@@ -55,11 +55,12 @@
   "referenceCode": "Edge-Drop stickProbe.ts copied unchanged; Tendedero rope math ported; see THIRD_PARTY_NOTICES.md",
   "packageBuildFailure": "Historical first Windows run failed after installer creation because builder tried implicit publishing. Fixed with --publish never; final main run 37783302073 succeeded.",
   "branch": "main",
-  "release": "0.0.3 package build and private upload pending",
+  "release": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.3-alpha.1",
   "packages": {
-    "mac": "evidence/package-mac.json",
-    "windows": "evidence/package-windows.json",
-    "release": "evidence/private-release.json"
+    "mac": "evidence/package-mac-stage4.json",
+    "windows": "evidence/package-windows-stage4.json",
+    "release": "evidence/private-release-stage4.json",
+    "packagedWorkflow": "evidence/package-group-stage4.json"
   },
   "groupImplementation": {
     "schema": 2,
@@ -74,5 +75,6 @@
     ],
     "interactionEvidence": "evidence/group-native.json",
     "scope": "Mac Electron IPC/DOM/protocol events; physical U09-U13 pending"
-  }
+  },
+  "sourceCommit": "d028a1b281607539f8bef874e9451f9ba07bcc9f"
 }
