@@ -1,0 +1,103 @@
+{
+  "scope": "own actual Mac windows and public geometry helper; not production integration or Windows/physical multi-monitor acceptance",
+  "cases": [
+    {
+      "label": "ordinary owned window",
+      "expected": "clear",
+      "probe": {
+        "platform": "mac",
+        "state": "clear",
+        "reason": "front-window-partial-target",
+        "displayId": 1,
+        "eligibleWindows": 1,
+        "expectedFrontMatch": true,
+        "screenCapturePreflightGranted": true,
+        "latencyMs": 95.1853
+      },
+      "actual": [
+        {
+          "visible": true,
+          "nativeFullscreen": false,
+          "maximized": false,
+          "bounds": {
+            "x": 400,
+            "y": 253,
+            "width": 640,
+            "height": 420
+          }
+        }
+      ]
+    },
+    {
+      "label": "ordinary maximize uses available work area",
+      "expected": "clear",
+      "probe": {
+        "platform": "mac",
+        "state": "clear",
+        "reason": "front-window-partial-target",
+        "displayId": 1,
+        "eligibleWindows": 1,
+        "expectedFrontMatch": true,
+        "screenCapturePreflightGranted": true,
+        "latencyMs": 2.54529
+      },
+      "actual": [
+        {
+          "visible": true,
+          "nativeFullscreen": false,
+          "maximized": true,
+          "bounds": {
+            "x": 0,
+            "y": 25,
+            "width": 1440,
+            "height": 875
+          }
+        }
+      ]
+    },
+    {
+      "label": "two ordinary front-app windows are ambiguous",
+      "expected": "unknown",
+      "probe": {
+        "platform": "mac",
+        "state": "unknown",
+        "reason": "multiple-front-app-windows-on-target",
+        "displayId": 1,
+        "eligibleWindows": 2,
+        "expectedFrontMatch": true,
+        "screenCapturePreflightGranted": true,
+        "latencyMs": 3.29675
+      },
+      "actual": [
+        {
+          "visible": true,
+          "nativeFullscreen": false,
+          "maximized": false,
+          "bounds": {
+            "x": 600,
+            "y": 105,
+            "width": 360,
+            "height": 280
+          }
+        },
+        {
+          "visible": true,
+          "nativeFullscreen": false,
+          "maximized": false,
+          "bounds": {
+            "x": 30,
+            "y": 65,
+            "width": 500,
+            "height": 330
+          }
+        }
+      ]
+    }
+  ],
+  "permissionRequestMade": false,
+  "actualDisplayCount": 1,
+  "preexistingScreenCaptureGrant": true,
+  "ownedPids": [],
+  "allOwnedPidsExited": true,
+  "fakeDataRemoved": true
+}

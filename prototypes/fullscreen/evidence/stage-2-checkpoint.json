@@ -1,0 +1,36 @@
+{
+  "stage": "paused for user clothespin visual rejection",
+  "stableSource": "dee1f2c",
+  "defaultIntegration": false,
+  "nodeChecks": {
+    "session": 5,
+    "policy": 5,
+    "passed": true
+  },
+  "nativeMatrix": "mac-matrix.json",
+  "nativeMatrixExitCode": 0,
+  "ownedFixturePids": [
+    82837,
+    82838,
+    82839,
+    82840,
+    82848,
+    82849
+  ],
+  "cleanupPassed": true,
+  "physicalWindows": false,
+  "unprivilegedMacProven": false,
+  "realAgentReceived": false,
+  "powerLockHypothesis": "shared reducer ignores all lock updates during suspension; source-runtime proof not yet run because out/main missing",
+  "retainedFailures": [
+    "mac-matrix-attempt-1: expected blocked for borderless window, actual OS constrained below menu bar so clear; fixture assumption corrected",
+    "power-lock-red.log: missing compiled out prerequisite, not native reproduction",
+    "verify command with unsupported --help executed verification; new node:test files were incorrectly collected by Vitest; renamed .checks.cjs to keep runners separate"
+  ],
+  "remaining": [
+    "reproduce suspended operation-lock release in actual isolated app",
+    "cross-process standard text receiver",
+    "explicit user decision before G7 default integration",
+    "physical system matrix"
+  ]
+}
