@@ -21,7 +21,7 @@
 
 独立 QA 使用自己的只读挂载和假数据，核对 DMG/asar 哈希，并独立构建得到相同的 5 个编译文件。新包的空/筛选空态为零正文、零 hit、零夹子；真实 Tray/MenuItem 回调完成设置打开→保存→关闭→重新新建及同窗 browse/settings 模式转换。已保存便签和未提交草稿（中文、空格、换行、emoji）以及标签/项目/Agent/reducedMotion 设置重启保持一致。
 
-修正 QA evaluate 参数错误后完整运行 **exit0**，自己的 12 个 PID 全部退出、有界清理成功、DMG 已卸载。首轮脚本错误 **exit1** 原样归档，不是产品缺陷，未改写为通过。假数据专属 F18 由 App 注册，未物理触发；MenuItem 回调不等于物理托盘点选。证据在 `evidence/qa-0.0.13/`，不继承 .11 独立原生通过。
+修正 QA evaluate 参数错误后完整运行 **exit0**，自己的 12 个 PID 全部退出、有界清理成功、DMG 已卸载。首轮脚本错误 **exit1** 原样归档，不是产品缺陷，未改写为通过。假数据专属 F18 由 App 注册，未物理触发；MenuItem 回调不等于物理托盘点选。完整独立报告 [INCREMENTAL-QA-REPORT.md](evidence/qa-0.0.13/INCREMENTAL-QA-REPORT.md)，原始证据与哈希在同目录，不继承 .11 独立原生通过。
 
 ## 冻结产物
 
