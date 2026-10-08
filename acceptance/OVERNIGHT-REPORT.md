@@ -19,7 +19,7 @@
 
 ## 独立 0.0.13 冻结包增量复验
 
-独立 QA 使用自己的只读挂载和假数据，核对 DMG/asar 哈希，并独立构建得到相同的 5 个编译文件。新包的空/筛选空态为零正文、零 hit、零夹子；真实 Tray/MenuItem 回调完成设置打开→保存→关闭→重新新建及同窗 browse/settings 模式转换。已保存便签和未提交草稿（中文、空格、换行、emoji）以及标签/项目/Agent/reducedMotion 设置重启保持一致。
+独立 QA 使用自己的只读挂载和假数据，核对 DMG/asar 哈希，并独立构建得到相同的 5 个编译文件。新包的空/筛选空态为零正文、零 hit、零夹子；真实 Tray/MenuItem 回调完成设置打开→保存→关闭→重新新建及同窗 browse/settings 模式转换。重启逐项断言覆盖便签全文/标题/项目、草稿全文/标题/项目/Claude 选择与设置（含 reducedMotion）；Codex 归属在提交后核对，未单独声称重启后的便签 Agent 断言。
 
 修正 QA evaluate 参数错误后完整运行 **exit0**，自己的 12 个 PID 全部退出、有界清理成功、DMG 已卸载。首轮脚本错误 **exit1** 原样归档，不是产品缺陷，未改写为通过。假数据专属 F18 由 App 注册，未物理触发；MenuItem 回调不等于物理托盘点选。完整独立报告 [INCREMENTAL-QA-REPORT.md](evidence/qa-0.0.13/INCREMENTAL-QA-REPORT.md)，原始证据与哈希在同目录，不继承 .11 独立原生通过。
 
@@ -48,3 +48,20 @@ G7 自动全屏抑制尚未实现，当前可使用托盘手动暂停；Mac `vis
 用户复验：使用单独假数据启动候选，确认空挂绳无常驻文字；托盘写念头能录入中文；打开设置、保存、关闭后再次从托盘写念头；检查保存和草稿取消、退出重启；对 3 条假数据分组/合并/拆分/撤销；向真实 Agent 拖正文确认只传文本并检查取消不丢数据；全屏时先手动暂停。物理操作需逐项记录结果。
 
 Library 批量保存失败：`Library prepare_uploads is not available`。没有确认保存的附件或 Library ID；本报告和截图以本地路径交付，不虚构云附件。
+
+## 明早唯一推荐体验入口
+
+Mac 唯一推荐：`/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline/dist/Thoughtline-0.0.13-mac-arm64.dmg`。Windows 对应：`/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline/dist/windows-dee1f2c/Thoughtline-0.0.13-win-x64.exe`。哈希见上表与 `evidence/final-package-{mac,windows}.json`。0.0.11 仅回退；0.0.12 和更早本轮中间包已清理，不推荐体验。
+
+Mac 最短体验：先从旧版托盘退出旧实例；打开上述 0.0.13 DMG，从挂载卷直接双击 Thoughtline.app，不点 Dock 的旧图标、不拖到 Applications。Finder“显示简介”可核对挂载 App 版本 0.0.13。从托盘写一条念头，再打开设置→保存→关闭→再次写一条，退出后从同一挂载卷重开检查便签和草稿恢复。实验版未安装替换；已安装 App、main 和已发布下载版均未覆盖。
+
+当前正确截图：`evidence/clothespin-1x-light-0.png`（空绳）、`clothespin-1x-light-3.png`（3 条）、`clothespin-1x-light-24.png`（24 数据、5 可见）；同名 dark / 2x 场景共12图。独立新包空态2图见 `evidence/qa-0.0.13/{empty-rope,filtered-empty-rope}.png`。不是物理Windows截图。指定笔记目录“截图/2026-10-09-0.0.13-当前候选”已同步副本和SHA。
+
+## 下一步具体条件
+
+- 需要现有 Windows 10/11 x64 实机：安装/退出恢复、托盘菜单实点、穿透与跨应用焦点、系统中文 IME、快捷键、真实 Agent 文本接收，以及 F11/PowerPoint/游戏、多屏/混合缩放。Mac/CI不能补出这些证据。
+- G7 未授权支持需要一个现有未授予屏幕录制的 Mac 启动环境/设备；本机 preflight=true，不改现有权限、不新建账号来伪装此验证。
+- 产品集成前需决定是否接受公开几何探测的有限支持与可能误抑制，并明确 unknown 时保持显式入口/当前悬停的策略。当前不暗改默认；仍可手动暂停。
+- 现有 Mac 和CI还能做受控自有多窗/最大化、协议错误/超时、缓存过期/目标屏切换、独立暂停理由、恢复dwell与草稿/拖出测试；这些不等于真实Windows或未授权Mac门禁。得到策略决定后再进入新的隔离实现和冻结包复验。
+
+本轮重复包/解包副本已按精确路径清理，清单见 `evidence/delivery-cleanup.json`；用户数据、依赖、原始项目和已安装App未触碰。
