@@ -1,0 +1,88 @@
+✖ fresh blocked belongs only to sampled target; expiry and target change cannot reuse it (3.944916ms)
+✖ concurrent demand shares one query; a target switch invalidates in-flight result (1.668ms)
+✖ late yields unknown, closes owned helper and cannot poison next request (0.398625ms)
+✖ malformed yields unknown, closes owned helper and cannot poison next request (0.121125ms)
+✖ exit yields unknown, closes owned helper and cannot poison next request (0.151583ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 0
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 50.931542
+
+✖ failing tests:
+
+test at prototypes/fullscreen/probe-session.test.cjs:10:1
+✖ fresh blocked belongs only to sampled target; expiry and target change cannot reuse it (3.944916ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'unknown'
+  - 'blocked'
+  
+      at TestContext.<anonymous> (/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-g7/prototypes/fullscreen/probe-session.test.cjs:13:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'unknown',
+    expected: 'blocked',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at prototypes/fullscreen/probe-session.test.cjs:21:1
+✖ concurrent demand shares one query; a target switch invalidates in-flight result (1.668ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be reference-equal to "expected":
+  + actual - expected
+  
+    Promise {
+  +   Symbol(async_id_symbol): 220,
+  -   Symbol(async_id_symbol): 221,
+      Symbol(trigger_async_id_symbol): 22,
+      {
+        reason: 'not-implemented',
+        state: 'unknown'
+      }
+  
+      at TestContext.<anonymous> (/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-g7/prototypes/fullscreen/probe-session.test.cjs:24:60)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [Promise],
+    expected: [Promise],
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at prototypes/fullscreen/probe-session.test.cjs:30:47
+✖ late yields unknown, closes owned helper and cannot poison next request (0.398625ms)
+  TypeError: session.current is not a function
+      at TestContext.<anonymous> (/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-g7/prototypes/fullscreen/probe-session.test.cjs:34:24)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at prototypes/fullscreen/probe-session.test.cjs:30:47
+✖ malformed yields unknown, closes owned helper and cannot poison next request (0.121125ms)
+  TypeError: session.current is not a function
+      at TestContext.<anonymous> (/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-g7/prototypes/fullscreen/probe-session.test.cjs:34:24)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at prototypes/fullscreen/probe-session.test.cjs:30:47
+✖ exit yields unknown, closes owned helper and cannot poison next request (0.151583ms)
+  TypeError: session.current is not a function
+      at TestContext.<anonymous> (/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-g7/prototypes/fullscreen/probe-session.test.cjs:34:24)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)

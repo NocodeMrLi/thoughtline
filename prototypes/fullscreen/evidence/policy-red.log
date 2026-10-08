@@ -1,0 +1,115 @@
+✖ blocked interrupts display and discards prior dwell; clear needs a new full dwell (0.944417ms)
+✖ sleep, screen-lock, manual and fullscreen release independently (0.136583ms)
+✖ fullscreen suppression waits for text-drag end then hides; does not mutate draft or note data (0.125916ms)
+✖ sleep cancels presentation immediately; lock release while suspended must not leave a stale drag lock (0.087708ms)
+✖ unknown policy proposal releases only automatic reason and retains explicit composer access (0.062042ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 0
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 120.497375
+
+✖ failing tests:
+
+test at prototypes/fullscreen/shelf-policy.test.cjs:4:1
+✖ blocked interrupts display and discards prior dwell; clear needs a new full dwell (0.944417ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'revealed'
+  - 'hidden'
+  
+      at TestContext.<anonymous> (/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-g7/prototypes/fullscreen/shelf-policy.test.cjs:6:46)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'revealed',
+    expected: 'hidden',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at prototypes/fullscreen/shelf-policy.test.cjs:12:1
+✖ sleep, screen-lock, manual and fullscreen release independently (0.136583ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'peek' !== 'hidden'
+  
+      at TestContext.<anonymous> (/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-g7/prototypes/fullscreen/shelf-policy.test.cjs:14:138)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'peek',
+    expected: 'hidden',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at prototypes/fullscreen/shelf-policy.test.cjs:17:1
+✖ fullscreen suppression waits for text-drag end then hides; does not mutate draft or note data (0.125916ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'peek' !== 'hidden'
+  
+      at TestContext.<anonymous> (/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-g7/prototypes/fullscreen/shelf-policy.test.cjs:21:69)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'peek',
+    expected: 'hidden',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at prototypes/fullscreen/shelf-policy.test.cjs:24:1
+✖ sleep cancels presentation immediately; lock release while suspended must not leave a stale drag lock (0.087708ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'peek' !== 'hidden'
+  
+      at TestContext.<anonymous> (/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-g7/prototypes/fullscreen/shelf-policy.test.cjs:26:40)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'peek',
+    expected: 'hidden',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at prototypes/fullscreen/shelf-policy.test.cjs:30:1
+✖ unknown policy proposal releases only automatic reason and retains explicit composer access (0.062042ms)
+  TypeError: p.sample is not a function
+      at TestContext.<anonymous> (/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-g7/prototypes/fullscreen/shelf-policy.test.cjs:32:4)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)

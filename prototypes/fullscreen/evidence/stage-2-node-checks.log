@@ -1,0 +1,18 @@
+✔ fresh blocked belongs only to sampled target; expiry and target change cannot reuse it (31.692041ms)
+✔ concurrent demand shares one query; a target switch invalidates in-flight result (183.340709ms)
+✔ late yields unknown, closes owned helper and cannot poison next request (98.570208ms)
+✔ malformed yields unknown, closes owned helper and cannot poison next request (55.584667ms)
+✔ exit yields unknown, closes owned helper and cannot poison next request (54.473666ms)
+✔ blocked interrupts display and discards prior dwell; clear needs a new full dwell (0.574959ms)
+✔ sleep, screen-lock, manual and fullscreen release independently (0.10675ms)
+✔ fullscreen suppression waits for text-drag end then hides (0.37775ms)
+✔ sleep cancels presentation immediately; lock release while suspended must not leave a stale drag lock (0.090583ms)
+✔ unknown policy proposal releases only automatic reason (0.063584ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 467.763208

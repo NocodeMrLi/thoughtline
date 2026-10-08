@@ -1,0 +1,13 @@
+✔ fresh blocked belongs only to sampled target; expiry and target change cannot reuse it (29.773167ms)
+✔ concurrent demand shares one query; a target switch invalidates in-flight result (182.862292ms)
+✔ late yields unknown, closes owned helper and cannot poison next request (97.751375ms)
+✔ malformed yields unknown, closes owned helper and cannot poison next request (58.809917ms)
+✔ exit yields unknown, closes owned helper and cannot poison next request (57.510084ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 470.673375

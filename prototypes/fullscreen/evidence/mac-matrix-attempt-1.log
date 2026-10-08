@@ -1,0 +1,13 @@
+AssertionError [ERR_ASSERTION]: borderless display coverage is blocked without native fullscreen: {"platform":"mac","state":"clear","reason":"front-window-partial-target","displayId":1,"eligibleWindows":1,"expectedFrontMatch":true,"screenCapturePreflightGranted":true,"latencyMs":3.22904}
+
+'clear' !== 'blocked'
+
+    at sample (/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-g7/prototypes/fullscreen/mac-matrix.cjs:15:11)
+    at async /Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-g7/prototypes/fullscreen/mac-matrix.cjs:26:3 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'clear',
+  expected: 'blocked',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
