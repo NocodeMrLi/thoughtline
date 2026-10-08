@@ -51,9 +51,11 @@ Library 批量保存失败：`Library prepare_uploads is not available`。没有
 
 ## 明早唯一推荐体验入口
 
-Mac 唯一推荐：`/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline/dist/Thoughtline-0.0.13-mac-arm64.dmg`。Windows 对应：`/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline/dist/windows-dee1f2c/Thoughtline-0.0.13-win-x64.exe`。哈希见上表与 `evidence/final-package-{mac,windows}.json`。0.0.11 仅回退；0.0.12 和更早本轮中间包已清理，不推荐体验。
+Mac 冻结产物：`/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline/dist/Thoughtline-0.0.13-mac-arm64.dmg`。Windows 对应：`/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline/dist/windows-dee1f2c/Thoughtline-0.0.13-win-x64.exe`。哈希见上表与 `evidence/final-package-{mac,windows}.json`。0.0.11 仅回退；0.0.12 和更早本轮中间包已清理，不推荐体验。
 
 Mac 隔离体验的唯一推荐入口：`/Users/lihongwei/Documents/Codex/2026-10-09/task/delivery/启动0.0.13隔离体验.command`，双击后从托盘写假念头，设置保存关闭后再新建，退出后仍从同一脚本重开检查恢复。固定测试数据在 `delivery/isolated-experience-0.0.13/user-data`，不复制或读取正式便签。不要直接双击挂载 App：未指定环境时它会使用正式 `~/Library/Application Support/Thoughtline`；此前该步骤作为隔离体验建议已撤回。建议先退出旧版是避免快捷键冲突和托盘混淆，隔离本身由脚本明确传入环境保证。脚本只读挂载、核对 DMG/asar/版本/签名，通过正常系统 open 流程启动，不绕过 Gatekeeper、不新开权限、不发送任何内容。若被系统拦截由用户处理。默认体验入口未主动运行；预检和独立假数据实际 LaunchServices/userData 检查均 exit0，4PID退出、挂载与假数据清理完成；早期验证脚本失败保留。详见 [隔离说明](../docs/delivery/README-隔离体验.md) 和 `evidence/isolation-launcher/launcher-status.json`。实验版未安装替换；已安装 App、main 和已发布下载版均未覆盖。
+
+独立 QA 对入口提交 `85a3f589` 完成只读审查，未发现阻塞：脚本/说明逐字节匹配、9 份证据 SHA 一致，语法和本机 open 环境参数能力核验通过。完整报告 [QA-ISOLATION-LAUNCHER-REVIEW.md](evidence/QA-ISOLATION-LAUNCHER-REVIEW.md)，绑定与原件在同目录 `qa-isolation-launcher-review/`。QA 未执行默认入口、预检或原生启动；此结论不扩大为默认体验已运行，也不增加物理操作、Windows 或 G7 验收。固定路径、保留测试数据、Terminal 保持至退出和系统安全提示的局限保留。
 
 当前正确截图：`evidence/clothespin-1x-light-0.png`（空绳）、`clothespin-1x-light-3.png`（3 条）、`clothespin-1x-light-24.png`（24 数据、5 可见）；同名 dark / 2x 场景共12图。独立新包空态2图见 `evidence/qa-0.0.13/{empty-rope,filtered-empty-rope}.png`。不是物理Windows截图。指定笔记目录“截图/2026-10-09-0.0.13-当前候选”已同步副本和SHA。
 

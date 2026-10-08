@@ -291,5 +291,17 @@
     "earlyVerifierAttemptsNotPassed": 5,
     "scope": "builder isolated normal LaunchServices test; no physical or whole product acceptance",
     "lastCheckOnlyLog": "check-only.log"
+  },
+  "independentLauncherReview": {
+    "reviewedLauncherCommit": "85a3f589dc93f814b5b7ff138c423536a43594f1",
+    "productionSourceCommit": "dee1f2c9046b284e2dd430632d9bdb913128c868",
+    "scope": "independent read-only files, git objects, syntax, open help and SHA review; no default/check-only/native launch by QA",
+    "noBlockerFound": true,
+    "launcherBytesUnchanged": true,
+    "nineEvidenceHashesMatched": true,
+    "defaultExperienceStartedByQA": false,
+    "independentNativeLaunchServicesRun": false,
+    "report": "evidence/QA-ISOLATION-LAUNCHER-REVIEW.md",
+    "binding": "evidence/qa-isolation-launcher-review/review-binding.json"
   }
 }
