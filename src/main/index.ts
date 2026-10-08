@@ -13,6 +13,7 @@ import {newIdea,editIdea,changeStatus,addAgent,updateAgent,removeAgent} from '..
 import type {Draft,Result,Snapshot} from '../shared/contracts';
 import type {PilotInfo,HitLayout,ComposerContext,AgentMutation,ClipMutation} from '../shared/bridge';
 import {mergeClips,splitClip,moveClip,selectClipIdea} from '../shared/clipCommands';
+import {fixedRope} from '../shared/ropeGeometry';
 import {layoutClips,normalizedPosition} from '../shared/clipLayout';
 app.setName('Thoughtline');
 app.setPath('userData',process.env.THOUGHTLINE_DATA_DIR||join(app.getPath('appData'),'Thoughtline'));
@@ -219,7 +220,7 @@ else app.whenReady().then(async()=>{
   if(!trusted(e,[shelf,manage])||!c||typeof c!=='object')return invalid('无效操作');
   if(revision!==snapshot.revision)return {ok:false,code:'CONFLICT',message:'布局已变化，请重新操作。'};
   const previous=snapshot,oldUndo=undoClips;let next:Result<Snapshot>;
-  const positioned=()=>{const positions=new Map(layoutClips(snapshot.clips,width).visible.map(p=>[p.clip.id,normalizedPosition(p.x,width)]));return {...snapshot,clips:snapshot.clips.map(clip=>positions.has(clip.id)?{...clip,position:positions.get(clip.id)!}:clip)};};
+  const positioned=()=>{const rope=fixedRope(width);const positions=new Map(layoutClips(snapshot.clips,rope.length).visible.map(p=>[p.clip.id,normalizedPosition(p.x,rope.length)]));return {...snapshot,clips:snapshot.clips.map(clip=>positions.has(clip.id)?{...clip,position:positions.get(clip.id)!}:clip)};};
   if(c.kind==='merge'&&typeof c.sourceId==='string'&&typeof c.targetId==='string')next=mergeClips(positioned(),c.sourceId,c.targetId);
   else if(c.kind==='move'&&typeof c.id==='string'&&typeof c.position==='number'&&(c.beforeId===null||typeof c.beforeId==='string'))next=moveClip(positioned(),c.id,c.position,c.beforeId);
   else if(c.kind==='select'&&typeof c.id==='string'&&typeof c.ideaId==='string')next=selectClipIdea(snapshot,c.id,c.ideaId);

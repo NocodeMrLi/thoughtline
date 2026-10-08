@@ -16,7 +16,7 @@ Source: https://github.com/alejandrobujan/tendedero/tree/ed0618a67cc59e0a8621b97
 
 Copyright (c) 2026 Alejandro Buján. MIT source license, full text and name/icon exclusion in licenses/Tendedero-MIT.txt.
 
-- src/shared/ropeGeometry.ts ports LineView.swift Layout.ropeY's fixed-end parabola to TypeScript, replacing screen-width sag with Thoughtline's count-based sag and clamping.
+- src/shared/ropeGeometry.ts ports LineView.swift Layout.ropeY's fixed-end parabola to TypeScript, with bounded centered length and fixed natural curvature. The earlier count-based sag was superseded by the user's fixed-rope requirement; note count no longer moves the rope.
 - The shelf visual follows the reference design; the name and icon are original Thoughtline assets. No private CGS APIs or screenshot-folder changes are used.
 
 These notices and licenses must be included in local installation packages. Other npm dependencies retain their own package licenses.

@@ -29,9 +29,9 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
   const requests=await shelf.evaluate(()=>window.motionRequests);await new Promise(r=>setTimeout(r,250));assert.equal(await shelf.evaluate(()=>window.motionRequests),requests,'no idle animation frames');
   await shelf.emulateMedia({reducedMotion:'reduce'});await submit(3);
   await shelf.waitForFunction(()=>Number(document.querySelector('[data-view=shelf]').dataset.progress)===1);
-  const reduced=await shelf.evaluate(()=>({animation:getComputedStyle(document.querySelector('.idea-card strong')).animationName,sag:Number(document.querySelector('.rope').dataset.sag)}));assert.equal(reduced.animation,'none');assert.equal(reduced.sag,26);
+  const reduced=await shelf.evaluate(()=>({animation:getComputedStyle(document.querySelector('.idea-card strong')).animationName,sag:Number(document.querySelector('.rope').dataset.sag),transform:getComputedStyle(document.querySelector('[data-view=shelf]')).transform}));assert.equal(reduced.animation,'none');assert.equal(reduced.sag,30);assert.equal(reduced.transform,'none');
   await shelf.screenshot({path:'acceptance/evidence/motion-native.png',omitBackground:true});
-  const report={scope:'actual Mac Electron app/native window and renderer protocol; not physical hover, click-through or subjective visual acceptance',compactSize:[160,112],exitRetainsNativeUntilPainted:true,rapidReentryStaysVisible:true,eventualNativeHide:true,noIdleAnimationFrames:true,liveSystemReducedMotion:true,sharedSag:26};
+  const report={scope:'actual Mac Electron app/native window and renderer protocol; not physical hover, click-through or subjective visual acceptance',compactSize:[160,112],exitRetainsNativeUntilPainted:true,rapidReentryStaysVisible:true,eventualNativeHide:true,noIdleAnimationFrames:true,liveSystemReducedMotion:true,sharedSag:30,fixedAcrossNoteCount:true};
   await fs.writeFile('acceptance/evidence/motion-native.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
  }finally{try{if(app)await app.close();}finally{await fs.rm(dir,{recursive:true,force:true});}}
 })().catch(e=>{console.error(e);process.exitCode=1;});
