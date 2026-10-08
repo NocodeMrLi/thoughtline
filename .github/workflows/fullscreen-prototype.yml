@@ -1,0 +1,35 @@
+name: Verify public fullscreen prototype
+on:
+  push:
+    branches: [codex/thoughtline-g7-public-probe-20261009]
+    paths: ['prototypes/fullscreen/**', '.github/workflows/fullscreen-prototype.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows-public-probe:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - run: cmake -S prototypes/fullscreen -B prototypes/fullscreen/build -A x64
+      - run: cmake --build prototypes/fullscreen/build --config Release
+      - run: ctest --test-dir prototypes/fullscreen/build -C Release --output-on-failure
+      - name: Runner API availability only (not physical Windows fullscreen acceptance)
+        shell: pwsh
+        run: |
+          $lines = 'sample', 'quit' | & ./prototypes/fullscreen/build/Release/fullscreen-probe.exe
+          if ($LASTEXITCODE -ne 0) { throw 'Probe failed' }
+          $lines | Set-Content prototypes/fullscreen/evidence/windows-runner.json
+          $result = $lines | ConvertFrom-Json
+          if ($result.state -notin @('clear','blocked','unknown')) { throw 'Invalid state' }
+          Get-FileHash prototypes/fullscreen/build/Release/fullscreen-probe.exe -Algorithm SHA256 | Format-List | Out-File prototypes/fullscreen/evidence/windows-binary-sha.txt
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: Thoughtline-G7-public-prototype-${{ github.sha }}
+          path: |
+            prototypes/fullscreen/build/Release/fullscreen-probe.exe
+            prototypes/fullscreen/build/Release/fullscreen-selftest.exe
+            prototypes/fullscreen/evidence/windows-*
+          if-no-files-found: error
+          retention-days: 30
