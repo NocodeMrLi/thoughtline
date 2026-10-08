@@ -1,0 +1,102 @@
+{
+  "sourceCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
+  "sourceVersion": "0.0.11",
+  "issue": "P2: untrusted shelf closeManage rejected; ignored reply left detail lock and stale 3-clip layout for 24-note fixtures",
+  "classification": "test/evidence defect; not demonstrated product failure",
+  "withdrawn": "four original 24-note PNGs and original clothespin report moved outside acceptance to local delivery/withdrawn-clothespin-evidence; no longer acceptance evidence",
+  "fix": "close from trusted manage, require success and unlocked shelf, require documented visible capacity before screenshot lock",
+  "independentRun": {
+    "threadId": "01a11c7a-7798-7081-aeb3-fa616fa360cd",
+    "exitCode": 0,
+    "result": {
+      "screenshots": 12,
+      "actualDprs": [
+        1,
+        2
+      ],
+      "passed": true
+    },
+    "producerScriptSha256": "7c8ef2633f733e540c81ffd830fff358ceca4b9aabf28afaa3d6837f7a899dcd",
+    "repositoryScriptSha256": "5a0c2bed92d564b47651c5888b5974074fe4d15b253a456292cf2354ffdd53e1",
+    "equivalenceNormalizations": [
+      "fixture import path",
+      "qa- output filename prefix"
+    ]
+  },
+  "images": [
+    {
+      "name": "clothespin-1x-light-0.png",
+      "sha256": "e1714015f149206a7f3ff0020e02c9bc42669a69c373153e04072030959aa96d",
+      "seededNotes": 0,
+      "visibleClips": 0
+    },
+    {
+      "name": "clothespin-1x-dark-0.png",
+      "sha256": "3bdc254852baf0f79d4cf24a37246162c725fbbbf0105ab4f6ed4d858cee796a",
+      "seededNotes": 0,
+      "visibleClips": 0
+    },
+    {
+      "name": "clothespin-1x-light-3.png",
+      "sha256": "c9393f778bed596f2a94bde5578d4466fb65c3668522070ee0b72906039b114a",
+      "seededNotes": 3,
+      "visibleClips": 3
+    },
+    {
+      "name": "clothespin-1x-dark-3.png",
+      "sha256": "e3943aa3ca44be9176845673fd4d3ac271e6eb4fd781b6dd5c74bf88298dff7d",
+      "seededNotes": 3,
+      "visibleClips": 3
+    },
+    {
+      "name": "clothespin-1x-light-24.png",
+      "sha256": "4b10a26c6c3adfd03ca8ef591c328581cf05972b7bc84e9af168251c2b03d9b0",
+      "seededNotes": 24,
+      "visibleClips": 5
+    },
+    {
+      "name": "clothespin-1x-dark-24.png",
+      "sha256": "2232a7a6508539db5778b2c9937e0efcb8b5b423e1b0fbf6616a08d6d9e589c6",
+      "seededNotes": 24,
+      "visibleClips": 5
+    },
+    {
+      "name": "clothespin-2x-light-0.png",
+      "sha256": "9844b70d7dec1f4a166abbfe7bfb70f864e0c4812d811b3746128f4dd98060e3",
+      "seededNotes": 0,
+      "visibleClips": 0
+    },
+    {
+      "name": "clothespin-2x-dark-0.png",
+      "sha256": "77872f45fa67adb7f4ee60175f306e3b3792b6497f3c1467570f6d630ade7729",
+      "seededNotes": 0,
+      "visibleClips": 0
+    },
+    {
+      "name": "clothespin-2x-light-3.png",
+      "sha256": "91977e8c5b8b36b16ee4dfb90f2d77d2075c6cfcc128b0bc3304195775097aa6",
+      "seededNotes": 3,
+      "visibleClips": 3
+    },
+    {
+      "name": "clothespin-2x-dark-3.png",
+      "sha256": "1ee50e19ddb4d23589184a90d360934ee62c262beba8a5736cfdcf4c1e9e7c4a",
+      "seededNotes": 3,
+      "visibleClips": 3
+    },
+    {
+      "name": "clothespin-2x-light-24.png",
+      "sha256": "6834f3a1d4621f8f83832b0188cca162807aaa57c5ba212de9454400bdda6749",
+      "seededNotes": 24,
+      "visibleClips": 5
+    },
+    {
+      "name": "clothespin-2x-dark-24.png",
+      "sha256": "1dd480ec4c7ace05586c8607349fa233abb07b471673d9e98ad7f49975cc185c",
+      "seededNotes": 24,
+      "visibleClips": 5
+    }
+  ],
+  "productionChanged": false,
+  "builderNativeRerun": false
+}

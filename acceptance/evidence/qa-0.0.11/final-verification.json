@@ -1,0 +1,73 @@
+{
+  "sourceCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
+  "sourceVersion": "0.0.11",
+  "platform": "macOS15.3.1-arm64",
+  "node": "24.19.0",
+  "unitTests": 58,
+  "typecheck": "passed",
+  "build": "passed",
+  "verifyLog": "draft-safety-verify.log",
+  "native": [
+    {
+      "test": "hidden-draft-workflow",
+      "exitCode": 0,
+      "log": "draft-safety-native.log"
+    },
+    {
+      "test": "lazy-window-workflow",
+      "exitCode": 0,
+      "log": "draft-safety-native.log"
+    },
+    {
+      "test": "settings-lifecycle",
+      "exitCode": 0,
+      "log": "draft-safety-native.log"
+    },
+    {
+      "test": "workflow",
+      "exitCode": 0,
+      "log": "draft-safety-native-remaining.log"
+    },
+    {
+      "test": "group-workflow",
+      "exitCode": 0,
+      "log": "draft-safety-native-remaining.log"
+    },
+    {
+      "test": "motion-workflow",
+      "exitCode": 0,
+      "log": "draft-safety-native-remaining.log"
+    },
+    {
+      "test": "text-drag-workflow",
+      "exitCode": 0,
+      "log": "draft-safety-native-remaining.log"
+    },
+    {
+      "test": "fixed-rope-workflow",
+      "exitCode": 0,
+      "log": "draft-safety-native-remaining.log"
+    },
+    {
+      "test": "clothespin-workflow",
+      "exitCode": 0,
+      "log": "clothespin-correction.json",
+      "producer": "independent QA corrected run",
+      "previousManyNoteEvidence": "withdrawn due to stale detail lock"
+    },
+    {
+      "test": "clean-shelf-workflow",
+      "exitCode": 0,
+      "log": "draft-safety-native-remaining.log"
+    },
+    {
+      "test": "smoke",
+      "exitCode": 0,
+      "log": "draft-safety-native-remaining.log"
+    }
+  ],
+  "registry": "protocol fixtures emulate OS shortcut registration; smoke/lifecycle explicitly use real OS registration",
+  "scope": "Electron native window objects, IPC and rendered UI/protocol; no physical Windows/IME/Agent receiving acceptance",
+  "recordedAtUtc": "2026-10-08T17:28:38.437722+00:00",
+  "visualCorrection": "clothespin-correction.json"
+}

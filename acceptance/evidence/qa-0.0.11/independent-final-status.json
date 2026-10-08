@@ -1,0 +1,83 @@
+{
+  "sourceCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
+  "qaCheckoutCommit": "7f5fa0a6743548d9273d9866705100440c62d879",
+  "staticCorrectionCommit": "264e168ea2ce886f23ca5f00e51c0dbdf4206335",
+  "version": "0.0.11",
+  "writtenAt": "2026-10-09T02:00:51.366547+08:00",
+  "formalAcceptance": false,
+  "limitedMacDesktopInitialExperience": "can proceed with stated untested system matrix, manual fullscreen pause and pending empty-state hint patch; no claim for newer candidate",
+  "verify": {
+    "exitCode": 0,
+    "unitFiles": 16,
+    "unitTests": 58,
+    "node": "25.8.1 outside declared24 range; exact source CI uses24.19.0"
+  },
+  "nativeSource": {
+    "ordinaryPassed": [
+      "workflow",
+      "group-workflow",
+      "motion-workflow",
+      "text-drag-workflow",
+      "fixed-rope-workflow",
+      "clean-shelf-workflow",
+      "lazy-window-workflow",
+      "hidden-draft-workflow"
+    ],
+    "correctedVisual": {
+      "script": "qa-thoughtline/qa-evidence/qa-clothespin-workflow.cjs",
+      "exitCode": 0,
+      "screenshots": 12,
+      "notes": [
+        0,
+        3,
+        24
+      ],
+      "visible": [
+        0,
+        3,
+        5
+      ],
+      "expectedCapacity": 5
+    },
+    "originalClothespin": {
+      "exitCode": 0,
+      "manyImageAcceptance": false,
+      "reason": "held 3-clip layout incorrectly labelled24; superseded with independent corrected images"
+    },
+    "smokeAndSettings": {
+      "exitCode": 0,
+      "scopeOverride": "wrapper realShortcuts:false; emulated OS registry, not physical registration"
+    }
+  },
+  "frozenPackageWorkflow": {
+    "exitCode": 0,
+    "asarSha256": "f28fb0e46cc6c9d7e1eec0986acecc6144e86daddaebdc1f62fe7741eafcb700"
+  },
+  "performance": {
+    "exitCode": 1,
+    "validMetrics": true,
+    "durationSeconds": 120.187,
+    "cpuPercentSingleCore": 0.18304808340336298,
+    "stableRssMiB": 266.734375,
+    "cpuGate": true,
+    "rssGate": true,
+    "cleanupError": "ENOTEMPTY after completed samples/report; fake data independently removed; all measured PIDs gone"
+  },
+  "issues": {
+    "Q1": "closed for tested BrowserWindow.hide/new draft paths; physicalMacHide untested",
+    "Q2": "closed",
+    "Q3": "closed fixture contamination; physicalhotkeys untested",
+    "Q4": "closed binding",
+    "Q5": "closed independent correction264e168; not product failure",
+    "Q6": "P3 cleanup script reliability remains pending upstream fix",
+    "G7": "P2 automaticfullscreen suppression not accepted; actual compositoroverlay unmeasured",
+    "emptyHint": "P3 current0.0.11 still has persistent empty hint; subsequent patch unreviewed"
+  },
+  "cleanup": {
+    "qaNativeInstancesEnded": true,
+    "ownDmgDetached": true,
+    "fakePerformanceDataRemoved": true,
+    "productionSourcesUnmodified": true
+  },
+  "library": "unavailable; no retries/bypass; no IDs"
+}

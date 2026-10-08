@@ -1,12 +1,12 @@
 {
-  "stage": "0.0.11 frozen candidate: native-hide draft safety, lazy windows, clean fixed rope and documented spring clips",
-  "asOf": "2026-10-08T17:31:57.919284+00:00",
+  "stage": "0.0.13 usable candidate; G7 experiment remains separate",
+  "asOf": "2026-10-09 Asia/Shanghai",
   "verify": {
     "typecheck": "passed",
-    "unitTests": 58,
+    "unitTests": 65,
     "build": "passed",
     "evidence": "evidence/final-verification.json",
-    "log": "evidence/draft-safety-verify.log"
+    "log": "evidence/candidate-0.0.13-verify.log"
   },
   "gates": [
     {
@@ -54,7 +54,7 @@
     "real Agent plaintext receiving untested",
     "fullscreen-hover suppression remains an implementation gap; full display/sleep matrix pending",
     "ad-hoc Mac candidate, not Developer ID/notarized; unsigned Windows",
-    "independent final QA/user visual acceptance pending; no complete user acceptance"
+    "independent QA .11 only; .13 builder checks complete, user acceptance pending"
   ],
   "referenceCode": "Edge-Drop stickProbe.ts copied unchanged; Tendedero fixed-end parabola adapted to fixed rope; MIT/Apache notices retained",
   "packageBuildFailure": "Historical first Windows run failed after installer creation because builder tried implicit publishing. Fixed with --publish never; final main run 37783302073 succeeded.",
@@ -64,7 +64,7 @@
     "mac": "evidence/final-package-mac.json",
     "windows": "evidence/final-package-windows.json",
     "packagedWorkflow": "evidence/overnight-package-acceptance.json",
-    "packageSourceCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
+    "packageSourceCommit": "dee1f2c9046b284e2dd430632d9bdb913128c868",
     "publishedVersion": "0.0.6",
     "newReleasePublished": false
   },
@@ -80,9 +80,11 @@
       360
     ],
     "interactionEvidence": "evidence/group-native.json",
-    "scope": "Mac Electron IPC/DOM/protocol events; physical U09-U13 pending"
+    "scope": "Mac Electron IPC/DOM/protocol events; physical U09-U13 pending",
+    "historicalEvidenceSourceCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
+    "notRerunForCurrentCandidate": true
   },
-  "sourceCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
+  "sourceCommit": "dee1f2c9046b284e2dd430632d9bdb913128c868",
   "installationCorrection": {
     "affectedMacRelease": "0.0.3-alpha.1",
     "cause": "invalid Electron linker signature after packaging; no sealed resources",
@@ -99,9 +101,11 @@
     "quitDraftPersistence": true,
     "recoverySelectorUnitTest": true,
     "nativeRecoveryDialogPhysicalAcceptance": false,
-    "separatePauseReasons": true
+    "separatePauseReasons": true,
+    "historicalEvidenceSourceCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
+    "notRerunForCurrentCandidate": true
   },
-  "sourceVersion": "0.0.11",
+  "sourceVersion": "0.0.13",
   "motion": {
     "evidence": "evidence/motion-native.json",
     "nativeExitFrameRetention": true,
@@ -109,44 +113,60 @@
     "finiteSharedClock": true,
     "liveSystemReducedMotion": true,
     "subjectivePhysicalAcceptance": false,
-    "fixedRopeAcrossCount": true
+    "fixedRopeAcrossCount": true,
+    "historicalEvidenceSourceCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
+    "notRerunForCurrentCandidate": true
   },
   "performance": {
     "baseline": "evidence/idle-without-debugger.json",
     "failedBeforeCache": "evidence/overnight-package-idle-before-cache.json",
     "final": "evidence/overnight-package-idle.json",
     "scope": "Mac frozen ad-hoc App executable, isolated empty data, direct spawn with no debugger; no native interaction tests running concurrently; hidden startup established separately by packaged workflow",
-    "durationSeconds": 120.174,
+    "durationSeconds": 120.188,
     "stableMembership": true,
-    "candidateRssMiB": 265.78125,
-    "candidateCpuPercent": 0.19138915239569287,
+    "candidateRssMiB": 303.171875,
+    "candidateCpuPercent": 0.19136685858821179,
     "rssGate": true,
     "cpuGate": true,
     "cpuThreshold": 2,
     "rssThresholdMiB": 350,
-    "sourceCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
-    "asarSha256": "f28fb0e46cc6c9d7e1eec0986acecc6144e86daddaebdc1f62fe7741eafcb700",
-    "status": "frozen Mac candidate passes measured hidden idle gates; not Windows or all-use performance acceptance"
+    "sourceCommit": "dee1f2c9046b284e2dd430632d9bdb913128c868",
+    "asarSha256": "4af1687daa8725dbbaa6793245a68aa4ed6681c5034197c7e30b39e917ae220e",
+    "status": "frozen Mac candidate passes measured hidden idle gates; not Windows or all-use performance acceptance",
+    "commandExitCode": 0,
+    "cleanupPassed": true
   },
   "plaintextDrag": {
     "protocol": "evidence/text-drag-native.json",
     "files": false,
     "cancelPreservesData": true,
-    "realAgentsAccepted": []
+    "realAgentsAccepted": [],
+    "historicalEvidenceSourceCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
+    "notRerunForCurrentCandidate": true
   },
   "baselineCommit": "5f9f29302e8fe61edda5680b91b3753986f4c516",
   "candidate": {
-    "version": "0.0.11",
+    "version": "0.0.13",
     "published": false,
     "releaseStill": "0.0.6",
-    "sourceStageCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
+    "sourceStageCommit": "dee1f2c9046b284e2dd430632d9bdb913128c868",
     "branch": "codex/thoughtline-acceptance-20261009"
   },
   "cleanShelf": {
     "evidence": "evidence/clean-shelf.json",
     "screenshotsLocal": [
-      "evidence/overnight-ui-before.png",
-      "evidence/overnight-ui-after.png"
+      "evidence/clothespin-1x-light-0.png",
+      "evidence/clothespin-1x-dark-0.png",
+      "evidence/clothespin-1x-light-3.png",
+      "evidence/clothespin-1x-dark-3.png",
+      "evidence/clothespin-1x-light-24.png",
+      "evidence/clothespin-1x-dark-24.png",
+      "evidence/clothespin-2x-light-0.png",
+      "evidence/clothespin-2x-dark-0.png",
+      "evidence/clothespin-2x-light-3.png",
+      "evidence/clothespin-2x-dark-3.png",
+      "evidence/clothespin-2x-light-24.png",
+      "evidence/clothespin-2x-dark-24.png"
     ],
     "permanentToolbarRemoved": true,
     "permanentReplacementIcons": false,
@@ -187,7 +207,7 @@
     "scenes": 12,
     "customColorsPreserved": true,
     "subjectiveAcceptance": false,
-    "correctedByIndependentQA": true,
+    "correctedByIndependentQA": false,
     "correction": "evidence/clothespin-correction.json",
     "seededCounts": [
       0,
@@ -198,7 +218,9 @@
       0,
       3,
       5
-    ]
+    ],
+    "currentCaptureProducer": "builder .13; historical independent .11 archived",
+    "sourceCommit": "dee1f2c9046b284e2dd430632d9bdb913128c868"
   },
   "hiddenDraftSafety": {
     "evidence": "evidence/hidden-draft-native.json",
@@ -217,5 +239,12 @@
     "performanceRunsSequential": true,
     "cancelChecksWaitForNativeHideAndLockRelease": true,
     "cancelChecksBodyAndRevision": true
-  }
+  },
+  "formalAcceptance": false,
+  "emptyShelfAndTray": {
+    "evidence": "evidence/empty-shelf.json",
+    "noPersistentEmptyHint": true,
+    "settingsOpenSaveCloseReopen": true
+  },
+  "nativeCurrent": "evidence/candidate-0.0.13-native.json"
 }

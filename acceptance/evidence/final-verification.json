@@ -1,73 +1,71 @@
 {
-  "sourceCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
-  "sourceVersion": "0.0.11",
-  "platform": "macOS15.3.1-arm64",
-  "node": "24.19.0",
-  "unitTests": 58,
+  "sourceCommit": "dee1f2c9046b284e2dd430632d9bdb913128c868",
+  "version": "0.0.13",
+  "formalAcceptance": false,
+  "unitTests": 65,
+  "unitFiles": 17,
   "typecheck": "passed",
   "build": "passed",
-  "verifyLog": "draft-safety-verify.log",
-  "native": [
-    {
-      "test": "hidden-draft-workflow",
-      "exitCode": 0,
-      "log": "draft-safety-native.log"
-    },
-    {
-      "test": "lazy-window-workflow",
-      "exitCode": 0,
-      "log": "draft-safety-native.log"
-    },
-    {
-      "test": "settings-lifecycle",
-      "exitCode": 0,
-      "log": "draft-safety-native.log"
-    },
-    {
-      "test": "workflow",
-      "exitCode": 0,
-      "log": "draft-safety-native-remaining.log"
-    },
-    {
-      "test": "group-workflow",
-      "exitCode": 0,
-      "log": "draft-safety-native-remaining.log"
-    },
-    {
-      "test": "motion-workflow",
-      "exitCode": 0,
-      "log": "draft-safety-native-remaining.log"
-    },
-    {
-      "test": "text-drag-workflow",
-      "exitCode": 0,
-      "log": "draft-safety-native-remaining.log"
-    },
-    {
-      "test": "fixed-rope-workflow",
-      "exitCode": 0,
-      "log": "draft-safety-native-remaining.log"
-    },
-    {
-      "test": "clothespin-workflow",
-      "exitCode": 0,
-      "log": "clothespin-correction.json",
-      "producer": "independent QA corrected run",
-      "previousManyNoteEvidence": "withdrawn due to stale detail lock"
-    },
-    {
-      "test": "clean-shelf-workflow",
-      "exitCode": 0,
-      "log": "draft-safety-native-remaining.log"
-    },
-    {
-      "test": "smoke",
-      "exitCode": 0,
-      "log": "draft-safety-native-remaining.log"
-    }
-  ],
-  "registry": "protocol fixtures emulate OS shortcut registration; smoke/lifecycle explicitly use real OS registration",
-  "scope": "Electron native window objects, IPC and rendered UI/protocol; no physical Windows/IME/Agent receiving acceptance",
-  "recordedAtUtc": "2026-10-08T17:28:38.437722+00:00",
-  "visualCorrection": "clothespin-correction.json"
+  "verifyLog": "candidate-0.0.13-verify.log",
+  "native": {
+    "sourceCommit": "dee1f2c9046b284e2dd430632d9bdb913128c868",
+    "version": "0.0.13",
+    "scope": "isolated source Electron native objects and protocol; no physical IME/Windows/compositor acceptance",
+    "results": [
+      {
+        "test": "empty-shelf-workflow",
+        "exitCode": 0,
+        "log": "acceptance/evidence/candidate-0.0.13-empty-shelf-workflow.log"
+      },
+      {
+        "test": "clean-shelf-workflow",
+        "exitCode": 0,
+        "log": "acceptance/evidence/candidate-0.0.13-clean-shelf-workflow.log"
+      },
+      {
+        "test": "clothespin-workflow",
+        "exitCode": 0,
+        "log": "acceptance/evidence/candidate-0.0.13-clothespin-workflow.log"
+      },
+      {
+        "test": "fixed-rope-workflow",
+        "exitCode": 0,
+        "log": "acceptance/evidence/candidate-0.0.13-fixed-rope-workflow.log"
+      },
+      {
+        "test": "workflow",
+        "exitCode": 0,
+        "log": "acceptance/evidence/candidate-0.0.13-workflow.log"
+      },
+      {
+        "test": "hidden-draft-workflow",
+        "exitCode": 0,
+        "log": "acceptance/evidence/candidate-0.0.13-hidden-draft-workflow.log"
+      },
+      {
+        "test": "lazy-window-workflow",
+        "exitCode": 0,
+        "log": "acceptance/evidence/candidate-0.0.13-lazy-window-workflow.log"
+      }
+    ]
+  },
+  "packageWorkflowExitCode": 0,
+  "packageIdleExitCode": 0,
+  "packageIdleCleanup": "passed; bounded child-tree exit wait and removal",
+  "packageBytes": "candidate-0.0.13-package-bytes.json",
+  "mac": "final-package-mac.json",
+  "windows": "final-package-windows.json",
+  "historicalIndependentQA": {
+    "version": "0.0.11",
+    "sourceCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
+    "directory": "qa-0.0.11",
+    "inheritedByCurrent": false
+  },
+  "remaining": [
+    "G7 automatic fullscreen suppression",
+    "physical Windows focus/click-through/IME/display",
+    "physical Mac IME and cross-app focus",
+    "real Agent plaintext drop",
+    "subjective user acceptance"
+  ]
 }

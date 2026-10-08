@@ -1,0 +1,22 @@
+{
+  "sourceCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
+  "imeGuard": {
+    "passed": true,
+    "scope": "Renderer KeyboardEvent isComposing/keyCode229 plus actual IPC; not physical macOS input method or candidate panel"
+  },
+  "rapidSubmit": {
+    "passed": true,
+    "calls": 3,
+    "persistedIdeas": 1,
+    "revisionDelta": 1
+  },
+  "fullscreen": {
+    "actualOwnNativeWindowEntered": true,
+    "cursor": "simulated through QA-only screen adapter; physical desktop cursor never moved",
+    "automaticSuppression": false,
+    "nativeShelfIsVisible": true,
+    "manualTrayPauseHidesShelf": true,
+    "compositorOcclusion": "not established: native isVisible is not proof of actual screen overlay in fullscreen Space"
+  },
+  "scope": "Own isolated Electron runtime and local data URL target; no external receiver, real chat, real global key or user app"
+}
