@@ -1,7 +1,7 @@
 const assert=require('node:assert/strict');const path=require('node:path');const fs=require('node:fs/promises');const os=require('node:os');const {_electron}=require('playwright');
 (async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-workflow-'));let app;
- const launch=async()=>_electron.launch({executablePath:require('electron'),args:[path.resolve('out/main/index.js')],env:{...process.env,THOUGHTLINE_DATA_DIR:dir},timeout:15000});
+ const launch=async()=>_electron.launch({executablePath:process.env.THOUGHTLINE_EXECUTABLE||require('electron'),args:process.env.THOUGHTLINE_EXECUTABLE?[]:[path.resolve('out/main/index.js')],env:{...process.env,THOUGHTLINE_DATA_DIR:dir},timeout:15000});
  const windows=async()=>{let shelf,composer,manage;for(const p of await app.windows()){if(p.url().includes('view=shelf'))shelf=p;if(p.url().includes('view=composer'))composer=p;if(p.url().includes('view=manage'))manage=p;}return {shelf,composer,manage};};
  const ready=async()=>{await app.firstWindow();while((await app.windows()).length<3)await app.waitForEvent('window',{timeout:5000});for(const p of await app.windows())await p.waitForURL(/view=(shelf|composer|manage)/,{waitUntil:'domcontentloaded',timeout:5000});const w=await windows();assert(w.shelf&&w.composer&&w.manage);await w.shelf.waitForSelector('[data-view="shelf"]',{state:'attached',timeout:5000});return w;};
  const result=async(p,method,...args)=>{const r=await p.evaluate(({method,args})=>window.thoughtline[method](...args),{method,args});assert(r.ok,r.message);return r.value;};

@@ -76,5 +76,14 @@
     "interactionEvidence": "evidence/group-native.json",
     "scope": "Mac Electron IPC/DOM/protocol events; physical U09-U13 pending"
   },
-  "sourceCommit": "d028a1b281607539f8bef874e9451f9ba07bcc9f"
+  "sourceCommit": "d028a1b281607539f8bef874e9451f9ba07bcc9f",
+  "installationCorrection": {
+    "affectedMacRelease": "0.0.3-alpha.1",
+    "cause": "invalid Electron linker signature after packaging; no sealed resources",
+    "localInstalledAppRepaired": true,
+    "fixedPackage": "0.0.4",
+    "signatureEvidence": "evidence/package-mac-stage5.json",
+    "distribution": "ad-hoc; Developer ID/notarization not configured; downloaded Gatekeeper path still separate"
+  },
+  "cleanup": "evidence/test-cleanup.json"
 }

@@ -1,7 +1,7 @@
 const assert=require('node:assert/strict'),path=require('node:path'),fs=require('node:fs/promises'),os=require('node:os');const {_electron}=require('playwright');
 (async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-groups-'));let app;
- const launch=async()=>_electron.launch({executablePath:require('electron'),args:[path.resolve('out/main/index.js')],env:{...process.env,THOUGHTLINE_DATA_DIR:dir},timeout:15000});
+ const launch=async()=>_electron.launch({executablePath:process.env.THOUGHTLINE_EXECUTABLE||require('electron'),args:process.env.THOUGHTLINE_EXECUTABLE?[]:[path.resolve('out/main/index.js')],env:{...process.env,THOUGHTLINE_DATA_DIR:dir},timeout:15000});
  const ready=async()=>{await app.firstWindow();while((await app.windows()).length<3)await app.waitForEvent('window',{timeout:5000});const pages=await app.windows();for(const p of pages)await p.waitForURL(/view=(shelf|composer|manage)/,{waitUntil:'domcontentloaded'});const by=name=>pages.find(p=>p.url().includes('view='+name));const shelf=by('shelf');await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});return {shelf,composer:by('composer'),manage:by('manage')};};
  const info=p=>p.evaluate(()=>window.thoughtline.info());
  const result=async(p,method,...args)=>{const r=await p.evaluate(({method,args})=>window.thoughtline[method](...args),{method,args});assert(r.ok,r.message);return r.value;};

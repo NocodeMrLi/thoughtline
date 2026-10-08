@@ -1,6 +1,6 @@
 {
   "name": "thoughtline",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "description": "晾念头 / Thoughtline desktop rope native pilot",
   "main": "out/main/index.js",
@@ -11,7 +11,7 @@
     "build": "node node_modules/electron-vite/bin/electron-vite.js build",
     "verify": "node scripts/verify.cjs",
     "smoke": "node tests/electron/smoke.cjs",
-    "package:mac": "node node_modules/electron-builder/cli.js --mac dmg --publish never",
+    "package:mac": "node scripts/package-mac.cjs",
     "package:win": "node node_modules/electron-builder/cli.js --win nsis --publish never",
     "workflow": "node tests/electron/workflow.cjs",
     "groups": "node tests/electron/group-workflow.cjs"
@@ -64,9 +64,10 @@
           ]
         }
       ],
-      "identity": null,
+      "identity": "-",
       "artifactName": "Thoughtline-${version}-mac-${arch}.dmg",
-      "icon": "assets/app-icon.png"
+      "icon": "assets/app-icon.png",
+      "hardenedRuntime": false
     },
     "win": {
       "target": [
