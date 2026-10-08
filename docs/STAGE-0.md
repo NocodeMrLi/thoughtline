@@ -14,3 +14,5 @@ Still awaiting: physical click-through/focus matrix on both systems, real Window
 Native test helper windows live only in tests; they never ship in installers. Installers are local/private test builds without public-release signing. Do not treat installation or CI packaging as manual platform acceptance.
 
 Follow-up hardening: operation locks freeze the visible sag during an in-progress weight transition; unlock continues toward the newest count. Packaging explicitly uses --publish never so CI cannot trigger an implicit release. The workflow uploads private test artifacts separately.
+
+Pilot installers are available in the [private prerelease](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.1-pilot.1). Both are built from `6eee5a13c4a208ccffa7a3ef60bc389dec0fbe02`; local hashes match GitHub asset digests. Current development is on main, with tested stage commits as rollback points.

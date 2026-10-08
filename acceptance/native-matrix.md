@@ -3,7 +3,8 @@
 | Platform | Evidence | Status |
 |---|---|---|
 | macOS15.3.1 arm64 / Electron44.7.0 | native-basic.json: hidden shelf, non-focusable display, hotkey registration | Native object checks passed |
+| macOS packaged App | DMG checksum VALID; packaged-cdp.json: bridge, shortcut registration, multiline persistence | Package startup checks passed; physical acceptance pending |
 | macOS physical mouse/focus | Test target was launched; user screenshot shows rope over target; automation tool runtime unavailable | Partial observation, not full acceptance |
-| Windows x64 | GitHub Actions package build pending; user will install at work and provide feedback | User acceptance pending |
+| Windows x64 | Main commit6eee5a1: Windows runner verify/NSIS/upload passed (run37783302073); user will install at work and provide feedback | User acceptance pending |
 
 No helper test window is part of the installed product. G0 dual-platform remains pending. G3 UI lock still waits for G0; pure shared work continues.

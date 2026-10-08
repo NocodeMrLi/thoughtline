@@ -5,14 +5,14 @@
     "typecheck": "passed",
     "unitTests": 25,
     "build": "passed",
-    "log": "evidence/stage1-verify.log"
+    "log": "evidence/final-verify.log"
   },
   "gates": [
     {
       "id": "G0",
       "status": "partial",
-      "mac": "native object checks passed; physical matrix pending",
-      "windows": "CI package pending; user will test at work"
+      "mac": "native object and packaged bridge/hotkey/full-text save checks passed; physical matrix pending",
+      "windows": "Windows runner verify and NSIS installer succeeded; user installation/interaction pending"
     },
     {
       "id": "G1",
@@ -54,5 +54,13 @@
     "unsigned test packages"
   ],
   "referenceCode": "Edge-Drop stickProbe.ts copied unchanged; Tendedero rope math ported; see THIRD_PARTY_NOTICES.md",
-  "packageBuildFailure": "First Windows installer build completed, then implicit CI publishing failed. Packaging now explicitly uses --publish never; workflow rerun required."
+  "packageBuildFailure": "Historical first Windows run failed after installer creation because builder tried implicit publishing. Fixed with --publish never; final main run 37783302073 succeeded.",
+  "sourceCommit": "6eee5a13c4a208ccffa7a3ef60bc389dec0fbe02",
+  "branch": "main",
+  "release": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.1-pilot.1",
+  "packages": {
+    "mac": "evidence/package-mac.json",
+    "windows": "evidence/package-windows.json",
+    "release": "evidence/private-release.json"
+  }
 }

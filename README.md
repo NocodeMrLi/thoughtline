@@ -14,7 +14,7 @@ Node24.19.0。执行 `npm ci`、`npm run verify`、`npm run dev`。主入口Cont
 
 ## 安装测试
 
-Mac arm64：`npm run package:mac`。Windows x64：Windows GitHub Actions运行验证及NSIS打包，安装包保存在对应Actions私有构建附件中。安装包SHA256随包提供；卸载不删除个人念头数据。
+Mac arm64：`npm run package:mac`。Windows x64：Windows GitHub Actions运行验证及NSIS打包，安装包同时保存于对应Actions私有构建附件和[双端测试预发布](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.1-pilot.1)。安装包SHA256随包提供；卸载不删除个人念头数据。
 
 Mac和Windows分别记录构建、安装与用户反馈，见[验收节点](acceptance/gates.json)。当前尚无Windows实机通过结论。
 
