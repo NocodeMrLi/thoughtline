@@ -24,6 +24,10 @@ SHA256：`d32339a2338139de37d58067ef16bdc014d5e67ad17f3d7019009a0e164a72d7`。
 
 夹子逐项对应见`../docs/CLOTHESPIN-DESIGN-PROPOSAL.md`。截图在`evidence/clothespin-{1x,2x}-{light,dark}-{0,3,24}.png`；测试背景为中性背景注入，不是实际壁纸验收。绳核2.2DIP配18DIP夹子，纸边与夹口重叠，阴影/高光克制；没有粗麻绳、便签倾斜和放大镜。新数据Codex蓝/Claude橙/柔紫Cursor，既有颜色全保留；Gemini/WorkBuddy未强制预置。
 
+独立QA随后发现P2测试/证据缺口：旧clothespin-workflow从不可信的shelf调用closeManage，忽略拒绝回复，残留详情锁使24张种子场景仍只显示3夹。原多夹截图结论已撤回；4张旧图和旧JSON仅在验收目录之外保留诊断记录，不再作为验收证据。仓库测试现改为从manage关闭、检查成功、等待锁释放及正常可见容量，再锁定画面。已同步QA独立成功重拍的12图，空/3/24张种子对应可见0/3/5夹；24是种子数量，不表示一屏展示24夹。新版JSON、总清单及gates已刷新，图片哈希和脚本等价范围见`evidence/clothespin-correction.json`。仅有测试及文档变化；生产源码、版本和冻结安装包仍是f99cdea/0.0.11。构建者未重跑原生，以避免污染QA独立性能测量。
+
+全屏静态建议见`../docs/FULLSCREEN-SUPPRESSION-PROPOSAL.md`。QA本地Mac全屏靶窗实验中，模拟指针仍令控制器shelfVisible与原生isVisible为true，手动暂停可隐藏；这些布尔值不能证明compositor实际遮挡。完整自动全屏抑制仍未通过，不能扩大为所有桌面交互不可用。QA最终120秒性能结果尚待其报告。Library保存尝试失败，没有Library附件或IDs；本地文件路径不等同用户可用附件。
+
 复验方法（使用独立工作树及临时数据，不与性能测量并行）：
 
 1. 检出冻结提交；Node24.19.0，运行`npm ci --no-audit --no-fund`和`npm run verify`。
