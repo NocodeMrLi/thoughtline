@@ -1,4 +1,4 @@
-import {app,BrowserWindow,clipboard,globalShortcut,ipcMain,nativeImage,nativeTheme,powerMonitor,screen,Tray,Menu} from 'electron';
+import {app,BrowserWindow,dialog,shell,clipboard,globalShortcut,ipcMain,nativeImage,nativeTheme,powerMonitor,screen,Tray,Menu} from 'electron';
 import {join} from 'node:path';
 import {randomUUID} from 'node:crypto';
 import {createShelf} from './windows/shelf';
@@ -6,7 +6,9 @@ import {createComposer} from './windows/composer';
 import {createManage} from './windows/manage';
 import {createHost} from './platform/host';
 import {EdgeController} from './edgeController';
-import {FileRepository} from './store/repository';
+import {loadWithRecovery} from './store/repository';
+import {swapShortcut} from './shortcuts';
+import {validWriteHotkey} from '../shared/composerKeys';
 import {newIdea,editIdea,changeStatus,addAgent,updateAgent,removeAgent} from '../shared/ideaCommands';
 import type {Draft,Result,Snapshot} from '../shared/contracts';
 import type {PilotInfo,HitLayout,ComposerContext,AgentMutation,ClipMutation} from '../shared/bridge';
@@ -14,6 +16,7 @@ import {mergeClips,splitClip,moveClip,selectClipIdea} from '../shared/clipComman
 import {layoutClips,normalizedPosition} from '../shared/clipLayout';
 app.setName('Thoughtline');
 app.setPath('userData',process.env.THOUGHTLINE_DATA_DIR||join(app.getPath('appData'),'Thoughtline'));
+let prepareQuit:(()=>Promise<boolean>)|null=null;let quitInFlight=false;
 let tray:Tray;let edge:EdgeController;let shelf:BrowserWindow;let composer:BrowserWindow;let manage:BrowserWindow;let quitting=false;
 const blank:Draft={text:'',title:'',project:'',agentId:'general'};
 const invalid=<T>(message:string):Result<T>=>({ok:false,code:'INVALID',message});
@@ -28,11 +31,17 @@ async function loadView(w:BrowserWindow,view:string){
 }
 if(!app.requestSingleInstanceLock())app.quit();
 else app.whenReady().then(async()=>{
- const repository=new FileRepository(app.getPath('userData'));const loaded=await repository.load();if(!loaded.ok)throw Error(loaded.message);
- let snapshot:Snapshot=loaded.value;let displayId=String(screen.getPrimaryDisplay().id);let width=screen.getPrimaryDisplay().bounds.width;
+ const dataDir=app.getPath('userData');
+ const loaded=await loadWithRecovery(dataDir,async error=>{
+  const {response}=await dialog.showMessageBox({type:'error',title:'晾念头：数据读取未成功',message:'念头数据暂时无法读取',detail:`${error.message}\n\n原文件仍保留。可以打开数据目录备份并修复，之后重试。\n数据目录：${dataDir}`,buttons:['打开数据文件夹','重试读取','退出'],defaultId:1,cancelId:2,noLink:true});
+  return response===0?'folder':response===1?'retry':'exit';
+ },async()=>{const error=await shell.openPath(dataDir);if(error)dialog.showErrorBox('无法打开数据目录',error);});
+ if(!loaded){app.quit();return;}const repository=loaded.repository;
+ let snapshot:Snapshot=loaded.snapshot;let displayId=String(screen.getPrimaryDisplay().id);let width=screen.getPrimaryDisplay().bounds.width;
  let composerSession=0,manageSession=0,manageSelection:string|null=null,editRevision=snapshot.revision;
  let dragCancelSession=0,dragEscape=false;
- let manageMode:'browse'|'detail'='browse',manageTitles=false;let undoClips:{snapshot:Snapshot;revision:number}|null=null;
+ let settingsBusy=false;let refreshTray=()=>{};
+ let manageMode:'browse'|'detail'|'settings'='browse',manageTitles=false;let undoClips:{snapshot:Snapshot;revision:number}|null=null;
  let composerContext:ComposerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
  const preload=join(__dirname,'../preload/index.js');shelf=createShelf(preload);composer=createComposer(preload);manage=createManage(preload);
  const host=createHost(shelf,composer);
@@ -45,6 +54,7 @@ else app.whenReady().then(async()=>{
  const cancelDrag=()=>{if(dragEscape){globalShortcut.unregister('Escape');dragEscape=false;lock('drag',false);}dragCancelSession++;publish();};
  edge=new EdgeController(host,(id,w)=>{displayId=id;width=w;cancelDrag();},publish);
  const openComposer=(ideaId?:string):Result<void>=>{
+  if(manage.isVisible()&&manageMode==='settings')return invalid('请先关闭设置。');
   if(composer.isVisible()){
    composer.show();composer.focus();return ideaId?invalid('请先保存或取消当前编辑。'):done();
   }
@@ -56,6 +66,20 @@ else app.whenReady().then(async()=>{
  const save=async(next:Result<Snapshot>,revision:number):Promise<Result<Snapshot>>=>{
   if(!next.ok)return next;const r=await repository.commit(next.value,revision);
   if(r.ok){snapshot=r.value;undoClips=null;publish();}return r;
+ };
+ const captureDraft=():Promise<Result<Draft>>=>new Promise(resolve=>{
+  const id=randomUUID();let finished=false;
+  const finish=(result:Result<Draft>)=>{if(finished)return;finished=true;clearTimeout(timer);ipcMain.removeListener('thoughtline:quit-draft',receive);resolve(result);};
+  const receive=(event:Electron.IpcMainEvent,requestId:string,draft:Draft|null)=>{if(requestId!==id||!trusted(event,[composer]))return;finish(draftShape(draft)?{ok:true,value:draft}:{ok:false,code:'IO',message:'当前内容正在保存，退出未完成。请稍后重试。'});};
+  const timer=setTimeout(()=>finish({ok:false,code:'IO',message:'未能读取当前草稿，退出已取消。请保留文字后重试。'}),3000);
+  ipcMain.on('thoughtline:quit-draft',receive);composer.webContents.send('thoughtline:prepare-quit',id);
+ });
+ prepareQuit=async()=>{
+  if(settingsBusy)return false;
+  if(!composer.isVisible()||composerContext.mode==='edit')return true;
+  const draft=await captureDraft();const saved=draft.ok?await save({ok:true,value:{...snapshot,draft:draft.value}},snapshot.revision):draft;
+  if(saved.ok)return true;
+  composer.webContents.send('thoughtline:quit-error',saved.message);composer.show();composer.focus();return false;
  };
  ipcMain.handle('thoughtline:info',e=>{if(!trusted(e))throw Error('不允许读取');return info();});
  ipcMain.on('thoughtline:hit-layout',(e,p:HitLayout)=>{
@@ -88,6 +112,22 @@ else app.whenReady().then(async()=>{
   manageSelection=id??null;manageMode=id?'detail':'browse';manageTitles=!!titles;manageSession++;lock('manage',true);publish();if(id){const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint()),p=screen.getCursorScreenPoint();const b=boundsFor(380,360);b.x=Math.round(Math.max(d.workArea.x+12,Math.min(d.workArea.x+d.workArea.width-b.width-12,p.x-b.width/2)));b.y=Math.round(Math.max(d.workArea.y+12,Math.min(d.workArea.y+d.workArea.height-b.height-12,p.y+24)));manage.setBounds(b);}else manage.setBounds(boundsFor(740,540));manage.show();manage.focus();return done();
  });
  ipcMain.handle('thoughtline:close-manage',e=>{if(!trusted(e,[manage]))return invalid('无效操作');hideManage();return done();});
+ const openSettings=():Result<void>=>{
+  if(composer.isVisible())return invalid('请先保存或取消当前输入。');
+  cancelDrag();manageMode='settings';manageTitles=false;manageSelection=null;manageSession++;lock('manage',true);manage.setBounds(boundsFor(440,390));publish();manage.show();manage.focus();return done();
+ };
+ ipcMain.handle('thoughtline:open-settings',e=>trusted(e)?openSettings():invalid('无效操作'));
+ ipcMain.handle('thoughtline:settings',async(e,settings:Snapshot['settings'],revision:number):Promise<Result<Snapshot>>=>{
+  if(!trusted(e,[manage])||manageMode!=='settings'||!settings||!validWriteHotkey(settings.writeHotkey)||typeof settings.reducedMotion!=='boolean')return invalid('请录制有效的组合快捷键。');
+  if(settingsBusy)return invalid('正在保存设置，请稍后重试。');
+  if(revision!==snapshot.revision)return {ok:false,code:'CONFLICT',message:'设置已变化，请核对后重试。'};
+  settingsBusy=true;let committed:Result<Snapshot>=invalid('快捷键已被占用，请录制其他组合；原键位保持。');
+  try{
+   const changed=await swapShortcut(globalShortcut,snapshot.settings.writeHotkey,settings.writeHotkey,()=>{openComposer();},async()=>{committed=await save({ok:true,value:{...snapshot,settings:{writeHotkey:settings.writeHotkey,reducedMotion:settings.reducedMotion}}},revision);return committed;});
+   if(!changed.ok)return changed.error?.ok===false?changed.error:committed;
+   refreshTray();publish();return committed;
+  }finally{settingsBusy=false;}
+ });
  ipcMain.handle('thoughtline:open-edit',(e,id:string)=>trusted(e,[shelf,manage])&&typeof id==='string'?openComposer(id):invalid('无效操作'));
  ipcMain.handle('thoughtline:status',async(e,id:string,status:'hanging'|'archived',revision:number)=>{
   if(!trusted(e,[shelf,manage])||typeof id!=='string'||!['hanging','archived'].includes(status))return invalid('无效操作');
@@ -130,13 +170,20 @@ else app.whenReady().then(async()=>{
  });
  for(const w of [composer,manage])w.on('close',event=>{if(!quitting)event.preventDefault();});
  await Promise.all([loadView(shelf,'shelf'),loadView(composer,'composer'),loadView(manage,'manage')]);
- const registered=globalShortcut.register(snapshot.settings.writeHotkey,()=>{openComposer();});
+ globalShortcut.register(snapshot.settings.writeHotkey,()=>{openComposer();});
  const icon=nativeImage.createFromPath(join(__dirname,'../../assets/'+(process.platform==='darwin'?'trayTemplate.png':'app-icon.png'))).resize({width:22,height:22});
  if(icon.isEmpty())throw Error('Thoughtline tray icon failed to load.');
  if(process.platform==='darwin')icon.setTemplateImage(true);tray=new Tray(icon);tray.setToolTip('晾念头 / Thoughtline');
- tray.setContextMenu(Menu.buildFromTemplate([{label:'晾念头 / Thoughtline',enabled:false},{label:`写念头：${snapshot.settings.writeHotkey}${registered?'':'（注册失败）'}`,enabled:false},{type:'separator'},{label:'暂停悬停',type:'checkbox',click:item=>{cancelDrag();edge.pause(item.checked);}},{label:'退出',click:()=>app.quit()}]));
- nativeTheme.on('updated',publish);powerMonitor.on('suspend',()=>{cancelDrag();edge.pause(true);});powerMonitor.on('lock-screen',()=>{cancelDrag();edge.pause(true);});powerMonitor.on('resume',()=>edge.pause(false));powerMonitor.on('unlock-screen',()=>edge.pause(false));
+ refreshTray=()=>tray.setContextMenu(Menu.buildFromTemplate([{label:'晾念头 / Thoughtline',enabled:false},{label:`写念头：${snapshot.settings.writeHotkey}${globalShortcut.isRegistered(snapshot.settings.writeHotkey)?'':'（注册失败）'}`,enabled:false},{type:'separator'},{label:'设置',enabled:!composer.isVisible(),click:()=>{openSettings();}},{label:'暂停悬停',type:'checkbox',checked:edge.isManuallyPaused(),click:item=>{cancelDrag();edge.pause(item.checked);}},{label:'退出',click:()=>app.quit()}]));
+ composer.on('show',refreshTray);composer.on('hide',refreshTray);refreshTray();
+ nativeTheme.on('updated',publish);powerMonitor.on('suspend',()=>{cancelDrag();edge.pause(true,'sleep');});powerMonitor.on('lock-screen',()=>{cancelDrag();edge.pause(true,'lock');});powerMonitor.on('resume',()=>edge.pause(false,'sleep'));powerMonitor.on('unlock-screen',()=>edge.pause(false,'lock'));
  screen.on('display-metrics-changed',cancelDrag);app.dock?.hide();publish();edge.start();
-}).catch(error=>{console.error(error);app.quit();});
-app.on('before-quit',()=>{quitting=true;edge?.stop();globalShortcut.unregisterAll();});
+}).catch(error=>{console.error(error);dialog.showErrorBox('晾念头启动未成功',error instanceof Error?error.message:'启动发生错误，请保留数据后重试。');app.quit();});
+app.on('before-quit',event=>{
+ if(!quitting&&prepareQuit){
+  event.preventDefault();if(quitInFlight)return;quitInFlight=true;
+  void prepareQuit().then(ok=>{quitInFlight=false;if(ok){quitting=true;app.quit();}}).catch(()=>{quitInFlight=false;composer?.webContents.send('thoughtline:quit-error','退出未成功，文字已保留，请重试。');});return;
+ }
+ quitting=true;edge?.stop();globalShortcut.unregisterAll();
+});
 app.on('window-all-closed',()=>{if(quitting)app.quit();});

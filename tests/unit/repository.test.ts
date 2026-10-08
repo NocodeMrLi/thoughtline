@@ -1,6 +1,7 @@
 import {afterEach,expect,test} from 'vitest';
 import {mkdtemp,rm,readFile,writeFile,rename,open} from 'node:fs/promises';
 import {tmpdir} from 'node:os';import {join} from 'node:path';
+import * as storage from '../../src/main/store/repository';
 import {FileRepository,type FileIO} from '../../src/main/store/repository';
 import type {Snapshot,Result} from '../../src/shared/contracts';
 const dirs:string[]=[];
@@ -48,4 +49,16 @@ test('旧schema1首次提交前保留原始备份，迁移保全全文与草稿'
  const {dir,repo}=await fixture();const s=value(await repo.load());const legacy={...add(s),schemaVersion:1,clips:undefined,draft:{text:'旧草稿',title:'',project:'',agentId:'general'}};const raw=JSON.stringify(legacy);
  await writeFile(join(dir,'snapshot.json'),raw);const upgraded=new FileRepository(dir);const migrated=value(await upgraded.load());expect(migrated.schemaVersion).toBe(2);expect(await readFile(join(dir,'snapshot.json'),'utf8')).toBe(raw);
  value(await upgraded.commit(migrated,migrated.revision));expect(await readFile(join(dir,'snapshot.schema1.backup.json'),'utf8')).toBe(raw);expect(value(await new FileRepository(dir).load()).draft?.text).toBe('旧草稿');
+});
+
+test('启动恢复界面退出时保留损坏原文，打开目录后可人工修复再重试',async()=>{
+ const {dir,repo}=await fixture();const s=value(await repo.load());const raw='{damaged';
+ await writeFile(join(dir,'snapshot.json'),raw);let prompt=0,folderRead='';
+ const result=await storage.loadWithRecovery?.(dir,async()=>{
+  prompt++;if(prompt===1)return 'folder';
+  await writeFile(join(dir,'snapshot.json'),JSON.stringify(add(s,'人工修复后的中文正文')));return 'retry';
+ },async()=>{folderRead=await readFile(join(dir,'snapshot.json'),'utf8');});
+ expect(folderRead).toBe(raw);expect(result?.snapshot.ideas[0].text).toBe('人工修复后的中文正文');
+ await writeFile(join(dir,'snapshot.json'),raw);
+ const cancelled=await storage.loadWithRecovery?.(dir,async()=>'exit',async()=>{});expect(cancelled).toBeNull();expect(await readFile(join(dir,'snapshot.json'),'utf8')).toBe(raw);
 });

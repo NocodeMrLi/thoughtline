@@ -1,11 +1,10 @@
 {
-  "stage": "0.0.3 compact cards and grouped clips",
+  "stage": "0.0.5 settings, quit draft and recovery",
   "asOf": "2026-10-08",
   "verify": {
     "typecheck": "passed",
-    "unitTests": 41,
-    "build": "passed",
-    "log": "evidence/stage4-final-verify.log"
+    "unitTests": 47,
+    "build": "passed"
   },
   "gates": [
     {
@@ -55,7 +54,7 @@
   "referenceCode": "Edge-Drop stickProbe.ts copied unchanged; Tendedero rope math ported; see THIRD_PARTY_NOTICES.md",
   "packageBuildFailure": "Historical first Windows run failed after installer creation because builder tried implicit publishing. Fixed with --publish never; final main run 37783302073 succeeded.",
   "branch": "main",
-  "release": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.3-alpha.1",
+  "release": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.4-alpha.1",
   "packages": {
     "mac": "evidence/package-mac-stage4.json",
     "windows": "evidence/package-windows-stage4.json",
@@ -85,5 +84,14 @@
     "signatureEvidence": "evidence/package-mac-stage5.json",
     "distribution": "ad-hoc; Developer ID/notarization not configured; downloaded Gatekeeper path still separate"
   },
-  "cleanup": "evidence/test-cleanup.json"
+  "cleanup": "evidence/test-cleanup.json",
+  "settingsAndLifecycle": {
+    "evidence": "evidence/settings-lifecycle.json",
+    "settingsRecorder": true,
+    "registryAndDiskFailureProtection": true,
+    "quitDraftPersistence": true,
+    "recoverySelectorUnitTest": true,
+    "nativeRecoveryDialogPhysicalAcceptance": false,
+    "separatePauseReasons": true
+  }
 }

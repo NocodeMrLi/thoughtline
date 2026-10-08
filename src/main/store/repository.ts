@@ -45,3 +45,13 @@ export class FileRepository implements Repository{
    const pending=this.queue.then(execute,execute);this.queue=pending;return pending;
   }
 }
+
+export async function loadWithRecovery(dir:string,choose:(error:Extract<Result<Snapshot>,{ok:false}>)=>Promise<'folder'|'retry'|'exit'>,openFolder:()=>Promise<void>):Promise<{repository:FileRepository;snapshot:Snapshot}|null>{
+ for(;;){
+  const repository=new FileRepository(dir),result=await repository.load();
+  if(result.ok)return {repository,snapshot:result.value};
+  const action=await choose(result);
+  if(action==='exit')return null;
+  if(action==='folder')await openFolder();
+ }
+}

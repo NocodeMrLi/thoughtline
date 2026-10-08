@@ -1,8 +1,9 @@
 import {screen} from 'electron';import {probeSeamAware,isNearProximity,type SeamTickState} from './vendor/edge-drop/stickProbe';import type {PlatformHost,Rect} from '../shared/contracts';import type {HitLayout} from '../shared/bridge';
-import {contains,toLocal} from '../shared/ropeGeometry';import {initialShelf,shelfTransition,type ShelfEvent} from '../shared/shelfState';
+import {contains,toLocal} from '../shared/ropeGeometry';import {initialShelf,shelfTransition,pauseTransition,type PauseReason,type ShelfEvent} from '../shared/shelfState';
 export class EdgeController{
  private state=initialShelf();private timer:ReturnType<typeof setTimeout>|null=null;
  private rects:Rect[]=[];private layoutRevision=-1;private displayId='';private paused=false;
+ private pauses={manual:false,sleep:false,lock:false,paused:false};
  private seam:SeamTickState={};private proximityDelay=400;
  private bounds:Rect={x:0,y:0,width:1200,height:340};
  constructor(private host:PlatformHost,private onDisplay:(id:string,width:number)=>void,private onStateChange:()=>void=()=>{}){}
@@ -11,7 +12,8 @@ export class EdgeController{
  stop(){if(this.timer)clearTimeout(this.timer);this.timer=null;this.host.hideShelf();}
  layout(payload:HitLayout){if(payload.displayId!==this.displayId||payload.layoutRevision<=this.layoutRevision)return;this.layoutRevision=payload.layoutRevision;this.rects=payload.rects;}
  event(event:ShelfEvent){const before=this.state.phase;const locked=this.state.locks.length>0;this.state=shelfTransition(this.state,event);this.render(before);if(before!==this.state.phase||locked!==(this.state.locks.length>0))this.onStateChange();}
- pause(value:boolean){this.paused=value;this.event({type:value?'suspend':'resume',now:Date.now()});}
+ isManuallyPaused(){return this.pauses.manual;}
+ pause(value:boolean,reason:PauseReason='manual'){this.pauses=pauseTransition(this.pauses,reason,value);if(this.paused===this.pauses.paused)return;this.paused=this.pauses.paused;this.event({type:this.paused?'suspend':'resume',now:Date.now()});}
  private render(before:string){
   if(this.state.phase==='hidden'){this.host.hideShelf();return;}
   if(before==='hidden')this.host.showShelf(this.bounds);

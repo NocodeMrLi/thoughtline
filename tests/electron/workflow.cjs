@@ -30,5 +30,5 @@ const assert=require('node:assert/strict');const path=require('node:path');const
   await app.close();app=null;app=await launch();({shelf}=await ready());info=await shelf.evaluate(()=>window.thoughtline.info());assert.equal(info.snapshot.ideas[0].text,edited);assert.equal(info.snapshot.ideas[0].agentId,'claude');
   const report={platform:process.platform,scope:'真实Electron桥接和DOM循环；不代表物理点击穿透、系统IME或跨App焦点',editCancelPreserved:true,editSavedFullText:true,archiveSearchRestore:true,copyFullText:true,restartPreserved:true};
   await fs.writeFile('acceptance/evidence/workflow-native.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
- }finally{if(app)await app.close();await fs.rm(dir,{recursive:true,force:true});}
+ }finally{try{if(app)await app.close();}finally{await fs.rm(dir,{recursive:true,force:true});}}
 })().catch(e=>{console.error(e);process.exitCode=1;});

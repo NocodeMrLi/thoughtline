@@ -40,3 +40,19 @@ test('Peek2300ms结束，睡眠关闭并清过期边缘计时',()=>{
   s=step(s,{type:'resume',now:10000});
   expect(step(s,{type:'tick',now:10100}).phase).toBe('hidden');
 });
+import * as transitions from '../../src/shared/shelfState';
+test('手动暂停经睡眠恢复仍暂停，锁屏与睡眠分别释放',()=>{
+ let state={manual:false,sleep:false,lock:false,paused:false};
+ state=transitions.pauseTransition?.(state,'manual',true)??state;
+ state=transitions.pauseTransition?.(state,'sleep',true)??state;
+ state=transitions.pauseTransition?.(state,'sleep',false)??state;
+ expect(state.paused).toBe(true);
+ state=transitions.pauseTransition?.(state,'manual',false)??state;
+ expect(state.paused).toBe(false);
+ state=transitions.pauseTransition?.(state,'lock',true)??state;
+ state=transitions.pauseTransition?.(state,'sleep',true)??state;
+ state=transitions.pauseTransition?.(state,'sleep',false)??state;
+ expect(state.paused).toBe(true);
+ state=transitions.pauseTransition?.(state,'lock',false)??state;
+ expect(state.paused).toBe(false);
+});

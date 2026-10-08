@@ -37,3 +37,8 @@ export function shelfTransition(previous:ShelfState,event:ShelfEvent):ShelfState
   }
   return s;
 }
+export type PauseReason='manual'|'sleep'|'lock';
+export type PauseState={manual:boolean;sleep:boolean;lock:boolean;paused:boolean};
+export function pauseTransition(state:PauseState,reason:PauseReason,active:boolean):PauseState{
+ const next={...state,[reason]:active};return {...next,paused:next.manual||next.sleep||next.lock};
+}

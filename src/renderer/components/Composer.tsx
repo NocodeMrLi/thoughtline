@@ -4,6 +4,12 @@ import type {Draft} from '../../shared/contracts';
 import {shouldSubmit} from '../../shared/composerKeys';
 export function Composer({info}:{info:PilotInfo}){
  const [draft,setDraft]=useState<Draft>(info.composerContext.draft);const [busy,setBusy]=useState(false);const [error,setError]=useState('');const text=useRef<HTMLTextAreaElement>(null);
+ const latest=useRef({draft,busy});latest.current={draft,busy};
+ useEffect(()=>{
+  const offPrepare=window.thoughtline.onPrepareQuit(()=>{if(latest.current.busy)return null;setBusy(true);return latest.current.draft;});
+  const offError=window.thoughtline.onQuitError(message=>{setBusy(false);setError(message);text.current?.focus();});
+  return()=>{offPrepare();offError();};
+ },[]);
  const editing=info.composerContext.mode==='edit';
  const grouped=info.snapshot.clips.find(c=>c.ideaIds.includes(info.composerContext.ideaId??''));const changesAgent=editing&&grouped&&grouped.ideaIds.length>1&&draft.agentId!==grouped.agentId;const [splitConfirmed,setSplitConfirmed]=useState(false);
  useEffect(()=>{setDraft(info.composerContext.draft);setError('');setSplitConfirmed(false);text.current?.focus();},[info.composerSession]);
