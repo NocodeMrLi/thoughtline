@@ -1,39 +1,25 @@
-# 全屏悬停抑制：静态实现建议
+# 全屏悬停抑制：公开接口原型与接入边界
 
-2026-10-09，北京时间。仅调查和设计，未修改冻结生产代码，未调用桌面探测接口，未启动原生测试。
+2026-10-09，北京时间。G7 原始目标仍是普通悬停在全屏游戏/演示时受到抑制；Mac Space 窗口策略和托盘手动暂停不能替代自动检测验收。稳定 0.0.13 dee1f2c 没有自动检测；本原型仅位于隔离分支 `codex/thoughtline-g7-public-probe-20261009` 的 `prototypes/fullscreen/`，未打入应用安装包。
 
-## 原计划和当前缺口
+## 已实现的公开信号
 
-原始 03 项目方案要求进入全屏演示、游戏或锁屏时抑制普通悬停；04 的 G7（第 280–291 行）明确要求双端系统适配与实际矩阵，并排除直接复制私有 CGS。10 的剩余计划限定公开接口可用范围。托盘手动暂停是补充入口，不能标成自动全屏检测通过。
+小型原生进程阻塞等待 stdin，请求一行 sample 返回一行 clear / blocked / unknown。没有每帧创建 PowerShell/AppleScript，不读取窗口标题/像素/用户便签，不申请 AX/屏幕录制权限，不使用 CGS/SkyLight。源码、CMake、19 项共享决策检查、隔离 Mac 全屏测试及 Windows 分支 CI 均可独立复验。
 
-冻结 f99cdea 的 EdgeController.poll 只有顶边/指针/显示器检测，没有前台窗口或全屏状态。Mac createShelf 已设置 visibleOnFullScreen:false；该设置是原生全屏 Space 的窗口策略，不是跨平台全屏识别。showInactive 与 focusable:false 降低抢焦点风险，不能保证覆盖层不遮挡内容。
+Windows [SHQueryUserNotificationState](https://learn.microsoft.com/en-us/windows/win32/api/shellapi/nf-shellapi-shqueryusernotificationstate) 的公开 NOT_PRESENT/BUSY/D3D_FULLSCREEN/PRESENTATION 状态先阻止全局打扰；[QUIET_TIME 与 APP](https://learn.microsoft.com/en-us/windows/win32/api/shellapi/ne-shellapi-query_user_notification_state) 本身不当成全屏。查询失败/无效 enum 返回 unknown。具备本进程 per-monitor-v2 DPI 上下文后，GetForegroundWindow 与 [DWM extended frame bounds](https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute) 同指针显示器物理边界比较。Win10 公共接口，目标 HWND 不在该显示器、无前台窗口或无法取边界返回 unknown。全屏大小只是覆盖几何：自动隐藏任务栏的最大化等可能误抑制；公开通知状态又不是逐显示器信号。Windows runner 能证明构建和接口调用，不是物理游戏/演示验收。
 
-## 公开接口核实
+Mac [NSWorkspace.frontmostApplication](https://developer.apple.com/documentation/appkit/nsworkspace/frontmostapplication) + [CGWindowListCopyWindowInfo](https://developer.apple.com/documentation/coregraphics/cgwindowlistcopywindowinfo(_:_:)) 匹配前台 PID、layer0 与目标显示器几何。活动显示器用公开 CGGetActiveDisplayList 验证。单一前台窗口覆盖目标返回 blocked，部分覆盖返回 clear；多窗口、无交集、元数据或显示器缺失返回 unknown。坐标都来自 CoreGraphics，不混用 Electron DIP。几何不是全屏 Space 的语义保证，也未解决桌面/Finder、多窗口、背景全屏和跨屏归属。
 
-Electron BrowserWindow.isFullScreen、enter-full-screen 都针对自身 BrowserWindow；不能把它们接到全屏暂停后宣称已检测其他应用。官方 [BrowserWindow 文档](https://www.electronjs.org/docs/latest/api/browser-window)。不把 desktopCapturer 当检测器：它用于桌面媒体源，屏幕内容采集在 Mac 需要同意，且没有保证返回其他应用全屏状态；本轮不引入屏幕采集或新权限。官方 [desktopCapturer 文档](https://www.electronjs.org/docs/latest/api/desktop-capturer)。
+## 本机证据与不可推断事项
 
-Windows 的 [SHQueryUserNotificationState](https://learn.microsoft.com/en-us/windows/win32/api/shellapi/nf-shellapi-shqueryusernotificationstate) 是受支持公共 API。官方状态包括 QUNS_BUSY、QUNS_RUNNING_D3D_FULL_SCREEN、QUNS_PRESENTATION_MODE，以及用户不在场；它不提供逐屏归属，且全屏开始/结束不发送此接口的状态通知，仍需有限轮询。[状态定义](https://learn.microsoft.com/en-us/windows/win32/api/shellapi/ne-shellapi-query_user_notification_state)。这些信号可用来保守抑制全局普通悬停，不能保证覆盖所有无边框游戏或每个显示器。
+自己的隔离 Electron 靶窗实际进入原生全屏（enter-full-screen + isFullScreen=true）并退出，探测 clear→blocked→clear；无效显示器返回 unknown。未用其他用户应用或便签。20 秒 helper 单进程 4Hz 的 CPU/RSS 和延迟见 `prototypes/fullscreen/evidence/mac-native.json`，这是 helper 局部采样，不是带检测器应用包的 120 秒性能门禁。
 
-Windows 可辅以 GetForegroundWindow、前台窗口可见性、MonitorFromWindow/GetMonitorInfo，以及 DwmGetWindowAttribute(DWMWA_EXTENDED_FRAME_BOUNDS) 的可见边界，判断前台窗口是否覆盖目标显示器。GetWindowRect 会受 DPI 虚拟化影响，DWM 可见边界又不自动调整 DPI，必须在原生适配层统一坐标；禁止直接比较物理像素和 Electron DIP。[GetWindowRect](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowrect)、[DWM 属性](https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute)。覆盖屏幕只是保守几何判定，最大化/自动隐藏任务栏可能导致误抑制，不能称为准确的语义全屏识别。
+**本机屏幕采集 preflight 已授权 true**。本轮没有调用 Request 接口或修改权限，但不能据此证明未授权 Mac 可用；需要已有的未授权环境复验，不能通过撤销用户权限、申请新授权或使用私有 API补结论。自有靶窗结果也不证明实际覆盖层 compositor、其他应用/全屏 Space 或双端矩阵。
 
-Mac 可研究 NSWorkspace.frontmostApplication + CGWindowListCopyWindowInfo 的前台 PID 与窗口几何，避免读取窗口标题或像素；它们不直接提供“当前目标屏幕是全屏 Space”的保证。跨屏、窗口缺失、权限限制或系统转场都需记录 unknown。此路线尚未做无权限运行证实，不能在当前候选里宣称可用。公开入口：[NSWorkspace](https://developer.apple.com/documentation/appkit/nsworkspace/frontmostapplication)、[CGWindowListCopyWindowInfo](https://developer.apple.com/documentation/coregraphics/cgwindowlistcopywindowinfo(_:_:))。不使用 CGS/SkyLight，也不申请 AX/屏幕录制权限作为本轮捷径。
+## 生产接入前的要求
 
-## 建议的实现边界
+不把未知结果默认改成全局普通悬停禁用。先证明正常桌面可达、已知全屏可抑制和恢复可用，明确各环境的未知范围；显式写作/查看入口保持可达。稳定候选的默认行为未改变。
 
-先做 Windows 公共 API 适配器，加 Mac 已有全屏 Space 隔离，明确其余场景有限支持。无需新常驻工具条。把检测器输出分成 clear / blocked / unknown，包含目标屏幕、时间戳和原因；应用不保存其他应用的标题、正文或截图。
+未来接入需串行低频缓存、短超时/过期保护、目标显示器切换使缓存失效、blocked 独立于 manual/sleep/lock；隐藏展示时取消 dwell，恢复重新停留。提交后自动 peek 也受策略约束。草稿不能因环境抑制销毁，拖出取消与锁释放需复验。助手错误/崩溃仍应有明确 unknown 与入口策略，不能静默给用户一个无法呼出的挂绳。
 
-使用小型可打包的原生辅助程序或 N-API 模块，随支持架构一起构建；不能在 16ms 指针循环里不断启动 PowerShell/AppleScript。低频缓存，例如后台 500–1000ms 查询，鼠标接近顶边时异步刷新，并在即将自动呼出前要求本轮新鲜结果。单实例串行探测，有短超时；助手崩溃、解析失败、过期或目标屏改变均返回 unknown。该策略缩小竞态，但不能消除查询后立即切换全屏的窗口。
-
-新加独立的环境抑制理由，不能复用或覆盖 manual/sleep/lock。blocked 立即取消悬停计时并隐藏展示；恢复要重新停留，不能沿用全屏前的 dwell。写作/编辑草稿不因此销毁；正在正文拖出时的撤销、锁释放与草稿保全须独立覆盖。
-
-推荐保守策略：blocked 与 unknown 不自动呼出，显式写作快捷键继续可用；提交后的自动 peek 也应经同一策略，否则保存会绕过防遮挡。若需要主动查看挂绳，可用临时托盘入口明确显示，不抢下层焦点。unknown 默认保守会在探测器缺失时禁用普通悬停，应在交付说明中明确，并保持显式取用入口可达；这是待父会话决策的行为变化，本轮不静默替换现有默认值。仅有手动暂停或 Mac Space 隔离的版本仍保持 G7 未验收。
-
-## 最小验证要求
-
-共享逻辑验证 clear/blocked/unknown、过期、目标屏切换、独立暂停理由、恢复重新 dwell、自动 peek、草稿不丢及锁释放。助手用结构化假结果覆盖错误分支，适配器的 Windows 构建必须在准确 SHA 的 Windows CI 成功。
-
-Windows 真机检查普通最大化、自动隐藏任务栏、F11 浏览器、PowerPoint 演示、独占与无边框游戏、多屏/混合缩放；Mac 检查原生全屏 Space、桌面演示/无边框窗口、多屏/分屏、睡眠锁屏恢复。逐项记录支持/误抑制/未测，不合并成“跨平台全屏通过”。冻结新包后重新独立测后台 CPU/RSS，避免探测助手引入常驻负担。
-
-## 当前结论
-
-这是可实施的有限支持方案；Windows 公共系统信号可先落地，Mac 非原生全屏的无权限几何探测仍需原型证据。当前先处理 QA 的截图脚本与证据修正，生产源码继续冻结。QA 释放原生时段并确定优先级后再统一安排生产补丁和新冻结包。
+仍需真实 Windows F11/PowerPoint/独占及无边框游戏、多屏混合缩放；Mac 未授权环境、原生全屏 Space/桌面演示/分屏/多窗；睡眠锁屏恢复与带 helper 的冻结包独立 CPU/RSS。当前原型交回明确限制，**G7 未实现产品集成、未验收**。保留手动暂停和当前 Space 策略，稳定 0.0.13 可供其他流程复验。

@@ -1,0 +1,51 @@
+{
+  "prototypeSourceCommit": "754a58f9b79d8a9c4eed47a60978052402f22450",
+  "macTestCommit": "044450c924fb2d6ffdbbf6df46c04191da0cd757",
+  "nativeSourcesIdenticalAcrossThoseCommits": true,
+  "stableCandidateSourceCommit": "dee1f2c9046b284e2dd430632d9bdb913128c868",
+  "integratedIntoApp": false,
+  "formalG7Acceptance": false,
+  "tests": {
+    "pureDecisionChecks": 19,
+    "macOwnNativeTransition": "clear-blocked-clear",
+    "invalidMacDisplay": "unknown",
+    "macWorkflowExitCode": 0,
+    "windowsCompile": "passed",
+    "windowsSelftest": "passed",
+    "windowsRunnerAvailability": "passed; notificationState=6, perMonitorV2=true",
+    "windowsPhysical": false
+  },
+  "windowsCiRun": 37826257911,
+  "windowsCiConclusion": "success",
+  "windowsProbeSha256": "fd98948eaf34d1828b69f843172e6e7ea4b649075ac62d874ea505173ee70ae7",
+  "windowsArtifactRelativePath": "prototypes/fullscreen/build/windows-ci-754a58f/Thoughtline-G7-public-prototype-754a58f9b79d8a9c4eed47a60978052402f22450/build/Release/fullscreen-probe.exe",
+  "macNoNewPermissionRequested": true,
+  "macUnprivilegedAvailabilityProven": false,
+  "preexistingMacScreenCaptureGrant": true,
+  "stableProductionChanged": false,
+  "failuresRetained": [
+    {
+      "stage": "first direct Mac compile",
+      "reason": "missing cmath/AppKit headers without explicit SDK sysroot; fixed explicit xcrun SDK"
+    },
+    {
+      "stage": "Mac compile",
+      "reason": "Rect conflicted with MacTypes; namespace qualified"
+    },
+    {
+      "stage": "first Mac workflow",
+      "reason": "invalid-display test failed; fixed by CGGetActiveDisplayList enumeration"
+    },
+    {
+      "stage": "Windows CI37825948581",
+      "reason": "compile and19 decisions passed, missing evidence directory failed command; CI directory creation fixed"
+    }
+  ],
+  "limitations": [
+    "Mac current host already screen-capture authorized; cannot prove permission-free support",
+    "geometry is not native Space state; conservative false positives and unknown multi-window/desktop/monitor",
+    "Windows runner is not physical fullscreen game/presentation acceptance",
+    "EdgeController integration, fresh cache, pause reasons, restored dwell, automatic peek and draft/drag safety not implemented",
+    "whole frozen app with helper performance not measured"
+  ]
+}

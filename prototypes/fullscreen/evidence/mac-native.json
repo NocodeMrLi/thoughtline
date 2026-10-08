@@ -1,0 +1,76 @@
+{
+  "scope": "public geometry probe against our isolated actual native Mac fullscreen target; not overlay compositor, third-party app matrix, unprivileged machine or Windows acceptance",
+  "normal": {
+    "platform": "mac",
+    "state": "clear",
+    "reason": "front-window-partial-target",
+    "displayId": 1,
+    "eligibleWindows": 1,
+    "expectedFrontMatch": true,
+    "screenCapturePreflightGranted": true,
+    "latencyMs": 83.1967
+  },
+  "entered": {
+    "nativeFullScreen": true,
+    "visible": true
+  },
+  "full": {
+    "platform": "mac",
+    "state": "blocked",
+    "reason": "front-window-covers-target",
+    "displayId": 1,
+    "eligibleWindows": 1,
+    "expectedFrontMatch": true,
+    "screenCapturePreflightGranted": true,
+    "latencyMs": 1.98796
+  },
+  "left": {
+    "nativeFullScreen": false,
+    "visible": true
+  },
+  "restored": {
+    "platform": "mac",
+    "state": "clear",
+    "reason": "front-window-partial-target",
+    "displayId": 1,
+    "eligibleWindows": 1,
+    "expectedFrontMatch": true,
+    "screenCapturePreflightGranted": true,
+    "latencyMs": 3.59308
+  },
+  "invalid": {
+    "platform": "mac",
+    "state": "unknown",
+    "reason": "target-display-unavailable",
+    "displayId": 4294967295,
+    "eligibleWindows": 0,
+    "expectedFrontMatch": true,
+    "screenCapturePreflightGranted": true,
+    "latencyMs": 5.71983
+  },
+  "permissionRequestMade": false,
+  "preexistingScreenCaptureGrant": true,
+  "probeSameProcess": true,
+  "performance": {
+    "samples": 80,
+    "cadenceHz": 4,
+    "durationSeconds": 20.003,
+    "cpuPercentSingleCore": 0.4499325101234815,
+    "maxRssMiB": 5.109375,
+    "latencyMedianMs": 3.28179,
+    "latencyMaxMs": 4.66067,
+    "scope": "helper process only; controlled normal fixture; not whole-app frozen 120-second gate"
+  },
+  "testedPrototypeCommit": "044450c924fb2d6ffdbbf6df46c04191da0cd757",
+  "commandExitCode": 0,
+  "fixtureAndProbeClosed": true,
+  "cleanup": "temporary synthetic directory removed successfully",
+  "notIntegratedIntoCandidate": true,
+  "publicNativeHelperSha256": "e9a2ffca136bdae18653183d6249b099efa81af067efecbc58625394a2211229",
+  "sourceHashes": {
+    "mac.mm": "f206b02108e3e326cd8eea15ad60198503323e6bc21f513a7fa80767e7b964d0",
+    "decision.hpp": "2e62cde1b977537078139260bfa9018fe1fba0ab654c5d2d043522769bd638b4",
+    "mac-workflow.cjs": "45bdc7655781365ace786fd423e28b08ca3598c07474aa276f14033b061f88ce",
+    "fixture.cjs": "509d7078bba3de9c27c0ad2e23fbd1d4c60c1963156f004eb177eaaa8fe3f71e"
+  }
+}
