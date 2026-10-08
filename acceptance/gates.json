@@ -1,0 +1,57 @@
+{
+  "stage": "0.0.1 native pilot",
+  "asOf": "2026-10-08",
+  "verify": {
+    "typecheck": "passed",
+    "unitTests": 24,
+    "build": "passed",
+    "log": "evidence/stage0-verify.log"
+  },
+  "gates": [
+    {
+      "id": "G0",
+      "status": "partial",
+      "mac": "native object checks passed; physical matrix pending",
+      "windows": "CI package pending; user will test at work"
+    },
+    {
+      "id": "G1",
+      "status": "shared logic tested; renderer animations not finalized"
+    },
+    {
+      "id": "G2",
+      "status": "atomic storage and commands tested; edit flow pending"
+    },
+    {
+      "id": "G3",
+      "status": "not accepted"
+    },
+    {
+      "id": "G4",
+      "status": "not accepted"
+    },
+    {
+      "id": "G5",
+      "status": "not accepted"
+    },
+    {
+      "id": "G6",
+      "status": "not accepted"
+    },
+    {
+      "id": "G7",
+      "status": "not accepted"
+    },
+    {
+      "id": "G8",
+      "status": "not accepted"
+    }
+  ],
+  "limitations": [
+    "no native text drag yet",
+    "no finalized filters/overflow/search/archive UI",
+    "physical click-through/focus acceptance pending",
+    "unsigned test packages"
+  ],
+  "referenceCode": "Edge-Drop stickProbe.ts copied unchanged; Tendedero rope math ported; see THIRD_PARTY_NOTICES.md"
+}

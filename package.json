@@ -1,0 +1,86 @@
+{
+  "name": "thoughtline",
+  "version": "0.0.1",
+  "private": true,
+  "description": "晾念头 / Thoughtline desktop rope native pilot",
+  "main": "out/main/index.js",
+  "scripts": {
+    "dev": "node node_modules/electron-vite/bin/electron-vite.js dev",
+    "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
+    "test": "node node_modules/vitest/vitest.mjs run",
+    "build": "node node_modules/electron-vite/bin/electron-vite.js build",
+    "verify": "node scripts/verify.cjs",
+    "smoke": "node tests/electron/smoke.cjs",
+    "package:mac": "node node_modules/electron-builder/cli.js --mac dmg",
+    "package:win": "node node_modules/electron-builder/cli.js --win nsis"
+  },
+  "engines": {
+    "node": ">=24.19.0 <25"
+  },
+  "dependencies": {
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "electron": "44.7.0",
+    "electron-builder": "26.15.3",
+    "electron-vite": "5.0.0",
+    "playwright": "1.62.1",
+    "typescript": "7.0.2",
+    "vitest": "5.0.3"
+  },
+  "author": "NocodeMrLi",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NocodeMrLi/thoughtline.git"
+  },
+  "build": {
+    "appId": "com.nocodemrli.thoughtline",
+    "productName": "Thoughtline",
+    "asar": true,
+    "files": [
+      "out/**/*",
+      "package.json",
+      "licenses/**/*",
+      "THIRD_PARTY_NOTICES.md"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "identity": null,
+      "artifactName": "Thoughtline-${version}-mac-${arch}.dmg"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "signAndEditExecutable": false,
+      "artifactName": "Thoughtline-${version}-win-${arch}.exe"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}

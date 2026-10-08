@@ -1,0 +1,27 @@
+export type Point = { x: number; y: number };
+export type Rect = Point & { width: number; height: number };
+export type AgentId = string;
+export type Idea = {
+  id: string; text: string; title: string; project: string; agentId: AgentId;
+  status: 'hanging' | 'archived'; createdAt: string; updatedAt: string;
+};
+export type AgentTag = { id: AgentId; name: string; color: string };
+export type Draft = { text: string; title: string; project: string; agentId: AgentId };
+export type Snapshot = {
+  schemaVersion: 1; revision: number; ideas: Idea[]; agents: AgentTag[]; draft: Draft | null;
+  settings: { writeHotkey: string; reducedMotion: boolean };
+};
+export type Result<T> = { ok: true; value: T } | {
+  ok: false; code: 'INVALID' | 'CONFLICT' | 'IO' | 'MISSING_BODY'; message: string;
+};
+export interface Repository {
+  load(): Promise<Result<Snapshot>>;
+  commit(next: Snapshot, expectedRevision: number): Promise<Result<Snapshot>>;
+}
+export interface PlatformHost {
+  platform: 'mac' | 'windows'; cursor(): Point;
+  displays(): { id: string; bounds: Rect; workArea: Rect; scaleFactor: number }[];
+  showShelf(bounds: Rect): void; hideShelf(): void; setShelfInteractive(value: boolean): void;
+  showComposer(bounds: Rect): void; closeComposer(): void;
+}
+export type DragResult = { accepted: boolean; format: 'text/plain'; target?: string };
