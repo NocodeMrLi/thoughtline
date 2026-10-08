@@ -1,0 +1,8 @@
+{
+  "commandExitCode": 1,
+  "scope": "test harness only, no main application code resumed",
+  "failure": "test expected process.pid/execPath before Node bootstrap, but only process.env was initialized; cleanup detach busy with own paused App",
+  "observedPassedEnvironmentBeforeMain": false,
+  "cleanup": "own executable path confirmed, SIGTERM own 75223, original test exit1, disk5 normal detach and fake directory removal completed",
+  "notProductFailure": true
+}

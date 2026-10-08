@@ -1,0 +1,8 @@
+{
+  "commandExitCode": 1,
+  "scope": "fake LaunchServices QA only",
+  "failure": "QA requested quit at app.isReady before asynchronous shelf startup completed; own root remained after SIGTERM, cleanup failed",
+  "observedEnvironment": "pre-main env matched fake path; own GPU/network command lines had same fake user-data-dir",
+  "cleanup": "own root75581 executable verified; only own root SIGKILL after bounded wait; child open/test exit1, normal detach and own fake directory removal completed",
+  "notCountedAsPassingRun": true
+}
