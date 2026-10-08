@@ -1,0 +1,18 @@
+{
+  "scope": "only outputs owned by this isolated checkout; no installed app, user notes, dependency directories, original repo or other process touched",
+  "removed": [
+    {
+      "path": "dist/Thoughtline-0.0.8-mac-arm64.dmg",
+      "bytes": 129676306
+    },
+    {
+      "path": "dist/Thoughtline-0.0.8-mac-arm64.dmg.blockmap",
+      "bytes": 136591
+    },
+    {
+      "path": "/tmp/thoughtline-library-helper",
+      "kind": "owned failed materialization helper"
+    }
+  ],
+  "retained": "0.0.9/0.0.10 stage DMGs, final0.0.11 App/DMG, source dependency symlink, 18 small UI screenshots and essential successful/failed evidence"
+}

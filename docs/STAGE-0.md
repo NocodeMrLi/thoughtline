@@ -1,4 +1,4 @@
-# 0.0.1 native pilot scope
+# Historical native pilot stages
 
 This is a staged native-window pilot, not the completed product.
 
@@ -31,8 +31,17 @@ Schema2 validates unique hanging-note membership and Agent ownership. Schema1 is
 
 41 unit tests, Mac native object smoke, edit/retrieval workflow, and grouped-clip IPC/DOM/protocol-mouse workflow passed. The latter covers early drop rejection and600ms drag merge. Physical Mac/Windows pointer, focus, IME, display and user acceptance remain separate, as does plaintext drag into Agent inputs. Source0.0.3 packages are a private unsigned test build.
 
-## Current 0.0.8 candidate
+## 0.0.8 window-lifecycle stage
 
 0.0.7 added standard plaintext export and drag cancellation; actual Agent receivers remain untested. 0.0.8 defers input/manage renderers and releases hidden windows after 30 seconds while preserving drafts in the main process. Latest published installers remain 0.0.6, from7d3e704; the historical release links above describe earlier stages.
 
 The highest product constraint is one rope, clips and notes in the steady state. Category/count pills and the persistent filter/search toolbar must be absent. Functionality stays available through explicit temporary interactions, the write overlay and tray. Physical Windows, IME, click-through/focus, display/fullscreen and user acceptance remain separate gates.
+
+
+## Current working-branch0.0.11 candidate
+
+User decisions supersede historical count-driven sag and metal-strip clips: the centered rope now has fixed position/length/curvature across empty/few/many notes. Design13 uses a18×38 painted wooden spring clip with silver coil/wire and24×44 hitbox. New data defaults are Codex blue, Claude orange, Cursor purple; all stored custom colors are retained. No permanent toolbar or replacement icon row exists. Input/manage windows remain lazy, drafts main-owned, quit drains pending writes.
+
+58 unit tests/type/build and applicable Mac native protocol workflows passed. Source commitf99cdea and the frozen local package are tracked in acceptance/OVERNIGHT-REPORT.md. Published release remains0.0.6; main has not been merged. Actual Windows/IME/focus/click-through/fullscreen/multi-monitor and real Agent text receiving remain unaccepted.
+
+0.0.11 additionally addresses independent QA's conditional native-hide data-loss finding: unconfirmed hidden composers keep their live renderer, reopen resumes without a new session, and quit captures hidden new drafts; failure restores the editable window. Actual BrowserWindow.hide/grace/quit and read-only disk regressions passed. Cancel tests wait for main lock release and native hiding, then check body and revision. Protocol fixtures use an emulated shortcut registry; real registration remains separate in smoke/lifecycle.

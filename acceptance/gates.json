@@ -1,11 +1,12 @@
 {
-  "stage": "0.0.8 candidate: lazy temporary windows, clean rope UI, quit write drain",
-  "asOf": "2026-10-08",
+  "stage": "0.0.11 frozen candidate: native-hide draft safety, lazy windows, clean fixed rope and documented spring clips",
+  "asOf": "2026-10-08T17:31:57.919284+00:00",
   "verify": {
     "typecheck": "passed",
-    "unitTests": 54,
+    "unitTests": 58,
     "build": "passed",
-    "log": "evidence/overnight-verify.log"
+    "evidence": "evidence/final-verification.json",
+    "log": "evidence/draft-safety-verify.log"
   },
   "gates": [
     {
@@ -16,7 +17,7 @@
     },
     {
       "id": "G1",
-      "status": "shared core and actual weight animation connected; final dual-platform visual acceptance pending"
+      "status": "fixed geometry and finite interruptible visibility tested; historical count-driven weight superseded; physical dual-platform acceptance pending"
     },
     {
       "id": "G2",
@@ -49,20 +50,23 @@
   ],
   "limitations": [
     "Windows physical focus/click-through/IME/display acceptance pending",
+    "Mac physical system IME, OS Hide menu and cross-app focus pending",
     "real Agent plaintext receiving untested",
+    "fullscreen-hover suppression remains an implementation gap; full display/sleep matrix pending",
     "ad-hoc Mac candidate, not Developer ID/notarized; unsigned Windows",
-    "latest fixed-rope requirement is next implementation stage; no complete user acceptance"
+    "independent final QA/user visual acceptance pending; no complete user acceptance"
   ],
-  "referenceCode": "Edge-Drop stickProbe.ts copied unchanged; Tendedero rope math ported; see THIRD_PARTY_NOTICES.md",
+  "referenceCode": "Edge-Drop stickProbe.ts copied unchanged; Tendedero fixed-end parabola adapted to fixed rope; MIT/Apache notices retained",
   "packageBuildFailure": "Historical first Windows run failed after installer creation because builder tried implicit publishing. Fixed with --publish never; final main run 37783302073 succeeded.",
   "branch": "codex/thoughtline-acceptance-20261009",
   "release": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.6-alpha.1",
   "packages": {
-    "mac": "evidence/package-mac-stage7.json",
-    "windows": "evidence/package-windows-stage7.json",
-    "release": "evidence/private-release-stage7.json",
-    "packagedWorkflow": "evidence/package-motion-stage7.json",
-    "packageSourceCommit": "7d3e704934baa91be901f21daca8325d4dadebb4"
+    "mac": "evidence/final-package-mac.json",
+    "windows": "evidence/final-package-windows.json",
+    "packagedWorkflow": "evidence/overnight-package-acceptance.json",
+    "packageSourceCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
+    "publishedVersion": "0.0.6",
+    "newReleasePublished": false
   },
   "groupImplementation": {
     "schema": 2,
@@ -78,7 +82,7 @@
     "interactionEvidence": "evidence/group-native.json",
     "scope": "Mac Electron IPC/DOM/protocol events; physical U09-U13 pending"
   },
-  "sourceCommit": null,
+  "sourceCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
   "installationCorrection": {
     "affectedMacRelease": "0.0.3-alpha.1",
     "cause": "invalid Electron linker signature after packaging; no sealed resources",
@@ -87,7 +91,7 @@
     "signatureEvidence": "evidence/package-mac-stage5.json",
     "distribution": "ad-hoc; Developer ID/notarization not configured; downloaded Gatekeeper path still separate"
   },
-  "cleanup": "evidence/test-cleanup.json",
+  "cleanup": "evidence/final-cleanup.json",
   "settingsAndLifecycle": {
     "evidence": "evidence/settings-lifecycle.json",
     "settingsRecorder": true,
@@ -97,23 +101,32 @@
     "nativeRecoveryDialogPhysicalAcceptance": false,
     "separatePauseReasons": true
   },
-  "sourceVersion": "0.0.8",
+  "sourceVersion": "0.0.11",
   "motion": {
     "evidence": "evidence/motion-native.json",
     "nativeExitFrameRetention": true,
     "interruptionContinuity": true,
     "finiteSharedClock": true,
     "liveSystemReducedMotion": true,
-    "subjectivePhysicalAcceptance": false
+    "subjectivePhysicalAcceptance": false,
+    "fixedRopeAcrossCount": true
   },
   "performance": {
     "baseline": "evidence/idle-without-debugger.json",
-    "candidateBeforeCache": "evidence/overnight-package-idle-before-cache.json",
-    "candidateBeforeCacheRssMiB": 296.40625,
-    "candidateBeforeCacheCpuPercent": 4.70206,
+    "failedBeforeCache": "evidence/overnight-package-idle-before-cache.json",
+    "final": "evidence/overnight-package-idle.json",
+    "scope": "Mac frozen ad-hoc App executable, isolated empty data, direct spawn with no debugger; no native interaction tests running concurrently; hidden startup established separately by packaged workflow",
+    "durationSeconds": 120.174,
+    "stableMembership": true,
+    "candidateRssMiB": 265.78125,
+    "candidateCpuPercent": 0.19138915239569287,
     "rssGate": true,
-    "cpuGate": false,
-    "status": "native pass-through deduplication implemented; final frozen candidate rerun pending"
+    "cpuGate": true,
+    "cpuThreshold": 2,
+    "rssThresholdMiB": 350,
+    "sourceCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
+    "asarSha256": "f28fb0e46cc6c9d7e1eec0986acecc6144e86daddaebdc1f62fe7741eafcb700",
+    "status": "frozen Mac candidate passes measured hidden idle gates; not Windows or all-use performance acceptance"
   },
   "plaintextDrag": {
     "protocol": "evidence/text-drag-native.json",
@@ -123,10 +136,11 @@
   },
   "baselineCommit": "5f9f29302e8fe61edda5680b91b3753986f4c516",
   "candidate": {
-    "version": "0.0.8",
+    "version": "0.0.11",
     "published": false,
     "releaseStill": "0.0.6",
-    "sourceStageCommit": "to be bound after code commit"
+    "sourceStageCommit": "f99cdea07d28e03f112b405e36968c791fa10550",
+    "branch": "codex/thoughtline-acceptance-20261009"
   },
   "cleanShelf": {
     "evidence": "evidence/clean-shelf.json",
@@ -143,5 +157,53 @@
     "evidence": "evidence/lazy-window-lifecycle.json",
     "hiddenReleaseSeconds": 30,
     "onlyShelfAtStartup": true
+  },
+  "fixedRope": {
+    "evidence": "evidence/fixed-rope.json",
+    "staticCounts": [
+      0,
+      3,
+      24
+    ],
+    "maximumLengthDIP": 1160,
+    "topDIP": 22,
+    "maximumSagDIP": 30
+  },
+  "clothespins": {
+    "design": "docs/CLOTHESPIN-DESIGN-PROPOSAL.md",
+    "evidence": "evidence/clothespin-native.json",
+    "visualDIP": [
+      18,
+      38
+    ],
+    "hitboxDIP": [
+      24,
+      44
+    ],
+    "actualDprs": [
+      1,
+      2
+    ],
+    "scenes": 12,
+    "customColorsPreserved": true,
+    "subjectiveAcceptance": false
+  },
+  "hiddenDraftSafety": {
+    "evidence": "evidence/hidden-draft-native.json",
+    "unconfirmedNativeHideDoesNotDispose": true,
+    "reopenResumesLiveText": true,
+    "hiddenQuitCapturesDraft": true,
+    "saveFailureBlocksQuitAndShowsText": true,
+    "physicalOsHideMenuTested": false
+  },
+  "testIsolation": {
+    "protocolShortcutRegistry": "emulated by default",
+    "realOsRegistrationOnly": [
+      "smoke",
+      "settings-lifecycle"
+    ],
+    "performanceRunsSequential": true,
+    "cancelChecksWaitForNativeHideAndLockRelease": true,
+    "cancelChecksBodyAndRevision": true
   }
 }
