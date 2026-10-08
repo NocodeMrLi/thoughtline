@@ -7,9 +7,8 @@ import {ClipCard} from './ClipCard';
 import {useShelfMotion} from '../hooks/useShelfMotion';
 type Drag={clip:Clip;pointer:number;startX:number;startY:number;origin:number;x:number;active:boolean;target:string|null;ready:boolean;revision:number};
 export function Shelf({info}:{info:PilotInfo}){
- const root=useRef<HTMLDivElement>(null),layoutRevision=useRef(0);const [agentId,setAgentId]=useState('all'),[error,setError]=useState(''),[notice,setNotice]=useState(''),[dragView,setDragView]=useState<Drag|null>(null);
+ const root=useRef<HTMLDivElement>(null),layoutRevision=useRef(0);const agentId=info.shelfAgentId;const [error,setError]=useState(''),[notice,setNotice]=useState(''),[dragView,setDragView]=useState<Drag|null>(null);
  const drag=useRef<Drag|null>(null),mergeTimer=useRef<ReturnType<typeof setTimeout>|null>(null);const infoRef=useRef(info);infoRef.current=info;
- useEffect(()=>{if(agentId!=='all'&&!info.snapshot.agents.some(a=>a.id===agentId))setAgentId('all');},[info.snapshot.revision,agentId]);
  const countFor=(id:string)=>info.snapshot.ideas.filter(i=>i.status==='hanging'&&(id==='all'||i.agentId===id)).length;
  const total=countFor('all');const filtered=info.snapshot.clips.filter(c=>agentId==='all'||c.agentId===agentId);const layout=layoutClips(filtered,info.width);
  const held=useRef({displayId:info.displayId,width:info.width,layout});
@@ -66,15 +65,8 @@ export function Shelf({info}:{info:PilotInfo}){
   };
   publish();const observer=new ResizeObserver(publish);root.current?.querySelectorAll('[data-hit]').forEach(el=>observer.observe(el));return()=>observer.disconnect();
  },[info.width,info.displayId,info.snapshot.revision,agentId,sag,progress,dragView]);
- const filter=(id:string)=>{reset();setAgentId(id);};
  return <div ref={root} data-view="shelf" data-visible={info.shelfVisible} data-progress={progress} className="shelf-root" style={{transform:`translate3d(0,${(progress-1)*250}px,0)`,opacity:progress,willChange:progress>0&&progress<1?'transform, opacity':undefined}}>
   <svg className="rope" data-sag={sag} width="100%" height="140" aria-hidden="true"><defs><linearGradient id="rope-edge"><stop stopColor="white" stopOpacity="0"/><stop offset=".06" stopColor="white"/><stop offset=".94" stopColor="white"/><stop offset="1" stopColor="white" stopOpacity="0"/></linearGradient><mask id="rope-mask"><rect width="100%" height="140" fill="url(#rope-edge)"/></mask></defs><g mask="url(#rope-mask)">{['rope-shadow','rope-core','rope-light'].map(c=><path key={c} className={c} d={`M 0 10 Q ${info.width/2} ${10+2*sag} ${info.width} 10`}/>)}</g></svg>
-  {info.snapshot.ideas.length>0&&<nav className="shelf-tools" aria-label="Agent筛选">
-   <button data-hit aria-pressed={agentId==='all'} onClick={()=>filter('all')}>全部 {total}</button>
-   {info.snapshot.agents.slice(0,4).map(a=><button className="agent-filter" key={a.id} data-hit aria-pressed={agentId===a.id} onClick={()=>filter(a.id)}><i style={{backgroundColor:a.color}}/>{a.name} {countFor(a.id)}</button>)}
-   <select data-hit aria-label="Agent筛选列表" value={agentId} onChange={e=>filter(e.target.value)}><option value="all">筛选 Agent</option>{info.snapshot.agents.map(a=><option key={a.id} value={a.id}>{a.name} {countFor(a.id)}</option>)}</select>
-   <button data-hit onClick={()=>void browse()}>{layout.overflow.length?`还有 ${layout.overflow.reduce((n,c)=>n+c.ideaIds.length,0)} 条`:'查找 / 已收起'}</button>
-  </nav>}
   {!visible.length&&<div className="empty-rope">{total?<>这里暂时没有可显示的夹子 <button data-hit onClick={()=>void browse()}>全部念头</button></>:<>还没有念头 · 按 {info.snapshot.settings.writeHotkey} 写一条</>}</div>}
   {visible.map(({clip:heldClip,x:origin})=>{
    const clip=info.snapshot.clips.find(c=>c.id===heldClip.id);if(!clip)return null;const active=dragView?.clip.id===clip.id;const x=active?dragView.x:origin,t=x/info.width,y=10+4*sag*t*(1-t);const agent=info.snapshot.agents.find(a=>a.id===clip.agentId);

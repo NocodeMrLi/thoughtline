@@ -1,10 +1,11 @@
 {
-  "stage": "0.0.7 standard plaintext drag, receiver acceptance pending",
+  "stage": "0.0.8 candidate: lazy temporary windows, clean rope UI, quit write drain",
   "asOf": "2026-10-08",
   "verify": {
     "typecheck": "passed",
-    "unitTests": 52,
-    "build": "passed"
+    "unitTests": 54,
+    "build": "passed",
+    "log": "evidence/overnight-verify.log"
   },
   "gates": [
     {
@@ -47,13 +48,14 @@
     }
   ],
   "limitations": [
-    "standard plaintext drag offered; actual Agent receiving and dual-platform OS drag pending",
-    "dual-platform physical click-through/focus/IME/display acceptance pending",
-    "unsigned test packages"
+    "Windows physical focus/click-through/IME/display acceptance pending",
+    "real Agent plaintext receiving untested",
+    "ad-hoc Mac candidate, not Developer ID/notarized; unsigned Windows",
+    "latest fixed-rope requirement is next implementation stage; no complete user acceptance"
   ],
   "referenceCode": "Edge-Drop stickProbe.ts copied unchanged; Tendedero rope math ported; see THIRD_PARTY_NOTICES.md",
   "packageBuildFailure": "Historical first Windows run failed after installer creation because builder tried implicit publishing. Fixed with --publish never; final main run 37783302073 succeeded.",
-  "branch": "main",
+  "branch": "codex/thoughtline-acceptance-20261009",
   "release": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.6-alpha.1",
   "packages": {
     "mac": "evidence/package-mac-stage7.json",
@@ -76,7 +78,7 @@
     "interactionEvidence": "evidence/group-native.json",
     "scope": "Mac Electron IPC/DOM/protocol events; physical U09-U13 pending"
   },
-  "sourceCommit": "b05e048a43725b778315c520726eca117177e7b3",
+  "sourceCommit": null,
   "installationCorrection": {
     "affectedMacRelease": "0.0.3-alpha.1",
     "cause": "invalid Electron linker signature after packaging; no sealed resources",
@@ -95,7 +97,7 @@
     "nativeRecoveryDialogPhysicalAcceptance": false,
     "separatePauseReasons": true
   },
-  "sourceVersion": "0.0.7",
+  "sourceVersion": "0.0.8",
   "motion": {
     "evidence": "evidence/motion-native.json",
     "nativeExitFrameRetention": true,
@@ -105,18 +107,41 @@
     "subjectivePhysicalAcceptance": false
   },
   "performance": {
-    "evidence": "evidence/idle-without-debugger.json",
-    "scope": "direct Electron without debugger; source module, not final production package measurement",
-    "cpuPercentSingleCore": 0.33294,
-    "stableRssMiB": 444.796875,
-    "cpuGate": true,
-    "rssGate": false,
-    "next": "defer unused renderer creation, preserve fast input and rerun lifecycle/idle"
+    "baseline": "evidence/idle-without-debugger.json",
+    "candidateBeforeCache": "evidence/overnight-package-idle-before-cache.json",
+    "candidateBeforeCacheRssMiB": 296.40625,
+    "candidateBeforeCacheCpuPercent": 4.70206,
+    "rssGate": true,
+    "cpuGate": false,
+    "status": "native pass-through deduplication implemented; final frozen candidate rerun pending"
   },
   "plaintextDrag": {
     "protocol": "evidence/text-drag-native.json",
     "files": false,
     "cancelPreservesData": true,
     "realAgentsAccepted": []
+  },
+  "baselineCommit": "5f9f29302e8fe61edda5680b91b3753986f4c516",
+  "candidate": {
+    "version": "0.0.8",
+    "published": false,
+    "releaseStill": "0.0.6",
+    "sourceStageCommit": "to be bound after code commit"
+  },
+  "cleanShelf": {
+    "evidence": "evidence/clean-shelf.json",
+    "screenshotsLocal": [
+      "evidence/overnight-ui-before.png",
+      "evidence/overnight-ui-after.png"
+    ],
+    "permanentToolbarRemoved": true,
+    "permanentReplacementIcons": false,
+    "agentIdentityOnCards": true,
+    "nativePhysicalMenuAcceptance": false
+  },
+  "lazyWindows": {
+    "evidence": "evidence/lazy-window-lifecycle.json",
+    "hiddenReleaseSeconds": 30,
+    "onlyShelfAtStartup": true
   }
 }

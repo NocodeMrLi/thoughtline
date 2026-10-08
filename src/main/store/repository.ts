@@ -29,6 +29,7 @@ export class FileRepository implements Repository{
     return {ok:true,value:structuredClone(initial)};
    }catch(e){return ioError(e);}
   }
+  async flush():Promise<void>{await this.queue;}
   commit(next:Snapshot,expectedRevision:number):Promise<Result<Snapshot>>{
    const execute=async():Promise<Result<Snapshot>>=>{
     const loaded=await this.load();if(!loaded.ok)return loaded;

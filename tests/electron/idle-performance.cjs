@@ -3,7 +3,7 @@ const time=s=>{const parts=s.split(':').map(Number);return parts.reduce((total,n
 (async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-idle-'));let app;
  try{
-  app=await _electron.launch({executablePath:process.env.THOUGHTLINE_EXECUTABLE||require('electron'),args:process.env.THOUGHTLINE_EXECUTABLE?[]:[path.resolve('out/main/index.js')],env:{...process.env,THOUGHTLINE_DATA_DIR:dir},timeout:15000});await app.firstWindow();while((await app.windows()).length<3)await app.waitForEvent('window');
+  app=await _electron.launch({executablePath:process.env.THOUGHTLINE_EXECUTABLE||require('electron'),args:process.env.THOUGHTLINE_EXECUTABLE?[]:[path.resolve('out/main/index.js')],env:{...process.env,THOUGHTLINE_DATA_DIR:dir},timeout:15000});await app.firstWindow();
   const root=app.process().pid;
   const sample=()=>{const all=execFileSync('ps',['-axo','pid=,ppid=,rss=,time='],{encoding:'utf8'}).trim().split('\n').map(l=>{const [pid,ppid,rss,cpu]=l.trim().split(/\s+/);return {pid:Number(pid),ppid:Number(ppid),rssKiB:Number(rss),cpuSeconds:time(cpu)};});const ids=new Set([root]);for(let i=0;i<all.length;i++)for(const p of all)if(ids.has(p.ppid))ids.add(p.pid);const tree=all.filter(p=>ids.has(p.pid));return {at:Date.now(),tree,rssMiB:tree.reduce((n,p)=>n+p.rssKiB,0)/1024,cpuSeconds:tree.reduce((n,p)=>n+p.cpuSeconds,0)};};
   await new Promise(r=>setTimeout(r,5000));const initial=sample();const samples=[initial];console.log(JSON.stringify({phase:'idle-measurement-started',rssMiB:initial.rssMiB,processes:initial.tree.length}));

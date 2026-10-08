@@ -1,7 +1,7 @@
 name: Build Windows test package
 on:
   push:
-    branches: [feat/native-pilot, main]
+    branches: [feat/native-pilot, main, codex/thoughtline-acceptance-20261009]
     paths-ignore: ['docs/**', '**.md', 'acceptance/**']
   workflow_dispatch:
 permissions:

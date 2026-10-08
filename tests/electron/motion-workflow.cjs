@@ -1,9 +1,10 @@
+const {launchOptions,warmViews}=require('./window-fixture.cjs');
 const assert=require('node:assert/strict'),path=require('node:path'),fs=require('node:fs/promises'),os=require('node:os');const {_electron}=require('playwright');
 (async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-motion-'));let app;
  try{
-  app=await _electron.launch({executablePath:process.env.THOUGHTLINE_EXECUTABLE||require('electron'),args:process.env.THOUGHTLINE_EXECUTABLE?[]:[path.resolve('out/main/index.js')],env:{...process.env,THOUGHTLINE_DATA_DIR:dir},timeout:15000});
-  await app.firstWindow();while((await app.windows()).length<3)await app.waitForEvent('window');const pages=await app.windows();const shelf=pages.find(p=>p.url().includes('view=shelf')),composer=pages.find(p=>p.url().includes('view=composer'));
+  app=await _electron.launch(await launchOptions(dir));
+  await warmViews(app);while((await app.windows()).length<3)await app.waitForEvent('window');const pages=await app.windows();const shelf=pages.find(p=>p.url().includes('view=shelf')),composer=pages.find(p=>p.url().includes('view=composer'));
   await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});
   const submit=async n=>{const r=await composer.evaluate(async n=>{const i=await window.thoughtline.info();return window.thoughtline.submit({text:'完整正文 '+n,title:'动效测试 '+n,agentId:'codex',project:''},i.snapshot.revision);},n);assert(r.ok,r.message);};
   await shelf.evaluate(()=>{const raf=window.requestAnimationFrame;window.motionRequests=0;window.requestAnimationFrame=callback=>{window.motionRequests++;return raf(callback);};});

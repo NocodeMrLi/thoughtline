@@ -1,10 +1,11 @@
+const {launchOptions,warmViews}=require('./window-fixture.cjs');
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
 const {_electron}=require('playwright');
 (async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-lifecycle-'));let app;
  const start=async()=>{
-  app=await _electron.launch({executablePath:process.env.THOUGHTLINE_EXECUTABLE||require('electron'),args:process.env.THOUGHTLINE_EXECUTABLE?[]:[path.resolve('out/main/index.js')],env:{...process.env,THOUGHTLINE_DATA_DIR:dir},timeout:15000});
-  await app.firstWindow();while((await app.windows()).length<3)await app.waitForEvent('window',{timeout:5000});
+  app=await _electron.launch(await launchOptions(dir));
+  await warmViews(app);while((await app.windows()).length<3)await app.waitForEvent('window',{timeout:5000});
   const pages=await app.windows();for(const p of pages)await p.waitForURL(/view=(shelf|composer|manage)/,{waitUntil:'domcontentloaded'});
   const by=name=>pages.find(p=>p.url().includes('view='+name));await by('shelf').waitForSelector('[data-view=shelf]',{state:'attached'});
   return {shelf:by('shelf'),composer:by('composer'),manage:by('manage')};

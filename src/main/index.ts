@@ -17,7 +17,7 @@ import {layoutClips,normalizedPosition} from '../shared/clipLayout';
 app.setName('Thoughtline');
 app.setPath('userData',process.env.THOUGHTLINE_DATA_DIR||join(app.getPath('appData'),'Thoughtline'));
 let prepareQuit:(()=>Promise<boolean>)|null=null;let quitInFlight=false;
-let tray:Tray;let edge:EdgeController;let shelf:BrowserWindow;let composer:BrowserWindow;let manage:BrowserWindow;let quitting=false;
+let tray:Tray;let edge:EdgeController;let shelf:BrowserWindow;let composer:BrowserWindow|null=null;let manage:BrowserWindow|null=null;let quitting=false;
 const blank:Draft={text:'',title:'',project:'',agentId:'general'};
 const invalid=<T>(message:string):Result<T>=>({ok:false,code:'INVALID',message});
 const done=():Result<void>=>({ok:true,value:undefined});
@@ -40,48 +40,73 @@ else app.whenReady().then(async()=>{
  let snapshot:Snapshot=loaded.snapshot;let displayId=String(screen.getPrimaryDisplay().id);let width=screen.getPrimaryDisplay().bounds.width;
  let composerSession=0,manageSession=0,manageSelection:string|null=null,editRevision=snapshot.revision;
  let dragCancelSession=0,dragEscape=false;let textDragTimer:ReturnType<typeof setTimeout>|null=null;let textDragOwner:string|null=null;
- let settingsBusy=false;let refreshTray=()=>{};
+ let shelfAgentId='all';let settingsBusy=false;let refreshTray=()=>{};
  let manageMode:'browse'|'detail'|'settings'='browse',manageTitles=false;let undoClips:{snapshot:Snapshot;revision:number}|null=null;
  let composerContext:ComposerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
- const preload=join(__dirname,'../preload/index.js');shelf=createShelf(preload);composer=createComposer(preload);manage=createManage(preload);
- const host=createHost(shelf,composer);
- const info=():PilotInfo=>({platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerContext,manageSession,manageSelection,manageMode,manageTitles,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
- const publish=()=>{for(const w of [shelf,composer,manage])if(!w.isDestroyed())w.webContents.send('thoughtline:info-update',info());};
- const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:BrowserWindow[]=[shelf,composer,manage])=>allowed.some(w=>w.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
+ const preload=join(__dirname,'../preload/index.js');shelf=createShelf(preload);
+ const host=createHost(shelf,()=>composer);
+ const info=():PilotInfo=>({platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerContext,manageSession,manageSelection,manageMode,manageTitles,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
+ const publish=()=>{for(const w of [shelf,composer,manage])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info());};
+ const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:(BrowserWindow|null)[]=[shelf,composer,manage])=>allowed.some(w=>w?.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
  const lock=(name:string,active:boolean)=>edge.event({type:'lock',name,active,now:Date.now()});
- const hideManage=()=>{manage.hide();lock('manage',false);};
+ const hideManage=()=>{manage?.hide();lock('manage',false);};
  const boundsFor=(w:number,h:number)=>{const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint());const width=Math.min(w,d.workArea.width-40),height=Math.min(h,d.workArea.height-48);return {x:Math.round(d.workArea.x+(d.workArea.width-width)/2),y:d.workArea.y+24,width,height};};
  const finishTextDrag=()=>{if(textDragTimer)clearTimeout(textDragTimer);textDragTimer=null;textDragOwner=null;lock('text-drag',false);};
  app.on('will-quit',()=>{if(textDragTimer)clearTimeout(textDragTimer);});
  const cancelDrag=()=>{finishTextDrag();if(dragEscape){globalShortcut.unregister('Escape');dragEscape=false;lock('drag',false);}dragCancelSession++;publish();};
  edge=new EdgeController(host,(id,w)=>{displayId=id;width=w;cancelDrag();},publish);
- const openComposer=(ideaId?:string):Result<void>=>{
-  if(manage.isVisible()&&manageMode==='settings')return invalid('请先关闭设置。');
-  if(composer.isVisible()){
+ let composerLoading:Promise<BrowserWindow>|null=null,manageLoading:Promise<BrowserWindow>|null=null;
+ let composerRelease:ReturnType<typeof setTimeout>|null=null,manageRelease:ReturnType<typeof setTimeout>|null=null;
+ const ensureComposer=():Promise<BrowserWindow>=>{
+  if(composerRelease)clearTimeout(composerRelease);composerRelease=null;
+  if(composerLoading)return composerLoading;if(composer)return Promise.resolve(composer);
+  const w=createComposer(preload);composer=w;
+  w.on('close',event=>{if(!quitting)event.preventDefault();});
+  w.on('show',()=>{if(composerRelease)clearTimeout(composerRelease);composerRelease=null;refreshTray();});
+  w.on('hide',()=>{refreshTray();composerRelease=setTimeout(()=>{composerRelease=null;if(!w.isDestroyed()&&!w.isVisible()){composer=null;w.destroy();}},30000);});
+  composerLoading=loadView(w,'composer').then(()=>w).catch(error=>{composer=null;w.destroy();throw error;}).finally(()=>{composerLoading=null;});
+  return composerLoading;
+ };
+ const ensureManage=():Promise<BrowserWindow>=>{
+  if(manageRelease)clearTimeout(manageRelease);manageRelease=null;
+  if(manageLoading)return manageLoading;if(manage)return Promise.resolve(manage);
+  const w=createManage(preload);manage=w;
+  w.on('close',event=>{if(!quitting)event.preventDefault();});
+  w.on('show',()=>{if(manageRelease)clearTimeout(manageRelease);manageRelease=null;});
+  w.on('hide',()=>{manageRelease=setTimeout(()=>{manageRelease=null;if(!w.isDestroyed()&&!w.isVisible()){manage=null;w.destroy();}},30000);});
+  manageLoading=loadView(w,'manage').then(()=>w).catch(error=>{manage=null;w.destroy();throw error;}).finally(()=>{manageLoading=null;});
+  return manageLoading;
+ };
+ app.on('will-quit',()=>{if(composerRelease)clearTimeout(composerRelease);if(manageRelease)clearTimeout(manageRelease);});
+ const openComposer=async(ideaId?:string):Promise<Result<void>>=>{
+  if(composerLoading)return done();
+  if(manage?.isVisible()&&manageMode==='settings')return invalid('请先关闭设置。');
+  if(composer?.isVisible()){
    composer.show();composer.focus();return ideaId?invalid('请先保存或取消当前编辑。'):done();
   }
   const idea=ideaId?snapshot.ideas.find(x=>x.id===ideaId):null;
   if(ideaId&&!idea)return invalid('找不到这条念头。');
   composerContext=idea?{mode:'edit',ideaId:idea.id,draft:{text:idea.text,title:idea.title,project:idea.project,agentId:idea.agentId}}:{mode:'new',ideaId:null,draft:snapshot.draft??blank};
-  editRevision=snapshot.revision;composerSession++;lock('composer',true);hideManage();publish();host.showComposer(boundsFor(530,440));return done();
+  editRevision=snapshot.revision;composerSession++;try{await ensureComposer();}catch{return {ok:false,code:'IO',message:'输入浮层未能打开，请重试。原数据已保留。'};}if(quitting)return invalid('正在退出。');if(manage?.isVisible()&&manageMode==='settings')return invalid('请先关闭设置。');lock('composer',true);hideManage();publish();host.showComposer(boundsFor(530,440));return done();
  };
  const save=async(next:Result<Snapshot>,revision:number):Promise<Result<Snapshot>>=>{
   if(!next.ok)return next;const r=await repository.commit(next.value,revision);
-  if(r.ok){snapshot=r.value;undoClips=null;publish();}return r;
+  if(r.ok){snapshot=r.value;undoClips=null;if(shelfAgentId!=='all'&&!snapshot.agents.some(a=>a.id===shelfAgentId))shelfAgentId='all';refreshTray();publish();}return r;
  };
  const captureDraft=():Promise<Result<Draft>>=>new Promise(resolve=>{
   const id=randomUUID();let finished=false;
   const finish=(result:Result<Draft>)=>{if(finished)return;finished=true;clearTimeout(timer);ipcMain.removeListener('thoughtline:quit-draft',receive);resolve(result);};
   const receive=(event:Electron.IpcMainEvent,requestId:string,draft:Draft|null)=>{if(requestId!==id||!trusted(event,[composer]))return;finish(draftShape(draft)?{ok:true,value:draft}:{ok:false,code:'IO',message:'当前内容正在保存，退出未完成。请稍后重试。'});};
   const timer=setTimeout(()=>finish({ok:false,code:'IO',message:'未能读取当前草稿，退出已取消。请保留文字后重试。'}),3000);
-  ipcMain.on('thoughtline:quit-draft',receive);composer.webContents.send('thoughtline:prepare-quit',id);
+  ipcMain.on('thoughtline:quit-draft',receive);composer!.webContents.send('thoughtline:prepare-quit',id);
  });
  prepareQuit=async()=>{
   if(settingsBusy)return false;
-  if(!composer.isVisible()||composerContext.mode==='edit')return true;
+  await repository.flush();
+  if(!composer?.isVisible()||composerContext.mode==='edit')return true;
   const draft=await captureDraft();const saved=draft.ok?await save({ok:true,value:{...snapshot,draft:draft.value}},snapshot.revision):draft;
   if(saved.ok)return true;
-  composer.webContents.send('thoughtline:quit-error',saved.message);composer.show();composer.focus();return false;
+  composer!.webContents.send('thoughtline:quit-error',saved.message);composer!.show();composer!.focus();return false;
  };
  ipcMain.handle('thoughtline:info',e=>{if(!trusted(e))throw Error('不允许读取');return info();});
  ipcMain.on('thoughtline:presentation-finished',(e,session:number)=>{if(trusted(e,[shelf])&&Number.isSafeInteger(session)&&session>=0)edge.presentationFinished(session);});
@@ -108,16 +133,49 @@ else app.whenReady().then(async()=>{
   const saved=await save({ok:true,value:{...snapshot,draft}},snapshot.revision);if(!saved.ok)return saved;
   host.closeComposer();lock('composer',false);return saved;
  });
- ipcMain.handle('thoughtline:open-manage',(e,id?:string,titles?:boolean):Result<void>=>{
+ ipcMain.handle('thoughtline:open-manage',async(e,id?:string,titles?:boolean):Promise<Result<void>>=>{
   if(!trusted(e)||id!==undefined&&typeof id!=='string'||titles!==undefined&&typeof titles!=='boolean')return invalid('无效操作');
-  if(composer.isVisible())return invalid('请先保存或取消当前输入。');
+  if(composer?.isVisible())return invalid('请先保存或取消当前输入。');
   if(id&&!snapshot.ideas.some(x=>x.id===id))return invalid('找不到这条念头。');
-  manageSelection=id??null;manageMode=id?'detail':'browse';manageTitles=!!titles;manageSession++;lock('manage',true);publish();if(id){const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint()),p=screen.getCursorScreenPoint();const b=boundsFor(380,360);b.x=Math.round(Math.max(d.workArea.x+12,Math.min(d.workArea.x+d.workArea.width-b.width-12,p.x-b.width/2)));b.y=Math.round(Math.max(d.workArea.y+12,Math.min(d.workArea.y+d.workArea.height-b.height-12,p.y+24)));manage.setBounds(b);}else manage.setBounds(boundsFor(740,540));manage.show();manage.focus();return done();
+  try{await ensureManage();}catch{return {ok:false,code:'IO',message:'浏览浮层未能打开，请重试。'};}if(quitting)return invalid('正在退出。');if(composer?.isVisible())return invalid('请先保存或取消当前输入。');manageSelection=id??null;manageMode=id?'detail':'browse';manageTitles=!!titles;manageSession++;lock('manage',true);publish();if(id){const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint()),p=screen.getCursorScreenPoint();const b=boundsFor(380,360);b.x=Math.round(Math.max(d.workArea.x+12,Math.min(d.workArea.x+d.workArea.width-b.width-12,p.x-b.width/2)));b.y=Math.round(Math.max(d.workArea.y+12,Math.min(d.workArea.y+d.workArea.height-b.height-12,p.y+24)));manage!.setBounds(b);}else manage!.setBounds(boundsFor(740,540));manage!.show();manage!.focus();return done();
  });
+ const selectShelfAgent=(id:string)=>{shelfAgentId=id==='all'||snapshot.agents.some(a=>a.id===id)?id:'all';refreshTray();publish();};
+ const agentFilterMenu=():Electron.MenuItemConstructorOptions[]=>[
+  {label:'全部',type:'radio',checked:shelfAgentId==='all',click:()=>selectShelfAgent('all')},
+  ...snapshot.agents.map(agent=>({label:agent.name,type:'radio' as const,checked:shelfAgentId===agent.id,click:()=>selectShelfAgent(agent.id)}))
+ ];
+ const browseFromTray=()=>{void openBrowse();};
+ const openBrowse=async()=>{
+  if(composer?.isVisible())return invalid('请先保存或取消当前输入。');
+  try{await ensureManage();}catch{return invalid('浏览浮层未能打开，请重试。');}
+  if(quitting||composer?.isVisible())return invalid('请先结束当前输入。');
+  manageMode='browse';manageSelection=null;manageTitles=false;manageSession++;lock('manage',true);manage!.setBounds(boundsFor(740,540));publish();manage!.show();manage!.focus();return done();
+ };
+ ipcMain.handle('thoughtline:shelf-menu',(e,id:string):Result<void>=>{
+  if(!trusted(e,[shelf])||typeof id!=='string')return invalid('无效操作');
+  const idea=snapshot.ideas.find(i=>i.id===id);if(!idea)return invalid('找不到这条念头。');
+  if(!edge.presentation().shelfVisible)return invalid('挂绳已收起。');
+  lock('menu',true);
+  const menu=Menu.buildFromTemplate([
+   {label:'查看全文',click:()=>{void openBrowseDetail(id);}},
+   {label:`只看 ${snapshot.agents.find(a=>a.id===idea.agentId)?.name??'这个 Agent'}`,click:()=>selectShelfAgent(idea.agentId)},
+   {label:'显示全部',click:()=>selectShelfAgent('all')},
+   {label:'筛选 Agent',submenu:agentFilterMenu()},
+   {type:'separator'},
+   {label:'查找 / 已收起',click:browseFromTray}
+  ]);
+  try{menu.popup({window:shelf,callback:()=>lock('menu',false)});}catch{lock('menu',false);return invalid('菜单未能打开，请从托盘查找念头。');}return done();
+ });
+ const openBrowseDetail=async(id:string)=>{
+  if(composer?.isVisible())return invalid('请先保存或取消当前输入。');
+  try{await ensureManage();}catch{return invalid('全文浮层未能打开，请重试。');}
+  if(quitting||composer?.isVisible())return invalid('请先结束当前输入。');
+  manageMode='detail';manageSelection=id;manageTitles=false;manageSession++;lock('manage',true);manage!.setBounds(boundsFor(380,360));publish();manage!.show();manage!.focus();return done();
+ };
  ipcMain.handle('thoughtline:close-manage',e=>{if(!trusted(e,[manage]))return invalid('无效操作');hideManage();return done();});
- const openSettings=():Result<void>=>{
-  if(composer.isVisible())return invalid('请先保存或取消当前输入。');
-  cancelDrag();manageMode='settings';manageTitles=false;manageSelection=null;manageSession++;lock('manage',true);manage.setBounds(boundsFor(440,390));publish();manage.show();manage.focus();return done();
+ const openSettings=async():Promise<Result<void>>=>{
+  if(composer?.isVisible())return invalid('请先保存或取消当前输入。');
+  try{await ensureManage();}catch{return {ok:false,code:'IO',message:'设置浮层未能打开，请重试。'};}if(quitting)return invalid('正在退出。');if(composer?.isVisible())return invalid('请先保存或取消当前输入。');cancelDrag();manageMode='settings';manageTitles=false;manageSelection=null;manageSession++;lock('manage',true);manage!.setBounds(boundsFor(440,390));publish();manage!.show();manage!.focus();return done();
  };
  ipcMain.handle('thoughtline:open-settings',e=>trusted(e)?openSettings():invalid('无效操作'));
  ipcMain.handle('thoughtline:settings',async(e,settings:Snapshot['settings'],revision:number):Promise<Result<Snapshot>>=>{
@@ -178,14 +236,13 @@ else app.whenReady().then(async()=>{
   if(r.ok){if(c.kind==='split'){manageSelection=c.ideaId;manageSession++;}undoClips=c.kind==='undo'?null:c.kind==='select'?(oldUndo?{...oldUndo,revision:r.value.revision}:null):{snapshot:previous,revision:r.value.revision};publish();}
   return r;
  });
- for(const w of [composer,manage])w.on('close',event=>{if(!quitting)event.preventDefault();});
- await Promise.all([loadView(shelf,'shelf'),loadView(composer,'composer'),loadView(manage,'manage')]);
+ await loadView(shelf,'shelf');
  globalShortcut.register(snapshot.settings.writeHotkey,()=>{openComposer();});
  const icon=nativeImage.createFromPath(join(__dirname,'../../assets/'+(process.platform==='darwin'?'trayTemplate.png':'app-icon.png'))).resize({width:22,height:22});
  if(icon.isEmpty())throw Error('Thoughtline tray icon failed to load.');
  if(process.platform==='darwin')icon.setTemplateImage(true);tray=new Tray(icon);tray.setToolTip('晾念头 / Thoughtline');
- refreshTray=()=>tray.setContextMenu(Menu.buildFromTemplate([{label:'晾念头 / Thoughtline',enabled:false},{label:`写念头：${snapshot.settings.writeHotkey}${globalShortcut.isRegistered(snapshot.settings.writeHotkey)?'':'（注册失败）'}`,enabled:false},{type:'separator'},{label:'设置',enabled:!composer.isVisible(),click:()=>{openSettings();}},{label:'暂停悬停',type:'checkbox',checked:edge.isManuallyPaused(),click:item=>{cancelDrag();edge.pause(item.checked);}},{label:'退出',click:()=>app.quit()}]));
- composer.on('show',refreshTray);composer.on('hide',refreshTray);refreshTray();
+ refreshTray=()=>tray.setContextMenu(Menu.buildFromTemplate([{label:'晾念头 / Thoughtline',enabled:false},{label:`写念头：${snapshot.settings.writeHotkey}${globalShortcut.isRegistered(snapshot.settings.writeHotkey)?'':'（注册失败）'}`,enabled:false},{type:'separator'},{label:'查找 / 已收起',enabled:!composer?.isVisible(),click:browseFromTray},{label:'筛选 Agent',submenu:agentFilterMenu()},{label:'设置',enabled:!composer?.isVisible(),click:()=>{openSettings();}},{label:'暂停悬停',type:'checkbox',checked:edge.isManuallyPaused(),click:item=>{cancelDrag();edge.pause(item.checked);}},{label:'退出',click:()=>app.quit()}]));
+ refreshTray();
  nativeTheme.on('updated',publish);powerMonitor.on('suspend',()=>{cancelDrag();edge.pause(true,'sleep');});powerMonitor.on('lock-screen',()=>{cancelDrag();edge.pause(true,'lock');});powerMonitor.on('resume',()=>edge.pause(false,'sleep'));powerMonitor.on('unlock-screen',()=>edge.pause(false,'lock'));
  screen.on('display-metrics-changed',cancelDrag);app.dock?.hide();publish();edge.start();
 }).catch(error=>{console.error(error);dialog.showErrorBox('晾念头启动未成功',error instanceof Error?error.message:'启动发生错误，请保留数据后重试。');app.quit();});

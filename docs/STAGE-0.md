@@ -30,3 +30,9 @@ Temporary detail/manage view, edit and cancellation, archive/restore with undo, 
 Schema2 validates unique hanging-note membership and Agent ownership. Schema1 is migrated in memory; the original raw file is retained before the first upgraded save. Archive/restore and changing Agent update membership without deleting text.
 
 41 unit tests, Mac native object smoke, edit/retrieval workflow, and grouped-clip IPC/DOM/protocol-mouse workflow passed. The latter covers early drop rejection and600ms drag merge. Physical Mac/Windows pointer, focus, IME, display and user acceptance remain separate, as does plaintext drag into Agent inputs. Source0.0.3 packages are a private unsigned test build.
+
+## Current 0.0.8 candidate
+
+0.0.7 added standard plaintext export and drag cancellation; actual Agent receivers remain untested. 0.0.8 defers input/manage renderers and releases hidden windows after 30 seconds while preserving drafts in the main process. Latest published installers remain 0.0.6, from7d3e704; the historical release links above describe earlier stages.
+
+The highest product constraint is one rope, clips and notes in the steady state. Category/count pills and the persistent filter/search toolbar must be absent. Functionality stays available through explicit temporary interactions, the write overlay and tray. Physical Windows, IME, click-through/focus, display/fullscreen and user acceptance remain separate gates.

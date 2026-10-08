@@ -62,3 +62,13 @@ test('启动恢复界面退出时保留损坏原文，打开目录后可人工�
  await writeFile(join(dir,'snapshot.json'),raw);
  const cancelled=await storage.loadWithRecovery?.(dir,async()=>'exit',async()=>{});expect(cancelled).toBeNull();expect(await readFile(join(dir,'snapshot.json'),'utf8')).toBe(raw);
 });
+
+test('退出等待正在进行的原子提交，完成后重启读到新正文',async()=>{
+ const {dir,repo}=await fixture();const initial=value(await repo.load());
+ let release!:()=>void;let started!:()=>void;
+ const entered=new Promise<void>(resolve=>{started=resolve;});const gate=new Promise<void>(resolve=>{release=resolve;});
+ const slow=new FileRepository(dir,{...io,rename:async(from,to)=>{if(to===join(dir,'snapshot.json')){started();await gate;}await rename(from,to);}});
+ value(await slow.load());const pending=slow.commit(add(initial,'退出前已点击保存的正文'),initial.revision);await entered;
+ let drained=false;const idle=slow.flush?.().then(()=>{drained=true;});await Promise.resolve();expect(drained).toBe(false);
+ release();value(await pending);await idle;expect(drained).toBe(true);expect(value(await new FileRepository(dir).load()).ideas[0].text).toBe('退出前已点击保存的正文');
+});

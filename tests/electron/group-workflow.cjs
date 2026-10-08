@@ -1,8 +1,9 @@
+const {launchOptions,warmViews}=require('./window-fixture.cjs');
 const assert=require('node:assert/strict'),path=require('node:path'),fs=require('node:fs/promises'),os=require('node:os');const {_electron}=require('playwright');
 (async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-groups-'));let app;
- const launch=async()=>_electron.launch({executablePath:process.env.THOUGHTLINE_EXECUTABLE||require('electron'),args:process.env.THOUGHTLINE_EXECUTABLE?[]:[path.resolve('out/main/index.js')],env:{...process.env,THOUGHTLINE_DATA_DIR:dir},timeout:15000});
- const ready=async()=>{await app.firstWindow();while((await app.windows()).length<3)await app.waitForEvent('window',{timeout:5000});const pages=await app.windows();for(const p of pages)await p.waitForURL(/view=(shelf|composer|manage)/,{waitUntil:'domcontentloaded'});const by=name=>pages.find(p=>p.url().includes('view='+name));const shelf=by('shelf');await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});return {shelf,composer:by('composer'),manage:by('manage')};};
+ const launch=async()=>_electron.launch(await launchOptions(dir));
+ const ready=async()=>{await warmViews(app);while((await app.windows()).length<3)await app.waitForEvent('window',{timeout:5000});const pages=await app.windows();for(const p of pages)await p.waitForURL(/view=(shelf|composer|manage)/,{waitUntil:'domcontentloaded'});const by=name=>pages.find(p=>p.url().includes('view='+name));const shelf=by('shelf');await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});return {shelf,composer:by('composer'),manage:by('manage')};};
  const info=p=>p.evaluate(()=>window.thoughtline.info());
  const result=async(p,method,...args)=>{const r=await p.evaluate(({method,args})=>window.thoughtline[method](...args),{method,args});assert(r.ok,r.message);return r.value;};
  try{
@@ -13,10 +14,12 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
   await result(shelf,'dragLock',true);
   const cross=await shelf.evaluate(async({a,c,revision})=>window.thoughtline.clipChange({kind:'merge',sourceId:a,targetId:c},revision),{a,c,revision:s.revision});assert(!cross.ok);
   await result(shelf,'dragLock',false);
+  await new Promise(r=>setTimeout(r,450));
   const pegA=await shelf.locator('[data-clip-id="'+a+'"] .peg-button').boundingBox(),pegB=await shelf.locator('[data-clip-id="'+b+'"] .peg-button').boundingBox();assert(pegA&&pegB);
   await shelf.mouse.move(pegA.x+12,pegA.y+20);await shelf.mouse.down();await shelf.mouse.move(pegB.x+12,pegB.y+20,{steps:4});await shelf.mouse.up();
   await shelf.getByText('未达到合夹停留时间，位置保持。',{exact:true}).waitFor();assert.equal((await info(shelf)).snapshot.clips.length,3);
-  await shelf.mouse.move(pegA.x+12,pegA.y+20);await shelf.mouse.down();await shelf.mouse.move(pegB.x+12,pegB.y+20,{steps:8});
+  const currentA=await shelf.locator('[data-clip-id="'+a+'"] .peg-button').boundingBox(),currentB=await shelf.locator('[data-clip-id="'+b+'"] .peg-button').boundingBox();
+  await shelf.mouse.move(currentA.x+12,currentA.y+20);await shelf.mouse.down();await shelf.mouse.move(currentB.x+12,currentB.y+20,{steps:8});
   await shelf.getByText('松开合并',{exact:true}).waitFor({timeout:4000});await shelf.mouse.up();await shelf.locator('[data-clip-id="'+a+'"]').waitFor({state:'detached',timeout:5000}).catch(async e=>{console.error(JSON.stringify({info:await info(shelf),message:await shelf.locator('.shelf-error').allTextContents()}));throw e;});
   s=(await info(shelf)).snapshot;assert.equal(s.clips.length,2);assert.equal(s.ideas.length,weight);assert.deepEqual(s.clips[0].ideaIds,[ids[1],ids[0]]);
   await result(shelf,'dragLock',false);await shelf.waitForSelector('[data-clip-id="'+b+'"] .page-number');

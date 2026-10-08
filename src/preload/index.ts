@@ -10,6 +10,7 @@ const api:ThoughtlineBridge={
  openManage:(id,titles)=>ipcRenderer.invoke('thoughtline:open-manage',id,titles),
  closeManage:()=>ipcRenderer.invoke('thoughtline:close-manage'),
  openEdit:id=>ipcRenderer.invoke('thoughtline:open-edit',id),
+ shelfMenu:id=>ipcRenderer.invoke('thoughtline:shelf-menu',id),
  openSettings:()=>ipcRenderer.invoke('thoughtline:open-settings'),
  saveSettings:(settings,revision)=>ipcRenderer.invoke('thoughtline:settings',settings,revision),
  onPrepareQuit:callback=>{const listener=(_e:Electron.IpcRendererEvent,id:string)=>{let draft=null;try{draft=callback();}catch{}ipcRenderer.send('thoughtline:quit-draft',id,draft);};ipcRenderer.on('thoughtline:prepare-quit',listener);return()=>ipcRenderer.removeListener('thoughtline:prepare-quit',listener);},

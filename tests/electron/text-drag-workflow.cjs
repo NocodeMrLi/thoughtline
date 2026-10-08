@@ -1,8 +1,9 @@
+const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');
 const assert=require('node:assert/strict'),path=require('node:path'),fs=require('node:fs/promises'),os=require('node:os');const {_electron}=require('playwright');
 (async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-text-drag-'));let app;
  try{
-  app=await _electron.launch({executablePath:require('electron'),args:[path.resolve('out/main/index.js')],env:{...process.env,THOUGHTLINE_DATA_DIR:dir},timeout:15000});await app.firstWindow();while((await app.windows()).length<3)await app.waitForEvent('window');const pages=await app.windows(),shelf=pages.find(p=>p.url().includes('view=shelf')),composer=pages.find(p=>p.url().includes('view=composer'));
+  app=await _electron.launch(await launchOptions(dir));await warmViews(app);while((await app.windows()).length<3)await app.waitForEvent('window');const pages=await app.windows(),shelf=pages.find(p=>p.url().includes('view=shelf')),composer=pages.find(p=>p.url().includes('view=composer'));
   const body='  第一行完整正文\n\n不要混入标题 @codex\n😀 末行保留空格  ';
   await composer.evaluate(async text=>{const i=await window.thoughtline.info();const r=await window.thoughtline.submit({text,title:'仅短标题',agentId:'codex',project:'仅标签'},i.snapshot.revision);if(!r.ok)throw Error(r.message);},body);
   await shelf.waitForSelector('.card-copy');await shelf.waitForFunction(()=>Number(document.querySelector('[data-view=shelf]').dataset.progress)===1);assert(await shelf.locator('.card-copy').evaluate(el=>el.draggable),'card body must offer standard plaintext drag separately from peg rearrangement');
@@ -12,10 +13,10 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
   assert.equal(payload.text,body);assert.deepEqual(payload.types,['text/plain']);assert.equal(payload.files,0);// Synthetic DataTransfer cannot set effectAllowed; verify it through a browser-owned drag below.
   assert((await shelf.evaluate(()=>window.thoughtline.info())).interactionLocked);
   await shelf.evaluate(id=>window.thoughtline.textDrag(false,id),before.ideas[0].id);
-  await shelf.waitForFunction(async()=>!(await window.thoughtline.info()).interactionLocked);
+  await waitForInfo(shelf,i=>!i.interactionLocked);
   assert.equal(await shelf.locator('.card-copy').getAttribute('data-exporting'),'false','forced main cancellation must reset source feedback even if dragend is lost');
   await shelf.evaluate(()=>document.querySelector('.card-copy').dispatchEvent(new DragEvent('dragend',{bubbles:true,dataTransfer:window.dragTransfer})));
-  await shelf.waitForFunction(async()=>!(await window.thoughtline.info()).interactionLocked);
+  await waitForInfo(shelf,i=>!i.interactionLocked);
   await shelf.locator('.card-copy').evaluate(el=>el.click());assert.equal(await app.evaluate(({clipboard})=>clipboard.readText()),clipboard);
   assert.deepEqual((await shelf.evaluate(()=>window.thoughtline.info())).snapshot,before);
   await shelf.evaluate(()=>{const target=document.createElement('textarea');target.id='test-text-receiver';target.setAttribute('aria-label','仅测试文本接收');Object.assign(target.style,{position:'absolute',left:'30px',top:'250px',width:'300px',height:'50px',pointerEvents:'auto'});target.addEventListener('dragover',e=>{e.preventDefault();e.dataTransfer.dropEffect='copy';});target.addEventListener('drop',e=>{e.preventDefault();window.receivedDrag={text:e.dataTransfer.getData('text/plain'),types:[...e.dataTransfer.types],files:e.dataTransfer.files.length,effect:e.dataTransfer.effectAllowed};});document.body.appendChild(target);});
