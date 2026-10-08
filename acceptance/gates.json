@@ -1,9 +1,9 @@
 {
-  "stage": "0.0.5 settings, quit draft and recovery",
+  "stage": "0.0.6 interaction motion refinement",
   "asOf": "2026-10-08",
   "verify": {
     "typecheck": "passed",
-    "unitTests": 47,
+    "unitTests": 52,
     "build": "passed"
   },
   "gates": [
@@ -54,12 +54,13 @@
   "referenceCode": "Edge-Drop stickProbe.ts copied unchanged; Tendedero rope math ported; see THIRD_PARTY_NOTICES.md",
   "packageBuildFailure": "Historical first Windows run failed after installer creation because builder tried implicit publishing. Fixed with --publish never; final main run 37783302073 succeeded.",
   "branch": "main",
-  "release": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.4-alpha.1",
+  "release": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.5-alpha.1",
   "packages": {
-    "mac": "evidence/package-mac-stage4.json",
-    "windows": "evidence/package-windows-stage4.json",
-    "release": "evidence/private-release-stage4.json",
-    "packagedWorkflow": "evidence/package-group-stage4.json"
+    "mac": "evidence/package-mac-stage6.json",
+    "windows": "evidence/package-windows-stage6.json",
+    "release": "evidence/private-release-stage6.json",
+    "packagedWorkflow": "evidence/settings-lifecycle.json",
+    "packageSourceCommit": "518ebbf617ed3464c11314d7d8ee89fd2e9bb238"
   },
   "groupImplementation": {
     "schema": 2,
@@ -75,7 +76,7 @@
     "interactionEvidence": "evidence/group-native.json",
     "scope": "Mac Electron IPC/DOM/protocol events; physical U09-U13 pending"
   },
-  "sourceCommit": "d028a1b281607539f8bef874e9451f9ba07bcc9f",
+  "sourceCommit": null,
   "installationCorrection": {
     "affectedMacRelease": "0.0.3-alpha.1",
     "cause": "invalid Electron linker signature after packaging; no sealed resources",
@@ -93,5 +94,21 @@
     "recoverySelectorUnitTest": true,
     "nativeRecoveryDialogPhysicalAcceptance": false,
     "separatePauseReasons": true
+  },
+  "sourceVersion": "0.0.6",
+  "motion": {
+    "evidence": "evidence/motion-native.json",
+    "nativeExitFrameRetention": true,
+    "interruptionContinuity": true,
+    "finiteSharedClock": true,
+    "liveSystemReducedMotion": true,
+    "subjectivePhysicalAcceptance": false
+  },
+  "performance": {
+    "evidence": "evidence/idle-performance.json",
+    "scope": "isolated Mac Electron with Playwright debugger; not final packaged production measurement",
+    "cpuGate": false,
+    "rssGate": false,
+    "action": "check non-debug baseline and defer unused UI renderer loading if reproduced"
   }
 }

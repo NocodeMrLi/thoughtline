@@ -8,6 +8,7 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
  try{
   app=await launch();let {shelf,composer,manage}=await ready();const texts=[' a\nCodex 第一张原文\n',' b\nCodex 第二张原文\n',' c\nClaude 原文\n'];
   for(let i=0;i<3;i++){const s=(await info(composer)).snapshot;await result(composer,'submit',{text:texts[i],title:'标签'+i,project:'项目',agentId:i<2?'codex':'claude'},s.revision);}
+  await shelf.waitForFunction(()=>!document.querySelector('[data-view=shelf]').hasAttribute('data-progress')||Number(document.querySelector('[data-view=shelf]').dataset.progress)===1);
   let s=(await info(shelf)).snapshot;const ids=s.ideas.map(i=>i.id),[a,b,c]=s.clips.map(c=>c.id);const weight=s.ideas.length;
   await result(shelf,'dragLock',true);
   const cross=await shelf.evaluate(async({a,c,revision})=>window.thoughtline.clipChange({kind:'merge',sourceId:a,targetId:c},revision),{a,c,revision:s.revision});assert(!cross.ok);

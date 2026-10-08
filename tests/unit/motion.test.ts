@@ -21,3 +21,9 @@ test('在重量过渡中加操作锁，当前卡片高度必须冻结到解锁',
  expect(currentWeight(resumed,5000)).toBe(41.75);
  expect(currentWeight(resumed,5360)).toBe(26);
 });
+test('重量使用有限时长的临界阻尼回弹，不越过88DIP上限',()=>{
+ const m=retargetWeight({from:8,to:8,startedAt:0,duration:0},88,100,{visible:true,locked:false,reduced:false});
+ expect(m.easing).toBe('spring');let previous=8;
+ for(let now=100;now<=460;now+=5){const value=currentWeight(m,now);expect(value).toBeGreaterThanOrEqual(previous);expect(value).toBeLessThanOrEqual(88);previous=value;}
+ expect(currentWeight(m,460)).toBe(88);
+});

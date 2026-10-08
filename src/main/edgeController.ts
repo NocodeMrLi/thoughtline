@@ -1,22 +1,38 @@
 import {screen} from 'electron';import {probeSeamAware,isNearProximity,type SeamTickState} from './vendor/edge-drop/stickProbe';import type {PlatformHost,Rect} from '../shared/contracts';import type {HitLayout} from '../shared/bridge';
+import {motion} from '../shared/motionTokens';
 import {contains,toLocal} from '../shared/ropeGeometry';import {initialShelf,shelfTransition,pauseTransition,type PauseReason,type ShelfEvent} from '../shared/shelfState';
 export class EdgeController{
  private state=initialShelf();private timer:ReturnType<typeof setTimeout>|null=null;
  private rects:Rect[]=[];private layoutRevision=-1;private displayId='';private paused=false;
  private pauses={manual:false,sleep:false,lock:false,paused:false};
+ private nativeVisible=false;private hideTimer:ReturnType<typeof setTimeout>|null=null;private presentationSession=0;
  private seam:SeamTickState={};private proximityDelay=400;
  private bounds:Rect={x:0,y:0,width:1200,height:340};
  constructor(private host:PlatformHost,private onDisplay:(id:string,width:number)=>void,private onStateChange:()=>void=()=>{}){}
- presentation(){return {shelfVisible:this.state.phase!=='hidden',interactionLocked:this.state.locks.length>0};}
+ presentation(){return {shelfVisible:this.state.phase!=='hidden',interactionLocked:this.state.locks.length>0,presentationSession:this.presentationSession};}
  start(){this.poll();}
- stop(){if(this.timer)clearTimeout(this.timer);this.timer=null;this.host.hideShelf();}
+ stop(){if(this.timer)clearTimeout(this.timer);this.timer=null;this.forceHide();}
+ private cancelHide(){if(this.hideTimer)clearTimeout(this.hideTimer);this.hideTimer=null;}
+ private forceHide(){this.cancelHide();this.presentationSession++;this.host.setShelfInteractive(false);this.host.hideShelf();this.nativeVisible=false;}
+ presentationFinished(session:number){if(session!==this.presentationSession||this.state.phase!=='hidden'||!this.hideTimer)return;this.cancelHide();this.host.hideShelf();this.nativeVisible=false;}
  layout(payload:HitLayout){if(payload.displayId!==this.displayId||payload.layoutRevision<=this.layoutRevision)return;this.layoutRevision=payload.layoutRevision;this.rects=payload.rects;}
- event(event:ShelfEvent){const before=this.state.phase;const locked=this.state.locks.length>0;this.state=shelfTransition(this.state,event);this.render(before);if(before!==this.state.phase||locked!==(this.state.locks.length>0))this.onStateChange();}
+ event(event:ShelfEvent){const before=this.state.phase;const locked=this.state.locks.length>0;this.state=shelfTransition(this.state,event);const session=this.presentationSession;this.render(before,event.type==='suspend');if(session!==this.presentationSession||before!==this.state.phase||locked!==(this.state.locks.length>0))this.onStateChange();}
  isManuallyPaused(){return this.pauses.manual;}
  pause(value:boolean,reason:PauseReason='manual'){this.pauses=pauseTransition(this.pauses,reason,value);if(this.paused===this.pauses.paused)return;this.paused=this.pauses.paused;this.event({type:this.paused?'suspend':'resume',now:Date.now()});}
- private render(before:string){
-  if(this.state.phase==='hidden'){this.host.hideShelf();return;}
-  if(before==='hidden')this.host.showShelf(this.bounds);
+ private render(before:string,immediate:boolean){
+  if(immediate){this.forceHide();return;}
+  if(this.state.phase==='hidden'){
+   this.host.setShelfInteractive(false);
+   if(this.nativeVisible&&before!=='hidden'){
+    this.cancelHide();const session=++this.presentationSession;
+    // The renderer acknowledges its final painted frame; a stalled renderer still closes.
+    this.hideTimer=setTimeout(()=>this.presentationFinished(session),motion.hide+120);
+   }
+   return;
+  }
+  if(before==='hidden'){
+   this.cancelHide();this.presentationSession++;this.host.showShelf(this.bounds);this.nativeVisible=true;
+  }
  }
  private poll=()=>{
   if(!this.paused){
