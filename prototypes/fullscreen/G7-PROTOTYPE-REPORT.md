@@ -12,7 +12,7 @@ Mac 自有靶窗实际原生 fullscreen event/isFullScreen：普通 clear→全�
 
 Windows [CI37826257911](https://github.com/NocodeMrLi/thoughtline/actions/runs/37826257911) 准确754a58f编译及19项决策检查成功。runner查询返回 clear、QUIET_TIME(6)、perMonitorV2=true，仅证明公开接口可调用。实际Windows游戏/演示、多屏/混合缩放未测。已下载原型exe且匹配CI SHA `fd98948eaf34d1828b69f843172e6e7ea4b649075ac62d874ea505173ee70ae7`，未在Mac执行。
 
-保留首轮失败：Mac SDK sysroot未指定、Rect命名冲突、无效显示器测试，以及 Windows CI37825948581的证据目录缺失（编译/19检查本已通过，整条CI失败）。修复后有明确复验，不将失败命令改成成功。
+保留首轮失败：Mac SDK sysroot未指定、Rect命名冲突、一次早期probe响应2秒超时、无效显示器测试，以及 Windows CI37825948581的证据目录缺失（编译/19检查本已通过，整条CI失败）。修复后有明确复验，不将失败命令改成成功。
 
 复验：Mac `node prototypes/fullscreen/build-mac.cjs` 后运行 `mac-workflow.cjs`，必须先协调原生时段；Windows按README的CMake/ctest命令。具体状态、源码/二进制哈希和证据见 `prototypes/fullscreen/evidence/prototype-status.json`、`mac-native.json`、`windows-ci.json`。
 
