@@ -5,7 +5,7 @@ const invalid=<T>(message:string):Result<T>=>({ok:false,code:'INVALID',message})
 const plain=(x:unknown):x is Record<string,unknown>=>!!x&&typeof x==='object'&&!Array.isArray(x);
 const textOK=(s:unknown,max:number)=>typeof s==='string'&&Array.from(s).length<=max;
 const bodyOK=(s:unknown,empty=false)=>typeof s==='string'&&(empty||!!s.trim())&&new TextEncoder().encode(s).length<=1048576;
-export function initialSnapshot():Snapshot{return {schemaVersion:2,revision:0,clips:[],ideas:[],agents:[{id:'codex',name:'Codex',color:'#7EAC65'},{id:'claude',name:'Claude',color:'#D59569'},{id:'cursor',name:'Cursor',color:'#8AADD4'},{id:'general',name:'通用',color:'#A4A5B0'}],draft:null,settings:{writeHotkey:'Control+Alt+N',reducedMotion:false}};}
+export function initialSnapshot():Snapshot{return {schemaVersion:2,revision:0,clips:[],ideas:[],agents:[{id:'codex',name:'Codex',color:'#4C90D9'},{id:'claude',name:'Claude',color:'#D79551'},{id:'cursor',name:'Cursor',color:'#9574CE'},{id:'general',name:'通用',color:'#A0A3AA'}],draft:null,settings:{writeHotkey:'Control+Alt+N',reducedMotion:false}};}
 export function validateSnapshot(input:unknown):Result<Snapshot>{
   if(!plain(input)||![1,2].includes(Number(input.schemaVersion)))return invalid('无法读取这个数据版本，原文件已保留。');
   if(!Number.isSafeInteger(input.revision)||Number(input.revision)<0||!Array.isArray(input.agents)||!Array.isArray(input.ideas)||!plain(input.settings))return invalid('数据结构不完整。');

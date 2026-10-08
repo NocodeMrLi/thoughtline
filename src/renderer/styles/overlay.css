@@ -36,3 +36,13 @@
 .card-copy[data-exporting=true]{opacity:.65;cursor:grabbing}.card-copy{transition:opacity 120ms}
 
 :root[data-theme=dark] .rope .rope-core{stroke:#A5AA9B}
+
+/* Design 13: painted wooden spring clip; hitbox remains 24×44 DIP. */
+.clothespin{position:absolute;left:3px;top:4px;overflow:visible;filter:drop-shadow(0 1px 1px #00000035)}
+.pin-arm{transform-box:view-box;transform-origin:10px 17px;transition:transform 110ms ease-out}
+.peg-button:hover .clothespin{filter:drop-shadow(0 1px 1px #00000045) brightness(1.06)}
+.peg-button:active .pin-front,.hanging.dragging .pin-front{transform:rotate(2deg)}
+.peg-button:active .pin-back,.hanging.dragging .pin-back{transform:rotate(-2deg)}
+.clothespin[data-reduced=true] .pin-arm{transform:none!important;transition:none!important}
+.peg-button:active .clothespin[data-reduced=true]{filter:drop-shadow(0 0 1px var(--accent))}
+@media(prefers-reduced-motion:reduce){.pin-arm{transform:none!important;transition:none!important}}

@@ -2,6 +2,7 @@ import {useEffect,useRef,useState} from 'react';
 import type {PointerEvent} from 'react';
 import type {Clip,Idea,AgentTag} from '../../shared/contracts';
 import type {ClipMutation} from '../../shared/bridge';
+import {Clothespin} from './Clothespin';
 export function ClipCard({clip,ideas,agent,onChange,onGrab,onError,reduced,textDragActive}:{clip:Clip;ideas:Idea[];agent:AgentTag|undefined;onChange:(c:ClipMutation)=>Promise<boolean>;onGrab:(e:PointerEvent<HTMLButtonElement>,clip:Clip)=>void;onError:(text:string)=>void;reduced:boolean;textDragActive:boolean}){
  const [copied,setCopied]=useState(false),[busy,setBusy]=useState(false),[direction,setDirection]=useState('');
  const copyTimer=useRef<ReturnType<typeof setTimeout>|null>(null),current=useRef(clip.currentId),ignoreCopyUntil=useRef(0),exportId=useRef<string|null>(null);const [exporting,setExporting]=useState(false);current.current=clip.currentId;
@@ -12,7 +13,7 @@ export function ClipCard({clip,ideas,agent,onChange,onGrab,onError,reduced,textD
  const open=async(titles=false)=>{const r=await window.thoughtline.openManage(idea.id,titles);if(!r.ok)onError(r.message);};
  const flip=async(step:number)=>{if(busy)return;const id=clip.ideaIds[index+step];if(!id)return;setBusy(true);setCopied(false);setDirection(step>0?'next':'previous');try{await onChange({kind:'select',id:clip.id,ideaId:id});}finally{setBusy(false);}};
  return <>
-  <button data-hit className="peg-button" aria-label={`移动夹子或查看：${idea.title}`} onPointerDown={e=>onGrab(e,clip)}><span className="peg" style={{backgroundColor:agent?.color}}/></button>
+  <button data-hit className="peg-button" aria-label={`移动夹子或查看：${idea.title}`} onPointerDown={e=>onGrab(e,clip)}><Clothespin color={agent?.color} reduced={reduced}/></button>
   <article data-hit data-copied={copied} className={`idea-card ${grouped?'grouped':''}`} onContextMenu={e=>{e.preventDefault();void window.thoughtline.shelfMenu(idea.id).then(r=>{if(!r.ok)onError(r.message);});}}>
    <button className="card-copy" draggable data-exporting={exporting} title="点击复制；拖动正文到支持文字拖放的输入框" onDragStart={e=>{
     e.dataTransfer.clearData();e.dataTransfer.setData('text/plain',idea.text);e.dataTransfer.effectAllowed='copy';ignoreCopyUntil.current=Infinity;setExporting(true);exportId.current=idea.id;window.thoughtline.textDrag(true,idea.id);
