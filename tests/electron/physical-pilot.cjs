@@ -18,7 +18,8 @@ const {_electron}=require(process.env.THOUGHTLINE_PLAYWRIGHT_PACKAGE||'playwrigh
  };
  const timer=setInterval(()=>snapshot().catch(console.error),1000);await snapshot();
  console.log('Native test target ready; physical OS interactions required.');
- const stop=async()=>{clearInterval(timer);await snapshot();await app.close();await fs.rm(dir,{recursive:true,force:true});process.exit(0);};
+ let stopping=false;
+ const stop=async()=>{if(stopping)return;stopping=true;clearInterval(timer);await snapshot().catch(()=>{});await app.close().catch(()=>{});await fs.rm(dir,{recursive:true,force:true});process.exit(0);};
  process.on('SIGINT',stop);process.on('SIGTERM',stop);
  await new Promise(()=>{});
 })().catch(e=>{console.error(e);process.exit(1)});

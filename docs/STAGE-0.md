@@ -12,3 +12,5 @@ This is a staged native-window pilot, not the completed product.
 Still awaiting: physical click-through/focus matrix on both systems, real Windows user feedback, finalized animated UI/overflow/filter/manage/edit flows, pure-text drag interoperability, full-screen/multi-monitor/sleep/performance acceptance, signed distribution.
 
 Native test helper windows live only in tests; they never ship in installers. Installers are local/private test builds without public-release signing. Do not treat installation or CI packaging as manual platform acceptance.
+
+Follow-up hardening: operation locks freeze the visible sag during an in-progress weight transition; unlock continues toward the newest count. Packaging explicitly uses --publish never so CI cannot trigger an implicit release. The workflow uploads private test artifacts separately.

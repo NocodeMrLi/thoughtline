@@ -7,6 +7,6 @@ export function currentWeight(m:WeightMotion,now:number):number{
   return m.from+(m.to-m.from)*(1-(1-t)**3);
 }
 export function retargetWeight(m:WeightMotion,next:number,now:number,o:{visible:boolean;locked:boolean;reduced:boolean}):WeightMotion{
-  if(o.locked)return m;
+  if(o.locked){const value=currentWeight(m,now);return {from:value,to:value,startedAt:now,duration:0};}
   return {from:o.visible&&!o.reduced?currentWeight(m,now):next,to:next,startedAt:now,duration:o.visible&&!o.reduced?motion.weight:0};
 }

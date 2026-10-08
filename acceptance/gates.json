@@ -3,9 +3,9 @@
   "asOf": "2026-10-08",
   "verify": {
     "typecheck": "passed",
-    "unitTests": 24,
+    "unitTests": 25,
     "build": "passed",
-    "log": "evidence/stage0-verify.log"
+    "log": "evidence/stage1-verify.log"
   },
   "gates": [
     {
@@ -53,5 +53,6 @@
     "physical click-through/focus acceptance pending",
     "unsigned test packages"
   ],
-  "referenceCode": "Edge-Drop stickProbe.ts copied unchanged; Tendedero rope math ported; see THIRD_PARTY_NOTICES.md"
+  "referenceCode": "Edge-Drop stickProbe.ts copied unchanged; Tendedero rope math ported; see THIRD_PARTY_NOTICES.md",
+  "packageBuildFailure": "First Windows installer build completed, then implicit CI publishing failed. Packaging now explicitly uses --publish never; workflow rerun required."
 }

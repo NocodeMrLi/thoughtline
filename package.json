@@ -11,8 +11,8 @@
     "build": "node node_modules/electron-vite/bin/electron-vite.js build",
     "verify": "node scripts/verify.cjs",
     "smoke": "node tests/electron/smoke.cjs",
-    "package:mac": "node node_modules/electron-builder/cli.js --mac dmg",
-    "package:win": "node node_modules/electron-builder/cli.js --win nsis"
+    "package:mac": "node node_modules/electron-builder/cli.js --mac dmg --publish never",
+    "package:win": "node node_modules/electron-builder/cli.js --win nsis --publish never"
   },
   "engines": {
     "node": ">=24.19.0 <25"
@@ -46,7 +46,8 @@
       "out/**/*",
       "package.json",
       "licenses/**/*",
-      "THIRD_PARTY_NOTICES.md"
+      "THIRD_PARTY_NOTICES.md",
+      "assets/**/*"
     ],
     "directories": {
       "output": "dist"
@@ -62,7 +63,8 @@
         }
       ],
       "identity": null,
-      "artifactName": "Thoughtline-${version}-mac-${arch}.dmg"
+      "artifactName": "Thoughtline-${version}-mac-${arch}.dmg",
+      "icon": "assets/app-icon.png"
     },
     "win": {
       "target": [
@@ -73,8 +75,9 @@
           ]
         }
       ],
-      "signAndEditExecutable": false,
-      "artifactName": "Thoughtline-${version}-win-${arch}.exe"
+      "artifactName": "Thoughtline-${version}-win-${arch}.exe",
+      "signExecutable": false,
+      "icon": "assets/app-icon.png"
     },
     "nsis": {
       "oneClick": false,

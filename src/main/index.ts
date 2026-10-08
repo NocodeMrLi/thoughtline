@@ -48,7 +48,8 @@ else app.whenReady().then(async()=>{
  composer.on('close',event=>{if(!quitting)event.preventDefault();});
  await Promise.all([loadView(shelf,'shelf'),loadView(composer,'composer')]);
  const registered=globalShortcut.register(snapshot.settings.writeHotkey,openComposer);
- const icon=nativeImage.createFromDataURL('data:image/svg+xml;base64,'+Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M1 5Q10 13 19 5" fill="none" stroke="black" stroke-width="1.5"/><rect x="8" y="8" width="4" height="8" rx="1" fill="black"/></svg>').toString('base64'));
+ const icon=nativeImage.createFromPath(join(__dirname,'../../assets/trayTemplate.png'));
+ if(icon.isEmpty())throw Error('Thoughtline tray icon failed to load.');
  icon.setTemplateImage(true);tray=new Tray(icon);tray.setToolTip('晾念头 / Thoughtline');
  tray.setContextMenu(Menu.buildFromTemplate([{label:'Thoughtline · 原生窗口小样',enabled:false},{label:`写作：${snapshot.settings.writeHotkey}${registered?'':'（注册失败）'}`,enabled:false},{type:'separator'},{label:'暂停悬停',type:'checkbox',click:item=>edge.pause(item.checked)},{label:'退出',click:()=>app.quit()}]));
  nativeTheme.on('updated',publish);powerMonitor.on('suspend',()=>edge.pause(true));powerMonitor.on('lock-screen',()=>edge.pause(true));powerMonitor.on('resume',()=>edge.pause(false));powerMonitor.on('unlock-screen',()=>edge.pause(false));
