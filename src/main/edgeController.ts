@@ -5,11 +5,12 @@ export class EdgeController{
  private rects:Rect[]=[];private layoutRevision=-1;private displayId='';private paused=false;
  private seam:SeamTickState={};private proximityDelay=400;
  private bounds:Rect={x:0,y:0,width:1200,height:340};
- constructor(private host:PlatformHost,private onDisplay:(id:string,width:number)=>void){}
+ constructor(private host:PlatformHost,private onDisplay:(id:string,width:number)=>void,private onStateChange:()=>void=()=>{}){}
+ presentation(){return {shelfVisible:this.state.phase!=='hidden',interactionLocked:this.state.locks.length>0};}
  start(){this.poll();}
  stop(){if(this.timer)clearTimeout(this.timer);this.timer=null;this.host.hideShelf();}
  layout(payload:HitLayout){if(payload.displayId!==this.displayId||payload.layoutRevision<=this.layoutRevision)return;this.layoutRevision=payload.layoutRevision;this.rects=payload.rects;}
- event(event:ShelfEvent){const before=this.state.phase;this.state=shelfTransition(this.state,event);this.render(before);}
+ event(event:ShelfEvent){const before=this.state.phase;const locked=this.state.locks.length>0;this.state=shelfTransition(this.state,event);this.render(before);if(before!==this.state.phase||locked!==(this.state.locks.length>0))this.onStateChange();}
  pause(value:boolean){this.paused=value;this.event({type:value?'suspend':'resume',now:Date.now()});}
  private render(before:string){
   if(this.state.phase==='hidden'){this.host.hideShelf();return;}

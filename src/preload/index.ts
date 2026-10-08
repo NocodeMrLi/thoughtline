@@ -5,6 +5,11 @@ const api:ThoughtlineBridge={
  hitRects:layout=>ipcRenderer.send('thoughtline:hit-layout',layout),
  copy:id=>ipcRenderer.invoke('thoughtline:copy',id),
  submit:(draft,revision)=>ipcRenderer.invoke('thoughtline:submit',draft,revision),
- close:draft=>ipcRenderer.invoke('thoughtline:close',draft)
+ close:draft=>ipcRenderer.invoke('thoughtline:close',draft),
+ openManage:id=>ipcRenderer.invoke('thoughtline:open-manage',id),
+ closeManage:()=>ipcRenderer.invoke('thoughtline:close-manage'),
+ openEdit:id=>ipcRenderer.invoke('thoughtline:open-edit',id),
+ setStatus:(id,status,revision)=>ipcRenderer.invoke('thoughtline:status',id,status,revision),
+ agentChange:(change,revision)=>ipcRenderer.invoke('thoughtline:agent',change,revision)
 };
 contextBridge.exposeInMainWorld('thoughtline',api);

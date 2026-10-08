@@ -1,26 +1,26 @@
 {
-  "stage": "0.0.1 native pilot",
+  "stage": "0.0.2 edit and retrieval alpha",
   "asOf": "2026-10-08",
   "verify": {
     "typecheck": "passed",
-    "unitTests": 25,
+    "unitTests": 31,
     "build": "passed",
-    "log": "evidence/final-verify.log"
+    "log": "evidence/stage3-final-verify.log"
   },
   "gates": [
     {
       "id": "G0",
       "status": "partial",
-      "mac": "native object and packaged bridge/hotkey/full-text save checks passed; physical matrix pending",
+      "mac": "native object and application workflow checked; physical click-through/focus/IME matrix pending",
       "windows": "Windows runner verify and NSIS installer succeeded; user installation/interaction pending"
     },
     {
       "id": "G1",
-      "status": "shared logic tested; renderer animations not finalized"
+      "status": "shared core and actual weight animation connected; final dual-platform visual acceptance pending"
     },
     {
       "id": "G2",
-      "status": "atomic storage and commands tested; edit flow pending"
+      "status": "edit/Agent commands and atomic storage tested; Mac native edit/archive/search/restore/copy/restart loop passed"
     },
     {
       "id": "G3",
@@ -49,15 +49,14 @@
   ],
   "limitations": [
     "no native text drag yet",
-    "no finalized filters/overflow/search/archive UI",
-    "physical click-through/focus acceptance pending",
+    "clip arrangement/merge/split design recorded; implementation pending",
+    "dual-platform physical click-through/focus/IME acceptance pending",
     "unsigned test packages"
   ],
   "referenceCode": "Edge-Drop stickProbe.ts copied unchanged; Tendedero rope math ported; see THIRD_PARTY_NOTICES.md",
   "packageBuildFailure": "Historical first Windows run failed after installer creation because builder tried implicit publishing. Fixed with --publish never; final main run 37783302073 succeeded.",
-  "sourceCommit": "6eee5a13c4a208ccffa7a3ef60bc389dec0fbe02",
   "branch": "main",
-  "release": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.1-pilot.1",
+  "release": "0.0.1 pilot package remains available; 0.0.2 package build pending",
   "packages": {
     "mac": "evidence/package-mac.json",
     "windows": "evidence/package-windows.json",

@@ -1,4 +1,5 @@
-import type {Snapshot,Draft,Result} from './contracts';
+import type {Snapshot,Draft,Result,AgentTag,Idea} from './contracts';
+import {visibleSlots} from './ropeGeometry';
 const invalid=<T>(message:string):Result<T>=>({ok:false,code:'INVALID',message});
 const plain=(x:unknown):x is Record<string,unknown>=>!!x&&typeof x==='object'&&!Array.isArray(x);
 const textOK=(s:unknown,max:number)=>typeof s==='string'&&Array.from(s).length<=max;
@@ -39,4 +40,29 @@ export function renameAgent(s:Snapshot,id:string,name:string):Result<Snapshot>{
 export function removeAgent(s:Snapshot,id:string,replacement:string):Result<Snapshot>{
   if(id==='general'||id===replacement||!s.agents.some(x=>x.id===id)||!s.agents.some(x=>x.id===replacement))return invalid('请选择存在的替代Agent，通用标签不能移除。');
   return validateSnapshot({...s,agents:s.agents.filter(x=>x.id!==id),ideas:s.ideas.map(x=>x.agentId===id?{...x,agentId:replacement}:x),draft:s.draft?.agentId===id?{...s.draft,agentId:replacement}:s.draft});
+}
+export function editIdea(s:Snapshot,id:string,draft:Draft,now:string):Result<Snapshot>{
+  if(!s.ideas.some(x=>x.id===id)||!draft||!bodyOK(draft.text)||!textOK(draft.title,50)||!textOK(draft.project,40))return invalid('正文、标题或项目无效，请保留文字后重试。');
+  const title=draft.title.trim()||Array.from(draft.text.split('\n').find(x=>x.trim())?.trim()??'').slice(0,50).join('');
+  return validateSnapshot({...s,ideas:s.ideas.map(x=>x.id===id?{...x,text:draft.text,title,project:draft.project,agentId:draft.agentId,updatedAt:now}:x)});
+}
+export function addAgent(s:Snapshot,a:AgentTag):Result<Snapshot>{
+  return validateSnapshot({...s,agents:[...s.agents,{id:a?.id,name:a?.name,color:a?.color}]});
+}
+export function updateAgent(s:Snapshot,id:string,patch:Pick<AgentTag,'name'|'color'>):Result<Snapshot>{
+  if(!s.agents.some(a=>a.id===id))return invalid('找不到这个Agent。');
+  return validateSnapshot({...s,agents:s.agents.map(a=>a.id===id?{...a,name:patch?.name,color:patch?.color}:a)});
+}
+export type IdeaQuery={status:'all'|'hanging'|'archived';query?:string;agentId?:string};
+export function findIdeas(s:Snapshot,q:IdeaQuery):Idea[]{
+  const text=(q.query??'').trim().toLowerCase();
+  const names=new Map(s.agents.map(a=>[a.id,a.name]));
+  return s.ideas.filter(i=>(q.status==='all'||i.status===q.status)&&(!q.agentId||q.agentId==='all'||i.agentId===q.agentId)&&(!text||[i.text,i.title,i.project,names.get(i.agentId)??''].join('\n').toLowerCase().includes(text)))
+    .sort((a,b)=>Date.parse(a.createdAt)-Date.parse(b.createdAt)||(a.id<b.id?-1:a.id>b.id?1:0));
+}
+export function shelfSelection(s:Snapshot,agentId:string,width:number){
+  const totalHanging=s.ideas.filter(i=>i.status==='hanging').length;
+  const filtered=findIdeas(s,{status:'hanging',agentId});
+  const visible=filtered.slice(0,visibleSlots(width));
+  return {totalHanging,visible,filteredCount:filtered.length,overflow:filtered.length-visible.length};
 }

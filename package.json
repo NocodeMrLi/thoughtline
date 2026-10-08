@@ -1,6 +1,6 @@
 {
   "name": "thoughtline",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "description": "晾念头 / Thoughtline desktop rope native pilot",
   "main": "out/main/index.js",
@@ -12,7 +12,8 @@
     "verify": "node scripts/verify.cjs",
     "smoke": "node tests/electron/smoke.cjs",
     "package:mac": "node node_modules/electron-builder/cli.js --mac dmg --publish never",
-    "package:win": "node node_modules/electron-builder/cli.js --win nsis --publish never"
+    "package:win": "node node_modules/electron-builder/cli.js --win nsis --publish never",
+    "workflow": "node tests/electron/workflow.cjs"
   },
   "engines": {
     "node": ">=24.19.0 <25"

@@ -5,8 +5,12 @@ const playwright=require(process.env.THOUGHTLINE_PLAYWRIGHT_PACKAGE||'playwright
  let app;
  try{
   app=await playwright._electron.launch({executablePath:require('electron'),args:[path.resolve('out/main/index.js')],env:{...process.env,THOUGHTLINE_DATA_DIR:dir},timeout:15000});
-  const shelf=await app.firstWindow({timeout:3000});
-  await shelf.waitForSelector('[data-view="shelf"]');
+  await app.firstWindow({timeout:3000});
+  while((await app.windows()).length<3)await app.waitForEvent('window',{timeout:5000});
+  for(const page of await app.windows())await page.waitForURL(/view=(shelf|composer|manage)/,{waitUntil:'domcontentloaded',timeout:5000});
+  const shelf=(await app.windows()).find(p=>p.url().includes('view=shelf'));
+  assert(shelf);await shelf.waitForSelector('[data-view="shelf"]',{state:'attached'});
+  await shelf.waitForFunction(async()=>Boolean((await window.thoughtline.info()).hotkeyRegistered),null,{polling:100,timeout:5000});
   const result=await app.evaluate(({BrowserWindow,globalShortcut})=>{
     const shelf=BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Shelf');
     return {title:shelf?.getTitle(),hidden:!shelf?.isVisible(),focusable:shelf?.isFocusable(),hotkey:globalShortcut.isRegistered('Control+Alt+N')};
