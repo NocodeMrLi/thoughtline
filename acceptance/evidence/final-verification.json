@@ -67,5 +67,19 @@
     "physical Mac IME and cross-app focus",
     "real Agent plaintext drop",
     "subjective user acceptance"
-  ]
+  ],
+  "independentCurrentQA": {
+    "version": "0.0.13",
+    "sourceCommit": "dee1f2c9046b284e2dd430632d9bdb913128c868",
+    "scope": "independent frozen Mac package affected flows; real MenuItem callbacks and renderer/IPC; not physical OS menu/IME/global key or Windows/G7 acceptance",
+    "passed": true,
+    "commandExitCode": 0,
+    "evidence": "evidence/qa-0.0.13/incremental-result.json",
+    "all12OwnedPidsExited": true,
+    "boundedCleanupPassed": true,
+    "dmgDetached": true,
+    "packageBytesIndependentlyMatched": true,
+    "oldQAInherited": false,
+    "firstFailedQAScriptAttemptPreserved": true
+  }
 }

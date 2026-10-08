@@ -1,0 +1,109 @@
+{
+  "sourceCommit": "dee1f2c9046b284e2dd430632d9bdb913128c868",
+  "reportCommit": "6ae06a2e8dc55c11cc37d1d99128c374eeb7e74d",
+  "version": "0.0.13",
+  "createdAt": "2026-10-09T02:52:08.717593+08:00",
+  "command": "node qa-0.0.13-native/frozen-incremental.cjs",
+  "exitCode": 0,
+  "qaScriptSha256": "069e55252f2215123e08436fce07d72d6dc692e410e63a9160d575109aadefa1",
+  "package": {
+    "sourceCommit": "dee1f2c9046b284e2dd430632d9bdb913128c868",
+    "dmgSha256": "63abca7db97acbde1876b26cf7f4394bb4e09a0888c38a72320cc1f7fe431f9c",
+    "asarSha256": "4af1687daa8725dbbaa6793245a68aa4ed6681c5034197c7e30b39e917ae220e",
+    "node": "v25.8.1",
+    "compiledFiles": [
+      {
+        "file": "out/main/index.js",
+        "packaged": "a73dd9006001bee79cd7ec0979034e5b2a8138987cef0b6fce817e5df0e9ad9f",
+        "independentBuild": "a73dd9006001bee79cd7ec0979034e5b2a8138987cef0b6fce817e5df0e9ad9f"
+      },
+      {
+        "file": "out/preload/index.js",
+        "packaged": "bddc1bdd58af17e601fcad73695739df5d74c120595f5de5a0d2d33285fd7fbd",
+        "independentBuild": "bddc1bdd58af17e601fcad73695739df5d74c120595f5de5a0d2d33285fd7fbd"
+      },
+      {
+        "file": "out/renderer/index.html",
+        "packaged": "6130a5e8b0d0366c1422b29ce4f86f5992427906dec097d08d8f8b9714c5a4ff",
+        "independentBuild": "6130a5e8b0d0366c1422b29ce4f86f5992427906dec097d08d8f8b9714c5a4ff"
+      },
+      {
+        "file": "out/renderer/assets/index-kAi4R-h9.js",
+        "packaged": "4eaa0ebdc293f81bb2960c11a25325357d7e092b41084899e6be343772afc0b1",
+        "independentBuild": "4eaa0ebdc293f81bb2960c11a25325357d7e092b41084899e6be343772afc0b1"
+      },
+      {
+        "file": "out/renderer/assets/index-oPkNq-fz.css",
+        "packaged": "c693580b640f05bed1e87d20abe2dbb92c16909bb554eca860bb5030eb3de103",
+        "independentBuild": "c693580b640f05bed1e87d20abe2dbb92c16909bb554eca860bb5030eb3de103"
+      }
+    ]
+  },
+  "checks": {
+    "startupOneShelf": true,
+    "emptyRopeOnly": true,
+    "traySettingsShowSaveCloseNew": true,
+    "visibleManageModeRefresh": true,
+    "noteSavedExact": true,
+    "filteredEmptyRopeOnlyAndNewAccessible": true,
+    "draftSavedExact": true,
+    "restartRestoresNoteDraftSettingsAndFields": true
+  },
+  "screenshots": [
+    {
+      "path": "/Users/lihongwei/Documents/Codex/2026-10-09/task-2/qa-0.0.13-native/empty-rope.png",
+      "visibleClips": 0,
+      "emptyText": "",
+      "hitTargets": 0,
+      "ropePath": "M 140 22 Q 720 82 1300 22",
+      "sha256": "0fdfbffb1c9f06e853d92b1600724d1894f3824ad79d50fc4115554d69c8a743",
+      "pixels": [
+        2880,
+        680
+      ]
+    },
+    {
+      "path": "/Users/lihongwei/Documents/Codex/2026-10-09/task-2/qa-0.0.13-native/filtered-empty-rope.png",
+      "visibleClips": 0,
+      "emptyText": "",
+      "hitTargets": 0,
+      "ropePath": "M 140 22 Q 720 82 1300 22",
+      "sha256": "a1d2c017747f8a5eaec882e6bf5916fc8ae5da7bb986ca19b54aafdad7c03a62",
+      "pixels": [
+        2880,
+        680
+      ]
+    }
+  ],
+  "instrumentation": "Tray.prototype.setContextMenu capture wrapper in QA process delegates original native method; production callbacks unchanged. screen pointer adapter affects only own App; no physical pointer movement. No packaged bytes modified.",
+  "hotkeyScope": "fixture-specific Control+Alt+Shift+F18 registered by unmodified App startup; never physically pressed, no callback invoked by keyboard",
+  "cleanup": {
+    "passed": true,
+    "removed": true,
+    "ownedPids": [
+      74141,
+      74142,
+      74143,
+      74144,
+      74151,
+      74155,
+      74169,
+      74170,
+      74171,
+      74172,
+      74180,
+      74183
+    ],
+    "helper": "exact dee1f2c tests/electron/idle-fixture-cleanup.cjs",
+    "boundedExitWaitAndRmRetries": true,
+    "ownDmgDetached": true
+  },
+  "physicalMenuSelection": false,
+  "formalAcceptance": false,
+  "remaining": [
+    "G7 automatic fullscreen suppression not part of0.0.13 package",
+    "physical IME, cross-app focus/click-through, Windows, real Agent receiving",
+    "0.0.13 performance not independently repeated per explicit incremental scope"
+  ],
+  "qaAttempt1": "evaluate callback parameter order error; all native processes and fake data cleaned; diagnostic log/JSON preserved; not product defect"
+}
