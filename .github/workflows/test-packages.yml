@@ -2,7 +2,7 @@ name: Build Windows test package
 on:
   push:
     branches: [feat/native-pilot, main]
-    paths-ignore: ['docs/**', '**.md']
+    paths-ignore: ['docs/**', '**.md', 'acceptance/**']
   workflow_dispatch:
 permissions:
   contents: read

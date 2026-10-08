@@ -6,6 +6,8 @@
 
 ## 本地开发
 
+当前落地阶段直接在 `main` 开发；经过验证的阶段提交并推送，作为修复与回滚节点。大版本迭代再建立独立分支。
+
 Node24.19.0。执行 `npm ci`、`npm run verify`、`npm run dev`。主入口Control+Alt+N；Mac⌘Enter、WindowsCtrlEnter挂上，Esc保存草稿。鼠标在屏幕顶部停留后显示挂绳。
 
 使用显式node_modules工具路径，兼容本机项目目录名称包含冒号的情况。`npm run smoke`验证真实Electron窗口配置与热键注册，不能替代物理鼠标及跨App验证。
