@@ -1,4 +1,8 @@
 export type SubmitKey={platform:'mac'|'windows';key:string;metaKey:boolean;ctrlKey:boolean;isComposing:boolean;keyCode:number};
+export function displayWriteHotkey(value:string,platform:'mac'|'windows'):string{
+ const labels:Record<string,string>=platform==='mac'?{Command:'⌘',Super:'⌘',Control:'⌃',Alt:'⌥',Shift:'⇧',Space:'空格'}:{Control:'Ctrl',Super:'Win'};
+ return value.split('+').map(part=>labels[part]??part).join(platform==='mac'?'':' + ');
+}
 export function shouldSubmit(input: SubmitKey): boolean {
   if(input.isComposing || input.keyCode===229)return false;
   return input.key==='Enter'&&(input.platform==='mac'?input.metaKey:input.ctrlKey);
