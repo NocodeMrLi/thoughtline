@@ -75,8 +75,8 @@ else app.whenReady().then(async()=>{
   if(manageLoading)return manageLoading;if(manage)return Promise.resolve(manage);
   const w=createManage(preload);manage=w;
   w.on('close',event=>{if(!quitting)event.preventDefault();});
-  w.on('show',()=>{if(manageRelease)clearTimeout(manageRelease);manageRelease=null;});
-  w.on('hide',()=>{manageRelease=setTimeout(()=>{manageRelease=null;if(!w.isDestroyed()&&!w.isVisible()){manage=null;w.destroy();}},30000);});
+  w.on('show',()=>{if(manageRelease)clearTimeout(manageRelease);manageRelease=null;refreshTray();});
+  w.on('hide',()=>{refreshTray();manageRelease=setTimeout(()=>{manageRelease=null;if(!w.isDestroyed()&&!w.isVisible()){manage=null;w.destroy();}},30000);});
   manageLoading=loadView(w,'manage').then(()=>w).catch(error=>{manage=null;w.destroy();throw error;}).finally(()=>{manageLoading=null;});
   return manageLoading;
  };
@@ -144,7 +144,7 @@ else app.whenReady().then(async()=>{
   if(!trusted(e)||id!==undefined&&typeof id!=='string'||titles!==undefined&&typeof titles!=='boolean')return invalid('无效操作');
   if(composer?.isVisible())return invalid('请先保存或取消当前输入。');
   if(id&&!snapshot.ideas.some(x=>x.id===id))return invalid('找不到这条念头。');
-  try{await ensureManage();}catch{return {ok:false,code:'IO',message:'浏览浮层未能打开，请重试。'};}if(quitting)return invalid('正在退出。');if(composer?.isVisible())return invalid('请先保存或取消当前输入。');manageSelection=id??null;manageMode=id?'detail':'browse';manageTitles=!!titles;manageSession++;lock('manage',true);publish();if(id){const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint()),p=screen.getCursorScreenPoint();const b=boundsFor(380,360);b.x=Math.round(Math.max(d.workArea.x+12,Math.min(d.workArea.x+d.workArea.width-b.width-12,p.x-b.width/2)));b.y=Math.round(Math.max(d.workArea.y+12,Math.min(d.workArea.y+d.workArea.height-b.height-12,p.y+24)));manage!.setBounds(b);}else manage!.setBounds(boundsFor(740,540));manage!.show();manage!.focus();return done();
+  try{await ensureManage();}catch{return {ok:false,code:'IO',message:'浏览浮层未能打开，请重试。'};}if(quitting)return invalid('正在退出。');if(composer?.isVisible())return invalid('请先保存或取消当前输入。');manageSelection=id??null;manageMode=id?'detail':'browse';manageTitles=!!titles;manageSession++;lock('manage',true);publish();if(id){const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint()),p=screen.getCursorScreenPoint();const b=boundsFor(380,360);b.x=Math.round(Math.max(d.workArea.x+12,Math.min(d.workArea.x+d.workArea.width-b.width-12,p.x-b.width/2)));b.y=Math.round(Math.max(d.workArea.y+12,Math.min(d.workArea.y+d.workArea.height-b.height-12,p.y+24)));manage!.setBounds(b);}else manage!.setBounds(boundsFor(740,540));manage!.show();manage!.focus();refreshTray();return done();
  });
  const selectShelfAgent=(id:string)=>{shelfAgentId=id==='all'||snapshot.agents.some(a=>a.id===id)?id:'all';refreshTray();publish();};
  const agentFilterMenu=():Electron.MenuItemConstructorOptions[]=>[
@@ -156,7 +156,7 @@ else app.whenReady().then(async()=>{
   if(composer?.isVisible())return invalid('请先保存或取消当前输入。');
   try{await ensureManage();}catch{return invalid('浏览浮层未能打开，请重试。');}
   if(quitting||composer?.isVisible())return invalid('请先结束当前输入。');
-  manageMode='browse';manageSelection=null;manageTitles=false;manageSession++;lock('manage',true);manage!.setBounds(boundsFor(740,540));publish();manage!.show();manage!.focus();return done();
+  manageMode='browse';manageSelection=null;manageTitles=false;manageSession++;lock('manage',true);manage!.setBounds(boundsFor(740,540));publish();manage!.show();manage!.focus();refreshTray();return done();
  };
  ipcMain.handle('thoughtline:shelf-menu',(e,id:string):Result<void>=>{
   if(!trusted(e,[shelf])||typeof id!=='string')return invalid('无效操作');
@@ -177,12 +177,12 @@ else app.whenReady().then(async()=>{
   if(composer?.isVisible())return invalid('请先保存或取消当前输入。');
   try{await ensureManage();}catch{return invalid('全文浮层未能打开，请重试。');}
   if(quitting||composer?.isVisible())return invalid('请先结束当前输入。');
-  manageMode='detail';manageSelection=id;manageTitles=false;manageSession++;lock('manage',true);manage!.setBounds(boundsFor(380,360));publish();manage!.show();manage!.focus();return done();
+  manageMode='detail';manageSelection=id;manageTitles=false;manageSession++;lock('manage',true);manage!.setBounds(boundsFor(380,360));publish();manage!.show();manage!.focus();refreshTray();return done();
  };
  ipcMain.handle('thoughtline:close-manage',e=>{if(!trusted(e,[manage]))return invalid('无效操作');hideManage();return done();});
  const openSettings=async():Promise<Result<void>>=>{
   if(composer?.isVisible())return invalid('请先保存或取消当前输入。');
-  try{await ensureManage();}catch{return {ok:false,code:'IO',message:'设置浮层未能打开，请重试。'};}if(quitting)return invalid('正在退出。');if(composer?.isVisible())return invalid('请先保存或取消当前输入。');cancelDrag();manageMode='settings';manageTitles=false;manageSelection=null;manageSession++;lock('manage',true);manage!.setBounds(boundsFor(440,390));publish();manage!.show();manage!.focus();return done();
+  try{await ensureManage();}catch{return {ok:false,code:'IO',message:'设置浮层未能打开，请重试。'};}if(quitting)return invalid('正在退出。');if(composer?.isVisible())return invalid('请先保存或取消当前输入。');cancelDrag();manageMode='settings';manageTitles=false;manageSelection=null;manageSession++;lock('manage',true);manage!.setBounds(boundsFor(440,390));publish();manage!.show();manage!.focus();refreshTray();return done();
  };
  ipcMain.handle('thoughtline:open-settings',e=>trusted(e)?openSettings():invalid('无效操作'));
  ipcMain.handle('thoughtline:settings',async(e,settings:Snapshot['settings'],revision:number):Promise<Result<Snapshot>>=>{
