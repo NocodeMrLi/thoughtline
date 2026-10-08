@@ -57,14 +57,16 @@ else app.whenReady().then(async()=>{
  const cancelDrag=()=>{finishTextDrag();if(dragEscape){globalShortcut.unregister('Escape');dragEscape=false;lock('drag',false);}dragCancelSession++;publish();};
  edge=new EdgeController(host,(id,w)=>{displayId=id;width=w;cancelDrag();},publish);
  let composerLoading:Promise<BrowserWindow>|null=null,manageLoading:Promise<BrowserWindow>|null=null;
+ let composerSafeToRelease=true;
+ const closeConfirmedComposer=()=>{composerSafeToRelease=true;host.closeComposer();};
  let composerRelease:ReturnType<typeof setTimeout>|null=null,manageRelease:ReturnType<typeof setTimeout>|null=null;
  const ensureComposer=():Promise<BrowserWindow>=>{
   if(composerRelease)clearTimeout(composerRelease);composerRelease=null;
   if(composerLoading)return composerLoading;if(composer)return Promise.resolve(composer);
   const w=createComposer(preload);composer=w;
   w.on('close',event=>{if(!quitting)event.preventDefault();});
-  w.on('show',()=>{if(composerRelease)clearTimeout(composerRelease);composerRelease=null;refreshTray();});
-  w.on('hide',()=>{refreshTray();composerRelease=setTimeout(()=>{composerRelease=null;if(!w.isDestroyed()&&!w.isVisible()){composer=null;w.destroy();}},30000);});
+  w.on('show',()=>{composerSafeToRelease=false;if(composerRelease)clearTimeout(composerRelease);composerRelease=null;refreshTray();});
+  w.on('hide',()=>{refreshTray();lock('composer',false);if(!composerSafeToRelease)return;composerRelease=setTimeout(()=>{composerRelease=null;if(composerSafeToRelease&&!w.isDestroyed()&&!w.isVisible()){composer=null;w.destroy();}},30000);});
   composerLoading=loadView(w,'composer').then(()=>w).catch(error=>{composer=null;w.destroy();throw error;}).finally(()=>{composerLoading=null;});
   return composerLoading;
  };
@@ -85,10 +87,14 @@ else app.whenReady().then(async()=>{
   if(composer?.isVisible()){
    composer.show();composer.focus();return ideaId?invalid('请先保存或取消当前编辑。'):done();
   }
+  if(composer&&!composerSafeToRelease){
+   hideManage();lock('composer',true);host.showComposer(boundsFor(530,440));
+   return ideaId?invalid('请先保存或取消尚未完成的输入。'):done();
+  }
   const idea=ideaId?snapshot.ideas.find(x=>x.id===ideaId):null;
   if(ideaId&&!idea)return invalid('找不到这条念头。');
   composerContext=idea?{mode:'edit',ideaId:idea.id,draft:{text:idea.text,title:idea.title,project:idea.project,agentId:idea.agentId}}:{mode:'new',ideaId:null,draft:snapshot.draft??blank};
-  editRevision=snapshot.revision;composerSession++;try{await ensureComposer();}catch{return {ok:false,code:'IO',message:'输入浮层未能打开，请重试。原数据已保留。'};}if(quitting)return invalid('正在退出。');if(manage?.isVisible()&&manageMode==='settings')return invalid('请先关闭设置。');lock('composer',true);hideManage();publish();host.showComposer(boundsFor(530,440));return done();
+  editRevision=snapshot.revision;composerSession++;try{await ensureComposer();}catch{return {ok:false,code:'IO',message:'输入浮层未能打开，请重试。原数据已保留。'};}if(quitting)return invalid('正在退出。');if(manage?.isVisible()&&manageMode==='settings')return invalid('请先关闭设置。');composerSafeToRelease=false;lock('composer',true);hideManage();publish();host.showComposer(boundsFor(530,440));return done();
  };
  const save=async(next:Result<Snapshot>,revision:number):Promise<Result<Snapshot>>=>{
   if(!next.ok)return next;const r=await repository.commit(next.value,revision);
@@ -104,7 +110,7 @@ else app.whenReady().then(async()=>{
  prepareQuit=async()=>{
   if(settingsBusy)return false;
   await repository.flush();
-  if(!composer?.isVisible()||composerContext.mode==='edit')return true;
+  if(!composer||(composerSafeToRelease&&!composer.isVisible())||composerContext.mode==='edit')return true;
   const draft=await captureDraft();const saved=draft.ok?await save({ok:true,value:{...snapshot,draft:draft.value}},snapshot.revision):draft;
   if(saved.ok)return true;
   composer!.webContents.send('thoughtline:quit-error',saved.message);composer!.show();composer!.focus();return false;
@@ -126,13 +132,13 @@ else app.whenReady().then(async()=>{
   const now=new Date().toISOString();
   const next=composerContext.mode==='edit'?editIdea(snapshot,composerContext.ideaId!,draft,now):newIdea(snapshot,draft,randomUUID(),now);
   const committed=await save(next,revision);if(!committed.ok)return committed;
-  host.closeComposer();lock('composer',false);edge.event({type:'peek',now:Date.now()});publish();return committed;
+  closeConfirmedComposer();lock('composer',false);edge.event({type:'peek',now:Date.now()});publish();return committed;
  });
  ipcMain.handle('thoughtline:close',async(e,draft:Draft):Promise<Result<Snapshot>>=>{
   if(!trusted(e,[composer])||!draftShape(draft))return invalid('无效操作');
-  if(composerContext.mode==='edit'){host.closeComposer();lock('composer',false);return {ok:true,value:snapshot};}
+  if(composerContext.mode==='edit'){closeConfirmedComposer();lock('composer',false);return {ok:true,value:snapshot};}
   const saved=await save({ok:true,value:{...snapshot,draft}},snapshot.revision);if(!saved.ok)return saved;
-  host.closeComposer();lock('composer',false);return saved;
+  closeConfirmedComposer();lock('composer',false);return saved;
  });
  ipcMain.handle('thoughtline:open-manage',async(e,id?:string,titles?:boolean):Promise<Result<void>>=>{
   if(!trusted(e)||id!==undefined&&typeof id!=='string'||titles!==undefined&&typeof titles!=='boolean')return invalid('无效操作');

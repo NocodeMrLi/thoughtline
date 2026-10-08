@@ -1,10 +1,10 @@
 const fs=require('node:fs/promises'),path=require('node:path');
-// Test adapter intercepts the real globalShortcut callback before loading the app.
+// Protocol fixtures emulate the shortcut registry by default; only smoke/lifecycle opt into real OS registration.
 // Production has no new IPC entry or test-only startup behavior.
-async function launchOptions(dir){
+async function launchOptions(dir,{realShortcuts=false}={}){
  if(process.env.THOUGHTLINE_EXECUTABLE)throw Error('These protocol fixtures require the source runtime. Use the packaged acceptance fixture for a frozen App.');
  const entry=path.join(dir,'protocol-entry.cjs');
- await fs.writeFile(entry,`const {globalShortcut,Menu}=require('electron');globalThis.thoughtlineTestPopup=null;Menu.prototype.popup=function(options){globalThis.thoughtlineTestPopup={menu:this,options};};const callbacks=new Map();const register=globalShortcut.register.bind(globalShortcut),unregister=globalShortcut.unregister.bind(globalShortcut);globalShortcut.register=(key,callback)=>{const ok=register(key,callback);if(ok)callbacks.set(key,callback);return ok;};globalShortcut.unregister=key=>{callbacks.delete(key);return unregister(key);};globalThis.thoughtlineTestHotkeys=callbacks;require(${JSON.stringify(path.resolve('out/main/index.js'))});`);
+ await fs.writeFile(entry,`const {globalShortcut,Menu}=require('electron');globalThis.thoughtlineTestPopup=null;Menu.prototype.popup=function(options){globalThis.thoughtlineTestPopup={menu:this,options};};const callbacks=new Map();const register=globalShortcut.register.bind(globalShortcut),unregister=globalShortcut.unregister.bind(globalShortcut);if(${JSON.stringify(realShortcuts)}){globalShortcut.register=(key,callback)=>{const ok=register(key,callback);if(ok)callbacks.set(key,callback);return ok;};globalShortcut.unregister=key=>{callbacks.delete(key);return unregister(key);};}else{globalShortcut.register=(key,callback)=>{if(callbacks.has(key))return false;callbacks.set(key,callback);return true;};globalShortcut.unregister=key=>callbacks.delete(key);globalShortcut.isRegistered=key=>callbacks.has(key);globalShortcut.unregisterAll=()=>callbacks.clear();}globalThis.thoughtlineTestHotkeys=callbacks;require(${JSON.stringify(path.resolve('out/main/index.js'))});`);
  return {executablePath:require('electron'),args:[entry],env:{...process.env,THOUGHTLINE_DATA_DIR:dir},timeout:15000};
 }
 async function openComposer(app,shelf){

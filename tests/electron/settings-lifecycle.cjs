@@ -1,10 +1,10 @@
-const {launchOptions,warmViews}=require('./window-fixture.cjs');
+const {launchOptions,warmViews,openComposer}=require('./window-fixture.cjs');
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
 const {_electron}=require('playwright');
 (async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-lifecycle-'));let app;
  const start=async()=>{
-  app=await _electron.launch(await launchOptions(dir));
+  app=await _electron.launch(await launchOptions(dir,{realShortcuts:true}));
   await warmViews(app);while((await app.windows()).length<3)await app.waitForEvent('window',{timeout:5000});
   const pages=await app.windows();for(const p of pages)await p.waitForURL(/view=(shelf|composer|manage)/,{waitUntil:'domcontentloaded'});
   const by=name=>pages.find(p=>p.url().includes('view='+name));await by('shelf').waitForSelector('[data-view=shelf]',{state:'attached'});
@@ -34,8 +34,8 @@ const {_electron}=require('playwright');
    assert.equal(JSON.parse(await fs.readFile(path.join(dir,'snapshot.json'),'utf8')).settings.writeHotkey,newKey);await fs.chmod(dir,0o700);
   }
   await manage.getByRole('button',{name:'关闭设置',exact:true}).click();
-  // Explicitly show our own isolated composer; this is a DOM/IPC lifecycle test, not physical hotkey acceptance.
-  await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer').show());
+  // Invoke the registered app callback so the production session lifecycle is exercised.
+  await openComposer(app,shelf);
   const draft='  退出前尚未挂上的草稿\n第二行中文\n第三行完整保留';
   await composer.locator('#idea-text').fill(draft);await composer.locator('.title-input input').fill('未提交标签');
   if(process.platform!=='win32'){

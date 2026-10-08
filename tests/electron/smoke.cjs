@@ -5,7 +5,7 @@ const playwright=require(process.env.THOUGHTLINE_PLAYWRIGHT_PACKAGE||'playwright
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-native-'));
  let app;
  try{
-  app=await playwright._electron.launch(await launchOptions(dir));
+  app=await playwright._electron.launch(await launchOptions(dir,{realShortcuts:true}));
   await warmViews(app);
   while((await app.windows()).length<3)await app.waitForEvent('window',{timeout:5000});
   for(const page of await app.windows())await page.waitForURL(/view=(shelf|composer|manage)/,{waitUntil:'domcontentloaded',timeout:5000});

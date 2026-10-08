@@ -1,4 +1,4 @@
-const {launchOptions,warmViews}=require('./window-fixture.cjs');
+const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');
 const assert=require('node:assert/strict');const path=require('node:path');const fs=require('node:fs/promises');const os=require('node:os');const {_electron}=require('playwright');
 (async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-workflow-'));let app;
@@ -18,8 +18,8 @@ const assert=require('node:assert/strict');const path=require('node:path');const
   assert.equal(await manage.locator('[data-full-text]').inputValue(),full);
   await result(manage,'openEdit',id);info=await composer.evaluate(()=>window.thoughtline.info());assert.equal(info.composerContext.mode,'edit');
   await composer.waitForFunction(()=>document.querySelector('#idea-text')?.value.startsWith('  原始正文'));
-  await composer.locator('#idea-text').fill('取消时不能覆盖原文');await composer.locator('.close').click();
-  info=await manage.evaluate(()=>window.thoughtline.info());assert.equal(info.snapshot.ideas[0].text,full);
+  const cancelRevision=info.snapshot.revision;await composer.locator('#idea-text').fill('取消时不能覆盖原文');await composer.locator('.close').click();await waitForInfo(shelf,i=>!i.interactionLocked);assert.equal(await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer').isVisible()),false);
+  info=await manage.evaluate(()=>window.thoughtline.info());assert.equal(info.snapshot.ideas[0].text,full);assert.equal(info.snapshot.revision,cancelRevision);
   await result(manage,'openEdit',id);info=await composer.evaluate(()=>window.thoughtline.info());
   const edited=full+'\n已编辑';await result(composer,'submit',{text:edited,title:'循环验收',project:'项目',agentId:'claude'},info.snapshot.revision);
   info=await manage.evaluate(()=>window.thoughtline.info());await result(manage,'setStatus',id,'archived',info.snapshot.revision);

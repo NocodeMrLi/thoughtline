@@ -22,7 +22,7 @@ const {_electron}=require('playwright');
   const reopened=await openComposer(app,shelf);assert.equal(await reopened.locator('#idea-text').inputValue(),draft);
   await app.close();app=null;
   assert.equal(JSON.parse(await fs.readFile(path.join(dir,'snapshot.json'),'utf8')).draft.text,draft,'quit must persist recreated composer draft');
-  const report={scope:'Mac Electron source runtime; real registered callback via test adapter, DOM and native window lifecycle; not physical hotkey/IME acceptance',startupWindows:1,firstOpenMs,singleComposer:true,gracePeriodReuse:true,releasedAfter30Seconds:true,recreatedDraftPreserved:true,quitDraftPreserved:true};
+  const report={scope:'Mac Electron source runtime; shortcut callback via test adapter with emulated OS registry, DOM and native window lifecycle; not physical hotkey/IME acceptance',startupWindows:1,firstOpenMs,singleComposer:true,gracePeriodReuse:true,releasedAfter30Seconds:true,recreatedDraftPreserved:true,quitDraftPreserved:true};
   await fs.writeFile('acceptance/evidence/lazy-window-lifecycle.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
  }finally{if(app)await app.close();await fs.rm(dir,{recursive:true,force:true});}
 })().catch(e=>{console.error(e);process.exitCode=1;});
