@@ -6,4 +6,4 @@ export function ropeY(x: number, width: number, n: number): number {
 }
 export const toLocal=(p:Point,o:Point):Point=>({x:p.x-o.x,y:p.y-o.y});
 export const contains=(r:Rect,p:Point):boolean=>r.width>0&&r.height>0&&p.x>=r.x&&p.y>=r.y&&p.x<r.x+r.width&&p.y<r.y+r.height;
-export const visibleSlots=(width:number):number=>Math.max(1,Math.min(6,Math.floor((width-80)/220)));
+export const visibleSlots=(width:number):number=>Math.max(0,1+Math.floor((width-184)/220));

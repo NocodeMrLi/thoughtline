@@ -1,11 +1,11 @@
 {
-  "stage": "0.0.2 edit and retrieval alpha",
+  "stage": "0.0.3 compact cards and grouped clips",
   "asOf": "2026-10-08",
   "verify": {
     "typecheck": "passed",
-    "unitTests": 31,
+    "unitTests": 41,
     "build": "passed",
-    "log": "evidence/stage3-final-verify.log"
+    "log": "evidence/stage4-final-verify.log"
   },
   "gates": [
     {
@@ -48,18 +48,31 @@
     }
   ],
   "limitations": [
-    "no native text drag yet",
-    "clip arrangement/merge/split design recorded; implementation pending",
-    "dual-platform physical click-through/focus/IME acceptance pending",
+    "no native plaintext drag into Agent inputs yet",
+    "dual-platform physical click-through/focus/IME/display acceptance pending",
     "unsigned test packages"
   ],
   "referenceCode": "Edge-Drop stickProbe.ts copied unchanged; Tendedero rope math ported; see THIRD_PARTY_NOTICES.md",
   "packageBuildFailure": "Historical first Windows run failed after installer creation because builder tried implicit publishing. Fixed with --publish never; final main run 37783302073 succeeded.",
   "branch": "main",
-  "release": "0.0.1 pilot package remains available; 0.0.2 package build pending",
+  "release": "0.0.3 package build and private upload pending",
   "packages": {
     "mac": "evidence/package-mac.json",
     "windows": "evidence/package-windows.json",
     "release": "evidence/private-release.json"
+  },
+  "groupImplementation": {
+    "schema": 2,
+    "migrationRawBackup": true,
+    "compactCard": [
+      160,
+      112
+    ],
+    "temporaryDetail": [
+      380,
+      360
+    ],
+    "interactionEvidence": "evidence/group-native.json",
+    "scope": "Mac Electron IPC/DOM/protocol events; physical U09-U13 pending"
   }
 }

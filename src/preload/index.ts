@@ -6,10 +6,12 @@ const api:ThoughtlineBridge={
  copy:id=>ipcRenderer.invoke('thoughtline:copy',id),
  submit:(draft,revision)=>ipcRenderer.invoke('thoughtline:submit',draft,revision),
  close:draft=>ipcRenderer.invoke('thoughtline:close',draft),
- openManage:id=>ipcRenderer.invoke('thoughtline:open-manage',id),
+ openManage:(id,titles)=>ipcRenderer.invoke('thoughtline:open-manage',id,titles),
  closeManage:()=>ipcRenderer.invoke('thoughtline:close-manage'),
  openEdit:id=>ipcRenderer.invoke('thoughtline:open-edit',id),
  setStatus:(id,status,revision)=>ipcRenderer.invoke('thoughtline:status',id,status,revision),
+ dragLock:active=>ipcRenderer.invoke('thoughtline:drag-lock',active),
+ clipChange:(change,revision)=>ipcRenderer.invoke('thoughtline:clip',change,revision),
  agentChange:(change,revision)=>ipcRenderer.invoke('thoughtline:agent',change,revision)
 };
 contextBridge.exposeInMainWorld('thoughtline',api);

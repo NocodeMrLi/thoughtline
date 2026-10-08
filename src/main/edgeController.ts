@@ -19,9 +19,10 @@ export class EdgeController{
  private poll=()=>{
   if(!this.paused){
    const point=this.host.cursor();const d=screen.getDisplayNearestPoint(point);
-   if(String(d.id)!==this.displayId){
+   const nextBounds={x:d.bounds.x,y:Math.max(d.bounds.y,d.workArea.y),width:d.bounds.width,height:340};
+   if(String(d.id)!==this.displayId||nextBounds.x!==this.bounds.x||nextBounds.y!==this.bounds.y||nextBounds.width!==this.bounds.width){
     this.event({type:'suspend',now:Date.now()});this.event({type:'resume',now:Date.now()});
-    this.seam=this.displayId?{crossPending:true,restStreak:0}:{};this.displayId=String(d.id);this.bounds={x:d.bounds.x,y:Math.max(d.bounds.y,d.workArea.y),width:d.bounds.width,height:340};
+    this.seam=this.displayId&&String(d.id)!==this.displayId?{crossPending:true,restStreak:0}:{};this.displayId=String(d.id);this.bounds=nextBounds;
     this.rects=[];this.layoutRevision=-1;this.onDisplay(this.displayId,this.bounds.width);
    }
    const local=toLocal(point,this.bounds);const hit=this.rects.some(r=>contains(r,local));
@@ -30,7 +31,7 @@ export class EdgeController{
    const corridor=local.y>=0&&local.y<Math.min(300,this.bounds.height)&&local.x>=0&&local.x<this.bounds.width;
    this.event({type:'pointer',zone:edge?'edge':hit?'card':corridor?'corridor':'outside',now:Date.now()});
    this.event({type:'tick',now:Date.now()});
-   this.host.setShelfInteractive(this.state.phase!=='hidden'&&hit);
+   this.host.setShelfInteractive(this.state.phase!=='hidden'&&(hit||this.state.locks.includes('drag')));
   }
   const delay=this.paused?1000:this.state.phase!=='hidden'?16:this.proximityDelay;
   this.timer=setTimeout(this.poll,delay);

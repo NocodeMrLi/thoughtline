@@ -10,6 +10,7 @@ const assert=require('node:assert/strict');const path=require('node:path');const
   const full='  原始正文\n中文第二行\n'+('长正文 '.repeat(300));
   let info=await composer.evaluate(()=>window.thoughtline.info());
   const s=await result(composer,'submit',{text:full,title:'循环验收',project:'项目',agentId:'codex'},info.snapshot.revision);const id=s.ideas[0].id;
+  await shelf.waitForSelector('[data-idea-id="'+id+'"]');assert.equal(await shelf.locator('.idea-card').evaluate(el=>el.getBoundingClientRect().width),160);assert.equal(await shelf.locator('.idea-card').evaluate(el=>el.getBoundingClientRect().height),112);
   await result(shelf,'openManage',id);assert(manage,'temporary manage view must exist');
   await manage.waitForSelector('[data-view="manage"]',{state:'attached'});
   await manage.waitForSelector('[data-full-text]',{timeout:5000}).catch(async e=>{console.error(await manage.evaluate(async()=>({info:await window.thoughtline.info(),html:document.body.innerHTML.slice(0,3500)})));throw e;});
@@ -21,7 +22,7 @@ const assert=require('node:assert/strict');const path=require('node:path');const
   await result(manage,'openEdit',id);info=await composer.evaluate(()=>window.thoughtline.info());
   const edited=full+'\n已编辑';await result(composer,'submit',{text:edited,title:'循环验收',project:'项目',agentId:'claude'},info.snapshot.revision);
   info=await manage.evaluate(()=>window.thoughtline.info());await result(manage,'setStatus',id,'archived',info.snapshot.revision);
-  await manage.getByRole('button',{name:'已收起',exact:true}).click();await manage.locator('#idea-search').fill('已编辑');
+  await result(shelf,'openManage');await manage.getByRole('button',{name:'已收起',exact:true}).click();await manage.locator('#idea-search').fill('已编辑');
   await manage.waitForSelector('[data-idea-id="'+id+'"]');
   info=await manage.evaluate(()=>window.thoughtline.info());await result(manage,'setStatus',id,'hanging',info.snapshot.revision);
   await result(manage,'copy',id);const clipboard=await app.evaluate(async({clipboard})=>await clipboard.readText());assert.equal(clipboard,edited);

@@ -7,8 +7,9 @@ export type Idea = {
 };
 export type AgentTag = { id: AgentId; name: string; color: string };
 export type Draft = { text: string; title: string; project: string; agentId: AgentId };
+export type Clip = {id:string; agentId:AgentId; ideaIds:string[]; currentId:string; position:number|null};
 export type Snapshot = {
-  schemaVersion: 1; revision: number; ideas: Idea[]; agents: AgentTag[]; draft: Draft | null;
+  schemaVersion: 2; revision: number; clips:Clip[]; ideas: Idea[]; agents: AgentTag[]; draft: Draft | null;
   settings: { writeHotkey: string; reducedMotion: boolean };
 };
 export type Result<T> = { ok: true; value: T } | {
