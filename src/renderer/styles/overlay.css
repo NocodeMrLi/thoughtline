@@ -32,3 +32,5 @@
 
 .merge-ring{position:absolute;left:56px;top:-16px;pointer-events:none;overflow:visible;transform:rotate(-90deg)}.merge-ring circle{fill:none;stroke-width:2}.ring-track{stroke:color-mix(in srgb,var(--accent),transparent 75%)}.ring-progress{stroke:var(--accent);stroke-dasharray:125.664;stroke-dashoffset:125.664;animation:merge-dwell 600ms linear forwards}.merge-target .ring-progress{stroke-dashoffset:0}
 @keyframes merge-dwell{to{stroke-dashoffset:0}}
+
+.card-copy[data-exporting=true]{opacity:.65;cursor:grabbing}.card-copy{transition:opacity 120ms}

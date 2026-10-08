@@ -49,7 +49,7 @@ export class EdgeController{
    const corridor=local.y>=0&&local.y<Math.min(300,this.bounds.height)&&local.x>=0&&local.x<this.bounds.width;
    this.event({type:'pointer',zone:edge?'edge':hit?'card':corridor?'corridor':'outside',now:Date.now()});
    this.event({type:'tick',now:Date.now()});
-   this.host.setShelfInteractive(this.state.phase!=='hidden'&&(hit||this.state.locks.includes('drag')));
+   this.host.setShelfInteractive(this.state.phase!=='hidden'&&(hit||this.state.locks.includes('drag')||this.state.locks.includes('text-drag')));
   }
   const delay=this.paused?1000:this.state.phase!=='hidden'?16:this.proximityDelay;
   this.timer=setTimeout(this.poll,delay);

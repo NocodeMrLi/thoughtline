@@ -39,19 +39,21 @@ else app.whenReady().then(async()=>{
  if(!loaded){app.quit();return;}const repository=loaded.repository;
  let snapshot:Snapshot=loaded.snapshot;let displayId=String(screen.getPrimaryDisplay().id);let width=screen.getPrimaryDisplay().bounds.width;
  let composerSession=0,manageSession=0,manageSelection:string|null=null,editRevision=snapshot.revision;
- let dragCancelSession=0,dragEscape=false;
+ let dragCancelSession=0,dragEscape=false;let textDragTimer:ReturnType<typeof setTimeout>|null=null;let textDragOwner:string|null=null;
  let settingsBusy=false;let refreshTray=()=>{};
  let manageMode:'browse'|'detail'|'settings'='browse',manageTitles=false;let undoClips:{snapshot:Snapshot;revision:number}|null=null;
  let composerContext:ComposerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
  const preload=join(__dirname,'../preload/index.js');shelf=createShelf(preload);composer=createComposer(preload);manage=createManage(preload);
  const host=createHost(shelf,composer);
- const info=():PilotInfo=>({platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerContext,manageSession,manageSelection,manageMode,manageTitles,canUndoClips:!!undoClips,dragCancelSession,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
+ const info=():PilotInfo=>({platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerContext,manageSession,manageSelection,manageMode,manageTitles,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
  const publish=()=>{for(const w of [shelf,composer,manage])if(!w.isDestroyed())w.webContents.send('thoughtline:info-update',info());};
  const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:BrowserWindow[]=[shelf,composer,manage])=>allowed.some(w=>w.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
  const lock=(name:string,active:boolean)=>edge.event({type:'lock',name,active,now:Date.now()});
  const hideManage=()=>{manage.hide();lock('manage',false);};
  const boundsFor=(w:number,h:number)=>{const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint());const width=Math.min(w,d.workArea.width-40),height=Math.min(h,d.workArea.height-48);return {x:Math.round(d.workArea.x+(d.workArea.width-width)/2),y:d.workArea.y+24,width,height};};
- const cancelDrag=()=>{if(dragEscape){globalShortcut.unregister('Escape');dragEscape=false;lock('drag',false);}dragCancelSession++;publish();};
+ const finishTextDrag=()=>{if(textDragTimer)clearTimeout(textDragTimer);textDragTimer=null;textDragOwner=null;lock('text-drag',false);};
+ app.on('will-quit',()=>{if(textDragTimer)clearTimeout(textDragTimer);});
+ const cancelDrag=()=>{finishTextDrag();if(dragEscape){globalShortcut.unregister('Escape');dragEscape=false;lock('drag',false);}dragCancelSession++;publish();};
  edge=new EdgeController(host,(id,w)=>{displayId=id;width=w;cancelDrag();},publish);
  const openComposer=(ideaId?:string):Result<void>=>{
   if(manage.isVisible()&&manageMode==='settings')return invalid('请先关闭设置。');
@@ -143,6 +145,13 @@ else app.whenReady().then(async()=>{
   else if(c.kind==='remove'&&typeof c.id==='string'&&typeof c.replacement==='string')next=removeAgent(snapshot,c.id,c.replacement);
   else return invalid('Agent内容无效');
   return save(next,revision);
+ });
+ ipcMain.on('thoughtline:text-drag',(e,active:boolean,id?:string)=>{
+  if(!trusted(e,[shelf])||typeof active!=='boolean')return;
+  if(!active){if(id===textDragOwner)finishTextDrag();return;}
+  if(textDragTimer||!edge.presentation().shelfVisible||typeof id!=='string'||!snapshot.ideas.some(i=>i.id===id&&i.status==='hanging'))return;
+  // Standard OS drag handles Escape. Do not register the peg's global Escape hook here.
+  textDragOwner=id;lock('text-drag',true);textDragTimer=setTimeout(finishTextDrag,60000);
  });
  ipcMain.handle('thoughtline:drag-lock',(e,active:boolean)=>{
   if(!trusted(e,[shelf])||typeof active!=='boolean')return invalid('无效操作');if(active&&!dragEscape){if(!globalShortcut.register('Escape',cancelDrag))return invalid('Esc快捷键被占用，拖动未开始，请释放快捷键后重试。');dragEscape=true;}

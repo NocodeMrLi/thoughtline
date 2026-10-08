@@ -1,5 +1,5 @@
 {
-  "stage": "0.0.6 interaction motion refinement",
+  "stage": "0.0.7 standard plaintext drag, receiver acceptance pending",
   "asOf": "2026-10-08",
   "verify": {
     "typecheck": "passed",
@@ -47,20 +47,20 @@
     }
   ],
   "limitations": [
-    "no native plaintext drag into Agent inputs yet",
+    "standard plaintext drag offered; actual Agent receiving and dual-platform OS drag pending",
     "dual-platform physical click-through/focus/IME/display acceptance pending",
     "unsigned test packages"
   ],
   "referenceCode": "Edge-Drop stickProbe.ts copied unchanged; Tendedero rope math ported; see THIRD_PARTY_NOTICES.md",
   "packageBuildFailure": "Historical first Windows run failed after installer creation because builder tried implicit publishing. Fixed with --publish never; final main run 37783302073 succeeded.",
   "branch": "main",
-  "release": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.5-alpha.1",
+  "release": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.6-alpha.1",
   "packages": {
-    "mac": "evidence/package-mac-stage6.json",
-    "windows": "evidence/package-windows-stage6.json",
-    "release": "evidence/private-release-stage6.json",
-    "packagedWorkflow": "evidence/settings-lifecycle.json",
-    "packageSourceCommit": "518ebbf617ed3464c11314d7d8ee89fd2e9bb238"
+    "mac": "evidence/package-mac-stage7.json",
+    "windows": "evidence/package-windows-stage7.json",
+    "release": "evidence/private-release-stage7.json",
+    "packagedWorkflow": "evidence/package-motion-stage7.json",
+    "packageSourceCommit": "7d3e704934baa91be901f21daca8325d4dadebb4"
   },
   "groupImplementation": {
     "schema": 2,
@@ -95,7 +95,7 @@
     "nativeRecoveryDialogPhysicalAcceptance": false,
     "separatePauseReasons": true
   },
-  "sourceVersion": "0.0.6",
+  "sourceVersion": "0.0.7",
   "motion": {
     "evidence": "evidence/motion-native.json",
     "nativeExitFrameRetention": true,
@@ -105,10 +105,18 @@
     "subjectivePhysicalAcceptance": false
   },
   "performance": {
-    "evidence": "evidence/idle-performance.json",
-    "scope": "isolated Mac Electron with Playwright debugger; not final packaged production measurement",
-    "cpuGate": false,
+    "evidence": "evidence/idle-without-debugger.json",
+    "scope": "direct Electron without debugger; source module, not final production package measurement",
+    "cpuPercentSingleCore": 0.33294,
+    "stableRssMiB": 444.796875,
+    "cpuGate": true,
     "rssGate": false,
-    "action": "check non-debug baseline and defer unused UI renderer loading if reproduced"
+    "next": "defer unused renderer creation, preserve fast input and rerun lifecycle/idle"
+  },
+  "plaintextDrag": {
+    "protocol": "evidence/text-drag-native.json",
+    "files": false,
+    "cancelPreservesData": true,
+    "realAgentsAccepted": []
   }
 }

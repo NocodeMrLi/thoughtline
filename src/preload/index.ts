@@ -16,6 +16,7 @@ const api:ThoughtlineBridge={
  onQuitError:callback=>{const listener=(_e:Electron.IpcRendererEvent,message:string)=>callback(message);ipcRenderer.on('thoughtline:quit-error',listener);return()=>ipcRenderer.removeListener('thoughtline:quit-error',listener);},
  setStatus:(id,status,revision)=>ipcRenderer.invoke('thoughtline:status',id,status,revision),
  dragLock:active=>ipcRenderer.invoke('thoughtline:drag-lock',active),
+ textDrag:(active,id)=>ipcRenderer.send('thoughtline:text-drag',active,id),
  clipChange:(change,revision)=>ipcRenderer.invoke('thoughtline:clip',change,revision),
  agentChange:(change,revision)=>ipcRenderer.invoke('thoughtline:agent',change,revision)
 };
