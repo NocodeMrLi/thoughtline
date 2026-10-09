@@ -35,6 +35,12 @@ export function moveClip(s:Snapshot,id:string,position:number,beforeId:string|nu
     for(let i=x.length-2;i>=0;i--)x[i]=Math.min(x[i],x[i+1]-MIN_SPACING);
     const moved=new Map(ordered.map((c,i)=>[c.id,normalizedPosition(x[i],width)]));
     for(let i=0;i<clips.length;i++)if(moved.has(clips[i].id))clips[i]={...clips[i],position:moved.get(clips[i].id)!};
+    // beforeId=null means the end of the visible lane, not behind overflow.
+    // Keep the visible selected lane ahead of its hidden tail; otherwise a
+    // default-position hidden clip can take the moved clip's place.
+    const selected=clips.filter(c=>agentId==='all'||c.agentId===agentId);
+    const lane=[...selected.filter(c=>visible.has(c.id)),...selected.filter(c=>!visible.has(c.id))];
+    let slot=0;for(let i=0;i<clips.length;i++)if(agentId==='all'||clips[i].agentId===agentId)clips[i]=lane[slot++];
    }
   }
  }
