@@ -65,7 +65,7 @@
 .idea-card{background:none;border:0;border-radius:2px;box-shadow:none;color:var(--paper-text)}
 .paper-sheet{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:visible;filter:drop-shadow(0 1px 2px var(--paper-shadow))}
 .paper-sheet .paper-face{fill:var(--paper);stroke:var(--paper-edge);stroke-width:1;stroke-linejoin:round}
-.paper-bend{stroke:none}.paper-curl{fill:none;stroke:var(--paper-edge);stroke-width:.6}
+.paper-shading{stroke:none}.paper-back{fill:color-mix(in srgb,var(--paper),#000000 9%);stroke:var(--paper-edge);stroke-width:.4}
 .idea-card:hover{box-shadow:none}
 .idea-card:hover .paper-sheet{filter:drop-shadow(0 2px 3px var(--paper-shadow))}
 .idea-card.grouped::before,.idea-card.grouped::after{background:var(--paper);border-color:var(--paper-edge);border-radius:2px 2px 5px 3px;clip-path:none;z-index:-2}
@@ -76,7 +76,7 @@
 .peg-button{left:68px}.clothespin-rear,.clamp-rope{left:71px}.merge-ring{left:56px}
 .source-ghost{width:160px;height:226px;border-radius:2px}
 .drag-message{top:312px}
-.card-copy{padding:12px 10px 0}.agent-name{font-size:11px}.idea-card .agent-name,.idea-card .copy-status{color:var(--paper-muted)}
+.card-copy{padding:14px 14px 0}.agent-name{font-size:11px}.idea-card .agent-name,.idea-card .copy-status{color:var(--paper-muted)}
 .idea-card .preview{font-size:13px;line-height:18px;-webkit-line-clamp:3;flex-shrink:1;color:var(--paper-text);opacity:.84;overflow-wrap:anywhere}
 .idea-card strong{flex-shrink:0}
 

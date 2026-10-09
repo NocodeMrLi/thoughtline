@@ -1,17 +1,17 @@
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto');
 const {_electron}=require('playwright'),{launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
-const stage=['baseline','paper'].includes(process.argv[2])?process.argv[2]:'candidate';const output=path.resolve(stage==='baseline'?'acceptance/evidence/clamp-review/baseline':'acceptance/evidence/upright-paper-review/'+(stage==='paper'?'preview':'candidate'));
+const stage=['baseline','paper','curved'].includes(process.argv[2])?process.argv[2]:'candidate';const output=path.resolve(stage==='baseline'?'acceptance/evidence/clamp-review/baseline':stage==='curved'?'acceptance/evidence/curved-paper-review/preview':'acceptance/evidence/upright-paper-review/'+(stage==='paper'?'preview':'candidate'));
 (async()=>{
  await fs.mkdir(output,{recursive:true});const scenes=[];
  for(const scale of (stage==='candidate'?[1,2]:[1])){
   const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-clamp-review-'));let app,pids=[];
   try{
    const options=await launchOptions(dir);options.args.push('--force-device-scale-factor='+scale);app=await _electron.launch(options);const {shelf,composer}=await warmViews(app);
-   const add=async(n,agentId)=>{const r=await composer.evaluate(async({n,agentId})=>{const i=await window.thoughtline.info();return window.thoughtline.submit({text:'只作视觉复验的中文假正文 '+n+'\n第二行😀',title:['检查交互细节','整理下一步','梳理产品思路'][Math.max(0,n-1)%3],agentId,project:''},i.snapshot.revision);},{n,agentId});assert(r.ok,r.message);return r.value.ideas.at(-1).id;};
+   const add=async(n,agentId)=>{const r=await composer.evaluate(async({n,agentId,curved})=>{const i=await window.thoughtline.info();return window.thoughtline.submit({text:curved?'今天想把零散的想法写下来。\n先收好，等需要时再展开。\n不用急着整理。':'只作视觉复验的中文假正文 '+n+'\n第二行😀',title:curved?'记录一个想法':['检查交互细节','整理下一步','梳理产品思路'][Math.max(0,n-1)%3],agentId,project:''},i.snapshot.revision);},{n,agentId,curved:stage==='curved'});assert(r.ok,r.message);return r.value.ideas.at(-1).id;};
    const seed=await add(0,'general'),i=await shelf.evaluate(()=>window.thoughtline.info());assert((await shelf.evaluate(({id,revision})=>window.thoughtline.setStatus(id,'archived',revision),{id:seed,revision:i.snapshot.revision})).ok);
    const shape=()=>shelf.locator('.rope > .rope-core').getAttribute('d');const fixed=await shape();let count=0;
-   for(const requested of (stage==='candidate'?[0,3,24]:[3])){
-    while(count<requested){count++;await add(count,['codex','claude','cursor'][(count-1)%3]);}
+   for(const requested of (stage==='curved'?[1]:stage==='candidate'?[0,3,24]:[3])){
+    while(count<requested){count++;await add(count,stage==='curved'?'general':['codex','claude','cursor'][(count-1)%3]);}
     const expected=stage==='baseline'?3:1+Math.floor(((await shelf.evaluate(()=>innerWidth))-184)/220);
     await shelf.waitForFunction(n=>document.querySelectorAll('.hanging').length===n,requested===0?0:Math.min(requested,expected));
     await waitForInfo(shelf,i=>!i.interactionLocked);await shelf.evaluate(()=>window.thoughtline.dragLock(true));
@@ -26,7 +26,7 @@ const stage=['baseline','paper'].includes(process.argv[2])?process.argv[2]:'cand
      }
      const name=`${scale}x-${theme}-${requested}`,normal=path.join(output,name+'-overall.png');await shelf.screenshot({path:normal});
      let zoom=null,paperDetail=null;
-     if(requested===3){const root=shelf.locator('[data-view=shelf]'),origin=await shelf.locator('.hanging').first().boundingBox();const before=await root.getAttribute('style');await root.evaluate((el,p)=>{el.style.transformOrigin='0 0';el.style.transform=`translate(${360-(p.x+80)*4}px,${110-p.y*4}px) scale(4)`;},origin);zoom=path.join(output,name+'-clamp-4x.png');await shelf.screenshot({path:zoom,clip:{x:0,y:0,width:720,height:340}});await root.evaluate((el,before)=>el.setAttribute('style',before),before);if(stage!=='baseline'){await root.evaluate((el,p)=>{el.style.transformOrigin='0 0';el.style.transform=`translate(${210-(p.x+80)*1.1}px,${45-p.y*1.1}px) scale(1.1)`;},origin);paperDetail=path.join(output,name+'-paper-detail.png');await shelf.screenshot({path:paperDetail,clip:{x:0,y:0,width:420,height:340}});await root.evaluate((el,before)=>el.setAttribute('style',before),before);}}
+     if(requested===3||stage==='curved'){const root=shelf.locator('[data-view=shelf]'),origin=await shelf.locator('.hanging').first().boundingBox();const before=await root.getAttribute('style');await root.evaluate((el,p)=>{el.style.transformOrigin='0 0';el.style.transform=`translate(${360-(p.x+80)*4}px,${110-p.y*4}px) scale(4)`;},origin);zoom=path.join(output,name+'-clamp-4x.png');await shelf.screenshot({path:zoom,clip:{x:0,y:0,width:720,height:340}});await root.evaluate((el,before)=>el.setAttribute('style',before),before);if(stage!=='baseline'){await root.evaluate((el,p)=>{el.style.transformOrigin='0 0';el.style.transform=`translate(${210-(p.x+80)*1.1}px,${45-p.y*1.1}px) scale(1.1)`;},origin);paperDetail=path.join(output,name+'-paper-detail.png');await shelf.screenshot({path:paperDetail,clip:{x:0,y:0,width:420,height:340}});await root.evaluate((el,before)=>el.setAttribute('style',before),before);}}
      const sha=async file=>crypto.createHash('sha256').update(await fs.readFile(file)).digest('hex');scenes.push({stage,scale,theme,seededHanging:requested,visible:geometry.cards.length,geometry,normal:{file:path.basename(normal),sha256:await sha(normal)},zoom:zoom?{file:path.basename(zoom),sha256:await sha(zoom),scope:'4x renderer transform inspection; not physical desktop scale'}:null,paperDetail:paperDetail?{file:path.basename(paperDetail),sha256:await sha(paperDetail),scope:'1.1x renderer detail showing entire upright paper, not physical desktop scaling'}:null});
     }
     await shelf.evaluate(()=>window.thoughtline.dragLock(false));

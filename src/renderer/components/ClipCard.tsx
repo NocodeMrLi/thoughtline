@@ -19,10 +19,15 @@ export function ClipCard({clip,ideas,agent,onChange,onGrab,onError,reduced,textD
   <button data-hit className="peg-button" aria-label={`移动夹子或查看：${idea.title}`} onPointerDown={e=>onGrab(e,clip)}><Clothespin color={agent?.color} reduced={reduced}/></button>
   <article data-hit data-copied={copied} className={`idea-card ${grouped?'grouped':''}`} onContextMenu={e=>{e.preventDefault();void window.thoughtline.shelfMenu(idea.id).then(r=>{if(!r.ok)onError(r.message);});}}>
    <svg className="paper-sheet" width="160" height="226" viewBox="0 0 160 226" aria-hidden="true">
-    <defs><linearGradient id={`${paperId}-bend`} x1="0" y1="0" x2="0" y2="1"><stop stopColor="#000000" stopOpacity="0"/><stop offset=".7" stopColor="#000000" stopOpacity=".025"/><stop offset="1" stopColor="#FFFFFF" stopOpacity=".08"/></linearGradient></defs>
-    <path className="paper-face" d="M2.5 .5H157.5Q159.5 .5 159.5 2.5V214.5Q159.5 219.5 154 221.5Q89 228.5 2.5 222.5Q.5 222.3 .5 220V2.5Q.5 .5 2.5 .5Z"/>
-    <path className="paper-bend" d="M.8 210Q89 217 159.2 207V214.5Q159.2 219.3 154 221.2Q89 228.2 2.5 222.2Q.8 222 .8 220Z" fill={`url(#${paperId}-bend)`}/>
-    <path className="paper-curl" d="M154 221.5Q158 216 159.5 214.5"/>
+    <defs>
+     <path id={`${paperId}-outline`} d="M3 2Q40-.5 77 .5Q115 1 154 4C158 8 157 36 155 58C151 105 164 142 154 187C152 205 142 219 128 224C89 216 37 222 9 214C1 195 7 161 6 132C10 87-.5 46 3 2Z"/>
+     <linearGradient id={`${paperId}-across`} x1="0" y1="0" x2="1" y2=".2"><stop stopColor="#000000" stopOpacity=".065"/><stop offset=".23" stopColor="#FFFFFF" stopOpacity=".13"/><stop offset=".52" stopColor="#000000" stopOpacity=".045"/><stop offset=".82" stopColor="#FFFFFF" stopOpacity=".11"/><stop offset="1" stopColor="#000000" stopOpacity=".06"/></linearGradient>
+     <linearGradient id={`${paperId}-down`} x1="0" y1="0" x2=".12" y2="1"><stop stopColor="#000000" stopOpacity=".035"/><stop offset=".25" stopColor="#FFFFFF" stopOpacity="0"/><stop offset=".64" stopColor="#000000" stopOpacity=".035"/><stop offset=".87" stopColor="#FFFFFF" stopOpacity=".08"/><stop offset="1" stopColor="#000000" stopOpacity=".09"/></linearGradient>
+    </defs>
+    <path className="paper-back" d="M148 179Q156 202 129 225Q110 224 98 220Q125 221 139 208Z"/>
+    <use className="paper-face" href={`#${paperId}-outline`}/>
+    <use className="paper-shading" href={`#${paperId}-outline`} fill={`url(#${paperId}-across)`}/>
+    <use className="paper-shading" href={`#${paperId}-outline`} fill={`url(#${paperId}-down)`}/>
    </svg>
    <button className="card-copy" draggable data-exporting={exporting} title="点击复制；拖动正文到支持文字拖放的输入框" onDragStart={e=>{
     e.dataTransfer.clearData();e.dataTransfer.setData('text/plain',idea.text);e.dataTransfer.effectAllowed='copy';ignoreCopyUntil.current=Infinity;setExporting(true);exportId.current=idea.id;window.thoughtline.textDrag(true,idea.id);
