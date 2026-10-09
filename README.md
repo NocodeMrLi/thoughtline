@@ -1,3 +1,5 @@
+> 分支最新视觉候选已批准居中70%挂绳与柔和端部：[实际UI预览](acceptance/CENTERED-ROPE-PREVIEW.md)。尚未新Mac打包/Windows CI，不将旧.14安装器当本轮实现；稳定.13与旧checkpoint保留。
+
 # 晾念头 / Thoughtline
 
 面向macOS与Windows的桌面顶边念头挂绳。快捷记录想法和提示词，用彩色夹子区分Agent；固定自然弧线，不随数量变化，随时取用。

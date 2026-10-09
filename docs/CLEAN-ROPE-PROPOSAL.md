@@ -1,4 +1,4 @@
-> 2026-10-09当前阶段：用户00:36认可连续纸形，00:37:49批准夹口轻接触影、Agent低饱和夹色呼应与clip ID固定的小幅形体差异。当前160×226三纸真实UI见 [PAPER-POLISH-PREVIEW](../acceptance/PAPER-POLISH-PREVIEW.md)，00:56近黑Agent字色被用户否定，已修为正常尺寸可辨蓝/暖赭并交新前后图，见 [AGENT-INK-PREVIEW](../acceptance/AGENT-INK-PREVIEW.md)，仍待用户方向复核；正面夹覆盖纸约5DIP、屏外绳端与文字平面保持。暂停期间解除旧锁专项见 [PAUSED-UNLOCK-FIX](../acceptance/PAUSED-UNLOCK-FIX.md)，不等于自动全屏G7或整体验收。以下保留历史方案与阶段记录。
+> 当前2026-10-09居中绳阶段：用户01:25:24已批准约70%屏宽、左右留白、仅端部渐隐，夹子中央约绳长2/3。已落实并提供空/三纸/满容量浅深实际图，见 [CENTERED-ROPE-PREVIEW](../acceptance/CENTERED-ROPE-PREVIEW.md)；旧屏外末梢目标被本决定覆盖。连续纸形和可辨Agent字色保持；当前源码尚未打新Mac包/再跑Windows CI，用户主观方向待复核。以下为历史方案与阶段记录。
 
 # 晾念头：干净挂绳与按需整理入口设计
 

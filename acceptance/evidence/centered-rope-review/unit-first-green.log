@@ -1,0 +1,48 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp
+
+ ❯ tests/unit/clipLayout.test.ts (5 tests | 2 failed) 6ms
+   × 宽屏不限制6夹，小屏放不下仍完整溢出 4ms
+   × 拉近到最小距离释放空间，不遮文字，位置随宽度夹紧 1ms
+ ❯ tests/unit/fixedRope.test.ts (2 tests | 1 failed) 4ms
+   × 绳两端越过屏幕裁切边界，固定弧线留出上方夹子命中空间 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/clipLayout.test.ts > 宽屏不限制6夹，小屏放不下仍完整溢出
+AssertionError: expected 6 to be greater than 6
+ ❯ tests/unit/clipLayout.test.ts:5:49
+      3| const clips=Array.from({length:12},(_,i)=>({id:''+i,agentId:'codex',id…
+      4| test('宽屏不限制6夹，小屏放不下仍完整溢出',()=>{
+      5|  expect(layoutClips(clips,2400).visible.length).toBeGreaterThan(6);
+       |                                                 ^
+      6|  expect(layoutClips(clips,150).visible).toHaveLength(0);expect(layoutC…
+      7| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/clipLayout.test.ts > 拉近到最小距离释放空间，不遮文字，位置随宽度夹紧
+AssertionError: expected 3 to be greater than 3
+ ❯ tests/unit/clipLayout.test.ts:10:31
+      8| test('拉近到最小距离释放空间，不遮文字，位置随宽度夹紧',()=>{
+      9|  const compact=clips.map((c,i)=>({...c,position:i*.17}));const normal=…
+     10|  expect(dense.visible.length).toBeGreaterThan(normal.visible.length);
+       |                               ^
+     11|  for(let i=1;i<dense.visible.length;i++)expect(dense.visible[i].x-dens…
+     12|  for(const {x} of layoutClips(compact,600).visible){expect(x-CARD_WIDT…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/fixedRope.test.ts > 绳两端越过屏幕裁切边界，固定弧线留出上方夹子命中空间
+AssertionError: expected 39 to be less than 0
+ ❯ tests/unit/fixedRope.test.ts:8:21
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  2 failed | 17 passed (19)
+      Tests  3 failed | 77 passed (80)
+   Start at  09:28:19
+   Duration  579ms (transform 54%, tests 27%, import 14%, worker 5%)
+

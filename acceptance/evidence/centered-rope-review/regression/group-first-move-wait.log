@@ -1,0 +1,13 @@
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(actual&&Math.abs(actual.x+12-expected)<.05)
+
+    at moveTo (/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/tests/electron/group-workflow.cjs:21:566)
+    at async /Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/tests/electron/group-workflow.cjs:22:3 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
