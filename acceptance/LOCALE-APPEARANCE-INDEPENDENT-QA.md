@@ -1,5 +1,15 @@
 # English and appearance independent QA
 
+## Current exact-source private package for independent QA
+
+Use **published private v0.0.17-preview.3**, source/tag `01017c9525ac971b6e97461ef2910140944eda19`, 227 canonical inputs `72314079c3dbfb77ef813a5d4c852e9eb46fe2ab85d1b45e671acaedf49242f9`. Mac arm64 DMG SHA256 `4799af1772eff9d013942d207c6235cce6a239ef89f3a2910994ef2ff5758a3d`; Windows x64 installer SHA256 `68c6f4f1f35a5ded1c8d1a04e3c063c4d372fd003fba73ceaa4e77c7921da235`. Full24 files/23 SUMS and the reviewed metadata byte readback are complete. [Current delivery](RELEASE-0.0.17-preview.3.md) supersedes the historical source/package checkpoints below; keep their failures as history.
+
+Retained controlled evidence: Mac226 units/4 platform skips, type/build, source20+11 and actual package6+3; Windows hosted CI37974164754 attempt1 at this source,230 units,type/build,source20+11,actual installed3 appearance plus schema2/backup/restart/reinstall/uninstall data retention. Portable Mac launcher was checked with the actual moved final DMG, producer original still available, missing/corrupt/symlink rejection. The last isolated Mac64 PIDs and7 profiles are absent; clone removed with full hash inventory, original app protected. These facts do **not** change any independent physical case below into a pass.
+
+Use the included final `QA-guide-v0.0.17-preview.3.md` with an independent profile. Run the downloaded Mac entry through `/bin/zsh ./Start-Thoughtline-Isolated-Mac.command --check-only`, then without the flag; do not require GitHub to preserve executable mode or bypass Gatekeeper. Windows NSIS uses the same app identity: test in an independent environment, not over the user's install. The newest preference write failure after an earlier success must remain visible; also test true Chinese composition during close/switch. Signing trust, real receivers, DPI/multiple displays/focus, physical system materials/accessibility/motion and user acceptance remain open. Paper stays matte; paired extra glass polish and README GIF are deferred.
+
+## Independent physical checklist and retained history
+
 This checklist covers the approved first-level language/day/night increment. At creation it is a **plan, not a passing report**. Original round-one [independent QA](ROUND1-INDEPENDENT-QA.md), including real WeChat/Doubao/WorkBuddy reception, remains open. Use the exact future preview.3 package/manifest, an independent synthetic data profile and separate Mac/Windows records; never replace the user's installation or send test text to real conversations.
 
 Record OS/build, app/package source SHA/hash/architecture, screen/DPI, keyboard/IME, current language/effective appearance and physical steps. A controlled Electron or CI result is a distinct evidence tier. For every finding include priority, preconditions, repeatable steps, expected/actual, screenshots/video/log IDs and reproducibility; retain failures.

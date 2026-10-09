@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="docs/readme/badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="docs/readme/badges/downloads.svg" alt="Release asset downloads: 3" /></a>
   <a href="#license"><img src="docs/readme/badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="docs/readme/badges/preview.svg" alt="Preview: 0.0.17-preview.2" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="docs/readme/badges/preview.svg" alt="Preview: 0.0.17-preview.3" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="docs/readme/badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="docs/readme/badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="docs/readme/badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   用一根绳、几只夹子和几张纸，轻轻留住工作与生活里的念头。
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><ins>下载 Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><ins>下载 Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.2</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.3</sub></p>
 
 Thoughtline 是一款面向 macOS 和 Windows 的轻量桌面念头工具。需要时，在屏幕顶边呼出晾衣绳；写下、整理、取用，再回到手头的事情。
 
@@ -36,6 +36,7 @@ Thoughtline 是一款面向 macOS 和 Windows 的轻量桌面念头工具。需�
 - **留下退路**：删除念头进入最近删除，可以恢复；删除项目只解除归属，保留念头内容。
 - **取用正文**：显式复制或从正文拖出纯文本，原纸张保留，不自动发送。
 - **自己管理数据**：念头保存在本机，可查看实际目录、更改保存位置、导出独立备份。
+- **中英与昼夜**：首层窗口即可切换中文／English和白昼／夜间外观，也可跟随系统；纸张保持柔和、清晰的纸感。
 
 <p align="center">
   <img src="docs/readme/images/thought-calendar.png" alt="Thoughtline念头日历：有记录的日期显示Logo红夹子与条数" width="740" />
@@ -44,7 +45,7 @@ Thoughtline 是一款面向 macOS 和 Windows 的轻量桌面念头工具。需�
 
 ## 下载与安装
 
-当前为预览版，测试包向有仓库访问权限的成员开放。到 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2) 下载安装包、隔离启动入口和 `SHA256SUMS`；每版提供对应构建来源与校验清单。
+当前为预览版，测试包向有仓库访问权限的成员开放。到 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3) 下载安装包、隔离启动入口和 `SHA256SUMS`；每版提供对应构建来源与校验清单。
 
 | 平台 | 当前安装包 |
 |---|---|
@@ -85,7 +86,7 @@ npm run package:win
 
 `verify` 执行类型检查、单元测试与构建；平台包在对应系统构建。技术栈为 Electron、React、TypeScript 和 Vite。
 
-当前预览版已完成适用自动检查与包验证。真实 Mac／Windows 输入法、DPI、多屏、焦点与微信、豆包、WorkBuddy 等外部输入框仍待独立测试。语言切换提供 **README 文档翻译**，应用界面目前为中文。
+当前预览版已完成适用自动检查与包验证。真实 Mac／Windows 输入法、DPI、多屏、焦点与微信、豆包、WorkBuddy 等外部输入框仍待独立测试。应用界面支持中文与 English；新建、展开和日历窗口右上角可直接切换语言及日间／夜间外观，设置内可恢复跟随系统。上方七种语言链接提供 **README 文档翻译**，不表示应用支持七种界面语言。
 
 ## 反馈
 

@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.2" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.3" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   줄 하나와 집게, 종이로 일상의 아이디어를 남깁니다.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><ins>Thoughtline 다운로드</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><ins>Thoughtline 다운로드</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.2</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.3</sub></p>
 
 Thoughtline은 macOS와 Windows용 가벼운 데스크톱 메모 도구입니다. 화면 위쪽 가장자리에서 생각을 꺼내 보고, 기록한 뒤 하던 일로 돌아가세요.
 
@@ -36,12 +36,13 @@ Thoughtline은 macOS와 Windows용 가벼운 데스크톱 메모 도구입니다
 - 삭제한 메모를 최근 삭제에서 복원합니다. 프로젝트 삭제는 메모 내용을 유지합니다.
 - 본문을 복사하거나 일반 텍스트로 드래그합니다. 원본을 유지하고 자동 전송하지 않습니다.
 - 데이터를 로컬에 저장하고 실제 폴더 확인, 이동, 독립 백업 내보내기를 지원합니다.
+- 첫 화면에서 중국어/English와 밝게/어둡게 모드를 바꾸거나 시스템 설정을 따릅니다. 종이는 부드럽고 읽기 편한 질감을 유지합니다.
 
 <p align="center"><img src="images/thought-calendar.png" alt="합성 시연 데이터를 사용한 생각 달력." width="740" /><br /><sub>합성 시연 데이터를 사용한 생각 달력.</sub></p>
 
 ## 다운로드 및 설치
 
-현재 미리보기 버전입니다. 저장소 접근 권한이 있는 구성원에게 제공됩니다. Releases에서 패키지, 격리 실행 스크립트, SHA256SUMS와 빌드 정보를 확인하세요. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2).
+현재 미리보기 버전입니다. 저장소 접근 권한이 있는 구성원에게 제공됩니다. Releases에서 패키지, 격리 실행 스크립트, SHA256SUMS와 빌드 정보를 확인하세요. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3).
 
 | Platform | Package |
 |---|---|
@@ -80,7 +81,7 @@ npm run package:mac
 npm run package:win
 ```
 
-적용 가능한 자동 검사와 패키지 검증은 통과했습니다. 실제 Mac/Windows 입력기, DPI, 다중 화면, 포커스와 WeChat·Doubao·WorkBuddy 입력칸은 독립 테스트가 필요합니다. 언어 링크는 README 번역이며 앱 UI는 현재 중국어입니다.
+적용 가능한 자동 검사와 패키지 검증은 통과했습니다. 실제 Mac/Windows 입력기, DPI, 다중 화면, 포커스와 WeChat·Doubao·WorkBuddy 입력칸은 독립 테스트가 필요합니다. 앱 UI는 중국어와 English를 지원합니다. 작성·상세·달력 창의 오른쪽 위에서 언어와 밝게/어둡게 모드를 바로 바꾸고, 설정에서 시스템 설정 따르기로 돌아갈 수 있습니다. 위의 7개 언어 링크는 README 번역이며 앱 UI가 7개 언어를 지원한다는 뜻은 아닙니다.
 
 ## 피드백
 

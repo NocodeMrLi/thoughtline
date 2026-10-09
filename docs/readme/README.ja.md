@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.2" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.3" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   一本のロープとクリップ、紙で日々のアイデアを残します。
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><ins>Thoughtline をダウンロード</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><ins>Thoughtline をダウンロード</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.2</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.3</sub></p>
 
 Thoughtline は macOS と Windows 向けの軽量なデスクトップメモアプリです。画面上端からメモを呼び出し、思いつきを書き留めて作業に戻れます。
 
@@ -36,12 +36,13 @@ Thoughtline は macOS と Windows 向けの軽量なデスクトップメモア�
 - 削除したメモは「最近削除した項目」から復元。プロジェクト削除でも本文は保持。
 - 本文をコピー、またはプレーンテキストとしてドラッグ。元のメモを保持し、自動送信しません。
 - データをローカル保存し、実際のフォルダー表示、移動、独立したバックアップ出力に対応。
+- 最初の画面から中国語／Englishとライト／ダークを切り替え、システムにも連動できます。紙は柔らかく読みやすい質感を保ちます。
 
 <p align="center"><img src="images/thought-calendar.png" alt="合成データを使ったメモカレンダーの例。" width="740" /><br /><sub>合成データを使ったメモカレンダーの例。</sub></p>
 
 ## ダウンロードとインストール
 
-現在はプレビュー版です。リポジトリへのアクセス権を持つメンバーが利用できます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2).
+現在はプレビュー版です。リポジトリへのアクセス権を持つメンバーが利用できます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3).
 
 | Platform | Package |
 |---|---|
@@ -80,7 +81,7 @@ npm run package:mac
 npm run package:win
 ```
 
-適用可能な自動検査とパッケージ検証は完了しています。実機の入力方式、DPI、複数画面、フォーカス、WeChat・Doubao・WorkBuddy の実際の入力欄は独立テスト待ちです。言語切替はREADMEの翻訳で、アプリ画面は現在中国語です。
+適用可能な自動検査とパッケージ検証は完了しています。実機の入力方式、DPI、複数画面、フォーカス、WeChat・Doubao・WorkBuddy の実際の入力欄は独立テスト待ちです。アプリ画面は中国語とEnglishに対応します。入力・詳細・カレンダーの右上で言語とライト／ダークを直接切り替え、設定でシステム連動に戻せます。上の7言語リンクはREADMEの翻訳で、アプリの対応言語数ではありません。
 
 ## フィードバック
 

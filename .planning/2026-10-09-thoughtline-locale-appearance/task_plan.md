@@ -9,9 +9,10 @@ Deliver English and first-level tactile day/night capsules without adding rope c
 - [x] Archive approved V2/motion and completed README remotely verified.
 - [x] Confirm clean main713a1fe and new isolated SDD ledger, preflight table/rulings.
 - [x] Task1: production and source validation212/4 +11repair/17main; scoped fixreview clean at7de6eab after source0cab2bb.
-- [ ] Task2 renewed delivery: 4191 actual dual gates passed but portable launcher failed consumer review; source062a scoped review approved,227 canonical72314079…, requires BOTH newlybuilt packages.
+- [x] Task2 renewed delivery: frozen01017c9 actual Mac/Windows gates and final scoped consumer review passed; 227 canonical72314079…, current private preview.3 published.
 - [x] Final whole-increment review and ONE scoped production fix; narrow Task2 EOL fixture review approved.
-- [ ] Exact renewed dual-package consumer, private publication, final README/docs and cleanup.
+- [x] Exact renewed dual-package consumer and private publication; README7+badge updated, clone cleanup complete.
+- [ ] Final documentation push/readback, SDD workspace archive/removal and requested external document sync (physical acceptance stays open).
 
 ## Errors retained
 - Mandatory compaction hook exit1: configured collaboration-memory directory missing; no fake read.
