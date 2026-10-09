@@ -1,0 +1,53 @@
+{
+  "beforeCommit": "54494df7cfecd26f109016861c3551f119e11613",
+  "sourceCommit": "3e5645481da49b169cadbfc2a2cac843d3235a6c",
+  "scope": "Independent pure Node25 TypeScript reducer replay; no Electron/browser/native/window/physical power events",
+  "sevenRedGreenScenarios": [
+    {
+      "name": "release paused composer",
+      "before": "expected assertion failure",
+      "after": "pass"
+    },
+    {
+      "name": "release paused manage",
+      "before": "expected assertion failure",
+      "after": "pass"
+    },
+    {
+      "name": "release paused menu",
+      "before": "expected assertion failure",
+      "after": "pass"
+    },
+    {
+      "name": "release paused drag",
+      "before": "expected assertion failure",
+      "after": "pass"
+    },
+    {
+      "name": "release paused text-drag",
+      "before": "expected assertion failure",
+      "after": "pass"
+    },
+    {
+      "name": "new lock remains active until release",
+      "before": "expected assertion failure",
+      "after": "pass"
+    },
+    {
+      "name": "release one lock without clearing remaining operation",
+      "before": "expected assertion failure",
+      "after": "pass"
+    }
+  ],
+  "pausedPresentationTimersAndPointerIgnored": true,
+  "activeLocksPreserved": true,
+  "duplicateAndUnknownReleaseIdempotent": true,
+  "inputImmutabilityReviewed": true,
+  "independentPauseReasonLastRelease": [
+    "manual",
+    "sleep",
+    "lock"
+  ],
+  "unpausedPresentationTraceUnchanged": 9,
+  "result": "pass"
+}

@@ -1,5 +1,7 @@
 # 连续纸轻润色：真实 UI 对比
 
+> 后续00:56用户反馈：15%夹色小字在实际图中仍近黑，该色彩效果未通过。修正候选和同ID正常尺度前后对比见 [AGENT-INK-PREVIEW](AGENT-INK-PREVIEW.md)。纸形/夹持等原图身份保留，旧色表不能替代可见色彩验收。
+
 生产源码固定 `54494df7cfecd26f109016861c3551f119e11613`；旧已认可纸形 `d9a9cd0` / 原单纸图 `427a26e` 保留。用户00:37:49批准三处轻润色。本轮保留160×226整体比例、上部写字平面及下三分之一缓弯：夹口下增加柔和接触影和细亮压痕；Agent小字以15%夹色混入深灰，通用仍中性；三个小幅纸形按clip ID固定选择，翻页、筛选、重排、重启不重新随机。没有新增胶带、横线或花纹。
 
 [浅色三纸整体](evidence/paper-polish-review/after/three-light-overall.png) · [浅色全纸近景](evidence/paper-polish-review/after/three-light-detail.png) · [深色三纸整体](evidence/paper-polish-review/after/three-dark-overall.png) · [深色全纸近景](evidence/paper-polish-review/after/three-dark-detail.png)。近景仅1.1×，整张纸完整；已实际查看整体与近景。before同正文/Agent三纸图在 `evidence/paper-polish-review/before/`，旧视觉身份没有覆盖。

@@ -1,0 +1,133 @@
+{
+  "sourceCommit": "3e5645481da49b169cadbfc2a2cac843d3235a6c",
+  "productionFixCommit": "93b82c652835600d8db6e73f8eb66cdf32b5b1fa",
+  "evidenceCommit": "36824b7508c2475ad6f57903c7648fb3c1da8e83",
+  "remoteHeadAtReview": "36824b7508c2475ad6f57903c7648fb3c1da8e83",
+  "sourceHashes": [
+    {
+      "file": "src/shared/shelfState.ts",
+      "matches": true
+    },
+    {
+      "file": "tests/unit/shelfState.test.ts",
+      "matches": true
+    },
+    {
+      "file": "tests/electron/paused-unlock-workflow.cjs",
+      "matches": true
+    }
+  ],
+  "evidenceHashes": [
+    {
+      "file": "native-red.log",
+      "matches": true
+    },
+    {
+      "file": "source-binding.json",
+      "matches": true
+    },
+    {
+      "file": "unit-red.log",
+      "matches": true
+    },
+    {
+      "file": "workflow.log",
+      "matches": true
+    },
+    {
+      "file": "text-drag-native.json",
+      "matches": true
+    },
+    {
+      "file": "native-green.log",
+      "matches": true
+    },
+    {
+      "file": "typecheck.log",
+      "matches": true
+    },
+    {
+      "file": "group-native.json",
+      "matches": true
+    },
+    {
+      "file": "fixture-checkbox-error.log",
+      "matches": true
+    },
+    {
+      "file": "workflow-native.json",
+      "matches": true
+    },
+    {
+      "file": "fixture-checkbox-result.json",
+      "matches": true
+    },
+    {
+      "file": "first-green-result.json",
+      "matches": true
+    },
+    {
+      "file": "unit-green.log",
+      "matches": true
+    },
+    {
+      "file": "text-drag.log",
+      "matches": true
+    },
+    {
+      "file": "fixture-startup-error.log",
+      "matches": true
+    },
+    {
+      "file": "checkpoint-status.json",
+      "matches": true
+    },
+    {
+      "file": "group.log",
+      "matches": true
+    },
+    {
+      "file": "first-green.log",
+      "matches": true
+    },
+    {
+      "file": "build.log",
+      "matches": true
+    },
+    {
+      "file": "green/result.json",
+      "matches": true
+    },
+    {
+      "file": "red/result.json",
+      "matches": true
+    }
+  ],
+  "productionDifference93to3e": "",
+  "sourceEvidenceCodeDifference": "",
+  "rendererSourceDifferenceFromVisual": "",
+  "reportedCompiledRendererHashesMatchVisual": true,
+  "paperPolishArchiveCompared": [
+    {
+      "file": "READONLY-REVIEW.md",
+      "byteIdenticalToQAOriginal": true
+    },
+    {
+      "file": "binding-check.json",
+      "byteIdenticalToQAOriginal": true
+    },
+    {
+      "file": "review-sha256.json",
+      "byteIdenticalToQAOriginal": true
+    },
+    {
+      "file": "static-shape-check.json",
+      "byteIdenticalToQAOriginal": true
+    },
+    {
+      "file": "static-shape-check.py",
+      "byteIdenticalToQAOriginal": true
+    }
+  ],
+  "compiledScope": "Reported fixed compiled hashes compared; no independent compilation or package verification"
+}

@@ -1,0 +1,43 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp
+
+ ❯ tests/unit/agentInk.test.ts (3 tests | 2 failed) 12ms
+   × 预设蓝和暖橙在两主题都保留明显色彩，拒绝85%近黑混色 4ms
+   × 深色自定义归属保留原色，计算确定且不改夹子输入色 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/agentInk.test.ts > 预设蓝和暖橙在两主题都保留明显色彩，拒绝85%近黑混色
+AssertionError: expected 70 to be greater than or equal to 80
+ ❯ tests/unit/agentInk.test.ts:9:31
+      7|   const blue=rgb(agentInkColors('#4C90D9')[theme]),orange=rgb(agentInk…
+      8|   expect(blue[2]-blue[0]).toBeGreaterThanOrEqual(80);expect(blue[2]).t…
+      9|   expect(orange[0]-orange[2]).toBeGreaterThanOrEqual(80);expect(orange…
+       |                               ^
+     10|  }
+     11| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/agentInk.test.ts > 深色自定义归属保留原色，计算确定且不改夹子输入色
+AssertionError: expected '#113355' to be '#123456' // Object.is equality
+
+Expected: "#123456"
+Received: "#113355"
+
+ ❯ tests/unit/agentInk.test.ts:22:23
+     20| test('深色自定义归属保留原色，计算确定且不改夹子输入色',()=>{
+     21|  const custom='#123456',result=agentInkColors(custom);expect(agentInkC…
+     22|  expect(result.light).toBe(custom);expect(result.dark).toBe(custom);ex…
+       |                       ^
+     23| });
+     24|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 17 passed (18)
+      Tests  2 failed | 76 passed (78)
+   Start at  09:01:52
+   Duration  585ms (transform 57%, tests 26%, import 13%, worker 3%)
+
