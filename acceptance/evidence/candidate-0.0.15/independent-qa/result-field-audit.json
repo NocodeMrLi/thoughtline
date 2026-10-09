@@ -1,0 +1,17 @@
+{
+  "rawResultUnmodified": true,
+  "fullOverflowVisibleBeforeField": {
+    "rawValue": 3,
+    "meaning": "before variable was reassigned after merge, therefore this field is the pre-restart grouped visible count, not the original full lane count. geometry-full independently records four cards; move identity assertion compares actual original IDs before/after."
+  },
+  "mixedVisibleBeforeField": {
+    "rawValue": [
+      {
+        "id": "clip0",
+        "x": 921.5999755859375
+      }
+    ],
+    "meaning": "new forward projection renders one clip for this seeded mixed ordering. Actual native assertion preserves this visible clip/center across hidden-source merge/restart; do not describe this as three or four visible clips."
+  },
+  "nativeCommandChainScope": "One actual move, visible merge, split, undo, hidden-source merge and restarts; historical strict multi-move source stress evidence is separate, not rerun as a complete native chain."
+}

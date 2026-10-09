@@ -1,0 +1,444 @@
+{
+  "sourceCommit": "81b7783e330b0de85c26df0202ab260e5bfe637a",
+  "scope": "actual shared commands from8 null-position clips with same main capture-before-mutation, pure only",
+  "trial": 0,
+  "step": 6,
+  "width": 1440,
+  "chain": [
+    {
+      "kind": "move",
+      "id": "1",
+      "position": 0,
+      "beforeId": "0",
+      "before": [
+        [
+          "0",
+          390
+        ],
+        [
+          "1",
+          610
+        ],
+        [
+          "2",
+          830
+        ],
+        [
+          "3",
+          1050
+        ]
+      ],
+      "after": [
+        [
+          "1",
+          384
+        ],
+        [
+          "0",
+          556
+        ],
+        [
+          "2",
+          830
+        ],
+        [
+          "3",
+          1050
+        ]
+      ]
+    },
+    {
+      "kind": "move",
+      "id": "2",
+      "position": 1,
+      "beforeId": null,
+      "before": [
+        [
+          "1",
+          384
+        ],
+        [
+          "0",
+          556
+        ],
+        [
+          "2",
+          830
+        ],
+        [
+          "3",
+          1050
+        ]
+      ],
+      "after": [
+        [
+          "1",
+          384
+        ],
+        [
+          "0",
+          556
+        ],
+        [
+          "3",
+          884
+        ],
+        [
+          "2",
+          1056
+        ]
+      ]
+    },
+    {
+      "kind": "move",
+      "id": "3",
+      "position": 0,
+      "beforeId": "1",
+      "before": [
+        [
+          "1",
+          384
+        ],
+        [
+          "0",
+          556
+        ],
+        [
+          "3",
+          884
+        ],
+        [
+          "2",
+          1056
+        ]
+      ],
+      "after": [
+        [
+          "3",
+          384
+        ],
+        [
+          "1",
+          556
+        ],
+        [
+          "0",
+          728
+        ],
+        [
+          "4",
+          948
+        ]
+      ]
+    },
+    {
+      "kind": "move",
+      "id": "4",
+      "position": 0,
+      "beforeId": "3",
+      "before": [
+        [
+          "3",
+          384
+        ],
+        [
+          "1",
+          556
+        ],
+        [
+          "0",
+          728
+        ],
+        [
+          "4",
+          948
+        ]
+      ],
+      "after": [
+        [
+          "4",
+          384
+        ],
+        [
+          "3",
+          556
+        ],
+        [
+          "1",
+          728
+        ],
+        [
+          "0",
+          900
+        ]
+      ]
+    },
+    {
+      "kind": "move",
+      "id": "3",
+      "position": 1,
+      "beforeId": null,
+      "before": [
+        [
+          "4",
+          384
+        ],
+        [
+          "3",
+          556
+        ],
+        [
+          "1",
+          728
+        ],
+        [
+          "0",
+          900
+        ]
+      ],
+      "after": [
+        [
+          "4",
+          384
+        ],
+        [
+          "1",
+          712
+        ],
+        [
+          "0",
+          884
+        ],
+        [
+          "2",
+          1056
+        ]
+      ]
+    },
+    {
+      "kind": "merge",
+      "sourceId": "4",
+      "targetId": "1",
+      "before": [
+        [
+          "4",
+          384
+        ],
+        [
+          "1",
+          712
+        ],
+        [
+          "0",
+          884
+        ],
+        [
+          "2",
+          1056
+        ]
+      ],
+      "after": [
+        [
+          "1",
+          540
+        ],
+        [
+          "0",
+          712
+        ],
+        [
+          "2",
+          884
+        ],
+        [
+          "3",
+          1056
+        ]
+      ]
+    }
+  ],
+  "clips": [
+    {
+      "id": "1",
+      "agentId": "codex",
+      "ideaIds": [
+        "i1",
+        "i4"
+      ],
+      "currentId": "i4",
+      "position": 0.4880952380952381
+    },
+    {
+      "id": "0",
+      "agentId": "codex",
+      "ideaIds": [
+        "i0"
+      ],
+      "currentId": "i0",
+      "position": 0.7440476190476191
+    },
+    {
+      "id": "5",
+      "agentId": "codex",
+      "ideaIds": [
+        "i5"
+      ],
+      "currentId": "i5",
+      "position": null
+    },
+    {
+      "id": "6",
+      "agentId": "codex",
+      "ideaIds": [
+        "i6"
+      ],
+      "currentId": "i6",
+      "position": null
+    },
+    {
+      "id": "7",
+      "agentId": "codex",
+      "ideaIds": [
+        "i7"
+      ],
+      "currentId": "i7",
+      "position": null
+    },
+    {
+      "id": "2",
+      "agentId": "codex",
+      "ideaIds": [
+        "i2"
+      ],
+      "currentId": "i2",
+      "position": 1
+    },
+    {
+      "id": "3",
+      "agentId": "codex",
+      "ideaIds": [
+        "i3"
+      ],
+      "currentId": "i3",
+      "position": 1
+    }
+  ],
+  "before": [
+    [
+      "1",
+      540
+    ],
+    [
+      "0",
+      712
+    ],
+    [
+      "2",
+      884
+    ],
+    [
+      "3",
+      1056
+    ]
+  ],
+  "afterCapture": [
+    [
+      "1",
+      540
+    ],
+    [
+      "0",
+      712
+    ],
+    [
+      "5",
+      884
+    ],
+    [
+      "2",
+      1056
+    ]
+  ],
+  "ideas": [
+    {
+      "id": "i0",
+      "text": "完整正文0",
+      "title": "t0",
+      "project": "",
+      "agentId": "codex",
+      "status": "hanging",
+      "createdAt": "2026-10-09T00:00:00Z",
+      "updatedAt": "2026-10-09T00:00:00Z"
+    },
+    {
+      "id": "i1",
+      "text": "完整正文1",
+      "title": "t1",
+      "project": "",
+      "agentId": "codex",
+      "status": "hanging",
+      "createdAt": "2026-10-09T00:00:00Z",
+      "updatedAt": "2026-10-09T00:00:00Z"
+    },
+    {
+      "id": "i2",
+      "text": "完整正文2",
+      "title": "t2",
+      "project": "",
+      "agentId": "codex",
+      "status": "hanging",
+      "createdAt": "2026-10-09T00:00:00Z",
+      "updatedAt": "2026-10-09T00:00:00Z"
+    },
+    {
+      "id": "i3",
+      "text": "完整正文3",
+      "title": "t3",
+      "project": "",
+      "agentId": "codex",
+      "status": "hanging",
+      "createdAt": "2026-10-09T00:00:00Z",
+      "updatedAt": "2026-10-09T00:00:00Z"
+    },
+    {
+      "id": "i4",
+      "text": "完整正文4",
+      "title": "t4",
+      "project": "",
+      "agentId": "codex",
+      "status": "hanging",
+      "createdAt": "2026-10-09T00:00:00Z",
+      "updatedAt": "2026-10-09T00:00:00Z"
+    },
+    {
+      "id": "i5",
+      "text": "完整正文5",
+      "title": "t5",
+      "project": "",
+      "agentId": "codex",
+      "status": "hanging",
+      "createdAt": "2026-10-09T00:00:00Z",
+      "updatedAt": "2026-10-09T00:00:00Z"
+    },
+    {
+      "id": "i6",
+      "text": "完整正文6",
+      "title": "t6",
+      "project": "",
+      "agentId": "codex",
+      "status": "hanging",
+      "createdAt": "2026-10-09T00:00:00Z",
+      "updatedAt": "2026-10-09T00:00:00Z"
+    },
+    {
+      "id": "i7",
+      "text": "完整正文7",
+      "title": "t7",
+      "project": "",
+      "agentId": "codex",
+      "status": "hanging",
+      "createdAt": "2026-10-09T00:00:00Z",
+      "updatedAt": "2026-10-09T00:00:00Z"
+    }
+  ]
+}

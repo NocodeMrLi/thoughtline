@@ -1,0 +1,32 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp
+
+ ❯ tests/unit/clipProjection.test.ts (5 tests | 1 failed) 88ms
+   × 满容量且有溢出时移最后可见夹到右界，隐藏夹不能抢位 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/clipProjection.test.ts > 满容量且有溢出时移最后可见夹到右界，隐藏夹不能抢位
+AssertionError: expected [ '0', '1', '3' ] to deeply equal [ '0', '1', '2' ]
+
+- Expected
++ Received
+
+  [
+    "0",
+    "1",
+-   "2",
++   "3",
+  ]
+
+ ❯ tests/unit/clipProjection.test.ts:13:330
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 passed (5)
+   Start at  10:04:35
+   Duration  221ms (tests 59%, transform 33%, import 6%, worker 1%)
+

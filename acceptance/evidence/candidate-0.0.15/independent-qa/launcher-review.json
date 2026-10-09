@@ -1,0 +1,53 @@
+{
+  "sourceCommit": "61a6837dbde290041a13226596baad5b21249fc1",
+  "staticOnly": true,
+  "executedByIndependentQA": false,
+  "checkOnlyExecutedByIndependentQA": false,
+  "scriptUnchangedSinceCopied": true,
+  "scriptSHA256": "768e805a142ea652ab4aaff0930f014abbc61bfb63db6c210cd9bbfe4326513b",
+  "checks": [
+    "fixed DMG/asar/version/strict signature",
+    "exact isolated data env via open -n -W --env",
+    "explicit clears for renderer/Node mode/Node options",
+    "listed isolation paths/snapshot files symlink refusal",
+    "no installed App fallback",
+    "retain test data; detach only own mount without force",
+    "no gatekeeper/quarantine bypass or process termination"
+  ],
+  "findings": [
+    {
+      "severity": "P2 documentation",
+      "issue": "common README points .13 rather than new .15",
+      "raw": "launcher-README.md",
+      "state": "corrected_current_.15_and_separate_.13_rollback"
+    },
+    {
+      "severity": "P3 documentation",
+      "issue": "first corrected README report link resolved to nonexistent ancestor acceptance",
+      "raw": "launcher-README-corrected-first.md",
+      "state": "corrected_target_path_independently_resolved"
+    }
+  ],
+  "finalREADME": "launcher-README-corrected-final.md",
+  "finalLinks": [
+    {
+      "label": "0.0.15候选报告",
+      "target": "../thoughtline-clamp/acceptance/CANDIDATE-0.0.15-REPORT.md",
+      "resolved": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/CANDIDATE-0.0.15-REPORT.md",
+      "existsAtQAFinalization": false
+    },
+    {
+      "label": "回退隔离说明",
+      "target": "README-0.0.13-回退隔离体验.md",
+      "resolved": "/Users/lihongwei/Documents/Codex/2026-10-09/task/delivery/README-0.0.13-回退隔离体验.md",
+      "existsAtQAFinalization": true
+    }
+  ],
+  "boundedConclusion": "static review only; builder LaunchServices environment proof not independently executed",
+  "candidateReportTargetNotYetWrittenByBuilder": true,
+  "shellSyntaxCheck": {
+    "command": "zsh -n launcher-0.0.15.command.txt",
+    "exitCode": 0,
+    "appNotLaunched": true
+  }
+}

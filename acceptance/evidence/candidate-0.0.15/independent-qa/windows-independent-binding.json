@@ -1,0 +1,31 @@
+{
+  "sourceCommit": "61a6837dbde290041a13226596baad5b21249fc1",
+  "version": "0.0.15",
+  "runId": 37873271157,
+  "independentRunHeadSha": "61a6837dbde290041a13226596baad5b21249fc1",
+  "independentRunConclusion": "success",
+  "installerFile": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/dist/windows-61a6837/Thoughtline-0.0.15-win-x64.exe",
+  "bytes": 111267797,
+  "independentSHA256": "7d72b841c8136de21354e6ad6dd32eb6486adff9a1e77ec973d1ab14f8d6f918",
+  "matchesBuilderReceipt": true,
+  "matchesCISumFile": true,
+  "executed": false,
+  "selectedLogLines": [
+    "windows-test-package\tRun actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1\t2026-10-09T02:10:18.8610660Z   node-version: 24.19.0",
+    "windows-test-package\tRun actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1\t2026-10-09T02:10:19.0849454Z Attempting to download 24.19.0...",
+    "windows-test-package\tRun actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1\t2026-10-09T02:10:19.6115724Z Acquiring 24.19.0 - x64 from https://github.com/actions/node-versions/releases/download/24.19.0-30872449280/node-24.19.0-win32-x64.7z",
+    "windows-test-package\tRun actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1\t2026-10-09T02:10:29.0669751Z node: v24.19.0",
+    "windows-test-package\tRun actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1\t2026-10-09T02:10:29.1742979Z [command]C:\\Windows\\system32\\cmd.exe /D /S /C \"C:\\hostedtoolcache\\windows\\node\\24.19.0\\x64\\npm.cmd config get cache\"",
+    "windows-test-package\tRun npm run verify\t2026-10-09T02:10:49.5632777Z > thoughtline@0.0.15 verify",
+    "windows-test-package\tRun npm run verify\t2026-10-09T02:10:49.9462980Z > thoughtline@0.0.15 typecheck",
+    "windows-test-package\tRun npm run verify\t2026-10-09T02:10:51.0814856Z > thoughtline@0.0.15 test",
+    "windows-test-package\tRun npm run verify\t2026-10-09T02:11:00.8129735Z ^[[2m Test Files ^[[22m ^[[1m^[[32m20 passed^[[39m^[[22m^[[90m (20)^[[39m",
+    "windows-test-package\tRun npm run verify\t2026-10-09T02:11:00.8134062Z ^[[2m      Tests ^[[22m ^[[1m^[[32m88 passed^[[39m^[[22m^[[90m (88)^[[39m",
+    "windows-test-package\tRun npm run verify\t2026-10-09T02:11:01.2008722Z > thoughtline@0.0.15 build",
+    "windows-test-package\tRun npm run package:win\t2026-10-09T02:11:05.4361592Z > thoughtline@0.0.15 package:win",
+    "windows-test-package\tRun npm run package:win\t2026-10-09T02:11:21.4259407Z   • building        target=nsis file=dist\\Thoughtline-0.0.15-win-x64.exe archs=x64 oneClick=false perMachine=false",
+    "windows-test-package\tRun npm run package:win\t2026-10-09T02:12:43.0356580Z   • file signing skipped via signExecutable configuration  file=dist\\Thoughtline-0.0.15-win-x64.__uninstaller.exe",
+    "windows-test-package\tRun npm run package:win\t2026-10-09T02:12:44.6767291Z   • file signing skipped via signExecutable configuration  file=dist\\Thoughtline-0.0.15-win-x64.exe",
+    "windows-test-package\tRun npm run package:win\t2026-10-09T02:12:44.6772847Z   • building block map  blockMapFile=dist\\Thoughtline-0.0.15-win-x64.exe.blockmap"
+  ]
+}

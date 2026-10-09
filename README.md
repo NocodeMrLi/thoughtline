@@ -1,14 +1,14 @@
-> 分支最新视觉候选已批准居中70%挂绳与柔和端部：[实际UI预览](acceptance/CENTERED-ROPE-PREVIEW.md)。尚未新Mac打包/Windows CI，不将旧.14安装器当本轮实现；稳定.13与旧checkpoint保留。
-
 # 晾念头 / Thoughtline
 
 面向macOS与Windows的桌面顶边念头挂绳。快捷记录想法和提示词，用彩色夹子区分Agent；固定自然弧线，不随数量变化，随时取用。
 
-当前工作分支源码 **0.0.11 本地候选：按需窗口、固定绳与文档13弹簧夹**。桌面挂绳加快捷输入，没有常驻主窗口。已接入编辑、临时全文浏览、收起/恢复、搜索、Agent增改迁移、临时筛选/溢出与有限显隐动画；已加入160×112DIP紧凑卡、展开全文、拖动夹子/同Agent合夹/拆分、悬停箭头与页码跳转；跨Agent正文拖入及双端物理体验仍在推进。详见[当前阶段](docs/STAGE-0.md)。
+当前候选 **0.0.15**：70%屏宽居中挂绳与渐淡端部、160×226DIP连续弯纸、正面弹簧夹和可辨Agent标签。源码冻结 `61a6837`，新增捕获位置固定点及满容量移动保全修复。临时写作/全文/管理窗口、编辑归档搜索、分组合夹拆分撤销、标准纯文本拖出与草稿恢复已接入；没有常驻主窗口或工具条。
+
+当前产物、88单测、11组源码流程、新包/性能及独立增量边界见[0.0.15候选报告](acceptance/CANDIDATE-0.0.15-REPORT.md)，本机体验必须从[新隔离入口](docs/delivery/README-0.0.15-隔离体验.md)启动。用户暂定认可当前视觉基线，正式整体验收尚未放行。0.0.13仅回退；已发布下载版仍为v0.0.6-alpha.1，不能用旧下载版验证此源码。
 
 ## 本地开发
 
-本轮使用隔离分支 `codex/thoughtline-acceptance-20261009`，验证后阶段提交推送。没有合并main或发布新版本；原工作区与已发布包保留。
+本轮使用隔离分支 `codex/thoughtline-clamp-20261009`，验证后阶段提交推送。没有合并main或发布新版本；原工作区与已发布包保留。
 
 Node24.19.0。执行 `npm ci`、`npm run verify`、`npm run dev`。主入口Control+Alt+N；Mac⌘Enter、WindowsCtrlEnter挂上，Esc保存草稿。鼠标在屏幕顶部停留后显示挂绳。
 
@@ -16,7 +16,7 @@ Node24.19.0。执行 `npm ci`、`npm run verify`、`npm run dev`。主入口Cont
 
 ## 安装测试
 
-Mac arm64：`npm run package:mac`。Windows x64：Windows GitHub Actions运行验证及NSIS打包，安装包同时保存于对应Actions私有构建附件和[双端测试预发布](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.6-alpha.1)。安装包SHA256随包提供；卸载不删除个人念头数据。
+Mac arm64：`npm run package:mac`。Windows x64：Windows GitHub Actions运行验证及NSIS打包，本轮包保存于对应Actions私有构建附件；[已发布预发布](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.6-alpha.1)是旧版，不包含本轮实现。安装包SHA256随包提供；卸载不删除个人念头数据。
 
 Mac和Windows分别记录构建、安装与用户反馈，见[验收节点](acceptance/gates.json)。当前尚无Windows实机通过结论。
 
@@ -30,7 +30,7 @@ Mac和Windows分别记录构建、安装与用户反馈，见[验收节点](acce
 
 自动测试使用独立临时数据并在结束时清理；冻结包使用专门的package-acceptance.cjs及package-idle.cjs，设置THOUGHTLINE_EXECUTABLE；源码协议测试不能直接当冻结包测试。
 
-0.0.5已增加托盘临时设置、组合键录制及减少动态效果。冲突或磁盘保存失败保留旧注册；新建草稿在退出前保存，保存失败不退出。数据恢复错误提供打开目录/重试/退出，保留原文件。手动暂停、睡眠、锁屏分别管理，恢复不撤掉手动暂停。`npm run lifecycle`验证真实注册、录制、冲突、POSIX不可写故障、新建退出草稿及重启；仍不能替代物理输入法/焦点。已发布安装包仍为0.0.6；源码0.0.7已接入标准text/plain拖放，但真实Agent接收尚未验收。0.0.11本地候选尚未发布。
+0.0.5已增加托盘临时设置、组合键录制及减少动态效果。冲突或磁盘保存失败保留旧注册；新建草稿在退出前保存，保存失败不退出。数据恢复错误提供打开目录/重试/退出，保留原文件。手动暂停、睡眠、锁屏分别管理，恢复不撤掉手动暂停。`npm run lifecycle`验证真实注册、录制、冲突、POSIX不可写故障、新建退出草稿及重启；仍不能替代物理输入法/焦点。已发布安装包仍为0.0.6；源码0.0.7已接入标准text/plain拖放，但真实Agent接收尚未验收。当前0.0.15候选尚未发布。
 
 ## 当前交付边界
 

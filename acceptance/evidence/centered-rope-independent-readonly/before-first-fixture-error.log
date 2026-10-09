@@ -1,0 +1,46 @@
+electron.launch: Timeout 15000ms exceeded.
+Call log:
+[2m  - <launching> /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron --inspect=0 --remote-debugging-port=0 /var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-centered-rope-107NIT/protocol-entry.cjs --force-device-scale-factor=1[22m
+[2m  - <launched> pid=94544[22m
+[2m  - [pid=94544][err] Debugger listening on ws://127.0.0.1:62567/06b3e089-9956-4197-a73b-db216e8a62c1[22m
+[2m  - [pid=94544][err] For help, see: https://nodejs.org/learn/getting-started/debugging[22m
+[2m  - <ws connecting> ws://127.0.0.1:62567/06b3e089-9956-4197-a73b-db216e8a62c1[22m
+[2m  - [pid=94544][err] Debugger attached.[22m
+[2m  - <ws connected> ws://127.0.0.1:62567/06b3e089-9956-4197-a73b-db216e8a62c1[22m
+[2m  - [pid=94544][err] App threw an error during load[22m
+[2m  - [pid=94544][err] Error: The 'screen' module can't be used before the app 'ready' event[22m
+[2m  - [pid=94544][err]     at createScreenIfNeeded (node:electron/js2c/browser_init:1:71264)[22m
+[2m  - [pid=94544][err]     at Object.get (node:electron/js2c/browser_init:1:71306)[22m
+[2m  - [pid=94544][err]     at Object.<anonymous> (/private/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-centered-rope-107NIT/protocol-entry.cjs:1:276)[22m
+[2m  - [pid=94544][err]     at Module._compile (node:internal/modules/cjs/loader:1937:14)[22m
+[2m  - [pid=94544][err]     at Object..js (node:internal/modules/cjs/loader:2070:10)[22m
+[2m  - [pid=94544][err]     at Module.load (node:internal/modules/cjs/loader:1658:32)[22m
+[2m  - [pid=94544][err]     at Module._load (node:internal/modules/cjs/loader:1450:12)[22m
+[2m  - [pid=94544][err]     at wrapModuleLoad (node:internal/modules/cjs/loader:268:19)[22m
+[2m  - [pid=94544][err]     at loadCJSModuleWithModuleLoad (node:internal/modules/esm/translators:378:15)[22m
+[2m  - [pid=94544][err]     at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:246:9)[22m
+
+    at async /Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/tests/electron/centered-rope-preview.cjs:13:8 {
+  log: [
+    '  - <launching> /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron --inspect=0 --remote-debugging-port=0 /var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-centered-rope-107NIT/protocol-entry.cjs --force-device-scale-factor=1',
+    '  - <launched> pid=94544',
+    '  - [pid=94544][err] Debugger listening on ws://127.0.0.1:62567/06b3e089-9956-4197-a73b-db216e8a62c1',
+    '  - [pid=94544][err] For help, see: https://nodejs.org/learn/getting-started/debugging',
+    '  - <ws connecting> ws://127.0.0.1:62567/06b3e089-9956-4197-a73b-db216e8a62c1',
+    '  - [pid=94544][err] Debugger attached.',
+    '  - <ws connected> ws://127.0.0.1:62567/06b3e089-9956-4197-a73b-db216e8a62c1',
+    '  - [pid=94544][err] App threw an error during load',
+    "  - [pid=94544][err] Error: The 'screen' module can't be used before the app 'ready' event",
+    '  - [pid=94544][err]     at createScreenIfNeeded (node:electron/js2c/browser_init:1:71264)',
+    '  - [pid=94544][err]     at Object.get (node:electron/js2c/browser_init:1:71306)',
+    '  - [pid=94544][err]     at Object.<anonymous> (/private/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-centered-rope-107NIT/protocol-entry.cjs:1:276)',
+    '  - [pid=94544][err]     at Module._compile (node:internal/modules/cjs/loader:1937:14)',
+    '  - [pid=94544][err]     at Object..js (node:internal/modules/cjs/loader:2070:10)',
+    '  - [pid=94544][err]     at Module.load (node:internal/modules/cjs/loader:1658:32)',
+    '  - [pid=94544][err]     at Module._load (node:internal/modules/cjs/loader:1450:12)',
+    '  - [pid=94544][err]     at wrapModuleLoad (node:internal/modules/cjs/loader:268:19)',
+    '  - [pid=94544][err]     at loadCJSModuleWithModuleLoad (node:internal/modules/esm/translators:378:15)',
+    '  - [pid=94544][err]     at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:246:9)'
+  ],
+  name: 'TimeoutError'
+}

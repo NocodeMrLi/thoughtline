@@ -1,0 +1,275 @@
+diff --git a/package-lock.json b/package-lock.json
+index 246d8cc..ef04e89 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -1,12 +1,12 @@
+ {
+   "name": "thoughtline",
+-  "version": "0.0.14",
++  "version": "0.0.15",
+   "lockfileVersion": 3,
+   "requires": true,
+   "packages": {
+     "": {
+       "name": "thoughtline",
+-      "version": "0.0.14",
++      "version": "0.0.15",
+       "dependencies": {
+         "react": "19.3.0",
+         "react-dom": "19.3.0"
+diff --git a/package.json b/package.json
+index 8db49d0..9edf9dc 100644
+--- a/package.json
++++ b/package.json
+@@ -1,6 +1,6 @@
+ {
+   "name": "thoughtline",
+-  "version": "0.0.14",
++  "version": "0.0.15",
+   "private": true,
+   "description": "\u667e\u5ff5\u5934 / Thoughtline desktop rope native pilot",
+   "main": "out/main/index.js",
+diff --git a/tests/electron/centered-rope-preview.cjs b/tests/electron/centered-rope-preview.cjs
+index 316ec1a..30d91a5 100644
+--- a/tests/electron/centered-rope-preview.cjs
++++ b/tests/electron/centered-rope-preview.cjs
+@@ -1,6 +1,6 @@
+ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto');
+ const {_electron}=require('playwright'),{launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
+-const stage=process.argv[2]||'after',output=path.resolve('acceptance/evidence/centered-rope-review/'+stage),hash=data=>crypto.createHash('sha256').update(data).digest('hex');
++const stage=process.argv[2]||'after',output=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/centered-rope-review/'+stage),hash=data=>crypto.createHash('sha256').update(data).digest('hex');
+ (async()=>{
+  await fs.mkdir(output,{recursive:true});const scenes=[],restarts=[],cleanups=[];
+  if(stage==='before'){const binding=JSON.parse(await fs.readFile('acceptance/evidence/agent-ink-review/manifest.json'));for(const [file,sha] of Object.entries(binding.compiledSha256))assert.equal(hash(await fs.readFile(file)),sha,'before must use frozen 796bbea compiled runtime');}
+diff --git a/tests/electron/clamp-viewport-review.cjs b/tests/electron/clamp-viewport-review.cjs
+index 7d5e25a..fd49718 100644
+--- a/tests/electron/clamp-viewport-review.cjs
++++ b/tests/electron/clamp-viewport-review.cjs
+@@ -7,15 +7,15 @@ const output=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evid
+   const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-clamp-viewport-'));let app,pids=[];
+   try{
+    const options=await launchOptions(dir),entry=options.args[0];let source=await fs.readFile(entry,'utf8');
+-   const setup=`require('electron').app.whenReady().then(()=>{const {screen}=require('electron');const primary=screen.getPrimaryDisplay.bind(screen),nearest=screen.getDisplayNearestPoint.bind(screen);const adapt=d=>({...d,bounds:{...d.bounds,width:${width}},workArea:{...d.workArea,width:${width}}});screen.getPrimaryDisplay=()=>adapt(primary());screen.getDisplayNearestPoint=p=>adapt(nearest(p));});`;
++   const setup=`require('electron').app.once('ready',()=>{const {screen}=require('electron');const adapt=d=>({...d,bounds:{...d.bounds,width:${width}},workArea:{...d.workArea,width:${width}}});for(const key of ['getPrimaryDisplay','getDisplayNearestPoint','getDisplayMatching']){const original=screen[key].bind(screen);screen[key]=(...args)=>adapt(original(...args));}const all=screen.getAllDisplays.bind(screen);screen.getAllDisplays=()=>all().map(adapt);screen.getCursorScreenPoint=()=>({x:${width}/2,y:1});});`;
+    source=setup+source;await fs.writeFile(entry,source);options.args.push('--force-device-scale-factor='+scale);app=await _electron.launch(options);const {shelf,composer}=await warmViews(app);await shelf.setViewportSize({width,height:340});const cdp=await app.context().newCDPSession(shelf);await cdp.send('Emulation.setDeviceMetricsOverride',{width,height:340,deviceScaleFactor:scale,mobile:false});
+    for(let n=0;n<24;n++){
+     const r=await composer.evaluate(async n=>{const i=await window.thoughtline.info();return window.thoughtline.submit({text:'屏宽模拟假正文 '+n,title:'检查夹持关系 '+(n+1),agentId:['codex','claude','cursor'][n%3],project:''},i.snapshot.revision);},n);assert(r.ok,r.message);
+    }
+-   const expected=1+Math.floor((width-184)/220);await shelf.waitForFunction(n=>document.querySelectorAll('.hanging').length===n,expected);await waitForInfo(shelf,i=>!i.interactionLocked);await shelf.evaluate(()=>window.thoughtline.dragLock(true));await shelf.waitForFunction(()=>Number(document.querySelector('[data-view=shelf]').dataset.progress)===1);
++   const min=Math.max(92,width*.15+width*.7/6),max=Math.min(width-92,width*.15+width*.7*5/6),expected=Math.max(0,1+Math.floor((max-min)/220));await shelf.waitForFunction(n=>document.querySelectorAll('.hanging').length===n,expected);await waitForInfo(shelf,i=>!i.interactionLocked);await shelf.evaluate(()=>window.thoughtline.dragLock(true));await shelf.waitForFunction(()=>Number(document.querySelector('[data-view=shelf]').dataset.progress)===1);
+    const theme=scale===1?'light':'dark';await app.evaluate(({nativeTheme},theme)=>{nativeTheme.themeSource=theme;},theme);await shelf.waitForFunction(theme=>document.documentElement.dataset.theme===theme,theme);await shelf.evaluate(theme=>{document.body.style.background=theme==='dark'?'#30343A':'#EAE8E0';},theme);
+    const geometry=await shelf.evaluate(()=>({width:innerWidth,height:innerHeight,dpr:devicePixelRatio,rope:document.querySelector('.rope > .rope-core').getAttribute('d'),layoutWidth:Number(document.querySelector('.rope').dataset.layoutWidth),cards:[...document.querySelectorAll('.hanging')].map(el=>{const hit=el.querySelector('.peg-button').getBoundingClientRect(),paper=el.querySelector('.idea-card').getBoundingClientRect();return {hit:{x:hit.x,y:hit.y,right:hit.right,width:hit.width,height:hit.height},paper:{x:paper.x,right:paper.right,width:paper.width,height:paper.height}};})}));
+-   assert.equal(geometry.width,width);assert.equal(geometry.layoutWidth,width);assert.equal(geometry.dpr,scale);assert(geometry.rope.startsWith('M -24 '));assert(geometry.rope.endsWith((width+24)+' 32'));
++   assert.equal(geometry.width,width);assert.equal(geometry.layoutWidth,width);assert.equal(geometry.dpr,scale);const ropePoints=geometry.rope.match(/-?\d+(?:\.\d+)?(?:e[-+]?\d+)?/g).map(Number);assert(Math.abs(ropePoints[0]-width*.15)<1e-8);assert(Math.abs(ropePoints.at(-2)-width*.85)<1e-8);assert.equal(ropePoints.at(-1),32);
+    for(const g of geometry.cards){assert(g.paper.x>=12-.01&&g.paper.right<=width-12+.01);assert(g.hit.x>=0&&g.hit.y>=0&&g.hit.right<=width);assert(Math.abs(g.hit.width-24)<.01&&Math.abs(g.hit.height-44)<.01);}
+    const file=`${width}dip-${scale}x-${theme}-24-overall.png`,full=path.join(output,file);const metrics=await cdp.send('Page.getLayoutMetrics');const shot=await cdp.send('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{x:0,y:0,width,height:340,scale:1}});const png=Buffer.from(shot.data,'base64');await fs.writeFile(full,png);assert.equal(png.readUInt32BE(16),width*scale);assert.equal(png.readUInt32BE(20),340*scale);await cdp.detach();scenes.push({width,scale,theme,seededHanging:24,visible:geometry.cards.length,geometry,pngPixels:{width:png.readUInt32BE(16),height:png.readUInt32BE(20)},captureMetrics:metrics.cssVisualViewport,file,sha256:crypto.createHash('sha256').update(await fs.readFile(full)).digest('hex')});
+   }finally{if(app){pids=await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid));if(!pids.includes(app.process().pid))pids.push(app.process().pid);await app.close();}await cleanupIdleFixture(dir,pids);}
+diff --git a/tests/electron/empty-shelf-workflow.cjs b/tests/electron/empty-shelf-workflow.cjs
+index f5ac36b..914daf7 100644
+--- a/tests/electron/empty-shelf-workflow.cjs
++++ b/tests/electron/empty-shelf-workflow.cjs
+@@ -1,7 +1,8 @@
++const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
+ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
+ const {_electron}=require('playwright'),{launchOptions,waitForInfo}=require('./window-fixture.cjs');
+ (async()=>{
+- const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-empty-shelf-'));let app;
++ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-empty-shelf-'));let app;const ownedPids=[];const close=async()=>{if(app){ownedPids.push(...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)),app.process().pid);await app.close();app=null;}};
+  try{
+   await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:2,revision:0,clips:[],ideas:[],agents:[{id:'general',name:'通用',color:'#A0A3AA'},{id:'codex',name:'Codex',color:'#4C90D9'},{id:'claude',name:'Claude',color:'#D79551'}],draft:null,settings:{writeHotkey:'Control+Alt+K',reducedMotion:false}}));
+   const options=await launchOptions(dir);const entry=options.args[0];await fs.writeFile(entry,`const {Tray}=require('electron');const original=Tray.prototype.setContextMenu;Tray.prototype.setContextMenu=function(menu){globalThis.thoughtlineTestTray=menu;return original.call(this,menu);};`+await fs.readFile(entry,'utf8'));
+@@ -21,5 +22,5 @@ const {_electron}=require('playwright'),{launchOptions,waitForInfo}=require('./w
+   const closed=await manage.evaluate(()=>window.thoughtline.closeManage());assert(closed.ok,closed.message);await waitForInfo(shelf,i=>!i.interactionLocked);assert.equal(await writeEnabled(),true,'closing settings after save must re-enable tray write');
+   await app.evaluate(()=>globalThis.thoughtlineTestTray.items.find(i=>i.label.startsWith('写念头：')).click());await waitForInfo(shelf,i=>i.interactionLocked);await composer.waitForFunction(()=>document.activeElement?.id==='idea-text');assert.equal(await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer').isVisible()),true);
+   const report={scope:'isolated Mac Electron runtime and actual native Menu callback through fixture adapter; no physical menu/shortcut or Windows acceptance',emptyRopeOnly:true,emptyFilteredRopeOnly:true,zeroEmptyHitTargets:true,trayNewNoteAccessible:true,traySettingsShowSaveCloseReopen:true,savedShortcut:'Control+Alt+K',displayedShortcut:trayWrite.label,submittedText:submitted.value.ideas[0].text};await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','empty-shelf.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
+- }finally{if(app)await app.close();await fs.rm(dir,{recursive:true,force:true,maxRetries:5,retryDelay:100});}
++ }finally{await close();await cleanupIdleFixture(dir,ownedPids);await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','empty-shelf-workflow-cleanup.json'),JSON.stringify({ownedPids,allPidsExited:true,fakeDataRemoved:true},null,2)+'\n');}
+ })().catch(e=>{console.error(e);process.exitCode=1;});
+diff --git a/tests/electron/hidden-draft-workflow.cjs b/tests/electron/hidden-draft-workflow.cjs
+index 9bedc36..1a41cdf 100644
+--- a/tests/electron/hidden-draft-workflow.cjs
++++ b/tests/electron/hidden-draft-workflow.cjs
+@@ -1,6 +1,7 @@
++const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
+ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
+ const {_electron}=require('playwright'),{launchOptions,openComposer}=require('./window-fixture.cjs');
+-(async()=>{const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-hidden-draft-'));let app;
++(async()=>{const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-hidden-draft-'));let app;const ownedPids=[];const close=async()=>{if(app){ownedPids.push(...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)),app.process().pid);await app.close();app=null;}};
+  try{
+   await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:2,revision:0,clips:[],ideas:[],agents:[{id:'general',name:'通用',color:'#A0A3AA'}],draft:null,settings:{writeHotkey:'Control+Alt+Shift+F19',reducedMotion:false}}));
+   app=await _electron.launch(await launchOptions(dir));const shelf=await app.firstWindow();await shelf.waitForURL(/view=shelf/);await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});
+@@ -9,8 +10,8 @@ const {_electron}=require('playwright'),{launchOptions,openComposer}=require('./
+   await new Promise(r=>setTimeout(r,31500));assert(await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().some(w=>w.getTitle()==='Thoughtline Composer')),'unconfirmed native hide must not dispose live draft');
+   const resumed=await openComposer(app,shelf);assert.equal(await resumed.locator('#idea-text').inputValue(),draft,'reopen must resume live hidden draft rather than overwrite from snapshot');
+   await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer').hide());
+-  await fs.chmod(dir,0o555);await app.evaluate(({app})=>app.quit());await composer.waitForFunction(()=>document.querySelector('.error')?.textContent.includes('保存未成功'));assert.equal(await composer.locator('#idea-text').inputValue(),draft);assert(await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer').isVisible()),'failed hidden-draft save must restore editable window');await fs.chmod(dir,0o755);await app.close();app=null;
++  await fs.chmod(dir,0o555);await app.evaluate(({app})=>app.quit());await composer.waitForFunction(()=>document.querySelector('.error')?.textContent.includes('保存未成功'));assert.equal(await composer.locator('#idea-text').inputValue(),draft);assert(await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer').isVisible()),'failed hidden-draft save must restore editable window');await fs.chmod(dir,0o755);await close();
+   assert.equal(JSON.parse(await fs.readFile(path.join(dir,'snapshot.json'),'utf8')).draft.text,draft,'quit must capture unconfirmed hidden draft');
+-  const report={scope:'actual Mac Electron BrowserWindow.hide event and grace timeout, shortcut callback through emulated registry, hidden renderer quit capture; not physical macOS Hide menu/IME acceptance',unconfirmedHiddenDraftRetainedBeyond30Seconds:true,reopenResumesLiveText:true,hiddenSaveFailureBlocksQuitAndShowsText:true,hiddenQuitPersistsDraft:true};await fs.writeFile('acceptance/evidence/hidden-draft-native.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
+- }finally{await fs.chmod(dir,0o755);if(app)await app.close();await fs.rm(dir,{recursive:true,force:true});}
++  const report={scope:'actual Mac Electron BrowserWindow.hide event and grace timeout, shortcut callback through emulated registry, hidden renderer quit capture; not physical macOS Hide menu/IME acceptance',unconfirmedHiddenDraftRetainedBeyond30Seconds:true,reopenResumesLiveText:true,hiddenSaveFailureBlocksQuitAndShowsText:true,hiddenQuitPersistsDraft:true};await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','hidden-draft-native.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
++ }finally{await fs.chmod(dir,0o755);await close();await cleanupIdleFixture(dir,ownedPids);await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','hidden-draft-workflow-cleanup.json'),JSON.stringify({ownedPids,allPidsExited:true,fakeDataRemoved:true},null,2)+'\n');}
+ })().catch(e=>{console.error(e);process.exitCode=1;});
+diff --git a/tests/electron/motion-workflow.cjs b/tests/electron/motion-workflow.cjs
+index de456f9..46e7838 100644
+--- a/tests/electron/motion-workflow.cjs
++++ b/tests/electron/motion-workflow.cjs
+@@ -1,9 +1,10 @@
++const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
+ const {launchOptions,warmViews}=require('./window-fixture.cjs');
+ const assert=require('node:assert/strict'),path=require('node:path'),fs=require('node:fs/promises'),os=require('node:os');const {_electron}=require('playwright');
+ (async()=>{
+- const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-motion-'));let app;
++ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-motion-'));let app;const ownedPids=[];const close=async()=>{if(app){ownedPids.push(...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)),app.process().pid);await app.close();app=null;}};
+  try{
+-  app=await _electron.launch(await launchOptions(dir));
++  const options=await launchOptions(dir);await fs.writeFile(options.args[0],`const {app:fixtureApp,screen}=require('electron');fixtureApp.once('ready',()=>{screen.getCursorScreenPoint=()=>({x:600,y:500});});`+await fs.readFile(options.args[0],'utf8'));app=await _electron.launch(options);
+   await warmViews(app);while((await app.windows()).length<3)await app.waitForEvent('window');const pages=await app.windows();const shelf=pages.find(p=>p.url().includes('view=shelf')),composer=pages.find(p=>p.url().includes('view=composer'));
+   await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});
+   const submit=async n=>{const r=await composer.evaluate(async n=>{const i=await window.thoughtline.info();return window.thoughtline.submit({text:'完整正文 '+n,title:'动效测试 '+n,agentId:'codex',project:''},i.snapshot.revision);},n);assert(r.ok,r.message);};
+@@ -29,9 +30,9 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
+   const requests=await shelf.evaluate(()=>window.motionRequests);await new Promise(r=>setTimeout(r,250));assert.equal(await shelf.evaluate(()=>window.motionRequests),requests,'no idle animation frames');
+   await shelf.emulateMedia({reducedMotion:'reduce'});await submit(3);
+   await shelf.waitForFunction(()=>Number(document.querySelector('[data-view=shelf]').dataset.progress)===1);
+-  const reduced=await shelf.evaluate(()=>({animation:getComputedStyle(document.querySelector('.idea-card strong')).animationName,sag:Number(document.querySelector('.rope').dataset.sag),transform:getComputedStyle(document.querySelector('[data-view=shelf]')).transform}));assert.equal(reduced.animation,'none');assert.equal(reduced.sag,30);assert.equal(reduced.transform,'none');
++  const reduced=await shelf.evaluate(()=>({animation:getComputedStyle(document.querySelector('.idea-card strong')).animationName,sag:Number(document.querySelector('.rope').dataset.sag),transform:getComputedStyle(document.querySelector('[data-view=shelf]')).transform}));assert.equal(reduced.animation,'none');const width=(await shelf.evaluate(()=>window.thoughtline.info())).width,expectedSag=Math.max(18,Math.min(30,width*.7*.026));assert.equal(reduced.sag,expectedSag);assert.equal(reduced.transform,'none');
+   await shelf.screenshot({path:path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','motion-native.png'),omitBackground:true});
+-  const report={scope:'actual Mac Electron app/native window and renderer protocol; not physical hover, click-through or subjective visual acceptance',compactSize:[160,226],exitRetainsNativeUntilPainted:true,rapidReentryStaysVisible:true,eventualNativeHide:true,noIdleAnimationFrames:true,liveSystemReducedMotion:true,sharedSag:30,fixedAcrossNoteCount:true};
++  const report={scope:'actual Mac Electron app/native window and renderer protocol; not physical hover, click-through or subjective visual acceptance',compactSize:[160,226],exitRetainsNativeUntilPainted:true,rapidReentryStaysVisible:true,eventualNativeHide:true,noIdleAnimationFrames:true,liveSystemReducedMotion:true,sharedSag:expectedSag,fixedAcrossNoteCount:true};
+   await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','motion-native.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
+- }finally{try{if(app)await app.close();}finally{await fs.rm(dir,{recursive:true,force:true});}}
++ }finally{await close();await cleanupIdleFixture(dir,ownedPids);await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','motion-workflow-cleanup.json'),JSON.stringify({ownedPids,allPidsExited:true,fakeDataRemoved:true},null,2)+'\n');}
+ })().catch(e=>{console.error(e);process.exitCode=1;});
+diff --git a/tests/electron/package-acceptance.cjs b/tests/electron/package-acceptance.cjs
+index 2931888..195c5d1 100644
+--- a/tests/electron/package-acceptance.cjs
++++ b/tests/electron/package-acceptance.cjs
+@@ -1,9 +1,10 @@
++const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
+ const {waitForInfo}=require('./window-fixture.cjs');
+ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto');
+ const {_electron}=require('playwright');
+ (async()=>{
+  if(!process.env.THOUGHTLINE_EXECUTABLE)throw Error('Set THOUGHTLINE_EXECUTABLE to the frozen test App executable.');
+- const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-package-acceptance-'));let app;
++ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-package-acceptance-'));let app;const ownedPids=[];const close=async()=>{if(app){ownedPids.push(...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)),app.process().pid);await app.close();app=null;}};
+  const body='  原始中文正文\n第二行😀\n末行  ',id='package-test-idea';
+  const seed={schemaVersion:2,revision:0,clips:[{id:'package-test-clip',agentId:'general',ideaIds:[id],currentId:id,position:null}],ideas:[{id,text:body,title:'独立包验收',project:'',agentId:'general',status:'hanging',createdAt:'2026-10-09T00:00:00.000Z',updatedAt:'2026-10-09T00:00:00.000Z'}],agents:[{id:'general',name:'通用',color:'#A4A5B0'}],draft:{text:'重启草稿',title:'',project:'',agentId:'general'},settings:{writeHotkey:'Control+Alt+F18',reducedMotion:false}};
+  const launch=async()=>{app=await _electron.launch({executablePath:process.env.THOUGHTLINE_EXECUTABLE,args:[],env:{...process.env,THOUGHTLINE_DATA_DIR:dir},timeout:20000});const shelf=await app.firstWindow();await shelf.waitForURL(/view=shelf/);await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});return shelf;};
+@@ -16,9 +17,9 @@ const {_electron}=require('playwright');
+   const canceled=await shelf.evaluate(()=>window.thoughtline.info());assert.equal(canceled.snapshot.ideas[0].text,body);assert.equal(canceled.snapshot.revision,cancelRevision);
+   assert((await shelf.evaluate(id=>window.thoughtline.openEdit(id),id)).ok);await composer.waitForFunction(body=>document.querySelector('#idea-text')?.value===body,body);await composer.locator('#idea-text').fill(body+'\n打包后编辑');await composer.getByRole('button',{name:'保存修改',exact:true}).click();
+   await waitForInfo(shelf,i=>!i.interactionLocked);
+-  await app.close();app=null;shelf=await launch();const info=await shelf.evaluate(()=>window.thoughtline.info());assert.equal(info.snapshot.ideas[0].text,body+'\n打包后编辑');assert.equal(info.snapshot.draft.text,'重启草稿');
++  await close();shelf=await launch();const info=await shelf.evaluate(()=>window.thoughtline.info());assert.equal(info.snapshot.ideas[0].text,body+'\n打包后编辑');assert.equal(info.snapshot.draft.text,'重启草稿');
+   assert((await shelf.evaluate(()=>window.thoughtline.openSettings())).ok);manage=(await app.windows()).find(p=>p.url().includes('view=manage'));await manage.waitForSelector('[data-mode=settings]');await manage.getByRole('button',{name:'关闭设置',exact:true}).click();
+   const report={scope:'actual frozen Mac App, isolated seeded data; Electron DOM/IPC and native window objects; not physical IME/focus/hotkey or Windows acceptance',version:await app.evaluate(({app})=>app.getVersion()),startupWindows:1,startupHidden:true,fullText:true,editCancelPreserved:true,editPersistedAcrossRestart:true,newDraftNotOverwrittenByEdit:true,lazySettings:true,asarSha256:crypto.createHash('sha256').update(await fs.readFile(path.resolve(process.env.THOUGHTLINE_EXECUTABLE,'../../Resources/app.asar'))).digest('hex')};
+-  await fs.writeFile('acceptance/evidence/overnight-package-acceptance.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
+- }finally{if(app)await app.close();await fs.rm(dir,{recursive:true,force:true});}
++  await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','overnight-package-acceptance.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
++ }finally{await close();await cleanupIdleFixture(dir,ownedPids);await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','package-acceptance-cleanup.json'),JSON.stringify({ownedPids,allPidsExited:true,fakeDataRemoved:true},null,2)+'\n');}
+ })().catch(e=>{console.error(e);process.exitCode=1;});
+diff --git a/tests/electron/package-idle.cjs b/tests/electron/package-idle.cjs
+index f14167c..27db38e 100644
+--- a/tests/electron/package-idle.cjs
++++ b/tests/electron/package-idle.cjs
+@@ -14,6 +14,6 @@ const time=s=>s.split(':').map(Number).reduce((a,n)=>a*60+n,0);
+   const first=sample(),samples=[first];for(let i=0;i<4;i++){await new Promise(r=>setTimeout(r,30000));samples.push(sample());console.log(JSON.stringify({seconds:(samples.at(-1).at-first.at)/1000,rssMiB:samples.at(-1).rssMiB}));}
+   const stable=samples.every(s=>JSON.stringify(s.tree.map(p=>p.pid).sort())===JSON.stringify(first.tree.map(p=>p.pid).sort()));assert(stable,'process membership changed, idle acceptance invalid');
+   const last=samples.at(-1),cpu=(last.cpuSeconds-first.cpuSeconds)/((last.at-first.at)/1000)*100,rss=Math.max(...samples.slice(-3).map(s=>s.rssMiB));
+-  const report={scope:'Mac frozen ad-hoc App executable, isolated empty data, direct spawn with no debugger; no native interaction tests running concurrently; hidden startup established separately by packaged workflow',durationSeconds:(last.at-first.at)/1000,stableMembership:stable,cpuPercentSingleCore:cpu,stableRssMiB:rss,cpuGate:cpu<=2,rssGate:rss<=350,asarSha256:crypto.createHash('sha256').update(await fs.readFile(path.resolve(process.env.THOUGHTLINE_EXECUTABLE,'../../Resources/app.asar'))).digest('hex'),samples};await fs.writeFile('acceptance/evidence/overnight-package-idle.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({cpu,rss,cpuGate:report.cpuGate,rssGate:report.rssGate}));assert(report.cpuGate);assert(report.rssGate);
+- }finally{if(child&&child.exitCode===null&&child.signalCode===null){child.kill('SIGTERM');await Promise.race([new Promise(r=>child.once('exit',r)),new Promise(r=>setTimeout(r,5000))]);if(child.exitCode===null&&child.signalCode===null){const exited=new Promise(r=>child.once('exit',r));child.kill('SIGKILL');await exited;}}if(child?.pid)measuredPids.add(child.pid);await cleanupIdleFixture(dir,measuredPids);}
++  const report={scope:'Mac frozen ad-hoc App executable, isolated empty data, direct spawn with no debugger; no native interaction tests running concurrently; hidden startup established separately by packaged workflow',durationSeconds:(last.at-first.at)/1000,stableMembership:stable,cpuPercentSingleCore:cpu,stableRssMiB:rss,cpuGate:cpu<=2,rssGate:rss<=350,asarSha256:crypto.createHash('sha256').update(await fs.readFile(path.resolve(process.env.THOUGHTLINE_EXECUTABLE,'../../Resources/app.asar'))).digest('hex'),samples};await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','overnight-package-idle.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({cpu,rss,cpuGate:report.cpuGate,rssGate:report.rssGate}));assert(report.cpuGate);assert(report.rssGate);
++ }finally{if(child&&child.exitCode===null&&child.signalCode===null){child.kill('SIGTERM');await Promise.race([new Promise(r=>child.once('exit',r)),new Promise(r=>setTimeout(r,5000))]);if(child.exitCode===null&&child.signalCode===null){const exited=new Promise(r=>child.once('exit',r));child.kill('SIGKILL');await exited;}}if(child?.pid)measuredPids.add(child.pid);await cleanupIdleFixture(dir,measuredPids);await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','package-idle-cleanup.json'),JSON.stringify({ownedPids:[...measuredPids],allPidsExited:true,fakeDataRemoved:true},null,2)+'\n');}
+ })().catch(e=>{console.error(e);process.exitCode=1;});
+diff --git a/tests/electron/paper-polish-preview.cjs b/tests/electron/paper-polish-preview.cjs
+index fbd9c86..8b0ade9 100644
+--- a/tests/electron/paper-polish-preview.cjs
++++ b/tests/electron/paper-polish-preview.cjs
+@@ -1,6 +1,6 @@
+ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto');
+ const {_electron}=require('playwright'),{launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
+-const stage=process.argv[2]||'after',output=path.resolve('acceptance/evidence/paper-polish-review/'+stage);
++const stage=process.argv[2]||'after',output=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/paper-polish-review/'+stage);
+ (async()=>{
+  await fs.mkdir(output,{recursive:true});const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-paper-polish-'));let app,pids=[];const scenes=[];
+  try{
+diff --git a/tests/electron/paused-unlock-workflow.cjs b/tests/electron/paused-unlock-workflow.cjs
+index bb86c18..bd4b111 100644
+--- a/tests/electron/paused-unlock-workflow.cjs
++++ b/tests/electron/paused-unlock-workflow.cjs
+@@ -1,6 +1,6 @@
+ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
+ const {_electron}=require('playwright'),{launchOptions,warmViews,openComposer,waitForInfo}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
+-const stage=process.argv[2]||'green',output=path.resolve('acceptance/evidence/paused-unlock-fix/'+stage);
++const stage=process.argv[2]||'green',output=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/paused-unlock-fix/'+stage);
+ (async()=>{
+  await fs.mkdir(output,{recursive:true});const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-paused-unlock-'));let app,pids=[];const checkpoints=[];
+  const note=async(label,shelf)=>{const info=await shelf.evaluate(()=>window.thoughtline.info());const native=await app.evaluate(({BrowserWindow})=>Object.fromEntries(BrowserWindow.getAllWindows().map(w=>[w.getTitle(),w.isVisible()])));checkpoints.push({label,nativeWindowsVisible:native,shelfVisible:info.shelfVisible,interactionLocked:info.interactionLocked,textDragActive:info.textDragActive,draft:info.snapshot.draft,ideaCount:info.snapshot.ideas.length});if(label.includes('paused')||label==='sleep released but lock-screen still active'||label.startsWith('manual pause cancels'))assert.equal(native['Thoughtline Shelf'],false,'paused native shelf must be hidden');return info;};
+diff --git a/tests/electron/projection-workflow.cjs b/tests/electron/projection-workflow.cjs
+new file mode 100644
+index 0000000..34a1f17
+--- /dev/null
++++ b/tests/electron/projection-workflow.cjs
+@@ -0,0 +1,27 @@
++const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
++const {_electron}=require('playwright'),{launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
++const output=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/candidate-0.0.15/source-regression');
++(async()=>{
++ await fs.mkdir(output,{recursive:true});const cases=[],pids=[];let app;
++ const close=async()=>{if(app){pids.push(...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)),app.process().pid);await app.close();app=null;}};
++ for(const {positions,width} of [{positions:[.8,null,.2,1],width:1440},{positions:Array(8).fill(null),width:1440},{positions:Array(8).fill(null),width:1040}]){
++  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-projection-'));
++  const ideas=positions.map((_,n)=>({id:'idea'+n,text:'  保全中文 '+n+'\n😀  ',title:'标签'+n,project:'项目',agentId:'codex',status:'hanging',createdAt:'2026-10-09T00:00:00Z',updatedAt:'2026-10-09T00:00:00Z'}));
++  const seed={schemaVersion:2,revision:0,ideas,clips:positions.map((position,n)=>({id:String(n),position,agentId:'codex',ideaIds:[ideas[n].id],currentId:ideas[n].id})),agents:[{id:'codex',name:'Codex',color:'#4C90D9'},{id:'general',name:'通用',color:'#A0A3AA'}],draft:null,settings:{writeHotkey:'Control+Alt+F18',reducedMotion:false}};
++  try{
++   await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify(seed));const options=await launchOptions(dir);await fs.writeFile(options.args[0],`const {app:fixtureApp,screen}=require('electron');fixtureApp.once('ready',()=>{const adapt=d=>({...d,bounds:{...d.bounds,width:${width}},workArea:{...d.workArea,width:${width}}});for(const key of ['getPrimaryDisplay','getDisplayNearestPoint','getDisplayMatching']){const original=screen[key].bind(screen);screen[key]=(...args)=>adapt(original(...args));}const all=screen.getAllDisplays.bind(screen);screen.getAllDisplays=()=>all().map(adapt);screen.getCursorScreenPoint=()=>({x:${width}/2,y:1});});`+await fs.readFile(options.args[0],'utf8'));app=await _electron.launch(options);const {shelf}=await warmViews(app);
++   const collect=async()=>{await waitForInfo(shelf,i=>!i.interactionLocked);await shelf.waitForFunction(()=>document.querySelector('[data-view=shelf]').dataset.locked==='false');await shelf.waitForFunction(()=>Number(document.querySelector('[data-view=shelf]').dataset.progress)===1);return shelf.locator('.hanging').evaluateAll(els=>els.map(el=>({id:el.dataset.clipId,x:el.getBoundingClientRect().x+80})));};
++   await shelf.evaluate(()=>window.thoughtline.onInfo(i=>{globalThis.fixtureReceivedRevision=i.snapshot.revision;}));
++   const command=async operation=>{const previousGeometry=await collect();const i=await shelf.evaluate(()=>window.thoughtline.info());const r=await shelf.evaluate(({operation,revision})=>window.thoughtline.clipChange(operation,revision),{operation,revision:i.snapshot.revision});assert(r.ok,r.message);await waitForInfo(shelf,j=>!j.interactionLocked&&j.snapshot.revision>i.snapshot.revision);await shelf.waitForFunction(revision=>globalThis.fixtureReceivedRevision>revision,i.snapshot.revision);await shelf.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));const geometry=await collect(),state=(await shelf.evaluate(()=>window.thoughtline.info())).snapshot;assert.deepEqual(state.ideas,ideas);assert.deepEqual(state.clips.flatMap(c=>c.ideaIds).sort(),ideas.map(i=>i.id).sort());const width=i.width,min=Math.max(92,width*.15+width*.7/6),max=Math.min(width-92,width*.15+width*.7*5/6);for(const g of geometry){const c=state.clips.find(c=>c.id===g.id);if(operation.kind==='move'&&operation.id===g.id&&previousGeometry.some(p=>p.id===g.id))assert(Math.abs(g.x-(min+c.position*(max-min)))<.05,'persisted moved ratio must match natural unlocked DOM');assert(g.x>=min-.01&&g.x<=max+.01);}return geometry;};
++   const before=await collect(),chain=[];
++   if(positions.length===4){const after=await command({kind:'merge',sourceId:'1',targetId:'0'});assert.deepEqual(after,before,'capturing hidden-source merge must not move existing visible centers');chain.push({kind:'merge',before,after});}
++   else if(width===1040){const chosen=before.at(-1).id,after=await command({kind:'move',id:chosen,position:1,beforeId:null});assert.deepEqual(after.map(p=>p.id).sort(),before.map(p=>p.id).sort());assert.equal(after.at(-1).id,chosen);chain.push({kind:'move-last-visible-to-right',after});}
++   else{
++    for(const op of [{kind:'move',id:'1',position:0,beforeId:'0'},{kind:'move',id:'2',position:1,beforeId:null},{kind:'move',id:'3',position:0,beforeId:'1'},{kind:'move',id:'4',position:0,beforeId:'3'},{kind:'move',id:'3',position:1,beforeId:null},{kind:'merge',sourceId:'4',targetId:'1'}])chain.push({operation:op,after:await command(op)});
++    const i=(await shelf.evaluate(()=>window.thoughtline.info())).snapshot,group=i.clips.find(c=>c.ideaIds.length>1);chain.push({kind:'split',after:await command({kind:'split',id:group.id,ideaId:group.ideaIds[0]})});chain.push({kind:'undo',after:await command({kind:'undo'})});
++   }
++   cases.push({width,seededPositions:positions,before,chain,allBodiesAndOwnershipPreserved:true,naturalUnlockedMovedRatioMatches:true});
++  }finally{await close();await cleanupIdleFixture(dir,pids);}
++ }
++ await fs.writeFile(path.join(output,'projection-native.json'),JSON.stringify({scope:'actual source main clipChange and naturally unlocked renderer; trusted DOM IPC commands including hidden merge/move/split/undo; no physical pointer/Windows acceptance',cases,ownedPids:[...new Set(pids)],allPidsExited:true,fakeDataRemoved:true},null,2)+'\n');console.log(JSON.stringify({passed:true,cases:cases.length}));
++})().catch(e=>{console.error(e);process.exitCode=1;});
+diff --git a/tests/electron/workflow.cjs b/tests/electron/workflow.cjs
+index a8ef1a2..a706f3f 100644
+--- a/tests/electron/workflow.cjs
++++ b/tests/electron/workflow.cjs
+@@ -1,7 +1,8 @@
++const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
+ const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');
+ const assert=require('node:assert/strict');const path=require('node:path');const fs=require('node:fs/promises');const os=require('node:os');const {_electron}=require('playwright');
+ (async()=>{
+- const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-workflow-'));let app;
++ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-workflow-'));let app;const ownedPids=[];const close=async()=>{if(app){ownedPids.push(...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)),app.process().pid);await app.close();app=null;}};
+  const launch=async()=>_electron.launch(await launchOptions(dir));
+  const windows=async()=>{let shelf,composer,manage;for(const p of await app.windows()){if(p.url().includes('view=shelf'))shelf=p;if(p.url().includes('view=composer'))composer=p;if(p.url().includes('view=manage'))manage=p;}return {shelf,composer,manage};};
+  const ready=async()=>{await warmViews(app);while((await app.windows()).length<3)await app.waitForEvent('window',{timeout:5000});for(const p of await app.windows())await p.waitForURL(/view=(shelf|composer|manage)/,{waitUntil:'domcontentloaded',timeout:5000});const w=await windows();assert(w.shelf&&w.composer&&w.manage);await w.shelf.waitForSelector('[data-view="shelf"]',{state:'attached',timeout:5000});return w;};
+@@ -11,7 +12,7 @@ const assert=require('node:assert/strict');const path=require('node:path');const
+   const full='  原始正文\n中文第二行\n'+('长正文 '.repeat(300));
+   let info=await composer.evaluate(()=>window.thoughtline.info());
+   const s=await result(composer,'submit',{text:full,title:'循环验收',project:'项目',agentId:'codex'},info.snapshot.revision);const id=s.ideas[0].id;
+-  await shelf.waitForSelector('[data-idea-id="'+id+'"]');assert.equal(await shelf.locator('.idea-card').evaluate(el=>el.getBoundingClientRect().width),160);assert.equal(await shelf.locator('.idea-card').evaluate(el=>el.getBoundingClientRect().height),226);
++  await shelf.waitForSelector('[data-idea-id="'+id+'"]');const paper=await shelf.locator('.idea-card').evaluate(el=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height};});assert(Math.abs(paper.width-160)<.01&&Math.abs(paper.height-226)<.01,'paper DOM bounds within floating-point precision');
+   await result(shelf,'openManage',id);assert(manage,'temporary manage view must exist');
+   await manage.waitForSelector('[data-view="manage"]',{state:'attached'});
+   await manage.waitForSelector('[data-full-text]',{timeout:5000}).catch(async e=>{console.error(await manage.evaluate(async()=>({info:await window.thoughtline.info(),html:document.body.innerHTML.slice(0,3500)})));throw e;});
+@@ -28,8 +29,8 @@ const assert=require('node:assert/strict');const path=require('node:path');const
+   info=await manage.evaluate(()=>window.thoughtline.info());await result(manage,'setStatus',id,'hanging',info.snapshot.revision);
+   await result(manage,'copy',id);const clipboard=await app.evaluate(async({clipboard})=>await clipboard.readText());assert.equal(clipboard,edited);
+   const before=(await manage.evaluate(()=>window.thoughtline.info())).snapshot;assert.equal(before.ideas[0].status,'hanging');
+-  await app.close();app=null;app=await launch();({shelf}=await ready());info=await shelf.evaluate(()=>window.thoughtline.info());assert.equal(info.snapshot.ideas[0].text,edited);assert.equal(info.snapshot.ideas[0].agentId,'claude');
++  await close();app=await launch();({shelf}=await ready());info=await shelf.evaluate(()=>window.thoughtline.info());assert.equal(info.snapshot.ideas[0].text,edited);assert.equal(info.snapshot.ideas[0].agentId,'claude');
+   const report={platform:process.platform,scope:'真实Electron桥接和DOM循环；不代表物理点击穿透、系统IME或跨App焦点',editCancelPreserved:true,editSavedFullText:true,archiveSearchRestore:true,copyFullText:true,restartPreserved:true};
+   await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','workflow-native.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
+- }finally{try{if(app)await app.close();}finally{await fs.rm(dir,{recursive:true,force:true});}}
++ }finally{await close();await cleanupIdleFixture(dir,ownedPids);await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','workflow-cleanup.json'),JSON.stringify({ownedPids,allPidsExited:true,fakeDataRemoved:true},null,2)+'\n');}
+ })().catch(e=>{console.error(e);process.exitCode=1;});

@@ -1,0 +1,30 @@
+electron.launch: Timeout 15000ms exceeded.
+Call log:
+[2m  - <launching> /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron --inspect=0 --remote-debugging-port=0 /var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-projection-SGWybE/protocol-entry.cjs[22m
+[2m  - <launched> pid=96694[22m
+[2m  - [pid=96694][err] Debugger listening on ws://127.0.0.1:49947/bd110b9a-479c-479c-aee8-626162d72d4e[22m
+[2m  - [pid=96694][err] For help, see: https://nodejs.org/learn/getting-started/debugging[22m
+[2m  - <ws connecting> ws://127.0.0.1:49947/bd110b9a-479c-479c-aee8-626162d72d4e[22m
+[2m  - [pid=96694][err] Debugger attached.[22m
+[2m  - <ws connected> ws://127.0.0.1:49947/bd110b9a-479c-479c-aee8-626162d72d4e[22m
+[2m  - [pid=96694][err][22m
+[2m  - [pid=96694][err] DevTools listening on ws://127.0.0.1:49949/devtools/browser/b434c248-54ca-490e-b5fe-64e7b33172d5[22m
+[2m  - <ws connecting> ws://127.0.0.1:49949/devtools/browser/b434c248-54ca-490e-b5fe-64e7b33172d5[22m
+[2m  - <ws connected> ws://127.0.0.1:49949/devtools/browser/b434c248-54ca-490e-b5fe-64e7b33172d5[22m
+
+    at async /Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/tests/electron/projection-workflow.cjs:12:328 {
+  log: [
+    '  - <launching> /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron --inspect=0 --remote-debugging-port=0 /var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-projection-SGWybE/protocol-entry.cjs',
+    '  - <launched> pid=96694',
+    '  - [pid=96694][err] Debugger listening on ws://127.0.0.1:49947/bd110b9a-479c-479c-aee8-626162d72d4e',
+    '  - [pid=96694][err] For help, see: https://nodejs.org/learn/getting-started/debugging',
+    '  - <ws connecting> ws://127.0.0.1:49947/bd110b9a-479c-479c-aee8-626162d72d4e',
+    '  - [pid=96694][err] Debugger attached.',
+    '  - <ws connected> ws://127.0.0.1:49947/bd110b9a-479c-479c-aee8-626162d72d4e',
+    '  - [pid=96694][err]',
+    '  - [pid=96694][err] DevTools listening on ws://127.0.0.1:49949/devtools/browser/b434c248-54ca-490e-b5fe-64e7b33172d5',
+    '  - <ws connecting> ws://127.0.0.1:49949/devtools/browser/b434c248-54ca-490e-b5fe-64e7b33172d5',
+    '  - <ws connected> ws://127.0.0.1:49949/devtools/browser/b434c248-54ca-490e-b5fe-64e7b33172d5'
+  ],
+  name: 'TimeoutError'
+}

@@ -1,0 +1,101 @@
+{
+  "sourceCommit": "61a6837dbde290041a13226596baad5b21249fc1",
+  "version": "0.0.15",
+  "executable": "/Users/lihongwei/Documents/Codex/2026-10-09/task-2/frozen-0.0.15/mount/Thoughtline.app/Contents/MacOS/Thoughtline",
+  "scope": "actual frozen readonlyMacApp; independentfake data; actualTrayMenu callbacks and nativeWindow objects; awaitedIPC/DOM with simulated ownscreen pointer and theme, memoryclipboard; not physicalmenu/pointer/IME/Windows/Agent/G7",
+  "runtimeNode": "v25.8.1",
+  "results": [],
+  "checkpoints": [
+    {
+      "label": "composer-close-paused-unlocked",
+      "locked": false,
+      "shelfVisible": false,
+      "textDragActive": false,
+      "native": {
+        "Thoughtline Composer": false,
+        "Thoughtline Manage": false,
+        "Thoughtline Shelf": false
+      }
+    },
+    {
+      "label": "submit-paused-body-preserved",
+      "locked": false,
+      "shelfVisible": false,
+      "textDragActive": false,
+      "native": {
+        "Thoughtline Composer": false,
+        "Thoughtline Manage": false,
+        "Thoughtline Shelf": false
+      }
+    },
+    {
+      "label": "settings-close-paused-unlocked",
+      "locked": false,
+      "shelfVisible": false,
+      "textDragActive": false,
+      "native": {
+        "Thoughtline Composer": false,
+        "Thoughtline Manage": false,
+        "Thoughtline Shelf": false
+      }
+    },
+    {
+      "label": "peg-lock-pause-canceled",
+      "locked": false,
+      "shelfVisible": false,
+      "textDragActive": false,
+      "native": {
+        "Thoughtline Composer": false,
+        "Thoughtline Manage": false,
+        "Thoughtline Shelf": false
+      }
+    },
+    {
+      "label": "text-drag-pause-canceled",
+      "locked": false,
+      "shelfVisible": false,
+      "textDragActive": false,
+      "native": {
+        "Thoughtline Composer": false,
+        "Thoughtline Manage": false,
+        "Thoughtline Shelf": false
+      }
+    }
+  ],
+  "menus": [
+    {
+      "menu": true,
+      "item": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "composer-current-light.png",
+      "path": "/Users/lihongwei/Documents/Codex/2026-10-09/task-2/qa-0.0.15-native/composer-current-light.png",
+      "sha256": "1050412d33b84a7d7d40d328c2876e30216b7584c176598ffee441026719e5b6"
+    },
+    {
+      "file": "composer-current-dark.png",
+      "path": "/Users/lihongwei/Documents/Codex/2026-10-09/task-2/qa-0.0.15-native/composer-current-dark.png",
+      "sha256": "a6c35651acd985b877781c4006d0282a17c1e522d7da0c198cfb1e3e60bd6e41"
+    }
+  ],
+  "cleanup": {
+    "passed": true,
+    "ownedPids": [
+      2911,
+      2923,
+      2924,
+      2925,
+      2940
+    ],
+    "allPidsExited": true,
+    "fakeDataRemoved": true
+  },
+  "error": {
+    "name": "TimeoutError",
+    "message": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '取消修改', exact: true })\u001b[22m\n",
+    "stack": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '取消修改', exact: true })\u001b[22m\n\n    at /Users/lihongwei/Documents/Codex/2026-10-09/task-2/qa-0.0.15-native/frozen-incremental.cjs:39:688"
+  },
+  "passed": false
+}
