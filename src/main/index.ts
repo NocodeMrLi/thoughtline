@@ -65,8 +65,9 @@ else app.whenReady().then(async()=>{
  let composerContext:ComposerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
  const preload=join(__dirname,'../preload/index.js');shelf=createShelf(preload);
  const host=createHost(shelf,()=>composer);
- const info=():PilotInfo=>({preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,manageSession,manageSelection,manageMode,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
- const publish=()=>{for(const w of [shelf,composer,manage])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info());};
+ let preferenceCommit:{version:number;sequence:number;sender:number}|null=null;
+ const info=(viewer?:number):PilotInfo=>({preferenceCommit:preferenceCommit?{version:preferenceCommit.version,sequence:preferenceCommit.sequence,own:preferenceCommit.sender===viewer}:null,preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,manageSession,manageSelection,manageMode,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
+ const publish=()=>{for(const w of [shelf,composer,manage])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info(w.webContents.id));};
  const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:(BrowserWindow|null)[]=[shelf,composer,manage])=>allowed.some(w=>w?.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
  const prepareWindow=(w:BrowserWindow|null):Promise<boolean>=>{
   if(!w||w.isDestroyed())return Promise.resolve(true);
@@ -162,10 +163,10 @@ else app.whenReady().then(async()=>{
  ipcMain.handle('thoughtline:preferences',async(e,patch:unknown,sequence:number)=>{
   if(!trusted(e,[composer,manage])||quitting||quitInFlight)return invalid(t("无效操作"));
   const result=await preferences.update(patch,String(e.sender.id),sequence);
-  if(result.ok){startupLocale=preferences.current.locale;nativeTheme.themeSource=preferences.current.theme;refreshTray();publish();}
+  if(result.ok){preferenceCommit={version:result.value.version,sequence,sender:e.sender.id};startupLocale=preferences.current.locale;nativeTheme.themeSource=preferences.current.theme;refreshTray();publish();}
   return result;
  });
- ipcMain.handle('thoughtline:info',e=>{if(!trusted(e))throw Error(t("不允许读取"));return info();});
+ ipcMain.handle('thoughtline:info',e=>{if(!trusted(e))throw Error(t("不允许读取"));return info(e.sender.id);});
  ipcMain.on('thoughtline:presentation-finished',(e,session:number)=>{if(trusted(e,[shelf])&&Number.isSafeInteger(session)&&session>=0)edge.presentationFinished(session);});
  ipcMain.on('thoughtline:hit-layout',(e,p:HitLayout)=>{
   if(!trusted(e,[shelf])||!p||!Number.isSafeInteger(p.layoutRevision)||!Array.isArray(p.rects)||p.rects.length>512||typeof p.displayId!=='string')return;

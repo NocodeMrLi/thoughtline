@@ -60,17 +60,18 @@ async function runPackagedFixture({ executable = process.env.THOUGHTLINE_EXECUTA
   } finally { fs.closeSync(stdout); fs.closeSync(stderr); }
   let completed;
   try { completed = JSON.parse(fs.readFileSync(workerResult, 'utf8')); } catch (error) { result.error = `Worker did not write a valid completion receipt (${error.code || error.name})`; }
-  if (completed?.cleanup?.profile === profile && completed.executable === executable) result = completed;
+  const accepted = completed?.cleanup?.profile === profile && completed.executable === executable;
+  if (accepted) result = completed;
   else if (completed) result.error = 'Worker receipt does not match this owned invocation';
   result.worker = termination;
-  result.stage = completed ? 'worker-completed' : 'worker-terminated-before-receipt';
+  result.stage = accepted ? 'worker-completed' : completed ? 'worker-receipt-rejected' : 'worker-terminated-before-receipt';
   result.launchEvents = fs.readFileSync(path.join(out, 'launch-events.jsonl'), 'utf8').split('\n').filter(Boolean).map(line => JSON.parse(line));
   result.observedPidState = result.launchEvents.filter(event => event.type === 'spawn' && event.pid).map(event => {
     try { process.kill(event.pid, 0); return { pid: event.pid, alive: true }; }
     catch (error) { return { pid: event.pid, alive: error.code === 'ESRCH' ? false : null, ...(error.code === 'ESRCH' ? {} : { error: error.code }) }; }
   });
   result.passed = result.passed === true && termination.code === 0 && !termination.signal && !termination.error;
-  if (!completed) {
+  if (!accepted) {
     result.cleanup.ownedPids = [...new Set(result.launchEvents.filter(event => event.type === 'spawn' && event.pid).map(event => event.pid))];
     result.cleanup.reason = 'No complete app lifecycle receipt; process tree exit is unverified and profile retained';
   }
