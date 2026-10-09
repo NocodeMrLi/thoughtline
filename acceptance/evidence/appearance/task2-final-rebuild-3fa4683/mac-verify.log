@@ -1,0 +1,49 @@
+
+> thoughtline@0.0.17-preview.3 verify
+> node scripts/verify.cjs
+
+
+> thoughtline@0.0.17-preview.3 typecheck
+> node node_modules/typescript/bin/tsc --noEmit
+
+
+> thoughtline@0.0.17-preview.3 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /private/tmp/thoughtline-task2-KnsYFP/owned-project
+
+
+ Test Files  39 passed | 1 skipped (40)
+      Tests  222 passed | 4 skipped (226)
+   Start at  01:48:02
+   Duration  1.86s (tests 68%, transform 20%, import 10%, worker 2%)
+
+    Isolate  40 workers spawned · ~133ms startup each (spawn + environment, per file)
+             at least ~625ms faster with isolate: false — reuses workers across files instead of one per file
+
+
+> thoughtline@0.0.17-preview.3 build
+> node node_modules/electron-vite/bin/electron-vite.js build
+
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 26 modules transformed.
+rendering chunks...
+out/main/index.js  152.43 kB
+✓ built in 177ms
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 1 modules transformed.
+rendering chunks...
+out/preload/index.js  4.17 kB
+✓ built in 10ms
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 61 modules transformed.
+rendering chunks...
+../../out/renderer/index.html                                    0.52 kB
+../../out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg   98.37 kB
+../../out/renderer/assets/index-CfdZHPhh.css                    41.44 kB
+../../out/renderer/assets/index-DEmlrfyx.js                    833.10 kB
+✓ built in 1.14s

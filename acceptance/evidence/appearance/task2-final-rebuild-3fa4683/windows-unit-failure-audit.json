@@ -1,0 +1,40 @@
+{
+  "passed": false,
+  "sourceHeadSha": "3fa46838cac1161fc6909ac0a2566cd8a87e79a8",
+  "canonicalSourceInputSha256": "0f0b1048ba136430216b731d51aa6b7db050f1c788c17d9299084e50efab3c7b",
+  "runId": 37968756145,
+  "runAttempt": 1,
+  "runConclusion": "failure",
+  "failedStage": "npm run verify, before Windows package/build-manifest/install/reinstall/uninstall",
+  "unitSummary": {
+    "passed": 222,
+    "failed": 4,
+    "testFilesPassed": 39,
+    "testFilesFailed": 1,
+    "failedFile": "tests/unit/preferenceOrdering.test.ts",
+    "error": "TypeError: Cannot read properties of null (reading 1)",
+    "location": "tests/unit/preferenceOrdering.test.ts:8:84"
+  },
+  "mechanism": {
+    "testHarness": "source.match(/const change=async\\(patch:PreferencePatch\\)=>(.*);\\n/)![1]",
+    "macLFMatches": true,
+    "syntheticCRLFMatches": false,
+    "interpretation": "Windows checkout CRLF is a strong inference, not independently proven by a runner raw source artifact; the fixed LF regex is not cross-platform",
+    "sourceEdited": false,
+    "assertionsWeakened": false
+  },
+  "artifacts": [
+    {
+      "id": 11634009682,
+      "name": "Thoughtline-Windows-source-ui-3fa46838cac1161fc6909ac0a2566cd8a87e79a8-1",
+      "bytes": 17791,
+      "sha256": "53298ebc4a94a4cee1fc0e4b318e263924e2a2e8a2246826b36c0ff1af2b1d8b",
+      "contents": [
+        "round1/p6-windows-source/source-key-events.json",
+        "round1/p6-windows-source/source-shelf.png"
+      ]
+    }
+  ],
+  "windowsInstallerArtifactAvailable": false,
+  "draftUpdated": false
+}
