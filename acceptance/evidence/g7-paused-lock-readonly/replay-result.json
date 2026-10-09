@@ -1,0 +1,504 @@
+{
+  "scope": "exact current shared TypeScript reducer under Node type stripping; no Electron, native windows, power events, system permission, notes or real shortcuts",
+  "sourceCommit": "d9a9cd013fb879a9f11065db8dabec73882c41df",
+  "sourcePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/src/shared/shelfState.ts",
+  "sourceSha256": "b7ac4c2eb5512208773f794c7602083c849714e6fb68422768bea14c05e7b5bf",
+  "normalControl": {
+    "phase": "revealed",
+    "zone": "edge",
+    "locks": [],
+    "dwellAt": 10,
+    "leaveAt": null,
+    "corridorUntil": null,
+    "peekUntil": null,
+    "suspended": false
+  },
+  "traces": [
+    {
+      "name": "composer",
+      "releaseWhileSuspendedIgnored": true,
+      "staleLockAfterResume": true,
+      "normalEdgeDwellCannotReveal": true,
+      "states": [
+        {
+          "event": {
+            "type": "lock",
+            "name": "composer",
+            "active": true,
+            "now": 0
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "outside",
+            "locks": [
+              "composer"
+            ],
+            "dwellAt": null,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": false
+          }
+        },
+        {
+          "event": {
+            "type": "suspend",
+            "now": 1
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "outside",
+            "locks": [
+              "composer"
+            ],
+            "dwellAt": null,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": true
+          }
+        },
+        {
+          "event": {
+            "type": "lock",
+            "name": "composer",
+            "active": false,
+            "now": 2
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "outside",
+            "locks": [
+              "composer"
+            ],
+            "dwellAt": null,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": true
+          }
+        },
+        {
+          "event": {
+            "type": "resume",
+            "now": 3
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "outside",
+            "locks": [
+              "composer"
+            ],
+            "dwellAt": null,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": false
+          }
+        },
+        {
+          "event": {
+            "type": "pointer",
+            "zone": "edge",
+            "now": 10
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "edge",
+            "locks": [
+              "composer"
+            ],
+            "dwellAt": 10,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": false
+          }
+        },
+        {
+          "event": {
+            "type": "tick",
+            "now": 1000
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "edge",
+            "locks": [
+              "composer"
+            ],
+            "dwellAt": 10,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "manage",
+      "releaseWhileSuspendedIgnored": true,
+      "staleLockAfterResume": true,
+      "normalEdgeDwellCannotReveal": true,
+      "states": [
+        {
+          "event": {
+            "type": "lock",
+            "name": "manage",
+            "active": true,
+            "now": 0
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "outside",
+            "locks": [
+              "manage"
+            ],
+            "dwellAt": null,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": false
+          }
+        },
+        {
+          "event": {
+            "type": "suspend",
+            "now": 1
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "outside",
+            "locks": [
+              "manage"
+            ],
+            "dwellAt": null,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": true
+          }
+        },
+        {
+          "event": {
+            "type": "lock",
+            "name": "manage",
+            "active": false,
+            "now": 2
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "outside",
+            "locks": [
+              "manage"
+            ],
+            "dwellAt": null,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": true
+          }
+        },
+        {
+          "event": {
+            "type": "resume",
+            "now": 3
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "outside",
+            "locks": [
+              "manage"
+            ],
+            "dwellAt": null,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": false
+          }
+        },
+        {
+          "event": {
+            "type": "pointer",
+            "zone": "edge",
+            "now": 10
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "edge",
+            "locks": [
+              "manage"
+            ],
+            "dwellAt": 10,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": false
+          }
+        },
+        {
+          "event": {
+            "type": "tick",
+            "now": 1000
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "edge",
+            "locks": [
+              "manage"
+            ],
+            "dwellAt": 10,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "menu",
+      "releaseWhileSuspendedIgnored": true,
+      "staleLockAfterResume": true,
+      "normalEdgeDwellCannotReveal": true,
+      "states": [
+        {
+          "event": {
+            "type": "lock",
+            "name": "menu",
+            "active": true,
+            "now": 0
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "outside",
+            "locks": [
+              "menu"
+            ],
+            "dwellAt": null,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": false
+          }
+        },
+        {
+          "event": {
+            "type": "suspend",
+            "now": 1
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "outside",
+            "locks": [
+              "menu"
+            ],
+            "dwellAt": null,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": true
+          }
+        },
+        {
+          "event": {
+            "type": "lock",
+            "name": "menu",
+            "active": false,
+            "now": 2
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "outside",
+            "locks": [
+              "menu"
+            ],
+            "dwellAt": null,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": true
+          }
+        },
+        {
+          "event": {
+            "type": "resume",
+            "now": 3
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "outside",
+            "locks": [
+              "menu"
+            ],
+            "dwellAt": null,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": false
+          }
+        },
+        {
+          "event": {
+            "type": "pointer",
+            "zone": "edge",
+            "now": 10
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "edge",
+            "locks": [
+              "menu"
+            ],
+            "dwellAt": 10,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": false
+          }
+        },
+        {
+          "event": {
+            "type": "tick",
+            "now": 1000
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "edge",
+            "locks": [
+              "menu"
+            ],
+            "dwellAt": 10,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "text-drag",
+      "releaseWhileSuspendedIgnored": true,
+      "staleLockAfterResume": true,
+      "normalEdgeDwellCannotReveal": true,
+      "states": [
+        {
+          "event": {
+            "type": "lock",
+            "name": "text-drag",
+            "active": true,
+            "now": 0
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "outside",
+            "locks": [
+              "text-drag"
+            ],
+            "dwellAt": null,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": false
+          }
+        },
+        {
+          "event": {
+            "type": "suspend",
+            "now": 1
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "outside",
+            "locks": [
+              "text-drag"
+            ],
+            "dwellAt": null,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": true
+          }
+        },
+        {
+          "event": {
+            "type": "lock",
+            "name": "text-drag",
+            "active": false,
+            "now": 2
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "outside",
+            "locks": [
+              "text-drag"
+            ],
+            "dwellAt": null,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": true
+          }
+        },
+        {
+          "event": {
+            "type": "resume",
+            "now": 3
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "outside",
+            "locks": [
+              "text-drag"
+            ],
+            "dwellAt": null,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": false
+          }
+        },
+        {
+          "event": {
+            "type": "pointer",
+            "zone": "edge",
+            "now": 10
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "edge",
+            "locks": [
+              "text-drag"
+            ],
+            "dwellAt": 10,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": false
+          }
+        },
+        {
+          "event": {
+            "type": "tick",
+            "now": 1000
+          },
+          "state": {
+            "phase": "hidden",
+            "zone": "edge",
+            "locks": [
+              "text-drag"
+            ],
+            "dwellAt": 10,
+            "leaveAt": null,
+            "corridorUntil": null,
+            "peekUntil": null,
+            "suspended": false
+          }
+        }
+      ]
+    }
+  ],
+  "productNativeReproduction": false,
+  "productionModified": false
+}
