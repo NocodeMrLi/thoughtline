@@ -56,3 +56,28 @@ test('手动暂停经睡眠恢复仍暂停，锁屏与睡眠分别释放',()=>{
  state=transitions.pauseTransition?.(state,'lock',false)??state;
  expect(state.paused).toBe(false);
 });
+
+test.each(['composer','manage','menu','drag','text-drag'])('暂停期间%s结束后恢复正常250ms悬停',name=>{
+ let s=step(initialShelf(),{type:'lock',name,active:true,now:0});
+ s=step(s,{type:'suspend',now:1});s=step(s,{type:'lock',name,active:false,now:2});
+ expect(s.locks).toEqual([]);expect(s.suspended).toBe(true);expect(s.phase).toBe('hidden');
+ s=step(s,{type:'resume',now:3});s=step(s,{type:'pointer',zone:'edge',now:10});
+ expect(step(s,{type:'tick',now:259}).phase).toBe('hidden');
+ expect(step(s,{type:'tick',now:260}).phase).toBe('revealed');
+});
+test('暂停中新操作仍记录锁，禁止peek和指针展开直到恢复后解除',()=>{
+ let s=step(initialShelf(),{type:'suspend',now:0});
+ s=step(s,{type:'lock',name:'composer',active:true,now:1});expect(s.locks).toEqual(['composer']);
+ s=step(s,{type:'peek',now:2});s=step(s,{type:'pointer',zone:'edge',now:3});s=step(s,{type:'tick',now:1000});
+ expect(s.phase).toBe('hidden');expect(s.dwellAt).toBe(null);
+ s=step(s,{type:'resume',now:1001});s=step(s,{type:'pointer',zone:'edge',now:1002});
+ expect(step(s,{type:'tick',now:2000}).phase).toBe('hidden');
+ s=step(s,{type:'lock',name:'composer',active:false,now:2001});expect(step(s,{type:'tick',now:2002}).phase).toBe('revealed');
+});
+test('暂停中只释放已结束锁，仍活跃的其他锁不能被恢复清空',()=>{
+ let s=step(initialShelf(),{type:'lock',name:'manage',active:true,now:0});
+ s=step(s,{type:'lock',name:'menu',active:true,now:1});s=step(s,{type:'suspend',now:2});
+ s=step(s,{type:'lock',name:'menu',active:false,now:3});expect(s.locks).toEqual(['manage']);
+ s=step(s,{type:'resume',now:4});s=step(s,{type:'pointer',zone:'edge',now:5});expect(step(s,{type:'tick',now:1000}).phase).toBe('hidden');
+ s=step(s,{type:'lock',name:'manage',active:false,now:1001});expect(step(s,{type:'tick',now:1002}).phase).toBe('revealed');
+});

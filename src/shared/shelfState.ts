@@ -6,16 +6,17 @@ export function shelfTransition(previous:ShelfState,event:ShelfEvent):ShelfState
   const s={...previous,locks:[...previous.locks]};
   if(event.type==='suspend')return {...initialShelf(),locks:s.locks,suspended:true};
   if(event.type==='resume')return {...initialShelf(),locks:s.locks};
-  if(s.suspended)return s;
-  if(event.type==='peek')return {...s,phase:'peek',peekUntil:event.now+2300,leaveAt:null};
+  // Window/drag lifecycle continues while hidden; pause suppresses presentation, not lock bookkeeping.
   if(event.type==='lock'){
     s.locks=event.active?[...new Set([...s.locks,event.name])]:s.locks.filter(x=>x!==event.name);
-    if(!s.locks.length){
+    if(!s.suspended&&!s.locks.length){
       s.leaveAt=(s.zone==='card'||s.zone==='edge')?null:event.now;
       if(s.peekUntil!==null)s.peekUntil=Math.max(s.peekUntil,event.now+500);
     }
     return s;
   }
+  if(s.suspended)return s;
+  if(event.type==='peek')return {...s,phase:'peek',peekUntil:event.now+2300,leaveAt:null};
   if(event.type==='pointer'&&event.zone!==s.zone){
     const oldZone=s.zone;s.zone=event.zone;
     s.dwellAt=event.zone==='edge'?event.now:null;
