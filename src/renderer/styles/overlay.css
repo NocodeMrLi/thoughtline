@@ -83,5 +83,6 @@
 
 .idea-card .page-arrow:hover:not(:disabled),.idea-card .card-copy:active{background:color-mix(in srgb,var(--paper),#808080 8%)}
 
-/* A quiet agent echo keeps neutral paper dominant and retains readable ink in both themes. */
-.idea-card[data-agent-neutral=false] .agent-name{color:color-mix(in srgb,#1C1E24 85%,var(--agent-color) 15%)}
+/* Agent hue remains visible; calibrated lightness keeps small labels readable on the shaded paper. */
+.idea-card[data-agent-neutral=false] .agent-name{color:var(--agent-ink-light)}
+:root[data-theme=dark] .idea-card[data-agent-neutral=false] .agent-name{color:var(--agent-ink-dark)}

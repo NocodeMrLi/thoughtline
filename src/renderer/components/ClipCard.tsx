@@ -1,12 +1,13 @@
-import {useEffect,useId,useRef,useState} from 'react';
+import {useEffect,useId,useMemo,useRef,useState} from 'react';
 import type {PointerEvent,CSSProperties} from 'react';
 import type {Clip,Idea,AgentTag} from '../../shared/contracts';
 import type {ClipMutation} from '../../shared/bridge';
 import {Clothespin} from './Clothespin';
 import {paperShapeForClip} from './paperShape';
+import {agentInkColors} from './agentInk';
 export function ClipCard({clip,ideas,agent,onChange,onGrab,onError,reduced,textDragActive,ropeContact}:{clip:Clip;ideas:Idea[];agent:AgentTag|undefined;onChange:(c:ClipMutation)=>Promise<boolean>;onGrab:(e:PointerEvent<HTMLButtonElement>,clip:Clip)=>void;onError:(text:string)=>void;reduced:boolean;textDragActive:boolean;ropeContact:string}){
  const [copied,setCopied]=useState(false),[busy,setBusy]=useState(false),[direction,setDirection]=useState('');
- const paperId=useId().replace(/:/g,'');const paper=paperShapeForClip(clip.id);
+ const paperId=useId().replace(/:/g,'');const paper=paperShapeForClip(clip.id);const ink=useMemo(()=>agentInkColors(agent?.color??'#A0A3AA'),[agent?.color]);
  const copyTimer=useRef<ReturnType<typeof setTimeout>|null>(null),current=useRef(clip.currentId),ignoreCopyUntil=useRef(0),exportId=useRef<string|null>(null);const [exporting,setExporting]=useState(false);current.current=clip.currentId;
  useEffect(()=>{setCopied(false);if(copyTimer.current)clearTimeout(copyTimer.current);return()=>{if(copyTimer.current)clearTimeout(copyTimer.current);if(exportId.current)window.thoughtline.textDrag(false,exportId.current);exportId.current=null;};},[clip.currentId]);
  useEffect(()=>{if(!textDragActive&&exportId.current){exportId.current=null;ignoreCopyUntil.current=performance.now()+160;setExporting(false);}},[textDragActive]);
@@ -18,7 +19,7 @@ export function ClipCard({clip,ideas,agent,onChange,onGrab,onError,reduced,textD
   <Clothespin color={agent?.color} reduced={reduced} layer="rear"/>
   <svg className="clamp-rope" width="18" height="38" viewBox="0 0 18 38" aria-hidden="true">{['rope-shadow','rope-core','rope-light'].map(c=><path key={c} className={c} d={ropeContact}/>)}</svg>
   <button data-hit className="peg-button" aria-label={`移动夹子或查看：${idea.title}`} onPointerDown={e=>onGrab(e,clip)}><Clothespin color={agent?.color} reduced={reduced}/></button>
-  <article data-hit data-paper-variant={paper.variant} data-agent-neutral={!agent||agent.id==='general'} style={{'--agent-color':agent?.color} as CSSProperties} data-copied={copied} className={`idea-card ${grouped?'grouped':''}`} onContextMenu={e=>{e.preventDefault();void window.thoughtline.shelfMenu(idea.id).then(r=>{if(!r.ok)onError(r.message);});}}>
+  <article data-hit data-paper-variant={paper.variant} data-agent-neutral={!agent||agent.id==='general'} style={{'--agent-ink-light':ink.light,'--agent-ink-dark':ink.dark} as CSSProperties} data-copied={copied} className={`idea-card ${grouped?'grouped':''}`} onContextMenu={e=>{e.preventDefault();void window.thoughtline.shelfMenu(idea.id).then(r=>{if(!r.ok)onError(r.message);});}}>
    <svg className="paper-sheet" width="160" height="226" viewBox="0 0 160 226" aria-hidden="true">
     <defs>
      <path id={`${paperId}-outline`} d={paper.outline}/>
