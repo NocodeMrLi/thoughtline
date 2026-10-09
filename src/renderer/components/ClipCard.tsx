@@ -20,11 +20,11 @@ export function ClipCard({clip,ideas,agent,onChange,onGrab,onError,reduced,textD
   <article data-hit data-copied={copied} className={`idea-card ${grouped?'grouped':''}`} onContextMenu={e=>{e.preventDefault();void window.thoughtline.shelfMenu(idea.id).then(r=>{if(!r.ok)onError(r.message);});}}>
    <svg className="paper-sheet" width="160" height="226" viewBox="0 0 160 226" aria-hidden="true">
     <defs>
-     <path id={`${paperId}-outline`} d="M3 2Q40-.5 77 .5Q115 1 154 4C158 8 157 36 155 58C151 105 164 142 154 187C152 205 142 219 128 224C89 216 37 222 9 214C1 195 7 161 6 132C10 87-.5 46 3 2Z"/>
-     <linearGradient id={`${paperId}-across`} x1="0" y1="0" x2="1" y2=".2"><stop stopColor="#000000" stopOpacity=".065"/><stop offset=".23" stopColor="#FFFFFF" stopOpacity=".13"/><stop offset=".52" stopColor="#000000" stopOpacity=".045"/><stop offset=".82" stopColor="#FFFFFF" stopOpacity=".11"/><stop offset="1" stopColor="#000000" stopOpacity=".06"/></linearGradient>
-     <linearGradient id={`${paperId}-down`} x1="0" y1="0" x2=".12" y2="1"><stop stopColor="#000000" stopOpacity=".035"/><stop offset=".25" stopColor="#FFFFFF" stopOpacity="0"/><stop offset=".64" stopColor="#000000" stopOpacity=".035"/><stop offset=".87" stopColor="#FFFFFF" stopOpacity=".08"/><stop offset="1" stopColor="#000000" stopOpacity=".09"/></linearGradient>
+     <path id={`${paperId}-outline`} d="M2 .8Q42 .2 77 .5Q118 .7 158 2C159 32 158 89 158 129C158 161 149 183 150 203Q150 214 156 217C115 226 61 231 10 222C3 212 2 198 2 184C2 162 3 143 2 128C1.6 90 1.5 39 2 .8Z"/>
+     <linearGradient id={`${paperId}-across`} x1="0" y1="0" x2="1" y2=".2"><stop stopColor="#FFFFFF" stopOpacity=".045"/><stop offset="1" stopColor="#000000" stopOpacity=".015"/></linearGradient>
+     <linearGradient id={`${paperId}-down`} x1="0" y1="0" x2="0" y2="1"><stop stopColor="#000000" stopOpacity="0"/><stop offset=".55" stopColor="#000000" stopOpacity="0"/><stop offset=".66" stopColor="#000000" stopOpacity=".018"/><stop offset=".79" stopColor="#000000" stopOpacity=".07"/><stop offset=".87" stopColor="#000000" stopOpacity=".055"/><stop offset=".96" stopColor="#FFFFFF" stopOpacity=".07"/><stop offset="1" stopColor="#FFFFFF" stopOpacity=".03"/></linearGradient>
     </defs>
-    <path className="paper-back" d="M148 179Q156 202 129 225Q110 224 98 220Q125 221 139 208Z"/>
+    <path className="paper-back" d="M9 219C58 229 116 226 156 217Q151 220 146 221C104 228 51 229 10 223Z"/>
     <use className="paper-face" href={`#${paperId}-outline`}/>
     <use className="paper-shading" href={`#${paperId}-outline`} fill={`url(#${paperId}-across)`}/>
     <use className="paper-shading" href={`#${paperId}-outline`} fill={`url(#${paperId}-down)`}/>
