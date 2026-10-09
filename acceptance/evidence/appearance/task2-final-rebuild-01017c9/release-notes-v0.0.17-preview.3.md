@@ -1,0 +1,7 @@
+# Thoughtline 0.0.17-preview.3 — private review draft
+
+This candidate adds Chinese/English UI and day/night appearance controls in the Composer, Detail and Calendar windows, with Follow system in Settings. Preferences persist separately from notes; user text and custom names are preserved. The desktop paper remains matte.
+
+Both packages were rebuilt from frozen source `01017c9525ac971b6e97461ef2910140944eda19` (227-input canonical vector `72314079c3dbfb77ef813a5d4c852e9eb46fe2ab85d1b45e671acaedf49242f9`). Mac arm64 DMG and Windows x64 NSIS installer passed isolated actual-package checks, including English/dark persistence across restart; the Windows runner also passed same-version reinstall and ordinary-uninstall data preservation. The delivered Mac launcher resolves its adjacent fixed-hash DMG and isolated profile from its own folder, including after the bundle is moved; missing, corrupt and symlink-profile checks passed. See `QA-guide-v0.0.17-preview.3.md`, `release-manifest.json` and `SHA256SUMS` before testing.
+
+Mac is ad-hoc signed and not notarized. Windows app and installer are unsigned. The Windows installer uses the existing app identity and may replace an installed version: use a separate test environment. Physical IME, DPI, multi-display, focus, natural motion and real WeChat/Doubao/WorkBuddy reception are still open for independent acceptance. This draft is for final review and must remain private/unpublished until the controller completes that review.

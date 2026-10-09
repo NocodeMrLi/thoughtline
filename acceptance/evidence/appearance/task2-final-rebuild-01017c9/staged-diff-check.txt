@@ -1,0 +1,1077 @@
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/SHA256SUMS.txt:1: trailing whitespace.
++68c6f4f1f35a5ded1c8d1a04e3c063c4d372fd003fba73ceaa4e77c7921da235  Thoughtline-0.0.17-preview.3-win-x64.exe
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:1: trailing whitespace.
++param(
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:2: trailing whitespace.
++  [Parameter(Mandatory=$true)][string]$Executable,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:3: trailing whitespace.
++  [switch]$CheckOnly
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:4: trailing whitespace.
++)
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:5: trailing whitespace.
++$ErrorActionPreference = 'Stop'
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:6: trailing whitespace.
++$exe = (Resolve-Path -LiteralPath $Executable).Path
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:7: trailing whitespace.
++if ((Split-Path $exe -Leaf) -ne 'Thoughtline.exe') { throw 'Select the installed Thoughtline.exe' }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:8: trailing whitespace.
++if ((Get-Item -LiteralPath $exe).VersionInfo.FileVersion -ne '0.0.17-preview.3') { throw 'This launcher requires the 0.0.17-preview.3 functional preflight executable' }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:9: trailing whitespace.
++if (!$env:LOCALAPPDATA) { throw 'Windows LOCALAPPDATA is unavailable' }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:10: trailing whitespace.
++if (Get-Process -Name Thoughtline -ErrorAction SilentlyContinue) { throw 'Exit other Thoughtline versions from their tray menus first. No processes were stopped.' }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:11: trailing whitespace.
++$data = Join-Path $env:LOCALAPPDATA 'Thoughtline-Preflight\0.0.17-preview.3\user-data'
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:12: trailing whitespace.
++$normal = Join-Path $env:APPDATA 'Thoughtline'
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:13: trailing whitespace.
++if ($data -eq $normal) { throw 'Isolated profile must differ from the normal profile' }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:14: trailing whitespace.
++Write-Output "Executable: $exe"
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:15: trailing whitespace.
++Write-Output "Isolated data: $data"
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:16: trailing whitespace.
++Write-Output 'This isolates notes. The installer still uses the same app identity and can replace an existing installed version.'
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:17: trailing whitespace.
++if ($CheckOnly) { Write-Output 'Check only: no data directory or app process created.'; return }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:18: trailing whitespace.
++New-Item -ItemType Directory -Path $data -Force | Out-Null
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:19: trailing whitespace.
++$previous = $env:THOUGHTLINE_DATA_DIR
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:20: trailing whitespace.
++try {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:21: trailing whitespace.
++  $env:THOUGHTLINE_DATA_DIR = $data
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:22: trailing whitespace.
++  $process = Start-Process -FilePath $exe -PassThru
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:23: trailing whitespace.
++  Write-Output "Launch requested (PID $($process.Id)). Verify the tray, version and isolated notes in the app."
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:24: trailing whitespace.
++} finally {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:25: trailing whitespace.
++  if ($null -eq $previous) { Remove-Item Env:THOUGHTLINE_DATA_DIR -ErrorAction SilentlyContinue } else { $env:THOUGHTLINE_DATA_DIR = $previous }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/Start-Thoughtline-Isolated.ps1:26: trailing whitespace.
++}
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/mac-mount.log:2: trailing whitespace.
++/dev/disk4          	GUID_partition_scheme          	
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/mac-package.log:56: trailing whitespace.
++/dev/disk4          	GUID_partition_scheme          	
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/npm-ls.log:13: new blank line at EOF.
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:175: trailing whitespace.
++windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T18:34:38.8927767Z 
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:186: trailing whitespace.
++windows-test-package	Run npm run verify	2026-10-09T18:34:41.4009203Z 
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:189: trailing whitespace.
++windows-test-package	Run npm run verify	2026-10-09T18:34:41.4020547Z 
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:190: trailing whitespace.
++windows-test-package	Run npm run verify	2026-10-09T18:34:41.7445724Z 
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:193: trailing whitespace.
++windows-test-package	Run npm run verify	2026-10-09T18:34:41.7448589Z 
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:194: trailing whitespace.
++windows-test-package	Run npm run verify	2026-10-09T18:34:43.2807085Z 
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:197: trailing whitespace.
++windows-test-package	Run npm run verify	2026-10-09T18:34:43.2815206Z 
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:198: trailing whitespace.
++windows-test-package	Run npm run verify	2026-10-09T18:34:43.8487665Z 
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:200: trailing whitespace.
++windows-test-package	Run npm run verify	2026-10-09T18:34:43.8625682Z 
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:229: trailing whitespace.
++windows-test-package	Run npm run verify	2026-10-09T18:34:56.3000477Z 
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:251: trailing whitespace.
++windows-test-package	Run npm run verify	2026-10-09T18:35:01.0921564Z 
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:256: trailing whitespace.
++windows-test-package	Run npm run verify	2026-10-09T18:35:01.1200956Z 
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:259: trailing whitespace.
++windows-test-package	Run npm run verify	2026-10-09T18:35:01.1224626Z 
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:260: trailing whitespace.
++windows-test-package	Run npm run verify	2026-10-09T18:35:01.4650286Z 
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:263: trailing whitespace.
++windows-test-package	Run npm run verify	2026-10-09T18:35:01.4653077Z 
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:758: trailing whitespace.
++windows-test-package	Run npm run package:win	2026-10-09T18:36:31.3084653Z 
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:761: trailing whitespace.
++windows-test-package	Run npm run package:win	2026-10-09T18:36:31.3087909Z 
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:820: trailing whitespace.
++windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-ci.log:859: trailing whitespace.
++windows-test-package	Retain Windows source UI evidence	
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:1: trailing whitespace.
++{
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:2: trailing whitespace.
++  "headSha": "01017c9525ac971b6e97461ef2910140944eda19",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:3: trailing whitespace.
++  "scope": "Disposable Windows runner NSIS current-user install/reinstall/ordinary uninstall; not physical acceptance",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:4: trailing whitespace.
++  "passed": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:5: trailing whitespace.
++  "installPreservesExistingData": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:6: trailing whitespace.
++  "isolationLauncherCheckOnly": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:7: trailing whitespace.
++  "appFileVersion": "0.0.17-preview.3",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:8: trailing whitespace.
++  "appProductVersion": "0.0.17.0",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:9: trailing whitespace.
++  "appSignature": "NotSigned",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:10: trailing whitespace.
++  "installerSignature": "NotSigned",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:11: trailing whitespace.
++  "approvedIconsEmbeddedInAppInstallerUninstaller": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:12: trailing whitespace.
++  "packagedEnglishAppearance": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:13: trailing whitespace.
++  "sameVersionReinstallPreservesData": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:14: trailing whitespace.
++  "ordinaryUninstallPreservesData": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:15: trailing whitespace.
++  "retainedSnapshotHashes": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:16: trailing whitespace.
++    "snapshot.bak.json": "59d70774e18159f07159a1aab518089974bef509297e071057fd723970b062c6",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:17: trailing whitespace.
++    "snapshot.json": "1aaf64d12466342c6bfa7680e6332c7a6c82d6f2e8b2accbd15a9269829894fc",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:18: trailing whitespace.
++    "snapshot.schema2.backup.json": "b2d10075204f9cf80a4ad062ddb5f48da6b1e540f8ef62ddda1634085f63d0c0",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:19: trailing whitespace.
++    "data-location.json": "3d220b70e844c8f42eaef06b3fe0f10cc796315c1a7b0363cfc38df4825d22ce",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:20: trailing whitespace.
++    "preflight-marker.txt": "22551893e62a2b6d13081c81e644f712e2e9ecd4724701f0232df755a232689c"
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:21: trailing whitespace.
++  }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-installer-preflight.json:22: trailing whitespace.
++}
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-runner-SHA256SUMS.txt:1: trailing whitespace.
++68c6f4f1f35a5ded1c8d1a04e3c063c4d372fd003fba73ceaa4e77c7921da235  Thoughtline-0.0.17-preview.3-win-x64.exe
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-packaged/workflow.log:1: trailing whitespace.
++{"passed":true,"packaged":true,"executable":"D:\\a\\_temp\\Thoughtline-installer-preflight\\Thoughtline.exe","version":"0.0.17-preview.3","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"checks":["exact-English-dark-UI-and-user-text","dirty-editor-focus-selection-content-preserved","package-restart-stored-preferences-date-content-English-calendar"],"scope":"actual isolated package DOM/IPC; no physical IME/DPI/multi-display/receiver acceptance","asarSha256":"710c8c2bbb9e60bcd42da218c4f0d9edfc00d015ec6d57c52657b583ea6a7e67","cleanup":{"normalQuit":true,"profile":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-packaged-appearance-m8mNRJ","profileRemoved":true,"ownedPids":[5908,7924,6020,940,8776,3324,4176,7544,4552,2388,7176,8656],"allExited":true},"worker":{"pid":6536,"code":0,"signal":null},"stage":"worker-completed","launchEvents":[{"time":"2026-10-09T18:38:33.884Z","type":"spawn","pid":5908,"shell":true,"runtimeOverrideKeys":[]},{"time":"2026-10-09T18:38:33.951Z","type":"stderr","pid":5908,"text":"Debugger listening on ws://127.0.0.1:53899/ea0bad4f-ec66-42f4-a09c-2de8fa4be197\r\n"},{"time":"2026-10-09T18:38:33.961Z","type":"stderr","pid":5908,"text":"For help, see: https://nodejs.org/learn/getting-started/debugging\r\n"},{"time":"2026-10-09T18:38:33.990Z","type":"stderr","pid":5908,"text":"Debugger attached.\r\n"},{"time":"2026-10-09T18:38:34.044Z","type":"stderr","pid":5908,"text":"\r\nDevTools listening on ws://127.0.0.1:53901/devtools/browser/d6dc9675-030d-4269-8fe6-7c85676898e8\r\n"},{"time":"2026-10-09T18:38:36.553Z","type":"stderr","pid":5908,"text":"Debugger ending on ws://127.0.0.1:53899/ea0bad4f-ec66-42f4-a09c-2de8fa4be197\r\nFor help, see: https://nodejs.org/learn/getting-started/debugging\r\n"},{"time":"2026-10-09T18:38:37.248Z","type":"exit","pid":5908,"code":0,"signal":null},{"time":"2026-10-09T18:38:37.256Z","type":"spawn","pid":4176,"shell":true,"runtimeOverrideKeys":[]},{"time":"2026-10-09T18:38:37.319Z","type":"stderr","pid":4176,"text":"Debugger listening on ws://127.0.0.1:53903/ec002c7e-ecfc-4079-85bd-61aca013ed63\r\n"},{"time":"2026-10-09T18:38:37.321Z","type":"stderr","pid":4176,"text":"For help, see: https://nodejs.org/learn/getting-started/debugging\r\n"},{"time":"2026-10-09T18:38:37.329Z","type":"stderr","pid":4176,"text":"Debugger attached.\r\n"},{"time":"2026-10-09T18:38:37.397Z","type":"stderr","pid":4176,"text":"\r\nDevTools listening on ws://127.0.0.1:53905/devtools/browser/88ce0fa3-3388-4f39-93a9-34402f9ff825\r\n"},{"time":"2026-10-09T18:38:38.388Z","type":"stderr","pid":4176,"text":"Debugger ending on ws://127.0.0.1:53903/ec002c7e-ecfc-4079-85bd-61aca013ed63\r\nFor help, see: https://nodejs.org/learn/getting-started/debugging\r\n"},{"time":"2026-10-09T18:38:38.967Z","type":"exit","pid":4176,"code":0,"signal":null}],"observedPidState":[{"pid":5908,"alive":false},{"pid":4176,"alive":false}]}
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/fix-round1/workflow.log:1: trailing whitespace.
++PASS light-rendered-custom-Agent-contrast
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/fix-round1/workflow.log:2: trailing whitespace.
++PASS dark-rendered-custom-Agent-contrast
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/fix-round1/workflow.log:3: trailing whitespace.
++PASS custom-clip-color-and-user-names-unchanged
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/fix-round1/workflow.log:4: trailing whitespace.
++PASS switch-then-drag-completion-current-English
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/fix-round1/workflow.log:5: trailing whitespace.
++PASS existing-drag-notice-renders-current-Chinese
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/fix-round1/workflow.log:6: trailing whitespace.
++PASS out-of-bounds-cancel-current-English
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/fix-round1/workflow.log:7: trailing whitespace.
++PASS locale-broadcast-does-not-cancel-active-drag
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/fix-round1/workflow.log:8: trailing whitespace.
++PASS active-drag-completion-uses-latest-locale
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/fix-round1/workflow.log:9: trailing whitespace.
++PASS actual-page-save-IO-current-English-diagnostic-bytes
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/fix-round1/workflow.log:10: trailing whitespace.
++PASS outer-storage-catch-current-English-diagnostic-bytes
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/fix-round1/workflow.log:11: trailing whitespace.
++PASS actual-startup-repository-IO-English-diagnostic-bytes
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:1: trailing whitespace.
++first-level-control-placement
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:2: trailing whitespace.
++shelf-cannot-write-preferences
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:3: trailing whitespace.
++composition-node-focus-selection-scroll-candidate-and-note-bytes-preserved
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:4: trailing whitespace.
++older-success-newest-IO-visible-current-locale-editor-intact
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:5: trailing whitespace.
++older-success-newest-catch-visible-current-locale-editor-intact
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:6: trailing whitespace.
++light-dark-rendered-body-and-button-contrast
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:7: trailing whitespace.
++composer-widths-350-380-480-740-no-overflow
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:8: trailing whitespace.
++continuous-drag-frames-and-escape-cancel
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:9: trailing whitespace.
++drag-release-and-immediate-reversal
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:10: trailing whitespace.
++keyboard-home-end-arrows
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:11: trailing whitespace.
++reduced-motion-and-forced-colors-operations-without-animation
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:12: trailing whitespace.
++atomic-IO-failure-visible-durable-rollback-text-retained-retry
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:13: trailing whitespace.
++late-failed-response-does-not-override-new-choice-or-current-locale
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:14: trailing whitespace.
++pointercancel-restores-durable-choice
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:15: trailing whitespace.
++late-error-across-settings-control-instances
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:16: trailing whitespace.
++other-window-success-suppresses-old-failure
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:17: trailing whitespace.
++calendar-detail-settings-sync-remount-sequences-dirty-inline-autosave
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:18: trailing whitespace.
++restart-persists-preferences-note-content-and-hotkey
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:19: trailing whitespace.
++real-bootstrap-new-profile-OS-locale-before-snapshot-creation
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/appearance/windows-source/workflow.log:20: trailing whitespace.
++corrupt-preference-file-preserved-visible-and-write-refused
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:1: trailing whitespace.
++{
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:2: trailing whitespace.
++  "attempt": "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f\\calendar-brand-clip-workflow-windows-ci-1791570946785-6212",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:3: trailing whitespace.
++  "stage": "complete",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:4: trailing whitespace.
++  "checks": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:5: trailing whitespace.
++    "isolatedDataDir": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:6: trailing whitespace.
++    "monthMarker": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:7: trailing whitespace.
++      "href": "file:///D:/a/thoughtline/thoughtline/out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:8: trailing whitespace.
++      "viewBox": "120 260 260 200",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:9: trailing whitespace.
++      "clip": "polygon(3% 33%, 4% 29%, 12% 9%, 15% 6%, 18% 5%, 50% 28%, 53% 27%, 83% 45%, 87% 49%, 88% 55%, 86% 58%, 96% 64%, 97% 69%, 96% 72%, 90% 90%, 87% 93%, 85% 93%, 38% 60%, 34% 57%, 4% 38%)",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:10: trailing whitespace.
++      "aria": "true",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:11: trailing whitespace.
++      "bounds": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:12: trailing whitespace.
++        "width": 22,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:13: trailing whitespace.
++        "height": 17
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:14: trailing whitespace.
++      },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:15: trailing whitespace.
++      "loaded": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:16: trailing whitespace.
++        "ok": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:17: trailing whitespace.
++        "width": 1254,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:18: trailing whitespace.
++        "height": 1254
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:19: trailing whitespace.
++      }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:20: trailing whitespace.
++    },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:21: trailing whitespace.
++    "yearMarker": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:22: trailing whitespace.
++      "href": "file:///D:/a/thoughtline/thoughtline/out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:23: trailing whitespace.
++      "viewBox": "120 260 260 200",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:24: trailing whitespace.
++      "clip": "polygon(3% 33%, 4% 29%, 12% 9%, 15% 6%, 18% 5%, 50% 28%, 53% 27%, 83% 45%, 87% 49%, 88% 55%, 86% 58%, 96% 64%, 97% 69%, 96% 72%, 90% 90%, 87% 93%, 85% 93%, 38% 60%, 34% 57%, 4% 38%)",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:25: trailing whitespace.
++      "aria": "true",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:26: trailing whitespace.
++      "bounds": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:27: trailing whitespace.
++        "width": 22,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:28: trailing whitespace.
++        "height": 17
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:29: trailing whitespace.
++      },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:30: trailing whitespace.
++      "loaded": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:31: trailing whitespace.
++        "ok": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:32: trailing whitespace.
++        "width": 1254,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:33: trailing whitespace.
++        "height": 1254
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:34: trailing whitespace.
++      }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:35: trailing whitespace.
++    },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:36: trailing whitespace.
++    "paperMarker": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:37: trailing whitespace.
++      "href": "file:///D:/a/thoughtline/thoughtline/out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:38: trailing whitespace.
++      "viewBox": "120 260 260 200",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:39: trailing whitespace.
++      "clip": "polygon(3% 33%, 4% 29%, 12% 9%, 15% 6%, 18% 5%, 50% 28%, 53% 27%, 83% 45%, 87% 49%, 88% 55%, 86% 58%, 96% 64%, 97% 69%, 96% 72%, 90% 90%, 87% 93%, 85% 93%, 38% 60%, 34% 57%, 4% 38%)",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:40: trailing whitespace.
++      "aria": "true",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:41: trailing whitespace.
++      "bounds": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:42: trailing whitespace.
++        "width": 22,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:43: trailing whitespace.
++        "height": 17
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:44: trailing whitespace.
++      },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:45: trailing whitespace.
++      "loaded": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:46: trailing whitespace.
++        "ok": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:47: trailing whitespace.
++        "width": 1254,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:48: trailing whitespace.
++        "height": 1254
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:49: trailing whitespace.
++      }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:50: trailing whitespace.
++    },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:51: trailing whitespace.
++    "motionClone": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:52: trailing whitespace.
++      "href": "file:///D:/a/thoughtline/thoughtline/out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:53: trailing whitespace.
++      "viewBox": "120 260 260 200",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:54: trailing whitespace.
++      "clip": "polygon(3% 33%, 4% 29%, 12% 9%, 15% 6%, 18% 5%, 50% 28%, 53% 27%, 83% 45%, 87% 49%, 88% 55%, 86% 58%, 96% 64%, 97% 69%, 96% 72%, 90% 90%, 87% 93%, 85% 93%, 38% 60%, 34% 57%, 4% 38%)",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:55: trailing whitespace.
++      "aria": null,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:56: trailing whitespace.
++      "bounds": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:57: trailing whitespace.
++        "width": 7.12969970703125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:58: trailing whitespace.
++        "height": 5.5093231201171875
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:59: trailing whitespace.
++      },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:60: trailing whitespace.
++      "loaded": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:61: trailing whitespace.
++        "ok": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:62: trailing whitespace.
++        "width": 1254,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:63: trailing whitespace.
++        "height": 1254
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:64: trailing whitespace.
++      }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:65: trailing whitespace.
++    },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:66: trailing whitespace.
++    "countWidths": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:67: trailing whitespace.
++      "350": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:68: trailing whitespace.
++        "windowWidth": 350,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:69: trailing whitespace.
++        "one": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:70: trailing whitespace.
++          "day": "2026-10-09",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:71: trailing whitespace.
++          "dateText": "9",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:72: trailing whitespace.
++          "countText": "3",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:73: trailing whitespace.
++          "cell": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:74: trailing whitespace.
++            "left": 235.5625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:75: trailing whitespace.
++            "right": 274.28125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:76: trailing whitespace.
++            "top": 216,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:77: trailing whitespace.
++            "bottom": 264,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:78: trailing whitespace.
++            "width": 38.71875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:79: trailing whitespace.
++            "height": 48
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:80: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:81: trailing whitespace.
++          "row": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:82: trailing whitespace.
++            "left": 240.5625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:83: trailing whitespace.
++            "right": 266.09375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:84: trailing whitespace.
++            "top": 243,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:85: trailing whitespace.
++            "bottom": 258,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:86: trailing whitespace.
++            "width": 25.53125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:87: trailing whitespace.
++            "height": 15
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:88: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:89: trailing whitespace.
++          "clip": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:90: trailing whitespace.
++            "left": 240.5625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:91: trailing whitespace.
++            "right": 258.15625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:92: trailing whitespace.
++            "top": 243.703125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:93: trailing whitespace.
++            "bottom": 257.296875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:94: trailing whitespace.
++            "width": 17.59375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:95: trailing whitespace.
++            "height": 13.59375
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:96: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:97: trailing whitespace.
++          "number": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:98: trailing whitespace.
++            "left": 260.15625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:99: trailing whitespace.
++            "right": 266.09375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:100: trailing whitespace.
++            "top": 243,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:101: trailing whitespace.
++            "bottom": 258,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:102: trailing whitespace.
++            "width": 5.9375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:103: trailing whitespace.
++            "height": 15
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:104: trailing whitespace.
++          }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:105: trailing whitespace.
++        },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:106: trailing whitespace.
++        "three": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:107: trailing whitespace.
++          "day": "2026-10-15",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:108: trailing whitespace.
++          "dateText": "15",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:109: trailing whitespace.
++          "countText": "123",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:110: trailing whitespace.
++          "cell": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:111: trailing whitespace.
++            "left": 191.84375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:112: trailing whitespace.
++            "right": 230.5625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:113: trailing whitespace.
++            "top": 269,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:114: trailing whitespace.
++            "bottom": 332.59375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:115: trailing whitespace.
++            "width": 38.71875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:116: trailing whitespace.
++            "height": 63.59375
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:117: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:118: trailing whitespace.
++          "row": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:119: trailing whitespace.
++            "left": 196.84375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:120: trailing whitespace.
++            "right": 225.5625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:121: trailing whitespace.
++            "top": 296,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:122: trailing whitespace.
++            "bottom": 326.59375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:123: trailing whitespace.
++            "width": 28.71875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:124: trailing whitespace.
++            "height": 30.59375
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:125: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:126: trailing whitespace.
++          "clip": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:127: trailing whitespace.
++            "left": 196.84375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:128: trailing whitespace.
++            "right": 214.4375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:129: trailing whitespace.
++            "top": 296,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:130: trailing whitespace.
++            "bottom": 309.59375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:131: trailing whitespace.
++            "width": 17.59375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:132: trailing whitespace.
++            "height": 13.59375
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:133: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:134: trailing whitespace.
++          "number": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:135: trailing whitespace.
++            "left": 196.84375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:136: trailing whitespace.
++            "right": 214.640625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:137: trailing whitespace.
++            "top": 311.59375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:138: trailing whitespace.
++            "bottom": 326.59375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:139: trailing whitespace.
++            "width": 17.796875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:140: trailing whitespace.
++            "height": 15
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:141: trailing whitespace.
++          }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:142: trailing whitespace.
++        }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:143: trailing whitespace.
++      },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:144: trailing whitespace.
++      "421": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:145: trailing whitespace.
++        "windowWidth": 421,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:146: trailing whitespace.
++        "one": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:147: trailing whitespace.
++          "day": "2026-10-09",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:148: trailing whitespace.
++          "dateText": "9",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:149: trailing whitespace.
++          "countText": "3",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:150: trailing whitespace.
++          "cell": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:151: trailing whitespace.
++            "left": 286.28125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:152: trailing whitespace.
++            "right": 335.140625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:153: trailing whitespace.
++            "top": 216,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:154: trailing whitespace.
++            "bottom": 269,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:155: trailing whitespace.
++            "width": 48.859375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:156: trailing whitespace.
++            "height": 53
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:157: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:158: trailing whitespace.
++          "row": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:159: trailing whitespace.
++            "left": 293.28125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:160: trailing whitespace.
++            "right": 326.21875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:161: trailing whitespace.
++            "top": 245,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:162: trailing whitespace.
++            "bottom": 262,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:163: trailing whitespace.
++            "width": 32.9375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:164: trailing whitespace.
++            "height": 17
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:165: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:166: trailing whitespace.
++          "clip": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:167: trailing whitespace.
++            "left": 293.28125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:168: trailing whitespace.
++            "right": 315.28125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:169: trailing whitespace.
++            "top": 245,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:170: trailing whitespace.
++            "bottom": 262,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:171: trailing whitespace.
++            "width": 22,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:172: trailing whitespace.
++            "height": 17
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:173: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:174: trailing whitespace.
++          "number": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:175: trailing whitespace.
++            "left": 320.28125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:176: trailing whitespace.
++            "right": 326.21875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:177: trailing whitespace.
++            "top": 246,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:178: trailing whitespace.
++            "bottom": 261,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:179: trailing whitespace.
++            "width": 5.9375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:180: trailing whitespace.
++            "height": 15
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:181: trailing whitespace.
++          }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:182: trailing whitespace.
++        },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:183: trailing whitespace.
++        "three": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:184: trailing whitespace.
++          "day": "2026-10-15",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:185: trailing whitespace.
++          "dateText": "15",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:186: trailing whitespace.
++          "countText": "123",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:187: trailing whitespace.
++          "cell": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:188: trailing whitespace.
++            "left": 232.421875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:189: trailing whitespace.
++            "right": 281.28125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:190: trailing whitespace.
++            "top": 274,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:191: trailing whitespace.
++            "bottom": 342,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:192: trailing whitespace.
++            "width": 48.859375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:193: trailing whitespace.
++            "height": 68
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:194: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:195: trailing whitespace.
++          "row": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:196: trailing whitespace.
++            "left": 239.421875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:197: trailing whitespace.
++            "right": 274.28125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:198: trailing whitespace.
++            "top": 303,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:199: trailing whitespace.
++            "bottom": 335,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:200: trailing whitespace.
++            "width": 34.859375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:201: trailing whitespace.
++            "height": 32
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:202: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:203: trailing whitespace.
++          "clip": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:204: trailing whitespace.
++            "left": 239.421875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:205: trailing whitespace.
++            "right": 261.421875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:206: trailing whitespace.
++            "top": 303,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:207: trailing whitespace.
++            "bottom": 320,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:208: trailing whitespace.
++            "width": 22,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:209: trailing whitespace.
++            "height": 17
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:210: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:211: trailing whitespace.
++          "number": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:212: trailing whitespace.
++            "left": 239.421875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:213: trailing whitespace.
++            "right": 257.21875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:214: trailing whitespace.
++            "top": 320,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:215: trailing whitespace.
++            "bottom": 335,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:216: trailing whitespace.
++            "width": 17.796875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:217: trailing whitespace.
++            "height": 15
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:218: trailing whitespace.
++          }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:219: trailing whitespace.
++        }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:220: trailing whitespace.
++      },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:221: trailing whitespace.
++      "500": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:222: trailing whitespace.
++        "windowWidth": 500,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:223: trailing whitespace.
++        "one": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:224: trailing whitespace.
++          "day": "2026-10-09",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:225: trailing whitespace.
++          "dateText": "9",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:226: trailing whitespace.
++          "countText": "3",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:227: trailing whitespace.
++          "cell": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:228: trailing whitespace.
++            "left": 342.703125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:229: trailing whitespace.
++            "right": 402.84375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:230: trailing whitespace.
++            "top": 216,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:231: trailing whitespace.
++            "bottom": 269,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:232: trailing whitespace.
++            "width": 60.140625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:233: trailing whitespace.
++            "height": 53
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:234: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:235: trailing whitespace.
++          "row": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:236: trailing whitespace.
++            "left": 349.703125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:237: trailing whitespace.
++            "right": 382.640625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:238: trailing whitespace.
++            "top": 245,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:239: trailing whitespace.
++            "bottom": 262,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:240: trailing whitespace.
++            "width": 32.9375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:241: trailing whitespace.
++            "height": 17
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:242: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:243: trailing whitespace.
++          "clip": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:244: trailing whitespace.
++            "left": 349.703125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:245: trailing whitespace.
++            "right": 371.703125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:246: trailing whitespace.
++            "top": 245,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:247: trailing whitespace.
++            "bottom": 262,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:248: trailing whitespace.
++            "width": 22,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:249: trailing whitespace.
++            "height": 17
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:250: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:251: trailing whitespace.
++          "number": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:252: trailing whitespace.
++            "left": 376.703125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:253: trailing whitespace.
++            "right": 382.640625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:254: trailing whitespace.
++            "top": 246,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:255: trailing whitespace.
++            "bottom": 261,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:256: trailing whitespace.
++            "width": 5.9375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:257: trailing whitespace.
++            "height": 15
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:258: trailing whitespace.
++          }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:259: trailing whitespace.
++        },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:260: trailing whitespace.
++        "three": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:261: trailing whitespace.
++          "day": "2026-10-15",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:262: trailing whitespace.
++          "dateText": "15",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:263: trailing whitespace.
++          "countText": "123",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:264: trailing whitespace.
++          "cell": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:265: trailing whitespace.
++            "left": 277.5625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:266: trailing whitespace.
++            "right": 337.703125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:267: trailing whitespace.
++            "top": 274,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:268: trailing whitespace.
++            "bottom": 327,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:269: trailing whitespace.
++            "width": 60.140625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:270: trailing whitespace.
++            "height": 53
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:271: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:272: trailing whitespace.
++          "row": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:273: trailing whitespace.
++            "left": 284.5625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:274: trailing whitespace.
++            "right": 329.359375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:275: trailing whitespace.
++            "top": 303,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:276: trailing whitespace.
++            "bottom": 320,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:277: trailing whitespace.
++            "width": 44.796875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:278: trailing whitespace.
++            "height": 17
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:279: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:280: trailing whitespace.
++          "clip": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:281: trailing whitespace.
++            "left": 284.5625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:282: trailing whitespace.
++            "right": 306.5625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:283: trailing whitespace.
++            "top": 303,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:284: trailing whitespace.
++            "bottom": 320,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:285: trailing whitespace.
++            "width": 22,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:286: trailing whitespace.
++            "height": 17
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:287: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:288: trailing whitespace.
++          "number": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:289: trailing whitespace.
++            "left": 311.5625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:290: trailing whitespace.
++            "right": 329.359375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:291: trailing whitespace.
++            "top": 304,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:292: trailing whitespace.
++            "bottom": 319,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:293: trailing whitespace.
++            "width": 17.796875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:294: trailing whitespace.
++            "height": 15
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:295: trailing whitespace.
++          }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:296: trailing whitespace.
++        }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:297: trailing whitespace.
++      },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:298: trailing whitespace.
++      "740": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:299: trailing whitespace.
++        "windowWidth": 740,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:300: trailing whitespace.
++        "one": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:301: trailing whitespace.
++          "day": "2026-10-09",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:302: trailing whitespace.
++          "dateText": "9",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:303: trailing whitespace.
++          "countText": "3",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:304: trailing whitespace.
++          "cell": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:305: trailing whitespace.
++            "left": 511.5625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:306: trailing whitespace.
++            "right": 604.28125,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:307: trailing whitespace.
++            "top": 235,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:308: trailing whitespace.
++            "bottom": 293,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:309: trailing whitespace.
++            "width": 92.71875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:310: trailing whitespace.
++            "height": 58
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:311: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:312: trailing whitespace.
++          "row": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:313: trailing whitespace.
++            "left": 521.5625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:314: trailing whitespace.
++            "right": 554.5,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:315: trailing whitespace.
++            "top": 268,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:316: trailing whitespace.
++            "bottom": 285,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:317: trailing whitespace.
++            "width": 32.9375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:318: trailing whitespace.
++            "height": 17
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:319: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:320: trailing whitespace.
++          "clip": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:321: trailing whitespace.
++            "left": 521.5625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:322: trailing whitespace.
++            "right": 543.5625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:323: trailing whitespace.
++            "top": 268,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:324: trailing whitespace.
++            "bottom": 285,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:325: trailing whitespace.
++            "width": 22,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:326: trailing whitespace.
++            "height": 17
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:327: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:328: trailing whitespace.
++          "number": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:329: trailing whitespace.
++            "left": 548.5625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:330: trailing whitespace.
++            "right": 554.5,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:331: trailing whitespace.
++            "top": 269,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:332: trailing whitespace.
++            "bottom": 284,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:333: trailing whitespace.
++            "width": 5.9375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:334: trailing whitespace.
++            "height": 15
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:335: trailing whitespace.
++          }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:336: trailing whitespace.
++        },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:337: trailing whitespace.
++        "three": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:338: trailing whitespace.
++          "day": "2026-10-15",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:339: trailing whitespace.
++          "dateText": "15",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:340: trailing whitespace.
++          "countText": "123",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:341: trailing whitespace.
++          "cell": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:342: trailing whitespace.
++            "left": 413.84375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:343: trailing whitespace.
++            "right": 506.5625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:344: trailing whitespace.
++            "top": 298,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:345: trailing whitespace.
++            "bottom": 356,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:346: trailing whitespace.
++            "width": 92.71875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:347: trailing whitespace.
++            "height": 58
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:348: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:349: trailing whitespace.
++          "row": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:350: trailing whitespace.
++            "left": 423.84375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:351: trailing whitespace.
++            "right": 468.640625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:352: trailing whitespace.
++            "top": 331,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:353: trailing whitespace.
++            "bottom": 348,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:354: trailing whitespace.
++            "width": 44.796875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:355: trailing whitespace.
++            "height": 17
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:356: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:357: trailing whitespace.
++          "clip": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:358: trailing whitespace.
++            "left": 423.84375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:359: trailing whitespace.
++            "right": 445.84375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:360: trailing whitespace.
++            "top": 331,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:361: trailing whitespace.
++            "bottom": 348,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:362: trailing whitespace.
++            "width": 22,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:363: trailing whitespace.
++            "height": 17
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:364: trailing whitespace.
++          },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:365: trailing whitespace.
++          "number": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:366: trailing whitespace.
++            "left": 450.84375,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:367: trailing whitespace.
++            "right": 468.640625,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:368: trailing whitespace.
++            "top": 332,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:369: trailing whitespace.
++            "bottom": 347,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:370: trailing whitespace.
++            "width": 17.796875,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:371: trailing whitespace.
++            "height": 15
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:372: trailing whitespace.
++          }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:373: trailing whitespace.
++        }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:374: trailing whitespace.
++      }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:375: trailing whitespace.
++    },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:376: trailing whitespace.
++    "originalSourceSha256": "313485e59395e3165f6504964efd72f4a3811150ac337834be3e2759f279f778"
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:377: trailing whitespace.
++  },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:378: trailing whitespace.
++  "screenshots": [
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:379: trailing whitespace.
++    "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f\\calendar-brand-clip-workflow-windows-ci-1791570946785-6212\\month.png",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:380: trailing whitespace.
++    "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f\\calendar-brand-clip-workflow-windows-ci-1791570946785-6212\\marker-closeup.png",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:381: trailing whitespace.
++    "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f\\calendar-brand-clip-workflow-windows-ci-1791570946785-6212\\year.png",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:382: trailing whitespace.
++    "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f\\calendar-brand-clip-workflow-windows-ci-1791570946785-6212\\day-paper.png",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:383: trailing whitespace.
++    "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f\\calendar-brand-clip-workflow-windows-ci-1791570946785-6212\\day-to-month-motion.png",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:384: trailing whitespace.
++    "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f\\calendar-brand-clip-workflow-windows-ci-1791570946785-6212\\month-350-one-three-digit.png",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:385: trailing whitespace.
++    "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f\\calendar-brand-clip-workflow-windows-ci-1791570946785-6212\\month-421-one-three-digit.png",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:386: trailing whitespace.
++    "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f\\calendar-brand-clip-workflow-windows-ci-1791570946785-6212\\month-500-one-three-digit.png",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:387: trailing whitespace.
++    "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f\\calendar-brand-clip-workflow-windows-ci-1791570946785-6212\\month-740-one-three-digit.png"
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:388: trailing whitespace.
++  ],
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:389: trailing whitespace.
++  "normalClose": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:390: trailing whitespace.
++  "fixtureRemoved": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:391: trailing whitespace.
++  "originalAppPid30628AliveAfter": "not-applicable"
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-brand-clip-workflow.log:392: trailing whitespace.
++}
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-geometry-workflow.log:1: trailing whitespace.
++{"scope":"isolated source Electron simulated window bounds and real repository; no physical multi-display/DPI","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"savedBounds":{"x":166,"y":42,"width":700,"height":580},"restoredBounds":{"x":166,"y":42,"width":700,"height":580},"settingsPreserved":true,"detailDidNotPollute":true,"motions":{"monthToDay":230,"dayToMonth":210,"monthToYear":210,"yearToMonth":230,"monthBackToYear":210},"sourceContent":true,"storedTextPreserved":true,"evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f\\calendar-geometry-workflow-windows-ci"}
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-motion-fix1-workflow.log:1: trailing whitespace.
++{"cases":[{"name":"empty-day-visible-return","passed":true,"emptyDay":"2026-10-01","visual":{"kind":"day-to-month","text":"这里还没有念头。","emptyCount":1}},{"name":"scroll-interrupts-active-motion","passed":true,"scrollTop":180},{"name":"restored-scroll-keeps-return-motion","passed":true,"kind":"day-to-month"},{"name":"resize-interrupts-active-motion","passed":true,"previousSize":[740,540]},{"name":"old-save-cannot-navigate-new-session","passed":true,"oldSession":2,"publishedSession":3,"storedTextSaved":true}],"evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f\\calendar-motion-fix1-workflow-windows-ci"}
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-motion-workflow.log:1: trailing whitespace.
++{"scope":"source Electron real pixels, synthetic dates; not physical iPhone or Windows acceptance","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"day":"2026-10-09","month":"2026-10","entered":["month-to-year","year-to-month","month-to-day","day-to-month"],"interruption":true,"reduced":true,"scroll":true,"twoColumns":true,"boundedCards":true,"compositionGuard":true,"evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f\\calendar-motion-workflow-windows-ci"}
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/calendar-workflow.log:1: trailing whitespace.
++{"scope":"isolated source Electron DOM/IPC on actual runner OS with synthetic dates; not physical DPI/IME","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"today":true,"archiveCounted":true,"initialNine":true,"threeColumns":true,"loadMore":true,"inlineEdit":true,"backScrollRestored":true,"yearTwelveMonths":true,"search":true,"softDeleteRestore":true}
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/final-calendar-shape-workflow.log:1: trailing whitespace.
++{"dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-final-shape-y6lBzh","evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f\\final-calendar-shape-workflow-windows-ci-9hrD84","cases":[{"name":"empty-day-expand","passed":true,"frames":[{"time":25,"kind":"month-to-day","from":{"left":413.84375,"top":173,"width":92.71875,"height":57},"to":{"left":23,"top":117,"width":679,"height":19.1875},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"calendar-paper-groups","x":0.507942,"y":0.507942,"tx":222.732,"ty":47.4079}],"clones":0,"clips":[]},{"time":100,"kind":"month-to-day","from":{"left":413.84375,"top":173,"width":92.71875,"height":57},"to":{"left":23,"top":117,"width":679,"height":19.1875},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"calendar-paper-groups","x":0.944699,"y":0.944699,"tx":25.0323,"ty":5.32805}],"clones":0,"clips":[]}]},{"name":"empty-day-return","passed":true,"frames":[{"time":25,"kind":"day-to-month","from":{"left":23,"top":117,"width":679,"height":19.1875},"to":{"left":413.84375,"top":173,"width":92.71875,"height":57},"transforms":[{"class":"calendar-motion-surface","x":0.599924,"y":0.599924,"tx":181.096,"ty":38.5458},{"class":"date-cell","x":1,"y":1,"tx":0,"ty":0}],"clones":0,"clips":[]},{"time":100,"kind":"day-to-month","from":{"left":23,"top":117,"width":679,"height":19.1875},"to":{"left":413.84375,"top":173,"width":92.71875,"height":57},"transforms":[{"class":"calendar-motion-surface","x":0.176821,"y":0.176821,"tx":372.616,"ty":79.3102},{"class":"date-cell","x":1,"y":1,"tx":0,"ty":0}],"clones":0,"clips":[]}]},{"name":"paper-day-expand","passed":true,"frames":[{"time":25,"kind":"month-to-day","from":{"left":413.84375,"top":297,"width":92.71875,"height":58},"to":{"left":23,"top":108,"width":679,"height":407},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"calendar-paper-groups","x":0.507942,"y":0.507942,"tx":222.732,"ty":108.397}],"clones":0,"clips":[{"width":22,"height":17}]},{"time":100,"kind":"month-to-day","from":{"left":413.84375,"top":297,"width":92.71875,"height":58},"to":{"left":23,"top":108,"width":679,"height":407},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"calendar-paper-groups","x":0.944699,"y":0.944699,"tx":25.0323,"ty":12.1825}],"clones":0,"clips":[{"width":22,"height":17}]}]},{"name":"paper-day-return","passed":true,"frames":[{"time":25,"kind":"day-to-month","from":{"left":23,"top":108,"width":679,"height":407},"to":{"left":413.84375,"top":297,"width":92.71875,"height":58},"transforms":[{"class":"calendar-motion-surface","x":0.599924,"y":0.599924,"tx":181.096,"ty":88.1339},{"class":"date-cell","x":1,"y":1,"tx":0,"ty":0}],"clones":6,"clips":[{"width":13.198333740234375,"height":10.198699951171875},{"width":13.19830322265625,"height":10.198699951171875},{"width":13.19830322265625,"height":10.198699951171875},{"width":13.198333740234375,"height":10.19873046875},{"width":13.19830322265625,"height":10.19873046875},{"width":13.19830322265625,"height":10.19873046875}]},{"time":100,"kind":"day-to-month","from":{"left":23,"top":108,"width":679,"height":407},"to":{"left":413.84375,"top":297,"width":92.71875,"height":58},"transforms":[{"class":"calendar-motion-surface","x":0.176821,"y":0.176821,"tx":372.616,"ty":181.341},{"class":"date-cell","x":1,"y":1,"tx":0,"ty":0}],"clones":6,"clips":[{"width":3.89007568359375,"height":3.0059814453125},{"width":3.89007568359375,"height":3.0059814453125},{"width":3.890045166015625,"height":3.0059814453125},{"width":3.89007568359375,"height":3.005950927734375},{"width":3.89007568359375,"height":3.005950927734375},{"width":3.890045166015625,"height":3.005950927734375}]}]},{"name":"month-to-year","passed":true,"frames":[{"time":25,"kind":"month-to-year","from":{"left":23,"top":141,"width":679,"height":338},"to":{"left":23,"top":396,"width":218.328125,"height":73},"transforms":[{"class":"calendar-motion-surface","x":0.636725,"y":0.636725,"tx":16.6064,"ty":118.153},{"class":"","x":1,"y":1,"tx":0,"ty":0}],"clones":0,"clips":[{"width":14.007965087890625,"height":10.8243408203125}]},{"time":100,"kind":"month-to-year","from":{"left":23,"top":141,"width":679,"height":338},"to":{"left":23,"top":396,"width":218.328125,"height":73},"transforms":[{"class":"calendar-motion-surface","x":0.252541,"y":0.252541,"tx":34.1686,"ty":243.107},{"class":"","x":1,"y":1,"tx":0,"ty":0}],"clones":0,"clips":[{"width":5.5558929443359375,"height":4.293182373046875}]}]},{"name":"year-to-month","passed":true,"frames":[{"time":25,"kind":"year-to-month","from":{"left":23,"top":396,"width":218.328125,"height":73},"to":{"left":23,"top":141,"width":679,"height":338},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"month-grid","x":0.553204,"y":0.553204,"tx":20.4244,"ty":145.318}],"clones":0,"clips":[{"width":22,"height":17}]},{"time":100,"kind":"year-to-month","from":{"left":23,"top":396,"width":218.328125,"height":73},"to":{"left":23,"top":141,"width":679,"height":338},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"month-grid","x":0.949786,"y":0.949786,"tx":2.29544,"ty":16.3319}],"clones":0,"clips":[{"width":22,"height":17}]}]}],"pids":[3172,6400,3864,7832,5056,824,1064],"normalClose":true,"pidChecks":[{"pid":3172,"status":"ESRCH"},{"pid":6400,"status":"ESRCH"},{"pid":3864,"status":"ESRCH"},{"pid":7832,"status":"ESRCH"},{"pid":5056,"status":"ESRCH"},{"pid":824,"status":"ESRCH"},{"pid":1064,"status":"ESRCH"}],"stat":"ENOENT","passed":true}
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/final-reader-placement-workflow.log:1: trailing whitespace.
++{"evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f\\final-reader-placement-workflow-windows-ci-uUDOjh","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-final-reader-BHGi7Q","cases":[{"name":"raw-cross","passed":true,"oldSession":2,"session":3,"reader":"c","editors":1,"draft":"UNSAVED cross C","persisted":"final probe c"},{"name":"real-main-cross-session-late-delete","passed":true,"session":3,"reader":"c","editors":1,"draft":"UNSAVED cross C","persisted":"final probe c"},{"name":"raw-same","passed":true,"oldSession":4,"session":4,"reader":"c","editors":1,"draft":"UNSAVED same C","persisted":"UNSAVED cross C"},{"name":"same-session-back-new-dirty-reader","passed":true,"session":4,"reader":"c","editors":1,"draft":"UNSAVED same C","persisted":"UNSAVED cross C"},{"name":"detail-fast-queued-flips-and-delayed-finish","passed":true,"sequentialFlipsRetained":true,"delayedFinishWaitedForSave":true},{"name":"calendar-normal-delete-neighbor","passed":true,"reader":"e"},{"name":"detail-normal-delete-neighbor-and-empty","passed":true,"neighbor":"f","lastDeleteEmpty":true},{"name":"detail-last-deleted-selection-stays-empty","passed":true,"noFallbackToOldManageSelection":true},{"name":"agent-auto-split-full-rope-notice-and-stable-body","passed":true,"notice":"已保存，绳上暂时放不下，可在念头日历查看","idsStable":true,"subsequentEditStable":true}],"pids":[2360,3764,5844,1552,4308,6468,4684],"scope":"Real source Electron main routing and persisted mutations; controlled reply hold, synthetic data only","normalClose":true,"pidChecks":[{"pid":2360,"status":"ESRCH"},{"pid":3764,"status":"ESRCH"},{"pid":5844,"status":"ESRCH"},{"pid":1552,"status":"ESRCH"},{"pid":4308,"status":"ESRCH"},{"pid":6468,"status":"ESRCH"},{"pid":4684,"status":"ESRCH"}],"stat":"ENOENT","passed":true}
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/inline-edit-workflow.log:1: trailing whitespace.
++{"scope":"isolated source Electron DOM/IPC on actual runner OS, synthetic composition events and disk fault; not physical IME","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"inline":true,"autosave":true,"lastInputClose":true,"compositionCloseBlocked":true,"failureRetained":true,"retryPersisted":true,"identityDatePreserved":true,"groupAgentSplitKeepsEditor":true}
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/storage-workflow.log:1: trailing whitespace.
++{"profile":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-p5-electron-i6Lqch\\profile","target":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-p5-electron-i6Lqch\\target","backup":"C:\\Users\\runneradmin\\AppData\\Local\\Temp\\thoughtline-p5-electron-i6Lqch\\Thoughtline-backup-2026-10-09T18-35-39-501Z-29150732-8d1f-4b46-9a5e-8086a76f89ed","checks":{"actualPath":true,"openFolder":true,"cancelUnchanged":true,"failedCopyOldLocation":true,"migrationRestart":true,"independentBackup":true,"dirtyFlush":true,"compositionRefused":true,"actualRestoreTwoRestarts":true,"offlineStartupFailClosed":true,"recoveryFolderRetry":true},"scope":"source Electron on actual runner OS with synthetic storage fixture; not hardware acceptance","host":{"platform":"win32","arch":"x64","release":"10.0.26100"}}
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f/windows-source-runtime.log:1: trailing whitespace.
++{"passed":true,"evidenceDirectory":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37974164754-1-b1e4f5807d97495cbe8e2f00a234066f\\source-attempt-hXYOga","attempt":"windows-source-runtime-windows-ci","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"scope":"Source Electron on the actual runner OS with emulated shortcut registration and DOM keyboard events; no physical IME, DPI, focus, display, or receiver acceptance","electron":"44.7.0","checks":{"enterInsertsNewline":true,"keyCode229GuardsSubmit":true,"platformSubmitShortcut":"Control+Enter","preservedEmojiAndLineBreak":true,"draftClearedAfterSubmit":true},"revisions":{"before":0,"after":2},"cleanup":{"directory":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-source-key-events-UMUfSV","ownedPids":[7588,4312,3688,572,8800,7952],"normalClose":true,"fakeDataRemoved":true,"allExited":true}}
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:1: trailing whitespace.
++{
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:2: trailing whitespace.
++  "passed": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:3: trailing whitespace.
++  "host": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:4: trailing whitespace.
++    "platform": "darwin",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:5: trailing whitespace.
++    "arch": "arm64",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:6: trailing whitespace.
++    "release": "24.3.0"
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:7: trailing whitespace.
++  },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:8: trailing whitespace.
++  "scope": "Source Electron on the actual runner OS with emulated shortcut registration and DOM keyboard events; no physical IME, DPI, focus, display, or receiver acceptance",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:9: trailing whitespace.
++  "electron": "44.7.0",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:10: trailing whitespace.
++  "checks": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:11: trailing whitespace.
++    "enterInsertsNewline": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:12: trailing whitespace.
++    "keyCode229GuardsSubmit": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:13: trailing whitespace.
++    "platformSubmitShortcut": "Meta+Enter",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:14: trailing whitespace.
++    "preservedEmojiAndLineBreak": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:15: trailing whitespace.
++    "draftClearedAfterSubmit": true
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:16: trailing whitespace.
++  },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:17: trailing whitespace.
++  "revisions": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:18: trailing whitespace.
++    "before": 0,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:19: trailing whitespace.
++    "after": 2
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:20: trailing whitespace.
++  },
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:21: trailing whitespace.
++  "cleanup": {
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:22: trailing whitespace.
++    "directory": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-source-key-events-HGWXbj",
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:23: trailing whitespace.
++    "ownedPids": [
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:24: trailing whitespace.
++      52866,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:25: trailing whitespace.
++      52867,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:26: trailing whitespace.
++      52868,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:27: trailing whitespace.
++      52869,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:28: trailing whitespace.
++      52873
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:29: trailing whitespace.
++    ],
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:30: trailing whitespace.
++    "normalClose": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:31: trailing whitespace.
++    "fakeDataRemoved": true,
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:32: trailing whitespace.
++    "allExited": true
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:33: trailing whitespace.
++  }
+acceptance/evidence/appearance/task2-final-rebuild-01017c9/windows-source-ui/round1/p6-windows-source/source-key-events.json:34: trailing whitespace.
++}
