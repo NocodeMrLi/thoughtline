@@ -1,4 +1,4 @@
-const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');
+const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 const assert=require('node:assert/strict'),path=require('node:path'),fs=require('node:fs/promises'),os=require('node:os');const {_electron}=require('playwright');
 (async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-text-drag-'));let app;
@@ -25,5 +25,5 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
   assert.equal(await app.evaluate(({clipboard})=>clipboard.readText()),clipboard);assert.deepEqual((await shelf.evaluate(()=>window.thoughtline.info())).snapshot,before);
   await shelf.locator('#test-text-receiver').evaluate(el=>el.remove());
   const report={scope:'actual Electron renderer DragEvent/DataTransfer protocol plus main operation lock; synthetic cancellation and browser-owned drag into a test-only textarea; not OS cross-app receiving acceptance',completePlaintext:true,noTitleOrAgentAdded:true,noFiles:true,copyEffect:true,cancelDoesNotCopyOrChangeData:true,independentPegInteraction:true,realTargets:{Codex:'not tested',Claude:'not tested',Cursor:'not tested'}};await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','text-drag-native.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
- }finally{try{if(app)await app.close();}finally{await fs.rm(dir,{recursive:true,force:true});}}
+ }finally{let pids=[];if(app){pids=[...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)),app.process().pid];await app.close();}await cleanupIdleFixture(dir,pids);await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','text-drag-cleanup.json'),JSON.stringify({pids,allPidsExited:true,fakeDataRemoved:true},null,2)+'\n');}
 })().catch(e=>{console.error(e);process.exitCode=1;});
