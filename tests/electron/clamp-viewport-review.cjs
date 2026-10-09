@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto');const {_electron}=require('playwright');
 const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
-const output=path.resolve('acceptance/evidence/clamp-review/viewport-matrix');
+const output=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/paper-review/viewport-matrix');
 (async()=>{
  await fs.mkdir(output,{recursive:true});const scenes=[];
  for(const width of [800,1024,1920,2560])for(const scale of [1,2]){

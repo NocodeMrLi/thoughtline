@@ -39,6 +39,6 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
   await result(manage,'clipChange',{kind:'undo'},s.revision);s=(await info(manage)).snapshot;assert.equal(s.clips.length,2);assert.deepEqual(s.clips[0].ideaIds,[ids[1],ids[0]]);
   await app.close();app=null;app=await launch();({shelf}=await ready());s=(await info(shelf)).snapshot;assert.equal(s.schemaVersion,2);assert.deepEqual(s.clips[0].ideaIds,[ids[1],ids[0]]);assert.equal(s.ideas[0].text,texts[0]);
   const report={platform:process.platform,scope:'Electron应用IPC/DOM/协议鼠标循环；不是系统物理拖动、穿透或Windows实机验收',compactSize:[160,112],detailSize:[380,360],crossAgentRejected:true,mergePreservesNotes:true,dragHoldMergeProtocol:true,earlyDropNoMerge:true,hoverArrows:true,pageSwitchNoCopy:true,copyCurrentFullText:true,titleJump:true,splitUndo:true,restartPreserved:true};
-  await fs.writeFile('acceptance/evidence/group-native.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
+  await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','group-native.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
  }finally{try{if(app)await app.close();}finally{await fs.rm(dir,{recursive:true,force:true});}}
 })().catch(e=>{console.error(e);process.exitCode=1;});
