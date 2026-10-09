@@ -1,0 +1,11 @@
+# Findings
+
+Main713a1fe clean/pushed. README7 real language pages/14 blobs verified remote, source206 unchanged. Original preview.2 actual code ca2137b kept.
+V2 directly visible Composer/Detail/Calendar controls approved; latest user adds iPhone Settings-like smooth tactile motion. Existing source PilotInfo.dark comes from nativeTheme; App only changes dataset.theme; no locale/persisted UI preference yet. Settings-only entry rejected. Shared new profile preference file avoids note snapshot CAS changes. Need truly new-profile detection before FileRepository creates snapshot. App uses main.tsx, Calendar.tsx; Manage.tsx legacy isn't the active calendar.
+UI Pro Max narrow queries return actual easing/reduced-motion/continuous-animation guidance and React state/focus guidelines; short interruptible transform-only motion is used, no nativeUISwitch claim. Official HIG web pages JS-only unread content; no claimed detailed timing source.
+
+V2 actual HTML-rendered posters read: 760px day/night and350px narrow show both capsules andclose in first-layer header. All screenshots remain concept-only (old for-review label); synthetic Chinese/emoji body unchanged. No new app flow run by controller. Previous concept capture2 cleanup normalQuit=true,exit0,4ownedPIDs ESRCH,fixtureRemoved=true. LiveGitHub PRIVATE and preview.3 tag absent404, suitable newversion; old.2 unaffected. ActualWindowsCI uploadcurrentlyonly round1/p6-windows-source/**, worker informed new appearance evidence must be retained separately.
+
+The log named ui-green-first.log is actually the failed first temp-build startup attempt2613 (closed context/missingtray), not GREEN. Names never prove test outcomes. Source UI GREEN remains unclaimed until actual success report. Added external preference corruption expectedRED1/15 then focused preference+i18nGREEN19/19 at23:50:14. Existing failures kept.
+
+Read actual sourceUI attempt8 350px Composer dark and Calendar light PNGs: both 中/EN and sun/moon capsules+close are visible in first header; title is shortened, rope untouched. Syntheticstress-text screenshots are verification only, not README/media updates.14sourcechecks log pass/normalQuit/fault restore,10ownedPIDs independently ESRCH/profile ENOENT. CurrentnewSettings cross-instance lateerror test/additional full regression/review still pending.
