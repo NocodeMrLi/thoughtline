@@ -12,6 +12,6 @@ function App(){
  useEffect(()=>{const off=window.thoughtline.onInfo(setInfo);window.thoughtline.info().then(setInfo).catch(console.error);return off;},[]);
  useEffect(()=>{if(info){document.documentElement.dataset.theme=info.dark?'dark':'light';document.documentElement.dataset.motion=info.snapshot.settings.reducedMotion?'reduce':'normal';}},[info?.dark,info?.snapshot.settings.reducedMotion]);
  if(!info)return null;const view=new URLSearchParams(location.search).get('view');
- return view==='composer'?<Composer info={info}/>:view==='manage'?(info.manageMode==='settings'?<Settings info={info}/>:info.manageMode==='detail'?<Detail info={info}/>:<Manage info={info}/>):<Shelf info={info}/>;
+ return view==='composer'?<Composer key={info.composerSession} info={info}/>:view==='manage'?(info.manageMode==='settings'?<Settings info={info}/>:info.manageMode==='detail'?<Detail info={info}/>:<Manage info={info}/>):<Shelf info={info}/>;
 }
 createRoot(document.getElementById('root')!).render(<App/>);

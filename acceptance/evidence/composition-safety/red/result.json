@@ -1,0 +1,13 @@
+{
+  "sourceCommit": "c3784976c5fc1877dfa337b0db4e79f3b9c8a423",
+  "test": "tests/unit/compositionFlush.test.ts",
+  "command": "node node_modules/vitest/vitest.mjs run tests/unit/compositionFlush.test.ts",
+  "exitCode": 1,
+  "failures": [
+    "paused flush persisted intermediate instead of rejecting",
+    "pending flush continued to intermediate write; test timed out"
+  ],
+  "oldAutosaverSHA256": "0ed7bdf3e8fcc5a830fd0a37ffa4aafe74421ccec935a7e203c067578760286a",
+  "testSHA256": "aa3095d4fdbf5dab6d2ce0e9e7d25d17982905b55b8623385a3f920a2c41eecf",
+  "originalNativeRedKeptAt": "acceptance/evidence/name-affordance/composition-probe/result.json"
+}

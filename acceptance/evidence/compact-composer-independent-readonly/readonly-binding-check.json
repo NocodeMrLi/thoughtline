@@ -1,0 +1,613 @@
+{
+  "sourceCommit": "ebd585ae5e3d4c5d505fe52b03c203517cc8f88f",
+  "evidenceCommit": "8a27ead234020589242ff6794f2348e539113632",
+  "remoteFetched": true,
+  "sourceToEvidenceDiffEmpty": true,
+  "sourceHashes": [
+    {
+      "file": "src/main/index.ts",
+      "sha256": "6bc68a336dce2dea7fda6635bc8d4e3e5f715ce3ba408085517c50b1ca1b3937",
+      "match": true
+    },
+    {
+      "file": "src/main/windows/composer.ts",
+      "sha256": "14da25caae9cea146f2ef3950b8c1b4f35ca13aeeaf5f8f631f24bab9b472035",
+      "match": true
+    },
+    {
+      "file": "src/shared/bridge.ts",
+      "sha256": "237120decba65c1de50f9aa6e3245436cf508e0b9d3839f7a0a1778660623110",
+      "match": true
+    },
+    {
+      "file": "src/shared/composerMaterial.ts",
+      "sha256": "0e98d808376f023f890113876e4dcbe3eef1c335a648bab794de1b1a8b301026",
+      "match": true
+    },
+    {
+      "file": "src/renderer/components/Composer.tsx",
+      "sha256": "b20d5bdbe1f6ce7d9ae9782fa5f11d89958a33d5cb938ed3415a096291f01644",
+      "match": true
+    },
+    {
+      "file": "src/renderer/styles/overlay.css",
+      "sha256": "68dcf74d5156988bd8a60eef7c4ae56cd0d6edcc7803a7699b7595ec550c950d",
+      "match": true
+    },
+    {
+      "file": "package.json",
+      "sha256": "d70dc8e8b89ccbfb23f93ff4af5bd85a1e2f6f3795a487b3db111c232c4e882c",
+      "match": true
+    },
+    {
+      "file": "package-lock.json",
+      "sha256": "3ad0e4885f7271d0edbd0ce24cd68d288d2ec2daebdc0bd5b1be4e57bbaeb851",
+      "match": true
+    },
+    {
+      "file": "tests/electron/compact-composer-preview.cjs",
+      "sha256": "bf7434cd2774e7a954d5334af9fd4024ffbf8f325dc1e95d94bd359abe59af20",
+      "match": true
+    },
+    {
+      "file": "tests/electron/draft-safety-workflow.cjs",
+      "sha256": "bf68046c880c9d6f37d75afba3eab8071e62804103015664ab7375fe5dcab63d",
+      "match": true
+    },
+    {
+      "file": "tests/electron/draft-crash-recovery.cjs",
+      "sha256": "abffea41798b49db448a784cbfa5565ea95bff66669733b90542d365385bf10b",
+      "match": true
+    },
+    {
+      "file": "tests/unit/composerMaterial.test.ts",
+      "sha256": "9cd06775d36257265efb1ea4a0bcbd0dd0bc18c7b6334601ca7bd801c84714f8",
+      "match": true
+    }
+  ],
+  "originalEvidenceHashes": [
+    {
+      "file": "before-footer-fix/claude-short-dark-native-desktop.png",
+      "sha256": "10b4b8f5b0faf3de39ce7e2200ef259b569703f82765b212da6c9d968d98a20d",
+      "match": true
+    },
+    {
+      "file": "before-footer-fix/claude-short-dark.png",
+      "sha256": "e9ec8c30bfa88c3ac9f566c328788c7974d5ebd75bbac2b7d582cf2f7f2be905",
+      "match": true
+    },
+    {
+      "file": "before-footer-fix/claude-short-light-native-desktop.png",
+      "sha256": "94d3ffa1cfa18816f1a79e26efdcf56a1f604245143d84d18f067fa5a9dc1e97",
+      "match": true
+    },
+    {
+      "file": "before-footer-fix/claude-short-light.png",
+      "sha256": "9800b3c03e1290fbdeade61904944a3d88e726adf4468f8c019da8d025c1fb51",
+      "match": true
+    },
+    {
+      "file": "before-footer-fix/codex-long-scroll-dark-native-desktop.png",
+      "sha256": "56042def5fe99a18c634fc3a0ad45027d50d6b349f3d489cfb139f692a3d4e4f",
+      "match": true
+    },
+    {
+      "file": "before-footer-fix/codex-long-scroll-dark.png",
+      "sha256": "7b31fbb7d054ab4bacb8d074941aca83104e5bb7171ff8f75a6cacee2a9da499",
+      "match": true
+    },
+    {
+      "file": "before-footer-fix/codex-long-scroll-light-native-desktop.png",
+      "sha256": "ae1f82b3b00a2ce2c63540c9da38305eddb8cd72f1fc7484c573340d6823c30d",
+      "match": true
+    },
+    {
+      "file": "before-footer-fix/codex-long-scroll-light.png",
+      "sha256": "8588b3abf76582fc70b71857537ae6c2abea2104563f91300a63c6241cc4c888",
+      "match": true
+    },
+    {
+      "file": "before-footer-fix/codex-short-light-native-desktop.png",
+      "sha256": "cf3762fbe93225629d3a6b699d84c8629bebda7921dfcacc0701b4d680128fb4",
+      "match": true
+    },
+    {
+      "file": "before-footer-fix/codex-short-light.png",
+      "sha256": "ad8f8ae4bf34bfd2bdde92e148c2bc69b8916472193857dc4b514256a803f13d",
+      "match": true
+    },
+    {
+      "file": "before-footer-fix/default-light-native-desktop.png",
+      "sha256": "4197a4c5173b480460b747a7b234a003108bd66fd1b7e668426d44ebb7f961a7",
+      "match": true
+    },
+    {
+      "file": "before-footer-fix/default-light.png",
+      "sha256": "47a23e545e9428f6e2c558a198c080b74e42d7aebd0731a08e770820566e4138",
+      "match": true
+    },
+    {
+      "file": "before-footer-fix/preview-result.json",
+      "sha256": "a182bb447b2eb80f11e1372e8f989e6c5c36b6ed32c63398aa506bfaa8c61a59",
+      "match": true
+    },
+    {
+      "file": "before-footer-fix/preview.log",
+      "sha256": "88d5aa16fba89c05f03dacbe0d5644fcd6dd439e12c139236f5a65cac14e5599",
+      "match": true
+    },
+    {
+      "file": "before-footer-fix/windows-style-simulation-dark.png",
+      "sha256": "cc09acac2cb8900b5790293f36ba8a3cb8829d59a06dd3b4767c4157608e470f",
+      "match": true
+    },
+    {
+      "file": "before-footer-fix/windows-style-simulation-light.png",
+      "sha256": "b4b76fedcf2a19d0581b648863ba6da997446edb657876d86be0b84e4f3a26ef",
+      "match": true
+    },
+    {
+      "file": "build.log",
+      "sha256": "d2968d48db37b884563b5bcf7d65f794a04a08f317946547038a51957d88774b",
+      "match": true
+    },
+    {
+      "file": "claude-short-dark-native-desktop.png",
+      "sha256": "8f76bc4025d33739e668582cfdb8cb36abedd7f7c48f4f618f9ecd14d33921a3",
+      "match": true
+    },
+    {
+      "file": "claude-short-dark.png",
+      "sha256": "38e3366e1a3fb8e78256b8d344e39139d9c3faa4d4e4f59e9b8cab883702250a",
+      "match": true
+    },
+    {
+      "file": "claude-short-light-native-desktop.png",
+      "sha256": "78df1422c2d3a0c3f6cdbfc8dac880b5e38a5ab3d526258c669f69d949ad4500",
+      "match": true
+    },
+    {
+      "file": "claude-short-light.png",
+      "sha256": "d747e7614176da4c8dbee4f8f3a93cc682dd1049c61a1a996e280dbb0f7ad8ff",
+      "match": true
+    },
+    {
+      "file": "codex-long-scroll-dark-native-desktop.png",
+      "sha256": "f9b68dd3e2534e11201e71f1d32d4fff8f3d5c8a22b091a75f9b35105727fb95",
+      "match": true
+    },
+    {
+      "file": "codex-long-scroll-dark.png",
+      "sha256": "99b60c8671d6a0358e503d6eec1b8a3b68c33319fe7c9cbb7bbd7adf9eb8a354",
+      "match": true
+    },
+    {
+      "file": "codex-long-scroll-light-native-desktop.png",
+      "sha256": "21539e83f71ae287b54968ca8ffa6e307125133e4bf93b09d6f03f11fc06879f",
+      "match": true
+    },
+    {
+      "file": "codex-long-scroll-light.png",
+      "sha256": "2ebb48ef46a2f741bdb0f7bf7593005729dc974c43ef42bc12cb6dfca474a259",
+      "match": true
+    },
+    {
+      "file": "codex-short-light-native-desktop.png",
+      "sha256": "fca2dd868b7de965d2e6d81d42f658b891d673631e7275ee30e847224a2f0e3c",
+      "match": true
+    },
+    {
+      "file": "codex-short-light.png",
+      "sha256": "08b59aed06a305fdd34899c13435322c80b4406fd975f7843cd80344fe81b5fc",
+      "match": true
+    },
+    {
+      "file": "crash-native.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "match": true
+    },
+    {
+      "file": "crash-recovery.json",
+      "sha256": "3ecec93899e8bc243974065cf3638979eab0af8eb8327d5f560b4b4e2555ccf2",
+      "match": true
+    },
+    {
+      "file": "default-light-native-desktop.png",
+      "sha256": "eedcef1a4e955ebe11c7f41768e89cf762a5b89892ec0cac2dedce4c55555c9f",
+      "match": true
+    },
+    {
+      "file": "default-light.png",
+      "sha256": "d6344b0d8728e9b504c0a649542b5128c2d128888be8f35681023f1fbb62292e",
+      "match": true
+    },
+    {
+      "file": "preview-cleanup.json",
+      "sha256": "ca9a2e134693fc2cea4ef195e5fbc2f9a87b305502f28cc698c6f630333b436c",
+      "match": true
+    },
+    {
+      "file": "preview-result.json",
+      "sha256": "83a33f57c61eb3084b20d8cd4c920d9a63ca769fb2dd6edbfd9b76781a59f3c9",
+      "match": true
+    },
+    {
+      "file": "preview.log",
+      "sha256": "38248f8d57cb3de53d16da512c1f4e4f9e7e413f99a4ac1cd23b89b95f7947a4",
+      "match": true
+    },
+    {
+      "file": "safety-native.json",
+      "sha256": "7fd85c40c9e26fdb7c2097a0944dbc1b2ad2004e7b44abfb47beadb37294b7e3",
+      "match": true
+    },
+    {
+      "file": "safety-native.log",
+      "sha256": "dd1845204dc07486bd5fee3be02ab4ea3482306caa3ea6ee2ad6ad5321ce175f",
+      "match": true
+    },
+    {
+      "file": "source-binding.json",
+      "sha256": "fbdff1b57e851c59be1a4f27080f28eff5c6b0dd474895fbe0fc796ccc9d1812",
+      "match": true
+    },
+    {
+      "file": "typecheck.log",
+      "sha256": "5130af017a6fb3cf93c17632458944e701e862893c0f2487ba533f2db53d939a",
+      "match": true
+    },
+    {
+      "file": "unit.log",
+      "sha256": "638145055fe9f17f47a2fe664b125d399ce0cce6825f34ee4d07a5a1e0d610a5",
+      "match": true
+    },
+    {
+      "file": "windows-style-simulation-dark.png",
+      "sha256": "72ee7f886bdf15383e251367004d719dec8c5a3f6b3f25a11a2cc592a7b2d0e2",
+      "match": true
+    },
+    {
+      "file": "windows-style-simulation-light.png",
+      "sha256": "72ae8ddcc0d80452a61a3f23833f34f05e54048b79bf7e24dcca8f3d79d68611",
+      "match": true
+    }
+  ],
+  "builderCompiledReadonlyHashes": [
+    {
+      "file": "out/main/index.js",
+      "sha256": "a2cdcc2bf77b76b71b6f2073a2ef8f605a0b81e0d4ae1e0acac3b284b03df9b6",
+      "match": true
+    },
+    {
+      "file": "out/preload/index.js",
+      "sha256": "0939feaf1844c5cb450bc0e91f375f3ace636073a9957191d84f5b7d5a92fa04",
+      "match": true
+    },
+    {
+      "file": "out/renderer/assets/index-BKE12Q8M.css",
+      "sha256": "68dcf74d5156988bd8a60eef7c4ae56cd0d6edcc7803a7699b7595ec550c950d",
+      "match": true
+    },
+    {
+      "file": "out/renderer/assets/index-DMammW8K.js",
+      "sha256": "8103dd6b15fded3cc17d941a4817808935541d827ce15ae0b25db56ecf4e59af",
+      "match": true
+    },
+    {
+      "file": "out/renderer/index.html",
+      "sha256": "5c9bad3780c577f19fd63aedd9552ddab38226c34f2d6d2a41ca389512adfbed",
+      "match": true
+    }
+  ],
+  "independentNativeRun": false,
+  "independentBuildRun": false,
+  "scenes": [
+    {
+      "label": "default",
+      "theme": "light",
+      "checks": {
+        "textarea132": true,
+        "viewport480x316": true,
+        "buttonFullyInsideFooter": true,
+        "buttonYEqualsFooterY": true,
+        "fieldsInsideViewport": true,
+        "materialOpaque": true
+      },
+      "images": [
+        {
+          "file": "default-light.png",
+          "sha256": "d6344b0d8728e9b504c0a649542b5128c2d128888be8f35681023f1fbb62292e",
+          "PNGDimensions": [
+            960,
+            632
+          ],
+          "matches": true
+        },
+        {
+          "file": "default-light-native-desktop.png",
+          "sha256": "eedcef1a4e955ebe11c7f41768e89cf762a5b89892ec0cac2dedce4c55555c9f",
+          "PNGDimensions": [
+            960,
+            632
+          ],
+          "matches": true
+        }
+      ],
+      "scrollHeight": 129,
+      "clientHeight": 129,
+      "scrollTop": 0,
+      "borderColor": "rgb(138, 142, 152)",
+      "scope": "actual Mac source; material recorded per scene and OS accessibility honored; composited crop only own window over own clean synthetic desktop-style backdrop; not true NSGlassEffectView"
+    },
+    {
+      "label": "codex-short",
+      "theme": "light",
+      "checks": {
+        "textarea132": true,
+        "viewport480x316": true,
+        "buttonFullyInsideFooter": true,
+        "buttonYEqualsFooterY": true,
+        "fieldsInsideViewport": true,
+        "materialOpaque": true
+      },
+      "images": [
+        {
+          "file": "codex-short-light.png",
+          "sha256": "08b59aed06a305fdd34899c13435322c80b4406fd975f7843cd80344fe81b5fc",
+          "PNGDimensions": [
+            960,
+            632
+          ],
+          "matches": true
+        },
+        {
+          "file": "codex-short-light-native-desktop.png",
+          "sha256": "fca2dd868b7de965d2e6d81d42f658b891d673631e7275ee30e847224a2f0e3c",
+          "PNGDimensions": [
+            960,
+            632
+          ],
+          "matches": true
+        }
+      ],
+      "scrollHeight": 129,
+      "clientHeight": 129,
+      "scrollTop": 0,
+      "borderColor": "rgb(38, 107, 182)",
+      "scope": "actual Mac source; material recorded per scene and OS accessibility honored; composited crop only own window over own clean synthetic desktop-style backdrop; not true NSGlassEffectView"
+    },
+    {
+      "label": "codex-long-scroll",
+      "theme": "light",
+      "checks": {
+        "textarea132": true,
+        "viewport480x316": true,
+        "buttonFullyInsideFooter": true,
+        "buttonYEqualsFooterY": true,
+        "fieldsInsideViewport": true,
+        "materialOpaque": true
+      },
+      "images": [
+        {
+          "file": "codex-long-scroll-light.png",
+          "sha256": "2ebb48ef46a2f741bdb0f7bf7593005729dc974c43ef42bc12cb6dfca474a259",
+          "PNGDimensions": [
+            960,
+            632
+          ],
+          "matches": true
+        },
+        {
+          "file": "codex-long-scroll-light-native-desktop.png",
+          "sha256": "21539e83f71ae287b54968ca8ffa6e307125133e4bf93b09d6f03f11fc06879f",
+          "PNGDimensions": [
+            960,
+            632
+          ],
+          "matches": true
+        }
+      ],
+      "scrollHeight": 812,
+      "clientHeight": 129,
+      "scrollTop": 683,
+      "borderColor": "rgb(38, 107, 182)",
+      "scope": "actual Mac source; material recorded per scene and OS accessibility honored; composited crop only own window over own clean synthetic desktop-style backdrop; not true NSGlassEffectView"
+    },
+    {
+      "label": "codex-long-scroll",
+      "theme": "dark",
+      "checks": {
+        "textarea132": true,
+        "viewport480x316": true,
+        "buttonFullyInsideFooter": true,
+        "buttonYEqualsFooterY": true,
+        "fieldsInsideViewport": true,
+        "materialOpaque": true
+      },
+      "images": [
+        {
+          "file": "codex-long-scroll-dark.png",
+          "sha256": "99b60c8671d6a0358e503d6eec1b8a3b68c33319fe7c9cbb7bbd7adf9eb8a354",
+          "PNGDimensions": [
+            960,
+            632
+          ],
+          "matches": true
+        },
+        {
+          "file": "codex-long-scroll-dark-native-desktop.png",
+          "sha256": "f9b68dd3e2534e11201e71f1d32d4fff8f3d5c8a22b091a75f9b35105727fb95",
+          "PNGDimensions": [
+            960,
+            632
+          ],
+          "matches": true
+        }
+      ],
+      "scrollHeight": 812,
+      "clientHeight": 129,
+      "scrollTop": 683,
+      "borderColor": "rgb(76, 144, 217)",
+      "scope": "actual Mac source; material recorded per scene and OS accessibility honored; composited crop only own window over own clean synthetic desktop-style backdrop; not true NSGlassEffectView"
+    },
+    {
+      "label": "claude-short",
+      "theme": "light",
+      "checks": {
+        "textarea132": true,
+        "viewport480x316": true,
+        "buttonFullyInsideFooter": true,
+        "buttonYEqualsFooterY": true,
+        "fieldsInsideViewport": true,
+        "materialOpaque": true
+      },
+      "images": [
+        {
+          "file": "claude-short-light.png",
+          "sha256": "d747e7614176da4c8dbee4f8f3a93cc682dd1049c61a1a996e280dbb0f7ad8ff",
+          "PNGDimensions": [
+            960,
+            632
+          ],
+          "matches": true
+        },
+        {
+          "file": "claude-short-light-native-desktop.png",
+          "sha256": "78df1422c2d3a0c3f6cdbfc8dac880b5e38a5ab3d526258c669f69d949ad4500",
+          "PNGDimensions": [
+            960,
+            632
+          ],
+          "matches": true
+        }
+      ],
+      "scrollHeight": 129,
+      "clientHeight": 129,
+      "scrollTop": 0,
+      "borderColor": "rgb(149, 93, 34)",
+      "scope": "actual Mac source; material recorded per scene and OS accessibility honored; composited crop only own window over own clean synthetic desktop-style backdrop; not true NSGlassEffectView"
+    },
+    {
+      "label": "claude-short",
+      "theme": "dark",
+      "checks": {
+        "textarea132": true,
+        "viewport480x316": true,
+        "buttonFullyInsideFooter": true,
+        "buttonYEqualsFooterY": true,
+        "fieldsInsideViewport": true,
+        "materialOpaque": true
+      },
+      "images": [
+        {
+          "file": "claude-short-dark.png",
+          "sha256": "38e3366e1a3fb8e78256b8d344e39139d9c3faa4d4e4f59e9b8cab883702250a",
+          "PNGDimensions": [
+            960,
+            632
+          ],
+          "matches": true
+        },
+        {
+          "file": "claude-short-dark-native-desktop.png",
+          "sha256": "8f76bc4025d33739e668582cfdb8cb36abedd7f7c48f4f618f9ecd14d33921a3",
+          "PNGDimensions": [
+            960,
+            632
+          ],
+          "matches": true
+        }
+      ],
+      "scrollHeight": 129,
+      "clientHeight": 129,
+      "scrollTop": 0,
+      "borderColor": "rgb(215, 149, 81)",
+      "scope": "actual Mac source; material recorded per scene and OS accessibility honored; composited crop only own window over own clean synthetic desktop-style backdrop; not true NSGlassEffectView"
+    },
+    {
+      "label": "windows-style-simulation",
+      "theme": "light",
+      "checks": {
+        "textarea132": true,
+        "viewport480x316": true,
+        "buttonFullyInsideFooter": true,
+        "buttonYEqualsFooterY": true,
+        "fieldsInsideViewport": true,
+        "materialOpaque": true
+      },
+      "images": [
+        {
+          "file": "windows-style-simulation-light.png",
+          "sha256": "72ae8ddcc0d80452a61a3f23833f34f05e54048b79bf7e24dcca8f3d79d68611",
+          "PNGDimensions": [
+            960,
+            632
+          ],
+          "matches": true
+        }
+      ],
+      "scrollHeight": 129,
+      "clientHeight": 129,
+      "scrollTop": 0,
+      "borderColor": "rgb(149, 93, 34)",
+      "scope": "Windows CSS style simulation in actual Mac renderer, opaque fallback; not Windows OS or Acrylic execution"
+    },
+    {
+      "label": "windows-style-simulation",
+      "theme": "dark",
+      "checks": {
+        "textarea132": true,
+        "viewport480x316": true,
+        "buttonFullyInsideFooter": true,
+        "buttonYEqualsFooterY": true,
+        "fieldsInsideViewport": true,
+        "materialOpaque": true
+      },
+      "images": [
+        {
+          "file": "windows-style-simulation-dark.png",
+          "sha256": "72ee7f886bdf15383e251367004d719dec8c5a3f6b3f25a11a2cc592a7b2d0e2",
+          "PNGDimensions": [
+            960,
+            632
+          ],
+          "matches": true
+        }
+      ],
+      "scrollHeight": 129,
+      "clientHeight": 129,
+      "scrollTop": 0,
+      "borderColor": "rgb(215, 149, 81)",
+      "scope": "Windows CSS style simulation in actual Mac renderer, opaque fallback; not Windows OS or Acrylic execution"
+    }
+  ],
+  "currentNativeCaptureImagesActuallyViewed": 6,
+  "WindowsMacCSSImagesActuallyViewed": 2,
+  "beforeFooterFact": {
+    "footer": {
+      "x": 17,
+      "y": 268,
+      "width": 446,
+      "height": 32,
+      "right": 463,
+      "bottom": 300
+    },
+    "button": {
+      "x": 391,
+      "y": 276,
+      "width": 72,
+      "height": 32,
+      "right": 463,
+      "bottom": 308
+    },
+    "bottomOverflowsFooterDIP": 8
+  },
+  "materialObserved": {
+    "reducedTransparency": true,
+    "highContrast": true,
+    "forcedColors": false
+  },
+  "nativeVibrancyObserved": false,
+  "reportedOwnedPIDsAbsent": 27,
+  "nativeBoundsCaveat": "fixture reads native bounds once before scenes; per-scene renderer viewport480x316 and fixed create/show bounds support size statement, not per-scene getBounds remeasurement."
+}

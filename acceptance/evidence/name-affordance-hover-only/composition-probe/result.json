@@ -1,0 +1,314 @@
+{
+  "scope": "isolated synthetic composition events on actual Mac source; tests early checkpoints and flagged key guards; not physical IME fault/data corruption evidence",
+  "fields": [
+    {
+      "field": "title",
+      "waitMs": 2400,
+      "before": {
+        "revision": 0,
+        "draft": {
+          "text": "已完成正文",
+          "title": "旧名称",
+          "project": "旧项目",
+          "agentId": "general"
+        },
+        "ideaCount": 0,
+        "nativeVisible": true,
+        "interactionLocked": true
+      },
+      "during": {
+        "revision": 1,
+        "draft": {
+          "text": "已完成正文",
+          "title": "未确认名称ming",
+          "project": "旧项目",
+          "agentId": "general"
+        },
+        "ideaCount": 0,
+        "nativeVisible": true,
+        "interactionLocked": true
+      },
+      "negativeCheckpointPassed": false,
+      "nativeVisibleAndLockProtected": true,
+      "keyProtection": [
+        {
+          "key": "Enter",
+          "metaKey": false,
+          "isComposing": true,
+          "keyCode": 13,
+          "observed": {
+            "revision": 1,
+            "draft": {
+              "text": "已完成正文",
+              "title": "未确认名称ming",
+              "project": "旧项目",
+              "agentId": "general"
+            },
+            "ideaCount": 0,
+            "nativeVisible": true,
+            "interactionLocked": true
+          }
+        },
+        {
+          "key": "Enter",
+          "metaKey": false,
+          "isComposing": false,
+          "keyCode": 229,
+          "observed": {
+            "revision": 1,
+            "draft": {
+              "text": "已完成正文",
+              "title": "未确认名称ming",
+              "project": "旧项目",
+              "agentId": "general"
+            },
+            "ideaCount": 0,
+            "nativeVisible": true,
+            "interactionLocked": true
+          }
+        },
+        {
+          "key": "Escape",
+          "metaKey": false,
+          "isComposing": true,
+          "keyCode": 13,
+          "observed": {
+            "revision": 1,
+            "draft": {
+              "text": "已完成正文",
+              "title": "未确认名称ming",
+              "project": "旧项目",
+              "agentId": "general"
+            },
+            "ideaCount": 0,
+            "nativeVisible": true,
+            "interactionLocked": true
+          }
+        },
+        {
+          "key": "Escape",
+          "metaKey": false,
+          "isComposing": false,
+          "keyCode": 229,
+          "observed": {
+            "revision": 1,
+            "draft": {
+              "text": "已完成正文",
+              "title": "未确认名称ming",
+              "project": "旧项目",
+              "agentId": "general"
+            },
+            "ideaCount": 0,
+            "nativeVisible": true,
+            "interactionLocked": true
+          }
+        },
+        {
+          "key": "Enter",
+          "metaKey": true,
+          "isComposing": true,
+          "keyCode": 13,
+          "observed": {
+            "revision": 1,
+            "draft": {
+              "text": "已完成正文",
+              "title": "未确认名称ming",
+              "project": "旧项目",
+              "agentId": "general"
+            },
+            "ideaCount": 0,
+            "nativeVisible": true,
+            "interactionLocked": true
+          }
+        },
+        {
+          "key": "Enter",
+          "metaKey": true,
+          "isComposing": false,
+          "keyCode": 229,
+          "observed": {
+            "revision": 1,
+            "draft": {
+              "text": "已完成正文",
+              "title": "未确认名称ming",
+              "project": "旧项目",
+              "agentId": "general"
+            },
+            "ideaCount": 0,
+            "nativeVisible": true,
+            "interactionLocked": true
+          }
+        }
+      ],
+      "compositionEndCompleteCheckpointPassed": true,
+      "after": {
+        "revision": 2,
+        "draft": {
+          "text": "已完成正文",
+          "title": "确认后的名称😀",
+          "project": "旧项目",
+          "agentId": "general"
+        },
+        "ideaCount": 0,
+        "nativeVisible": true,
+        "interactionLocked": true
+      }
+    },
+    {
+      "field": "project",
+      "waitMs": 2400,
+      "before": {
+        "revision": 3,
+        "draft": {
+          "text": "已完成正文",
+          "title": "确认后的名称😀",
+          "project": "旧项目",
+          "agentId": "general"
+        },
+        "ideaCount": 0,
+        "nativeVisible": true,
+        "interactionLocked": true
+      },
+      "during": {
+        "revision": 4,
+        "draft": {
+          "text": "已完成正文",
+          "title": "确认后的名称😀",
+          "project": "未确认项目xiang",
+          "agentId": "general"
+        },
+        "ideaCount": 0,
+        "nativeVisible": true,
+        "interactionLocked": true
+      },
+      "negativeCheckpointPassed": false,
+      "nativeVisibleAndLockProtected": true,
+      "keyProtection": [
+        {
+          "key": "Enter",
+          "metaKey": false,
+          "isComposing": true,
+          "keyCode": 13,
+          "observed": {
+            "revision": 4,
+            "draft": {
+              "text": "已完成正文",
+              "title": "确认后的名称😀",
+              "project": "未确认项目xiang",
+              "agentId": "general"
+            },
+            "ideaCount": 0,
+            "nativeVisible": true,
+            "interactionLocked": true
+          }
+        },
+        {
+          "key": "Enter",
+          "metaKey": false,
+          "isComposing": false,
+          "keyCode": 229,
+          "observed": {
+            "revision": 4,
+            "draft": {
+              "text": "已完成正文",
+              "title": "确认后的名称😀",
+              "project": "未确认项目xiang",
+              "agentId": "general"
+            },
+            "ideaCount": 0,
+            "nativeVisible": true,
+            "interactionLocked": true
+          }
+        },
+        {
+          "key": "Escape",
+          "metaKey": false,
+          "isComposing": true,
+          "keyCode": 13,
+          "observed": {
+            "revision": 4,
+            "draft": {
+              "text": "已完成正文",
+              "title": "确认后的名称😀",
+              "project": "未确认项目xiang",
+              "agentId": "general"
+            },
+            "ideaCount": 0,
+            "nativeVisible": true,
+            "interactionLocked": true
+          }
+        },
+        {
+          "key": "Escape",
+          "metaKey": false,
+          "isComposing": false,
+          "keyCode": 229,
+          "observed": {
+            "revision": 4,
+            "draft": {
+              "text": "已完成正文",
+              "title": "确认后的名称😀",
+              "project": "未确认项目xiang",
+              "agentId": "general"
+            },
+            "ideaCount": 0,
+            "nativeVisible": true,
+            "interactionLocked": true
+          }
+        },
+        {
+          "key": "Enter",
+          "metaKey": true,
+          "isComposing": true,
+          "keyCode": 13,
+          "observed": {
+            "revision": 4,
+            "draft": {
+              "text": "已完成正文",
+              "title": "确认后的名称😀",
+              "project": "未确认项目xiang",
+              "agentId": "general"
+            },
+            "ideaCount": 0,
+            "nativeVisible": true,
+            "interactionLocked": true
+          }
+        },
+        {
+          "key": "Enter",
+          "metaKey": true,
+          "isComposing": false,
+          "keyCode": 229,
+          "observed": {
+            "revision": 4,
+            "draft": {
+              "text": "已完成正文",
+              "title": "确认后的名称😀",
+              "project": "未确认项目xiang",
+              "agentId": "general"
+            },
+            "ideaCount": 0,
+            "nativeVisible": true,
+            "interactionLocked": true
+          }
+        }
+      ],
+      "compositionEndCompleteCheckpointPassed": true,
+      "after": {
+        "revision": 5,
+        "draft": {
+          "text": "已完成正文",
+          "title": "确认后的名称😀",
+          "project": "确认后的项目😀",
+          "agentId": "general"
+        },
+        "ideaCount": 0,
+        "nativeVisible": true,
+        "interactionLocked": true
+      }
+    }
+  ],
+  "allCompositionNegativeCheckpointsPassed": false,
+  "postCompositionEscapeAndEnterAndCommandEnterPassed": true,
+  "physicalImeTested": false
+}

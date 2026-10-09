@@ -1,0 +1,22 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-draft-recovery
+
+ ❯ tests/unit/draftAutosaver.test.ts (7 tests | 1 failed) 9ms
+   ❯ new draft checkpoint scheduling (7)
+     × backs off failed automatic writes when typing continues 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/draftAutosaver.test.ts > new draft checkpoint scheduling > backs off failed automatic writes when typing continues
+AssertionError: expected "vi.fn()" to be called 1 times, but got 2 times
+ ❯ tests/unit/draftAutosaver.test.ts:10:305
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 6 passed (7)
+   Start at  10:51:54
+   Duration  113ms (transform 58%, tests 21%, import 15%, worker 6%)
+

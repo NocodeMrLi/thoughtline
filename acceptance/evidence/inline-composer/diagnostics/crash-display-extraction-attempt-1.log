@@ -1,0 +1,19 @@
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  {
+    agentId: 'custom',
++   project: '\n新项目\n',
+-   project: '新项目',
+    text: '  正在输入的新草稿\n第二行 emoji😀  ',
+    title: '新名称'
+  }
+
+    at /Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-inline-composer/tests/electron/draft-crash-recovery.cjs:13:164 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [Object],
+  expected: [Object],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}

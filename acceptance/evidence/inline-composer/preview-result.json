@@ -1,0 +1,587 @@
+{
+  "scope": "source preview; no new package or physical IME/Windows acceptance",
+  "electron": "44.7.0",
+  "macOS": "24.3.0",
+  "bounds": {
+    "x": 480,
+    "y": 49,
+    "width": 480,
+    "height": 260
+  },
+  "capturePermission": "granted",
+  "accessibility": {
+    "reducedTransparency": true,
+    "highContrast": true,
+    "forcedColors": false
+  },
+  "trueLiquidGlass": false,
+  "nativeVibrancy": false,
+  "fixedTextHeight": 132,
+  "shortLongNativeBoundsUnchanged": true,
+  "scenes": [
+    {
+      "label": "default",
+      "theme": "light",
+      "nativeBounds": {
+        "x": 480,
+        "y": 49,
+        "width": 480,
+        "height": 260
+      },
+      "geometry": {
+        "body": {
+          "x": 13,
+          "y": 47,
+          "width": 454,
+          "height": 132,
+          "right": 467,
+          "bottom": 179
+        },
+        "scrollHeight": 129,
+        "clientHeight": 129,
+        "scrollTop": 0,
+        "bodyBorder": "rgb(138, 142, 152)",
+        "bodyBackground": "rgb(255, 255, 255)",
+        "title": {
+          "x": 13,
+          "y": 13,
+          "width": 418,
+          "height": 28,
+          "right": 431,
+          "bottom": 41
+        },
+        "properties": {
+          "x": 13,
+          "y": 215,
+          "width": 191.7265625,
+          "height": 32,
+          "right": 204.7265625,
+          "bottom": 247
+        },
+        "project": {
+          "x": 13,
+          "y": 215,
+          "width": 92.2265625,
+          "height": 32,
+          "right": 105.2265625,
+          "bottom": 247
+        },
+        "agent": {
+          "x": 109.2265625,
+          "y": 215,
+          "width": 95.5,
+          "height": 32,
+          "right": 204.7265625,
+          "bottom": 247
+        },
+        "footer": {
+          "x": 13,
+          "y": 215,
+          "width": 454,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "button": {
+          "x": 395,
+          "y": 215,
+          "width": 72,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "select": {
+          "x": 149.2265625,
+          "y": 215,
+          "width": 51.5,
+          "height": 32,
+          "right": 200.7265625,
+          "bottom": 247
+        },
+        "viewport": {
+          "width": 480,
+          "height": 260,
+          "dpr": 2
+        },
+        "material": "opaque",
+        "platform": "mac",
+        "focused": true
+      },
+      "rendererFile": "default-light.png",
+      "rendererSha256": "e7058b7cbf764b60747d125a9e447ccccd14f7e2c5457518df6d1578f6118ad3",
+      "nativeFile": "default-light-native-desktop.png",
+      "nativeSha256": "1b796aa8ecaca80a9f224688fdf0a32904b58cbeab348e2d9ecf6200ca40d084",
+      "scope": "actual Mac source; material recorded per scene and OS accessibility honored; composited crop only own window over own clean synthetic desktop-style backdrop; not true NSGlassEffectView"
+    },
+    {
+      "label": "codex-short",
+      "theme": "light",
+      "nativeBounds": {
+        "x": 480,
+        "y": 49,
+        "width": 480,
+        "height": 260
+      },
+      "geometry": {
+        "body": {
+          "x": 13,
+          "y": 47,
+          "width": 454,
+          "height": 132,
+          "right": 467,
+          "bottom": 179
+        },
+        "scrollHeight": 129,
+        "clientHeight": 129,
+        "scrollTop": 0,
+        "bodyBorder": "rgb(38, 107, 182)",
+        "bodyBackground": "rgb(255, 255, 255)",
+        "title": {
+          "x": 13,
+          "y": 13,
+          "width": 418,
+          "height": 28,
+          "right": 431,
+          "bottom": 41
+        },
+        "properties": {
+          "x": 13,
+          "y": 215,
+          "width": 191.7265625,
+          "height": 32,
+          "right": 204.7265625,
+          "bottom": 247
+        },
+        "project": {
+          "x": 13,
+          "y": 215,
+          "width": 92.2265625,
+          "height": 32,
+          "right": 105.2265625,
+          "bottom": 247
+        },
+        "agent": {
+          "x": 109.2265625,
+          "y": 215,
+          "width": 95.5,
+          "height": 32,
+          "right": 204.7265625,
+          "bottom": 247
+        },
+        "footer": {
+          "x": 13,
+          "y": 215,
+          "width": 454,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "button": {
+          "x": 395,
+          "y": 215,
+          "width": 72,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "select": {
+          "x": 149.2265625,
+          "y": 215,
+          "width": 51.5,
+          "height": 32,
+          "right": 200.7265625,
+          "bottom": 247
+        },
+        "viewport": {
+          "width": 480,
+          "height": 260,
+          "dpr": 2
+        },
+        "material": "opaque",
+        "platform": "mac",
+        "focused": true
+      },
+      "rendererFile": "codex-short-light.png",
+      "rendererSha256": "c1cb0a42cedf962bd29312eea96177e4f2883c438fa77b217b22532b0db96455",
+      "nativeFile": "codex-short-light-native-desktop.png",
+      "nativeSha256": "49b116e4fcd0a41c826ba2af8a1ecce1e8b618850c804f73cdd39d4089b0a343",
+      "scope": "actual Mac source; material recorded per scene and OS accessibility honored; composited crop only own window over own clean synthetic desktop-style backdrop; not true NSGlassEffectView"
+    },
+    {
+      "label": "codex-long-scroll",
+      "theme": "light",
+      "nativeBounds": {
+        "x": 480,
+        "y": 49,
+        "width": 480,
+        "height": 260
+      },
+      "geometry": {
+        "body": {
+          "x": 13,
+          "y": 47,
+          "width": 454,
+          "height": 132,
+          "right": 467,
+          "bottom": 179
+        },
+        "scrollHeight": 812,
+        "clientHeight": 129,
+        "scrollTop": 683,
+        "bodyBorder": "rgb(38, 107, 182)",
+        "bodyBackground": "rgb(255, 255, 255)",
+        "title": {
+          "x": 13,
+          "y": 13,
+          "width": 418,
+          "height": 28,
+          "right": 431,
+          "bottom": 41
+        },
+        "properties": {
+          "x": 13,
+          "y": 215,
+          "width": 215.7265625,
+          "height": 32,
+          "right": 228.7265625,
+          "bottom": 247
+        },
+        "project": {
+          "x": 13,
+          "y": 215,
+          "width": 116.2265625,
+          "height": 32,
+          "right": 129.2265625,
+          "bottom": 247
+        },
+        "agent": {
+          "x": 133.2265625,
+          "y": 215,
+          "width": 95.5,
+          "height": 32,
+          "right": 228.7265625,
+          "bottom": 247
+        },
+        "footer": {
+          "x": 13,
+          "y": 215,
+          "width": 454,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "button": {
+          "x": 395,
+          "y": 215,
+          "width": 72,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "select": {
+          "x": 173.2265625,
+          "y": 215,
+          "width": 51.5,
+          "height": 32,
+          "right": 224.7265625,
+          "bottom": 247
+        },
+        "viewport": {
+          "width": 480,
+          "height": 260,
+          "dpr": 2
+        },
+        "material": "opaque",
+        "platform": "mac",
+        "focused": true
+      },
+      "rendererFile": "codex-long-scroll-light.png",
+      "rendererSha256": "ca75789c13bc13b7d022ec39998b33d2a35f535e0b75b36f1142a506571a8b98",
+      "nativeFile": "codex-long-scroll-light-native-desktop.png",
+      "nativeSha256": "a52c4276a5e65ee6348b9b7c2503d0ea52120a368d6c8641fcbf1187b3d1de8d",
+      "scope": "actual Mac source; material recorded per scene and OS accessibility honored; composited crop only own window over own clean synthetic desktop-style backdrop; not true NSGlassEffectView"
+    },
+    {
+      "label": "codex-long-scroll",
+      "theme": "dark",
+      "nativeBounds": {
+        "x": 480,
+        "y": 49,
+        "width": 480,
+        "height": 260
+      },
+      "geometry": {
+        "body": {
+          "x": 13,
+          "y": 47,
+          "width": 454,
+          "height": 132,
+          "right": 467,
+          "bottom": 179
+        },
+        "scrollHeight": 812,
+        "clientHeight": 129,
+        "scrollTop": 683,
+        "bodyBorder": "rgb(76, 144, 217)",
+        "bodyBackground": "rgb(41, 44, 49)",
+        "title": {
+          "x": 13,
+          "y": 13,
+          "width": 418,
+          "height": 28,
+          "right": 431,
+          "bottom": 41
+        },
+        "properties": {
+          "x": 13,
+          "y": 215,
+          "width": 215.7265625,
+          "height": 32,
+          "right": 228.7265625,
+          "bottom": 247
+        },
+        "project": {
+          "x": 13,
+          "y": 215,
+          "width": 116.2265625,
+          "height": 32,
+          "right": 129.2265625,
+          "bottom": 247
+        },
+        "agent": {
+          "x": 133.2265625,
+          "y": 215,
+          "width": 95.5,
+          "height": 32,
+          "right": 228.7265625,
+          "bottom": 247
+        },
+        "footer": {
+          "x": 13,
+          "y": 215,
+          "width": 454,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "button": {
+          "x": 395,
+          "y": 215,
+          "width": 72,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "select": {
+          "x": 173.2265625,
+          "y": 215,
+          "width": 51.5,
+          "height": 32,
+          "right": 224.7265625,
+          "bottom": 247
+        },
+        "viewport": {
+          "width": 480,
+          "height": 260,
+          "dpr": 2
+        },
+        "material": "opaque",
+        "platform": "mac",
+        "focused": true
+      },
+      "rendererFile": "codex-long-scroll-dark.png",
+      "rendererSha256": "d2aa312ef967803f6684ab21333b6ab92d16eda9b48d185b4b311b5af3969ce0",
+      "nativeFile": "codex-long-scroll-dark-native-desktop.png",
+      "nativeSha256": "083f041efb0ce64c579df665a1029b3edc50ed0688844d8181303f90a5c170c4",
+      "scope": "actual Mac source; material recorded per scene and OS accessibility honored; composited crop only own window over own clean synthetic desktop-style backdrop; not true NSGlassEffectView"
+    },
+    {
+      "label": "claude-short",
+      "theme": "light",
+      "nativeBounds": {
+        "x": 480,
+        "y": 49,
+        "width": 480,
+        "height": 260
+      },
+      "geometry": {
+        "body": {
+          "x": 13,
+          "y": 47,
+          "width": 454,
+          "height": 132,
+          "right": 467,
+          "bottom": 179
+        },
+        "scrollHeight": 129,
+        "clientHeight": 129,
+        "scrollTop": 0,
+        "bodyBorder": "rgb(149, 93, 34)",
+        "bodyBackground": "rgb(255, 255, 255)",
+        "title": {
+          "x": 13,
+          "y": 13,
+          "width": 418,
+          "height": 28,
+          "right": 431,
+          "bottom": 41
+        },
+        "properties": {
+          "x": 13,
+          "y": 215,
+          "width": 215.7265625,
+          "height": 32,
+          "right": 228.7265625,
+          "bottom": 247
+        },
+        "project": {
+          "x": 13,
+          "y": 215,
+          "width": 116.2265625,
+          "height": 32,
+          "right": 129.2265625,
+          "bottom": 247
+        },
+        "agent": {
+          "x": 133.2265625,
+          "y": 215,
+          "width": 95.5,
+          "height": 32,
+          "right": 228.7265625,
+          "bottom": 247
+        },
+        "footer": {
+          "x": 13,
+          "y": 215,
+          "width": 454,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "button": {
+          "x": 395,
+          "y": 215,
+          "width": 72,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "select": {
+          "x": 173.2265625,
+          "y": 215,
+          "width": 51.5,
+          "height": 32,
+          "right": 224.7265625,
+          "bottom": 247
+        },
+        "viewport": {
+          "width": 480,
+          "height": 260,
+          "dpr": 2
+        },
+        "material": "opaque",
+        "platform": "mac",
+        "focused": true
+      },
+      "rendererFile": "claude-short-light.png",
+      "rendererSha256": "55e6a4eb525957e17dccfa6078b1119903f1418c9e10f21fe984c4ec31981b01",
+      "nativeFile": "claude-short-light-native-desktop.png",
+      "nativeSha256": "ca524930efe50d5c70347c40650738914039651e0b95cc593f7492594f58e438",
+      "scope": "actual Mac source; material recorded per scene and OS accessibility honored; composited crop only own window over own clean synthetic desktop-style backdrop; not true NSGlassEffectView"
+    },
+    {
+      "label": "claude-short",
+      "theme": "dark",
+      "nativeBounds": {
+        "x": 480,
+        "y": 49,
+        "width": 480,
+        "height": 260
+      },
+      "geometry": {
+        "body": {
+          "x": 13,
+          "y": 47,
+          "width": 454,
+          "height": 132,
+          "right": 467,
+          "bottom": 179
+        },
+        "scrollHeight": 129,
+        "clientHeight": 129,
+        "scrollTop": 0,
+        "bodyBorder": "rgb(215, 149, 81)",
+        "bodyBackground": "rgb(41, 44, 49)",
+        "title": {
+          "x": 13,
+          "y": 13,
+          "width": 418,
+          "height": 28,
+          "right": 431,
+          "bottom": 41
+        },
+        "properties": {
+          "x": 13,
+          "y": 215,
+          "width": 215.7265625,
+          "height": 32,
+          "right": 228.7265625,
+          "bottom": 247
+        },
+        "project": {
+          "x": 13,
+          "y": 215,
+          "width": 116.2265625,
+          "height": 32,
+          "right": 129.2265625,
+          "bottom": 247
+        },
+        "agent": {
+          "x": 133.2265625,
+          "y": 215,
+          "width": 95.5,
+          "height": 32,
+          "right": 228.7265625,
+          "bottom": 247
+        },
+        "footer": {
+          "x": 13,
+          "y": 215,
+          "width": 454,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "button": {
+          "x": 395,
+          "y": 215,
+          "width": 72,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "select": {
+          "x": 173.2265625,
+          "y": 215,
+          "width": 51.5,
+          "height": 32,
+          "right": 224.7265625,
+          "bottom": 247
+        },
+        "viewport": {
+          "width": 480,
+          "height": 260,
+          "dpr": 2
+        },
+        "material": "opaque",
+        "platform": "mac",
+        "focused": true
+      },
+      "rendererFile": "claude-short-dark.png",
+      "rendererSha256": "f492aecd59b8fa02dca09d6026f181e24bc1a7a0c1829210ae50ebd10ab8c3b2",
+      "nativeFile": "claude-short-dark-native-desktop.png",
+      "nativeSha256": "456220c512f0548e2453db5df93bf10fc1bdddb686778125a6cc04131e456006",
+      "scope": "actual Mac source; material recorded per scene and OS accessibility honored; composited crop only own window over own clean synthetic desktop-style backdrop; not true NSGlassEffectView"
+    }
+  ]
+}

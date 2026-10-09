@@ -1,0 +1,100 @@
+{
+  "name": "thoughtline",
+  "version": "0.0.16-preview.4",
+  "private": true,
+  "description": "\u667e\u5ff5\u5934 / Thoughtline desktop rope native pilot",
+  "main": "out/main/index.js",
+  "scripts": {
+    "dev": "node node_modules/electron-vite/bin/electron-vite.js dev",
+    "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
+    "test": "node node_modules/vitest/vitest.mjs run",
+    "build": "node node_modules/electron-vite/bin/electron-vite.js build",
+    "verify": "node scripts/verify.cjs",
+    "smoke": "node tests/electron/smoke.cjs",
+    "package:mac": "node scripts/package-mac.cjs",
+    "package:win": "node node_modules/electron-builder/cli.js --win nsis --publish never",
+    "workflow": "node tests/electron/workflow.cjs",
+    "groups": "node tests/electron/group-workflow.cjs",
+    "lifecycle": "node tests/electron/settings-lifecycle.cjs",
+    "motion": "node tests/electron/motion-workflow.cjs",
+    "idle": "node tests/electron/idle-performance.cjs",
+    "lazy": "node tests/electron/lazy-window-workflow.cjs",
+    "idle:direct": "node tests/electron/idle-without-debugger.cjs",
+    "rope": "node tests/electron/fixed-rope-workflow.cjs",
+    "clothespins": "node tests/electron/clothespin-workflow.cjs",
+    "hidden-draft": "node tests/electron/hidden-draft-workflow.cjs"
+  },
+  "engines": {
+    "node": ">=24.19.0 <25"
+  },
+  "dependencies": {
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "electron": "44.7.0",
+    "electron-builder": "26.15.3",
+    "electron-vite": "5.0.0",
+    "playwright": "1.62.1",
+    "typescript": "7.0.2",
+    "vitest": "5.0.3"
+  },
+  "author": "NocodeMrLi",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NocodeMrLi/thoughtline.git"
+  },
+  "build": {
+    "appId": "com.nocodemrli.thoughtline",
+    "productName": "Thoughtline",
+    "asar": true,
+    "files": [
+      "out/**/*",
+      "package.json",
+      "licenses/**/*",
+      "THIRD_PARTY_NOTICES.md",
+      "assets/**/*"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "identity": "-",
+      "artifactName": "Thoughtline-${version}-mac-${arch}.dmg",
+      "icon": "assets/app-icon.png",
+      "hardenedRuntime": false
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "Thoughtline-${version}-win-${arch}.exe",
+      "signExecutable": false,
+      "icon": "assets/app-icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}

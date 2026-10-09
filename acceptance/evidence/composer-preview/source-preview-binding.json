@@ -1,0 +1,251 @@
+{
+  "sourceCommit": "6638ce14a4aefc9f3a13e2fbb36b7710f722c55f",
+  "baseFrozenCommit": "61a6837dbde290041a13226596baad5b21249fc1",
+  "version": "0.0.16-preview.1",
+  "branch": "codex/thoughtline-composer-20261009",
+  "sourceSha256": {
+    "src/main/index.ts": "66b6407d5a7639e7d406c0bf22f361ac51d138aee7cd3bfbe875b3b655da68b0",
+    "src/main/windows/composer.ts": "6f6475c045dcf0945b5badf16223ccf8983a69c376fbd6b3390acbed3d4bbec2",
+    "src/renderer/components/Composer.tsx": "1b880ab4b24fb45543d417fb14412459e3d80dfc6d28bea7579076bc96f4a373",
+    "src/renderer/styles/overlay.css": "8f937eeb2ea52a106d2aa3ce10b881b1029f82bfd6038fc02d8b29ae785444b7",
+    "package.json": "d160b181503e4b50fdbf7814560b69093d740e3c1e3d8b116ddcfae6bed9fdee",
+    "package-lock.json": "79327b73719732d979932833b474feb44a721031474de364e70f8c8f62cb8481",
+    "tests/electron/composer-preview.cjs": "5b81b10ec2f53c950c031691432246195c6be509b5e33feb418b8ab5e60fa407"
+  },
+  "compiledSha256": {
+    "out/main/index.js": "01c9e6feee73a03e98ffdc473fafc2652ec3c2e9ba3f2cb5ad7a215060ab933c",
+    "out/preload/index.js": "bddc1bdd58af17e601fcad73695739df5d74c120595f5de5a0d2d33285fd7fbd",
+    "out/renderer/assets/index-CEzLPFWD.css": "8f937eeb2ea52a106d2aa3ce10b881b1029f82bfd6038fc02d8b29ae785444b7",
+    "out/renderer/assets/index-CjU4Lsji.js": "e232ff3928697969ef8c6107bcc6193754260dcbaddb813f729385ce21be075d",
+    "out/renderer/index.html": "252a98d288f957d49f9537aa50a19d0cd2a764f626e29ebe5dc5854d6b93611d"
+  },
+  "scenes": [
+    {
+      "label": "default",
+      "theme": "light",
+      "platform": "actual macOS source Electron; no Windows execution",
+      "nativeBounds": {
+        "x": 455,
+        "y": 49,
+        "width": 530,
+        "height": 520
+      },
+      "geometry": {
+        "viewport": {
+          "width": 530,
+          "height": 520,
+          "dpr": 2
+        },
+        "body": {
+          "x": 21,
+          "y": 59,
+          "width": 488,
+          "height": 297.5,
+          "right": 509,
+          "bottom": 356.5
+        },
+        "footer": {
+          "x": 21,
+          "y": 463,
+          "width": 488,
+          "height": 38,
+          "right": 509,
+          "bottom": 501
+        },
+        "status": {
+          "x": 21,
+          "y": 439,
+          "width": 488,
+          "height": 16,
+          "right": 509,
+          "bottom": 455
+        },
+        "optionsOpen": false,
+        "bodyFocused": true,
+        "selectedAgent": "general",
+        "allAgentOptions": [
+          "general",
+          "codex",
+          "claude",
+          "cursor",
+          "custom-review"
+        ]
+      },
+      "file": "default-light.png",
+      "sha256": "638c38b1433c2cec91972f52fcc67d2827dea8cf56a1cc0850cf6f3c9750ebe4"
+    },
+    {
+      "label": "options",
+      "theme": "light",
+      "platform": "actual macOS source Electron; no Windows execution",
+      "nativeBounds": {
+        "x": 455,
+        "y": 49,
+        "width": 530,
+        "height": 520
+      },
+      "geometry": {
+        "viewport": {
+          "width": 530,
+          "height": 520,
+          "dpr": 2
+        },
+        "body": {
+          "x": 21,
+          "y": 59,
+          "width": 488,
+          "height": 234,
+          "right": 509,
+          "bottom": 293
+        },
+        "footer": {
+          "x": 21,
+          "y": 463,
+          "width": 488,
+          "height": 38,
+          "right": 509,
+          "bottom": 501
+        },
+        "status": {
+          "x": 21,
+          "y": 439,
+          "width": 488,
+          "height": 16,
+          "right": 509,
+          "bottom": 455
+        },
+        "optionsOpen": true,
+        "bodyFocused": true,
+        "selectedAgent": "general",
+        "allAgentOptions": [
+          "general",
+          "codex",
+          "claude",
+          "cursor",
+          "custom-review"
+        ]
+      },
+      "file": "options-light.png",
+      "sha256": "dd3cf8aa58d455859ced47b9fcd95e19db23e4c5c285ab539041341c01fa1a88"
+    },
+    {
+      "label": "options",
+      "theme": "dark",
+      "platform": "actual macOS source Electron; no Windows execution",
+      "nativeBounds": {
+        "x": 455,
+        "y": 49,
+        "width": 530,
+        "height": 520
+      },
+      "geometry": {
+        "viewport": {
+          "width": 530,
+          "height": 520,
+          "dpr": 2
+        },
+        "body": {
+          "x": 21,
+          "y": 59,
+          "width": 488,
+          "height": 234,
+          "right": 509,
+          "bottom": 293
+        },
+        "footer": {
+          "x": 21,
+          "y": 463,
+          "width": 488,
+          "height": 38,
+          "right": 509,
+          "bottom": 501
+        },
+        "status": {
+          "x": 21,
+          "y": 439,
+          "width": 488,
+          "height": 16,
+          "right": 509,
+          "bottom": 455
+        },
+        "optionsOpen": true,
+        "bodyFocused": true,
+        "selectedAgent": "general",
+        "allAgentOptions": [
+          "general",
+          "codex",
+          "claude",
+          "cursor",
+          "custom-review"
+        ]
+      },
+      "file": "options-dark.png",
+      "sha256": "ad302237eb8f8ef0852fcca155097ed255dcc6d2754a692bc5ac2bbcf1f82227"
+    },
+    {
+      "label": "default",
+      "theme": "dark",
+      "platform": "actual macOS source Electron; no Windows execution",
+      "nativeBounds": {
+        "x": 455,
+        "y": 49,
+        "width": 530,
+        "height": 520
+      },
+      "geometry": {
+        "viewport": {
+          "width": 530,
+          "height": 520,
+          "dpr": 2
+        },
+        "body": {
+          "x": 21,
+          "y": 59,
+          "width": 488,
+          "height": 297.5,
+          "right": 509,
+          "bottom": 356.5
+        },
+        "footer": {
+          "x": 21,
+          "y": 463,
+          "width": 488,
+          "height": 38,
+          "right": 509,
+          "bottom": 501
+        },
+        "status": {
+          "x": 21,
+          "y": 439,
+          "width": 488,
+          "height": 16,
+          "right": 509,
+          "bottom": 455
+        },
+        "optionsOpen": false,
+        "bodyFocused": false,
+        "selectedAgent": "general",
+        "allAgentOptions": [
+          "general",
+          "codex",
+          "claude",
+          "cursor",
+          "custom-review"
+        ]
+      },
+      "file": "default-dark.png",
+      "sha256": "1ede1dd23a4ec6050b50448330a053e6e0e6f5ee2246513b6908f95c549050e7"
+    }
+  ],
+  "checks": {
+    "canonicalUnitFiles": 20,
+    "canonicalUnitTests": 88,
+    "typecheckExitCode": 0,
+    "buildExitCode": 0,
+    "nativePreviewExitCode": 0,
+    "ownedPidsExited": true,
+    "fakeDataRemoved": true
+  },
+  "scope": "actual Mac source Electron DOM/IPC; screenshot DIP530x520 DPR2; no new package, physical IME/hotkey/Windows/crash recovery untested",
+  "draftCrashLimitation": "only explicit close/normal quit writes a draft; unpersisted typing has no autosave/crash journal in this preview"
+}

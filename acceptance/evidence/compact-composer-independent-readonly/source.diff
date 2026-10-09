@@ -1,0 +1,267 @@
+diff --git a/package-lock.json b/package-lock.json
+index 3672e2b..5aae6de 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -1,12 +1,12 @@
+ {
+   "name": "thoughtline",
+-  "version": "0.0.16-preview.2",
++  "version": "0.0.16-preview.3",
+   "lockfileVersion": 3,
+   "requires": true,
+   "packages": {
+     "": {
+       "name": "thoughtline",
+-      "version": "0.0.16-preview.2",
++      "version": "0.0.16-preview.3",
+       "dependencies": {
+         "react": "19.3.0",
+         "react-dom": "19.3.0"
+diff --git a/package.json b/package.json
+index 438f5de..f36383f 100644
+--- a/package.json
++++ b/package.json
+@@ -1,6 +1,6 @@
+ {
+   "name": "thoughtline",
+-  "version": "0.0.16-preview.2",
++  "version": "0.0.16-preview.3",
+   "private": true,
+   "description": "\u667e\u5ff5\u5934 / Thoughtline desktop rope native pilot",
+   "main": "out/main/index.js",
+diff --git a/src/main/index.ts b/src/main/index.ts
+index a094a7d..c3b9a20 100644
+--- a/src/main/index.ts
++++ b/src/main/index.ts
+@@ -2,7 +2,7 @@ import {app,BrowserWindow,dialog,shell,clipboard,globalShortcut,ipcMain,nativeIm
+ import {join} from 'node:path';
+ import {randomUUID} from 'node:crypto';
+ import {createShelf} from './windows/shelf';
+-import {createComposer,COMPOSER_SIZE} from './windows/composer';
++import {createComposer,COMPOSER_SIZE,currentComposerMaterial} from './windows/composer';
+ import {createManage} from './windows/manage';
+ import {createHost} from './platform/host';
+ import {EdgeController} from './edgeController';
+@@ -47,7 +47,7 @@ else app.whenReady().then(async()=>{
+  let composerContext:ComposerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
+  const preload=join(__dirname,'../preload/index.js');shelf=createShelf(preload);
+  const host=createHost(shelf,()=>composer);
+- const info=():PilotInfo=>({platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerContext,manageSession,manageSelection,manageMode,manageTitles,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
++ const info=():PilotInfo=>({platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,manageSession,manageSelection,manageMode,manageTitles,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
+  const publish=()=>{for(const w of [shelf,composer,manage])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info());};
+  const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:(BrowserWindow|null)[]=[shelf,composer,manage])=>allowed.some(w=>w?.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
+  const lock=(name:string,active:boolean)=>edge.event({type:'lock',name,active,now:Date.now()});
+@@ -65,7 +65,7 @@ else app.whenReady().then(async()=>{
+   if(composerRelease)clearTimeout(composerRelease);composerRelease=null;
+   if(composerLoading)return composerLoading;if(composer)return Promise.resolve(composer);
+   const w=createComposer(preload);composer=w;
+-  w.on('close',event=>{if(!quitting)event.preventDefault();});
++  w.on('close',event=>{if(!quitting)event.preventDefault();});w.on('focus',publish);w.on('blur',publish);
+   w.on('show',()=>{composerSafeToRelease=false;if(composerRelease)clearTimeout(composerRelease);composerRelease=null;refreshTray();});
+   w.on('hide',()=>{refreshTray();lock('composer',false);if(!composerSafeToRelease)return;composerRelease=setTimeout(()=>{composerRelease=null;if(composerSafeToRelease&&!w.isDestroyed()&&!w.isVisible()){composer=null;w.destroy();}},30000);});
+   composerLoading=loadView(w,'composer').then(()=>w).catch(error=>{composer=null;w.destroy();throw error;}).finally(()=>{composerLoading=null;});
+diff --git a/src/main/windows/composer.ts b/src/main/windows/composer.ts
+index f099bd8..fdde0cb 100644
+--- a/src/main/windows/composer.ts
++++ b/src/main/windows/composer.ts
+@@ -1,6 +1,11 @@
+ import {BrowserWindow,nativeTheme} from 'electron';
+-export const COMPOSER_SIZE={width:530,height:520};
++import {release} from 'node:os';
++import {composerMaterial} from '../../shared/composerMaterial';
++export const COMPOSER_SIZE={width:480,height:316};
++export const currentComposerMaterial=(focused=true)=>composerMaterial(process.platform,release(),nativeTheme.prefersReducedTransparency,nativeTheme.shouldUseHighContrastColors,nativeTheme.inForcedColorsMode,focused);
+ export function createComposer(preload:string):BrowserWindow{
+- const window=new BrowserWindow({title:'Thoughtline Composer',frame:false,show:false,resizable:false,skipTaskbar:true,alwaysOnTop:true,width:COMPOSER_SIZE.width,height:COMPOSER_SIZE.height,backgroundColor:nativeTheme.shouldUseDarkColors?'#202226':'#F7F7F5',webPreferences:{preload,contextIsolation:true,nodeIntegration:false,sandbox:true}});
+- const theme=()=>window.setBackgroundColor(nativeTheme.shouldUseDarkColors?'#202226':'#F7F7F5');nativeTheme.on('updated',theme);window.once('closed',()=>nativeTheme.removeListener('updated',theme));return window;
++ const material=currentComposerMaterial();
++ const window=new BrowserWindow({title:'Thoughtline Composer',frame:false,show:false,resizable:false,skipTaskbar:true,alwaysOnTop:true,width:COMPOSER_SIZE.width,height:COMPOSER_SIZE.height,transparent:process.platform==='darwin',roundedCorners:true,vibrancy:material==='vibrancy'?'popover':undefined,visualEffectState:'followWindow',backgroundMaterial:material==='acrylic'?'acrylic':'none',backgroundColor:material==='opaque'?(nativeTheme.shouldUseDarkColors?'#202226':'#F5F5F7'):'#00000000',webPreferences:{preload,contextIsolation:true,nodeIntegration:false,sandbox:true}});
++ const theme=()=>{const material=currentComposerMaterial(window.isFocused());if(process.platform==='darwin')window.setVibrancy(material==='vibrancy'?'popover':null);if(process.platform==='win32')window.setBackgroundMaterial(material==='acrylic'?'acrylic':'none');window.setBackgroundColor(material==='opaque'?(nativeTheme.shouldUseDarkColors?'#202226':'#F5F5F7'):'#00000000');};
++ nativeTheme.on('updated',theme);window.on('focus',theme);window.on('blur',theme);window.once('closed',()=>nativeTheme.removeListener('updated',theme));return window;
+ }
+diff --git a/src/renderer/components/Composer.tsx b/src/renderer/components/Composer.tsx
+index af1ae08..859db0e 100644
+--- a/src/renderer/components/Composer.tsx
++++ b/src/renderer/components/Composer.tsx
+@@ -1,8 +1,9 @@
+-import {useEffect,useRef,useState} from 'react';
++import {useEffect,useRef,useState,type CSSProperties} from 'react';
+ import type {PilotInfo} from '../../shared/bridge';
+ import type {Draft} from '../../shared/contracts';
+ import {shouldSubmit} from '../../shared/composerKeys';
+ import {DraftAutosaver} from '../../shared/draftAutosaver';
++import {agentInkColors} from './agentInk';
+ export function Composer({info}:{info:PilotInfo}){
+  const [draft,setDraft]=useState<Draft>(info.composerContext.draft),[busy,setBusy]=useState(false),[error,setError]=useState(''),[autosaveError,setAutosaveError]=useState('');
+  const text=useRef<HTMLTextAreaElement>(null),inFlight=useRef(false),composing=useRef(false);
+@@ -29,19 +30,21 @@ export function Composer({info}:{info:PilotInfo}){
+   if(busy||inFlight.current)return;if(changesAgent&&!splitConfirmed){setError('保存后会移至新Agent的独立夹子，请先确认。');return;}
+   inFlight.current=true;setBusy(true);setError('');try{await autosaver.current?.flush();const revision=editing?info.snapshot.revision:(await window.thoughtline.info()).snapshot.revision;const r=await window.thoughtline.submit(draft,revision);if(!r.ok){setError(r.message);}}catch{setError('保存未成功，文字已保留，请重试。');}finally{inFlight.current=false;setBusy(false);}
+  };
+- const close=async(browse=false)=>{
+-  if(busy||inFlight.current)return;inFlight.current=true;setBusy(true);setError('');try{await autosaver.current?.flush();const r=await window.thoughtline.close(draft);if(!r.ok){setError(r.message);}else if(browse){const opened=await window.thoughtline.openManage();if(!opened.ok)setError(opened.message);}}catch{setError('草稿保存未成功，文字已保留。');}finally{inFlight.current=false;setBusy(false);}
++ const close=async()=>{
++  if(busy||inFlight.current)return;inFlight.current=true;setBusy(true);setError('');try{await autosaver.current?.flush();const r=await window.thoughtline.close(draft);if(!r.ok){setError(r.message);}}catch{setError('草稿保存未成功，文字已保留。');}finally{inFlight.current=false;setBusy(false);}
+  };
+- return <main data-view="composer" data-platform={info.platform} className="composer" aria-labelledby="composer-heading" aria-busy={busy} onKeyDown={e=>{
++ const agent=info.snapshot.agents.find(a=>a.id===draft.agentId),ink=agentInkColors(agent?.color??'#A0A3AA');
++ const outline={ '--composer-agent-light':agent?.id==='general'?'#8A8E98':ink.light,'--composer-agent-dark':agent?.id==='general'?'#7B828E':agent?.color??'#7B828E' } as CSSProperties;
++ return <main style={outline} data-view="composer" data-material={info.composerMaterial} data-platform={info.platform} className="composer" aria-labelledby="composer-heading" aria-busy={busy} onKeyDown={e=>{
+   const isComposing=e.nativeEvent.isComposing||composing.current;
+   if(shouldSubmit({platform:info.platform,key:e.key,metaKey:e.metaKey,ctrlKey:e.ctrlKey,isComposing,keyCode:e.nativeEvent.keyCode})){e.preventDefault();if(!e.repeat)void submit();}
+   else if(e.key==='Escape'&&!isComposing&&e.nativeEvent.keyCode!==229&&!(e.target instanceof HTMLSelectElement)){e.preventDefault();void close();}
+  }}>
+   <header><label id="composer-heading" htmlFor="idea-text">{editing?'编辑念头':'写下念头'}</label><button className="close" aria-label={editing?'取消编辑并关闭':'保存草稿并关闭'} onClick={()=>void close()} disabled={busy}>×</button></header>
+-  <textarea id="idea-text" ref={text} value={draft.text} placeholder="先写下来，稍后交给 Agent。" aria-describedby="composer-status composer-shortcut" aria-invalid={!!(error||autosaveError)} onCompositionStart={()=>{composing.current=true;autosaver.current?.pause();}} onCompositionEnd={()=>{composing.current=false;autosaver.current?.resume();}} onChange={e=>updateDraft({...draft,text:e.target.value})} spellCheck={false} disabled={busy}/>
+-  <div className="composer-tools"><label className="composer-agent"><span>给谁</span><span className="composer-select"><i aria-hidden="true" style={{backgroundColor:info.snapshot.agents.find(a=>a.id===draft.agentId)?.color}}/><select aria-label="念头归属 Agent" disabled={busy} value={draft.agentId} onChange={e=>updateDraft({...draft,agentId:e.target.value})}>{info.snapshot.agents.map(a=><option key={a.id} value={a.id}>{a.name}</option>)}</select></span></label><button className="text-button" disabled={busy} onClick={()=>void close(true)}>查找 / 已收起</button></div>
+-  <details className="composer-details"><summary>名称与项目 <span>可选</span></summary><div className="composer-optional"><label>名称<input maxLength={50} disabled={busy} value={draft.title} placeholder="留空时取正文首行" onChange={e=>updateDraft({...draft,title:e.target.value})}/></label><label>项目<input maxLength={40} disabled={busy} value={draft.project} placeholder="便于之后找回" onChange={e=>updateDraft({...draft,project:e.target.value})}/></label></div></details>
++  <textarea id="idea-text" ref={text} value={draft.text} placeholder="先写下来，稍后交给 Agent。" aria-describedby="composer-status composer-shortcut composer-help" aria-invalid={!!(error||autosaveError)} onCompositionStart={()=>{composing.current=true;autosaver.current?.pause();}} onCompositionEnd={()=>{composing.current=false;autosaver.current?.resume();}} onChange={e=>updateDraft({...draft,text:e.target.value})} spellCheck={false} disabled={busy}/>
++  <div className="composer-optional"><label><span className="sr-only">名称（可选）</span><input aria-label="名称" maxLength={50} disabled={busy} value={draft.title} placeholder="名称（可选）" title="留空时使用正文首行" onChange={e=>updateDraft({...draft,title:e.target.value})}/></label><label><span className="sr-only">项目（可选）</span><input aria-label="项目" maxLength={40} disabled={busy} value={draft.project} placeholder="项目（可选）" onChange={e=>updateDraft({...draft,project:e.target.value})}/></label></div>
+   <div id="composer-status" className="composer-status"><p className="error" role="alert">{error||autosaveError}</p>{changesAgent&&<label className="split-confirm"><input type="checkbox" disabled={busy} checked={splitConfirmed} onChange={e=>setSplitConfirmed(e.target.checked)}/>保存后移至新Agent的独立夹子</label>}</div>
+-  <footer><span id="composer-shortcut">{info.platform==='mac'?'⌘ Enter':'Ctrl Enter'} {editing?'保存':'挂上'}<small>Enter 换行 · Esc {editing?'取消编辑':'保存草稿'}</small></span><button className="primary" disabled={busy||!draft.text.trim()} onClick={()=>void submit()}>{busy?'正在保存…':editing?'保存修改':'挂上'}</button></footer>
++  <footer><label className="composer-agent"><span className="sr-only">念头归属 Agent</span><span className="composer-select"><i aria-hidden="true" style={{backgroundColor:agent?.color}}/><select aria-label="念头归属 Agent" disabled={busy} value={draft.agentId} onChange={e=>updateDraft({...draft,agentId:e.target.value})}>{info.snapshot.agents.map(a=><option key={a.id} value={a.id}>{a.name}</option>)}</select></span></label><div className="composer-submit"><span id="composer-shortcut">{info.platform==='mac'?'⌘ Enter':'Ctrl Enter'}</span><button className="primary" disabled={busy||!draft.text.trim()} onClick={()=>void submit()}>{busy?'保存中…':editing?'保存修改':'挂上'}</button></div></footer>
++  <span id="composer-help" className="sr-only">Enter 换行。{editing?'Esc 取消编辑，保留原记录。':'Esc 保存草稿并关闭。'}查找和已收起可从系统Thoughtline图标菜单打开。</span>
+  </main>;
+ }
+diff --git a/src/renderer/styles/overlay.css b/src/renderer/styles/overlay.css
+index eb62eae..7e3edf0 100644
+--- a/src/renderer/styles/overlay.css
++++ b/src/renderer/styles/overlay.css
+@@ -87,18 +87,21 @@
+ .idea-card[data-agent-neutral=false] .agent-name{color:var(--agent-ink-light)}
+ :root[data-theme=dark] .idea-card[data-agent-neutral=false] .agent-name{color:var(--agent-ink-dark)}
+ 
+-/* Independent composer preview. The accepted rope/paper surface is unchanged. */
+-.composer{--compose-bg:#F7F7F5;--compose-field:#FFFFFF;--compose-border:#262C3822;--compose-accent:#0879E8;background:var(--compose-bg);padding:18px 20px;gap:8px;display:grid;grid-template-rows:auto minmax(70px,1fr) auto auto auto auto;overflow:hidden;border:1px solid var(--compose-border);border-radius:12px;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
+-:root[data-theme=dark] .composer{--compose-bg:#202226;--compose-field:#292C31;--compose-border:#FFFFFF25;--compose-accent:#268DFF}
+-.composer[data-platform=windows]{font-family:"Segoe UI","Microsoft YaHei",sans-serif;border-radius:9px;--compose-accent:#0067C0}
++/* Compact fixed-height writing surface. Native material is supplied by the OS, not CSS blur. */
++.composer{--compose-bg:#FFFFFF24;--compose-field:#FFFFFFDD;--compose-border:#FFFFFFB0;--compose-accent:#0879E8;--compose-agent:var(--composer-agent-light);display:grid;grid-template-rows:26px 132px 30px minmax(0,1fr) 32px;height:100%;padding:15px 16px;gap:8px;overflow:hidden;background:linear-gradient(155deg,#FFFFFF30,#FFFFFF08),var(--compose-bg);border:1px solid var(--compose-border);border-radius:16px;box-shadow:inset 0 1px 0 #FFFFFFA0,inset 0 -1px 0 #FFFFFF28;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
++:root[data-theme=dark] .composer{--compose-bg:#15192045;--compose-field:#1D222AE8;--compose-border:#FFFFFF3D;--compose-accent:#268DFF;--compose-agent:var(--composer-agent-dark);background:linear-gradient(155deg,#FFFFFF0C,#FFFFFF02),var(--compose-bg);box-shadow:inset 0 1px 0 #FFFFFF24,inset 0 -1px 0 #FFFFFF08}
++.composer[data-material=opaque]{--compose-bg:#F5F5F7}.composer[data-material=opaque] textarea,.composer[data-material=opaque] input,.composer[data-material=opaque] select{background:#FFFFFF}
++:root[data-theme=dark] .composer[data-material=opaque]{--compose-bg:#202226}:root[data-theme=dark] .composer[data-material=opaque] textarea,:root[data-theme=dark] .composer[data-material=opaque] input,:root[data-theme=dark] .composer[data-material=opaque] select{background:#292C31}
++.composer[data-platform=windows]{font-family:"Segoe UI Variable","Segoe UI","Microsoft YaHei",sans-serif;border-radius:8px;--compose-accent:#0067C0;--compose-border:#FFFFFF52;background:var(--compose-bg);box-shadow:inset 0 1px 0 #FFFFFF35}
+ :root[data-theme=dark] .composer[data-platform=windows]{--compose-accent:#60B5FF}
+-.composer header{height:32px}.composer header label{font-size:15px;letter-spacing:.1px}.composer .close{color:var(--muted);border-radius:6px}.composer .close:hover{background:color-mix(in srgb,var(--text),transparent 94%)}
+-.composer textarea{min-height:0;width:100%;height:100%;font-size:14px;line-height:1.7;background:var(--compose-field);border:1px solid var(--compose-border);border-radius:8px;padding:14px;outline:0;overflow:auto}
+-.composer textarea:focus-visible{border-color:color-mix(in srgb,var(--compose-accent),transparent 25%);box-shadow:0 0 0 2px color-mix(in srgb,var(--compose-accent),transparent 88%)}
+-.composer-tools{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0}.composer-agent{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}.composer-select{display:flex;align-items:center;position:relative;min-width:112px;max-width:220px}.composer-select i{position:absolute;left:10px;z-index:1;pointer-events:none;width:7px;height:7px;margin:0}.composer-select select{font-size:12px;max-width:220px;width:100%;height:34px;padding:5px 28px 5px 24px;background:var(--compose-field);border-color:var(--compose-border);border-radius:6px;color:var(--text)}
+-.composer .text-button{font-size:12px;text-decoration:none}.composer .text-button:hover{text-decoration:underline}
+-.composer-details{min-height:0}.composer-details summary{font-size:12px;line-height:24px;color:var(--muted)}.composer-details summary span{margin-left:6px;font-size:11px;opacity:.85}.composer-optional{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:8px 2px 2px;max-height:82px;overflow:auto}.composer-optional label{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:5px;min-width:0}.composer-optional input{height:32px;min-width:0;width:100%;font-size:12px;background:var(--compose-field);border-color:var(--compose-border)}
+-.composer-status{min-height:16px;max-height:72px;overflow:auto}.composer-status .error:empty{min-height:16px}.composer-status .split-confirm{font-size:12px;display:flex;align-items:center;gap:6px}.composer-status .split-confirm input{margin:0}
+-.composer footer{min-height:38px;flex-shrink:0}.composer footer>span{font-size:12px;color:var(--muted);line-height:18px}.composer footer small{display:block;font-size:11px}.composer .primary{min-width:80px;min-height:36px;border-radius:7px;padding:7px 18px;font-size:13px;font-weight:600;background:var(--compose-accent);color:white}.composer[data-platform=windows] .primary{border-radius:5px}
+-@media(max-height:420px){.composer{padding:12px;gap:6px}.composer header{height:28px}.composer textarea{padding:10px}.composer-select select{height:30px}.composer-optional{max-height:62px;padding-top:5px}.composer-status{max-height:42px}.composer footer{min-height:34px}}
+-@media(max-height:340px){.composer-optional{max-height:38px}.composer footer small{display:none}}
++.composer header{height:26px;-webkit-app-region:drag}.composer header label{font-size:14px;font-weight:600}.composer .close{-webkit-app-region:no-drag;width:28px;height:28px;color:var(--muted);border-radius:50%;font-size:20px}.composer .close:hover{background:color-mix(in srgb,var(--text),transparent 93%)}
++.composer textarea{height:132px;min-height:132px;max-height:132px;width:100%;resize:none;overflow-y:auto;line-height:22px;font-size:14px;padding:10px 12px;background:var(--compose-field);border:1.5px solid var(--compose-agent);border-radius:10px;outline:0;box-shadow:inset 0 1px 2px #00000004}
++.composer textarea:focus-visible{border-color:var(--compose-agent);outline:0;box-shadow:0 0 0 2px color-mix(in srgb,var(--compose-agent),transparent 90%)}
++.composer-optional{display:grid;grid-template-columns:1fr 1fr;gap:10px;min-width:0;padding:0;overflow:visible}.composer-optional label{min-width:0}.composer-optional input{width:100%;min-width:0;height:30px;padding:5px 9px;font-size:12px;background:color-mix(in srgb,var(--compose-field),transparent 12%);border:1px solid #83889636;border-radius:7px}.composer-optional input::placeholder{color:var(--muted);opacity:.85}
++.composer-status{min-height:0;overflow:auto}.composer-status .error{min-height:0;font-size:11px;line-height:14px}.composer-status .split-confirm{font-size:11px;line-height:14px;display:flex;align-items:center;gap:5px}.composer-status .split-confirm input{margin:0;width:14px;height:14px;padding:0}
++.composer footer{height:32px;min-height:32px;display:flex;align-items:center;justify-content:space-between;gap:10px}.composer-agent{display:flex;min-width:0}.composer-select{display:flex;align-items:center;position:relative;min-width:110px;max-width:180px}.composer-select i{position:absolute;left:10px;z-index:1;pointer-events:none;width:7px;height:7px;margin:0}.composer-select select{height:30px;max-width:180px;width:100%;padding:5px 24px 5px 24px;font-size:12px;background:var(--compose-field);border:1px solid #83889630;border-radius:8px;color:var(--text)}
++.composer .composer-submit{display:flex;flex-direction:row;align-items:center;gap:9px}.composer footer #composer-shortcut{font-size:11px;color:var(--muted);white-space:nowrap}.composer .primary{height:32px;min-width:72px;padding:5px 16px;font-size:12px;font-weight:600;background:var(--compose-accent);border:0;border-radius:16px;color:#FFF}.composer[data-platform=windows] .primary{border-radius:4px}.composer[data-platform=windows] textarea,.composer[data-platform=windows] input,.composer[data-platform=windows] select{border-radius:5px}
++@media(max-height:290px){.composer{padding:9px 12px;gap:5px;grid-template-rows:24px 110px 28px minmax(0,1fr) 30px}.composer textarea{height:110px;min-height:110px;max-height:110px}.composer-optional input{height:28px}.composer footer,.composer .primary{height:30px;min-height:30px}}
++@media(forced-colors:active){.composer{background:Canvas;border-color:CanvasText}.composer textarea,.composer input,.composer select{background:Canvas;color:CanvasText;border-color:CanvasText}.composer .primary{background:Highlight;color:HighlightText}}
++
++.composer input:focus-visible,.composer select:focus-visible{outline:2px solid color-mix(in srgb,var(--compose-agent),transparent 40%);outline-offset:1px}
+diff --git a/src/shared/bridge.ts b/src/shared/bridge.ts
+index 6173d10..107dce4 100644
+--- a/src/shared/bridge.ts
++++ b/src/shared/bridge.ts
+@@ -2,7 +2,7 @@ import type {Draft,Rect,Result,Snapshot} from './contracts';
+ export type ComposerContext={mode:'new'|'edit';ideaId:string|null;draft:Draft};
+ export type AgentMutation={kind:'add';name:string;color:string}|{kind:'update';id:string;name:string;color:string}|{kind:'remove';id:string;replacement:string};
+ export type ClipMutation={kind:'merge';sourceId:string;targetId:string}|{kind:'move';id:string;position:number;beforeId:string|null}|{kind:'select';id:string;ideaId:string}|{kind:'split';id:string;ideaId:string}|{kind:'splitAll'|'archiveAll';id:string}|{kind:'undo'};
+-export type PilotInfo={platform:'mac'|'windows';snapshot:Snapshot;displayId:string;width:number;dark:boolean;hotkeyRegistered:boolean;composerSession:number;composerDraftSequence:number;composerContext:ComposerContext;manageSession:number;manageSelection:string|null;manageMode:'browse'|'detail'|'settings';manageTitles:boolean;canUndoClips:boolean;dragCancelSession:number;shelfVisible:boolean;interactionLocked:boolean;presentationSession:number;textDragActive:boolean;shelfAgentId:string};
++export type PilotInfo={platform:'mac'|'windows';snapshot:Snapshot;displayId:string;width:number;dark:boolean;hotkeyRegistered:boolean;composerSession:number;composerDraftSequence:number;composerMaterial:'vibrancy'|'acrylic'|'opaque';composerContext:ComposerContext;manageSession:number;manageSelection:string|null;manageMode:'browse'|'detail'|'settings';manageTitles:boolean;canUndoClips:boolean;dragCancelSession:number;shelfVisible:boolean;interactionLocked:boolean;presentationSession:number;textDragActive:boolean;shelfAgentId:string};
+ export type HitLayout={layoutRevision:number;displayId:string;rects:Rect[]};
+ export interface ThoughtlineBridge{
+  info():Promise<PilotInfo>; onInfo(callback:(info:PilotInfo)=>void):()=>void;
+diff --git a/src/shared/composerMaterial.ts b/src/shared/composerMaterial.ts
+new file mode 100644
+index 0000000..654a5ef
+--- /dev/null
++++ b/src/shared/composerMaterial.ts
+@@ -0,0 +1,7 @@
++export type ComposerMaterial='vibrancy'|'acrylic'|'opaque';
++export function composerMaterial(platform:string,release:string,reduceTransparency:boolean,highContrast:boolean,forcedColors:boolean,focused=true):ComposerMaterial{
++ if(reduceTransparency||highContrast||forcedColors)return 'opaque';
++ if(platform==='darwin')return 'vibrancy';
++ if(platform==='win32'&&Number(release.split('.')[2])>=22621&&focused)return 'acrylic';
++ return 'opaque';
++}
+diff --git a/tests/electron/compact-composer-preview.cjs b/tests/electron/compact-composer-preview.cjs
+new file mode 100644
+index 0000000..2c01710
+--- /dev/null
++++ b/tests/electron/compact-composer-preview.cjs
+@@ -0,0 +1,19 @@
++const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto'),{execFile}=require('node:child_process'),{promisify}=require('node:util');
++const {_electron}=require('playwright'),{launchOptions,openComposer,waitForInfo}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
++const output=path.resolve('acceptance/evidence/compact-composer');
++(async()=>{const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-compact-preview-'));let app,pids=[];const scenes=[];let capturePermission;
++ try{await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:2,revision:0,ideas:[],clips:[],agents:[{id:'general',name:'通用',color:'#A0A3AA'},{id:'codex',name:'Codex',color:'#4C90D9'},{id:'claude',name:'Claude',color:'#D79551'}],draft:null,settings:{writeHotkey:'Control+Alt+F18',reducedMotion:false}}));app=await _electron.launch(await launchOptions(dir));const shelf=await app.firstWindow();await shelf.waitForURL(/view=shelf/);await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});const composer=await openComposer(app,shelf);
++ const bounds=await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer').getBounds());assert.deepEqual({width:bounds.width,height:bounds.height},{width:480,height:316});
++ capturePermission=await app.evaluate(({systemPreferences})=>systemPreferences.getMediaAccessStatus('screen'));
++ await app.evaluate(async({BrowserWindow},b)=>{const back=new BrowserWindow({title:'Thoughtline QA clean backdrop',frame:false,x:b.x-16,y:b.y-16,width:b.width+32,height:b.height+32,show:false,backgroundColor:'#83BBC7',webPreferences:{sandbox:true,contextIsolation:true,nodeIntegration:false}});await back.loadURL('data:text/html;charset=utf-8,'+encodeURIComponent('<html><body style="margin:0;height:100vh;background:linear-gradient(115deg,#B0D3DA 0%,#6496BE 27%,#C4CADB 49%,#D8C9AD 73%,#A7BBB5 100%)"><div style="height:28%;margin-top:38%;background:#e9edf475;transform:rotate(-12deg)"></div></body></html>'));back.setAlwaysOnTop(true,'floating',-1);back.showInactive();const front=BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer');front.show();front.focus();},bounds);
++ const capture=async(label,theme,{windowsSimulation=false}={})=>{await app.evaluate(({nativeTheme},theme)=>{nativeTheme.themeSource=theme;},theme);await composer.waitForFunction(theme=>document.documentElement.dataset.theme===theme,theme);if(windowsSimulation)await composer.evaluate(()=>{document.querySelector('.composer').dataset.platform='windows';document.querySelector('.composer').dataset.material='opaque';});await composer.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
++ const geometry=await composer.evaluate(()=>{const box=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom};};const text=document.querySelector('#idea-text');return {body:box(text),scrollHeight:text.scrollHeight,clientHeight:text.clientHeight,scrollTop:text.scrollTop,bodyBorder:getComputedStyle(text).borderColor,bodyBackground:getComputedStyle(text).backgroundColor,fields:[...document.querySelectorAll('.composer-optional input')].map(box),footer:box(document.querySelector('footer')),button:box(document.querySelector('.primary')),select:box(document.querySelector('select')),viewport:{width:innerWidth,height:innerHeight,dpr:devicePixelRatio},material:document.querySelector('.composer').dataset.material,platform:document.querySelector('.composer').dataset.platform,focused:document.activeElement.id==='idea-text'};});
++ assert.equal(geometry.body.height,132);assert(geometry.footer.bottom<=geometry.viewport.height+.01);assert(geometry.button.bottom<=geometry.footer.bottom+.01);assert(Math.abs(geometry.button.y-geometry.footer.y)<.01);assert(geometry.fields.every(r=>r.bottom<=geometry.viewport.height&&r.width>150));assert.equal(await composer.locator('details').count(),0);assert.equal(await composer.getByRole('button',{name:'查找 / 已收起'}).count(),0);
++ const file=label+'-'+theme+'.png';await composer.screenshot({path:path.join(output,file),omitBackground:true});let nativeFile=null;
++ if(!windowsSimulation&&capturePermission==='granted'){nativeFile=label+'-'+theme+'-native-desktop.png';await promisify(execFile)('/usr/sbin/screencapture',['-x','-R'+[bounds.x,bounds.y,bounds.width,bounds.height].join(','),path.join(output,nativeFile)]);}
++ scenes.push({label,theme,geometry,rendererFile:file,rendererSha256:crypto.createHash('sha256').update(await fs.readFile(path.join(output,file))).digest('hex'),nativeFile,nativeSha256:nativeFile?crypto.createHash('sha256').update(await fs.readFile(path.join(output,nativeFile))).digest('hex'):null,scope:windowsSimulation?'Windows CSS style simulation in actual Mac renderer, opaque fallback; not Windows OS or Acrylic execution':'actual Mac source; material recorded per scene and OS accessibility honored; composited crop only own window over own clean synthetic desktop-style backdrop; not true NSGlassEffectView'});console.log(JSON.stringify({checkpoint:'image',file:path.join(output,nativeFile||file),capturePermission,geometry}));};
++ await capture('default','light');const short='先留住一个念头。';await composer.locator('select').selectOption('codex');await composer.locator('#idea-text').fill(short);await capture('codex-short','light');const long=Array.from({length:36},(_,i)=>`第${i+1}行：长文在这里滚动，窗口和正文框都不长高。😀`).join('\n');await composer.locator('#idea-text').fill(long);await composer.getByLabel('名称',{exact:true}).fill('长文测试');await composer.getByLabel('项目',{exact:true}).fill('独立假数据');await composer.locator('#idea-text').focus();await composer.locator('#idea-text').evaluate(e=>{e.scrollTop=e.scrollHeight;});await capture('codex-long-scroll','light');const longScene=scenes.at(-1);assert(longScene.geometry.scrollHeight>longScene.geometry.clientHeight);assert(longScene.geometry.scrollTop>0);assert.equal(longScene.geometry.body.height,scenes[0].geometry.body.height);await capture('codex-long-scroll','dark');await composer.locator('#idea-text').fill('给 Claude 的暖色边框。');await composer.locator('select').selectOption('claude');await capture('claude-short','light');assert.notEqual(scenes[1].geometry.bodyBorder,scenes.at(-1).geometry.bodyBorder);await capture('claude-short','dark');
++ await capture('windows-style-simulation','light',{windowsSimulation:true});await capture('windows-style-simulation','dark',{windowsSimulation:true});
++ const info=await shelf.evaluate(()=>window.thoughtline.info());const accessibility=await app.evaluate(({nativeTheme})=>({reducedTransparency:nativeTheme.prefersReducedTransparency,highContrast:nativeTheme.shouldUseHighContrastColors,forcedColors:nativeTheme.inForcedColorsMode}));await fs.writeFile(path.join(output,'preview-result.json'),JSON.stringify({scope:'source preview; no new package or physical IME/Windows acceptance',electron:process.versions.electron??require('electron/package.json').version,macOS:os.release(),bounds,capturePermission,accessibility,trueLiquidGlass:false,nativeVibrancy:info.composerMaterial==='vibrancy',fixedTextHeight:132,shortLongNativeBoundsUnchanged:true,scenes},null,2)+'\n');
++ }finally{if(app){pids=await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid));pids.push(app.process().pid);await app.close();}await cleanupIdleFixture(dir,pids);await fs.writeFile(path.join(output,'preview-cleanup.json'),JSON.stringify({ownedPids:[...new Set(pids)],allExited:true,fakeDataRemoved:true},null,2)+'\n');}
++})().catch(e=>{console.error(e);process.exitCode=1;});
+diff --git a/tests/electron/draft-crash-recovery.cjs b/tests/electron/draft-crash-recovery.cjs
+index 1c1f5a5..02cdbde 100644
+--- a/tests/electron/draft-crash-recovery.cjs
++++ b/tests/electron/draft-crash-recovery.cjs
+@@ -4,7 +4,7 @@ const output=path.resolve('acceptance/evidence/draft-recovery'),baseline=process
+ (async()=>{const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-draft-crash-'));let app,pids=[],result={baseline,scope:'own isolated Mac source process SIGKILL/restart; no real shortcuts, clipboard, physical IME or Windows'};
+  const prior={text:'已保存的旧草稿',title:'旧名称',project:'旧项目',agentId:'general'},body='  正在输入的新草稿\n第二行 emoji😀  ';
+  const start=async()=>{app=await _electron.launch(await launchOptions(dir));const shelf=await app.firstWindow();await shelf.waitForURL(/view=shelf/);await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});return {shelf,composer:await openComposer(app,shelf)};};
+- try{await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:2,revision:0,ideas:[],clips:[],agents:[{id:'general',name:'通用',color:'#A0A3AA'},{id:'custom',name:'假Agent',color:'#2C8A76'}],draft:prior,settings:{writeHotkey:'Control+Alt+F18',reducedMotion:false}}));let {shelf,composer}=await start();await composer.locator('#idea-text').fill(body);await composer.locator('summary').click();await composer.getByLabel('名称',{exact:true}).fill('新名称');await composer.getByLabel('项目',{exact:true}).fill('新项目');await composer.locator('select').selectOption('custom');
++ try{await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:2,revision:0,ideas:[],clips:[],agents:[{id:'general',name:'通用',color:'#A0A3AA'},{id:'custom',name:'假Agent',color:'#2C8A76'}],draft:prior,settings:{writeHotkey:'Control+Alt+F18',reducedMotion:false}}));let {shelf,composer}=await start();await composer.locator('#idea-text').fill(body);await composer.getByLabel('名称',{exact:true}).fill('新名称');await composer.getByLabel('项目',{exact:true}).fill('新项目');await composer.locator('select').selectOption('custom');
+  if(baseline)await composer.waitForTimeout(2600);else{await waitForInfo(shelf,i=>i.snapshot.draft?.text===body&&i.snapshot.draft?.agentId==='custom'&&i.snapshot.draft?.project==='新项目');}
+  const disk=JSON.parse(await fs.readFile(path.join(dir,'snapshot.json'),'utf8'));result.beforeKillDraft=disk.draft;
+  const own=await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid));own.push(app.process().pid);pids.push(...own);assert(own.includes(app.process().pid));app.process().kill('SIGKILL');await new Promise(r=>app.process().once('exit',r));app=null;await cleanupIdleFixture(path.join(dir,'nonexistent-child-cleanup'),own);
+diff --git a/tests/electron/draft-safety-workflow.cjs b/tests/electron/draft-safety-workflow.cjs
+index e8b5cc3..fd5e21c 100644
+--- a/tests/electron/draft-safety-workflow.cjs
++++ b/tests/electron/draft-safety-workflow.cjs
+@@ -3,7 +3,7 @@ const {_electron}=require('playwright'),{launchOptions,openComposer,waitForInfo}
+ const output=path.resolve('acceptance/evidence/draft-recovery');
+ (async()=>{const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-draft-safety-'));let app,pids=[];const checkpoints=[];
+  const mark=(name,fields={})=>{checkpoints.push({name,...fields});console.log(JSON.stringify({checkpoint:name,...fields}));};
+- const start=async()=>{app=await _electron.launch(await launchOptions(dir));const shelf=await app.firstWindow();await shelf.waitForURL(/view=shelf/);await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});return {shelf,composer:await openComposer(app,shelf)};};
++ const start=async()=>{const options=await launchOptions(dir);await fs.writeFile(options.args[0],`const Tray=require('electron').Tray,nativeSet=Tray.prototype.setContextMenu;Tray.prototype.setContextMenu=function(menu){globalThis.thoughtlineTestTrayMenu=menu;return nativeSet.call(this,menu);};`+await fs.readFile(options.args[0],'utf8'));app=await _electron.launch(options);const shelf=await app.firstWindow();await shelf.waitForURL(/view=shelf/);await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});return {shelf,composer:await openComposer(app,shelf)};};
+  const stop=async()=>{pids.push(...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)),app.process().pid);await app.close();app=null;};
+  const visible=()=>app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer').isVisible());
+  try{await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:2,revision:0,ideas:[],clips:[],agents:[{id:'general',name:'通用',color:'#A0A3AA'}],draft:{text:'原草稿',title:'旧',project:'',agentId:'general'},settings:{writeHotkey:'Control+Alt+F18',reducedMotion:false}}));let {shelf,composer}=await start();await composer.waitForTimeout(2200);assert.equal((await shelf.evaluate(()=>window.thoughtline.info())).snapshot.revision,0);mark('hydration-does-not-save-or-overwrite');
+@@ -13,7 +13,7 @@ const output=path.resolve('acceptance/evidence/draft-recovery');
+  await composer.reload();await composer.waitForSelector('#idea-text');assert.equal(await composer.locator('#idea-text').inputValue(),'确认后的中文😀');await composer.locator('#idea-text').fill('重载后继续写');await waitForInfo(shelf,i=>i.snapshot.draft?.text==='重载后继续写');mark('renderer-reload-sequence-resumes');
+  const current=await composer.evaluate(()=>window.thoughtline.info());const stale=await composer.evaluate(async({session,sequence})=>window.thoughtline.saveDraft({text:'旧包覆写',title:'',project:'',agentId:'general'},session,sequence),{session:current.composerSession,sequence:1});assert(stale.ok);assert.equal((await shelf.evaluate(()=>window.thoughtline.info())).snapshot.draft.text,'重载后继续写');mark('old-sequence-cannot-overwrite');
+  await fs.chmod(dir,0o555);await composer.locator('#idea-text').fill('自动保存失败也保留全文\n😀');await composer.locator('.error').filter({hasText:/自动保存未成功/}).waitFor();assert.equal(await composer.locator('#idea-text').inputValue(),'自动保存失败也保留全文\n😀');assert.equal(await visible(),true);const disk=JSON.parse(await fs.readFile(path.join(dir,'snapshot.json'),'utf8'));assert.equal(disk.draft.text,'重载后继续写');await fs.chmod(dir,0o755);await composer.getByRole('button',{name:'保存草稿并关闭',exact:true}).click();await waitForInfo(shelf,i=>!i.interactionLocked);assert.equal((await shelf.evaluate(()=>window.thoughtline.info())).snapshot.draft.text,'自动保存失败也保留全文\n😀');mark('auto-io-failure-preserves-window-disk-and-manual-retry');
+- composer=await openComposer(app,shelf);await composer.locator('#idea-text').fill('查找前100ms的新草稿');await composer.getByRole('button',{name:'查找 / 已收起',exact:true}).click();const until=Date.now()+10000;let manage;while(!manage&&Date.now()<until){manage=(await app.windows()).find(p=>p.url().includes('view=manage'));if(!manage)await new Promise(r=>setTimeout(r,25));}assert(manage);await manage.waitForSelector('[data-view=manage]');await waitForInfo(shelf,i=>i.manageMode==='browse');assert.equal((await shelf.evaluate(()=>window.thoughtline.info())).snapshot.draft.text,'查找前100ms的新草稿');await manage.evaluate(()=>window.thoughtline.closeManage());composer=await openComposer(app,shelf);assert.equal(await composer.locator('#idea-text').inputValue(),'查找前100ms的新草稿');mark('actual-find-save-close-manage-reopen');
++ composer=await openComposer(app,shelf);await composer.locator('#idea-text').fill('查找前100ms的新草稿');await composer.getByRole('button',{name:'保存草稿并关闭',exact:true}).click();await waitForInfo(shelf,i=>!i.interactionLocked);await app.evaluate(()=>{const item=globalThis.thoughtlineTestTrayMenu.items.find(i=>i.label==='查找 / 已收起');if(!item?.enabled)throw Error('Actual system tray browse entry unavailable');item.click();});const until=Date.now()+10000;let manage;while(!manage&&Date.now()<until){manage=(await app.windows()).find(p=>p.url().includes('view=manage'));if(!manage)await new Promise(r=>setTimeout(r,25));}assert(manage);await manage.waitForSelector('[data-view=manage]');await waitForInfo(shelf,i=>i.manageMode==='browse');assert.equal((await shelf.evaluate(()=>window.thoughtline.info())).snapshot.draft.text,'查找前100ms的新草稿');await manage.evaluate(()=>window.thoughtline.closeManage());composer=await openComposer(app,shelf);assert.equal(await composer.locator('#idea-text').inputValue(),'查找前100ms的新草稿');mark('actual-system-tray-find-save-close-manage-reopen-no-shelf-toolbar');
+  await composer.locator('#idea-text').fill('只应提交一次，且草稿不可回流');const submissionSession=(await composer.evaluate(()=>window.thoughtline.info())).composerSession;await composer.locator('.primary').evaluate(button=>{button.click();button.click();button.click();});await waitForInfo(shelf,i=>!i.interactionLocked&&i.snapshot.ideas.length===1);await composer.waitForTimeout(2300);let snapshot=(await shelf.evaluate(()=>window.thoughtline.info())).snapshot;assert.equal(snapshot.ideas.length,1);assert.equal(snapshot.ideas[0].text,'只应提交一次，且草稿不可回流');assert.equal(snapshot.draft,null);mark('after-submit-native-observation',{visible:await visible(),session:(await composer.evaluate(()=>window.thoughtline.info())).composerSession,submittedSession:submissionSession});const post=await composer.evaluate(({session})=>window.thoughtline.saveDraft({text:'迟到的草稿',title:'',project:'',agentId:'general'},session,999),{session:submissionSession});assert(!post.ok);mark('pending-submit-three-clicks-one-note-no-late-draft-resurrection');
+  composer=await openComposer(app,shelf);await composer.locator('#idea-text').fill('新建草稿应独立于已有记录编辑');await composer.getByRole('button',{name:'保存草稿并关闭',exact:true}).click();await waitForInfo(shelf,i=>!i.interactionLocked);snapshot=(await shelf.evaluate(()=>window.thoughtline.info())).snapshot;const beforeEdit=structuredClone(snapshot);const edit=await shelf.evaluate(id=>window.thoughtline.openEdit(id),snapshot.ideas[0].id);assert(edit.ok);await composer.waitForFunction(()=>document.querySelector('header label').textContent==='编辑念头');await composer.locator('#idea-text').fill('被取消的编辑不得自动存入正文或新草稿');await composer.waitForTimeout(2300);assert.deepEqual((await shelf.evaluate(()=>window.thoughtline.info())).snapshot,beforeEdit);await composer.getByRole('button',{name:'取消编辑并关闭',exact:true}).click();await waitForInfo(shelf,i=>!i.interactionLocked);assert.deepEqual((await shelf.evaluate(()=>window.thoughtline.info())).snapshot,beforeEdit);mark('edit-has-no-auto-save-and-cancel-preserves-note-draft-revision');
+  composer=await openComposer(app,shelf);await composer.locator('#idea-text').fill('正常退出前未到节流时间的新正文');await stop();({shelf,composer}=await start());assert.equal(await composer.locator('#idea-text').inputValue(),'正常退出前未到节流时间的新正文');assert.equal((await shelf.evaluate(()=>window.thoughtline.info())).snapshot.ideas[0].text,beforeEdit.ideas[0].text);mark('dirty-normal-quit-restart-saves-latest-with-note-preserved');
+diff --git a/tests/unit/composerMaterial.test.ts b/tests/unit/composerMaterial.test.ts
+new file mode 100644
+index 0000000..c98eb08
+--- /dev/null
++++ b/tests/unit/composerMaterial.test.ts
+@@ -0,0 +1,10 @@
++import {it,expect} from 'vitest';
++import {composerMaterial} from '../../src/shared/composerMaterial';
++it('uses supported native materials with accessibility, inactive and old-Windows fallback',()=>{
++ expect(composerMaterial('darwin','24.3.0',false,false,false)).toBe('vibrancy');
++ expect(composerMaterial('win32','10.0.22621',false,false,false)).toBe('acrylic');
++ expect(composerMaterial('win32','10.0.22000',false,false,false)).toBe('opaque');
++ expect(composerMaterial('win32','10.0.19045',false,false,false)).toBe('opaque');
++ expect(composerMaterial('win32','10.0.22631',false,false,false,false)).toBe('opaque');
++ for(const platform of ['darwin','win32'])for(const flags of [[true,false,false],[false,true,false],[false,false,true]])expect(composerMaterial(platform,'10.0.22631',...flags as [boolean,boolean,boolean])).toBe('opaque');
++});

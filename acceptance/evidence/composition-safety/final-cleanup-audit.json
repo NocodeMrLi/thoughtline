@@ -1,0 +1,105 @@
+{
+  "recordedAtUTC": "2026-10-09T04:22:53.408714+00:00",
+  "scope": "read-only ps of precisely recorded own PIDs; no process termination",
+  "ownPids": [
+    10941,
+    10942,
+    10943,
+    10944,
+    10945,
+    11039,
+    11040,
+    11041,
+    11042,
+    11043,
+    11111,
+    11112,
+    11113,
+    11114,
+    11115,
+    11191,
+    11192,
+    11193,
+    11195,
+    11196,
+    11201,
+    11204,
+    11205,
+    11206,
+    11207,
+    11208
+  ],
+  "psExit": 1,
+  "psStdout": "",
+  "psStderr": "",
+  "allRecordedPidsAbsent": true,
+  "recordedFakeDirsAbsent": {
+    "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-composition-safety-W8qfSI": true,
+    "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-composition-safety-PNlqvn": true,
+    "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-optional-composition-MZdVHf": true
+  },
+  "fixtureCleanupAssertions": {
+    "acceptance/evidence/composition-safety/attempt-1/native/result.json": {
+      "ownPids": [
+        10941,
+        10942,
+        10943,
+        10944,
+        10945
+      ],
+      "allExited": true,
+      "fakeDataDirectory": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-composition-safety-W8qfSI",
+      "fakeDataRemoved": true
+    },
+    "acceptance/evidence/composition-safety/native/result.json": {
+      "ownPids": [
+        11039,
+        11040,
+        11041,
+        11042,
+        11043
+      ],
+      "allExited": true,
+      "fakeDataDirectory": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-composition-safety-PNlqvn",
+      "fakeDataRemoved": true
+    },
+    "acceptance/evidence/composition-safety/original-probe/cleanup.json": {
+      "ownPids": [
+        11111,
+        11112,
+        11113,
+        11114,
+        11115
+      ],
+      "allExited": true,
+      "fakeDataDirectory": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-optional-composition-MZdVHf",
+      "fakeDataRemoved": true
+    },
+    "acceptance/evidence/composition-safety/draft-regression/safety-native.json": {
+      "ownPids": [
+        11191,
+        11192,
+        11193,
+        11195,
+        11196,
+        11201,
+        11204,
+        11205,
+        11206,
+        11207,
+        11208
+      ],
+      "allExited": true,
+      "fakeDataRemoved": true
+    }
+  },
+  "systemPreferences": {
+    "increaseContrast": "1",
+    "reduceTransparency": "1"
+  },
+  "oldWorktree": {
+    "head": "c3784976c5fc1877dfa337b0db4e79f3b9c8a423",
+    "status": "",
+    "unchanged": true
+  }
+}

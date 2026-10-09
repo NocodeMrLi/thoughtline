@@ -7,6 +7,7 @@ const api:ThoughtlineBridge={
  copy:id=>ipcRenderer.invoke('thoughtline:copy',id),
  submit:(draft,revision)=>ipcRenderer.invoke('thoughtline:submit',draft,revision),
  close:draft=>ipcRenderer.invoke('thoughtline:close',draft),
+ saveDraft:(draft,session,sequence)=>ipcRenderer.invoke('thoughtline:save-draft',draft,session,sequence),
  openManage:(id,titles)=>ipcRenderer.invoke('thoughtline:open-manage',id,titles),
  closeManage:()=>ipcRenderer.invoke('thoughtline:close-manage'),
  openEdit:id=>ipcRenderer.invoke('thoughtline:open-edit',id),
