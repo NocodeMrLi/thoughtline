@@ -1,0 +1,191 @@
+{
+  "sourceCommit": "cd013813e21de3d03a0a5cd3e10af1977ed1f85b",
+  "evidenceCommit": "f92fa59206843ccec57118985864912c3901351a",
+  "remoteObjectFetched": true,
+  "sourceToEvidenceDiffEmpty": true,
+  "source": [
+    {
+      "path": "src/main/index.ts",
+      "sha256": "64fca2c0b5fd3425cb18de6aefaeffbe6f7bf687ca0b7185c968b7a915f0f456",
+      "match": true
+    },
+    {
+      "path": "src/preload/index.ts",
+      "sha256": "bdb181a283b30e4d94969a8654287f2ba209378da854308cbb6e5d779559dff0",
+      "match": true
+    },
+    {
+      "path": "src/shared/bridge.ts",
+      "sha256": "43a256c539200c954074141d807771f099633bdcc8f203ed829e9f847f9054e1",
+      "match": true
+    },
+    {
+      "path": "src/shared/draftAutosaver.ts",
+      "sha256": "0ed7bdf3e8fcc5a830fd0a37ffa4aafe74421ccec935a7e203c067578760286a",
+      "match": true
+    },
+    {
+      "path": "src/renderer/components/Composer.tsx",
+      "sha256": "78b5055e5540ceb7f3cd2e26eca54f5516abb9669102dfdfdcad4b1b03f9b990",
+      "match": true
+    },
+    {
+      "path": "package.json",
+      "sha256": "326808136a3f10d019d30274ba71ddb7628dc6671027219c9b364a42ec901c47",
+      "match": true
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "5fb0c66f7bdf57ef387b357d9bb471e97c0311727df124eb4039f83186a5def3",
+      "match": true
+    },
+    {
+      "path": "tests/unit/draftAutosaver.test.ts",
+      "sha256": "15db3c57a1555f5696992d187bd5648832a4dcf4e7fa399bfbfbd8b0f65c4ef7",
+      "match": true
+    },
+    {
+      "path": "tests/electron/draft-crash-recovery.cjs",
+      "sha256": "76a554537d9763bb01aa1a46ed5d0c8b56df1754f329757e7c83d3479dc4b3bc",
+      "match": true
+    },
+    {
+      "path": "tests/electron/draft-safety-workflow.cjs",
+      "sha256": "4c150cd4792e2752bb5a6a09f2b35e9308e35787884247e0a79ea33b8ff68dd3",
+      "match": true
+    }
+  ],
+  "evidence": [
+    {
+      "path": "attempt-1-selector-error/draft-safety-workflow.cjs",
+      "sha256": "c4efe70489c24a372c400e61e19326881120cd33df6bb60204cec9a1f8a10c2a",
+      "match": true
+    },
+    {
+      "path": "attempt-1-selector-error/safety-native.json",
+      "sha256": "c07782b84dfedad32e473002fa3af6962376b226f00cc62f5e386adb0eecb115",
+      "match": true
+    },
+    {
+      "path": "attempt-1-selector-error/safety-native.log",
+      "sha256": "29c4c2ec4dc32511993906bfe11251f762740d47cd9f103a735f77f1aa4fb73e",
+      "match": true
+    },
+    {
+      "path": "attempt-2-late-session/draft-safety-workflow.cjs",
+      "sha256": "90520a964235033b72c9e7d04a28b50886f80bbad162c1879f49365e5d7ce0df",
+      "match": true
+    },
+    {
+      "path": "attempt-2-late-session/safety-native.json",
+      "sha256": "8bd486598756cdb8c676770088f76bd0ee718985359c253759d8486df51caf9f",
+      "match": true
+    },
+    {
+      "path": "attempt-2-late-session/safety-native.log",
+      "sha256": "9ab8a7fa731d42e647826f01ac587782f645141efe3edeef2adaa4df03487520",
+      "match": true
+    },
+    {
+      "path": "baseline-build.log",
+      "sha256": "e8f4cad184694236a42e4c80bd928959d165d97350157478b23ce64cbb479a00",
+      "match": true
+    },
+    {
+      "path": "baseline-loss.json",
+      "sha256": "51d09efda61e7175cdea276e9be63fa1331a123eed460fb7c944728b63ed0e97",
+      "match": true
+    },
+    {
+      "path": "baseline-native.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "match": true
+    },
+    {
+      "path": "build.log",
+      "sha256": "c5555e7779d93fde26b887b60fbc435c072619a4bfd56722f9ab2e31f3137964",
+      "match": true
+    },
+    {
+      "path": "crash-native.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "match": true
+    },
+    {
+      "path": "crash-recovery.json",
+      "sha256": "40b9aa2521d55cb44bed0887b3838552781013c426c34b3573892ed44d91b7b4",
+      "match": true
+    },
+    {
+      "path": "failure-backoff-red.log",
+      "sha256": "cef5e59a8b14a3407589d5c55bf39cd7413b9d621410fc7f480c218805fe081e",
+      "match": true
+    },
+    {
+      "path": "final-cleanup-check.json",
+      "sha256": "c5472aae42663aa797f9d5c3046c40605f14592af8f70f9e997e9a2aa9d0d5e9",
+      "match": true
+    },
+    {
+      "path": "safety-native.json",
+      "sha256": "fc5c2bad5a5efa0ba688e663c92ddb0574c5a371a43ec2b0ee3d95b9313b2e42",
+      "match": true
+    },
+    {
+      "path": "safety-native.log",
+      "sha256": "8ead367b0592d7b07e374c0a6aad6432c98397526adb5d790db9ce4ddf1e8626",
+      "match": true
+    },
+    {
+      "path": "scheduler-unit.log",
+      "sha256": "9c4d99985456070d8fba53ebc9cd97cf974d24b30b433b352a611345bb517b68",
+      "match": true
+    },
+    {
+      "path": "source-binding.json",
+      "sha256": "f439c03676cf3d858a7947fc2b7b4f9af3c5c43f08025ee0ab6763db42583c17",
+      "match": true
+    },
+    {
+      "path": "typecheck.log",
+      "sha256": "cb426e79df349e52b509372d1f4a983ec896d5b4657c301ead5b56f474a5649e",
+      "match": true
+    },
+    {
+      "path": "unit.log",
+      "sha256": "a17b0ace4124cf160271e3e795250f979d5118090f9cf67a06bddecfea412aa9",
+      "match": true
+    }
+  ],
+  "builderCompiledHashesReadonly": [
+    {
+      "path": "out/main/index.js",
+      "sha256": "5c154440a0d2da123be3d581213620213de1b900db0f9b1546152e88d2d8157f",
+      "match": true
+    },
+    {
+      "path": "out/preload/index.js",
+      "sha256": "0939feaf1844c5cb450bc0e91f375f3ace636073a9957191d84f5b7d5a92fa04",
+      "match": true
+    },
+    {
+      "path": "out/renderer/assets/index-CEzLPFWD.css",
+      "sha256": "8f937eeb2ea52a106d2aa3ce10b881b1029f82bfd6038fc02d8b29ae785444b7",
+      "match": true
+    },
+    {
+      "path": "out/renderer/assets/index-DSQ5Zays.js",
+      "sha256": "fb6759195e066f4a619084ae351b91247613c49be62fcb7fbc65559bda326155",
+      "match": true
+    },
+    {
+      "path": "out/renderer/index.html",
+      "sha256": "f5b39199d77533001dd0d06ad396197e2a37b417aa910ec8e9e6b8a40f565e3c",
+      "match": true
+    }
+  ],
+  "independentBuildRun": false,
+  "independentNativeRun": false,
+  "baselineNote": "baseline-loss.json has baseline bool but not exact source or compiled hashes; checkpoint report identifies566cce0 and build log indicates preview.1. Do not claim independent baseline executable binding.",
+  "cleanupReportedPIDs": 42
+}
