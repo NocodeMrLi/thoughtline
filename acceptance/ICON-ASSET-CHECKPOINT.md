@@ -1,0 +1,19 @@
+# Approved TL icon asset checkpoint
+
+2026-10-09. User approved the exact-contour programmatic alpha mask at 05:55:26 UTC (Sentinel_091a3c6b44808191b1b81319ebd2d298). The final design is the warm ivory tile, independent dark teal TL and approximately 30-degree front-facing red peg. Old v2 designs are superseded.
+
+Integration baseline: Windows preflight HEAD `17823b064be8994e96e283edddea7515dc1dfc12`, including composition safety source `4400f73d430256b5731840610b9f0ccfcd0b8147`. Version remains 0.0.16-preview.5.
+
+[Approved original](../assets/source/approved-TL-brand-logo.jpg) is byte-identical to the user's desktop JPEG: 1254×1254, SHA256 `313485e59395e3165f6504964efd72f4a3811150ac337834be3e2759f279f778`. [Transparent source](../assets/source/thoughtline-tl-v11-transparent-1254.png) retains every source RGB byte; only alpha was added using anchored cubic geometry. Body alpha255, a3423-pixel coverage antialiasing rim, one connected silhouette, no holes, no exterior islands. Source alpha bounds52,57–1202,1193. No color-key threshold or redraw.
+
+The 1440px padded master adds transparent canvas only, without enlarging the1254 artwork. [1024 PNG](../assets/app-icon.png), [Mac ICNS](../assets/app-icon.icns), [Windows ICO](../assets/app-icon.ico), PNG16/24/32/48/64/128/256/512/1024, Mac16/32@2x mono Template72/144dpi and independent Windows7-frame tray ICO are complete. Templates simplify material and color; 16px red peg is a recognition accent, not readable metal detail. Windows small tray has a warm backplate for contrast.
+
+[Offline resource verification](evidence/icon-final/resource-verification.json) passed: native Mac iconutil decoded10 ICNS representations; Pillow decoded7 main ICO and7 tray ICO frames; every visible RGB and alpha matched its PNG. SourceRGB exact, topology, DPI, packaging paths, compiled tray routes verified. All native-size PNGs, deep/light backgrounds, enlarged corners and decoded16/32 frames were actually inspected. [App sheet](evidence/icon-final/app-sizes-light-dark.png), [edge sheet](evidence/icon-final/tile-corners-dark-2x.png), [decoded sheet](evidence/icon-final/decoded-container-16-32.png), [tray simulation](evidence/icon-final/tray-sizes-light-dark-simulation.png).
+
+Mac build.icon points to ICNS; Windows and NSIS app/installer/uninstaller/header point to ICO. Mac tray preserves16DIP with automatic@2x loading and template coloring; Windows Tray receives the ICO path so the OS chooses a resolution. Legacy app SVG removed.
+
+[Regression log](evidence/icon-final/verify.log): typecheck,102 unit tests passed/4 skipped (24 files passed/1 skipped), build exit0. The prior103 progress count was corrected from the actual log. No native desktop launch, install, replacement, publication or main merge. OS icon cache, real menu bar/taskbar and final packages remain for parent-coordinated verification. Rejected imagegen results remain historical evidence, not assets.
+
+Reproduce with Python3, Pillow and numpy using scripts/export-icons.py; scripts/verify-icons.py additionally uses Mac iconutil for actual native decode and requires the current compiled out/main. Exporter uses standard separate RGB/alpha resources for16/32 ICNS and PNG entries for larger/Retina sizes to avoid the system encoder's premultiplied small-edge conversion. Temporary codec and iconset directories are automatically removed.
+
+This asset commit is self-contained for cherry-picking onto17823b0: approved JPEG, mask specification, assets, exports/verifier, platform paths and current evidence. Earlier Library/alpha rejection commits are not prerequisites. Project notebook sync is the next documentation-only increment; parent may start package work from this fixed asset checkpoint.

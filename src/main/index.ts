@@ -254,9 +254,13 @@ else app.whenReady().then(async()=>{
  });
  await loadView(shelf,'shelf');
  globalShortcut.register(snapshot.settings.writeHotkey,()=>{openComposer();});
- const icon=nativeImage.createFromPath(join(__dirname,'../../assets/'+(process.platform==='darwin'?'trayTemplate.png':'app-icon.png'))).resize({width:22,height:22});
- if(icon.isEmpty())throw Error('Thoughtline tray icon failed to load.');
- if(process.platform==='darwin')icon.setTemplateImage(true);tray=new Tray(icon);tray.setToolTip('晾念头 / Thoughtline');
+ const trayPath=join(__dirname,'../../assets/'+(process.platform==='darwin'?'trayTemplate.png':'tray-win.ico'));
+ if(process.platform==='darwin'){
+  const icon=nativeImage.createFromPath(trayPath);
+  if(icon.isEmpty())throw Error('Thoughtline tray icon failed to load.');
+  icon.setTemplateImage(true);tray=new Tray(icon);
+ }else tray=new Tray(trayPath);
+ tray.setToolTip('晾念头 / Thoughtline');
  refreshTray=()=>tray.setContextMenu(Menu.buildFromTemplate([{label:'晾念头 / Thoughtline',enabled:false},{label:`写念头：${displayWriteHotkey(snapshot.settings.writeHotkey,host.platform)}${globalShortcut.isRegistered(snapshot.settings.writeHotkey)?'':'（注册失败）'}`,enabled:!composer?.isVisible()&&!(manage?.isVisible()&&manageMode==='settings'),click:()=>{void openComposer();}},{type:'separator'},{label:'查找 / 已收起',enabled:!composer?.isVisible(),click:browseFromTray},{label:'筛选 Agent',submenu:agentFilterMenu()},{label:'设置',enabled:!composer?.isVisible(),click:()=>{openSettings();}},{label:'暂停悬停',type:'checkbox',checked:edge.isManuallyPaused(),click:item=>{cancelDrag();edge.pause(item.checked);}},{label:'退出',click:()=>app.quit()}]));
  refreshTray();
  nativeTheme.on('updated',publish);powerMonitor.on('suspend',()=>{cancelDrag();edge.pause(true,'sleep');});powerMonitor.on('lock-screen',()=>{cancelDrag();edge.pause(true,'lock');});powerMonitor.on('resume',()=>edge.pause(false,'sleep'));powerMonitor.on('unlock-screen',()=>edge.pause(false,'lock'));
