@@ -1,0 +1,24 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/manageGeometry.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/manageGeometry.test.ts [ tests/unit/manageGeometry.test.ts ]
+Error: Cannot find module '../../src/main/windows/manageGeometry' imported from /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/unit/manageGeometry.test.ts
+ ❯ tests/unit/manageGeometry.test.ts:2:1
+      1| import {describe,it,expect} from 'vitest';
+      2| import {fitManageBounds} from '../../src/main/windows/manageGeometry';
+       | ^
+      3|
+      4| describe('manage window bounds',()=>{
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  19:24:39
+   Duration  110ms (worker 97%, environment 3%)
+

@@ -1,0 +1,18 @@
+locator.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('button', { name: '重试保存', exact: true })[22m
+[2m    - locator resolved to <button>重试保存</button>[22m
+[2m  - attempting click action[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m  - element was detached from the DOM, retrying[22m
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/inline-edit-workflow.cjs:8:750 {
+  log: [
+    "  - waiting for getByRole('button', { name: '重试保存', exact: true })",
+    '    - locator resolved to <button>重试保存</button>',
+    '  - attempting click action',
+    '    - waiting for element to be visible, enabled and stable',
+    '  - element was detached from the DOM, retrying'
+  ],
+  name: 'TimeoutError'
+}

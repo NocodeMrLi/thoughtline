@@ -1,0 +1,90 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/p3Schema.test.ts (19 tests | 3 failed) 30ms
+   × 旧typed schema2快照中新建仍按localday，已有记录按旧原始偏移日期冻结 6ms
+   × 迁移扩展年份+010000-01-01T00:00:00Z不能返回非法创建日或截断为今天 1ms
+   × 迁移扩展年份-000001-01-01T00:00:00Z不能返回非法创建日或截断为今天 0ms
+ ❯ tests/unit/p3Repository.test.ts (9 tests | 1 failed) 116ms
+   × 扩展年份无法迁移为规范创建日时保留原文件，禁止提交空库或无效schema3 7ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/p3Repository.test.ts > 扩展年份无法迁移为规范创建日时保留原文件，禁止提交空库或无效schema3
+AssertionError: expected { ok: true, value: { …(7) } } to match object { ok: false, code: 'INVALID' }
+(8 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "code": "INVALID",
+-   "ok": false,
++   "ok": true,
+  }
+
+ ❯ tests/unit/p3Repository.test.ts:55:63
+     53| test('扩展年份无法迁移为规范创建日时保留原文件，禁止提交空库或无效schema3',async()=>{
+     54|  const dir=await fixture();const source=old(2);source.ideas[0].created…
+     55|  const repo=new FileRepository(dir);expect(await repo.load()).toMatchO…
+       |                                                               ^
+     56|  expect(await repo.commit(initialSnapshot(),7)).toMatchObject({ok:fals…
+     57|  expect(await readFile(join(dir,'snapshot.json'),'utf8')).toBe(raw);ex…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/unit/p3Schema.test.ts > 旧typed schema2快照中新建仍按localday，已有记录按旧原始偏移日期冻结
+AssertionError: expected { text: ' \n原文 🧵\n ', …(9) } to match object { createdDay: '2026-01-02', …(2) }
+(7 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "createdAt": "2026-01-01T18:30:00Z",
+-   "createdDay": "2026-01-02",
+-   "creationTimeZone": "Asia/Shanghai",
++   "createdDay": "2026-01-01",
++   "creationTimeZone": "legacy-offset",
+  }
+
+ ❯ tests/unit/p3Schema.test.ts:56:59
+     54|  process.env.TZ='Asia/Shanghai';const s={...initialSnapshot(),schemaVe…
+     55|  const next=value(newIdea(s,draft,'new','2026-01-01T18:30:00Z'));
+     56|  expect(next.schemaVersion).toBe(3);expect(next.ideas[0]).toMatchObjec…
+       |                                                           ^
+     57| });
+     58|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/unit/p3Schema.test.ts > 迁移扩展年份+010000-01-01T00:00:00Z不能返回非法创建日或截断为今天
+ FAIL  tests/unit/p3Schema.test.ts > 迁移扩展年份-000001-01-01T00:00:00Z不能返回非法创建日或截断为今天
+AssertionError: expected { ok: true, value: { …(7) } } to match object { ok: false, code: 'INVALID' }
+(8 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "code": "INVALID",
+-   "ok": false,
++   "ok": true,
+  }
+
+ ❯ tests/unit/p3Schema.test.ts:61:74
+     59| test.each(['+010000-01-01T00:00:00Z','-000001-01-01T00:00:00Z'])('迁移扩展…
+     60|  expect(Number.isFinite(Date.parse(createdAt))).toBe(true);
+     61|  expect(validateSnapshot({...legacy(2),ideas:[{...oldIdea,createdAt}]}…
+       |                                                                          ^
+     62| });
+     63|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  4 failed | 24 passed (28)
+   Start at  19:17:44
+   Duration  269ms (tests 53%, transform 37%, import 8%, worker 2%)
+

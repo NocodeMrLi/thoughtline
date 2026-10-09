@@ -1,0 +1,15 @@
+/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/draft-safety-workflow.cjs:18
+ composer=await openComposer(app,shelf);await composer.locator('#idea-text').fill('新建草稿应独立于已有记录编辑');await composer.getByRole('button',{name:'保存草稿并关闭',exact:true}).click();await waitForInfo(shelf,i=>!i.interactionLocked);snapshot=(await shelf.evaluate(()=>window.thoughtline.info())).snapshot;const beforeEdit=structuredClone(snapshot);const edit=await shelf.evaluate(id=>window.thoughtline.openEdit(id),snapshot.ideas[0].id);assert(edit.ok);const manage=(await app.windows()).find(p=>p.url().includes('view=manage'));await manage.waitForSelector('[data-inline-editor]');assert.equal(await visible(),false,'existing idea opens in Detail');const edited='原地自动保存正文😀';await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill(edited);await waitForInfo(shelf,i=>i.snapshot.ideas[0].text===edited);assert.equal((await manage.evaluate(()=>window.thoughtline.closeManage())).ok,true);const afterEdit=(await shelf.evaluate(()=>window.thoughtline.info())).snapshot;assert.deepEqual(afterEdit.draft,beforeEdit.draft);assert.equal(afterEdit.ideas[0].id,beforeEdit.ideas[0].id);assert.equal(afterEdit.ideas[0].createdAt,beforeEdit.ideas[0].createdAt);mark('existing-note-inline-autosave-keeps-independent-new-draft');
+                                                                                                                                                                                                                                                                                                                                                                                                                                                               ^
+
+SyntaxError: Identifier 'manage' has already been declared
+    at wrapSafe (node:internal/modules/cjs/loader:1804:18)
+    at Module._compile (node:internal/modules/cjs/loader:1846:20)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.19.0

@@ -1,0 +1,191 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/ideaHistory.test.ts (3 tests | 3 failed) 14ms
+   × ideaDay优先冻结日，旧fixture从原偏移日期回退而不随现在时区改变 11ms
+   × calendarIndex以Map索引hanging/archived，trash不计数且同日稳定创建顺序 2ms
+   × calendarIndex复用Agent/正文/项目过滤并按冻结日分组，空结果无假日期 1ms
+ ❯ tests/unit/p3IdeaCommands.test.ts (13 tests | 13 failed) 23ms
+   × 软删除保全全文/ID/创建日/归属并从物理组移出，恢复挂着记录独立成夹保留原组 5ms
+   × 已收起记录软删除后恢复仍收起，永久删除只允许trash而不自动清空其他条目 0ms
+   × 删除时间与ID验证失败不动数据，deleted不能经edit或changeStatus绕过恢复 0ms
+   × 项目删除清除trash和草稿归属，恢复后不会复活已移除项目 0ms
+   × findIdeas的all与搜索均不包括trash，保留已收起记录 0ms
+   × CAS逐字段检测text已改变，旧回调冲突不覆写新内容 1ms
+   × CAS逐字段检测title已改变，旧回调冲突不覆写新内容 0ms
+   × CAS逐字段检测project已改变，旧回调冲突不覆写新内容 0ms
+   × CAS逐字段检测agentId已改变，旧回调冲突不覆写新内容 0ms
+   × CAS允许无关revision/窗口位置/其他念头/状态变化，不丢当前草稿与创建日 0ms
+   × CAS先成功后旧回调冲突，Agent变化拆到独立夹而不动其余组成员 0ms
+   × CAS拒绝deleted、缺失ID和非法expected字段，无效草稿不覆盖 0ms
+   × schema3验证trash恢复元数据与夹子归属，旧schema不得引入deleted 14ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 16 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/ideaHistory.test.ts > ideaDay优先冻结日，旧fixture从原偏移日期回退而不随现在时区改变
+AssertionError: ideaDay export exists: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ history tests/unit/ideaHistory.test.ts:8:151
+
+ ❯ tests/unit/ideaHistory.test.ts:12:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/16]⎯
+
+ FAIL  tests/unit/ideaHistory.test.ts > calendarIndex以Map索引hanging/archived，trash不计数且同日稳定创建顺序
+AssertionError: ideaDay export exists: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ history tests/unit/ideaHistory.test.ts:8:151
+
+ ❯ tests/unit/ideaHistory.test.ts:17:24
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/16]⎯
+
+ FAIL  tests/unit/ideaHistory.test.ts > calendarIndex复用Agent/正文/项目过滤并按冻结日分组，空结果无假日期
+AssertionError: ideaDay export exists: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ history tests/unit/ideaHistory.test.ts:8:151
+
+ ❯ tests/unit/ideaHistory.test.ts:25:24
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/16]⎯
+
+ FAIL  tests/unit/p3IdeaCommands.test.ts > 软删除保全全文/ID/创建日/归属并从物理组移出，恢复挂着记录独立成夹保留原组
+AssertionError: deleteIdea export exists: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ api tests/unit/p3IdeaCommands.test.ts:8:118
+
+ ❯ tests/unit/p3IdeaCommands.test.ts:15:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/16]⎯
+
+ FAIL  tests/unit/p3IdeaCommands.test.ts > 已收起记录软删除后恢复仍收起，永久删除只允许trash而不自动清空其他条目
+AssertionError: deleteIdea export exists: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ api tests/unit/p3IdeaCommands.test.ts:8:118
+
+ ❯ tests/unit/p3IdeaCommands.test.ts:27:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/16]⎯
+
+ FAIL  tests/unit/p3IdeaCommands.test.ts > 删除时间与ID验证失败不动数据，deleted不能经edit或changeStatus绕过恢复
+AssertionError: deleteIdea export exists: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ api tests/unit/p3IdeaCommands.test.ts:8:118
+
+ ❯ tests/unit/p3IdeaCommands.test.ts:39:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/16]⎯
+
+ FAIL  tests/unit/p3IdeaCommands.test.ts > 项目删除清除trash和草稿归属，恢复后不会复活已移除项目
+AssertionError: deleteIdea export exists: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ api tests/unit/p3IdeaCommands.test.ts:8:118
+
+ ❯ tests/unit/p3IdeaCommands.test.ts:50:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/16]⎯
+
+ FAIL  tests/unit/p3IdeaCommands.test.ts > findIdeas的all与搜索均不包括trash，保留已收起记录
+AssertionError: deleteIdea export exists: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ api tests/unit/p3IdeaCommands.test.ts:8:118
+
+ ❯ tests/unit/p3IdeaCommands.test.ts:56:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/16]⎯
+
+ FAIL  tests/unit/p3IdeaCommands.test.ts > CAS逐字段检测text已改变，旧回调冲突不覆写新内容
+ FAIL  tests/unit/p3IdeaCommands.test.ts > CAS逐字段检测title已改变，旧回调冲突不覆写新内容
+ FAIL  tests/unit/p3IdeaCommands.test.ts > CAS逐字段检测project已改变，旧回调冲突不覆写新内容
+ FAIL  tests/unit/p3IdeaCommands.test.ts > CAS逐字段检测agentId已改变，旧回调冲突不覆写新内容
+AssertionError: editIdeaIfUnchanged export exists: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ api tests/unit/p3IdeaCommands.test.ts:8:118
+
+ ❯ tests/unit/p3IdeaCommands.test.ts:62:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/16]⎯
+
+ FAIL  tests/unit/p3IdeaCommands.test.ts > CAS允许无关revision/窗口位置/其他念头/状态变化，不丢当前草稿与创建日
+AssertionError: editIdeaIfUnchanged export exists: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ api tests/unit/p3IdeaCommands.test.ts:8:118
+
+ ❯ tests/unit/p3IdeaCommands.test.ts:68:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/16]⎯
+
+ FAIL  tests/unit/p3IdeaCommands.test.ts > CAS先成功后旧回调冲突，Agent变化拆到独立夹而不动其余组成员
+AssertionError: editIdeaIfUnchanged export exists: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ api tests/unit/p3IdeaCommands.test.ts:8:118
+
+ ❯ tests/unit/p3IdeaCommands.test.ts:77:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/16]⎯
+
+ FAIL  tests/unit/p3IdeaCommands.test.ts > CAS拒绝deleted、缺失ID和非法expected字段，无效草稿不覆盖
+AssertionError: editIdeaIfUnchanged export exists: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ api tests/unit/p3IdeaCommands.test.ts:8:118
+
+ ❯ tests/unit/p3IdeaCommands.test.ts:85:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/16]⎯
+
+ FAIL  tests/unit/p3IdeaCommands.test.ts > schema3验证trash恢复元数据与夹子归属，旧schema不得引入deleted
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/p3IdeaCommands.test.ts:94:72
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/16]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  16 failed (16)
+   Start at  19:13:01
+   Duration  172ms (transform 62%, tests 23%, import 11%, worker 3%)
+

@@ -1,0 +1,14 @@
+opening composer after 0 saved
+opening composer after 1 saved
+opening composer after 2 saved
+opening composer after 3 saved
+locator.innerText: Error: strict mode violation: locator('[role=status]') resolved to 2 elements:
+    1) <p role="status" class="reader-notice">已保存，绳上暂时放不下</p> aka locator('p')
+    2) <span role="status">已保存，绳上暂时放不下</span> aka locator('footer').getByText('已保存，绳上暂时放不下')
+
+Call log:
+[2m  - waiting for locator('[role=status]')[22m
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/overflow-notice-workflow.cjs:5:803 {
+  log: [ "  - waiting for locator('[role=status]')" ]
+}

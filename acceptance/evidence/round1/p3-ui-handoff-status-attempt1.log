@@ -1,0 +1,10 @@
+locator.textContent: Error: strict mode violation: locator('[role=alert]') resolved to 2 elements:
+    1) <p role="alert" class="error">操作未成功，原文已保留，请重试。</p> aka getByText('操作未成功，原文已保留，请重试。')
+    2) <p role="alert" class="error">本地保存未成功，请保留文字并重试。 (controlled persistent page dis…</p> aka getByText('本地保存未成功，请保留文字并重试。 (controlled')
+
+Call log:
+[2m  - waiting for locator('[role=alert]')[22m
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/page-handoff-workflow.cjs:38:307 {
+  log: [ "  - waiting for locator('[role=alert]')" ]
+}

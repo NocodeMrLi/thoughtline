@@ -1,0 +1,387 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/p3Schema.test.ts (14 tests | 14 failed) 21ms
+   × 新快照与旧typed fixture规范化后始终是schema3，未知版本类型不被数字转换接受 7ms
+   × schema1创建日冻结在原始偏移日期，迁移不使用当前时区或今天 4ms
+   × schema2创建日冻结在原始偏移日期，迁移不使用当前时区或今天 1ms
+   × 旧无明确偏移时间使用UTC日期，schema3已存日期跨时区和编辑不变 1ms
+   × 新建按Asia/Shanghai系统本地日期跨午夜，createdAt和完整正文不变 1ms
+   × 新建按America/Los_Angeles系统本地日期跨午夜，createdAt和完整正文不变 2ms
+   × schema3拒绝不真实或非规范创建日2026-02-29 1ms
+   × schema3拒绝不真实或非规范创建日2026-02-30 0ms
+   × schema3拒绝不真实或非规范创建日2026-13-01 0ms
+   × schema3拒绝不真实或非规范创建日2026-00-10 0ms
+   × schema3拒绝不真实或非规范创建日2026-1-01 1ms
+   × schema3拒绝不真实或非规范创建日not-date 0ms
+   × schema3接受闰年日期但拒绝空时区和部分创建日元数据 0ms
+   × 日历窗口bounds接受有限坐标与正合理尺寸，缺省设置兼容 1ms
+ ❯ tests/unit/clipCommands.test.ts (6 tests | 1 failed) 11ms
+   × schema1迁移将每条挂着记录变为独立夹子，已收起不占位，原文保全 6ms
+ ❯ tests/unit/p3Repository.test.ts (8 tests | 4 failed) 122ms
+   × schema1原始字节先备份，修订/全文/草稿/日期跨提交重启保全，备份不覆盖 9ms
+   × schema2原始字节先备份，修订/全文/草稿/日期跨提交重启保全，备份不覆盖 7ms
+   × schema2原始备份失败时不升级snapshot或丢旧文 22ms
+   × 损坏主文件由schema2备份恢复后分别保留损坏原文和schema2原字节 30ms
+ ❯ tests/unit/repository.test.ts (10 tests | 1 failed) 195ms
+   × 旧schema1首次提交前保留原始备份，迁移保全全文与草稿 12ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 20 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/clipCommands.test.ts > schema1迁移将每条挂着记录变为独立夹子，已收起不占位，原文保全
+AssertionError: expected 2 to be 3 // Object.is equality
+
+- Expected
++ Received
+
+- 3
++ 2
+
+ ❯ tests/unit/clipCommands.test.ts:8:39
+      6|  const legacy={...s,schemaVersion:1,clips:undefined,ideas:[...s.ideas,…
+      7|  const migrated=validateSnapshot(legacy);expect(migrated.ok).toBe(true…
+      8|  expect(migrated.value.schemaVersion).toBe(3);expect((migrated.value a…
+       |                                       ^
+      9|  expect((migrated.value as any).clips[0]).toMatchObject({ideaIds:['one…
+     10| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/20]⎯
+
+ FAIL  tests/unit/p3Repository.test.ts > schema1原始字节先备份，修订/全文/草稿/日期跨提交重启保全，备份不覆盖
+ FAIL  tests/unit/p3Repository.test.ts > schema2原始字节先备份，修订/全文/草稿/日期跨提交重启保全，备份不覆盖
+AssertionError: expected 2 to be 3 // Object.is equality
+
+- Expected
++ Received
+
+- 3
++ 2
+
+ ❯ tests/unit/p3Repository.test.ts:19:33
+     17|  const dir=await fixture();const raw=' \n'+JSON.stringify(old(schemaVe…
+     18|  process.env.TZ='America/Los_Angeles';const repo=new FileRepository(di…
+     19|  expect(migrated.schemaVersion).toBe(3);expect(migrated.revision).toBe…
+       |                                 ^
+     20|  expect(migrated.ideas[0]).toMatchObject({text:'  原文 🧵\n第二行\n ',creat…
+     21|  expect(migrated.draft?.text).toBe(' 尚未写完\n ');expect(await readFile(j…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/20]⎯
+
+ FAIL  tests/unit/p3Repository.test.ts > schema2原始备份失败时不升级snapshot或丢旧文
+AssertionError: expected { ok: true, value: { …(7) } } to match object { ok: false, code: 'IO' }
+(8 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "code": "IO",
+-   "ok": false,
++   "ok": true,
+  }
+
+ ❯ tests/unit/p3Repository.test.ts:41:66
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/20]⎯
+
+ FAIL  tests/unit/p3Repository.test.ts > 损坏主文件由schema2备份恢复后分别保留损坏原文和schema2原字节
+AssertionError: expected null to be '{\n  "schemaVersion": 2,\n  "revision…' // Object.is equality
+
+- Expected:
+"{
+  \"schemaVersion\": 2,
+  \"revision\": 7,
+  \"clips\": [
+    {
+      \"id\": \"old-group\",
+      \"agentId\": \"general\",
+      \"ideaIds\": [
+        \"old\"
+      ],
+      \"currentId\": \"old\",
+      \"position\": 0.43
+    }
+  ],
+  \"ideas\": [
+    {
+      \"id\": \"old\",
+      \"text\": \"  原文 🧵\\n第二行\\n \",
+      \"title\": \"短名\",
+      \"project\": \"项目\",
+      \"agentId\": \"general\",
+      \"status\": \"hanging\",
+      \"createdAt\": \"2026-01-01T00:30:00+08:00\",
+      \"updatedAt\": \"2026-02-10T18:00:00Z\"
+    }
+  ],
+  \"agents\": [
+    {
+      \"id\": \"codex\",
+      \"name\": \"Codex\",
+      \"color\": \"#4C90D9\"
+    },
+    {
+      \"id\": \"claude\",
+      \"name\": \"Claude\",
+      \"color\": \"#D79551\"
+    },
+    {
+      \"id\": \"cursor\",
+      \"name\": \"Cursor\",
+      \"color\": \"#9574CE\"
+    },
+    {
+      \"id\": \"general\",
+      \"name\": \"通用\",
+      \"color\": \"#A0A3AA\"
+    }
+  ],
+  \"draft\": {
+    \"text\": \" 尚未写完\\n \",
+    \"title\": \"草稿名\",
+    \"project\": \"项目\",
+    \"agentId\": \"general\"
+  },
+  \"settings\": {
+    \"writeHotkey\": \"Control+Alt+N\",
+    \"reducedMotion\": false
+  }
+}"
+
++ Received:
+null
+
+ ❯ tests/unit/p3Repository.test.ts:56:90
+     54|  const dir=await fixture(),raw=JSON.stringify(old(2),null,2);await wri…
+     55|  const repo=new FileRepository(dir);const s=value(await repo.load());v…
+     56|  expect(await readFile(join(dir,'snapshot.schema2.backup.json'),'utf8'…
+       |                                                                                          ^
+     57|  const corrupt=(await readdir(dir)).find(f=>f.startsWith('snapshot.cor…
+     58|  expect(value(await new FileRepository(dir).load()).ideas[0].text).toB…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/20]⎯
+
+ FAIL  tests/unit/p3Schema.test.ts > 新快照与旧typed fixture规范化后始终是schema3，未知版本类型不被数字转换接受
+AssertionError: expected 2 to be 3 // Object.is equality
+
+- Expected
++ Received
+
+- 3
++ 2
+
+ ❯ tests/unit/p3Schema.test.ts:13:42
+     11|
+     12| test('新快照与旧typed fixture规范化后始终是schema3，未知版本类型不被数字转换接受',()=>{
+     13|  expect(initialSnapshot().schemaVersion).toBe(3);
+       |                                          ^
+     14|  for(const schemaVersion of [0,4,99,'2','3',null])expect(validateSnaps…
+     15|  const v=value(validateSnapshot({...legacy(2),schemaVersion:3}));
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/20]⎯
+
+ FAIL  tests/unit/p3Schema.test.ts > schema1创建日冻结在原始偏移日期，迁移不使用当前时区或今天
+ FAIL  tests/unit/p3Schema.test.ts > schema2创建日冻结在原始偏移日期，迁移不使用当前时区或今天
+AssertionError: expected { Object (schemaVersion, revision, ...) } to match object { schemaVersion: 3, revision: 11 }
+(7 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "revision": 11,
+-   "schemaVersion": 3,
++   "schemaVersion": 2,
+  }
+
+ ❯ tests/unit/p3Schema.test.ts:22:17
+     20|  process.env.TZ='America/Los_Angeles';
+     21|  const result=value(validateSnapshot(legacy(schemaVersion)));
+     22|  expect(result).toMatchObject({schemaVersion:3,revision:11});
+       |                 ^
+     23|  expect(result.ideas[0]).toMatchObject({...oldIdea,createdDay:'2026-01…
+     24|  expect(result.clips[0]).toMatchObject(schemaVersion===1?{id:'clip:old…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/20]⎯
+
+ FAIL  tests/unit/p3Schema.test.ts > 旧无明确偏移时间使用UTC日期，schema3已存日期跨时区和编辑不变
+AssertionError: expected { text: ' \n原文 🧵\n ', …(7) } to match object { createdDay: '2026-01-01', …(1) }
+(8 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "createdDay": "2026-01-01",
+-   "creationTimeZone": "legacy-offset",
++   "agentId": "general",
++   "createdAt": "2026-01-01T00:30:00",
++   "id": "old",
++   "project": "项目",
++   "status": "hanging",
++   "text": " 
++ 原文 🧵
++  ",
++   "title": "标题",
++   "updatedAt": "2026-01-01T00:30:00+08:00",
+  }
+
+ ❯ tests/unit/p3Schema.test.ts:33:26
+     31|  process.env.TZ='America/Los_Angeles';
+     32|  const result=value(validateSnapshot({...legacy(2),ideas:[{...oldIdea,…
+     33|  expect(result.ideas[0]).toMatchObject({createdDay:'2026-01-01',creati…
+       |                          ^
+     34|  const frozen=value(validateSnapshot({...result,ideas:[{...result.idea…
+     35|  process.env.TZ='Asia/Shanghai';
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/20]⎯
+
+ FAIL  tests/unit/p3Schema.test.ts > 新建按Asia/Shanghai系统本地日期跨午夜，createdAt和完整正文不变
+AssertionError: expected { text: ' \n原文 🧵\n ', …(7) } to match object { text: ' \n原文 🧵\n ', …(7) }
+(2 matching properties omitted from actual)
+
+- Expected
++ Received
+
+@@ -1,10 +1,8 @@
+  {
+    "agentId": "general",
+    "createdAt": "2026-01-01T18:30:00Z",
+-   "createdDay": "2026-01-02",
+-   "creationTimeZone": "Asia/Shanghai",
+    "project": "项目",
+    "text": " 
+  原文 🧵
+   ",
+    "title": "标题",
+
+ ❯ tests/unit/p3Schema.test.ts:45:24
+     43|  process.env.TZ=tz;
+     44|  const next=value(newIdea(initialSnapshot(),draft,'new',createdAt));
+     45|  expect(next.ideas[0]).toMatchObject({...draft,createdAt,updatedAt:cre…
+       |                        ^
+     46| });
+     47|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/20]⎯
+
+ FAIL  tests/unit/p3Schema.test.ts > 新建按America/Los_Angeles系统本地日期跨午夜，createdAt和完整正文不变
+AssertionError: expected { text: ' \n原文 🧵\n ', …(7) } to match object { text: ' \n原文 🧵\n ', …(7) }
+(2 matching properties omitted from actual)
+
+- Expected
++ Received
+
+@@ -1,10 +1,8 @@
+  {
+    "agentId": "general",
+    "createdAt": "2026-01-01T00:30:00Z",
+-   "createdDay": "2025-12-31",
+-   "creationTimeZone": "America/Los_Angeles",
+    "project": "项目",
+    "text": " 
+  原文 🧵
+   ",
+    "title": "标题",
+
+ ❯ tests/unit/p3Schema.test.ts:45:24
+     43|  process.env.TZ=tz;
+     44|  const next=value(newIdea(initialSnapshot(),draft,'new',createdAt));
+     45|  expect(next.ideas[0]).toMatchObject({...draft,createdAt,updatedAt:cre…
+       |                        ^
+     46| });
+     47|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/20]⎯
+
+ FAIL  tests/unit/p3Schema.test.ts > schema3拒绝不真实或非规范创建日2026-02-29
+ FAIL  tests/unit/p3Schema.test.ts > schema3拒绝不真实或非规范创建日2026-02-30
+ FAIL  tests/unit/p3Schema.test.ts > schema3拒绝不真实或非规范创建日2026-13-01
+ FAIL  tests/unit/p3Schema.test.ts > schema3拒绝不真实或非规范创建日2026-00-10
+ FAIL  tests/unit/p3Schema.test.ts > schema3拒绝不真实或非规范创建日2026-1-01
+ FAIL  tests/unit/p3Schema.test.ts > schema3拒绝不真实或非规范创建日not-date
+AssertionError: expected { ok: true, value: { …(7) } } to match object { ok: false, code: 'INVALID' }
+(8 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "code": "INVALID",
+-   "ok": false,
++   "ok": true,
+  }
+
+ ❯ tests/unit/p3Schema.test.ts:49:155
+     47|
+     48| test.each(['2026-02-29','2026-02-30','2026-13-01','2026-00-10','2026-1…
+     49|  for(const schemaVersion of [2,3])expect(validateSnapshot({...legacy(2…
+       |                                                                                                                                                           ^
+     50| });
+     51|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/20]⎯
+
+ FAIL  tests/unit/p3Schema.test.ts > schema3接受闰年日期但拒绝空时区和部分创建日元数据
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/p3Schema.test.ts:54:41
+     52| test('schema3接受闰年日期但拒绝空时区和部分创建日元数据',()=>{
+     53|  const candidate={...legacy(2),schemaVersion:3,ideas:[{...oldIdea,crea…
+     54|  expect(validateSnapshot(candidate).ok).toBe(true);
+       |                                         ^
+     55|  for(const creationTimeZone of ['', '  ',null,42])expect(validateSnaps…
+     56|  expect(validateSnapshot({...candidate,ideas:[{...candidate.ideas[0],c…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/20]⎯
+
+ FAIL  tests/unit/p3Schema.test.ts > 日历窗口bounds接受有限坐标与正合理尺寸，缺省设置兼容
+AssertionError: expected { ok: true, value: { …(7) } } to match object { ok: false, code: 'INVALID' }
+(8 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "code": "INVALID",
+-   "ok": false,
++   "ok": true,
+  }
+
+ ❯ tests/unit/p3Schema.test.ts:64:112
+     62|  expect(value(validateSnapshot({...initialSnapshot(),settings:{...init…
+     63|  for(const bad of [{...bounds,x:Infinity},{...bounds,y:NaN},{...bounds…
+     64|   expect(validateSnapshot({...initialSnapshot(),settings:{...initialSn…
+       |                                                                                                                ^
+     65|  }
+     66| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/20]⎯
+
+ FAIL  tests/unit/repository.test.ts > 旧schema1首次提交前保留原始备份，迁移保全全文与草稿
+AssertionError: expected 2 to be 3 // Object.is equality
+
+- Expected
++ Received
+
+- 3
++ 2
+
+ ❯ tests/unit/repository.test.ts:50:163
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/20]⎯
+
+
+ Test Files  4 failed (4)
+      Tests  20 failed | 18 passed (38)
+   Start at  19:11:04
+   Duration  358ms (tests 54%, transform 36%, import 8%, worker 2%)
+

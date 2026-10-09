@@ -1,0 +1,41 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/p3Schema.test.ts (16 tests | 2 failed) 27ms
+   × schema1迁移按原始偏移日期重建旧版本附带的日历元数据 5ms
+   × schema2迁移按原始偏移日期重建旧版本附带的日历元数据 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/p3Schema.test.ts > schema1迁移按原始偏移日期重建旧版本附带的日历元数据
+ FAIL  tests/unit/p3Schema.test.ts > schema2迁移按原始偏移日期重建旧版本附带的日历元数据
+AssertionError: expected { text: ' \n原文 🧵\n ', …(9) } to match object { createdDay: '2026-01-01', …(2) }
+(7 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "createdAt": "2026-01-01T00:30:00+08:00",
+-   "createdDay": "2026-01-01",
+-   "creationTimeZone": "legacy-offset",
++   "createdDay": "2025-12-31",
++   "creationTimeZone": "America/Los_Angeles",
+  }
+
+ ❯ tests/unit/p3Schema.test.ts:32:26
+     30| test.each([1,2] as const)('schema%s迁移按原始偏移日期重建旧版本附带的日历元数据',schemaVersi…
+     31|  const result=value(validateSnapshot({...legacy(schemaVersion),ideas:[…
+     32|  expect(result.ideas[0]).toMatchObject({createdDay:'2026-01-01',creati…
+       |                          ^
+     33| });
+     34|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 14 passed (16)
+   Start at  19:15:40
+   Duration  157ms (transform 52%, tests 33%, import 12%, worker 3%)
+

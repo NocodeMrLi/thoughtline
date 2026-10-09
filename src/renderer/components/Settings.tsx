@@ -9,8 +9,8 @@ export function Settings({info}:{info:PilotInfo}){
  const input=useRef<HTMLInputElement>(null);
  useEffect(()=>{setHotkey(info.snapshot.settings.writeHotkey);setReduced(info.snapshot.settings.reducedMotion);setRecording(false);setError('');setNotice('');},[info.manageSession]);
  useEffect(()=>{if(recording)input.current?.focus();},[recording]);
- const save=async()=>{if(busy||recording)return;setBusy(true);setError('');setNotice('');try{const r=await window.thoughtline.saveSettings({writeHotkey:hotkey,reducedMotion:reduced},info.snapshot.revision);if(r.ok)setNotice('已保存。');else setError(r.message);}catch{setError('保存未成功，原快捷键保持可用。');}finally{setBusy(false);}};
- return <main data-view="manage" data-mode="settings" className="manage app-settings" onKeyDown={e=>{
+ const save=async()=>{if(busy||recording)return;setBusy(true);setError('');setNotice('');try{const r=await window.thoughtline.saveSettings({...info.snapshot.settings,writeHotkey:hotkey,reducedMotion:reduced},info.snapshot.revision);if(r.ok)setNotice('已保存。');else setError(r.message);}catch{setError('保存未成功，原快捷键保持可用。');}finally{setBusy(false);}};
+ return <main data-view="manage" data-mode="settings" data-material={info.manageMaterial} data-platform={info.platform} className="manage app-settings" onKeyDown={e=>{
   if(e.nativeEvent.isComposing||e.nativeEvent.keyCode===229)return;
   if(e.key==='Escape'){e.preventDefault();if(recording)setRecording(false);else if(!busy)void window.thoughtline.closeManage();}
  }}>
@@ -25,7 +25,7 @@ export function Settings({info}:{info:PilotInfo}){
   {!info.hotkeyRegistered&&<p className="error" role="alert">当前快捷键未注册成功，请录制其他组合后保存。</p>}
   <button className="text-button default-hotkey" disabled={busy} onClick={()=>{setHotkey('Control+Alt+N');setRecording(false);}}>恢复默认键位</button>
   <label className="motion-setting"><input type="checkbox" checked={reduced} disabled={busy} onChange={e=>setReduced(e.target.checked)}/>减少动态效果</label>
-  <p className="setting-hint">关闭位移和内容渐变，保留挂绳下沉的最终位置。</p>
+  <p className="setting-hint">关闭位移和内容渐变，固定挂绳形状保持不变。</p>
   <p className="error" role="alert">{error}</p>
   <footer><span role="status">{notice}</span><button className="primary" disabled={busy||recording} onClick={()=>void save()}>{busy?'正在保存…':'保存设置'}</button></footer>
  </main>;

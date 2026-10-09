@@ -1,0 +1,48 @@
+
+> thoughtline@0.0.17-preview.1 verify
+> node scripts/verify.cjs
+
+
+> thoughtline@0.0.17-preview.1 typecheck
+> node node_modules/typescript/bin/tsc --noEmit
+
+
+> thoughtline@0.0.17-preview.1 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+
+ Test Files  32 passed | 1 skipped (33)
+      Tests  163 passed | 4 skipped (167)
+   Start at  19:27:07
+   Duration  1.00s (tests 55%, transform 27%, import 13%, worker 4%)
+
+    Isolate  33 workers spawned · ~99ms startup each (spawn + environment, per file)
+             at least ~368ms faster with isolate: false — reuses workers across files instead of one per file
+
+
+> thoughtline@0.0.17-preview.1 build
+> node node_modules/electron-vite/bin/electron-vite.js build
+
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 21 modules transformed.
+rendering chunks...
+out/main/index.js  84.04 kB
+✓ built in 165ms
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 1 modules transformed.
+rendering chunks...
+out/preload/index.js  3.72 kB
+✓ built in 6ms
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 53 modules transformed.
+rendering chunks...
+../../out/renderer/index.html                   0.52 kB
+../../out/renderer/assets/index-DOsk_Xih.css   34.39 kB
+../../out/renderer/assets/index-BP2PPJj9.js   752.33 kB
+✓ built in 926ms

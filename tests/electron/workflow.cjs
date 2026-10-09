@@ -17,20 +17,18 @@ const assert=require('node:assert/strict');const path=require('node:path');const
   await manage.waitForSelector('[data-view="manage"]',{state:'attached'});
   await manage.waitForSelector('[data-full-text]',{timeout:5000}).catch(async e=>{console.error(await manage.evaluate(async()=>({info:await window.thoughtline.info(),html:document.body.innerHTML.slice(0,3500)})));throw e;});
   assert.equal(await manage.locator('[data-full-text]').inputValue(),full);
-  await result(manage,'openEdit',id);info=await composer.evaluate(()=>window.thoughtline.info());assert.equal(info.composerContext.mode,'edit');
-  await composer.waitForFunction(()=>document.querySelector('#idea-text')?.value.startsWith('  原始正文'));
-  const cancelRevision=info.snapshot.revision;await composer.locator('#idea-text').fill('取消时不能覆盖原文');await composer.locator('.close').click();await waitForInfo(shelf,i=>!i.interactionLocked);assert.equal(await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer').isVisible()),false);
-  info=await manage.evaluate(()=>window.thoughtline.info());assert.equal(info.snapshot.ideas[0].text,full);assert.equal(info.snapshot.revision,cancelRevision);
-  await result(manage,'openEdit',id);info=await composer.evaluate(()=>window.thoughtline.info());
-  const edited=full+'\n已编辑';await result(composer,'submit',{text:edited,title:'循环验收',project:'项目',agentId:'claude'},info.snapshot.revision);
+  await result(manage,'openEdit',id);await manage.waitForSelector('[data-inline-editor]');assert.equal(await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer').isVisible()),false);
+  const firstEdit='自动保存后关闭\n原文改动';await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill(firstEdit);assert.equal((await manage.evaluate(()=>window.thoughtline.closeManage())).ok,true);await waitForInfo(shelf,i=>i.snapshot.ideas[0].text===firstEdit);assert.equal(JSON.parse(await fs.readFile(path.join(dir,'snapshot.json'),'utf8')).ideas[0].text,firstEdit);
+  await result(shelf,'openManage',id);await manage.waitForSelector('[data-mode=detail]');await manage.getByRole('button',{name:'编辑',exact:true}).click();await manage.waitForSelector('[data-inline-editor]');
+  const edited=full+'\n已编辑';await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill(edited);await manage.getByRole('combobox',{name:'编辑归属 Agent'}).selectOption('claude');await manage.getByRole('button',{name:'完成编辑',exact:true}).first().click();await waitForInfo(manage,i=>i.snapshot.ideas[0].text===edited&&i.snapshot.ideas[0].agentId==='claude');
   info=await manage.evaluate(()=>window.thoughtline.info());await result(manage,'setStatus',id,'archived',info.snapshot.revision);
-  await result(shelf,'openManage');await manage.getByRole('button',{name:'已收起',exact:true}).click();await manage.locator('#idea-search').fill('已编辑');
+  await result(shelf,'openManage');await manage.waitForSelector('[data-mode=calendar]');await manage.getByRole('textbox',{name:'搜索念头'}).fill('已编辑');
   await manage.waitForSelector('[data-idea-id="'+id+'"]');
   info=await manage.evaluate(()=>window.thoughtline.info());await result(manage,'setStatus',id,'hanging',info.snapshot.revision);
   await result(manage,'copy',id);const clipboard=await app.evaluate(async({clipboard})=>await clipboard.readText());assert.equal(clipboard,edited);
   const before=(await manage.evaluate(()=>window.thoughtline.info())).snapshot;assert.equal(before.ideas[0].status,'hanging');
   await close();app=await launch();({shelf}=await ready());info=await shelf.evaluate(()=>window.thoughtline.info());assert.equal(info.snapshot.ideas[0].text,edited);assert.equal(info.snapshot.ideas[0].agentId,'claude');
-  const report={platform:process.platform,scope:'真实Electron桥接和DOM循环；不代表物理点击穿透、系统IME或跨App焦点',editCancelPreserved:true,editSavedFullText:true,archiveSearchRestore:true,copyFullText:true,restartPreserved:true};
+  const report={platform:process.platform,scope:'真实Electron桥接和DOM循环；不代表物理点击穿透、系统IME或跨App焦点',inlineAutosaveOnClose:true,editSavedFullText:true,archiveSearchRestore:true,copyFullText:true,restartPreserved:true};
   await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','workflow-native.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
  }finally{await close();await cleanupIdleFixture(dir,ownedPids);await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','workflow-cleanup.json'),JSON.stringify({ownedPids,allPidsExited:true,fakeDataRemoved:true},null,2)+'\n');}
 })().catch(e=>{console.error(e);process.exitCode=1;});

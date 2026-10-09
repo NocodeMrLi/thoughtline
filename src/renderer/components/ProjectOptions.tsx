@@ -1,12 +1,12 @@
 import {useEffect,useRef,useState,type PointerEvent,type ReactNode} from 'react';
-export function ProjectOptions({projects,reduced,disabled,onChoose,onDelete,onDone,children}:{projects:string[];reduced:boolean;disabled:boolean;onChoose:(project:string)=>void;onDelete:(project:string)=>Promise<void>;onDone:()=>void;children?:ReactNode}){
+export function ProjectOptions({projects,reduced,disabled,onChoose,onDelete,onDone,composing,children}:{projects:string[];reduced:boolean;disabled:boolean;onChoose:(project:string)=>void;onDelete:(project:string)=>Promise<void>;onDone:()=>void;composing?:()=>boolean;children?:ReactNode}){
  const [editing,setEditing]=useState(false),[removing,setRemoving]=useState(false),[error,setError]=useState('');
  const press=useRef<{timer:ReturnType<typeof setTimeout>;x:number;y:number}|null>(null),suppress=useRef(false);
  const cancel=()=>{if(press.current)clearTimeout(press.current.timer);press.current=null;};
  useEffect(()=>cancel,[]);
  const start=(e:PointerEvent<HTMLButtonElement>)=>{if(e.button!==0||disabled||editing)return;suppress.current=false;cancel();press.current={x:e.clientX,y:e.clientY,timer:setTimeout(()=>{press.current=null;suppress.current=true;setEditing(true);},500)};};
  const remove=async(p:string)=>{if(removing)return;setRemoving(true);setError('');try{await onDelete(p);}catch(e){setError(e instanceof Error?e.message:'分组未删除，请重试。');}finally{setRemoving(false);}};
- return <div className="project-editor" data-editing={editing} data-reduced={reduced} onKeyDown={e=>{if(e.key==='Escape'&&!e.nativeEvent.isComposing){e.preventDefault();e.stopPropagation();if(!removing){cancel();setEditing(false);onDone();}}}}>
+ return <div className="project-editor" data-editing={editing} data-reduced={reduced} onKeyDown={e=>{if(e.key==='Escape'&&!e.nativeEvent.isComposing&&!composing?.()){e.preventDefault();e.stopPropagation();if(!removing){cancel();setEditing(false);onDone();}}}}>
   <div className="project-editor-controls"><button type="button" aria-label="退出项目编辑" disabled={removing} onClick={()=>{cancel();setEditing(false);onDone();}}>×</button><button type="button" disabled={removing} onClick={()=>{cancel();setEditing(false);onDone();}}>完成</button></div>
   {children}<p className="project-hint">{editing?'删除分组不会删除念头':'长按分组可整理'}</p>
   <div className="composer-project-options"><button type="button" disabled={disabled||removing} onClick={()=>{if(!editing)onChoose('');}}>未分组</button>{projects.map(p=><span className="project-tag" key={p} data-deletable={editing}>

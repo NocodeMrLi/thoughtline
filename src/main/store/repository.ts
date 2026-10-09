@@ -5,7 +5,7 @@ import {atomicWrite,fileIO,type FileIO} from './atomicFile';
 export type {FileIO} from './atomicFile';
 const ioError=(e:unknown):Result<never>=>({ok:false,code:'IO',message:'本地保存未成功，请保留文字并重试。'+(e instanceof Error?` (${e.message})`:'')});
 export class FileRepository implements Repository{
-  private cached:Snapshot|null=null;private queue:Promise<unknown>=Promise.resolve();private damaged:string|null=null;private legacy:string|null=null;
+  private cached:Snapshot|null=null;private queue:Promise<unknown>=Promise.resolve();private damaged:string|null=null;private legacy:{version:1|2;raw:string}|null=null;
   constructor(private dir:string,private io:FileIO=fileIO){}
   private async readOptional(path:string):Promise<string|null>{try{return await this.io.read(path);}catch(e){if((e as NodeJS.ErrnoException).code==='ENOENT')return null;throw e;}}
   async load():Promise<Result<Snapshot>>{
@@ -14,14 +14,14 @@ export class FileRepository implements Repository{
     const path=join(this.dir,'snapshot.json');const raw=await this.readOptional(path);
     if(raw!==null){
       try{const decoded=JSON.parse(raw);const result=validateSnapshot(decoded);
-        if(result.ok){if(decoded.schemaVersion===1)this.legacy=raw;this.cached=result.value;return {ok:true,value:structuredClone(result.value)};}
-        if(decoded&&![1,2].includes(decoded.schemaVersion))return result;
+        if(result.ok){if(decoded.schemaVersion===1||decoded.schemaVersion===2)this.legacy={version:decoded.schemaVersion,raw};this.cached=result.value;return {ok:true,value:structuredClone(result.value)};}
+        if(decoded&&![1,2,3].includes(decoded.schemaVersion))return result;
       }catch(e){if(!(e instanceof SyntaxError))throw e;}
       this.damaged=raw;
     }
     const backup=await this.readOptional(join(this.dir,'snapshot.bak.json'));
     if(backup!==null){
-      try{const decoded=JSON.parse(backup),result=validateSnapshot(decoded);if(result.ok){if(decoded.schemaVersion===1)this.legacy=backup;this.cached=result.value;return {ok:true,value:structuredClone(result.value)};}}catch(e){if(!(e instanceof SyntaxError))throw e;}
+      try{const decoded=JSON.parse(backup),result=validateSnapshot(decoded);if(result.ok){if(decoded.schemaVersion===1||decoded.schemaVersion===2)this.legacy={version:decoded.schemaVersion,raw:backup};this.cached=result.value;return {ok:true,value:structuredClone(result.value)};}}catch(e){if(!(e instanceof SyntaxError))throw e;}
     }
     if(raw!==null||backup!==null)return {ok:false,code:'INVALID',message:'数据损坏且没有可用备份，原文件已保留。'};
     await mkdir(this.dir,{recursive:true});const initial=initialSnapshot();
@@ -36,7 +36,7 @@ export class FileRepository implements Repository{
     if(loaded.value.revision!==expectedRevision)return {ok:false,code:'CONFLICT',message:'内容已更新，请重新读取后再试。'};
     const checked=validateSnapshot({...next,revision:expectedRevision+1});if(!checked.ok)return checked;
     try{
-      if(this.legacy!==null&&await this.readOptional(join(this.dir,'snapshot.schema1.backup.json'))===null)await atomicWrite(join(this.dir,'snapshot.schema1.backup.json'),this.legacy,this.io);
+      if(this.legacy!==null){const path=join(this.dir,`snapshot.schema${this.legacy.version}.backup.json`);if(await this.readOptional(path)===null)await atomicWrite(path,this.legacy.raw,this.io);}
       if(this.damaged!==null)await atomicWrite(join(this.dir,'snapshot.corrupt-'+randomUUID()+'.json'),this.damaged,this.io);
       await atomicWrite(join(this.dir,'snapshot.bak.json'),JSON.stringify(loaded.value),this.io);
       await atomicWrite(join(this.dir,'snapshot.json'),JSON.stringify(checked.value),this.io);

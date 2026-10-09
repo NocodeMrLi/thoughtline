@@ -1,5 +1,5 @@
 {
-  "stage": "0.0.17-preview.1 repair development on main; P1/P2 controlled verification complete, P3-P5 in progress, physical acceptance pending",
+  "stage": "0.0.17-preview.1 development: P1-P4 controlled source verification complete; P5/P6 pending; physical acceptance pending",
   "asOf": "2026-10-09 Asia/Shanghai",
   "sourceCommit": "b89481926753377c66afe0bdf2ef8dd5d453bbb7",
   "branch": "main",
@@ -279,9 +279,25 @@
       "scope": "runner verify/build/install/data-retention/source provenance, not physical device",
       "evidence": "evidence/round1/p2-windows-run.json"
     },
-    "p3": "in progress data layer; standalone UI not integrated",
-    "p4": "planned",
-    "p5": "planned",
+    "p3": {
+      "status": "implemented; scoped Spec/Quality approved after R1 fix",
+      "verify": {
+        "macUnitPassed": 163,
+        "windowsOnlySkippedOnMac": 4,
+        "typecheck": "passed",
+        "build": "passed",
+        "note": "Full suite before small scoped R1 fix; after-fix type/build and covering Electron regressions passed",
+        "log": "evidence/round1/p3-ui-verify-final.log"
+      },
+      "review": "evidence/round1/p3-ui-review.md",
+      "naturalQuitIndependent": "evidence/round1/p3-ui-page-all-independent-review.log"
+    },
+    "p4": {
+      "status": "implemented; controlled calendar and scoped review passed",
+      "evidence": "evidence/round1/p3-ui-calendar-workflow-final.log",
+      "physicalAcceptance": false
+    },
+    "p5": "pending implementation",
     "externalReceiving": {
       "wechatWindows": "user reported success, version4.1.13.65; independently untested",
       "doubaoWindows": "user reported intermittent success via QQ browser version unknown; independently untested",

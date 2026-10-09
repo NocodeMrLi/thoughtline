@@ -4,12 +4,13 @@ import {randomUUID} from 'node:crypto';
 import {createShelf} from './windows/shelf';
 import {createComposer,COMPOSER_SIZE,currentComposerMaterial} from './windows/composer';
 import {createManage} from './windows/manage';
+import {fitManageBounds} from './windows/manageGeometry';
 import {createHost} from './platform/host';
 import {EdgeController} from './edgeController';
 import {loadWithRecovery} from './store/repository';
 import {swapShortcut} from './shortcuts';
 import {validWriteHotkey,displayWriteHotkey} from '../shared/composerKeys';
-import {newIdea,editIdea,changeStatus,addAgent,updateAgent,removeAgent,removeProject} from '../shared/ideaCommands';
+import {newIdea,changeStatus,addAgent,updateAgent,removeAgent,removeProject,editIdeaIfUnchanged,deleteIdea,restoreIdea,permanentlyDeleteIdea} from '../shared/ideaCommands';
 import type {Draft,Result,Snapshot} from '../shared/contracts';
 import type {PilotInfo,HitLayout,ComposerContext,AgentMutation,ClipMutation} from '../shared/bridge';
 import {mergeClips,splitClip,moveClip,selectClipIdea,dropClipIdea} from '../shared/clipCommands';
@@ -40,14 +41,16 @@ else app.whenReady().then(async()=>{
  let snapshot:Snapshot=loaded.snapshot;let displayId=String(screen.getPrimaryDisplay().id);let width=screen.getPrimaryDisplay().bounds.width;
  let draftSequence=0,draftWritableSession:number|null=null;let composerWrites:Promise<unknown>=Promise.resolve();
  const composerWrite=<T>(action:()=>Promise<T>):Promise<T>=>{const next=composerWrites.then(action,action);composerWrites=next;return next;};
- let composerSession=0,manageSession=0,manageSelection:string|null=null,editRevision=snapshot.revision;
+ let composerSession=0,manageSession=0,manageSelection:string|null=null;
+ let manageEditingOwner:{session:number;ideaId:string}|null=null,manageEditingRequested=false;
  let dragCancelSession=0,dragEscape=false;let textDragTimer:ReturnType<typeof setTimeout>|null=null;let textDragOwner:string|null=null;
  let placementNotice:string|null=null;let shelfAgentId='all';let settingsBusy=false;let refreshTray=()=>{};
+ let geometryTimer:ReturnType<typeof setTimeout>|null=null,boundsIgnoreUntil=0;
  let manageMode:'browse'|'detail'|'settings'='browse',manageTitles=false;let undoClips:{snapshot:Snapshot;revision:number}|null=null;
  let composerContext:ComposerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
  const preload=join(__dirname,'../preload/index.js');shelf=createShelf(preload);
  const host=createHost(shelf,()=>composer);
- const info=():PilotInfo=>({platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,manageSession,manageSelection,manageMode,manageTitles,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
+ const info=():PilotInfo=>({platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,manageSession,manageSelection,manageMode,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
  const publish=()=>{for(const w of [shelf,composer,manage])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info());};
  const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:(BrowserWindow|null)[]=[shelf,composer,manage])=>allowed.some(w=>w?.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
  const prepareWindow=(w:BrowserWindow|null):Promise<boolean>=>{
@@ -60,8 +63,20 @@ else app.whenReady().then(async()=>{
  };
  const prepareViews=async()=>await prepareWindow(shelf)&&await prepareWindow(manage);
  const lock=(name:string,active:boolean)=>edge.event({type:'lock',name,active,now:Date.now()});
- const hideManage=()=>{manage?.hide();lock('manage',false);};
+ const hideManage=()=>{manageEditingOwner=null;manageEditingRequested=false;manage?.hide();lock('manage',false);};
  const boundsFor=(w:number,h:number)=>{const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint());const width=Math.min(w,d.workArea.width-40),height=Math.min(h,d.workArea.height-48);return {x:Math.round(d.workArea.x+(d.workArea.width-width)/2),y:d.workArea.y+24,width,height};};
+ const workAreas=()=>screen.getAllDisplays().map(d=>d.workArea);
+ const setManageBounds=(bounds:Electron.Rectangle)=>{boundsIgnoreUntil=Date.now()+500;manage?.setBounds(fitManageBounds(bounds,workAreas()));};
+ const calendarBounds=()=>fitManageBounds(snapshot.settings.calendarBounds??boundsFor(740,540),workAreas());
+ const queueCalendarGeometry=()=>{
+  if(manageMode!=='browse'||!manage?.isVisible()||Date.now()<boundsIgnoreUntil)return;
+  if(geometryTimer)clearTimeout(geometryTimer);
+  geometryTimer=setTimeout(()=>{geometryTimer=null;const bounds=manage?.getBounds();if(!bounds||!manage?.isVisible()||manageMode!=='browse')return;
+   void composerWrite(async()=>{const saved=await repository.commit({...snapshot,settings:{...snapshot.settings,calendarBounds:bounds}},snapshot.revision);
+    if(saved.ok){snapshot=saved.value;if(undoClips)undoClips={snapshot:{...undoClips.snapshot,settings:{...undoClips.snapshot.settings,calendarBounds:bounds}},revision:snapshot.revision};publish();}
+   });
+  },350);
+ };
  const finishTextDrag=()=>{if(textDragTimer)clearTimeout(textDragTimer);textDragTimer=null;textDragOwner=null;lock('text-drag',false);};
  app.on('will-quit',()=>{if(textDragTimer)clearTimeout(textDragTimer);});
  const cancelDrag=()=>{finishTextDrag();if(dragEscape){globalShortcut.unregister('Escape');dragEscape=false;lock('drag',false);}dragCancelSession++;publish();};
@@ -84,29 +99,30 @@ else app.whenReady().then(async()=>{
   if(manageRelease)clearTimeout(manageRelease);manageRelease=null;
   if(manageLoading)return manageLoading;if(manage)return Promise.resolve(manage);
   const w=createManage(preload);manage=w;
-  w.on('close',event=>{if(!quitting)event.preventDefault();});
+  w.on('close',event=>{if(!quitting){event.preventDefault();void prepareWindow(w).then(ok=>{if(ok)hideManage();else{w.show();w.focus();}});}});
+  w.on('focus',publish);w.on('blur',publish);
+  w.on('will-move',()=>{boundsIgnoreUntil=0;});w.on('will-resize',()=>{boundsIgnoreUntil=0;});
+  w.on('move',queueCalendarGeometry);w.on('resize',queueCalendarGeometry);
   w.on('show',()=>{if(manageRelease)clearTimeout(manageRelease);manageRelease=null;refreshTray();});
-  w.on('hide',()=>{refreshTray();manageRelease=setTimeout(()=>{manageRelease=null;if(!w.isDestroyed()&&!w.isVisible()){manage=null;w.destroy();}},30000);});
+  w.on('hide',()=>{refreshTray();if(manageEditingOwner){w.show();w.focus();return;}manageRelease=setTimeout(()=>{manageRelease=null;if(!w.isDestroyed()&&!w.isVisible()&&!manageEditingOwner){manage=null;w.destroy();}},30000);});
   manageLoading=loadView(w,'manage').then(()=>w).catch(error=>{manage=null;w.destroy();throw error;}).finally(()=>{manageLoading=null;});
   return manageLoading;
  };
- app.on('will-quit',()=>{if(composerRelease)clearTimeout(composerRelease);if(manageRelease)clearTimeout(manageRelease);});
- const openComposer=async(ideaId?:string):Promise<Result<void>>=>{
+ app.on('will-quit',()=>{if(composerRelease)clearTimeout(composerRelease);if(manageRelease)clearTimeout(manageRelease);if(geometryTimer)clearTimeout(geometryTimer);});
+ const openComposer=async():Promise<Result<void>>=>{
   if(composerLoading)return done();
   if(manage?.isVisible()&&manageMode==='settings')return invalid('请先关闭设置。');
   if(composer?.isVisible()){
-   composer.show();composer.focus();return ideaId?invalid('请先保存或取消当前编辑。'):done();
+   composer.show();composer.focus();return done();
   }
   if(composer&&!composerSafeToRelease){
    if(!await prepareViews())return invalid('最后修改尚未保存，窗口已保留。');
    hideManage();lock('composer',true);host.showComposer(boundsFor(COMPOSER_SIZE.width,COMPOSER_SIZE.height));
-   return ideaId?invalid('请先保存或取消尚未完成的输入。'):done();
+   return done();
   }
   if(!await prepareViews())return invalid('最后修改尚未保存，窗口已保留。');
-  const idea=ideaId?snapshot.ideas.find(x=>x.id===ideaId):null;
-  if(ideaId&&!idea)return invalid('找不到这条念头。');
-  composerContext=idea?{mode:'edit',ideaId:idea.id,draft:{text:idea.text,title:idea.title,project:idea.project,agentId:idea.agentId}}:{mode:'new',ideaId:null,draft:snapshot.draft??blank};
-  editRevision=snapshot.revision;composerSession++;draftWritableSession=composerSession;draftSequence=0;try{await ensureComposer();}catch{return {ok:false,code:'IO',message:'输入浮层未能打开，请重试。原数据已保留。'};}if(quitting)return invalid('正在退出。');if(manage?.isVisible()&&manageMode==='settings')return invalid('请先关闭设置。');composerSafeToRelease=false;lock('composer',true);hideManage();publish();host.showComposer(boundsFor(COMPOSER_SIZE.width,COMPOSER_SIZE.height));return done();
+  composerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
+  composerSession++;draftWritableSession=composerSession;draftSequence=0;try{await ensureComposer();}catch{return {ok:false,code:'IO',message:'输入浮层未能打开，请重试。原数据已保留。'};}if(quitting)return invalid('正在退出。');if(manage?.isVisible()&&manageMode==='settings')return invalid('请先关闭设置。');composerSafeToRelease=false;lock('composer',true);hideManage();publish();host.showComposer(boundsFor(COMPOSER_SIZE.width,COMPOSER_SIZE.height));return done();
  };
  const save=async(next:Result<Snapshot>,revision:number):Promise<Result<Snapshot>>=>{
   if(!next.ok)return next;const r=await repository.commit(next.value,revision);
@@ -123,7 +139,7 @@ else app.whenReady().then(async()=>{
   if(settingsBusy)return false;
   if(!await prepareWindow(shelf)||!await prepareWindow(manage))return false;
   await composerWrites;await repository.flush();
-  if(!composer||(composerSafeToRelease&&!composer.isVisible())||composerContext.mode==='edit')return true;
+  if(!composer||(composerSafeToRelease&&!composer.isVisible()))return true;
   const draft=await captureDraft();const saved=draft.ok?await save({ok:true,value:{...snapshot,draft:draft.value}},snapshot.revision):draft;
   if(saved.ok)return true;
   composer!.webContents.send('thoughtline:quit-error',saved.message);composer!.show();composer!.focus();return false;
@@ -149,16 +165,15 @@ else app.whenReady().then(async()=>{
  }));
  ipcMain.handle('thoughtline:submit',async(e,draft:Draft,revision:number)=>{let overflowId:string|null=null;const committed=await composerWrite(async():Promise<Result<Snapshot>>=>{
   if(!trusted(e,[composer])||!draftShape(draft))return invalid('无效内容');
-  if(composerContext.mode==='edit'&&revision!==editRevision)return {ok:false,code:'CONFLICT',message:'记录已变化，请保留文字，重新打开后核对。'};
   const now=new Date().toISOString(),createdId=randomUUID();
-  const next=composerContext.mode==='edit'?editIdea(snapshot,composerContext.ideaId!,draft,now):newIdea({...snapshot,clips:captureClipPositions(snapshot.clips,width)},draft,createdId,now);
+  if(composerContext.mode!=='new')return invalid('已有念头请在原窗口编辑。');
+  const next=newIdea({...snapshot,clips:captureClipPositions(snapshot.clips,width)},draft,createdId,now);
   const committed=await save(next,revision);if(!committed.ok)return committed;
   closeConfirmedComposer();lock('composer',false);edge.event({type:'peek',now:Date.now()});placementNotice=null;const createdClip=snapshot.clips.find(c=>c.ideaIds.includes(createdId));if(createdClip&&layoutClips(snapshot.clips,width).overflow.some(c=>c.id===createdClip.id)){placementNotice='已保存，绳上暂时放不下';overflowId=createdId;}publish();return committed;
  });if(committed.ok&&overflowId)await openBrowseDetail(overflowId);return committed;
  });
  ipcMain.handle('thoughtline:close',(e,draft:Draft)=>composerWrite(async():Promise<Result<Snapshot>>=>{
   if(!trusted(e,[composer])||!draftShape(draft))return invalid('无效操作');
-  if(composerContext.mode==='edit'){closeConfirmedComposer();lock('composer',false);return {ok:true,value:snapshot};}
   const saved=await save({ok:true,value:{...snapshot,draft}},snapshot.revision);if(!saved.ok)return saved;
   closeConfirmedComposer();lock('composer',false);return saved;
  }));
@@ -167,7 +182,7 @@ else app.whenReady().then(async()=>{
   if(composer?.isVisible())return invalid('请先保存或取消当前输入。');
   if(id&&!snapshot.ideas.some(x=>x.id===id))return invalid('找不到这条念头。');
   if(!await prepareViews())return invalid('最后修改尚未保存，窗口已保留。');
-  try{await ensureManage();}catch{return {ok:false,code:'IO',message:'浏览浮层未能打开，请重试。'};}if(quitting)return invalid('正在退出。');if(composer?.isVisible())return invalid('请先保存或取消当前输入。');manageSelection=id??null;manageMode=id?'detail':'browse';manageTitles=!!titles;manageSession++;lock('manage',true);publish();if(id){const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint()),p=screen.getCursorScreenPoint();const b=boundsFor(380,360);b.x=Math.round(Math.max(d.workArea.x+12,Math.min(d.workArea.x+d.workArea.width-b.width-12,p.x-b.width/2)));b.y=Math.round(Math.max(d.workArea.y+12,Math.min(d.workArea.y+d.workArea.height-b.height-12,p.y+24)));manage!.setBounds(b);}else manage!.setBounds(boundsFor(740,540));manage!.show();manage!.focus();refreshTray();return done();
+  try{await ensureManage();}catch{return {ok:false,code:'IO',message:'浏览浮层未能打开，请重试。'};}if(quitting)return invalid('正在退出。');if(composer?.isVisible())return invalid('请先保存或取消当前输入。');manageSelection=id??null;manageMode=id?'detail':'browse';manageTitles=!!titles;manageEditingRequested=false;manageSession++;lock('manage',true);publish();if(id){const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint()),p=screen.getCursorScreenPoint();const b=boundsFor(420,500);b.x=Math.round(Math.max(d.workArea.x+12,Math.min(d.workArea.x+d.workArea.width-b.width-12,p.x-b.width/2)));b.y=Math.round(Math.max(d.workArea.y+12,Math.min(d.workArea.y+d.workArea.height-b.height-12,p.y+24)));setManageBounds(b);}else setManageBounds(calendarBounds());manage!.show();manage!.focus();refreshTray();return done();
  });
  const selectShelfAgent=async(id:string)=>{if(!await prepareWindow(shelf))return invalid('页码尚未保存，筛选已保留。');shelfAgentId=id==='all'||snapshot.agents.some(a=>a.id===id)?id:'all';refreshTray();publish();};
  const agentFilterMenu=():Electron.MenuItemConstructorOptions[]=>[
@@ -180,7 +195,7 @@ else app.whenReady().then(async()=>{
   if(!await prepareViews())return invalid('最后修改尚未保存，窗口已保留。');
   try{await ensureManage();}catch{return invalid('浏览浮层未能打开，请重试。');}
   if(quitting||composer?.isVisible())return invalid('请先结束当前输入。');
-  manageMode='browse';manageSelection=null;manageTitles=false;manageSession++;lock('manage',true);manage!.setBounds(boundsFor(740,540));publish();manage!.show();manage!.focus();refreshTray();return done();
+  manageMode='browse';manageSelection=null;manageTitles=false;manageEditingRequested=false;manageSession++;lock('manage',true);setManageBounds(calendarBounds());publish();manage!.show();manage!.focus();refreshTray();return done();
  };
  ipcMain.handle('thoughtline:shelf-menu',(e,id:string):Result<void>=>{
   if(!trusted(e,[shelf])||typeof id!=='string')return invalid('无效操作');
@@ -202,40 +217,71 @@ else app.whenReady().then(async()=>{
   if(!await prepareViews())return invalid('最后修改尚未保存，窗口已保留。');
   try{await ensureManage();}catch{return invalid('全文浮层未能打开，请重试。');}
   if(quitting||composer?.isVisible())return invalid('请先结束当前输入。');
-  manageMode='detail';manageSelection=id;manageTitles=false;manageSession++;lock('manage',true);manage!.setBounds(boundsFor(380,360));publish();manage!.show();manage!.focus();refreshTray();return done();
+  manageMode='detail';manageSelection=id;manageTitles=false;manageEditingRequested=false;manageSession++;lock('manage',true);setManageBounds(boundsFor(420,500));publish();manage!.show();manage!.focus();refreshTray();return done();
  };
  ipcMain.handle('thoughtline:close-manage',async e=>{if(!trusted(e,[manage]))return invalid('无效操作');if(!await prepareWindow(manage))return invalid('最后修改尚未保存，窗口已保留。');hideManage();return done();});
  const openSettings=async():Promise<Result<void>>=>{
   if(composer?.isVisible())return invalid('请先保存或取消当前输入。');
   if(!await prepareViews())return invalid('最后修改尚未保存，窗口已保留。');
-  try{await ensureManage();}catch{return {ok:false,code:'IO',message:'设置浮层未能打开，请重试。'};}if(quitting)return invalid('正在退出。');if(composer?.isVisible())return invalid('请先保存或取消当前输入。');cancelDrag();manageMode='settings';manageTitles=false;manageSelection=null;manageSession++;lock('manage',true);manage!.setBounds(boundsFor(440,390));publish();manage!.show();manage!.focus();refreshTray();return done();
+  try{await ensureManage();}catch{return {ok:false,code:'IO',message:'设置浮层未能打开，请重试。'};}if(quitting)return invalid('正在退出。');if(composer?.isVisible())return invalid('请先保存或取消当前输入。');cancelDrag();manageMode='settings';manageTitles=false;manageSelection=null;manageEditingRequested=false;manageSession++;lock('manage',true);setManageBounds(boundsFor(440,390));publish();manage!.show();manage!.focus();refreshTray();return done();
  };
  ipcMain.handle('thoughtline:open-settings',e=>trusted(e)?openSettings():invalid('无效操作'));
  ipcMain.handle('thoughtline:settings',async(e,settings:Snapshot['settings'],revision:number):Promise<Result<Snapshot>>=>{
   if(!trusted(e,[manage])||manageMode!=='settings'||!settings||!validWriteHotkey(settings.writeHotkey)||typeof settings.reducedMotion!=='boolean')return invalid('请录制有效的组合快捷键。');
+  return composerWrite(async()=>{
   if(settingsBusy)return invalid('正在保存设置，请稍后重试。');
   if(revision!==snapshot.revision)return {ok:false,code:'CONFLICT',message:'设置已变化，请核对后重试。'};
   settingsBusy=true;let committed:Result<Snapshot>=invalid('快捷键已被占用，请录制其他组合；原键位保持。');
   try{
-   const changed=await swapShortcut(globalShortcut,snapshot.settings.writeHotkey,settings.writeHotkey,()=>{openComposer();},async()=>{committed=await save({ok:true,value:{...snapshot,settings:{writeHotkey:settings.writeHotkey,reducedMotion:settings.reducedMotion}}},revision);return committed;});
+   const changed=await swapShortcut(globalShortcut,snapshot.settings.writeHotkey,settings.writeHotkey,()=>{openComposer();},async()=>{committed=await save({ok:true,value:{...snapshot,settings:{...snapshot.settings,writeHotkey:settings.writeHotkey,reducedMotion:settings.reducedMotion}}},revision);return committed;});
    if(!changed.ok)return changed.error?.ok===false?changed.error:committed;
    refreshTray();publish();return committed;
   }finally{settingsBusy=false;}
+  });
  });
- ipcMain.handle('thoughtline:open-edit',(e,id:string)=>trusted(e,[shelf,manage])&&typeof id==='string'?openComposer(id):invalid('无效操作'));
+ ipcMain.handle('thoughtline:open-edit',async(e,id:string)=>{
+  if(!trusted(e,[shelf,manage])||typeof id!=='string'||!snapshot.ideas.some(i=>i.id===id&&i.status!=='deleted'))return invalid('找不到这条念头。');
+  if(trusted(e,[manage])&&manageMode==='detail'&&manageSelection===id){manageEditingRequested=true;publish();return done();}
+  const opened=await openBrowseDetail(id);if(opened.ok){manageEditingRequested=true;publish();}return opened;
+ });
+ ipcMain.handle('thoughtline:set-editing',(e,active:boolean,session:number,ideaId:string):Result<void>=>{
+  if(!trusted(e,[manage])||typeof active!=='boolean'||session!==manageSession||typeof ideaId!=='string')return invalid('编辑会话已结束。');
+  if(active){if(!snapshot.ideas.some(i=>i.id===ideaId&&i.status!=='deleted'))return invalid('找不到这条念头。');manageEditingOwner={session,ideaId};}
+  else if(manageEditingOwner?.session===session&&manageEditingOwner.ideaId===ideaId)manageEditingOwner=null;
+  publish();return done();
+ });
+ ipcMain.handle('thoughtline:update-idea',(e,id:string,draft:Draft,expectedDraft:Draft,session:number)=>{
+  if(!trusted(e,[manage])||typeof id!=='string'||!draftShape(draft)||!draftShape(expectedDraft)||session!==manageSession||!manage?.isVisible())return Promise.resolve(invalid<Snapshot>('编辑会话已结束，文字仍在窗口中。'));
+  return composerWrite(async():Promise<Result<Snapshot>>=>{
+   if(!trusted(e,[manage])||session!==manageSession||!manage?.isVisible()||manageEditingOwner?.session!==session||manageEditingOwner.ideaId!==id)return invalid('编辑会话已结束，文字仍在窗口中。');
+   return save(editIdeaIfUnchanged(snapshot,id,draft,expectedDraft,new Date().toISOString()),snapshot.revision);
+  });
+ });
+ ipcMain.handle('thoughtline:idea-history',(e,id:string,kind:'delete'|'restore'|'permanent',revision:number)=>{
+  if(!trusted(e,[manage])||typeof id!=='string'||!['delete','restore','permanent'].includes(kind))return Promise.resolve(invalid<Snapshot>('无效操作'));
+  return composerWrite(async()=>{
+   if(revision!==snapshot.revision)return {ok:false as const,code:'CONFLICT' as const,message:'内容已更新，请重新操作。'};
+   const next=kind==='delete'?deleteIdea(snapshot,id,new Date().toISOString()):kind==='restore'?restoreIdea({...snapshot,clips:captureClipPositions(snapshot.clips,width)},id,new Date().toISOString()):permanentlyDeleteIdea(snapshot,id);
+   const r=await save(next,revision);if(r.ok){placementNotice=kind==='restore'&&layoutClips(snapshot.clips,width).overflow.some(c=>c.ideaIds.includes(id))?'已恢复，绳上暂时放不下，可在念头日历查看':null;publish();}return r;
+  });
+ });
  ipcMain.handle('thoughtline:status',async(e,id:string,status:'hanging'|'archived',revision:number)=>{
   if(!trusted(e,[shelf,manage])||typeof id!=='string'||!['hanging','archived'].includes(status))return invalid('无效操作');
+  return composerWrite(async()=>{if(revision!==snapshot.revision)return {ok:false as const,code:'CONFLICT' as const,message:'内容已变化，请重新操作。'};
   const r=await save(changeStatus({...snapshot,clips:captureClipPositions(snapshot.clips,width)},id,status,new Date().toISOString()),revision);
   if(r.ok){placementNotice=status==='hanging'&&layoutClips(snapshot.clips,width).overflow.some(c=>c.ideaIds.includes(id))?'已保存，绳上暂时放不下':null;edge.event({type:'peek',now:Date.now()});publish();}return r;
+  });
  });
- ipcMain.handle('thoughtline:agent',async(e,c:AgentMutation,revision:number)=>{
+ ipcMain.handle('thoughtline:agent',(e,c:AgentMutation,revision:number)=>{
   if(!trusted(e,[manage])||!c||typeof c!=='object')return invalid('无效操作');
+  return composerWrite(async()=>{if(revision!==snapshot.revision)return {ok:false as const,code:'CONFLICT' as const,message:'内容已变化，请重新操作。'};
   let next:Result<Snapshot>;
   if(c.kind==='add'&&typeof c.name==='string'&&typeof c.color==='string')next=addAgent(snapshot,{id:randomUUID(),name:c.name.trim(),color:c.color});
   else if(c.kind==='update'&&typeof c.id==='string'&&typeof c.name==='string'&&typeof c.color==='string')next=updateAgent(snapshot,c.id,{name:c.name.trim(),color:c.color});
   else if(c.kind==='remove'&&typeof c.id==='string'&&typeof c.replacement==='string')next=removeAgent(snapshot,c.id,c.replacement);
   else return invalid('Agent内容无效');
   return save(next,revision);
+  });
  });
  ipcMain.handle('thoughtline:project-delete',(e,project:string,revision:number)=>composerWrite(async()=>{
   if(!trusted(e,[composer,manage])||typeof project!=='string'||!project)return invalid('未分组不能删除。');
@@ -270,6 +316,7 @@ else app.whenReady().then(async()=>{
  });
  ipcMain.handle('thoughtline:clip',async(e,c:ClipMutation,revision:number)=>{
   if(!trusted(e,[shelf,manage])||!c||typeof c!=='object')return invalid('无效操作');
+  return composerWrite(async()=>{
   if(revision!==snapshot.revision)return {ok:false,code:'CONFLICT',message:'布局已变化，请重新操作。'};
   const previous=snapshot,oldUndo=undoClips;let next:Result<Snapshot>;
   const positioned=()=>({...snapshot,clips:captureClipPositions(snapshot.clips,width,shelfAgentId)});
@@ -289,6 +336,7 @@ else app.whenReady().then(async()=>{
   const r=await save(next,revision);
   if(r.ok){placementNotice=['split','splitAll'].includes(c.kind)&&layoutClips(snapshot.clips,width).overflow.length?'已保存，绳上暂时放不下，可在念头日历查看':null;if(c.kind==='split'){manageSelection=c.ideaId;manageSession++;}undoClips=c.kind==='undo'?null:c.kind==='select'?(oldUndo?{...oldUndo,revision:r.value.revision}:null):{snapshot:previous,revision:r.value.revision};publish();}
   return r;
+  });
  });
  await loadView(shelf,'shelf');
  globalShortcut.register(snapshot.settings.writeHotkey,()=>{openComposer();});
@@ -302,7 +350,8 @@ else app.whenReady().then(async()=>{
  refreshTray=()=>tray.setContextMenu(Menu.buildFromTemplate([{label:'晾念头 / Thoughtline',enabled:false},{label:`写念头：${displayWriteHotkey(snapshot.settings.writeHotkey,host.platform)}${globalShortcut.isRegistered(snapshot.settings.writeHotkey)?'':'（注册失败）'}`,enabled:!composer?.isVisible()&&!(manage?.isVisible()&&manageMode==='settings'),click:()=>{void openComposer();}},{type:'separator'},{label:'查找 / 已收起',enabled:!composer?.isVisible(),click:browseFromTray},{label:'筛选 Agent',submenu:agentFilterMenu()},{label:'设置',enabled:!composer?.isVisible(),click:()=>{openSettings();}},{label:'暂停悬停',type:'checkbox',checked:edge.isManuallyPaused(),click:item=>{cancelDrag();edge.pause(item.checked);}},{label:'退出',click:()=>app.quit()}]));
  refreshTray();
  nativeTheme.on('updated',publish);powerMonitor.on('suspend',()=>{cancelDrag();edge.pause(true,'sleep');});powerMonitor.on('lock-screen',()=>{cancelDrag();edge.pause(true,'lock');});powerMonitor.on('resume',()=>edge.pause(false,'sleep'));powerMonitor.on('unlock-screen',()=>edge.pause(false,'lock'));
- screen.on('display-metrics-changed',cancelDrag);app.dock?.hide();publish();edge.start();
+ const clampManage=()=>{cancelDrag();if(manage?.isVisible())setManageBounds(manage.getBounds());};
+ screen.on('display-metrics-changed',clampManage);screen.on('display-removed',clampManage);app.dock?.hide();publish();edge.start();
 }).catch(error=>{console.error(error);dialog.showErrorBox('晾念头启动未成功',error instanceof Error?error.message:'启动发生错误，请保留数据后重试。');app.quit();});
 app.on('before-quit',event=>{
  if(!quitting&&prepareQuit){

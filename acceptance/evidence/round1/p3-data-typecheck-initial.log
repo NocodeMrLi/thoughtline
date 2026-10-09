@@ -1,0 +1,13 @@
+src/renderer/components/Manage.tsx(12,266): error TS2345: Argument of type '{ id: string; status: "archived" | "deleted" | "hanging"; } | null' is not assignable to parameter of type 'SetStateAction<{ id: string; status: "archived" | "hanging"; } | null>'.
+  Type '{ id: string; status: "archived" | "deleted" | "hanging"; }' is not assignable to type 'SetStateAction<{ id: string; status: "archived" | "hanging"; } | null>'.
+    Types of property 'status' are incompatible.
+      Type '"archived" | "deleted" | "hanging"' is not assignable to type '"archived" | "hanging" | undefined'.
+        Type '"deleted"' is not assignable to type '"archived" | "hanging" | undefined'.
+src/shared/ideaCommands.ts(73,115): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Draft'.
+  No index signature with a parameter of type 'string' was found on type 'Draft'.
+src/shared/ideaCommands.ts(81,64): error TS2345: Argument of type '(Idea | { id: string; text: string; title: string; project: string; agentId: string; createdAt: string; createdDay?: string | undefined; creationTimeZone?: string | undefined; status: "deleted"; deletedFrom: "archived" | ... 1 more ... | "hanging"; deletedAt: string; updatedAt: string; })[]' is not assignable to parameter of type 'Idea[]'.
+  Type 'Idea | { id: string; text: string; title: string; project: string; agentId: string; createdAt: string; createdDay?: string | undefined; creationTimeZone?: string | undefined; status: "deleted"; deletedFrom: "archived" | ... 1 more ... | "hanging"; deletedAt: string; updatedAt: string; }' is not assignable to type 'Idea'.
+    Type '{ id: string; text: string; title: string; project: string; agentId: AgentId; createdAt: string; createdDay?: string; creationTimeZone?: string; status: 'deleted'; deletedFrom: "archived" | "deleted" | "hanging"; deletedAt: string; updatedAt: string; }' is not assignable to type 'Idea'.
+      Types of property 'deletedFrom' are incompatible.
+        Type '"archived" | "deleted" | "hanging"' is not assignable to type '"archived" | "hanging" | undefined'.
+          Type '"deleted"' is not assignable to type '"archived" | "hanging" | undefined'.

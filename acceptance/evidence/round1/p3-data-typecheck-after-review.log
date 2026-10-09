@@ -1,0 +1,5 @@
+src/renderer/components/Manage.tsx(12,266): error TS2345: Argument of type '{ id: string; status: "archived" | "deleted" | "hanging"; } | null' is not assignable to parameter of type 'SetStateAction<{ id: string; status: "archived" | "hanging"; } | null>'.
+  Type '{ id: string; status: "archived" | "deleted" | "hanging"; }' is not assignable to type 'SetStateAction<{ id: string; status: "archived" | "hanging"; } | null>'.
+    Types of property 'status' are incompatible.
+      Type '"archived" | "deleted" | "hanging"' is not assignable to type '"archived" | "hanging" | undefined'.
+        Type '"deleted"' is not assignable to type '"archived" | "hanging" | undefined'.

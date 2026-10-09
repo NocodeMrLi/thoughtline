@@ -5,7 +5,7 @@ test('schema1迁移将每条挂着记录变为独立夹子，已收起不占位�
  let s=initialSnapshot();const r=newIdea(s,{text:' 原文\n',title:'',project:'',agentId:'codex'},'one',now);if(!r.ok)throw Error(r.message);s=r.value;
  const legacy={...s,schemaVersion:1,clips:undefined,ideas:[...s.ideas,{...s.ideas[0],id:'history',status:'archived'}]};
  const migrated=validateSnapshot(legacy);expect(migrated.ok).toBe(true);if(!migrated.ok)return;
- expect(migrated.value.schemaVersion).toBe(2);expect((migrated.value as any).clips).toHaveLength(1);
+ expect(migrated.value.schemaVersion).toBe(3);expect((migrated.value as any).clips).toHaveLength(1);
  expect((migrated.value as any).clips[0]).toMatchObject({ideaIds:['one'],currentId:'one'});expect(migrated.value.ideas[0].text).toBe(' 原文\n');
 });
 import {mergeClips,splitClip,selectClipIdea,moveClip} from '../../src/shared/clipCommands';

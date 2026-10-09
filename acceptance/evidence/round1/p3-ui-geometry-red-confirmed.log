@@ -1,0 +1,93 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/manageGeometry.test.ts (4 tests | 3 failed) 6ms
+   ❯ manage window bounds (4)
+     × moves a disconnected secondary window onto the remaining display 4ms
+     × fits an oversized saved window into a compact scaled work area 1ms
+     × clamps a 150 percent scaled work area with nonzero origin 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/manageGeometry.test.ts > manage window bounds > moves a disconnected secondary window onto the remaining display
+AssertionError: expected { x: 2000, y: 100, width: 740, …(1) } to deeply equal { x: 688, y: 100, width: 740, …(1) }
+
+- Expected
++ Received
+
+  {
+    "height": 540,
+    "width": 740,
+-   "x": 688,
++   "x": 2000,
+    "y": 100,
+  }
+
+ ❯ tests/unit/manageGeometry.test.ts:11:5
+      9|  it('moves a disconnected secondary window onto the remaining display'…
+     10|   expect(fitManageBounds({x:2000,y:100,width:740,height:540},[{x:0,y:0…
+     11|    .toEqual({x:688,y:100,width:740,height:540});
+       |     ^
+     12|  });
+     13|  it('fits an oversized saved window into a compact scaled work area',(…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/manageGeometry.test.ts > manage window bounds > fits an oversized saved window into a compact scaled work area
+AssertionError: expected { x: +0, y: +0, width: 1200, …(1) } to deeply equal { x: 12, y: 12, width: 1000, …(1) }
+
+- Expected
++ Received
+
+  {
+-   "height": 744,
+-   "width": 1000,
+-   "x": 12,
+-   "y": 12,
++   "height": 900,
++   "width": 1200,
++   "x": 0,
++   "y": 0,
+  }
+
+ ❯ tests/unit/manageGeometry.test.ts:15:5
+     13|  it('fits an oversized saved window into a compact scaled work area',(…
+     14|   expect(fitManageBounds({x:0,y:0,width:1200,height:900},[{x:0,y:0,wid…
+     15|    .toEqual({x:12,y:12,width:1000,height:744});
+       |     ^
+     16|  });
+     17|  it('clamps a 150 percent scaled work area with nonzero origin',()=>{
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/manageGeometry.test.ts > manage window bounds > clamps a 150 percent scaled work area with nonzero origin
+AssertionError: expected { x: 1900, y: 950, width: 740, …(1) } to deeply equal { x: 1808, y: 408, width: 740, …(1) }
+
+- Expected
++ Received
+
+  {
+    "height": 540,
+    "width": 740,
+-   "x": 1808,
+-   "y": 408,
++   "x": 1900,
++   "y": 950,
+  }
+
+ ❯ tests/unit/manageGeometry.test.ts:19:5
+     17|  it('clamps a 150 percent scaled work area with nonzero origin',()=>{
+     18|   expect(fitManageBounds({x:1900,y:950,width:740,height:540},[{x:1280,…
+     19|    .toEqual({x:1808,y:408,width:740,height:540});
+       |     ^
+     20|  });
+     21| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 1 passed (4)
+   Start at  19:24:47
+   Duration  100ms (transform 56%, tests 19%, import 18%, worker 6%)
+

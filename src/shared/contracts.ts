@@ -3,14 +3,16 @@ export type Rect = Point & { width: number; height: number };
 export type AgentId = string;
 export type Idea = {
   id: string; text: string; title: string; project: string; agentId: AgentId;
-  status: 'hanging' | 'archived'; createdAt: string; updatedAt: string;
+  status: 'hanging' | 'archived' | 'deleted'; createdAt: string; updatedAt: string;
+  createdDay?: string; creationTimeZone?: string;
+  deletedAt?: string; deletedFrom?: 'hanging' | 'archived';
 };
 export type AgentTag = { id: AgentId; name: string; color: string };
 export type Draft = { text: string; title: string; project: string; agentId: AgentId };
 export type Clip = {id:string; agentId:AgentId; ideaIds:string[]; currentId:string; position:number|null};
 export type Snapshot = {
-  schemaVersion: 2; revision: number; clips:Clip[]; ideas: Idea[]; agents: AgentTag[]; draft: Draft | null;
-  settings: { writeHotkey: string; reducedMotion: boolean };
+  schemaVersion: 2 | 3; revision: number; clips:Clip[]; ideas: Idea[]; agents: AgentTag[]; draft: Draft | null;
+  settings: { writeHotkey: string; reducedMotion: boolean; calendarBounds?: Rect };
 };
 export type Result<T> = { ok: true; value: T } | {
   ok: false; code: 'INVALID' | 'CONFLICT' | 'IO' | 'MISSING_BODY'; message: string;

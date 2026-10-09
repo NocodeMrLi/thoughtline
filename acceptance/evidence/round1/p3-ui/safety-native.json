@@ -1,0 +1,59 @@
+{
+  "scope": "actual Mac source DOM/IPC/native visibility; fake shortcuts and data; synthetic composition only",
+  "checkpoints": [
+    {
+      "name": "hydration-does-not-save-or-overwrite"
+    },
+    {
+      "name": "composition-negative-await-native-visible-lock-stable",
+      "waitMs": 2400
+    },
+    {
+      "name": "composition-end-checkpoints-complete-text"
+    },
+    {
+      "name": "renderer-reload-sequence-resumes"
+    },
+    {
+      "name": "old-sequence-cannot-overwrite"
+    },
+    {
+      "name": "auto-io-failure-preserves-window-disk-and-manual-retry"
+    },
+    {
+      "name": "actual-system-tray-find-save-close-manage-reopen-no-shelf-toolbar"
+    },
+    {
+      "name": "after-submit-native-observation",
+      "visible": false,
+      "session": 3,
+      "submittedSession": 3
+    },
+    {
+      "name": "pending-submit-three-clicks-one-note-no-late-draft-resurrection"
+    },
+    {
+      "name": "existing-note-inline-autosave-keeps-independent-new-draft"
+    },
+    {
+      "name": "dirty-normal-quit-restart-saves-latest-with-note-preserved"
+    }
+  ],
+  "cleanup": {
+    "ownPids": [
+      40678,
+      40679,
+      40680,
+      40681,
+      40682,
+      40698,
+      40730,
+      40732,
+      40733,
+      40735,
+      40736
+    ],
+    "allExited": true,
+    "fakeDataRemoved": true
+  }
+}

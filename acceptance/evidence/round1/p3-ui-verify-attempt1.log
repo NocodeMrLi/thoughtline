@@ -1,0 +1,376 @@
+
+> thoughtline@0.0.17-preview.1 verify
+> node scripts/verify.cjs
+
+
+> thoughtline@0.0.17-preview.1 typecheck
+> node node_modules/typescript/bin/tsc --noEmit
+
+
+> thoughtline@0.0.17-preview.1 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/clipProjection.test.ts (6 tests | 3 failed) 174ms
+   × QA可达移动合夹链每步捕获保持身份与坐标，移动让位被实际命令持久化 14ms
+   × 满容量且有溢出时移最后可见夹到右界，隐藏夹不能抢位 2ms
+   × 混合比例与筛选移动压力：旧可见身份保留，其他Agent位置不动 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/clipProjection.test.ts > QA可达移动合夹链每步捕获保持身份与坐标，移动让位被实际命令持久化
+AssertionError: expected [ { id: 'i0', …(9) }, …(7) ] to deeply equal [ { id: 'i0', …(7) }, …(7) ]
+
+- Expected
++ Received
+
+@@ -1,9 +1,11 @@
+  [
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i0",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 0
+  😀 ",
+@@ -11,10 +13,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i1",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 1
+  😀 ",
+@@ -22,10 +26,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i2",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 2
+  😀 ",
+@@ -33,10 +39,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i3",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 3
+  😀 ",
+@@ -44,10 +52,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i4",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 4
+  😀 ",
+@@ -55,10 +65,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i5",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 5
+  😀 ",
+@@ -66,10 +78,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i6",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 6
+  😀 ",
+@@ -77,10 +91,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i7",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 7
+  😀 ",
+
+ ❯ tests/unit/clipProjection.test.ts:11:459
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/clipProjection.test.ts > 满容量且有溢出时移最后可见夹到右界，隐藏夹不能抢位
+AssertionError: expected [ { id: 'i0', …(9) }, …(7) ] to deeply equal [ { id: 'i0', …(7) }, …(7) ]
+
+- Expected
++ Received
+
+@@ -1,9 +1,11 @@
+  [
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i0",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 0
+  😀 ",
+@@ -11,10 +13,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i1",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 1
+  😀 ",
+@@ -22,10 +26,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i2",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 2
+  😀 ",
+@@ -33,10 +39,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i3",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 3
+  😀 ",
+@@ -44,10 +52,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i4",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 4
+  😀 ",
+@@ -55,10 +65,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i5",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 5
+  😀 ",
+@@ -66,10 +78,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i6",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 6
+  😀 ",
+@@ -77,10 +91,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i7",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 7
+  😀 ",
+
+ ❯ tests/unit/clipProjection.test.ts:13:510
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/clipProjection.test.ts > 混合比例与筛选移动压力：旧可见身份保留，其他Agent位置不动
+AssertionError: expected [ { id: 'i0', …(9) }, …(7) ] to deeply equal [ { id: 'i0', …(7) }, …(7) ]
+
+- Expected
++ Received
+
+@@ -1,9 +1,11 @@
+  [
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i0",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 0
+  😀 ",
+@@ -11,10 +13,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "claude",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i1",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 1
+  😀 ",
+@@ -22,10 +26,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i2",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 2
+  😀 ",
+@@ -33,10 +39,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "claude",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i3",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 3
+  😀 ",
+@@ -44,10 +52,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i4",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 4
+  😀 ",
+@@ -55,10 +65,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "claude",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i5",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 5
+  😀 ",
+@@ -66,10 +78,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "codex",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i6",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 6
+  😀 ",
+@@ -77,10 +91,12 @@
+      "updatedAt": "2026-10-09T00:00:00Z",
+    },
+    {
+      "agentId": "claude",
+      "createdAt": "2026-10-09T00:00:00Z",
++     "createdDay": "2026-10-09",
++     "creationTimeZone": "legacy-offset",
+      "id": "i7",
+      "project": "",
+      "status": "hanging",
+      "text": " 完整正文 7
+  😀 ",
+
+ ❯ tests/unit/clipProjection.test.ts:14:1182
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed | 31 passed | 1 skipped (33)
+      Tests  3 failed | 160 passed | 4 skipped (167)
+   Start at  19:26:44
+   Duration  983ms (tests 48%, transform 35%, import 13%, worker 4%)
+
+    Isolate  33 workers spawned · ~103ms startup each (spawn + environment, per file)
+             at least ~383ms faster with isolate: false — reuses workers across files instead of one per file
+

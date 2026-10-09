@@ -47,7 +47,7 @@ test('未知schema不被备份或空数据覆盖；非法Agent引用不能保存
 });
 test('旧schema1首次提交前保留原始备份，迁移保全全文与草稿',async()=>{
  const {dir,repo}=await fixture();const s=value(await repo.load());const legacy={...add(s),schemaVersion:1,clips:undefined,draft:{text:'旧草稿',title:'',project:'',agentId:'general'}};const raw=JSON.stringify(legacy);
- await writeFile(join(dir,'snapshot.json'),raw);const upgraded=new FileRepository(dir);const migrated=value(await upgraded.load());expect(migrated.schemaVersion).toBe(2);expect(await readFile(join(dir,'snapshot.json'),'utf8')).toBe(raw);
+ await writeFile(join(dir,'snapshot.json'),raw);const upgraded=new FileRepository(dir);const migrated=value(await upgraded.load());expect(migrated.schemaVersion).toBe(3);expect(await readFile(join(dir,'snapshot.json'),'utf8')).toBe(raw);
  value(await upgraded.commit(migrated,migrated.revision));expect(await readFile(join(dir,'snapshot.schema1.backup.json'),'utf8')).toBe(raw);expect(value(await new FileRepository(dir).load()).draft?.text).toBe('旧草稿');
 });
 

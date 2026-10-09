@@ -37,3 +37,19 @@ Windows P1 CI37915342457 verify/package/manifest/parse通过，安装预检失�
 文档小任务：21 篇历史阶段文件及历史版本/原始交付移至笔记库“归档”，保留完整方案、当前设计和正式交付；链接与入口提示前的原文及 SHA256 清单保留，可恢复。历史证据字节未改。
 
 P2 main commit `97875dda8d85201ff088218a347f7de2c301dc7e` 已推送；Windows CI `37921662961` 对相同 headSha 完成并 success，严格隔离launcher的新版本绑定已通过安装预检。run JSON 与完整日志保留。该 CI 只验证 runner 类型、单测、打包、安装保全和来源，不代表物理 Windows 或外部输入框通过。最终交付包待 P3–P5 完成后另冻结，当前 CI 包非最终交付。
+
+## P3 数据底层（未阶段提交，UI 接入中）
+
+schema3 输出与新写入；旧 schema1/2 首次写前保留原字节备份。旧记录创建日按原 timestamp 偏移日期冻结，标 legacy-offset；新建按创建瞬间本地日期与时区。最近删除保 ID、正文和原状态；编辑四字段 CAS。未确认输入与过期 IPC 保护将在 UI 接入验证。数据范围 75 项覆盖单测 exit0，异常年份和旧 schema2 新建日期先红后绿并复核关闭。全工程 typecheck 尚有旧 Manage 状态类型错误 T1，交日历接入处理，不能写全工程通过。报告和失败证据见 acceptance/evidence/round1/p3-data-*。
+
+回滚限制：旧 preview6 只识别 schema1/2，不能直接读取 schema3。需保留新旧副本，用升级前 snapshot.schema2.backup.json 等原备份在独立目录验证旧包。升级后新增、修改及最近删除不在旧备份中，不能承诺无损降级。目录迁移、独立备份与实际恢复待 P5。
+
+## P3/P4 UI 集成检查点（独立审查中，未阶段提交）
+
+原地四字段编辑、350/1500ms 自动保存、IME guard、最近删除、日历日/月/年、9+18分页和返回滚动、辅助窗口图标/材质/拖动/位置集成已完成。最后生产输入 verify exit0：163 passed /4 Windows-only skipped，typecheck/build通过；相关合成 Electron 回归见 p3-ui-report.md，不代表安装包或真机。
+
+标题列表绕过保存 guard 的原始代码缺陷有真正 RED/GREEN；Agent 拆出保持同 ID 的 RED 为临时移除保护的断言敏感性测试，不能混作用户问题复现。日期格点击来源120ms过渡及减少动态效果、实际窗口 bounds 关闭重开恢复有受控证据。早期项目面板测试两次 Composer 焦点等待超时，后隔离两次通过；失败仍保留，不归因电脑。
+
+独立审查发现从合夹收起当前纸后残留旧夹页码0/2，待修复/复核；该阶段暂不写通过。Windows schema2预检完整预期迁移交P5，实际冻结App测试交P6。清理审计只读检查29份P3相关收据的183个PID均退出；部分收据未记录目录路径，不能独立stat复验，以cleanup助手成功返回为证据。旧PID30628仍在。证据与报告保持历史版本，未覆盖已提交P2原件。
+
+后续有效结论：R1已真正RED/GREEN修复并独立复核关闭，Spec无开放发现/Quality无新增阻断。独立archive-current与page-all自然exit0，新增收据含目录stat与PID审计；先前page-all人工清理的运行仍按非自然完成保留。测试脚本退出改为恢复故障、真实保存检查、正常关窗/释放锁/quit，移除app.exit与app.close竞态。P3/P4受控实现范围通过，安装包和物理范围未通过，目录迁移仍待P5。
