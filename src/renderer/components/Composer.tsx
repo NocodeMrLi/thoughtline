@@ -53,7 +53,12 @@ export function Composer({info}:{info:PilotInfo}){
  useEffect(()=>{setDraft(info.composerContext.draft);setError('');setSplitConfirmed(false);setProjectOpen(false);text.current?.focus();},[info.composerSession]);
  const submit=async()=>{
   if(!live.current||busy||inFlight.current||composition.current.composing)return;if(changesAgent&&!splitConfirmed){setError('保存后会移至新Agent的独立夹子，请先确认。');return;}
-  inFlight.current=true;setBusy(true);setError('');try{await autosaver.current?.flush();if(!live.current||composition.current.composing)return;const revision=editing?info.snapshot.revision:(await window.thoughtline.info()).snapshot.revision;const r=await window.thoughtline.submit(latest.current.draft,revision);if(!r.ok){setError(r.message);}}catch{setError('保存未成功，文字已保留，请重试。');}finally{inFlight.current=false;setBusy(false);}
+  inFlight.current=true;setBusy(true);setError('');try{
+   await autosaver.current?.flush();if(!live.current||composition.current.composing)return;
+   let revision=info.snapshot.revision;
+   if(!editing){const current=await window.thoughtline.info();if(!live.current||composition.current.composing||current.composerSession!==info.composerSession)return;revision=current.snapshot.revision;}
+   const r=await window.thoughtline.submit(latest.current.draft,revision);if(!r.ok){setError(r.message);}
+  }catch{setError('保存未成功，文字已保留，请重试。');}finally{inFlight.current=false;setBusy(false);}
  };
  const close=async()=>{
   if(!live.current||busy||inFlight.current||composition.current.composing)return;inFlight.current=true;setBusy(true);setError('');try{await autosaver.current?.flush();if(!live.current||composition.current.composing)return;const r=await window.thoughtline.close(latest.current.draft);if(!r.ok){setError(r.message);}}catch{setError('草稿保存未成功，文字已保留。');}finally{inFlight.current=false;setBusy(false);}
