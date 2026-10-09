@@ -1,0 +1,43 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/preferenceOrdering.test.ts (8 tests | 4 failed) 9ms
+   ❯ CRLF production source (4)
+     × newest IO result stays visible after older successful broadcast 2ms
+     × newest rejection stays visible after older successful broadcast 0ms
+     × newer local intent still suppresses older failure 0ms
+     × another window success still suppresses delayed failure 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/preferenceOrdering.test.ts > CRLF production source > newest IO result stays visible after older successful broadcast
+ FAIL  tests/unit/preferenceOrdering.test.ts > CRLF production source > newest rejection stays visible after older successful broadcast
+TypeError: Cannot read properties of null (reading '1')
+ ❯ harness tests/unit/preferenceOrdering.test.ts:8:84
+
+ ❯ tests/unit/preferenceOrdering.test.ts:18:151
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/unit/preferenceOrdering.test.ts > CRLF production source > newer local intent still suppresses older failure
+TypeError: Cannot read properties of null (reading '1')
+ ❯ harness tests/unit/preferenceOrdering.test.ts:8:84
+
+ ❯ tests/unit/preferenceOrdering.test.ts:19:76
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/unit/preferenceOrdering.test.ts > CRLF production source > another window success still suppresses delayed failure
+TypeError: Cannot read properties of null (reading '1')
+ ❯ harness tests/unit/preferenceOrdering.test.ts:8:84
+
+ ❯ tests/unit/preferenceOrdering.test.ts:20:82
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 4 passed (8)
+   Start at  01:56:44
+   Duration  137ms (transform 59%, tests 19%, import 15%, worker 6%)
+

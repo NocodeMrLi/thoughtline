@@ -1,0 +1,21 @@
+# Task2 included unit fixture EOL repair
+
+DONE_WITH_CONCERNS — fixture repaired and locally verified; focused independent fixture review/new exact freeze/BOTH package consumers remain pending. Source commit517ff10e1e9cece60842ddcfae71f9eb1a6356b5, base65b7ea80462d68aef8b0935a24ab821797d3e564. No production files, callback/helper logic, packages, CI, remote/tag/draft/README/planning or external docs changed.
+
+Original Windows run37968756145 from3fa4683 had222pass/4fail, all at preferenceOrdering.test.ts:8 null match, before package/build-manifest/install gates. Original logs and windows-unit-failure-audit.json under ../task2-final-rebuild-3fa4683 remain intact. Runner raw source bytes were not retained; actual CRLF checkout as the historical cause remains a strong mechanism inference, not directly observed runner bytes.
+
+Only included file changed: tests/unit/preferenceOrdering.test.ts. Each existing behavior runs with in-memory source EOL normalized to LF and CRLF. Extraction accepts an optional carriage return and asserts the production callback is present before indexing. No production source disk rewriting, callback substitution, duplicated production policy or relaxed behavioral assertion. assertion-preservation.json compares all original test bodies verbatim, except the required harness(eol) argument. Tests still execute the actual production callback plus imported production ordering helper, with deferred bridge/broadcast order.
+
+Commands used explicit workdir /Users/lihongwei/Desktop/晾念头 : Thoughtline/app, /bin/sh login=false, PATH /Users/lihongwei/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:/opt/homebrew/bin:/usr/bin:/bin, Node24.19.0:
+
+- RED: `node node_modules/vitest/vitest.mjs run tests/unit/preferenceOrdering.test.ts` exit1. LF4 pass, CRLF4 fail at original fixed-LF extractor (red.log). Matrix added before extraction repair. Source snapshot fixture-red.ts, full contemporaneous227-key red-input/source-inputs.json and tracked patch retained.
+- GREEN: same command exit0,8/8 (green.log). Latest IO failure and catch after own prior success remain visible; newer local intent and other-window success suppress older failures, for BOTH EOL forms. fixture-green.ts and green-input full227-key inventory/patch retained.
+- `npm run typecheck` exit0 (typecheck.log).
+- `npm test` once after final change exit0:226 pass/4 Windows-only skips,39 suites pass/1 skip,230 total (unit-full.log). Prior222 tests plus4 extra EOL cases. No repeated suite, Electron or package run.
+- `git diff --check` exit0. Included-file exact diff saved in included-fixture.diff.
+
+Source bytes are saved as production-LF.tsx/production-CRLF.tsx plus fixture snapshots. source-bytes.json stores exact byte lengths, CRLF/LF counts, SHA256 and base64 copies so later checkout EOL conversion cannot erase the observed distinction. Both production variants came from the same untouched source, normalized only in memory. Full source vectors before/after saved. Before227 canonical0f0b1048ba136430216b731d51aa6b7db050f1c788c17d9299084e50efab3c7b; after227 canonical10367d7b3dc5d920af5e781b13b9daa1848e273cec4c542d5e652a198a68dffa, Mac raw4a5c3b3d596a9ea1c3342f69af7d01beafe56dd83712781d48fc87410fa9bcef. binding.json verifies only this fixture changed among included inputs and all contemporaneous GREEN hashes match final source. No new included files.
+
+This fixture creates no app/process/profile or temporary source files; LF/CRLF transformation is in memory. Existing full-unit synthetic harness tests retain their own exit/cleanup assertions. No Electron, fault injection into an app, global input/clipboard, real-note read, installation or OS action. Original out/dependencies/worktrees untouched by commands; PID30628 reverified alive. Parent .planning/findings and progress modifications remain unstaged. No force/history rewrite or push.
+
+The mandatory memory refresh hook again failed because its configured directory is missing; no successful refresh claimed. Only expected controlled RED failures occurred. No Windows physical/platform pass claim: local LF/CRLF tests prove fixture extraction/behavior portability mechanism, and the renewed Windows consumer must establish actual runner success. This is the Task2 narrow fixture repair, not another whole-increment review wave.
