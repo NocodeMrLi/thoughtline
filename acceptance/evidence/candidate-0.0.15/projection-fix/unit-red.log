@@ -1,0 +1,75 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp
+
+ ❯ tests/unit/clipProjection.test.ts (4 tests | 3 failed) 10ms
+   × QA混合合法ratio/null：捕获必须保持展示身份、溢出身份和每个中心 5ms
+   × 确定性3000混合旧比例/未定位及筛选压力：捕获是布局固定点 1ms
+   × QA可达移动合夹链每步捕获保持身份与坐标，移动让位被实际命令持久化 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/clipProjection.test.ts > QA混合合法ratio/null：捕获必须保持展示身份、溢出身份和每个中心
+AssertionError: expected [ '0', '1', '2', '3' ] to deeply equal [ '0', '2', '3' ]
+
+- Expected
++ Received
+
+  [
+    "0",
++   "1",
+    "2",
+    "3",
+  ]
+
+ ❯ fixed tests/unit/clipProjection.test.ts:6:322
+
+ ❯ tests/unit/clipProjection.test.ts:9:160
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/clipProjection.test.ts > 确定性3000混合旧比例/未定位及筛选压力：捕获是布局固定点
+AssertionError: expected [ '0', '1', '2', '4' ] to deeply equal [ '0', '1', '4', '6' ]
+
+- Expected
++ Received
+
+  [
+    "0",
+    "1",
++   "2",
+    "4",
+-   "6",
+  ]
+
+ ❯ fixed tests/unit/clipProjection.test.ts:6:322
+
+ ❯ tests/unit/clipProjection.test.ts:10:377
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/clipProjection.test.ts > QA可达移动合夹链每步捕获保持身份与坐标，移动让位被实际命令持久化
+AssertionError: expected [ '1', '0', '5', '2' ] to deeply equal [ '1', '0', '2', '3' ]
+
+- Expected
++ Received
+
+  [
+    "1",
+    "0",
++   "5",
+    "2",
+-   "3",
+  ]
+
+ ❯ fixed tests/unit/clipProjection.test.ts:6:322
+
+ ❯ tests/unit/clipProjection.test.ts:11:422
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 1 passed (4)
+   Start at  09:54:20
+   Duration  173ms (transform 76%, tests 11%, import 10%, worker 3%)
+

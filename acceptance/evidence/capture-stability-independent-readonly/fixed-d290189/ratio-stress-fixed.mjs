@@ -1,0 +1,7 @@
+import fs from 'node:fs/promises';
+import {layoutClips,captureClipPositions} from './execution-modules/clipLayout.ts';
+let seed=314159;const rand=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};const failures=[];let trials=3000,failureCount=0;
+for(let trial=0;trial<trials;trial++){const width=380+Math.floor(rand()*3461),count=1+Math.floor(rand()*24),clips=Array.from({length:count},(_,i)=>({id:''+i,agentId:'codex',ideaIds:['i'+i],currentId:'i'+i,position:rand()<.3?null:rand()}));const before=layoutClips(clips,width),after=layoutClips(captureClipPositions(clips,width),width);const same=before.visible.length===after.visible.length&&before.visible.every((p,i)=>p.clip.id===after.visible[i].clip.id&&Math.abs(p.x-after.visible[i].x)<1e-7);if(!same)failureCount++;if(!same&&failures.length<5)failures.push({trial,width,clips,before:before.visible.map(p=>[p.clip.id,p.x]),after:after.visible.map(p=>[p.clip.id,p.x])});}
+const result={seed:314159,trials,failureCount,scope:'deterministic pure capture/layout fixedpoint over valid position ratios/null; no native',failures};await fs.writeFile(new URL('ratio-stress-fixed.json',import.meta.url),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));
+
+if(failureCount!==0)throw new Error("capture pressure failures "+failureCount);

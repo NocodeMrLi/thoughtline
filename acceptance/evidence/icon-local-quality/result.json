@@ -1,0 +1,70 @@
+{
+  "original": {
+    "localPath": "/Users/lihongwei/Desktop/TL品牌LOGO.jpg",
+    "repoPath": "assets/source/thoughtline-tl-layered-clip-v11-original.jpg",
+    "sizeBytes": 98367,
+    "sha256": "313485e59395e3165f6504964efd72f4a3811150ac337834be3e2759f279f778",
+    "format": "JPEG",
+    "mode": "RGB",
+    "width": 1254,
+    "height": 1254,
+    "jpegQuantizationTables": 2,
+    "jpegQuantizationRange": [
+      2,
+      18
+    ],
+    "originalPreservedByteForByte": true,
+    "actualVisualInspection": true,
+    "visibleDirection": "Independent dark-teal T and L, ivory rounded-square tile, coral front-facing peg at about 30 degrees on upper-left end of T",
+    "visualQuality": "No screenshot/browser frame, visible crisp letter/peg contours, no obvious block compression; 1024 output needs downsampling, not upscaling",
+    "externalMockupBackgroundAndShadow": true,
+    "nativeAlpha": false
+  },
+  "rejectedEdits": [
+    {
+      "path": "acceptance/evidence/icon-local-quality/rejected-alpha-edit-1.png",
+      "sha256": "11770cbb33d54ad995bd67834856d4a80240eaea4f32d40cbe5e03d483be1336",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaBoundingBox": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "fullyOpaquePixels": 426,
+      "fullyTransparentPixels": 236951,
+      "partiallyTransparentPixels": 1335139,
+      "centerAlpha": 253,
+      "outer24PixelsWithAlpha": 21045,
+      "accepted": false
+    },
+    {
+      "path": "acceptance/evidence/icon-local-quality/rejected-alpha-edit-2.png",
+      "sha256": "675f73ebfd01fafdab9a6627c2eb273c32b98330d1e69eae00b3e452421bde31",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaBoundingBox": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "fullyOpaquePixels": 443,
+      "fullyTransparentPixels": 242471,
+      "partiallyTransparentPixels": 1329602,
+      "centerAlpha": 253,
+      "outer24PixelsWithAlpha": 11123,
+      "accepted": false
+    }
+  ],
+  "latestIntegrationBaseline": "17823b064be8994e96e283edddea7515dc1dfc12",
+  "latestFunctionalSource": "4400f73d430256b5731840610b9f0ccfcd0b8147",
+  "productionIconAccepted": false,
+  "exportsProduced": false,
+  "desktopLaunched": false,
+  "physicalWindowsTest": false,
+  "stopReason": "Two imagegen alpha edits retain detached exterior pixels and partially transparent tile interior; do not use for production."
+}

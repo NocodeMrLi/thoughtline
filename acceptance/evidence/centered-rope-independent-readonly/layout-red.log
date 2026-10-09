@@ -1,0 +1,26 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp
+
+ ❯ tests/unit/centeredRope.test.ts (2 tests | 1 failed) 6ms
+   × 已批准居中70%绳，左右留白与中央2/3夹区适配屏宽 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/centeredRope.test.ts > 已批准居中70%绳，左右留白与中央2/3夹区适配屏宽
+AssertionError: expected 1.1846153846153846 to be close to 0.7, received difference is 0.48461538461538467, but expected 5e-11
+ ❯ tests/unit/centeredRope.test.ts:8:57
+      6| test('已批准居中70%绳，左右留白与中央2/3夹区适配屏宽',()=>{
+      7|  for(const width of [260,380,800,1040,1440,1920,2560,3840]){
+      8|   const rope=fixedRope(width);expect(rope.length/width).toBeCloseTo(.7…
+       |                                                         ^
+      9|   expect(fixedRopeY(width/2,rope)).toBeCloseTo(rope.top+rope.sag,10);
+     10|   for(const count of [0,3,24]){const layout=layoutClips(clips(count),w…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  09:27:50
+   Duration  188ms (transform 82%, import 8%, tests 7%, worker 3%)
+

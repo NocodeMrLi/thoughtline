@@ -1,25 +1,25 @@
-# 0.0.13 隔离体验入口
+# 0.0.15 当前候选隔离体验
 
-请双击本机入口：
+本轮70%居中淡端绳、连续弯纸、正向夹持及可辨Agent颜色在 **0.0.15**。请使用本机新入口：
 
-`/Users/lihongwei/Documents/Codex/2026-10-09/task/delivery/启动0.0.13隔离体验.command`
+`/Users/lihongwei/Documents/Codex/2026-10-09/task/delivery/启动0.0.15隔离体验.command`
 
-也可在 Terminal 执行以上路径。保持该 Terminal 窗口到退出 App；重新体验/恢复仍从同一脚本启动。无需安装替换，不要把 App 拖到 Applications，不要从 Dock 旧图标或挂载卷直接双击 App。
+双击或从 Terminal 执行。保持 Terminal 到测试App退出，下次仍使用同一入口检查恢复。0.0.13仅留作回退，不能用于验收本轮新挂绳。不要安装替换、拖进 Applications、从旧Dock图标或挂载App直接启动。
 
-脚本核对固定 0.0.13 DMG SHA、包内 asar SHA、版本和签名；以只读方式挂载，经系统正常 `open -n -W --env` 流程启动。不会删除隔离目录现有内容、沿存储符号链接读写、强制卸载或停止其他进程。若系统安全提示拦截，请由用户按正常流程处理；脚本不移除 quarantine、不禁用 Gatekeeper、不申请新权限。
+脚本固定核对DMG、asar、0.0.15版本及严格签名；只读挂载后经系统正常 `open -n -W --env` 启动。测试数据独立保存于 `delivery/isolated-experience-0.0.15/user-data`，不复制或读取正式便签，保留至下次重开。脚本拒绝测试目录/存储文件符号链接，不删除已有测试数据，不强制卸载，不终止别人的进程。退出App后自动尝试弹出自己的挂载。
 
-固定测试数据目录：
+`--check-only` 只完成哈希/挂载/版本/签名检查，不启动App。默认双击入口没有调试器。额外LaunchServices验证在自己的另一个临时假数据目录中运行，用临时loopback inspector在主代码执行前核实环境，执行后核实实际userData与版本；这不是用户默认入口已启动的声明。
 
-`/Users/lihongwei/Documents/Codex/2026-10-09/task/delivery/isolated-experience-0.0.13/user-data`
+未指定 `THOUGHTLINE_DATA_DIR` 的普通App会使用正式目录，所以请始终从本入口体验。建议先从旧版托盘手动退出旧实例，以免抢同一快捷键或认错托盘；本脚本不会替你停止它。若系统安全提示阻止打开，请按正常流程自行处理；入口不绕过Gatekeeper、不修改quarantine、不申请新持久权限。
 
-这是新的独立便签/草稿/Chromium缓存目录，不从正式目录复制数据。请只写测试内容；脚本不会发送任何内容。数据保留以便下次从同一入口恢复，脚本不自动重置。
+建议用假内容验收：
 
-**直接双击 App 不保证隔离。** 当前生产代码 `src/main/index.ts:19` 未指定 `THOUGHTLINE_DATA_DIR` 时，使用正式 `~/Library/Application Support/Thoughtline`。本脚本明确覆盖这个环境变量，也明确清空开发 renderer URL；不依赖普通 shell 环境经 LaunchServices 继承。此前“直接从DMG双击作隔离体验”的说明已撤回。
+1. 检查空绳、三纸、更多便签时绳曲率不变、两端淡出、正文平整、Codex蓝/Claude暖赭可辨。
+2. 托盘写中文、空格、换行与emoji；保存草稿、重开、提交，退出后从同一入口检查全文和草稿。
+3. 打开设置→保存→关闭→再次托盘写念头；切换Agent筛选，空筛选不出现额外按钮。
+4. 满容量时把最后可见夹移到右端，确认它仍可见；同Agent合夹、翻页、全文、拆分、撤销；检查无关夹不漂移及所有便签仍可在列表找到。
+5. 暂停时关闭草稿/设置后恢复；向真实Agent拖全文并检查取消保全。真实Agent发送由你自行操作。
 
-建议先从旧版托盘退出旧实例，仅为了避免两个版本抢同一系统快捷键或认错同名托盘；脚本不会替你终止旧版。数据隔离由固定环境路径实现，不靠“先退出”实现。
+报告与机器证据：[0.0.15候选报告](../../acceptance/CANDIDATE-0.0.15-REPORT.md)。该候选不代表整体正式验收通过；G7自动全屏、物理Windows/IME/焦点/穿透/混合缩放与真实Agent接收尚需设备证据。Mac是ad-hoc签名，非Developer ID公证；Windows构建成功不等于Windows交互实测。
 
-最短体验：双击脚本 → 托盘写一条假念头 → 设置打开/保存/关闭 → 再次托盘新建 → 从测试 App 托盘退出 → 再次双击同一脚本检查便签与草稿恢复。
-
-只读预检：入口后加 `--check-only`，检查哈希、只读挂载、版本和签名后退出，未启动 App。该预检 exit0。额外独立假数据的真实 LaunchServices 测试已在运行主程序前核实传入环境、运行后核实实际 userData 和0.0.13版本，4个进程退出、挂载与临时数据清理，完整命令 exit0。验证使用临时loopback调试连接，仅验证脚本使用；默认用户入口无调试参数且尚未主动运行。
-
-验证脚本前5轮失败/修复与短暂工具断连单独记录，未当成通过；未把此检查扩大成物理菜单、系统IME、Windows/G7或整个产品验收。证据见 `acceptance/evidence/isolation-launcher/`。
+0.0.13回退入口和原说明单列在 [回退隔离说明](README-0.0.13-回退隔离体验.md)，仅回退使用，不代表本轮新挂绳。

@@ -1,0 +1,5 @@
+import assert from 'node:assert/strict';import fs from 'node:fs/promises';
+import {layoutClips,captureClipPositions} from './execution-modules/clipLayout.ts';
+const width=1440;const clips=[.8,null,.2,1].map((position,i)=>({id:''+i,agentId:'codex',ideaIds:['i'+i],currentId:'i'+i,position}));
+const before=layoutClips(clips,width);const captured=captureClipPositions(clips,width);const after=layoutClips(captured,width);assert.equal(before.visible.find(p=>p.clip.id==='0').x-after.visible.find(p=>p.clip.id==='0').x,172);const rows=x=>x.visible.map(p=>({id:p.clip.id,x:p.x}));
+const report={sourceCommit:'81b7783e330b0de85c26df0202ab260e5bfe637a',scope:'pure fixed source, no native; all input position ratios valid',width,clips,before:rows(before),beforeOverflow:before.overflow.map(c=>c.id),captured,after:rows(after),afterOverflow:after.overflow.map(c=>c.id),unrelatedClip0DriftDIP:172,allClipIDsPreserved:true};await fs.writeFile(new URL('capture-defect-repro.json',import.meta.url),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

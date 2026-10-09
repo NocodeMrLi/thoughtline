@@ -1,4 +1,10 @@
-# Historical native pilot stages
+# Current candidate and historical native pilot stages
+
+Current candidate **0.0.15 /61a6837** is frozen on `codex/thoughtline-clamp-20261009`: 70%-viewport centered/fading rope, fixed count-independent curve, 160×226 continuous paper, front-facing clips and visible blue/ochre Agent labels. No persistent toolbar/hint. Projection capture is stable and explicit moves preserve visible identity ahead of overflow; all ideas remain stored. The user provisionally accepted the visual baseline, not full platform acceptance.
+
+88 tests in20 unit files/type/build and11 isolated current-source Electron workflows passed. Mac frozen package/signature/byte equality and120-second idle passed; exact WindowsCI37873271157 passed. Independent latest-package increment is tracked separately. [Current delivery report](../acceptance/CANDIDATE-0.0.15-REPORT.md) and [isolated0.0.15 launcher](delivery/README-0.0.15-隔离体验.md) supersede older candidate recommendations. 0.0.13 remains rollback; released download remainsv0.0.6-alpha.1. Physical Windows/IME/focus/click-through/real Agent receiving and G7 automatic fullscreen remain open.
+
+The following entries are historical and retain the implementation/evidence boundary of their original stage. Their count-dependent sag, old compact sizes, empty hints, and published links are not current behavior.
 
 This is a staged native-window pilot, not the completed product.
 

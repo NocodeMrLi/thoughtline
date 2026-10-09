@@ -1,0 +1,36 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp
+
+ ❯ tests/unit/centeredRope.test.ts (3 tests | 1 failed) 9ms
+   × 移到新夹区最右侧时为已有夹子留最小间距，不把可容纳的移动夹藏入溢出 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/centeredRope.test.ts > 移到新夹区最右侧时为已有夹子留最小间距，不把可容纳的移动夹藏入溢出
+AssertionError: expected [ '1', '2' ] to deeply equal [ '1', '2', '0' ]
+
+- Expected
++ Received
+
+  [
+    "1",
+    "2",
+-   "0",
+  ]
+
+ ❯ tests/unit/centeredRope.test.ts:27:102
+     25| test('移到新夹区最右侧时为已有夹子留最小间距，不把可容纳的移动夹藏入溢出',()=>{
+     26|  const captured=captureClipPositions(clips(3),1440),moving={...capture…
+     27|  const after=layoutClips([...captured.slice(1),moving],1440);expect(af…
+       |                                                                                                      ^
+     28|  for(let i=1;i<after.visible.length;i++)expect(after.visible[i].x-afte…
+     29|  expect(after.visible.at(-1)!.x).toBeCloseTo(1440*.15+1440*.7*5/6,8);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed (3)
+   Start at  09:35:05
+   Duration  153ms (transform 75%, tests 11%, import 10%, worker 4%)
+

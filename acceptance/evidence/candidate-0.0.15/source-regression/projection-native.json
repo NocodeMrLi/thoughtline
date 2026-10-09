@@ -1,0 +1,325 @@
+{
+  "scope": "actual source main clipChange and naturally unlocked renderer; trusted DOM IPC commands including hidden merge/move/split/undo; no physical pointer/Windows acceptance",
+  "cases": [
+    {
+      "width": 1440,
+      "seededPositions": [
+        0.8,
+        null,
+        0.2,
+        1
+      ],
+      "before": [
+        {
+          "id": "0",
+          "x": 921.5999755859375
+        }
+      ],
+      "chain": [
+        {
+          "kind": "merge",
+          "before": [
+            {
+              "id": "0",
+              "x": 921.5999755859375
+            }
+          ],
+          "after": [
+            {
+              "id": "0",
+              "x": 921.5999755859375
+            }
+          ]
+        }
+      ],
+      "allBodiesAndOwnershipPreserved": true,
+      "naturalUnlockedMovedRatioMatches": true
+    },
+    {
+      "width": 1440,
+      "seededPositions": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "before": [
+        {
+          "id": "0",
+          "x": 390
+        },
+        {
+          "id": "1",
+          "x": 610
+        },
+        {
+          "id": "2",
+          "x": 830
+        },
+        {
+          "id": "3",
+          "x": 1050
+        }
+      ],
+      "chain": [
+        {
+          "operation": {
+            "kind": "move",
+            "id": "1",
+            "position": 0,
+            "beforeId": "0"
+          },
+          "after": [
+            {
+              "id": "1",
+              "x": 384
+            },
+            {
+              "id": "0",
+              "x": 556
+            },
+            {
+              "id": "2",
+              "x": 830
+            },
+            {
+              "id": "3",
+              "x": 1050
+            }
+          ]
+        },
+        {
+          "operation": {
+            "kind": "move",
+            "id": "2",
+            "position": 1,
+            "beforeId": null
+          },
+          "after": [
+            {
+              "id": "1",
+              "x": 384
+            },
+            {
+              "id": "0",
+              "x": 556
+            },
+            {
+              "id": "3",
+              "x": 884
+            },
+            {
+              "id": "2",
+              "x": 1056
+            }
+          ]
+        },
+        {
+          "operation": {
+            "kind": "move",
+            "id": "3",
+            "position": 0,
+            "beforeId": "1"
+          },
+          "after": [
+            {
+              "id": "3",
+              "x": 384
+            },
+            {
+              "id": "1",
+              "x": 556
+            },
+            {
+              "id": "0",
+              "x": 728
+            },
+            {
+              "id": "2",
+              "x": 1056
+            }
+          ]
+        },
+        {
+          "operation": {
+            "kind": "move",
+            "id": "4",
+            "position": 0,
+            "beforeId": "3"
+          },
+          "after": [
+            {
+              "id": "4",
+              "x": 384
+            },
+            {
+              "id": "3",
+              "x": 556
+            },
+            {
+              "id": "1",
+              "x": 728
+            },
+            {
+              "id": "0",
+              "x": 900
+            }
+          ]
+        },
+        {
+          "operation": {
+            "kind": "move",
+            "id": "3",
+            "position": 1,
+            "beforeId": null
+          },
+          "after": [
+            {
+              "id": "4",
+              "x": 384
+            },
+            {
+              "id": "1",
+              "x": 712
+            },
+            {
+              "id": "0",
+              "x": 884
+            },
+            {
+              "id": "3",
+              "x": 1056
+            }
+          ]
+        },
+        {
+          "operation": {
+            "kind": "merge",
+            "sourceId": "4",
+            "targetId": "1"
+          },
+          "after": [
+            {
+              "id": "1",
+              "x": 712
+            },
+            {
+              "id": "0",
+              "x": 884
+            },
+            {
+              "id": "3",
+              "x": 1056
+            }
+          ]
+        },
+        {
+          "kind": "split",
+          "after": [
+            {
+              "id": "1",
+              "x": 712
+            },
+            {
+              "id": "9e3dec5d-1029-459c-b389-338b6a5bc398",
+              "x": 932
+            }
+          ]
+        },
+        {
+          "kind": "undo",
+          "after": [
+            {
+              "id": "1",
+              "x": 712
+            },
+            {
+              "id": "0",
+              "x": 884
+            },
+            {
+              "id": "3",
+              "x": 1056
+            }
+          ]
+        }
+      ],
+      "allBodiesAndOwnershipPreserved": true,
+      "naturalUnlockedMovedRatioMatches": true
+    },
+    {
+      "width": 1040,
+      "seededPositions": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "before": [
+        {
+          "id": "0",
+          "x": 300
+        },
+        {
+          "id": "1",
+          "x": 520
+        },
+        {
+          "id": "2",
+          "x": 740
+        }
+      ],
+      "chain": [
+        {
+          "kind": "move-last-visible-to-right",
+          "after": [
+            {
+              "id": "0",
+              "x": 300
+            },
+            {
+              "id": "1",
+              "x": 520
+            },
+            {
+              "id": "2",
+              "x": 762.6666870117188
+            }
+          ]
+        }
+      ],
+      "allBodiesAndOwnershipPreserved": true,
+      "naturalUnlockedMovedRatioMatches": true
+    }
+  ],
+  "ownedPids": [
+    97141,
+    97142,
+    97143,
+    97144,
+    97145,
+    97146,
+    97148,
+    97150,
+    97151,
+    97152,
+    97157,
+    97158,
+    97159,
+    97160,
+    97161,
+    97162,
+    97163,
+    97164
+  ],
+  "allPidsExited": true,
+  "fakeDataRemoved": true
+}
