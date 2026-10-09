@@ -32,7 +32,7 @@ Mac Node24.19.0 verify：102unit通过、4Windows-only跳过、类型/构建通�
 
 App/installer 未签名，SmartScreen、SAC、企业策略可能阻止运行，不关闭安全机制/不修改系统执行策略。正常退出等待保存；Windows 注销/关机不触发正常退出回调，未 ACK 草稿尾部/未提交编辑/强退或断电无法承诺零丢失。物理IME/CtrlEnter/焦点/穿透、消费者Win10/11/ARM64/多屏缩放、真实Agent/G7、旧版升级/回滚、OS图标缓存/任务栏视觉仍需用户实机；`formalAcceptance=false`。
 
-准确源码及独立复核事项见 [QA 固定入口](WINDOWS-V11-QA-HANDOFF-20261009.md)。独立最终整合 QA 结论待专门 QA 线程完成，本文不提前宣称其通过。
+准确源码及独立复核事项见 [QA 固定入口](WINDOWS-V11-QA-HANDOFF-20261009.md)。独立最终整合只读 QA 已完成，未发现交付阻挡，可以进入用户 Windows 隔离实测；formalAcceptance=false。
 
 ## 最终下载与原始结果
 
@@ -52,4 +52,8 @@ App/installer 未签名，SmartScreen、SAC、企业策略可能阻止运行，�
 - [安装器数据保持报告](evidence/windows-v11/windows-installer-preflight.json)：passed=true；现存合成数据在当前用户安装前后保持、同版本重装/普通卸载保持、CheckOnly无profile副作用；App及installer均NotSigned。App numeric ProductVersion为 `0.0.16.0`，App FileVersion为 `.6`；下载installer的字符串FileVersion/ProductVersion均 `.6`，PE固定数字version为 `0.0.16.0`。
 - [PE嵌入报告](evidence/windows-v11/windows-pe-icons.json)：passed=true；App、installer和uninstaller均有完整匹配group，7帧尺寸16/24/32/48/64/128/256与批准App ICO逐帧原始payload hash相同。图标缓存/物理视觉仍未验。
 
-独立最终只读 QA 线程 `01a11f5d-cf47-7244-a3d5-aa1d8831c0c8` 已有准确固定入口；其结果待该线程报告，本线程不提前代签。后续文档HEAD与上面的打包source分开。
+独立最终只读 QA 线程 `01a11f5d-cf47-7244-a3d5-aa1d8831c0c8` 已有准确固定入口；其独立报告已完成，无阻挡；原始报告与receipt原样保留。后续文档HEAD与上面的打包source分开。
+
+## 独立最终交付 QA
+
+线程 `01a11f5d-cf47-7244-a3d5-aa1d8831c0c8` 已完成只读复核：[独立报告](evidence/windows-v11/independent-qa/INDEPENDENT-WINDOWS-DELIVERY-QA.md)、[独立receipt](evidence/windows-v11/independent-qa/INDEPENDENT-WINDOWS-DELIVERY-QA.json)。独立复算exe SHA256、7帧PE和版本、manifest/source/编译hash/launcher绑定、合成fixture及revision8保存状态的snapshot/bak/marker hash，均与最终CI和下载记录一致。批准资产/Git对象、两次失败与修复严格校验也已复核。结论：无交付阻挡，可以进入Windows隔离实测。QA没有改生产文件、启动native或安装/改变系统。物理IME/CtrlEnter/焦点/穿透/Agent/G7/旧版升级回滚仍未验，formalAcceptance=false。
