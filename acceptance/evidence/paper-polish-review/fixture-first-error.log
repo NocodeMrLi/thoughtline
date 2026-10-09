@@ -1,0 +1,12 @@
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert((await shelf.evaluate(s=>window.thoughtline.clipChange({kind:'merge',sourceId:s.clips[0].id,targetId:s.clips[1].id},s.revision),i)).ok)
+
+    at /Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/tests/electron/paper-polish-preview.cjs:25:74 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
