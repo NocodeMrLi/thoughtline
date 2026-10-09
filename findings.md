@@ -1,0 +1,7 @@
+# Findings
+
+2026-10-09：远端main ff39779cbeb562083f3574db4d2998693091b0be，private=true，只main/G7。原main5f9f293 clean，无活跃vite；旧Electron为default_app从/运行，保留PID30628和安装版28102。原目录普通ff同步完成；所有其他worktree未更改。schema2有ideas.project字符串、物理clips独立；只有hanging/archived；仓库快照commit队列和revision。
+
+需求原文整理已存笔记库216行18134字节，初始SHA25672ed476ee2f3fb03d7f65c55fa941171d3e56cadeccfaf6cbe8ea642b94ed183。用户反馈Windows微信成功/豆包间歇/WorkBuddy失败属于反馈层，无独立复现。当前没有项目专属.agents/skills；上级AGENTS已读，用户本轮固定绳/两轮方案覆盖旧规则。
+
+P1采用清除全部idea/draft project引用而不引入项目实体，schema2不变；撤销快照同样清除，物理整理可撤销但分组不复活。用户确认Windows微信4.1.13.65/WorkBuddy5.7.6/QQ浏览器版本未知。当前生产纸张160x226已有A4比例，不需重画。翻页有busy等写盘，布局单向导致右侧卡后的新卡看不到左侧空位。

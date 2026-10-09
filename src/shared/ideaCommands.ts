@@ -81,3 +81,10 @@ export function shelfSelection(s:Snapshot,agentId:string,width:number){
   const visible=filtered.slice(0,visibleSlots(width));
   return {totalHanging,visible,filteredCount:filtered.length,overflow:filtered.length-visible.length};
 }
+
+// Project membership is independent of physical clips. Clearing every reference
+// (including archived ideas and drafts) makes deletion survive reconstruction.
+export function removeProject(s:Snapshot,project:string,now:string):Result<Snapshot>{
+ if(!project||!textOK(project,40)||!Number.isFinite(Date.parse(now)))return invalid('未分组不能删除。');
+ return validateSnapshot({...s,ideas:s.ideas.map(i=>i.project===project?{...i,project:'',updatedAt:now}:i),draft:s.draft?.project===project?{...s.draft,project:''}:s.draft});
+}

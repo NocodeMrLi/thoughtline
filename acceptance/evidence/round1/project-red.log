@@ -1,0 +1,46 @@
+
+> thoughtline@0.0.16-preview.6 test
+> node node_modules/vitest/vitest.mjs run tests/unit/projectDeletion.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/projectDeletion.test.ts (3 tests | 3 failed) 21ms
+   × 删除项目立即清除全部念头和草稿归属，物理合夹/当前页/正文保持 3ms
+   × 未分组不可删除，退出无删除时无需任何数据写入 0ms
+   × 删除项目含已收起念头并且独立重启不会复活 17ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/projectDeletion.test.ts > 删除项目立即清除全部念头和草稿归属，物理合夹/当前页/正文保持
+TypeError: removeProject is not a function
+ ❯ tests/unit/projectDeletion.test.ts:12:49
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/projectDeletion.test.ts > 未分组不可删除，退出无删除时无需任何数据写入
+TypeError: removeProject is not a function
+ ❯ tests/unit/projectDeletion.test.ts:18:36
+     16| });
+     17| test('未分组不可删除，退出无删除时无需任何数据写入',()=>{
+     18|  const s=fixture();expect(commands.removeProject(s,'',now)).toMatchObj…
+       |                                    ^
+     19| });
+     20| test('删除项目含已收起念头并且独立重启不会复活',async()=>{
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/projectDeletion.test.ts > 删除项目含已收起念头并且独立重启不会复活
+TypeError: removeProject is not a function
+ ❯ tests/unit/projectDeletion.test.ts:22:184
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  17:57:06
+   Duration  159ms (transform 57%, tests 26%, import 14%, worker 3%)
+

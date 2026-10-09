@@ -20,6 +20,7 @@ const api:ThoughtlineBridge={
  dragLock:active=>ipcRenderer.invoke('thoughtline:drag-lock',active),
  textDrag:(active,id)=>ipcRenderer.send('thoughtline:text-drag',active,id),
  clipChange:(change,revision)=>ipcRenderer.invoke('thoughtline:clip',change,revision),
+ projectDelete:(project,revision)=>ipcRenderer.invoke('thoughtline:project-delete',project,revision),
  agentChange:(change,revision)=>ipcRenderer.invoke('thoughtline:agent',change,revision)
 };
 contextBridge.exposeInMainWorld('thoughtline',api);

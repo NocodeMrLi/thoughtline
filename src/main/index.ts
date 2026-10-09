@@ -9,7 +9,7 @@ import {EdgeController} from './edgeController';
 import {loadWithRecovery} from './store/repository';
 import {swapShortcut} from './shortcuts';
 import {validWriteHotkey,displayWriteHotkey} from '../shared/composerKeys';
-import {newIdea,editIdea,changeStatus,addAgent,updateAgent,removeAgent} from '../shared/ideaCommands';
+import {newIdea,editIdea,changeStatus,addAgent,updateAgent,removeAgent,removeProject} from '../shared/ideaCommands';
 import type {Draft,Result,Snapshot} from '../shared/contracts';
 import type {PilotInfo,HitLayout,ComposerContext,AgentMutation,ClipMutation} from '../shared/bridge';
 import {mergeClips,splitClip,moveClip,selectClipIdea} from '../shared/clipCommands';
@@ -220,7 +220,19 @@ else app.whenReady().then(async()=>{
   else return invalid('Agent内容无效');
   return save(next,revision);
  });
- ipcMain.on('thoughtline:text-drag',(e,active:boolean,id?:string)=>{
+ ipcMain.handle('thoughtline:project-delete',(e,project:string,revision:number)=>composerWrite(async()=>{
+  if(!trusted(e,[composer,manage])||typeof project!=='string'||!project)return invalid('未分组不能删除。');
+  if(revision!==snapshot.revision)return {ok:false,code:'CONFLICT',message:'内容已更新，请重新删除分组。'};
+  const priorUndo=undoClips,now=new Date().toISOString();
+  const saved=await save(removeProject(snapshot,project,now),revision);
+  if(saved.ok){
+   if(composerContext.draft.project===project)composerContext={...composerContext,draft:{...composerContext.draft,project:''}};
+   if(priorUndo){const cleaned=removeProject(priorUndo.snapshot,project,now);if(cleaned.ok)undoClips={snapshot:cleaned.value,revision:snapshot.revision};}
+   publish();
+  }
+  return saved;
+ }));
+ ipcMain.on('thoughtline:text-drag' ,(e,active:boolean,id?:string)=>{
   if(!trusted(e,[shelf])||typeof active!=='boolean')return;
   if(!active){if(id===textDragOwner)finishTextDrag();return;}
   if(textDragTimer||!edge.presentation().shelfVisible||typeof id!=='string'||!snapshot.ideas.some(i=>i.id===id&&i.status==='hanging'))return;

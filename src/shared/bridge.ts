@@ -21,6 +21,7 @@ export interface ThoughtlineBridge{
  clipChange(change:ClipMutation,revision:number):Promise<Result<Snapshot>>;
  dragLock(active:boolean):Promise<Result<void>>;
  textDrag(active:boolean,id?:string):void;
+ projectDelete(project:string,revision:number):Promise<Result<Snapshot>>;
  agentChange(change:AgentMutation,revision:number):Promise<Result<Snapshot>>;
 }
 declare global{interface Window{thoughtline:ThoughtlineBridge;}}
