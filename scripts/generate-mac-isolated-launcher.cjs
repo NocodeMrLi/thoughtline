@@ -37,14 +37,14 @@ try {
   fs.rmSync(mount, { recursive: true });
 }
 const dmgHash = hash(dmg);
-const dataRoot = path.join(delivery, 'isolated-experience');
 const command = `#!/bin/zsh
 set -euo pipefail
 umask 077
-candidate_dmg=${q(dmg)}
+launcher_dir=\${0:A:h}
+candidate_dmg="$launcher_dir/Thoughtline-${version}-mac-arm64.dmg"
 expected_dmg=${q(dmgHash)}
 expected_asar=${q(asarHash)}
-experience_root=${q(dataRoot)}
+experience_root="$launcher_dir/isolated-experience"
 experience_data="$experience_root/user-data"
 experience_mount="$experience_root/mount"
 candidate_app="$experience_mount/Thoughtline.app"
