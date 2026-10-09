@@ -1,0 +1,610 @@
+--- a/README.md
++++ b/README.md
+@@ -1,57 +1,58 @@
+ <h1 align="center">
+   <img src="assets/app-icon.png" alt="Thoughtline app icon" width="96" height="96" valign="middle" /> 晾念头 · Thoughtline
+ </h1>
+ 
+ <p align="center">
+   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="docs/readme/badges/stars.svg" alt="GitHub stars: 0" /></a>
+   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="docs/readme/badges/downloads.svg" alt="Release asset downloads: 3" /></a>
+   <a href="#license"><img src="docs/readme/badges/license.svg" alt="License: UNLICENSED" /></a>
+-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="docs/readme/badges/preview.svg" alt="Preview: 0.0.17-preview.2" /></a>
++  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="docs/readme/badges/preview.svg" alt="Preview: 0.0.17-preview.3" /></a>
+   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="docs/readme/badges/feedback.svg" alt="Feedback on GitHub" /></a>
+-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="docs/readme/badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
++  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="docs/readme/badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+ </p>
+ 
+ <p align="center">
+   <sub><a href="README.md">中文</a> · <a href="docs/readme/README.en.md">English</a> · <a href="docs/readme/README.ja.md">日本語</a> · <a href="docs/readme/README.ko.md">한국어</a> · <a href="docs/readme/README.es.md">Español</a> · <a href="docs/readme/README.fr.md">Français</a> · <a href="docs/readme/README.pt.md">Português</a></sub>
+ </p>
+ 
+ <p align="center">
+   <strong>把念头晾起来，让灵感随手可见。</strong><br />
+   用一根绳、几只夹子和几张纸，轻轻留住工作与生活里的念头。
+ </p>
+ 
+-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><ins>下载 Thoughtline</ins></a></h2>
++<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><ins>下载 Thoughtline</ins></a></h2>
+ 
+-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.2</sub></p>
++<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.3</sub></p>
+ 
+ Thoughtline 是一款面向 macOS 和 Windows 的轻量桌面念头工具。需要时，在屏幕顶边呼出晾衣绳；写下、整理、取用，再回到手头的事情。
+ 
+ ## 功能
+ 
+ - **随手记下**：快捷键打开新建窗，记录标题、正文和归属；未提交内容可以保存为草稿。
+ - **晾在桌面**：常驻界面只有绳、夹子和纸张。夹子正面夹住薄纸，新念头默认归属“通用”。
+ - **顺手整理**：拖木夹移动整组，拖纸张上缘抽出一张；兼容夹子可以合并，整理支持撤销。
+ - **原地修改**：在展开窗或日历里直接编辑，短暂停顿后自动保存；组内翻页即时显示。
+ - **按日期回看**：念头日历支持日、月、年浏览、搜索与状态筛选；已收起的念头仍可找到。
+ - **留下退路**：删除念头进入最近删除，可以恢复；删除项目只解除归属，保留念头内容。
+ - **取用正文**：显式复制或从正文拖出纯文本，原纸张保留，不自动发送。
+ - **自己管理数据**：念头保存在本机，可查看实际目录、更改保存位置、导出独立备份。
++- **中英与昼夜**：首层窗口即可切换中文／English和白昼／夜间外观，也可跟随系统；纸张保持柔和、清晰的纸感。
+ 
+ <p align="center">
+   <img src="docs/readme/images/thought-calendar.png" alt="Thoughtline念头日历：有记录的日期显示Logo红夹子与条数" width="740" />
+   <br /><sub>念头日历示例，使用合成演示数据。</sub>
+ </p>
+ 
+ ## 下载与安装
+ 
+-当前为预览版，测试包向有仓库访问权限的成员开放。到 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2) 下载安装包、隔离启动入口和 `SHA256SUMS`；每版提供对应构建来源与校验清单。
++当前为预览版，测试包向有仓库访问权限的成员开放。到 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3) 下载安装包、隔离启动入口和 `SHA256SUMS`；每版提供对应构建来源与校验清单。
+ 
+ | 平台 | 当前安装包 |
+ |---|---|
+ | macOS · Apple Silicon | arm64 · DMG |
+ | Windows | x64 · EXE（NSIS） |
+ 
+ 安装或升级前，正常退出应用并备份现有数据。Mac 当前为 ad-hoc 签名，尚未 Developer ID 签名或公证；Windows 当前未签名。安装受系统安全提示阻挡时保留原提示，不关闭安全保护。当前不提供自动更新。
+ 
+ ## 开始使用
+ 
+@@ -78,21 +79,21 @@
+ ```
+ 
+ ```bash
+ npm run verify
+ npm run package:mac
+ npm run package:win
+ ```
+ 
+ `verify` 执行类型检查、单元测试与构建；平台包在对应系统构建。技术栈为 Electron、React、TypeScript 和 Vite。
+ 
+-当前预览版已完成适用自动检查与包验证。真实 Mac／Windows 输入法、DPI、多屏、焦点与微信、豆包、WorkBuddy 等外部输入框仍待独立测试。语言切换提供 **README 文档翻译**，应用界面目前为中文。
++当前预览版已完成适用自动检查与包验证。真实 Mac／Windows 输入法、DPI、多屏、焦点与微信、豆包、WorkBuddy 等外部输入框仍待独立测试。应用界面支持中文与 English；新建、展开和日历窗口右上角可直接切换语言及日间／夜间外观，设置内可恢复跟随系统。上方七种语言链接提供 **README 文档翻译**，不表示应用支持七种界面语言。
+ 
+ ## 反馈
+ 
+ 通过 [Issues](https://github.com/NocodeMrLi/thoughtline/issues) 报告问题或建议。请附系统与应用版本、复现步骤、预期／实际结果及经过脱敏的截图或日志；不要上传真实念头或个人数据。
+ 
+ Star 与下载徽章更新于 2026-10-09；下载数统计发布资产下载次数，代表 API 快照。
+ 
+ <a id="license"></a>
+ ## 许可与致谢
+ 
+--- a/docs/readme/README.en.md
++++ b/docs/readme/README.en.md
+@@ -1,54 +1,55 @@
+ <h1 align="center">
+   <img src="../../assets/app-icon.png" alt="Thoughtline app icon" width="96" height="96" valign="middle" /> 晾念头 · Thoughtline
+ </h1>
+ 
+ <p align="center">
+   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
+   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
+   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
+-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.2" /></a>
++  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.3" /></a>
+   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
+-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
++  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+ </p>
+ 
+ <p align="center">
+   <sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub>
+ </p>
+ 
+ <p align="center">
+   <strong>Hang up a thought. Keep inspiration within reach.</strong><br />
+   A rope, a few clips, and sheets of paper for everyday ideas.
+ </p>
+ 
+-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><ins>Download Thoughtline</ins></a></h2>
++<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><ins>Download Thoughtline</ins></a></h2>
+ 
+-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.2</sub></p>
++<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.3</sub></p>
+ 
+ Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ideas at the top edge of the screen, capture a thought, and return to what you were doing.
+ 
+ ## Features
+ 
+ - Capture titles, text, and categories with a shortcut; keep unfinished notes as drafts.
+ - A desktop rope with clips and paper, with new thoughts assigned to General.
+ - Move a whole clip or detach one sheet; merge compatible clips and undo organization.
+ - Edit directly in the detail view or calendar; autosave after a short pause and turn pages instantly.
+ - Browse by day, month, or year; search and filter, including archived thoughts.
+ - Recover deleted thoughts from Recently Deleted. Removing a project keeps its thoughts.
+ - Copy text or drag the body as plain text. The source note stays in place; nothing is sent automatically.
+ - Keep data locally; inspect the actual folder, move it, or export an independent backup.
++- Switch Chinese/English and light/dark directly in the first-level windows, or follow the system; paper stays soft and readable.
+ 
+ <p align="center"><img src="images/thought-calendar.png" alt="Thought calendar with synthetic demonstration data." width="740" /><br /><sub>Thought calendar with synthetic demonstration data.</sub></p>
+ 
+ ## Download and install
+ 
+-This is a preview. Downloads are available to members with repository access. Releases include packages, isolated launchers, SHA256SUMS, and build provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2).
++This is a preview. Downloads are available to members with repository access. Releases include packages, isolated launchers, SHA256SUMS, and build provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3).
+ 
+ | Platform | Package |
+ |---|---|
+ | macOS · Apple Silicon | arm64 · DMG |
+ | Windows | x64 · EXE (NSIS) |
+ 
+ Before upgrading, quit normally and back up your data. The Mac package is ad-hoc signed, without Developer ID signing or notarization; Windows is unsigned. Keep system security protections enabled. There is no automatic update.
+ 
+ ## Getting started
+ 
+@@ -73,21 +74,21 @@
+ npm ci
+ npm run dev
+ ```
+ 
+ ```bash
+ npm run verify
+ npm run package:mac
+ npm run package:win
+ ```
+ 
+-Applicable automated and package checks have passed. Physical Mac/Windows IME, DPI, multiple displays, focus, and real receiving fields in WeChat, Doubao, and WorkBuddy still need independent testing. These language links translate the README; the app interface is currently Chinese.
++Applicable automated and package checks have passed. Physical Mac/Windows IME, DPI, multiple displays, focus, and real receiving fields in WeChat, Doubao, and WorkBuddy still need independent testing. The app interface supports Chinese and English. Switch language and light/dark appearance directly at the top right of Composer, Detail, or Calendar; Settings can restore Follow system. The seven language links translate the README, not seven app interface languages.
+ 
+ ## Feedback
+ 
+ Use Issues for bugs and ideas. Include versions, reproduction steps, expected and actual behavior, and redacted evidence. Do not upload personal thoughts or data. [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
+ 
+ Stars and downloads are an API snapshot dated 2026-10-09. Downloads count release asset downloads.
+ 
+ <a id="license"></a>
+ ## License and acknowledgments
+ 
+--- a/docs/readme/README.ja.md
++++ b/docs/readme/README.ja.md
+@@ -1,54 +1,55 @@
+ <h1 align="center">
+   <img src="../../assets/app-icon.png" alt="Thoughtline app icon" width="96" height="96" valign="middle" /> 晾念头 · Thoughtline
+ </h1>
+ 
+ <p align="center">
+   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
+   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
+   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
+-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.2" /></a>
++  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.3" /></a>
+   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
+-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
++  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+ </p>
+ 
+ <p align="center">
+   <sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub>
+ </p>
+ 
+ <p align="center">
+   <strong>思いつきを吊るして、ひらめきを身近に。</strong><br />
+   一本のロープとクリップ、紙で日々のアイデアを残します。
+ </p>
+ 
+-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><ins>Thoughtline をダウンロード</ins></a></h2>
++<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><ins>Thoughtline をダウンロード</ins></a></h2>
+ 
+-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.2</sub></p>
++<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.3</sub></p>
+ 
+ Thoughtline は macOS と Windows 向けの軽量なデスクトップメモアプリです。画面上端からメモを呼び出し、思いつきを書き留めて作業に戻れます。
+ 
+ ## 機能
+ 
+ - ショートカットでタイトル、本文、分類を記録し、未完成のメモを下書きに保存。
+ - デスクトップにはロープ、クリップ、紙だけを表示。新しいメモは「通用」に分類。
+ - クリップ全体を移動、紙を一枚取り出し、互換性のあるクリップを結合。整理は取り消し可能。
+ - 詳細画面やカレンダー内で直接編集。短い入力停止後に自動保存し、ページを即座に切り替え。
+ - 日・月・年で振り返り、検索や状態フィルターで収納済みのメモも表示。
+ - 削除したメモは「最近削除した項目」から復元。プロジェクト削除でも本文は保持。
+ - 本文をコピー、またはプレーンテキストとしてドラッグ。元のメモを保持し、自動送信しません。
+ - データをローカル保存し、実際のフォルダー表示、移動、独立したバックアップ出力に対応。
++- 最初の画面から中国語／Englishとライト／ダークを切り替え、システムにも連動できます。紙は柔らかく読みやすい質感を保ちます。
+ 
+ <p align="center"><img src="images/thought-calendar.png" alt="合成データを使ったメモカレンダーの例。" width="740" /><br /><sub>合成データを使ったメモカレンダーの例。</sub></p>
+ 
+ ## ダウンロードとインストール
+ 
+-現在はプレビュー版です。リポジトリへのアクセス権を持つメンバーが利用できます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2).
++現在はプレビュー版です。リポジトリへのアクセス権を持つメンバーが利用できます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3).
+ 
+ | Platform | Package |
+ |---|---|
+ | macOS · Apple Silicon | arm64 · DMG |
+ | Windows | x64 · EXE (NSIS) |
+ 
+ 更新前に正常終了してデータをバックアップしてください。Mac は ad-hoc 署名のみで Developer ID 署名・公証はなく、Windows は未署名です。システムの安全保護を無効にしないでください。自動更新はありません。
+ 
+ ## 使い始める
+ 
+@@ -73,21 +74,21 @@
+ npm ci
+ npm run dev
+ ```
+ 
+ ```bash
+ npm run verify
+ npm run package:mac
+ npm run package:win
+ ```
+ 
+-適用可能な自動検査とパッケージ検証は完了しています。実機の入力方式、DPI、複数画面、フォーカス、WeChat・Doubao・WorkBuddy の実際の入力欄は独立テスト待ちです。言語切替はREADMEの翻訳で、アプリ画面は現在中国語です。
++適用可能な自動検査とパッケージ検証は完了しています。実機の入力方式、DPI、複数画面、フォーカス、WeChat・Doubao・WorkBuddy の実際の入力欄は独立テスト待ちです。アプリ画面は中国語とEnglishに対応します。入力・詳細・カレンダーの右上で言語とライト／ダークを直接切り替え、設定でシステム連動に戻せます。上の7言語リンクはREADMEの翻訳で、アプリの対応言語数ではありません。
+ 
+ ## フィードバック
+ 
+ 不具合や提案は Issues へ。バージョン、再現手順、期待結果と実際の結果、個人情報を除いた証拠を添えてください。実際のメモや個人データをアップロードしないでください。 [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
+ 
+ Starとダウンロード数は2026-10-09のAPIスナップショットです。ダウンロード数はリリース資産の取得回数です。
+ 
+ <a id="license"></a>
+ ## ライセンスと謝辞
+ 
+--- a/docs/readme/README.ko.md
++++ b/docs/readme/README.ko.md
+@@ -1,54 +1,55 @@
+ <h1 align="center">
+   <img src="../../assets/app-icon.png" alt="Thoughtline app icon" width="96" height="96" valign="middle" /> 晾念头 · Thoughtline
+ </h1>
+ 
+ <p align="center">
+   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
+   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
+   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
+-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.2" /></a>
++  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.3" /></a>
+   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
+-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
++  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+ </p>
+ 
+ <p align="center">
+   <sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub>
+ </p>
+ 
+ <p align="center">
+   <strong>생각을 걸어 두고, 영감을 가까이.</strong><br />
+   줄 하나와 집게, 종이로 일상의 아이디어를 남깁니다.
+ </p>
+ 
+-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><ins>Thoughtline 다운로드</ins></a></h2>
++<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><ins>Thoughtline 다운로드</ins></a></h2>
+ 
+-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.2</sub></p>
++<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.3</sub></p>
+ 
+ Thoughtline은 macOS와 Windows용 가벼운 데스크톱 메모 도구입니다. 화면 위쪽 가장자리에서 생각을 꺼내 보고, 기록한 뒤 하던 일로 돌아가세요.
+ 
+ ## 기능
+ 
+ - 단축키로 제목, 본문, 분류를 기록하고 미완성 메모를 초안으로 저장합니다.
+ - 데스크톱에는 줄, 집게, 종이만 표시합니다. 새 메모의 기본 분류는 일반입니다.
+ - 집게 전체를 옮기거나 종이 한 장을 분리하고, 호환 집게를 합칩니다. 정리는 실행 취소할 수 있습니다.
+ - 상세 보기와 달력에서 직접 편집합니다. 잠시 입력을 멈추면 자동 저장하고 페이지를 즉시 전환합니다.
+ - 일·월·년으로 돌아보고 검색과 상태 필터로 보관한 메모도 찾습니다.
+ - 삭제한 메모를 최근 삭제에서 복원합니다. 프로젝트 삭제는 메모 내용을 유지합니다.
+ - 본문을 복사하거나 일반 텍스트로 드래그합니다. 원본을 유지하고 자동 전송하지 않습니다.
+ - 데이터를 로컬에 저장하고 실제 폴더 확인, 이동, 독립 백업 내보내기를 지원합니다.
++- 첫 화면에서 중국어/English와 밝게/어둡게 모드를 바꾸거나 시스템 설정을 따릅니다. 종이는 부드럽고 읽기 편한 질감을 유지합니다.
+ 
+ <p align="center"><img src="images/thought-calendar.png" alt="합성 시연 데이터를 사용한 생각 달력." width="740" /><br /><sub>합성 시연 데이터를 사용한 생각 달력.</sub></p>
+ 
+ ## 다운로드 및 설치
+ 
+-현재 미리보기 버전입니다. 저장소 접근 권한이 있는 구성원에게 제공됩니다. Releases에서 패키지, 격리 실행 스크립트, SHA256SUMS와 빌드 정보를 확인하세요. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2).
++현재 미리보기 버전입니다. 저장소 접근 권한이 있는 구성원에게 제공됩니다. Releases에서 패키지, 격리 실행 스크립트, SHA256SUMS와 빌드 정보를 확인하세요. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3).
+ 
+ | Platform | Package |
+ |---|---|
+ | macOS · Apple Silicon | arm64 · DMG |
+ | Windows | x64 · EXE (NSIS) |
+ 
+ 업데이트 전에 정상 종료하고 데이터를 백업하세요. Mac은 ad-hoc 서명이며 Developer ID 서명이나 공증이 없고, Windows는 서명되지 않았습니다. 시스템 보안 보호를 끄지 마세요. 자동 업데이트는 없습니다.
+ 
+ ## 시작하기
+ 
+@@ -73,21 +74,21 @@
+ npm ci
+ npm run dev
+ ```
+ 
+ ```bash
+ npm run verify
+ npm run package:mac
+ npm run package:win
+ ```
+ 
+-적용 가능한 자동 검사와 패키지 검증은 통과했습니다. 실제 Mac/Windows 입력기, DPI, 다중 화면, 포커스와 WeChat·Doubao·WorkBuddy 입력칸은 독립 테스트가 필요합니다. 언어 링크는 README 번역이며 앱 UI는 현재 중국어입니다.
++적용 가능한 자동 검사와 패키지 검증은 통과했습니다. 실제 Mac/Windows 입력기, DPI, 다중 화면, 포커스와 WeChat·Doubao·WorkBuddy 입력칸은 독립 테스트가 필요합니다. 앱 UI는 중국어와 English를 지원합니다. 작성·상세·달력 창의 오른쪽 위에서 언어와 밝게/어둡게 모드를 바로 바꾸고, 설정에서 시스템 설정 따르기로 돌아갈 수 있습니다. 위의 7개 언어 링크는 README 번역이며 앱 UI가 7개 언어를 지원한다는 뜻은 아닙니다.
+ 
+ ## 피드백
+ 
+ 버그와 제안은 Issues에 등록하세요. 버전, 재현 단계, 예상 결과와 실제 결과, 개인정보를 가린 증거를 첨부하세요. 실제 메모나 개인 데이터를 올리지 마세요. [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
+ 
+ Star와 다운로드 수는 2026-10-09 API 스냅샷입니다. 다운로드는 릴리스 파일의 다운로드 횟수입니다.
+ 
+ <a id="license"></a>
+ ## 라이선스와 감사
+ 
+--- a/docs/readme/README.es.md
++++ b/docs/readme/README.es.md
+@@ -1,54 +1,55 @@
+ <h1 align="center">
+   <img src="../../assets/app-icon.png" alt="Thoughtline app icon" width="96" height="96" valign="middle" /> 晾念头 · Thoughtline
+ </h1>
+ 
+ <p align="center">
+   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
+   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
+   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
+-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.2" /></a>
++  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.3" /></a>
+   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
+-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
++  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+ </p>
+ 
+ <p align="center">
+   <sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub>
+ </p>
+ 
+ <p align="center">
+   <strong>Cuelga una idea. Mantén la inspiración a mano.</strong><br />
+   Una cuerda, unas pinzas y hojas de papel para tus ideas cotidianas.
+ </p>
+ 
+-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><ins>Descargar Thoughtline</ins></a></h2>
++<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><ins>Descargar Thoughtline</ins></a></h2>
+ 
+-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.2</sub></p>
++<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.3</sub></p>
+ 
+ Thoughtline es una herramienta ligera para macOS y Windows. Muestra tus ideas en el borde superior de la pantalla, anota una y vuelve a lo que estabas haciendo.
+ 
+ ## Funciones
+ 
+ - Anota título, texto y categoría con un atajo; guarda notas incompletas como borradores.
+ - Una cuerda de escritorio con pinzas y papel; las ideas nuevas usan la categoría General.
+ - Mueve una pinza completa o separa una hoja; combina pinzas compatibles y deshaz la organización.
+ - Edita en la vista de detalle o el calendario, con guardado automático tras una pausa y cambio inmediato de página.
+ - Explora por día, mes o año; busca y filtra también las ideas archivadas.
+ - Restaura notas desde Eliminados recientemente. Borrar un proyecto conserva sus ideas.
+ - Copia o arrastra el texto sin formato. La nota original se mantiene y no se envía nada automáticamente.
+ - Guarda los datos localmente; consulta la carpeta real, muévelos o exporta una copia independiente.
++- Cambia entre chino/inglés y modo claro/oscuro desde las primeras ventanas, o sigue el sistema; el papel sigue siendo suave y legible.
+ 
+ <p align="center"><img src="images/thought-calendar.png" alt="Calendario de ideas con datos de demostración sintéticos." width="740" /><br /><sub>Calendario de ideas con datos de demostración sintéticos.</sub></p>
+ 
+ ## Descarga e instalación
+ 
+-Esta es una versión preliminar para miembros con acceso al repositorio. Releases incluye paquetes, lanzadores aislados, SHA256SUMS y procedencia de las compilaciones. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2).
++Esta es una versión preliminar para miembros con acceso al repositorio. Releases incluye paquetes, lanzadores aislados, SHA256SUMS y procedencia de las compilaciones. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3).
+ 
+ | Platform | Package |
+ |---|---|
+ | macOS · Apple Silicon | arm64 · DMG |
+ | Windows | x64 · EXE (NSIS) |
+ 
+ Antes de actualizar, cierra la aplicación normalmente y respalda tus datos. Mac usa firma ad-hoc, sin Developer ID ni notarización; Windows no tiene firma. Mantén las protecciones del sistema. No hay actualizaciones automáticas.
+ 
+ ## Primeros pasos
+ 
+@@ -73,21 +74,21 @@
+ npm ci
+ npm run dev
+ ```
+ 
+ ```bash
+ npm run verify
+ npm run package:mac
+ npm run package:win
+ ```
+ 
+-Las comprobaciones automáticas y de paquetes aplicables han pasado. IME, DPI, varias pantallas, foco y campos reales de WeChat, Doubao y WorkBuddy requieren pruebas independientes. Estos idiomas traducen el README; la interfaz de la aplicación está actualmente en chino.
++Las comprobaciones automáticas y de paquetes aplicables han pasado. IME, DPI, varias pantallas, foco y campos reales de WeChat, Doubao y WorkBuddy requieren pruebas independientes. La interfaz admite chino e inglés. Cambia el idioma y el modo claro/oscuro directamente en la esquina superior derecha de Composición, Detalle o Calendario; en Ajustes puedes volver a seguir el sistema. Los siete enlaces traducen el README, no indican siete idiomas para la interfaz.
+ 
+ ## Comentarios
+ 
+ Usa Issues para errores y sugerencias. Incluye versiones, pasos, resultado esperado y real, y pruebas sin información privada. No subas notas personales ni datos reales. [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
+ 
+ Estrellas y descargas: instantánea de la API del 2026-10-09. Las descargas cuentan archivos de las publicaciones.
+ 
+ <a id="license"></a>
+ ## Licencia y agradecimientos
+ 
+--- a/docs/readme/README.fr.md
++++ b/docs/readme/README.fr.md
+@@ -1,54 +1,55 @@
+ <h1 align="center">
+   <img src="../../assets/app-icon.png" alt="Thoughtline app icon" width="96" height="96" valign="middle" /> 晾念头 · Thoughtline
+ </h1>
+ 
+ <p align="center">
+   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
+   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
+   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
+-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.2" /></a>
++  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.3" /></a>
+   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
+-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
++  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+ </p>
+ 
+ <p align="center">
+   <sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub>
+ </p>
+ 
+ <p align="center">
+   <strong>Accrochez une idée. Gardez l’inspiration à portée de main.</strong><br />
+   Une corde, quelques pinces et des feuilles pour les idées du quotidien.
+ </p>
+ 
+-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><ins>Télécharger Thoughtline</ins></a></h2>
++<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><ins>Télécharger Thoughtline</ins></a></h2>
+ 
+-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.2</sub></p>
++<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.3</sub></p>
+ 
+ Thoughtline est un outil léger pour macOS et Windows. Retrouvez vos idées au bord supérieur de l’écran, notez une pensée, puis reprenez votre activité.
+ 
+ ## Fonctionnalités
+ 
+ - Saisissez titre, texte et catégorie avec un raccourci ; conservez les notes inachevées comme brouillons.
+ - Une corde de bureau avec pinces et papier ; les nouvelles idées sont classées dans Général.
+ - Déplacez une pince entière ou détachez une feuille ; fusionnez les pinces compatibles et annulez l’organisation.
+ - Modifiez dans la vue détaillée ou le calendrier, avec sauvegarde après une courte pause et changement de page immédiat.
+ - Parcourez jours, mois et années ; recherchez et filtrez aussi les idées archivées.
+ - Restaurez les notes récemment supprimées. Supprimer un projet conserve ses idées.
+ - Copiez ou glissez le texte brut. La note reste en place et rien n’est envoyé automatiquement.
+ - Conservez les données localement ; consultez le dossier réel, déplacez-le ou exportez une sauvegarde indépendante.
++- Passez du chinois à l’anglais et du mode clair au mode sombre dès les premières fenêtres, ou suivez le système ; le papier reste doux et lisible.
+ 
+ <p align="center"><img src="images/thought-calendar.png" alt="Calendrier d’idées avec des données de démonstration synthétiques." width="740" /><br /><sub>Calendrier d’idées avec des données de démonstration synthétiques.</sub></p>
+ 
+ ## Téléchargement et installation
+ 
+-Cette version d’aperçu est réservée aux membres ayant accès au dépôt. Releases contient les paquets, lanceurs isolés, SHA256SUMS et informations de provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2).
++Cette version d’aperçu est réservée aux membres ayant accès au dépôt. Releases contient les paquets, lanceurs isolés, SHA256SUMS et informations de provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3).
+ 
+ | Platform | Package |
+ |---|---|
+ | macOS · Apple Silicon | arm64 · DMG |
+ | Windows | x64 · EXE (NSIS) |
+ 
+ Avant une mise à jour, quittez normalement et sauvegardez vos données. Mac utilise une signature ad-hoc, sans Developer ID ni notarisation ; Windows n’est pas signé. Gardez les protections système actives. Aucune mise à jour automatique.
+ 
+ ## Premiers pas
+ 
+@@ -73,21 +74,21 @@
+ npm ci
+ npm run dev
+ ```
+ 
+ ```bash
+ npm run verify
+ npm run package:mac
+ npm run package:win
+ ```
+ 
+-Les contrôles automatiques et de paquets applicables ont réussi. IME, DPI, multi-écran, focus et champs réels de WeChat, Doubao et WorkBuddy nécessitent encore des tests indépendants. Ces langues traduisent le README ; l’interface est actuellement en chinois.
++Les contrôles automatiques et de paquets applicables ont réussi. IME, DPI, multi-écran, focus et champs réels de WeChat, Doubao et WorkBuddy nécessitent encore des tests indépendants. L’interface propose le chinois et l’anglais. La langue et le mode clair/sombre se changent directement en haut à droite des fenêtres de rédaction, de détail et du calendrier ; les réglages permettent de suivre à nouveau le système. Les sept liens traduisent le README et ne représentent pas sept langues d’interface.
+ 
+ ## Retours
+ 
+ Signalez les problèmes dans Issues avec versions, étapes, résultats attendus et réels, et preuves anonymisées. Ne publiez pas de pensées personnelles ou de données réelles. [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
+ 
+ Étoiles et téléchargements : instantané API du 2026-10-09. Les téléchargements comptent les fichiers des publications.
+ 
+ <a id="license"></a>
+ ## Licence et remerciements
+ 
+--- a/docs/readme/README.pt.md
++++ b/docs/readme/README.pt.md
+@@ -1,54 +1,55 @@
+ <h1 align="center">
+   <img src="../../assets/app-icon.png" alt="Thoughtline app icon" width="96" height="96" valign="middle" /> 晾念头 · Thoughtline
+ </h1>
+ 
+ <p align="center">
+   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
+   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
+   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
+-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.2" /></a>
++  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.3" /></a>
+   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
+-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
++  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+ </p>
+ 
+ <p align="center">
+   <sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub>
+ </p>
+ 
+ <p align="center">
+   <strong>Pendure uma ideia. Deixe a inspiração por perto.</strong><br />
+   Uma corda, alguns prendedores e folhas para as ideias do dia a dia.
+ </p>
+ 
+-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><ins>Baixar Thoughtline</ins></a></h2>
++<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><ins>Baixar Thoughtline</ins></a></h2>
+ 
+-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.2</sub></p>
++<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.3</sub></p>
+ 
+ Thoughtline é uma ferramenta leve para macOS e Windows. Abra suas ideias na borda superior da tela, registre um pensamento e volte ao que estava fazendo.
+ 
+ ## Recursos
+ 
+ - Registre título, texto e categoria com um atalho; mantenha notas incompletas como rascunhos.
+ - Uma corda na área de trabalho com prendedores e papel; novas ideias usam a categoria Geral.
+ - Mova um prendedor inteiro ou separe uma folha; una prendedores compatíveis e desfaça a organização.
+ - Edite na visualização detalhada ou no calendário, com salvamento após uma breve pausa e troca imediata de página.
+ - Navegue por dia, mês ou ano; pesquise e filtre também ideias arquivadas.
+ - Restaure notas em Excluídos recentemente. Excluir um projeto mantém suas ideias.
+ - Copie ou arraste texto simples. A nota original permanece e nada é enviado automaticamente.
+ - Guarde dados localmente; veja a pasta real, mova-a ou exporte um backup independente.
++- Alterne chinês/inglês e modo claro/escuro nas primeiras janelas, ou acompanhe o sistema; o papel continua suave e legível.
+ 
+ <p align="center"><img src="images/thought-calendar.png" alt="Calendário de ideias com dados sintéticos de demonstração." width="740" /><br /><sub>Calendário de ideias com dados sintéticos de demonstração.</sub></p>
+ 
+ ## Download e instalação
+ 
+-Esta é uma versão de prévia para membros com acesso ao repositório. Releases inclui pacotes, inicializadores isolados, SHA256SUMS e origem das compilações. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2).
++Esta é uma versão de prévia para membros com acesso ao repositório. Releases inclui pacotes, inicializadores isolados, SHA256SUMS e origem das compilações. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3).
+ 
+ | Platform | Package |
+ |---|---|
+ | macOS · Apple Silicon | arm64 · DMG |
+ | Windows | x64 · EXE (NSIS) |
+ 
+ Antes de atualizar, encerre normalmente e faça backup dos dados. Mac usa assinatura ad-hoc, sem Developer ID ou notarização; Windows não é assinado. Mantenha as proteções do sistema. Não há atualização automática.
+ 
+ ## Primeiros passos
+ 
+@@ -73,21 +74,21 @@
+ npm ci
+ npm run dev
+ ```
+ 
+ ```bash
+ npm run verify
+ npm run package:mac
+ npm run package:win
+ ```
+ 
+-As verificações automáticas e de pacotes aplicáveis passaram. IME, DPI, múltiplas telas, foco e campos reais do WeChat, Doubao e WorkBuddy ainda precisam de testes independentes. Os idiomas traduzem o README; a interface está atualmente em chinês.
++As verificações automáticas e de pacotes aplicáveis passaram. IME, DPI, múltiplas telas, foco e campos reais do WeChat, Doubao e WorkBuddy ainda precisam de testes independentes. A interface oferece chinês e inglês. Alterne o idioma e o modo claro/escuro diretamente no canto superior direito das janelas de escrita, detalhes ou calendário; nas configurações, você pode voltar a seguir o sistema. Os sete links traduzem o README, não representam sete idiomas da interface.
+ 
+ ## Feedback
+ 
+ Use Issues para problemas e ideias. Inclua versões, passos, resultados esperados e reais e evidências sem informações pessoais. Não envie pensamentos ou dados reais. [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
+ 
+ Estrelas e downloads: retrato da API em 2026-10-09. Downloads contam arquivos das publicações.
+ 
+ <a id="license"></a>
+ ## Licença e agradecimentos
+ 
+--- a/docs/readme/badges/preview.svg
++++ b/docs/readme/badges/preview.svg
+@@ -1 +1 @@
+-<svg xmlns="http://www.w3.org/2000/svg" width="189" height="20" role="img" aria-label="preview: 0.0.17-preview.2"><title>preview: 0.0.17-preview.2</title><clipPath id="r"><rect width="189" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><path fill="#555" d="M0 0h65v20H0z"/><path fill="#dd7a48" d="M65 0h124v20H65z"/></g><g fill="#fff" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="11" text-anchor="middle"><text x="32.5" y="14">preview</text><text x="127.0" y="14">0.0.17-preview.2</text></g></svg>
++<svg xmlns="http://www.w3.org/2000/svg" width="189" height="20" role="img" aria-label="preview: 0.0.17-preview.3"><title>preview: 0.0.17-preview.3</title><clipPath id="r"><rect width="189" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><path fill="#555" d="M0 0h65v20H0z"/><path fill="#dd7a48" d="M65 0h124v20H65z"/></g><g fill="#fff" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="11" text-anchor="middle"><text x="32.5" y="14">preview</text><text x="127.0" y="14">0.0.17-preview.3</text></g></svg>

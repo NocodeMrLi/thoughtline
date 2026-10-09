@@ -39,3 +39,13 @@ P3 数据层 75 项覆盖单测通过，包含原字节备份、备份写入失�
 开发纯模块 `restoreBackup` 提供同样的清单/版本/路径/链接/哈希/快照校验、排他复制及实际 FileRepository 读取；它不自动更改 profile 配置。合成 source Electron 已按独立备份执行复制恢复并两次启动完整快照比对，另有纯模块真实恢复测试。见 `acceptance/evidence/round1/p5-storage/`；这不是物理磁盘断连/权限/断电、Windows 实机或安装包验收。
 
 旧 preview6 不能读 schema3。降级只能在独立目录使用升级前 `snapshot.schema2.backup.json`（或 schema1 原备份）作为 `snapshot.json`；那份备份不包含升级后的新增、编辑、最近删除等变化。保留当前 schema3 副本和新版应用，不能把换回旧 App 视为无损降级。
+
+## preview.3 界面偏好与念头数据分开
+
+中英语言与日夜外观保存在应用 profile 的独立 `preferences.json`，格式为 `{"schemaVersion":1,"version":0,"locale":"zh-CN","theme":"system"}`；locale可为`en`，theme可为`light`／`dark`，version随偏好写入递增。它不修改念头schema3、修订号、正文、ID、创建日或快捷键，不随“更改念头保存位置”迁走。窗口共享顺序写入，过期回复不能覆盖新选择；写入失败显示错误并保持最后持久值，损坏／未知／外部改写的偏好文件保留供恢复。
+
+导出的念头备份只包含上文列出的snapshot文件和清单，**不自动带走profile界面偏好**。若需完整迁移profile，应在正常退出后独立保留`preferences.json`及`data-location.json`，确认指向的念头目录也已备份；不要把位置配置当正文副本。恢复念头备份到新profile时，语言／主题按新profile默认或用户选择重新设置。
+
+preview.3与preview.2的念头格式均为schema3。回滚到preview.2不会将念头格式降回schema2，该版不消费新偏好文件；保留新profile与念头目录副本，在独立目录核对回滚后的正文、ID、日期、草稿与当前页。回到v0.0.16-preview.6的限制仍以上文旧版本说明为准，不能承诺降级保留升级后的修改。
+
+同源d9cf75b的preview.3实际Mac包6项schema2／保存／日历／备份验证（包含实际恢复后两次重启）及Windows runner实际安装schema2／保存／备份／重启、同版重装与普通卸载保数据检查通过。Windows runner与Mac受控包结果不证明真实磁盘断连／断电／权限故障或用户双端验收。证据见`acceptance/evidence/appearance/task2-rebuild-d9cf75b/`。
