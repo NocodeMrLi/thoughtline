@@ -1,16 +1,16 @@
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto');
 const {_electron}=require('playwright'),{launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
-const stage=process.argv[2]==='baseline'?'baseline':'candidate';const output=path.resolve('acceptance/evidence/clamp-review/'+stage);
+const stage=['baseline','paper'].includes(process.argv[2])?process.argv[2]:'candidate';const output=path.resolve(stage==='baseline'?'acceptance/evidence/clamp-review/baseline':'acceptance/evidence/paper-review/'+(stage==='paper'?'preview':'candidate'));
 (async()=>{
  await fs.mkdir(output,{recursive:true});const scenes=[];
- for(const scale of (stage==='baseline'?[1]:[1,2])){
+ for(const scale of (stage==='candidate'?[1,2]:[1])){
   const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-clamp-review-'));let app,pids=[];
   try{
    const options=await launchOptions(dir);options.args.push('--force-device-scale-factor='+scale);app=await _electron.launch(options);const {shelf,composer}=await warmViews(app);
    const add=async(n,agentId)=>{const r=await composer.evaluate(async({n,agentId})=>{const i=await window.thoughtline.info();return window.thoughtline.submit({text:'只作视觉复验的中文假正文 '+n+'\n第二行😀',title:['检查交互细节','整理下一步','梳理产品思路'][Math.max(0,n-1)%3],agentId,project:''},i.snapshot.revision);},{n,agentId});assert(r.ok,r.message);return r.value.ideas.at(-1).id;};
    const seed=await add(0,'general'),i=await shelf.evaluate(()=>window.thoughtline.info());assert((await shelf.evaluate(({id,revision})=>window.thoughtline.setStatus(id,'archived',revision),{id:seed,revision:i.snapshot.revision})).ok);
    const shape=()=>shelf.locator('.rope > .rope-core').getAttribute('d');const fixed=await shape();let count=0;
-   for(const requested of (stage==='baseline'?[3]:[0,3,24])){
+   for(const requested of (stage==='candidate'?[0,3,24]:[3])){
     while(count<requested){count++;await add(count,['codex','claude','cursor'][(count-1)%3]);}
     const expected=stage==='baseline'?3:1+Math.floor(((await shelf.evaluate(()=>innerWidth))-184)/220);
     await shelf.waitForFunction(n=>document.querySelectorAll('.hanging').length===n,requested===0?0:Math.min(requested,expected));
@@ -22,7 +22,7 @@ const stage=process.argv[2]==='baseline'?'baseline':'candidate';const output=pat
      const geometry=await shelf.evaluate(()=>({viewport:{width:innerWidth,height:innerHeight,dpr:devicePixelRatio},rope:document.querySelector('.rope > .rope-core').getAttribute('d'),cards:[...document.querySelectorAll('.hanging')].map(el=>{const p=el.querySelector('.clothespin').getBoundingClientRect(),hit=el.querySelector('.peg-button').getBoundingClientRect(),paper=el.querySelector('.idea-card').getBoundingClientRect(),r=el.getBoundingClientRect();return {visual:{width:p.width,height:p.height,top:p.top,bottom:p.bottom},hit:{x:hit.x,y:hit.y,width:hit.width,height:hit.height},paper:{x:paper.x,y:paper.y,width:paper.width,height:paper.height},ropeCenter:r.y,frontOverlap:p.bottom-paper.top,ropeInPin:r.y-p.top,paperInPin:paper.top-p.top,rearArm:!!el.querySelector('[data-part=rear-arm]'),contactRope:!!el.querySelector('.clamp-rope'),frontArm:!!el.querySelector('[data-part=front-arm]')};})}));
      assert.equal(geometry.rope,fixed);assert.equal(await shelf.locator('nav').count(),0);
      for(const g of geometry.cards){for(const [value,want] of [[g.hit.width,24],[g.hit.height,44],[g.visual.width,18],[g.visual.height,38],[g.paper.width,160],[g.paper.height,112]])assert(Math.abs(value-want)<.01);
-      if(stage==='candidate'){assert(g.ropeInPin>=25&&g.ropeInPin<=29,'rope belongs in lower jaw');assert(g.paperInPin>=27&&g.paperInPin<=31,'paper enters same lower jaw');assert(g.frontOverlap>=8&&g.frontOverlap<=10);assert(g.rearArm&&g.frontArm&&g.contactRope);assert(g.hit.x>=0&&g.hit.y>=0);assert(g.paper.x>=0&&g.paper.x+g.paper.width<=geometry.viewport.width);}
+      if(stage!=='baseline'){assert(g.ropeInPin>=25&&g.ropeInPin<=29,'rope belongs in lower jaw');assert(g.paperInPin>=32&&g.paperInPin<=34,'paper enters same lower jaw');assert(g.frontOverlap>=4&&g.frontOverlap<=6);assert(g.rearArm&&g.frontArm&&g.contactRope);assert(g.hit.x>=0&&g.hit.y>=0);assert(g.paper.x>=0&&g.paper.x+g.paper.width<=geometry.viewport.width);}
      }
      const name=`${scale}x-${theme}-${requested}`,normal=path.join(output,name+'-overall.png');await shelf.screenshot({path:normal});
      let zoom=null;

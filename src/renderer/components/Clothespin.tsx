@@ -12,7 +12,7 @@ export function Clothespin({color='#A0A3AA',reduced=false,layer='front'}:{color?
    <path d="M14.8 1.7 15.2 16.3 14.4 18.7 15.2 24.3 15 36.7" fill="none" stroke="#FFFFFF45" strokeWidth=".55"/>
    <path d="M5 1.5 14.8 .4 16.2 1.7 15.7 16.1 14.7 18.8 16 24.5 15.6 37.2 5.2 37.6 5.7 24.2 6.3 18Z" fill="#00000018"/>
   </g>:<>
-   <path data-part="paper-contact-shadow" d="M2.7 29.1h11.5l.8 8.8-11.5.5Z" fill="#000000" opacity=".2" transform="translate(.6 .7)"/>
+   <path data-part="paper-contact-shadow" d="M2.7 33.1h11.5l.4 4.8-11.2.5Z" fill="#000000" opacity=".2" transform="translate(.6 .7)"/>
    <g className="pin-arm pin-front" data-part="front-arm">
     <path d="M3 1.4 12.8 .9 14 2.1 13.4 16.1 12 18.5 13.9 22.7 13.4 36.8 12.5 37.8 3.2 37.5 2.5 36.5 3.1 23 4.3 18.6 3.7 16.1Z" fill="currentColor" stroke="#15151565" strokeWidth=".6"/>
     <path d="M3 1.4 12.8 .9 14 2.1 13.4 16.1 12 18.5 13.9 22.7 13.4 36.8 12.5 37.8 3.2 37.5 2.5 36.5 3.1 23 4.3 18.6 3.7 16.1Z" fill={`url(#${id}-bevel)`}/>
