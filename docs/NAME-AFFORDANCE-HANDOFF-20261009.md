@@ -1,6 +1,6 @@
 # 名称提示小修与组合修复入口
 
-独立工作树：`/Users/lihongwei/Documents/Codex/2026-10-09/task-5/thoughtline-name-affordance`；私有分支`codex/thoughtline-name-affordance-20261009`。最终视觉source `4f8483af9e19883d1e5ed0ee76b6086f390d1135`，前置hover-only `7054e70a450ef78d7e552d7cf372336394e8a0be`。证据提交请解析该分支随后`docs: freeze editable name hint and original composition failures`提交；[完整视觉/原红报告](../acceptance/NAME-AFFORDANCE-PREVIEW.md)。
+独立工作树：`/Users/lihongwei/Documents/Codex/2026-10-09/task-5/thoughtline-name-affordance`；私有分支`codex/thoughtline-name-affordance-20261009`。最终视觉source `4f8483af9e19883d1e5ed0ee76b6086f390d1135`，前置hover-only `7054e70a450ef78d7e552d7cf372336394e8a0be`；视觉与原红证据提交 `f45c45d435503d832208d653e6a31ce12609281d`；[完整视觉/原红报告](../acceptance/NAME-AFFORDANCE-PREVIEW.md)。当前交接仅文档后续提交，source和85件证据字节不变。
 
 名称可选placeholder已有，最终补常显铅笔、点击直接编辑、tooltip、1DIP focus细线、轻背景和50字边界。10场景10检查点、96unit/type/build通过；实际默认空名称与“一个小念头”图见报告。480×260、132正文、通用Agent、项目/给谁/挂上、绳架/.15冻结不变。系统两项偏好保持1/1，没有本轮玻璃图或新包。
 
