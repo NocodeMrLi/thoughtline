@@ -1,0 +1,53 @@
+{
+  "sourceHead": "4191fd82d965641a803d994644993fc9426e7c40",
+  "canonicalInputCount": 227,
+  "canonicalVectorSha256": "10367d7b3dc5d920af5e781b13b9daa1848e273cec4c542d5e652a198a68dffa",
+  "windowsRawVectorSha256": "b5853024bab67881bda251bd89452f871d01deb4bd9873ab1f2b883a9972ddfb",
+  "macRawVectorSha256": "4a5c3b3d596a9ea1c3342f69af7d01beafe56dd83712781d48fc87410fa9bcef",
+  "runId": "37970340295",
+  "artifactIds": {
+    "package": 11634798997,
+    "sourceUi": 11636101502
+  },
+  "artifactZipSha256": {
+    "package": "74c65d6b7acf013e61bfa7649f84574f53fa75c84d22dec374dc31c2dc4b5961",
+    "sourceUi": "79717e0eb454d80e710e65ba6de6b3312e4d6a8bdae199d29e13222aeba1886a"
+  },
+  "installer": {
+    "name": "Thoughtline-0.0.17-preview.3-win-x64.exe",
+    "bytes": 113101941,
+    "sha256": "a09ce5940c231979616ab25a402791e9d3d949c5ce465f22a12abc331b850214",
+    "peMachine": "0x14c",
+    "peOptionalMagic": "0x10b"
+  },
+  "checks": {
+    "ci_artifact_package_zip_sha": true,
+    "ci_artifact_ui_zip_sha": true,
+    "manifest_source": true,
+    "vector_canonical": true,
+    "manifest_input_raw_matches_win_ui": true,
+    "main_source_227_raw": true,
+    "main_count": true,
+    "main_cleanup": true,
+    "repair_source_227_raw": true,
+    "repair_count": true,
+    "repair_cleanup": true,
+    "installed_passed": true,
+    "installer_passed": true,
+    "installed_existingSchema2Read": true,
+    "installed_singleInstance": true,
+    "installed_packagedCommitAndNormalQuit": true,
+    "installed_exactSchema2BackupRestart": true,
+    "installed_locationConfigPreserved": true,
+    "installed_packagedOutputsMatchBuild": true,
+    "installed_compiledWindowsTrayUsesApprovedIco": true,
+    "reinstall_uninstall": true,
+    "packaged_appearance": true,
+    "pe_icons": true,
+    "installer_runner_sha": true,
+    "installer_pe32_nsis_bootstrapper": true,
+    "installed_runtime_x64": true,
+    "unsigned_declared": true
+  },
+  "passed": true
+}
