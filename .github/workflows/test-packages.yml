@@ -33,6 +33,15 @@ jobs:
             & node "tests/electron/$test.cjs" 2>&1 | Tee-Object -FilePath (Join-Path $runEvidence "$test.log")
             if ($LASTEXITCODE -ne 0) { throw "$test failed with exit code $LASTEXITCODE" }
           }
+      - name: Appearance and English source workflow on Windows
+        shell: pwsh
+        env:
+          THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/appearance/windows-source
+          THOUGHTLINE_FAKE_CLIPBOARD: '1'
+        run: |
+          New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
+          & node tests/electron/appearance-workflow.cjs 2>&1 | Tee-Object -FilePath (Join-Path $env:THOUGHTLINE_EVIDENCE_DIR 'workflow.log')
+          if ($LASTEXITCODE -ne 0) { throw "Appearance workflow failed: $LASTEXITCODE" }
       - run: npm run package:win
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
@@ -86,5 +95,7 @@ jobs:
           name: Thoughtline-Windows-source-ui-${{ github.sha }}-${{ github.run_attempt }}
           path: |
             acceptance/evidence/round1/p6-windows-source/**
+            acceptance/evidence/appearance/windows-source/**
+            acceptance/evidence/appearance/windows-packaged/**
           if-no-files-found: warn
           retention-days: 30

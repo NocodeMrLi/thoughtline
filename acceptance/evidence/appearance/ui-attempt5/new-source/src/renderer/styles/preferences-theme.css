@@ -1,0 +1,9 @@
+/* Warm paper / ink teal, and dim warm paper / deep blue gray. */
+:root{--surface:#F6F3EB;--text:#213D3B;--muted:#505F5B;--paper:#F5EFDF;--paper-text:#293E39;--paper-muted:#52615A;--accent:#476963;--coral:#BD5D4E;--focus:#426C8F;--switch-track:#DDE2DD;--switch-thumb:#FFF9EC;--error:#9D3027}
+:root[data-theme=dark]{--surface:#222C33;--text:#F2EADF;--muted:#C1BCB2;--paper:#383831;--paper-text:#F2EADB;--paper-muted:#CBC4B7;--accent:#476963;--coral:#F29B86;--focus:#ADD8EB;--switch-track:#151F27;--switch-thumb:#48534F;--error:#FFB0A4}
+.composer,.manage{--aux-bg:var(--surface);--aux-field:var(--paper);background:var(--surface);color:var(--text)}
+:root[data-theme=dark] .composer,:root[data-theme=dark] .manage,.composer[data-material=opaque],.manage[data-material=opaque],:root[data-theme=dark] .composer[data-material=opaque],:root[data-theme=dark] .manage[data-material=opaque]{--aux-bg:var(--surface);--aux-field:var(--paper);background:var(--surface)}
+.composer textarea,.idea-reader>textarea,.inline-editor>textarea,.inline-editor>input{background:var(--paper);color:var(--paper-text)}
+.composer-title::placeholder,textarea::placeholder,input::placeholder{color:var(--muted);opacity:1}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline-color:var(--focus)}
+@media(forced-colors:active){:root,:root[data-theme=dark]{--surface:Canvas;--text:CanvasText;--muted:CanvasText;--paper:Canvas;--paper-text:CanvasText;--paper-muted:CanvasText;--accent:Highlight;--focus:Highlight;--error:CanvasText}.composer,.manage,.composer textarea,.idea-reader>textarea,.inline-editor>textarea,.inline-editor>input{background:Canvas;color:CanvasText}}

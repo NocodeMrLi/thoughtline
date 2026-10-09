@@ -1,0 +1,141 @@
+
+> thoughtline@0.0.17-preview.2 test
+> node node_modules/vitest/vitest.mjs run tests/unit/preferences.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/preferences.test.ts (13 tests | 13 failed) 86ms
+   × new profile selects en-US without touching notes 20ms
+   × new profile selects zh-Hant-TW without touching notes 5ms
+   × new profile selects fr-FR without touching notes 3ms
+   × existing snapshot.json evidence stays Chinese even when unreadable 3ms
+   × existing snapshot.bak.json evidence stays Chinese even when unreadable 2ms
+   × existing snapshot.schema2.backup.json evidence stays Chinese even when unreadable 2ms
+   × existing data-location.json evidence stays Chinese even when unreadable 2ms
+   × serialized patches retain both concurrent choices, reject stale per-sender sequences, preserve snapshot revision/settings 29ms
+   × corrupt preferences preserved and cannot be overwritten ({) 2ms
+   × corrupt preferences preserved and cannot be overwritten ({"schemaVersion":99}) 2ms
+   × corrupt preferences preserved and cannot be overwritten ({"schemaVersion":1,"version":0,"locale":"fr","theme":"light"}) 8ms
+   × failed atomic write retains durable values; later valid sequence recovers 3ms
+   × invalid payloads, extra settings and invalid versions cannot alter preferences 2ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 13 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/preferences.test.ts > new profile selects en-US without touching notes
+ FAIL  tests/unit/preferences.test.ts > new profile selects fr-FR without touching notes
+AssertionError: expected {} to deeply equal { schemaVersion: 1, version: +0, …(2) }
+
+- Expected
++ Received
+
+- {
+-   "locale": "en",
+-   "schemaVersion": 1,
+-   "theme": "system",
+-   "version": 0,
+- }
++ {}
+
+ ❯ tests/unit/preferences.test.ts:9:218
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/13]⎯
+
+ FAIL  tests/unit/preferences.test.ts > new profile selects zh-Hant-TW without touching notes
+AssertionError: expected {} to deeply equal { schemaVersion: 1, version: +0, …(2) }
+
+- Expected
++ Received
+
+- {
+-   "locale": "zh-CN",
+-   "schemaVersion": 1,
+-   "theme": "system",
+-   "version": 0,
+- }
++ {}
+
+ ❯ tests/unit/preferences.test.ts:9:218
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/13]⎯
+
+ FAIL  tests/unit/preferences.test.ts > existing snapshot.json evidence stays Chinese even when unreadable
+ FAIL  tests/unit/preferences.test.ts > existing snapshot.bak.json evidence stays Chinese even when unreadable
+ FAIL  tests/unit/preferences.test.ts > existing snapshot.schema2.backup.json evidence stays Chinese even when unreadable
+ FAIL  tests/unit/preferences.test.ts > existing data-location.json evidence stays Chinese even when unreadable
+AssertionError: expected undefined to be 'zh-CN' // Object.is equality
+
+- Expected:
+"zh-CN"
+
++ Received:
+undefined
+
+ ❯ tests/unit/preferences.test.ts:10:298
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/13]⎯
+
+ FAIL  tests/unit/preferences.test.ts > serialized patches retain both concurrent choices, reject stale per-sender sequences, preserve snapshot revision/settings
+AssertionError: expected {} to match object { locale: 'en', theme: 'dark', …(1) }
+
+- Expected
++ Received
+
+- {
+-   "locale": "en",
+-   "theme": "dark",
+-   "version": 2,
+- }
++ {}
+
+ ❯ tests/unit/preferences.test.ts:11:485
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/13]⎯
+
+ FAIL  tests/unit/preferences.test.ts > corrupt preferences preserved and cannot be overwritten ({)
+ FAIL  tests/unit/preferences.test.ts > corrupt preferences preserved and cannot be overwritten ({"schemaVersion":99})
+ FAIL  tests/unit/preferences.test.ts > corrupt preferences preserved and cannot be overwritten ({"schemaVersion":1,"version":0,"locale":"fr","theme":"light"})
+AssertionError: expected undefined to be truthy
+
+- Expected:
+true
+
++ Received:
+undefined
+
+ ❯ tests/unit/preferences.test.ts:12:320
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/13]⎯
+
+ FAIL  tests/unit/preferences.test.ts > failed atomic write retains durable values; later valid sequence recovers
+Error: ENOENT: no such file or directory, open '/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-preference-unit-TBdVyj/preferences.json'
+ ❯ tests/unit/preferences.test.ts:13:285
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/13]⎯
+
+ FAIL  tests/unit/preferences.test.ts > invalid payloads, extra settings and invalid versions cannot alter preferences
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/preferences.test.ts:14:306
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/13]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  13 failed (13)
+   Start at  23:35:12
+   Duration  732ms (transform 64%, tests 20%, import 14%, worker 2%)
+

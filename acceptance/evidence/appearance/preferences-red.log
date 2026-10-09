@@ -1,0 +1,29 @@
+
+> thoughtline@0.0.17-preview.2 test
+> node node_modules/vitest/vitest.mjs run tests/unit/preferences.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/preferences.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/preferences.test.ts [ tests/unit/preferences.test.ts ]
+Error: Cannot find module '../../src/main/store/preferences' imported from /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/unit/preferences.test.ts
+ ❯ tests/unit/preferences.test.ts:4:1
+      2| import {mkdtemp,mkdir,readFile,writeFile,rm} from 'node:fs/promises';
+      3| import {join} from 'node:path';import {tmpdir} from 'node:os';
+      4| import {PreferenceRepository} from '../../src/main/store/preferences';
+       | ^
+      5| import {FileRepository} from '../../src/main/store/repository';
+      6| import {fileIO} from '../../src/main/store/atomicFile';
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  23:35:02
+   Duration  472ms (worker 99%, environment 1%)
+

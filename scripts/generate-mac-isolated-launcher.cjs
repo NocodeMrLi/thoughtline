@@ -7,8 +7,9 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 
-const version = '0.0.17-preview.2';
-const delivery = '/Users/lihongwei/Documents/Codex/2026-10-09/thoughtline-round1-repair/delivery/v0.0.17-preview.2';
+const version = require('../package.json').version;
+const delivery = process.env.THOUGHTLINE_DELIVERY_DIR;
+if (!delivery) throw Error('Set THOUGHTLINE_DELIVERY_DIR to the new frozen package delivery directory.');
 const dmg = path.join(delivery, `Thoughtline-${version}-mac-arm64.dmg`);
 const output = path.join(delivery, `启动${version}隔离体验.command`);
 const q = value => `'${value.replaceAll("'", "'\\''")}'`;

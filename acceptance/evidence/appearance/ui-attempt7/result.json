@@ -1,0 +1,29 @@
+{
+  "checks": [
+    "first-level-control-placement",
+    "shelf-cannot-write-preferences",
+    "composition-node-focus-selection-scroll-candidate-and-note-bytes-preserved",
+    "light-dark-rendered-body-and-button-contrast",
+    "composer-widths-350-380-480-740-no-overflow",
+    "continuous-drag-frames-and-escape-cancel",
+    "drag-release-and-immediate-reversal",
+    "keyboard-home-end-arrows",
+    "reduced-motion-and-forced-colors-operations-without-animation",
+    "atomic-IO-failure-visible-durable-rollback-text-retained-retry",
+    "calendar-detail-settings-sync-remount-sequences-dirty-inline-autosave",
+    "restart-persists-preferences-note-content-and-hotkey"
+  ],
+  "frames": [
+    13,
+    18,
+    23,
+    28
+  ],
+  "host": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "release": "24.3.0"
+  },
+  "scope": "isolated source Electron with synthetic input; not physical IME, DPI, multi-display, natural hand feel or receiver acceptance",
+  "formalAcceptance": false
+}

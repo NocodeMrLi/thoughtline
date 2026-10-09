@@ -1,5 +1,6 @@
 import {contextBridge,ipcRenderer} from 'electron';import type {ThoughtlineBridge} from '../shared/bridge';
 const api:ThoughtlineBridge={
+ setPreferences:(patch,sequence)=>ipcRenderer.invoke('thoughtline:preferences',patch,sequence),
  storageInfo:()=>ipcRenderer.invoke('thoughtline:storage-info'),
  openStorageDirectory:()=>ipcRenderer.invoke('thoughtline:open-storage-directory'),
  changeStorage:()=>ipcRenderer.invoke('thoughtline:change-storage'),

@@ -1,0 +1,32 @@
+
+> thoughtline@0.0.17-preview.3 test
+> node node_modules/vitest/vitest.mjs run tests/unit/preferences.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/preferences.test.ts (15 tests | 1 failed) 148ms
+   × external corruption after startup is preserved on next write 16ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/preferences.test.ts > external corruption after startup is preserved on next write
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/preferences.test.ts:15:270
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 14 passed (15)
+   Start at  23:50:04
+   Duration  354ms (tests 57%, transform 35%, import 8%, worker 1%)
+

@@ -1,0 +1,40 @@
+first-level-control-placement
+shelf-cannot-write-preferences
+composition-node-focus-selection-scroll-candidate-and-note-bytes-preserved
+light-dark-rendered-body-and-button-contrast
+composer-widths-350-380-480-740-no-overflow
+continuous-drag-frames-and-escape-cancel
+drag-release-and-immediate-reversal
+keyboard-home-end-arrows
+reduced-motion-and-forced-colors-operations-without-animation
+atomic-IO-failure-visible-durable-rollback-text-retained-retry
+locator.check: Clicking the checkbox did not change its state
+Call log:
+[2m  - waiting for getByRole('checkbox', { name: 'Follow system', exact: true })[22m
+[2m    - locator resolved to <input type="checkbox"/>[22m
+[2m  - attempting click action[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - performing click action[22m
+[2m    - click action done[22m
+[2m    - waiting for scheduled navigations to finish[22m
+[2m    - navigations have finished[22m
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-workflow.cjs:29:620 {
+  log: [
+    "  - waiting for getByRole('checkbox', { name: 'Follow system', exact: true })",
+    '    - locator resolved to <input type="checkbox"/>',
+    '  - attempting click action',
+    '    - waiting for element to be visible, enabled and stable',
+    '    - element is visible, enabled and stable',
+    '    - scrolling into view if needed',
+    '    - done scrolling',
+    '    - performing click action',
+    '    - click action done',
+    '    - waiting for scheduled navigations to finish',
+    '    - navigations have finished'
+  ],
+  name: 'Error'
+}
