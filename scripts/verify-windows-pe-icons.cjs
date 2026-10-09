@@ -7,7 +7,9 @@ function verify(executable,ico){
  const expected=ResEdit.Data.IconFile.from(fs.readFileSync(ico)).icons.map(item=>({width:item.data.width,height:item.data.height,sha256:digest(payload(item.data))}));
  const pe=ResEdit.NtExecutable.from(fs.readFileSync(executable));
  const resources=ResEdit.NtExecutableResource.from(pe);
- const groups=ResEdit.Resource.IconGroupEntry.fromEntries(resources.entries).map(group=>({id:group.id,lang:group.lang,frames:group.getIconItemsFromEntries(resources.entries).map(icon=>({width:icon.width,height:icon.height,sha256:digest(payload(icon))}))}));
+ // PE group dimensions are one-byte fields: 0 represents 256 pixels.
+ // resedit's group reader preserves 0, whereas its ICO reader exposes 256.
+ const groups=ResEdit.Resource.IconGroupEntry.fromEntries(resources.entries).map(group=>({id:group.id,lang:group.lang,frames:group.getIconItemsFromEntries(resources.entries).map(icon=>({width:icon.width||256,height:icon.height||256,sha256:digest(payload(icon))}))}));
  const matching=groups.filter(group=>group.frames.length===expected.length&&expected.every(frame=>group.frames.some(actual=>actual.width===frame.width&&actual.height===frame.height&&actual.sha256===frame.sha256)));
  assert(matching.length>0,`${executable}: no PE icon group matches every approved ICO frame`);
  return {file:executable,executableSha256:digest(fs.readFileSync(executable)),expectedIco:ico,expectedIcoSha256:digest(fs.readFileSync(ico)),expectedFrames:expected,matchingGroups:matching,allGroups:groups,passed:true};

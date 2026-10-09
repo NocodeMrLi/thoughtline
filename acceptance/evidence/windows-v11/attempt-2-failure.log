@@ -1,0 +1,38 @@
+windows-test-package	Disposable runner installation and data retention preflight	﻿2026-10-09T06:26:16.1548593Z ##[group]Run ./scripts/windows-installer-preflight.ps1
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:16.1549487Z ^[[36;1m./scripts/windows-installer-preflight.ps1^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:16.1654292Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:16.1661605Z ##[endgroup]
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:42.1168300Z Executable: D:\a\_temp\Thoughtline-installer-preflight\Thoughtline.exe
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:42.1171843Z Isolated data: C:\Users\runneradmin\AppData\Local\Thoughtline-Preflight\0.0.16-preview.6\user-data
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:42.1174946Z This isolates notes. The installer still uses the same app identity and can replace an existing installed version.
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:42.1198719Z Check only: no data directory or app process created.
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9265820Z node:internal/assert/utils:77
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9266687Z     throw err;
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9267115Z     ^
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9267343Z 
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9268518Z AssertionError [ERR_ASSERTION]: D:\a\_temp\Thoughtline-installer-preflight\Thoughtline.exe: no PE icon group matches every approved ICO frame
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9270356Z     at verify (D:\a\thoughtline\thoughtline\scripts\verify-windows-pe-icons.cjs:12:2)
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9271551Z     at D:\a\thoughtline\thoughtline\scripts\verify-windows-pe-icons.cjs:17:220
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9272361Z     at Array.map (<anonymous>)
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9273357Z     at Object.<anonymous> (D:\a\thoughtline\thoughtline\scripts\verify-windows-pe-icons.cjs:17:210)
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9274821Z     at Module._compile (node:internal/modules/cjs/loader:1872:14)
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9275685Z     at Object..js (node:internal/modules/cjs/loader:2003:10)
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9276517Z     at Module.load (node:internal/modules/cjs/loader:1594:32)
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9277371Z     at Module._load (node:internal/modules/cjs/loader:1396:12)
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9278211Z     at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9279311Z     at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5) {
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9321560Z   generatedMessage: false,
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9325165Z   code: 'ERR_ASSERTION',
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9340221Z   actual: false,
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9373061Z   expected: true,
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9398079Z   operator: '==',
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9422227Z   diff: 'simple'
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9481905Z }
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9555303Z 
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:44.9576072Z Node.js v24.19.0
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:45.2094316Z ^[[31;1mException: ^[[0mD:\a\thoughtline\thoughtline\scripts\windows-installer-preflight.ps1:40^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:45.2095970Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:45.2097763Z ^[[31;1m^[[0m^[[36;1m^[[36;1m  40 | ^[[0m … $LASTEXITCODE -ne 0) { ^[[36;1mthrow 'Embedded PE icon verification failed'^[[0m }^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:45.2099922Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:45.2101403Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mEmbedded PE icon verification failed^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T06:26:45.2353442Z ##[error]Process completed with exit code 1.
