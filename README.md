@@ -6,13 +6,15 @@
 
 按用户授权收敛到 **main**，保留阶段提交作为回滚点。双端私有预发布已发布，最终远端状态见 [发布报告](acceptance/RELEASE-0.0.16-preview.6.md)，准确来源及 SHA256 随安装包清单提供。历史 `.15` 包和 QA 记录保留；后续开发默认使用 main，不为日常增量另建分支。
 
-当前开发候选 **0.0.17-preview.1**：P1 项目长按即时删除，P2 整夹／单纸／正文拖动、全绳空位与即时翻页已提交 main `97875dda8d85201ff088218a347f7de2c301dc7e`。原地自动保存、最近删除和念头日历已接入并通过限定独立审查；目录迁移和最终包仍待完成。准确实现／证据／未测边界见 [本轮记录](docs/ROUND1-REPAIR.md)、[数据升级与回滚](docs/ROUND1-DATA-SAFETY.md) 和 [接收端矩阵](acceptance/ROUND1-DRAG-MATRIX.md)。
+当前开发候选 **0.0.17-preview.1**：P1 项目长按即时删除，P2 整夹／单纸／正文拖动、全绳空位与即时翻页已提交 main `97875dda8d85201ff088218a347f7de2c301dc7e`。原地自动保存、最近删除和念头日历已接入并通过限定独立审查；目录迁移、独立备份和实际恢复已完成源码受控验证，最终包与物理验收仍待完成。准确实现／证据／未测边界见 [本轮记录](docs/ROUND1-REPAIR.md)、[数据升级与回滚](docs/ROUND1-DATA-SAFETY.md) 和 [接收端矩阵](acceptance/ROUND1-DRAG-MATRIX.md)。
 
 ## 开发与验证
 
 Node24.19.0：`npm ci`、`npm run verify`、`npm run dev`。Control+Alt+N 写念头；Mac⌘Enter、WindowsCtrlEnter提交，Enter换行，Esc存草稿。
 
-本轮最近一次 Mac 全工程验证为163项单测通过、4项Windows专属跳过、类型/构建通过；UI收尾修复须再做限定复核。最近成功的Windows CI是P2源码 `97875dda8d85201ff088218a347f7de2c301dc7e`，不是新schema3集成验证。已发布preview6的102/106项单测、DMG内保存/重启及Windows安装保全是历史证据，不能算本轮刷新。合成DOM/IPC、单测和CI不能替代物理IME、焦点、空白穿透、热键、多屏、真实Agent/G7；**formalAcceptance=false**。Windows CtrlEnter 的本轮Composer端到端测试待最终CI接入。
+P5 最近一次 Mac 全工程验证为175项单测通过、4项Windows专属跳过、类型/构建通过（在R1之前）；随后检查后目录失联R1修复有25项相关单测、类型/构建与受控Electron启动验证，并通过限定复核；目录迁移和备份恢复另有隔离 source Electron 检查。最近成功的Windows CI是P2源码 `97875dda8d85201ff088218a347f7de2c301dc7e`，不是新schema3集成验证。已发布preview6的102/106项单测、DMG内保存/重启及Windows安装保全是历史证据，不能算本轮刷新。合成DOM/IPC、单测和CI不能替代物理IME、焦点、空白穿透、热键、多屏、真实Agent/G7；**formalAcceptance=false**。Windows CtrlEnter 的本轮Composer端到端测试待最终CI接入。
+
+设置中的“念头数据位置”显示实际路径；更改位置保留旧副本，导出备份不切换当前目录。恢复到新目录与旧版本回滚步骤见 [数据安全说明](docs/ROUND1-DATA-SAFETY.md)。
 
 ## 安装与数据
 

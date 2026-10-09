@@ -13,3 +13,6 @@
 .year-grid{animation:calendar-level 120ms ease-out;transform-origin:50% 0}
 @keyframes calendar-level{from{opacity:.55;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
 :root[data-motion=reduce] .calendar-paper-groups,:root[data-motion=reduce] .year-grid{animation:none;transform:none}
+
+.app-settings{overflow-y:auto;min-height:0}.storage-settings{margin:16px 0 8px;padding:12px;border:1px solid var(--border,rgba(128,128,128,.25));border-radius:12px;min-width:0}.storage-settings legend{font-weight:600}.storage-settings [data-storage-path]{overflow-wrap:anywhere;user-select:text;font-size:12px;line-height:1.5}.storage-actions{display:flex;flex-wrap:wrap;gap:8px}.storage-settings .setting-hint{overflow-wrap:anywhere}.app-settings footer [role=status]{overflow-wrap:anywhere;min-width:0}
+.app-settings footer{flex-wrap:wrap;gap:8px}.app-settings footer [role=status]:not(:empty){flex-basis:100%;font-size:12px;line-height:1.5}.app-settings footer .primary{margin-left:auto}

@@ -1,5 +1,9 @@
 import {contextBridge,ipcRenderer} from 'electron';import type {ThoughtlineBridge} from '../shared/bridge';
 const api:ThoughtlineBridge={
+ storageInfo:()=>ipcRenderer.invoke('thoughtline:storage-info'),
+ openStorageDirectory:()=>ipcRenderer.invoke('thoughtline:open-storage-directory'),
+ changeStorage:()=>ipcRenderer.invoke('thoughtline:change-storage'),
+ exportBackup:()=>ipcRenderer.invoke('thoughtline:export-backup'),
  selectClip:(id,ideaId,sequence)=>ipcRenderer.invoke('thoughtline:select-clip',id,ideaId,sequence),
  onPrepareLeave:callback=>{const listener=async(_e:Electron.IpcRendererEvent,id:string)=>{let ok=false;try{ok=await callback();}catch{}ipcRenderer.send('thoughtline:leave-ready',id,ok);};ipcRenderer.on('thoughtline:prepare-leave',listener);return()=>ipcRenderer.removeListener('thoughtline:prepare-leave',listener);},
  info:()=>ipcRenderer.invoke('thoughtline:info'),

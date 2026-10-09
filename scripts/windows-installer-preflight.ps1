@@ -12,6 +12,8 @@ function Run-Checked($exe, $arguments) {
 function Snapshot-Hashes {
   $result = [ordered]@{}
   Get-ChildItem $data -Filter 'snapshot*.json' | Sort-Object Name | ForEach-Object { $result[$_.Name] = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower() }
+  $locationConfig = Join-Path $data 'data-location.json'
+  if (Test-Path $locationConfig) { $result['data-location.json'] = (Get-FileHash $locationConfig -Algorithm SHA256).Hash.ToLower() }
   $result['preflight-marker.txt'] = (Get-FileHash (Join-Path $data 'preflight-marker.txt') -Algorithm SHA256).Hash.ToLower()
   return ($result | ConvertTo-Json -Compress)
 }

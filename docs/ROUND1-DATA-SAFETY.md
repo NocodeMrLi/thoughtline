@@ -1,6 +1,6 @@
 # 第一轮数据升级、备份与回滚
 
-本文件记录开发中的数据契约。目录迁移和独立备份入口仍待 P5 实施验证；不能把下面的升级规则当作迁移、恢复或用户验收已经通过。
+本文件记录开发中的数据契约。P5 已完成源码层目录迁移、独立备份与合成恢复检查；具体范围见文末，物理磁盘/安装包/用户验收仍待完成。
 
 ## schema3 升级
 
@@ -19,3 +19,23 @@
 ## 验证状态
 
 P3 数据层 75 项覆盖单测通过，包含原字节备份、备份写入失败、未知版本拒绝、日期迁移与重验、最近删除和编辑 CAS；见 `acceptance/evidence/round1/p3-data-report.md` 与独立审查。原地编辑、日历、目录切换和实际备份恢复的集成验证另记录，Mac 受控测试与 Windows runner、物理双端及真实接收端分别标记。
+
+## P5 念头目录、迁移与独立备份
+
+设置中显示当前“念头数据位置”的真实绝对路径，可打开文件夹、更改位置或导出备份。更改位置需选一个已存在的空文件夹；应用先等待编辑和翻页保存，输入法候选未确认或保存失败时停止。只复制 `snapshot.json`、`snapshot.bak.json`、专用 schema1/2 原字节备份及损坏原件，不搬浏览器缓存。复制后逐文件比对 SHA256/大小、完整快照及修订号，并实际创建新 FileRepository 读取成功，最后才原子写位置配置并切换。旧目录不删除。
+
+`THOUGHTLINE_DATA_DIR`（如设置）或默认 userData 仍是应用 profile。`data-location.json` 保存在 profile，格式为 `{"schemaVersion":1,"path":"绝对念头目录"}`。缓存、应用锁和该位置配置仍在 profile；快捷键等业务设置随念头快照保存。备份 profile 时也保留此配置；它不是念头正文副本。配置指向的磁盘失联、目录缺少主快照和备份、配置损坏或未知版本均进入启动恢复提示，不新建空库。可重新连接磁盘、打开配置文件夹检查、重试或退出；不要通过删除配置掩盖失联问题。
+
+导出备份会在所选父目录创建时间+UUID 命名的独立子目录。`manifest.json` 记录清单版本、应用版本、快照版本、revision、时间以及每个文件的 SHA256 和字节数；导出不更改当前目录。拒绝已存在目标文件、目录/数据文件链接、复制失败、文件校验不符和磁盘/当前快照不一致。失败仅清理本次创建且 hash/大小仍能核实归属的文件；外部改写或不完整文件可能保留供诊断，不能保证每种故障后目标仍为空。
+
+### 从独立备份恢复到新位置（当前没有一键恢复按钮）
+
+1. 正常退出 Thoughtline，保留当前念头目录、profile 和原备份，不直接在备份目录启动应用。
+2. 打开备份的 `manifest.json`。仅接受清单版本1、合法 snapshot 文件名；文件应与清单一一对应（另有 manifest），无链接或未知文件。用 Mac `shasum -a 256 文件路径` / Windows PowerShell `Get-FileHash -Algorithm SHA256 文件路径` 逐个比对 SHA256，并按文件属性比对字节数。损坏或不完整时停止，不覆盖现有数据。
+3. 新建一个独立空目录，将清单列出的 snapshot 文件复制进去；不复制 manifest 或缓存。再次逐项核验副本。不要将恢复内容合并进当前目录。
+4. 使用**支持 schema3 的当前新版本**及独立 `THOUGHTLINE_DATA_DIR` 启动这个恢复目录。Mac 可在终端用 `open --env 'THOUGHTLINE_DATA_DIR=/绝对路径/恢复副本' '/应用路径/Thoughtline.app'`；Windows 在临时 PowerShell 会话设置 `$env:THOUGHTLINE_DATA_DIR='D:\恢复副本'` 后运行实际 `Thoughtline.exe`，测试后关闭该终端。启动前须退出其他 Thoughtline。检查正文、ID/顺序、创建日、状态、夹子当前页和草稿，正常退出后再次启动确认。
+5. 确认恢复副本后，若要让日常 profile 使用该目录，先正常退出，再保留原 `data-location.json` 副本，并将其中 path 改为恢复目录的绝对路径（JSON 中 Windows 反斜杠须写作 `\\`）。若没有位置配置，则创建上述 schemaVersion1 格式。重启核对设置所显示路径。保留旧目录，直到确认恢复内容完整。
+
+开发纯模块 `restoreBackup` 提供同样的清单/版本/路径/链接/哈希/快照校验、排他复制及实际 FileRepository 读取；它不自动更改 profile 配置。合成 source Electron 已按独立备份执行复制恢复并两次启动完整快照比对，另有纯模块真实恢复测试。见 `acceptance/evidence/round1/p5-storage/`；这不是物理磁盘断连/权限/断电、Windows 实机或安装包验收。
+
+旧 preview6 不能读 schema3。降级只能在独立目录使用升级前 `snapshot.schema2.backup.json`（或 schema1 原备份）作为 `snapshot.json`；那份备份不包含升级后的新增、编辑、最近删除等变化。保留当前 schema3 副本和新版应用，不能把换回旧 App 视为无损降级。

@@ -7,7 +7,8 @@ import {createManage} from './windows/manage';
 import {fitManageBounds} from './windows/manageGeometry';
 import {createHost} from './platform/host';
 import {EdgeController} from './edgeController';
-import {loadWithRecovery} from './store/repository';
+import {FileRepository} from './store/repository';
+import {loadStorageDirectory,loadStorageLocation,commitStorageDirectory,migrateStorage,exportBackup as writeBackup} from './store/storageLocations';
 import {swapShortcut} from './shortcuts';
 import {validWriteHotkey,displayWriteHotkey} from '../shared/composerKeys';
 import {newIdea,changeStatus,addAgent,updateAgent,removeAgent,removeProject,editIdeaIfUnchanged,deleteIdea,restoreIdea,permanentlyDeleteIdea} from '../shared/ideaCommands';
@@ -32,19 +33,26 @@ async function loadView(w:BrowserWindow,view:string){
 }
 if(!app.requestSingleInstanceLock())app.quit();
 else app.whenReady().then(async()=>{
- const dataDir=app.getPath('userData');
- const loaded=await loadWithRecovery(dataDir,async error=>{
-  const {response}=await dialog.showMessageBox({type:'error',title:'晾念头：数据读取未成功',message:'念头数据暂时无法读取',detail:`${error.message}\n\n原文件仍保留。可以打开数据目录备份并修复，之后重试。\n数据目录：${dataDir}`,buttons:['打开数据文件夹','重试读取','退出'],defaultId:1,cancelId:2,noLink:true});
-  return response===0?'folder':response===1?'retry':'exit';
- },async()=>{const error=await shell.openPath(dataDir);if(error)dialog.showErrorBox('无法打开数据目录',error);});
- if(!loaded){app.quit();return;}const repository=loaded.repository;
+ const profileDir=app.getPath('userData');let dataDir=profileDir;
+ let loaded:{repository:FileRepository;snapshot:Snapshot}|null=null;
+ for(;;){
+  const location=await loadStorageLocation(profileDir);
+  const candidate=location.ok?new FileRepository(location.value.directory,undefined,{allowCreate:location.value.allowCreate}):null;
+  const result=candidate?await candidate.load():location;
+  if(result.ok&&candidate&&location.ok){dataDir=location.value.directory;loaded={repository:candidate,snapshot:result.value as Snapshot};break;}
+  const error=result.ok?'无法读取位置配置':result.message;
+  const {response}=await dialog.showMessageBox({type:'error',title:'晾念头：数据读取未成功',message:'念头数据暂时无法读取',detail:`${error}\n\n原文件仍保留。请恢复数据磁盘或修复位置配置后重试。\n配置文件夹：${profileDir}`,buttons:['打开配置文件夹','重试读取','退出'],defaultId:1,cancelId:2,noLink:true});
+  if(response===2){app.quit();return;}
+  if(response===0){const error=await shell.openPath(profileDir);if(error)dialog.showErrorBox('无法打开配置目录',error);}
+ }
+ let repository=loaded.repository;
  let snapshot:Snapshot=loaded.snapshot;let displayId=String(screen.getPrimaryDisplay().id);let width=screen.getPrimaryDisplay().bounds.width;
  let draftSequence=0,draftWritableSession:number|null=null;let composerWrites:Promise<unknown>=Promise.resolve();
  const composerWrite=<T>(action:()=>Promise<T>):Promise<T>=>{const next=composerWrites.then(action,action);composerWrites=next;return next;};
  let composerSession=0,manageSession=0,manageSelection:string|null=null;
  let manageEditingOwner:{session:number;ideaId:string}|null=null,manageEditingRequested=false;
  let dragCancelSession=0,dragEscape=false;let textDragTimer:ReturnType<typeof setTimeout>|null=null;let textDragOwner:string|null=null;
- let placementNotice:string|null=null;let shelfAgentId='all';let settingsBusy=false;let refreshTray=()=>{};
+ let placementNotice:string|null=null;let shelfAgentId='all';let settingsBusy=false;let storageBusy=false;let refreshTray=()=>{};
  let geometryTimer:ReturnType<typeof setTimeout>|null=null,boundsIgnoreUntil=0;
  let manageMode:'browse'|'detail'|'settings'='browse',manageTitles=false;let undoClips:{snapshot:Snapshot;revision:number}|null=null;
  let composerContext:ComposerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
@@ -136,7 +144,7 @@ else app.whenReady().then(async()=>{
   ipcMain.on('thoughtline:quit-draft',receive);composer!.webContents.send('thoughtline:prepare-quit',id);
  });
  prepareQuit=async()=>{
-  if(settingsBusy)return false;
+  if(settingsBusy||storageBusy)return false;
   if(!await prepareWindow(shelf)||!await prepareWindow(manage))return false;
   await composerWrites;await repository.flush();
   if(!composer||(composerSafeToRelease&&!composer.isVisible()))return true;
@@ -223,9 +231,40 @@ else app.whenReady().then(async()=>{
  const openSettings=async():Promise<Result<void>>=>{
   if(composer?.isVisible())return invalid('请先保存或取消当前输入。');
   if(!await prepareViews())return invalid('最后修改尚未保存，窗口已保留。');
-  try{await ensureManage();}catch{return {ok:false,code:'IO',message:'设置浮层未能打开，请重试。'};}if(quitting)return invalid('正在退出。');if(composer?.isVisible())return invalid('请先保存或取消当前输入。');cancelDrag();manageMode='settings';manageTitles=false;manageSelection=null;manageEditingRequested=false;manageSession++;lock('manage',true);setManageBounds(boundsFor(440,390));publish();manage!.show();manage!.focus();refreshTray();return done();
+  try{await ensureManage();}catch{return {ok:false,code:'IO',message:'设置浮层未能打开，请重试。'};}if(quitting)return invalid('正在退出。');if(composer?.isVisible())return invalid('请先保存或取消当前输入。');cancelDrag();manageMode='settings';manageTitles=false;manageSelection=null;manageEditingRequested=false;manageSession++;lock('manage',true);setManageBounds(boundsFor(500,600));publish();manage!.show();manage!.focus();refreshTray();return done();
  };
  ipcMain.handle('thoughtline:open-settings',e=>trusted(e)?openSettings():invalid('无效操作'));
+ const storageState=()=>({directory:dataDir,profileDirectory:profileDir,revision:snapshot.revision});
+ ipcMain.handle('thoughtline:storage-info',e=>trusted(e,[manage])?{ok:true,value:storageState()}:invalid('无效操作'));
+ ipcMain.handle('thoughtline:open-storage-directory',async e=>{
+  if(!trusted(e,[manage]))return invalid('无效操作');
+  const valid=await loadStorageDirectory(profileDir);if(!valid.ok)return valid;
+  try{const error=await shell.openPath(dataDir);return error?invalid(error):done();}catch{return invalid('无法打开当前念头目录。');}
+ });
+ const storageOperation=async(e:Electron.IpcMainInvokeEvent,kind:'migrate'|'backup')=>{
+  if(!trusted(e,[manage])||storageBusy||quitting)return invalid('存储操作正在进行，请稍后重试。');
+  if(composer?.isVisible())return invalid('请先保存当前输入。');
+  storageBusy=true;
+  try{
+   if(!await prepareViews())return invalid('最后修改尚未保存或输入法尚未确认，仍使用原位置。');
+   const choice=await dialog.showOpenDialog(manage!,{title:kind==='migrate'?'选择新的空念头文件夹':'选择独立备份的保存文件夹',properties:['openDirectory','createDirectory']});
+   if(choice.canceled||!choice.filePaths[0])return {ok:true,value:{...storageState(),canceled:true}};
+   return await composerWrite(async()=>{
+    if(!trusted(e,[manage])||quitting)return invalid('操作窗口已关闭。');
+    await repository.flush();
+    if(kind==='backup'){
+     const result=await writeBackup(dataDir,choice.filePaths[0],snapshot,app.getVersion());
+     return result.ok?{ok:true,value:{...storageState(),directory:result.value,canceled:false}}:result;
+    }
+    const result=await migrateStorage(dataDir,choice.filePaths[0],snapshot,path=>commitStorageDirectory(profileDir,path));
+    if(!result.ok)return result;
+    dataDir=result.value.directory;repository=result.value.repository;snapshot=result.value.snapshot;undoClips=null;publish();
+    return {ok:true,value:{...storageState(),canceled:false}};
+   });
+  }catch(error){return invalid(`操作未完成，仍使用原位置。${error instanceof Error?error.message:''}`);}finally{storageBusy=false;}
+ };
+ ipcMain.handle('thoughtline:change-storage',e=>storageOperation(e,'migrate'));
+ ipcMain.handle('thoughtline:export-backup',e=>storageOperation(e,'backup'));
  ipcMain.handle('thoughtline:settings',async(e,settings:Snapshot['settings'],revision:number):Promise<Result<Snapshot>>=>{
   if(!trusted(e,[manage])||manageMode!=='settings'||!settings||!validWriteHotkey(settings.writeHotkey)||typeof settings.reducedMotion!=='boolean')return invalid('请录制有效的组合快捷键。');
   return composerWrite(async()=>{

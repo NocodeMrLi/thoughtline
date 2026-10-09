@@ -1,0 +1,59 @@
+
+> thoughtline@0.0.17-preview.1 test
+> node node_modules/vitest/vitest.mjs run tests/unit/storageLocations.test.ts tests/unit/repository.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/repository.test.ts (11 tests | 1 failed) 427ms
+   × R1 existing-only缺失快照不创建文件，默认首次使用仍可建库 16ms
+ ❯ tests/unit/storageLocations.test.ts (14 tests | 2 failed) 721ms
+   × R1 配置验证成功后directory失联，真实existing-only读取失败且不建空库 32ms
+   × R1 配置验证成功后files失联，真实existing-only读取失败且不建空库 44ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/repository.test.ts > R1 existing-only缺失快照不创建文件，默认首次使用仍可建库
+AssertionError: expected { ok: true, value: { …(7) } } to match object { ok: false, code: 'IO' }
+(8 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "code": "IO",
+-   "ok": false,
++   "ok": true,
+  }
+
+ ❯ tests/unit/repository.test.ts:78:81
+     76| test('R1 existing-only缺失快照不创建文件，默认首次使用仍可建库',async()=>{
+     77|  const {dir}=await fixture();const missing=join(dir,'missing');
+     78|  expect(await new FileRepository(missing,undefined,{allowCreate:false}…
+       |                                                                                 ^
+     79|  await expect(readFile(join(missing,'snapshot.json'))).rejects.toMatch…
+     80|  const initial=value(await new FileRepository(missing).load());expect(…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/storageLocations.test.ts > R1 配置验证成功后directory失联，真实existing-only读取失败且不建空库
+ FAIL  tests/unit/storageLocations.test.ts > R1 配置验证成功后files失联，真实existing-only读取失败且不建空库
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/storageLocations.test.ts:29:105
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  3 failed | 22 passed (25)
+   Start at  20:20:18
+   Duration  1.11s (tests 70%, transform 25%, import 5%, worker 1%)
+

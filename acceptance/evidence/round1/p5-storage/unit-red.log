@@ -1,0 +1,66 @@
+
+> thoughtline@0.0.17-preview.1 test
+> node node_modules/vitest/vitest.mjs run tests/unit/storageLocations.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/storageLocations.test.ts (8 tests | 7 failed) 149ms
+   × 配置不存在使用profile；配置失联/未知版本保留原文并拒绝空库 27ms
+   × 迁移只复制owned数据，提交位置后重启全部快照一致，旧字节保留 14ms
+   × copy EACCES 中途失败清除本次文件且旧目录配置不变 17ms
+   × copy ENOSPC 中途失败清除本次文件且旧目录配置不变 18ms
+   × copy ENOENT 中途失败清除本次文件且旧目录配置不变 21ms
+   × 独立导出 manifest、实际恢复及 FileRepository 再重启完整相等；损坏备份拒绝 16ms
+   × cached/source不一致拒绝迁移/导出；manifest traversal与未知版本拒绝 17ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/storageLocations.test.ts > 配置不存在使用profile；配置失联/未知版本保留原文并拒绝空库
+Error: Not implemented
+ ❯ value tests/unit/storageLocations.test.ts:9:49
+
+ ❯ tests/unit/storageLocations.test.ts:12:83
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  tests/unit/storageLocations.test.ts > 迁移只复制owned数据，提交位置后重启全部快照一致，旧字节保留
+Error: Not implemented
+ ❯ value tests/unit/storageLocations.test.ts:9:49
+
+ ❯ tests/unit/storageLocations.test.ts:13:197
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  tests/unit/storageLocations.test.ts > copy EACCES 中途失败清除本次文件且旧目录配置不变
+ FAIL  tests/unit/storageLocations.test.ts > copy ENOSPC 中途失败清除本次文件且旧目录配置不变
+ FAIL  tests/unit/storageLocations.test.ts > copy ENOENT 中途失败清除本次文件且旧目录配置不变
+Error: Not implemented
+ ❯ value tests/unit/storageLocations.test.ts:9:49
+
+ ❯ tests/unit/storageLocations.test.ts:14:598
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  tests/unit/storageLocations.test.ts > 独立导出 manifest、实际恢复及 FileRepository 再重启完整相等；损坏备份拒绝
+Error: Not implemented
+ ❯ value tests/unit/storageLocations.test.ts:9:49
+
+ ❯ tests/unit/storageLocations.test.ts:16:105
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  tests/unit/storageLocations.test.ts > cached/source不一致拒绝迁移/导出；manifest traversal与未知版本拒绝
+Error: Not implemented
+ ❯ value tests/unit/storageLocations.test.ts:9:49
+
+ ❯ tests/unit/storageLocations.test.ts:17:299
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  7 failed | 1 passed (8)
+   Start at  20:04:50
+   Duration  300ms (tests 66%, transform 26%, import 6%, worker 1%)
+

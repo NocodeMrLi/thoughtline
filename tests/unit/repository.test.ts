@@ -72,3 +72,11 @@ test('退出等待正在进行的原子提交，完成后重启读到新正文',
  let drained=false;const idle=slow.flush?.().then(()=>{drained=true;});await Promise.resolve();expect(drained).toBe(false);
  release();value(await pending);await idle;expect(drained).toBe(true);expect(value(await new FileRepository(dir).load()).ideas[0].text).toBe('退出前已点击保存的正文');
 });
+
+test('R1 existing-only缺失快照不创建文件，默认首次使用仍可建库',async()=>{
+ const {dir}=await fixture();const missing=join(dir,'missing');
+ expect(await new FileRepository(missing,undefined,{allowCreate:false}).load()).toMatchObject({ok:false,code:'IO'});
+ await expect(readFile(join(missing,'snapshot.json'))).rejects.toMatchObject({code:'ENOENT'});
+ const initial=value(await new FileRepository(missing).load());expect(initial.revision).toBe(0);expect(initial.ideas).toEqual([]);
+ expect(JSON.parse(await readFile(join(missing,'snapshot.json'),'utf8'))).toEqual(initial);
+});
