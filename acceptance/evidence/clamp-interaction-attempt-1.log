@@ -1,0 +1,12 @@
+locator.getAttribute: Error: strict mode violation: locator('.rope-core') resolved to 4 elements:
+    1) <path class="rope-core" d="M -24 32 Q 720 92 1464 32"></path> aka locator('path').nth(1)
+    2) <path class="rope-core" d="M 0 26.780989854318417 Q 9 27.00438995837669 18 27.2102302289282"></path> aka locator('.clamp-rope > .rope-core').first()
+    3) <path class="rope-core" d="M 0 26.99561004162331 Q 9 27.00438995837669 18 26.99561004162331"></path> aka locator('div:nth-child(3) > .clamp-rope > .rope-core')
+    4) <path class="rope-core" d="M 0 27.2102302289282 Q 9 27.00438995837669 18 26.780989854318417"></path> aka locator('div:nth-child(4) > .clamp-rope > .rope-core')
+
+Call log:
+[2m  - waiting for locator('.rope-core')[22m
+
+    at /Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/tests/electron/clamp-interaction-review.cjs:9:49 {
+  log: [ "  - waiting for locator('.rope-core')" ]
+}

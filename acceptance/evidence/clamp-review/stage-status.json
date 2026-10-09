@@ -1,0 +1,306 @@
+{
+  "stage": "clamp and cropped rope visual checkpoint; next paper-distance proposal awaits user choice",
+  "sourceCommit": "aa0ac310381a8a26dd9e49fca6b34a7bf9580cf4",
+  "branch": "codex/thoughtline-clamp-20261009",
+  "packageVersionUnchanged": "0.0.13 (source review only, no new installer)",
+  "userAcknowledgedFrontOrientationViaParent": true,
+  "paperDistanceDecisionPending": true,
+  "newPaperShapeImplemented": false,
+  "formalVisualAcceptance": false,
+  "formalAcceptance": false,
+  "newPackageBuilt": false,
+  "fullRegressionRun": false,
+  "stable013DmgSha256": "63abca7db97acbde1876b26cf7f4394bb4e09a0888c38a72320cc1f7fe431f9c",
+  "stable013WorktreeClean": true,
+  "sourceHashes": {
+    "src/renderer/components/Clothespin.tsx": "2384433d5d377bc37b745000ad50a20df00176fd8cf7cbb7f397be1ffdf5d371",
+    "src/renderer/components/ClipCard.tsx": "054e8bc69ab9e903c02d0f24ac28bc2db23d55495258ab23bb6e019cbbeb51ad",
+    "src/renderer/components/Shelf.tsx": "32b00c93c7182d43b7384be53803050e43d7eb135a816f3441431fce7f2ce9f9",
+    "src/renderer/styles/overlay.css": "be9206132fc8f7533e11dfc89769f8d95ce4e8442b25381fc05efc83fd5c7ec9",
+    "src/shared/ropeGeometry.ts": "b95ee3cdb6685d962845bc14de15d54c0a44c77c7e43d3db0cf287d5bda6df3d"
+  },
+  "compiledHashes": {
+    "out/main/index.js": "d3aeb25689c26df80adf738b5d6e53526d9f356a789bc8836daa92c927559989",
+    "out/preload/index.js": "bddc1bdd58af17e601fcad73695739df5d74c120595f5de5a0d2d33285fd7fbd",
+    "out/renderer/index.html": "8b454e7b95bd919207a763d229d4861390472d0aff366c0647859e1d1a993ca8",
+    "out/renderer/assets/index-D3MqCbG1.css": "be9206132fc8f7533e11dfc89769f8d95ce4e8442b25381fc05efc83fd5c7ec9",
+    "out/renderer/assets/index-Gvp5SsVu.js": "1248a5b712e0f4c2e2b10f93337f8b47e7eed3e44a4bb26b72db84bbb8cb4b35"
+  },
+  "checks": {
+    "typecheck": "passed",
+    "build": "passed",
+    "focusedGeometryUnits": 4,
+    "primaryVisualCommandExitCode": 0,
+    "primaryScenes": 12,
+    "viewportCommandExitCode": 0,
+    "viewportScenes": 8,
+    "interactionCommandExitCode": 0,
+    "mouseCancelPreservesSnapshot": true,
+    "touchProtocolMovePersists": true,
+    "liveReducedMotion": true,
+    "fixedRopeAcrossDrag": true,
+    "physicalOsInteraction": false,
+    "ownedInstancesFinished": true
+  },
+  "images": [
+    {
+      "file": "baseline/1x-dark-3-clamp-4x.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/baseline/1x-dark-3-clamp-4x.png",
+      "sha256": "a1a8e8b6ea43aa20cd7543b718e1afc1b886f1a91dc68dd7aec6eb5f35add42c",
+      "pixels": {
+        "width": 720,
+        "height": 340
+      }
+    },
+    {
+      "file": "baseline/1x-dark-3-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/baseline/1x-dark-3-overall.png",
+      "sha256": "e3943aa3ca44be9176845673fd4d3ac271e6eb4fd781b6dd5c74bf88298dff7d",
+      "pixels": {
+        "width": 1440,
+        "height": 340
+      }
+    },
+    {
+      "file": "baseline/1x-light-3-clamp-4x.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/baseline/1x-light-3-clamp-4x.png",
+      "sha256": "f584cda90ab9045f4e37b4443ee3ac1da25f8f74b47d044c8c09b8d063da7327",
+      "pixels": {
+        "width": 720,
+        "height": 340
+      }
+    },
+    {
+      "file": "baseline/1x-light-3-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/baseline/1x-light-3-overall.png",
+      "sha256": "930d65dbab0a9df4888c288b7d2f60143cea92f272700182f6cceb4a48b90856",
+      "pixels": {
+        "width": 1440,
+        "height": 340
+      }
+    },
+    {
+      "file": "candidate/1x-dark-0-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/candidate/1x-dark-0-overall.png",
+      "sha256": "52381fd9aba514f2ad7305400543b5aaafd1b444ec3b9dc0360400195edf3870",
+      "pixels": {
+        "width": 1440,
+        "height": 340
+      }
+    },
+    {
+      "file": "candidate/1x-dark-24-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/candidate/1x-dark-24-overall.png",
+      "sha256": "96622f20fed38c6d254b7666891d3f5f8c481248b2c75ddf91354eaf19eb493f",
+      "pixels": {
+        "width": 1440,
+        "height": 340
+      }
+    },
+    {
+      "file": "candidate/1x-dark-3-clamp-4x.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/candidate/1x-dark-3-clamp-4x.png",
+      "sha256": "bf7ce293626768bda081e99d01de3a2a858963f3e9a7093784986906aab27af7",
+      "pixels": {
+        "width": 720,
+        "height": 340
+      }
+    },
+    {
+      "file": "candidate/1x-dark-3-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/candidate/1x-dark-3-overall.png",
+      "sha256": "da56a1c331d567fcc8d1b3934316ad00942c1cf045e3afeb000469555b15892b",
+      "pixels": {
+        "width": 1440,
+        "height": 340
+      }
+    },
+    {
+      "file": "candidate/1x-light-0-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/candidate/1x-light-0-overall.png",
+      "sha256": "424ef3fa14245617a5d9e274e43a026b29bbba00a9c3ed9652e357db1df4f521",
+      "pixels": {
+        "width": 1440,
+        "height": 340
+      }
+    },
+    {
+      "file": "candidate/1x-light-24-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/candidate/1x-light-24-overall.png",
+      "sha256": "fc564652d64f1911f9c5e0e99bd8f577d89d972b8910468fefb1604e6bb1c8da",
+      "pixels": {
+        "width": 1440,
+        "height": 340
+      }
+    },
+    {
+      "file": "candidate/1x-light-3-clamp-4x.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/candidate/1x-light-3-clamp-4x.png",
+      "sha256": "01ac42d16309ce5569c37b508b1f09bfaafb33948e99c10f06515966ad48e2d6",
+      "pixels": {
+        "width": 720,
+        "height": 340
+      }
+    },
+    {
+      "file": "candidate/1x-light-3-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/candidate/1x-light-3-overall.png",
+      "sha256": "0fc960abe068393bd1867e57c15c5523847b77273e8bf496fdd851913ec230ae",
+      "pixels": {
+        "width": 1440,
+        "height": 340
+      }
+    },
+    {
+      "file": "candidate/2x-dark-0-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/candidate/2x-dark-0-overall.png",
+      "sha256": "b1d0573e01fec6d26296c382c00d6b9cdeb6318f9c9f4b80f7af3c148e608855",
+      "pixels": {
+        "width": 2880,
+        "height": 680
+      }
+    },
+    {
+      "file": "candidate/2x-dark-24-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/candidate/2x-dark-24-overall.png",
+      "sha256": "48965b8d182e746b60aad889d449ee9ec1d7b33ddd67bdaa2806f6f7cabc0be1",
+      "pixels": {
+        "width": 2880,
+        "height": 680
+      }
+    },
+    {
+      "file": "candidate/2x-dark-3-clamp-4x.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/candidate/2x-dark-3-clamp-4x.png",
+      "sha256": "e9f06f65a43e8f13fd50c6f6416de5e73cc719d73591dfc2fdb0dd87dd7b7c16",
+      "pixels": {
+        "width": 1440,
+        "height": 680
+      }
+    },
+    {
+      "file": "candidate/2x-dark-3-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/candidate/2x-dark-3-overall.png",
+      "sha256": "3675271f74056f2a08192002626ee974b64b52cd91e30433f1c483942322c5ec",
+      "pixels": {
+        "width": 2880,
+        "height": 680
+      }
+    },
+    {
+      "file": "candidate/2x-light-0-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/candidate/2x-light-0-overall.png",
+      "sha256": "8f6f18a85e9e168e932d311534eba0c924781882c0073572ec3c6683c49f6831",
+      "pixels": {
+        "width": 2880,
+        "height": 680
+      }
+    },
+    {
+      "file": "candidate/2x-light-24-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/candidate/2x-light-24-overall.png",
+      "sha256": "46a23fba4be033c92298633703282ec003ca1602712add18a945dd75013c4331",
+      "pixels": {
+        "width": 2880,
+        "height": 680
+      }
+    },
+    {
+      "file": "candidate/2x-light-3-clamp-4x.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/candidate/2x-light-3-clamp-4x.png",
+      "sha256": "a979eb2e71a91da46ec2dd690e3b6ecc94790db0ba7310ad027311162ea25085",
+      "pixels": {
+        "width": 1440,
+        "height": 680
+      }
+    },
+    {
+      "file": "candidate/2x-light-3-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/candidate/2x-light-3-overall.png",
+      "sha256": "6fe96cfb5992adb668b63966241445afbbd35e987bd128a446f71c5f19b9dbd8",
+      "pixels": {
+        "width": 2880,
+        "height": 680
+      }
+    },
+    {
+      "file": "viewport-matrix/1024dip-1x-light-24-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/viewport-matrix/1024dip-1x-light-24-overall.png",
+      "sha256": "d8d58faca217dd33114698ae9a39bf31a718e0e9406cb3cc3f86e6c979711e9c",
+      "pixels": {
+        "width": 1024,
+        "height": 340
+      }
+    },
+    {
+      "file": "viewport-matrix/1024dip-2x-dark-24-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/viewport-matrix/1024dip-2x-dark-24-overall.png",
+      "sha256": "736ee57f9049012bd09beef6668d0738899a5a96afaf7bb2e019c61531fc2414",
+      "pixels": {
+        "width": 2048,
+        "height": 680
+      }
+    },
+    {
+      "file": "viewport-matrix/1920dip-1x-light-24-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/viewport-matrix/1920dip-1x-light-24-overall.png",
+      "sha256": "e0ce95c3910a601dd5028b05a6d4197d852476d4b514b4dfa850214414d41808",
+      "pixels": {
+        "width": 1920,
+        "height": 340
+      }
+    },
+    {
+      "file": "viewport-matrix/1920dip-2x-dark-24-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/viewport-matrix/1920dip-2x-dark-24-overall.png",
+      "sha256": "39f49c3c4791b1c623f3e9bb7216aafe301e2d63059ce9d2779dad2e0269eba8",
+      "pixels": {
+        "width": 3840,
+        "height": 680
+      }
+    },
+    {
+      "file": "viewport-matrix/2560dip-1x-light-24-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/viewport-matrix/2560dip-1x-light-24-overall.png",
+      "sha256": "d6cfd385915b40ec048ac99d2a0d44a40f78f14cf09597b4d4395578e6c9f0e4",
+      "pixels": {
+        "width": 2560,
+        "height": 340
+      }
+    },
+    {
+      "file": "viewport-matrix/2560dip-2x-dark-24-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/viewport-matrix/2560dip-2x-dark-24-overall.png",
+      "sha256": "c49bd646d2bcb2c90d11b2c41a6b1028449af8706e823780a7961abae609e313",
+      "pixels": {
+        "width": 5120,
+        "height": 680
+      }
+    },
+    {
+      "file": "viewport-matrix/800dip-1x-light-24-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/viewport-matrix/800dip-1x-light-24-overall.png",
+      "sha256": "34c185ebce05785c7dfe7b296093ffc822980a8d15d67e725c04e0c0879e3338",
+      "pixels": {
+        "width": 800,
+        "height": 340
+      }
+    },
+    {
+      "file": "viewport-matrix/800dip-2x-dark-24-overall.png",
+      "absolutePath": "/Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp/acceptance/evidence/clamp-review/viewport-matrix/800dip-2x-dark-24-overall.png",
+      "sha256": "4a4fd964e104b948048cdcb1764f31bd31a9c1f9ff2c94dcce9b9bd68346788b",
+      "pixels": {
+        "width": 1600,
+        "height": 680
+      }
+    }
+  ],
+  "scopes": [
+    "primary source renderer DPR1/2 and neutral backgrounds",
+    "viewport widths emulated in test screen provider, not physical multi-display",
+    "4x detail renderer transform, not physical OS scaling",
+    "real Agent receiving not tested",
+    "G7 stage paused, not integrated"
+  ]
+}

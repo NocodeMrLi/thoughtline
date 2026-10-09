@@ -1,0 +1,21 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp
+
+ ❯ tests/unit/fixedRope.test.ts (2 tests | 1 failed) 4ms
+   × 绳两端越过屏幕裁切边界，固定弧线留出上方夹子命中空间 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/fixedRope.test.ts > 绳两端越过屏幕裁切边界，固定弧线留出上方夹子命中空间
+AssertionError: expected 20.799999999999997 to be less than 0
+ ❯ tests/unit/fixedRope.test.ts:8:21
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  07:44:04
+   Duration  141ms (transform 80%, import 10%, tests 6%, worker 4%)
+
