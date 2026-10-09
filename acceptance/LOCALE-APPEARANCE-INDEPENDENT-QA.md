@@ -23,3 +23,15 @@ Record OS/build, app/package source SHA/hash/architecture, screen/DPI, keyboard/
 | Receiver matrix | Continue original WeChat4.1.13.65, QQ-browser Doubao(version unknown), WorkBuddy5.7.6 real input-box repeated tests | Full correct text/no duplicates/attachments/draft overwrite/automatic send; original feedback is not independent reproduction | Not yet independently tested |
 
 Cleanup: finish or cancel composition deliberately, restore fault hooks/held replies, save/flush and close normally. Confirm own PID exit before removing own test data. Preserve findings and deliverables, never kill the original app or delete unrelated caches. Note backups and profile UI preferences have separate storage; record their documented restore/rollback behavior after implementation.
+
+## Source implementation checkpoint (2026-10-10)
+
+Producer implementation0cab2bb97d17d172850597375b917cc13ab5f639/evidence7de6eab012bc40ed812115d2f4bebe8f26d65634. Type/build passed;212unitpassed/4Windows-onlyskipped; controlledMacappearance17 andrepair11passed. Independentcodefixreview addressedAgentink/currentShelfmessages/diagnosticbytes/ASCIIgenerator. Source222-inputcanonical2bb6af24495e914ff333886348f6077135682ff2f7506c14e40b9360ab3f95fc matchesall222finalrepaircapturefiles. This checkpoint does not turn any independent physical-case row above into a pass. Actual .3 packages/Windows checks are downstream.
+
+| Additional case | Steps | Expected | Actual / evidence |
+|---|---|---|---|
+| Custom Agent contrast | Use saturated/neutralcustomcolors inbothmodes; examine ropepaperlabels | Labelcontrast≥4.5:1 overactualpaper/shading; originalclipcolor/art/usertextunchanged | Sourcecontrolledsamples≥4.607:1; physicalbothplatformpending |
+| Current drag notices | Switchlocale, move/cancelclip, changelocaleagain duringdrag, safe page-savefault | Latestlanguagecompletion/cancel/error; active dragnotcanceled bylocale | Macsourcecontrolledpassed; independentphysicalpending |
+| Diagnostic integrity | Testprofile IO/storage/startupfaults withChineseandASCII punctuation/path | Localizedknownappmessage; exactunchangeddiagnosticbytes | Macsourcecontrolledpassed; actualpackages/Windowspending |
+
+Paper must remainthin/matte/paper-like; anylaterglassqualityworkbelongsauxchrome/smallcontrols andmustrespecteachplatformstyle(MacApple/WindowsFluent)withpairedverification. Currentincrementcontains no newglassredesign. READMEpromotionalimage/GIFexplicitlydeferred. Twoearlyownedstartupoverlap/forcedcleanupfailuresandalllaterharnessfailuresareretainevidence,neverpassednormalshutdown.

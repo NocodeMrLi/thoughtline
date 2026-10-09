@@ -8,7 +8,7 @@ Deliver English and first-level tactile day/night capsules without adding rope c
 ## Phases
 - [x] Archive approved V2/motion and completed README remotely verified.
 - [x] Confirm clean main713a1fe and new isolated SDD ledger, preflight table/rulings.
-- [ ] Task1: production and source validation completed at631a7d1, evidence82a7a8a; independent task review pending.
+- [x] Task1: production and source validation212/4 +11repair/17main; scoped fixreview clean at7de6eab after source0cab2bb.
 - [ ] Task2: exact-source dual packages/actual checks + private draft + task review.
 - [ ] Final whole-increment review/fix, exact private publication, docs and cleanup.
 
