@@ -1,0 +1,116 @@
+{
+  "evidence": "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37960611892-1-203c5cf6a6d84f4eb7198519651342b7\\final-reader-placement-workflow-windows-ci-3zcg2L",
+  "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-final-reader-vYk4n3",
+  "cases": [
+    {
+      "name": "raw-cross",
+      "passed": true,
+      "oldSession": 2,
+      "session": 3,
+      "reader": "c",
+      "editors": 1,
+      "draft": "UNSAVED cross C",
+      "persisted": "final probe c"
+    },
+    {
+      "name": "real-main-cross-session-late-delete",
+      "passed": true,
+      "session": 3,
+      "reader": "c",
+      "editors": 1,
+      "draft": "UNSAVED cross C",
+      "persisted": "final probe c"
+    },
+    {
+      "name": "raw-same",
+      "passed": true,
+      "oldSession": 4,
+      "session": 4,
+      "reader": "c",
+      "editors": 1,
+      "draft": "UNSAVED same C",
+      "persisted": "UNSAVED cross C"
+    },
+    {
+      "name": "same-session-back-new-dirty-reader",
+      "passed": true,
+      "session": 4,
+      "reader": "c",
+      "editors": 1,
+      "draft": "UNSAVED same C",
+      "persisted": "UNSAVED cross C"
+    },
+    {
+      "name": "detail-fast-queued-flips-and-delayed-finish",
+      "passed": true,
+      "sequentialFlipsRetained": true,
+      "delayedFinishWaitedForSave": true
+    },
+    {
+      "name": "calendar-normal-delete-neighbor",
+      "passed": true,
+      "reader": "e"
+    },
+    {
+      "name": "detail-normal-delete-neighbor-and-empty",
+      "passed": true,
+      "neighbor": "f",
+      "lastDeleteEmpty": true
+    },
+    {
+      "name": "detail-last-deleted-selection-stays-empty",
+      "passed": true,
+      "noFallbackToOldManageSelection": true
+    },
+    {
+      "name": "agent-auto-split-full-rope-notice-and-stable-body",
+      "passed": true,
+      "notice": "已保存，绳上暂时放不下，可在念头日历查看",
+      "idsStable": true,
+      "subsequentEditStable": true
+    }
+  ],
+  "pids": [
+    7684,
+    6004,
+    584,
+    2680,
+    7980,
+    6600,
+    7236
+  ],
+  "scope": "Real source Electron main routing and persisted mutations; controlled reply hold, synthetic data only",
+  "normalClose": true,
+  "pidChecks": [
+    {
+      "pid": 7684,
+      "status": "ESRCH"
+    },
+    {
+      "pid": 6004,
+      "status": "ESRCH"
+    },
+    {
+      "pid": 584,
+      "status": "ESRCH"
+    },
+    {
+      "pid": 2680,
+      "status": "ESRCH"
+    },
+    {
+      "pid": 7980,
+      "status": "ESRCH"
+    },
+    {
+      "pid": 6600,
+      "status": "ESRCH"
+    },
+    {
+      "pid": 7236,
+      "status": "ESRCH"
+    }
+  ],
+  "stat": "ENOENT",
+  "passed": true
+}

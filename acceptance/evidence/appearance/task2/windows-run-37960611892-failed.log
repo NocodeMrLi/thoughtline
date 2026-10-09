@@ -1,0 +1,26 @@
+windows-test-package	Disposable runner installation and data retention preflight	﻿2026-10-09T16:42:04.7075978Z ##[group]Run ./scripts/windows-installer-preflight.ps1
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:04.7076437Z ^[[36;1m./scripts/windows-installer-preflight.ps1^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:04.7134387Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:04.7134725Z ##[endgroup]
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:24.3497596Z Executable: D:\a\_temp\Thoughtline-installer-preflight\Thoughtline.exe
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:24.3501165Z Isolated data: C:\Users\runneradmin\AppData\Local\Thoughtline-Preflight\0.0.17-preview.3\user-data
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:24.3502376Z This isolates notes. The installer still uses the same app identity and can replace an existing installed version.
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:24.3526046Z Check only: no data directory or app process created.
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2662280Z ^[[31;1mD:\a\thoughtline\thoughtline\node_modules\playwright-core\lib\coreBundle.js:43834^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2681084Z ^[[31;1m  const failError = new Error("Process failed to launch!");^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2694257Z ^[[31;1m                    ^^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2704027Z ^[[31;1m^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2708005Z ^[[31;1mError: Process failed to launch!^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2711978Z ^[[31;1m    at waitForLine (D:\a\thoughtline\thoughtline\node_modules\playwright-core\lib\coreBundle.js:43834:21)^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2715592Z ^[[31;1m    at Electron.launch (D:\a\thoughtline\thoughtline\node_modules\playwright-core\lib\coreBundle.js:44044:36)^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2720597Z ^[[31;1m    at async ElectronDispatcher.launch (D:\a\thoughtline\thoughtline\node_modules\playwright-core\lib\coreBundle.js:55209:37)^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2724161Z ^[[31;1m    at async _ProgressController.run (D:\a\thoughtline\thoughtline\node_modules\playwright-core\lib\coreBundle.js:12149:27)^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2730361Z ^[[31;1m    at async DispatcherConnection.dispatch (D:\a\thoughtline\thoughtline\node_modules\playwright-core\lib\coreBundle.js:18775:27)^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2733472Z ^[[31;1m^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2736894Z ^[[31;1mNode.js v24.19.0^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.3768477Z ^[[31;1mException: ^[[0mD:\a\thoughtline\thoughtline\scripts\windows-installer-preflight.ps1:53^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.3769095Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.3769750Z ^[[31;1m^[[0m^[[36;1m^[[36;1m  53 | ^[[0m … DE -ne 0) { ^[[36;1mthrow 'Actual installed package appearance preflight fail^[[0m …^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.3770443Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.3771118Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mActual installed package appearance preflight failed^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.4086499Z ##[error]Process completed with exit code 1.

@@ -1,0 +1,854 @@
+windows-test-package	Set up job	﻿2026-10-09T16:38:53.8653281Z Current runner version: '2.337.0'
+windows-test-package	Set up job	2026-10-09T16:38:53.8752956Z ##[group]Runner Image Provisioner
+windows-test-package	Set up job	2026-10-09T16:38:53.8753751Z Hosted Compute Agent
+windows-test-package	Set up job	2026-10-09T16:38:53.8754228Z Version: 20260901.588
+windows-test-package	Set up job	2026-10-09T16:38:53.8754708Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+windows-test-package	Set up job	2026-10-09T16:38:53.8755309Z Build Date: 2026-09-01T19:56:44Z
+windows-test-package	Set up job	2026-10-09T16:38:53.8755847Z Worker ID: {eec2dd12-5c91-4689-97b5-09a2c0dfff6a}
+windows-test-package	Set up job	2026-10-09T16:38:53.8756421Z Azure Region: centralus
+windows-test-package	Set up job	2026-10-09T16:38:53.8756897Z ##[endgroup]
+windows-test-package	Set up job	2026-10-09T16:38:53.8758011Z ##[group]Operating System
+windows-test-package	Set up job	2026-10-09T16:38:53.8758558Z Microsoft Windows Server 2025
+windows-test-package	Set up job	2026-10-09T16:38:53.8759049Z 10.0.26100
+windows-test-package	Set up job	2026-10-09T16:38:53.8759445Z Datacenter
+windows-test-package	Set up job	2026-10-09T16:38:53.8759882Z ##[endgroup]
+windows-test-package	Set up job	2026-10-09T16:38:53.8760317Z ##[group]Runner Image
+windows-test-package	Set up job	2026-10-09T16:38:53.8760779Z Image: windows-2025-vs2026
+windows-test-package	Set up job	2026-10-09T16:38:53.8761268Z Version: 20260925.250.1
+windows-test-package	Set up job	2026-10-09T16:38:53.8762242Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260925.250/images/windows/Windows2025-VS2026-Readme.md
+windows-test-package	Set up job	2026-10-09T16:38:53.8802364Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260925.250
+windows-test-package	Set up job	2026-10-09T16:38:53.8803521Z ##[endgroup]
+windows-test-package	Set up job	2026-10-09T16:38:53.8804534Z ##[group]GITHUB_TOKEN Permissions
+windows-test-package	Set up job	2026-10-09T16:38:53.8807052Z Contents: read
+windows-test-package	Set up job	2026-10-09T16:38:53.8807543Z Metadata: read
+windows-test-package	Set up job	2026-10-09T16:38:53.8807979Z ##[endgroup]
+windows-test-package	Set up job	2026-10-09T16:38:53.8810299Z Secret source: Actions
+windows-test-package	Set up job	2026-10-09T16:38:53.8811033Z Cache mode: write
+windows-test-package	Set up job	2026-10-09T16:38:53.8811725Z Prepare workflow directory
+windows-test-package	Set up job	2026-10-09T16:38:53.9167140Z Prepare all required actions
+windows-test-package	Set up job	2026-10-09T16:38:53.9204729Z Getting action download info
+windows-test-package	Set up job	2026-10-09T16:38:54.1734254Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+windows-test-package	Set up job	2026-10-09T16:38:54.2852659Z Download action repository 'actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1' (SHA:949feb2413d6458794dcd2491c4babbbce0c15c1)
+windows-test-package	Set up job	2026-10-09T16:38:54.7265867Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+windows-test-package	Set up job	2026-10-09T16:38:55.1942116Z Complete job name: windows-test-package
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	﻿2026-10-09T16:38:55.3029144Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.3030077Z with:
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.3030315Z   repository: NocodeMrLi/thoughtline
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.3032662Z   token: ***
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.3032883Z   ssh-strict: true
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.3033107Z   ssh-user: git
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.3033337Z   persist-credentials: true
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.3033592Z   clean: true
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.3033819Z   sparse-checkout-cone-mode: true
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.3034082Z   fetch-depth: 1
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.3034302Z   fetch-tags: false
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.3034530Z   show-progress: true
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.3034757Z   lfs: false
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.3034965Z   submodules: false
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.3035218Z   set-safe-directory: true
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.3035478Z   allow-unsafe-pr-checkout: false
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.3035836Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.9654808Z Syncing repository: NocodeMrLi/thoughtline
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.9657431Z ##[group]Getting Git version info
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.9659057Z Working directory is 'D:\a\thoughtline\thoughtline'
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.9660895Z [command]"C:\Program Files\Git\bin\git.exe" version
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.9661991Z git version 2.55.0.windows.5
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.9665196Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.9670410Z Temporarily overriding HOME='D:\a\_temp\0a934e24-e42e-4f46-9499-9b1f97e36b0e' before making global git config changes
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.9671968Z Adding repository directory to the temporary git global config as a safe directory
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.9673478Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\thoughtline\thoughtline
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.9675705Z Deleting the contents of 'D:\a\thoughtline\thoughtline'
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.9678369Z ##[group]Determining repository object format
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.9679484Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.9680490Z ##[group]Initializing the repository
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.9681665Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\thoughtline\thoughtline
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.9733757Z Initialized empty Git repository in D:/a/thoughtline/thoughtline/.git/
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:55.9777693Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/NocodeMrLi/thoughtline
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:56.0425917Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:56.0432873Z ##[group]Disabling automatic garbage collection
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:56.0434065Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:56.0976196Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:56.0979506Z ##[group]Setting up auth
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:56.0980474Z Removing SSH command configuration
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:56.0981620Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:56.0999042Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:57.3947279Z Removing HTTP extra header
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:57.3953627Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:57.4171035Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:57.8361768Z Removing includeIf entries pointing to credentials config files
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:57.8365512Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:57.8623597Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:58.3176739Z [command]"C:\Program Files\Git\bin\git.exe" config --file D:\a\_temp\git-credentials-8d620ebb-f0d1-4113-8051-02b3d8a73ec0.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:58.3389358Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/thoughtline/thoughtline/.git.path D:\a\_temp\git-credentials-8d620ebb-f0d1-4113-8051-02b3d8a73ec0.config
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:58.3598380Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path D:\a\_temp\git-credentials-8d620ebb-f0d1-4113-8051-02b3d8a73ec0.config
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:58.3893783Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-8d620ebb-f0d1-4113-8051-02b3d8a73ec0.config
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:58.4150236Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-8d620ebb-f0d1-4113-8051-02b3d8a73ec0.config
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:58.4488194Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:58.4502342Z ##[group]Fetching the repository
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:38:58.4511436Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +3cb50bb10572559c9ef4593542def35179c28f10:refs/remotes/origin/main
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:00.8464809Z From https://github.com/NocodeMrLi/thoughtline
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:00.8513443Z  * [new ref]         3cb50bb10572559c9ef4593542def35179c28f10 -> origin/main
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:00.8618654Z [command]"C:\Program Files\Git\bin\git.exe" branch --list --remote origin/main
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:00.8924917Z   origin/main
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:00.8992495Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse refs/remotes/origin/main
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:00.9205119Z 3cb50bb10572559c9ef4593542def35179c28f10
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:00.9273955Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:00.9342212Z ##[group]Determining the checkout info
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:00.9354211Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:00.9356204Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:00.9683816Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:00.9974617Z ##[group]Checking out the ref
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:00.9995768Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:01.9610525Z Switched to a new branch 'main'
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:01.9681090Z branch 'main' set up to track 'origin/main'.
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:01.9800929Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:02.0154324Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:39:02.0627380Z 3cb50bb10572559c9ef4593542def35179c28f10
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	﻿2026-10-09T16:39:02.1021793Z ##[group]Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:02.1022133Z with:
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:02.1022256Z   node-version: 24.19.0
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:02.1022403Z   cache: npm
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:02.1022556Z   check-latest: false
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:02.1024070Z   token: ***
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:02.1024200Z   package-manager-cache: true
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:02.1024351Z ##[endgroup]
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:02.2212356Z Attempting to download 24.19.0...
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:02.9347648Z Acquiring 24.19.0 - x64 from https://github.com/actions/node-versions/releases/download/24.19.0-30872449280/node-24.19.0-win32-x64.7z
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:03.3991869Z Extracting ...
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:05.3371159Z Adding to the cache ...
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:14.0718694Z ##[group]Environment details
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:15.6067865Z node: v24.19.0
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:15.6068434Z npm: 11.17.0
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:15.6068792Z yarn: 1.22.22
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:15.6069358Z ##[endgroup]
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:15.6445495Z [command]C:\Windows\system32\cmd.exe /D /S /C "C:\hostedtoolcache\windows\node\24.19.0\x64\npm.cmd config get cache"
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:15.8829322Z C:\npm\cache
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T16:39:16.1406236Z npm cache is not found
+windows-test-package	Run npm ci --no-audit --no-fund	﻿2026-10-09T16:39:16.1678949Z ##[group]Run npm ci --no-audit --no-fund
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T16:39:16.1679297Z ^[[36;1mnpm ci --no-audit --no-fund^[[0m
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T16:39:16.2146581Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T16:39:16.2146874Z ##[endgroup]
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T16:39:19.2396344Z npm warn deprecated rimraf@2.6.3: Rimraf versions prior to v4 are no longer supported
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T16:39:20.8600249Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T16:39:21.6386531Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T16:39:25.0435422Z npm warn deprecated boolean@3.2.0: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T16:39:29.9875609Z 
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T16:39:29.9876636Z added 363 packages in 13s
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T16:39:29.9885034Z npm warn allow-scripts 3 packages have install scripts not yet covered by allowScripts:
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T16:39:29.9895171Z npm warn allow-scripts   electron-winstaller@5.4.0 (install: node ./script/select-7z-arch.js)
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T16:39:29.9895930Z npm warn allow-scripts   esbuild@0.25.12 (postinstall: node install.js)
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T16:39:29.9896557Z npm warn allow-scripts   esbuild@0.28.2 (postinstall: node install.js)
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T16:39:29.9899556Z npm warn allow-scripts
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T16:39:29.9900376Z npm warn allow-scripts Run `npm approve-scripts --allow-scripts-pending` to review, or `npm approve-scripts <pkg>` to allow.
+windows-test-package	Run npm run verify	﻿2026-10-09T16:39:31.4946840Z ##[group]Run npm run verify
+windows-test-package	Run npm run verify	2026-10-09T16:39:31.4947086Z ^[[36;1mnpm run verify^[[0m
+windows-test-package	Run npm run verify	2026-10-09T16:39:31.4992519Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Run npm run verify	2026-10-09T16:39:31.4992890Z ##[endgroup]
+windows-test-package	Run npm run verify	2026-10-09T16:39:32.2809431Z 
+windows-test-package	Run npm run verify	2026-10-09T16:39:32.2810632Z > thoughtline@0.0.17-preview.3 verify
+windows-test-package	Run npm run verify	2026-10-09T16:39:32.2811221Z > node scripts/verify.cjs
+windows-test-package	Run npm run verify	2026-10-09T16:39:32.2811478Z 
+windows-test-package	Run npm run verify	2026-10-09T16:39:32.5350368Z 
+windows-test-package	Run npm run verify	2026-10-09T16:39:32.5351496Z > thoughtline@0.0.17-preview.3 typecheck
+windows-test-package	Run npm run verify	2026-10-09T16:39:32.5352177Z > node node_modules/typescript/bin/tsc --noEmit
+windows-test-package	Run npm run verify	2026-10-09T16:39:32.5352755Z 
+windows-test-package	Run npm run verify	2026-10-09T16:39:33.6339095Z 
+windows-test-package	Run npm run verify	2026-10-09T16:39:33.6340424Z > thoughtline@0.0.17-preview.3 test
+windows-test-package	Run npm run verify	2026-10-09T16:39:33.6341133Z > node node_modules/vitest/vitest.mjs run
+windows-test-package	Run npm run verify	2026-10-09T16:39:33.6357888Z 
+windows-test-package	Run npm run verify	2026-10-09T16:39:34.1330764Z 
+windows-test-package	Run npm run verify	2026-10-09T16:39:34.1332626Z ^[[1m^[[30m^[[46m RUN ^[[49m^[[39m^[[22m ^[[36mv5.0.3 ^[[39m^[[90mD:/a/thoughtline/thoughtline^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:34.1333243Z 
+windows-test-package	Run npm run verify	2026-10-09T16:39:35.0441942Z  ^[[32m✓^[[39m tests/unit/storageLocations.test.ts ^[[2m(^[[22m^[[2m14 tests^[[22m^[[2m)^[[22m^[[33m 644^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:35.2226409Z  ^[[32m✓^[[39m tests/unit/p3IdeaCommands.test.ts ^[[2m(^[[22m^[[2m13 tests^[[22m^[[2m)^[[22m^[[32m 34^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:35.5894077Z  ^[[32m✓^[[39m tests/unit/repository.test.ts ^[[2m(^[[22m^[[2m11 tests^[[22m^[[2m)^[[22m^[[32m 233^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:35.9103292Z  ^[[32m✓^[[39m tests/unit/p3Repository.test.ts ^[[2m(^[[22m^[[2m9 tests^[[22m^[[2m)^[[22m^[[32m 189^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:36.0503726Z  ^[[32m✓^[[39m tests/unit/p3Schema.test.ts ^[[2m(^[[22m^[[2m19 tests^[[22m^[[2m)^[[22m^[[32m 23^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:36.5795114Z  ^[[32m✓^[[39m tests/unit/clipProjection.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[33m 401^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:36.7059224Z  ^[[32m✓^[[39m tests/unit/shelfState.test.ts ^[[2m(^[[22m^[[2m13 tests^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:37.0114414Z  ^[[32m✓^[[39m tests/unit/preferences.test.ts ^[[2m(^[[22m^[[2m16 tests^[[22m^[[2m)^[[22m^[[32m 157^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:37.1899432Z  ^[[32m✓^[[39m tests/unit/ideaWorkflow.test.ts ^[[2m(^[[22m^[[2m7 tests^[[22m^[[2m)^[[22m^[[32m 49^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:37.4163290Z  ^[[32m✓^[[39m tests/unit/i18n.test.ts ^[[2m(^[[22m^[[2m11 tests^[[22m^[[2m)^[[22m^[[32m 39^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:37.5742407Z  ^[[32m✓^[[39m tests/unit/clipCommands.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[32m 25^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:37.7157063Z  ^[[32m✓^[[39m tests/unit/centeredRope.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 13^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:37.8530551Z  ^[[32m✓^[[39m tests/unit/draftAutosaver.test.ts ^[[2m(^[[22m^[[2m7 tests^[[22m^[[2m)^[[22m^[[32m 11^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:38.0057748Z  ^[[32m✓^[[39m tests/unit/ideaHistory.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 20^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:38.1442111Z  ^[[32m✓^[[39m tests/unit/agentSplitPlacement.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[32m 10^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:38.2911814Z  ^[[32m✓^[[39m tests/unit/ideaCommands.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 19^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:38.4724717Z  ^[[32m✓^[[39m tests/unit/projectDeletion.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 55^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:38.6038431Z  ^[[32m✓^[[39m tests/unit/clipLayout.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:38.7416488Z  ^[[32m✓^[[39m tests/unit/macLauncherGenerator.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 13^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:38.9203976Z  ^[[32m✓^[[39m tests/unit/paperDrop.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 34^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:39.0810670Z  ^[[32m✓^[[39m tests/unit/shortcuts.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 4^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:43.1370559Z ^[[90mstdout^[[2m | tests/unit/shelfPresentation.test.ts
+windows-test-package	Run npm run verify	2026-10-09T16:39:43.1371773Z ^[[22m^[[39mDownloading Electron binary...
+windows-test-package	Run npm run verify	2026-10-09T16:39:43.1372290Z 
+windows-test-package	Run npm run verify	2026-10-09T16:39:43.1581602Z  ^[[32m✓^[[39m tests/unit/shelfPresentation.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:43.2821340Z  ^[[32m✓^[[39m tests/unit/spaceAllocation.test.ts ^[[2m(^[[22m^[[2m7 tests^[[22m^[[2m)^[[22m^[[32m 6^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:43.4078182Z  ^[[32m✓^[[39m tests/unit/fixedRope.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 4^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:43.5419809Z  ^[[32m✓^[[39m tests/unit/motion.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 4^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:45.4914658Z  ^[[32m✓^[[39m tests/unit/windowsAtomicWrite.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[33m 1821^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:45.4915676Z    ^[[33m^[[2m✓^[[22m^[[39m Windows transient EPERM retries without losing the old snapshot^[[33m 458^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:45.4916684Z    ^[[33m^[[2m✓^[[22m^[[39m Windows transient EBUSY retries without losing the old snapshot^[[33m 452^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:45.4917616Z    ^[[33m^[[2m✓^[[22m^[[39m Windows transient EACCES retries without losing the old snapshot^[[33m 454^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:45.4935292Z    ^[[33m^[[2m✓^[[22m^[[39m Windows exhausted rename retries preserve the prior snapshot and remove only the temporary file^[[33m 454^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:45.6385353Z  ^[[32m✓^[[39m tests/unit/agentInk.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 10^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:45.7859116Z  ^[[32m✓^[[39m tests/unit/idleFixtureCleanup.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 12^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:45.9144141Z  ^[[32m✓^[[39m tests/unit/compositionSession.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 3^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:46.0349111Z  ^[[32m✓^[[39m tests/unit/shortcutKeys.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[32m 3^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:46.1481595Z  ^[[32m✓^[[39m tests/unit/ropeGeometry.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 3^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:46.2829552Z  ^[[32m✓^[[39m tests/unit/manageGeometry.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 4^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:46.4069719Z  ^[[32m✓^[[39m tests/unit/visibilityMotion.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 3^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:46.5245392Z  ^[[32m✓^[[39m tests/unit/compositionFlush.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 7^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:46.6471194Z  ^[[32m✓^[[39m tests/unit/platformHost.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 3^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:46.7842675Z  ^[[32m✓^[[39m tests/unit/agentPalette.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:46.9003924Z  ^[[32m✓^[[39m tests/unit/composerMaterial.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 3^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:47.0118771Z  ^[[32m✓^[[39m tests/unit/composer.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 2^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:47.0195658Z 
+windows-test-package	Run npm run verify	2026-10-09T16:39:47.0196703Z ^[[2m Test Files ^[[22m ^[[1m^[[32m38 passed^[[39m^[[22m^[[90m (38)^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:47.0197356Z ^[[2m      Tests ^[[22m ^[[1m^[[32m216 passed^[[39m^[[22m^[[90m (216)^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:47.0197879Z ^[[2m   Start at ^[[22m 16:39:34
+windows-test-package	Run npm run verify	2026-10-09T16:39:47.0198405Z ^[[2m   Duration ^[[22m 12.88s^[[2m (import 49%, tests 43%, transform 6%, worker 2%)^[[22m
+windows-test-package	Run npm run verify	2026-10-09T16:39:47.0198791Z 
+windows-test-package	Run npm run verify	2026-10-09T16:39:47.0199312Z ^[[2m    Isolate ^[[22m ^[[33m38 workers spawned^[[39m^[[2m · ~97ms startup each (spawn + environment, per file)^[[22m
+windows-test-package	Run npm run verify	2026-10-09T16:39:47.0200292Z ^[[2m            ^[[22m ^[[2mat least ~3.58s faster with ^[[22m^[[33misolate: false^[[39m^[[2m — reuses workers across files instead of one per file^[[22m
+windows-test-package	Run npm run verify	2026-10-09T16:39:47.0200792Z 
+windows-test-package	Run npm run verify	2026-10-09T16:39:47.2787520Z 
+windows-test-package	Run npm run verify	2026-10-09T16:39:47.2788501Z > thoughtline@0.0.17-preview.3 build
+windows-test-package	Run npm run verify	2026-10-09T16:39:47.2789225Z > node node_modules/electron-vite/bin/electron-vite.js build
+windows-test-package	Run npm run verify	2026-10-09T16:39:47.2789598Z 
+windows-test-package	Run npm run verify	2026-10-09T16:39:47.6833221Z ^[[36mvite v7.3.7 ^[[32mbuilding ssr environment for production...^[[36m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:47.7475447Z transforming...
+windows-test-package	Run npm run verify	2026-10-09T16:39:47.9953427Z ^[[32m✓^[[39m 26 modules transformed.
+windows-test-package	Run npm run verify	2026-10-09T16:39:48.0403965Z rendering chunks...
+windows-test-package	Run npm run verify	2026-10-09T16:39:48.0441718Z ^[[2mout/main/^[[22m^[[36mindex.js  ^[[39m^[[1m^[[2m152.11 kB^[[22m^[[1m^[[22m
+windows-test-package	Run npm run verify	2026-10-09T16:39:48.0443664Z ^[[32m✓ built in 344ms^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:48.0479054Z ^[[36mvite v7.3.7 ^[[32mbuilding ssr environment for production...^[[36m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:48.0542354Z transforming...
+windows-test-package	Run npm run verify	2026-10-09T16:39:48.0595128Z ^[[32m✓^[[39m 1 modules transformed.
+windows-test-package	Run npm run verify	2026-10-09T16:39:48.0653361Z rendering chunks...
+windows-test-package	Run npm run verify	2026-10-09T16:39:48.0661551Z ^[[2mout/preload/^[[22m^[[36mindex.js  ^[[39m^[[1m^[[2m4.17 kB^[[22m^[[1m^[[22m
+windows-test-package	Run npm run verify	2026-10-09T16:39:48.0662176Z ^[[32m✓ built in 18ms^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:48.0696560Z ^[[36mvite v7.3.7 ^[[32mbuilding client environment for production...^[[36m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:48.0866695Z transforming...
+windows-test-package	Run npm run verify	2026-10-09T16:39:49.3261143Z ^[[32m✓^[[39m 60 modules transformed.
+windows-test-package	Run npm run verify	2026-10-09T16:39:49.4439784Z rendering chunks...
+windows-test-package	Run npm run verify	2026-10-09T16:39:49.4522724Z ^[[2m../../out/renderer/^[[22m^[[32mindex.html                                  ^[[39m^[[1m^[[2m  0.52 kB^[[22m^[[1m^[[22m
+windows-test-package	Run npm run verify	2026-10-09T16:39:49.4523662Z ^[[2m../../out/renderer/^[[22m^[[32massets/approved-TL-brand-logo-vrNXAf6L.jpg  ^[[39m^[[1m^[[2m 98.37 kB^[[22m^[[1m^[[22m
+windows-test-package	Run npm run verify	2026-10-09T16:39:49.4524430Z ^[[2m../../out/renderer/^[[22m^[[35massets/index-CuWCBgJ_.css                   ^[[39m^[[1m^[[2m 41.59 kB^[[22m^[[1m^[[22m
+windows-test-package	Run npm run verify	2026-10-09T16:39:49.4525170Z ^[[2m../../out/renderer/^[[22m^[[36massets/index-BfZgAICZ.js                    ^[[39m^[[1m^[[33m832.71 kB^[[39m^[[22m
+windows-test-package	Run npm run verify	2026-10-09T16:39:49.4525627Z ^[[32m✓ built in 1.38s^[[39m
+windows-test-package	Run npm run verify	2026-10-09T16:39:49.4956092Z (node:7328) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+windows-test-package	Run npm run verify	2026-10-09T16:39:49.4957296Z (Use `node --trace-deprecation ...` to show where the warning was created)
+windows-test-package	Source Electron UI regression on Windows	﻿2026-10-09T16:39:49.5618474Z ##[group]Run $evidenceRoot = 'acceptance/evidence/round1/p6-windows-source'
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:39:49.5618889Z ^[[36;1m$evidenceRoot = 'acceptance/evidence/round1/p6-windows-source'^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:39:49.5619165Z ^[[36;1mNew-Item -ItemType Directory -Force $evidenceRoot | Out-Null^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:39:49.5619552Z ^[[36;1m$runEvidence = Join-Path $evidenceRoot ('run-{0}-{1}-{2}' -f $env:GITHUB_RUN_ID, $env:GITHUB_RUN_ATTEMPT, [guid]::NewGuid().ToString('N'))^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:39:49.5619954Z ^[[36;1mNew-Item -ItemType Directory -Path $runEvidence | Out-Null^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:39:49.5620181Z ^[[36;1m$env:THOUGHTLINE_EVIDENCE_DIR = $runEvidence^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:39:49.5620876Z ^[[36;1mforeach ($test in @('inline-edit-workflow', 'calendar-workflow', 'calendar-motion-workflow', 'calendar-motion-fix1-workflow', 'calendar-geometry-workflow', 'storage-workflow', 'windows-source-runtime', 'calendar-brand-clip-workflow', 'final-reader-placement-workflow', 'final-calendar-shape-workflow')) {^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:39:49.5621593Z ^[[36;1m  $env:THOUGHTLINE_ATTEMPT = ('{0}-windows-ci' -f $test)^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:39:49.5630479Z ^[[36;1m  & node "tests/electron/$test.cjs" 2>&1 | Tee-Object -FilePath (Join-Path $runEvidence "$test.log")^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:39:49.5631118Z ^[[36;1m  if ($LASTEXITCODE -ne 0) { throw "$test failed with exit code $LASTEXITCODE" }^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:39:49.5631465Z ^[[36;1m}^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:39:49.5682638Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:39:49.5682860Z env:
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:39:49.5682994Z   THOUGHTLINE_FAKE_CLIPBOARD: 1
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:39:49.5683133Z ##[endgroup]
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:39:55.6298869Z {"scope":"isolated source Electron DOM/IPC on actual runner OS, synthetic composition events and disk fault; not physical IME","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"inline":true,"autosave":true,"lastInputClose":true,"compositionCloseBlocked":true,"failureRetained":true,"retryPersisted":true,"identityDatePreserved":true,"groupAgentSplitKeepsEditor":true}
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:39:58.5735910Z {"scope":"isolated source Electron DOM/IPC on actual runner OS with synthetic dates; not physical DPI/IME","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"today":true,"archiveCounted":true,"initialNine":true,"threeColumns":true,"loadMore":true,"inlineEdit":true,"backScrollRestored":true,"yearTwelveMonths":true,"search":true,"softDeleteRestore":true}
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:05.8116105Z {"scope":"source Electron real pixels, synthetic dates; not physical iPhone or Windows acceptance","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"day":"2026-10-09","month":"2026-10","entered":["month-to-year","year-to-month","month-to-day","day-to-month"],"interruption":true,"reduced":true,"scroll":true,"twoColumns":true,"boundedCards":true,"compositionGuard":true,"evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37960611892-1-203c5cf6a6d84f4eb7198519651342b7\\calendar-motion-workflow-windows-ci"}
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:10.4332258Z {"cases":[{"name":"empty-day-visible-return","passed":true,"emptyDay":"2026-10-01","visual":{"kind":"day-to-month","text":"这里还没有念头。","emptyCount":1}},{"name":"scroll-interrupts-active-motion","passed":true,"scrollTop":180},{"name":"restored-scroll-keeps-return-motion","passed":true,"kind":"day-to-month"},{"name":"resize-interrupts-active-motion","passed":true,"previousSize":[740,540]},{"name":"old-save-cannot-navigate-new-session","passed":true,"oldSession":2,"publishedSession":3,"storedTextSaved":true}],"evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37960611892-1-203c5cf6a6d84f4eb7198519651342b7\\calendar-motion-fix1-workflow-windows-ci"}
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:15.3692865Z {"scope":"isolated source Electron simulated window bounds and real repository; no physical multi-display/DPI","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"savedBounds":{"x":166,"y":42,"width":700,"height":580},"restoredBounds":{"x":166,"y":42,"width":700,"height":580},"settingsPreserved":true,"detailDidNotPollute":true,"motions":{"monthToDay":230,"dayToMonth":210,"monthToYear":210,"yearToMonth":230,"monthBackToYear":210},"sourceContent":true,"storedTextPreserved":true,"evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37960611892-1-203c5cf6a6d84f4eb7198519651342b7\\calendar-geometry-workflow-windows-ci"}
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:19.3365965Z {"profile":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-p5-electron-Xnda7r\\profile","target":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-p5-electron-Xnda7r\\target","backup":"C:\\Users\\runneradmin\\AppData\\Local\\Temp\\thoughtline-p5-electron-Xnda7r\\Thoughtline-backup-2026-10-09T16-40-16-701Z-9b396026-31e1-4e92-b8b4-b5e68474b825","checks":{"actualPath":true,"openFolder":true,"cancelUnchanged":true,"failedCopyOldLocation":true,"migrationRestart":true,"independentBackup":true,"dirtyFlush":true,"compositionRefused":true,"actualRestoreTwoRestarts":true,"offlineStartupFailClosed":true,"recoveryFolderRetry":true},"scope":"source Electron on actual runner OS with synthetic storage fixture; not hardware acceptance","host":{"platform":"win32","arch":"x64","release":"10.0.26100"}}
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:20.9395604Z {"passed":true,"evidenceDirectory":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37960611892-1-203c5cf6a6d84f4eb7198519651342b7\\source-attempt-6ZPqTs","attempt":"windows-source-runtime-windows-ci","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"scope":"Source Electron on the actual runner OS with emulated shortcut registration and DOM keyboard events; no physical IME, DPI, focus, display, or receiver acceptance","electron":"44.7.0","checks":{"enterInsertsNewline":true,"keyCode229GuardsSubmit":true,"platformSubmitShortcut":"Control+Enter","preservedEmojiAndLineBreak":true,"draftClearedAfterSubmit":true},"revisions":{"before":0,"after":2},"cleanup":{"directory":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-source-key-events-bnHuWb","ownedPids":[6596,3832,1304,8052,7360,1824],"normalClose":true,"fakeDataRemoved":true,"allExited":true}}
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9336931Z {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9339375Z   "attempt": "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37960611892-1-203c5cf6a6d84f4eb7198519651342b7\\calendar-brand-clip-workflow-windows-ci-1791564021210-8024",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9423931Z   "stage": "complete",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9465764Z   "checks": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9475326Z     "isolatedDataDir": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9477994Z     "monthMarker": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9589515Z       "href": "file:///D:/a/thoughtline/thoughtline/out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9591370Z       "viewBox": "120 260 260 200",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9592220Z       "clip": "polygon(3% 33%, 4% 29%, 12% 9%, 15% 6%, 18% 5%, 50% 28%, 53% 27%, 83% 45%, 87% 49%, 88% 55%, 86% 58%, 96% 64%, 97% 69%, 96% 72%, 90% 90%, 87% 93%, 85% 93%, 38% 60%, 34% 57%, 4% 38%)",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9593145Z       "aria": "true",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9594770Z       "bounds": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9595486Z         "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9595716Z         "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9595938Z       },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9596144Z       "loaded": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9596405Z         "ok": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9596635Z         "width": 1254,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9596878Z         "height": 1254
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9597105Z       }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9597312Z     },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9597534Z     "yearMarker": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9598078Z       "href": "file:///D:/a/thoughtline/thoughtline/out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9598626Z       "viewBox": "120 260 260 200",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9599232Z       "clip": "polygon(3% 33%, 4% 29%, 12% 9%, 15% 6%, 18% 5%, 50% 28%, 53% 27%, 83% 45%, 87% 49%, 88% 55%, 86% 58%, 96% 64%, 97% 69%, 96% 72%, 90% 90%, 87% 93%, 85% 93%, 38% 60%, 34% 57%, 4% 38%)",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9601003Z       "aria": "true",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9601252Z       "bounds": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9601508Z         "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9601742Z         "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9601972Z       },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9602174Z       "loaded": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9602398Z         "ok": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9602634Z         "width": 1254,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9602892Z         "height": 1254
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9603152Z       }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9603434Z     },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9603655Z     "paperMarker": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9604153Z       "href": "file:///D:/a/thoughtline/thoughtline/out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9604701Z       "viewBox": "120 260 260 200",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9605296Z       "clip": "polygon(3% 33%, 4% 29%, 12% 9%, 15% 6%, 18% 5%, 50% 28%, 53% 27%, 83% 45%, 87% 49%, 88% 55%, 86% 58%, 96% 64%, 97% 69%, 96% 72%, 90% 90%, 87% 93%, 85% 93%, 38% 60%, 34% 57%, 4% 38%)",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9605834Z       "aria": "true",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9606074Z       "bounds": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9606267Z         "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9606446Z         "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9606678Z       },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9606873Z       "loaded": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9607192Z         "ok": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9607701Z         "width": 1254,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9608230Z         "height": 1254
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9609895Z       }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9610663Z     },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9611337Z     "motionClone": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9623750Z       "href": "file:///D:/a/thoughtline/thoughtline/out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9624599Z       "viewBox": "120 260 260 200",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9625375Z       "clip": "polygon(3% 33%, 4% 29%, 12% 9%, 15% 6%, 18% 5%, 50% 28%, 53% 27%, 83% 45%, 87% 49%, 88% 55%, 86% 58%, 96% 64%, 97% 69%, 96% 72%, 90% 90%, 87% 93%, 85% 93%, 38% 60%, 34% 57%, 4% 38%)",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9625921Z       "aria": null,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9626336Z       "bounds": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9626593Z         "width": 7.12969970703125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9626883Z         "height": 5.5093231201171875
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9627145Z       },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9627365Z       "loaded": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9627596Z         "ok": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9628060Z         "width": 1254,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9628306Z         "height": 1254
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9628556Z       }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9628766Z     },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9628990Z     "countWidths": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9629227Z       "350": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9629439Z         "windowWidth": 350,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9629711Z         "one": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9630168Z           "day": "2026-10-09",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9630442Z           "dateText": "9",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9631046Z           "countText": "3",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9631447Z           "cell": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9631851Z             "left": 235.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9632120Z             "right": 274.28125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9632574Z             "top": 216,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9632840Z             "bottom": 264,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9633475Z             "width": 38.71875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9633718Z             "height": 48
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9634162Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9634642Z           "row": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9634927Z             "left": 240.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9635194Z             "right": 266.09375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9635591Z             "top": 243,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9635832Z             "bottom": 258,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9636101Z             "width": 25.53125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9636590Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9636836Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9637189Z           "clip": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9637414Z             "left": 240.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9637692Z             "right": 258.15625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9638732Z             "top": 243.703125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9639147Z             "bottom": 257.296875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9639626Z             "width": 17.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9641886Z             "height": 13.59375
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9642122Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9642480Z           "number": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9642773Z             "left": 260.15625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9643202Z             "right": 266.09375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9643473Z             "top": 243,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9643725Z             "bottom": 258,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9643984Z             "width": 5.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9644279Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9644623Z           }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9644838Z         },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9645040Z         "three": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9645292Z           "day": "2026-10-15",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9645537Z           "dateText": "15",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9645789Z           "countText": "123",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9646147Z           "cell": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9646345Z             "left": 191.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9646615Z             "right": 230.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9647013Z             "top": 269,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9647309Z             "bottom": 332.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9647731Z             "width": 38.71875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9648003Z             "height": 63.59375
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9648400Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9648586Z           "row": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9648965Z             "left": 196.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9649332Z             "right": 225.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9649585Z             "top": 296,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9649840Z             "bottom": 326.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9650220Z             "width": 28.71875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9650770Z             "height": 30.59375
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9651011Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9651354Z           "clip": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9651613Z             "left": 196.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9652036Z             "right": 214.4375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9652293Z             "top": 296,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9652835Z             "bottom": 309.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9653102Z             "width": 17.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9653477Z             "height": 13.59375
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9653725Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9653950Z           "number": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9654210Z             "left": 196.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9655367Z             "right": 214.640625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9655639Z             "top": 311.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9656057Z             "bottom": 326.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9656333Z             "width": 17.796875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9656741Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9656984Z           }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9657198Z         }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9657508Z       },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9657895Z       "421": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9658160Z         "windowWidth": 421,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9658365Z         "one": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9658562Z           "day": "2026-10-09",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9658785Z           "dateText": "9",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9659129Z           "countText": "3",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9659333Z           "cell": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9659672Z             "left": 286.28125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9659998Z             "right": 335.140625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9660213Z             "top": 216,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9660659Z             "bottom": 269,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9661072Z             "width": 48.859375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9661383Z             "height": 53
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9661567Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9661732Z           "row": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9661923Z             "left": 293.28125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9662284Z             "right": 326.21875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9662484Z             "top": 245,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9662814Z             "bottom": 262,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9663014Z             "width": 32.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9663369Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9663753Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9664037Z           "clip": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9664232Z             "left": 293.28125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9664696Z             "right": 315.28125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9664894Z             "top": 245,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9665084Z             "bottom": 262,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9665297Z             "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9665490Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9665823Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9665986Z           "number": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9666184Z             "left": 320.28125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9666414Z             "right": 326.21875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9666732Z             "top": 246,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9666925Z             "bottom": 261,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9667126Z             "width": 5.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9667331Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9667517Z           }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9667678Z         },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9667833Z         "three": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9668023Z           "day": "2026-10-15",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9668230Z           "dateText": "15",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9668437Z           "countText": "123",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9668634Z           "cell": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9668834Z             "left": 232.421875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9669049Z             "right": 281.28125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9669252Z             "top": 274,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9669440Z             "bottom": 342,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9669654Z             "width": 48.859375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9669859Z             "height": 68
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9670052Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9670207Z           "row": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9670396Z             "left": 239.421875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9670611Z             "right": 274.28125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9671001Z             "top": 303,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9671357Z             "bottom": 335,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9671569Z             "width": 34.859375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9671912Z             "height": 32
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9672273Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9672519Z           "clip": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9672705Z             "left": 239.421875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9672933Z             "right": 261.421875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9673273Z             "top": 303,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9673463Z             "bottom": 320,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9673908Z             "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9674176Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9674479Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9674977Z           "number": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9675176Z             "left": 239.421875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9675523Z             "right": 257.21875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9675821Z             "top": 320,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9676029Z             "bottom": 335,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9676361Z             "width": 17.796875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9676647Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9676831Z           }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9676990Z         }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9677141Z       },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9677294Z       "500": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9677473Z         "windowWidth": 500,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9677679Z         "one": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9677869Z           "day": "2026-10-09",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9678074Z           "dateText": "9",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9678289Z           "countText": "3",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9678487Z           "cell": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9678680Z             "left": 342.703125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9678893Z             "right": 402.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9679101Z             "top": 216,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9679291Z             "bottom": 269,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9679506Z             "width": 60.140625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9679709Z             "height": 53
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9679892Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9680055Z           "row": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9680249Z             "left": 349.703125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9680469Z             "right": 382.640625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9680691Z             "top": 245,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9680882Z             "bottom": 262,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9681082Z             "width": 32.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9681289Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9681967Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9682132Z           "clip": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9682328Z             "left": 349.703125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9682549Z             "right": 371.703125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9682762Z             "top": 245,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9682950Z             "bottom": 262,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9683152Z             "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9683341Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9683532Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9683692Z           "number": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9683887Z             "left": 376.703125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9684103Z             "right": 382.640625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9684307Z             "top": 246,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9684494Z             "bottom": 261,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9684690Z             "width": 5.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9684904Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9685090Z           }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9685244Z         },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9685409Z         "three": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9685606Z           "day": "2026-10-15",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9685821Z           "dateText": "15",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9686028Z           "countText": "123",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9686226Z           "cell": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9686404Z             "left": 277.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9686620Z             "right": 337.703125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9686829Z             "top": 274,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9687019Z             "bottom": 327,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9687236Z             "width": 60.140625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9687445Z             "height": 53
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9687627Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9687788Z           "row": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9687963Z             "left": 284.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9688181Z             "right": 329.359375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9688393Z             "top": 303,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9688590Z             "bottom": 320,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9688805Z             "width": 44.796875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9689013Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9689207Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9689370Z           "clip": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9689552Z             "left": 284.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9689775Z             "right": 306.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9689982Z             "top": 303,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9690179Z             "bottom": 320,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9690455Z             "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9690642Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9690984Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9691158Z           "number": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9691345Z             "left": 311.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9691563Z             "right": 329.359375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9691770Z             "top": 304,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9691954Z             "bottom": 319,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9692170Z             "width": 17.796875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9692377Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9692561Z           }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9692717Z         }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9692888Z       },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9693339Z       "740": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9693611Z         "windowWidth": 740,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9693809Z         "one": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9693994Z           "day": "2026-10-09",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9694311Z           "dateText": "9",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9694637Z           "countText": "3",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9694914Z           "cell": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9695094Z             "left": 511.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9695314Z             "right": 604.28125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9695522Z             "top": 235,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9695710Z             "bottom": 293,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9695918Z             "width": 92.71875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9696129Z             "height": 58
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9696310Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9696472Z           "row": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9696653Z             "left": 521.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9696856Z             "right": 554.5,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9697057Z             "top": 268,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9697298Z             "bottom": 285,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9697621Z             "width": 32.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9697877Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9698140Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9698362Z           "clip": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9698595Z             "left": 521.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9698861Z             "right": 543.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9699123Z             "top": 268,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9699368Z             "bottom": 285,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9699618Z             "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9699887Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9700112Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9700328Z           "number": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9700561Z             "left": 548.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9700825Z             "right": 554.5,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9701077Z             "top": 269,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9701345Z             "bottom": 284,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9701599Z             "width": 5.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9701850Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9702075Z           }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9702287Z         },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9702498Z         "three": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9702769Z           "day": "2026-10-15",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9703024Z           "dateText": "15",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9703276Z           "countText": "123",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9703537Z           "cell": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9703781Z             "left": 413.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9704051Z             "right": 506.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9704336Z             "top": 298,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9704571Z             "bottom": 356,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9704823Z             "width": 92.71875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9705075Z             "height": 58
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9705311Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9705523Z           "row": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9705768Z             "left": 423.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9706077Z             "right": 468.640625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9706677Z             "top": 331,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9706928Z             "bottom": 348,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9707219Z             "width": 44.796875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9707492Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9707738Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9708110Z           "clip": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9708349Z             "left": 423.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9708619Z             "right": 445.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9709013Z             "top": 331,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9709422Z             "bottom": 348,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9709652Z             "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9712513Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9712958Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9713281Z           "number": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9713622Z             "left": 450.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9713984Z             "right": 468.640625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9714316Z             "top": 332,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9714654Z             "bottom": 347,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9714994Z             "width": 17.796875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9715324Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9715632Z           }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9715925Z         }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9716256Z       }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9716540Z     },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9717022Z     "originalSourceSha256": "313485e59395e3165f6504964efd72f4a3811150ac337834be3e2759f279f778"
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9717547Z   },
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9717847Z   "screenshots": [
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9718817Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37960611892-1-203c5cf6a6d84f4eb7198519651342b7\\calendar-brand-clip-workflow-windows-ci-1791564021210-8024\\month.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9720418Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37960611892-1-203c5cf6a6d84f4eb7198519651342b7\\calendar-brand-clip-workflow-windows-ci-1791564021210-8024\\marker-closeup.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9721847Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37960611892-1-203c5cf6a6d84f4eb7198519651342b7\\calendar-brand-clip-workflow-windows-ci-1791564021210-8024\\year.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9723353Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37960611892-1-203c5cf6a6d84f4eb7198519651342b7\\calendar-brand-clip-workflow-windows-ci-1791564021210-8024\\day-paper.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9724809Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37960611892-1-203c5cf6a6d84f4eb7198519651342b7\\calendar-brand-clip-workflow-windows-ci-1791564021210-8024\\day-to-month-motion.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9726323Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37960611892-1-203c5cf6a6d84f4eb7198519651342b7\\calendar-brand-clip-workflow-windows-ci-1791564021210-8024\\month-350-one-three-digit.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9728101Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37960611892-1-203c5cf6a6d84f4eb7198519651342b7\\calendar-brand-clip-workflow-windows-ci-1791564021210-8024\\month-421-one-three-digit.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9729654Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37960611892-1-203c5cf6a6d84f4eb7198519651342b7\\calendar-brand-clip-workflow-windows-ci-1791564021210-8024\\month-500-one-three-digit.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9731345Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37960611892-1-203c5cf6a6d84f4eb7198519651342b7\\calendar-brand-clip-workflow-windows-ci-1791564021210-8024\\month-740-one-three-digit.png"
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9732528Z   ],
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9732913Z   "normalClose": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9733289Z   "fixtureRemoved": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9733737Z   "originalAppPid30628AliveAfter": "not-applicable"
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:23.9734207Z }
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:28.0613638Z {"evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37960611892-1-203c5cf6a6d84f4eb7198519651342b7\\final-reader-placement-workflow-windows-ci-3zcg2L","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-final-reader-vYk4n3","cases":[{"name":"raw-cross","passed":true,"oldSession":2,"session":3,"reader":"c","editors":1,"draft":"UNSAVED cross C","persisted":"final probe c"},{"name":"real-main-cross-session-late-delete","passed":true,"session":3,"reader":"c","editors":1,"draft":"UNSAVED cross C","persisted":"final probe c"},{"name":"raw-same","passed":true,"oldSession":4,"session":4,"reader":"c","editors":1,"draft":"UNSAVED same C","persisted":"UNSAVED cross C"},{"name":"same-session-back-new-dirty-reader","passed":true,"session":4,"reader":"c","editors":1,"draft":"UNSAVED same C","persisted":"UNSAVED cross C"},{"name":"detail-fast-queued-flips-and-delayed-finish","passed":true,"sequentialFlipsRetained":true,"delayedFinishWaitedForSave":true},{"name":"calendar-normal-delete-neighbor","passed":true,"reader":"e"},{"name":"detail-normal-delete-neighbor-and-empty","passed":true,"neighbor":"f","lastDeleteEmpty":true},{"name":"detail-last-deleted-selection-stays-empty","passed":true,"noFallbackToOldManageSelection":true},{"name":"agent-auto-split-full-rope-notice-and-stable-body","passed":true,"notice":"已保存，绳上暂时放不下，可在念头日历查看","idsStable":true,"subsequentEditStable":true}],"pids":[7684,6004,584,2680,7980,6600,7236],"scope":"Real source Electron main routing and persisted mutations; controlled reply hold, synthetic data only","normalClose":true,"pidChecks":[{"pid":7684,"status":"ESRCH"},{"pid":6004,"status":"ESRCH"},{"pid":584,"status":"ESRCH"},{"pid":2680,"status":"ESRCH"},{"pid":7980,"status":"ESRCH"},{"pid":6600,"status":"ESRCH"},{"pid":7236,"status":"ESRCH"}],"stat":"ENOENT","passed":true}
+windows-test-package	Source Electron UI regression on Windows	2026-10-09T16:40:30.5431051Z {"dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-final-shape-lIYjhO","evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-37960611892-1-203c5cf6a6d84f4eb7198519651342b7\\final-calendar-shape-workflow-windows-ci-hSoR3E","cases":[{"name":"empty-day-expand","passed":true,"frames":[{"time":25,"kind":"month-to-day","from":{"left":413.84375,"top":173,"width":92.71875,"height":57},"to":{"left":23,"top":117,"width":679,"height":19.1875},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"calendar-paper-groups","x":0.507942,"y":0.507942,"tx":222.732,"ty":47.4079}],"clones":0,"clips":[]},{"time":100,"kind":"month-to-day","from":{"left":413.84375,"top":173,"width":92.71875,"height":57},"to":{"left":23,"top":117,"width":679,"height":19.1875},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"calendar-paper-groups","x":0.944699,"y":0.944699,"tx":25.0323,"ty":5.32805}],"clones":0,"clips":[]}]},{"name":"empty-day-return","passed":true,"frames":[{"time":25,"kind":"day-to-month","from":{"left":23,"top":117,"width":679,"height":19.1875},"to":{"left":413.84375,"top":173,"width":92.71875,"height":57},"transforms":[{"class":"calendar-motion-surface","x":0.599924,"y":0.599924,"tx":181.096,"ty":38.5458},{"class":"date-cell","x":1,"y":1,"tx":0,"ty":0}],"clones":0,"clips":[]},{"time":100,"kind":"day-to-month","from":{"left":23,"top":117,"width":679,"height":19.1875},"to":{"left":413.84375,"top":173,"width":92.71875,"height":57},"transforms":[{"class":"calendar-motion-surface","x":0.176821,"y":0.176821,"tx":372.616,"ty":79.3102},{"class":"date-cell","x":1,"y":1,"tx":0,"ty":0}],"clones":0,"clips":[]}]},{"name":"paper-day-expand","passed":true,"frames":[{"time":25,"kind":"month-to-day","from":{"left":413.84375,"top":297,"width":92.71875,"height":58},"to":{"left":23,"top":108,"width":679,"height":407},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"calendar-paper-groups","x":0.507942,"y":0.507942,"tx":222.732,"ty":108.397}],"clones":0,"clips":[{"width":22,"height":17}]},{"time":100,"kind":"month-to-day","from":{"left":413.84375,"top":297,"width":92.71875,"height":58},"to":{"left":23,"top":108,"width":679,"height":407},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"calendar-paper-groups","x":0.944699,"y":0.944699,"tx":25.0323,"ty":12.1825}],"clones":0,"clips":[{"width":22,"height":17}]}]},{"name":"paper-day-return","passed":true,"frames":[{"time":25,"kind":"day-to-month","from":{"left":23,"top":108,"width":679,"height":407},"to":{"left":413.84375,"top":297,"width":92.71875,"height":58},"transforms":[{"class":"calendar-motion-surface","x":0.599924,"y":0.599924,"tx":181.096,"ty":88.1339},{"class":"date-cell","x":1,"y":1,"tx":0,"ty":0}],"clones":6,"clips":[{"width":13.198333740234375,"height":10.198699951171875},{"width":13.19830322265625,"height":10.198699951171875},{"width":13.19830322265625,"height":10.198699951171875},{"width":13.198333740234375,"height":10.19873046875},{"width":13.19830322265625,"height":10.19873046875},{"width":13.19830322265625,"height":10.19873046875}]},{"time":100,"kind":"day-to-month","from":{"left":23,"top":108,"width":679,"height":407},"to":{"left":413.84375,"top":297,"width":92.71875,"height":58},"transforms":[{"class":"calendar-motion-surface","x":0.176821,"y":0.176821,"tx":372.616,"ty":181.341},{"class":"date-cell","x":1,"y":1,"tx":0,"ty":0}],"clones":6,"clips":[{"width":3.89007568359375,"height":3.0059814453125},{"width":3.89007568359375,"height":3.0059814453125},{"width":3.890045166015625,"height":3.0059814453125},{"width":3.89007568359375,"height":3.005950927734375},{"width":3.89007568359375,"height":3.005950927734375},{"width":3.890045166015625,"height":3.005950927734375}]}]},{"name":"month-to-year","passed":true,"frames":[{"time":25,"kind":"month-to-year","from":{"left":23,"top":141,"width":679,"height":338},"to":{"left":23,"top":396,"width":218.328125,"height":73},"transforms":[{"class":"calendar-motion-surface","x":0.636725,"y":0.636725,"tx":16.6064,"ty":118.153},{"class":"","x":1,"y":1,"tx":0,"ty":0}],"clones":0,"clips":[{"width":14.007965087890625,"height":10.8243408203125}]},{"time":100,"kind":"month-to-year","from":{"left":23,"top":141,"width":679,"height":338},"to":{"left":23,"top":396,"width":218.328125,"height":73},"transforms":[{"class":"calendar-motion-surface","x":0.252541,"y":0.252541,"tx":34.1686,"ty":243.107},{"class":"","x":1,"y":1,"tx":0,"ty":0}],"clones":0,"clips":[{"width":5.5558929443359375,"height":4.293182373046875}]}]},{"name":"year-to-month","passed":true,"frames":[{"time":25,"kind":"year-to-month","from":{"left":23,"top":396,"width":218.328125,"height":73},"to":{"left":23,"top":141,"width":679,"height":338},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"month-grid","x":0.553204,"y":0.553204,"tx":20.4244,"ty":145.318}],"clones":0,"clips":[{"width":22,"height":17}]},{"time":100,"kind":"year-to-month","from":{"left":23,"top":396,"width":218.328125,"height":73},"to":{"left":23,"top":141,"width":679,"height":338},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"month-grid","x":0.949786,"y":0.949786,"tx":2.29544,"ty":16.3319}],"clones":0,"clips":[{"width":22,"height":17}]}]}],"pids":[4428,6892,1008,2824,2764,6704,7848],"normalClose":true,"pidChecks":[{"pid":4428,"status":"ESRCH"},{"pid":6892,"status":"ESRCH"},{"pid":1008,"status":"ESRCH"},{"pid":2824,"status":"ESRCH"},{"pid":2764,"status":"ESRCH"},{"pid":6704,"status":"ESRCH"},{"pid":7848,"status":"ESRCH"}],"stat":"ENOENT","passed":true}
+windows-test-package	Appearance and English source workflow on Windows	﻿2026-10-09T16:40:30.5930854Z ##[group]Run New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:30.5931559Z ^[[36;1mNew-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:30.5932224Z ^[[36;1m& node tests/electron/appearance-workflow.cjs 2>&1 | Tee-Object -FilePath (Join-Path $env:THOUGHTLINE_EVIDENCE_DIR 'workflow.log')^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:30.5932875Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw "Appearance workflow failed: $LASTEXITCODE" }^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:30.5984027Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:30.5984360Z env:
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:30.5984613Z   THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/appearance/windows-source
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:30.5984932Z   THOUGHTLINE_FAKE_CLIPBOARD: 1
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:30.5985142Z ##[endgroup]
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:32.0199626Z first-level-control-placement
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:32.0201572Z shelf-cannot-write-preferences
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:33.0601065Z composition-node-focus-selection-scroll-candidate-and-note-bytes-preserved
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:34.0435647Z light-dark-rendered-body-and-button-contrast
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:34.2814936Z composer-widths-350-380-480-740-no-overflow
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:34.8626346Z continuous-drag-frames-and-escape-cancel
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:35.0632119Z drag-release-and-immediate-reversal
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:35.1852644Z keyboard-home-end-arrows
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:35.3389853Z reduced-motion-and-forced-colors-operations-without-animation
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:35.4713604Z atomic-IO-failure-visible-durable-rollback-text-retained-retry
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:35.6842608Z late-failed-response-does-not-override-new-choice-or-current-locale
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:36.1584958Z pointercancel-restores-durable-choice
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:37.0979382Z late-error-across-settings-control-instances
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:38.4744018Z calendar-detail-settings-sync-remount-sequences-dirty-inline-autosave
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:39.0479335Z restart-persists-preferences-note-content-and-hotkey
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:40.7356652Z real-bootstrap-new-profile-OS-locale-before-snapshot-creation
+windows-test-package	Appearance and English source workflow on Windows	2026-10-09T16:40:41.7224875Z corrupt-preference-file-preserved-visible-and-write-refused
+windows-test-package	Appearance review fixes on Windows	﻿2026-10-09T16:40:41.8130187Z ##[group]Run New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:41.8130922Z ^[[36;1mNew-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:41.8131641Z ^[[36;1m& node tests/electron/appearance-fix-workflow.cjs 2>&1 | Tee-Object -FilePath (Join-Path $env:THOUGHTLINE_EVIDENCE_DIR 'workflow.log')^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:41.8132335Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw "Appearance review fixes failed: $LASTEXITCODE" }^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:41.8188186Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:41.8188534Z env:
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:41.8188870Z   THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/appearance/windows-source/fix-round1
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:41.8189265Z   THOUGHTLINE_FAKE_CLIPBOARD: 1
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:41.8189479Z ##[endgroup]
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:43.9066033Z PASS light-rendered-custom-Agent-contrast
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:44.1506510Z PASS dark-rendered-custom-Agent-contrast
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:44.2447049Z PASS custom-clip-color-and-user-names-unchanged
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:44.6105106Z PASS switch-then-drag-completion-current-English
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:44.7264027Z PASS existing-drag-notice-renders-current-Chinese
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:45.0555527Z PASS out-of-bounds-cancel-current-English
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:45.2044375Z PASS locale-broadcast-does-not-cancel-active-drag
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:45.2711115Z PASS active-drag-completion-uses-latest-locale
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:45.6698649Z PASS actual-page-save-IO-current-English-diagnostic-bytes
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:46.0463812Z PASS outer-storage-catch-current-English-diagnostic-bytes
+windows-test-package	Appearance review fixes on Windows	2026-10-09T16:40:47.2987901Z PASS actual-startup-repository-IO-English-diagnostic-bytes
+windows-test-package	Run npm run package:win	﻿2026-10-09T16:40:47.6212742Z ##[group]Run npm run package:win
+windows-test-package	Run npm run package:win	2026-10-09T16:40:47.6213074Z ^[[36;1mnpm run package:win^[[0m
+windows-test-package	Run npm run package:win	2026-10-09T16:40:47.6274807Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Run npm run package:win	2026-10-09T16:40:47.6275157Z env:
+windows-test-package	Run npm run package:win	2026-10-09T16:40:47.6275334Z   CSC_IDENTITY_AUTO_DISCOVERY: false
+windows-test-package	Run npm run package:win	2026-10-09T16:40:47.6275567Z ##[endgroup]
+windows-test-package	Run npm run package:win	2026-10-09T16:40:48.4101761Z 
+windows-test-package	Run npm run package:win	2026-10-09T16:40:48.4102997Z > thoughtline@0.0.17-preview.3 package:win
+windows-test-package	Run npm run package:win	2026-10-09T16:40:48.4103824Z > node node_modules/electron-builder/cli.js --win nsis --publish never
+windows-test-package	Run npm run package:win	2026-10-09T16:40:48.4104609Z 
+windows-test-package	Run npm run package:win	2026-10-09T16:40:48.9749718Z   • electron-builder  version=26.15.3 os=10.0.26100
+windows-test-package	Run npm run package:win	2026-10-09T16:40:48.9807975Z   • loaded configuration  file=package.json ("build" field)
+windows-test-package	Run npm run package:win	2026-10-09T16:40:49.9882183Z   • executing @electron/rebuild  electronVersion=44.7.0 arch=x64 buildFromSource=false workspaceRoot=D:\a\thoughtline\thoughtline projectDir=./ appDir=./
+windows-test-package	Run npm run package:win	2026-10-09T16:40:49.9914310Z   • installing native dependencies  arch=x64
+windows-test-package	Run npm run package:win	2026-10-09T16:40:50.1432451Z   • completed installing native dependencies
+windows-test-package	Run npm run package:win	2026-10-09T16:40:50.1744402Z   • packaging       platform=win32 arch=x64 electron=44.7.0 appOutDir=dist\win-unpacked
+windows-test-package	Run npm run package:win	2026-10-09T16:40:50.2758730Z   • downloaded      label=electron progress=100%
+windows-test-package	Run npm run package:win	2026-10-09T16:40:54.6869134Z   • downloaded electron zip extracted successfully  output=D:\a\thoughtline\thoughtline\dist\win-unpacked
+windows-test-package	Run npm run package:win	2026-10-09T16:40:54.7126258Z   • searching for node modules  pm=npm searchDir=D:\a\thoughtline\thoughtline
+windows-test-package	Run npm run package:win	2026-10-09T16:40:57.8757182Z   • updating asar integrity executable resource  executablePath=dist\win-unpacked\Thoughtline.exe
+windows-test-package	Run npm run package:win	2026-10-09T16:40:58.2606065Z   • file signing skipped via signExecutable configuration  file=dist\win-unpacked\Thoughtline.exe
+windows-test-package	Run npm run package:win	2026-10-09T16:40:58.2617735Z   • building        target=nsis file=dist\Thoughtline-0.0.17-preview.3-win-x64.exe archs=x64 oneClick=false perMachine=false
+windows-test-package	Run npm run package:win	2026-10-09T16:40:58.3583191Z   • downloaded      label=nsis-3.0.4.1.7z progress=100%
+windows-test-package	Run npm run package:win	2026-10-09T16:40:58.6261181Z   • downloaded      label=7zip-win-x64.tar.gz progress=100%
+windows-test-package	Run npm run package:win	2026-10-09T16:41:57.5217530Z   • downloaded      label=nsis-resources-3.4.1.7z progress=100%
+windows-test-package	Run npm run package:win	2026-10-09T16:41:58.7065230Z   • file signing skipped via signExecutable configuration  file=dist\Thoughtline-0.0.17-preview.3-win-x64.__uninstaller.exe
+windows-test-package	Run npm run package:win	2026-10-09T16:42:00.3184901Z   • file signing skipped via signExecutable configuration  file=dist\Thoughtline-0.0.17-preview.3-win-x64.exe
+windows-test-package	Run npm run package:win	2026-10-09T16:42:00.3195593Z   • building block map  blockMapFile=dist\Thoughtline-0.0.17-preview.3-win-x64.exe.blockmap
+windows-test-package	Bind package to source and compiled outputs	﻿2026-10-09T16:42:03.2686999Z ##[group]Run node scripts/windows-build-manifest.cjs
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T16:42:03.2687439Z ^[[36;1mnode scripts/windows-build-manifest.cjs^[[0m
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T16:42:03.2743058Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T16:42:03.2743451Z ##[endgroup]
+windows-test-package	Parse user isolation launcher without launching	﻿2026-10-09T16:42:04.3471093Z ##[group]Run $parseErrors = $null
+windows-test-package	Parse user isolation launcher without launching	2026-10-09T16:42:04.3471722Z ^[[36;1m$parseErrors = $null^[[0m
+windows-test-package	Parse user isolation launcher without launching	2026-10-09T16:42:04.3471881Z ^[[36;1m$tokens = $null^[[0m
+windows-test-package	Parse user isolation launcher without launching	2026-10-09T16:42:04.3472319Z ^[[36;1m[System.Management.Automation.Language.Parser]::ParseFile((Join-Path $PWD 'docs/delivery/Start-Thoughtline-Isolated.ps1'), [ref]$tokens, [ref]$parseErrors) | Out-Null^[[0m
+windows-test-package	Parse user isolation launcher without launching	2026-10-09T16:42:04.3472851Z ^[[36;1mif ($parseErrors.Count -ne 0) { throw ($parseErrors | Out-String) }^[[0m
+windows-test-package	Parse user isolation launcher without launching	2026-10-09T16:42:04.3473249Z ^[[36;1mCopy-Item docs/delivery/Start-Thoughtline-Isolated.ps1 dist/Start-Thoughtline-Isolated.ps1^[[0m
+windows-test-package	Parse user isolation launcher without launching	2026-10-09T16:42:04.3525895Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Parse user isolation launcher without launching	2026-10-09T16:42:04.3526159Z ##[endgroup]
+windows-test-package	Disposable runner installation and data retention preflight	﻿2026-10-09T16:42:04.7075978Z ##[group]Run ./scripts/windows-installer-preflight.ps1
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:04.7076437Z ^[[36;1m./scripts/windows-installer-preflight.ps1^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:04.7134387Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:04.7134725Z ##[endgroup]
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:24.3497596Z Executable: D:\a\_temp\Thoughtline-installer-preflight\Thoughtline.exe
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:24.3501165Z Isolated data: C:\Users\runneradmin\AppData\Local\Thoughtline-Preflight\0.0.17-preview.3\user-data
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:24.3502376Z This isolates notes. The installer still uses the same app identity and can replace an existing installed version.
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:24.3526046Z Check only: no data directory or app process created.
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2662280Z ^[[31;1mD:\a\thoughtline\thoughtline\node_modules\playwright-core\lib\coreBundle.js:43834^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2681084Z ^[[31;1m  const failError = new Error("Process failed to launch!");^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2694257Z ^[[31;1m                    ^^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2704027Z ^[[31;1m^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2708005Z ^[[31;1mError: Process failed to launch!^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2711978Z ^[[31;1m    at waitForLine (D:\a\thoughtline\thoughtline\node_modules\playwright-core\lib\coreBundle.js:43834:21)^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2715592Z ^[[31;1m    at Electron.launch (D:\a\thoughtline\thoughtline\node_modules\playwright-core\lib\coreBundle.js:44044:36)^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2720597Z ^[[31;1m    at async ElectronDispatcher.launch (D:\a\thoughtline\thoughtline\node_modules\playwright-core\lib\coreBundle.js:55209:37)^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2724161Z ^[[31;1m    at async _ProgressController.run (D:\a\thoughtline\thoughtline\node_modules\playwright-core\lib\coreBundle.js:12149:27)^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2730361Z ^[[31;1m    at async DispatcherConnection.dispatch (D:\a\thoughtline\thoughtline\node_modules\playwright-core\lib\coreBundle.js:18775:27)^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2733472Z ^[[31;1m^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.2736894Z ^[[31;1mNode.js v24.19.0^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.3768477Z ^[[31;1mException: ^[[0mD:\a\thoughtline\thoughtline\scripts\windows-installer-preflight.ps1:53^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.3769095Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.3769750Z ^[[31;1m^[[0m^[[36;1m^[[36;1m  53 | ^[[0m … DE -ne 0) { ^[[36;1mthrow 'Actual installed package appearance preflight fail^[[0m …^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.3770443Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.3771118Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mActual installed package appearance preflight failed^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T16:42:29.4086499Z ##[error]Process completed with exit code 1.
+windows-test-package	Retain failed preflight diagnostics	﻿2026-10-09T16:42:29.4272362Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:29.4272689Z with:
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:29.4272931Z   name: Thoughtline-Windows-preflight-failed-3cb50bb10572559c9ef4593542def35179c28f10-1
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:29.4273198Z   path: dist/*.json
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:29.4273337Z   if-no-files-found: ignore
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:29.4273476Z   retention-days: 30
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:29.4273609Z   compression-level: 6
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:29.4273732Z   overwrite: false
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:29.4273859Z   include-hidden-files: false
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:29.4273996Z   archive: true
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:29.4274116Z ##[endgroup]
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:29.5653901Z With the provided path, there will be 4 files uploaded
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:29.5657620Z Artifact name is valid!
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:29.5658245Z Root directory input is valid!
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:29.8127744Z Uploading artifact: Thoughtline-Windows-preflight-failed-3cb50bb10572559c9ef4593542def35179c28f10-1.zip
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:29.8171802Z Beginning upload of artifact content to blob storage
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:30.0106259Z Uploaded bytes 21749
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:30.0479691Z Finished uploading artifact content to blob storage!
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:30.0480991Z SHA256 digest of uploaded artifact is 7200a7f977ef07898875a5d8cdbc7364e5aa8513fac02354148cffe316e58d9b
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:30.0481661Z Finalizing artifact upload
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:30.3709312Z Artifact Thoughtline-Windows-preflight-failed-3cb50bb10572559c9ef4593542def35179c28f10-1 successfully finalized. Artifact ID 11630144301
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:30.3711230Z Artifact Thoughtline-Windows-preflight-failed-3cb50bb10572559c9ef4593542def35179c28f10-1 has been successfully uploaded! Final size is 21749 bytes. Artifact ID is 11630144301
+windows-test-package	Retain failed preflight diagnostics	2026-10-09T16:42:30.3712768Z Artifact download URL: https://github.com/NocodeMrLi/thoughtline/actions/runs/37960611892/artifacts/11630144301
+windows-test-package	Retain Windows source UI evidence	﻿2026-10-09T16:42:30.3973314Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:30.3973640Z with:
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:30.3973868Z   name: Thoughtline-Windows-source-ui-3cb50bb10572559c9ef4593542def35179c28f10-1
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:30.3974358Z   path: acceptance/evidence/round1/p6-windows-source/**
+windows-test-package	Retain Windows source UI evidence	acceptance/evidence/appearance/windows-source/**
+windows-test-package	Retain Windows source UI evidence	acceptance/evidence/appearance/windows-packaged/**
+windows-test-package	Retain Windows source UI evidence	
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:30.3974749Z   if-no-files-found: warn
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:30.3974895Z   retention-days: 30
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:30.3975029Z   compression-level: 6
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:30.3975165Z   overwrite: false
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:30.3975298Z   include-hidden-files: false
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:30.3975440Z   archive: true
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:30.3975562Z ##[endgroup]
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:30.5510603Z Multiple search paths detected. Calculating the least common ancestor of all paths
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:30.5512244Z The least common ancestor is D:\a\thoughtline\thoughtline\acceptance\evidence. This will be the root directory of the artifact
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:30.5514364Z With the provided path, there will be 90 files uploaded
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:30.5515155Z Artifact name is valid!
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:30.5515540Z Root directory input is valid!
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:30.8561615Z Uploading artifact: Thoughtline-Windows-source-ui-3cb50bb10572559c9ef4593542def35179c28f10-1.zip
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:30.8608293Z Beginning upload of artifact content to blob storage
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:31.5105053Z Uploaded bytes 1754896
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:31.5564509Z Finished uploading artifact content to blob storage!
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:31.5566108Z SHA256 digest of uploaded artifact is cecf40f60e33de56b280768fe2c1e724c560f20b997230105e940a1ee7ac68ff
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:31.5566984Z Finalizing artifact upload
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:31.8965117Z Artifact Thoughtline-Windows-source-ui-3cb50bb10572559c9ef4593542def35179c28f10-1 successfully finalized. Artifact ID 11629769337
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:31.9034746Z Artifact Thoughtline-Windows-source-ui-3cb50bb10572559c9ef4593542def35179c28f10-1 has been successfully uploaded! Final size is 1754896 bytes. Artifact ID is 11629769337
+windows-test-package	Retain Windows source UI evidence	2026-10-09T16:42:31.9036283Z Artifact download URL: https://github.com/NocodeMrLi/thoughtline/actions/runs/37960611892/artifacts/11629769337
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	﻿2026-10-09T16:42:31.9209197Z Post job cleanup.
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:32.0479225Z [command]"C:\Program Files\Git\bin\git.exe" version
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:32.0694655Z git version 2.55.0.windows.5
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:32.0762504Z Temporarily overriding HOME='D:\a\_temp\f8aa71ce-c641-4aac-9097-e7ed0e26669e' before making global git config changes
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:32.0764654Z Adding repository directory to the temporary git global config as a safe directory
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:32.0765728Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\thoughtline\thoughtline
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:32.1002486Z Removing SSH command configuration
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:32.1012101Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:32.1267744Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:32.7487272Z Removing HTTP extra header
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:32.7496537Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:32.7751849Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.2383889Z Removing includeIf entries pointing to credentials config files
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.2394543Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.2624218Z includeif.gitdir:D:/a/thoughtline/thoughtline/.git.path
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.2624941Z includeif.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.2625512Z includeif.gitdir:/github/workspace/.git.path
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.2626097Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.2663958Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/thoughtline/thoughtline/.git.path
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.2886609Z D:\a\_temp\git-credentials-8d620ebb-f0d1-4113-8051-02b3d8a73ec0.config
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.2929006Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/thoughtline/thoughtline/.git.path D\:\\a\\_temp\\git\-credentials\-8d620ebb\-f0d1\-4113\-8051\-02b3d8a73ec0\.config
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.3176699Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.3380325Z D:\a\_temp\git-credentials-8d620ebb-f0d1-4113-8051-02b3d8a73ec0.config
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.3416036Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path D\:\\a\\_temp\\git\-credentials\-8d620ebb\-f0d1\-4113\-8051\-02b3d8a73ec0\.config
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.3670407Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.3883820Z /github/runner_temp/git-credentials-8d620ebb-f0d1-4113-8051-02b3d8a73ec0.config
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.3920475Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-8d620ebb\-f0d1\-4113\-8051\-02b3d8a73ec0\.config
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.4177922Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.4457630Z /github/runner_temp/git-credentials-8d620ebb-f0d1-4113-8051-02b3d8a73ec0.config
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.4521380Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-8d620ebb\-f0d1\-4113\-8051\-02b3d8a73ec0\.config
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.4791592Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T16:42:33.9688205Z Removing credentials config 'D:\a\_temp\git-credentials-8d620ebb-f0d1-4113-8051-02b3d8a73ec0.config'
+windows-test-package	Complete job	﻿2026-10-09T16:42:33.9883924Z Cleaning up orphan processes
