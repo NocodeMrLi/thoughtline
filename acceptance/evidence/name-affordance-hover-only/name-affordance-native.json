@@ -1,0 +1,597 @@
+{
+  "scope": "actual Mac source with isolated fake data and synthetic keyboard/shortcut protocol; existing OS preferences retained; no physical IME/Windows acceptance",
+  "checks": [
+    "default-empty-optional-name-general-agent-body-focus",
+    "hover-subtle-background-without-border-or-focus-steal",
+    "mouse-focus-keeps-editable-hint",
+    "shift-tab-reaches-name-existing-visible-focus-outline",
+    "plain-enter-does-not-submit-tab-order-escape-saves-name-and-body-reopen-body-focus",
+    "empty-name-command-enter-submits-first-line-title-to-general",
+    "manual-name-command-enter-persists-name-agent-fixed-long-scroll-body",
+    "system-accessibility-preferences-unchanged"
+  ],
+  "originalPreferences": {
+    "increaseContrast": "1",
+    "reduceTransparency": "1"
+  },
+  "afterPreferences": {
+    "increaseContrast": "1",
+    "reduceTransparency": "1"
+  },
+  "accessibility": {
+    "reducedTransparency": true,
+    "highContrast": true,
+    "forcedColors": false,
+    "capturePermission": "granted"
+  },
+  "bounds": {
+    "x": 480,
+    "y": 49,
+    "width": 480,
+    "height": 260
+  },
+  "scenes": [
+    {
+      "label": "default-empty-light",
+      "theme": "light",
+      "geometry": {
+        "title": {
+          "x": 13,
+          "y": 13,
+          "width": 418,
+          "height": 28,
+          "right": 431,
+          "bottom": 41
+        },
+        "body": {
+          "x": 13,
+          "y": 47,
+          "width": 454,
+          "height": 132,
+          "right": 467,
+          "bottom": 179
+        },
+        "footer": {
+          "x": 13,
+          "y": 215,
+          "width": 454,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "project": {
+          "x": 13,
+          "y": 215,
+          "width": 92.2265625,
+          "height": 32,
+          "right": 105.2265625,
+          "bottom": 247
+        },
+        "agent": {
+          "x": 109.2265625,
+          "y": 215,
+          "width": 92,
+          "height": 32,
+          "right": 201.2265625,
+          "bottom": 247
+        },
+        "submit": {
+          "x": 395,
+          "y": 215,
+          "width": 72,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "viewport": {
+          "width": 480,
+          "height": 260,
+          "dpr": 2
+        },
+        "nameValue": "",
+        "placeholder": "名称（可选）",
+        "nameBackground": "rgba(0, 0, 0, 0)",
+        "nameBorderWidth": "0px",
+        "nameOutline": "none",
+        "nameOutlineWidth": "3px",
+        "focused": "body",
+        "hovered": false,
+        "focusVisible": false,
+        "material": "opaque",
+        "agentId": "general",
+        "scrollHeight": 129,
+        "clientHeight": 129,
+        "scrollTop": 0
+      },
+      "nativeBounds": {
+        "x": 480,
+        "y": 49,
+        "width": 480,
+        "height": 260
+      },
+      "nativeFile": "default-empty-light-native-desktop.png"
+    },
+    {
+      "label": "empty-name-hover-light",
+      "theme": "light",
+      "geometry": {
+        "title": {
+          "x": 13,
+          "y": 13,
+          "width": 418,
+          "height": 28,
+          "right": 431,
+          "bottom": 41
+        },
+        "body": {
+          "x": 13,
+          "y": 47,
+          "width": 454,
+          "height": 132,
+          "right": 467,
+          "bottom": 179
+        },
+        "footer": {
+          "x": 13,
+          "y": 215,
+          "width": 454,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "project": {
+          "x": 13,
+          "y": 215,
+          "width": 92.2265625,
+          "height": 32,
+          "right": 105.2265625,
+          "bottom": 247
+        },
+        "agent": {
+          "x": 109.2265625,
+          "y": 215,
+          "width": 92,
+          "height": 32,
+          "right": 201.2265625,
+          "bottom": 247
+        },
+        "submit": {
+          "x": 395,
+          "y": 215,
+          "width": 72,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "viewport": {
+          "width": 480,
+          "height": 260,
+          "dpr": 2
+        },
+        "nameValue": "",
+        "placeholder": "名称（可选）",
+        "nameBackground": "color(srgb 0.141176 0.14902 0.176471 / 0.05)",
+        "nameBorderWidth": "0px",
+        "nameOutline": "none",
+        "nameOutlineWidth": "3px",
+        "focused": "body",
+        "hovered": true,
+        "focusVisible": false,
+        "material": "opaque",
+        "agentId": "general",
+        "scrollHeight": 129,
+        "clientHeight": 129,
+        "scrollTop": 0
+      },
+      "nativeBounds": {
+        "x": 480,
+        "y": 49,
+        "width": 480,
+        "height": 260
+      },
+      "nativeFile": "empty-name-hover-light-native-desktop.png"
+    },
+    {
+      "label": "empty-name-click-focus-light",
+      "theme": "light",
+      "geometry": {
+        "title": {
+          "x": 13,
+          "y": 13,
+          "width": 418,
+          "height": 28,
+          "right": 431,
+          "bottom": 41
+        },
+        "body": {
+          "x": 13,
+          "y": 47,
+          "width": 454,
+          "height": 132,
+          "right": 467,
+          "bottom": 179
+        },
+        "footer": {
+          "x": 13,
+          "y": 215,
+          "width": 454,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "project": {
+          "x": 13,
+          "y": 215,
+          "width": 92.2265625,
+          "height": 32,
+          "right": 105.2265625,
+          "bottom": 247
+        },
+        "agent": {
+          "x": 109.2265625,
+          "y": 215,
+          "width": 92,
+          "height": 32,
+          "right": 201.2265625,
+          "bottom": 247
+        },
+        "submit": {
+          "x": 395,
+          "y": 215,
+          "width": 72,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "viewport": {
+          "width": 480,
+          "height": 260,
+          "dpr": 2
+        },
+        "nameValue": "",
+        "placeholder": "名称（可选）",
+        "nameBackground": "color(srgb 0.141176 0.14902 0.176471 / 0.05)",
+        "nameBorderWidth": "0px",
+        "nameOutline": "solid",
+        "nameOutlineWidth": "2px",
+        "focused": "name",
+        "hovered": false,
+        "focusVisible": true,
+        "material": "opaque",
+        "agentId": "general",
+        "scrollHeight": 129,
+        "clientHeight": 129,
+        "scrollTop": 0
+      },
+      "nativeBounds": {
+        "x": 480,
+        "y": 49,
+        "width": 480,
+        "height": 260
+      },
+      "nativeFile": "empty-name-click-focus-light-native-desktop.png"
+    },
+    {
+      "label": "empty-name-keyboard-focus-light",
+      "theme": "light",
+      "geometry": {
+        "title": {
+          "x": 13,
+          "y": 13,
+          "width": 418,
+          "height": 28,
+          "right": 431,
+          "bottom": 41
+        },
+        "body": {
+          "x": 13,
+          "y": 47,
+          "width": 454,
+          "height": 132,
+          "right": 467,
+          "bottom": 179
+        },
+        "footer": {
+          "x": 13,
+          "y": 215,
+          "width": 454,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "project": {
+          "x": 13,
+          "y": 215,
+          "width": 92.2265625,
+          "height": 32,
+          "right": 105.2265625,
+          "bottom": 247
+        },
+        "agent": {
+          "x": 109.2265625,
+          "y": 215,
+          "width": 92,
+          "height": 32,
+          "right": 201.2265625,
+          "bottom": 247
+        },
+        "submit": {
+          "x": 395,
+          "y": 215,
+          "width": 72,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "viewport": {
+          "width": 480,
+          "height": 260,
+          "dpr": 2
+        },
+        "nameValue": "",
+        "placeholder": "名称（可选）",
+        "nameBackground": "color(srgb 0.141176 0.14902 0.176471 / 0.05)",
+        "nameBorderWidth": "0px",
+        "nameOutline": "solid",
+        "nameOutlineWidth": "2px",
+        "focused": "name",
+        "hovered": false,
+        "focusVisible": true,
+        "material": "opaque",
+        "agentId": "general",
+        "scrollHeight": 129,
+        "clientHeight": 129,
+        "scrollTop": 0
+      },
+      "nativeBounds": {
+        "x": 480,
+        "y": 49,
+        "width": 480,
+        "height": 260
+      },
+      "nativeFile": "empty-name-keyboard-focus-light-native-desktop.png"
+    },
+    {
+      "label": "default-empty-dark",
+      "theme": "dark",
+      "geometry": {
+        "title": {
+          "x": 13,
+          "y": 13,
+          "width": 418,
+          "height": 28,
+          "right": 431,
+          "bottom": 41
+        },
+        "body": {
+          "x": 13,
+          "y": 47,
+          "width": 454,
+          "height": 132,
+          "right": 467,
+          "bottom": 179
+        },
+        "footer": {
+          "x": 13,
+          "y": 215,
+          "width": 454,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "project": {
+          "x": 13,
+          "y": 215,
+          "width": 92.2265625,
+          "height": 32,
+          "right": 105.2265625,
+          "bottom": 247
+        },
+        "agent": {
+          "x": 109.2265625,
+          "y": 215,
+          "width": 92,
+          "height": 32,
+          "right": 201.2265625,
+          "bottom": 247
+        },
+        "submit": {
+          "x": 395,
+          "y": 215,
+          "width": 72,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "viewport": {
+          "width": 480,
+          "height": 260,
+          "dpr": 2
+        },
+        "nameValue": "",
+        "placeholder": "名称（可选）",
+        "nameBackground": "rgba(0, 0, 0, 0)",
+        "nameBorderWidth": "0px",
+        "nameOutline": "none",
+        "nameOutlineWidth": "3px",
+        "focused": "body",
+        "hovered": false,
+        "focusVisible": false,
+        "material": "opaque",
+        "agentId": "general",
+        "scrollHeight": 129,
+        "clientHeight": 129,
+        "scrollTop": 0
+      },
+      "nativeBounds": {
+        "x": 480,
+        "y": 49,
+        "width": 480,
+        "height": 260
+      },
+      "nativeFile": "default-empty-dark-native-desktop.png"
+    },
+    {
+      "label": "empty-name-keyboard-focus-dark",
+      "theme": "dark",
+      "geometry": {
+        "title": {
+          "x": 13,
+          "y": 13,
+          "width": 418,
+          "height": 28,
+          "right": 431,
+          "bottom": 41
+        },
+        "body": {
+          "x": 13,
+          "y": 47,
+          "width": 454,
+          "height": 132,
+          "right": 467,
+          "bottom": 179
+        },
+        "footer": {
+          "x": 13,
+          "y": 215,
+          "width": 454,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "project": {
+          "x": 13,
+          "y": 215,
+          "width": 92.2265625,
+          "height": 32,
+          "right": 105.2265625,
+          "bottom": 247
+        },
+        "agent": {
+          "x": 109.2265625,
+          "y": 215,
+          "width": 92,
+          "height": 32,
+          "right": 201.2265625,
+          "bottom": 247
+        },
+        "submit": {
+          "x": 395,
+          "y": 215,
+          "width": 72,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "viewport": {
+          "width": 480,
+          "height": 260,
+          "dpr": 2
+        },
+        "nameValue": "",
+        "placeholder": "名称（可选）",
+        "nameBackground": "color(srgb 0.960784 0.952941 0.929412 / 0.05)",
+        "nameBorderWidth": "0px",
+        "nameOutline": "solid",
+        "nameOutlineWidth": "2px",
+        "focused": "name",
+        "hovered": false,
+        "focusVisible": true,
+        "material": "opaque",
+        "agentId": "general",
+        "scrollHeight": 129,
+        "clientHeight": 129,
+        "scrollTop": 0
+      },
+      "nativeBounds": {
+        "x": 480,
+        "y": 49,
+        "width": 480,
+        "height": 260
+      },
+      "nativeFile": "empty-name-keyboard-focus-dark-native-desktop.png"
+    },
+    {
+      "label": "named-long-scroll-light",
+      "theme": "light",
+      "geometry": {
+        "title": {
+          "x": 13,
+          "y": 13,
+          "width": 418,
+          "height": 28,
+          "right": 431,
+          "bottom": 41
+        },
+        "body": {
+          "x": 13,
+          "y": 47,
+          "width": 454,
+          "height": 132,
+          "right": 467,
+          "bottom": 179
+        },
+        "footer": {
+          "x": 13,
+          "y": 215,
+          "width": 454,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "project": {
+          "x": 13,
+          "y": 215,
+          "width": 92.2265625,
+          "height": 32,
+          "right": 105.2265625,
+          "bottom": 247
+        },
+        "agent": {
+          "x": 109.2265625,
+          "y": 215,
+          "width": 92,
+          "height": 32,
+          "right": 201.2265625,
+          "bottom": 247
+        },
+        "submit": {
+          "x": 395,
+          "y": 215,
+          "width": 72,
+          "height": 32,
+          "right": 467,
+          "bottom": 247
+        },
+        "viewport": {
+          "width": 480,
+          "height": 260,
+          "dpr": 2
+        },
+        "nameValue": "手动名称",
+        "placeholder": "名称（可选）",
+        "nameBackground": "rgba(0, 0, 0, 0)",
+        "nameBorderWidth": "0px",
+        "nameOutline": "none",
+        "nameOutlineWidth": "3px",
+        "focused": "body",
+        "hovered": false,
+        "focusVisible": false,
+        "material": "opaque",
+        "agentId": "codex",
+        "scrollHeight": 812,
+        "clientHeight": 129,
+        "scrollTop": 683
+      },
+      "nativeBounds": {
+        "x": 480,
+        "y": 49,
+        "width": 480,
+        "height": 260
+      },
+      "nativeFile": "named-long-scroll-light-native-desktop.png"
+    }
+  ],
+  "formalAcceptance": false,
+  "newPackage": false
+}
