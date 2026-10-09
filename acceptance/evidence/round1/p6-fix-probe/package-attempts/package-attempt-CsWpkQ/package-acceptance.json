@@ -1,0 +1,20 @@
+{
+  "passed": false,
+  "evidenceDirectory": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round1/p6-fix-probe/package-attempts/package-attempt-CsWpkQ",
+  "attempt": "same",
+  "scope": "Actual frozen Mac App with isolated synthetic data; DOM/IPC and packaged asar, not physical input or Windows acceptance",
+  "host": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "release": "24.3.0"
+  },
+  "checks": {},
+  "error": "electron.launch: Failed to launch: Error: spawn /nonexistent/Thoughtline.app/Contents/MacOS/Thoughtline ENOENT\nCall log:\n\u001b[2m  - <launching> /nonexistent/Thoughtline.app/Contents/MacOS/Thoughtline --inspect=0 --remote-debugging-port=0\u001b[22m\n\u001b[2m  - [pid=N/A] starting temporary directories cleanup\u001b[22m\n\u001b[2m  - [pid=N/A] finished temporary directories cleanup\u001b[22m\n\n    at async launch (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/package-acceptance.cjs:13:32)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/package-acceptance.cjs:17:13",
+  "cleanup": {
+    "directory": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-package-acceptance-jh1v8J",
+    "ownedPids": [],
+    "normalClose": false,
+    "allExited": true,
+    "fakeDataRemoved": true
+  }
+}

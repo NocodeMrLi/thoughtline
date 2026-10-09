@@ -1,0 +1,49 @@
+
+> thoughtline@0.0.17-preview.2 verify
+> node scripts/verify.cjs
+
+
+> thoughtline@0.0.17-preview.2 typecheck
+> node node_modules/typescript/bin/tsc --noEmit
+
+
+> thoughtline@0.0.17-preview.2 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+
+ Test Files  34 passed | 1 skipped (35)
+      Tests  184 passed | 4 skipped (188)
+   Start at  21:58:17
+   Duration  1.62s (tests 63%, transform 25%, import 9%, worker 3%)
+
+    Isolate  35 workers spawned · ~138ms startup each (spawn + environment, per file)
+             at least ~551ms faster with isolate: false — reuses workers across files instead of one per file
+
+
+> thoughtline@0.0.17-preview.2 build
+> node node_modules/electron-vite/bin/electron-vite.js build
+
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 22 modules transformed.
+rendering chunks...
+out/main/index.js  95.81 kB
+✓ built in 188ms
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 1 modules transformed.
+rendering chunks...
+out/preload/index.js  4.06 kB
+✓ built in 7ms
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 54 modules transformed.
+rendering chunks...
+../../out/renderer/index.html                                    0.52 kB
+../../out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg   98.37 kB
+../../out/renderer/assets/index-DnYxG1k4.css                    35.79 kB
+../../out/renderer/assets/index-Ca19kRUU.js                    769.29 kB
+✓ built in 971ms

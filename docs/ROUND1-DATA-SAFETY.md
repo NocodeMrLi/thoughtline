@@ -31,7 +31,7 @@ P3 数据层 75 项覆盖单测通过，包含原字节备份、备份写入失�
 ### 从独立备份恢复到新位置（当前没有一键恢复按钮）
 
 1. 正常退出 Thoughtline，保留当前念头目录、profile 和原备份，不直接在备份目录启动应用。
-2. 打开备份的 `manifest.json`。仅接受清单版本1、合法 snapshot 文件名；文件应与清单一一对应（另有 manifest），无链接或未知文件。用 Mac `shasum -a 256 文件路径` / Windows PowerShell `Get-FileHash -Algorithm SHA256 文件路径` 逐个比对 SHA256，并按文件属性比对字节数。损坏或不完整时停止，不覆盖现有数据。
+2. 打开备份的 `manifest.json`。仅接受清单版本1、合法 snapshot 文件名；文件应与清单一一对应（另有 manifest），无链接或未知文件。用 Mac `LC_ALL=C /usr/bin/shasum -a 256 文件路径` / Windows PowerShell `Get-FileHash -Algorithm SHA256 文件路径` 逐个比对 SHA256，并按文件属性比对字节数。损坏或不完整时停止，不覆盖现有数据。
 3. 新建一个独立空目录，将清单列出的 snapshot 文件复制进去；不复制 manifest 或缓存。再次逐项核验副本。不要将恢复内容合并进当前目录。
 4. 使用**支持 schema3 的当前新版本**及独立 `THOUGHTLINE_DATA_DIR` 启动这个恢复目录。Mac 可在终端用 `open --env 'THOUGHTLINE_DATA_DIR=/绝对路径/恢复副本' '/应用路径/Thoughtline.app'`；Windows 在临时 PowerShell 会话设置 `$env:THOUGHTLINE_DATA_DIR='D:\恢复副本'` 后运行实际 `Thoughtline.exe`，测试后关闭该终端。启动前须退出其他 Thoughtline。检查正文、ID/顺序、创建日、状态、夹子当前页和草稿，正常退出后再次启动确认。
 5. 确认恢复副本后，若要让日常 profile 使用该目录，先正常退出，再保留原 `data-location.json` 副本，并将其中 path 改为恢复目录的绝对路径（JSON 中 Windows 反斜杠须写作 `\\`）。若没有位置配置，则创建上述 schemaVersion1 格式。重启核对设置所显示路径。保留旧目录，直到确认恢复内容完整。

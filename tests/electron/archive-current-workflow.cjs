@@ -5,7 +5,7 @@ const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:
 
 (async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-p3-archive-current-'));
- const evidence='acceptance/evidence/round1/p3-ui',attempt=process.env.THOUGHTLINE_ATTEMPT||'current';let app,pids=[];
+ const evidence=process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round1/p3-ui',attempt=process.env.THOUGHTLINE_ATTEMPT||'current';let app,pids=[];
  try{
   const ids=['i','j','k'],ideas=ids.map(id=>({id,text:`正文 ${id} 中文\n🧷`,title:`纸 ${id}`,project:'',agentId:'general',status:'hanging',createdAt:'2026-10-09T00:00:00Z',updatedAt:'2026-10-09T00:00:00Z'}));
   const initial={schemaVersion:2,revision:0,ideas,clips:[{id:'c',agentId:'general',ideaIds:ids,currentId:'i',position:.5}],agents:[{id:'general',name:'通用',color:'#A0A3AA'}],draft:null,settings:{writeHotkey:'Control+Alt+N',reducedMotion:true}};

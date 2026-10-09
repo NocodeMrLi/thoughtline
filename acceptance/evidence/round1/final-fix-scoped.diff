@@ -1,0 +1,357 @@
+--- before/src/main/index.ts
++++ after/src/main/index.ts
+@@ -293,7 +293,12 @@
+   if(!trusted(e,[manage])||typeof id!=='string'||!draftShape(draft)||!draftShape(expectedDraft)||session!==manageSession||!manage?.isVisible())return Promise.resolve(invalid<Snapshot>('编辑会话已结束，文字仍在窗口中。'));
+   return composerWrite(async():Promise<Result<Snapshot>>=>{
+    if(!trusted(e,[manage])||session!==manageSession||!manage?.isVisible()||manageEditingOwner?.session!==session||manageEditingOwner.ideaId!==id)return invalid('编辑会话已结束，文字仍在窗口中。');
+-   return save(editIdeaIfUnchanged(snapshot,id,draft,expectedDraft,new Date().toISOString()),snapshot.revision);
++   const priorClips=new Set(snapshot.clips.map(c=>c.id));
++   const saved=await save(editIdeaIfUnchanged(snapshot,id,draft,expectedDraft,new Date().toISOString(),width),snapshot.revision);
++   if(saved.ok&&snapshot.clips.some(c=>!priorClips.has(c.id)&&c.ideaIds.includes(id))){
++    placementNotice=layoutClips(snapshot.clips,width).overflow.some(c=>c.ideaIds.includes(id))?'已保存，绳上暂时放不下，可在念头日历查看':null;publish();
++   }
++   return saved;
+   });
+  });
+  ipcMain.handle('thoughtline:idea-history',(e,id:string,kind:'delete'|'restore'|'permanent',revision:number)=>{
+--- before/src/renderer/components/Calendar.tsx
++++ after/src/renderer/components/Calendar.tsx
+@@ -66,9 +66,13 @@
+   Object.assign(layer.style,{left:`${from.left-bounds.left}px`,top:`${from.top-bounds.top}px`,width:`${from.width}px`,height:`${from.height}px`});if(request.visual)layer.appendChild(request.visual);root.appendChild(layer);
+   const duration=request.kind==='day-to-month'||request.kind==='month-to-year'||request.kind==='reader-to-card'?210:230;
+   const expands=request.kind==='year-to-month'||request.kind==='month-to-day'||request.kind==='card-to-reader';
+-  const end=`translate(${to.left-from.left}px, ${to.top-from.top}px) scale(${to.width/from.width}, ${to.height/from.height})`;
++  // Fit the content uniformly inside the destination; the clipped surface keeps
++  // text, A4 paper and brand pixels in their original proportions.
++  const shrink=Math.min(to.width/from.width,to.height/from.height),grow=Math.min(from.width/to.width,from.height/to.height);
++  const end=`translate(${to.left-from.left+(to.width-from.width*shrink)/2}px, ${to.top-from.top+(to.height-from.height*shrink)/2}px) scale(${shrink})`;
++  const start=`translate(${from.left-to.left+(from.width-to.width*grow)/2}px, ${from.top-to.top+(from.height-to.height*grow)/2}px) scale(${grow})`;
+   const surface=layer.animate(expands?[{opacity:1},{offset:.4,opacity:0},{opacity:0}]:[{transform:'translate(0px, 0px) scale(1, 1)',opacity:1},{transform:end,opacity:0}],{duration,easing:'cubic-bezier(.22, 1, .36, 1)',fill:'both'});
+-  const reveal=target.animate(expands?[{transform:`translate(${from.left-to.left}px, ${from.top-to.top}px) scale(${from.width/to.width}, ${from.height/to.height})`,transformOrigin:'0 0',opacity:.25},{transform:'none',transformOrigin:'0 0',opacity:1}]:[{opacity:.45},{opacity:1}],{duration:expands?duration:duration-35,delay:expands?0:35,easing:'cubic-bezier(.22, 1, .36, 1)',fill:'both'});
++  const reveal=target.animate(expands?[{transform:start,transformOrigin:'0 0',opacity:.25},{transform:'none',transformOrigin:'0 0',opacity:1}]:[{opacity:.45},{opacity:1}],{duration:expands?duration:duration-35,delay:expands?0:35,easing:'cubic-bezier(.22, 1, .36, 1)',fill:'both'});
+   let active=true;
+   const scrollNode=scroll.current,anchorScroll=scrollNode?.scrollTop;
+   const interruptScroll=()=>{if(scrollNode&&Math.abs(scrollNode.scrollTop-(anchorScroll??0))>.5)cancelMotion();};
+@@ -89,6 +93,18 @@
+  const filteredDays=index.days.filter(d=>query.trim()?true:nav.level==='yearIdeas'?d.startsWith(year+'-'):nav.level==='day'?d===nav.day:d.startsWith(nav.month));
+  const cards=nav.level==='trash'?index.trash:filteredDays.flatMap(d=>index.normal.get(d)!);
+  const shown=cards.slice(0,nav.limit),idea=info.snapshot.ideas.find(i=>i.id===selected);
++ // Recover the current selection from a committed snapshot, even when its Reader
++ // has already unmounted. Navigation/session changes cancel this ownership.
++ const priorReader=useRef<{session:number;intent:number;id:string|null;deleted:boolean;ids:string[]}|null>(null);
++ useLayoutEffect(()=>{
++  const prior=priorReader.current;
++  if(prior&&prior.session===info.manageSession&&prior.intent===navigationIntent.current&&prior.id===selected&&selected&&(!idea||(idea.status==='deleted')!==prior.deleted)){
++   const at=prior.ids.indexOf(selected),available=new Set(cards.map(i=>i.id));
++   const next=[...prior.ids.slice(at+1),...prior.ids.slice(0,at).reverse()].find(id=>available.has(id));
++   setSelected(next??null);restoreScroll.current=readerScroll.current;
++  }
++  priorReader.current={session:info.manageSession,intent:navigationIntent.current,id:selected,deleted:idea?.status==='deleted',ids:cards.map(i=>i.id)};
++ },[info.snapshot,info.manageSession,selected]);
+  const saveScroll=()=>({...nav,scroll:scroll.current?.scrollTop??0});
+  const go=async(next:Nav,motion?:{from:Element|null;to:string;kind:MotionKind})=>{const intent=++navigationIntent.current,session=info.manageSession;if(!await prepareLeave()||!currentIntent(session,intent))return;if(motion)captureMotion(motion.from,motion.to,motion.kind);else cancelMotion();setHistory(h=>[...h,saveScroll()]);restoreScroll.current=next.scroll;setNav(next);setSelected(null);setTools(false);};
+  const back=async()=>{const intent=++navigationIntent.current,session=info.manageSession;if(!await prepareLeave()||!currentIntent(session,intent))return;if(selected){captureMotion(host.current?.querySelector('.idea-reader')??null,`[data-idea-id="${selected}"]`,'reader-to-card');setSelected(null);restoreScroll.current=readerScroll.current;return;}const last=history.at(-1);if(last){if(nav.level==='day'&&last.level==='month')captureMotion(host.current?.querySelector('.calendar-paper-groups')??null,`[data-day="${nav.day}"]`,'day-to-month');else if(nav.level==='month'&&last.level==='year')captureMotion(host.current?.querySelector('.month-grid')??null,`[data-month="${nav.month}"]`,'month-to-year');else if(nav.level==='year'&&last.level==='month')captureMotion(host.current?.querySelector(`[data-month="${last.month}"]`)??null,'.month-grid','year-to-month');else cancelMotion();setHistory(h=>h.slice(0,-1));restoreScroll.current=last.scroll;setNav(last);}else{cancelMotion();restoreScroll.current=0;setNav(initial);}setTools(false);};
+@@ -100,7 +116,7 @@
+  return <main ref={host} data-view="manage" data-mode="calendar" data-material={info.manageMaterial} data-platform={info.platform} className="manage thought-calendar">
+   <header className="auxiliary-header"><div className="calendar-heading">{(selected||history.length>0||nav.level!=='month')&&<IconButton icon="back" label="返回" onClick={()=>void back()}/>}<button className="calendar-title" onClick={()=>{if(nav.level==='month'&&!selected){void go({...nav,level:'year',scroll:0,limit:9},{from:host.current?.querySelector('.month-grid')??null,to:`[data-month="${nav.month}"]`,kind:'month-to-year'});}}} title={nav.level==='month'?'查看全年十二个月':undefined}>{idea?.title??label}</button></div><div className="calendar-header-actions"><IconButton icon="more" label="日历更多选项" aria-expanded={tools} onClick={()=>setTools(!tools)}/><button className="close" aria-label="关闭日历" onClick={()=>void window.thoughtline.closeManage()}>×</button></div></header>
+   {tools&&<div className="calendar-tools"><button onClick={()=>void go({...nav,level:'trash',scroll:0,limit:9})}>最近删除</button><button onClick={()=>void run(()=>window.thoughtline.openSettings())}>存储与设置</button><button onClick={()=>void go({...nav,level:'agents',scroll:0,limit:9})}>Agent 标签</button></div>}
+-  {idea?<IdeaReader key={idea.id} idea={idea} info={info} onRemoved={()=>{const at=cards.findIndex(i=>i.id===idea.id),next=cards[at+1]??cards[at-1];setSelected(next?.id??null);restoreScroll.current=readerScroll.current;}}/>:<>
++  {idea?<IdeaReader key={idea.id+':'+info.manageSession} idea={idea} info={info}/>:<>
+    {nav.level!=='agents'&&<div className="calendar-search"><input aria-label="搜索念头" placeholder="搜索正文、名称或项目" value={query} onChange={e=>{navigationIntent.current++;cancelMotion();setQuery(e.target.value);restoreScroll.current=0;if(scroll.current)scroll.current.scrollTop=0;setNav(n=>({...n,scroll:0,limit:9}));}}/><select aria-label="筛选念头状态" value={status} onChange={e=>{navigationIntent.current++;cancelMotion();setStatus(e.target.value as typeof status);restoreScroll.current=0;if(scroll.current)scroll.current.scrollTop=0;setNav(n=>({...n,scroll:0,limit:9}));}}><option value="all">全部状态</option><option value="hanging">挂着</option><option value="archived">已收起</option></select></div>}
+    {(grid||yearGrid)&&<div className="calendar-navigation"><button aria-label={yearGrid?'上一年':'上个月'} onClick={()=>{navigationIntent.current++;cancelMotion();restoreScroll.current=0;setNav(n=>({...n,month:shiftMonth(n.month,yearGrid?-12:-1)}));}}>‹</button><button onClick={()=>{navigationIntent.current++;cancelMotion();restoreScroll.current=0;setNav(initial);}}>今天</button><button onClick={()=>void go({...nav,level:yearGrid?'yearIdeas':'monthIdeas',scroll:0,limit:9})}>{yearGrid?`查看全年念头（${yearCount(year)}）`:`查看本月念头（${monthCount(nav.month)}）`}</button><button aria-label={yearGrid?'下一年':'下个月'} onClick={()=>{navigationIntent.current++;cancelMotion();restoreScroll.current=0;setNav(n=>({...n,month:shiftMonth(n.month,yearGrid?12:1)}));}}>›</button></div>}
+    <div ref={scroll} className="calendar-content" data-calendar-scroll>
+--- before/src/renderer/components/Detail.tsx
++++ after/src/renderer/components/Detail.tsx
+@@ -1,4 +1,4 @@
+-import {useEffect,useRef,useState} from 'react';
++import {useEffect,useLayoutEffect,useRef,useState} from 'react';
+ import type {PilotInfo} from '../../shared/bridge';
+ import {useClipPage} from '../hooks/useClipPage';
+ import {prepareLeave} from '../hooks/leaveGuards';
+@@ -6,20 +6,36 @@
+ import {IconButton} from './ActionIcon';
+ 
+ export function Detail({info}:{info:PilotInfo}){
+- const [error,setError]=useState(''),[titles,setTitles]=useState(info.manageTitles),[selected,setSelected]=useState<string|null>(null);
++ const [error,setError]=useState(''),[titles,setTitles]=useState(info.manageTitles),[selected,setSelected]=useState<string|null|undefined>(undefined);
+  const [editRequest,setEditRequest]=useState<{session:number;ideaId:string}|null>(null);
+- const trackedId=selected??info.manageSelection;
++ const trackedId=selected===undefined?info.manageSelection:selected;
+  const clip=info.snapshot.clips.find(c=>c.ideaIds.includes(trackedId??''));
+  const page=useClipPage(clip,setError);
+- const visibleId=selected??(info.snapshot.ideas.some(i=>i.id===info.manageSelection&&i.status!=='deleted')?info.manageSelection:null)??(clip?.ideaIds.includes(page.id)?page.id:null)??clip?.ideaIds[0]??info.manageSelection;
++ const visibleId=selected!==undefined?selected:(info.snapshot.ideas.some(i=>i.id===info.manageSelection&&i.status!=='deleted')?info.manageSelection:null)??(clip?.ideaIds.includes(page.id)?page.id:null)??clip?.ideaIds[0]??info.manageSelection;
+  const idea=info.snapshot.ideas.find(i=>i.id===visibleId&&i.status!=='deleted');
+  const index=clip?.ideaIds.indexOf(idea?.id??'')??-1;
+- useEffect(()=>{setTitles(info.manageTitles);setSelected(null);setEditRequest(null);setError('');},[info.manageSession]);
++ useEffect(()=>{setTitles(info.manageTitles);setSelected(undefined);setEditRequest(null);setError('');},[info.manageSession]);
+  useEffect(()=>{if(info.manageEditingRequested&&info.manageSelection)setEditRequest({session:info.manageSession,ideaId:info.manageSelection});},[info.manageEditingRequested,info.manageSession,info.manageSelection]);
++ const live=useRef(true),session=useRef(info.manageSession),intent=useRef(0);
++ session.current=info.manageSession;
++ useEffect(()=>{live.current=true;return()=>{live.current=false;intent.current++;};},[]);
++ const owned=(at:number)=>live.current&&session.current===at;
++ const latest=useRef({clip,page,visibleId});latest.current={clip,page,visibleId};
++ const priorReader=useRef<{session:number;intent:number;id:string|null|undefined;ids:string[]}|null>(null);
++ useLayoutEffect(()=>{
++  const prior=priorReader.current;
++  if(prior&&prior.session===info.manageSession&&prior.intent===intent.current&&prior.id===visibleId&&visibleId&&!idea){
++   const at=prior.ids.indexOf(visibleId),available=new Set(info.snapshot.ideas.filter(i=>i.status!=='deleted').map(i=>i.id));
++   setSelected([...prior.ids.slice(at+1),...prior.ids.slice(0,at).reverse()].find(id=>available.has(id))??null);
++  }
++  priorReader.current={session:info.manageSession,intent:intent.current,id:visibleId,ids:clip?.ideaIds??[]};
++ },[info.snapshot,info.manageSession,visibleId]);
+  const selectionQueue=useRef(Promise.resolve());
+- const choose=(id:string)=>{selectionQueue.current=selectionQueue.current.then(async()=>{if(!await prepareLeave())return;if(!clip?.ideaIds.includes(id))return;page.choose(id);setSelected(id);setTitles(false);setEditRequest(null);}).catch(()=>setError('最后修改尚未保存，请重试。'));};
+- const flip=(step:number)=>{selectionQueue.current=selectionQueue.current.then(async()=>{if(!await prepareLeave())return;const at=clip?.ideaIds.indexOf(page.current()||visibleId||'')??-1;const next=clip?.ideaIds[at+step];if(next){page.choose(next);setSelected(next);setTitles(false);setEditRequest(null);}}).catch(()=>setError('最后修改尚未保存，请重试。'));};
+- const removed=()=>{const ids=clip?.ideaIds??[];const at=ids.indexOf(idea?.id??'');const next=ids[at+1]??ids[at-1]??null;setSelected(next);};
++ // Queued flips share session ownership so fast sequential clicks are all kept.
++ const choose=(id:string)=>{const at=info.manageSession;selectionQueue.current=selectionQueue.current.then(async()=>{if(!owned(at)||!await prepareLeave()||!owned(at))return;const current=latest.current;if(!current.clip?.ideaIds.includes(id))return;intent.current++;current.page.choose(id);setSelected(id);setTitles(false);setEditRequest(null);}).catch(()=>{if(owned(at))setError('最后修改尚未保存，请重试。');});};
++ const flip=(step:number)=>{const at=info.manageSession;selectionQueue.current=selectionQueue.current.then(async()=>{if(!owned(at)||!await prepareLeave()||!owned(at))return;const current=latest.current,index=current.clip?.ideaIds.indexOf(current.page.current()||current.visibleId||'')??-1;const next=current.clip?.ideaIds[index+step];if(next){intent.current++;current.page.choose(next);setSelected(next);setTitles(false);setEditRequest(null);}}).catch(()=>{if(owned(at))setError('最后修改尚未保存，请重试。');});};
++ const toggleTitles=async()=>{const at=info.manageSession,token=++intent.current;if(await prepareLeave()&&owned(at)&&intent.current===token)setTitles(value=>!value);};
++ const undo=async()=>{const at=info.manageSession,token=++intent.current,valid=()=>owned(at)&&intent.current===token;try{if(!await prepareLeave()||!valid())return;const current=await window.thoughtline.info();if(!valid()||current.manageSession!==at)return;const r=await window.thoughtline.clipChange({kind:'undo'},current.snapshot.revision);if(valid()&&!r.ok)setError(r.message);}catch{if(valid())setError('操作未成功，请重试。');}};
+  return <main data-view="manage" data-mode="detail" data-material={info.manageMaterial} data-platform={info.platform} className="manage compact-detail" onKeyDown={e=>{
+   if(e.nativeEvent.isComposing||e.nativeEvent.keyCode===229)return;
+   if(e.key==='Escape'){e.preventDefault();if(titles)setTitles(false);else void window.thoughtline.closeManage();}
+@@ -27,9 +43,9 @@
+   if(e.key==='ArrowLeft'){e.preventDefault();flip(-1);}if(e.key==='ArrowRight'){e.preventDefault();flip(1);}
+  }}>
+   <header><span>{info.snapshot.agents.find(a=>a.id===idea?.agentId)?.name}{idea?.project?` · ${idea.project}`:''}</span><div className="detail-header-actions"><IconButton icon="calendar" label="念头日历" onClick={()=>void window.thoughtline.openManage()}/><button className="close" aria-label="关闭详情" onClick={()=>void window.thoughtline.closeManage()}>×</button></div></header>
+-  {idea?<><div className="detail-heading"><strong>{idea.title}</strong>{clip&&clip.ideaIds.length>1&&<nav className="detail-pager" aria-label="便签切换"><button aria-label="上一张便签" disabled={index<=0} onClick={()=>flip(-1)}>‹</button><button aria-label="打开本夹标题列表" onMouseDown={e=>e.preventDefault()} onClick={()=>{void prepareLeave().then(ok=>{if(ok)setTitles(value=>!value);});}}>{index+1}/{clip.ideaIds.length}</button><button aria-label="下一张便签" disabled={index>=clip.ideaIds.length-1} onClick={()=>flip(1)}>›</button></nav>}</div>
+-   {titles&&clip?<div className="clip-titles" aria-label="本夹便签标题">{clip.ideaIds.map(id=>{const row=info.snapshot.ideas.find(i=>i.id===id);return row&&<button key={id} aria-pressed={id===idea.id} onClick={()=>choose(id)}>{row.title}</button>;})}</div>:<IdeaReader key={idea.id+':'+info.manageSession} idea={idea} info={info} initialEdit={editRequest?.session===info.manageSession&&editRequest.ideaId===idea.id} onRemoved={removed}/>}
++  {idea?<><div className="detail-heading"><strong>{idea.title}</strong>{clip&&clip.ideaIds.length>1&&<nav className="detail-pager" aria-label="便签切换"><button aria-label="上一张便签" disabled={index<=0} onClick={()=>flip(-1)}>‹</button><button aria-label="打开本夹标题列表" onMouseDown={e=>e.preventDefault()} onClick={()=>void toggleTitles()}>{index+1}/{clip.ideaIds.length}</button><button aria-label="下一张便签" disabled={index>=clip.ideaIds.length-1} onClick={()=>flip(1)}>›</button></nav>}</div>
++   {titles&&clip?<div className="clip-titles" aria-label="本夹便签标题">{clip.ideaIds.map(id=>{const row=info.snapshot.ideas.find(i=>i.id===id);return row&&<button key={id} aria-pressed={id===idea.id} onClick={()=>choose(id)}>{row.title}</button>;})}</div>:<IdeaReader key={idea.id+':'+info.manageSession} idea={idea} info={info} initialEdit={editRequest?.session===info.manageSession&&editRequest.ideaId===idea.id}/>}
+   </>:<p className="empty-list">这张纸已移到最近删除，或当前夹子为空。可在念头日历查看。</p>}
+-  <footer className="detail-bottom">{info.canUndoClips&&<IconButton icon="undo" label="撤销整理" onClick={async()=>{if(!await prepareLeave())return;const current=await window.thoughtline.info();const r=await window.thoughtline.clipChange({kind:'undo'},current.snapshot.revision);if(!r.ok)setError(r.message);}}/>}<span role="status">{info.placementNotice}</span></footer>{error&&<p role="alert" className="error">{error}</p>}
++  <footer className="detail-bottom">{info.canUndoClips&&<IconButton icon="undo" label="撤销整理" onClick={()=>void undo()}/>}<span role="status">{info.placementNotice}</span></footer>{error&&<p role="alert" className="error">{error}</p>}
+  </main>;
+ }
+--- before/src/renderer/components/IdeaReader.tsx
++++ after/src/renderer/components/IdeaReader.tsx
+@@ -1,25 +1,38 @@
+-import {useEffect,useState} from 'react';
++import {useEffect,useRef,useState} from 'react';
+ import type {PilotInfo,ClipMutation} from '../../shared/bridge';
+ import type {Idea,Result} from '../../shared/contracts';
+ import {prepareLeave} from '../hooks/leaveGuards';
+ import {flushPageSelections} from '../hooks/useClipPage';
+ import {InlineIdeaEditor} from './InlineIdeaEditor';
+ import {IconButton,ActionIcon} from './ActionIcon';
+-export function IdeaReader({idea,info,initialEdit=false,onRemoved}:{idea:Idea;info:PilotInfo;initialEdit?:boolean;onRemoved?:()=>void}){
++export function IdeaReader({idea,info,initialEdit=false}:{idea:Idea;info:PilotInfo;initialEdit?:boolean}){
+  const [editing,setEditing]=useState(initialEdit),[menu,setMenu]=useState(false),[permanent,setPermanent]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');
+  useEffect(()=>{setMenu(false);setPermanent(false);setError('');setNotice('');},[idea.id]);
+  useEffect(()=>{if(initialEdit)setEditing(true);},[initialEdit]);
++ const live=useRef(true),operation=useRef(0),pending=useRef(false),owner=useRef({session:info.manageSession,id:idea.id});
++ owner.current={session:info.manageSession,id:idea.id};
++ useEffect(()=>{live.current=true;return()=>{live.current=false;operation.current++;};},[]);
++ const checkpoint=()=>{const token=++operation.current,session=info.manageSession,id=idea.id;return ()=>live.current&&operation.current===token&&owner.current.session===session&&owner.current.id===id;};
++ const finishEdit=async()=>{const current=checkpoint();if(await prepareLeave()&&current())setEditing(false);};
+  const clip=info.snapshot.clips.find(c=>c.ideaIds.includes(idea.id)),deleted=(idea.status as string)==='deleted';
+- const run=async(task:(current:PilotInfo)=>Promise<Result<unknown>>,message='',removed=false)=>{
+-  if(busy)return;setBusy(true);setError('');try{if(!await prepareLeave())return;await flushPageSelections();const current=await window.thoughtline.info(),result=await task(current);if(!result.ok){setError(result.message);return;}setNotice(message);setMenu(false);setPermanent(false);if(removed)onRemoved?.();}catch{setError('操作未成功，原文已保留，请重试。');}finally{setBusy(false);}
++ const run=async(task:(current:PilotInfo)=>Promise<Result<unknown>>,message='')=>{
++  if(pending.current)return;const currentOwner=checkpoint();pending.current=true;setBusy(true);setError('');
++  try{
++   if(!await prepareLeave()||!currentOwner())return;
++   await flushPageSelections();if(!currentOwner())return;
++   const current=await window.thoughtline.info();if(!currentOwner()||current.manageSession!==info.manageSession)return;
++   const result=await task(current);if(!currentOwner())return;
++   if(!result.ok){setError(result.message);return;}setNotice(message);setMenu(false);setPermanent(false);
++  }catch{if(currentOwner())setError('操作未成功，原文已保留，请重试。');}
++  finally{if(currentOwner()){pending.current=false;setBusy(false);}}
+  };
+  const change=(c:ClipMutation,message:string)=>run(current=>window.thoughtline.clipChange(c,current.snapshot.revision),message);
+- const history=(kind:'delete'|'restore'|'permanent')=>run(current=>window.thoughtline.ideaHistory(idea.id,kind,current.snapshot.revision),kind==='delete'?'已移到最近删除，可恢复。':kind==='restore'?'念头已恢复。':'已永久删除。',true);
++ const history=(kind:'delete'|'restore'|'permanent')=>run(current=>window.thoughtline.ideaHistory(idea.id,kind,current.snapshot.revision),kind==='delete'?'已移到最近删除，可恢复。':kind==='restore'?'念头已恢复。':'已永久删除。');
+  return <section className="idea-reader" data-reader-id={idea.id}>
+   {editing&&!deleted?<InlineIdeaEditor key={idea.id+':'+info.manageSession} idea={idea} info={info} onDone={()=>setEditing(false)}/>:<textarea data-full-text readOnly aria-label="完整正文，可手动选中复制" value={idea.text}/>}
+   <div className="reader-toolbar" aria-label="念头操作">
+    <IconButton icon="copy" label="复制正文" disabled={busy} onClick={()=>void run(()=>window.thoughtline.copy(idea.id),'已复制完整正文。')}/>
+-   {!deleted&&<><IconButton icon="edit" label={editing?'完成编辑':'编辑'} disabled={busy} aria-pressed={editing} onClick={()=>{if(editing)void prepareLeave().then(ok=>{if(ok)setEditing(false);});else setEditing(true);}}/><IconButton icon={idea.status==='hanging'?'archive':'restore'} label={idea.status==='hanging'?'收起当前念头':'重新挂上'} disabled={busy} onClick={()=>void run(current=>window.thoughtline.setStatus(idea.id,idea.status==='hanging'?'archived':'hanging',current.snapshot.revision),'状态已更新，正文保留。')}/>{clip&&clip.ideaIds.length>1&&<IconButton icon="split" label="拆出当前纸张" disabled={busy} onClick={()=>void change({kind:'split',id:clip.id,ideaId:idea.id},'已拆出当前纸张。')}/>}</>}
++   {!deleted&&<><IconButton icon="edit" label={editing?'完成编辑':'编辑'} disabled={busy} aria-pressed={editing} onClick={()=>{if(editing)void finishEdit();else setEditing(true);}}/><IconButton icon={idea.status==='hanging'?'archive':'restore'} label={idea.status==='hanging'?'收起当前念头':'重新挂上'} disabled={busy} onClick={()=>void run(current=>window.thoughtline.setStatus(idea.id,idea.status==='hanging'?'archived':'hanging',current.snapshot.revision),'状态已更新，正文保留。')}/>{clip&&clip.ideaIds.length>1&&<IconButton icon="split" label="拆出当前纸张" disabled={busy} onClick={()=>void change({kind:'split',id:clip.id,ideaId:idea.id},'已拆出当前纸张。')}/>}</>}
+    {deleted&&<IconButton icon="restore" label="恢复念头" disabled={busy} onClick={()=>void history('restore')}/>}
+    <IconButton icon="more" label="更多操作" disabled={busy} aria-expanded={menu} onClick={()=>{setMenu(!menu);setPermanent(false);}}/>
+   </div>
+--- before/src/renderer/components/InlineIdeaEditor.tsx
++++ after/src/renderer/components/InlineIdeaEditor.tsx
+@@ -37,7 +37,7 @@
+  });
+  const flush=async()=>{if(composition.current.composing){setError('请先完成输入法选字。');return false;}try{await saver.current?.flush();return true;}catch{return false;}};
+  const projects=[...new Set(info.snapshot.ideas.map(i=>i.project).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+- return <section data-inline-editor className="inline-editor" aria-label="原地编辑念头" onKeyDown={e=>{if(e.key==='Escape'){e.stopPropagation();if(!e.nativeEvent.isComposing&&!composition.current.composing){e.preventDefault();void flush().then(ok=>{if(ok)onDone();});}}}}>
++ return <section data-inline-editor className="inline-editor" aria-label="原地编辑念头" onKeyDown={e=>{if(e.key==='Escape'){e.stopPropagation();if(!e.nativeEvent.isComposing&&!composition.current.composing){e.preventDefault();void flush().then(ok=>{if(ok&&live.current)onDone();});}}}}>
+   <input aria-label="编辑标题" placeholder="名称（可选）" maxLength={50} value={draft.title} {...events('title')}/>
+   <textarea ref={text} aria-label="编辑正文" value={draft.text} spellCheck={false} {...events('text')}/>
+   <div className="inline-properties"><button aria-label={`项目：${draft.project||'未分组'}`} aria-expanded={projectOpen} onClick={()=>setProjectOpen(!projectOpen)}>项目：{draft.project||'未分组'} ⌄</button><label>给谁：<select aria-label="编辑归属 Agent" value={draft.agentId} onChange={e=>{setConfirmAgent(false);update({...latest.current,agentId:e.target.value});}}>{info.snapshot.agents.map(a=><option key={a.id} value={a.id}>{a.name}</option>)}</select></label></div>
+@@ -46,7 +46,7 @@
+    if(base.current.project===p)base.current={...base.current,project:''};if(latest.current.project===p)update({...latest.current,project:''});
+   }}><label>项目<input aria-label="编辑项目" maxLength={40} value={draft.project} {...events('project')}/></label></ProjectOptions></div>}
+   {needsSplit&&<label className="inline-split-confirm"><input type="checkbox" checked={confirmAgent} onChange={e=>{setConfirmAgent(e.target.checked);if(e.target.checked){splitAllowed.current=true;void flush();}}}/>更改归属会将当前纸张移至独立夹子</label>}
+-  <div className="inline-save-status"><span role="status">{status}</span><button onClick={()=>void flush().then(ok=>{if(ok)onDone();})}>完成编辑</button>{error&&<button onClick={()=>void flush()}>重试保存</button>}</div>
++  <div className="inline-save-status"><span role="status">{status}</span><button onClick={()=>void flush().then(ok=>{if(ok&&live.current)onDone();})}>完成编辑</button>{error&&<button onClick={()=>void flush()}>重试保存</button>}</div>
+   {error&&<div className="inline-save-error"><p role="alert">{error} 文字仍在这里。</p><button onClick={()=>{text.current?.focus();text.current?.select();}}>选中正文以复制</button></div>}
+  </section>;
+ }
+--- before/src/shared/ideaCommands.ts
++++ after/src/shared/ideaCommands.ts
+@@ -1,4 +1,5 @@
+ import type {Snapshot,Draft,Result,AgentTag,Idea} from './contracts';
++import {captureClipPositions} from './clipLayout';
+ import {visibleSlots} from './ropeGeometry';
+ import {independentClip,pruneClips} from './clipModel';
+ import {ideaDay} from './ideaHistory';
+@@ -70,11 +71,13 @@
+   let clips=pruneClips(s.clips,ideas);const updated=ideas.find(i=>i.id===id)!;if(updated.status==='hanging'&&!clips.some(c=>c.ideaIds.includes(id)))clips=[...clips,independentClip({...s,clips},id,updated.agentId)];
+   return validateSnapshot({...s,clips,ideas});
+ }
+-export function editIdeaIfUnchanged(s:Snapshot,id:string,draft:Draft,expectedDraft:Draft,now:string):Result<Snapshot>{
++export function editIdeaIfUnchanged(s:Snapshot,id:string,draft:Draft,expectedDraft:Draft,now:string,width?:number):Result<Snapshot>{
+   const idea=s.ideas.find(i=>i.id===id);
+   if(!idea||idea.status==='deleted'||!plain(expectedDraft)||!(['text','title','project','agentId'] as const).every(k=>typeof expectedDraft[k]==='string'))return invalid('找不到可编辑的念头或原内容无效。');
+   if(idea.text!==expectedDraft.text||idea.title!==expectedDraft.title||idea.project!==expectedDraft.project||idea.agentId!==expectedDraft.agentId)return {ok:false,code:'CONFLICT',message:'这条念头已更新，请保留当前文字并重新读取。'};
+-  return editIdea(s,id,draft,now);
++  const owner=s.clips.find(c=>c.ideaIds.includes(id));
++  const separates=owner&&owner.ideaIds.length>1&&owner.agentId!==draft.agentId;
++  return editIdea(separates&&width!==undefined?{...s,clips:captureClipPositions(s.clips,width)}:s,id,draft,now);
+ }
+ export function deleteIdea(s:Snapshot,id:string,now:string):Result<Snapshot>{
+   const idea=s.ideas.find(i=>i.id===id);
+--- before/tests/electron/archive-current-workflow.cjs
++++ after/tests/electron/archive-current-workflow.cjs
+@@ -5,7 +5,7 @@
+ 
+ (async()=>{
+  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-p3-archive-current-'));
+- const evidence='acceptance/evidence/round1/p3-ui',attempt=process.env.THOUGHTLINE_ATTEMPT||'current';let app,pids=[];
++ const evidence=process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round1/p3-ui',attempt=process.env.THOUGHTLINE_ATTEMPT||'current';let app,pids=[];
+  try{
+   const ids=['i','j','k'],ideas=ids.map(id=>({id,text:`正文 ${id} 中文\n🧷`,title:`纸 ${id}`,project:'',agentId:'general',status:'hanging',createdAt:'2026-10-09T00:00:00Z',updatedAt:'2026-10-09T00:00:00Z'}));
+   const initial={schemaVersion:2,revision:0,ideas,clips:[{id:'c',agentId:'general',ideaIds:ids,currentId:'i',position:.5}],agents:[{id:'general',name:'通用',color:'#A0A3AA'}],draft:null,settings:{writeHotkey:'Control+Alt+N',reducedMotion:true}};
+--- before/tests/electron/calendar-brand-clip-workflow.cjs
++++ after/tests/electron/calendar-brand-clip-workflow.cjs
+@@ -11,7 +11,7 @@
+ (async()=>{
+  await fs.mkdir(attempt,{recursive:true});
+  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-calendar-brand-clip-'));
+- const receipt={attempt,fixtureDataDir:dir,originalAppPid30628AliveBefore:alive(30628),stage:'seed',screenshots:[],checks:{},pids:[]};
++ const receipt={attempt,fixtureDataDir:dir,originalAppPid30628AliveBefore:process.platform==='darwin'?alive(30628):'not-applicable',stage:'seed',screenshots:[],checks:{},pids:[]};
+  let app,manage,shelf,normalClose=false;
+  try{
+   const now=new Date(),pad=n=>String(n).padStart(2,'0'),day=`${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`;
+@@ -59,7 +59,7 @@
+  finally{
+   if(app){try{if(manage)await manage.evaluate(()=>window.thoughtline.closeManage());receipt.pids.push(...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)));await app.close();normalClose=true;}catch(error){receipt.closeFailure=String(error);process.exitCode=1;}}
+   receipt.normalClose=normalClose;try{if(normalClose){await cleanupIdleFixture(dir,receipt.pids);receipt.fixtureRemoved=true;}else receipt.fixtureRemoved=false;}catch(error){receipt.cleanupFailure=String(error);process.exitCode=1;}
+-  receipt.originalAppPid30628AliveAfter=alive(30628);
++  receipt.originalAppPid30628AliveAfter=process.platform==='darwin'?alive(30628):'not-applicable';
+   await fs.writeFile(path.join(attempt,'receipt.json'),JSON.stringify(receipt,null,2));
+   console.log(JSON.stringify({attempt,stage:receipt.stage,checks:receipt.checks,screenshots:receipt.screenshots,normalClose:receipt.normalClose,fixtureRemoved:receipt.fixtureRemoved,failure:receipt.failure,closeFailure:receipt.closeFailure,cleanupFailure:receipt.cleanupFailure,originalAppPid30628AliveAfter:receipt.originalAppPid30628AliveAfter},null,2));
+  }
+--- before/tests/electron/package-acceptance.cjs
++++ after/tests/electron/package-acceptance.cjs
+@@ -1,4 +1,5 @@
+ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto');
++const packageInfo=require('../../package.json');
+ const {_electron}=require('playwright'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs'),{waitForInfo}=require('./window-fixture.cjs');
+ (async()=>{
+  if(!process.env.THOUGHTLINE_EXECUTABLE)throw Error('Set THOUGHTLINE_EXECUTABLE to the frozen test App executable.');
+@@ -26,10 +27,10 @@
+   assert((await shelf.evaluate(()=>window.thoughtline.openManage())).ok);manage=(await app.windows()).find(p=>p.url().includes('view=manage'));await manage.waitForSelector('[data-mode=calendar]');await manage.getByRole('textbox',{name:'搜索念头'}).fill('close flush');assert.equal(await manage.locator('[data-idea-id="'+id+'"]').count(),1);await manage.locator('[data-idea-id="'+id+'"]').click();assert.equal(await manage.locator('[data-full-text]').inputValue(),finalInput);
+   await manage.getByRole('button',{name:'更多操作',exact:true}).click();await manage.getByRole('button',{name:'删除当前念头',exact:false}).click();await waitForInfo(manage,i=>i.snapshot.ideas[0].status==='deleted');await manage.getByRole('textbox',{name:'搜索念头'}).fill('');await manage.getByRole('button',{name:'日历更多选项',exact:true}).click();await manage.getByRole('button',{name:'最近删除',exact:true}).click();assert.equal(await manage.locator('[data-idea-id="'+id+'"]').count(),1);await manage.locator('[data-idea-id="'+id+'"]').click();await manage.getByRole('button',{name:'恢复念头',exact:true}).click();await waitForInfo(manage,i=>i.snapshot.ideas[0].status==='hanging');result.checks.calendarSearchSoftDeleteRestore=true;
+   await manage.screenshot({path:path.join(evidence,'package-calendar.png')});assert((await manage.evaluate(()=>window.thoughtline.openSettings())).ok);await manage.waitForSelector('[data-mode=settings]');await app.evaluate((_,target)=>{require('electron').dialog.showOpenDialog=async()=>({canceled:false,filePaths:[target]});},backupParent);
+-  const exported=await manage.evaluate(()=>window.thoughtline.exportBackup());assert(exported.ok,exported.message);const expected=(await manage.evaluate(()=>window.thoughtline.info())).snapshot,manifest=JSON.parse(await fs.readFile(path.join(exported.value.directory,'manifest.json'),'utf8'));assert.equal(manifest.appVersion,require('../package.json').version);assert.equal(manifest.revision,expected.revision);
++  const exported=await manage.evaluate(()=>window.thoughtline.exportBackup());assert(exported.ok,exported.message);const expected=(await manage.evaluate(()=>window.thoughtline.info())).snapshot,manifest=JSON.parse(await fs.readFile(path.join(exported.value.directory,'manifest.json'),'utf8'));assert.equal(manifest.appVersion,packageInfo.version);assert.equal(manifest.revision,expected.revision);
+   for(const item of manifest.files){assert(/^(snapshot(?:\.bak|\.schema[12]\.backup)?\.json|snapshot\.corrupt-[a-f0-9-]+\.json)$/.test(item.name));const bytes=await fs.readFile(path.join(exported.value.directory,item.name));assert.equal(bytes.length,item.size);assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),item.sha256);await fs.copyFile(path.join(exported.value.directory,item.name),path.join(restored,item.name),require('node:fs').constants.COPYFILE_EXCL);}result.checks.independentBackupManifestAndBytes=true;
+   assert((await manage.evaluate(()=>window.thoughtline.closeManage())).ok);await close();for(let n=0;n<2;n++){shelf=await launch(restored);assert.deepEqual((await shelf.evaluate(()=>window.thoughtline.info())).snapshot,expected);await close();}result.checks.actualBackupRestoreTwoRestarts=true;
+-  result.version=require('../package.json').version;result.asarSha256=crypto.createHash('sha256').update(await fs.readFile(path.resolve(executable,'../../Resources/app.asar'))).digest('hex');completedChecks=true;
++  result.version=packageInfo.version;result.asarSha256=crypto.createHash('sha256').update(await fs.readFile(path.resolve(executable,'../../Resources/app.asar'))).digest('hex');completedChecks=true;
+  }catch(error){result.error=String(error?.stack||error);throw error;}finally{
+   try{
+    await close();await cleanupIdleFixture(root,pids);const absent=await fs.stat(root).then(()=>false,e=>{if(e.code==='ENOENT')return true;throw e;});assert(absent);
+--- before/.github/workflows/test-packages.yml
++++ after/.github/workflows/test-packages.yml
+@@ -28,7 +28,7 @@
+           $runEvidence = Join-Path $evidenceRoot ('run-{0}-{1}-{2}' -f $env:GITHUB_RUN_ID, $env:GITHUB_RUN_ATTEMPT, [guid]::NewGuid().ToString('N'))
+           New-Item -ItemType Directory -Path $runEvidence | Out-Null
+           $env:THOUGHTLINE_EVIDENCE_DIR = $runEvidence
+-          foreach ($test in @('inline-edit-workflow', 'calendar-workflow', 'calendar-motion-workflow', 'calendar-motion-fix1-workflow', 'calendar-geometry-workflow', 'storage-workflow', 'windows-source-runtime')) {
++          foreach ($test in @('inline-edit-workflow', 'calendar-workflow', 'calendar-motion-workflow', 'calendar-motion-fix1-workflow', 'calendar-geometry-workflow', 'storage-workflow', 'windows-source-runtime', 'calendar-brand-clip-workflow', 'final-reader-placement-workflow', 'final-calendar-shape-workflow')) {
+             $env:THOUGHTLINE_ATTEMPT = ('{0}-windows-ci' -f $test)
+             & node "tests/electron/$test.cjs" 2>&1 | Tee-Object -FilePath (Join-Path $runEvidence "$test.log")
+             if ($LASTEXITCODE -ne 0) { throw "$test failed with exit code $LASTEXITCODE" }
+--- /dev/null
++++ after/tests/unit/agentSplitPlacement.test.ts
+@@ -0,0 +1,15 @@
++import {expect,test} from 'vitest';
++import {initialSnapshot,editIdeaIfUnchanged,validateSnapshot} from '../../src/shared/ideaCommands';
++import {layoutClips} from '../../src/shared/clipLayout';
++import type {Snapshot,Result,Draft} from '../../src/shared/contracts';
++const value=<T>(r:Result<T>)=>{if(!r.ok)throw Error(r.message);return r.value;};
++const now='2026-10-09T00:00:00Z',base:Draft={text:'完整正文 中文😀\n ',title:'标题',project:'项目',agentId:'general'};
++function seed(positions:(number|null)[]):Snapshot {const ids=['a','b',...positions.slice(1).map((_,n)=>'other'+n)];return value(validateSnapshot({...initialSnapshot(),ideas:ids.map(id=>({...base,id,status:'hanging',createdAt:now,updatedAt:now})),clips:positions.map((position,n)=>({id:'clip'+n,ideaIds:n===0?['a','b']:['other'+(n-1)],currentId:n===0?'b':'other'+(n-1),agentId:'general',position}))}));}
++for(const [label,width,positions,overflow] of [ ['automatic',1440,[null,null],false],['left',1440,[1],false],['middle',1440,[0,1],false],['right',1440,[0],false],['full',900,[null,null],true] ] as const)test('Agent split preserves old centers and identity: '+label,()=>{
++ const s=seed([...positions]),before=layoutClips(s.clips,width),draft={...base,agentId:'codex'};
++ const next=value(editIdeaIfUnchanged(s,'b',draft,base,now,width)),after=layoutClips(next.clips,width);
++ for(const p of before.visible)expect(after.visible.find(q=>q.clip.id===p.clip.id)?.x).toBeCloseTo(p.x,8);
++ expect(after.overflow.some(c=>c.ideaIds.includes('b'))).toBe(overflow);expect(next.ideas.map(i=>i.id)).toEqual(s.ideas.map(i=>i.id));expect(next.ideas.find(i=>i.id==='b')).toMatchObject({...draft,id:'b',createdAt:now});expect(next.clips[0]).toMatchObject({id:'clip0',ideaIds:['a'],currentId:'a'});expect(next.clips.find(c=>c.ideaIds.includes('b'))).toMatchObject({ideaIds:['b'],currentId:'b'});
++ const continued=value(editIdeaIfUnchanged(next,'b',{...draft,text:'继续编辑'},draft,now,width));expect(continued.clips).toEqual(next.clips);expect(continued.ideas.find(i=>i.id==='b')?.text).toBe('继续编辑');
++});
++test('ordinary edit with existing unrelated overflow leaves clip layout metadata alone',()=>{const s=seed([null,null,null,null,null]);const next=value(editIdeaIfUnchanged(s,'b',{...base,text:'只改文'},base,now,900));expect(next.clips).toEqual(s.clips);});
+--- /dev/null
++++ after/tests/electron/final-reader-placement-workflow.cjs
+@@ -0,0 +1,44 @@
++const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');
++const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
++const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
++(async()=>{
++ const root=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round1/final-fix');await fs.mkdir(root,{recursive:true});const evidence=await fs.mkdtemp(path.join(root,(process.env.THOUGHTLINE_ATTEMPT||'reader-placement')+'-'));
++ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-final-reader-'));const receipt={evidence,dir,cases:[],pids:[],scope:'Real source Electron main routing and persisted mutations; controlled reply hold, synthetic data only'};let app,manage,shelf;
++ const run=async(name,task)=>{try{receipt.cases.push({name,passed:true,...await task()});}catch(e){receipt.cases.push({name,passed:false,error:e.stack});}finally{if(app)await app.evaluate(({ipcMain})=>{globalThis.finalRelease?.();globalThis.finalRelease=null;if(globalThis.finalHistory){ipcMain.removeHandler('thoughtline:idea-history');ipcMain.handle('thoughtline:idea-history',globalThis.finalHistory);globalThis.finalHistory=null;}});}};
++ try{
++  const ids=['a','b','b2','c','d','e','f','g','h','q','r',...Array.from({length:30},(_,i)=>'full'+i)],ideas=ids.map(id=>({id,text:'final probe '+id,title:'final probe '+id,project:'',agentId:'general',status:'hanging',createdAt:'2026-10-09T00:00:00Z',updatedAt:'2026-10-09T00:00:00Z'}));
++  const clips=[{id:'separate-test',agentId:'general',ideaIds:['q','r'],currentId:'q',position:null},{id:'group',agentId:'general',ideaIds:['d','e','f'],currentId:'d',position:null},{id:'agents',agentId:'general',ideaIds:['g','h'],currentId:'g',position:null},...ids.filter(id=>!['d','e','f','g','h','q','r'].includes(id)).map(id=>({id:'clip:'+id,agentId:'general',ideaIds:[id],currentId:id,position:null}))];
++  await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:2,revision:0,ideas,clips,agents:[{id:'general',name:'通用',color:'#A0A3AA'},{id:'codex',name:'Codex',color:'#4C90D9'}],draft:null,settings:{writeHotkey:'Control+Alt+N',reducedMotion:true}}));
++  app=await _electron.launch(await launchOptions(dir));({shelf,manage}=await warmViews(app));assert.equal((await manage.evaluate(()=>window.thoughtline.storageInfo())).value.directory,dir);
++  const calendar=async()=>{assert((await shelf.evaluate(()=>window.thoughtline.openManage())).ok);await manage.waitForSelector('[data-mode=calendar]');await manage.getByRole('textbox',{name:'搜索念头'}).fill('final probe');};
++  const open=async id=>{await manage.locator(`[data-idea-id="${id}"]`).click();await manage.waitForSelector(`[data-reader-id="${id}"]`);};
++  const del=async()=>{await manage.getByRole('button',{name:'更多操作',exact:true}).click();await manage.getByRole('button',{name:/删除当前念头/}).click();};
++  for(const cross of [true,false])await run(cross?'real-main-cross-session-late-delete':'same-session-back-new-dirty-reader',async()=>{
++   const id=cross?'a':'b';await calendar();await open(id);
++   await app.evaluate(({ipcMain})=>{const key='thoughtline:idea-history',original=ipcMain._invokeHandlers.get(key);globalThis.finalHistory=original;globalThis.finalHeld=false;ipcMain.removeHandler(key);ipcMain.handle(key,async(...args)=>{const result=await original(...args);globalThis.finalHeld=true;await new Promise(resolve=>globalThis.finalRelease=resolve);return result;});});
++   const oldSession=(await manage.evaluate(()=>window.thoughtline.info())).manageSession;await del();await app.evaluate(async()=>{const end=Date.now()+5000;while(!globalThis.finalHeld&&Date.now()<end)await new Promise(r=>setTimeout(r,10));if(!globalThis.finalHeld)throw Error('delete never held');});
++   assert.equal(JSON.parse(await fs.readFile(path.join(dir,'snapshot.json'),'utf8')).ideas.find(i=>i.id===id).status,'deleted');
++   if(cross)await calendar();else {await manage.getByRole('button',{name:'返回',exact:true}).click();await manage.getByRole('textbox',{name:'搜索念头'}).waitFor();}
++   await open('c');await manage.getByRole('button',{name:'编辑',exact:true}).click();await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill('UNSAVED '+(cross?'cross':'same')+' C');
++   await app.evaluate(()=>{globalThis.finalRelease();globalThis.finalRelease=null;});
++   const actual=await manage.evaluate(async()=>{await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));const i=await window.thoughtline.info();return {session:i.manageSession,reader:document.querySelector('[data-reader-id]')?.getAttribute('data-reader-id'),editors:document.querySelectorAll('[data-inline-editor]').length,draft:document.querySelector('[data-inline-editor] textarea')?.value,persisted:i.snapshot.ideas.find(x=>x.id==='c').text};});
++   receipt.cases.push({name:'raw-'+(cross?'cross':'same'),passed:true,oldSession,...actual});assert(cross?actual.session>oldSession:actual.session===oldSession);assert.equal(actual.reader,'c');assert.equal(actual.editors,1);assert.equal(actual.draft,'UNSAVED '+(cross?'cross':'same')+' C');assert((await manage.evaluate(()=>window.thoughtline.closeManage())).ok);return actual;
++  });
++  await run('detail-fast-queued-flips-and-delayed-finish',async()=>{
++   assert((await shelf.evaluate(()=>window.thoughtline.openManage('d'))).ok);await manage.waitForSelector('[data-reader-id="d"]');
++   await manage.evaluate(()=>{const next=document.querySelector('[aria-label="下一张便签"]');next.click();next.click();});await manage.waitForSelector('[data-reader-id="f"]');
++   await manage.evaluate(()=>{const previous=document.querySelector('[aria-label="上一张便签"]');previous.click();previous.click();});await manage.waitForSelector('[data-reader-id="d"]');
++   await manage.getByRole('button',{name:'编辑',exact:true}).click();await app.evaluate(({ipcMain})=>{const key='thoughtline:update-idea',original=ipcMain._invokeHandlers.get(key);globalThis.finalEdit=original;globalThis.finalEditHeld=false;ipcMain.removeHandler(key);ipcMain.handle(key,async(...args)=>{const result=await original(...args);globalThis.finalEditHeld=true;await new Promise(r=>globalThis.finalEditRelease=r);return result;});});
++   try{await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill('delayed finish 中文😀');await manage.locator('.inline-save-status button').click();await app.evaluate(async()=>{const end=Date.now()+5000;while(!globalThis.finalEditHeld&&Date.now()<end)await new Promise(r=>setTimeout(r,10));if(!globalThis.finalEditHeld)throw Error('edit never held');});assert.equal(await manage.locator('[data-inline-editor]').count(),1);await app.evaluate(()=>{globalThis.finalEditRelease();globalThis.finalEditRelease=null;});await manage.waitForSelector('[data-inline-editor]',{state:'detached'});assert.equal(await manage.locator('[data-full-text]').inputValue(),'delayed finish 中文😀');}
++   finally{await app.evaluate(({ipcMain})=>{globalThis.finalEditRelease?.();globalThis.finalEditRelease=null;if(globalThis.finalEdit){ipcMain.removeHandler('thoughtline:update-idea');ipcMain.handle('thoughtline:update-idea',globalThis.finalEdit);globalThis.finalEdit=null;}});}
++   return {sequentialFlipsRetained:true,delayedFinishWaitedForSave:true};
++  });
++  await run('calendar-normal-delete-neighbor',async()=>{await calendar();await open('d');await del();await manage.waitForSelector('[data-reader-id="e"]',{timeout:2500});return {reader:'e'};});
++  await run('detail-normal-delete-neighbor-and-empty',async()=>{assert((await shelf.evaluate(()=>window.thoughtline.openManage('e'))).ok);await manage.waitForSelector('[data-reader-id="e"]');await del();await manage.waitForSelector('[data-reader-id="f"]',{timeout:2500});await del();await manage.waitForSelector('.compact-detail>.empty-list',{timeout:2500});await manage.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));assert.equal(await manage.locator('[data-reader-id]').count(),0);return {neighbor:'f',lastDeleteEmpty:true};});
++  await run('detail-last-deleted-selection-stays-empty',async()=>{assert((await shelf.evaluate(()=>window.thoughtline.openManage('q'))).ok);await manage.waitForSelector('[data-reader-id="q"]');await manage.getByRole('button',{name:'下一张便签'}).click();await manage.waitForSelector('[data-reader-id="r"]');await manage.getByRole('button',{name:'拆出当前纸张'}).click();await waitForInfo(manage,i=>i.snapshot.clips.some(c=>c.ideaIds.length===1&&c.ideaIds[0]==='r'));await del();await manage.waitForSelector('.compact-detail>.empty-list',{timeout:2500});await manage.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));assert.equal(await manage.locator('[data-reader-id]').count(),0);assert.equal((await manage.evaluate(()=>window.thoughtline.info())).snapshot.ideas.find(i=>i.id==='q').status,'hanging');return {noFallbackToOldManageSelection:true};});
++  await run('agent-auto-split-full-rope-notice-and-stable-body',async()=>{assert((await shelf.evaluate(()=>window.thoughtline.openManage('h'))).ok);await manage.waitForSelector('[data-reader-id="h"]');const before=(await manage.evaluate(()=>window.thoughtline.info())).snapshot;await manage.getByRole('button',{name:'编辑',exact:true}).click();await manage.getByRole('combobox',{name:'编辑归属 Agent'}).selectOption('codex');await manage.getByRole('checkbox',{name:/独立夹子/}).check();let current=await waitForInfo(manage,i=>i.snapshot.ideas.find(x=>x.id==='h').agentId==='codex');await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill('after split body 中文😀');current=await waitForInfo(manage,i=>i.snapshot.ideas.find(x=>x.id==='h').text==='after split body 中文😀');assert.deepEqual(current.snapshot.ideas.map(i=>i.id),before.ideas.map(i=>i.id));assert.equal(current.snapshot.clips.find(c=>c.ideaIds.includes('h')).currentId,'h');assert.deepEqual(current.snapshot.clips.find(c=>c.id==='agents').ideaIds,['g']);const notice=await manage.locator('.reader-notice').textContent();await manage.screenshot({path:path.join(evidence,'agent-full-rope-notice.png')});assert.match(notice,/已保存.*暂时放不下.*念头日历/);return {notice,idsStable:true,subsequentEditStable:true};});
++ }catch(e){receipt.failure=e.stack;process.exitCode=1;}finally{
++  try{if(app){await app.evaluate(({ipcMain})=>{globalThis.finalRelease?.();if(globalThis.finalHistory){ipcMain.removeHandler('thoughtline:idea-history');ipcMain.handle('thoughtline:idea-history',globalThis.finalHistory);}});if(manage)assert((await manage.evaluate(()=>window.thoughtline.closeManage())).ok);receipt.pids=[...new Set([app.process().pid,...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid))])];await app.close();receipt.normalClose=true;await cleanupIdleFixture(dir,receipt.pids);receipt.pidChecks=receipt.pids.map(pid=>{try{process.kill(pid,0);return {pid,status:'ALIVE'};}catch(e){return {pid,status:e.code};}});receipt.stat=await fs.stat(dir).then(()=> 'EXISTS',e=>e.code);}}
++  catch(e){receipt.cleanupFailure=e.stack;process.exitCode=1;}receipt.passed=!receipt.failure&&!receipt.cleanupFailure&&receipt.cases.every(x=>x.passed)&&receipt.stat==='ENOENT';if(!receipt.passed)process.exitCode=1;await fs.writeFile(path.join(evidence,'receipt.json'),JSON.stringify(receipt,null,2));console.log(JSON.stringify(receipt));
++ }
++})();
+--- /dev/null
++++ after/tests/electron/final-calendar-shape-workflow.cjs
+@@ -0,0 +1,8 @@
++const {launchOptions,warmViews}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs'),{_electron}=require('playwright');
++const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
++(async()=>{const root=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round1/final-fix');await fs.mkdir(root,{recursive:true});const evidence=await fs.mkdtemp(path.join(root,(process.env.THOUGHTLINE_ATTEMPT||'calendar-shape')+'-')),dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-final-shape-'));let app,manage;const receipt={dir,evidence,cases:[],pids:[]};
++try{
++ const d=new Date(),pad=n=>String(n).padStart(2,'0'),month=`${d.getFullYear()}-${pad(d.getMonth()+1)}`,day=month+'-15',empty=month+'-01';const ideas=Array.from({length:12},(_,n)=>({id:'shape'+n,text:'字形与纸张保持比例 中文😀 '+n,title:'纸张 '+n,agentId:'general',project:'',status:'hanging',createdAt:day+'T12:00:00Z',updatedAt:day+'T12:00:00Z'}));await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:2,revision:0,ideas,clips:ideas.map(i=>({id:'clip:'+i.id,ideaIds:[i.id],currentId:i.id,agentId:'general',position:null})),agents:[{id:'general',name:'通用',color:'#A0A3AA'}],draft:null,settings:{writeHotkey:'Control+Alt+N',reducedMotion:false}}));app=await _electron.launch(await launchOptions(dir));const views=await warmViews(app);manage=views.manage;assert.equal((await manage.evaluate(()=>window.thoughtline.storageInfo())).value.directory,dir);assert((await views.shelf.evaluate(()=>window.thoughtline.openManage())).ok);await manage.waitForSelector('.month-grid');
++ const sample=async(name,click)=>{await click();await manage.waitForSelector('[data-calendar-motion]');const frames=[];for(const t of [25,100]){const frame=await manage.evaluate(t=>{for(const a of document.getAnimations()){a.pause();a.currentTime=t;}const layer=document.querySelector('[data-calendar-motion]'),kind=layer.dataset.calendarMotion,target=kind==='month-to-year'?document.querySelector(`[data-month="${JSON.parse(layer.dataset.to).month||''}"]`):null;return {kind,from:JSON.parse(layer.dataset.from),to:JSON.parse(layer.dataset.to),transforms:[...new Set(document.getAnimations().map(a=>a.effect.target))].map(el=>{const m=new DOMMatrix(getComputedStyle(el).transform);return {class:el.className,x:m.a,y:m.d,tx:m.e,ty:m.f};}),clones:layer.querySelectorAll('.calendar-paper').length,clips:[...layer.querySelectorAll('.mini-clip')].map(el=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height};})};},t);frames.push({time:t,...frame});await manage.screenshot({path:path.join(evidence,name+'-'+t+'.png'),animations:'allow'});}await manage.evaluate(()=>{for(const a of document.getAnimations())a.finish();});const passed=frames.every(f=>f.transforms.every(m=>Math.abs(m.x-m.y)<1e-6));receipt.cases.push({name,passed,frames});};
++ const back=()=>manage.getByRole('button',{name:'返回',exact:true}).click();await sample('empty-day-expand',()=>manage.locator(`[data-day="${empty}"]`).click());await sample('empty-day-return',back);await sample('paper-day-expand',()=>manage.locator(`[data-day="${day}"]`).click());await sample('paper-day-return',back);await sample('month-to-year',()=>manage.locator('.calendar-title').click());await sample('year-to-month',()=>manage.locator(`[data-month="${month}"]`).click());assert(receipt.cases.every(x=>x.passed),'visible content must scale uniformly at early and middle frames');
++}catch(e){receipt.failure=e.stack;process.exitCode=1;}finally{try{if(app){if(manage){await manage.evaluate(()=>{for(const a of document.getAnimations())a.finish();});assert((await manage.evaluate(()=>window.thoughtline.closeManage())).ok);}receipt.pids=[...new Set([app.process().pid,...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid))])];await app.close();receipt.normalClose=true;await cleanupIdleFixture(dir,receipt.pids);receipt.pidChecks=receipt.pids.map(pid=>{try{process.kill(pid,0);return {pid,status:'ALIVE'};}catch(e){return {pid,status:e.code};}});receipt.stat=await fs.stat(dir).then(()=> 'EXISTS',e=>e.code);}}catch(e){receipt.cleanupFailure=e.stack;process.exitCode=1;}receipt.passed=!receipt.failure&&!receipt.cleanupFailure&&receipt.stat==='ENOENT';await fs.writeFile(path.join(evidence,'receipt.json'),JSON.stringify(receipt,null,2));console.log(JSON.stringify(receipt));}})();

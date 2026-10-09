@@ -293,7 +293,12 @@ else app.whenReady().then(async()=>{
   if(!trusted(e,[manage])||typeof id!=='string'||!draftShape(draft)||!draftShape(expectedDraft)||session!==manageSession||!manage?.isVisible())return Promise.resolve(invalid<Snapshot>('编辑会话已结束，文字仍在窗口中。'));
   return composerWrite(async():Promise<Result<Snapshot>>=>{
    if(!trusted(e,[manage])||session!==manageSession||!manage?.isVisible()||manageEditingOwner?.session!==session||manageEditingOwner.ideaId!==id)return invalid('编辑会话已结束，文字仍在窗口中。');
-   return save(editIdeaIfUnchanged(snapshot,id,draft,expectedDraft,new Date().toISOString()),snapshot.revision);
+   const priorClips=new Set(snapshot.clips.map(c=>c.id));
+   const saved=await save(editIdeaIfUnchanged(snapshot,id,draft,expectedDraft,new Date().toISOString(),width),snapshot.revision);
+   if(saved.ok&&snapshot.clips.some(c=>!priorClips.has(c.id)&&c.ideaIds.includes(id))){
+    placementNotice=layoutClips(snapshot.clips,width).overflow.some(c=>c.ideaIds.includes(id))?'已保存，绳上暂时放不下，可在念头日历查看':null;publish();
+   }
+   return saved;
   });
  });
  ipcMain.handle('thoughtline:idea-history',(e,id:string,kind:'delete'|'restore'|'permanent',revision:number)=>{

@@ -18,6 +18,21 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm run verify
+      - name: Source Electron UI regression on Windows
+        shell: pwsh
+        env:
+          THOUGHTLINE_FAKE_CLIPBOARD: '1'
+        run: |
+          $evidenceRoot = 'acceptance/evidence/round1/p6-windows-source'
+          New-Item -ItemType Directory -Force $evidenceRoot | Out-Null
+          $runEvidence = Join-Path $evidenceRoot ('run-{0}-{1}-{2}' -f $env:GITHUB_RUN_ID, $env:GITHUB_RUN_ATTEMPT, [guid]::NewGuid().ToString('N'))
+          New-Item -ItemType Directory -Path $runEvidence | Out-Null
+          $env:THOUGHTLINE_EVIDENCE_DIR = $runEvidence
+          foreach ($test in @('inline-edit-workflow', 'calendar-workflow', 'calendar-motion-workflow', 'calendar-motion-fix1-workflow', 'calendar-geometry-workflow', 'storage-workflow', 'windows-source-runtime', 'calendar-brand-clip-workflow', 'final-reader-placement-workflow', 'final-calendar-shape-workflow')) {
+            $env:THOUGHTLINE_ATTEMPT = ('{0}-windows-ci' -f $test)
+            & node "tests/electron/$test.cjs" 2>&1 | Tee-Object -FilePath (Join-Path $runEvidence "$test.log")
+            if ($LASTEXITCODE -ne 0) { throw "$test failed with exit code $LASTEXITCODE" }
+          }
       - run: npm run package:win
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
@@ -63,4 +78,13 @@ jobs:
           name: Thoughtline-Windows-preflight-failed-${{ github.sha }}-${{ github.run_attempt }}
           path: dist/*.json
           if-no-files-found: ignore
+          retention-days: 30
+      - name: Retain Windows source UI evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: Thoughtline-Windows-source-ui-${{ github.sha }}-${{ github.run_attempt }}
+          path: |
+            acceptance/evidence/round1/p6-windows-source/**
+          if-no-files-found: warn
           retention-days: 30

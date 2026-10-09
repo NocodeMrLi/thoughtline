@@ -1,0 +1,14 @@
+electron.launch: Failed to launch: Error: spawn /nonexistent/Thoughtline.app/Contents/MacOS/Thoughtline ENOENT
+Call log:
+[2m  - <launching> /nonexistent/Thoughtline.app/Contents/MacOS/Thoughtline --inspect=0 --remote-debugging-port=0[22m
+[2m  - [pid=N/A] starting temporary directories cleanup[22m
+[2m  - [pid=N/A] finished temporary directories cleanup[22m
+
+    at async launch (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/package-acceptance.cjs:13:32)
+    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/package-acceptance.cjs:17:13 {
+  log: [
+    '  - <launching> /nonexistent/Thoughtline.app/Contents/MacOS/Thoughtline --inspect=0 --remote-debugging-port=0',
+    '  - [pid=N/A] starting temporary directories cleanup',
+    '  - [pid=N/A] finished temporary directories cleanup'
+  ]
+}

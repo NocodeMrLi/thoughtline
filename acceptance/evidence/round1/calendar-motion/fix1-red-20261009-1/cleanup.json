@@ -1,0 +1,47 @@
+{
+  "stage": "old-save-cannot-navigate-new-session",
+  "host": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "release": "24.3.0"
+  },
+  "directory": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-calendar-motion-fix1-1PAuBG",
+  "pids": [
+    60446,
+    60446,
+    60447,
+    60448,
+    60449,
+    60450,
+    60451
+  ],
+  "normalClose": true,
+  "dataRemoved": true,
+  "allExited": true,
+  "assertionsComplete": true,
+  "passed": false,
+  "cases": [
+    {
+      "name": "empty-day-visible-return",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: empty-day return must shrink visible empty-state content\n\n0 !== 1\n"
+    },
+    {
+      "name": "scroll-interrupts-active-motion",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: user scroll cancels fixed-geometry overlay\n\n1 !== 0\n"
+    },
+    {
+      "name": "resize-interrupts-active-motion",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: resize cancels stale source and target geometry\n\n1 !== 0\n"
+    },
+    {
+      "name": "old-save-cannot-navigate-new-session",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: old pending navigation must not replace new session month\n\n0 !== 1\n"
+    }
+  ],
+  "recoveryError": null,
+  "cleanupError": null
+}

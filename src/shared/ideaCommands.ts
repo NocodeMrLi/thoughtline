@@ -1,4 +1,5 @@
 import type {Snapshot,Draft,Result,AgentTag,Idea} from './contracts';
+import {captureClipPositions} from './clipLayout';
 import {visibleSlots} from './ropeGeometry';
 import {independentClip,pruneClips} from './clipModel';
 import {ideaDay} from './ideaHistory';
@@ -70,11 +71,13 @@ export function editIdea(s:Snapshot,id:string,draft:Draft,now:string):Result<Sna
   let clips=pruneClips(s.clips,ideas);const updated=ideas.find(i=>i.id===id)!;if(updated.status==='hanging'&&!clips.some(c=>c.ideaIds.includes(id)))clips=[...clips,independentClip({...s,clips},id,updated.agentId)];
   return validateSnapshot({...s,clips,ideas});
 }
-export function editIdeaIfUnchanged(s:Snapshot,id:string,draft:Draft,expectedDraft:Draft,now:string):Result<Snapshot>{
+export function editIdeaIfUnchanged(s:Snapshot,id:string,draft:Draft,expectedDraft:Draft,now:string,width?:number):Result<Snapshot>{
   const idea=s.ideas.find(i=>i.id===id);
   if(!idea||idea.status==='deleted'||!plain(expectedDraft)||!(['text','title','project','agentId'] as const).every(k=>typeof expectedDraft[k]==='string'))return invalid('找不到可编辑的念头或原内容无效。');
   if(idea.text!==expectedDraft.text||idea.title!==expectedDraft.title||idea.project!==expectedDraft.project||idea.agentId!==expectedDraft.agentId)return {ok:false,code:'CONFLICT',message:'这条念头已更新，请保留当前文字并重新读取。'};
-  return editIdea(s,id,draft,now);
+  const owner=s.clips.find(c=>c.ideaIds.includes(id));
+  const separates=owner&&owner.ideaIds.length>1&&owner.agentId!==draft.agentId;
+  return editIdea(separates&&width!==undefined?{...s,clips:captureClipPositions(s.clips,width)}:s,id,draft,now);
 }
 export function deleteIdea(s:Snapshot,id:string,now:string):Result<Snapshot>{
   const idea=s.ideas.find(i=>i.id===id);
