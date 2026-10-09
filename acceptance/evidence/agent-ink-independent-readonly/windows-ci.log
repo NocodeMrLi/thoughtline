@@ -1,0 +1,339 @@
+windows-test-package	Set up job	﻿2026-10-09T01:07:13.8854651Z Current runner version: '2.337.0'
+windows-test-package	Set up job	2026-10-09T01:07:13.8921222Z ##[group]Runner Image Provisioner
+windows-test-package	Set up job	2026-10-09T01:07:13.8922614Z Hosted Compute Agent
+windows-test-package	Set up job	2026-10-09T01:07:13.8923888Z Version: 20260901.588
+windows-test-package	Set up job	2026-10-09T01:07:13.8924926Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+windows-test-package	Set up job	2026-10-09T01:07:13.8926137Z Build Date: 2026-09-01T19:56:44Z
+windows-test-package	Set up job	2026-10-09T01:07:13.8927270Z Worker ID: {596f70ef-25eb-40bd-b37b-73e901dbf27a}
+windows-test-package	Set up job	2026-10-09T01:07:13.8928477Z Azure Region: westus2
+windows-test-package	Set up job	2026-10-09T01:07:13.8929361Z ##[endgroup]
+windows-test-package	Set up job	2026-10-09T01:07:13.8931476Z ##[group]Operating System
+windows-test-package	Set up job	2026-10-09T01:07:13.8932532Z Microsoft Windows Server 2025
+windows-test-package	Set up job	2026-10-09T01:07:13.8933564Z 10.0.26100
+windows-test-package	Set up job	2026-10-09T01:07:13.8934423Z Datacenter
+windows-test-package	Set up job	2026-10-09T01:07:13.8935264Z ##[endgroup]
+windows-test-package	Set up job	2026-10-09T01:07:13.8936608Z ##[group]Runner Image
+windows-test-package	Set up job	2026-10-09T01:07:13.8937743Z Image: windows-2025-vs2026
+windows-test-package	Set up job	2026-10-09T01:07:13.8938819Z Version: 20260925.250.1
+windows-test-package	Set up job	2026-10-09T01:07:13.8940963Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260925.250/images/windows/Windows2025-VS2026-Readme.md
+windows-test-package	Set up job	2026-10-09T01:07:13.8944761Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260925.250
+windows-test-package	Set up job	2026-10-09T01:07:13.8946619Z ##[endgroup]
+windows-test-package	Set up job	2026-10-09T01:07:13.8948595Z ##[group]GITHUB_TOKEN Permissions
+windows-test-package	Set up job	2026-10-09T01:07:13.8951458Z Contents: read
+windows-test-package	Set up job	2026-10-09T01:07:13.8952410Z Metadata: read
+windows-test-package	Set up job	2026-10-09T01:07:13.8953278Z ##[endgroup]
+windows-test-package	Set up job	2026-10-09T01:07:13.8956258Z Secret source: Actions
+windows-test-package	Set up job	2026-10-09T01:07:13.8958096Z Cache mode: write
+windows-test-package	Set up job	2026-10-09T01:07:13.8959436Z Prepare workflow directory
+windows-test-package	Set up job	2026-10-09T01:07:13.9655089Z Prepare all required actions
+windows-test-package	Set up job	2026-10-09T01:07:13.9730296Z Getting action download info
+windows-test-package	Set up job	2026-10-09T01:07:14.3395292Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+windows-test-package	Set up job	2026-10-09T01:07:14.5538861Z Download action repository 'actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1' (SHA:949feb2413d6458794dcd2491c4babbbce0c15c1)
+windows-test-package	Set up job	2026-10-09T01:07:15.0531151Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+windows-test-package	Set up job	2026-10-09T01:07:15.9208700Z Complete job name: windows-test-package
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	﻿2026-10-09T01:07:16.4927760Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:16.4929572Z with:
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:16.4930265Z   repository: NocodeMrLi/thoughtline
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:16.4938107Z   token: ***
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:16.4938797Z   ssh-strict: true
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:16.4939459Z   ssh-user: git
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:16.4940138Z   persist-credentials: true
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:16.4940921Z   clean: true
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:16.4941613Z   sparse-checkout-cone-mode: true
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:16.4942435Z   fetch-depth: 1
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:16.4943106Z   fetch-tags: false
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:16.4943790Z   show-progress: true
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:16.4944477Z   lfs: false
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:16.4945118Z   submodules: false
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:16.4945841Z   set-safe-directory: true
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:16.4946657Z   allow-unsafe-pr-checkout: false
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:16.4947860Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2893307Z Syncing repository: NocodeMrLi/thoughtline
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2895418Z ##[group]Getting Git version info
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2896204Z Working directory is 'D:\a\thoughtline\thoughtline'
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2897223Z [command]"C:\Program Files\Git\bin\git.exe" version
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2897832Z git version 2.55.0.windows.5
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2899569Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2906678Z Temporarily overriding HOME='D:\a\_temp\c7ce4512-3c3d-46dc-8a99-7bd1fb1dda66' before making global git config changes
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2908073Z Adding repository directory to the temporary git global config as a safe directory
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2909338Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\thoughtline\thoughtline
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2911061Z Deleting the contents of 'D:\a\thoughtline\thoughtline'
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2916157Z ##[group]Determining repository object format
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2917029Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2917725Z ##[group]Initializing the repository
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2918497Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\thoughtline\thoughtline
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2919527Z Initialized empty Git repository in D:/a/thoughtline/thoughtline/.git/
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2923136Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/NocodeMrLi/thoughtline
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2925105Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2925928Z ##[group]Disabling automatic garbage collection
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2926701Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2928228Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2928880Z ##[group]Setting up auth
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2929361Z Removing SSH command configuration
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2930250Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:19.2932800Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:20.4237703Z Removing HTTP extra header
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:20.4243322Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:20.4657286Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:22.0988748Z Removing includeIf entries pointing to credentials config files
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:22.1015185Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:22.1489908Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:23.2692308Z [command]"C:\Program Files\Git\bin\git.exe" config --file D:\a\_temp\git-credentials-9f31ef1d-2c5e-4819-a275-72fc488e5121.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:23.3249378Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/thoughtline/thoughtline/.git.path D:\a\_temp\git-credentials-9f31ef1d-2c5e-4819-a275-72fc488e5121.config
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:23.3604537Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path D:\a\_temp\git-credentials-9f31ef1d-2c5e-4819-a275-72fc488e5121.config
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:23.4314970Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-9f31ef1d-2c5e-4819-a275-72fc488e5121.config
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:23.4851274Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-9f31ef1d-2c5e-4819-a275-72fc488e5121.config
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:23.5936072Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:23.5937972Z ##[group]Fetching the repository
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:23.5943203Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +764bec916db7e9e3fb823c56499c046ebf597ba7:refs/remotes/origin/codex/thoughtline-clamp-20261009
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.0951133Z From https://github.com/NocodeMrLi/thoughtline
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.0956966Z  * [new ref]         764bec916db7e9e3fb823c56499c046ebf597ba7 -> origin/codex/thoughtline-clamp-20261009
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.1045737Z [command]"C:\Program Files\Git\bin\git.exe" branch --list --remote origin/codex/thoughtline-clamp-20261009
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.1446900Z   origin/codex/thoughtline-clamp-20261009
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.1494284Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse refs/remotes/origin/codex/thoughtline-clamp-20261009
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.1793338Z 764bec916db7e9e3fb823c56499c046ebf597ba7
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.1828105Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.1829265Z ##[group]Determining the checkout info
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.1830516Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.1840480Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.2303587Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.2980098Z ##[group]Checking out the ref
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.2982020Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B codex/thoughtline-clamp-20261009 refs/remotes/origin/codex/thoughtline-clamp-20261009
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.5110885Z Switched to a new branch 'codex/thoughtline-clamp-20261009'
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.5189736Z branch 'codex/thoughtline-clamp-20261009' set up to track 'origin/codex/thoughtline-clamp-20261009'.
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.5333718Z ##[endgroup]
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.5922385Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+windows-test-package	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:07:28.6216661Z 764bec916db7e9e3fb823c56499c046ebf597ba7
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	﻿2026-10-09T01:07:28.6738210Z ##[group]Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:28.6738814Z with:
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:28.6739102Z   node-version: 24.19.0
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:28.6739412Z   cache: npm
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:28.6739677Z   check-latest: false
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:28.6742274Z   token: ***
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:28.6742567Z   package-manager-cache: true
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:28.6742885Z ##[endgroup]
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:28.9011008Z Attempting to download 24.19.0...
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:29.4619610Z Acquiring 24.19.0 - x64 from https://github.com/actions/node-versions/releases/download/24.19.0-30872449280/node-24.19.0-win32-x64.7z
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:29.9616741Z Extracting ...
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:32.5486387Z Adding to the cache ...
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:37.7207667Z ##[group]Environment details
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:38.4662326Z node: v24.19.0
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:38.4663157Z npm: 11.17.0
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:38.4663645Z yarn: 1.22.22
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:38.4664474Z ##[endgroup]
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:38.5700986Z [command]C:\Windows\system32\cmd.exe /D /S /C "C:\hostedtoolcache\windows\node\24.19.0\x64\npm.cmd config get cache"
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:38.8900185Z C:\npm\cache
+windows-test-package	Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:07:39.3478449Z npm cache is not found
+windows-test-package	Run npm ci --no-audit --no-fund	﻿2026-10-09T01:07:39.3812786Z ##[group]Run npm ci --no-audit --no-fund
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T01:07:39.3813206Z ^[[36;1mnpm ci --no-audit --no-fund^[[0m
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T01:07:39.4450033Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T01:07:39.4450509Z ##[endgroup]
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T01:07:43.8366584Z npm warn deprecated rimraf@2.6.3: Rimraf versions prior to v4 are no longer supported
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T01:07:45.3835052Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T01:07:45.5754522Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T01:07:49.0628769Z npm warn deprecated boolean@3.2.0: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T01:07:56.7815830Z 
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T01:07:56.7817000Z added 363 packages in 16s
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T01:07:56.7834224Z npm warn allow-scripts 3 packages have install scripts not yet covered by allowScripts:
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T01:07:56.7835804Z npm warn allow-scripts   electron-winstaller@5.4.0 (install: node ./script/select-7z-arch.js)
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T01:07:56.7845211Z npm warn allow-scripts   esbuild@0.25.12 (postinstall: node install.js)
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T01:07:56.7847685Z npm warn allow-scripts   esbuild@0.28.2 (postinstall: node install.js)
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T01:07:56.7864416Z npm warn allow-scripts
+windows-test-package	Run npm ci --no-audit --no-fund	2026-10-09T01:07:56.7872500Z npm warn allow-scripts Run `npm approve-scripts --allow-scripts-pending` to review, or `npm approve-scripts <pkg>` to allow.
+windows-test-package	Run npm run verify	﻿2026-10-09T01:07:57.9770504Z ##[group]Run npm run verify
+windows-test-package	Run npm run verify	2026-10-09T01:07:57.9770854Z ^[[36;1mnpm run verify^[[0m
+windows-test-package	Run npm run verify	2026-10-09T01:07:57.9850987Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Run npm run verify	2026-10-09T01:07:57.9851598Z ##[endgroup]
+windows-test-package	Run npm run verify	2026-10-09T01:07:59.2535830Z 
+windows-test-package	Run npm run verify	2026-10-09T01:07:59.2536181Z > thoughtline@0.0.14 verify
+windows-test-package	Run npm run verify	2026-10-09T01:07:59.2536663Z > node scripts/verify.cjs
+windows-test-package	Run npm run verify	2026-10-09T01:07:59.2536925Z 
+windows-test-package	Run npm run verify	2026-10-09T01:07:59.2536935Z 
+windows-test-package	Run npm run verify	2026-10-09T01:07:59.2537149Z > thoughtline@0.0.14 typecheck
+windows-test-package	Run npm run verify	2026-10-09T01:07:59.2537705Z > node node_modules/typescript/bin/tsc --noEmit
+windows-test-package	Run npm run verify	2026-10-09T01:07:59.2538090Z 
+windows-test-package	Run npm run verify	2026-10-09T01:08:00.2992923Z 
+windows-test-package	Run npm run verify	2026-10-09T01:08:00.2993259Z > thoughtline@0.0.14 test
+windows-test-package	Run npm run verify	2026-10-09T01:08:00.2993821Z > node node_modules/vitest/vitest.mjs run
+windows-test-package	Run npm run verify	2026-10-09T01:08:00.2994191Z 
+windows-test-package	Run npm run verify	2026-10-09T01:08:00.8514573Z 
+windows-test-package	Run npm run verify	2026-10-09T01:08:00.8519600Z ^[[1m^[[30m^[[46m RUN ^[[49m^[[39m^[[22m ^[[36mv5.0.3 ^[[39m^[[90mD:/a/thoughtline/thoughtline^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:00.8520619Z 
+windows-test-package	Run npm run verify	2026-10-09T01:08:01.8128103Z  ^[[32m✓^[[39m tests/unit/repository.test.ts ^[[2m(^[[22m^[[2m10 tests^[[22m^[[2m)^[[22m^[[32m 267^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:01.8130733Z  ^[[32m✓^[[39m tests/unit/shelfState.test.ts ^[[2m(^[[22m^[[2m13 tests^[[22m^[[2m)^[[22m^[[32m 9^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:01.9197600Z  ^[[32m✓^[[39m tests/unit/ideaWorkflow.test.ts ^[[2m(^[[22m^[[2m7 tests^[[22m^[[2m)^[[22m^[[32m 40^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:02.1145218Z  ^[[32m✓^[[39m tests/unit/clipCommands.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[32m 13^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:02.2923498Z  ^[[32m✓^[[39m tests/unit/ideaCommands.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 10^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:02.4948396Z  ^[[32m✓^[[39m tests/unit/clipLayout.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[32m 10^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:02.7057736Z  ^[[32m✓^[[39m tests/unit/shortcuts.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 6^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:07.2342646Z ^[[90mstdout^[[2m | tests/unit/shelfPresentation.test.ts
+windows-test-package	Run npm run verify	2026-10-09T01:08:07.2345306Z ^[[22m^[[39mDownloading Electron binary...
+windows-test-package	Run npm run verify	2026-10-09T01:08:07.2346009Z 
+windows-test-package	Run npm run verify	2026-10-09T01:08:07.2634316Z  ^[[32m✓^[[39m tests/unit/shelfPresentation.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 8^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:07.4468794Z  ^[[32m✓^[[39m tests/unit/fixedRope.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 6^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:07.6254744Z  ^[[32m✓^[[39m tests/unit/motion.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 7^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:07.8076165Z  ^[[32m✓^[[39m tests/unit/idleFixtureCleanup.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 18^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:07.9998599Z  ^[[32m✓^[[39m tests/unit/agentInk.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 10^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:08.1831799Z  ^[[32m✓^[[39m tests/unit/shortcutKeys.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:08.3528387Z  ^[[32m✓^[[39m tests/unit/ropeGeometry.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 7^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:08.5390829Z  ^[[32m✓^[[39m tests/unit/visibilityMotion.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 4^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:08.7296049Z  ^[[32m✓^[[39m tests/unit/platformHost.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:08.8947799Z  ^[[32m✓^[[39m tests/unit/agentPalette.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:09.0826236Z  ^[[32m✓^[[39m tests/unit/composer.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 4^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:09.0948655Z 
+windows-test-package	Run npm run verify	2026-10-09T01:08:09.0950919Z ^[[2m Test Files ^[[22m ^[[1m^[[32m18 passed^[[39m^[[22m^[[90m (18)^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:09.0954483Z ^[[2m      Tests ^[[22m ^[[1m^[[32m78 passed^[[39m^[[22m^[[90m (78)^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:09.0955895Z ^[[2m   Start at ^[[22m 01:08:00
+windows-test-package	Run npm run verify	2026-10-09T01:08:09.1028416Z ^[[2m   Duration ^[[22m 8.22s^[[2m (import 83%, tests 8%, transform 8%, worker 2%)^[[22m
+windows-test-package	Run npm run verify	2026-10-09T01:08:09.1053344Z 
+windows-test-package	Run npm run verify	2026-10-09T01:08:09.1057406Z ^[[2m    Isolate ^[[22m ^[[33m18 workers spawned^[[39m^[[2m · ~139ms startup each (spawn + environment, per file)^[[22m
+windows-test-package	Run npm run verify	2026-10-09T01:08:09.1064458Z ^[[2m            ^[[22m ^[[2mat least ~2.36s faster with ^[[22m^[[33misolate: false^[[39m^[[2m — reuses workers across files instead of one per file^[[22m
+windows-test-package	Run npm run verify	2026-10-09T01:08:09.1065361Z 
+windows-test-package	Run npm run verify	2026-10-09T01:08:09.4380591Z 
+windows-test-package	Run npm run verify	2026-10-09T01:08:09.4381449Z > thoughtline@0.0.14 build
+windows-test-package	Run npm run verify	2026-10-09T01:08:09.4382458Z > node node_modules/electron-vite/bin/electron-vite.js build
+windows-test-package	Run npm run verify	2026-10-09T01:08:09.4383188Z 
+windows-test-package	Run npm run verify	2026-10-09T01:08:10.0447485Z ^[[36mvite v7.3.7 ^[[32mbuilding ssr environment for production...^[[36m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:10.1668720Z transforming...
+windows-test-package	Run npm run verify	2026-10-09T01:08:10.4188310Z ^[[32m✓^[[39m 18 modules transformed.
+windows-test-package	Run npm run verify	2026-10-09T01:08:10.4618374Z rendering chunks...
+windows-test-package	Run npm run verify	2026-10-09T01:08:10.4665966Z ^[[2mout/main/^[[22m^[[36mindex.js  ^[[39m^[[1m^[[2m57.87 kB^[[22m^[[1m^[[22m
+windows-test-package	Run npm run verify	2026-10-09T01:08:10.4667612Z ^[[32m✓ built in 397ms^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:10.4716305Z ^[[36mvite v7.3.7 ^[[32mbuilding ssr environment for production...^[[36m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:10.4775045Z transforming...
+windows-test-package	Run npm run verify	2026-10-09T01:08:10.4822590Z ^[[32m✓^[[39m 1 modules transformed.
+windows-test-package	Run npm run verify	2026-10-09T01:08:10.4868806Z rendering chunks...
+windows-test-package	Run npm run verify	2026-10-09T01:08:10.4888355Z ^[[2mout/preload/^[[22m^[[36mindex.js  ^[[39m^[[1m^[[2m2.55 kB^[[22m^[[1m^[[22m
+windows-test-package	Run npm run verify	2026-10-09T01:08:10.4889444Z ^[[32m✓ built in 17ms^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:10.4938409Z ^[[36mvite v7.3.7 ^[[32mbuilding client environment for production...^[[36m^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:10.5189388Z transforming...
+windows-test-package	Run npm run verify	2026-10-09T01:08:12.3972143Z ^[[32m✓^[[39m 43 modules transformed.
+windows-test-package	Run npm run verify	2026-10-09T01:08:12.5402405Z rendering chunks...
+windows-test-package	Run npm run verify	2026-10-09T01:08:12.5517676Z ^[[2m../../out/renderer/^[[22m^[[32mindex.html                 ^[[39m^[[1m^[[2m  0.52 kB^[[22m^[[1m^[[22m
+windows-test-package	Run npm run verify	2026-10-09T01:08:12.5519387Z ^[[2m../../out/renderer/^[[22m^[[35massets/index-BILnUEqn.css  ^[[39m^[[1m^[[2m 17.19 kB^[[22m^[[1m^[[22m
+windows-test-package	Run npm run verify	2026-10-09T01:08:12.5526427Z ^[[2m../../out/renderer/^[[22m^[[36massets/index-DdlofKgu.js   ^[[39m^[[1m^[[33m705.73 kB^[[39m^[[22m
+windows-test-package	Run npm run verify	2026-10-09T01:08:12.5540418Z ^[[32m✓ built in 2.06s^[[39m
+windows-test-package	Run npm run verify	2026-10-09T01:08:12.6031450Z (node:8768) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+windows-test-package	Run npm run verify	2026-10-09T01:08:12.6034055Z (Use `node --trace-deprecation ...` to show where the warning was created)
+windows-test-package	Run npm run package:win	﻿2026-10-09T01:08:12.6707085Z ##[group]Run npm run package:win
+windows-test-package	Run npm run package:win	2026-10-09T01:08:12.6707456Z ^[[36;1mnpm run package:win^[[0m
+windows-test-package	Run npm run package:win	2026-10-09T01:08:12.6776436Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Run npm run package:win	2026-10-09T01:08:12.6776784Z env:
+windows-test-package	Run npm run package:win	2026-10-09T01:08:12.6776966Z   CSC_IDENTITY_AUTO_DISCOVERY: false
+windows-test-package	Run npm run package:win	2026-10-09T01:08:12.6777210Z ##[endgroup]
+windows-test-package	Run npm run package:win	2026-10-09T01:08:13.5986934Z 
+windows-test-package	Run npm run package:win	2026-10-09T01:08:13.5987829Z > thoughtline@0.0.14 package:win
+windows-test-package	Run npm run package:win	2026-10-09T01:08:13.5988688Z > node node_modules/electron-builder/cli.js --win nsis --publish never
+windows-test-package	Run npm run package:win	2026-10-09T01:08:13.5989246Z 
+windows-test-package	Run npm run package:win	2026-10-09T01:08:14.3605212Z   • electron-builder  version=26.15.3 os=10.0.26100
+windows-test-package	Run npm run package:win	2026-10-09T01:08:14.3682419Z   • loaded configuration  file=package.json ("build" field)
+windows-test-package	Run npm run package:win	2026-10-09T01:08:15.6058625Z   • executing @electron/rebuild  electronVersion=44.7.0 arch=x64 buildFromSource=false workspaceRoot=D:\a\thoughtline\thoughtline projectDir=./ appDir=./
+windows-test-package	Run npm run package:win	2026-10-09T01:08:15.6208440Z   • installing native dependencies  arch=x64
+windows-test-package	Run npm run package:win	2026-10-09T01:08:15.8290523Z   • completed installing native dependencies
+windows-test-package	Run npm run package:win	2026-10-09T01:08:15.8364219Z   • packaging       platform=win32 arch=x64 electron=44.7.0 appOutDir=dist\win-unpacked
+windows-test-package	Run npm run package:win	2026-10-09T01:08:15.9943905Z   • downloaded      label=electron progress=100%
+windows-test-package	Run npm run package:win	2026-10-09T01:08:21.5297463Z   • downloaded electron zip extracted successfully  output=D:\a\thoughtline\thoughtline\dist\win-unpacked
+windows-test-package	Run npm run package:win	2026-10-09T01:08:21.5495106Z   • searching for node modules  pm=npm searchDir=D:\a\thoughtline\thoughtline
+windows-test-package	Run npm run package:win	2026-10-09T01:08:25.4922597Z   • updating asar integrity executable resource  executablePath=dist\win-unpacked\Thoughtline.exe
+windows-test-package	Run npm run package:win	2026-10-09T01:08:25.6754881Z   • downloaded      label=icons-bundle.tar.gz progress=100%
+windows-test-package	Run npm run package:win	2026-10-09T01:08:29.5153042Z   • file signing skipped via signExecutable configuration  file=dist\win-unpacked\Thoughtline.exe
+windows-test-package	Run npm run package:win	2026-10-09T01:08:29.5166859Z   • building        target=nsis file=dist\Thoughtline-0.0.14-win-x64.exe archs=x64 oneClick=false perMachine=false
+windows-test-package	Run npm run package:win	2026-10-09T01:08:29.6846461Z   • downloaded      label=nsis-3.0.4.1.7z progress=100%
+windows-test-package	Run npm run package:win	2026-10-09T01:08:29.8866982Z   • downloaded      label=7zip-win-x64.tar.gz progress=100%
+windows-test-package	Run npm run package:win	2026-10-09T01:09:43.8412705Z   • downloaded      label=nsis-resources-3.4.1.7z progress=100%
+windows-test-package	Run npm run package:win	2026-10-09T01:09:45.4817861Z   • file signing skipped via signExecutable configuration  file=dist\Thoughtline-0.0.14-win-x64.__uninstaller.exe
+windows-test-package	Run npm run package:win	2026-10-09T01:09:47.0005268Z   • file signing skipped via signExecutable configuration  file=dist\Thoughtline-0.0.14-win-x64.exe
+windows-test-package	Run npm run package:win	2026-10-09T01:09:47.0010063Z   • building block map  blockMapFile=dist\Thoughtline-0.0.14-win-x64.exe.blockmap
+windows-test-package	Hash test installers	﻿2026-10-09T01:09:51.7649352Z ##[group]Run $files = Get-ChildItem dist -Filter '*.exe'
+windows-test-package	Hash test installers	2026-10-09T01:09:51.7650205Z ^[[36;1m$files = Get-ChildItem dist -Filter '*.exe'^[[0m
+windows-test-package	Hash test installers	2026-10-09T01:09:51.7650925Z ^[[36;1mif ($files.Count -eq 0) { throw 'No installer was built' }^[[0m
+windows-test-package	Hash test installers	2026-10-09T01:09:51.7651914Z ^[[36;1m$files | ForEach-Object {^[[0m
+windows-test-package	Hash test installers	2026-10-09T01:09:51.7652525Z ^[[36;1m  $hash = Get-FileHash $_.FullName -Algorithm SHA256^[[0m
+windows-test-package	Hash test installers	2026-10-09T01:09:51.7695672Z ^[[36;1m  "$($hash.Hash.ToLower())  $($_.Name)"^[[0m
+windows-test-package	Hash test installers	2026-10-09T01:09:51.7696386Z ^[[36;1m} | Set-Content dist/SHA256SUMS.txt^[[0m
+windows-test-package	Hash test installers	2026-10-09T01:09:51.7812065Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Hash test installers	2026-10-09T01:09:51.7814188Z ##[endgroup]
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	﻿2026-10-09T01:09:52.5323782Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:52.5324416Z with:
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:52.5324795Z   name: Thoughtline-Windows-x64-764bec916db7e9e3fb823c56499c046ebf597ba7
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:52.5325287Z   path: dist/*.exe
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	dist/SHA256SUMS.txt
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:52.5325627Z   if-no-files-found: error
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:52.5325897Z   retention-days: 30
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:52.5326139Z   compression-level: 6
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:52.5326381Z   overwrite: false
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:52.5326640Z   include-hidden-files: false
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:52.5326916Z   archive: true
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:52.5327116Z ##[endgroup]
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:52.7280735Z With the provided path, there will be 2 files uploaded
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:52.7288528Z Artifact name is valid!
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:52.7289405Z Root directory input is valid!
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:53.0978123Z Uploading artifact: Thoughtline-Windows-x64-764bec916db7e9e3fb823c56499c046ebf597ba7.zip
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:53.1046417Z Beginning upload of artifact content to blob storage
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:54.8836280Z Uploaded bytes 8388608
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:55.0792514Z Uploaded bytes 16777216
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:55.2093470Z Uploaded bytes 25165824
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:55.3437950Z Uploaded bytes 33554432
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:55.4509942Z Uploaded bytes 41943040
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:55.6318106Z Uploaded bytes 50331648
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:55.8080241Z Uploaded bytes 58720256
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:56.1668348Z Uploaded bytes 67108864
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:56.5968940Z Uploaded bytes 75497472
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:56.9543538Z Uploaded bytes 83886080
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:57.3328457Z Uploaded bytes 92274688
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:57.6528627Z Uploaded bytes 100663296
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:58.0747218Z Uploaded bytes 109051904
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:58.7783033Z Uploaded bytes 111270390
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:58.7875375Z Finished uploading artifact content to blob storage!
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:58.7877316Z SHA256 digest of uploaded artifact is 7f8a61ed2995af110fb6a5378da828db9f1cf334df3d4ac133cd87118f4d61a6
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:58.7880002Z Finalizing artifact upload
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:58.7911790Z Artifact Thoughtline-Windows-x64-764bec916db7e9e3fb823c56499c046ebf597ba7 successfully finalized. Artifact ID 11588419163
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:58.7915212Z Artifact Thoughtline-Windows-x64-764bec916db7e9e3fb823c56499c046ebf597ba7 has been successfully uploaded! Final size is 111270390 bytes. Artifact ID is 11588419163
+windows-test-package	Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9	2026-10-09T01:09:58.7918448Z Artifact download URL: https://github.com/NocodeMrLi/thoughtline/actions/runs/37868192110/artifacts/11588419163
+windows-test-package	Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	﻿2026-10-09T01:09:58.8193919Z Post job cleanup.
+windows-test-package	Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:09:59.2726204Z [command]"C:\Program Files\Git\usr\bin\tar.exe" --posix -cf cache.tzst --exclude cache.tzst -P -C D:/a/thoughtline/thoughtline --files-from manifest.txt --force-local --use-compress-program "zstd -T0"
+windows-test-package	Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:10:01.4568289Z Sent 4980736 of 55435256 (9.0%), 4.7 MBs/sec
+windows-test-package	Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:10:02.4695005Z Sent 14155776 of 55435256 (25.5%), 6.7 MBs/sec
+windows-test-package	Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:10:03.4729884Z Sent 21364736 of 55435256 (38.5%), 6.7 MBs/sec
+windows-test-package	Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:10:04.4806114Z Sent 27394048 of 55435256 (49.4%), 6.5 MBs/sec
+windows-test-package	Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:10:05.4865506Z Sent 32768000 of 55435256 (59.1%), 6.2 MBs/sec
+windows-test-package	Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:10:06.4869412Z Sent 38469632 of 55435256 (69.4%), 6.1 MBs/sec
+windows-test-package	Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:10:07.4867608Z Sent 44236800 of 55435256 (79.8%), 6.0 MBs/sec
+windows-test-package	Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:10:08.4918930Z Sent 49479680 of 55435256 (89.3%), 5.9 MBs/sec
+windows-test-package	Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:10:09.4960780Z Sent 53936128 of 55435256 (97.3%), 5.7 MBs/sec
+windows-test-package	Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:10:10.3511728Z Sent 55435256 of 55435256 (100.0%), 5.3 MBs/sec
+windows-test-package	Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1	2026-10-09T01:10:10.6389866Z Cache saved with the key: node-cache-Windows-x64-npm-cd01591ae42d78361c84cab4fa230a5a7f68bec809b34d4fe0e2bef1f4812885
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	﻿2026-10-09T01:10:10.6716186Z Post job cleanup.
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:10.9103251Z [command]"C:\Program Files\Git\bin\git.exe" version
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:10.9451917Z git version 2.55.0.windows.5
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:10.9555835Z Temporarily overriding HOME='D:\a\_temp\527d808f-3d1d-4fee-8bc0-1bc6b5b71090' before making global git config changes
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:10.9557623Z Adding repository directory to the temporary git global config as a safe directory
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:10.9567206Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\thoughtline\thoughtline
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:10.9893486Z Removing SSH command configuration
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:10.9905991Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:11.0447551Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:11.7210321Z Removing HTTP extra header
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:11.7223164Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7206027Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7209871Z Removing includeIf entries pointing to credentials config files
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7211424Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7212504Z includeif.gitdir:D:/a/thoughtline/thoughtline/.git.path
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7213357Z includeif.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7214137Z includeif.gitdir:/github/workspace/.git.path
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7214840Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7216603Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/thoughtline/thoughtline/.git.path
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7218300Z D:\a\_temp\git-credentials-9f31ef1d-2c5e-4819-a275-72fc488e5121.config
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7222798Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/thoughtline/thoughtline/.git.path D\:\\a\\_temp\\git\-credentials\-9f31ef1d\-2c5e\-4819\-a275\-72fc488e5121\.config
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7225863Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7227741Z D:\a\_temp\git-credentials-9f31ef1d-2c5e-4819-a275-72fc488e5121.config
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7230833Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path D\:\\a\\_temp\\git\-credentials\-9f31ef1d\-2c5e\-4819\-a275\-72fc488e5121\.config
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7234054Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7235540Z /github/runner_temp/git-credentials-9f31ef1d-2c5e-4819-a275-72fc488e5121.config
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7261882Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-9f31ef1d\-2c5e\-4819\-a275\-72fc488e5121\.config
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7264622Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7266084Z /github/runner_temp/git-credentials-9f31ef1d-2c5e-4819-a275-72fc488e5121.config
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7268807Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-9f31ef1d\-2c5e\-4819\-a275\-72fc488e5121\.config
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:12.7274905Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+windows-test-package	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-09T01:10:13.2575415Z Removing credentials config 'D:\a\_temp\git-credentials-9f31ef1d-2c5e-4819-a275-72fc488e5121.config'
+windows-test-package	Complete job	﻿2026-10-09T01:10:13.2669385Z Cleaning up orphan processes

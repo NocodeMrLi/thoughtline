@@ -22,3 +22,5 @@ before真实UI色彩判据红，after绿；78 unit、类型、构建与after源�
 Windows现有test-packages.yml workflow_dispatch已完成：[run37868192110](https://github.com/NocodeMrLi/thoughtline/actions/runs/37868192110)，准确tested `764bec916db7e9e3fb823c56499c046ebf597ba7`（生产与796bbea一致）。18文件78 unit、类型/构建、Windows NSIS打包/hash/私有上传全绿，下载候选SHA复算与CI一致；见 [固定包与原始日志](evidence/windows-ci-764bec9/README.md)。没有修改CI权限/secrets/触发配置、release或main。没有物理Windows交互验证，后续ICC分析脚本/文档校正不冒称在该次CI内执行。
 
 独立QA实际查看八张准确前后图，确认正常1440×340中蓝/暖赭可辨、通用中性、标题正文与纸形保持；6源/test与22原证据哈希核对一致。此是可供父会话实际审图并交用户的方向复核，不替用户宣称完整视觉验收。
+
+完整[独立只读QA报告](evidence/agent-ink-independent-readonly/READONLY-REVIEW.md)已原件归档；56项原目录hash已核，精简目录和旧相对链接映射见[README](evidence/agent-ink-independent-readonly/README.md)。QA独立确认同ID字段/模型/ICC六行、固定Windows run和EXE hash；没有启动原生或安装器，不扩大为完整.14验收。

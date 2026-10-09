@@ -1,0 +1,138 @@
+{
+  "sourceCommit": "796bbeaac9ba3d2f2895dd26b7fab695b620d735",
+  "evidenceCommit": "764bec916db7e9e3fb823c56499c046ebf597ba7",
+  "remoteHeadAtReview": "764bec916db7e9e3fb823c56499c046ebf597ba7",
+  "manifestKeys": [
+    "sourceCommit",
+    "beforeSourceCommit",
+    "sourceSha256",
+    "compiledSha256",
+    "sameClipIdsBodiesOutlinesAndFramesBeforeAfter",
+    "unitPassed",
+    "typecheckExit",
+    "buildExit",
+    "nativeBeforeExpectedExit",
+    "nativeAfterExit",
+    "windowsCI",
+    "formalVisualAcceptance",
+    "physicalWindowsIMEPassed"
+  ],
+  "sourceHashes": [
+    {
+      "file": "src/renderer/components/agentInk.ts",
+      "matches": true
+    },
+    {
+      "file": "src/renderer/components/ClipCard.tsx",
+      "matches": true
+    },
+    {
+      "file": "src/renderer/styles/overlay.css",
+      "matches": true
+    },
+    {
+      "file": "tests/unit/agentInk.test.ts",
+      "matches": true
+    },
+    {
+      "file": "tests/electron/agent-ink-preview.cjs",
+      "matches": true
+    },
+    {
+      "file": "tests/electron/agent-ink-pixels.py",
+      "matches": true
+    }
+  ],
+  "evidenceHashes": [
+    {
+      "file": "typecheck.log",
+      "matches": true
+    },
+    {
+      "file": "first-calibration-unit.log",
+      "matches": true
+    },
+    {
+      "file": "pixels.log",
+      "matches": true
+    },
+    {
+      "file": "unit.log",
+      "matches": true
+    },
+    {
+      "file": "manifest.json",
+      "matches": true
+    },
+    {
+      "file": "before.log",
+      "matches": true
+    },
+    {
+      "file": "after.log",
+      "matches": true
+    },
+    {
+      "file": "build.log",
+      "matches": true
+    },
+    {
+      "file": "before/light-agent-labels-1.5x.png",
+      "matches": true
+    },
+    {
+      "file": "before/result.json",
+      "matches": true
+    },
+    {
+      "file": "before/dark-agent-labels-1.5x.png",
+      "matches": true
+    },
+    {
+      "file": "before/dark-three-overall.png",
+      "matches": true
+    },
+    {
+      "file": "before/light-three-overall.png",
+      "matches": true
+    },
+    {
+      "file": "before/cleanup.json",
+      "matches": true
+    },
+    {
+      "file": "before/pixel-observation.json",
+      "matches": true
+    },
+    {
+      "file": "after/light-agent-labels-1.5x.png",
+      "matches": true
+    },
+    {
+      "file": "after/result.json",
+      "matches": true
+    },
+    {
+      "file": "after/dark-agent-labels-1.5x.png",
+      "matches": true
+    },
+    {
+      "file": "after/dark-three-overall.png",
+      "matches": true
+    },
+    {
+      "file": "after/light-three-overall.png",
+      "matches": true
+    },
+    {
+      "file": "after/cleanup.json",
+      "matches": true
+    },
+    {
+      "file": "after/pixel-observation.json",
+      "matches": true
+    }
+  ],
+  "sourceEvidenceDiff": "",
+  "compiledScope": "builder bindings only, no QA build"
+}
