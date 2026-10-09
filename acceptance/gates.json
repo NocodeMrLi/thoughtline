@@ -1,15 +1,15 @@
 {
-  "stage": "0.0.15 frozen candidate; provisional visual baseline; overall acceptance not released",
+  "stage": "0.0.16-preview.6 dual-platform private prerelease preparation; physical acceptance pending",
   "asOf": "2026-10-09 Asia/Shanghai",
-  "sourceCommit": "61a6837dbde290041a13226596baad5b21249fc1",
-  "branch": "codex/thoughtline-clamp-20261009",
+  "sourceCommit": "aa23b210ce26de956f88c48851dc1681ab233f6b",
+  "branch": "main",
   "verify": {
     "typecheck": "passed",
-    "unitTests": 88,
-    "unitFiles": 20,
+    "unitTests": 102,
+    "windowsUnitTests": 106,
+    "windowsOnlySkippedOnMac": 4,
     "build": "passed",
-    "evidence": "evidence/candidate-0.0.15/source-freeze.json",
-    "log": "evidence/candidate-0.0.15/unit-final.log"
+    "evidence": "evidence/release-0.0.16-preview.6/main-verify.log"
   },
   "gates": [
     {
@@ -190,7 +190,12 @@
       "evidence/candidate-0.0.15/source-regression/empty-shelf.json"
     ]
   },
-  "composerNextStage": {
+  "historicalBaseline": {
+    "sourceCommit": "61a6837dbde290041a13226596baad5b21249fc1",
+    "gatesFile": "evidence/release-0.0.16-preview.6/gates-before-release.json",
+    "note": "Inherited .15 gate/performance records below retain their historical scopes; they are not fresh .6 physical acceptance."
+  },
+  "historicalComposerPreview": {
     "frozenPreviewSource": "6638ce1",
     "previewEvidence": "566cce05680189f03c94925960bc4646bd72f848",
     "version": "0.0.16-preview.1",
@@ -198,5 +203,33 @@
     "isolatedWorktree": "../thoughtline-composer",
     "draftAutosaveCrashRecovery": false,
     "doesNotChangeThisPackage": true
+  },
+  "composerCurrent": {
+    "version": "0.0.16-preview.6",
+    "geometryDIP": [
+      480,
+      260
+    ],
+    "textHeightDIP": 132,
+    "compositionSyntheticChecks": 20,
+    "delayedSubmitControlledChecks": 4,
+    "physicalImeTested": false,
+    "windowsComposerKeyboardEndToEnd": false
+  },
+  "releasePreparation": {
+    "version": "0.0.16-preview.6",
+    "tag": "v0.0.16-preview.6",
+    "macBuildSource": "723356385af5518cddae65d2ae023707a0c804b6",
+    "windowsBuildSource": "aa23b210ce26de956f88c48851dc1681ab233f6b",
+    "status": "ready-local-not-published",
+    "architectures": {
+      "mac": "arm64",
+      "windows": "x64"
+    },
+    "signing": {
+      "mac": "ad-hoc; no Developer ID or notarization",
+      "windows": "NotSigned"
+    },
+    "evidence": "evidence/release-0.0.16-preview.6/mac-package-binding.json"
   }
 }

@@ -1,0 +1,202 @@
+{
+  "stage": "0.0.15 frozen candidate; provisional visual baseline; overall acceptance not released",
+  "asOf": "2026-10-09 Asia/Shanghai",
+  "sourceCommit": "61a6837dbde290041a13226596baad5b21249fc1",
+  "branch": "codex/thoughtline-clamp-20261009",
+  "verify": {
+    "typecheck": "passed",
+    "unitTests": 88,
+    "unitFiles": 20,
+    "build": "passed",
+    "evidence": "evidence/candidate-0.0.15/source-freeze.json",
+    "log": "evidence/candidate-0.0.15/unit-final.log"
+  },
+  "gates": [
+    {
+      "id": "G0",
+      "status": "partial",
+      "mac": "native object and application workflow checked; physical click-through/focus/IME matrix pending",
+      "windows": "Windows runner verify and NSIS installer succeeded; user installation/interaction pending"
+    },
+    {
+      "id": "G1",
+      "status": "fixed geometry and finite interruptible visibility tested; historical count-driven weight superseded; physical dual-platform acceptance pending"
+    },
+    {
+      "id": "G2",
+      "status": "edit/Agent commands and atomic storage tested; Mac native edit/archive/search/restore/copy/restart loop passed"
+    },
+    {
+      "id": "G3",
+      "status": "not accepted"
+    },
+    {
+      "id": "G4",
+      "status": "not accepted"
+    },
+    {
+      "id": "G5",
+      "status": "not accepted"
+    },
+    {
+      "id": "G6",
+      "status": "not accepted"
+    },
+    {
+      "id": "G7",
+      "status": "not accepted"
+    },
+    {
+      "id": "G8",
+      "status": "not accepted"
+    }
+  ],
+  "limitations": [
+    "Windows physical focus/click-through/IME/display acceptance pending",
+    "Mac physical system IME, OS Hide menu and cross-app focus pending",
+    "real Agent plaintext receiving untested",
+    "fullscreen-hover suppression remains an implementation gap; full display/sleep matrix pending",
+    "ad-hoc Mac candidate, not Developer ID/notarized; unsigned Windows",
+    "Physical/system/Windows/G7 gates retain their explicit unaccepted scope; source/package protocol results do not replace them",
+    "0.0.15/new composer preview save draft on explicit close/normal quit only; unpersisted typing crash recovery not implemented"
+  ],
+  "referenceCode": "Edge-Drop stickProbe.ts copied unchanged; Tendedero fixed-end parabola adapted to fixed rope; MIT/Apache notices retained",
+  "release": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.6-alpha.1",
+  "packages": {
+    "version": "0.0.15",
+    "packageSourceCommit": "61a6837dbde290041a13226596baad5b21249fc1",
+    "mac": "evidence/candidate-0.0.15/package-source-bytes.json",
+    "packagedWorkflow": "evidence/candidate-0.0.15/package-regression/overnight-package-acceptance.json",
+    "idle": "evidence/candidate-0.0.15/package-regression/overnight-package-idle.json",
+    "windowsRun": 37873271157,
+    "windows": "evidence/candidate-0.0.15/windows-ci/receipt.json",
+    "publishedVersion": "0.0.6",
+    "newReleasePublished": false
+  },
+  "formalAcceptance": false,
+  "report": "CANDIDATE-0.0.15-REPORT.md",
+  "currentSourceWorkflows": {
+    "count": 11,
+    "status": "all exit0",
+    "evidence": "evidence/candidate-0.0.15/source-regression-status.json",
+    "scope": "Mac source actual Electron DOM/IPC/windows; emulated shortcut/clipboard/pointer providers; not physical devices"
+  },
+  "currentIndependentIncrement": {
+    "status": "passed limited frozen Mac package increment, formal acceptance false",
+    "sourceReadonly": "evidence/capture-stability-independent-readonly/READONLY-REVIEW.md",
+    "packageReport": "evidence/candidate-0.0.15/independent-qa/INCREMENTAL-QA-REPORT.md",
+    "packageOriginalReportSha256": "0944bc8ce90c4d7191eb32d92a55a86d125f1ab6761cf39441dd6417648cd9b0",
+    "nativeCommandExitCode": 0,
+    "scenarios": 4,
+    "ownedPidsVerifiedExited": 42,
+    "qaPerformanceRerun": false,
+    "scope": "actual Mac frozen package trusted DOM/IPC/Tray Menu callbacks; no physical IME/menu/hotkey/Windows/Agent/fullscreen acceptance"
+  },
+  "fullscreenPrototype": {
+    "branch": "codex/thoughtline-g7-public-probe-20261009",
+    "codeCommit": "754a58f9b79d8a9c4eed47a60978052402f22450",
+    "evidenceCommit": "cacf0672bfb959e3ef12b15b249c7d28d9dfd45f",
+    "integrated": false,
+    "macUnprivilegedProven": false,
+    "windowsPhysical": false,
+    "g7Accepted": false
+  },
+  "sourceVersion": "0.0.15",
+  "baselineRollback": {
+    "version": "0.0.13",
+    "commit": "dee1f2c9046b284e2dd430632d9bdb913128c868",
+    "report": "OVERNIGHT-REPORT.md"
+  },
+  "historicalGates": "evidence/gates-0.0.13-original.json",
+  "nativeCurrent": "evidence/candidate-0.0.15/source-regression-status.json",
+  "isolatedUserExperience": {
+    "sourceCommit": "61a6837dbde290041a13226596baad5b21249fc1",
+    "version": "0.0.15",
+    "recommendedLauncher": "/Users/lihongwei/Documents/Codex/2026-10-09/task/delivery/启动0.0.15隔离体验.command",
+    "launcherSha256": "768e805a142ea652ab4aaff0930f014abbc61bfb63db6c210cd9bbfe4326513b",
+    "fixedIsolatedData": "/Users/lihongwei/Documents/Codex/2026-10-09/task/delivery/isolated-experience-0.0.15/user-data",
+    "defaultExperienceStarted": false,
+    "checkOnlyExitCode": 0,
+    "launchServicesFakeVerificationExitCode": 0,
+    "owned4PidsExited": true,
+    "temporaryFakeDirRemoved": true,
+    "mountDetached": true,
+    "gatekeeperBypass": false,
+    "permissionChanges": false,
+    "scope": "builder normal LaunchServices fake-directory proof with temporary loopback inspector; not default physical experience"
+  },
+  "fixedRope": {
+    "fractionOfViewport": 0.7,
+    "eachSideBlankFraction": 0.15,
+    "fadeFractionOfEachEnd": 0.08,
+    "clipCentersWithinMiddleTwoThirds": true,
+    "countIndependent": true,
+    "defaultNullPositionVisibleByWidth": {
+      "1040": 3,
+      "1440": 4,
+      "1920": 5
+    },
+    "minimumSpacing": 172,
+    "comfortableSpacing": 220,
+    "scope": "default null-position counts; explicit ratios may have different capacity; physical multi-display acceptance pending",
+    "evidence": "evidence/candidate-0.0.15/preview/result.json"
+  },
+  "projectionFix": {
+    "captureFixedPoint": "passed unit/independent pure checks",
+    "overflowMovePreservesOldVisibleIdentity": "passed unit/independent pure checks/current source IPC",
+    "ideasAndBodiesPreserved": true,
+    "currentSourceEvidence": "evidence/candidate-0.0.15/source-regression/projection-native.json",
+    "independentPureReport": "evidence/capture-stability-independent-readonly/READONLY-REVIEW.md"
+  },
+  "paperAndHit": {
+    "paperDIP": [
+      160,
+      226
+    ],
+    "pegHitDIP": [
+      24,
+      44
+    ],
+    "footerDIP": [
+      32,
+      32
+    ],
+    "allSampledFooterCornersInsideDrawnContour": true,
+    "allSampledFooterRectsInsidePublishedIPC": true,
+    "scope": "current source protocol screenshots and SVG point-in-polygon, no physical click-through acceptance",
+    "evidence": "evidence/candidate-0.0.15/paper-hit/result.json"
+  },
+  "performance": {
+    "durationSeconds": 120.149,
+    "stableMembership": true,
+    "cpuPercentSingleCore": 0.19975197463149913,
+    "stableRssMiB": 305.015625,
+    "cpuGate": true,
+    "rssGate": true,
+    "commandExitCode": 0,
+    "cleanupPassed": true,
+    "scope": "Mac frozen ad-hoc App executable, isolated empty data, direct spawn with no debugger; no native interaction tests running concurrently; hidden startup established separately by packaged workflow",
+    "evidence": "evidence/candidate-0.0.15/package-regression/overnight-package-idle.json"
+  },
+  "hiddenDraftSafety": {
+    "scope": "latest source actual BrowserWindow.hide and31.5s grace, renderer quit save failure, emulated shortcut callback; no physical OS hide/IME",
+    "evidence": "evidence/candidate-0.0.15/source-regression/hidden-draft-native.json"
+  },
+  "pauseAndSettings": {
+    "pauseUnlockAndSyntheticPowerReasons": "current10checkpoints passed",
+    "settingsMenuRefresh": "current source actual Menu callback passed",
+    "evidence": [
+      "evidence/candidate-0.0.15/pause/result.json",
+      "evidence/candidate-0.0.15/source-regression/empty-shelf.json"
+    ]
+  },
+  "composerNextStage": {
+    "frozenPreviewSource": "6638ce1",
+    "previewEvidence": "566cce05680189f03c94925960bc4646bd72f848",
+    "version": "0.0.16-preview.1",
+    "packaged": false,
+    "isolatedWorktree": "../thoughtline-composer",
+    "draftAutosaveCrashRecovery": false,
+    "doesNotChangeThisPackage": true
+  }
+}

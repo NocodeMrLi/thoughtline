@@ -1,0 +1,94 @@
+{
+  "scope": "Delete only these fully integrated, unchanged remote branches after successful release; skip changed tips or open PRs",
+  "relatedThreadsObservedIdle": true,
+  "localWorktreesPreserved": true,
+  "branches": [
+    {
+      "branch": "codex/thoughtline-acceptance-20261009",
+      "tip": "4dd6dea868948c433ed7fdca9b3ff01565e03828",
+      "basis": "Exact tip reachable from consolidated main; valid functionality or independent QA history retained; duplicate historical icon JPEG superseded by byte-identical canonical source",
+      "recoverFrom": "main ancestry at this exact tip; restore with git push origin <tip>:refs/heads/<branch>",
+      "localWorktreeDisposition": "Preserved; no local worktree/checked-out branch deletion"
+    },
+    {
+      "branch": "codex/thoughtline-clamp-20261009",
+      "tip": "fdbd4370f076f327b51497285aa72da4859300c3",
+      "basis": "Exact tip reachable from consolidated main; valid functionality or independent QA history retained; duplicate historical icon JPEG superseded by byte-identical canonical source",
+      "recoverFrom": "main ancestry at this exact tip; restore with git push origin <tip>:refs/heads/<branch>",
+      "localWorktreeDisposition": "Preserved; no local worktree/checked-out branch deletion"
+    },
+    {
+      "branch": "codex/thoughtline-compact-composer-20261009",
+      "tip": "8a27ead234020589242ff6794f2348e539113632",
+      "basis": "Exact tip reachable from consolidated main; valid functionality or independent QA history retained; duplicate historical icon JPEG superseded by byte-identical canonical source",
+      "recoverFrom": "main ancestry at this exact tip; restore with git push origin <tip>:refs/heads/<branch>",
+      "localWorktreeDisposition": "Preserved; no local worktree/checked-out branch deletion"
+    },
+    {
+      "branch": "codex/thoughtline-composer-20261009",
+      "tip": "0a9e46763368006e45ffff1edbac6b215f68c51d",
+      "basis": "Exact tip reachable from consolidated main; valid functionality or independent QA history retained; duplicate historical icon JPEG superseded by byte-identical canonical source",
+      "recoverFrom": "main ancestry at this exact tip; restore with git push origin <tip>:refs/heads/<branch>",
+      "localWorktreeDisposition": "Preserved; no local worktree/checked-out branch deletion"
+    },
+    {
+      "branch": "codex/thoughtline-composition-safety-20261009",
+      "tip": "ac26ab3e6ca05696f8d10c097c3ac501a3cf3c26",
+      "basis": "Exact tip reachable from consolidated main; valid functionality or independent QA history retained; duplicate historical icon JPEG superseded by byte-identical canonical source",
+      "recoverFrom": "main ancestry at this exact tip; restore with git push origin <tip>:refs/heads/<branch>",
+      "localWorktreeDisposition": "Preserved; no local worktree/checked-out branch deletion"
+    },
+    {
+      "branch": "codex/thoughtline-draft-recovery-20261009",
+      "tip": "5c8803a9c925e9a368a985e178439abbc2509a81",
+      "basis": "Exact tip reachable from consolidated main; valid functionality or independent QA history retained; duplicate historical icon JPEG superseded by byte-identical canonical source",
+      "recoverFrom": "main ancestry at this exact tip; restore with git push origin <tip>:refs/heads/<branch>",
+      "localWorktreeDisposition": "Preserved; no local worktree/checked-out branch deletion"
+    },
+    {
+      "branch": "codex/thoughtline-icons-20261009",
+      "tip": "456d445d3807ef69dc9dd1d608865c32cc960946",
+      "basis": "Exact tip reachable from consolidated main; valid functionality or independent QA history retained; duplicate historical icon JPEG superseded by byte-identical canonical source",
+      "recoverFrom": "main ancestry at this exact tip; restore with git push origin <tip>:refs/heads/<branch>",
+      "localWorktreeDisposition": "Preserved; no local worktree/checked-out branch deletion"
+    },
+    {
+      "branch": "codex/thoughtline-inline-composer-20261009",
+      "tip": "93efc57762e14177493af3015a2341a3d177c382",
+      "basis": "Exact tip reachable from consolidated main; valid functionality or independent QA history retained; duplicate historical icon JPEG superseded by byte-identical canonical source",
+      "recoverFrom": "main ancestry at this exact tip; restore with git push origin <tip>:refs/heads/<branch>",
+      "localWorktreeDisposition": "Preserved; no local worktree/checked-out branch deletion"
+    },
+    {
+      "branch": "codex/thoughtline-name-affordance-20261009",
+      "tip": "c3784976c5fc1877dfa337b0db4e79f3b9c8a423",
+      "basis": "Exact tip reachable from consolidated main; valid functionality or independent QA history retained; duplicate historical icon JPEG superseded by byte-identical canonical source",
+      "recoverFrom": "main ancestry at this exact tip; restore with git push origin <tip>:refs/heads/<branch>",
+      "localWorktreeDisposition": "Preserved; no local worktree/checked-out branch deletion"
+    },
+    {
+      "branch": "codex/thoughtline-windows-preflight-20261009",
+      "tip": "38355e4bb712e89be3c2e9cc0f7913b3906ae419",
+      "basis": "Exact tip reachable from consolidated main; valid functionality or independent QA history retained; duplicate historical icon JPEG superseded by byte-identical canonical source",
+      "recoverFrom": "main ancestry at this exact tip; restore with git push origin <tip>:refs/heads/<branch>",
+      "localWorktreeDisposition": "Preserved; no local worktree/checked-out branch deletion"
+    },
+    {
+      "branch": "feat/native-pilot",
+      "tip": "91ddeb18f85dead040000aeb6f22546a96c3c97c",
+      "basis": "Exact tip reachable from consolidated main; valid functionality or independent QA history retained; duplicate historical icon JPEG superseded by byte-identical canonical source",
+      "recoverFrom": "main ancestry at this exact tip; restore with git push origin <tip>:refs/heads/<branch>",
+      "localWorktreeDisposition": "Preserved; no local worktree/checked-out branch deletion"
+    }
+  ],
+  "keep": [
+    {
+      "branch": "main",
+      "reason": "Primary development branch"
+    },
+    {
+      "branch": "codex/thoughtline-g7-public-probe-20261009",
+      "reason": "Seven valid unique experimental commits remain unintegrated; G7 product integration/physical verification incomplete"
+    }
+  ]
+}

@@ -1,46 +1,23 @@
 # 晾念头 / Thoughtline
 
-面向macOS与Windows的桌面顶边念头挂绳。快捷记录想法和提示词，用彩色夹子区分Agent；固定自然弧线，不随数量变化，随时取用。
+面向 macOS 与 Windows 的桌面顶边念头挂绳。快捷记录完整正文，用彩色夹子区分 Agent；固定自然弧线，无常驻主窗口或工具条。
 
-当前候选 **0.0.15**：70%屏宽居中挂绳与渐淡端部、160×226DIP连续弯纸、正面弹簧夹和可辨Agent标签。源码冻结 `61a6837`，新增捕获位置固定点及满容量移动保全修复。临时写作/全文/管理窗口、编辑归档搜索、分组合夹拆分撤销、标准纯文本拖出与草稿恢复已接入；没有常驻主窗口或工具条。
+当前候选 **0.0.16-preview.6**：批准的红夹 TL 图标、480×260 紧凑输入窗、名称编辑提示、内联项目/Agent、草稿组合输入及延迟提交续作保护。全文、管理、搜索归档、分组合夹拆分撤销和纯文本拖出保留。物理跨应用拖入仍需逐个 Agent 验收，G7 全屏探测保持独立实验。
 
-当前产物、88单测、11组源码流程、新包/性能及独立增量边界见[0.0.15候选报告](acceptance/CANDIDATE-0.0.15-REPORT.md)，本机体验必须从[新隔离入口](docs/delivery/README-0.0.15-隔离体验.md)启动。用户暂定认可当前视觉基线，正式整体验收尚未放行。0.0.13仅回退；已发布下载版仍为v0.0.6-alpha.1，不能用旧下载版验证此源码。
+按用户授权收敛到 **main**，保留阶段提交作为回滚点。双端私有预发布准备与最终远端状态见 [发布报告](acceptance/RELEASE-0.0.16-preview.6.md)，准确来源及 SHA256 随安装包清单提供。历史 `.15` 包和 QA 记录保留；后续开发默认使用 main，不为日常增量另建分支。
 
-## 本地开发
+## 开发与验证
 
-本轮使用隔离分支 `codex/thoughtline-clamp-20261009`，验证后阶段提交推送。没有合并main或发布新版本；原工作区与已发布包保留。
+Node24.19.0：`npm ci`、`npm run verify`、`npm run dev`。Control+Alt+N 写念头；Mac⌘Enter、WindowsCtrlEnter提交，Enter换行，Esc存草稿。
 
-Node24.19.0。执行 `npm ci`、`npm run verify`、`npm run dev`。主入口Control+Alt+N；Mac⌘Enter、WindowsCtrlEnter挂上，Esc保存草稿。鼠标在屏幕顶部停留后显示挂绳。
+Mac102unit、Windows106unit、类型/构建通过。当前Mac20项合成组合输入、4项受控延迟续作及DMG内App隔离保存/重启通过；Windows CI实际当前用户安装、同版本重装、普通卸载合成数据保持、单实例和PE嵌入图标通过。合成DOM/IPC、单测和CI不能替代物理IME、焦点、空白穿透、热键、多屏、真实Agent/G7、旧版升级回滚；**formalAcceptance=false**。当前 Windows CtrlEnter 没有 Composer 端到端操作。
 
-使用显式node_modules工具路径，兼容本机项目目录名称包含冒号的情况。`npm run smoke`验证真实Electron窗口配置与热键注册；`npm run workflow`验证编辑取消、全文保存、收起搜索恢复、复制和重启保全。`npm run groups`验证拖动停留合并、提前松手不合并、翻页不误复制、拆分撤销和重启；这些不能替代物理鼠标及跨App验证。
+## 安装与数据
 
-## 安装测试
+macOS Apple Silicon **arm64 DMG**；Windows **x64 NSIS**。没有 Intel Mac、原生 Windows ARM64/x86 包或自动更新。Mac为完整资源ad-hoc签名，未Developer ID/公证；Windows未签名。被Gatekeeper/SmartScreen/SAC或企业策略阻挡时记录原文，不关闭安全机制、不修改执行策略。
 
-Mac arm64：`npm run package:mac`。Windows x64：Windows GitHub Actions运行验证及NSIS打包，本轮包保存于对应Actions私有构建附件；[已发布预发布](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.6-alpha.1)是旧版，不包含本轮实现。安装包SHA256随包提供；卸载不删除个人念头数据。
+先退出旧App，备份整个默认数据目录（Mac `~/Library/Application Support/Thoughtline`；Windows `%APPDATA%\Thoughtline`），保留旧包。相同appId可替换旧安装；隔离笔记不等于并排安装身份。Windows先取消安装完成页自动运行，再按 [实机清单和隔离入口](docs/WINDOWS-ACCEPTANCE-V11-20261009.md)只用合成数据。
 
-Mac和Windows分别记录构建、安装与用户反馈，见[验收节点](acceptance/gates.json)。当前尚无Windows实机通过结论。
+普通Windows卸载保留默认数据；显式 `--delete-app-data` 会删除默认profile，本轮不传。自定义数据放在安装目录内不作保持保证。回滚先保留新旧两份完整数据，对副本验证，不能覆盖唯一新数据。未ACK尾部、未提交编辑、注销/关机、强退/断电不承诺零丢失。
 
-## 项目依据
-
-产品方案、开工计划及两轮UI审计主文存于用户指定笔记目录；代码阶段状态在本仓库记录。本仓库暂未开源，参考复用代码仍保留其原许可，见[第三方声明](THIRD_PARTY_NOTICES.md)。
-
-## Mac测试包签名校验
-
-0.0.3及更早Mac包漏了资源签名校验；0.0.4显式执行ad-hoc签名，`package:mac`必须验证构建App和DMG内App的`codesign --verify --deep --strict`，任一失败则打包命令失败。报告输出到dist/mac-signature-verification.json。这是完整资源签名，并非Apple Developer ID或公证；可信私有测试包首次下载仍可能需要“系统设置→隐私与安全性→仍要打开”，不能据本机未隔离启动宣称所有下载电脑免拦截。[Apple官方说明](https://support.apple.com/zh-cn/102445)
-
-自动测试使用独立临时数据并在结束时清理；冻结包使用专门的package-acceptance.cjs及package-idle.cjs，设置THOUGHTLINE_EXECUTABLE；源码协议测试不能直接当冻结包测试。
-
-0.0.5已增加托盘临时设置、组合键录制及减少动态效果。冲突或磁盘保存失败保留旧注册；新建草稿在退出前保存，保存失败不退出。数据恢复错误提供打开目录/重试/退出，保留原文件。手动暂停、睡眠、锁屏分别管理，恢复不撤掉手动暂停。`npm run lifecycle`验证真实注册、录制、冲突、POSIX不可写故障、新建退出草稿及重启；仍不能替代物理输入法/焦点。已发布安装包仍为0.0.6；源码0.0.7已接入标准text/plain拖放，但真实Agent接收尚未验收。当前0.0.15候选尚未发布。
-
-## 当前交付边界
-
-常态前端只能是绳、夹子和便签；不能通过常驻标签条或另一排小图标承载功能。此要求优先于早期UI稿。筛选、查找与已收起通过用户主动打开的临时交互或托盘/快捷浮层完成。卡片内Agent/标题保留必要识别信息。
-
-0.0.8只在需要时创建写作/管理窗口，隐藏30秒后释放，主进程持有快照与草稿。`npm run lazy`验证重建和草稿保全；`npm run idle:direct`检查源代码无调试器进程树。性能必须在未进行其他原生交互时测量；进程成员变化的结果拒绝作为空闲通过。
-
-协议工作流使用tests中的热键回调适配器，不增加生产IPC或默认预热。冻结App独立检查见`tests/electron/package-acceptance.cjs`和`package-idle.cjs`，使用THOUGHTLINE_EXECUTABLE指定候选可执行文件；前者不声明系统IME/跨App焦点通过，后者不带调试器。
-
-
-固定绳与文档13夹子：`npm run rope`、`npm run clothespins`。空/少/多便签绳形不变；18×38DIP双木质夹臂、银簧压丝，24×44DIP命中，新数据Codex蓝/Claude橙；既有自选颜色保留。设计对应清单见[夹子实施记录](docs/CLOTHESPIN-DESIGN-PROPOSAL.md)，本轮固定交付、测试边界和用户验收方法见[验收报告](acceptance/OVERNIGHT-REPORT.md)。
-
-0.0.11修复未确认原生隐藏的草稿安全：只有确认保存/提交的窗口可在30秒后释放；意外隐藏保留当前输入并恢复原会话，退出也捕获隐藏草稿，保存失败阻止退出。`npm run hidden-draft`覆盖真实BrowserWindow.hide、释放期限和不可写退出。通用协议fixture默认模拟快捷键注册；只有smoke/lifecycle显式使用真实OS注册，须顺序运行。
+历史门禁与性能记录明确保留原来源，见 [验收记录](acceptance/gates.json)；[`.15`冻结报告](acceptance/CANDIDATE-0.0.15-REPORT.md)可用于历史追溯。产品方案和UI契约在用户项目笔记目录，第三方许可见 [声明](THIRD_PARTY_NOTICES.md)。仓库保持私有。
