@@ -15,3 +15,7 @@
 [源及五编译输出绑定](evidence/draft-recovery/source-binding.json)、[单测](evidence/draft-recovery/unit.log)、[类型](evidence/draft-recovery/typecheck.log)、[构建](evidence/draft-recovery/build.log)、[自有PID最终检查](evidence/draft-recovery/final-cleanup-check.json)。临时假数据已清理，记录的自有PID均不存在，未读取用户便签或停止他人进程。
 
 限制：仅恢复已完成的原子检查点；崩溃发生在节流等待或写入完成前仍可能丢最后一小段，不能称每个按键即时持久或断电零丢失。组合事件为合成验证，非物理系统IME；Windows未执行、新包未构建、性能未重测。未提交编辑异常恢复不在本阶段，仅证明取消编辑不污染新建草稿或已存正文。后续紧凑UI需按新源重新复验，不继承旧布局验收。
+
+## Independent readonly scope
+
+[Independent report](evidence/draft-recovery-independent-readonly/READONLY-REVIEW.md) reviews exact source and builder evidence. It did not build or launch the App. It confirms no new blocking issue in this limited scope; 2s schedules a checkpoint, sequence is not disk ACK, baseline compiled bytes were not embedded, slow native IO was not injected, parent-directory fsync/power-loss guarantees are not claimed.

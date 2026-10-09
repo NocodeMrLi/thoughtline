@@ -1,0 +1,40 @@
+{
+  "baseline": true,
+  "scope": "own isolated Mac source process SIGKILL/restart; no real shortcuts, clipboard, physical IME or Windows",
+  "beforeKillDraft": {
+    "text": "已保存的旧草稿",
+    "title": "旧名称",
+    "project": "旧项目",
+    "agentId": "general"
+  },
+  "afterRestartDraft": {
+    "text": "已保存的旧草稿",
+    "agentId": "general",
+    "title": "旧名称",
+    "project": "旧项目"
+  },
+  "expected": {
+    "text": "  正在输入的新草稿\n第二行 emoji😀  ",
+    "title": "新名称",
+    "project": "新项目",
+    "agentId": "custom"
+  },
+  "recovered": false,
+  "confirmedBaselineLoss": true,
+  "cleanup": {
+    "ownPids": [
+      4474,
+      4475,
+      4476,
+      4477,
+      4480,
+      4482,
+      4483,
+      4484,
+      4485,
+      4486
+    ],
+    "allExited": true,
+    "fakeDataRemoved": true
+  }
+}
