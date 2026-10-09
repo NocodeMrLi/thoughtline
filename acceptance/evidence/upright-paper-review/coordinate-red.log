@@ -1,0 +1,78 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp
+
+ ❯ tests/unit/clipLayout.test.ts (5 tests | 3 failed) 7ms
+   × 保存布局与renderer使用同一可见宽度，未参与操作的夹子中心不漂移 2ms
+   × 主进程只记录renderer实际可见的容量，不把屏外绳段纳入位置 2ms
+   × 筛选布局只冻结当前Agent可见夹子，其他Agent位置原样 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/clipLayout.test.ts > 保存布局与renderer使用同一可见宽度，未参与操作的夹子中心不漂移
+AssertionError: expected 932.0481927710842 to be close to 940, received difference is 7.951807228915754, but expected 5e-9
+ ❯ tests/unit/clipLayout.test.ts:18:52
+     16|  const before=layoutClips(clips.slice(0,3),1440),captured=captureClipP…
+     17|  const after=layoutClips(captured.slice(1),1440);
+     18|  expect(after.visible.find(p=>p.clip.id==='2')!.x).toBeCloseTo(before.…
+       |                                                    ^
+     19| });
+     20| test('主进程只记录renderer实际可见的容量，不把屏外绳段纳入位置',()=>{
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/clipLayout.test.ts > 主进程只记录renderer实际可见的容量，不把屏外绳段纳入位置
+AssertionError: expected [ '0', '1', '2', '3', '4' ] to deeply equal [ '0', '1', '2', '3' ]
+
+- Expected
++ Received
+
+  [
+    "0",
+    "1",
+    "2",
+    "3",
++   "4",
+  ]
+
+ ❯ tests/unit/clipLayout.test.ts:22:86
+     20| test('主进程只记录renderer实际可见的容量，不把屏外绳段纳入位置',()=>{
+     21|  const width=1015,visible=layoutClips(clips,width).visible.map(p=>p.cl…
+     22|  expect(captureClipPositions(clips,width).filter(c=>c.position!==null)…
+       |                                                                                      ^
+     23| });
+     24| test('筛选布局只冻结当前Agent可见夹子，其他Agent位置原样',()=>{
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/clipLayout.test.ts > 筛选布局只冻结当前Agent可见夹子，其他Agent位置原样
+AssertionError: expected { id: '1', agentId: 'claude', …(3) } to deeply equal { id: '1', agentId: 'claude', …(3) }
+
+- Expected
++ Received
+
+@@ -3,7 +3,7 @@
+    "currentId": "1",
+    "id": "1",
+    "ideaIds": [
+      "1",
+    ],
+-   "position": null,
++   "position": 0.5,
+  }
+
+ ❯ tests/unit/clipLayout.test.ts:26:78
+     24| test('筛选布局只冻结当前Agent可见夹子，其他Agent位置原样',()=>{
+     25|  const mixed=clips.slice(0,3).map((c,i)=>({...c,agentId:i===1?'claude'…
+     26|  const captured=captureClipPositions(mixed,1440,'codex');expect(captur…
+       |                                                                              ^
+     27|  const before=layoutClips(mixed.filter(c=>c.agentId==='codex'),1440),a…
+     28|  expect(after.visible.map(p=>p.x)).toEqual(before.visible.map(p=>p.x));
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 2 passed (5)
+   Start at  08:08:49
+   Duration  146ms (transform 76%, tests 11%, import 10%, worker 4%)
+

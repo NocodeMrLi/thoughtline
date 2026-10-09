@@ -1,0 +1,48 @@
+{
+  "commit": "84ea53782f16bc79e4a547c74aa1b0140a4b2726",
+  "scope": "Node-only execution of immutable shared TypeScript and exact main positioned() expression; no Electron, no native UI",
+  "mainPositionedExpression": "const positioned=()=>{const rope=fixedRope(width);const positions=new Map(layoutClips(snapshot.clips,rope.length).visible.map(p=>[p.clip.id,normalizedPosition(p.x,rope.length)]));return {...snapshot,clips:snapshot.clips.map(clip=>positions.has(clip.id)?{...clip,position:positions.get(clip.id)!}:clip)};};",
+  "width": 1440,
+  "ropeLength": 1488,
+  "before": [
+    {
+      "id": "clip-0",
+      "x": 500
+    },
+    {
+      "id": "clip-1",
+      "x": 720
+    },
+    {
+      "id": "clip-2",
+      "x": 940
+    }
+  ],
+  "afterMergeFirstIntoSecond": [
+    {
+      "id": "clip-1",
+      "x": 720
+    },
+    {
+      "id": "clip-2",
+      "x": 931.9018404907976
+    }
+  ],
+  "expectedWithViewportCoordinates": [
+    {
+      "id": "clip-1",
+      "x": 720
+    },
+    {
+      "id": "clip-2",
+      "x": 940
+    }
+  ],
+  "unrelatedThirdClipDrift": -8.098159509202446,
+  "capacityBoundary": {
+    "width": 1040,
+    "rendererVisible": 4,
+    "mainVisible": 5
+  },
+  "result": "coordinate-domain mismatch reproduced statically"
+}
