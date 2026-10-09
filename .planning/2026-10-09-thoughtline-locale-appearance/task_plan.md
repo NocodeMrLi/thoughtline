@@ -10,7 +10,8 @@ Deliver English and first-level tactile day/night capsules without adding rope c
 - [x] Confirm clean main713a1fe and new isolated SDD ledger, preflight table/rulings.
 - [x] Task1: production and source validation212/4 +11repair/17main; scoped fixreview clean at7de6eab after source0cab2bb.
 - [ ] Task2 renewed delivery: previousd9cf24-asset gate passed; final source repairf809fe3/227 requires reviewed newfreeze+BOTH newlybuilt packages.
-- [ ] Final whole-increment review/fix, exact private publication, docs and cleanup.
+- [x] Final whole-increment review and ONE scoped production fix; narrow Task2 EOL fixture review approved.
+- [ ] Exact renewed dual-package consumer, private publication, final README/docs and cleanup.
 
 ## Errors retained
 - Mandatory compaction hook exit1: configured collaboration-memory directory missing; no fake read.

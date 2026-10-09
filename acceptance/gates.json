@@ -1,8 +1,8 @@
 {
-  "stage": "Final code review and ONE scoped repair approved; fresh same-source dual-package rebuild required before private publication",
+  "stage": "Final production review and included EOL fixture scoped review approved; renewed exact-source paired packages required",
   "asOf": "2026-10-10 Asia/Shanghai",
   "branch": "main",
-  "lastCommittedSource": "f809fe36b72bee8f8bdc9afe0607591c98013b23",
+  "lastCommittedSource": "517ff10e1e9cece60842ddcfae71f9eb1a6356b5",
   "currentCandidateVersion": "0.0.17-preview.3",
   "formalAcceptance": false,
   "round1": {
@@ -513,10 +513,10 @@
     },
     "materialBoundary": "paper stays matte paper; current native vibrancy/acrylic fallback is not native Liquid Glass; paired additional polish evaluation deferred",
     "readmeHeroGif": "deferred by user until complete independent QA and fixes",
-    "status": "ONE source fix and scoped review approved; no repaired packages yet; paired rebuild required",
+    "status": "Reviewed CRLF fixture fix; fresh same-source Mac and Windows consumer gates pending",
     "reviewedImplementationSource": "f809fe36b72bee8f8bdc9afe0607591c98013b23",
     "sourceInputCount": 227,
-    "canonicalInputSha256": "0f0b1048ba136430216b731d51aa6b7db050f1c788c17d9299084e50efab3c7b",
+    "canonicalInputSha256": "10367d7b3dc5d920af5e781b13b9daa1848e273cec4c542d5e652a198a68dffa",
     "actualRepairedPackageSource": null,
     "historicalD9Candidate": {
       "status": "historical d9cf candidate: gates passed before final source repair; private draft still unpublished and must be rebuilt",
@@ -586,6 +586,27 @@
         "task2Important": 0,
         "task2Minor": 1
       }
+    },
+    "packagedUnitFixtureRepair": {
+      "source": "517ff10e1e9cece60842ddcfae71f9eb1a6356b5",
+      "review": "evidence/appearance/controller-final/task-2-crlf-fixture-review.md",
+      "spec": "pass",
+      "quality": "pass",
+      "localLfCrlfChecks": 8,
+      "macUnitPassed": 226,
+      "windowsOnlySkipped": 4,
+      "actualRunnerHistoricalCrlfBytes": "not retained; mechanism inference only"
+    },
+    "blocked3faConsumer": {
+      "source": "3fa46838cac1161fc6909ac0a2566cd8a87e79a8",
+      "windowsRun": 37968756145,
+      "unitPassed": 222,
+      "unitFailed": 4,
+      "installerProduced": false,
+      "macActualPackageChecks": 6,
+      "macActualAppearanceChecks": 3,
+      "promoted": false,
+      "evidence": "evidence/appearance/task2-final-rebuild-3fa4683/task-2-report.md"
     }
   }
 }

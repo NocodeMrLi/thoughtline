@@ -40,3 +40,7 @@ Launch readiness scopedreviewclean all3gapsaddressed/noCriticalImportant; oneMin
 2026-10-10: d9cf75b same-source actualMac6+3/Windows220+17+11+3/reinstall/uninstall gates passed. f1351cc evidence push/private draft complete24/23 verified. Task2review Spec✅/QualityApproved0Critical0Important1Minor(DEP0190), actual/physical boundary retained. Original3cb failure andpartial13 checkpoint kept. Extra own duplicates1496858624 allocatedbytes removed. Whole-increment finalreviewnext; README queued8-file text/version patch, screenshot/GIFdeferred.
 
 2026-10-10: ONEwholefinalreview I1/M1 repairedsourcef809fe3, evidence22d1ccc/report correctiona94f0ad.10focused/222+4/type/build/actualMac20+11;227capture exact/35PID5profile+ownedbuildgone. ONEscopedreviewalladdressed/noNewCriticalImportant; M2unattributedDEP0190defer. Need newexactfreeze andBOTH package rebuild; oldd9cf24draft remainsunpublished anddoesnotincludeproductionfix.
+
+2026-10-10 consumer3fa4683 blocked: Win37968756145 222pass/4unitfixturefail (fixedLFmatch), no installer; Macactual6+3 only. Evidence65b7ea8, draftstilld9cf/unpublished. Task2 narrow LF/CRLF fixture RED/GREEN + scopedreview then new exact BOTH rebuild, final broadreview not repeated. Compaction refresh hook again exit1 configured directory missing; no fake refresh.
+
+Task2 CRLF fixture source517ff10/evidence80c5ac6, scopedreviewADDRESSED/SpecPASS/QualityPASS/0newfinding; local8EOLcases+226unit4skip/typepassed. Canon22710367d7b…a68dffa. Nextexactfreeze+BOTH consumers, no currentpackage promotion.

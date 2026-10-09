@@ -21,3 +21,9 @@ User2026-10-10 annotationconfirmed: elevatebothplatformstogether under eachsyste
 ## Task2 actual package gate failure
 
 Frozen3cb successfulWin216/216/source10+17+11/NSIS/installedschema2+backuprestart precedes first packagedappearance launch failure. New fixture passes ELECTRON_RUN_AS_NODE empty; successful old fixture deletes key. Electron44 Win getenv_s presence andMacnonempty differ (official versioned sources); originalrunner nochildstderr prohibits 100%deathcauseclaim. Playwright1.62.1 fourwaiters/serialawait can earlyterminateNode24 unhandledreject beforefixturefinally: isolatedsyntheticprobe reproduces. Test-only env deletion+failure supervision under investigation; no productionchange, no blindretry. Allactualfailure retained commit0df7ee0, .3tag/draftnone.
+
+2026-10-10 consumer3fa4683 blocked: Win37968756145 222pass/4unitfixturefail (fixedLFmatch), no installer; Macactual6+3 only. Evidence65b7ea8, draftstilld9cf/unpublished. Task2 narrow LF/CRLF fixture RED/GREEN + scopedreview then new exact BOTH rebuild, final broadreview not repeated. Compaction refresh hook again exit1 configured directory missing; no fake refresh.
+
+Controller initial source-audit guessed source-after.json ENOENT before any mutation; rg found actual vector-after.json and exact227 key/hash audit passed. No unread evidence used.
+
+Task2 CRLF fixture source517ff10/evidence80c5ac6, scopedreviewADDRESSED/SpecPASS/QualityPASS/0newfinding; local8EOLcases+226unit4skip/typepassed. Canon22710367d7b…a68dffa. Nextexactfreeze+BOTH consumers, no currentpackage promotion.

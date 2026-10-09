@@ -1,5 +1,10 @@
 # v0.0.17-preview.3 同源双端测试交付
 
+最新消费检查点：Windows `37968756145` 从3fa4683在verify阶段222通过／4夹具失败，未生成安装器；该次Mac6+3通过仅为阻断候选。保留[失败报告](evidence/appearance/task2-final-rebuild-3fa4683/task-2-report.md)。已仅修复LF／CRLF回调提取夹具，8项对照通过、Mac完整单测226通过／4平台跳过、类型通过；[限定复审](evidence/appearance/controller-final/task-2-crlf-fixture-review.md)Spec／Quality通过。生产I1／M1源码和唯一终审复审不变，新227输入canonical为`10367d7b3dc5d920af5e781b13b9daa1848e273cec4c542d5e652a198a68dffa`，必须从新冻结源码重建双端后再发布。
+
+下方d9cf旧候选与3fa单Mac均为历史，当前最终交付目录尚不存在；历史目录分别为`delivery/failed-final-review-d9cf75b-v0.0.17-preview.3`、`delivery/blocked-final-rebuild-3fa4683-v0.0.17-preview.3`。草稿仍未发布，旧tag未改。
+
+
 当前状态：整个增量终审的I1／M1已修复并通过唯一限定复审，剩0Critical／0Important／1非阻断Minor。必须新源码同源双端重建后才发布；下方d9cf双包／24附件是旧候选历史，不含f809fe3并发提示修复。用户和物理双端验收未通过。原第一轮修复已交付preview.2；本增量加入完整中英界面及首层太阳／月亮滑动胶囊，保留绳、夹子、纸张的主界面。
 
 | 平台 | 包 | 字节 | SHA256 |
