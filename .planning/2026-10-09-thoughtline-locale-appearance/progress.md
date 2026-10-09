@@ -26,3 +26,13 @@ Reviewedhead d489b1d; Specissues/Qualityneedsfixes,0Critical/3Important/1Minor. 
 Fixround1DONE implementation0cab2bb/evidence7de6eab.212passed/4Win-onlyskipped; type/buildexit0,repair11+main17controlledUIpassed. Source222vector2bb6af24495e914ff333886348f6077135682ff2f7506c14e40b9360ab3f95fc; ui-final2all222hash/keysequalcanonical. Rootrecomputedfrozenvectorat7deandreadactual11passresult; uniquerecordedownPIDsESRCH/profileabsent/protected30628alive. Freshscopedrereviewer/root/locale_appearance_fix_review(gpt-6-sol)active; no Task2executionbeforegate.
 
 Task1scopedrereview: allthreeImportant+ASCIIproducerreadinessADDRESSED, noNewCriticalImportant/out-of-scopeextension. ProducerSpec/Qualitygate satisfied;222canon/currentper-runhashcomplete. Task1complete, minorwarningnoise deferredaccurately; actualpackage/Windows→Task2, realplatform/receivergatesremain open. RootpreparesconsistentexactfreezeHEADwithonlyexcludedplanning/auditevidence updates.
+
+Task2 frozen3cb failed Windows installedappearance firstlaunch (run37960611892attempt1); source216+10+17+11 and initialinstalledschema2/backup/restart passed, reinstall/uninstall not reached/installerartifact absent. Mac actual6+3 passed but unpromoted. No tag/draft, root read retained failure and routed diagnosis; external docs corrected with full backups.
+
+Latestuserrests/nextmorningacceptance: continueauthorizedwork, finalREADMEtext/versioncheck andpackage push/sourcebinding andowntrashcleanup required; GIFremainsdeferred. Exactquote saved/readbackinrequestedmaster/fullbeforebackupin指定归档. Noautomation/reminderrequested.
+
+Preparedonly sevenREADMEfeaturebullets+localizationdisclosure+versionchanges; noREADME/imagebyteschanged. Initialpreparationassert assumedtranslatedbulletsbold, foundactualplainbullets/readthenadjustedselector; failedassertbeforewrite/nofilemutation. Applyafteractualpublication.
+
+Task2 narrowlaunch source0c768925/evidence831b208,225canon7b658b2d…764cc independentlyrecomputed. Focused4/4,unit216/4,typepass,existingDMG3/3 regression. Fresh scopedreview /root/packaged_launch_fix_review running(gpt-6-sol); noCI/build/publicationyet. RootauditedMac11PIDs/profileabsent, protected30628alive; RED577Bseed archived/exactownedprofile separatelycleaned withhistoricalPIDgapunchanged. External38/master/feature/00/07 accuratependingstate/backedup/readback.
+
+Launch readiness scopedreviewclean all3gapsaddressed/noCriticalImportant; oneMinorstage diagnostic retained forfinalreview. Rootpreparesclean225freeze; existing3cbMacpassingcandidatecannotbepromoted. Newdualbuildnext.

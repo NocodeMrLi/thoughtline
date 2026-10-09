@@ -17,3 +17,7 @@ Independenttaskreview confirms3Important defects despiteprevioussourcepasses; te
 User2026-10-10 explicitly: glass quality must not convertpaper toglass. Exactquote backedup/saved/readback inmaterialreference+master. Paperthin/matte/naturalcurve/readable; candidateglassonlyauxchrome/smallcontrols. Production increment still no glass redesign; original implementer informed, including newfixworkflowWindowsCI evidence readiness.
 
 User2026-10-10 annotationconfirmed: elevatebothplatformstogether under eachsystemstyle, never Mac-only. Exactquote saved/readback master/materialref; currentdual .3package gatesunchanged, futurematerialexperimentmustcoverMac+Windowsaspairedscope. Paperremainsmattepaper.
+
+## Task2 actual package gate failure
+
+Frozen3cb successfulWin216/216/source10+17+11/NSIS/installedschema2+backuprestart precedes first packagedappearance launch failure. New fixture passes ELECTRON_RUN_AS_NODE empty; successful old fixture deletes key. Electron44 Win getenv_s presence andMacnonempty differ (official versioned sources); originalrunner nochildstderr prohibits 100%deathcauseclaim. Playwright1.62.1 fourwaiters/serialawait can earlyterminateNode24 unhandledreject beforefixturefinally: isolatedsyntheticprobe reproduces. Test-only env deletion+failure supervision under investigation; no productionchange, no blindretry. Allactualfailure retained commit0df7ee0, .3tag/draftnone.

@@ -1,0 +1,23 @@
+# Task 2 packaged launch fix: scoped independent re-review
+
+- **Portable absent-variable launch contract** — **ADDRESSED**. `tests/electron/packaged-launch.cjs:5-10` removes the known runtime overrides case-insensitively; `tests/electron/packaged-appearance-worker.cjs:9` passes that environment to Playwright instead of empty override values. `tests/unit/packagedLaunch.test.ts:8,12` covers absent keys and Windows case variants. The original first-launch death in run 37960611892 remains causally unproven; this verdict is about fixture readiness, not a successful Windows installed-app run.
+- **Early Playwright/Node fatal exit bypasses fixture `finally` and leaves no JSON** — **ADDRESSED**. The public fixture delegates to a supervisor (`tests/electron/packaged-appearance.cjs:1-3`); `tests/electron/packaged-launch.cjs:43-49` writes a failed receipt before starting the worker, `:52-78` retains worker exit status, stderr/stdout files, owned launch events and an updated failed receipt even when the worker writes no completion JSON. `tests/electron/packaged-launch.cjs:15-35` captures the exact launch without changing Playwright rejection policy. The actual invalid-Node probe has exit 1, `passed=false`, a spawn PID and `bad option` stderr in `acceptance/evidence/appearance/launch-repair/early-exit-green/`; `tests/unit/packagedLaunch.test.ts:13` covers that path. The original Windows child exit reason is still unknown.
+- **No returned app must not imply normal quit or safe profile deletion** — **ADDRESSED**. `tests/electron/packaged-appearance-worker.cjs:8-9,19` tracks launch failure and requires a returned lifecycle before marking normal quit or invoking cleanup. `tests/electron/packaged-launch.cjs:47,73-75` leaves `normalQuit=false`, `allExited=false`, `profileRemoved=false` and retains the profile when no worker receipt exists. `tests/unit/packagedLaunch.test.ts:9,13` covers rejected launch and early process death. The separate later cleanup of a synthetic profile does not rewrite the original failure receipt.
+
+## New breakage in the fix diff
+
+- **Minor — mismatched worker receipt receives a misleading stage.** At `tests/electron/packaged-launch.cjs:63-66`, a completion JSON whose profile or executable does not match is correctly rejected and remains failed, but the stage is still set to `worker-completed` because it uses the mere existence of `completed`. The explicit mismatch error preserves the failure; this only weakens diagnostic clarity for that anomalous case.
+
+## Out-of-scope observations
+
+- No current Windows runner result exists for this repaired source. Run 37960611892 stopped before same-version reinstall and uninstall; the rebuilt Windows x64 installer, installed appearance check, source-vector match and later gates still need downstream verification. Neither the unit tests nor the successful old-source Mac DMG run substitutes for those gates.
+- The successful Mac regression used the previous blocked `3cb50bb` DMG. Its raw receipt records three package checks, worker exit 0 and normal cleanup, but does not establish new-source Mac package acceptance.
+- The historical Windows child death lacks child stderr/exit evidence. The repaired fixture can collect those on a future run; it cannot retroactively prove that the blank environment variables caused the original death. The controller's separate post-audit cleanup of the old RED synthetic profile does not change that historical uncertainty.
+
+## Checks reviewed
+
+- Read the focused four-file fix diff once and compared the moved package assertion body with the original in that diff; no package assertion was removed or weakened.
+- Checked raw `fixture-red.log` (two expected failures), `fixture-green-attempt1-failed.log` (one retained test failure), `fixture-final-green.log` (4/4), `unit-full.log` (216 passed, four Windows-only skipped), `typecheck.log`, invalid-Node failure receipt/events/worker stderr, and old-package Mac receipt plus cleanup audit. The final focused run covers the final source; the full unit/Mac runs preceded only receipt host/version metadata.
+- Checked the pinned Playwright launch source at `node_modules/playwright-core/lib/coreBundle.js:43988-44018`: on Windows it quotes the executable in a shell command, which matches the narrow recorder's quoted-prefix test at `tests/electron/packaged-launch.cjs:19`. No suite, package launch or Electron workflow was rerun in this review. Checkout/index/HEAD were not changed by the review.
+
+**Fix round: All findings addressed, no new Critical/Important breakage.** One Minor diagnostic-stage finding remains. Windows installed-package acceptance, subsequent installer gates and exact historical cause remain open downstream.
