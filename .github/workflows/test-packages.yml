@@ -21,11 +21,24 @@ jobs:
       - run: npm run package:win
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - name: Bind package to source and compiled outputs
+        run: node scripts/windows-build-manifest.cjs
+      - name: Parse user isolation launcher without launching
+        shell: pwsh
+        run: |
+          $parseErrors = $null
+          $tokens = $null
+          [System.Management.Automation.Language.Parser]::ParseFile((Join-Path $PWD 'docs/delivery/Start-Thoughtline-Isolated.ps1'), [ref]$tokens, [ref]$parseErrors) | Out-Null
+          if ($parseErrors.Count -ne 0) { throw ($parseErrors | Out-String) }
+          Copy-Item docs/delivery/Start-Thoughtline-Isolated.ps1 dist/Start-Thoughtline-Isolated.ps1
+      - name: Disposable runner installation and data retention preflight
+        shell: pwsh
+        run: ./scripts/windows-installer-preflight.ps1
       - name: Hash test installers
         shell: pwsh
         run: |
           $files = Get-ChildItem dist -Filter '*.exe'
-          if ($files.Count -eq 0) { throw 'No installer was built' }
+          if ($files.Count -ne 1) { throw 'Expected exactly one x64 installer' }
           $files | ForEach-Object {
             $hash = Get-FileHash $_.FullName -Algorithm SHA256
             "$($hash.Hash.ToLower())  $($_.Name)"
@@ -36,5 +49,17 @@ jobs:
           path: |
             dist/*.exe
             dist/SHA256SUMS.txt
+            dist/build-manifest.json
+            dist/windows-installed-preflight.json
+            dist/windows-installer-preflight.json
+            dist/Start-Thoughtline-Isolated.ps1
           if-no-files-found: error
+          retention-days: 30
+      - name: Retain failed preflight diagnostics
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: Thoughtline-Windows-preflight-failed-${{ github.sha }}-${{ github.run_attempt }}
+          path: dist/*.json
+          if-no-files-found: ignore
           retention-days: 30
