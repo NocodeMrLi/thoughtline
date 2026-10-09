@@ -1,5 +1,5 @@
 {
-  "stage": "0.0.17-preview.2 source ready to freeze; final scoped Spec/Quality Approved; actual packages/physical acceptance pending",
+  "stage": "0.0.17-preview.2 actual-package harness fix2 reviewed; ready for new freeze and dual rebuild; physical acceptance pending",
   "asOf": "2026-10-09 Asia/Shanghai",
   "branch": "main",
   "lastCommittedSource": "fa45cb88105db81806e419bba5d8029af9540389",
@@ -146,6 +146,23 @@
         "allRecordedPidsAbsent": true,
         "allRecordedTemporaryDirsAbsent": true,
         "physicalAcceptance": false
+      },
+      "previousSourceFreeze": "9a862b7e6734d8b453f45e8130ebe7677f046459",
+      "packageFix2": {
+        "status": "Spec/Quality PASS; actual rebuilt package gate pending",
+        "report": "evidence/round1/p6-package-fix2-report.md",
+        "review": "evidence/round1/p6-package-fix2-review.md",
+        "firstPackageAcceptance": "failed at evaluate global require; retained unapproved",
+        "productionChanged": false,
+        "parentCleanup": "evidence/round1/p6-delivery-local/package-dialog-fix2-controller-cleanup-audit.json"
+      },
+      "previousWindowsCi": {
+        "id": 37942506422,
+        "headSha": "9a862b7e6734d8b453f45e8130ebe7677f046459",
+        "result": "success",
+        "scope": "interim source before one-line package fixture fix; not final source",
+        "run": "evidence/round1/p6-delivery-local/windows-9a-run-final.json",
+        "log": "evidence/round1/p6-delivery-local/windows-9a-run-final.log"
       }
     }
   },

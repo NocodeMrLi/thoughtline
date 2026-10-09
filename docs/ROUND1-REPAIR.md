@@ -99,3 +99,5 @@ Windows严格schema2→schema3完整预期、首次旧原字节备份/restart以
 剩余问题：ONE限定再审、准确源码阶段提交和双端最终构建／包内验收；物理Mac／Windows输入法、DPI、多屏、焦点与真实微信／豆包／WorkBuddy接收仍未测。受控暂停帧不等于自然帧率或iPhone并排手感。
 
 最终限定复核：`acceptance/evidence/round1/final-scoped-rereview.md`，R1–R4全部ADDRESSED，Spec／Quality Approved；157冻结输入、完整13文件diff、12张受控动效PNG、10项CI接入已独立核对，无新增阻断。184／4skip全量与9个最终串行源流程均通过；实际最终包、物理两端和真实目标接收仍须后续门禁。
+
+P6实际包门禁fix2：9a862b7的Mac严格构建与签名通过，实际App迁移／编辑／关窗／重启／最近删除通过；备份对话框替身的global require上下文错误导致完整包fixture失败，原JSON／截图／日志保留。已限定改用evaluate提供的dialog；真实隔离source callback RED/GREEN与导出manifest/SHA通过，Spec／Quality PASS，原严格包断言未放宽。新sourcefreeze后重新构建两端和完整包fixture；旧9a包未批准。9a来源WindowsCI37942506422 success，188单测及10source工作流、严格NSIS预检通过，仅作阶段来源证据。

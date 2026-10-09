@@ -1,0 +1,6 @@
+Read-only controller audit attempt 1 assumed a nested cleanup object.
+Actual receipt keys: root, red, green, normalClose, allExited, dataRemoved, pids.
+Traceback (most recent call last):
+  File "<stdin>", line 6, in <module>
+KeyError: 'cleanup'
+Exit 1 before audit output or mutation. Corrected by using the receipt's actual root/pids fields. No App launched or process signaled.

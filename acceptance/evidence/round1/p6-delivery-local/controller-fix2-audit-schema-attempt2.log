@@ -1,0 +1,5 @@
+Read-only controller audit attempt 2 verified attempt1 PID/stat, then assumed attempt2 used the same root/pids keys.
+Traceback (most recent call last):
+  File "<stdin>", line 4, in <module>
+KeyError: 'root'
+Exit 1 before audit output or mutation. Actual attempt2 uses directory/ownedPids; complete JSON read before corrected final audit. No App launched or process signaled.

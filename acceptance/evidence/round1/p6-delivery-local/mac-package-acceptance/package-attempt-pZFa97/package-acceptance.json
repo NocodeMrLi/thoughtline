@@ -1,0 +1,36 @@
+{
+  "passed": false,
+  "evidenceDirectory": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round1/p6-delivery-local/mac-package-acceptance/package-attempt-pZFa97",
+  "attempt": "p6-dmg-1",
+  "scope": "Actual frozen Mac App with isolated synthetic data; DOM/IPC and packaged asar, not physical input or Windows acceptance",
+  "host": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "release": "24.3.0"
+  },
+  "checks": {
+    "schema2ReadAs3WithIdentityAndDraft": true,
+    "detailInlineAutosaveAndCloseFlush": true,
+    "restartPreservesTextIdMetadataAndNewDraft": true,
+    "calendarSearchSoftDeleteRestore": true
+  },
+  "error": "electronApplication.evaluate: ReferenceError: require is not defined\n    at eval (eval at evaluate (:311:30), <anonymous>:1:14)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/package-acceptance.cjs:29:215",
+  "cleanup": {
+    "directory": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-package-acceptance-hbglbj",
+    "ownedPids": [
+      77936,
+      77940,
+      77941,
+      77943,
+      77944,
+      77957,
+      77959,
+      77960,
+      77962,
+      77963
+    ],
+    "normalClose": true,
+    "allExited": true,
+    "fakeDataRemoved": true
+  }
+}
