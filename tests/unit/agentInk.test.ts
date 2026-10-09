@@ -10,14 +10,14 @@ test('预设蓝和暖橙在两主题都保留明显色彩，拒绝85%近黑混�
  }
 });
 test('可读性校准包含标签区域最深1.5%跨纸明暗，不只未叠加的纸基色',()=>{
- for(const color of ['#4C90D9','#D79551','#9574CE','#FFFFFF','#000000','#00FF00','#FF0000','#0000FF','#EEEEEE','#123456']){
+ for(const color of ['#4C90D9','#D79551','#9574CE','#FFFFFF','#000000','#00FF00','#FF0000','#0000FF','#EEEEEE','#123456','#8AADD4','#A0A3AA']){
   const result=agentInkColors(color);
-  for(const [theme,paper] of [['light',[242,240,233]],['dark',[179,175,162]]] as const){
-   const foreground=lum(rgb(result[theme])),background=lum(paper.map(v=>v*.985));expect((background+.05)/(foreground+.05)).toBeGreaterThanOrEqual(4.6);
+  for(const [theme,paper] of [['light',[245,239,223]],['dark',[56,56,49]]] as const){
+   const foreground=lum(rgb(result[theme]));for(const backdrop of [paper.map(v=>v*.985),paper.map(v=>v*.955+255*.045)]){const background=lum(backdrop);expect((Math.max(background,foreground)+.05)/(Math.min(background,foreground)+.05)).toBeGreaterThanOrEqual(4.6);}
   }
  }
 });
-test('深色自定义归属保留原色，计算确定且不改夹子输入色',()=>{
+test('自定义夹子输入色保持不变，标签按两主题可读性调亮或调暗',()=>{
  const custom='#123456',result=agentInkColors(custom);expect(agentInkColors(custom)).toEqual(result);
- expect(result.light).toBe(custom);expect(result.dark).toBe(custom);expect(custom).toBe('#123456');
+ expect(result.light).toBe(custom);expect(result.dark).not.toBe(custom);expect(custom).toBe('#123456');
 });

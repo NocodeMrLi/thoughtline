@@ -1,0 +1,26 @@
+PASS light-rendered-custom-Agent-contrast
+FAIL dark-rendered-custom-Agent-contrast {"theme":"dark","text":"Custom 中文 0 · 项目，原文","ink":"rgb(23, 65, 110)","paper":"rgb(56, 56, 49)","ratio":1.1490433506875892}
+PASS custom-clip-color-and-user-names-unchanged
+FAIL switch-then-drag-completion-current-English Expected values to be strictly equal:
++ actual - expected
+
++ '夹子位置已保存'
+- 'Clip position saved'
+
+PASS existing-drag-notice-renders-current-Chinese
+FAIL out-of-bounds-cancel-current-English Expected values to be strictly equal:
++ actual - expected
+
++ '拖动已取消'
+- 'Drag canceled'
+
+FAIL actual-page-save-IO-current-English-diagnostic-bytes Expected values to be strictly equal:
++ actual - expected
+
++ "本地保存未成功，请保留文字并重试。 (ENOSPC: open '/用户/原始，中文 (a,b).json')"
+- "Local save failed. Keep your text and retry. (ENOSPC: open '/用户/原始，中文 (a,b).json')"
+
+page.waitForSelector: Target page, context or browser has been closed
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:20:75 {
+  log: []
+}

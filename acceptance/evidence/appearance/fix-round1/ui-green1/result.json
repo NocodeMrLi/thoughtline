@@ -1,0 +1,54 @@
+{
+  "checks": [
+    "light-rendered-custom-Agent-contrast",
+    "dark-rendered-custom-Agent-contrast",
+    "custom-clip-color-and-user-names-unchanged",
+    "switch-then-drag-completion-current-English",
+    "existing-drag-notice-renders-current-Chinese",
+    "out-of-bounds-cancel-current-English"
+  ],
+  "failures": [],
+  "contrast": [
+    {
+      "theme": "light",
+      "samples": [
+        {
+          "text": "Custom 中文 0 · 项目，原文",
+          "ink": "rgb(38, 107, 180)",
+          "paper": "rgb(245, 239, 223)"
+        },
+        {
+          "text": "Custom 中文 1 · 项目，原文",
+          "ink": "rgb(59, 107, 161)",
+          "paper": "rgb(245, 239, 223)"
+        },
+        {
+          "text": "Custom 中文 2 · 项目，原文",
+          "ink": "rgb(102, 105, 114)",
+          "paper": "rgb(245, 239, 223)"
+        }
+      ]
+    },
+    {
+      "theme": "dark",
+      "samples": [
+        {
+          "text": "Custom 中文 0 · 项目，原文",
+          "ink": "rgb(130, 178, 228)",
+          "paper": "rgb(56, 56, 49)"
+        },
+        {
+          "text": "Custom 中文 1 · 项目，原文",
+          "ink": "rgb(143, 177, 214)",
+          "paper": "rgb(56, 56, 49)"
+        },
+        {
+          "text": "Custom 中文 2 · 项目，原文",
+          "ink": "rgb(171, 174, 180)",
+          "paper": "rgb(56, 56, 49)"
+        }
+      ]
+    }
+  ],
+  "scope": "isolated source rendered DOM/IPC/controlled pointer, IO and native-dialog interception; not physical acceptance"
+}

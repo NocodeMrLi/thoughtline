@@ -1,0 +1,28 @@
+PASS light-rendered-custom-Agent-contrast
+PASS dark-rendered-custom-Agent-contrast
+PASS custom-clip-color-and-user-names-unchanged
+PASS switch-then-drag-completion-current-English
+PASS existing-drag-notice-renders-current-Chinese
+PASS out-of-bounds-cancel-current-English
+PASS locale-broadcast-does-not-cancel-active-drag
+PASS active-drag-completion-uses-latest-locale
+PASS actual-page-save-IO-current-English-diagnostic-bytes
+FAIL outer-storage-catch-current-English-diagnostic-bytes Expected values to be strictly equal:
++ actual - expected
+
++ ''
+- "Operation incomplete. The original location is retained. ENOSPC: open '/用户/原始，中文 (a,b).json'"
+
+PASS actual-startup-repository-IO-English-diagnostic-bytes
+AssertionError [ERR_ASSERTION]: [{"name":"outer-storage-catch-current-English-diagnostic-bytes","error":"AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ ''\n- \"Operation incomplete. The original location is retained. ENOSPC: open '/用户/原始，中文 (a,b).json'\"\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:22:518\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:6:39)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:22:435"}]
+
+1 !== 0
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:25:9 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}

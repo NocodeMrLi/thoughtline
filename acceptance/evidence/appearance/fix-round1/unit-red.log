@@ -1,0 +1,107 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/agentInk.test.ts (3 tests | 2 failed) 7ms
+   × 可读性校准包含标签区域最深1.5%跨纸明暗，不只未叠加的纸基色 3ms
+   × 深色自定义归属保留原色，计算确定且不改夹子输入色 1ms
+ ❯ tests/unit/i18n.test.ts (11 tests | 6 failed) 86ms
+   × unknown diagnostics retain exact bytes: ENOENT: open '/用户/原始，中文.json' 4ms
+   × unknown diagnostics retain exact bytes: ENOSPC /用户/原始中文 (，,).json 1ms
+   × unknown diagnostics retain exact bytes: raw, diagnostic，unchanged 0ms
+   × unknown diagnostics retain exact bytes: 项目：原始诊断 0ms
+   × actual repository IO and startup envelope preserve diagnostic payload 51ms
+   × outer main storage error translates its wrapper only; nested app errors and success paths are deliberate 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/agentInk.test.ts > 可读性校准包含标签区域最深1.5%跨纸明暗，不只未叠加的纸基色
+AssertionError: expected 4.587531527391459 to be greater than or equal to 4.6
+ ❯ tests/unit/agentInk.test.ts:16:236
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  tests/unit/agentInk.test.ts > 深色自定义归属保留原色，计算确定且不改夹子输入色
+AssertionError: expected '#123456' not to be '#123456' // Object.is equality
+ ❯ tests/unit/agentInk.test.ts:22:60
+     20| test('深色自定义归属保留原色，计算确定且不改夹子输入色',()=>{
+     21|  const custom='#123456',result=agentInkColors(custom);expect(agentInkC…
+     22|  expect(result.light).toBe(custom);expect(result.dark).not.toBe(custom…
+       |                                                            ^
+     23| });
+     24|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  tests/unit/i18n.test.ts > unknown diagnostics retain exact bytes: ENOENT: open '/用户/原始，中文.json'
+AssertionError: expected 'ENOENT: open \'/用户/原始, 中文.json\'' to be 'ENOENT: open \'/用户/原始，中文.json\'' // Object.is equality
+
+Expected: "ENOENT: open '/用户/原始，中文.json'"
+Received: "ENOENT: open '/用户/原始, 中文.json'"
+
+ ❯ tests/unit/i18n.test.ts:9:212
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  tests/unit/i18n.test.ts > unknown diagnostics retain exact bytes: ENOSPC /用户/原始中文 (，,).json
+AssertionError: expected 'ENOSPC /用户/原始中文 (, ,).json' to be 'ENOSPC /用户/原始中文 (，,).json' // Object.is equality
+
+Expected: "ENOSPC /用户/原始中文 (，,).json"
+Received: "ENOSPC /用户/原始中文 (, ,).json"
+
+ ❯ tests/unit/i18n.test.ts:9:212
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  tests/unit/i18n.test.ts > unknown diagnostics retain exact bytes: raw, diagnostic，unchanged
+AssertionError: expected 'raw, diagnostic, unchanged' to be 'raw, diagnostic，unchanged' // Object.is equality
+
+Expected: "raw, diagnostic，unchanged"
+Received: "raw, diagnostic, unchanged"
+
+ ❯ tests/unit/i18n.test.ts:9:212
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  tests/unit/i18n.test.ts > unknown diagnostics retain exact bytes: 项目：原始诊断
+AssertionError: expected 'Project: 原始诊断' to be '项目：原始诊断' // Object.is equality
+
+Expected: "项目：原始诊断"
+Received: "Project: 原始诊断"
+
+ ❯ tests/unit/i18n.test.ts:9:212
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  tests/unit/i18n.test.ts > actual repository IO and startup envelope preserve diagnostic payload
+AssertionError: expected '本地保存未成功, 请保留文字并重试。 (ENOSPC: open \'/用…' to be 'Local save failed. Keep your text and…' // Object.is equality
+
+Expected: "Local save failed. Keep your text and retry. (ENOSPC: open '/用户/原始，中文 (a,b).json')"
+Received: "本地保存未成功, 请保留文字并重试。 (ENOSPC: open '/用户/原始，中文 (a,b).json')"
+
+ ❯ tests/unit/i18n.test.ts:10:577
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  tests/unit/i18n.test.ts > outer main storage error translates its wrapper only; nested app errors and success paths are deliberate
+AssertionError: expected '操作未完成, 仍使用原位置。EACCES /原始，目录 (a,b)' to be 'Operation incomplete. Original locati…' // Object.is equality
+
+Expected: "Operation incomplete. Original location retained. EACCES /原始，目录 (a,b)"
+Received: "操作未完成, 仍使用原位置。EACCES /原始，目录 (a,b)"
+
+ ❯ tests/unit/i18n.test.ts:11:215
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  8 failed | 6 passed (14)
+   Start at  00:23:02
+   Duration  359ms (transform 49%, tests 36%, import 12%, worker 4%)
+

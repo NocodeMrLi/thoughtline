@@ -11,7 +11,7 @@ const version = require('../package.json').version;
 const delivery = process.env.THOUGHTLINE_DELIVERY_DIR;
 if (!delivery) throw Error('Set THOUGHTLINE_DELIVERY_DIR to the new frozen package delivery directory.');
 const dmg = path.join(delivery, `Thoughtline-${version}-mac-arm64.dmg`);
-const output = path.join(delivery, `启动${version}隔离体验.command`);
+const output = path.join(delivery, 'Start-Thoughtline-Isolated-Mac.command');
 const q = value => `'${value.replaceAll("'", "'\\''")}'`;
 const hash = file => createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const run = (cmd, args) => execFileSync(cmd, args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();

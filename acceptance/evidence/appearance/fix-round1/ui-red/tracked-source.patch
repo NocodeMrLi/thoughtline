@@ -1,0 +1,35 @@
+diff --git a/tests/unit/agentInk.test.ts b/tests/unit/agentInk.test.ts
+index dd75358..871273b 100644
+--- a/tests/unit/agentInk.test.ts
++++ b/tests/unit/agentInk.test.ts
+@@ -10,14 +10,14 @@ test('预设蓝和暖橙在两主题都保留明显色彩，拒绝85%近黑混
+  }
+ });
+ test('可读性校准包含标签区域最深1.5%跨纸明暗，不只未叠加的纸基色',()=>{
+- for(const color of ['#4C90D9','#D79551','#9574CE','#FFFFFF','#000000','#00FF00','#FF0000','#0000FF','#EEEEEE','#123456']){
++ for(const color of ['#4C90D9','#D79551','#9574CE','#FFFFFF','#000000','#00FF00','#FF0000','#0000FF','#EEEEEE','#123456','#8AADD4','#A0A3AA']){
+   const result=agentInkColors(color);
+-  for(const [theme,paper] of [['light',[242,240,233]],['dark',[179,175,162]]] as const){
+-   const foreground=lum(rgb(result[theme])),background=lum(paper.map(v=>v*.985));expect((background+.05)/(foreground+.05)).toBeGreaterThanOrEqual(4.6);
++  for(const [theme,paper] of [['light',[245,239,223]],['dark',[56,56,49]]] as const){
++   const foreground=lum(rgb(result[theme]));for(const backdrop of [paper.map(v=>v*.985),paper.map(v=>v*.955+255*.045)]){const background=lum(backdrop);expect((Math.max(background,foreground)+.05)/(Math.min(background,foreground)+.05)).toBeGreaterThanOrEqual(4.6);}
+   }
+  }
+ });
+ test('深色自定义归属保留原色，计算确定且不改夹子输入色',()=>{
+  const custom='#123456',result=agentInkColors(custom);expect(agentInkColors(custom)).toEqual(result);
+- expect(result.light).toBe(custom);expect(result.dark).toBe(custom);expect(custom).toBe('#123456');
++ expect(result.light).toBe(custom);expect(result.dark).not.toBe(custom);expect(custom).toBe('#123456');
+ });
+diff --git a/tests/unit/i18n.test.ts b/tests/unit/i18n.test.ts
+index b1d999f..3455b8a 100644
+--- a/tests/unit/i18n.test.ts
++++ b/tests/unit/i18n.test.ts
+@@ -5,3 +5,7 @@ test('calendar formatting and plural use the stored day without timezone changes
+ test('system IDs alone localize and user values are inserted unchanged',()=>{expect(agentLabel('en',{id:'general',name:'通用'})).toBe('General');expect(agentLabel('en',{id:'custom',name:'通用'})).toBe('通用');expect(translate('en','projectLabel',{project:'未分组'})).toBe('Project: 未分组');expect(localizeMessage('en','ENOENT /用户/原始中文')).toBe('ENOENT /用户/原始中文');});
+ test('asynchronous messages render in current locale with diagnostic and user placeholders retained',()=>{expect(localizeMessage('en','保存未成功，文字已保留。')).toBe('Save failed. Your text is preserved.');expect(localizeMessage('zh-CN','Save failed. Your text is preserved.')).toBe('保存未成功，文字已保留。');});
+ test('storage boundary translates nested app failure while preserving diagnostic paths',()=>{expect(localizeMessage('en','操作未完成，仍使用原位置，原副本保留。位置配置损坏。')).toBe('Operation incomplete. Original location and copy retained. Storage configuration is damaged.');expect(localizeMessage('en','文件校验不符：中文/未分组.json')).toBe('File verification failed: 中文/未分组.json');});
++
++ test.each(["ENOENT: open '/用户/原始，中文.json'",'ENOSPC /用户/原始中文 (，,).json','raw, diagnostic，unchanged','项目：原始诊断'])('unknown diagnostics retain exact bytes: %s',diagnostic=>{expect(localizeMessage('en',diagnostic)).toBe(diagnostic);expect(localizeMessage('zh-CN',diagnostic)).toBe(diagnostic);});
++ test('actual repository IO and startup envelope preserve diagnostic payload',async()=>{const {FileRepository}=await import('../../src/main/store/repository');const {fileIO}=await import('../../src/main/store/atomicFile');const diagnostic="ENOSPC: open '/用户/原始，中文 (a,b).json'";const result=await new FileRepository('/unused-synthetic-fixture',{...fileIO,read:async()=>{throw Error(diagnostic);}}).load();expect(result.ok).toBe(false);if(result.ok)return;const english=`Local save failed. Keep your text and retry. (${diagnostic})`;expect(localizeMessage('en',result.message)).toBe(english);expect(localizeMessage('zh-CN',english)).toBe(result.message);expect(translate('en','startupDetails',{error:localizeMessage('en',result.message),path:'/配置，路径'})).toBe(`${english}\n\nOriginal files are preserved. Restore the data disk or repair the location configuration and retry.\nConfiguration folder: /配置，路径`);});
++ test('outer main storage error translates its wrapper only; nested app errors and success paths are deliberate',()=>{const diagnostic="EACCES /原始，目录 (a,b)";expect(localizeMessage('en','操作未完成，仍使用原位置。'+diagnostic)).toBe('Operation incomplete. Original location retained. '+diagnostic);expect(localizeMessage('en','操作未完成，仍使用原位置，原副本保留。'+diagnostic)).toBe('Operation incomplete. Original location and copy retained. '+diagnostic);expect(localizeMessage('en','已切换到 /用户，目录。旧副本已保留。')).toBe('Switched to /用户，目录. The old copy is preserved.');});

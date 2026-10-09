@@ -42,6 +42,15 @@ jobs:
           New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
           & node tests/electron/appearance-workflow.cjs 2>&1 | Tee-Object -FilePath (Join-Path $env:THOUGHTLINE_EVIDENCE_DIR 'workflow.log')
           if ($LASTEXITCODE -ne 0) { throw "Appearance workflow failed: $LASTEXITCODE" }
+      - name: Appearance review fixes on Windows
+        shell: pwsh
+        env:
+          THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/appearance/windows-source/fix-round1
+          THOUGHTLINE_FAKE_CLIPBOARD: '1'
+        run: |
+          New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
+          & node tests/electron/appearance-fix-workflow.cjs 2>&1 | Tee-Object -FilePath (Join-Path $env:THOUGHTLINE_EVIDENCE_DIR 'workflow.log')
+          if ($LASTEXITCODE -ne 0) { throw "Appearance review fixes failed: $LASTEXITCODE" }
       - run: npm run package:win
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'

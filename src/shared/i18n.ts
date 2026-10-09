@@ -8,7 +8,20 @@ export function translate<K extends MessageKey>(locale:Locale,key:K,...args:Args
 export const countThoughts=(locale:Locale,n:number)=>locale==='en'?`${n} ${new Intl.PluralRules('en').select(n)==='one'?'thought':'thoughts'}`:`${n}条念头`;
 export function formatCalendarDate(locale:Locale,key:string,kind:'day'|'month'|'year'|'monthName'='day'):string{const [y,m=1,d=1]=key.split('-').map(Number);return new Intl.DateTimeFormat(locale,{timeZone:'UTC',...(kind==='year'?{year:'numeric' as const}:kind==='monthName'?{month:'long' as const}:kind==='month'?{year:'numeric' as const,month:'long' as const}:{year:'numeric' as const,month:'long' as const,day:'numeric' as const})}).format(new Date(Date.UTC(y,m-1,d,12)));}
 export const agentLabel=(locale:Locale,agent:{id:string;name:string}|undefined)=>agent?(agent.id==='general'?translate(locale,'通用'):agent.name):'';
-const escaped=(s:string)=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-const patterns=Object.keys(zh).flatMap(key=>['zh-CN','en'].map(locale=>{const template=dictionaries[locale as Locale][key as MessageKey],names=[...template.matchAll(/\{(\w+)\}/g)].map(m=>m[1]);return {key:key as MessageKey,names,template,pattern:new RegExp('^'+template.split(/\{\w+\}/).map(escaped).join('([\\s\\S]*?)')+'$')};}));
-/** Only call for app-owned messages. Exact templates retain diagnostic/user slots verbatim. */
-export function localizeMessage(locale:Locale,message:string|null|undefined):string{if(!message)return '';const storagePrefix='操作未完成，仍使用原位置，原副本保留。';if(message.startsWith(storagePrefix))return translate(locale,'storageFailure',{detail:localizeMessage(locale,message.slice(storagePrefix.length))});const mismatch='文件校验不符：';if(message.startsWith(mismatch))return translate(locale,'fileMismatch',{name:message.slice(mismatch.length)});for(const p of patterns){if(!p.names.length&&message===p.template)return dictionaries[locale][p.key];}for(const p of patterns){if(!p.names.length)continue;const match=p.pattern.exec(message);if(match){const values=Object.fromEntries(p.names.map((n,i)=>[n,match[i+1]]));return dictionaries[locale][p.key].replace(/\{(\w+)\}/g,(_,name)=>values[name]);}}return message;}
+// Reverse only complete app-owned status/error envelopes, never arbitrary UI/date templates.
+const exactMessages=(Object.keys(zh) as MessageKey[]).filter(key=>!zh[key].includes('{'));
+const envelopes=['localSaveFailureDetail','storageFailure','outerStorageFailure','fileMismatch','changedLocation','savedBackup'] as const;
+/** App diagnostics and path slots stay byte-for-byte intact. Only nested app-error wrappers recurse. */
+export function localizeMessage(locale:Locale,message:string|null|undefined):string{
+ if(!message)return '';
+ for(const key of exactMessages)if(message===zh[key]||message===en[key])return dictionaries[locale][key];
+ for(const key of envelopes)for(const source of ['zh-CN','en'] as const){
+  const template=dictionaries[source][key],slot=template.match(/\{\w+\}/)![0],at=template.indexOf(slot),prefix=template.slice(0,at),suffix=template.slice(at+slot.length);
+  if(message.startsWith(prefix)&&message.endsWith(suffix)&&message.length>=prefix.length+suffix.length){
+   const raw=message.slice(prefix.length,suffix?message.length-suffix.length:undefined);
+   const value=key==='storageFailure'||key==='outerStorageFailure'?localizeMessage(locale,raw):raw;
+   return dictionaries[locale][key].replace(/\{\w+\}/,()=>value);
+  }
+ }
+ return message;
+}

@@ -1,0 +1,68 @@
+{
+  "checks": [
+    "light-rendered-custom-Agent-contrast",
+    "custom-clip-color-and-user-names-unchanged",
+    "existing-drag-notice-renders-current-Chinese"
+  ],
+  "failures": [
+    {
+      "name": "dark-rendered-custom-Agent-contrast",
+      "error": "AssertionError [ERR_ASSERTION]: {\"theme\":\"dark\",\"text\":\"Custom 中文 0 · 项目，原文\",\"ink\":\"rgb(23, 65, 110)\",\"paper\":\"rgb(56, 56, 49)\",\"ratio\":1.1490433506875892}\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:16:832\n    at check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:6:45)\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:16:369"
+    },
+    {
+      "name": "switch-then-drag-completion-current-English",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ '夹子位置已保存'\n- 'Clip position saved'\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:18:115\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:6:39)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:18:41"
+    },
+    {
+      "name": "out-of-bounds-cancel-current-English",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ '拖动已取消'\n- 'Drag canceled'\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:18:479\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:6:39)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:18:412"
+    },
+    {
+      "name": "actual-page-save-IO-current-English-diagnostic-bytes",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ \"本地保存未成功，请保留文字并重试。 (ENOSPC: open '/用户/原始，中文 (a,b).json')\"\n- \"Local save failed. Keep your text and retry. (ENOSPC: open '/用户/原始，中文 (a,b).json')\"\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:19:266\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:6:39)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:19:183"
+    }
+  ],
+  "contrast": [
+    {
+      "theme": "light",
+      "samples": [
+        {
+          "text": "Custom 中文 0 · 项目，原文",
+          "ink": "rgb(38, 107, 182)",
+          "paper": "rgb(245, 239, 223)"
+        },
+        {
+          "text": "Custom 中文 1 · 项目，原文",
+          "ink": "rgb(60, 108, 163)",
+          "paper": "rgb(245, 239, 223)"
+        },
+        {
+          "text": "Custom 中文 2 · 项目，原文",
+          "ink": "rgb(102, 106, 115)",
+          "paper": "rgb(245, 239, 223)"
+        }
+      ]
+    },
+    {
+      "theme": "dark",
+      "samples": [
+        {
+          "text": "Custom 中文 0 · 项目，原文",
+          "ink": "rgb(23, 65, 110)",
+          "paper": "rgb(56, 56, 49)"
+        },
+        {
+          "text": "Custom 中文 1 · 项目，原文",
+          "ink": "rgb(36, 65, 98)",
+          "paper": "rgb(56, 56, 49)"
+        },
+        {
+          "text": "Custom 中文 2 · 项目，原文",
+          "ink": "rgb(61, 64, 69)",
+          "paper": "rgb(56, 56, 49)"
+        }
+      ]
+    }
+  ],
+  "scope": "isolated source rendered DOM/IPC/controlled pointer, IO and native-dialog interception; not physical acceptance"
+}

@@ -1,0 +1,214 @@
+diff --git a/.github/workflows/test-packages.yml b/.github/workflows/test-packages.yml
+index 3583e87..7c8b61c 100644
+--- a/.github/workflows/test-packages.yml
++++ b/.github/workflows/test-packages.yml
+@@ -42,6 +42,15 @@ jobs:
+           New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
+           & node tests/electron/appearance-workflow.cjs 2>&1 | Tee-Object -FilePath (Join-Path $env:THOUGHTLINE_EVIDENCE_DIR 'workflow.log')
+           if ($LASTEXITCODE -ne 0) { throw "Appearance workflow failed: $LASTEXITCODE" }
++      - name: Appearance review fixes on Windows
++        shell: pwsh
++        env:
++          THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/appearance/windows-source/fix-round1
++          THOUGHTLINE_FAKE_CLIPBOARD: '1'
++        run: |
++          New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
++          & node tests/electron/appearance-fix-workflow.cjs 2>&1 | Tee-Object -FilePath (Join-Path $env:THOUGHTLINE_EVIDENCE_DIR 'workflow.log')
++          if ($LASTEXITCODE -ne 0) { throw "Appearance review fixes failed: $LASTEXITCODE" }
+       - run: npm run package:win
+         env:
+           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+diff --git "a/docs/delivery/README-0.0.17-preview.3-\351\232\224\347\246\273\344\275\223\351\252\214.md" "b/docs/delivery/README-0.0.17-preview.3-\351\232\224\347\246\273\344\275\223\351\252\214.md"
+index 8739d8f..0b93dce 100644
+--- "a/docs/delivery/README-0.0.17-preview.3-\351\232\224\347\246\273\344\275\223\351\252\214.md"
++++ "b/docs/delivery/README-0.0.17-preview.3-\351\232\224\347\246\273\344\275\223\351\252\214.md"
+@@ -4,6 +4,6 @@
+ 
+ 偏好独立保存在 profile 的 preferences.json，修改偏好不改写念头快照。全新 profile 按系统语言选择中文或 English；已有念头数据或位置配置的 profile 保持中文。无法读取或保存偏好时保留文件并显示错误。
+ 
+-本文件是新版本交付准备，不代表已生成、签署、上传或发布新安装包。版本 .2 的说明和专用 Windows 启动器保留供回滚。当前通用 Windows 启动器只认 .3 文件版本，使用独立的 .3 数据目录。安装器仍可能替换同应用身份的既有安装，应在独立测试环境安装。Mac 启动器须在最终 DMG / asar 确定后生成，固定实际哈希并核对严格签名；不修改用户的已安装 App。
++本文件是新版本交付准备，不代表已生成、签署、上传或发布新安装包。版本 .2 的说明和专用 Windows 启动器保留供回滚。当前通用 Windows 启动器只认 .3 文件版本，使用独立的 .3 数据目录。安装器仍可能替换同应用身份的既有安装，应在独立测试环境安装。Mac 启动器固定命名 `Start-Thoughtline-Isolated-Mac.command`，须在最终 DMG / asar 确定后生成，固定实际哈希并核对严格签名；不修改用户的已安装 App。
+ 
+ 自动测试覆盖范围及未测项以 acceptance/evidence/appearance/ 和独立 QA 说明为准。源代码 Electron、合成输入、截图、CI 均不证明物理输入法候选、双端自然滑动手感、DPI、多屏或真实微信 / 豆包 / WorkBuddy 接收通过。新包须分别运行 tests/electron/packaged-appearance.cjs 留存实际可执行文件和 asar 哈希；不得以源码结果替代。
+diff --git a/scripts/generate-mac-isolated-launcher.cjs b/scripts/generate-mac-isolated-launcher.cjs
+index b02c0ec..9a5bc68 100644
+--- a/scripts/generate-mac-isolated-launcher.cjs
++++ b/scripts/generate-mac-isolated-launcher.cjs
+@@ -11,7 +11,7 @@ const version = require('../package.json').version;
+ const delivery = process.env.THOUGHTLINE_DELIVERY_DIR;
+ if (!delivery) throw Error('Set THOUGHTLINE_DELIVERY_DIR to the new frozen package delivery directory.');
+ const dmg = path.join(delivery, `Thoughtline-${version}-mac-arm64.dmg`);
+-const output = path.join(delivery, `启动${version}隔离体验.command`);
++const output = path.join(delivery, 'Start-Thoughtline-Isolated-Mac.command');
+ const q = value => `'${value.replaceAll("'", "'\\''")}'`;
+ const hash = file => createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+ const run = (cmd, args) => execFileSync(cmd, args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+diff --git a/src/renderer/components/Shelf.tsx b/src/renderer/components/Shelf.tsx
+index 84835c7..3f8291a 100644
+--- a/src/renderer/components/Shelf.tsx
++++ b/src/renderer/components/Shelf.tsx
+@@ -10,7 +10,7 @@ import {ClipCard} from './ClipCard';
+ import {useShelfMotion} from '../hooks/useShelfMotion';
+ type Drag={mode:'clip'|'paper';ideaId:string;valid:boolean;clip:Clip;pointer:number;startX:number;startY:number;origin:number;x:number;active:boolean;target:string|null;ready:boolean;revision:number};
+ export function Shelf({info}:{info:PilotInfo}){
+- const {t}=useLocale();
++ const {t,m}=useLocale();
+  const ropeId=useId().replace(/:/g,'');
+  const root=useRef<HTMLDivElement>(null),layoutRevision=useRef(0);const agentId=info.shelfAgentId;const [error,setError]=useState(''),[notice,setNotice]=useState(''),[dragView,setDragView]=useState<Drag|null>(null);
+  const drag=useRef<Drag|null>(null),mergeTimer=useRef<ReturnType<typeof setTimeout>|null>(null);const infoRef=useRef(info);infoRef.current=info;
+@@ -55,12 +55,12 @@ export function Shelf({info}:{info:PilotInfo}){
+    const target=visibleRef.current.find(p=>p.clip.id===d.target);let message='';
+    const outside=e.clientY<0||e.clientY>300||e.clientX<0||e.clientX>infoRef.current.width;
+    if(!outside){
+-    if(d.ready&&target?.clip.agentId===d.clip.agentId){if(await change(d.mode==='paper'?{kind:'paperDrop',id:d.clip.id,ideaId:d.ideaId,targetId:target.clip.id,position:null}:{kind:'merge',sourceId:d.clip.id,targetId:target.clip.id},d.revision))message=d.mode==='paper'?t("当前纸张已合入目标夹子"):t("已合夹 · 可在详情中拆出或撤销");}
+-    else if(d.target){message=target?.clip.agentId!==d.clip.agentId?t("不同 Agent 无法合夹，位置保持。"):t("未达到合夹停留时间，位置保持。");}
+-    else if(d.mode==='paper'){if(d.valid&&await change({kind:'paperDrop',id:d.clip.id,ideaId:d.ideaId,targetId:null,position:normalizedPosition(d.x,infoRef.current.width)},d.revision))message=t("当前纸张已挂到空位");else message=t("无合法空位，纸张保持原位");}
++    if(d.ready&&target?.clip.agentId===d.clip.agentId){if(await change(d.mode==='paper'?{kind:'paperDrop',id:d.clip.id,ideaId:d.ideaId,targetId:target.clip.id,position:null}:{kind:'merge',sourceId:d.clip.id,targetId:target.clip.id},d.revision))message=d.mode==='paper'?"当前纸张已合入目标夹子":"已合夹 · 可在详情中拆出或撤销";}
++    else if(d.target){message=target?.clip.agentId!==d.clip.agentId?"不同 Agent 无法合夹，位置保持。":"未达到合夹停留时间，位置保持。";}
++    else if(d.mode==='paper'){if(d.valid&&await change({kind:'paperDrop',id:d.clip.id,ideaId:d.ideaId,targetId:null,position:normalizedPosition(d.x,infoRef.current.width)},d.revision))message="当前纸张已挂到空位";else message="无合法空位，纸张保持原位";}
+     else{
+      const before=visibleRef.current.find(p=>p.clip.id!==d.clip.id&&p.x>d.x)?.clip.id??null;
+-     if(await change({kind:'move',id:d.clip.id,position:normalizedPosition(d.x,infoRef.current.width),beforeId:before},d.revision))message=t("夹子位置已保存");
++     if(await change({kind:'move',id:d.clip.id,position:normalizedPosition(d.x,infoRef.current.width),beforeId:before},d.revision))message="夹子位置已保存";
+     }
+    }
+    setNotice(outside?'拖动已取消':message);reset();
+@@ -87,6 +87,6 @@ export function Shelf({info}:{info:PilotInfo}){
+   })}
+   {dragView?.mode==='paper'&&dragView.active&&<div className="paper-drag-preview" data-valid={dragView.valid} aria-hidden="true" style={{left:dragView.x,top:fixedRopeY(dragView.x,rope)}}><ClipCard clip={{...dragView.clip,ideaIds:[dragView.ideaId],currentId:dragView.ideaId}} ideas={info.snapshot.ideas} agent={info.snapshot.agents.find(a=>a.id===dragView.clip.agentId)} onChange={change} onGrab={()=>{}} onError={()=>{}} reduced={true} textDragActive={false} ropeContact="M0 27H18"/></div>}
+   {dragView&&<><div className="source-ghost" style={{left:dragView.origin,top:fixedRopeY(dragView.origin,rope)+6}}/><span className="drag-message" role="status">{dragView.ready?t("松开合并"):dragView.target?(info.snapshot.clips.find(c=>c.id===dragView.target)?.agentId===dragView.clip.agentId?t("停留后合夹"):t("不同 Agent 不能合夹")):dragView.mode==='paper'?(dragView.valid?t("松开将当前纸张挂到空位 · Esc取消"):t("绳上暂时放不下 · Esc取消")):t("拖动调整位置 · Esc取消")}</span></>}
+-  {(error||notice)&&<button data-hit className="shelf-error" role={error?'alert':'status'} onClick={()=>{setError('');setNotice('');}}>{error||notice}</button>}
++  {(error||notice)&&<button data-hit className="shelf-error" role={error?'alert':'status'} onClick={()=>{setError('');setNotice('');}}>{m(error||notice)}</button>}
+  </div>;
+ }
+diff --git a/src/renderer/components/agentInk.ts b/src/renderer/components/agentInk.ts
+index c1a1771..f0bf5ae 100644
+--- a/src/renderer/components/agentInk.ts
++++ b/src/renderer/components/agentInk.ts
+@@ -1,8 +1,8 @@
+ type RGB=[number,number,number];
+-const lightPaper:RGB=[242,240,233],darkPaper:RGB=[179,175,162];
++const lightPaper:RGB=[245,239,223],darkPaper:RGB=[56,56,49];
+ const luminance=(rgb:RGB)=>rgb.map(v=>{const c=v/255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4;}).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
+ const contrast=(a:RGB,b:RGB)=>(Math.max(luminance(a),luminance(b))+.05)/(Math.min(luminance(a),luminance(b))+.05);
+-// Keep the clip's hue/saturation. Only lower lightness enough for the label's paper region.
++// Preserve the clip's hue/saturation; adjust label lightness for the current paper palette.
+ export function agentInkColors(color:string):{light:string;dark:string}{
+  const hex=/^#[0-9a-f]{6}$/i.test(color)?color:'#A0A3AA';
+  const [r,g,b]=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255),hi=Math.max(r,g,b),lo=Math.min(r,g,b),d=hi-lo,l=(hi+lo)/2;
+@@ -14,10 +14,13 @@ export function agentInkColors(color:string):{light:string;dark:string}{
+   return channels.map(v=>Math.floor((v+m)*255)) as RGB;
+  };
+  const ink=(paper:RGB)=>{
+-  // Label sits above the lower curve/pressure shadow; its across-gradient can darken paper by at most 1.5%.
+-  const shaded=paper.map(v=>v*.985) as RGB;const original=[r,g,b].map(v=>Math.round(v*255)) as RGB;if(contrast(shaded,original)>=4.6)return hex.toLowerCase();let low=0,high=Math.min(l,.5);
+-  for(let n=0;n<24;n++){const mid=(low+high)/2;if(contrast(shaded,rgbAt(mid))>=4.6)low=mid;else high=mid;}
+-  return '#'+rgbAt(low).map(v=>v.toString(16).padStart(2,'0')).join('');
++  // Label is above the lower fold. Bound both across-paper extrema (black1.5%, white4.5%).
++  const darkest=paper.map(v=>v*.985) as RGB,brightest=paper.map(v=>v*.955+255*.045) as RGB;
++  const readable=(rgb:RGB)=>Math.min(contrast(darkest,rgb),contrast(brightest,rgb))>=4.6;
++  const original=[r,g,b].map(v=>Math.round(v*255)) as RGB;if(readable(original))return hex.toLowerCase();
++  const lighten=luminance(paper)<.18;let low=lighten?l:0,high=lighten?1:l;
++  for(let n=0;n<24;n++){const mid=(low+high)/2;if(readable(rgbAt(mid))===lighten)high=mid;else low=mid;}
++  return '#'+rgbAt(lighten?high:low).map(v=>v.toString(16).padStart(2,'0')).join('');
+  };
+  return {light:ink(lightPaper),dark:ink(darkPaper)};
+ }
+diff --git a/src/shared/i18n.ts b/src/shared/i18n.ts
+index 36495b1..02ff09f 100644
+--- a/src/shared/i18n.ts
++++ b/src/shared/i18n.ts
+@@ -8,7 +8,20 @@ export function translate<K extends MessageKey>(locale:Locale,key:K,...args:Args
+ export const countThoughts=(locale:Locale,n:number)=>locale==='en'?`${n} ${new Intl.PluralRules('en').select(n)==='one'?'thought':'thoughts'}`:`${n}条念头`;
+ export function formatCalendarDate(locale:Locale,key:string,kind:'day'|'month'|'year'|'monthName'='day'):string{const [y,m=1,d=1]=key.split('-').map(Number);return new Intl.DateTimeFormat(locale,{timeZone:'UTC',...(kind==='year'?{year:'numeric' as const}:kind==='monthName'?{month:'long' as const}:kind==='month'?{year:'numeric' as const,month:'long' as const}:{year:'numeric' as const,month:'long' as const,day:'numeric' as const})}).format(new Date(Date.UTC(y,m-1,d,12)));}
+ export const agentLabel=(locale:Locale,agent:{id:string;name:string}|undefined)=>agent?(agent.id==='general'?translate(locale,'通用'):agent.name):'';
+-const escaped=(s:string)=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+-const patterns=Object.keys(zh).flatMap(key=>['zh-CN','en'].map(locale=>{const template=dictionaries[locale as Locale][key as MessageKey],names=[...template.matchAll(/\{(\w+)\}/g)].map(m=>m[1]);return {key:key as MessageKey,names,template,pattern:new RegExp('^'+template.split(/\{\w+\}/).map(escaped).join('([\\s\\S]*?)')+'$')};}));
+-/** Only call for app-owned messages. Exact templates retain diagnostic/user slots verbatim. */
+-export function localizeMessage(locale:Locale,message:string|null|undefined):string{if(!message)return '';const storagePrefix='操作未完成，仍使用原位置，原副本保留。';if(message.startsWith(storagePrefix))return translate(locale,'storageFailure',{detail:localizeMessage(locale,message.slice(storagePrefix.length))});const mismatch='文件校验不符：';if(message.startsWith(mismatch))return translate(locale,'fileMismatch',{name:message.slice(mismatch.length)});for(const p of patterns){if(!p.names.length&&message===p.template)return dictionaries[locale][p.key];}for(const p of patterns){if(!p.names.length)continue;const match=p.pattern.exec(message);if(match){const values=Object.fromEntries(p.names.map((n,i)=>[n,match[i+1]]));return dictionaries[locale][p.key].replace(/\{(\w+)\}/g,(_,name)=>values[name]);}}return message;}
++// Reverse only complete app-owned status/error envelopes, never arbitrary UI/date templates.
++const exactMessages=(Object.keys(zh) as MessageKey[]).filter(key=>!zh[key].includes('{'));
++const envelopes=['localSaveFailureDetail','storageFailure','outerStorageFailure','fileMismatch','changedLocation','savedBackup'] as const;
++/** App diagnostics and path slots stay byte-for-byte intact. Only nested app-error wrappers recurse. */
++export function localizeMessage(locale:Locale,message:string|null|undefined):string{
++ if(!message)return '';
++ for(const key of exactMessages)if(message===zh[key]||message===en[key])return dictionaries[locale][key];
++ for(const key of envelopes)for(const source of ['zh-CN','en'] as const){
++  const template=dictionaries[source][key],slot=template.match(/\{\w+\}/)![0],at=template.indexOf(slot),prefix=template.slice(0,at),suffix=template.slice(at+slot.length);
++  if(message.startsWith(prefix)&&message.endsWith(suffix)&&message.length>=prefix.length+suffix.length){
++   const raw=message.slice(prefix.length,suffix?message.length-suffix.length:undefined);
++   const value=key==='storageFailure'||key==='outerStorageFailure'?localizeMessage(locale,raw):raw;
++   return dictionaries[locale][key].replace(/\{\w+\}/,()=>value);
++  }
++ }
++ return message;
++}
+diff --git a/src/shared/messages.ts b/src/shared/messages.ts
+index 3405794..290194a 100644
+--- a/src/shared/messages.ts
++++ b/src/shared/messages.ts
+@@ -363,6 +363,8 @@ export const zh = {
+  "clipTitles": "本夹{count}张便签，点击展开标题",
+  "fileMismatch": "文件校验不符：{name}",
+  "storageFailure": "操作未完成，仍使用原位置，原副本保留。{detail}",
++ "outerStorageFailure": "操作未完成，仍使用原位置。{detail}",
++ "localSaveFailureDetail": "本地保存未成功，请保留文字并重试。 ({detail})",
+  "moveClip": "移动夹子或查看：{p0}",
+  "dragPaper": "拖出当前纸张：{p0}",
+  "copyPaper": "{p0}：{p1}，点击复制正文",
+@@ -739,6 +741,8 @@ export const en = {
+  "clipTitles": "{count} papers in this clip; show titles",
+  "fileMismatch": "File verification failed: {name}",
+  "storageFailure": "Operation incomplete. Original location and copy retained. {detail}",
++ "outerStorageFailure": "Operation incomplete. The original location is retained. {detail}",
++ "localSaveFailureDetail": "Local save failed. Keep your text and retry. ({detail})",
+  "moveClip": "Move clip or view: {p0}",
+  "dragPaper": "Separate this paper: {p0}",
+  "copyPaper": "{p0}: {p1}; click to copy text",
+diff --git a/tests/electron/appearance-source-binding.cjs b/tests/electron/appearance-source-binding.cjs
+index 38c9e10..a675c23 100644
+--- a/tests/electron/appearance-source-binding.cjs
++++ b/tests/electron/appearance-source-binding.cjs
+@@ -1,6 +1,6 @@
+ const fs=require('node:fs/promises'),path=require('node:path'),{execFileSync}=require('node:child_process'),{createHash}=require('node:crypto');
+ async function bindAppearanceSource(output){
+- const include=p=>/^(src|assets|scripts|tests|licenses|\.github|docs\/delivery)\//.test(p)||/^(package.*\.json|electron\.vite\.config\.ts|tsconfig.*\.json|vitest\.config\..*|\.gitignore)$/.test(p);
++ const include=p=>['.gitattributes','THIRD_PARTY_NOTICES.md','acceptance/evidence/icon-final/resource-verification.json','acceptance/evidence/round1/p6-electron-cache-binding.json'].includes(p)||/^(src|assets|scripts|tests|licenses|\.github|docs\/delivery)\//.test(p)||/^(package.*\.json|electron\.vite\.config\.ts|tsconfig.*\.json|vitest\.config\..*|\.gitignore)$/.test(p);
+  const tracked=execFileSync('git',['ls-files','-z']).toString().split('\0').filter(include),untracked=execFileSync('git',['ls-files','--others','--exclude-standard','-z']).toString().split('\0').filter(include);const hashes={};
+  for(const p of [...new Set([...tracked,...untracked])].sort()){const raw=await fs.readFile(p);hashes[p]=createHash('sha256').update(raw).digest('hex');}
+  await fs.mkdir(output,{recursive:true});await fs.writeFile(path.join(output,'source-inputs.json'),JSON.stringify({base:execFileSync('git',['rev-parse','HEAD']).toString().trim(),node:process.version,files:hashes},null,2));await fs.writeFile(path.join(output,'tracked-source.patch'),execFileSync('git',['diff','--binary','HEAD','--',...tracked],{maxBuffer:20*1024*1024}));
+diff --git a/tests/unit/agentInk.test.ts b/tests/unit/agentInk.test.ts
+index dd75358..871273b 100644
+--- a/tests/unit/agentInk.test.ts
++++ b/tests/unit/agentInk.test.ts
+@@ -10,14 +10,14 @@ test('预设蓝和暖橙在两主题都保留明显色彩，拒绝85%近黑混
+  }
+ });
+ test('可读性校准包含标签区域最深1.5%跨纸明暗，不只未叠加的纸基色',()=>{
+- for(const color of ['#4C90D9','#D79551','#9574CE','#FFFFFF','#000000','#00FF00','#FF0000','#0000FF','#EEEEEE','#123456']){
++ for(const color of ['#4C90D9','#D79551','#9574CE','#FFFFFF','#000000','#00FF00','#FF0000','#0000FF','#EEEEEE','#123456','#8AADD4','#A0A3AA']){
+   const result=agentInkColors(color);
+-  for(const [theme,paper] of [['light',[242,240,233]],['dark',[179,175,162]]] as const){
+-   const foreground=lum(rgb(result[theme])),background=lum(paper.map(v=>v*.985));expect((background+.05)/(foreground+.05)).toBeGreaterThanOrEqual(4.6);
++  for(const [theme,paper] of [['light',[245,239,223]],['dark',[56,56,49]]] as const){
++   const foreground=lum(rgb(result[theme]));for(const backdrop of [paper.map(v=>v*.985),paper.map(v=>v*.955+255*.045)]){const background=lum(backdrop);expect((Math.max(background,foreground)+.05)/(Math.min(background,foreground)+.05)).toBeGreaterThanOrEqual(4.6);}
+   }
+  }
+ });
+ test('深色自定义归属保留原色，计算确定且不改夹子输入色',()=>{
+  const custom='#123456',result=agentInkColors(custom);expect(agentInkColors(custom)).toEqual(result);
+- expect(result.light).toBe(custom);expect(result.dark).toBe(custom);expect(custom).toBe('#123456');
++ expect(result.light).toBe(custom);expect(result.dark).not.toBe(custom);expect(custom).toBe('#123456');
+ });
+diff --git a/tests/unit/i18n.test.ts b/tests/unit/i18n.test.ts
+index b1d999f..30f5b2d 100644
+--- a/tests/unit/i18n.test.ts
++++ b/tests/unit/i18n.test.ts
+@@ -5,3 +5,7 @@ test('calendar formatting and plural use the stored day without timezone changes
+ test('system IDs alone localize and user values are inserted unchanged',()=>{expect(agentLabel('en',{id:'general',name:'通用'})).toBe('General');expect(agentLabel('en',{id:'custom',name:'通用'})).toBe('通用');expect(translate('en','projectLabel',{project:'未分组'})).toBe('Project: 未分组');expect(localizeMessage('en','ENOENT /用户/原始中文')).toBe('ENOENT /用户/原始中文');});
+ test('asynchronous messages render in current locale with diagnostic and user placeholders retained',()=>{expect(localizeMessage('en','保存未成功，文字已保留。')).toBe('Save failed. Your text is preserved.');expect(localizeMessage('zh-CN','Save failed. Your text is preserved.')).toBe('保存未成功，文字已保留。');});
+ test('storage boundary translates nested app failure while preserving diagnostic paths',()=>{expect(localizeMessage('en','操作未完成，仍使用原位置，原副本保留。位置配置损坏。')).toBe('Operation incomplete. Original location and copy retained. Storage configuration is damaged.');expect(localizeMessage('en','文件校验不符：中文/未分组.json')).toBe('File verification failed: 中文/未分组.json');});
++
++ test.each(["ENOENT: open '/用户/原始，中文.json'",'ENOSPC /用户/原始中文 (，,).json','raw, diagnostic，unchanged','项目：原始诊断'])('unknown diagnostics retain exact bytes: %s',diagnostic=>{expect(localizeMessage('en',diagnostic)).toBe(diagnostic);expect(localizeMessage('zh-CN',diagnostic)).toBe(diagnostic);});
++ test('actual repository IO and startup envelope preserve diagnostic payload',async()=>{const {FileRepository}=await import('../../src/main/store/repository');const {fileIO}=await import('../../src/main/store/atomicFile');const diagnostic="ENOSPC: open '/用户/原始，中文 (a,b).json'";const result=await new FileRepository('/unused-synthetic-fixture',{...fileIO,read:async()=>{throw Error(diagnostic);}}).load();expect(result.ok).toBe(false);if(result.ok)return;const english=`Local save failed. Keep your text and retry. (${diagnostic})`;expect(localizeMessage('en',result.message)).toBe(english);expect(localizeMessage('zh-CN',english)).toBe(result.message);expect(translate('en','startupDetails',{error:localizeMessage('en',result.message),path:'/配置，路径'})).toBe(`${english}\n\nOriginal files are preserved. Restore the data disk or repair the location configuration and retry.\nConfiguration folder: /配置，路径`);});
++ test('outer main storage error translates its wrapper only; nested app errors and success paths are deliberate',()=>{const diagnostic="EACCES /原始，目录 (a,b)";expect(localizeMessage('en','操作未完成，仍使用原位置。'+diagnostic)).toBe('Operation incomplete. The original location is retained. '+diagnostic);expect(localizeMessage('en','操作未完成，仍使用原位置，原副本保留。'+diagnostic)).toBe('Operation incomplete. Original location and copy retained. '+diagnostic);expect(localizeMessage('en','已切换到 /用户，目录。旧副本已保留。')).toBe('Switched to /用户，目录. The old copy is preserved.');});

@@ -1,0 +1,63 @@
+{
+  "checks": [
+    "light-rendered-custom-Agent-contrast",
+    "dark-rendered-custom-Agent-contrast",
+    "custom-clip-color-and-user-names-unchanged",
+    "switch-then-drag-completion-current-English",
+    "existing-drag-notice-renders-current-Chinese",
+    "out-of-bounds-cancel-current-English",
+    "locale-broadcast-does-not-cancel-active-drag",
+    "active-drag-completion-uses-latest-locale",
+    "actual-page-save-IO-current-English-diagnostic-bytes",
+    "actual-startup-repository-IO-English-diagnostic-bytes"
+  ],
+  "failures": [
+    {
+      "name": "outer-storage-catch-current-English-diagnostic-bytes",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ ''\n- \"Operation incomplete. The original location is retained. ENOSPC: open '/用户/原始，中文 (a,b).json'\"\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:22:518\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:6:39)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:22:435"
+    }
+  ],
+  "contrast": [
+    {
+      "theme": "light",
+      "samples": [
+        {
+          "text": "Custom 中文 0 · 项目，原文",
+          "ink": "rgb(38, 107, 180)",
+          "paper": "rgb(245, 239, 223)"
+        },
+        {
+          "text": "Custom 中文 1 · 项目，原文",
+          "ink": "rgb(59, 107, 161)",
+          "paper": "rgb(245, 239, 223)"
+        },
+        {
+          "text": "Custom 中文 2 · 项目，原文",
+          "ink": "rgb(102, 105, 114)",
+          "paper": "rgb(245, 239, 223)"
+        }
+      ]
+    },
+    {
+      "theme": "dark",
+      "samples": [
+        {
+          "text": "Custom 中文 0 · 项目，原文",
+          "ink": "rgb(130, 178, 228)",
+          "paper": "rgb(56, 56, 49)"
+        },
+        {
+          "text": "Custom 中文 1 · 项目，原文",
+          "ink": "rgb(143, 177, 214)",
+          "paper": "rgb(56, 56, 49)"
+        },
+        {
+          "text": "Custom 中文 2 · 项目，原文",
+          "ink": "rgb(171, 174, 180)",
+          "paper": "rgb(56, 56, 49)"
+        }
+      ]
+    }
+  ],
+  "scope": "isolated source rendered DOM/IPC/controlled pointer, IO and native-dialog interception; not physical acceptance"
+}

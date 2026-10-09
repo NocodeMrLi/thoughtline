@@ -10,7 +10,7 @@ import {ClipCard} from './ClipCard';
 import {useShelfMotion} from '../hooks/useShelfMotion';
 type Drag={mode:'clip'|'paper';ideaId:string;valid:boolean;clip:Clip;pointer:number;startX:number;startY:number;origin:number;x:number;active:boolean;target:string|null;ready:boolean;revision:number};
 export function Shelf({info}:{info:PilotInfo}){
- const {t}=useLocale();
+ const {t,m}=useLocale();
  const ropeId=useId().replace(/:/g,'');
  const root=useRef<HTMLDivElement>(null),layoutRevision=useRef(0);const agentId=info.shelfAgentId;const [error,setError]=useState(''),[notice,setNotice]=useState(''),[dragView,setDragView]=useState<Drag|null>(null);
  const drag=useRef<Drag|null>(null),mergeTimer=useRef<ReturnType<typeof setTimeout>|null>(null);const infoRef=useRef(info);infoRef.current=info;
@@ -55,12 +55,12 @@ export function Shelf({info}:{info:PilotInfo}){
    const target=visibleRef.current.find(p=>p.clip.id===d.target);let message='';
    const outside=e.clientY<0||e.clientY>300||e.clientX<0||e.clientX>infoRef.current.width;
    if(!outside){
-    if(d.ready&&target?.clip.agentId===d.clip.agentId){if(await change(d.mode==='paper'?{kind:'paperDrop',id:d.clip.id,ideaId:d.ideaId,targetId:target.clip.id,position:null}:{kind:'merge',sourceId:d.clip.id,targetId:target.clip.id},d.revision))message=d.mode==='paper'?t("当前纸张已合入目标夹子"):t("已合夹 · 可在详情中拆出或撤销");}
-    else if(d.target){message=target?.clip.agentId!==d.clip.agentId?t("不同 Agent 无法合夹，位置保持。"):t("未达到合夹停留时间，位置保持。");}
-    else if(d.mode==='paper'){if(d.valid&&await change({kind:'paperDrop',id:d.clip.id,ideaId:d.ideaId,targetId:null,position:normalizedPosition(d.x,infoRef.current.width)},d.revision))message=t("当前纸张已挂到空位");else message=t("无合法空位，纸张保持原位");}
+    if(d.ready&&target?.clip.agentId===d.clip.agentId){if(await change(d.mode==='paper'?{kind:'paperDrop',id:d.clip.id,ideaId:d.ideaId,targetId:target.clip.id,position:null}:{kind:'merge',sourceId:d.clip.id,targetId:target.clip.id},d.revision))message=d.mode==='paper'?"当前纸张已合入目标夹子":"已合夹 · 可在详情中拆出或撤销";}
+    else if(d.target){message=target?.clip.agentId!==d.clip.agentId?"不同 Agent 无法合夹，位置保持。":"未达到合夹停留时间，位置保持。";}
+    else if(d.mode==='paper'){if(d.valid&&await change({kind:'paperDrop',id:d.clip.id,ideaId:d.ideaId,targetId:null,position:normalizedPosition(d.x,infoRef.current.width)},d.revision))message="当前纸张已挂到空位";else message="无合法空位，纸张保持原位";}
     else{
      const before=visibleRef.current.find(p=>p.clip.id!==d.clip.id&&p.x>d.x)?.clip.id??null;
-     if(await change({kind:'move',id:d.clip.id,position:normalizedPosition(d.x,infoRef.current.width),beforeId:before},d.revision))message=t("夹子位置已保存");
+     if(await change({kind:'move',id:d.clip.id,position:normalizedPosition(d.x,infoRef.current.width),beforeId:before},d.revision))message="夹子位置已保存";
     }
    }
    setNotice(outside?'拖动已取消':message);reset();
@@ -87,6 +87,6 @@ export function Shelf({info}:{info:PilotInfo}){
   })}
   {dragView?.mode==='paper'&&dragView.active&&<div className="paper-drag-preview" data-valid={dragView.valid} aria-hidden="true" style={{left:dragView.x,top:fixedRopeY(dragView.x,rope)}}><ClipCard clip={{...dragView.clip,ideaIds:[dragView.ideaId],currentId:dragView.ideaId}} ideas={info.snapshot.ideas} agent={info.snapshot.agents.find(a=>a.id===dragView.clip.agentId)} onChange={change} onGrab={()=>{}} onError={()=>{}} reduced={true} textDragActive={false} ropeContact="M0 27H18"/></div>}
   {dragView&&<><div className="source-ghost" style={{left:dragView.origin,top:fixedRopeY(dragView.origin,rope)+6}}/><span className="drag-message" role="status">{dragView.ready?t("松开合并"):dragView.target?(info.snapshot.clips.find(c=>c.id===dragView.target)?.agentId===dragView.clip.agentId?t("停留后合夹"):t("不同 Agent 不能合夹")):dragView.mode==='paper'?(dragView.valid?t("松开将当前纸张挂到空位 · Esc取消"):t("绳上暂时放不下 · Esc取消")):t("拖动调整位置 · Esc取消")}</span></>}
-  {(error||notice)&&<button data-hit className="shelf-error" role={error?'alert':'status'} onClick={()=>{setError('');setNotice('');}}>{error||notice}</button>}
+  {(error||notice)&&<button data-hit className="shelf-error" role={error?'alert':'status'} onClick={()=>{setError('');setNotice('');}}>{m(error||notice)}</button>}
  </div>;
 }
