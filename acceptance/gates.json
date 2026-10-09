@@ -1,5 +1,5 @@
 {
-  "stage": "0.0.16-preview.6 dual-platform private prerelease published; physical acceptance pending",
+  "stage": "0.0.17-preview.1 repair development on main; P1/P2 controlled verification complete, P3-P5 in progress, physical acceptance pending",
   "asOf": "2026-10-09 Asia/Shanghai",
   "sourceCommit": "b89481926753377c66afe0bdf2ef8dd5d453bbb7",
   "branch": "main",
@@ -102,7 +102,7 @@
     "windowsPhysical": false,
     "g7Accepted": false
   },
-  "sourceVersion": "0.0.16-preview.6",
+  "sourceVersion": "0.0.17-preview.1",
   "baselineRollback": {
     "version": "0.0.13",
     "commit": "dee1f2c9046b284e2dd430632d9bdb913128c868",
@@ -194,7 +194,7 @@
   "historicalBaseline": {
     "sourceCommit": "61a6837dbde290041a13226596baad5b21249fc1",
     "gatesFile": "evidence/release-0.0.16-preview.6/gates-before-release.json",
-    "note": "Inherited .15 gate/performance records below retain their historical scopes; they are not fresh .6 physical acceptance.",
+    "note": "Published preview6 fields and inherited older workflow/performance evidence retain their historical scopes; current development evidence is only in round1. These are not fresh physical acceptance.",
     "inheritedKeysNotFreshPreview6Evidence": [
       "currentSourceWorkflows",
       "currentIndependentIncrement",
@@ -259,5 +259,35 @@
     "windows": "evidence/candidate-0.0.15/windows-ci/receipt.json",
     "publishedVersion": "0.0.6",
     "newReleasePublished": false
+  },
+  "round1": {
+    "plan": "/Users/lihongwei/安安的成长笔记📒/晾念头 Thoughtline/Thoughtline第一轮修复优化.md",
+    "p1Commit": "1d8705d8e6b2a4283bd253aa86e1b1cbf7a37e00",
+    "p2Commit": "97875dda8d85201ff088218a347f7de2c301dc7e",
+    "p2ControlledVerify": {
+      "macUnitPassed": 115,
+      "windowsOnlySkippedOnMac": 4,
+      "typecheck": "passed",
+      "build": "passed",
+      "log": "evidence/round1/p2-final-verify.log",
+      "scopedReview": "evidence/round1/p2-recheck.md"
+    },
+    "windowsCi": {
+      "id": 37921662961,
+      "headSha": "97875dda8d85201ff088218a347f7de2c301dc7e",
+      "result": "success",
+      "scope": "runner verify/build/install/data-retention/source provenance, not physical device",
+      "evidence": "evidence/round1/p2-windows-run.json"
+    },
+    "p3": "in progress data layer; standalone UI not integrated",
+    "p4": "planned",
+    "p5": "planned",
+    "externalReceiving": {
+      "wechatWindows": "user reported success, version4.1.13.65; independently untested",
+      "doubaoWindows": "user reported intermittent success via QQ browser version unknown; independently untested",
+      "workbuddyWindows": "user reported persistent failure, version5.7.6; independently untested",
+      "matrix": "ROUND1-DRAG-MATRIX.md"
+    },
+    "formalAcceptance": false
   }
 }

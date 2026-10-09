@@ -1,10 +1,12 @@
+> 此清单保留 v0.0.16-preview.6 的历史实机步骤；旧版启动器已保存在 delivery/archive。0.0.17 的编辑、最近删除、日历、迁移及回滚规则请按本轮交付清单执行。
+
 # Windows 新图标候选：实机验收
 
 本轮包为 **0.0.16-preview.6 / Windows x64**，集成批准的 TL v11 图标、组合输入及延迟提交续作保护。包验证与物理桌面验收分别记录；这是未签名私有候选，没有发布 release 或合并 main。
 
 ## 下载和核验
 
-从 [CI 37893774452](https://github.com/NocodeMrLi/thoughtline/actions/runs/37893774452) 的 **Artifacts** 下载 `Thoughtline-Windows-x64-aa23b210ce26de956f88c48851dc1681ab233f6b`（artifact 11598913007），需要私有仓库登录。解压后应有一个 `Thoughtline-0.0.16-preview.6-win-x64.exe`、`SHA256SUMS.txt`、`build-manifest.json`、三份校验 JSON：`windows-installed-preflight.json`、`windows-installer-preflight.json`、`windows-pe-icons.json`，以及 `Start-Thoughtline-Isolated.ps1`。脚本来源见 [仓库文件](delivery/Start-Thoughtline-Isolated.ps1)，hash 绑定在 manifest。本轮 run、冻结 SHA 和下载 hash 以[阶段报告](../acceptance/WINDOWS-V11-DELIVERY-20261009.md)为准。
+从 [CI 37893774452](https://github.com/NocodeMrLi/thoughtline/actions/runs/37893774452) 的 **Artifacts** 下载 `Thoughtline-Windows-x64-aa23b210ce26de956f88c48851dc1681ab233f6b`（artifact 11598913007），需要私有仓库登录。解压后应有一个 `Thoughtline-0.0.16-preview.6-win-x64.exe`、`SHA256SUMS.txt`、`build-manifest.json`、三份校验 JSON：`windows-installed-preflight.json`、`windows-installer-preflight.json`、`windows-pe-icons.json`，以及 `Start-Thoughtline-Isolated.ps1`。脚本来源见 [仓库文件](delivery/archive/Start-Thoughtline-Isolated-preview6.ps1)，hash 绑定在 manifest。本轮 run、冻结 SHA 和下载 hash 以[阶段报告](../acceptance/WINDOWS-V11-DELIVERY-20261009.md)为准。
 
 在 PowerShell 对解压文件运行：
 

@@ -35,3 +35,5 @@ Windows P1 CI37915342457 verify/package/manifest/parse通过，安装预检失�
 2026-10-09 限定独立复核 Spec / Quality 通过，3 项 Important（离开失败、跨窗口重试、快速翻页展开）及 detached checkpoint 生命周期已修复。全量 verify exit0，115 passed / 4 Windows-only skipped，类型与构建通过。隔离 Electron 交接四场景、收起失败/重试、满位提交队列场景通过。queue 早期两份名为 green 的日志实际上失败（textContent 少了调用）；保留原日志，修正后 p2-queue-fixed.log 与最终 JSON/cleanup 才支持通过。见本目录 acceptance/evidence/round1/p2-*-report.md 和 p2-recheck.md。
 
 文档小任务：21 篇历史阶段文件及历史版本/原始交付移至笔记库“归档”，保留完整方案、当前设计和正式交付；链接与入口提示前的原文及 SHA256 清单保留，可恢复。历史证据字节未改。
+
+P2 main commit `97875dda8d85201ff088218a347f7de2c301dc7e` 已推送；Windows CI `37921662961` 对相同 headSha 完成并 success，严格隔离launcher的新版本绑定已通过安装预检。run JSON 与完整日志保留。该 CI 只验证 runner 类型、单测、打包、安装保全和来源，不代表物理 Windows 或外部输入框通过。最终交付包待 P3–P5 完成后另冻结，当前 CI 包非最终交付。
