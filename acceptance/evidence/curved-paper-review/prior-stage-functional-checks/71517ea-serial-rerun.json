@@ -1,0 +1,13 @@
+{
+  "reason": "First viewport and interaction fixtures briefly overlapped; preserve their outputs and rerun serially before freezing final evidence",
+  "checks": [
+    {
+      "script": "clamp-viewport-review",
+      "exitCode": 0
+    },
+    {
+      "script": "clamp-interaction-review",
+      "exitCode": 0
+    }
+  ]
+}

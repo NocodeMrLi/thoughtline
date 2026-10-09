@@ -1,0 +1,20 @@
+{
+  "removed": [
+    {
+      "file": "1x-light-1-clamp-4x.png",
+      "sha256": "33bd30b1569c669a1575e06a4e1a688b0465eb02188a6e1b2b970f4dcfbd7672",
+      "scope": "4x renderer transform inspection; not physical desktop scale"
+    },
+    {
+      "file": "1x-dark-1-clamp-4x.png",
+      "sha256": "4f443550a5ad2b15130c061168b193f82e66dacb942d3816b043b8531d483fdf",
+      "scope": "4x renderer transform inspection; not physical desktop scale"
+    }
+  ],
+  "reason": "Keep only requested normal-size whole viewport and slight 1.1x whole-paper detail; do not use 4x closeups to mask normal-size realism",
+  "ownInstancesExited": true,
+  "fakeDataRemoved": true,
+  "unremoved": [],
+  "sourceCommit": "47d4e980ad7dc3701cb7fdf4a5fbcffb94ef4a28",
+  "scope": "Historical first continuous-curvature attempt; latest d9a9cd0 generated only four primary images."
+}
