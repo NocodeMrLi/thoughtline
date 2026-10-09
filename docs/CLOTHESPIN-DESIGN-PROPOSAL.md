@@ -1,4 +1,4 @@
-> 2026-10-09最新用户反馈：旧直边平板纸感未通过。采用近A4的160×226纸框，夹口固定，上半部平静，下三分之一连续缓弯/侧缘曲率/宽幅柔和明暗；去除孤立折角，薄边，文字清晰，页脚上移。当前单纸真实UI候选见[CONTINUOUS-PAPER-PREVIEW](../acceptance/CONTINUOUS-PAPER-PREVIEW.md)，等待主观视觉反馈，不做正式验收结论。正面夹、屏外绳端与固定弧形保留；当前默认归属通用，用户主动选Agent，恢复草稿不重置。
+> 2026-10-09当前阶段：用户00:36认可连续纸形，00:37:49批准夹口轻接触影、Agent低饱和夹色呼应与clip ID固定的小幅形体差异。当前160×226三纸真实UI见 [PAPER-POLISH-PREVIEW](../acceptance/PAPER-POLISH-PREVIEW.md)，轻润色效果等待反馈；正面夹覆盖纸约5DIP、屏外绳端与文字平面保持。暂停期间解除旧锁专项见 [PAUSED-UNLOCK-FIX](../acceptance/PAUSED-UNLOCK-FIX.md)，不等于自动全屏G7或整体验收。以下保留历史方案与阶段记录。
 
 ## 用户验收修正：夹持关系与绳端（2026-10-09）
 

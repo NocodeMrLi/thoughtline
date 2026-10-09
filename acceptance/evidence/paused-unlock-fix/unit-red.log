@@ -1,0 +1,167 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Documents/Codex/2026-10-09/task/thoughtline-clamp
+
+ ❯ tests/unit/shelfState.test.ts (13 tests | 7 failed) 10ms
+   × 暂停期间composer结束后恢复正常250ms悬停 5ms
+   × 暂停期间manage结束后恢复正常250ms悬停 1ms
+   × 暂停期间menu结束后恢复正常250ms悬停 1ms
+   × 暂停期间drag结束后恢复正常250ms悬停 1ms
+   × 暂停期间text-drag结束后恢复正常250ms悬停 0ms
+   × 暂停中新操作仍记录锁，禁止peek和指针展开直到恢复后解除 0ms
+   × 暂停中只释放已结束锁，仍活跃的其他锁不能被恢复清空 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/shelfState.test.ts > 暂停期间composer结束后恢复正常250ms悬停
+AssertionError: expected [ 'composer' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "composer",
++ ]
+
+ ❯ tests/unit/shelfState.test.ts:63:18
+     61|  let s=step(initialShelf(),{type:'lock',name,active:true,now:0});
+     62|  s=step(s,{type:'suspend',now:1});s=step(s,{type:'lock',name,active:fa…
+     63|  expect(s.locks).toEqual([]);expect(s.suspended).toBe(true);expect(s.p…
+       |                  ^
+     64|  s=step(s,{type:'resume',now:3});s=step(s,{type:'pointer',zone:'edge',…
+     65|  expect(step(s,{type:'tick',now:259}).phase).toBe('hidden');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  tests/unit/shelfState.test.ts > 暂停期间manage结束后恢复正常250ms悬停
+AssertionError: expected [ 'manage' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "manage",
++ ]
+
+ ❯ tests/unit/shelfState.test.ts:63:18
+     61|  let s=step(initialShelf(),{type:'lock',name,active:true,now:0});
+     62|  s=step(s,{type:'suspend',now:1});s=step(s,{type:'lock',name,active:fa…
+     63|  expect(s.locks).toEqual([]);expect(s.suspended).toBe(true);expect(s.p…
+       |                  ^
+     64|  s=step(s,{type:'resume',now:3});s=step(s,{type:'pointer',zone:'edge',…
+     65|  expect(step(s,{type:'tick',now:259}).phase).toBe('hidden');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  tests/unit/shelfState.test.ts > 暂停期间menu结束后恢复正常250ms悬停
+AssertionError: expected [ 'menu' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "menu",
++ ]
+
+ ❯ tests/unit/shelfState.test.ts:63:18
+     61|  let s=step(initialShelf(),{type:'lock',name,active:true,now:0});
+     62|  s=step(s,{type:'suspend',now:1});s=step(s,{type:'lock',name,active:fa…
+     63|  expect(s.locks).toEqual([]);expect(s.suspended).toBe(true);expect(s.p…
+       |                  ^
+     64|  s=step(s,{type:'resume',now:3});s=step(s,{type:'pointer',zone:'edge',…
+     65|  expect(step(s,{type:'tick',now:259}).phase).toBe('hidden');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  tests/unit/shelfState.test.ts > 暂停期间drag结束后恢复正常250ms悬停
+AssertionError: expected [ 'drag' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "drag",
++ ]
+
+ ❯ tests/unit/shelfState.test.ts:63:18
+     61|  let s=step(initialShelf(),{type:'lock',name,active:true,now:0});
+     62|  s=step(s,{type:'suspend',now:1});s=step(s,{type:'lock',name,active:fa…
+     63|  expect(s.locks).toEqual([]);expect(s.suspended).toBe(true);expect(s.p…
+       |                  ^
+     64|  s=step(s,{type:'resume',now:3});s=step(s,{type:'pointer',zone:'edge',…
+     65|  expect(step(s,{type:'tick',now:259}).phase).toBe('hidden');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  tests/unit/shelfState.test.ts > 暂停期间text-drag结束后恢复正常250ms悬停
+AssertionError: expected [ 'text-drag' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "text-drag",
++ ]
+
+ ❯ tests/unit/shelfState.test.ts:63:18
+     61|  let s=step(initialShelf(),{type:'lock',name,active:true,now:0});
+     62|  s=step(s,{type:'suspend',now:1});s=step(s,{type:'lock',name,active:fa…
+     63|  expect(s.locks).toEqual([]);expect(s.suspended).toBe(true);expect(s.p…
+       |                  ^
+     64|  s=step(s,{type:'resume',now:3});s=step(s,{type:'pointer',zone:'edge',…
+     65|  expect(step(s,{type:'tick',now:259}).phase).toBe('hidden');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  tests/unit/shelfState.test.ts > 暂停中新操作仍记录锁，禁止peek和指针展开直到恢复后解除
+AssertionError: expected [] to deeply equal [ 'composer' ]
+
+- Expected
++ Received
+
+- [
+-   "composer",
+- ]
++ []
+
+ ❯ tests/unit/shelfState.test.ts:70:76
+     68| test('暂停中新操作仍记录锁，禁止peek和指针展开直到恢复后解除',()=>{
+     69|  let s=step(initialShelf(),{type:'suspend',now:0});
+     70|  s=step(s,{type:'lock',name:'composer',active:true,now:1});expect(s.lo…
+       |                                                                            ^
+     71|  s=step(s,{type:'peek',now:2});s=step(s,{type:'pointer',zone:'edge',no…
+     72|  expect(s.phase).toBe('hidden');expect(s.dwellAt).toBe(null);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  tests/unit/shelfState.test.ts > 暂停中只释放已结束锁，仍活跃的其他锁不能被恢复清空
+AssertionError: expected [ 'manage', 'menu' ] to deeply equal [ 'manage' ]
+
+- Expected
++ Received
+
+  [
+    "manage",
++   "menu",
+  ]
+
+ ❯ tests/unit/shelfState.test.ts:80:73
+     78|  let s=step(initialShelf(),{type:'lock',name:'manage',active:true,now:…
+     79|  s=step(s,{type:'lock',name:'menu',active:true,now:1});s=step(s,{type:…
+     80|  s=step(s,{type:'lock',name:'menu',active:false,now:3});expect(s.locks…
+       |                                                                         ^
+     81|  s=step(s,{type:'resume',now:4});s=step(s,{type:'pointer',zone:'edge',…
+     82|  s=step(s,{type:'lock',name:'manage',active:false,now:1001});expect(st…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  7 failed | 6 passed (13)
+   Start at  08:47:01
+   Duration  158ms (transform 74%, tests 12%, import 11%, worker 3%)
+

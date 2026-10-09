@@ -1,0 +1,162 @@
+{
+  "stage": "green",
+  "scope": "Mac actual source windows, trusted DOM IPC and actual tray Menu callback; synthetic fixture pointer and powerMonitor emits, no physical pointer/menu/OS sleep/global keys/system clipboard/Windows/fullscreen acceptance",
+  "checkpoints": [
+    {
+      "label": "composer open manually paused",
+      "nativeWindowsVisible": {
+        "Thoughtline Composer": true,
+        "Thoughtline Manage": false,
+        "Thoughtline Shelf": false
+      },
+      "shelfVisible": false,
+      "interactionLocked": true,
+      "textDragActive": false,
+      "draft": {
+        "text": "",
+        "title": "",
+        "project": "",
+        "agentId": "general"
+      },
+      "ideaCount": 0
+    },
+    {
+      "label": "composer closed while paused",
+      "nativeWindowsVisible": {
+        "Thoughtline Composer": false,
+        "Thoughtline Manage": false,
+        "Thoughtline Shelf": false
+      },
+      "shelfVisible": false,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": {
+        "text": "  暂停时关闭的完整中文草稿\n第二行 😀  ",
+        "title": "",
+        "project": "",
+        "agentId": "general"
+      },
+      "ideaCount": 0
+    },
+    {
+      "label": "manual resume edge dwell reveals",
+      "nativeWindowsVisible": {
+        "Thoughtline Composer": false,
+        "Thoughtline Manage": false,
+        "Thoughtline Shelf": true
+      },
+      "shelfVisible": true,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": {
+        "text": "  暂停时关闭的完整中文草稿\n第二行 😀  ",
+        "title": "",
+        "project": "",
+        "agentId": "general"
+      },
+      "ideaCount": 0
+    },
+    {
+      "label": "submit while paused retains full body and remains hidden",
+      "nativeWindowsVisible": {
+        "Thoughtline Composer": false,
+        "Thoughtline Manage": false,
+        "Thoughtline Shelf": false
+      },
+      "shelfVisible": false,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": null,
+      "ideaCount": 1
+    },
+    {
+      "label": "settings closed while manually paused",
+      "nativeWindowsVisible": {
+        "Thoughtline Composer": false,
+        "Thoughtline Manage": false,
+        "Thoughtline Shelf": false
+      },
+      "shelfVisible": false,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": null,
+      "ideaCount": 1
+    },
+    {
+      "label": "sleep released but lock-screen still active",
+      "nativeWindowsVisible": {
+        "Thoughtline Composer": false,
+        "Thoughtline Manage": false,
+        "Thoughtline Shelf": false
+      },
+      "shelfVisible": false,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": null,
+      "ideaCount": 1
+    },
+    {
+      "label": "all power pause reasons released, hover restored",
+      "nativeWindowsVisible": {
+        "Thoughtline Composer": false,
+        "Thoughtline Manage": false,
+        "Thoughtline Shelf": true
+      },
+      "shelfVisible": true,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": null,
+      "ideaCount": 1
+    },
+    {
+      "label": "manual pause cancels peg drag lock",
+      "nativeWindowsVisible": {
+        "Thoughtline Composer": false,
+        "Thoughtline Manage": false,
+        "Thoughtline Shelf": false
+      },
+      "shelfVisible": false,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": null,
+      "ideaCount": 1
+    },
+    {
+      "label": "manual pause cancels full text drag lock",
+      "nativeWindowsVisible": {
+        "Thoughtline Composer": false,
+        "Thoughtline Manage": false,
+        "Thoughtline Shelf": false
+      },
+      "shelfVisible": false,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": null,
+      "ideaCount": 1
+    },
+    {
+      "label": "all affected paths complete",
+      "nativeWindowsVisible": {
+        "Thoughtline Composer": false,
+        "Thoughtline Manage": false,
+        "Thoughtline Shelf": true
+      },
+      "shelfVisible": true,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": null,
+      "ideaCount": 1
+    }
+  ],
+  "ownedPids": [
+    91971,
+    91972,
+    91973,
+    91974,
+    91975,
+    91976,
+    91971
+  ],
+  "allOwnedPidsExited": true,
+  "fakeDataRemoved": true
+}

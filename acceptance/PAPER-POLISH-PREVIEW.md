@@ -6,7 +6,7 @@
 
 真实 renderer 先红：底缘约226.746DIP、全文角在轮廓外、所有纸同一形状、无新压痕。after绿：三种形状实际出现且两主题不变；装饰底缘连stroke最大≤225.44DIP；单卡/组卡所有页脚按钮四角经SVG密集采样在绘制纸面内，完整32×32DIP矩形仍在article/实际main捕获的IPC命中矩形内。页脚上移14DIP，没有缩按钮或命中。结果 [before](evidence/paper-polish-review/before/result.json) / [after](evidence/paper-polish-review/after/result.json)。这不是物理点击穿透验收。
 
-Agent墨色sRGB对比≥4.5；默认颜色、最亮自定义白色界限与通用两主题均通过，见 [ink-contrast.json](evidence/paper-polish-review/ink-contrast.json)。原深主题中性墨色4.489略低，单通道各暗1后≥4.5，红记录保留。68 unit、类型检查、构建及此次实际预览exit0。测试首轮跨Agent合并被规则拒绝（脚本错误）；随后首个after的counter给出的三ID恰好同variant，失败日志/结果保留；最终显式固定clip ID覆盖三形，after完整exit0。before旧counter身份不与最终after身份宣称逐个相同，正文/Agent和旧轮廓一致。
+未叠加gradient的 --paper 基色与Agent墨色sRGB算术对比≥4.5；这不是合成纸面逐像素或显示器最低对比。默认颜色、最亮自定义白色界限与通用两主题均通过，见 [ink-contrast.json](evidence/paper-polish-review/ink-contrast.json)。原深主题中性墨色4.489略低，单通道各暗1后≥4.5，红记录保留。68 unit、类型检查、构建及此次实际预览exit0。测试首轮跨Agent合并被规则拒绝（脚本错误）；随后首个after的counter给出的三ID恰好同variant，失败日志/结果保留；最终显式固定clip ID覆盖三形，after完整exit0。before旧counter身份不与最终after身份宣称逐个相同，正文/Agent和旧轮廓一致。
 
 所有自己启动的PID已结束、假数据已删除。无真实globalShortcut注册/物理按键/系统剪贴板/用户便签或安装版操作。未打包、未扩完整矩阵，不继承.13功能或Windows/IME通过；主观轻润色由用户判断。暂停解除锁仍单独待功能修复，不将此轮视为G7结案。
 

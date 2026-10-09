@@ -1,0 +1,112 @@
+{
+  "stage": "green",
+  "scope": "Mac actual source windows, trusted DOM IPC and actual tray Menu callback; synthetic fixture pointer and powerMonitor emits, no physical pointer/menu/OS sleep/global keys/system clipboard/Windows/fullscreen acceptance",
+  "checkpoints": [
+    {
+      "label": "composer open manually paused",
+      "shelfVisible": false,
+      "interactionLocked": true,
+      "textDragActive": false,
+      "draft": {
+        "text": "",
+        "title": "",
+        "project": "",
+        "agentId": "general"
+      },
+      "ideaCount": 0
+    },
+    {
+      "label": "composer closed while paused",
+      "shelfVisible": false,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": {
+        "text": "  暂停时关闭的完整中文草稿\n第二行 😀  ",
+        "title": "",
+        "project": "",
+        "agentId": "general"
+      },
+      "ideaCount": 0
+    },
+    {
+      "label": "manual resume edge dwell reveals",
+      "shelfVisible": true,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": {
+        "text": "  暂停时关闭的完整中文草稿\n第二行 😀  ",
+        "title": "",
+        "project": "",
+        "agentId": "general"
+      },
+      "ideaCount": 0
+    },
+    {
+      "label": "submit while paused retains full body and remains hidden",
+      "shelfVisible": false,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": null,
+      "ideaCount": 1
+    },
+    {
+      "label": "settings closed while manually paused",
+      "shelfVisible": false,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": null,
+      "ideaCount": 1
+    },
+    {
+      "label": "sleep released but lock-screen still active",
+      "shelfVisible": false,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": null,
+      "ideaCount": 1
+    },
+    {
+      "label": "all power pause reasons released, hover restored",
+      "shelfVisible": true,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": null,
+      "ideaCount": 1
+    },
+    {
+      "label": "manual pause cancels peg drag lock",
+      "shelfVisible": false,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": null,
+      "ideaCount": 1
+    },
+    {
+      "label": "manual pause cancels full text drag lock",
+      "shelfVisible": false,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": null,
+      "ideaCount": 1
+    },
+    {
+      "label": "all affected paths complete",
+      "shelfVisible": true,
+      "interactionLocked": false,
+      "textDragActive": false,
+      "draft": null,
+      "ideaCount": 1
+    }
+  ],
+  "ownedPids": [
+    91764,
+    91766,
+    91767,
+    91769,
+    91773,
+    91775,
+    91764
+  ],
+  "allOwnedPidsExited": true,
+  "fakeDataRemoved": true
+}
