@@ -1,0 +1,35 @@
+{
+  "sourceCommit": "cd013813e21de3d03a0a5cd3e10af1977ed1f85b",
+  "basePreview": "566cce05680189f03c94925960bc4646bd72f848",
+  "version": "0.0.16-preview.2",
+  "sourceSha256": {
+    "src/main/index.ts": "64fca2c0b5fd3425cb18de6aefaeffbe6f7bf687ca0b7185c968b7a915f0f456",
+    "src/preload/index.ts": "bdb181a283b30e4d94969a8654287f2ba209378da854308cbb6e5d779559dff0",
+    "src/shared/bridge.ts": "43a256c539200c954074141d807771f099633bdcc8f203ed829e9f847f9054e1",
+    "src/shared/draftAutosaver.ts": "0ed7bdf3e8fcc5a830fd0a37ffa4aafe74421ccec935a7e203c067578760286a",
+    "src/renderer/components/Composer.tsx": "78b5055e5540ceb7f3cd2e26eca54f5516abb9669102dfdfdcad4b1b03f9b990",
+    "package.json": "326808136a3f10d019d30274ba71ddb7628dc6671027219c9b364a42ec901c47",
+    "package-lock.json": "5fb0c66f7bdf57ef387b357d9bb471e97c0311727df124eb4039f83186a5def3",
+    "tests/unit/draftAutosaver.test.ts": "15db3c57a1555f5696992d187bd5648832a4dcf4e7fa399bfbfbd8b0f65c4ef7",
+    "tests/electron/draft-crash-recovery.cjs": "76a554537d9763bb01aa1a46ed5d0c8b56df1754f329757e7c83d3479dc4b3bc",
+    "tests/electron/draft-safety-workflow.cjs": "4c150cd4792e2752bb5a6a09f2b35e9308e35787884247e0a79ea33b8ff68dd3"
+  },
+  "compiledSha256": {
+    "out/main/index.js": "5c154440a0d2da123be3d581213620213de1b900db0f9b1546152e88d2d8157f",
+    "out/preload/index.js": "0939feaf1844c5cb450bc0e91f375f3ace636073a9957191d84f5b7d5a92fa04",
+    "out/renderer/assets/index-CEzLPFWD.css": "8f937eeb2ea52a106d2aa3ce10b881b1029f82bfd6038fc02d8b29ae785444b7",
+    "out/renderer/assets/index-DSQ5Zays.js": "fb6759195e066f4a619084ae351b91247613c49be62fcb7fbc65559bda326155",
+    "out/renderer/index.html": "f5b39199d77533001dd0d06ad396197e2a37b417aa910ec8e9e6b8a40f565e3c"
+  },
+  "tests": {
+    "files": 21,
+    "count": 95,
+    "typecheckExitCode": 0,
+    "buildExitCode": 0,
+    "crashRecoveryExitCode": 0,
+    "safetyNativeExitCode": 0
+  },
+  "newPackage": false,
+  "uiLayoutUnchangedFromRejectedPreview": true,
+  "scope": "new drafts only; completed atomic checkpoints after own SIGKILL; pending typing not guaranteed"
+}
