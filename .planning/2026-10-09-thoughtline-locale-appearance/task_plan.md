@@ -9,7 +9,7 @@ Deliver English and first-level tactile day/night capsules without adding rope c
 - [x] Archive approved V2/motion and completed README remotely verified.
 - [x] Confirm clean main713a1fe and new isolated SDD ledger, preflight table/rulings.
 - [x] Task1: production and source validation212/4 +11repair/17main; scoped fixreview clean at7de6eab after source0cab2bb.
-- [x] Task2: exact-source d9cf75b dual actual packages + complete24-asset private draft + Spec/Quality review0Critical/0Important.
+- [ ] Task2 renewed delivery: previousd9cf24-asset gate passed; final source repairf809fe3/227 requires reviewed newfreeze+BOTH newlybuilt packages.
 - [ ] Final whole-increment review/fix, exact private publication, docs and cleanup.
 
 ## Errors retained

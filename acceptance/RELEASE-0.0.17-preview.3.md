@@ -1,6 +1,6 @@
 # v0.0.17-preview.3 同源双端测试交付
 
-当前状态：私有草稿24附件已核对，任务审查通过，整个增量终审／发布待完成；用户和物理双端验收未通过。原第一轮修复已交付preview.2；本增量加入完整中英界面及首层太阳／月亮滑动胶囊，保留绳、夹子、纸张的主界面。
+当前状态：整个增量终审的I1／M1已修复并通过唯一限定复审，剩0Critical／0Important／1非阻断Minor。必须新源码同源双端重建后才发布；下方d9cf双包／24附件是旧候选历史，不含f809fe3并发提示修复。用户和物理双端验收未通过。原第一轮修复已交付preview.2；本增量加入完整中英界面及首层太阳／月亮滑动胶囊，保留绳、夹子、纸张的主界面。
 
 | 平台 | 包 | 字节 | SHA256 |
 |---|---|---:|---|
@@ -16,3 +16,7 @@ Mac15.3.1 arm64／Node24.19／Electron44.7：216单测通过、4Windows专用跳
 实施与完整测试／清理见[Task2报告](evidence/appearance/task2-rebuild-d9cf75b/task-2-report.md)，独立测试见[英文与外观检查表](LOCALE-APPEARANCE-INDEPENDENT-QA.md)及[原第一轮检查表](ROUND1-INDEPENDENT-QA.md)。微信4.1.13.65、QQ浏览器豆包及WorkBuddy5.7.6仍只是用户反馈；真实接收框、双端物理输入法／DPI／多屏／焦点／动画与材质手感未测。纸保持哑光薄纸；额外玻璃材质只是双端评估，README宣传图／GIF按用户要求后置。
 
 念头schema3与独立profile偏好保存／备份／回滚见[数据安全](../docs/ROUND1-DATA-SAFETY.md)。旧preview.2／v0.0.16-preview.6、真实安装／数据、原out／依赖、其他工作树和原Electron进程保护。当前记录不是用户验收通过声明。
+
+## 最终源码修复复审（2026-10-10）
+
+source`f809fe36b72bee8f8bdc9afe0607591c98013b23`，证据22d1ccc／报告修正a94f0ad，227canonical`0f0b1048ba136430216b731d51aa6b7db050f1c788c17d9299084e50efab3c7b`。语言／主题前一次成功不再隐藏最新失败提示；短期IPC提交来源按真实webContents投影，不改偏好文件或念头schema／revision。10focused、222单测／4平台跳过、type/build、实际Mac源20+11通过，全部227输入一致，35PID／5profile正常清理。详见[最终源修复报告](evidence/appearance/final-fix/report.md)和[限定复审](evidence/appearance/controller-final/final-scoped-rereview.md)。新实际包尚待Task2同源重建；旧d9cf候选不可直接发布。

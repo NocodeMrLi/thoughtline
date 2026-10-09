@@ -1,8 +1,8 @@
 {
-  "stage": "0.0.17-preview.3 same-source dual packages staged in private draft; final review/publication pending; independent physical/receiver acceptance pending",
+  "stage": "Final code review and ONE scoped repair approved; fresh same-source dual-package rebuild required before private publication",
   "asOf": "2026-10-10 Asia/Shanghai",
   "branch": "main",
-  "lastCommittedSource": "d9cf75b425464589e6761abd8dff9954f3e2ad0c",
+  "lastCommittedSource": "f809fe36b72bee8f8bdc9afe0607591c98013b23",
   "currentCandidateVersion": "0.0.17-preview.3",
   "formalAcceptance": false,
   "round1": {
@@ -488,12 +488,12 @@
     }
   },
   "localeAppearance": {
-    "status": "Task1 and Task2 Spec/Quality approved; same-source dual packages staged private draft; final whole-increment review/publication pending; physical acceptance false",
+    "status": "source final review approved after ONE fix/rereview; old d9cf packages remain historical candidate; new paired rebuild pending",
     "plan": "../docs/LOCALE-APPEARANCE-PLAN.md",
     "version": "0.0.17-preview.3",
     "source": "d9cf75b425464589e6761abd8dff9954f3e2ad0c",
-    "sourceInputCount": 225,
-    "canonicalInputSha256": "7b658b2d8a88b499c722bfe51a9bba0889b13673e0ee0661364f4eb5129764cc",
+    "sourceInputCount": 227,
+    "canonicalInputSha256": "0f0b1048ba136430216b731d51aa6b7db050f1c788c17d9299084e50efab3c7b",
     "productionImplementation": "0cab2bb97d17d172850597375b917cc13ab5f639",
     "packagedFixtureRepair": "0c7689251b598cf3435bc68fb450c0a1e6c3321b",
     "task1Review": "evidence/appearance/controller-final/task-1-fix-round1-review.md",
@@ -554,6 +554,25 @@
       "task2Critical": 0,
       "task2Important": 0,
       "task2Minor": 1
+    },
+    "finalSourceRepair": "f809fe36b72bee8f8bdc9afe0607591c98013b23",
+    "finalWholeReview": "evidence/appearance/controller-final/final-review.md",
+    "finalScopedReReview": "evidence/appearance/controller-final/final-scoped-rereview.md",
+    "finalReviewCounts": {
+      "remainingCritical": 0,
+      "remainingImportant": 0,
+      "deferredMinor": 1
+    },
+    "postFinalFixMacSource": {
+      "unitPassed": 222,
+      "windowsOnlySkipped": 4,
+      "typecheck": "passed",
+      "build": "passed",
+      "appearanceChecks": 20,
+      "repairChecks": 11,
+      "cleanupPids": 35,
+      "cleanupProfiles": 5,
+      "physicalAcceptance": false
     }
   }
 }
