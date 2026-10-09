@@ -1,4 +1,4 @@
-> 2026-10-09当前阶段：用户00:36认可连续纸形，00:37:49批准夹口轻接触影、Agent低饱和夹色呼应与clip ID固定的小幅形体差异。当前160×226三纸真实UI见 [PAPER-POLISH-PREVIEW](../acceptance/PAPER-POLISH-PREVIEW.md)，轻润色效果等待反馈；正面夹覆盖纸约5DIP、屏外绳端与文字平面保持。暂停期间解除旧锁专项见 [PAUSED-UNLOCK-FIX](../acceptance/PAUSED-UNLOCK-FIX.md)，不等于自动全屏G7或整体验收。以下保留历史方案与阶段记录。
+> 2026-10-09当前阶段：用户00:36认可连续纸形，00:37:49批准夹口轻接触影、Agent低饱和夹色呼应与clip ID固定的小幅形体差异。当前160×226三纸真实UI见 [PAPER-POLISH-PREVIEW](../acceptance/PAPER-POLISH-PREVIEW.md)，00:56近黑Agent字色被用户否定，已修为正常尺寸可辨蓝/暖赭并交新前后图，见 [AGENT-INK-PREVIEW](../acceptance/AGENT-INK-PREVIEW.md)，仍待用户方向复核；正面夹覆盖纸约5DIP、屏外绳端与文字平面保持。暂停期间解除旧锁专项见 [PAUSED-UNLOCK-FIX](../acceptance/PAUSED-UNLOCK-FIX.md)，不等于自动全屏G7或整体验收。以下保留历史方案与阶段记录。
 
 ## 用户验收修正：夹持关系与绳端（2026-10-09）
 
