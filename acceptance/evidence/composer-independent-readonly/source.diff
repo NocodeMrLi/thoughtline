@@ -1,0 +1,187 @@
+diff --git a/package-lock.json b/package-lock.json
+index ef04e89..29b8c3f 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -1,12 +1,12 @@
+ {
+   "name": "thoughtline",
+-  "version": "0.0.15",
++  "version": "0.0.16-preview.1",
+   "lockfileVersion": 3,
+   "requires": true,
+   "packages": {
+     "": {
+       "name": "thoughtline",
+-      "version": "0.0.15",
++      "version": "0.0.16-preview.1",
+       "dependencies": {
+         "react": "19.3.0",
+         "react-dom": "19.3.0"
+diff --git a/package.json b/package.json
+index 9edf9dc..8dca89a 100644
+--- a/package.json
++++ b/package.json
+@@ -1,6 +1,6 @@
+ {
+   "name": "thoughtline",
+-  "version": "0.0.15",
++  "version": "0.0.16-preview.1",
+   "private": true,
+   "description": "\u667e\u5ff5\u5934 / Thoughtline desktop rope native pilot",
+   "main": "out/main/index.js",
+diff --git a/src/main/index.ts b/src/main/index.ts
+index 8088138..134abf5 100644
+--- a/src/main/index.ts
++++ b/src/main/index.ts
+@@ -2,7 +2,7 @@ import {app,BrowserWindow,dialog,shell,clipboard,globalShortcut,ipcMain,nativeIm
+ import {join} from 'node:path';
+ import {randomUUID} from 'node:crypto';
+ import {createShelf} from './windows/shelf';
+-import {createComposer} from './windows/composer';
++import {createComposer,COMPOSER_SIZE} from './windows/composer';
+ import {createManage} from './windows/manage';
+ import {createHost} from './platform/host';
+ import {EdgeController} from './edgeController';
+@@ -87,13 +87,13 @@ else app.whenReady().then(async()=>{
+    composer.show();composer.focus();return ideaId?invalid('请先保存或取消当前编辑。'):done();
+   }
+   if(composer&&!composerSafeToRelease){
+-   hideManage();lock('composer',true);host.showComposer(boundsFor(530,440));
++   hideManage();lock('composer',true);host.showComposer(boundsFor(COMPOSER_SIZE.width,COMPOSER_SIZE.height));
+    return ideaId?invalid('请先保存或取消尚未完成的输入。'):done();
+   }
+   const idea=ideaId?snapshot.ideas.find(x=>x.id===ideaId):null;
+   if(ideaId&&!idea)return invalid('找不到这条念头。');
+   composerContext=idea?{mode:'edit',ideaId:idea.id,draft:{text:idea.text,title:idea.title,project:idea.project,agentId:idea.agentId}}:{mode:'new',ideaId:null,draft:snapshot.draft??blank};
+-  editRevision=snapshot.revision;composerSession++;try{await ensureComposer();}catch{return {ok:false,code:'IO',message:'输入浮层未能打开，请重试。原数据已保留。'};}if(quitting)return invalid('正在退出。');if(manage?.isVisible()&&manageMode==='settings')return invalid('请先关闭设置。');composerSafeToRelease=false;lock('composer',true);hideManage();publish();host.showComposer(boundsFor(530,440));return done();
++  editRevision=snapshot.revision;composerSession++;try{await ensureComposer();}catch{return {ok:false,code:'IO',message:'输入浮层未能打开，请重试。原数据已保留。'};}if(quitting)return invalid('正在退出。');if(manage?.isVisible()&&manageMode==='settings')return invalid('请先关闭设置。');composerSafeToRelease=false;lock('composer',true);hideManage();publish();host.showComposer(boundsFor(COMPOSER_SIZE.width,COMPOSER_SIZE.height));return done();
+  };
+  const save=async(next:Result<Snapshot>,revision:number):Promise<Result<Snapshot>>=>{
+   if(!next.ok)return next;const r=await repository.commit(next.value,revision);
+diff --git a/src/main/windows/composer.ts b/src/main/windows/composer.ts
+index 739c967..f099bd8 100644
+--- a/src/main/windows/composer.ts
++++ b/src/main/windows/composer.ts
+@@ -1,4 +1,6 @@
+-import {BrowserWindow} from 'electron';
++import {BrowserWindow,nativeTheme} from 'electron';
++export const COMPOSER_SIZE={width:530,height:520};
+ export function createComposer(preload:string):BrowserWindow{
+- return new BrowserWindow({title:'Thoughtline Composer',frame:false,show:false,resizable:false,skipTaskbar:true,alwaysOnTop:true,width:530,height:410,webPreferences:{preload,contextIsolation:true,nodeIntegration:false,sandbox:true}});
++ const window=new BrowserWindow({title:'Thoughtline Composer',frame:false,show:false,resizable:false,skipTaskbar:true,alwaysOnTop:true,width:COMPOSER_SIZE.width,height:COMPOSER_SIZE.height,backgroundColor:nativeTheme.shouldUseDarkColors?'#202226':'#F7F7F5',webPreferences:{preload,contextIsolation:true,nodeIntegration:false,sandbox:true}});
++ const theme=()=>window.setBackgroundColor(nativeTheme.shouldUseDarkColors?'#202226':'#F7F7F5');nativeTheme.on('updated',theme);window.once('closed',()=>nativeTheme.removeListener('updated',theme));return window;
+ }
+diff --git a/src/renderer/components/Composer.tsx b/src/renderer/components/Composer.tsx
+index c65aba5..7df8c8a 100644
+--- a/src/renderer/components/Composer.tsx
++++ b/src/renderer/components/Composer.tsx
+@@ -3,28 +3,36 @@ import type {PilotInfo} from '../../shared/bridge';
+ import type {Draft} from '../../shared/contracts';
+ import {shouldSubmit} from '../../shared/composerKeys';
+ export function Composer({info}:{info:PilotInfo}){
+- const [draft,setDraft]=useState<Draft>(info.composerContext.draft);const [busy,setBusy]=useState(false);const [error,setError]=useState('');const text=useRef<HTMLTextAreaElement>(null);
++ const [draft,setDraft]=useState<Draft>(info.composerContext.draft),[busy,setBusy]=useState(false),[error,setError]=useState('');
++ const text=useRef<HTMLTextAreaElement>(null),inFlight=useRef(false),composing=useRef(false);
+  const latest=useRef({draft,busy});latest.current={draft,busy};
++ useEffect(()=>{if(error&&!busy)text.current?.focus();},[error,busy]);
+  useEffect(()=>{
+-  const offPrepare=window.thoughtline.onPrepareQuit(()=>{if(latest.current.busy)return null;setBusy(true);return latest.current.draft;});
+-  const offError=window.thoughtline.onQuitError(message=>{setBusy(false);setError(message);text.current?.focus();});
++  const offPrepare=window.thoughtline.onPrepareQuit(()=>{if(latest.current.busy||inFlight.current)return null;inFlight.current=true;setBusy(true);return latest.current.draft;});
++  const offError=window.thoughtline.onQuitError(message=>{inFlight.current=false;setBusy(false);setError(message);});
+   return()=>{offPrepare();offError();};
+  },[]);
+  const editing=info.composerContext.mode==='edit';
+- const grouped=info.snapshot.clips.find(c=>c.ideaIds.includes(info.composerContext.ideaId??''));const changesAgent=editing&&grouped&&grouped.ideaIds.length>1&&draft.agentId!==grouped.agentId;const [splitConfirmed,setSplitConfirmed]=useState(false);
+- useEffect(()=>{setDraft(info.composerContext.draft);setError('');setSplitConfirmed(false);text.current?.focus();},[info.composerSession]);
+- const submit=async()=>{if(busy)return;if(changesAgent&&!splitConfirmed){setError('保存后会移至新Agent的独立夹子，请先确认。');return;}setBusy(true);setError('');try{const r=await window.thoughtline.submit(draft,info.snapshot.revision);if(!r.ok)setError(r.message);}catch{setError('保存未成功，文字已保留，请重试。');}finally{setBusy(false);}};
+- const close=async(browse=false)=>{if(busy)return;setBusy(true);setError('');try{const r=await window.thoughtline.close(draft);if(!r.ok)setError(r.message);else if(browse){const opened=await window.thoughtline.openManage();if(!opened.ok)setError(opened.message);}}catch{setError('草稿保存未成功，文字已保留。');}finally{setBusy(false);}};
+- return <main data-view="composer" className="composer" onKeyDown={e=>{
+-  if(shouldSubmit({platform:info.platform,key:e.key,metaKey:e.metaKey,ctrlKey:e.ctrlKey,isComposing:e.nativeEvent.isComposing,keyCode:e.nativeEvent.keyCode})){e.preventDefault();void submit();}
+-  else if(e.key==='Escape'&&!e.nativeEvent.isComposing&&e.nativeEvent.keyCode!==229){e.preventDefault();void close();}
++ const grouped=info.snapshot.clips.find(c=>c.ideaIds.includes(info.composerContext.ideaId??'')),changesAgent=editing&&grouped&&grouped.ideaIds.length>1&&draft.agentId!==grouped.agentId;
++ const [splitConfirmed,setSplitConfirmed]=useState(false);
++ useEffect(()=>{setDraft(info.composerContext.draft);setError('');setSplitConfirmed(false);composing.current=false;text.current?.focus();},[info.composerSession]);
++ const submit=async()=>{
++  if(busy||inFlight.current)return;if(changesAgent&&!splitConfirmed){setError('保存后会移至新Agent的独立夹子，请先确认。');return;}
++  inFlight.current=true;setBusy(true);setError('');try{const r=await window.thoughtline.submit(draft,info.snapshot.revision);if(!r.ok){setError(r.message);}}catch{setError('保存未成功，文字已保留，请重试。');}finally{inFlight.current=false;setBusy(false);}
++ };
++ const close=async(browse=false)=>{
++  if(busy||inFlight.current)return;inFlight.current=true;setBusy(true);setError('');try{const r=await window.thoughtline.close(draft);if(!r.ok){setError(r.message);}else if(browse){const opened=await window.thoughtline.openManage();if(!opened.ok)setError(opened.message);}}catch{setError('草稿保存未成功，文字已保留。');}finally{inFlight.current=false;setBusy(false);}
++ };
++ return <main data-view="composer" data-platform={info.platform} className="composer" aria-labelledby="composer-heading" aria-busy={busy} onKeyDown={e=>{
++  const isComposing=e.nativeEvent.isComposing||composing.current;
++  if(shouldSubmit({platform:info.platform,key:e.key,metaKey:e.metaKey,ctrlKey:e.ctrlKey,isComposing,keyCode:e.nativeEvent.keyCode})){e.preventDefault();if(!e.repeat)void submit();}
++  else if(e.key==='Escape'&&!isComposing&&e.nativeEvent.keyCode!==229&&!(e.target instanceof HTMLSelectElement)){e.preventDefault();void close();}
+  }}>
+-  <header><label htmlFor="idea-text">{editing?'编辑念头':'写下念头'}</label><button className="close" aria-label={editing?'取消编辑并关闭':'保存草稿并关闭'} onClick={()=>void close()} disabled={busy}>×</button></header>
+-  <textarea id="idea-text" ref={text} value={draft.text} placeholder="写下来，稍后交给 Agent。" onChange={e=>setDraft({...draft,text:e.target.value})} spellCheck={false} disabled={busy}/>
+-  <div className="agents" role="group" aria-label="给哪个Agent">{info.snapshot.agents.map(a=><button key={a.id} aria-pressed={draft.agentId===a.id} disabled={busy} onClick={()=>setDraft({...draft,agentId:a.id})}><i style={{backgroundColor:a.color}}/>{a.name}</button>)}</div>
+-  <label className="title-input">名称 / 找回标签（可选）<input maxLength={50} disabled={busy} value={draft.title} placeholder="不填时使用正文首个非空行" onChange={e=>setDraft({...draft,title:e.target.value})}/></label>
+-  <details><summary>项目（可选）</summary><div className="optional"><label>项目<input maxLength={40} disabled={busy} value={draft.project} onChange={e=>setDraft({...draft,project:e.target.value})}/></label></div></details>
+-  <p className="error" role="alert">{error}</p>{changesAgent&&<label className="split-confirm"><input type="checkbox" checked={splitConfirmed} onChange={e=>setSplitConfirmed(e.target.checked)}/>保存后移至新Agent的独立夹子</label>}
+-  <footer><div><span>{info.platform==='mac'?'⌘ Enter':'Ctrl Enter'} {editing?'保存':'挂上'} · Enter换行</span><button className="text-button" disabled={busy} onClick={()=>void close(true)}>查找 / 已收起</button></div><button className="primary" disabled={busy||!draft.text.trim()} onClick={()=>void submit()}>{busy?'正在保存…':editing?'保存修改':'挂上'}</button></footer>
++  <header><label id="composer-heading" htmlFor="idea-text">{editing?'编辑念头':'写下念头'}</label><button className="close" aria-label={editing?'取消编辑并关闭':'保存草稿并关闭'} onClick={()=>void close()} disabled={busy}>×</button></header>
++  <textarea id="idea-text" ref={text} value={draft.text} placeholder="先写下来，稍后交给 Agent。" aria-describedby="composer-status composer-shortcut" aria-invalid={!!error} onCompositionStart={()=>{composing.current=true;}} onCompositionEnd={()=>{composing.current=false;}} onChange={e=>setDraft({...draft,text:e.target.value})} spellCheck={false} disabled={busy}/>
++  <div className="composer-tools"><label className="composer-agent"><span>给谁</span><span className="composer-select"><i aria-hidden="true" style={{backgroundColor:info.snapshot.agents.find(a=>a.id===draft.agentId)?.color}}/><select aria-label="念头归属 Agent" disabled={busy} value={draft.agentId} onChange={e=>setDraft({...draft,agentId:e.target.value})}>{info.snapshot.agents.map(a=><option key={a.id} value={a.id}>{a.name}</option>)}</select></span></label><button className="text-button" disabled={busy} onClick={()=>void close(true)}>查找 / 已收起</button></div>
++  <details className="composer-details"><summary>名称与项目 <span>可选</span></summary><div className="composer-optional"><label>名称<input maxLength={50} disabled={busy} value={draft.title} placeholder="留空时取正文首行" onChange={e=>setDraft({...draft,title:e.target.value})}/></label><label>项目<input maxLength={40} disabled={busy} value={draft.project} placeholder="便于之后找回" onChange={e=>setDraft({...draft,project:e.target.value})}/></label></div></details>
++  <div id="composer-status" className="composer-status"><p className="error" role="alert">{error}</p>{changesAgent&&<label className="split-confirm"><input type="checkbox" disabled={busy} checked={splitConfirmed} onChange={e=>setSplitConfirmed(e.target.checked)}/>保存后移至新Agent的独立夹子</label>}</div>
++  <footer><span id="composer-shortcut">{info.platform==='mac'?'⌘ Enter':'Ctrl Enter'} {editing?'保存':'挂上'}<small>Enter 换行 · Esc {editing?'取消编辑':'保存草稿'}</small></span><button className="primary" disabled={busy||!draft.text.trim()} onClick={()=>void submit()}>{busy?'正在保存…':editing?'保存修改':'挂上'}</button></footer>
+  </main>;
+ }
+diff --git a/src/renderer/styles/overlay.css b/src/renderer/styles/overlay.css
+index 6ca2375..eb62eae 100644
+--- a/src/renderer/styles/overlay.css
++++ b/src/renderer/styles/overlay.css
+@@ -86,3 +86,19 @@
+ /* Agent hue remains visible; calibrated lightness keeps small labels readable on the shaded paper. */
+ .idea-card[data-agent-neutral=false] .agent-name{color:var(--agent-ink-light)}
+ :root[data-theme=dark] .idea-card[data-agent-neutral=false] .agent-name{color:var(--agent-ink-dark)}
++
++/* Independent composer preview. The accepted rope/paper surface is unchanged. */
++.composer{--compose-bg:#F7F7F5;--compose-field:#FFFFFF;--compose-border:#262C3822;--compose-accent:#0879E8;background:var(--compose-bg);padding:18px 20px;gap:8px;display:grid;grid-template-rows:auto minmax(70px,1fr) auto auto auto auto;overflow:hidden;border:1px solid var(--compose-border);border-radius:12px;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
++:root[data-theme=dark] .composer{--compose-bg:#202226;--compose-field:#292C31;--compose-border:#FFFFFF25;--compose-accent:#268DFF}
++.composer[data-platform=windows]{font-family:"Segoe UI","Microsoft YaHei",sans-serif;border-radius:9px;--compose-accent:#0067C0}
++:root[data-theme=dark] .composer[data-platform=windows]{--compose-accent:#60B5FF}
++.composer header{height:32px}.composer header label{font-size:15px;letter-spacing:.1px}.composer .close{color:var(--muted);border-radius:6px}.composer .close:hover{background:color-mix(in srgb,var(--text),transparent 94%)}
++.composer textarea{min-height:0;width:100%;height:100%;font-size:14px;line-height:1.7;background:var(--compose-field);border:1px solid var(--compose-border);border-radius:8px;padding:14px;outline:0;overflow:auto}
++.composer textarea:focus-visible{border-color:color-mix(in srgb,var(--compose-accent),transparent 25%);box-shadow:0 0 0 2px color-mix(in srgb,var(--compose-accent),transparent 88%)}
++.composer-tools{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0}.composer-agent{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}.composer-select{display:flex;align-items:center;position:relative;min-width:112px;max-width:220px}.composer-select i{position:absolute;left:10px;z-index:1;pointer-events:none;width:7px;height:7px;margin:0}.composer-select select{font-size:12px;max-width:220px;width:100%;height:34px;padding:5px 28px 5px 24px;background:var(--compose-field);border-color:var(--compose-border);border-radius:6px;color:var(--text)}
++.composer .text-button{font-size:12px;text-decoration:none}.composer .text-button:hover{text-decoration:underline}
++.composer-details{min-height:0}.composer-details summary{font-size:12px;line-height:24px;color:var(--muted)}.composer-details summary span{margin-left:6px;font-size:11px;opacity:.85}.composer-optional{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:8px 2px 2px;max-height:82px;overflow:auto}.composer-optional label{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:5px;min-width:0}.composer-optional input{height:32px;min-width:0;width:100%;font-size:12px;background:var(--compose-field);border-color:var(--compose-border)}
++.composer-status{min-height:16px;max-height:72px;overflow:auto}.composer-status .error:empty{min-height:16px}.composer-status .split-confirm{font-size:12px;display:flex;align-items:center;gap:6px}.composer-status .split-confirm input{margin:0}
++.composer footer{min-height:38px;flex-shrink:0}.composer footer>span{font-size:12px;color:var(--muted);line-height:18px}.composer footer small{display:block;font-size:11px}.composer .primary{min-width:80px;min-height:36px;border-radius:7px;padding:7px 18px;font-size:13px;font-weight:600;background:var(--compose-accent);color:white}.composer[data-platform=windows] .primary{border-radius:5px}
++@media(max-height:420px){.composer{padding:12px;gap:6px}.composer header{height:28px}.composer textarea{padding:10px}.composer-select select{height:30px}.composer-optional{max-height:62px;padding-top:5px}.composer-status{max-height:42px}.composer footer{min-height:34px}}
++@media(max-height:340px){.composer-optional{max-height:38px}.composer footer small{display:none}}
+diff --git a/tests/electron/composer-preview.cjs b/tests/electron/composer-preview.cjs
+new file mode 100644
+index 0000000..64920ba
+--- /dev/null
++++ b/tests/electron/composer-preview.cjs
+@@ -0,0 +1,26 @@
++const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto');
++const {_electron}=require('playwright'),{launchOptions,openComposer,waitForInfo}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
++const output=path.resolve('acceptance/evidence/composer-preview');
++(async()=>{
++ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-composer-preview-'));let app,pids=[];const scenes=[];
++ try{
++  await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:2,revision:0,ideas:[],clips:[],agents:[{id:'general',name:'通用',color:'#A0A3AA'},{id:'codex',name:'Codex',color:'#4C90D9'},{id:'claude',name:'Claude',color:'#D79551'},{id:'cursor',name:'Cursor',color:'#9574CE'},{id:'custom-review',name:'自己的 Agent',color:'#2C8A76'}],draft:null,settings:{writeHotkey:'Control+Alt+F18',reducedMotion:false}}));
++  app=await _electron.launch(await launchOptions(dir));const shelf=await app.firstWindow();await shelf.waitForURL(/view=shelf/);await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});let composer=await openComposer(app,shelf);
++  const capture=async(label,theme)=>{await app.evaluate(({nativeTheme},theme)=>{nativeTheme.themeSource=theme;},theme);await composer.waitForFunction(theme=>document.documentElement.dataset.theme===theme,theme);await composer.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
++   const nativeBounds=await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer').getBounds());
++   const geometry=await composer.evaluate(()=>{const box=el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom};};return {viewport:{width:innerWidth,height:innerHeight,dpr:devicePixelRatio},body:box(document.querySelector('#idea-text')),footer:box(document.querySelector('.composer footer')),status:box(document.querySelector('#composer-status')),optionsOpen:document.querySelector('details').open,bodyFocused:document.activeElement.id==='idea-text',selectedAgent:document.querySelector('select').value,allAgentOptions:[...document.querySelectorAll('select option')].map(o=>o.value)};});
++   assert(geometry.footer.bottom<=geometry.viewport.height+.01);assert(geometry.status.bottom<=geometry.viewport.height+.01);assert(geometry.body.height>=150);assert(geometry.allAgentOptions.includes('custom-review'));
++   const file=label+'-'+theme+'.png';await composer.screenshot({path:path.join(output,file)});scenes.push({label,theme,platform:'actual macOS source Electron; no Windows execution',nativeBounds,geometry,file,sha256:crypto.createHash('sha256').update(await fs.readFile(path.join(output,file))).digest('hex')});console.log(JSON.stringify({checkpoint:'screenshot',file:path.join(output,file),nativeBounds}));
++  };
++  assert.equal(await composer.locator('select').inputValue(),'general');assert.equal(await composer.locator('details').getAttribute('open'),null);await capture('default','light');
++  await composer.locator('.composer-details summary').click();const body='  先留住一个还没想完整的念头。\n慢慢补上，不急着整理。😀  ';
++  await composer.locator('#idea-text').fill(body);await capture('options','light');await capture('options','dark');await composer.locator('.composer-details summary').click();await capture('default','dark');
++  await composer.locator('select').selectOption('custom-review');await composer.locator('.composer-details summary').click();await composer.getByLabel('名称',{exact:true}).fill('一条假念头');await composer.getByLabel('项目',{exact:true}).fill('预览假项目');
++  await composer.getByRole('button',{name:'保存草稿并关闭',exact:true}).click();await waitForInfo(shelf,i=>!i.interactionLocked);composer=await openComposer(app,shelf);assert.equal(await composer.locator('#idea-text').inputValue(),body);assert.equal(await composer.locator('select').inputValue(),'custom-review');assert.equal(await composer.getByLabel('名称',{exact:true}).inputValue(),'一条假念头');assert.equal(await composer.getByLabel('项目',{exact:true}).inputValue(),'预览假项目');
++  const revision=(await shelf.evaluate(()=>window.thoughtline.info())).snapshot.revision;
++  await composer.locator('#idea-text').evaluate(el=>{el.dispatchEvent(new CompositionEvent('compositionstart',{bubbles:true}));for(const key of ['Enter','Escape'])el.dispatchEvent(new KeyboardEvent('keydown',{key,metaKey:true,bubbles:true,cancelable:true}));el.dispatchEvent(new CompositionEvent('compositionend',{bubbles:true}));});assert.equal((await shelf.evaluate(()=>window.thoughtline.info())).snapshot.revision,revision);assert.equal(await composer.locator('#idea-text').inputValue(),body);
++  await fs.chmod(dir,0o555);await composer.getByRole('button',{name:'保存草稿并关闭',exact:true}).click();await composer.locator('.error').filter({hasText:/保存/}).waitFor();assert.equal(await composer.locator('#idea-text').inputValue(),body);await composer.waitForFunction(()=>document.querySelector('#idea-text')===document.activeElement);await fs.chmod(dir,0o755);
++  await composer.locator('.primary').evaluate(button=>{for(let i=0;i<3;i++)button.click();});await waitForInfo(shelf,i=>!i.interactionLocked&&i.snapshot.ideas.length===1);const stored=(await shelf.evaluate(()=>window.thoughtline.info())).snapshot;assert.equal(stored.ideas[0].text,body);assert.equal(stored.ideas[0].agentId,'custom-review');assert.equal(stored.ideas[0].title,'一条假念头');assert.equal(stored.draft,null);
++  await fs.writeFile(path.join(output,'result.json'),JSON.stringify({scope:'actual Mac source preview and trusted DOM/native windows with emulated hotkey/clipboard; composition synthetic only; no physical IME/hotkey or Windows acceptance; no new package',scenes,draftCloseReopenAllFields:true,customAgentRetained:true,compositionGuardsSubmitAndClose:true,saveFailureKeepsTextAndFocus:true,retrySucceeds:true,threeClicksOneNote:true,bodyFullWhitespaceEmojiPreserved:true},null,2)+'\n');
++ }finally{await fs.chmod(dir,0o755);if(app){pids=await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid));pids.push(app.process().pid);await app.close();}await cleanupIdleFixture(dir,pids);await fs.writeFile(path.join(output,'cleanup.json'),JSON.stringify({ownedPids:[...new Set(pids)],allPidsExited:true,fakeDataRemoved:true},null,2)+'\n');}
++})().catch(e=>{console.error(e);process.exitCode=1;});
