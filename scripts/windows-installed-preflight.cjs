@@ -46,10 +46,13 @@ async function main(){
   const asar=require('@electron/asar');const packed=path.join(path.dirname(executable),'resources','app.asar');
   const bundledPackage=JSON.parse(asar.extractFile(packed,'package.json'));assert.equal(bundledPackage.version,pkg.version);
   result.packagedHashes={};
-  for(const file of ['out/main/index.js','out/preload/index.js','out/renderer/index.html','assets/app-icon.png']){
+  const manifest=JSON.parse(await fs.readFile('dist/build-manifest.json','utf8'));
+  const files=[...Object.keys(manifest.hashes).filter(file=>file.startsWith('out/')),'assets/app-icon.png','assets/app-icon.ico','assets/tray-win.ico'];
+  for(const file of files){
    // asar v3 resolves archive members with path.sep; POSIX member paths fail on Windows.
    const bytes=asar.extractFile(packed,path.join(...file.split('/')));assert.equal(hash(bytes),hash(await fs.readFile(file)));result.packagedHashes[file]=hash(bytes);
   }result.checks.packagedOutputsMatchBuild=true;
+  assert((await fs.readFile('out/main/index.js','utf8')).includes('tray-win.ico'));result.checks.compiledWindowsTrayUsesApprovedIco=true;
   result.passed=true;
  }finally{
   if(app)await app.close();await fs.writeFile('dist/windows-installed-preflight.json',JSON.stringify(result,null,2)+'\n');

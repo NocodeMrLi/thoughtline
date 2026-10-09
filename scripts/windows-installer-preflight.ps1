@@ -25,7 +25,7 @@ try {
   if (!(Test-Path $exe)) { throw 'Installed executable missing' }
   if ((Snapshot-Hashes) -ne $seed) { throw 'Fresh install changed pre-existing fixture data' }
   $report.installPreservesExistingData = $true
-  $isolated = Join-Path $env:LOCALAPPDATA 'Thoughtline-Preflight\0.0.16-preview.5\user-data'
+  $isolated = Join-Path $env:LOCALAPPDATA 'Thoughtline-Preflight\0.0.16-preview.6\user-data'
   if (Test-Path $isolated) { throw 'Unexpected existing isolation fixture' }
   & ./docs/delivery/Start-Thoughtline-Isolated.ps1 -Executable $exe -CheckOnly
   if (Test-Path $isolated) { throw 'Check-only launcher created a profile' }
@@ -35,6 +35,10 @@ try {
   $report.appSignature = [string](Get-AuthenticodeSignature $exe).Status
   $report.installerSignature = [string](Get-AuthenticodeSignature $installer[0].FullName).Status
   if ($report.appSignature -ne 'NotSigned' -or $report.installerSignature -ne 'NotSigned') { throw 'Unexpected signing status for unsigned preflight' }
+  $uninstaller = Join-Path $install 'Uninstall Thoughtline.exe'
+  node scripts/verify-windows-pe-icons.cjs $exe $installer[0].FullName $uninstaller
+  if ($LASTEXITCODE -ne 0) { throw 'Embedded PE icon verification failed' }
+  $report.approvedIconsEmbeddedInAppInstallerUninstaller = $true
   node scripts/windows-installed-preflight.cjs verify $exe
   if ($LASTEXITCODE -ne 0) { throw 'Packaged application preflight failed' }
   $before = Snapshot-Hashes

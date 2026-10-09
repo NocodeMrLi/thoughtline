@@ -1,0 +1,48 @@
+
+> thoughtline@0.0.16-preview.6 verify
+> node scripts/verify.cjs
+
+
+> thoughtline@0.0.16-preview.6 typecheck
+> node node_modules/typescript/bin/tsc --noEmit
+
+
+> thoughtline@0.0.16-preview.6 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Documents/Codex/2026-10-09/task-7/thoughtline-windows-preflight
+
+
+ Test Files  24 passed | 1 skipped (25)
+      Tests  102 passed | 4 skipped (106)
+   Start at  14:18:24
+   Duration  768ms (tests 46%, transform 37%, import 13%, worker 4%)
+
+    Isolate  25 workers spawned · ~106ms startup each (spawn + environment, per file)
+             at least ~273ms faster with isolate: false — reuses workers across files instead of one per file
+
+
+> thoughtline@0.0.16-preview.6 build
+> node node_modules/electron-vite/bin/electron-vite.js build
+
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 19 modules transformed.
+rendering chunks...
+out/main/index.js  63.48 kB
+✓ built in 112ms
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 1 modules transformed.
+rendering chunks...
+out/preload/index.js  2.67 kB
+✓ built in 7ms
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 45 modules transformed.
+rendering chunks...
+../../out/renderer/index.html                   0.52 kB
+../../out/renderer/assets/index-Zs56a7pc.css   23.62 kB
+../../out/renderer/assets/index-BtnSFuM3.js   718.92 kB
+✓ built in 871ms
