@@ -1,7 +1,8 @@
-const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');
+const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 const assert=require('node:assert/strict'),path=require('node:path'),fs=require('node:fs/promises'),os=require('node:os');const {_electron}=require('playwright');
 (async()=>{
- const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-groups-'));let app;
+ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-groups-'));let app,pids=[];
+ const close=async()=>{if(app){pids.push(...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)),app.process().pid);await app.close();app=null;}};
  const launch=async()=>_electron.launch(await launchOptions(dir));
  const ready=async()=>{await warmViews(app);while((await app.windows()).length<3)await app.waitForEvent('window',{timeout:5000});const pages=await app.windows();for(const p of pages)await p.waitForURL(/view=(shelf|composer|manage)/,{waitUntil:'domcontentloaded'});const by=name=>pages.find(p=>p.url().includes('view='+name));const shelf=by('shelf');await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});return {shelf,composer:by('composer'),manage:by('manage')};};
  const info=p=>p.evaluate(()=>window.thoughtline.info());
@@ -15,6 +16,10 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
   const cross=await shelf.evaluate(async({a,c,revision})=>window.thoughtline.clipChange({kind:'merge',sourceId:a,targetId:c},revision),{a,c,revision:s.revision});assert(!cross.ok);
   await result(shelf,'dragLock',false);
   await new Promise(r=>setTimeout(r,450));
+  // Move to both travel limits using real renderer PointerEvents and trusted IPC.
+  const travelWidth=(await info(shelf)).width,travelMin=Math.max(92,travelWidth*.15+travelWidth*.7/6),travelMax=Math.min(travelWidth-92,travelWidth*.15+travelWidth*.7*5/6);
+  const moveTo=async(x,expected)=>{const revision=(await info(shelf)).snapshot.revision,box=await shelf.locator('[data-clip-id="'+a+'"] .peg-button').boundingBox();await shelf.mouse.move(box.x+12,box.y+20);await shelf.mouse.down();await shelf.mouse.move(x,box.y+20,{steps:8});await shelf.mouse.up();await waitForInfo(shelf,i=>!i.interactionLocked&&i.snapshot.revision>revision);await shelf.waitForFunction(()=>document.querySelector('[data-view=shelf]').dataset.locked==='false');const actual=await shelf.locator('[data-clip-id="'+a+'"] .peg-button').boundingBox();assert(actual&&Math.abs(actual.x+12-expected)<.05);assert.equal(await shelf.locator('.hanging').count(),3);};
+  await moveTo(10,travelMin);await moveTo(travelWidth-10,travelMax);
   const pegA=await shelf.locator('[data-clip-id="'+a+'"] .peg-button').boundingBox(),pegB=await shelf.locator('[data-clip-id="'+b+'"] .peg-button').boundingBox();assert(pegA&&pegB);
   await shelf.mouse.move(pegA.x+12,pegA.y+20);await shelf.mouse.down();await shelf.mouse.move(pegB.x+12,pegB.y+20,{steps:4});await shelf.mouse.up();
   await shelf.getByText('未达到合夹停留时间，位置保持。',{exact:true}).waitFor();assert.equal((await info(shelf)).snapshot.clips.length,3);
@@ -41,8 +46,8 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
   await manage.getByRole('button',{name:'标签1',exact:true}).click();assert.equal(await manage.locator('[data-full-text]').inputValue(),texts[1]);
   s=(await info(manage)).snapshot;await result(manage,'clipChange',{kind:'split',id:b,ideaId:ids[1]},s.revision);s=(await info(manage)).snapshot;assert.equal(s.clips.length,3);assert.equal(s.ideas[1].text,texts[1]);
   await result(manage,'clipChange',{kind:'undo'},s.revision);s=(await info(manage)).snapshot;assert.equal(s.clips.length,2);assert.deepEqual(s.clips[0].ideaIds,[ids[1],ids[0]]);
-  await app.close();app=null;app=await launch();({shelf}=await ready());s=(await info(shelf)).snapshot;assert.equal(s.schemaVersion,2);assert.deepEqual(s.clips[0].ideaIds,[ids[1],ids[0]]);assert.equal(s.ideas[0].text,texts[0]);
-  const report={platform:process.platform,scope:'Electron应用IPC/DOM/协议鼠标循环；不是系统物理拖动、穿透或Windows实机验收',compactSize:[160,226],detailSize:[380,360],unrelatedClipCenterPreserved:true,crossAgentRejected:true,mergePreservesNotes:true,dragHoldMergeProtocol:true,earlyDropNoMerge:true,hoverArrows:true,pageSwitchNoCopy:true,copyCurrentFullText:true,titleJump:true,splitUndo:true,restartPreserved:true};
+  await close();app=await launch();({shelf}=await ready());s=(await info(shelf)).snapshot;assert.equal(s.schemaVersion,2);assert.deepEqual(s.clips[0].ideaIds,[ids[1],ids[0]]);assert.equal(s.ideas[0].text,texts[0]);
+  const report={platform:process.platform,scope:'Electron应用IPC/DOM/协议鼠标循环；不是系统物理拖动、穿透或Windows实机验收',compactSize:[160,226],detailSize:[380,360],unrelatedClipCenterPreserved:true,moveBothTravelLimitsPreservesAllThreeVisible:true,rightEdgeReflowWithinTravelBounds:true,crossAgentRejected:true,mergePreservesNotes:true,dragHoldMergeProtocol:true,earlyDropNoMerge:true,hoverArrows:true,pageSwitchNoCopy:true,copyCurrentFullText:true,titleJump:true,splitUndo:true,restartPreserved:true};
   await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','group-native.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
- }finally{try{if(app)await app.close();}finally{await fs.rm(dir,{recursive:true,force:true});}}
+ }finally{await close();await cleanupIdleFixture(dir,pids);await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','group-cleanup.json'),JSON.stringify({pids:[...new Set(pids)],allPidsExited:true,fakeDataRemoved:true},null,2)+'\n');}
 })().catch(e=>{console.error(e);process.exitCode=1;});

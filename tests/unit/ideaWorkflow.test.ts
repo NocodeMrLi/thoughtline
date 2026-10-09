@@ -39,7 +39,7 @@ test('筛选与可见容量不减少总重量，也不删除溢出记录',()=>{
  let s=commands.initialSnapshot();
  for(let i=0;i<8;i++)s=unwrap(commands.newIdea(s,{...draft,agentId:i<2?'claude':'codex'},'id'+i,now));
  const all=commands.shelfSelection(s,'all',1000);
- expect(all.totalHanging).toBe(8);expect(all.visible.map(x=>x.id)).toEqual(['id0','id1','id2','id3']);expect(all.overflow).toBe(4);
+ expect(all.totalHanging).toBe(8);expect(all.visible.map(x=>x.id)).toEqual(['id0','id1','id2']);expect(all.overflow).toBe(5);
  const filtered=commands.shelfSelection(s,'claude',1000);
  expect(filtered.totalHanging).toBe(8);expect(filtered.visible.map(x=>x.id)).toEqual(['id0','id1']);expect(filtered.overflow).toBe(0);expect(s.ideas).toHaveLength(8);
 });
@@ -48,7 +48,7 @@ test('大量历史不计重量，持续挂着也只占有限展示槽位',()=>{
  for(let i=0;i<40;i++)s=unwrap(commands.newIdea(s,{...draft},'idea'+String(i).padStart(3,'0'),now));
  for(let i=0;i<35;i++)s=unwrap(commands.changeStatus(s,s.ideas[i].id,'archived',later));
  const picked=commands.shelfSelection(s,'all',1000);
- expect(picked.totalHanging).toBe(5);expect(picked.visible).toHaveLength(4);expect(picked.overflow).toBe(1);
+ expect(picked.totalHanging).toBe(5);expect(picked.visible).toHaveLength(3);expect(picked.overflow).toBe(2);
  expect(commands.findIdeas(s,{status:'archived'})).toHaveLength(35);expect(s.ideas).toHaveLength(40);
 });
 test('未填名称时从首个非空正文行生成找回标签，原文不裁剪',()=>{

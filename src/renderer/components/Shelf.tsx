@@ -1,13 +1,14 @@
-import {useEffect,useLayoutEffect,useRef,useState} from 'react';
+import {useEffect,useId,useLayoutEffect,useRef,useState} from 'react';
 import type {PointerEvent} from 'react';
 import type {PilotInfo,ClipMutation} from '../../shared/bridge';
 import type {Clip} from '../../shared/contracts';
-import {layoutClips,normalizedPosition,CARD_WIDTH} from '../../shared/clipLayout';
+import {layoutClips,normalizedPosition,clipTravelBounds} from '../../shared/clipLayout';
 import {fixedRope,fixedRopeY} from '../../shared/ropeGeometry';
 import {ClipCard} from './ClipCard';
 import {useShelfMotion} from '../hooks/useShelfMotion';
 type Drag={clip:Clip;pointer:number;startX:number;startY:number;origin:number;x:number;active:boolean;target:string|null;ready:boolean;revision:number};
 export function Shelf({info}:{info:PilotInfo}){
+ const ropeId=useId().replace(/:/g,'');
  const root=useRef<HTMLDivElement>(null),layoutRevision=useRef(0);const agentId=info.shelfAgentId;const [error,setError]=useState(''),[notice,setNotice]=useState(''),[dragView,setDragView]=useState<Drag|null>(null);
  const drag=useRef<Drag|null>(null),mergeTimer=useRef<ReturnType<typeof setTimeout>|null>(null);const infoRef=useRef(info);infoRef.current=info;
  const filtered=info.snapshot.clips.filter(c=>agentId==='all'||c.agentId===agentId);const rope=fixedRope(info.width);const layout=layoutClips(filtered,info.width);
@@ -32,7 +33,7 @@ export function Shelf({info}:{info:PilotInfo}){
    if(!d.active){if(Math.hypot(e.clientX-d.startX,e.clientY-d.startY)<5)return;d.active=true;
     const r=await window.thoughtline.dragLock(true);if(drag.current!==d){void window.thoughtline.dragLock(false);return;}if(!r.ok){setError(r.message);reset();return;}
    }
-   d.x=Math.max(CARD_WIDTH/2+12,Math.min(infoRef.current.width-CARD_WIDTH/2-12,d.origin+e.clientX-d.startX));
+   const bounds=clipTravelBounds(infoRef.current.width);d.x=Math.max(bounds.min,Math.min(bounds.max,d.origin+e.clientX-d.startX));
    const target=visibleRef.current.find(p=>p.clip.id!==d.clip.id&&Math.abs(p.x-d.x)<=30&&Math.abs(e.clientY-d.startY)<90);
    const id=target?.clip.id??null;
    if(d.target!==id){if(mergeTimer.current)clearTimeout(mergeTimer.current);d.target=id;d.ready=false;
@@ -66,7 +67,9 @@ export function Shelf({info}:{info:PilotInfo}){
   publish();const observer=new ResizeObserver(publish);root.current?.querySelectorAll('[data-hit]').forEach(el=>observer.observe(el));return()=>observer.disconnect();
  },[info.width,info.displayId,info.snapshot.revision,agentId,sag,progress,dragView]);
  return <div ref={root} data-view="shelf" data-visible={info.shelfVisible} data-locked={info.interactionLocked} data-progress={progress} data-reduced={reduced} className="shelf-root" style={{transform:reduced?'none':`translate3d(0,${(progress-1)*250}px,0)`,opacity:progress,willChange:!reduced&&progress>0&&progress<1?'transform, opacity':undefined}}>
-  <svg className="rope" data-sag={sag} data-left={rope.left} data-length={rope.length} data-layout-width={info.width} width="100%" height="140" aria-hidden="true">{['rope-shadow','rope-core','rope-light'].map(c=><path key={c} className={c} d={`M ${rope.left} ${rope.top} Q ${info.width/2} ${rope.top+2*sag} ${rope.left+rope.length} ${rope.top}`}/>)}</svg>
+  <svg className="rope" data-sag={sag} data-left={rope.left} data-length={rope.length} data-layout-width={info.width} data-end-fade=".08" width="100%" height="140" aria-hidden="true">
+   <defs><linearGradient id={`${ropeId}-ends`} gradientUnits="userSpaceOnUse" x1={rope.left} x2={rope.left+rope.length} y1="0" y2="0"><stop stopColor="white" stopOpacity="0"/><stop offset=".08" stopColor="white"/><stop offset=".92" stopColor="white"/><stop offset="1" stopColor="white" stopOpacity="0"/></linearGradient><mask id={`${ropeId}-mask`} maskUnits="userSpaceOnUse" x="0" y="0" width={info.width} height="140"><rect width={info.width} height="140" fill={`url(#${ropeId}-ends)`}/></mask></defs>
+   {['rope-shadow','rope-core','rope-light'].map(c=><path key={c} className={c} mask={`url(#${ropeId}-mask)`} d={`M ${rope.left} ${rope.top} Q ${info.width/2} ${rope.top+2*sag} ${rope.left+rope.length} ${rope.top}`}/>)}</svg>
   {visible.map(({clip:heldClip,x:origin})=>{
    const clip=info.snapshot.clips.find(c=>c.id===heldClip.id);if(!clip)return null;const active=dragView?.clip.id===clip.id;const x=active?dragView.x:origin,y=fixedRopeY(x,rope);const agent=info.snapshot.agents.find(a=>a.id===clip.agentId);
    const slope=4*rope.sag/rope.length*(1-2*(x-rope.left)/rope.length),bend=-4*rope.sag/(rope.length*rope.length);
