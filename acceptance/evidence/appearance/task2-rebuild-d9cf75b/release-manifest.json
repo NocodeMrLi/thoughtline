@@ -59,19 +59,30 @@
     "mapping": "../failed-attempt-3cb50bb-v0.0.17-preview.3/old-partial-mapping.json"
   },
   "releaseAssets": [
+    "QA-guide-v0.0.17-preview.3.md",
+    "SHA256SUMS",
+    "Start-Thoughtline-Isolated-Mac.command",
+    "Start-Thoughtline-Isolated.ps1",
     "Thoughtline-0.0.17-preview.3-mac-arm64.dmg",
     "Thoughtline-0.0.17-preview.3-mac-arm64.dmg.blockmap",
     "Thoughtline-0.0.17-preview.3-win-x64.exe",
-    "Start-Thoughtline-Isolated-Mac.command",
-    "Start-Thoughtline-Isolated.ps1",
-    "QA-guide-v0.0.17-preview.3.md",
-    "release-notes-v0.0.17-preview.3.md",
+    "Windows-source-UI-evidence.zip",
+    "mac-asar-input-audit.json",
     "mac-build-manifest.json",
-    "windows-build-manifest.json",
-    "source-freeze-input-vector-d9cf75b.json",
-    "windows-package-audit.json",
+    "mac-launcher-generation.json",
+    "mac-package-acceptance.json",
+    "mac-packaged-appearance.json",
+    "mac-signature-verification.json",
     "release-manifest.json",
-    "SHA256SUMS"
+    "release-notes-v0.0.17-preview.3.md",
+    "source-freeze-input-vector-d9cf75b.json",
+    "windows-build-manifest.json",
+    "windows-installed-preflight.json",
+    "windows-installer-preflight.json",
+    "windows-package-audit.json",
+    "windows-packaged-appearance.json",
+    "windows-pe-icons.json",
+    "windows-runner-SHA256SUMS.txt"
   ],
   "files": {
     "QA-guide-v0.0.17-preview.3.md": {
@@ -107,12 +118,12 @@
     "Windows-source-UI-evidence.zip": {
       "bytes": 1792736,
       "sha256": "10b0d9f2b001edbe971300f9e649c252ef4c3002be12594cdc285245b613cc3e",
-      "role": "local-verification-evidence"
+      "role": "draft-release-asset"
     },
     "mac-asar-input-audit.json": {
       "bytes": 276,
       "sha256": "1386abc2c87e5047ad8851cf88d6c0c751ddc5d5d00af6b194865bd9a4a30cc2",
-      "role": "local-verification-evidence"
+      "role": "draft-release-asset"
     },
     "mac-build-manifest.json": {
       "bytes": 54981,
@@ -122,22 +133,22 @@
     "mac-launcher-generation.json": {
       "bytes": 709,
       "sha256": "eeaeb0a8dcfa5bb308dad251bf6944fc72df92da56cc0f0826f64a3b3172c105",
-      "role": "local-verification-evidence"
+      "role": "draft-release-asset"
     },
     "mac-package-acceptance.json": {
       "bytes": 1336,
       "sha256": "c09cb5110322e80fc8731aadaed0d08dcd42cefc4de3e02e9111ead305c5b255",
-      "role": "local-verification-evidence"
+      "role": "draft-release-asset"
     },
     "mac-packaged-appearance.json": {
       "bytes": 5342,
       "sha256": "3e0541e897595617c9fe8e48eee32de7b8447fa077725cbdc53030598d2cef0e",
-      "role": "local-verification-evidence"
+      "role": "draft-release-asset"
     },
     "mac-signature-verification.json": {
       "bytes": 380,
       "sha256": "ecf09a1276796b62b32bd66528f5cc63b41543ad5112375cc9e94d33efc980e7",
-      "role": "local-verification-evidence"
+      "role": "draft-release-asset"
     },
     "release-notes-v0.0.17-preview.3.md": {
       "bytes": 1296,
@@ -157,12 +168,12 @@
     "windows-installed-preflight.json": {
       "bytes": 1786,
       "sha256": "db67812420807c6ec591321dfc846b1d7a34276e0d97d62e58bec8f5e484b270",
-      "role": "local-verification-evidence"
+      "role": "draft-release-asset"
     },
     "windows-installer-preflight.json": {
       "bytes": 1133,
       "sha256": "9ee1b41dc5bc8c7ac318b37249ac8c72f5a1da97ed2cf4c38d33d83f6246edc2",
-      "role": "local-verification-evidence"
+      "role": "draft-release-asset"
     },
     "windows-package-audit.json": {
       "bytes": 2235,
@@ -172,17 +183,22 @@
     "windows-packaged-appearance.json": {
       "bytes": 3580,
       "sha256": "80d6533bfb1f616debe92b37abc66cb14b5003e432ff1590d08cfd47d3d02e59",
-      "role": "local-verification-evidence"
+      "role": "draft-release-asset"
     },
     "windows-pe-icons.json": {
       "bytes": 12814,
       "sha256": "a874631b051f73e220e259db2f2f57650495f7e5c6bc97fb0e99ccb4fcd9c0d3",
-      "role": "local-verification-evidence"
+      "role": "draft-release-asset"
     },
     "windows-runner-SHA256SUMS.txt": {
       "bytes": 108,
       "sha256": "fea043673c9463091b957f2aff0b8dd0406fac09021d202a70030f47dafcb3cf",
-      "role": "local-verification-evidence"
+      "role": "draft-release-asset"
     }
+  },
+  "assetCompleteness": {
+    "localRegularFiles": 24,
+    "completeChecksumTargets": 23,
+    "expectedDraftAssets": 24
   }
 }

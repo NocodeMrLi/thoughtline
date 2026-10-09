@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "ownership": "Task2-owned /tmp/thoughtline-task2-KnsYFP only",
+  "reason": "new d9cf dual packages, full local SHA256SUMS and 13 remote draft asset byte downloads verified before cleanup",
+  "sourceHeadSha": "d9cf75b425464589e6761abd8dff9954f3e2ad0c",
+  "releaseId": 408155486,
+  "protected": [
+    "original checkout out/node_modules",
+    "Electron PID 30628",
+    "old 3cb failed-attempt archive and original failed ZIP/logs",
+    "new final delivery directory and rollback packages",
+    "task evidence"
+  ],
+  "preflight": {
+    "noTaskMountFound": true,
+    "noOpenTaskBuildOutputFound": true,
+    "pid30628Alive": true
+  },
+  "paths": [
+    {
+      "relativePath": "owned-project/node_modules",
+      "kind": "directory",
+      "fileCount": 10763,
+      "directoryCount": 1631,
+      "symlinkCount": 61,
+      "logicalBytes": 530322175,
+      "allocatedBytes": 561336320,
+      "inventorySha256": "94c71ad155b44e5b5338ee741374e125f1995b8e5240a0c43bbd1c30ffd0c794"
+    },
+    {
+      "relativePath": "owned-project/dist",
+      "kind": "directory",
+      "fileCount": 274,
+      "directoryCount": 321,
+      "symlinkCount": 14,
+      "logicalBytes": 447768295,
+      "allocatedBytes": 449503232,
+      "inventorySha256": "158a1e59fdcd191ece31c4bc6cad1580d86ab366e4b439a0495f3de3cbf8bbbf"
+    },
+    {
+      "relativePath": "owned-project/out",
+      "kind": "directory",
+      "fileCount": 6,
+      "directoryCount": 5,
+      "symlinkCount": 0,
+      "logicalBytes": 1129322,
+      "allocatedBytes": 1150976,
+      "inventorySha256": "c811253394c0a2ff07de3ac57e4744eab8734cbd7dad5c668073e8d376c241ed"
+    },
+    {
+      "relativePath": "release-readback",
+      "kind": "directory",
+      "fileCount": 13,
+      "directoryCount": 1,
+      "symlinkCount": 0,
+      "logicalBytes": 246840832,
+      "allocatedBytes": 252039168,
+      "inventorySha256": "6d02c85908f84fa7dccaf4204a1f934885f844edaa5a1d01aab9bd3fe3cf17cf"
+    },
+    {
+      "relativePath": "windows-d9cf-package",
+      "kind": "directory",
+      "fileCount": 7,
+      "directoryCount": 1,
+      "symlinkCount": 0,
+      "logicalBytes": 113174681,
+      "allocatedBytes": 113192960,
+      "inventorySha256": "e4984805807e858bb120a2ddbfcfdb55e969b478f0ed027b0cf44619017799d4"
+    },
+    {
+      "relativePath": "windows-d9cf-source-ui",
+      "kind": "directory",
+      "fileCount": 96,
+      "directoryCount": 15,
+      "symlinkCount": 0,
+      "logicalBytes": 1979833,
+      "allocatedBytes": 2207744,
+      "inventorySha256": "a9607f1722986bb1a78db3adb4d201b9d8662d0d4647ef5a8f0c95977af7bd1b"
+    },
+    {
+      "relativePath": "windows-d9cf-package.zip",
+      "kind": "file",
+      "fileCount": 1,
+      "directoryCount": 0,
+      "symlinkCount": 0,
+      "logicalBytes": 113129282,
+      "allocatedBytes": 113131520,
+      "inventorySha256": "9b2566b99771c127df10ec8d3b8d31e1075ed13fd228dd7d484ad67ef09316ed"
+    },
+    {
+      "relativePath": "windows-d9cf-source-ui.zip",
+      "kind": "file",
+      "fileCount": 1,
+      "directoryCount": 0,
+      "symlinkCount": 0,
+      "logicalBytes": 1792736,
+      "allocatedBytes": 2113536,
+      "inventorySha256": "afd14978d91915adb59ba10eb952b8d6e311f5fad0f103c5fecbc84bbaeab683"
+    }
+  ],
+  "totalLogicalBytes": 1456137156,
+  "totalAllocatedBytes": 1494675456,
+  "deleted": true,
+  "absenceVerified": true,
+  "completionRepair": {
+    "reason": "24/24 draft asset completion; only new/replaced 13 downloaded copies removed after exact byte verification",
+    "relativePath": "release-completion-readback",
+    "fileCount": 13,
+    "directoryCount": 1,
+    "logicalBytes": 1830294,
+    "allocatedBytes": 2183168,
+    "inventorySha256": "78be0e8248a8ae5ef623235fc2ca7f3b71d5fb2c5d85e9702150c030e6010c68",
+    "preflightNoOpenFile": true,
+    "deleted": true,
+    "absenceVerified": true
+  },
+  "totalFreedLogicalBytes": 1457967450,
+  "totalFreedAllocatedBytes": 1496858624
+}
