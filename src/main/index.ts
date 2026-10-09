@@ -2,7 +2,7 @@ import {app,BrowserWindow,dialog,shell,clipboard,globalShortcut,ipcMain,nativeIm
 import {join} from 'node:path';
 import {randomUUID} from 'node:crypto';
 import {createShelf} from './windows/shelf';
-import {createComposer} from './windows/composer';
+import {createComposer,COMPOSER_SIZE} from './windows/composer';
 import {createManage} from './windows/manage';
 import {createHost} from './platform/host';
 import {EdgeController} from './edgeController';
@@ -87,13 +87,13 @@ else app.whenReady().then(async()=>{
    composer.show();composer.focus();return ideaId?invalid('请先保存或取消当前编辑。'):done();
   }
   if(composer&&!composerSafeToRelease){
-   hideManage();lock('composer',true);host.showComposer(boundsFor(530,440));
+   hideManage();lock('composer',true);host.showComposer(boundsFor(COMPOSER_SIZE.width,COMPOSER_SIZE.height));
    return ideaId?invalid('请先保存或取消尚未完成的输入。'):done();
   }
   const idea=ideaId?snapshot.ideas.find(x=>x.id===ideaId):null;
   if(ideaId&&!idea)return invalid('找不到这条念头。');
   composerContext=idea?{mode:'edit',ideaId:idea.id,draft:{text:idea.text,title:idea.title,project:idea.project,agentId:idea.agentId}}:{mode:'new',ideaId:null,draft:snapshot.draft??blank};
-  editRevision=snapshot.revision;composerSession++;try{await ensureComposer();}catch{return {ok:false,code:'IO',message:'输入浮层未能打开，请重试。原数据已保留。'};}if(quitting)return invalid('正在退出。');if(manage?.isVisible()&&manageMode==='settings')return invalid('请先关闭设置。');composerSafeToRelease=false;lock('composer',true);hideManage();publish();host.showComposer(boundsFor(530,440));return done();
+  editRevision=snapshot.revision;composerSession++;try{await ensureComposer();}catch{return {ok:false,code:'IO',message:'输入浮层未能打开，请重试。原数据已保留。'};}if(quitting)return invalid('正在退出。');if(manage?.isVisible()&&manageMode==='settings')return invalid('请先关闭设置。');composerSafeToRelease=false;lock('composer',true);hideManage();publish();host.showComposer(boundsFor(COMPOSER_SIZE.width,COMPOSER_SIZE.height));return done();
  };
  const save=async(next:Result<Snapshot>,revision:number):Promise<Result<Snapshot>>=>{
   if(!next.ok)return next;const r=await repository.commit(next.value,revision);
