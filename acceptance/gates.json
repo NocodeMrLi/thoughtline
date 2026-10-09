@@ -1,8 +1,8 @@
 {
-  "stage": "0.0.17-preview.2 actual-package harness fix2 reviewed; ready for new freeze and dual rebuild; physical acceptance pending",
+  "stage": "0.0.17-preview.2 private prerelease delivered; applicable automated/package gates verified; physical/receiver/user acceptance pending",
   "asOf": "2026-10-09 Asia/Shanghai",
   "branch": "main",
-  "lastCommittedSource": "fa45cb88105db81806e419bba5d8029af9540389",
+  "lastCommittedSource": "ca2137b1c7af1458643ac2988c6cc4ed9ce15e35",
   "currentCandidateVersion": "0.0.17-preview.2",
   "formalAcceptance": false,
   "round1": {
@@ -43,7 +43,7 @@
       "evidence": "evidence/round1/p3-ui-calendar-workflow-final.log",
       "physicalAcceptance": false,
       "motionSupplement": {
-        "status": "implemented; Task7 fix1 and final uniform-content R2 scoped reviews approved; actual package/physical hand feel pending",
+        "status": "implemented; scoped reviews and final Windows source fixtures passed; physical hand feel untested",
         "report": "evidence/round1/calendar-motion-report.md",
         "cleanupAudit": "evidence/round1/calendar-motion/controller-cleanup-audit.json",
         "durationMs": {
@@ -54,7 +54,7 @@
         "review": "evidence/round1/calendar-motion-review.md"
       },
       "brandMarker": {
-        "status": "implemented; fix2 scoped Spec/Quality Approved; physical and final-package pending",
+        "status": "implemented from approved HD pixels; scoped review and final Windows source badge workflow passed; physical untested",
         "report": "evidence/round1/calendar-brand-clip-report.md",
         "source": "assets/source/approved-TL-brand-logo.jpg",
         "sourceSha256": "313485e59395e3165f6504964efd72f4a3811150ac337834be3e2759f279f778",
@@ -98,10 +98,10 @@
     },
     "formalAcceptance": false,
     "p6": {
-      "status": "source tools, Task8 and final R1-R4 scoped review approved; ready to freeze; no actual final packages",
+      "status": "same-source Mac package 6/6 and Windows runner 188/10/NSIS verified; private prerelease published; independent physical QA pending",
       "candidateVersion": "0.0.17-preview.2",
-      "published": false,
-      "frozenSourceCommit": null,
+      "published": true,
+      "frozenSourceCommit": "ca2137b1c7af1458643ac2988c6cc4ed9ce15e35",
       "taskReview": "evidence/round1/p6-source-review.md",
       "cleanupAudit": "evidence/round1/p6-fix-probe/controller-cleanup-audit.json",
       "wholeBranchReview": {
@@ -149,7 +149,7 @@
       },
       "previousSourceFreeze": "9a862b7e6734d8b453f45e8130ebe7677f046459",
       "packageFix2": {
-        "status": "Spec/Quality PASS; actual rebuilt package gate pending",
+        "status": "Spec/Quality PASS; actual rebuilt Mac package six checks PASS; Windows rebuilt from identical source PASS",
         "report": "evidence/round1/p6-package-fix2-report.md",
         "review": "evidence/round1/p6-package-fix2-review.md",
         "firstPackageAcceptance": "failed at evaluate global require; retained unapproved",
@@ -163,6 +163,63 @@
         "scope": "interim source before one-line package fixture fix; not final source",
         "run": "evidence/round1/p6-delivery-local/windows-9a-run-final.json",
         "log": "evidence/round1/p6-delivery-local/windows-9a-run-final.log"
+      },
+      "report": "RELEASE-0.0.17-preview.2.md",
+      "deliveryReport": "evidence/round1/p6-delivery-report.md",
+      "sourceInputCount": 206,
+      "canonicalInputSha256": "099ce1eb5e4b56c1d377c944d953f3c70f1a83b1e29fefe73d7baa84b99a4200",
+      "release": {
+        "url": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2",
+        "id": 408004525,
+        "repositoryVisibility": "PRIVATE",
+        "draft": false,
+        "prerelease": true,
+        "tagCommit": "ca2137b1c7af1458643ac2988c6cc4ed9ce15e35",
+        "serverAssetsMatched": 15,
+        "checksumTargetsMatched": 14,
+        "serverVerification": "evidence/round1/p6-delivery-local/controller-release-publish-and-cleanup-final-audit.json"
+      },
+      "macPackage": {
+        "version": "0.0.17-preview.2",
+        "arch": "arm64",
+        "source": "ca2137b1c7af1458643ac2988c6cc4ed9ce15e35",
+        "bytes": 133377669,
+        "sha256": "9ef50f9804edeaf4c3b3a15713037047e403372de98d40fba27110465edbdd45",
+        "checksPassed": 6,
+        "restoredDataRestarts": 2,
+        "signature": "ad-hoc strict; not Developer ID/notarized",
+        "report": "evidence/round1/p6-delivery-local/controller-mac-ca-package-acceptance-audit.json",
+        "physicalAcceptance": false
+      },
+      "windowsFinal": {
+        "id": 37943540735,
+        "headSha": "ca2137b1c7af1458643ac2988c6cc4ed9ce15e35",
+        "result": "success",
+        "unitPassed": 188,
+        "sourceElectronWorkflows": 10,
+        "arch": "x64 installed App; PE32 NSIS bootstrapper",
+        "host": "win32/x64/10.0.26100",
+        "bytes": 113089690,
+        "sha256": "1ccc1e4badd2ea8db7bea3da3b5fa563fa294234f9181bee93ff7e6d50e2d3d5",
+        "signature": "NotSigned",
+        "installerRetentionChecks": "passed",
+        "run": "evidence/round1/p6-delivery-local/windows-ca-run-final.json",
+        "log": "evidence/round1/p6-delivery-local/windows-ca-run-final.log",
+        "audit": "evidence/round1/p6-delivery-local/windows-source-ui-audit-ca2137b.json",
+        "physicalAcceptance": false
+      },
+      "cleanupFinal": {
+        "audit": "evidence/round1/controller-final-cleanup-audit.json",
+        "deletionReceipt": "evidence/round1/p6-delivery-local/cleanup-after-release-ca2137b.json",
+        "deletedLogicalBytes": 696785896,
+        "locatableMacReceipts": 118,
+        "distinctRecordedPids": 517,
+        "allLocatableMacDirectoriesAbsent": true,
+        "allRecordedMacPidsAbsent": true,
+        "historicalMissingDirectoryRecords": 92,
+        "retainedUnreadableFailure": "evidence/round1/p5-windows-run.json",
+        "originalPid30628": "alive protected",
+        "scope": "recorded owned temporary receipts; no current-user data/process/worktree removal"
       }
     }
   },
