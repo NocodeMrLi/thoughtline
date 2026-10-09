@@ -1,5 +1,9 @@
 # v0.0.17-preview.3 同源双端测试交付
 
+最新检查点：4191双端实际包与24附件已验证，但独立消费复审发现Mac隔离启动器引用生产者绝对路径，禁止发布该候选。仅修复生成器于`062a626a69c63156ccdbdd0b4f64a97c3f0e461b`；真实旧DMG搬迁RED／GREEN证明相邻目录解析、缺失／损坏拒收及profile链接保护。原包不改、测试副本清理。[限定复审](evidence/appearance/controller-final/task-2-portable-launcher-scoped-review.md)Spec／Quality通过，I1／M1／M2全部解决，未新增Critical／Important。新227输入canonical`72314079c3dbfb77ef813a5d4c852e9eb46fe2ab85d1b45e671acaedf49242f9`；接下来必须新冻结源码双端重建与实际包消费验收。草稿未发布，无preview.3 tag，真实双端验收仍未测。
+
+以下为保留的历史检查点，不能作为当前新源码安装包或发布证明。
+
 最新消费检查点：Windows `37968756145` 从3fa4683在verify阶段222通过／4夹具失败，未生成安装器；该次Mac6+3通过仅为阻断候选。保留[失败报告](evidence/appearance/task2-final-rebuild-3fa4683/task-2-report.md)。已仅修复LF／CRLF回调提取夹具，8项对照通过、Mac完整单测226通过／4平台跳过、类型通过；[限定复审](evidence/appearance/controller-final/task-2-crlf-fixture-review.md)Spec／Quality通过。生产I1／M1源码和唯一终审复审不变，新227输入canonical为`10367d7b3dc5d920af5e781b13b9daa1848e273cec4c542d5e652a198a68dffa`，必须从新冻结源码重建双端后再发布。
 
 下方d9cf旧候选与3fa单Mac均为历史，当前最终交付目录尚不存在；历史目录分别为`delivery/failed-final-review-d9cf75b-v0.0.17-preview.3`、`delivery/blocked-final-rebuild-3fa4683-v0.0.17-preview.3`。草稿仍未发布，旧tag未改。

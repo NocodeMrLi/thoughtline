@@ -27,3 +27,5 @@ Frozen3cb successfulWin216/216/source10+17+11/NSIS/installedschema2+backuprestar
 Controller initial source-audit guessed source-after.json ENOENT before any mutation; rg found actual vector-after.json and exact227 key/hash audit passed. No unread evidence used.
 
 Task2 CRLF fixture source517ff10/evidence80c5ac6, scopedreviewADDRESSED/SpecPASS/QualityPASS/0newfinding; local8EOLcases+226unit4skip/typepassed. Canon22710367d7b…a68dffa. Nextexactfreeze+BOTH consumers, no currentpackage promotion.
+
+2026-10-10 portableMacsource062a / evidence d338 / correctedreport4d8: scopedSpec/Quality PASS(I1/M1/M2); actualhistoricalDMGmoved/no-fallbackchecks passnewgenerator; full227canon72314079 matches. Old4191 actualpair remains unpublished and not repairsource. Newcleanfreeze andBOTHactualconsumer rebuildnext. No extra production change/broadreview.

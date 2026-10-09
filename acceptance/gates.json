@@ -1,8 +1,8 @@
 {
-  "stage": "Final production review and included EOL fixture scoped review approved; renewed exact-source paired packages required",
+  "stage": "Portable launcher scoped review approved; fresh exact-source paired packages required",
   "asOf": "2026-10-10 Asia/Shanghai",
   "branch": "main",
-  "lastCommittedSource": "517ff10e1e9cece60842ddcfae71f9eb1a6356b5",
+  "lastCommittedSource": "062a626a69c63156ccdbdd0b4f64a97c3f0e461b",
   "currentCandidateVersion": "0.0.17-preview.3",
   "formalAcceptance": false,
   "round1": {
@@ -513,10 +513,10 @@
     },
     "materialBoundary": "paper stays matte paper; current native vibrancy/acrylic fallback is not native Liquid Glass; paired additional polish evaluation deferred",
     "readmeHeroGif": "deferred by user until complete independent QA and fixes",
-    "status": "Reviewed CRLF fixture fix; fresh same-source Mac and Windows consumer gates pending",
+    "status": "Scoped portable-launcher repair approved; both newly frozen actual packages pending",
     "reviewedImplementationSource": "f809fe36b72bee8f8bdc9afe0607591c98013b23",
     "sourceInputCount": 227,
-    "canonicalInputSha256": "10367d7b3dc5d920af5e781b13b9daa1848e273cec4c542d5e652a198a68dffa",
+    "canonicalInputSha256": "72314079c3dbfb77ef813a5d4c852e9eb46fe2ab85d1b45e671acaedf49242f9",
     "actualRepairedPackageSource": null,
     "historicalD9Candidate": {
       "status": "historical d9cf candidate: gates passed before final source repair; private draft still unpublished and must be rebuilt",
@@ -607,6 +607,34 @@
       "macActualAppearanceChecks": 3,
       "promoted": false,
       "evidence": "evidence/appearance/task2-final-rebuild-3fa4683/task-2-report.md"
+    },
+    "packagedPortableLauncherRepair": {
+      "source": "062a626a69c63156ccdbdd0b4f64a97c3f0e461b",
+      "evidence": "d33894e85c08d3724464596a80782651d09db1e1",
+      "reportCorrection": "4d8b70232d10aff513e7b97d24e38599cd5a3a8f",
+      "review": "evidence/appearance/controller-final/task-2-portable-launcher-scoped-review.md",
+      "spec": "pass",
+      "quality": "pass",
+      "actualFixture": "historical4191 DMG only; relocated RED/GREEN, no App launch",
+      "newPackages": "pending"
+    },
+    "historical4191Candidate": {
+      "source": "4191fd82d965641a803d994644993fc9426e7c40",
+      "canonical": "10367d7b3dc5d920af5e781b13b9daa1848e273cec4c542d5e652a198a68dffa",
+      "evidenceCommit": "3534c8118b30756419a3e0970f7865d41e4bde5e",
+      "macUnitPassed": 226,
+      "macPlatformSkipped": 4,
+      "macActualPackageChecks": 6,
+      "macAppearanceChecks": 3,
+      "windowsRun": 37970340295,
+      "windowsUnitPassed": 230,
+      "windowsAppearanceChecks": 3,
+      "sourceAppearanceChecksEach": 20,
+      "sourceRepairChecksEach": 11,
+      "draftAssets": 24,
+      "checksumTargets": 23,
+      "distributionBlocked": "Mac launcher references producer absolute paths; subsequent source repair not in these packages",
+      "promoted": false
     }
   }
 }
