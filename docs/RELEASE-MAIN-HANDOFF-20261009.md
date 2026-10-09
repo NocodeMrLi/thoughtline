@@ -32,3 +32,7 @@ Windows：`/Users/lihongwei/Documents/Codex/2026-10-09/task-7/delivery/0.0.16-pr
 8. 同步项目笔记新一期，阶段commit/push并复核main/release/branch列表。最后清理本树冗余out及dist/App、缓存临时文件和自有进程，保留最终双端包/证据、正常依赖、旧.15/.5包及真数据。
 
 用户最终不要下载地址，只要main SHA、release/tag、版本架构、分支处置、测试和残留风险。formalAcceptance=false；签名/公证、同appId覆盖与完整备份、物理Windows/IME/焦点/穿透/Agent/G7/旧版升级回滚边界必须如实记录。无需追加发布或main合并授权。
+
+## 检查点之后已完成（2026-10-09 16时段，北京时间）
+
+以上为历史接续检查点。现已普通fast-forward推送main、发布v0.0.16-preview.6（tag `b89481926753377c66afe0bdf2ef8dd5d453bbb7` / release407667273）、全部7项服务端size/SHA256匹配、mainWindowsCI37900797155通过；11条整合远端分支expected-tip atomic删除完成，main/G7与所有本地工作树保留。实际双端来源不变，没有新增生产脚本/流水线。最终报告为 acceptance/RELEASE-0.0.16-preview.6.md，最终main收尾SHA见任务根 RELEASE-PROGRESS.md；formalAcceptance=false。

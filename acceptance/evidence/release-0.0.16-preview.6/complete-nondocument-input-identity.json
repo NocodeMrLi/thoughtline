@@ -1,0 +1,627 @@
+{
+  "scope": "ALL tracked nondocument files including electron.vite.config.ts, tsconfig.json, gitignore plus delivered PowerShell launcher; exclude acceptance/**, README.md and other docs/** historical material",
+  "sources": [
+    "aa23b210ce26de956f88c48851dc1681ab233f6b",
+    "723356385af5518cddae65d2ae023707a0c804b6",
+    "b89481926753377c66afe0bdf2ef8dd5d453bbb7"
+  ],
+  "allInputsIdentical": true,
+  "inputs": {
+    ".gitattributes": {
+      "mode": "100644",
+      "gitObject": "7ccbb1a32fe0d0220d9b448895a622fd72e88e98"
+    },
+    ".github/workflows/test-packages.yml": {
+      "mode": "100644",
+      "gitObject": "81e0aa4bf8f3a4bdb6368d62a42321c04a210cf5"
+    },
+    ".gitignore": {
+      "mode": "100644",
+      "gitObject": "238a0f197dcbaedac6d18223cea3c16a0ea21d5c"
+    },
+    "THIRD_PARTY_NOTICES.md": {
+      "mode": "100644",
+      "gitObject": "3e8f5c64585fd6dd1ff519c6d416bfa7ff076491"
+    },
+    "assets/app-icon.icns": {
+      "mode": "100644",
+      "gitObject": "d00e1b369d69b2d30c872b0af760771782d551cd"
+    },
+    "assets/app-icon.ico": {
+      "mode": "100644",
+      "gitObject": "c0d0311262223ebf212fd017a414d18f469b1868"
+    },
+    "assets/app-icon.png": {
+      "mode": "100644",
+      "gitObject": "34f985da63da6e06e46c8680f38a800c1ed60e82"
+    },
+    "assets/icons/app-1024.png": {
+      "mode": "100644",
+      "gitObject": "34f985da63da6e06e46c8680f38a800c1ed60e82"
+    },
+    "assets/icons/app-128.png": {
+      "mode": "100644",
+      "gitObject": "600b621f2a63e0433db0fc46d64ff64afa8c6d07"
+    },
+    "assets/icons/app-16.png": {
+      "mode": "100644",
+      "gitObject": "503faafd1ca55b4697858143f053e1028a4d059b"
+    },
+    "assets/icons/app-24.png": {
+      "mode": "100644",
+      "gitObject": "4b2f979cc2676a5806a33b05b281812753ef56d1"
+    },
+    "assets/icons/app-256.png": {
+      "mode": "100644",
+      "gitObject": "f8d814b2935a63087fc8d28fb9cfd6cebd247ae1"
+    },
+    "assets/icons/app-32.png": {
+      "mode": "100644",
+      "gitObject": "7f78351db6520c09e5d521e4551e971d3ef7e2e2"
+    },
+    "assets/icons/app-48.png": {
+      "mode": "100644",
+      "gitObject": "ce5817767d2207b34ff2f55d51c67e5772623725"
+    },
+    "assets/icons/app-512.png": {
+      "mode": "100644",
+      "gitObject": "854c4660b44597e3c204b610b71dd2db1021928b"
+    },
+    "assets/icons/app-64.png": {
+      "mode": "100644",
+      "gitObject": "aeef2d35f4dfebfa090fe910e5d540bf4f372791"
+    },
+    "assets/icons/tray-win-128.png": {
+      "mode": "100644",
+      "gitObject": "f085715307cb59e931946efe7c2bcc8685ef00bb"
+    },
+    "assets/icons/tray-win-16.png": {
+      "mode": "100644",
+      "gitObject": "6636355b1a7fc3d4c32b0bc06cd5b3de01e2fa73"
+    },
+    "assets/icons/tray-win-24.png": {
+      "mode": "100644",
+      "gitObject": "3835cf4ca21fc98ce698be6c1efdf0332d34bf9f"
+    },
+    "assets/icons/tray-win-256.png": {
+      "mode": "100644",
+      "gitObject": "0117e3b796face8ad58f0a531cb0a1265de21d07"
+    },
+    "assets/icons/tray-win-32.png": {
+      "mode": "100644",
+      "gitObject": "ab18777fa12c492601f01d70eeedbf9ec8195032"
+    },
+    "assets/icons/tray-win-48.png": {
+      "mode": "100644",
+      "gitObject": "efa16c728233936a02680a375378cb9721dd6f96"
+    },
+    "assets/icons/tray-win-64.png": {
+      "mode": "100644",
+      "gitObject": "46e74bde7bcecca076d1d6be941ad6d71b8ee685"
+    },
+    "assets/source/approved-TL-brand-logo.jpg": {
+      "mode": "100644",
+      "gitObject": "d10580ca6d1ffdd5bd38b880a6776fc1bd8442de"
+    },
+    "assets/source/thoughtline-tl-v11-padded-master.png": {
+      "mode": "100644",
+      "gitObject": "58a563224d2e4582a26529db767519337dcf2626"
+    },
+    "assets/source/thoughtline-tl-v11-transparent-1254.png": {
+      "mode": "100644",
+      "gitObject": "b9f292c96d0096212ae5b133c9199290613b8bf5"
+    },
+    "assets/source/tile-contour-v11.json": {
+      "mode": "100644",
+      "gitObject": "00b2cba2410caa7b0e98917e1c8348165f7dfde4"
+    },
+    "assets/tray-win.ico": {
+      "mode": "100644",
+      "gitObject": "d0c636912a5495cfa101b06ace0751977658bea4"
+    },
+    "assets/trayTemplate.png": {
+      "mode": "100644",
+      "gitObject": "fb49e3b9ef807b9ea12a2deac512e80ff7d5cb02"
+    },
+    "assets/trayTemplate.svg": {
+      "mode": "100644",
+      "gitObject": "a1688127a9cae483d2bb7f651d22f9805e75acc8"
+    },
+    "assets/trayTemplate@2x.png": {
+      "mode": "100644",
+      "gitObject": "76b8f5b6626e72534440ed85f9e1948ba540c052"
+    },
+    "docs/delivery/Start-Thoughtline-Isolated.ps1": {
+      "mode": "100644",
+      "gitObject": "cd51cb25ba105100dc00c0c7731ff896f8acb251"
+    },
+    "electron.vite.config.ts": {
+      "mode": "100644",
+      "gitObject": "085f0111c35670275a6021d09a9b66e4305435b2"
+    },
+    "licenses/Edge-Drop-Apache-2.0.txt": {
+      "mode": "100644",
+      "gitObject": "6353c2d37e54336c6f5e593442f14ed53dcf76a2"
+    },
+    "licenses/Tendedero-MIT.txt": {
+      "mode": "100644",
+      "gitObject": "16ccaec5c6a09534a003259a62ef32367e2bb668"
+    },
+    "package-lock.json": {
+      "mode": "100644",
+      "gitObject": "ac2f03d1943ac073f7904e88121dc6f05dfa0792"
+    },
+    "package.json": {
+      "mode": "100644",
+      "gitObject": "a8e9539450654dbd25db15a8c9b706f9d43302bd"
+    },
+    "scripts/export-icons.py": {
+      "mode": "100644",
+      "gitObject": "22aeaa12d7f001b29a027876cee5e3b9504691c9"
+    },
+    "scripts/package-mac.cjs": {
+      "mode": "100644",
+      "gitObject": "963f8a4b5e0027af4a5e7cbabd58504cd701fc8a"
+    },
+    "scripts/verify-icons.py": {
+      "mode": "100644",
+      "gitObject": "c4d2c3053fcea9ccd5214f105c5a618fcd1412ff"
+    },
+    "scripts/verify-mac-signature.cjs": {
+      "mode": "100644",
+      "gitObject": "4e3424769c8bcab94b6dbe64620dcb6d4c8bca9f"
+    },
+    "scripts/verify-windows-pe-icons.cjs": {
+      "mode": "100644",
+      "gitObject": "ea3983f598611bc8b30991cd8efc600c06dd8c76"
+    },
+    "scripts/verify.cjs": {
+      "mode": "100644",
+      "gitObject": "5b271d187d32192e31f095a02675a446a6c8849c"
+    },
+    "scripts/windows-build-manifest.cjs": {
+      "mode": "100644",
+      "gitObject": "1f1958d483153a34453ea9df481200756d281ca6"
+    },
+    "scripts/windows-installed-preflight.cjs": {
+      "mode": "100644",
+      "gitObject": "ad31b54d9020587f5b27b84d7dff2336d6ab39be"
+    },
+    "scripts/windows-installer-preflight.ps1": {
+      "mode": "100644",
+      "gitObject": "96faeea264cabae996114be24dc9a15a0af19b80"
+    },
+    "src/main/edgeController.ts": {
+      "mode": "100644",
+      "gitObject": "d0fda0ca319dbb69428e0ee85eef2f7c030d1e40"
+    },
+    "src/main/index.ts": {
+      "mode": "100644",
+      "gitObject": "67eb39d91da95b271e6754eb631725b4f87def08"
+    },
+    "src/main/platform/host.ts": {
+      "mode": "100644",
+      "gitObject": "16ee2935539818f9eef8dc5e8fa0f9d314d9d4a1"
+    },
+    "src/main/platform/textDrag.ts": {
+      "mode": "100644",
+      "gitObject": "6e3d3c27763a0b5b8e1c565a4d472713fd8fd907"
+    },
+    "src/main/shortcuts.ts": {
+      "mode": "100644",
+      "gitObject": "d72c543ccc92d9b2c20ae26b2594036516aa67d5"
+    },
+    "src/main/store/atomicFile.ts": {
+      "mode": "100644",
+      "gitObject": "8e54e911f8591523cd1918ee8113616f05c404f0"
+    },
+    "src/main/store/repository.ts": {
+      "mode": "100644",
+      "gitObject": "05cf217b9e1c26a7c51c8dad75b46af1a7ca0202"
+    },
+    "src/main/vendor/edge-drop/stickProbe.ts": {
+      "mode": "100644",
+      "gitObject": "f8f12875f17e5fa3e4e1158a519c06f905471899"
+    },
+    "src/main/vendor/edge-drop/workAreaCache.ts": {
+      "mode": "100644",
+      "gitObject": "8d5b91b142ad3e6c84147a9d89bac0ab0f6ed9f9"
+    },
+    "src/main/windows/composer.ts": {
+      "mode": "100644",
+      "gitObject": "fdc3fcaa393fd9a0daf7960ec4b84236e2ffa6bb"
+    },
+    "src/main/windows/manage.ts": {
+      "mode": "100644",
+      "gitObject": "6ac8111ec89f7a02ad9952d573af77923c4797c4"
+    },
+    "src/main/windows/shelf.ts": {
+      "mode": "100644",
+      "gitObject": "e16d73207382f5f42bab312c1ad1d8c2886080ed"
+    },
+    "src/preload/index.ts": {
+      "mode": "100644",
+      "gitObject": "e7e9d5f328021d6e53fe3e6b1be75fa7218d183a"
+    },
+    "src/renderer/components/ClipCard.tsx": {
+      "mode": "100644",
+      "gitObject": "9facc0a208335d7baa248d1044af1d07a0774ba7"
+    },
+    "src/renderer/components/Clothespin.tsx": {
+      "mode": "100644",
+      "gitObject": "53c7d768ca9c3ac91f50729fb002bb0d0c6cf009"
+    },
+    "src/renderer/components/Composer.tsx": {
+      "mode": "100644",
+      "gitObject": "06376a6d184468eaa158f6f794b8f0cb934cef91"
+    },
+    "src/renderer/components/Detail.tsx": {
+      "mode": "100644",
+      "gitObject": "107e6eb192c7950593e9886e83dbbcd4f8e6f041"
+    },
+    "src/renderer/components/Manage.tsx": {
+      "mode": "100644",
+      "gitObject": "7aab7f69d7e8fa4e56424a4ddbfb1682a2d99e01"
+    },
+    "src/renderer/components/Settings.tsx": {
+      "mode": "100644",
+      "gitObject": "49f440e6e38e695ad9f66e8c591fc0305cdb91a3"
+    },
+    "src/renderer/components/Shelf.tsx": {
+      "mode": "100644",
+      "gitObject": "9bffdb3c3b01cfd0859be5629ec04b3fb53f0658"
+    },
+    "src/renderer/components/agentInk.ts": {
+      "mode": "100644",
+      "gitObject": "c1a177140caf5df9215977f3c7924112f8ed8eee"
+    },
+    "src/renderer/components/paperShape.ts": {
+      "mode": "100644",
+      "gitObject": "eae9e85ac0f57325bb068196c6cae2c4c48f78f5"
+    },
+    "src/renderer/hooks/useShelfMotion.ts": {
+      "mode": "100644",
+      "gitObject": "f10ea537a44d41d5438e562230c4ae7011e14d2f"
+    },
+    "src/renderer/index.html": {
+      "mode": "100644",
+      "gitObject": "b09c2d2c5f076890a1691e398a854273d629955d"
+    },
+    "src/renderer/main.tsx": {
+      "mode": "100644",
+      "gitObject": "0ccea07899d81f7d8bae433a28e3ba8c06e49533"
+    },
+    "src/renderer/styles/overlay.css": {
+      "mode": "100644",
+      "gitObject": "24835bac74db015330bcb23e00db0486358faa3f"
+    },
+    "src/shared/bridge.ts": {
+      "mode": "100644",
+      "gitObject": "107dce43bb4838e5896792a7d715941e6f0c3de5"
+    },
+    "src/shared/clipCommands.ts": {
+      "mode": "100644",
+      "gitObject": "901054b4fefa9e28e36858e525be725ac59b5dd4"
+    },
+    "src/shared/clipLayout.ts": {
+      "mode": "100644",
+      "gitObject": "4065f5f94a65881d7b62d18b75f6f9a699ef1e1c"
+    },
+    "src/shared/clipModel.ts": {
+      "mode": "100644",
+      "gitObject": "86f8f08cf44033eb70a7853e0b03a043f318ecfa"
+    },
+    "src/shared/composerKeys.ts": {
+      "mode": "100644",
+      "gitObject": "fc42ef112ad98b7a96b7579f2d0abd46593bed8d"
+    },
+    "src/shared/composerMaterial.ts": {
+      "mode": "100644",
+      "gitObject": "654a5eff5f0f9a40b0bb1e203b40d675a9a121ac"
+    },
+    "src/shared/compositionSession.ts": {
+      "mode": "100644",
+      "gitObject": "7436e237e4ef8b3fc18feb8d53ad5f3c1629e0d6"
+    },
+    "src/shared/contracts.ts": {
+      "mode": "100644",
+      "gitObject": "f4d8f44b853c24fa8073cd20408a2267f1a36466"
+    },
+    "src/shared/draftAutosaver.ts": {
+      "mode": "100644",
+      "gitObject": "fb120673303c78ff35f257d05e14c621f335a2f7"
+    },
+    "src/shared/ideaCommands.ts": {
+      "mode": "100644",
+      "gitObject": "89009acf1b16c1b8520ca2bffd64adc6f42515aa"
+    },
+    "src/shared/motionTokens.ts": {
+      "mode": "100644",
+      "gitObject": "38edaf9c0ffff42be8383c47049a0cae3dcc706b"
+    },
+    "src/shared/ropeGeometry.ts": {
+      "mode": "100644",
+      "gitObject": "1c92736ed8053d3e04b8ffc72f7127c4531cec11"
+    },
+    "src/shared/shelfState.ts": {
+      "mode": "100644",
+      "gitObject": "a6df154b4c7bf8e26e46c00e6b6b934be46efe93"
+    },
+    "tests/electron/agent-default-workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "acb294958c1b2bca434b90e340986bae28a53ff6"
+    },
+    "tests/electron/agent-ink-pixels.py": {
+      "mode": "100644",
+      "gitObject": "b58a0ae1f14bb54e4c38225c0bf4638e73c78106"
+    },
+    "tests/electron/agent-ink-preview.cjs": {
+      "mode": "100644",
+      "gitObject": "84664cf99864d6e34d82cdb806caa7c6d839cfa8"
+    },
+    "tests/electron/centered-rope-preview.cjs": {
+      "mode": "100644",
+      "gitObject": "30d91a5501219861b2fc161159b050a698c5444e"
+    },
+    "tests/electron/clamp-interaction-review.cjs": {
+      "mode": "100644",
+      "gitObject": "695b44fe7b1b5600e15ce2b35a6539b6dfe57d7c"
+    },
+    "tests/electron/clamp-viewport-review.cjs": {
+      "mode": "100644",
+      "gitObject": "fd49718bf37f9754f4dd294d259319974d8c9171"
+    },
+    "tests/electron/clamp-visual-review.cjs": {
+      "mode": "100644",
+      "gitObject": "db29dd85cb4444334d751355c74de53c05c76bd5"
+    },
+    "tests/electron/clean-shelf-workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "ae03576d5c4e4dee9a43e8c3d22e54a0990cb0e7"
+    },
+    "tests/electron/clothespin-workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "00d8e489b4e696911d6934dc384e81da913ed120"
+    },
+    "tests/electron/compact-composer-preview.cjs": {
+      "mode": "100644",
+      "gitObject": "2c01710819ef148b1c5ba2a68181f0da04bd2d6c"
+    },
+    "tests/electron/composer-preview.cjs": {
+      "mode": "100644",
+      "gitObject": "64920ba1c1a70504f27647901bf899655e8d0f5e"
+    },
+    "tests/electron/composition-safety-workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "f18540ffde487c3da975e32a4a35826ecdf61494"
+    },
+    "tests/electron/delayed-submit-workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "5fa99ad717289e149073a267b5b05896cc19ec84"
+    },
+    "tests/electron/draft-crash-recovery.cjs": {
+      "mode": "100644",
+      "gitObject": "381b7589942b0886d06b39e711be3c5be79ad76e"
+    },
+    "tests/electron/draft-safety-workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "5bb11e398a94b2b2482193ada9db0c9f8a3d92c0"
+    },
+    "tests/electron/empty-shelf-workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "914daf75777538b4c28b69388e050d49cda069a6"
+    },
+    "tests/electron/fixed-rope-workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "8cdab3ebd8be178cbad793848f9c873b61bc25b0"
+    },
+    "tests/electron/group-workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "69504909da7228d837ebc155b934cca7b429dc98"
+    },
+    "tests/electron/hidden-draft-workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "1a41cdfe196d44883c0728c0f7beeff54227264c"
+    },
+    "tests/electron/idle-fixture-cleanup.cjs": {
+      "mode": "100644",
+      "gitObject": "c8089b2ae414b0ee6320aa4fe657d63d958ca442"
+    },
+    "tests/electron/idle-performance.cjs": {
+      "mode": "100644",
+      "gitObject": "ff080d60d90aea6a84bc0321065cab249cb41919"
+    },
+    "tests/electron/idle-without-debugger.cjs": {
+      "mode": "100644",
+      "gitObject": "1cdf1ff757a3630679f58510888586635015f93b"
+    },
+    "tests/electron/inline-composer-preview.cjs": {
+      "mode": "100644",
+      "gitObject": "64c23c6cd4f0b68b600e2e01df963d1293bb50b3"
+    },
+    "tests/electron/inline-material-preview.cjs": {
+      "mode": "100644",
+      "gitObject": "15aca7e3846293eadf2da786a8f397c5ada7caa1"
+    },
+    "tests/electron/inline-properties-workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "3ea740115f9d7f313ccfc59674eaf074bdae0745"
+    },
+    "tests/electron/lazy-window-workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "7f1c9043acc40fd91c731cf3ab76ab5c26db2de8"
+    },
+    "tests/electron/motion-workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "46e78387d87829ff5cf31be593626f85e6defad9"
+    },
+    "tests/electron/name-affordance-workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "e592d850765b6abbff05c07d13bf555ce88e4f76"
+    },
+    "tests/electron/optional-composition-probe.cjs": {
+      "mode": "100644",
+      "gitObject": "912695ac3cba8a599d0b4a6debd5dd3ad4992e62"
+    },
+    "tests/electron/package-acceptance.cjs": {
+      "mode": "100644",
+      "gitObject": "195c5d1ed34d2bd7e999401e1881007a68c998f9"
+    },
+    "tests/electron/package-idle.cjs": {
+      "mode": "100644",
+      "gitObject": "27db38ef65f0253aea6c0a7c4fc86e35ac4eb376"
+    },
+    "tests/electron/packaged-cdp.cjs": {
+      "mode": "100644",
+      "gitObject": "cf59568ca9e8d7f0de2b23ad352ac44d2e0b9830"
+    },
+    "tests/electron/paper-footer-geometry.cjs": {
+      "mode": "100644",
+      "gitObject": "97279cbc3d6360bacb72d002ece4cb7d82b4df63"
+    },
+    "tests/electron/paper-polish-preview.cjs": {
+      "mode": "100644",
+      "gitObject": "8b0ade91d709421d3c3aec5c5abffe57390d5c25"
+    },
+    "tests/electron/paused-unlock-workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "bd4b111d1942c8c98d0a13070fb6dbdd1806c78d"
+    },
+    "tests/electron/physical-pilot.cjs": {
+      "mode": "100644",
+      "gitObject": "276c3b63f80d52d48dbed15418920b7034a18e31"
+    },
+    "tests/electron/projection-workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "34a1f173c5924e9912aa8ac4233df94c9261448a"
+    },
+    "tests/electron/settings-lifecycle.cjs": {
+      "mode": "100644",
+      "gitObject": "e7c27c16eebad60c92141eeba3b74853ed8251a6"
+    },
+    "tests/electron/smoke.cjs": {
+      "mode": "100644",
+      "gitObject": "893a5b20ea033abf5da6ab5886ec2f761ea3f027"
+    },
+    "tests/electron/text-drag-workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "3bb80576db76f2fbc0722bcb1a5ef1d639b59a2d"
+    },
+    "tests/electron/window-fixture.cjs": {
+      "mode": "100644",
+      "gitObject": "1b37f67d194533a722015a2bead7bd8bf936e3f1"
+    },
+    "tests/electron/workflow.cjs": {
+      "mode": "100644",
+      "gitObject": "a706f3f0b4fa87fd90e56ac79b205fb002211c41"
+    },
+    "tests/unit/agentInk.test.ts": {
+      "mode": "100644",
+      "gitObject": "dd75358a12298d2923a739e4b0cbada20244a893"
+    },
+    "tests/unit/agentPalette.test.ts": {
+      "mode": "100644",
+      "gitObject": "731a5e2ad0619231368f206c993c21a7a6ec7701"
+    },
+    "tests/unit/centeredRope.test.ts": {
+      "mode": "100644",
+      "gitObject": "fe4e79bdaaa2822a768d9b8a48990596b753a26b"
+    },
+    "tests/unit/clipCommands.test.ts": {
+      "mode": "100644",
+      "gitObject": "38404d5c4db7cd99f9da8f382d05eebff5dfeadd"
+    },
+    "tests/unit/clipLayout.test.ts": {
+      "mode": "100644",
+      "gitObject": "ffac35937fd4dfdfb672f60c5074cc849356742f"
+    },
+    "tests/unit/clipProjection.test.ts": {
+      "mode": "100644",
+      "gitObject": "d066d1118b3b6f8923aa6805f48a6f6b2def17f5"
+    },
+    "tests/unit/composer.test.ts": {
+      "mode": "100644",
+      "gitObject": "156c4eb124378c291730b550df3c89068cc98ed6"
+    },
+    "tests/unit/composerMaterial.test.ts": {
+      "mode": "100644",
+      "gitObject": "c98eb0854755f6ac9ca3821aa67bd5950dfabbea"
+    },
+    "tests/unit/compositionFlush.test.ts": {
+      "mode": "100644",
+      "gitObject": "a3d174a6a586c50540ddad4f96d1637da68832b6"
+    },
+    "tests/unit/compositionSession.test.ts": {
+      "mode": "100644",
+      "gitObject": "ffec036b017cb3efd10070c71944d1d15326da40"
+    },
+    "tests/unit/draftAutosaver.test.ts": {
+      "mode": "100644",
+      "gitObject": "b170f0c44bc6b958735f67ecdf3b4e09bc6d4e56"
+    },
+    "tests/unit/fixedRope.test.ts": {
+      "mode": "100644",
+      "gitObject": "cc02d357debec504776090e5558170d1fe4873fe"
+    },
+    "tests/unit/ideaCommands.test.ts": {
+      "mode": "100644",
+      "gitObject": "832ab2ed334ba08366758fc03eb6c04e13ee09bb"
+    },
+    "tests/unit/ideaWorkflow.test.ts": {
+      "mode": "100644",
+      "gitObject": "219bfeba8ae38f44fe841c4f5b8650066fd3f1a3"
+    },
+    "tests/unit/idleFixtureCleanup.test.ts": {
+      "mode": "100644",
+      "gitObject": "e1f99d027a4ee86e6028061df5e2e48e4e9b50f4"
+    },
+    "tests/unit/motion.test.ts": {
+      "mode": "100644",
+      "gitObject": "f60cd9a8cb7d0d70116afa793a8887f4a1807e00"
+    },
+    "tests/unit/platformHost.test.ts": {
+      "mode": "100644",
+      "gitObject": "9241858368b6107ea139f709a2eb92dbf73fae81"
+    },
+    "tests/unit/repository.test.ts": {
+      "mode": "100644",
+      "gitObject": "95941010d4ab76b6ad7f9549db265effa7eb8cc1"
+    },
+    "tests/unit/ropeGeometry.test.ts": {
+      "mode": "100644",
+      "gitObject": "58014a581d94ccd049be049387ffd119e4a0489f"
+    },
+    "tests/unit/shelfPresentation.test.ts": {
+      "mode": "100644",
+      "gitObject": "448ef7376b8ed7c497536667dd2b8a195b7e3717"
+    },
+    "tests/unit/shelfState.test.ts": {
+      "mode": "100644",
+      "gitObject": "fcefce4c5e2330c4ea7f4f8abe9627798f77966e"
+    },
+    "tests/unit/shortcutKeys.test.ts": {
+      "mode": "100644",
+      "gitObject": "cfd8e1c110961f376b079303b822053955effa61"
+    },
+    "tests/unit/shortcuts.test.ts": {
+      "mode": "100644",
+      "gitObject": "5b7d1d807a19204f3411c1917c1a95fe8b971ba2"
+    },
+    "tests/unit/visibilityMotion.test.ts": {
+      "mode": "100644",
+      "gitObject": "acf6a06c1199746594e66239e7eb89425d0a569e"
+    },
+    "tests/unit/windowsAtomicWrite.test.ts": {
+      "mode": "100644",
+      "gitObject": "4ef8375f6d174e90a57aa7badc45b938fa4a0b37"
+    },
+    "tsconfig.json": {
+      "mode": "100644",
+      "gitObject": "87e607ba7dd28e2b4f1f66fe813c3600bb991e9a"
+    },
+    "vitest.config.ts": {
+      "mode": "100644",
+      "gitObject": "be74937725c93587c49d2cfe7d688c736f4a630c"
+    }
+  }
+}

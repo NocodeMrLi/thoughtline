@@ -1,7 +1,7 @@
 {
-  "stage": "0.0.16-preview.6 dual-platform private prerelease preparation; physical acceptance pending",
+  "stage": "0.0.16-preview.6 dual-platform private prerelease published; physical acceptance pending",
   "asOf": "2026-10-09 Asia/Shanghai",
-  "sourceCommit": "aa23b210ce26de956f88c48851dc1681ab233f6b",
+  "sourceCommit": "b89481926753377c66afe0bdf2ef8dd5d453bbb7",
   "branch": "main",
   "verify": {
     "typecheck": "passed",
@@ -61,20 +61,21 @@
     "0.0.15/new composer preview save draft on explicit close/normal quit only; unpersisted typing crash recovery not implemented"
   ],
   "referenceCode": "Edge-Drop stickProbe.ts copied unchanged; Tendedero fixed-end parabola adapted to fixed rope; MIT/Apache notices retained",
-  "release": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.6-alpha.1",
+  "release": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.16-preview.6",
   "packages": {
-    "version": "0.0.15",
-    "packageSourceCommit": "61a6837dbde290041a13226596baad5b21249fc1",
-    "mac": "evidence/candidate-0.0.15/package-source-bytes.json",
-    "packagedWorkflow": "evidence/candidate-0.0.15/package-regression/overnight-package-acceptance.json",
-    "idle": "evidence/candidate-0.0.15/package-regression/overnight-package-idle.json",
-    "windowsRun": 37873271157,
-    "windows": "evidence/candidate-0.0.15/windows-ci/receipt.json",
-    "publishedVersion": "0.0.6",
-    "newReleasePublished": false
+    "version": "0.0.16-preview.6",
+    "tag": "v0.0.16-preview.6",
+    "releaseCommit": "b89481926753377c66afe0bdf2ef8dd5d453bbb7",
+    "macBuildSource": "723356385af5518cddae65d2ae023707a0c804b6",
+    "windowsBuildSource": "aa23b210ce26de956f88c48851dc1681ab233f6b",
+    "macArchitecture": "arm64",
+    "windowsArchitecture": "x64",
+    "published": true,
+    "serverVerification": "evidence/release-0.0.16-preview.6/release-server-verification.json",
+    "manifestLocalPath": "/Users/lihongwei/Documents/Codex/2026-10-09/task-7/releases/v0.0.16-preview.6/release-manifest.json"
   },
   "formalAcceptance": false,
-  "report": "CANDIDATE-0.0.15-REPORT.md",
+  "report": "RELEASE-0.0.16-preview.6.md",
   "currentSourceWorkflows": {
     "count": 11,
     "status": "all exit0",
@@ -101,7 +102,7 @@
     "windowsPhysical": false,
     "g7Accepted": false
   },
-  "sourceVersion": "0.0.15",
+  "sourceVersion": "0.0.16-preview.6",
   "baselineRollback": {
     "version": "0.0.13",
     "commit": "dee1f2c9046b284e2dd430632d9bdb913128c868",
@@ -193,7 +194,19 @@
   "historicalBaseline": {
     "sourceCommit": "61a6837dbde290041a13226596baad5b21249fc1",
     "gatesFile": "evidence/release-0.0.16-preview.6/gates-before-release.json",
-    "note": "Inherited .15 gate/performance records below retain their historical scopes; they are not fresh .6 physical acceptance."
+    "note": "Inherited .15 gate/performance records below retain their historical scopes; they are not fresh .6 physical acceptance.",
+    "inheritedKeysNotFreshPreview6Evidence": [
+      "currentSourceWorkflows",
+      "currentIndependentIncrement",
+      "nativeCurrent",
+      "isolatedUserExperience",
+      "performance",
+      "hiddenDraftSafety",
+      "pauseAndSettings",
+      "projectionFix",
+      "paperAndHit",
+      "fixedRope"
+    ]
   },
   "historicalComposerPreview": {
     "frozenPreviewSource": "6638ce1",
@@ -221,7 +234,7 @@
     "tag": "v0.0.16-preview.6",
     "macBuildSource": "723356385af5518cddae65d2ae023707a0c804b6",
     "windowsBuildSource": "aa23b210ce26de956f88c48851dc1681ab233f6b",
-    "status": "ready-local-not-published",
+    "status": "published-private-prerelease",
     "architectures": {
       "mac": "arm64",
       "windows": "x64"
@@ -230,6 +243,21 @@
       "mac": "ad-hoc; no Developer ID or notarization",
       "windows": "NotSigned"
     },
-    "evidence": "evidence/release-0.0.16-preview.6/mac-package-binding.json"
+    "evidence": "evidence/release-0.0.16-preview.6/mac-package-binding.json",
+    "releaseCommit": "b89481926753377c66afe0bdf2ef8dd5d453bbb7",
+    "releaseId": 407667273,
+    "mainWindowsCi": 37900797155,
+    "serverVerification": "evidence/release-0.0.16-preview.6/release-server-verification.json"
+  },
+  "historicalPackages": {
+    "version": "0.0.15",
+    "packageSourceCommit": "61a6837dbde290041a13226596baad5b21249fc1",
+    "mac": "evidence/candidate-0.0.15/package-source-bytes.json",
+    "packagedWorkflow": "evidence/candidate-0.0.15/package-regression/overnight-package-acceptance.json",
+    "idle": "evidence/candidate-0.0.15/package-regression/overnight-package-idle.json",
+    "windowsRun": 37873271157,
+    "windows": "evidence/candidate-0.0.15/windows-ci/receipt.json",
+    "publishedVersion": "0.0.6",
+    "newReleasePublished": false
   }
 }

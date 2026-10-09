@@ -1,0 +1,368 @@
+﻿2026-10-09T07:45:02.0279201Z Current runner version: '2.337.0'
+2026-10-09T07:45:02.0318072Z ##[group]Runner Image Provisioner
+2026-10-09T07:45:02.0319275Z Hosted Compute Agent
+2026-10-09T07:45:02.0320112Z Version: 20260901.588
+2026-10-09T07:45:02.0321071Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+2026-10-09T07:45:02.0322134Z Build Date: 2026-09-01T19:56:44Z
+2026-10-09T07:45:02.0323229Z Worker ID: {7068bdf0-f9be-4e80-a551-c2a4c4a6d246}
+2026-10-09T07:45:02.0325179Z Azure Region: centralus
+2026-10-09T07:45:02.0326189Z ##[endgroup]
+2026-10-09T07:45:02.0328296Z ##[group]Operating System
+2026-10-09T07:45:02.0329477Z Microsoft Windows Server 2025
+2026-10-09T07:45:02.0330544Z 10.0.26100
+2026-10-09T07:45:02.0331425Z Datacenter
+2026-10-09T07:45:02.0332317Z ##[endgroup]
+2026-10-09T07:45:02.0333649Z ##[group]Runner Image
+2026-10-09T07:45:02.0334751Z Image: windows-2025-vs2026
+2026-10-09T07:45:02.0335846Z Version: 20260925.250.1
+2026-10-09T07:45:02.0338924Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260925.250/images/windows/Windows2025-VS2026-Readme.md
+2026-10-09T07:45:02.0342009Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260925.250
+2026-10-09T07:45:02.0343863Z ##[endgroup]
+2026-10-09T07:45:02.0345787Z ##[group]GITHUB_TOKEN Permissions
+2026-10-09T07:45:02.0349040Z Contents: read
+2026-10-09T07:45:02.0350091Z Metadata: read
+2026-10-09T07:45:02.0351056Z ##[endgroup]
+2026-10-09T07:45:02.0354488Z Secret source: Actions
+2026-10-09T07:45:02.0356045Z Cache mode: write
+2026-10-09T07:45:02.0357341Z Prepare workflow directory
+2026-10-09T07:45:02.0919194Z Prepare all required actions
+2026-10-09T07:45:02.0998851Z Getting action download info
+2026-10-09T07:45:02.4464420Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-10-09T07:45:02.6286053Z Download action repository 'actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1' (SHA:949feb2413d6458794dcd2491c4babbbce0c15c1)
+2026-10-09T07:45:03.3291913Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-10-09T07:45:04.0033562Z Complete job name: windows-test-package
+2026-10-09T07:45:04.2484565Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-10-09T07:45:04.2488138Z with:
+2026-10-09T07:45:04.2489478Z   repository: NocodeMrLi/thoughtline
+2026-10-09T07:45:04.2506957Z   token: ***
+2026-10-09T07:45:04.2509282Z   ssh-strict: true
+2026-10-09T07:45:04.2510592Z   ssh-user: git
+2026-10-09T07:45:04.2511864Z   persist-credentials: true
+2026-10-09T07:45:04.2513819Z   clean: true
+2026-10-09T07:45:04.2515156Z   sparse-checkout-cone-mode: true
+2026-10-09T07:45:04.2516724Z   fetch-depth: 1
+2026-10-09T07:45:04.2518765Z   fetch-tags: false
+2026-10-09T07:45:04.2520059Z   show-progress: true
+2026-10-09T07:45:04.2521333Z   lfs: false
+2026-10-09T07:45:04.2523719Z   submodules: false
+2026-10-09T07:45:04.2525102Z   set-safe-directory: true
+2026-10-09T07:45:04.2527941Z   allow-unsafe-pr-checkout: false
+2026-10-09T07:45:04.2530039Z ##[endgroup]
+2026-10-09T07:45:12.2624544Z Syncing repository: NocodeMrLi/thoughtline
+2026-10-09T07:45:12.2627636Z ##[group]Getting Git version info
+2026-10-09T07:45:12.2632009Z Working directory is 'D:\a\thoughtline\thoughtline'
+2026-10-09T07:45:12.2633145Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-10-09T07:45:12.2633789Z git version 2.55.0.windows.5
+2026-10-09T07:45:12.2635531Z ##[endgroup]
+2026-10-09T07:45:12.2641231Z Temporarily overriding HOME='D:\a\_temp\3dc5dc04-8299-4afa-9c31-475ad0bfba47' before making global git config changes
+2026-10-09T07:45:12.2642538Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-09T07:45:12.2643805Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\thoughtline\thoughtline
+2026-10-09T07:45:12.2646537Z Deleting the contents of 'D:\a\thoughtline\thoughtline'
+2026-10-09T07:45:12.2652269Z ##[group]Determining repository object format
+2026-10-09T07:45:12.2653652Z ##[endgroup]
+2026-10-09T07:45:12.2657247Z ##[group]Initializing the repository
+2026-10-09T07:45:12.2658481Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\thoughtline\thoughtline
+2026-10-09T07:45:12.2662223Z Initialized empty Git repository in D:/a/thoughtline/thoughtline/.git/
+2026-10-09T07:45:12.2669296Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/NocodeMrLi/thoughtline
+2026-10-09T07:45:12.2674697Z ##[endgroup]
+2026-10-09T07:45:12.2676189Z ##[group]Disabling automatic garbage collection
+2026-10-09T07:45:12.2677034Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2026-10-09T07:45:12.2773692Z ##[endgroup]
+2026-10-09T07:45:12.2774443Z ##[group]Setting up auth
+2026-10-09T07:45:12.2774900Z Removing SSH command configuration
+2026-10-09T07:45:12.2775700Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-10-09T07:45:12.2778006Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-10-09T07:45:12.2784326Z Removing HTTP extra header
+2026-10-09T07:45:12.2786340Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-09T07:45:12.2793841Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-10-09T07:45:12.2800955Z Removing includeIf entries pointing to credentials config files
+2026-10-09T07:45:12.2802237Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-09T07:45:12.2807668Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-10-09T07:45:12.2819781Z [command]"C:\Program Files\Git\bin\git.exe" config --file D:\a\_temp\git-credentials-0974e9b3-ebc0-4cb7-8001-dbf8dd4092b7.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2026-10-09T07:45:12.2825124Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/thoughtline/thoughtline/.git.path D:\a\_temp\git-credentials-0974e9b3-ebc0-4cb7-8001-dbf8dd4092b7.config
+2026-10-09T07:45:12.2828680Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path D:\a\_temp\git-credentials-0974e9b3-ebc0-4cb7-8001-dbf8dd4092b7.config
+2026-10-09T07:45:12.2832311Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-0974e9b3-ebc0-4cb7-8001-dbf8dd4092b7.config
+2026-10-09T07:45:12.2836116Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-0974e9b3-ebc0-4cb7-8001-dbf8dd4092b7.config
+2026-10-09T07:45:12.2838967Z ##[endgroup]
+2026-10-09T07:45:12.2839918Z ##[group]Fetching the repository
+2026-10-09T07:45:12.2841840Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b89481926753377c66afe0bdf2ef8dd5d453bbb7:refs/remotes/origin/main
+2026-10-09T07:45:14.7591040Z From https://github.com/NocodeMrLi/thoughtline
+2026-10-09T07:45:14.7592006Z  * [new ref]         b89481926753377c66afe0bdf2ef8dd5d453bbb7 -> origin/main
+2026-10-09T07:45:14.7704236Z [command]"C:\Program Files\Git\bin\git.exe" branch --list --remote origin/main
+2026-10-09T07:45:14.8675388Z   origin/main
+2026-10-09T07:45:14.8747837Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse refs/remotes/origin/main
+2026-10-09T07:45:14.9631205Z b89481926753377c66afe0bdf2ef8dd5d453bbb7
+2026-10-09T07:45:14.9753653Z ##[endgroup]
+2026-10-09T07:45:14.9890625Z ##[group]Determining the checkout info
+2026-10-09T07:45:14.9911557Z ##[endgroup]
+2026-10-09T07:45:15.0116712Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2026-10-09T07:45:15.0406373Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2026-10-09T07:45:15.1100102Z ##[group]Checking out the ref
+2026-10-09T07:45:15.1111246Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+2026-10-09T07:45:16.2518116Z Switched to a new branch 'main'
+2026-10-09T07:45:16.2705582Z branch 'main' set up to track 'origin/main'.
+2026-10-09T07:45:16.2888838Z ##[endgroup]
+2026-10-09T07:45:16.4672436Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+2026-10-09T07:45:16.5184940Z b89481926753377c66afe0bdf2ef8dd5d453bbb7
+2026-10-09T07:45:16.6253835Z ##[group]Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+2026-10-09T07:45:16.6254598Z with:
+2026-10-09T07:45:16.6254895Z   node-version: 24.19.0
+2026-10-09T07:45:16.6255227Z   cache: npm
+2026-10-09T07:45:16.6255525Z   check-latest: false
+2026-10-09T07:45:16.6260592Z   token: ***
+2026-10-09T07:45:16.6261476Z   package-manager-cache: true
+2026-10-09T07:45:16.6261885Z ##[endgroup]
+2026-10-09T07:45:16.9271551Z Attempting to download 24.19.0...
+2026-10-09T07:45:17.6704345Z Acquiring 24.19.0 - x64 from https://github.com/actions/node-versions/releases/download/24.19.0-30872449280/node-24.19.0-win32-x64.7z
+2026-10-09T07:45:18.3559281Z Extracting ...
+2026-10-09T07:45:23.2843482Z Adding to the cache ...
+2026-10-09T07:45:27.7976650Z ##[group]Environment details
+2026-10-09T07:45:29.2851899Z node: v24.19.0
+2026-10-09T07:45:29.2852556Z npm: 11.17.0
+2026-10-09T07:45:29.2853009Z yarn: 1.22.22
+2026-10-09T07:45:29.2853784Z ##[endgroup]
+2026-10-09T07:45:29.3830840Z [command]C:\Windows\system32\cmd.exe /D /S /C "C:\hostedtoolcache\windows\node\24.19.0\x64\npm.cmd config get cache"
+2026-10-09T07:45:29.7443387Z C:\npm\cache
+2026-10-09T07:45:30.1281618Z npm cache is not found
+2026-10-09T07:45:30.1556926Z ##[group]Run npm ci --no-audit --no-fund
+2026-10-09T07:45:30.1557540Z [36;1mnpm ci --no-audit --no-fund[0m
+2026-10-09T07:45:30.2319207Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-09T07:45:30.2319806Z ##[endgroup]
+2026-10-09T07:45:38.8242216Z npm warn deprecated rimraf@2.6.3: Rimraf versions prior to v4 are no longer supported
+2026-10-09T07:45:50.8484120Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2026-10-09T07:45:56.8569355Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2026-10-09T07:45:57.5456535Z npm warn deprecated boolean@3.2.0: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+2026-10-09T07:46:17.5241656Z
+2026-10-09T07:46:17.5242414Z added 363 packages in 46s
+2026-10-09T07:46:17.5276010Z npm warn allow-scripts 3 packages have install scripts not yet covered by allowScripts:
+2026-10-09T07:46:17.5284045Z npm warn allow-scripts   electron-winstaller@5.4.0 (install: node ./script/select-7z-arch.js)
+2026-10-09T07:46:17.5289343Z npm warn allow-scripts   esbuild@0.25.12 (postinstall: node install.js)
+2026-10-09T07:46:17.5290515Z npm warn allow-scripts   esbuild@0.28.2 (postinstall: node install.js)
+2026-10-09T07:46:17.5293884Z npm warn allow-scripts
+2026-10-09T07:46:17.5295226Z npm warn allow-scripts Run `npm approve-scripts --allow-scripts-pending` to review, or `npm approve-scripts <pkg>` to allow.
+2026-10-09T07:46:19.1965657Z ##[group]Run npm run verify
+2026-10-09T07:46:19.1965994Z [36;1mnpm run verify[0m
+2026-10-09T07:46:19.2035964Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-09T07:46:19.2036513Z ##[endgroup]
+2026-10-09T07:46:21.2394804Z
+2026-10-09T07:46:21.2426064Z > thoughtline@0.0.16-preview.6 verify
+2026-10-09T07:46:21.2475920Z > node scripts/verify.cjs
+2026-10-09T07:46:21.2511150Z
+2026-10-09T07:46:21.9303379Z
+2026-10-09T07:46:21.9344393Z > thoughtline@0.0.16-preview.6 typecheck
+2026-10-09T07:46:21.9370676Z > node node_modules/typescript/bin/tsc --noEmit
+2026-10-09T07:46:21.9562679Z
+2026-10-09T07:46:24.0167924Z
+2026-10-09T07:46:24.0168929Z > thoughtline@0.0.16-preview.6 test
+2026-10-09T07:46:24.0169941Z > node node_modules/vitest/vitest.mjs run
+2026-10-09T07:46:24.0170543Z
+2026-10-09T07:46:24.6776441Z
+2026-10-09T07:46:24.6779528Z [1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90mD:/a/thoughtline/thoughtline[39m
+2026-10-09T07:46:24.6780664Z
+2026-10-09T07:46:25.4942126Z  [32m✓[39m tests/unit/repository.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 353[2mms[22m[39m
+2026-10-09T07:46:26.7873941Z  [32m✓[39m tests/unit/clipProjection.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 1097[2mms[22m[39m
+2026-10-09T07:46:26.7876099Z    [33m[2m✓[22m[39m 确定性3000混合旧比例/未定位及筛选压力：捕获是布局固定点[33m 434[2mms[22m[39m
+2026-10-09T07:46:26.7951204Z    [33m[2m✓[22m[39m 混合比例与筛选移动压力：旧可见身份保留，其他Agent位置不动[33m 648[2mms[22m[39m
+2026-10-09T07:46:27.1528165Z  [32m✓[39m tests/unit/shelfState.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+2026-10-09T07:46:27.4428005Z  [32m✓[39m tests/unit/ideaWorkflow.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 37[2mms[22m[39m
+2026-10-09T07:46:27.6770869Z  [32m✓[39m tests/unit/clipCommands.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+2026-10-09T07:46:27.8996055Z  [32m✓[39m tests/unit/centeredRope.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+2026-10-09T07:46:28.1385652Z  [32m✓[39m tests/unit/draftAutosaver.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+2026-10-09T07:46:28.3891367Z  [32m✓[39m tests/unit/ideaCommands.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+2026-10-09T07:46:28.5787406Z  [32m✓[39m tests/unit/clipLayout.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+2026-10-09T07:46:28.7982585Z  [32m✓[39m tests/unit/shortcuts.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+2026-10-09T07:46:34.8639487Z [90mstdout[2m | tests/unit/shelfPresentation.test.ts
+2026-10-09T07:46:34.8645585Z [22m[39mDownloading Electron binary...
+2026-10-09T07:46:34.8659830Z
+2026-10-09T07:46:34.9598978Z  [32m✓[39m tests/unit/shelfPresentation.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+2026-10-09T07:46:35.2999380Z  [32m✓[39m tests/unit/fixedRope.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+2026-10-09T07:46:35.6864557Z  [32m✓[39m tests/unit/motion.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+2026-10-09T07:46:39.0343642Z  [32m✓[39m tests/unit/windowsAtomicWrite.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 2829[2mms[22m[39m
+2026-10-09T07:46:39.0345576Z    [33m[2m✓[22m[39m Windows transient EPERM retries without losing the old snapshot[33m 1047[2mms[22m[39m
+2026-10-09T07:46:39.0347604Z    [33m[2m✓[22m[39m Windows transient EBUSY retries without losing the old snapshot[33m 533[2mms[22m[39m
+2026-10-09T07:46:39.0349427Z    [33m[2m✓[22m[39m Windows transient EACCES retries without losing the old snapshot[33m 629[2mms[22m[39m
+2026-10-09T07:46:39.0353498Z    [33m[2m✓[22m[39m Windows exhausted rename retries preserve the prior snapshot and remove only the temporary file[33m 616[2mms[22m[39m
+2026-10-09T07:46:39.6318089Z  [32m✓[39m tests/unit/idleFixtureCleanup.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 80[2mms[22m[39m
+2026-10-09T07:46:39.9400170Z  [32m✓[39m tests/unit/agentInk.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+2026-10-09T07:46:40.1449989Z  [32m✓[39m tests/unit/compositionSession.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+2026-10-09T07:46:40.3837554Z  [32m✓[39m tests/unit/shortcutKeys.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+2026-10-09T07:46:40.5922080Z  [32m✓[39m tests/unit/ropeGeometry.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+2026-10-09T07:46:40.8605110Z  [32m✓[39m tests/unit/visibilityMotion.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+2026-10-09T07:46:41.1006428Z  [32m✓[39m tests/unit/compositionFlush.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+2026-10-09T07:46:41.2819216Z  [32m✓[39m tests/unit/platformHost.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 5[2mms[22m[39m
+2026-10-09T07:46:41.4741586Z  [32m✓[39m tests/unit/agentPalette.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+2026-10-09T07:46:42.1503163Z  [32m✓[39m tests/unit/composerMaterial.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-09T07:46:42.1504714Z  [32m✓[39m tests/unit/composer.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-09T07:46:42.1505386Z
+2026-10-09T07:46:42.1505955Z [2m Test Files [22m [1m[32m25 passed[39m[22m[90m (25)[39m
+2026-10-09T07:46:42.1517837Z [2m      Tests [22m [1m[32m106 passed[39m[22m[90m (106)[39m
+2026-10-09T07:46:42.1518737Z [2m   Start at [22m 07:46:24
+2026-10-09T07:46:42.1519742Z [2m   Duration [22m 17.17s[2m (import 53%, tests 39%, transform 6%, worker 2%)[22m
+2026-10-09T07:46:42.1520325Z
+2026-10-09T07:46:42.1538816Z [2m    Isolate [22m [33m25 workers spawned[39m[2m · ~201ms startup each (spawn + environment, per file)[22m
+2026-10-09T07:46:42.1545619Z [2m            [22m [2mat least ~4.83s faster with [22m[33misolate: false[39m[2m — reuses workers across files instead of one per file[22m
+2026-10-09T07:46:42.1546461Z
+2026-10-09T07:46:45.2075907Z
+2026-10-09T07:46:45.2076239Z > thoughtline@0.0.16-preview.6 build
+2026-10-09T07:46:45.2076983Z > node node_modules/electron-vite/bin/electron-vite.js build
+2026-10-09T07:46:45.2077437Z
+2026-10-09T07:46:45.2078174Z [36mvite v7.3.7 [32mbuilding ssr environment for production...[36m[39m
+2026-10-09T07:46:45.2078902Z transforming...
+2026-10-09T07:46:45.2079431Z [32m✓[39m 19 modules transformed.
+2026-10-09T07:46:45.2079877Z rendering chunks...
+2026-10-09T07:46:45.2080577Z [2mout/main/[22m[36mindex.js  [39m[1m[2m63.48 kB[22m[1m[22m
+2026-10-09T07:46:45.2081254Z [32m✓ built in 445ms[39m
+2026-10-09T07:46:45.2082040Z [36mvite v7.3.7 [32mbuilding ssr environment for production...[36m[39m
+2026-10-09T07:46:45.2082681Z transforming...
+2026-10-09T07:46:45.2083150Z [32m✓[39m 1 modules transformed.
+2026-10-09T07:46:45.2083580Z rendering chunks...
+2026-10-09T07:46:45.2084313Z [2mout/preload/[22m[36mindex.js  [39m[1m[2m2.67 kB[22m[1m[22m
+2026-10-09T07:46:45.2085000Z [32m✓ built in 17ms[39m
+2026-10-09T07:46:45.2085797Z [36mvite v7.3.7 [32mbuilding client environment for production...[36m[39m
+2026-10-09T07:46:45.2086469Z transforming...
+2026-10-09T07:46:45.6006840Z [32m✓[39m 45 modules transformed.
+2026-10-09T07:46:45.8063168Z (node:5424) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+2026-10-09T07:46:45.8065334Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-09T07:46:45.8066010Z rendering chunks...
+2026-10-09T07:46:45.8454202Z [2m../../out/renderer/[22m[32mindex.html                 [39m[1m[2m  0.52 kB[22m[1m[22m
+2026-10-09T07:46:45.8455807Z [2m../../out/renderer/[22m[35massets/index-TWcBVs9t.css  [39m[1m[2m 23.73 kB[22m[1m[22m
+2026-10-09T07:46:45.8458369Z [2m../../out/renderer/[22m[36massets/index-CUdsv_ln.js   [39m[1m[33m718.92 kB[39m[22m
+2026-10-09T07:46:45.8467912Z [32m✓ built in 2.29s[39m
+2026-10-09T07:46:45.8816710Z ##[group]Run npm run package:win
+2026-10-09T07:46:45.8818088Z [36;1mnpm run package:win[0m
+2026-10-09T07:46:45.8939014Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-09T07:46:45.8939591Z env:
+2026-10-09T07:46:45.8939891Z   CSC_IDENTITY_AUTO_DISCOVERY: false
+2026-10-09T07:46:45.8940311Z ##[endgroup]
+2026-10-09T07:46:47.2538512Z
+2026-10-09T07:46:47.2627766Z > thoughtline@0.0.16-preview.6 package:win
+2026-10-09T07:46:47.2628884Z > node node_modules/electron-builder/cli.js --win nsis --publish never
+2026-10-09T07:46:47.2629549Z
+2026-10-09T07:46:47.6637294Z   • electron-builder  version=26.15.3 os=10.0.26100
+2026-10-09T07:46:47.6888415Z   • loaded configuration  file=package.json ("build" field)
+2026-10-09T07:46:49.2207168Z   • executing @electron/rebuild  electronVersion=44.7.0 arch=x64 buildFromSource=false workspaceRoot=D:\a\thoughtline\thoughtline projectDir=./ appDir=./
+2026-10-09T07:46:49.2209283Z   • installing native dependencies  arch=x64
+2026-10-09T07:46:49.4925946Z   • completed installing native dependencies
+2026-10-09T07:46:49.4998251Z   • packaging       platform=win32 arch=x64 electron=44.7.0 appOutDir=dist\win-unpacked
+2026-10-09T07:46:49.6059275Z   • downloaded      label=electron progress=100%
+2026-10-09T07:46:55.9824573Z   • downloaded electron zip extracted successfully  output=D:\a\thoughtline\thoughtline\dist\win-unpacked
+2026-10-09T07:46:56.0080692Z   • searching for node modules  pm=npm searchDir=D:\a\thoughtline\thoughtline
+2026-10-09T07:47:00.2374925Z   • updating asar integrity executable resource  executablePath=dist\win-unpacked\Thoughtline.exe
+2026-10-09T07:47:00.6782142Z   • file signing skipped via signExecutable configuration  file=dist\win-unpacked\Thoughtline.exe
+2026-10-09T07:47:00.6796892Z   • building        target=nsis file=dist\Thoughtline-0.0.16-preview.6-win-x64.exe archs=x64 oneClick=false perMachine=false
+2026-10-09T07:47:00.8043235Z   • downloaded      label=nsis-3.0.4.1.7z progress=100%
+2026-10-09T07:47:00.9896417Z   • downloaded      label=7zip-win-x64.tar.gz progress=100%
+2026-10-09T07:48:23.2021082Z   • downloaded      label=nsis-resources-3.4.1.7z progress=100%
+2026-10-09T07:48:24.9315137Z   • file signing skipped via signExecutable configuration  file=dist\Thoughtline-0.0.16-preview.6-win-x64.__uninstaller.exe
+2026-10-09T07:48:26.6809501Z   • file signing skipped via signExecutable configuration  file=dist\Thoughtline-0.0.16-preview.6-win-x64.exe
+2026-10-09T07:48:26.6868055Z   • building block map  blockMapFile=dist\Thoughtline-0.0.16-preview.6-win-x64.exe.blockmap
+2026-10-09T07:48:31.7536547Z ##[group]Run node scripts/windows-build-manifest.cjs
+2026-10-09T07:48:31.7537338Z [36;1mnode scripts/windows-build-manifest.cjs[0m
+2026-10-09T07:48:31.7625798Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-09T07:48:31.7626226Z ##[endgroup]
+2026-10-09T07:48:32.4351306Z ##[group]Run $parseErrors = $null
+2026-10-09T07:48:32.4351703Z [36;1m$parseErrors = $null[0m
+2026-10-09T07:48:32.4351938Z [36;1m$tokens = $null[0m
+2026-10-09T07:48:32.4352692Z [36;1m[System.Management.Automation.Language.Parser]::ParseFile((Join-Path $PWD 'docs/delivery/Start-Thoughtline-Isolated.ps1'), [ref]$tokens, [ref]$parseErrors) | Out-Null[0m
+2026-10-09T07:48:32.4353594Z [36;1mif ($parseErrors.Count -ne 0) { throw ($parseErrors | Out-String) }[0m
+2026-10-09T07:48:32.4354210Z [36;1mCopy-Item docs/delivery/Start-Thoughtline-Isolated.ps1 dist/Start-Thoughtline-Isolated.ps1[0m
+2026-10-09T07:48:32.4430804Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-09T07:48:32.4431174Z ##[endgroup]
+2026-10-09T07:48:33.0500727Z ##[group]Run ./scripts/windows-installer-preflight.ps1
+2026-10-09T07:48:33.0501298Z [36;1m./scripts/windows-installer-preflight.ps1[0m
+2026-10-09T07:48:33.0576883Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-09T07:48:33.0577252Z ##[endgroup]
+2026-10-09T07:48:54.3805794Z Executable: D:\a\_temp\Thoughtline-installer-preflight\Thoughtline.exe
+2026-10-09T07:48:54.3807176Z Isolated data: C:\Users\runneradmin\AppData\Local\Thoughtline-Preflight\0.0.16-preview.6\user-data
+2026-10-09T07:48:54.3809081Z This isolates notes. The installer still uses the same app identity and can replace an existing installed version.
+2026-10-09T07:48:54.3810233Z Check only: no data directory or app process created.
+2026-10-09T07:49:16.5386355Z ##[group]Run $files = Get-ChildItem dist -Filter '*.exe'
+2026-10-09T07:49:16.5386928Z [36;1m$files = Get-ChildItem dist -Filter '*.exe'[0m
+2026-10-09T07:49:16.5387448Z [36;1mif ($files.Count -ne 1) { throw 'Expected exactly one x64 installer' }[0m
+2026-10-09T07:49:16.5388084Z [36;1m$files | ForEach-Object {[0m
+2026-10-09T07:49:16.5388476Z [36;1m  $hash = Get-FileHash $_.FullName -Algorithm SHA256[0m
+2026-10-09T07:49:16.5388922Z [36;1m  "$($hash.Hash.ToLower())  $($_.Name)"[0m
+2026-10-09T07:49:16.5389281Z [36;1m} | Set-Content dist/SHA256SUMS.txt[0m
+2026-10-09T07:49:16.5465456Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-09T07:49:16.5466153Z ##[endgroup]
+2026-10-09T07:49:17.4013441Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-10-09T07:49:17.4014010Z with:
+2026-10-09T07:49:17.4014344Z   name: Thoughtline-Windows-x64-b89481926753377c66afe0bdf2ef8dd5d453bbb7
+2026-10-09T07:49:17.4015607Z   path: dist/*.exe
+dist/SHA256SUMS.txt
+dist/build-manifest.json
+dist/windows-installed-preflight.json
+dist/windows-installer-preflight.json
+dist/windows-pe-icons.json
+dist/Start-Thoughtline-Isolated.ps1
+
+2026-10-09T07:49:17.4016513Z   if-no-files-found: error
+2026-10-09T07:49:17.4016730Z   retention-days: 30
+2026-10-09T07:49:17.4016928Z   compression-level: 6
+2026-10-09T07:49:17.4017123Z   overwrite: false
+2026-10-09T07:49:17.4017316Z   include-hidden-files: false
+2026-10-09T07:49:17.4017534Z   archive: true
+2026-10-09T07:49:17.4017706Z ##[endgroup]
+2026-10-09T07:49:17.6727969Z With the provided path, there will be 7 files uploaded
+2026-10-09T07:49:17.6773655Z Artifact name is valid!
+2026-10-09T07:49:17.6775628Z Root directory input is valid!
+2026-10-09T07:49:17.9956067Z Uploading artifact: Thoughtline-Windows-x64-b89481926753377c66afe0bdf2ef8dd5d453bbb7.zip
+2026-10-09T07:49:18.0025460Z Beginning upload of artifact content to blob storage
+2026-10-09T07:49:18.9397344Z Uploaded bytes 8388608
+2026-10-09T07:49:19.1952843Z Uploaded bytes 16777216
+2026-10-09T07:49:19.3977691Z Uploaded bytes 25165824
+2026-10-09T07:49:19.6846583Z Uploaded bytes 33554432
+2026-10-09T07:49:19.9293236Z Uploaded bytes 41943040
+2026-10-09T07:49:20.2173153Z Uploaded bytes 50331648
+2026-10-09T07:49:20.5739608Z Uploaded bytes 58720256
+2026-10-09T07:49:20.8145532Z Uploaded bytes 67108864
+2026-10-09T07:49:21.1718089Z Uploaded bytes 75497472
+2026-10-09T07:49:21.5006304Z Uploaded bytes 83886080
+2026-10-09T07:49:21.7112538Z Uploaded bytes 92274688
+2026-10-09T07:49:22.0441093Z Uploaded bytes 100663296
+2026-10-09T07:49:22.3729809Z Uploaded bytes 109051904
+2026-10-09T07:49:22.5045125Z Uploaded bytes 112988802
+2026-10-09T07:49:22.5508494Z Finished uploading artifact content to blob storage!
+2026-10-09T07:49:22.5510046Z SHA256 digest of uploaded artifact is 0fff1f6504510835abf58f3b35145e82ed4da65a956981ab8fb84ed673c96d59
+2026-10-09T07:49:22.5511273Z Finalizing artifact upload
+2026-10-09T07:49:22.8639019Z Artifact Thoughtline-Windows-x64-b89481926753377c66afe0bdf2ef8dd5d453bbb7 successfully finalized. Artifact ID 11602427835
+2026-10-09T07:49:22.8641759Z Artifact Thoughtline-Windows-x64-b89481926753377c66afe0bdf2ef8dd5d453bbb7 has been successfully uploaded! Final size is 112988802 bytes. Artifact ID is 11602427835
+2026-10-09T07:49:22.8644335Z Artifact download URL: https://github.com/NocodeMrLi/thoughtline/actions/runs/37900797155/artifacts/11602427835
+2026-10-09T07:49:22.9133622Z Post job cleanup.
+2026-10-09T07:49:23.2634910Z [command]"C:\Program Files\Git\usr\bin\tar.exe" --posix -cf cache.tzst --exclude cache.tzst -P -C D:/a/thoughtline/thoughtline --files-from manifest.txt --force-local --use-compress-program "zstd -T0"
+2026-10-09T07:49:25.3528625Z Sent 50593792 of 55436872 (91.3%), 48.1 MBs/sec
+2026-10-09T07:49:25.8049372Z Sent 55436872 of 55436872 (100.0%), 35.1 MBs/sec
+2026-10-09T07:49:25.9582862Z Cache saved with the key: node-cache-Windows-x64-npm-e18487027223d940b0bd506fe82191833002a498d4594915f5de0b3ff589c17f
+2026-10-09T07:49:25.9942058Z Post job cleanup.
+2026-10-09T07:49:26.2609577Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-10-09T07:49:26.2992554Z git version 2.55.0.windows.5
+2026-10-09T07:49:26.3079873Z Temporarily overriding HOME='D:\a\_temp\c3f9e8f4-4a9a-4d99-a84a-7122f23947ec' before making global git config changes
+2026-10-09T07:49:26.3081516Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-09T07:49:26.3091215Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\thoughtline\thoughtline
+2026-10-09T07:49:26.3441907Z Removing SSH command configuration
+2026-10-09T07:49:26.3455250Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-10-09T07:49:26.3824987Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-10-09T07:49:27.1067440Z Removing HTTP extra header
+2026-10-09T07:49:27.1079326Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-09T07:49:27.1434582Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-10-09T07:49:27.7874492Z Removing includeIf entries pointing to credentials config files
+2026-10-09T07:49:27.7887180Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-09T07:49:27.8185978Z includeif.gitdir:D:/a/thoughtline/thoughtline/.git.path
+2026-10-09T07:49:27.8187459Z includeif.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path
+2026-10-09T07:49:27.8189820Z includeif.gitdir:/github/workspace/.git.path
+2026-10-09T07:49:27.8191504Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-09T07:49:27.8242262Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/thoughtline/thoughtline/.git.path
+2026-10-09T07:49:27.8550575Z D:\a\_temp\git-credentials-0974e9b3-ebc0-4cb7-8001-dbf8dd4092b7.config
+2026-10-09T07:49:27.8604533Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/thoughtline/thoughtline/.git.path D\:\\a\\_temp\\git\-credentials\-0974e9b3\-ebc0\-4cb7\-8001\-dbf8dd4092b7\.config
+2026-10-09T07:49:27.8956173Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path
+2026-10-09T07:49:27.9249377Z D:\a\_temp\git-credentials-0974e9b3-ebc0-4cb7-8001-dbf8dd4092b7.config
+2026-10-09T07:49:27.9300228Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path D\:\\a\\_temp\\git\-credentials\-0974e9b3\-ebc0\-4cb7\-8001\-dbf8dd4092b7\.config
+2026-10-09T07:49:27.9641068Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-09T07:49:27.9949432Z /github/runner_temp/git-credentials-0974e9b3-ebc0-4cb7-8001-dbf8dd4092b7.config
+2026-10-09T07:49:27.9996789Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-0974e9b3\-ebc0\-4cb7\-8001\-dbf8dd4092b7\.config
+2026-10-09T07:49:28.0379447Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-09T07:49:28.0835131Z /github/runner_temp/git-credentials-0974e9b3-ebc0-4cb7-8001-dbf8dd4092b7.config
+2026-10-09T07:49:28.0921525Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-0974e9b3\-ebc0\-4cb7\-8001\-dbf8dd4092b7\.config
+2026-10-09T07:49:28.1265034Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-10-09T07:49:28.7868970Z Removing credentials config 'D:\a\_temp\git-credentials-0974e9b3-ebc0-4cb7-8001-dbf8dd4092b7.config'
+2026-10-09T07:49:28.8213969Z Cleaning up orphan processes
