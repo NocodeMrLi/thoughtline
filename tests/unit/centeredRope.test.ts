@@ -28,3 +28,6 @@ test('移到新夹区最右侧时为已有夹子留最小间距，不把可容�
  for(let i=1;i<after.visible.length;i++)expect(after.visible[i].x-after.visible[i-1].x).toBeGreaterThanOrEqual(MIN_SPACING);
  expect(after.visible.at(-1)!.x).toBeCloseTo(1440*.15+1440*.7*5/6,8);
 });
+test('首夹显式比例0映射精确左界，不能被居中起排的虚拟前夹推走',()=>{
+ const one={...clips(1)[0],position:0};expect(layoutClips([one,...clips(2).map((c,i)=>({...c,id:'other'+i,position:.5+i*.3}))],1440).visible[0].x).toBeCloseTo(384,8);
+});

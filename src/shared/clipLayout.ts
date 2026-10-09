@@ -7,9 +7,9 @@ export function clipTravelBounds(width:number){
  return ropeClipBounds(width,CARD_WIDTH/2+MARGIN);
 }
 export function layoutClips(clips:Clip[],width:number){
- const {min,max}=clipTravelBounds(width);const visible:{clip:Clip;x:number}[]=[],overflow:Clip[]=[];const capacity=Math.max(0,1+Math.floor((max-min)/COMFORT_SPACING));const start=(min+max-(Math.min(clips.length,capacity)-1)*COMFORT_SPACING)/2;let last=start-COMFORT_SPACING;
+ const {min,max}=clipTravelBounds(width);const visible:{clip:Clip;x:number}[]=[],overflow:Clip[]=[];const capacity=Math.max(0,1+Math.floor((max-min)/COMFORT_SPACING));const start=(min+max-(Math.min(clips.length,capacity)-1)*COMFORT_SPACING)/2;let last=Number.NEGATIVE_INFINITY;
  for(const clip of clips){
-  const preferred=clip.position===null?last+COMFORT_SPACING:min+clip.position*Math.max(0,max-min);
+  const preferred=clip.position===null?(visible.length?last+COMFORT_SPACING:start):min+clip.position*Math.max(0,max-min);
   const x=Math.max(min,last+MIN_SPACING,preferred);
   if(max<min){overflow.push(clip);continue;}
   if(x>max){
