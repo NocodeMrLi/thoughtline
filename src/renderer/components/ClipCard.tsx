@@ -18,11 +18,11 @@ export function ClipCard({clip,ideas,agent,onChange,onGrab,onError,reduced,textD
   <svg className="clamp-rope" width="18" height="38" viewBox="0 0 18 38" aria-hidden="true">{['rope-shadow','rope-core','rope-light'].map(c=><path key={c} className={c} d={ropeContact}/>)}</svg>
   <button data-hit className="peg-button" aria-label={`移动夹子或查看：${idea.title}`} onPointerDown={e=>onGrab(e,clip)}><Clothespin color={agent?.color} reduced={reduced}/></button>
   <article data-hit data-copied={copied} className={`idea-card ${grouped?'grouped':''}`} onContextMenu={e=>{e.preventDefault();void window.thoughtline.shelfMenu(idea.id).then(r=>{if(!r.ok)onError(r.message);});}}>
-   <svg className="paper-sheet" width="136" height="188" viewBox="0 0 136 188" aria-hidden="true">
+   <svg className="paper-sheet" width="160" height="226" viewBox="0 0 160 226" aria-hidden="true">
     <defs><linearGradient id={`${paperId}-bend`} x1="0" y1="0" x2="0" y2="1"><stop stopColor="#000000" stopOpacity="0"/><stop offset=".7" stopColor="#000000" stopOpacity=".025"/><stop offset="1" stopColor="#FFFFFF" stopOpacity=".08"/></linearGradient></defs>
-    <path className="paper-face" d="M2.5 .5H133.5Q135.5 .5 135.5 2.5V176.5Q135.5 181.5 130 183.5Q75 190.5 2.5 184.5Q.5 184.3 .5 182V2.5Q.5 .5 2.5 .5Z"/>
-    <path className="paper-bend" d="M.8 172Q75 179 135.2 169V176.5Q135.2 181.3 130 183.2Q75 190.2 2.5 184.2Q.8 184 .8 182Z" fill={`url(#${paperId}-bend)`}/>
-    <path className="paper-curl" d="M130 183.5Q134 178 135.5 176.5"/>
+    <path className="paper-face" d="M2.5 .5H157.5Q159.5 .5 159.5 2.5V214.5Q159.5 219.5 154 221.5Q89 228.5 2.5 222.5Q.5 222.3 .5 220V2.5Q.5 .5 2.5 .5Z"/>
+    <path className="paper-bend" d="M.8 210Q89 217 159.2 207V214.5Q159.2 219.3 154 221.2Q89 228.2 2.5 222.2Q.8 222 .8 220Z" fill={`url(#${paperId}-bend)`}/>
+    <path className="paper-curl" d="M154 221.5Q158 216 159.5 214.5"/>
    </svg>
    <button className="card-copy" draggable data-exporting={exporting} title="点击复制；拖动正文到支持文字拖放的输入框" onDragStart={e=>{
     e.dataTransfer.clearData();e.dataTransfer.setData('text/plain',idea.text);e.dataTransfer.effectAllowed='copy';ignoreCopyUntil.current=Infinity;setExporting(true);exportId.current=idea.id;window.thoughtline.textDrag(true,idea.id);

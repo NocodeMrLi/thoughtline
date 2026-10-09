@@ -1,5 +1,5 @@
 import type {Clip} from './contracts';
-export const CARD_WIDTH=136,CARD_HEIGHT=188,MIN_SPACING=172,COMFORT_SPACING=220,MARGIN=12;
+export const CARD_WIDTH=160,CARD_HEIGHT=226,MIN_SPACING=172,COMFORT_SPACING=220,MARGIN=12;
 export function layoutClips(clips:Clip[],width:number){
  const min=CARD_WIDTH/2+MARGIN,max=width-min;const visible:{clip:Clip;x:number}[]=[],overflow:Clip[]=[];const capacity=Math.max(0,1+Math.floor((width-2*min)/COMFORT_SPACING));const start=(width-(Math.min(clips.length,capacity)-1)*COMFORT_SPACING)/2;let last=start-COMFORT_SPACING;
  for(const clip of clips){

@@ -1,4 +1,4 @@
-const {launchOptions,warmViews}=require('./window-fixture.cjs');
+const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');
 const assert=require('node:assert/strict'),path=require('node:path'),fs=require('node:fs/promises'),os=require('node:os');const {_electron}=require('playwright');
 (async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-groups-'));let app;
@@ -22,10 +22,12 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
   const currentA=await shelf.locator('[data-clip-id="'+a+'"] .peg-button').boundingBox(),currentB=await shelf.locator('[data-clip-id="'+b+'"] .peg-button').boundingBox();
   await shelf.mouse.move(currentA.x+12,currentA.y+20);await shelf.mouse.down();await shelf.mouse.move(currentB.x+12,currentB.y+20,{steps:8});
   await shelf.getByText('松开合并',{exact:true}).waitFor({timeout:4000});await shelf.mouse.up();await shelf.locator('[data-clip-id="'+a+'"]').waitFor({state:'detached',timeout:5000}).catch(async e=>{console.error(JSON.stringify({info:await info(shelf),message:await shelf.locator('.shelf-error').allTextContents()}));throw e;});
+  await waitForInfo(shelf,i=>!i.interactionLocked&&i.snapshot.revision>s.revision);await shelf.waitForFunction(()=>document.querySelector('[data-view=shelf]').dataset.locked==='false');
+  const savedUnrelated=(await info(shelf)).snapshot.clips.find(clip=>clip.id===c);assert(savedUnrelated.position!==null);
   const unrelatedAfter=await shelf.locator('[data-clip-id="'+c+'"]').boundingBox();assert(Math.abs(unrelatedAfter.x-unrelatedBefore.x)<.05,'merge must preserve unrelated rendered clip center');
   s=(await info(shelf)).snapshot;assert.equal(s.clips.length,2);assert.equal(s.ideas.length,weight);assert.deepEqual(s.clips[0].ideaIds,[ids[1],ids[0]]);
   await result(shelf,'dragLock',false);await shelf.waitForSelector('[data-clip-id="'+b+'"] .page-number');
-  const card=shelf.locator('[data-clip-id="'+b+'"]');const size=await card.locator('.idea-card').evaluate(el=>{const r=el.getBoundingClientRect(),s=getComputedStyle(el);return {width:r.width,height:r.height,cssWidth:s.width,cssHeight:s.height};});assert.equal(size.cssWidth,'136px');assert.equal(size.cssHeight,'188px');assert(Math.abs(size.width-136)<.01&&Math.abs(size.height-188)<.01,'transformed bounds preserve compact size within floating point precision');
+  const card=shelf.locator('[data-clip-id="'+b+'"]');const size=await card.locator('.idea-card').evaluate(el=>{const r=el.getBoundingClientRect(),s=getComputedStyle(el);return {width:r.width,height:r.height,cssWidth:s.width,cssHeight:s.height};});assert.equal(size.cssWidth,'160px');assert.equal(size.cssHeight,'226px');assert(Math.abs(size.width-160)<.01&&Math.abs(size.height-226)<.01,'transformed bounds preserve compact size within floating point precision');
   // Keep the shelf present via the application's explicit operation lock. UI protocol events are not physical device acceptance.
   await result(shelf,'dragLock',true);await shelf.mouse.move(1200,310);assert.equal(await card.locator('.page-arrow').first().evaluate(el=>getComputedStyle(el).visibility),'hidden');
   await card.locator('.idea-card').hover({force:true});assert.equal(await card.locator('.page-arrow').first().evaluate(el=>getComputedStyle(el).visibility),'visible');
@@ -40,7 +42,7 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
   s=(await info(manage)).snapshot;await result(manage,'clipChange',{kind:'split',id:b,ideaId:ids[1]},s.revision);s=(await info(manage)).snapshot;assert.equal(s.clips.length,3);assert.equal(s.ideas[1].text,texts[1]);
   await result(manage,'clipChange',{kind:'undo'},s.revision);s=(await info(manage)).snapshot;assert.equal(s.clips.length,2);assert.deepEqual(s.clips[0].ideaIds,[ids[1],ids[0]]);
   await app.close();app=null;app=await launch();({shelf}=await ready());s=(await info(shelf)).snapshot;assert.equal(s.schemaVersion,2);assert.deepEqual(s.clips[0].ideaIds,[ids[1],ids[0]]);assert.equal(s.ideas[0].text,texts[0]);
-  const report={platform:process.platform,scope:'Electron应用IPC/DOM/协议鼠标循环；不是系统物理拖动、穿透或Windows实机验收',compactSize:[136,188],detailSize:[380,360],unrelatedClipCenterPreserved:true,crossAgentRejected:true,mergePreservesNotes:true,dragHoldMergeProtocol:true,earlyDropNoMerge:true,hoverArrows:true,pageSwitchNoCopy:true,copyCurrentFullText:true,titleJump:true,splitUndo:true,restartPreserved:true};
+  const report={platform:process.platform,scope:'Electron应用IPC/DOM/协议鼠标循环；不是系统物理拖动、穿透或Windows实机验收',compactSize:[160,226],detailSize:[380,360],unrelatedClipCenterPreserved:true,crossAgentRejected:true,mergePreservesNotes:true,dragHoldMergeProtocol:true,earlyDropNoMerge:true,hoverArrows:true,pageSwitchNoCopy:true,copyCurrentFullText:true,titleJump:true,splitUndo:true,restartPreserved:true};
   await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','group-native.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
  }finally{try{if(app)await app.close();}finally{await fs.rm(dir,{recursive:true,force:true});}}
 })().catch(e=>{console.error(e);process.exitCode=1;});

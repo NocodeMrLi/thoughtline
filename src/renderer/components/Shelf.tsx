@@ -65,7 +65,7 @@ export function Shelf({info}:{info:PilotInfo}){
   };
   publish();const observer=new ResizeObserver(publish);root.current?.querySelectorAll('[data-hit]').forEach(el=>observer.observe(el));return()=>observer.disconnect();
  },[info.width,info.displayId,info.snapshot.revision,agentId,sag,progress,dragView]);
- return <div ref={root} data-view="shelf" data-visible={info.shelfVisible} data-progress={progress} data-reduced={reduced} className="shelf-root" style={{transform:reduced?'none':`translate3d(0,${(progress-1)*250}px,0)`,opacity:progress,willChange:!reduced&&progress>0&&progress<1?'transform, opacity':undefined}}>
+ return <div ref={root} data-view="shelf" data-visible={info.shelfVisible} data-locked={info.interactionLocked} data-progress={progress} data-reduced={reduced} className="shelf-root" style={{transform:reduced?'none':`translate3d(0,${(progress-1)*250}px,0)`,opacity:progress,willChange:!reduced&&progress>0&&progress<1?'transform, opacity':undefined}}>
   <svg className="rope" data-sag={sag} data-left={rope.left} data-length={rope.length} data-layout-width={info.width} width="100%" height="140" aria-hidden="true">{['rope-shadow','rope-core','rope-light'].map(c=><path key={c} className={c} d={`M ${rope.left} ${rope.top} Q ${info.width/2} ${rope.top+2*sag} ${rope.left+rope.length} ${rope.top}`}/>)}</svg>
   {visible.map(({clip:heldClip,x:origin})=>{
    const clip=info.snapshot.clips.find(c=>c.id===heldClip.id);if(!clip)return null;const active=dragView?.clip.id===clip.id;const x=active?dragView.x:origin,y=fixedRopeY(x,rope);const agent=info.snapshot.agents.find(a=>a.id===clip.agentId);

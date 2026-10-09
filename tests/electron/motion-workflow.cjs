@@ -11,7 +11,7 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
   await submit(1);
   await shelf.waitForFunction(()=>Number(document.querySelector('[data-view=shelf]').dataset.progress)===1);
   await shelf.evaluate(()=>window.thoughtline.dragLock(true));
-  const dimensions=await shelf.locator('.idea-card').evaluate(el=>({width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height}));assert.deepEqual(dimensions,{width:136,height:188});
+  const dimensions=await shelf.locator('.idea-card').evaluate(el=>({width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height}));assert.deepEqual(dimensions,{width:160,height:226});
   await shelf.evaluate(()=>window.thoughtline.dragLock(false));
   let retained=false,revived=false;
   for(let i=0;i<180;i++){
@@ -31,7 +31,7 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
   await shelf.waitForFunction(()=>Number(document.querySelector('[data-view=shelf]').dataset.progress)===1);
   const reduced=await shelf.evaluate(()=>({animation:getComputedStyle(document.querySelector('.idea-card strong')).animationName,sag:Number(document.querySelector('.rope').dataset.sag),transform:getComputedStyle(document.querySelector('[data-view=shelf]')).transform}));assert.equal(reduced.animation,'none');assert.equal(reduced.sag,30);assert.equal(reduced.transform,'none');
   await shelf.screenshot({path:path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','motion-native.png'),omitBackground:true});
-  const report={scope:'actual Mac Electron app/native window and renderer protocol; not physical hover, click-through or subjective visual acceptance',compactSize:[136,188],exitRetainsNativeUntilPainted:true,rapidReentryStaysVisible:true,eventualNativeHide:true,noIdleAnimationFrames:true,liveSystemReducedMotion:true,sharedSag:30,fixedAcrossNoteCount:true};
+  const report={scope:'actual Mac Electron app/native window and renderer protocol; not physical hover, click-through or subjective visual acceptance',compactSize:[160,226],exitRetainsNativeUntilPainted:true,rapidReentryStaysVisible:true,eventualNativeHide:true,noIdleAnimationFrames:true,liveSystemReducedMotion:true,sharedSag:30,fixedAcrossNoteCount:true};
   await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','motion-native.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
  }finally{try{if(app)await app.close();}finally{await fs.rm(dir,{recursive:true,force:true});}}
 })().catch(e=>{console.error(e);process.exitCode=1;});

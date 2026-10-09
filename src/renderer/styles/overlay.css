@@ -60,9 +60,9 @@
 @media(prefers-reduced-motion:reduce){.pin-arm{transform:none!important;transition:none!important}}
 
 /* Quiet paper edges: a small clipped corner, no folded flap or heavy white frame. */
-:root{--paper:#F2EDE2;--paper-edge:#74695A30;--paper-shadow:#0000001C}
-:root[data-theme=dark]{--paper:#363A3B;--paper-edge:#D2CEC322;--paper-shadow:#00000030}
-.idea-card{background:none;border:0;border-radius:2px;box-shadow:none}
+:root{--paper:#F2F0E9;--paper-text:#24262D;--paper-muted:#565B68;--paper-edge:#74695A26;--paper-shadow:#00000016}
+:root[data-theme=dark]{--paper:#B3AFA2;--paper-text:#24262D;--paper-muted:#3F4448;--paper-edge:#423C3033;--paper-shadow:#00000030}
+.idea-card{background:none;border:0;border-radius:2px;box-shadow:none;color:var(--paper-text)}
 .paper-sheet{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:visible;filter:drop-shadow(0 1px 2px var(--paper-shadow))}
 .paper-sheet .paper-face{fill:var(--paper);stroke:var(--paper-edge);stroke-width:1;stroke-linejoin:round}
 .paper-bend{stroke:none}.paper-curl{fill:none;stroke:var(--paper-edge);stroke-width:.6}
@@ -72,10 +72,12 @@
 .hanging.dragging .idea-card{box-shadow:none}
 .hanging.dragging .paper-sheet{filter:drop-shadow(0 3px 4px var(--paper-shadow))}
 /* Upright paper keeps its writing plane flat; only the bottom edge bends slightly. */
-.hanging{width:136px}.idea-card{width:136px;height:188px}
-.peg-button{left:56px}.clothespin-rear,.clamp-rope{left:59px}.merge-ring{left:44px}
-.source-ghost{width:136px;height:188px;border-radius:2px}
-.drag-message{top:280px}
-.card-copy{padding:12px 10px 0}.agent-name{font-size:11px}
-.idea-card .preview{font-size:13px;line-height:18px;-webkit-line-clamp:3;flex-shrink:1;color:var(--text);opacity:.84;overflow-wrap:anywhere}
+.hanging{width:160px}.idea-card{width:160px;height:226px}
+.peg-button{left:68px}.clothespin-rear,.clamp-rope{left:71px}.merge-ring{left:56px}
+.source-ghost{width:160px;height:226px;border-radius:2px}
+.drag-message{top:312px}
+.card-copy{padding:12px 10px 0}.agent-name{font-size:11px}.idea-card .agent-name,.idea-card .copy-status{color:var(--paper-muted)}
+.idea-card .preview{font-size:13px;line-height:18px;-webkit-line-clamp:3;flex-shrink:1;color:var(--paper-text);opacity:.84;overflow-wrap:anywhere}
 .idea-card strong{flex-shrink:0}
+
+.idea-card .page-arrow:hover:not(:disabled),.idea-card .card-copy:active{background:color-mix(in srgb,var(--paper),#808080 8%)}

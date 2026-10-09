@@ -11,7 +11,7 @@ const assert=require('node:assert/strict');const path=require('node:path');const
   const full='  原始正文\n中文第二行\n'+('长正文 '.repeat(300));
   let info=await composer.evaluate(()=>window.thoughtline.info());
   const s=await result(composer,'submit',{text:full,title:'循环验收',project:'项目',agentId:'codex'},info.snapshot.revision);const id=s.ideas[0].id;
-  await shelf.waitForSelector('[data-idea-id="'+id+'"]');assert.equal(await shelf.locator('.idea-card').evaluate(el=>el.getBoundingClientRect().width),136);assert.equal(await shelf.locator('.idea-card').evaluate(el=>el.getBoundingClientRect().height),188);
+  await shelf.waitForSelector('[data-idea-id="'+id+'"]');assert.equal(await shelf.locator('.idea-card').evaluate(el=>el.getBoundingClientRect().width),160);assert.equal(await shelf.locator('.idea-card').evaluate(el=>el.getBoundingClientRect().height),226);
   await result(shelf,'openManage',id);assert(manage,'temporary manage view must exist');
   await manage.waitForSelector('[data-view="manage"]',{state:'attached'});
   await manage.waitForSelector('[data-full-text]',{timeout:5000}).catch(async e=>{console.error(await manage.evaluate(async()=>({info:await window.thoughtline.info(),html:document.body.innerHTML.slice(0,3500)})));throw e;});
