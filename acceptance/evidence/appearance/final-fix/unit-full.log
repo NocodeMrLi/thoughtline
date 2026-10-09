@@ -1,0 +1,16 @@
+
+> thoughtline@0.0.17-preview.3 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+
+ Test Files  39 passed | 1 skipped (40)
+      Tests  222 passed | 4 skipped (226)
+   Start at  01:38:21
+   Duration  1.84s (tests 61%, transform 25%, import 10%, worker 3%)
+
+    Isolate  40 workers spawned · ~123ms startup each (spawn + environment, per file)
+             at least ~582ms faster with isolate: false — reuses workers across files instead of one per file
+
