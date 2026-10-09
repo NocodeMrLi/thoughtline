@@ -59,7 +59,7 @@
 .merge-ring{top:-33px;z-index:5}
 @media(prefers-reduced-motion:reduce){.pin-arm{transform:none!important;transition:none!important}}
 
-/* Quiet paper edges: a small clipped corner, no folded flap or heavy white frame. */
+/* Quiet continuous paper curvature, no folded flap or heavy frame. */
 :root{--paper:#F2F0E9;--paper-text:#24262D;--paper-muted:#565B68;--paper-edge:#74695A26;--paper-shadow:#00000016}
 :root[data-theme=dark]{--paper:#B3AFA2;--paper-text:#24262D;--paper-muted:#3F4448;--paper-edge:#423C3033;--paper-shadow:#00000030}
 .idea-card{background:none;border:0;border-radius:2px;box-shadow:none;color:var(--paper-text)}
@@ -77,8 +77,11 @@
 .source-ghost{width:160px;height:226px;border-radius:2px}
 .drag-message{top:312px}
 .card-copy{padding:14px 14px 68px}.agent-name{font-size:11px}.idea-card .agent-name,.idea-card .copy-status{color:var(--paper-muted)}
-.idea-card footer{position:absolute;left:0;right:0;bottom:30px}
+.idea-card footer{position:absolute;left:0;right:0;bottom:44px}
 .idea-card .preview{font-size:13px;line-height:18px;-webkit-line-clamp:3;flex-shrink:1;color:var(--paper-text);opacity:.84;overflow-wrap:anywhere}
 .idea-card strong{flex-shrink:0}
 
 .idea-card .page-arrow:hover:not(:disabled),.idea-card .card-copy:active{background:color-mix(in srgb,var(--paper),#808080 8%)}
+
+/* A quiet agent echo keeps neutral paper dominant and retains readable ink in both themes. */
+.idea-card[data-agent-neutral=false] .agent-name{color:color-mix(in srgb,#1C1E24 85%,var(--agent-color) 15%)}
