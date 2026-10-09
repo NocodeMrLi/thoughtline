@@ -1,0 +1,49 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Documents/Codex/2026-10-09/task-6/thoughtline-composition-safety
+
+ ❯ tests/unit/compositionFlush.test.ts (2 tests | 2 failed) 5011ms
+   × flush refuses a paused draft instead of checkpointing its intermediate value 5ms
+   × pause during a pending flush prevents the next intermediate write 5005ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/compositionFlush.test.ts > flush refuses a paused draft instead of checkpointing its intermediate value
+AssertionError: promise resolved "undefined" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+undefined
+
+ ❯ tests/unit/compositionFlush.test.ts:6:50
+      4| it('flush refuses a paused draft instead of checkpointing its intermed…
+      5|  vi.useFakeTimers();const write=vi.fn(async()=>{}),a=new DraftAutosave…
+      6|  a.pause();a.update('未确认');await expect(a.flush()).rejects.toThrow();
+       |                                                  ^
+      7|  expect(write).not.toHaveBeenCalled();a.update('确认');a.resume();await …
+      8| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/compositionFlush.test.ts > pause during a pending flush prevents the next intermediate write
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/unit/compositionFlush.test.ts:9:1
+      7|  expect(write).not.toHaveBeenCalled();a.update('确认');a.resume();await …
+      8| });
+      9| it('pause during a pending flush prevents the next intermediate write'…
+       | ^
+     10|  vi.useFakeTimers();let release!:()=>void;const seen:string[]=[];
+     11|  const a=new DraftAutosaver('',async v=>{seen.push(v);await new Promis…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  12:14:00
+   Duration  5.12s (tests 99%)
+

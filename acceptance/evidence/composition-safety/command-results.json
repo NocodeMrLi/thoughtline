@@ -1,0 +1,49 @@
+{
+  "sourceCommit": "3731dbc88424876838ce11c61d6e20a04b85a0d0",
+  "nodeVersion": "v24.19.0",
+  "results": [
+    {
+      "command": "node node_modules/vitest/vitest.mjs run tests/unit/compositionFlush.test.ts",
+      "source": "c3784976c5fc1877dfa337b0db4e79f3b9c8a423",
+      "exit": 1,
+      "evidence": "red/flush-unit.log"
+    },
+    {
+      "command": "node node_modules/vitest/vitest.mjs run",
+      "exit": 0,
+      "tests": 102,
+      "files": 24,
+      "evidence": "unit.log"
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc --noEmit",
+      "exit": 0,
+      "evidence": "typecheck.log"
+    },
+    {
+      "command": "node node_modules/electron-vite/bin/electron-vite.js build",
+      "exit": 0,
+      "evidence": "build.log"
+    },
+    {
+      "command": "node tests/electron/composition-safety-workflow.cjs",
+      "exit": 0,
+      "checkpoints": 20,
+      "evidence": "native/result.json"
+    },
+    {
+      "command": "THOUGHTLINE_EVIDENCE_DIR=acceptance/evidence/composition-safety/original-probe node tests/electron/optional-composition-probe.cjs",
+      "exit": 0,
+      "evidence": "original-probe/result.json"
+    },
+    {
+      "command": "THOUGHTLINE_EVIDENCE_DIR=acceptance/evidence/composition-safety/draft-regression node tests/electron/draft-safety-workflow.cjs",
+      "exit": 0,
+      "checkpoints": 11,
+      "evidence": "draft-regression/safety-native.json"
+    }
+  ],
+  "physicalImeTested": false,
+  "windowsTested": false,
+  "formalAcceptance": false
+}
