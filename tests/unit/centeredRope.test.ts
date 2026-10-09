@@ -2,6 +2,8 @@ import {expect,test} from 'vitest';
 import {fixedRope,fixedRopeY} from '../../src/shared/ropeGeometry';
 import {layoutClips,normalizedPosition,captureClipPositions,MIN_SPACING,CARD_WIDTH} from '../../src/shared/clipLayout';
 import type {Clip} from '../../src/shared/contracts';
+import {moveClip} from '../../src/shared/clipCommands';
+import {initialSnapshot} from '../../src/shared/ideaCommands';
 const clips=(count:number):Clip[]=>Array.from({length:count},(_,i)=>({id:String(i),agentId:i%2?'claude':'codex',ideaIds:[String(i)],currentId:String(i),position:null}));
 test('已批准居中70%绳，左右留白与中央2/3夹区适配屏宽',()=>{
  for(const width of [260,380,800,1040,1440,1920,2560,3840]){
@@ -24,7 +26,7 @@ test('旧比例位置映射到新夹区，无数据改写或丢失，捕获后�
 });
 test('移到新夹区最右侧时为已有夹子留最小间距，不把可容纳的移动夹藏入溢出',()=>{
  const captured=captureClipPositions(clips(3),1440),moving={...captured[0],position:1};
- const after=layoutClips([...captured.slice(1),moving],1440);expect(after.visible.map(p=>p.clip.id)).toEqual(['1','2','0']);expect(after.overflow).toHaveLength(0);
+ const snapshot={...initialSnapshot(),clips:captured,ideas:captured.map(c=>({id:c.currentId,text:'正文',title:'标签',project:'',agentId:c.agentId,status:'hanging' as const,createdAt:'2026-10-09T00:00:00Z',updatedAt:'2026-10-09T00:00:00Z'}))};const r=moveClip(snapshot,moving.id,1,null,1440);expect(r.ok).toBe(true);if(!r.ok)throw Error(r.message);const after=layoutClips(r.value.clips,1440);expect(after.visible.map(p=>p.clip.id)).toEqual(['1','2','0']);expect(after.overflow).toHaveLength(0);
  for(let i=1;i<after.visible.length;i++)expect(after.visible[i].x-after.visible[i-1].x).toBeGreaterThanOrEqual(MIN_SPACING);
  expect(after.visible.at(-1)!.x).toBeCloseTo(1440*.15+1440*.7*5/6,8);
 });

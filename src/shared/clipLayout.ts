@@ -12,22 +12,12 @@ export function layoutClips(clips:Clip[],width:number){
   const preferred=clip.position===null?(visible.length?last+COMFORT_SPACING:start):min+clip.position*Math.max(0,max-min);
   const x=Math.max(min,last+MIN_SPACING,preferred);
   if(max<min){overflow.push(clip);continue;}
-  if(x>max){
-   // An explicit move near the right end may need its neighbours to make room.
-   // Reflow only when the whole candidate sequence physically fits; a merge
-   // with already-spaced captured coordinates keeps unrelated centres intact.
-   if(clip.position!==null&&visible.length<1+Math.floor((max-min)/MIN_SPACING)){
-    const next=[...visible.map(p=>p.x),max];
-    for(let i=next.length-2;i>=0;i--)next[i]=Math.min(next[i],next[i+1]-MIN_SPACING);
-    if(next[0]>=min){visible.forEach((p,i)=>{p.x=next[i];});visible.push({clip,x:max});last=max;continue;}
-   }
-   overflow.push(clip);continue;
-  }
+  if(x>max){overflow.push(clip);continue;}
   visible.push({clip,x});last=x;
  }
  return {visible,overflow};
 }
-export function normalizedPosition(x:number,width:number){const {min,max}=clipTravelBounds(width);return Math.max(0,Math.min(1,(x-min)/Math.max(1,max-min)));}
+export function normalizedPosition(x:number,width:number){const {min,max}=clipTravelBounds(width);return max>min?Math.max(0,Math.min(1,(x-min)/(max-min))):0;}
 
 // Snapshot current rendered positions before a clip mutation.
 export function captureClipPositions(clips:Clip[],width:number,agentId='all'){

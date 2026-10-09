@@ -227,7 +227,7 @@ else app.whenReady().then(async()=>{
   const previous=snapshot,oldUndo=undoClips;let next:Result<Snapshot>;
   const positioned=()=>({...snapshot,clips:captureClipPositions(snapshot.clips,width,shelfAgentId)});
   if(c.kind==='merge'&&typeof c.sourceId==='string'&&typeof c.targetId==='string')next=mergeClips(positioned(),c.sourceId,c.targetId);
-  else if(c.kind==='move'&&typeof c.id==='string'&&typeof c.position==='number'&&(c.beforeId===null||typeof c.beforeId==='string'))next=moveClip(positioned(),c.id,c.position,c.beforeId);
+  else if(c.kind==='move'&&typeof c.id==='string'&&typeof c.position==='number'&&(c.beforeId===null||typeof c.beforeId==='string'))next=moveClip(positioned(),c.id,c.position,c.beforeId,width,shelfAgentId);
   else if(c.kind==='select'&&typeof c.id==='string'&&typeof c.ideaId==='string')next=selectClipIdea(snapshot,c.id,c.ideaId);
   else if(c.kind==='split'&&typeof c.id==='string'&&typeof c.ideaId==='string')next=splitClip(positioned(),c.id,c.ideaId,randomUUID());
   else if(c.kind==='splitAll'&&typeof c.id==='string'){
