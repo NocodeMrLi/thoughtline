@@ -1,0 +1,37 @@
+{
+  "noIndependentNativeOrBuild": true,
+  "priorOverlayCSSPrefixByteUnchanged": true,
+  "mainDiffOnlyUsesSharedComposerSize": true,
+  "nativeThemeListenerRemovedOnClosed": true,
+  "defaultLightBodyHeight": 297.5,
+  "optionsLightDarkBodyHeight": 234,
+  "footerBottom501Within520": true,
+  "defaultDarkBodyFocusedFalseExplainedByPriorSummaryClick": true,
+  "reachableStructure": {
+    "bodyLabel": true,
+    "agentSelectNamed": true,
+    "allSnapshotAgentsIncluded": true,
+    "nativeDetailsSummaryForNameProject": true,
+    "lookupButtonCallsCloseThenOpenManageOnlyAfterSuccessfulSave": true,
+    "lookupActualWorkflowTested": false,
+    "editGroupAgentSplitConfirmationRetained": true
+  },
+  "safetyEvidenceLimitations": [
+    {
+      "severity": "P3 test evidence boundary",
+      "subject": "compositionGuardsSubmitAndClose",
+      "detail": "Synthetic dispatch then immediate acknowledged info revision and input text check. No observation interval/in-flight IPC accounting/window visibility/lock assertion. Static composing ref guard matches intended handling; no product defect shown, no physical IME or complete asynchronous-negative claim."
+    },
+    {
+      "severity": "P3 coverage boundary",
+      "subject": "draftCloseReopenAllFields",
+      "detail": "Same-process Composer hide/reopen only. Not process restart or dirty normal quit recovery. Crash/autosave expressly absent and separate next stage."
+    },
+    {
+      "severity": "P3 coverage boundary",
+      "subject": "lookup/edit/Agent migration",
+      "detail": "DOM/source reachable; new find entry actual close→manage and existing grouped edit/migrate/cancel not covered by this new fixture."
+    }
+  ],
+  "readonlyChecks": "Source/evidence hashes and actual four original images only; builder native/unit results reviewed, not independently rerun."
+}

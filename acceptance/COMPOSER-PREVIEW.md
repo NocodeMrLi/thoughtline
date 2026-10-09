@@ -15,3 +15,9 @@
 首轮发现真实的预览错误焦点时序：禁用期间安排 focus 没有生效，专项 exit1。改为 error/busy 渲染提交后再 focus，完整复验 exit0。保留 [红日志](evidence/composer-preview/error-refocus-red.log)，没有把首轮命令标绿。
 
 当前仅可声称显式关闭和正常退出保存草稿；**未持久化的正在输入内容仍没有自动保存或异常退出恢复承诺**。下一阶段先用假数据复现异常终止，再独立实现安全节流/原子保存及恢复；不阻挡本次先看效果。真实系统 IME、跨应用焦点/热键、完整编辑迁移、长文本/低工作区、屏幕阅读器、Windows 原生与新冻结包矩阵仍待后续验证；合成组合事件不等于物理中文输入验收。
+
+## 02:43 用户视觉反馈覆盖初次预览状态
+
+用户明确拒绝当前布局：正文框过大、底部元素繁杂、折叠不缩小窗口且隐藏信息、边框缺少Agent颜色联动。原图和功能证据保持，**当前视觉不通过**。父提出紧凑/直接显示可选字段/动态正文高度/Agent色描边备选，待确认，未实施新布局。
+
+[独立只读审阅](evidence/composer-independent-readonly/READONLY-REVIEW.md) 与 [用户反馈补充](evidence/composer-independent-readonly/USER-VISUAL-FEEDBACK-ADDENDUM.md)。原专项是同进程关闭/隐藏重开，不是重启或dirty quit；synthetic composition原负断言立即读取，未完整等待在途IPC/原生可见/锁；新查找与分组迁移尚未实际点击复验。深色默认图焦点在summary折叠后，不能说四图均正文聚焦。以上是证据边界，不把源码guard或原有功能结论误报失败。草稿恢复在另一个工作树推进。
