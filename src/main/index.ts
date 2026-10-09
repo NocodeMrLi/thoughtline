@@ -2,7 +2,7 @@ import {app,BrowserWindow,dialog,shell,clipboard,globalShortcut,ipcMain,nativeIm
 import {join} from 'node:path';
 import {randomUUID} from 'node:crypto';
 import {createShelf} from './windows/shelf';
-import {createComposer,COMPOSER_SIZE} from './windows/composer';
+import {createComposer,COMPOSER_SIZE,currentComposerMaterial} from './windows/composer';
 import {createManage} from './windows/manage';
 import {createHost} from './platform/host';
 import {EdgeController} from './edgeController';
@@ -47,7 +47,7 @@ else app.whenReady().then(async()=>{
  let composerContext:ComposerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
  const preload=join(__dirname,'../preload/index.js');shelf=createShelf(preload);
  const host=createHost(shelf,()=>composer);
- const info=():PilotInfo=>({platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerContext,manageSession,manageSelection,manageMode,manageTitles,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
+ const info=():PilotInfo=>({platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,manageSession,manageSelection,manageMode,manageTitles,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
  const publish=()=>{for(const w of [shelf,composer,manage])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info());};
  const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:(BrowserWindow|null)[]=[shelf,composer,manage])=>allowed.some(w=>w?.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
  const lock=(name:string,active:boolean)=>edge.event({type:'lock',name,active,now:Date.now()});
@@ -65,7 +65,7 @@ else app.whenReady().then(async()=>{
   if(composerRelease)clearTimeout(composerRelease);composerRelease=null;
   if(composerLoading)return composerLoading;if(composer)return Promise.resolve(composer);
   const w=createComposer(preload);composer=w;
-  w.on('close',event=>{if(!quitting)event.preventDefault();});
+  w.on('close',event=>{if(!quitting)event.preventDefault();});w.on('focus',publish);w.on('blur',publish);
   w.on('show',()=>{composerSafeToRelease=false;if(composerRelease)clearTimeout(composerRelease);composerRelease=null;refreshTray();});
   w.on('hide',()=>{refreshTray();lock('composer',false);if(!composerSafeToRelease)return;composerRelease=setTimeout(()=>{composerRelease=null;if(composerSafeToRelease&&!w.isDestroyed()&&!w.isVisible()){composer=null;w.destroy();}},30000);});
   composerLoading=loadView(w,'composer').then(()=>w).catch(error=>{composer=null;w.destroy();throw error;}).finally(()=>{composerLoading=null;});
