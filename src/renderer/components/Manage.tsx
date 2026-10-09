@@ -20,7 +20,7 @@ export function Manage({info}:{info:PilotInfo}){
    </div>
    {results.length>50&&<nav className="pagination" aria-label="分页"><button disabled={shownPage===0} onClick={()=>setPage(shownPage-1)}>上一页</button><span>{shownPage+1} / {maxPage+1} · 每页50条</span><button disabled={shownPage===maxPage} onClick={()=>setPage(shownPage+1)}>下一页</button></nav>}
   </>:<AgentSettings info={info} busy={busy} run={run}/>}
-  <footer className="manage-message"><span role="status">{notice}</span>{undo&&section==='ideas'&&<button disabled={busy} onClick={()=>void setIdeaStatus(undo.id,undo.status,false)}>撤销上次收起 / 恢复</button>}<span className="error" role="alert">{error}</span></footer>
+  <footer className="manage-message"><span role="status">{info.placementNotice||notice}</span>{undo&&section==='ideas'&&<button disabled={busy} onClick={()=>void setIdeaStatus(undo.id,undo.status,false)}>撤销上次收起 / 恢复</button>}<span className="error" role="alert">{error}</span></footer>
  </main>;
 }
 function AgentSettings({info,busy,run}:{info:PilotInfo;busy:boolean;run:(task:()=>Promise<Result<unknown>>,message?:string)=>Promise<boolean>}){

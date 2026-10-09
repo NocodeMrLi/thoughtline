@@ -1,0 +1,14 @@
+AssertionError [ERR_ASSERTION]: archive must stop when page checkpoint fails
++ actual - expected
+
++ 'archived'
+- 'hanging'
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/page-handoff-workflow.cjs:31:11 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'archived',
+  expected: 'hanging',
+  operator: 'strictEqual',
+  diff: 'simple'
+}

@@ -1,5 +1,7 @@
 import {contextBridge,ipcRenderer} from 'electron';import type {ThoughtlineBridge} from '../shared/bridge';
 const api:ThoughtlineBridge={
+ selectClip:(id,ideaId,sequence)=>ipcRenderer.invoke('thoughtline:select-clip',id,ideaId,sequence),
+ onPrepareLeave:callback=>{const listener=async(_e:Electron.IpcRendererEvent,id:string)=>{let ok=false;try{ok=await callback();}catch{}ipcRenderer.send('thoughtline:leave-ready',id,ok);};ipcRenderer.on('thoughtline:prepare-leave',listener);return()=>ipcRenderer.removeListener('thoughtline:prepare-leave',listener);},
  info:()=>ipcRenderer.invoke('thoughtline:info'),
  onInfo:callback=>{const listener=(_event:Electron.IpcRendererEvent,info:Parameters<typeof callback>[0])=>callback(info);ipcRenderer.on('thoughtline:info-update',listener);return()=>ipcRenderer.removeListener('thoughtline:info-update',listener);},
  hitRects:layout=>ipcRenderer.send('thoughtline:hit-layout',layout),

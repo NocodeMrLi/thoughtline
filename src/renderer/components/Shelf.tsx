@@ -2,11 +2,12 @@ import {useEffect,useId,useLayoutEffect,useRef,useState} from 'react';
 import type {PointerEvent} from 'react';
 import type {PilotInfo,ClipMutation} from '../../shared/bridge';
 import type {Clip} from '../../shared/contracts';
-import {layoutClips,normalizedPosition,clipTravelBounds} from '../../shared/clipLayout';
+import {layoutClips,normalizedPosition,clipTravelBounds,availableClipPosition} from '../../shared/clipLayout';
 import {fixedRope,fixedRopeY} from '../../shared/ropeGeometry';
+import {flushPageSelections} from '../hooks/useClipPage';
 import {ClipCard} from './ClipCard';
 import {useShelfMotion} from '../hooks/useShelfMotion';
-type Drag={clip:Clip;pointer:number;startX:number;startY:number;origin:number;x:number;active:boolean;target:string|null;ready:boolean;revision:number};
+type Drag={mode:'clip'|'paper';ideaId:string;valid:boolean;clip:Clip;pointer:number;startX:number;startY:number;origin:number;x:number;active:boolean;target:string|null;ready:boolean;revision:number};
 export function Shelf({info}:{info:PilotInfo}){
  const ropeId=useId().replace(/:/g,'');
  const root=useRef<HTMLDivElement>(null),layoutRevision=useRef(0);const agentId=info.shelfAgentId;const [error,setError]=useState(''),[notice,setNotice]=useState(''),[dragView,setDragView]=useState<Drag|null>(null);
@@ -18,14 +19,15 @@ export function Shelf({info}:{info:PilotInfo}){
  const reset=()=>{if(mergeTimer.current)clearTimeout(mergeTimer.current);mergeTimer.current=null;const wasActive=drag.current?.active;drag.current=null;setDragView(null);if(wasActive)void window.thoughtline.dragLock(false);};
  useEffect(()=>{reset();},[info.displayId,info.width,info.dragCancelSession]);
  useEffect(()=>()=>{if(mergeTimer.current)clearTimeout(mergeTimer.current);void window.thoughtline.dragLock(false);},[]);
- const change=async(c:ClipMutation,revision=infoRef.current.snapshot.revision)=>{
-  const r=await window.thoughtline.clipChange(c,revision);if(!r.ok){setError(r.message);return false;}setError('');return true;
+ const change=async(c:ClipMutation,revision?:number)=>{
+  try{await flushPageSelections();if(revision===undefined)revision=(await window.thoughtline.info()).snapshot.revision;
+  const r=await window.thoughtline.clipChange(c,revision);if(!r.ok){setError(r.message);return false;}setError('');return true;}catch{setError('页码尚未保存，整理已暂停，请重试。');return false;}
  };
  const browse=async(id?:string)=>{const r=await window.thoughtline.openManage(id);if(!r.ok)setError(r.message);};
- const grab=(e:PointerEvent<HTMLButtonElement>,clip:Clip)=>{
+ const grab=(e:PointerEvent<HTMLButtonElement>,clip:Clip,mode:'clip'|'paper'='clip')=>{
   if(e.button!==0||drag.current)return;e.preventDefault();e.currentTarget.setPointerCapture(e.pointerId);
   const x=visible.find(p=>p.clip.id===clip.id)?.x??e.clientX;
-  drag.current={clip,pointer:e.pointerId,startX:e.clientX,startY:e.clientY,origin:x,x,active:false,target:null,ready:false,revision:info.snapshot.revision};setError('');setNotice('');
+  drag.current={mode,ideaId:clip.currentId,valid:true,clip,pointer:e.pointerId,startX:e.clientX,startY:e.clientY,origin:x,x,active:false,target:null,ready:false,revision:info.snapshot.revision};setError('');setNotice('');
  };
  useEffect(()=>{
   const move=async(e:globalThis.PointerEvent)=>{
@@ -39,16 +41,21 @@ export function Shelf({info}:{info:PilotInfo}){
    if(d.target!==id){if(mergeTimer.current)clearTimeout(mergeTimer.current);d.target=id;d.ready=false;
     if(target&&target.clip.agentId===d.clip.agentId)mergeTimer.current=setTimeout(()=>{if(drag.current===d&&d.target===id){d.ready=true;setDragView({...d});}},600);
    }
+   d.valid=true;
+   if(d.mode==='paper'&&!d.target){const occupied=visibleRef.current.filter(p=>d.clip.ideaIds.length>1||p.clip.id!==d.clip.id).map(p=>p.x),free=availableClipPosition(occupied,infoRef.current.width,d.x);d.valid=free!==null;if(free!==null)d.x=free;}
    setDragView({...d});
   };
   const up=async(e:globalThis.PointerEvent)=>{
    const d=drag.current;if(!d||e.pointerId!==d.pointer)return;
-   if(!d.active){reset();void browse(d.clip.currentId);return;}
+   if(!d.active){reset();if(d.mode==='clip')void browse(d.clip.currentId);return;}
+   try{await flushPageSelections();}catch{setError('页码尚未保存，拖动已取消。');reset();return;}const current=await window.thoughtline.info();if(drag.current!==d)return;
+   const currentSource=current.snapshot.clips.find(c=>c.id===d.clip.id);if(!currentSource||currentSource.agentId!==d.clip.agentId||JSON.stringify(currentSource.ideaIds)!==JSON.stringify(d.clip.ideaIds)||currentSource.position!==d.clip.position){setNotice('布局已变化，拖动已取消');reset();return;}d.revision=current.snapshot.revision;
    const target=visibleRef.current.find(p=>p.clip.id===d.target);let message='';
    const outside=e.clientY<0||e.clientY>300||e.clientX<0||e.clientX>infoRef.current.width;
    if(!outside){
-    if(d.ready&&target?.clip.agentId===d.clip.agentId){if(await change({kind:'merge',sourceId:d.clip.id,targetId:target.clip.id},d.revision))message='已合夹 · 可在详情中拆出或撤销';}
+    if(d.ready&&target?.clip.agentId===d.clip.agentId){if(await change(d.mode==='paper'?{kind:'paperDrop',id:d.clip.id,ideaId:d.ideaId,targetId:target.clip.id,position:null}:{kind:'merge',sourceId:d.clip.id,targetId:target.clip.id},d.revision))message=d.mode==='paper'?'当前纸张已合入目标夹子':'已合夹 · 可在详情中拆出或撤销';}
     else if(d.target){message=target?.clip.agentId!==d.clip.agentId?'不同 Agent 无法合夹，位置保持。':'未达到合夹停留时间，位置保持。';}
+    else if(d.mode==='paper'){if(d.valid&&await change({kind:'paperDrop',id:d.clip.id,ideaId:d.ideaId,targetId:null,position:normalizedPosition(d.x,infoRef.current.width)},d.revision))message='当前纸张已挂到空位';else message='无合法空位，纸张保持原位';}
     else{
      const before=visibleRef.current.find(p=>p.clip.id!==d.clip.id&&p.x>d.x)?.clip.id??null;
      if(await change({kind:'move',id:d.clip.id,position:normalizedPosition(d.x,infoRef.current.width),beforeId:before},d.revision))message='夹子位置已保存';
@@ -71,12 +78,13 @@ export function Shelf({info}:{info:PilotInfo}){
    <defs><linearGradient id={`${ropeId}-ends`} gradientUnits="userSpaceOnUse" x1={rope.left} x2={rope.left+rope.length} y1="0" y2="0"><stop stopColor="white" stopOpacity="0"/><stop offset=".08" stopColor="white"/><stop offset=".92" stopColor="white"/><stop offset="1" stopColor="white" stopOpacity="0"/></linearGradient><mask id={`${ropeId}-mask`} maskUnits="userSpaceOnUse" x="0" y="0" width={info.width} height="140"><rect width={info.width} height="140" fill={`url(#${ropeId}-ends)`}/></mask></defs>
    {['rope-shadow','rope-core','rope-light'].map(c=><path key={c} className={c} mask={`url(#${ropeId}-mask)`} d={`M ${rope.left} ${rope.top} Q ${info.width/2} ${rope.top+2*sag} ${rope.left+rope.length} ${rope.top}`}/>)}</svg>
   {visible.map(({clip:heldClip,x:origin})=>{
-   const clip=info.snapshot.clips.find(c=>c.id===heldClip.id);if(!clip)return null;const active=dragView?.clip.id===clip.id;const x=active?dragView.x:origin,y=fixedRopeY(x,rope);const agent=info.snapshot.agents.find(a=>a.id===clip.agentId);
+   const clip=info.snapshot.clips.find(c=>c.id===heldClip.id);if(!clip)return null;const active=dragView?.clip.id===clip.id&&dragView.mode==='clip';const x=active?dragView.x:origin,y=fixedRopeY(x,rope);const agent=info.snapshot.agents.find(a=>a.id===clip.agentId);
    const slope=4*rope.sag/rope.length*(1-2*(x-rope.left)/rope.length),bend=-4*rope.sag/(rope.length*rope.length);
    const ropeContact=`M 0 ${27+81*bend-9*slope} Q 9 ${27-81*bend} 18 ${27+81*bend+9*slope}`;
    return <div className={`hanging ${active?'dragging':''} ${dragView?.target===clip.id&&dragView.clip.agentId===clip.agentId?'merge-pending':''} ${dragView?.ready&&dragView.target===clip.id?'merge-target':''}`} data-idea-id={clip.currentId} data-clip-id={clip.id} key={clip.id} style={{transform:`translate3d(${x}px,${y}px,0) translateX(-50%)`}}>{dragView?.target===clip.id&&dragView.clip.agentId===clip.agentId&&<svg className="merge-ring" key={`${dragView.clip.id}:${clip.id}`} width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><circle className="ring-track" cx="24" cy="24" r="20"/><circle className="ring-progress" cx="24" cy="24" r="20"/></svg>}<ClipCard clip={clip} ideas={info.snapshot.ideas} agent={agent} onChange={change} onGrab={grab} onError={setError} reduced={reduced} textDragActive={info.textDragActive} ropeContact={ropeContact}/></div>;
   })}
-  {dragView&&<><div className="source-ghost" style={{left:dragView.origin,top:fixedRopeY(dragView.origin,rope)+6}}/><span className="drag-message" role="status">{dragView.ready?'松开合并':dragView.target?(info.snapshot.clips.find(c=>c.id===dragView.target)?.agentId===dragView.clip.agentId?'停留后合夹':'不同 Agent 不能合夹'):'拖动调整位置 · Esc取消'}</span></>}
+  {dragView?.mode==='paper'&&dragView.active&&<div className="paper-drag-preview" data-valid={dragView.valid} aria-hidden="true" style={{left:dragView.x,top:fixedRopeY(dragView.x,rope)}}><ClipCard clip={{...dragView.clip,ideaIds:[dragView.ideaId],currentId:dragView.ideaId}} ideas={info.snapshot.ideas} agent={info.snapshot.agents.find(a=>a.id===dragView.clip.agentId)} onChange={change} onGrab={()=>{}} onError={()=>{}} reduced={true} textDragActive={false} ropeContact="M0 27H18"/></div>}
+  {dragView&&<><div className="source-ghost" style={{left:dragView.origin,top:fixedRopeY(dragView.origin,rope)+6}}/><span className="drag-message" role="status">{dragView.ready?'松开合并':dragView.target?(info.snapshot.clips.find(c=>c.id===dragView.target)?.agentId===dragView.clip.agentId?'停留后合夹':'不同 Agent 不能合夹'):dragView.mode==='paper'?(dragView.valid?'松开将当前纸张挂到空位 · Esc取消':'绳上暂时放不下 · Esc取消'):'拖动调整位置 · Esc取消'}</span></>}
   {(error||notice)&&<button data-hit className="shelf-error" role={error?'alert':'status'} onClick={()=>{setError('');setNotice('');}}>{error||notice}</button>}
  </div>;
 }

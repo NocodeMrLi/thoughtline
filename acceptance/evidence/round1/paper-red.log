@@ -1,0 +1,41 @@
+
+> thoughtline@0.0.17-preview.1 test
+> node node_modules/vitest/vitest.mjs run tests/unit/paperDrop.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/paperDrop.test.ts (3 tests | 3 failed) 5ms
+   × 上缘拖出当前纸到空位，只迁当前ID且不移动其他手动夹 3ms
+   × 单张合入兼容夹：反复拆合ID/顺序/内容完整，目标直接显示新张 1ms
+   × 跨Agent、同源、无效位置与缺失正文拒收，快照原样 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/paperDrop.test.ts > 上缘拖出当前纸到空位，只迁当前ID且不移动其他手动夹
+TypeError: dropClipIdea is not a function
+ ❯ tests/unit/paperDrop.test.ts:9:63
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/paperDrop.test.ts > 单张合入兼容夹：反复拆合ID/顺序/内容完整，目标直接显示新张
+TypeError: dropClipIdea is not a function
+ ❯ tests/unit/paperDrop.test.ts:15:34
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/paperDrop.test.ts > 跨Agent、同源、无效位置与缺失正文拒收，快照原样
+TypeError: dropClipIdea is not a function
+ ❯ tests/unit/paperDrop.test.ts:18:131
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  18:07:58
+   Duration  130ms (transform 72%, import 15%, tests 8%, worker 4%)
+

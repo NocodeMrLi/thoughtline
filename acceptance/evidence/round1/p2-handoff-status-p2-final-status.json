@@ -1,0 +1,25 @@
+{
+  "platform": "darwin",
+  "scope": "isolated source Electron real DOM/IPC with 250ms rename and controlled persistent disk failure; fake clipboard, not physical acceptance",
+  "checks": [
+    "archive blocked by failed page checkpoint; retry flushes before archive and preserves body"
+  ],
+  "writes": [
+    {
+      "page": "a",
+      "failed": false
+    },
+    {
+      "page": "b",
+      "failed": true
+    },
+    {
+      "page": "b",
+      "failed": false
+    },
+    {
+      "page": "c",
+      "failed": false
+    }
+  ]
+}

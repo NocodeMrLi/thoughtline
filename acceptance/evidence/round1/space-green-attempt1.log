@@ -1,0 +1,91 @@
+
+> thoughtline@0.0.17-preview.1 test
+> node node_modules/vitest/vitest.mjs run tests/unit/spaceAllocation.test.ts tests/unit/clipLayout.test.ts tests/unit/clipProjection.test.ts tests/unit/centeredRope.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/centeredRope.test.ts (4 tests | 1 failed) 11ms
+   × 移到新夹区最右侧时为已有夹子留最小间距，不把可容纳的移动夹藏入溢出 4ms
+ ❯ tests/unit/clipProjection.test.ts (6 tests | 3 failed) 19ms
+   × 确定性3000混合旧比例/未定位及筛选压力：捕获是布局固定点 12ms
+   × 实际move命令在足够空间内持久化右端让位，renderer不隐式重排 1ms
+   × 混合比例与筛选移动压力：旧可见身份保留，其他Agent位置不动 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/centeredRope.test.ts > 移到新夹区最右侧时为已有夹子留最小间距，不把可容纳的移动夹藏入溢出
+AssertionError: expected [ '0', '1', '2' ] to deeply equal [ '1', '2', '0' ]
+
+- Expected
++ Received
+
+  [
++   "0",
+    "1",
+    "2",
+-   "0",
+  ]
+
+ ❯ tests/unit/centeredRope.test.ts:29:428
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/unit/clipProjection.test.ts > 确定性3000混合旧比例/未定位及筛选压力：捕获是布局固定点
+AssertionError: expected [ '0', '2', '4' ] to deeply equal [ '0', '4', '2' ]
+
+- Expected
++ Received
+
+  [
+    "0",
+-   "4",
+    "2",
++   "4",
+  ]
+
+ ❯ fixed tests/unit/clipProjection.test.ts:6:322
+
+ ❯ tests/unit/clipProjection.test.ts:10:383
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/unit/clipProjection.test.ts > 实际move命令在足够空间内持久化右端让位，renderer不隐式重排
+AssertionError: expected [ '0', '1', '2' ] to deeply equal [ '1', '2', '0' ]
+
+- Expected
++ Received
+
+  [
++   "0",
+    "1",
+    "2",
+-   "0",
+  ]
+
+ ❯ tests/unit/clipProjection.test.ts:12:282
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/unit/clipProjection.test.ts > 混合比例与筛选移动压力：旧可见身份保留，其他Agent位置不动
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/clipProjection.test.ts:14:1071
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  2 failed | 2 passed (4)
+      Tests  4 failed | 18 passed (22)
+   Start at  18:05:50
+   Duration  167ms (transform 66%, import 15%, tests 15%, worker 4%)
+

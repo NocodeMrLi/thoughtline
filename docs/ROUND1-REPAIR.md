@@ -15,3 +15,23 @@
 ## 待做
 
 P2：三种拖动、外拖、翻页测量／合并保存、全绳空位。P3：原地编辑／自动保存、最近删除、窗口拖动与统一图标材质。第二轮日历／历史检索／目录迁移与备份实际恢复。真实双端IME/DPI/多屏/焦点/目标接收、独立QA、用户验收待完成。旧安装PID28102与Electron30628保留，测试仅独立临时目录与合成文字；测试自有PID和数据清理receipt已保存。
+
+## P2 整理、空位、翻页（开发检查点）
+
+纸张上缘留白拖当前一张，木夹拖整组，正文保持text/plain复制拖动。合法空位预览、600ms兼容夹子合入，放开提交；无效落点/Esc不改数据。单纸30次往返拆合单测保存ID/顺序/正文；隔离Electron空位、兼容合入、Esc检查见paper-native.json。分配器搜索全部空隙，新建/拆出/恢复前固定旧位置；精度容差避免合法手动位置被反复归一化改写。真满新建保存后直接打开详情，显示“已保存，绳上暂时放不下”；拆出/恢复在辅助窗口提示。
+
+翻页由同步ref累积点击，100ms合并/300ms最长等待后台保存；主进程只更新当前夹页并串行处理序号，旧请求不能覆盖新页。关闭/退出/整理前flush，失败阻止离开/整理，重复同序号可以重试。受控磁盘250ms延迟下三次点击从旧1/4变为即时4/4；观测9.2ms与28.6ms（两次）显示，IPC约265ms，序列化/写盘/广播见page-timing-*.json。这是受控因果测试，未独立复现用户偶发慢的设备原因。
+
+Windows P1 CI37915342457 verify/package/manifest/parse通过，安装预检失败：隔离launcher严格绑定旧preview6版本。失败证据保留；旧脚本归档，新脚本和预检目录更新为0.0.17-preview.1，仍严格核对版本和独立目录。下一阶段源码CI重新验。
+
+外拖接收矩阵和逐次验收步骤见acceptance/ROUND1-DRAG-MATRIX.md；三种真实接收端独立结果仍未测，不宣称WorkBuddy已修好或不支持。普通复制入口保持显式触发。
+
+### 材质能力依据
+
+核对本地Electron44.7.0类型及[官方BrowserWindow API](https://www.electronjs.org/docs/latest/api/browser-window)：vibrancy是macOS系统材质，Windows backgroundMaterial提供mica/acrylic等；未发现本地直接NSGlassEffectView桥接。[Apple NSGlassEffectView](https://developer.apple.com/documentation/appkit/nsglasseffectview)是Liquid Glass接口；本机macOS15.3.1不据此冒称原生Liquid Glass。本轮采用现有vibrancy/acrylic能力并按减少透明度/高对比降级，原生Liquid Glass待对应系统与桥接验证。未变更系统偏好。anysearch调用list_domains返回API tool not found，按已授权核实范围改查官方来源，未保存任何新key。
+
+### P2 阶段验证闭环
+
+2026-10-09 限定独立复核 Spec / Quality 通过，3 项 Important（离开失败、跨窗口重试、快速翻页展开）及 detached checkpoint 生命周期已修复。全量 verify exit0，115 passed / 4 Windows-only skipped，类型与构建通过。隔离 Electron 交接四场景、收起失败/重试、满位提交队列场景通过。queue 早期两份名为 green 的日志实际上失败（textContent 少了调用）；保留原日志，修正后 p2-queue-fixed.log 与最终 JSON/cleanup 才支持通过。见本目录 acceptance/evidence/round1/p2-*-report.md 和 p2-recheck.md。
+
+文档小任务：21 篇历史阶段文件及历史版本/原始交付移至笔记库“归档”，保留完整方案、当前设计和正式交付；链接与入口提示前的原文及 SHA256 清单保留，可恢复。历史证据字节未改。

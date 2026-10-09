@@ -12,8 +12,8 @@ import {validWriteHotkey,displayWriteHotkey} from '../shared/composerKeys';
 import {newIdea,editIdea,changeStatus,addAgent,updateAgent,removeAgent,removeProject} from '../shared/ideaCommands';
 import type {Draft,Result,Snapshot} from '../shared/contracts';
 import type {PilotInfo,HitLayout,ComposerContext,AgentMutation,ClipMutation} from '../shared/bridge';
-import {mergeClips,splitClip,moveClip,selectClipIdea} from '../shared/clipCommands';
-import {captureClipPositions} from '../shared/clipLayout';
+import {mergeClips,splitClip,moveClip,selectClipIdea,dropClipIdea} from '../shared/clipCommands';
+import {captureClipPositions,layoutClips} from '../shared/clipLayout';
 app.setName('Thoughtline');
 app.setPath('userData',process.env.THOUGHTLINE_DATA_DIR||join(app.getPath('appData'),'Thoughtline'));
 let prepareQuit:(()=>Promise<boolean>)|null=null;let quitInFlight=false;
@@ -42,14 +42,23 @@ else app.whenReady().then(async()=>{
  const composerWrite=<T>(action:()=>Promise<T>):Promise<T>=>{const next=composerWrites.then(action,action);composerWrites=next;return next;};
  let composerSession=0,manageSession=0,manageSelection:string|null=null,editRevision=snapshot.revision;
  let dragCancelSession=0,dragEscape=false;let textDragTimer:ReturnType<typeof setTimeout>|null=null;let textDragOwner:string|null=null;
- let shelfAgentId='all';let settingsBusy=false;let refreshTray=()=>{};
+ let placementNotice:string|null=null;let shelfAgentId='all';let settingsBusy=false;let refreshTray=()=>{};
  let manageMode:'browse'|'detail'|'settings'='browse',manageTitles=false;let undoClips:{snapshot:Snapshot;revision:number}|null=null;
  let composerContext:ComposerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
  const preload=join(__dirname,'../preload/index.js');shelf=createShelf(preload);
  const host=createHost(shelf,()=>composer);
- const info=():PilotInfo=>({platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,manageSession,manageSelection,manageMode,manageTitles,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
+ const info=():PilotInfo=>({platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,manageSession,manageSelection,manageMode,manageTitles,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
  const publish=()=>{for(const w of [shelf,composer,manage])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info());};
  const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:(BrowserWindow|null)[]=[shelf,composer,manage])=>allowed.some(w=>w?.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
+ const prepareWindow=(w:BrowserWindow|null):Promise<boolean>=>{
+  if(!w||w.isDestroyed())return Promise.resolve(true);
+  return new Promise(resolve=>{const id=randomUUID();let finished=false;
+   const finish=(ok:boolean)=>{if(finished)return;finished=true;clearTimeout(timer);ipcMain.removeListener('thoughtline:leave-ready',receive);resolve(ok);};
+   const receive=(event:Electron.IpcMainEvent,requestId:string,ok:boolean)=>{if(requestId===id&&trusted(event,[w]))finish(ok===true);};
+   const timer=setTimeout(()=>finish(false),5000);ipcMain.on('thoughtline:leave-ready',receive);w.webContents.send('thoughtline:prepare-leave',id);
+  });
+ };
+ const prepareViews=async()=>await prepareWindow(shelf)&&await prepareWindow(manage);
  const lock=(name:string,active:boolean)=>edge.event({type:'lock',name,active,now:Date.now()});
  const hideManage=()=>{manage?.hide();lock('manage',false);};
  const boundsFor=(w:number,h:number)=>{const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint());const width=Math.min(w,d.workArea.width-40),height=Math.min(h,d.workArea.height-48);return {x:Math.round(d.workArea.x+(d.workArea.width-width)/2),y:d.workArea.y+24,width,height};};
@@ -89,9 +98,11 @@ else app.whenReady().then(async()=>{
    composer.show();composer.focus();return ideaId?invalid('请先保存或取消当前编辑。'):done();
   }
   if(composer&&!composerSafeToRelease){
+   if(!await prepareViews())return invalid('最后修改尚未保存，窗口已保留。');
    hideManage();lock('composer',true);host.showComposer(boundsFor(COMPOSER_SIZE.width,COMPOSER_SIZE.height));
    return ideaId?invalid('请先保存或取消尚未完成的输入。'):done();
   }
+  if(!await prepareViews())return invalid('最后修改尚未保存，窗口已保留。');
   const idea=ideaId?snapshot.ideas.find(x=>x.id===ideaId):null;
   if(ideaId&&!idea)return invalid('找不到这条念头。');
   composerContext=idea?{mode:'edit',ideaId:idea.id,draft:{text:idea.text,title:idea.title,project:idea.project,agentId:idea.agentId}}:{mode:'new',ideaId:null,draft:snapshot.draft??blank};
@@ -110,6 +121,7 @@ else app.whenReady().then(async()=>{
  });
  prepareQuit=async()=>{
   if(settingsBusy)return false;
+  if(!await prepareWindow(shelf)||!await prepareWindow(manage))return false;
   await composerWrites;await repository.flush();
   if(!composer||(composerSafeToRelease&&!composer.isVisible())||composerContext.mode==='edit')return true;
   const draft=await captureDraft();const saved=draft.ok?await save({ok:true,value:{...snapshot,draft:draft.value}},snapshot.revision):draft;
@@ -135,14 +147,15 @@ else app.whenReady().then(async()=>{
   if(saved.ok){snapshot=saved.value;composerContext={...composerContext,draft};if(undoClips)undoClips={snapshot:{...undoClips.snapshot,draft},revision:snapshot.revision};publish();}
   return saved;
  }));
- ipcMain.handle('thoughtline:submit',(e,draft:Draft,revision:number)=>composerWrite(async():Promise<Result<Snapshot>>=>{
+ ipcMain.handle('thoughtline:submit',async(e,draft:Draft,revision:number)=>{let overflowId:string|null=null;const committed=await composerWrite(async():Promise<Result<Snapshot>>=>{
   if(!trusted(e,[composer])||!draftShape(draft))return invalid('无效内容');
   if(composerContext.mode==='edit'&&revision!==editRevision)return {ok:false,code:'CONFLICT',message:'记录已变化，请保留文字，重新打开后核对。'};
-  const now=new Date().toISOString();
-  const next=composerContext.mode==='edit'?editIdea(snapshot,composerContext.ideaId!,draft,now):newIdea(snapshot,draft,randomUUID(),now);
+  const now=new Date().toISOString(),createdId=randomUUID();
+  const next=composerContext.mode==='edit'?editIdea(snapshot,composerContext.ideaId!,draft,now):newIdea({...snapshot,clips:captureClipPositions(snapshot.clips,width)},draft,createdId,now);
   const committed=await save(next,revision);if(!committed.ok)return committed;
-  closeConfirmedComposer();lock('composer',false);edge.event({type:'peek',now:Date.now()});publish();return committed;
- }));
+  closeConfirmedComposer();lock('composer',false);edge.event({type:'peek',now:Date.now()});placementNotice=null;const createdClip=snapshot.clips.find(c=>c.ideaIds.includes(createdId));if(createdClip&&layoutClips(snapshot.clips,width).overflow.some(c=>c.id===createdClip.id)){placementNotice='已保存，绳上暂时放不下';overflowId=createdId;}publish();return committed;
+ });if(committed.ok&&overflowId)await openBrowseDetail(overflowId);return committed;
+ });
  ipcMain.handle('thoughtline:close',(e,draft:Draft)=>composerWrite(async():Promise<Result<Snapshot>>=>{
   if(!trusted(e,[composer])||!draftShape(draft))return invalid('无效操作');
   if(composerContext.mode==='edit'){closeConfirmedComposer();lock('composer',false);return {ok:true,value:snapshot};}
@@ -153,9 +166,10 @@ else app.whenReady().then(async()=>{
   if(!trusted(e)||id!==undefined&&typeof id!=='string'||titles!==undefined&&typeof titles!=='boolean')return invalid('无效操作');
   if(composer?.isVisible())return invalid('请先保存或取消当前输入。');
   if(id&&!snapshot.ideas.some(x=>x.id===id))return invalid('找不到这条念头。');
+  if(!await prepareViews())return invalid('最后修改尚未保存，窗口已保留。');
   try{await ensureManage();}catch{return {ok:false,code:'IO',message:'浏览浮层未能打开，请重试。'};}if(quitting)return invalid('正在退出。');if(composer?.isVisible())return invalid('请先保存或取消当前输入。');manageSelection=id??null;manageMode=id?'detail':'browse';manageTitles=!!titles;manageSession++;lock('manage',true);publish();if(id){const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint()),p=screen.getCursorScreenPoint();const b=boundsFor(380,360);b.x=Math.round(Math.max(d.workArea.x+12,Math.min(d.workArea.x+d.workArea.width-b.width-12,p.x-b.width/2)));b.y=Math.round(Math.max(d.workArea.y+12,Math.min(d.workArea.y+d.workArea.height-b.height-12,p.y+24)));manage!.setBounds(b);}else manage!.setBounds(boundsFor(740,540));manage!.show();manage!.focus();refreshTray();return done();
  });
- const selectShelfAgent=(id:string)=>{shelfAgentId=id==='all'||snapshot.agents.some(a=>a.id===id)?id:'all';refreshTray();publish();};
+ const selectShelfAgent=async(id:string)=>{if(!await prepareWindow(shelf))return invalid('页码尚未保存，筛选已保留。');shelfAgentId=id==='all'||snapshot.agents.some(a=>a.id===id)?id:'all';refreshTray();publish();};
  const agentFilterMenu=():Electron.MenuItemConstructorOptions[]=>[
   {label:'全部',type:'radio',checked:shelfAgentId==='all',click:()=>selectShelfAgent('all')},
   ...snapshot.agents.map(agent=>({label:agent.name,type:'radio' as const,checked:shelfAgentId===agent.id,click:()=>selectShelfAgent(agent.id)}))
@@ -163,6 +177,7 @@ else app.whenReady().then(async()=>{
  const browseFromTray=()=>{void openBrowse();};
  const openBrowse=async()=>{
   if(composer?.isVisible())return invalid('请先保存或取消当前输入。');
+  if(!await prepareViews())return invalid('最后修改尚未保存，窗口已保留。');
   try{await ensureManage();}catch{return invalid('浏览浮层未能打开，请重试。');}
   if(quitting||composer?.isVisible())return invalid('请先结束当前输入。');
   manageMode='browse';manageSelection=null;manageTitles=false;manageSession++;lock('manage',true);manage!.setBounds(boundsFor(740,540));publish();manage!.show();manage!.focus();refreshTray();return done();
@@ -184,13 +199,15 @@ else app.whenReady().then(async()=>{
  });
  const openBrowseDetail=async(id:string)=>{
   if(composer?.isVisible())return invalid('请先保存或取消当前输入。');
+  if(!await prepareViews())return invalid('最后修改尚未保存，窗口已保留。');
   try{await ensureManage();}catch{return invalid('全文浮层未能打开，请重试。');}
   if(quitting||composer?.isVisible())return invalid('请先结束当前输入。');
   manageMode='detail';manageSelection=id;manageTitles=false;manageSession++;lock('manage',true);manage!.setBounds(boundsFor(380,360));publish();manage!.show();manage!.focus();refreshTray();return done();
  };
- ipcMain.handle('thoughtline:close-manage',e=>{if(!trusted(e,[manage]))return invalid('无效操作');hideManage();return done();});
+ ipcMain.handle('thoughtline:close-manage',async e=>{if(!trusted(e,[manage]))return invalid('无效操作');if(!await prepareWindow(manage))return invalid('最后修改尚未保存，窗口已保留。');hideManage();return done();});
  const openSettings=async():Promise<Result<void>>=>{
   if(composer?.isVisible())return invalid('请先保存或取消当前输入。');
+  if(!await prepareViews())return invalid('最后修改尚未保存，窗口已保留。');
   try{await ensureManage();}catch{return {ok:false,code:'IO',message:'设置浮层未能打开，请重试。'};}if(quitting)return invalid('正在退出。');if(composer?.isVisible())return invalid('请先保存或取消当前输入。');cancelDrag();manageMode='settings';manageTitles=false;manageSelection=null;manageSession++;lock('manage',true);manage!.setBounds(boundsFor(440,390));publish();manage!.show();manage!.focus();refreshTray();return done();
  };
  ipcMain.handle('thoughtline:open-settings',e=>trusted(e)?openSettings():invalid('无效操作'));
@@ -208,8 +225,8 @@ else app.whenReady().then(async()=>{
  ipcMain.handle('thoughtline:open-edit',(e,id:string)=>trusted(e,[shelf,manage])&&typeof id==='string'?openComposer(id):invalid('无效操作'));
  ipcMain.handle('thoughtline:status',async(e,id:string,status:'hanging'|'archived',revision:number)=>{
   if(!trusted(e,[shelf,manage])||typeof id!=='string'||!['hanging','archived'].includes(status))return invalid('无效操作');
-  const r=await save(changeStatus(snapshot,id,status,new Date().toISOString()),revision);
-  if(r.ok)edge.event({type:'peek',now:Date.now()});return r;
+  const r=await save(changeStatus({...snapshot,clips:captureClipPositions(snapshot.clips,width)},id,status,new Date().toISOString()),revision);
+  if(r.ok){placementNotice=status==='hanging'&&layoutClips(snapshot.clips,width).overflow.some(c=>c.ideaIds.includes(id))?'已保存，绳上暂时放不下':null;edge.event({type:'peek',now:Date.now()});publish();}return r;
  });
  ipcMain.handle('thoughtline:agent',async(e,c:AgentMutation,revision:number)=>{
   if(!trusted(e,[manage])||!c||typeof c!=='object')return invalid('无效操作');
@@ -243,6 +260,14 @@ else app.whenReady().then(async()=>{
   if(!trusted(e,[shelf])||typeof active!=='boolean')return invalid('无效操作');if(active&&!dragEscape){if(!globalShortcut.register('Escape',cancelDrag))return invalid('Esc快捷键被占用，拖动未开始，请释放快捷键后重试。');dragEscape=true;}
   if(!active&&dragEscape){globalShortcut.unregister('Escape');dragEscape=false;}lock('drag',active);return done();
  });
+ // A failed retry keeps its original cross-window generation. Only a new choice can supersede it.
+ const pageSequences=new Map<string,{sequence:number;generation:number}>(),pageGenerations=new Map<string,number>();let pageGeneration=0;
+ ipcMain.handle('thoughtline:select-clip',(e,id:string,ideaId:string,sequence:number)=>{
+  if(!trusted(e,[shelf,manage])||typeof id!=='string'||typeof ideaId!=='string'||!Number.isSafeInteger(sequence)||sequence<=0)return invalid('页码请求无效。');
+  const key=e.sender.id+':'+id,priorRequest=pageSequences.get(key);if(sequence<(priorRequest?.sequence??0))return Promise.resolve({ok:true as const,value:snapshot});
+  const generation=sequence===priorRequest?.sequence?priorRequest.generation:++pageGeneration;if(sequence!==priorRequest?.sequence){pageSequences.set(key,{sequence,generation});pageGenerations.set(id,generation);}
+  return composerWrite(async()=>{if(generation!==pageGenerations.get(id))return {ok:true as const,value:snapshot};const prior=undoClips;const r=await save(selectClipIdea(snapshot,id,ideaId),snapshot.revision);if(r.ok){if(prior)undoClips={...prior,revision:snapshot.revision};publish();}return r;});
+ });
  ipcMain.handle('thoughtline:clip',async(e,c:ClipMutation,revision:number)=>{
   if(!trusted(e,[shelf,manage])||!c||typeof c!=='object')return invalid('无效操作');
   if(revision!==snapshot.revision)return {ok:false,code:'CONFLICT',message:'布局已变化，请重新操作。'};
@@ -250,18 +275,19 @@ else app.whenReady().then(async()=>{
   const positioned=()=>({...snapshot,clips:captureClipPositions(snapshot.clips,width,shelfAgentId)});
   if(c.kind==='merge'&&typeof c.sourceId==='string'&&typeof c.targetId==='string')next=mergeClips(positioned(),c.sourceId,c.targetId);
   else if(c.kind==='move'&&typeof c.id==='string'&&typeof c.position==='number'&&(c.beforeId===null||typeof c.beforeId==='string'))next=moveClip(positioned(),c.id,c.position,c.beforeId,width,shelfAgentId);
+  else if(c.kind==='paperDrop'&&typeof c.id==='string'&&typeof c.ideaId==='string'&&(c.targetId===null||typeof c.targetId==='string')&&(c.position===null||typeof c.position==='number'))next=dropClipIdea(positioned(),c.id,c.ideaId,c.targetId,c.position,randomUUID(),width);
   else if(c.kind==='select'&&typeof c.id==='string'&&typeof c.ideaId==='string')next=selectClipIdea(snapshot,c.id,c.ideaId);
-  else if(c.kind==='split'&&typeof c.id==='string'&&typeof c.ideaId==='string')next=splitClip(positioned(),c.id,c.ideaId,randomUUID());
+  else if(c.kind==='split'&&typeof c.id==='string'&&typeof c.ideaId==='string')next=splitClip(positioned(),c.id,c.ideaId,randomUUID(),width);
   else if(c.kind==='splitAll'&&typeof c.id==='string'){
    const clip=snapshot.clips.find(x=>x.id===c.id);if(!clip||clip.ideaIds.length<2)return invalid('没有可拆出的便签。');
-   next={ok:true,value:positioned()};for(const id of clip.ideaIds.slice(1)){if(!next.ok)break;next=splitClip(next.value,c.id,id,randomUUID());}
+   next={ok:true,value:positioned()};for(const id of clip.ideaIds.slice(1)){if(!next.ok)break;next=splitClip(next.value,c.id,id,randomUUID(),width);}
   }else if(c.kind==='archiveAll'&&typeof c.id==='string'){
    const clip=snapshot.clips.find(x=>x.id===c.id);if(!clip)return invalid('找不到夹子。');next={ok:true,value:snapshot};for(const id of clip.ideaIds){if(!next.ok)break;next=changeStatus(next.value,id,'archived',new Date().toISOString());}
   }else if(c.kind==='undo'){
    if(!oldUndo||oldUndo.revision!==revision)return invalid('没有可撤销的夹子操作。');next={ok:true,value:{...oldUndo.snapshot,revision}};
   }else return invalid('夹子操作无效');
   const r=await save(next,revision);
-  if(r.ok){if(c.kind==='split'){manageSelection=c.ideaId;manageSession++;}undoClips=c.kind==='undo'?null:c.kind==='select'?(oldUndo?{...oldUndo,revision:r.value.revision}:null):{snapshot:previous,revision:r.value.revision};publish();}
+  if(r.ok){placementNotice=['split','splitAll'].includes(c.kind)&&layoutClips(snapshot.clips,width).overflow.length?'已保存，绳上暂时放不下，可在念头日历查看':null;if(c.kind==='split'){manageSelection=c.ideaId;manageSession++;}undoClips=c.kind==='undo'?null:c.kind==='select'?(oldUndo?{...oldUndo,revision:r.value.revision}:null):{snapshot:previous,revision:r.value.revision};publish();}
   return r;
  });
  await loadView(shelf,'shelf');

@@ -1,0 +1,30 @@
+
+> thoughtline@0.0.17-preview.1 test
+> node node_modules/vitest/vitest.mjs run tests/unit/paperDrop.test.ts tests/unit/clipCommands.test.ts tests/unit/clipProjection.test.ts tests/unit/spaceAllocation.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/paperDrop.test.ts (3 tests | 1 failed) 13ms
+   × 上缘拖出当前纸到空位，只迁当前ID且不移动其他手动夹 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/paperDrop.test.ts > 上缘拖出当前纸到空位，只迁当前ID且不移动其他手动夹
+TypeError: old is not iterable
+ ❯ tests/unit/paperDrop.test.ts:11:17
+      9|  const s=fixture(),old=layoutClips(s.clips,1920),next=v(clips.dropClip…
+     10|  expect(next.ideas).toEqual(s.ideas);expect(next.clips.find(c=>c.id===…
+     11|  for(const p of old)expect(layoutClips(next.clips,1920).visible.find(x…
+       |                 ^
+     12| });
+     13| test('单张合入兼容夹：反复拆合ID/顺序/内容完整，目标直接显示新张',()=>{
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  1 failed | 21 passed (22)
+   Start at  18:09:22
+   Duration  375ms (tests 51%, transform 39%, import 8%, worker 2%)
+

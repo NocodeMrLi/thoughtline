@@ -1,0 +1,14 @@
+AssertionError [ERR_ASSERTION]: immediate expand must show current d body
++ actual - expected
+
++ ' a中文\n🧷原文\n '
+- ' d中文\n🧷原文\n '
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/page-handoff-workflow.cjs:26:62 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: ' a中文\n🧷原文\n ',
+  expected: ' d中文\n🧷原文\n ',
+  operator: 'strictEqual',
+  diff: 'simple'
+}

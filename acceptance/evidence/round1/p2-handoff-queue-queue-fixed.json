@@ -1,0 +1,21 @@
+{
+  "platform": "darwin",
+  "scope": "isolated source Electron real DOM/IPC with 250ms rename and controlled persistent disk failure; fake clipboard, not physical acceptance",
+  "checks": [
+    "overflow submit releases queue before pending Shelf checkpoint and opens saved body"
+  ],
+  "writes": [
+    {
+      "page": "a",
+      "failed": false
+    },
+    {
+      "page": "a",
+      "failed": false
+    },
+    {
+      "page": "b",
+      "failed": false
+    }
+  ]
+}

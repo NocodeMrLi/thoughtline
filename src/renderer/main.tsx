@@ -7,7 +7,10 @@ import {Detail} from './components/Detail';
 import {Manage} from './components/Manage';
 import {Settings} from './components/Settings';
 import './styles/overlay.css';
+import {flushPageSelections} from './hooks/useClipPage';
+import {prepareLeave} from './hooks/leaveGuards';
 function App(){
+ useEffect(()=>window.thoughtline.onPrepareLeave(async()=>{try{if(!await prepareLeave())return false;await flushPageSelections();return true;}catch{return false;}}),[]);
  const [info,setInfo]=useState<PilotInfo|null>(null);
  useEffect(()=>{const off=window.thoughtline.onInfo(setInfo);window.thoughtline.info().then(setInfo).catch(console.error);return off;},[]);
  useEffect(()=>{if(info){document.documentElement.dataset.theme=info.dark?'dark':'light';document.documentElement.dataset.motion=info.snapshot.settings.reducedMotion?'reduce':'normal';}},[info?.dark,info?.snapshot.settings.reducedMotion]);

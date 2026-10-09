@@ -1,0 +1,62 @@
+
+> thoughtline@0.0.17-preview.1 test
+> node node_modules/vitest/vitest.mjs run tests/unit/spaceAllocation.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/spaceAllocation.test.ts (7 tests | 6 failed) 8ms
+   × 右侧手动夹后新增，必须回填左侧合法空位且旧位置不漂移 width=800 5ms
+   × 右侧手动夹后新增，必须回填左侧合法空位且旧位置不漂移 width=1040 1ms
+   × 右侧手动夹后新增，必须回填左侧合法空位且旧位置不漂移 width=1440 0ms
+   × 右侧手动夹后新增，必须回填左侧合法空位且旧位置不漂移 width=1920 0ms
+   × 右侧手动夹后新增，必须回填左侧合法空位且旧位置不漂移 width=2560 0ms
+   × 左/右保留，中间空位可新挂，满后明确溢出而不盖住旧纸 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/spaceAllocation.test.ts > 右侧手动夹后新增，必须回填左侧合法空位且旧位置不漂移 width=800
+ FAIL  tests/unit/spaceAllocation.test.ts > 右侧手动夹后新增，必须回填左侧合法空位且旧位置不漂移 width=1040
+ FAIL  tests/unit/spaceAllocation.test.ts > 右侧手动夹后新增，必须回填左侧合法空位且旧位置不漂移 width=1440
+ FAIL  tests/unit/spaceAllocation.test.ts > 右侧手动夹后新增，必须回填左侧合法空位且旧位置不漂移 width=1920
+ FAIL  tests/unit/spaceAllocation.test.ts > 右侧手动夹后新增，必须回填左侧合法空位且旧位置不漂移 width=2560
+AssertionError: expected [ 'right' ] to deeply equal [ 'new', 'right' ]
+
+- Expected
++ Received
+
+  [
+-   "new",
+    "right",
+  ]
+
+ ❯ tests/unit/spaceAllocation.test.ts:8:49
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  tests/unit/spaceAllocation.test.ts > 左/右保留，中间空位可新挂，满后明确溢出而不盖住旧纸
+AssertionError: expected [ { …(2) }, { …(2) } ] to have a length of 3 but got 2
+
+- Expected
++ Received
+
+- 3
++ 2
+
+ ❯ tests/unit/spaceAllocation.test.ts:13:24
+     11| test('左/右保留，中间空位可新挂，满后明确溢出而不盖住旧纸',()=>{
+     12|  const width=1440,old=[c('left',0),c('right',1)],after=layoutClips([..…
+     13|  expect(after.visible).toHaveLength(3);expect(after.visible.find(p=>p.…
+       |                        ^
+     14|  const full=[c('a',0),c('b',.26),c('c',.52),c('d',1),c('new',null)];co…
+     15| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  6 failed | 1 passed (7)
+   Start at  18:05:12
+   Duration  117ms (transform 59%, tests 19%, import 16%, worker 5%)
+
