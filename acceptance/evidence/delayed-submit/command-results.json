@@ -1,0 +1,45 @@
+{
+  "sourceCommit": "4400f73d430256b5731840610b9f0ccfcd0b8147",
+  "results": [
+    {
+      "test": "tests/electron/delayed-submit-workflow.cjs",
+      "productionSource": "3731dbc88424876838ce11c61d6e20a04b85a0d0",
+      "exitCode": 2,
+      "cases": 3,
+      "controlPasses": 1,
+      "negativeFailures": 2,
+      "evidence": "red/result.json"
+    },
+    {
+      "test": "tests/electron/delayed-submit-workflow.cjs",
+      "exitCode": 0,
+      "cases": 4,
+      "evidence": "green/result.json"
+    },
+    {
+      "test": "vitest run",
+      "exitCode": 0,
+      "tests": 102,
+      "files": 24,
+      "evidence": "green/unit.log"
+    },
+    {
+      "test": "tsc --noEmit",
+      "exitCode": 0,
+      "evidence": "green/typecheck.log"
+    },
+    {
+      "test": "electron-vite build",
+      "exitCode": 0,
+      "evidence": "green/build.log"
+    },
+    {
+      "test": "tests/electron/composition-safety-workflow.cjs",
+      "exitCode": 0,
+      "checkpoints": 20,
+      "evidence": "green/p2-regression/result.json"
+    }
+  ],
+  "scope": "Controlled info promise delay and forced lifecycle IPC; no ordinary-user trigger or physical IME claim",
+  "formalAcceptance": false
+}
