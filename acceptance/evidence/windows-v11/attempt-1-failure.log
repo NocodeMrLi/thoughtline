@@ -1,0 +1,32 @@
+windows-test-package	Bind package to source and compiled outputs	﻿2026-10-09T06:22:00.3328076Z ##[group]Run node scripts/windows-build-manifest.cjs
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.3328895Z ^[[36;1mnode scripts/windows-build-manifest.cjs^[[0m
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.3418761Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.3419241Z ##[endgroup]
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8100731Z node:assert:152
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8101868Z   throw new AssertionError(obj);
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8102468Z   ^
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8102784Z 
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8103556Z AssertionError [ERR_ASSERTION]: assets/source/tile-contour-v11.json: approved asset mismatch
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8104452Z + actual - expected
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8104762Z 
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8105328Z + 'e8223ff7955ac9c278c115b125b0d1d2fd76824f8005001588097fff45b063a4'
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8106527Z - 'f086a0cda362177a8bb3357c916ea7624dd5b00e9c72a7e7952d2777dc2b27d1'
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8107135Z 
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8107789Z     at Object.<anonymous> (D:\a\thoughtline\thoughtline\scripts\windows-build-manifest.cjs:12:9)
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8109104Z     at Module._compile (node:internal/modules/cjs/loader:1872:14)
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8109978Z     at Object..js (node:internal/modules/cjs/loader:2003:10)
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8111219Z     at Module.load (node:internal/modules/cjs/loader:1594:32)
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8112119Z     at Module._load (node:internal/modules/cjs/loader:1396:12)
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8112954Z     at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8116725Z     at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8117764Z     at node:internal/main/run_main_module:33:47 {
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8118464Z   generatedMessage: false,
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8119041Z   code: 'ERR_ASSERTION',
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8119823Z   actual: 'e8223ff7955ac9c278c115b125b0d1d2fd76824f8005001588097fff45b063a4',
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8120874Z   expected: 'f086a0cda362177a8bb3357c916ea7624dd5b00e9c72a7e7952d2777dc2b27d1',
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8121773Z   operator: 'strictEqual',
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8122361Z   diff: 'simple'
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8122833Z }
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8123248Z 
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.8123534Z Node.js v24.19.0
+windows-test-package	Bind package to source and compiled outputs	2026-10-09T06:22:00.9353349Z ##[error]Process completed with exit code 1.
