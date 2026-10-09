@@ -25,6 +25,11 @@ try {
   if (!(Test-Path $exe)) { throw 'Installed executable missing' }
   if ((Snapshot-Hashes) -ne $seed) { throw 'Fresh install changed pre-existing fixture data' }
   $report.installPreservesExistingData = $true
+  $isolated = Join-Path $env:LOCALAPPDATA 'Thoughtline-Preflight\0.0.16-preview.5\user-data'
+  if (Test-Path $isolated) { throw 'Unexpected existing isolation fixture' }
+  & ./docs/delivery/Start-Thoughtline-Isolated.ps1 -Executable $exe -CheckOnly
+  if (Test-Path $isolated) { throw 'Check-only launcher created a profile' }
+  $report.isolationLauncherCheckOnly = $true
   $report.appFileVersion = (Get-Item $exe).VersionInfo.FileVersion
   $report.appProductVersion = (Get-Item $exe).VersionInfo.ProductVersion
   $report.appSignature = [string](Get-AuthenticodeSignature $exe).Status

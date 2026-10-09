@@ -47,7 +47,8 @@ async function main(){
   const bundledPackage=JSON.parse(asar.extractFile(packed,'package.json'));assert.equal(bundledPackage.version,pkg.version);
   result.packagedHashes={};
   for(const file of ['out/main/index.js','out/preload/index.js','out/renderer/index.html','assets/app-icon.png']){
-   const bytes=asar.extractFile(packed,file);assert.equal(hash(bytes),hash(await fs.readFile(file)));result.packagedHashes[file]=hash(bytes);
+   // asar v3 resolves archive members with path.sep; POSIX member paths fail on Windows.
+   const bytes=asar.extractFile(packed,path.join(...file.split('/')));assert.equal(hash(bytes),hash(await fs.readFile(file)));result.packagedHashes[file]=hash(bytes);
   }result.checks.packagedOutputsMatchBuild=true;
   result.passed=true;
  }finally{

@@ -23,6 +23,14 @@ jobs:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
       - name: Bind package to source and compiled outputs
         run: node scripts/windows-build-manifest.cjs
+      - name: Parse user isolation launcher without launching
+        shell: pwsh
+        run: |
+          $parseErrors = $null
+          $tokens = $null
+          [System.Management.Automation.Language.Parser]::ParseFile((Join-Path $PWD 'docs/delivery/Start-Thoughtline-Isolated.ps1'), [ref]$tokens, [ref]$parseErrors) | Out-Null
+          if ($parseErrors.Count -ne 0) { throw ($parseErrors | Out-String) }
+          Copy-Item docs/delivery/Start-Thoughtline-Isolated.ps1 dist/Start-Thoughtline-Isolated.ps1
       - name: Disposable runner installation and data retention preflight
         shell: pwsh
         run: ./scripts/windows-installer-preflight.ps1
@@ -44,6 +52,7 @@ jobs:
             dist/build-manifest.json
             dist/windows-installed-preflight.json
             dist/windows-installer-preflight.json
+            dist/Start-Thoughtline-Isolated.ps1
           if-no-files-found: error
           retention-days: 30
       - name: Retain failed preflight diagnostics
