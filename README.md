@@ -1,29 +1,99 @@
-# 晾念头 / Thoughtline
+<h1 align="center">
+  <img src="assets/app-icon.png" alt="Thoughtline app icon" width="96" height="96" valign="middle" /> 晾念头 · Thoughtline
+</h1>
 
-面向 macOS 与 Windows 的桌面顶边念头挂绳。快捷记录完整正文，用彩色夹子区分 Agent；固定自然弧线，无常驻主窗口或工具条。
+<p align="center">
+  <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="docs/readme/badges/stars.svg" alt="GitHub stars: 0" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="docs/readme/badges/downloads.svg" alt="Release asset downloads: 3" /></a>
+  <a href="#license"><img src="docs/readme/badges/license.svg" alt="License: UNLICENSED" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="docs/readme/badges/preview.svg" alt="Preview: 0.0.17-preview.2" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="docs/readme/badges/feedback.svg" alt="Feedback on GitHub" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="docs/readme/badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+</p>
 
-历史已发布基线 **0.0.16-preview.6**：批准的红夹 TL 图标、480×260 紧凑输入窗、名称编辑提示、内联项目/Agent、草稿组合输入及延迟提交续作保护。全文、管理、搜索归档、分组合夹拆分撤销和纯文本拖出保留。物理跨应用拖入仍需逐个 Agent 验收，G7 全屏探测保持独立实验。
+<p align="center">
+  <sub><a href="README.md">中文</a> · <a href="docs/readme/README.en.md">English</a> · <a href="docs/readme/README.ja.md">日本語</a> · <a href="docs/readme/README.ko.md">한국어</a> · <a href="docs/readme/README.es.md">Español</a> · <a href="docs/readme/README.fr.md">Français</a> · <a href="docs/readme/README.pt.md">Português</a></sub>
+</p>
 
-按用户授权收敛到 **main**，保留阶段提交作为回滚点。双端私有预发布已发布，最终远端状态见 [发布报告](acceptance/RELEASE-0.0.16-preview.6.md)，准确来源及 SHA256 随安装包清单提供。历史 `.15` 包和 QA 记录保留；后续开发默认使用 main，不为日常增量另建分支。
+<p align="center">
+  <strong>把念头晾起来，让灵感随手可见。</strong><br />
+  用一根绳、几只夹子和几张纸，轻轻留住工作与生活里的念头。
+</p>
 
-最新私有测试预发布 **0.0.17-preview.2**：分组即时删除、拖拆／外拖源协议、即时翻页与全绳空位、原地自动保存、最近删除、念头日历／苹果日历式等比连续缩放／批准Logo红夹子、目录迁移与实际备份恢复已实现并通过适用检查。实际双端包来自同一源码 `ca2137b1c7af1458643ac2988c6cc4ed9ce15e35`。包／哈希／严格隔离入口见 [本轮发布报告](acceptance/RELEASE-0.0.17-preview.2.md) 与 [私有预发布](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2)；逐项实现／证据／未测边界见 [本轮记录](docs/ROUND1-REPAIR.md)、[数据安全](docs/ROUND1-DATA-SAFETY.md) 和 [接收端矩阵](acceptance/ROUND1-DRAG-MATRIX.md)。
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><ins>下载 Thoughtline</ins></a></h2>
 
-## 开发与验证
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.2</sub></p>
 
-Node24.19.0：`npm ci`、`npm run verify`、`npm run dev`。Control+Alt+N 写念头；Mac⌘Enter、WindowsCtrlEnter提交，Enter换行，Esc存草稿。
+Thoughtline 是一款面向 macOS 和 Windows 的轻量桌面念头工具。需要时，在屏幕顶边呼出晾衣绳；写下、整理、取用，再回到手头的事情。
 
-本轮Mac源全量184通过／4Windows专属跳过，类型与构建通过；9个最终源Electron流程、实际只读DMG App六项检查（含独立备份SHA与恢复两次重启）通过。Windows最终CI37943540735在同一ca2137b上188／188单测、类型／构建、10源交互及严格NSIS安装／重装／卸载保全通过，含合成ControlEnter端到端。物理Mac／Windows中文输入法、DPI、多屏、窗口焦点／穿透与微信／QQ豆包／WorkBuddy真实输入框均未测；CI、合成事件和源DOM不能代替这些验收。**formalAcceptance=false**。历史preview6及P5阶段结果保留为历史，不算本轮刷新。
+## 功能
 
-设置中的“念头数据位置”显示实际路径；更改位置保留旧副本，导出备份不切换当前目录。恢复到新目录与旧版本回滚步骤见 [数据安全说明](docs/ROUND1-DATA-SAFETY.md)。
+- **随手记下**：快捷键打开新建窗，记录标题、正文和归属；未提交内容可以保存为草稿。
+- **晾在桌面**：常驻界面只有绳、夹子和纸张。夹子正面夹住薄纸，新念头默认归属“通用”。
+- **顺手整理**：拖木夹移动整组，拖纸张上缘抽出一张；兼容夹子可以合并，整理支持撤销。
+- **原地修改**：在展开窗或日历里直接编辑，短暂停顿后自动保存；组内翻页即时显示。
+- **按日期回看**：念头日历支持日、月、年浏览、搜索与状态筛选；已收起的念头仍可找到。
+- **留下退路**：删除念头进入最近删除，可以恢复；删除项目只解除归属，保留念头内容。
+- **取用正文**：显式复制或从正文拖出纯文本，原纸张保留，不自动发送。
+- **自己管理数据**：念头保存在本机，可查看实际目录、更改保存位置、导出独立备份。
 
-## 安装与数据
+<p align="center">
+  <img src="docs/readme/images/thought-calendar.png" alt="Thoughtline念头日历：有记录的日期显示Logo红夹子与条数" width="740" />
+  <br /><sub>念头日历示例，使用合成演示数据。</sub>
+</p>
 
-macOS Apple Silicon **arm64 DMG**；Windows **x64 NSIS**。没有 Intel Mac、原生 Windows ARM64/x86 包或自动更新。Mac为完整资源ad-hoc签名，未Developer ID/公证；Windows未签名。被Gatekeeper/SmartScreen/SAC或企业策略阻挡时记录原文，不关闭安全机制、不修改执行策略。
+## 下载与安装
 
-先退出旧App，备份整个默认数据目录（Mac `~/Library/Application Support/Thoughtline`；Windows `%APPDATA%\Thoughtline`），保留旧包。相同appId可替换旧安装；隔离笔记不等于并排安装身份。Windows先取消安装完成页自动运行，再按 [实机清单和隔离入口](docs/WINDOWS-ACCEPTANCE-V11-20261009.md)只用合成数据。
+当前为预览版，测试包向有仓库访问权限的成员开放。到 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2) 下载安装包、隔离启动入口和 `SHA256SUMS`；每版提供对应构建来源与校验清单。
 
-普通Windows卸载保留默认数据；显式 `--delete-app-data` 会删除默认profile，本轮不传。自定义数据放在安装目录内不作保持保证。回滚先保留新旧两份完整数据，对副本验证，不能覆盖唯一新数据。未ACK尾部、未提交编辑、注销/关机、强退/断电不承诺零丢失。
+| 平台 | 当前安装包 |
+|---|---|
+| macOS · Apple Silicon | arm64 · DMG |
+| Windows | x64 · EXE（NSIS） |
 
-历史门禁与性能记录明确保留原来源，见 [验收记录](acceptance/gates.json)；[`.15`冻结报告](acceptance/CANDIDATE-0.0.15-REPORT.md)可用于历史追溯。产品方案和UI契约在用户项目笔记目录，第三方许可见 [声明](THIRD_PARTY_NOTICES.md)。仓库保持私有。
+安装或升级前，正常退出应用并备份现有数据。Mac 当前为 ad-hoc 签名，尚未 Developer ID 签名或公证；Windows 当前未签名。安装受系统安全提示阻挡时保留原提示，不关闭安全保护。当前不提供自动更新。
 
-本轮Mac隔离入口为 `Start-Thoughtline-Isolated-Mac.command`，固定最终交付目录及包哈希；GitHub中文名清洗后使用ASCII别名，脚本字节未变。旧模板中中文名是生成名，实际交付按本轮报告。Windows使用独立测试环境及严格 `.2` 入口；未自动替换用户安装。
+## 开始使用
+
+1. 按 `Control + Alt + N` 写一个念头；Mac 对应 `⌃ + ⌥ + N`，可在设置中修改。
+2. `Enter` 换行；Mac 用 `⌘ + Enter` 提交，Windows 用 `Ctrl + Enter` 提交；`Esc` 保存草稿并收起输入窗。
+3. 将鼠标移到屏幕顶边，呼出绳上的念头。展开纸张可阅读、复制、编辑或收起。
+4. 从日历回看、搜索已收起的念头，或在最近删除中恢复内容。
+
+Codex、Claude、Cursor 等标签表示念头归属。向其他软件取用内容时，由用户复制或拖动正文；目标输入框的实际接收效果仍需分别验证。
+
+## 数据与备份
+
+日历设置显示实际保存位置。迁移先复制并校验，再切换目录；旧副本保留。导出备份是独立副本，不改变当前位置。恢复流程见 [数据安全说明](docs/ROUND1-DATA-SAFETY.md)。
+
+当前数据格式为 schema3。旧版 `0.0.16-preview.6` 不能直接读取新格式；降级前保留新数据，并使用升级前备份在独立目录验证。升级前备份不包含之后的修改。
+
+## 开发
+
+使用 **Node.js 24.19.0 或更高的 24.x 版本**。
+
+```bash
+npm ci
+npm run dev
+```
+
+```bash
+npm run verify
+npm run package:mac
+npm run package:win
+```
+
+`verify` 执行类型检查、单元测试与构建；平台包在对应系统构建。技术栈为 Electron、React、TypeScript 和 Vite。
+
+当前预览版已完成适用自动检查与包验证。真实 Mac／Windows 输入法、DPI、多屏、焦点与微信、豆包、WorkBuddy 等外部输入框仍待独立测试。语言切换提供 **README 文档翻译**，应用界面目前为中文。
+
+## 反馈
+
+通过 [Issues](https://github.com/NocodeMrLi/thoughtline/issues) 报告问题或建议。请附系统与应用版本、复现步骤、预期／实际结果及经过脱敏的截图或日志；不要上传真实念头或个人数据。
+
+Star 与下载徽章更新于 2026-10-09；下载数统计发布资产下载次数，代表 API 快照。
+
+<a id="license"></a>
+## 许可与致谢
+
+当前项目为 `UNLICENSED`，尚未授予开源使用许可。未来公开发布时将另行明确许可证与贡献方式。第三方代码及许可证见 [第三方声明](THIRD_PARTY_NOTICES.md)。

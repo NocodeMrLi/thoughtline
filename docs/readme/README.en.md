@@ -1,0 +1,94 @@
+<h1 align="center">
+  <img src="../../assets/app-icon.png" alt="Thoughtline app icon" width="96" height="96" valign="middle" /> 晾念头 · Thoughtline
+</h1>
+
+<p align="center">
+  <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
+  <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.2" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+</p>
+
+<p align="center">
+  <sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub>
+</p>
+
+<p align="center">
+  <strong>Hang up a thought. Keep inspiration within reach.</strong><br />
+  A rope, a few clips, and sheets of paper for everyday ideas.
+</p>
+
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2"><ins>Download Thoughtline</ins></a></h2>
+
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.2</sub></p>
+
+Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ideas at the top edge of the screen, capture a thought, and return to what you were doing.
+
+## Features
+
+- Capture titles, text, and categories with a shortcut; keep unfinished notes as drafts.
+- A desktop rope with clips and paper, with new thoughts assigned to General.
+- Move a whole clip or detach one sheet; merge compatible clips and undo organization.
+- Edit directly in the detail view or calendar; autosave after a short pause and turn pages instantly.
+- Browse by day, month, or year; search and filter, including archived thoughts.
+- Recover deleted thoughts from Recently Deleted. Removing a project keeps its thoughts.
+- Copy text or drag the body as plain text. The source note stays in place; nothing is sent automatically.
+- Keep data locally; inspect the actual folder, move it, or export an independent backup.
+
+<p align="center"><img src="images/thought-calendar.png" alt="Thought calendar with synthetic demonstration data." width="740" /><br /><sub>Thought calendar with synthetic demonstration data.</sub></p>
+
+## Download and install
+
+This is a preview. Downloads are available to members with repository access. Releases include packages, isolated launchers, SHA256SUMS, and build provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.2).
+
+| Platform | Package |
+|---|---|
+| macOS · Apple Silicon | arm64 · DMG |
+| Windows | x64 · EXE (NSIS) |
+
+Before upgrading, quit normally and back up your data. The Mac package is ad-hoc signed, without Developer ID signing or notarization; Windows is unsigned. Keep system security protections enabled. There is no automatic update.
+
+## Getting started
+
+1. Press Control + Alt + N to capture a thought (⌃ + ⌥ + N on Mac); change the shortcut in Settings.
+2. Enter inserts a line break. Submit with ⌘ + Enter on Mac or Ctrl + Enter on Windows. Esc saves a draft and closes the composer.
+3. Move the pointer to the top screen edge to reveal the rope; open a sheet to read, copy, edit, or archive it.
+4. Use the calendar to find archived thoughts or restore items from Recently Deleted.
+
+Codex, Claude, and Cursor labels describe categories. Copy or drag text yourself; receiving behavior in other applications is still being verified.
+
+## Data and backups
+
+Calendar settings show the actual data folder. Moving data copies and verifies it before switching; the original remains. Exporting a backup does not change the current folder. [Data / 备份说明](../ROUND1-DATA-SAFETY.md).
+
+The current format is schema3. Version 0.0.16-preview.6 cannot read it directly. Preserve new data and validate a pre-upgrade backup in a separate folder before downgrading; that backup excludes later changes.
+
+## Development
+
+Use Node.js 24.19.0 or a newer 24.x version. verify runs type checks, unit tests, and a build. Build each platform package on its corresponding OS. The stack is Electron, React, TypeScript, and Vite.
+
+```bash
+npm ci
+npm run dev
+```
+
+```bash
+npm run verify
+npm run package:mac
+npm run package:win
+```
+
+Applicable automated and package checks have passed. Physical Mac/Windows IME, DPI, multiple displays, focus, and real receiving fields in WeChat, Doubao, and WorkBuddy still need independent testing. These language links translate the README; the app interface is currently Chinese.
+
+## Feedback
+
+Use Issues for bugs and ideas. Include versions, reproduction steps, expected and actual behavior, and redacted evidence. Do not upload personal thoughts or data. [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
+
+Stars and downloads are an API snapshot dated 2026-10-09. Downloads count release asset downloads.
+
+<a id="license"></a>
+## License and acknowledgments
+
+The project is currently UNLICENSED; no open-source permission has been granted. A future public release will specify its license and contribution process. See the third-party notices for included code and licenses. [Third-party notices](../../THIRD_PARTY_NOTICES.md).
