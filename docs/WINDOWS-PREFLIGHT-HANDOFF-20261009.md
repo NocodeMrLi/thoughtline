@@ -11,3 +11,5 @@
 Mac 无新 native 启动，不终止安装版或原开发区 Electron；原工作树 HEAD ac26ab3、status 干净。新测试只在一次性 Windows runner 合成目录安装/卸载；不能在用户机运行 `scripts/windows-*preflight`，用户只用交付隔离启动脚本/清单。依赖链接借用原 node_modules，不清正常依赖/原包/真笔记/他人文件。
 
 已授权本轮私有分支 commit/push；未 main 合并/release/自动更新/本机安装/更改系统权限。实机 Windows10/11/ARM64/多屏缩放、物理 IME/焦点/穿透、真实 Agent/G7、旧版升级/回滚仍待用户实机，`formalAcceptance=false`。后续最终图标包取得批准原材后集成并选择新 preview 版本、冻结新打包 SHA 和 hash，重新核 CI；本旧图标包不能升级成最终 v11 交付声明。
+
+父收尾通知：选定本地 `/Users/lihongwei/Desktop/TL品牌LOGO.jpg` 已交图标线程 `01a11eb6-5f7f-75f8-ae51-f02e6b1e10ee` 做质量/资源检查，403不再是唯一取件路径；本轮未读/导入未核资产。图标协调基线为本私有分支，打包冻结7a76da6；全部 src/assets仍4400f73。后续文档提交不改该freeze；资产固定后应由统一包阶段检查资产提交范围再集成，避免合并图标旧基线覆盖Windows CI/版本/源码。

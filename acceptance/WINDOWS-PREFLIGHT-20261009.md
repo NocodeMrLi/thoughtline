@@ -33,3 +33,5 @@
 用户可按 [Windows 操作清单](../docs/WINDOWS-ACCEPTANCE-20261009.md) 下载校验、退出/备份正常 profile、当前用户安装、取消安装完成页自动运行，再用 hash 绑定的 `Start-Thoughtline-Isolated.ps1` 打开自造文本目录。脚本使用精确 FileVersion 拒绝误启动 `.15`，发现已有 Thoughtline 时不终止而拒绝；只对子进程暂设数据环境，不修改系统执行策略。
 
 回滚保留新旧两份数据和旧 `.15` 已校验安装包；退出 preview、备份 preview、普通卸载、安装旧版、先用副本隔离验证。禁止覆盖唯一新数据；rollback 撤回这轮组合输入/延迟续作保护。schema2 源码兼容已核，实际旧版升级/降级/全用户安装、消费者 Windows10/11 设备矩阵、物理 IME/快捷键/穿透、真实 Agent/G7/整体体感仍待验；`formalAcceptance=false`。图标 v11 源材 403 是最终图标包阻挡，不阻挡上述旧图标功能预检。
+
+收尾协调更新：用户已将选定图标保存为 `/Users/lihongwei/Desktop/TL品牌LOGO.jpg`，图标线程 `01a11eb6-5f7f-75f8-ae51-f02e6b1e10ee` 正做本地质量检查和正式资源固定；Library403 不再是唯一取件路径。本预检没有读取/导入未核图。最终图标包待资产 SHA/QA 固定后，基于本分支集成资产提交、选新 preview 版本并重新冻结构建；不要直接覆盖7a76da6对应旧图标安装器或把其成功 CI 复用为新图标包通过。

@@ -16,3 +16,5 @@ App 和安装器均 `NotSigned`，SmartScreen/SAC/企业策略仍可能拦截。
 - [准确 CI 记录](证据/Windows功能预检-20261009/acceptance/evidence/windows-preflight/final-run.json)
 
 物理 Windows IME/Ctrl+Enter/焦点/穿透、Windows10/11/ARM64/缩放多屏、真实 Agent/G7、旧版升级/回滚和完整体感仍未验，`formalAcceptance=false`。最终 v11 素材 Library→Mac 403 继续由另线程处理；下一最终图标包取得批准原件后需新 preview 版本及新冻结 CI/hash。本轮私有阶段提交推送后即可让用户下载旧图标预检包实机测试。
+
+收尾更新：用户已提供本地 `/Users/lihongwei/Desktop/TL品牌LOGO.jpg`，图标线程正在做质量检查与正式资源固定，403不再是唯一素材路径。此预检没有导入未核图；最终含新图标包待资产/QA固定后统一基于本轮分支集成并以新版本/新SHA构建。
