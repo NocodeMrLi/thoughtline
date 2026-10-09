@@ -1,10 +1,11 @@
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useId,useRef,useState} from 'react';
 import type {PointerEvent} from 'react';
 import type {Clip,Idea,AgentTag} from '../../shared/contracts';
 import type {ClipMutation} from '../../shared/bridge';
 import {Clothespin} from './Clothespin';
 export function ClipCard({clip,ideas,agent,onChange,onGrab,onError,reduced,textDragActive,ropeContact}:{clip:Clip;ideas:Idea[];agent:AgentTag|undefined;onChange:(c:ClipMutation)=>Promise<boolean>;onGrab:(e:PointerEvent<HTMLButtonElement>,clip:Clip)=>void;onError:(text:string)=>void;reduced:boolean;textDragActive:boolean;ropeContact:string}){
  const [copied,setCopied]=useState(false),[busy,setBusy]=useState(false),[direction,setDirection]=useState('');
+ const paperId=useId().replace(/:/g,'');
  const copyTimer=useRef<ReturnType<typeof setTimeout>|null>(null),current=useRef(clip.currentId),ignoreCopyUntil=useRef(0),exportId=useRef<string|null>(null);const [exporting,setExporting]=useState(false);current.current=clip.currentId;
  useEffect(()=>{setCopied(false);if(copyTimer.current)clearTimeout(copyTimer.current);return()=>{if(copyTimer.current)clearTimeout(copyTimer.current);if(exportId.current)window.thoughtline.textDrag(false,exportId.current);exportId.current=null;};},[clip.currentId]);
  useEffect(()=>{if(!textDragActive&&exportId.current){exportId.current=null;ignoreCopyUntil.current=performance.now()+160;setExporting(false);}},[textDragActive]);
@@ -17,13 +18,18 @@ export function ClipCard({clip,ideas,agent,onChange,onGrab,onError,reduced,textD
   <svg className="clamp-rope" width="18" height="38" viewBox="0 0 18 38" aria-hidden="true">{['rope-shadow','rope-core','rope-light'].map(c=><path key={c} className={c} d={ropeContact}/>)}</svg>
   <button data-hit className="peg-button" aria-label={`移动夹子或查看：${idea.title}`} onPointerDown={e=>onGrab(e,clip)}><Clothespin color={agent?.color} reduced={reduced}/></button>
   <article data-hit data-copied={copied} className={`idea-card ${grouped?'grouped':''}`} onContextMenu={e=>{e.preventDefault();void window.thoughtline.shelfMenu(idea.id).then(r=>{if(!r.ok)onError(r.message);});}}>
-   <svg className="paper-sheet" width="160" height="112" viewBox="0 0 160 112" aria-hidden="true"><path d="M2.5 .5H157.5Q159.5 .5 159.5 2.5V108.5L156.5 111.5H2.5Q.5 111.5 .5 109.5V2.5Q.5 .5 2.5 .5Z"/></svg>
+   <svg className="paper-sheet" width="136" height="188" viewBox="0 0 136 188" aria-hidden="true">
+    <defs><linearGradient id={`${paperId}-bend`} x1="0" y1="0" x2="0" y2="1"><stop stopColor="#000000" stopOpacity="0"/><stop offset=".7" stopColor="#000000" stopOpacity=".025"/><stop offset="1" stopColor="#FFFFFF" stopOpacity=".08"/></linearGradient></defs>
+    <path className="paper-face" d="M2.5 .5H133.5Q135.5 .5 135.5 2.5V176.5Q135.5 181.5 130 183.5Q75 190.5 2.5 184.5Q.5 184.3 .5 182V2.5Q.5 .5 2.5 .5Z"/>
+    <path className="paper-bend" d="M.8 172Q75 179 135.2 169V176.5Q135.2 181.3 130 183.2Q75 190.2 2.5 184.2Q.8 184 .8 182Z" fill={`url(#${paperId}-bend)`}/>
+    <path className="paper-curl" d="M130 183.5Q134 178 135.5 176.5"/>
+   </svg>
    <button className="card-copy" draggable data-exporting={exporting} title="点击复制；拖动正文到支持文字拖放的输入框" onDragStart={e=>{
     e.dataTransfer.clearData();e.dataTransfer.setData('text/plain',idea.text);e.dataTransfer.effectAllowed='copy';ignoreCopyUntil.current=Infinity;setExporting(true);exportId.current=idea.id;window.thoughtline.textDrag(true,idea.id);
    }} onDragEnd={()=>{ignoreCopyUntil.current=performance.now()+160;setExporting(false);if(exportId.current)window.thoughtline.textDrag(false,exportId.current);exportId.current=null;}} aria-label={`${agent?.name??'通用'}：${idea.title}，点击复制正文`} onClick={async()=>{
     if(performance.now()<ignoreCopyUntil.current)return;const id=idea.id,r=await window.thoughtline.copy(id);if(!r.ok){onError(r.message);return;}if(current.current!==id)return;
     if(copyTimer.current)clearTimeout(copyTimer.current);setCopied(true);copyTimer.current=setTimeout(()=>setCopied(false),1500);
-   }}><span className="agent-name">{agent?.name??'通用'}{idea.project?` · ${idea.project}`:''}</span><strong key={idea.id} data-direction={reduced?undefined:direction}>{idea.title}</strong></button>
+   }}><span className="agent-name">{agent?.name??'通用'}{idea.project?` · ${idea.project}`:''}</span><strong key={idea.id} data-direction={reduced?undefined:direction}>{idea.title}</strong><span className="preview">{idea.text}</span></button>
    <footer className={grouped?'group-footer':'single-footer'}>
     {grouped?<><button className="page-arrow" aria-label="上一张便签" disabled={busy||index===0} onClick={()=>void flip(-1)}>‹</button><button className="page-number" aria-label={`第${index+1}张，共${clip.ideaIds.length}张，打开标题列表`} onClick={()=>void open(true)}>{copied?'✓':`${index+1}/${clip.ideaIds.length}`}</button><button className="page-arrow" aria-label="下一张便签" disabled={busy||index===clip.ideaIds.length-1} onClick={()=>void flip(1)}>›</button></>:<span className="copy-status" aria-live="polite">{copied?'已复制':''}</span>}
     <button aria-label={`展开全文：${idea.title}`} onClick={()=>void open()}><ExpandIcon/></button>

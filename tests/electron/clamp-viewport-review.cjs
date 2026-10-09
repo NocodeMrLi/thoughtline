@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto');const {_electron}=require('playwright');
 const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
-const output=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/paper-review/viewport-matrix');
+const output=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/upright-paper-review/viewport-matrix');
 (async()=>{
  await fs.mkdir(output,{recursive:true});const scenes=[];
  for(const width of [800,1024,1920,2560])for(const scale of [1,2]){
@@ -12,7 +12,7 @@ const output=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evid
    for(let n=0;n<24;n++){
     const r=await composer.evaluate(async n=>{const i=await window.thoughtline.info();return window.thoughtline.submit({text:'屏宽模拟假正文 '+n,title:'检查夹持关系 '+(n+1),agentId:['codex','claude','cursor'][n%3],project:''},i.snapshot.revision);},n);assert(r.ok,r.message);
    }
-   const expected=1+Math.floor((width-184)/220);await shelf.waitForFunction(n=>document.querySelectorAll('.hanging').length===n,expected);await waitForInfo(shelf,i=>!i.interactionLocked);await shelf.evaluate(()=>window.thoughtline.dragLock(true));await shelf.waitForFunction(()=>Number(document.querySelector('[data-view=shelf]').dataset.progress)===1);
+   const expected=1+Math.floor((width-160)/220);await shelf.waitForFunction(n=>document.querySelectorAll('.hanging').length===n,expected);await waitForInfo(shelf,i=>!i.interactionLocked);await shelf.evaluate(()=>window.thoughtline.dragLock(true));await shelf.waitForFunction(()=>Number(document.querySelector('[data-view=shelf]').dataset.progress)===1);
    const theme=scale===1?'light':'dark';await app.evaluate(({nativeTheme},theme)=>{nativeTheme.themeSource=theme;},theme);await shelf.waitForFunction(theme=>document.documentElement.dataset.theme===theme,theme);await shelf.evaluate(theme=>{document.body.style.background=theme==='dark'?'#30343A':'#EAE8E0';},theme);
    const geometry=await shelf.evaluate(()=>({width:innerWidth,height:innerHeight,dpr:devicePixelRatio,rope:document.querySelector('.rope > .rope-core').getAttribute('d'),layoutWidth:Number(document.querySelector('.rope').dataset.layoutWidth),cards:[...document.querySelectorAll('.hanging')].map(el=>{const hit=el.querySelector('.peg-button').getBoundingClientRect(),paper=el.querySelector('.idea-card').getBoundingClientRect();return {hit:{x:hit.x,y:hit.y,right:hit.right,width:hit.width,height:hit.height},paper:{x:paper.x,right:paper.right,width:paper.width,height:paper.height}};})}));
    assert.equal(geometry.width,width);assert.equal(geometry.layoutWidth,width);assert.equal(geometry.dpr,scale);assert(geometry.rope.startsWith('M -24 '));assert(geometry.rope.endsWith((width+24)+' 32'));
