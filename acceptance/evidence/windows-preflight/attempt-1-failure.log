@@ -1,0 +1,14 @@
+windows-test-package	Disposable runner installation and data retention preflight	﻿2026-10-09T05:27:44.7327054Z ##[group]Run ./scripts/windows-installer-preflight.ps1
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T05:27:44.7327557Z ^[[36;1m./scripts/windows-installer-preflight.ps1^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T05:27:44.7405510Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T05:27:44.7405891Z ##[endgroup]
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T05:28:22.2295209Z Error: "out/main/index.js" was not found in this archive
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T05:28:22.2296795Z     at Filesystem.getFile (D:\a\thoughtline\thoughtline\node_modules\@electron\asar\lib\filesystem.js:187:19)
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T05:28:22.2302180Z     at Object.extractFile (D:\a\thoughtline\thoughtline\node_modules\@electron\asar\lib\asar.js:256:33)
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T05:28:22.2303845Z     at main (D:\a\thoughtline\thoughtline\scripts\windows-installed-preflight.cjs:50:21)
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T05:28:23.1132370Z ^[[31;1mException: ^[[0mD:\a\thoughtline\thoughtline\scripts\windows-installer-preflight.ps1:34^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T05:28:23.1134199Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T05:28:23.1135540Z ^[[31;1m^[[0m^[[36;1m^[[36;1m  34 | ^[[0m … LASTEXITCODE -ne 0) { ^[[36;1mthrow 'Packaged application preflight failed'^[[0m }^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T05:28:23.1137274Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T05:28:23.1138634Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mPackaged application preflight failed^[[0m
+windows-test-package	Disposable runner installation and data retention preflight	2026-10-09T05:28:23.1536671Z ##[error]Process completed with exit code 1.
