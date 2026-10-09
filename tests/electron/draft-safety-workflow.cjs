@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
 const {_electron}=require('playwright'),{launchOptions,openComposer,waitForInfo}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
-const output=path.resolve('acceptance/evidence/draft-recovery');
+const output=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/draft-recovery');
 (async()=>{const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-draft-safety-'));let app,pids=[];const checkpoints=[];
  const mark=(name,fields={})=>{checkpoints.push({name,...fields});console.log(JSON.stringify({checkpoint:name,...fields}));};
  const start=async()=>{const options=await launchOptions(dir);await fs.writeFile(options.args[0],`const Tray=require('electron').Tray,nativeSet=Tray.prototype.setContextMenu;Tray.prototype.setContextMenu=function(menu){globalThis.thoughtlineTestTrayMenu=menu;return nativeSet.call(this,menu);};`+await fs.readFile(options.args[0],'utf8'));app=await _electron.launch(options);const shelf=await app.firstWindow();await shelf.waitForURL(/view=shelf/);await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});return {shelf,composer:await openComposer(app,shelf)};};

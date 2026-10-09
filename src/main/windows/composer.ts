@@ -1,7 +1,7 @@
 import {BrowserWindow,nativeTheme} from 'electron';
 import {release} from 'node:os';
 import {composerMaterial} from '../../shared/composerMaterial';
-export const COMPOSER_SIZE={width:480,height:316};
+export const COMPOSER_SIZE={width:480,height:260};
 export const currentComposerMaterial=(focused=true)=>composerMaterial(process.platform,release(),nativeTheme.prefersReducedTransparency,nativeTheme.shouldUseHighContrastColors,nativeTheme.inForcedColorsMode,focused);
 export function createComposer(preload:string):BrowserWindow{
  const material=currentComposerMaterial();
