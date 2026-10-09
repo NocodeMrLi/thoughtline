@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
 const {_electron}=require('playwright'),{launchOptions,warmViews,openComposer,waitForInfo}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
-const stage=process.argv[2]||'green',output=path.resolve('acceptance/evidence/paused-unlock-fix/'+stage);
+const stage=process.argv[2]||'green',output=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/paused-unlock-fix/'+stage);
 (async()=>{
  await fs.mkdir(output,{recursive:true});const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-paused-unlock-'));let app,pids=[];const checkpoints=[];
  const note=async(label,shelf)=>{const info=await shelf.evaluate(()=>window.thoughtline.info());const native=await app.evaluate(({BrowserWindow})=>Object.fromEntries(BrowserWindow.getAllWindows().map(w=>[w.getTitle(),w.isVisible()])));checkpoints.push({label,nativeWindowsVisible:native,shelfVisible:info.shelfVisible,interactionLocked:info.interactionLocked,textDragActive:info.textDragActive,draft:info.snapshot.draft,ideaCount:info.snapshot.ideas.length});if(label.includes('paused')||label==='sleep released but lock-screen still active'||label.startsWith('manual pause cancels'))assert.equal(native['Thoughtline Shelf'],false,'paused native shelf must be hidden');return info;};

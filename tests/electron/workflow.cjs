@@ -1,7 +1,8 @@
+const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');
 const assert=require('node:assert/strict');const path=require('node:path');const fs=require('node:fs/promises');const os=require('node:os');const {_electron}=require('playwright');
 (async()=>{
- const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-workflow-'));let app;
+ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-workflow-'));let app;const ownedPids=[];const close=async()=>{if(app){ownedPids.push(...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)),app.process().pid);await app.close();app=null;}};
  const launch=async()=>_electron.launch(await launchOptions(dir));
  const windows=async()=>{let shelf,composer,manage;for(const p of await app.windows()){if(p.url().includes('view=shelf'))shelf=p;if(p.url().includes('view=composer'))composer=p;if(p.url().includes('view=manage'))manage=p;}return {shelf,composer,manage};};
  const ready=async()=>{await warmViews(app);while((await app.windows()).length<3)await app.waitForEvent('window',{timeout:5000});for(const p of await app.windows())await p.waitForURL(/view=(shelf|composer|manage)/,{waitUntil:'domcontentloaded',timeout:5000});const w=await windows();assert(w.shelf&&w.composer&&w.manage);await w.shelf.waitForSelector('[data-view="shelf"]',{state:'attached',timeout:5000});return w;};
@@ -11,7 +12,7 @@ const assert=require('node:assert/strict');const path=require('node:path');const
   const full='  原始正文\n中文第二行\n'+('长正文 '.repeat(300));
   let info=await composer.evaluate(()=>window.thoughtline.info());
   const s=await result(composer,'submit',{text:full,title:'循环验收',project:'项目',agentId:'codex'},info.snapshot.revision);const id=s.ideas[0].id;
-  await shelf.waitForSelector('[data-idea-id="'+id+'"]');assert.equal(await shelf.locator('.idea-card').evaluate(el=>el.getBoundingClientRect().width),160);assert.equal(await shelf.locator('.idea-card').evaluate(el=>el.getBoundingClientRect().height),226);
+  await shelf.waitForSelector('[data-idea-id="'+id+'"]');const paper=await shelf.locator('.idea-card').evaluate(el=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height};});assert(Math.abs(paper.width-160)<.01&&Math.abs(paper.height-226)<.01,'paper DOM bounds within floating-point precision');
   await result(shelf,'openManage',id);assert(manage,'temporary manage view must exist');
   await manage.waitForSelector('[data-view="manage"]',{state:'attached'});
   await manage.waitForSelector('[data-full-text]',{timeout:5000}).catch(async e=>{console.error(await manage.evaluate(async()=>({info:await window.thoughtline.info(),html:document.body.innerHTML.slice(0,3500)})));throw e;});
@@ -28,8 +29,8 @@ const assert=require('node:assert/strict');const path=require('node:path');const
   info=await manage.evaluate(()=>window.thoughtline.info());await result(manage,'setStatus',id,'hanging',info.snapshot.revision);
   await result(manage,'copy',id);const clipboard=await app.evaluate(async({clipboard})=>await clipboard.readText());assert.equal(clipboard,edited);
   const before=(await manage.evaluate(()=>window.thoughtline.info())).snapshot;assert.equal(before.ideas[0].status,'hanging');
-  await app.close();app=null;app=await launch();({shelf}=await ready());info=await shelf.evaluate(()=>window.thoughtline.info());assert.equal(info.snapshot.ideas[0].text,edited);assert.equal(info.snapshot.ideas[0].agentId,'claude');
+  await close();app=await launch();({shelf}=await ready());info=await shelf.evaluate(()=>window.thoughtline.info());assert.equal(info.snapshot.ideas[0].text,edited);assert.equal(info.snapshot.ideas[0].agentId,'claude');
   const report={platform:process.platform,scope:'真实Electron桥接和DOM循环；不代表物理点击穿透、系统IME或跨App焦点',editCancelPreserved:true,editSavedFullText:true,archiveSearchRestore:true,copyFullText:true,restartPreserved:true};
   await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','workflow-native.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
- }finally{try{if(app)await app.close();}finally{await fs.rm(dir,{recursive:true,force:true});}}
+ }finally{await close();await cleanupIdleFixture(dir,ownedPids);await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','workflow-cleanup.json'),JSON.stringify({ownedPids,allPidsExited:true,fakeDataRemoved:true},null,2)+'\n');}
 })().catch(e=>{console.error(e);process.exitCode=1;});

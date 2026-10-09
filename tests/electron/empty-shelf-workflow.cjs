@@ -1,7 +1,8 @@
+const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
 const {_electron}=require('playwright'),{launchOptions,waitForInfo}=require('./window-fixture.cjs');
 (async()=>{
- const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-empty-shelf-'));let app;
+ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-empty-shelf-'));let app;const ownedPids=[];const close=async()=>{if(app){ownedPids.push(...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)),app.process().pid);await app.close();app=null;}};
  try{
   await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:2,revision:0,clips:[],ideas:[],agents:[{id:'general',name:'通用',color:'#A0A3AA'},{id:'codex',name:'Codex',color:'#4C90D9'},{id:'claude',name:'Claude',color:'#D79551'}],draft:null,settings:{writeHotkey:'Control+Alt+K',reducedMotion:false}}));
   const options=await launchOptions(dir);const entry=options.args[0];await fs.writeFile(entry,`const {Tray}=require('electron');const original=Tray.prototype.setContextMenu;Tray.prototype.setContextMenu=function(menu){globalThis.thoughtlineTestTray=menu;return original.call(this,menu);};`+await fs.readFile(entry,'utf8'));
@@ -21,5 +22,5 @@ const {_electron}=require('playwright'),{launchOptions,waitForInfo}=require('./w
   const closed=await manage.evaluate(()=>window.thoughtline.closeManage());assert(closed.ok,closed.message);await waitForInfo(shelf,i=>!i.interactionLocked);assert.equal(await writeEnabled(),true,'closing settings after save must re-enable tray write');
   await app.evaluate(()=>globalThis.thoughtlineTestTray.items.find(i=>i.label.startsWith('写念头：')).click());await waitForInfo(shelf,i=>i.interactionLocked);await composer.waitForFunction(()=>document.activeElement?.id==='idea-text');assert.equal(await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer').isVisible()),true);
   const report={scope:'isolated Mac Electron runtime and actual native Menu callback through fixture adapter; no physical menu/shortcut or Windows acceptance',emptyRopeOnly:true,emptyFilteredRopeOnly:true,zeroEmptyHitTargets:true,trayNewNoteAccessible:true,traySettingsShowSaveCloseReopen:true,savedShortcut:'Control+Alt+K',displayedShortcut:trayWrite.label,submittedText:submitted.value.ideas[0].text};await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','empty-shelf.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
- }finally{if(app)await app.close();await fs.rm(dir,{recursive:true,force:true,maxRetries:5,retryDelay:100});}
+ }finally{await close();await cleanupIdleFixture(dir,ownedPids);await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','empty-shelf-workflow-cleanup.json'),JSON.stringify({ownedPids,allPidsExited:true,fakeDataRemoved:true},null,2)+'\n');}
 })().catch(e=>{console.error(e);process.exitCode=1;});

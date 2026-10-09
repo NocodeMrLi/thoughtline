@@ -1,9 +1,10 @@
+const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 const {launchOptions,warmViews}=require('./window-fixture.cjs');
 const assert=require('node:assert/strict'),path=require('node:path'),fs=require('node:fs/promises'),os=require('node:os');const {_electron}=require('playwright');
 (async()=>{
- const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-motion-'));let app;
+ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-motion-'));let app;const ownedPids=[];const close=async()=>{if(app){ownedPids.push(...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)),app.process().pid);await app.close();app=null;}};
  try{
-  app=await _electron.launch(await launchOptions(dir));
+  const options=await launchOptions(dir);await fs.writeFile(options.args[0],`const {app:fixtureApp,screen}=require('electron');fixtureApp.once('ready',()=>{screen.getCursorScreenPoint=()=>({x:600,y:500});});`+await fs.readFile(options.args[0],'utf8'));app=await _electron.launch(options);
   await warmViews(app);while((await app.windows()).length<3)await app.waitForEvent('window');const pages=await app.windows();const shelf=pages.find(p=>p.url().includes('view=shelf')),composer=pages.find(p=>p.url().includes('view=composer'));
   await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});
   const submit=async n=>{const r=await composer.evaluate(async n=>{const i=await window.thoughtline.info();return window.thoughtline.submit({text:'完整正文 '+n,title:'动效测试 '+n,agentId:'codex',project:''},i.snapshot.revision);},n);assert(r.ok,r.message);};
@@ -29,9 +30,9 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
   const requests=await shelf.evaluate(()=>window.motionRequests);await new Promise(r=>setTimeout(r,250));assert.equal(await shelf.evaluate(()=>window.motionRequests),requests,'no idle animation frames');
   await shelf.emulateMedia({reducedMotion:'reduce'});await submit(3);
   await shelf.waitForFunction(()=>Number(document.querySelector('[data-view=shelf]').dataset.progress)===1);
-  const reduced=await shelf.evaluate(()=>({animation:getComputedStyle(document.querySelector('.idea-card strong')).animationName,sag:Number(document.querySelector('.rope').dataset.sag),transform:getComputedStyle(document.querySelector('[data-view=shelf]')).transform}));assert.equal(reduced.animation,'none');assert.equal(reduced.sag,30);assert.equal(reduced.transform,'none');
+  const reduced=await shelf.evaluate(()=>({animation:getComputedStyle(document.querySelector('.idea-card strong')).animationName,sag:Number(document.querySelector('.rope').dataset.sag),transform:getComputedStyle(document.querySelector('[data-view=shelf]')).transform}));assert.equal(reduced.animation,'none');const width=(await shelf.evaluate(()=>window.thoughtline.info())).width,expectedSag=Math.max(18,Math.min(30,width*.7*.026));assert.equal(reduced.sag,expectedSag);assert.equal(reduced.transform,'none');
   await shelf.screenshot({path:path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','motion-native.png'),omitBackground:true});
-  const report={scope:'actual Mac Electron app/native window and renderer protocol; not physical hover, click-through or subjective visual acceptance',compactSize:[160,226],exitRetainsNativeUntilPainted:true,rapidReentryStaysVisible:true,eventualNativeHide:true,noIdleAnimationFrames:true,liveSystemReducedMotion:true,sharedSag:30,fixedAcrossNoteCount:true};
+  const report={scope:'actual Mac Electron app/native window and renderer protocol; not physical hover, click-through or subjective visual acceptance',compactSize:[160,226],exitRetainsNativeUntilPainted:true,rapidReentryStaysVisible:true,eventualNativeHide:true,noIdleAnimationFrames:true,liveSystemReducedMotion:true,sharedSag:expectedSag,fixedAcrossNoteCount:true};
   await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','motion-native.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
- }finally{try{if(app)await app.close();}finally{await fs.rm(dir,{recursive:true,force:true});}}
+ }finally{await close();await cleanupIdleFixture(dir,ownedPids);await fs.writeFile(path.join(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence','motion-workflow-cleanup.json'),JSON.stringify({ownedPids,allPidsExited:true,fakeDataRemoved:true},null,2)+'\n');}
 })().catch(e=>{console.error(e);process.exitCode=1;});

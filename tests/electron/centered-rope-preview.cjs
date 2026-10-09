@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto');
 const {_electron}=require('playwright'),{launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
-const stage=process.argv[2]||'after',output=path.resolve('acceptance/evidence/centered-rope-review/'+stage),hash=data=>crypto.createHash('sha256').update(data).digest('hex');
+const stage=process.argv[2]||'after',output=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/centered-rope-review/'+stage),hash=data=>crypto.createHash('sha256').update(data).digest('hex');
 (async()=>{
  await fs.mkdir(output,{recursive:true});const scenes=[],restarts=[],cleanups=[];
  if(stage==='before'){const binding=JSON.parse(await fs.readFile('acceptance/evidence/agent-ink-review/manifest.json'));for(const [file,sha] of Object.entries(binding.compiledSha256))assert.equal(hash(await fs.readFile(file)),sha,'before must use frozen 796bbea compiled runtime');}
