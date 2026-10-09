@@ -1,0 +1,38 @@
+{
+  "passed": false,
+  "packaged": true,
+  "executable": "/Users/lihongwei/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+  "checks": [],
+  "stage": "worker-terminated-before-receipt",
+  "cleanup": {
+    "normalQuit": false,
+    "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-packaged-appearance-flTXTS",
+    "profileRemoved": false,
+    "ownedPids": [
+      19226
+    ],
+    "allExited": false,
+    "reason": "No complete app lifecycle receipt; process tree exit is unverified and profile retained"
+  },
+  "error": "Worker did not write a valid completion receipt (ENOENT)",
+  "worker": {
+    "pid": 19224,
+    "code": 1,
+    "signal": null
+  },
+  "launchEvents": [
+    {
+      "time": "2026-10-09T16:56:38.732Z",
+      "type": "spawn",
+      "pid": 19226,
+      "shell": false,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-09T16:56:38.749Z",
+      "type": "stderr",
+      "pid": 19226,
+      "text": "/Users/lihongwei/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node: bad option: --remote-debugging-port=0\n"
+    }
+  ]
+}

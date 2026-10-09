@@ -1,0 +1,28 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/packagedLaunch.test.ts (4 tests | 1 failed) 283ms
+   × actual Playwright early process death retains a failed supervisor receipt 269ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/packagedLaunch.test.ts > actual Playwright early process death retains a failed supervisor receipt
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/packagedLaunch.test.ts:13:1156
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 3 passed (4)
+   Start at  00:56:26
+   Duration  404ms (tests 90%, transform 7%, import 2%, worker 1%)
+

@@ -1,0 +1,43 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/packagedLaunch.test.ts (2 tests | 2 failed) 29ms
+   × packaged launch removes runtime overrides instead of setting empty strings 21ms
+   × rejected first launch never claims normal quit or removes an unverified profile 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/packagedLaunch.test.ts > packaged launch removes runtime overrides instead of setting empty strings
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/packagedLaunch.test.ts:8:259
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/packagedLaunch.test.ts > rejected first launch never claims normal quit or removes an unverified profile
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/packagedLaunch.test.ts:9:206
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  00:52:15
+   Duration  204ms (tests 39%, transform 37%, import 20%, worker 4%)
+

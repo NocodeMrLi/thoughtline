@@ -1,0 +1,160 @@
+{
+  "passed": true,
+  "packaged": true,
+  "executable": "/tmp/thoughtline-launch-repair-mount-BWW8bM/Thoughtline.app/Contents/MacOS/Thoughtline",
+  "version": "0.0.17-preview.3",
+  "host": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "release": "24.3.0"
+  },
+  "checks": [
+    "exact-English-dark-UI-and-user-text",
+    "dirty-editor-focus-selection-content-preserved",
+    "package-restart-stored-preferences-date-content-English-calendar"
+  ],
+  "scope": "actual isolated package DOM/IPC; no physical IME/DPI/multi-display/receiver acceptance",
+  "asarSha256": "b4883ddd55decc4eabc57b2956aeef5e5e5084b1ed259b6caa42753867f9ff6b",
+  "cleanup": {
+    "normalQuit": true,
+    "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-packaged-appearance-fp4o0p",
+    "profileRemoved": true,
+    "ownedPids": [
+      19294,
+      19305,
+      19306,
+      19309,
+      19310,
+      19327,
+      19329,
+      19330,
+      19331,
+      19333
+    ],
+    "allExited": true
+  },
+  "worker": {
+    "pid": 19293,
+    "code": 0,
+    "signal": null
+  },
+  "stage": "worker-completed",
+  "launchEvents": [
+    {
+      "time": "2026-10-09T16:57:27.167Z",
+      "type": "spawn",
+      "pid": 19294,
+      "shell": false,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-09T16:57:29.445Z",
+      "type": "stderr",
+      "pid": 19294,
+      "text": "Debugger listening on ws://127.0.0.1:61851/34c2c9a2-3aac-49b7-8e42-98ef098c59f9\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-09T16:57:29.474Z",
+      "type": "stderr",
+      "pid": 19294,
+      "text": "Debugger attached.\n"
+    },
+    {
+      "time": "2026-10-09T16:57:29.983Z",
+      "type": "stderr",
+      "pid": 19294,
+      "text": "\nDevTools listening on ws://127.0.0.1:61863/devtools/browser/ca5b2450-fd46-4b1c-a337-8adfaba94007\n"
+    },
+    {
+      "time": "2026-10-09T16:57:31.526Z",
+      "type": "stderr",
+      "pid": 19294,
+      "text": "2026-10-10 00:57:31.525 Thoughtline[19294:5734999] +[IMKClient subclass]: chose IMKClient_Modern\n2026-10-10 00:57:31.526 Thoughtline[19294:5734999] +[IMKInputSession subclass]: chose IMKInputSession_Modern\n"
+    },
+    {
+      "time": "2026-10-09T16:57:31.677Z",
+      "type": "stderr",
+      "pid": 19294,
+      "text": "2026-10-10 00:57:31.665 Thoughtline[19294:5734999] _TIPropertyValueIsValid called with 11 on nil context!\n2026-10-10 00:57:31.665 Thoughtline[19294:5734999] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 11, bailing.\n2026-10-10 00:57:31.665 Thoughtline[19294:5734999] _TIPropertyValueIsValid called with 12 on nil context!\n2026-10-10 00:57:31.665 Thoughtline[19294:5734999] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 12, bailing.\n"
+    },
+    {
+      "time": "2026-10-09T16:57:33.221Z",
+      "type": "stderr",
+      "pid": 19294,
+      "text": "2026-10-10 00:57:33.220 Thoughtline[19294:5734999] _TIPropertyValueIsValid called with 12 on nil context!\n2026-10-10 00:57:33.220 Thoughtline[19294:5734999] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 12, bailing.\n"
+    },
+    {
+      "time": "2026-10-09T16:57:34.035Z",
+      "type": "stderr",
+      "pid": 19294,
+      "text": "Debugger ending on ws://127.0.0.1:61851/34c2c9a2-3aac-49b7-8e42-98ef098c59f9\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-09T16:57:34.122Z",
+      "type": "exit",
+      "pid": 19294,
+      "code": 0,
+      "signal": null
+    },
+    {
+      "time": "2026-10-09T16:57:34.126Z",
+      "type": "spawn",
+      "pid": 19327,
+      "shell": false,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-09T16:57:34.328Z",
+      "type": "stderr",
+      "pid": 19327,
+      "text": "Debugger listening on ws://127.0.0.1:61891/8c5b7bc9-cd53-425e-85c1-043e348e5443\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-09T16:57:34.332Z",
+      "type": "stderr",
+      "pid": 19327,
+      "text": "Debugger attached.\n"
+    },
+    {
+      "time": "2026-10-09T16:57:34.353Z",
+      "type": "stderr",
+      "pid": 19327,
+      "text": "\nDevTools listening on ws://127.0.0.1:61893/devtools/browser/ecb0bf8e-3dcb-44c9-99d8-fcb8952b8a0d\n"
+    },
+    {
+      "time": "2026-10-09T16:57:35.078Z",
+      "type": "stderr",
+      "pid": 19327,
+      "text": "Debugger ending on ws://127.0.0.1:61891/8c5b7bc9-cd53-425e-85c1-043e348e5443\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-09T16:57:35.450Z",
+      "type": "stderr",
+      "pid": 19327,
+      "text": "2026-10-10 00:57:35.450 Thoughtline[19327:5735468] +[IMKClient subclass]: chose IMKClient_Modern\n2026-10-10 00:57:35.450 Thoughtline[19327:5735468] +[IMKInputSession subclass]: chose IMKInputSession_Modern\n"
+    },
+    {
+      "time": "2026-10-09T16:57:35.486Z",
+      "type": "stderr",
+      "pid": 19327,
+      "text": "2026-10-10 00:57:35.485 Thoughtline[19327:5735468] _TIPropertyValueIsValid called with 11 on nil context!\n2026-10-10 00:57:35.485 Thoughtline[19327:5735468] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 11, bailing.\n2026-10-10 00:57:35.485 Thoughtline[19327:5735468] _TIPropertyValueIsValid called with 12 on nil context!\n2026-10-10 00:57:35.485 Thoughtline[19327:5735468] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 12, bailing.\n"
+    },
+    {
+      "time": "2026-10-09T16:57:35.511Z",
+      "type": "exit",
+      "pid": 19327,
+      "code": 0,
+      "signal": null
+    }
+  ],
+  "observedPidState": [
+    {
+      "pid": 19294,
+      "alive": false
+    },
+    {
+      "pid": 19327,
+      "alive": false
+    }
+  ]
+}

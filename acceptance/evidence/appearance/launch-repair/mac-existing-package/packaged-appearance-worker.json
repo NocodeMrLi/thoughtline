@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "packaged": true,
+  "executable": "/tmp/thoughtline-launch-repair-mount-BWW8bM/Thoughtline.app/Contents/MacOS/Thoughtline",
+  "version": "0.0.17-preview.3",
+  "host": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "release": "24.3.0"
+  },
+  "checks": [
+    "exact-English-dark-UI-and-user-text",
+    "dirty-editor-focus-selection-content-preserved",
+    "package-restart-stored-preferences-date-content-English-calendar"
+  ],
+  "scope": "actual isolated package DOM/IPC; no physical IME/DPI/multi-display/receiver acceptance",
+  "asarSha256": "b4883ddd55decc4eabc57b2956aeef5e5e5084b1ed259b6caa42753867f9ff6b",
+  "cleanup": {
+    "normalQuit": true,
+    "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-packaged-appearance-fp4o0p",
+    "profileRemoved": true,
+    "ownedPids": [
+      19294,
+      19305,
+      19306,
+      19309,
+      19310,
+      19327,
+      19329,
+      19330,
+      19331,
+      19333
+    ],
+    "allExited": true
+  }
+}
