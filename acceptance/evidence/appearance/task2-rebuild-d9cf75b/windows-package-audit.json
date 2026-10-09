@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "source": {
+    "headSha": "d9cf75b425464589e6761abd8dff9954f3e2ad0c",
+    "count": 225,
+    "canonicalSha256": "7b658b2d8a88b499c722bfe51a9bba0889b13673e0ee0661364f4eb5129764cc",
+    "windowsRawSha256": "e10c8252a66687fa2533914f3a9a78eca474c560c6e5f5ea9f9115f2ad0f9ccb",
+    "fixtureCount": 2,
+    "allCanonicalModeBlobMatchFreeze": true,
+    "allFixtureRawHashesMatchManifest": true
+  },
+  "windowsPackage": {
+    "name": "Thoughtline-0.0.17-preview.3-win-x64.exe",
+    "bytes": 113101708,
+    "sha256": "ad5401e0cf3fb9489a6520efbc9d49fcaf7ae2a94bf6e3a358588ca7fbf71f89",
+    "format": "PE32 NSIS bootstrapper (installed Electron runtime x64)",
+    "peMachine": "0x14c",
+    "certificateTableBytes": 0,
+    "runnerSHA256SUMSMatch": true,
+    "buildRunId": "37963724007",
+    "runAttempt": "1"
+  },
+  "launcher": {
+    "windowsArtifactSha256": "4da07f0f81b6f0071de34af571d3c283b50549dcd077dad343e59ba2ae8ac55d",
+    "macCheckoutRawSha256": "90e55ca3f915e0ff911f00f30b3437bdf9e5dc3e029b314c9a0e6ec2244f9f20",
+    "canonicalGitBlob": "d79c684844b0b6e73a80188c1ea7a97f63bf0a2a",
+    "lineEndingNormalizedContentMatches": true,
+    "rawDifferenceReason": "Windows checkout CRLF vs Mac checkout LF; canonical Git blob identical"
+  },
+  "windowsAcceptance": {
+    "installedPreflightPassed": true,
+    "installerPreflightPassed": true,
+    "packagedAppearanceChecks": [
+      "exact-English-dark-UI-and-user-text",
+      "dirty-editor-focus-selection-content-preserved",
+      "package-restart-stored-preferences-date-content-English-calendar"
+    ],
+    "appearanceNormalQuit": true,
+    "appearanceProfileRemoved": true,
+    "appearanceAllOwnedPidsExited": true,
+    "sourceMainChecks": 17,
+    "sourceFixChecks": 11,
+    "reinstallDataPreserved": true,
+    "ordinaryUninstallDataPreserved": true,
+    "notSigned": true,
+    "physicalAcceptance": false
+  },
+  "downloadedArtifacts": [
+    {
+      "name": "windows-d9cf-package.zip",
+      "size": 113129282,
+      "sha256": "22549a92c69f4985639e7aafc02d5a53363b38619451746812945b39e79cb9d1"
+    },
+    {
+      "name": "windows-d9cf-source-ui.zip",
+      "size": 1792736,
+      "sha256": "10b0d9f2b001edbe971300f9e649c252ef4c3002be12594cdc285245b613cc3e"
+    }
+  ]
+}
