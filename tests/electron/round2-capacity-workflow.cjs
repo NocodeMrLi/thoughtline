@@ -10,7 +10,27 @@ const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=requ
    ideas.push({id:'history',title:'待挂历史',text:'完整历史\n中文😀',project:'保留项目',agentId:'general',status:'archived',createdAt:now,updatedAt:now});
    await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:3,revision:0,ideas,clips:ideas.filter(i=>i.status==='hanging').map(i=>({id:'clip:'+i.id,agentId:i.agentId,ideaIds:[i.id],currentId:i.id,position:null})),agents:[{id:'general',name:'通用',color:'#A0A3AA'}],draft:null,settings:{writeHotkey:'Control+Alt+N',reducedMotion:true}}));
    app=await _electron.launch(await launchOptions(dir));const views=await warmViews(app);assert.equal((await views.manage.evaluate(()=>window.thoughtline.storageInfo())).value.directory,dir);
-   result.detail=await action(app,views,dir);await views.manage.screenshot({path:path.join(evidence,name+'.png')});result.passed=true;
+   result.detail=await action(app,views,dir);
+   // Capture the view the case actually leaves visible. The warmed Manage window
+   // is hidden after Composer cases; capturing it stalls on Windows until teardown.
+   result.windows=await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().map(w=>({title:w.getTitle(),url:w.webContents.getURL(),visible:w.isVisible()})));
+   const expected={
+    'calendar-open-immediate-hang':'Thoughtline Manage','more-menu-content-width':'Thoughtline Manage',
+    'new-swap-cancel-confirm-undo':'Thoughtline Shelf','calendar-swap-open-focus-retained':'Thoughtline Manage',
+    'stale-target-retains-draft':'Thoughtline Composer','write-failure-in-picker-keeps-old-and-new-content':'Thoughtline Manage',
+    'composer-write-failure-keeps-focus-and-draft':'Thoughtline Shelf','native-show-all-Agent-label-and-selection':'Thoughtline Manage',
+   }[name];
+   if(expected)assert(result.windows.some(w=>w.title===expected&&w.visible),`${name} must leave ${expected} visible`);
+   if(name==='full-composer-save-stays-out-of-reader'){
+    assert(!result.windows.some(w=>w.visible&&['Thoughtline Manage','Thoughtline Composer'].includes(w.title)),'save must close Composer without opening a reader');
+    result.intentionalAbsence='Saved-only flow closes Composer and leaves Manage hidden; see the pre-submit screenshot.';
+   }
+   result.screenshots=[];
+   for(const w of result.windows.filter(w=>w.visible)){
+    const page=(await app.windows()).find(p=>p.url()===w.url);assert(page,`visible ${w.title} must have a capture target`);
+    const file=name+'-'+w.title.replaceAll(' ','-')+'.png';await page.screenshot({path:path.join(evidence,file)});result.screenshots.push(file);
+   }
+   result.passed=true;
   }catch(e){result.error=e.stack;}finally{if(app){try{result.pids=[...new Set([app.process().pid,...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid))])];await app.close();result.normalClose=true;await cleanupIdleFixture(dir,result.pids);result.dataRemoved=true;}catch(e){result.cleanupError=e.stack;}}else{await fs.rm(dir,{recursive:true,force:true});result.dataRemoved=true;}receipt.cases.push(result);}
  };
  await run('calendar-open-immediate-hang',1,async(app,{shelf,manage})=>{
@@ -73,7 +93,7 @@ const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=requ
  });
  await run('full-composer-save-stays-out-of-reader',40,async(app,{shelf,manage})=>{
   const composer=await openComposer(app,shelf);await composer.locator('#idea-text').fill('新建原文 中文😀\n首尾保留 ');
-  const button=composer.locator('.composer-submit .primary');assert.equal(await button.innerText(),'保存','full capacity must be known before submission');await button.click();
+  const button=composer.locator('.composer-submit .primary');assert.equal(await button.innerText(),'保存','full capacity must be known before submission');await composer.screenshot({path:path.join(evidence,'full-composer-before-save.png')});await button.click();
   const info=await waitForInfo(shelf,i=>i.snapshot.ideas.some(x=>x.text.startsWith('新建原文')));assert.equal(info.snapshot.ideas.at(-1).status,'archived');assert.equal(info.placementNotice,null);
   assert.equal(await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().some(w=>w.getTitle()==='Thoughtline Manage'&&w.isVisible())),false);return {archived:true,noReaderJump:true};
  });
