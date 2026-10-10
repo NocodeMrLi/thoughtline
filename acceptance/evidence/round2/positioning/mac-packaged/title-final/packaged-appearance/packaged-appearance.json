@@ -1,0 +1,148 @@
+{
+  "passed": true,
+  "packaged": true,
+  "executable": "/Users/lihongwei/Documents/Codex/2026-10-10/thoughtline-round2-repair/positioning-increment/package-source/dist/mac-arm64/Thoughtline.app/Contents/MacOS/Thoughtline",
+  "version": "0.0.20",
+  "host": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "release": "24.3.0"
+  },
+  "checks": [
+    "exact-English-dark-UI-and-user-text",
+    "dirty-editor-focus-selection-content-preserved",
+    "package-restart-stored-preferences-date-content-English-calendar"
+  ],
+  "scope": "actual isolated package DOM/IPC; no physical IME/DPI/multi-display/receiver acceptance",
+  "asarSha256": "28cea7898f8986d4a5b9973d4135ecbd7498fb2ecffeaa39d631896c0d4fc222",
+  "cleanup": {
+    "normalQuit": true,
+    "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-packaged-appearance-KKz7At",
+    "profileRemoved": true,
+    "ownedPids": [
+      58659,
+      58660,
+      58661,
+      58662,
+      58666,
+      58670,
+      58672,
+      58673,
+      58674,
+      58676
+    ],
+    "allExited": true
+  },
+  "worker": {
+    "pid": 58658,
+    "code": 0,
+    "signal": null
+  },
+  "stage": "worker-completed",
+  "launchEvents": [
+    {
+      "time": "2026-10-10T09:15:32.319Z",
+      "type": "spawn",
+      "pid": 58659,
+      "shell": false,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-10T09:15:32.437Z",
+      "type": "stderr",
+      "pid": 58659,
+      "text": "Debugger listening on ws://127.0.0.1:54580/20bd25fa-39b5-4bce-a1f1-3be2cee54280\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-10T09:15:32.441Z",
+      "type": "stderr",
+      "pid": 58659,
+      "text": "Debugger attached.\n"
+    },
+    {
+      "time": "2026-10-10T09:15:32.454Z",
+      "type": "stderr",
+      "pid": 58659,
+      "text": "\nDevTools listening on ws://127.0.0.1:54582/devtools/browser/4c65ec49-0edc-4d79-abfc-3636d344276b\n"
+    },
+    {
+      "time": "2026-10-10T09:15:33.100Z",
+      "type": "stderr",
+      "pid": 58659,
+      "text": "2026-10-10 17:15:33.100 Thoughtline[58659:8586773] +[IMKClient subclass]: chose IMKClient_Modern\n2026-10-10 17:15:33.100 Thoughtline[58659:8586773] +[IMKInputSession subclass]: chose IMKInputSession_Modern\n"
+    },
+    {
+      "time": "2026-10-10T09:15:33.142Z",
+      "type": "stderr",
+      "pid": 58659,
+      "text": "2026-10-10 17:15:33.142 Thoughtline[58659:8586773] _TIPropertyValueIsValid called with 11 on nil context!\n2026-10-10 17:15:33.142 Thoughtline[58659:8586773] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 11, bailing.\n2026-10-10 17:15:33.142 Thoughtline[58659:8586773] _TIPropertyValueIsValid called with 12 on nil context!\n2026-10-10 17:15:33.142 Thoughtline[58659:8586773] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 12, bailing.\n"
+    },
+    {
+      "time": "2026-10-10T09:15:33.183Z",
+      "type": "stderr",
+      "pid": 58659,
+      "text": "2026-10-10 17:15:33.183 Thoughtline[58659:8586773] _TIPropertyValueIsValid called with 12 on nil context!\n2026-10-10 17:15:33.183 Thoughtline[58659:8586773] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 12, bailing.\n"
+    },
+    {
+      "time": "2026-10-10T09:15:33.619Z",
+      "type": "stderr",
+      "pid": 58659,
+      "text": "Debugger ending on ws://127.0.0.1:54580/20bd25fa-39b5-4bce-a1f1-3be2cee54280\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-10T09:15:33.669Z",
+      "type": "exit",
+      "pid": 58659,
+      "code": 0,
+      "signal": null
+    },
+    {
+      "time": "2026-10-10T09:15:33.672Z",
+      "type": "spawn",
+      "pid": 58670,
+      "shell": false,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-10T09:15:33.820Z",
+      "type": "stderr",
+      "pid": 58670,
+      "text": "Debugger listening on ws://127.0.0.1:54584/51926e89-9bb8-4e3a-9372-fce5ef8b27af\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-10T09:15:33.821Z",
+      "type": "stderr",
+      "pid": 58670,
+      "text": "Debugger attached.\n"
+    },
+    {
+      "time": "2026-10-10T09:15:33.842Z",
+      "type": "stderr",
+      "pid": 58670,
+      "text": "\nDevTools listening on ws://127.0.0.1:54586/devtools/browser/67a51c3f-63d0-43ff-a89e-4eed110e181d\n"
+    },
+    {
+      "time": "2026-10-10T09:15:34.331Z",
+      "type": "stderr",
+      "pid": 58670,
+      "text": "Debugger ending on ws://127.0.0.1:54584/51926e89-9bb8-4e3a-9372-fce5ef8b27af\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-10T09:15:34.387Z",
+      "type": "exit",
+      "pid": 58670,
+      "code": 0,
+      "signal": null
+    }
+  ],
+  "observedPidState": [
+    {
+      "pid": 58659,
+      "alive": false
+    },
+    {
+      "pid": 58670,
+      "alive": false
+    }
+  ]
+}

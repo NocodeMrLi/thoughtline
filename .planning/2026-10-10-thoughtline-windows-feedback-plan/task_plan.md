@@ -48,5 +48,9 @@ Completed: short Merge/Split actions and automatic spacing, including right-clic
 - [x] Same canonical second-round plan appended/backed up/read back; six fresh defaults +generic labels +effective on/off-line status.
 - [x] Failing meaningful behavior tests before implementation.
 - [x] Minimal model/i18n/menu/calendar/reader changes preserving schema/userdata.
-- [ ] Mac/Windows regression and actual same-source packages.
-- [ ] Documented immutable private new release/owned cleanup.
+- [x] Mac/Windows regression and actual same-source packages.
+- [x] Documented immutable private new release/owned cleanup.
+
+
+## Latest0.0.20 delivery
+Finalsource9628a1427846cfc04fb47366883a5c666aff8a16; private regular32asset release408840229. Mac258+4 skip/Windows262, CI38040607416 and actual-package title/positioning/capacity/appearance/split/topedge pass.257inputs/230 exactCRLF differences,33Macpayload inputs and installedWindows binding.1085.9MiB ownedcleanup. Canonical/00/07/master fullcontent backedup/readback. Approved reminder+lightpopover plan archived for subsequent development, not implemented/in0.0.20. Physical acceptance gaps remain.
