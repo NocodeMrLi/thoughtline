@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.3" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/preview.svg" alt="Version: 0.0.17-preview.4" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   줄 하나와 집게, 종이로 일상의 아이디어를 남깁니다.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><ins>Thoughtline 다운로드</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><ins>Thoughtline 다운로드</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.3</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.4</sub></p>
 
 Thoughtline은 macOS와 Windows용 가벼운 데스크톱 메모 도구입니다. 화면 위쪽 가장자리에서 생각을 꺼내 보고, 기록한 뒤 하던 일로 돌아가세요.
 
@@ -42,14 +42,14 @@ Thoughtline은 macOS와 Windows용 가벼운 데스크톱 메모 도구입니다
 
 ## 다운로드 및 설치
 
-현재 미리보기 버전입니다. 저장소 접근 권한이 있는 구성원에게 제공됩니다. Releases에서 패키지, 격리 실행 스크립트, SHA256SUMS와 빌드 정보를 확인하세요. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3).
+저장소 접근 권한이 있는 구성원에게 다운로드를 제공합니다. Releases에서 패키지, 격리 실행 스크립트, SHA256SUMS와 빌드 정보를 확인하세요. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4).
 
 | Platform | Package |
 |---|---|
 | macOS · Apple Silicon | arm64 · DMG |
 | Windows | x64 · EXE (NSIS) |
 
-업데이트 전에 정상 종료하고 데이터를 백업하세요. Mac은 ad-hoc 서명이며 Developer ID 서명이나 공증이 없고, Windows는 서명되지 않았습니다. 시스템 보안 보호를 끄지 마세요. 자동 업데이트는 없습니다.
+업데이트 전에 정상 종료하고 데이터를 백업하세요. 상용 서명 인증서나 공증은 계획하지 않습니다. Mac은 로컬 ad-hoc 서명을 유지하며 Windows는 서명되지 않았습니다. 사용자는 시스템의 정상적인 신뢰 확인 절차에 따라 설치합니다. 서명 여부가 버전의 완성도를 결정하지 않습니다. 자동 업데이트는 없습니다.
 
 ## 시작하기
 

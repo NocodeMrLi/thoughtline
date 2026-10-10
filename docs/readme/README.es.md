@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.3" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/preview.svg" alt="Version: 0.0.17-preview.4" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   Una cuerda, unas pinzas y hojas de papel para tus ideas cotidianas.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><ins>Descargar Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><ins>Descargar Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.3</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.4</sub></p>
 
 Thoughtline es una herramienta ligera para macOS y Windows. Muestra tus ideas en el borde superior de la pantalla, anota una y vuelve a lo que estabas haciendo.
 
@@ -42,14 +42,14 @@ Thoughtline es una herramienta ligera para macOS y Windows. Muestra tus ideas en
 
 ## Descarga e instalación
 
-Esta es una versión preliminar para miembros con acceso al repositorio. Releases incluye paquetes, lanzadores aislados, SHA256SUMS y procedencia de las compilaciones. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3).
+Las descargas están disponibles para miembros con acceso al repositorio. Releases incluye paquetes, lanzadores aislados, SHA256SUMS y procedencia de las compilaciones. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4).
 
 | Platform | Package |
 |---|---|
 | macOS · Apple Silicon | arm64 · DMG |
 | Windows | x64 · EXE (NSIS) |
 
-Antes de actualizar, cierra la aplicación normalmente y respalda tus datos. Mac usa firma ad-hoc, sin Developer ID ni notarización; Windows no tiene firma. Mantén las protecciones del sistema. No hay actualizaciones automáticas.
+Antes de actualizar, cierra la aplicación normalmente y respalda tus datos. No se prevén certificados de firma comercial ni notarización. Mac conserva la firma local ad-hoc; Windows no tiene firma. El usuario instala mediante los avisos normales de confianza del sistema. La firma no determina la madurez de una versión. No hay actualizaciones automáticas.
 
 ## Primeros pasos
 

@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/preview.svg" alt="Preview: 0.0.17-preview.3" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/preview.svg" alt="Version: 0.0.17-preview.4" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   一本のロープとクリップ、紙で日々のアイデアを残します。
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><ins>Thoughtline をダウンロード</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><ins>Thoughtline をダウンロード</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.3</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.4</sub></p>
 
 Thoughtline は macOS と Windows 向けの軽量なデスクトップメモアプリです。画面上端からメモを呼び出し、思いつきを書き留めて作業に戻れます。
 
@@ -42,14 +42,14 @@ Thoughtline は macOS と Windows 向けの軽量なデスクトップメモア�
 
 ## ダウンロードとインストール
 
-現在はプレビュー版です。リポジトリへのアクセス権を持つメンバーが利用できます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3).
+リポジトリへのアクセス権を持つメンバーがダウンロードできます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4).
 
 | Platform | Package |
 |---|---|
 | macOS · Apple Silicon | arm64 · DMG |
 | Windows | x64 · EXE (NSIS) |
 
-更新前に正常終了してデータをバックアップしてください。Mac は ad-hoc 署名のみで Developer ID 署名・公証はなく、Windows は未署名です。システムの安全保護を無効にしないでください。自動更新はありません。
+更新前に正常終了してデータをバックアップしてください。商用署名証明書や公証は予定していません。Mac はローカルの ad-hoc 署名を維持し、Windows は未署名です。ユーザーが通常のシステム確認に従って信頼を選択し、インストールします。署名の有無は製品の成熟度とは別です。自動更新はありません。
 
 ## 使い始める
 

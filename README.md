@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="docs/readme/badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="docs/readme/badges/downloads.svg" alt="Release asset downloads: 3" /></a>
   <a href="#license"><img src="docs/readme/badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="docs/readme/badges/preview.svg" alt="Preview: 0.0.17-preview.3" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="docs/readme/badges/preview.svg" alt="Version: 0.0.17-preview.4" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="docs/readme/badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><img src="docs/readme/badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="docs/readme/badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   用一根绳、几只夹子和几张纸，轻轻留住工作与生活里的念头。
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3"><ins>下载 Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><ins>下载 Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.3</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.4</sub></p>
 
 Thoughtline 是一款面向 macOS 和 Windows 的轻量桌面念头工具。需要时，在屏幕顶边呼出晾衣绳；写下、整理、取用，再回到手头的事情。
 
@@ -45,20 +45,20 @@ Thoughtline 是一款面向 macOS 和 Windows 的轻量桌面念头工具。需�
 
 ## 下载与安装
 
-当前为预览版，测试包向有仓库访问权限的成员开放。到 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.3) 下载安装包、隔离启动入口和 `SHA256SUMS`；每版提供对应构建来源与校验清单。
+当前版本向有仓库访问权限的成员开放。到 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4) 下载安装包、隔离启动入口和 `SHA256SUMS`；每版提供对应构建来源与校验清单。
 
 | 平台 | 当前安装包 |
 |---|---|
 | macOS · Apple Silicon | arm64 · DMG |
 | Windows | x64 · EXE（NSIS） |
 
-安装或升级前，正常退出应用并备份现有数据。Mac 当前为 ad-hoc 签名，尚未 Developer ID 签名或公证；Windows 当前未签名。安装受系统安全提示阻挡时保留原提示，不关闭安全保护。当前不提供自动更新。
+安装或升级前，正常退出应用并备份现有数据。项目不安排商业签名证书、平台认证或公证；用户按系统正常信任提示安装使用。Mac 保留本地 ad-hoc 签名，Windows 包未签名。签名状态与软件的成熟度、验收结果分开说明。当前不提供自动更新。
 
 ## 开始使用
 
 1. 按 `Control + Alt + N` 写一个念头；Mac 对应 `⌃ + ⌥ + N`，可在设置中修改。
 2. `Enter` 换行；Mac 用 `⌘ + Enter` 提交，Windows 用 `Ctrl + Enter` 提交；`Esc` 保存草稿并收起输入窗。
-3. 将鼠标移到屏幕顶边，呼出绳上的念头。展开纸张可阅读、复制、编辑或收起。
+3. 将鼠标移到屏幕顶边，呼出绳上的念头。移向或操作纸张时保持展开，离开操作区域后收起。展开纸张可阅读、复制、编辑或收起。
 4. 从日历回看、搜索已收起的念头，或在最近删除中恢复内容。
 
 Codex、Claude、Cursor 等标签表示念头归属。向其他软件取用内容时，由用户复制或拖动正文；目标输入框的实际接收效果仍需分别验证。
@@ -86,7 +86,7 @@ npm run package:win
 
 `verify` 执行类型检查、单元测试与构建；平台包在对应系统构建。技术栈为 Electron、React、TypeScript 和 Vite。
 
-当前预览版已完成适用自动检查与包验证。真实 Mac／Windows 输入法、DPI、多屏、焦点与微信、豆包、WorkBuddy 等外部输入框仍待独立测试。应用界面支持中文与 English；新建、展开和日历窗口右上角可直接切换语言及日间／夜间外观，设置内可恢复跟随系统。上方七种语言链接提供 **README 文档翻译**，不表示应用支持七种界面语言。
+当前版本已完成适用自动检查与包验证。真实 Mac／Windows 输入法、DPI、多屏、焦点与微信、豆包、WorkBuddy 等外部输入框仍待独立测试。应用界面支持中文与 English；新建、展开和日历窗口右上角可直接切换语言及日间／夜间外观，设置内可恢复跟随系统。上方七种语言链接提供 **README 文档翻译**，不表示应用支持七种界面语言。
 
 ## 反馈
 
