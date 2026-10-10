@@ -4,11 +4,11 @@
 
 <p align="center">
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 29" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/preview.svg" alt="Version: 0.0.17-preview.4" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="badges/preview.svg" alt="Version: 0.0.17-preview.5" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   줄 하나와 집게, 종이로 일상의 아이디어를 남깁니다.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><ins>Thoughtline 다운로드</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><ins>Thoughtline 다운로드</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.4</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.5</sub></p>
 
 Thoughtline은 macOS와 Windows용 가벼운 데스크톱 메모 도구입니다. 화면 위쪽 가장자리에서 생각을 꺼내 보고, 기록한 뒤 하던 일로 돌아가세요.
 
@@ -30,7 +30,7 @@ Thoughtline은 macOS와 Windows용 가벼운 데스크톱 메모 도구입니다
 
 - 단축키로 제목, 본문, 분류를 기록하고 미완성 메모를 초안으로 저장합니다.
 - 데스크톱에는 줄, 집게, 종이만 표시합니다. 새 메모의 기본 분류는 일반입니다.
-- 집게 전체를 옮기거나 종이 한 장을 분리하고, 호환 집게를 합칩니다. 정리는 실행 취소할 수 있습니다.
+- 집게 전체를 옮기거나 종이 한 장을 분리하고, 호환 집게를 합칩니다. 정리는 실행 취소할 수 있습니다. 자동 정리로 순서를 유지하면서 간격을 맞추고 위치만 실행 취소할 수 있습니다.
 - 상세 보기와 달력에서 직접 편집합니다. 잠시 입력을 멈추면 자동 저장하고 페이지를 즉시 전환합니다.
 - 일·월·년으로 돌아보고 검색과 상태 필터로 보관한 메모도 찾습니다.
 - 삭제한 메모를 최근 삭제에서 복원합니다. 프로젝트 삭제는 메모 내용을 유지합니다.
@@ -42,7 +42,7 @@ Thoughtline은 macOS와 Windows용 가벼운 데스크톱 메모 도구입니다
 
 ## 다운로드 및 설치
 
-저장소 접근 권한이 있는 구성원에게 다운로드를 제공합니다. Releases에서 패키지, 격리 실행 스크립트, SHA256SUMS와 빌드 정보를 확인하세요. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4).
+저장소 접근 권한이 있는 구성원에게 다운로드를 제공합니다. Releases에서 패키지, 격리 실행 스크립트, SHA256SUMS와 빌드 정보를 확인하세요. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5).
 
 | Platform | Package |
 |---|---|
@@ -87,7 +87,7 @@ npm run package:win
 
 버그와 제안은 Issues에 등록하세요. 버전, 재현 단계, 예상 결과와 실제 결과, 개인정보를 가린 증거를 첨부하세요. 실제 메모나 개인 데이터를 올리지 마세요. [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
 
-Star와 다운로드 수는 2026-10-09 API 스냅샷입니다. 다운로드는 릴리스 파일의 다운로드 횟수입니다.
+Star와 다운로드 수는 2026-10-10 API 스냅샷입니다. 다운로드는 릴리스 파일의 다운로드 횟수입니다.
 
 <a id="license"></a>
 ## 라이선스와 감사

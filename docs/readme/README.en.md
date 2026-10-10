@@ -4,11 +4,11 @@
 
 <p align="center">
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 29" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/preview.svg" alt="Version: 0.0.17-preview.4" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="badges/preview.svg" alt="Version: 0.0.17-preview.5" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   A rope, a few clips, and sheets of paper for everyday ideas.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><ins>Download Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><ins>Download Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.4</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.5</sub></p>
 
 Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ideas at the top edge of the screen, capture a thought, and return to what you were doing.
 
@@ -42,7 +42,7 @@ Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ide
 
 ## Download and install
 
-Downloads are available to members with repository access. Releases include packages, isolated launchers, SHA256SUMS, and build provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4).
+Downloads are available to members with repository access. Releases include packages, isolated launchers, SHA256SUMS, and build provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5).
 
 | Platform | Package |
 |---|---|
@@ -87,7 +87,7 @@ Applicable automated and package checks have passed. Physical Mac/Windows IME, D
 
 Use Issues for bugs and ideas. Include versions, reproduction steps, expected and actual behavior, and redacted evidence. Do not upload personal thoughts or data. [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
 
-Stars and downloads are an API snapshot dated 2026-10-09. Downloads count release asset downloads.
+Stars and downloads are an API snapshot dated 2026-10-10. Downloads count release asset downloads.
 
 <a id="license"></a>
 ## License and acknowledgments

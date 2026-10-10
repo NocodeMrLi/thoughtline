@@ -4,11 +4,11 @@
 
 <p align="center">
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 29" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/preview.svg" alt="Version: 0.0.17-preview.4" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="badges/preview.svg" alt="Version: 0.0.17-preview.5" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   Una cuerda, unas pinzas y hojas de papel para tus ideas cotidianas.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><ins>Descargar Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><ins>Descargar Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.4</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.5</sub></p>
 
 Thoughtline es una herramienta ligera para macOS y Windows. Muestra tus ideas en el borde superior de la pantalla, anota una y vuelve a lo que estabas haciendo.
 
@@ -30,7 +30,7 @@ Thoughtline es una herramienta ligera para macOS y Windows. Muestra tus ideas en
 
 - Anota título, texto y categoría con un atajo; guarda notas incompletas como borradores.
 - Una cuerda de escritorio con pinzas y papel; las ideas nuevas usan la categoría General.
-- Mueve una pinza completa o separa una hoja; combina pinzas compatibles y deshaz la organización.
+- Mueve una pinza completa o separa una hoja; combina pinzas compatibles y deshaz la organización. La organización automática compacta los espacios sin cambiar el orden y permite deshacer las posiciones.
 - Edita en la vista de detalle o el calendario, con guardado automático tras una pausa y cambio inmediato de página.
 - Explora por día, mes o año; busca y filtra también las ideas archivadas.
 - Restaura notas desde Eliminados recientemente. Borrar un proyecto conserva sus ideas.
@@ -42,7 +42,7 @@ Thoughtline es una herramienta ligera para macOS y Windows. Muestra tus ideas en
 
 ## Descarga e instalación
 
-Las descargas están disponibles para miembros con acceso al repositorio. Releases incluye paquetes, lanzadores aislados, SHA256SUMS y procedencia de las compilaciones. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4).
+Las descargas están disponibles para miembros con acceso al repositorio. Releases incluye paquetes, lanzadores aislados, SHA256SUMS y procedencia de las compilaciones. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5).
 
 | Platform | Package |
 |---|---|
@@ -87,7 +87,7 @@ Las comprobaciones automáticas y de paquetes aplicables han pasado. IME, DPI, v
 
 Usa Issues para errores y sugerencias. Incluye versiones, pasos, resultado esperado y real, y pruebas sin información privada. No subas notas personales ni datos reales. [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
 
-Estrellas y descargas: instantánea de la API del 2026-10-09. Las descargas cuentan archivos de las publicaciones.
+Estrellas y descargas: instantánea de la API del 2026-10-10. Las descargas cuentan archivos de las publicaciones.
 
 <a id="license"></a>
 ## Licencia y agradecimientos

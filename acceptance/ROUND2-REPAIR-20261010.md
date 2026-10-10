@@ -1,4 +1,4 @@
-# Thoughtline second round repair — stage A
+# Thoughtline second round repair — stages A–D
 
 User authorized execution after canonical project plan saved/read back. Display name: **Thoughtline日历 / Thoughtline Calendar**.
 
@@ -20,3 +20,15 @@ Day settings-return exposed a5.5px browser scroll anchor offset; restore initial
 User approved “自动整理 / Arrange clips”; canonical plan updated before implementation. Explicit full-rope compaction includes filtered-out Agents, retains rendered left-to-right order and all idea/clip/current-page identities. Uses existing172 DIP safety spacing, reserving one right-side slot when capacity allows. Position-only undo retains a later page choice and cannot resurrect a removed project. Finite180ms transform motion updates native hit rectangles during each frame and respects reduced motion. Mac source menu/undo/restart tests and new geometry units pass; all failed animation/assertion fixture receipts retained.
 Windows run38018138414 on d5a8d23: **separate external receiver process** reproduces baseline ownerFocusable=false/ownerFocused=false, closed=false; foreground owner true/true, closed=true. This is controlled real native Windows input, not user physical machine acceptance. Production now activates Shelf only during explicit native-menu invocation on Windows; cancel/select/error/hide/quit restores nonactivating owner and releases one owned menu lock. Repeated production external click tests added. Mac native owner remains unchanged and real programmatic cancel test passes; physical external click remains open.
 Run38018138414 otherwise passes source/UI/motion/storage/appearance and builds package, but fails installer preflight because isolation launcher still requires preview.4. Corrected launcher/current isolated profile version to preview.5; prior4 release remains immutable. Electron cache check now pins actual Electron dependency44.7.0, same audited273 entries and exact ZIP SHA, rather than unrelated app version.
+
+
+## Stage D: final controlled platform results
+
+Frozen source60453773034347e1b49ccfd5d1cd42657e9ac60c; Windows run38018943609 succeeded,237 units. Mac233 units plus4 Windows-only skips. Source workflows:9 UI cases,3 day/year/search-return cases and7 arrangement cases pass on both hosts. Normal arrangement180ms verified with only the owned test renderer using no-preference media; separate system-reduce and application-reduce checks pass. Windows runner's actual reduced-motion setting is preserved. Previous16ddc09 failure expected normal animation while the host requested reduction; failure receipt retained.
+
+Windows production native menu closes after external other-process OS mouse input three consecutive times; owner is foreground only while the menu is active and returns to nonfocusable afterward. Agent submenu remains open, Esc cancels. These are hosted native tests, not physical user-device acceptance. Mac real programmatic cancel passed; physical outside click remains untested.
+
+Actual Mac preview.5 package passes six data/edit/restart/delete/backup-restore cases and three appearance/preferences/focus cases, plus top-edge slow corridor/copy/expand/reveal. All owned app profiles and PIDs verified clean after normal quit. User installed preview.3 PID67908 is protected. Packages use the same frozen source; final delivery hashes/release facts recorded separately after artifact download and source comparison. Independent physical IME/DPI/multi-display/text receivers and animation feel remain open. No user acceptance claimed.
+
+
+Final private regular releasev0.0.17-preview.5 on frozen6045377 verified23 server hashes. Full package/rollback/cleanup/physical gaps: [delivery report](../docs/releases/round2-preview5-delivery.md). Reclaimed875.8MiB only owned temporary copies; old installs/worktrees/rollback retained.

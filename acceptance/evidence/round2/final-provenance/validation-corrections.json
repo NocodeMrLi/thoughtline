@@ -1,0 +1,16 @@
+{
+  "source": "60453773034347e1b49ccfd5d1cd42657e9ac60c",
+  "HTMLAudit": {
+    "initialFailureRetained": "../source-pair-html-model-red.log",
+    "cause": "Audit incorrectly converted Vite-injected LF tags to CRLF. Vite serializeTags explicitly uses LF; only original HTML final newline converts on Windows. Exact corrected bytes and derived CSS/JS names match actual Windows hash.",
+    "productionChanged": false,
+    "assertionStillExactSHA256": true
+  },
+  "firstReleaseUpload": {
+    "failedReleaseID": 408587670,
+    "cause": "Wildcard included check-only isolated-experience directory. GH create aborted; API404 and tag/release absent confirmed.",
+    "recovery": "Explicit23 file-only assets with identical frozen source and hashes.",
+    "existingReleasesTouched": false
+  },
+  "credentialExposure": false
+}

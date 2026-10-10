@@ -4,11 +4,11 @@
 
 <p align="center">
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 29" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/preview.svg" alt="Version: 0.0.17-preview.4" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="badges/preview.svg" alt="Version: 0.0.17-preview.5" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   Une corde, quelques pinces et des feuilles pour les idées du quotidien.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><ins>Télécharger Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><ins>Télécharger Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.4</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.5</sub></p>
 
 Thoughtline est un outil léger pour macOS et Windows. Retrouvez vos idées au bord supérieur de l’écran, notez une pensée, puis reprenez votre activité.
 
@@ -30,7 +30,7 @@ Thoughtline est un outil léger pour macOS et Windows. Retrouvez vos idées au b
 
 - Saisissez titre, texte et catégorie avec un raccourci ; conservez les notes inachevées comme brouillons.
 - Une corde de bureau avec pinces et papier ; les nouvelles idées sont classées dans Général.
-- Déplacez une pince entière ou détachez une feuille ; fusionnez les pinces compatibles et annulez l’organisation.
+- Déplacez une pince entière ou détachez une feuille ; fusionnez les pinces compatibles et annulez l’organisation. L’organisation automatique resserre les espacements sans changer l’ordre et permet d’annuler les positions.
 - Modifiez dans la vue détaillée ou le calendrier, avec sauvegarde après une courte pause et changement de page immédiat.
 - Parcourez jours, mois et années ; recherchez et filtrez aussi les idées archivées.
 - Restaurez les notes récemment supprimées. Supprimer un projet conserve ses idées.
@@ -42,7 +42,7 @@ Thoughtline est un outil léger pour macOS et Windows. Retrouvez vos idées au b
 
 ## Téléchargement et installation
 
-Les téléchargements sont réservés aux membres ayant accès au dépôt. Releases contient les paquets, lanceurs isolés, SHA256SUMS et informations de provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4).
+Les téléchargements sont réservés aux membres ayant accès au dépôt. Releases contient les paquets, lanceurs isolés, SHA256SUMS et informations de provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5).
 
 | Platform | Package |
 |---|---|
@@ -87,7 +87,7 @@ Les contrôles automatiques et de paquets applicables ont réussi. IME, DPI, mul
 
 Signalez les problèmes dans Issues avec versions, étapes, résultats attendus et réels, et preuves anonymisées. Ne publiez pas de pensées personnelles ou de données réelles. [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
 
-Étoiles et téléchargements : instantané API du 2026-10-09. Les téléchargements comptent les fichiers des publications.
+Étoiles et téléchargements : instantané API du 2026-10-10. Les téléchargements comptent les fichiers des publications.
 
 <a id="license"></a>
 ## Licence et remerciements

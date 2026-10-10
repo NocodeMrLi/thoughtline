@@ -4,11 +4,11 @@
 
 <p align="center">
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="docs/readme/badges/stars.svg" alt="GitHub stars: 0" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="docs/readme/badges/downloads.svg" alt="Release asset downloads: 3" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="docs/readme/badges/downloads.svg" alt="Release asset downloads: 29" /></a>
   <a href="#license"><img src="docs/readme/badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="docs/readme/badges/preview.svg" alt="Version: 0.0.17-preview.4" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="docs/readme/badges/preview.svg" alt="Version: 0.0.17-preview.5" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="docs/readme/badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="docs/readme/badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="docs/readme/badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   用一根绳、几只夹子和几张纸，轻轻留住工作与生活里的念头。
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><ins>下载 Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><ins>下载 Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.4</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.5</sub></p>
 
 Thoughtline 是一款面向 macOS 和 Windows 的轻量桌面念头工具。需要时，在屏幕顶边呼出晾衣绳；写下、整理、取用，再回到手头的事情。
 
@@ -45,7 +45,7 @@ Thoughtline 是一款面向 macOS 和 Windows 的轻量桌面念头工具。需�
 
 ## 下载与安装
 
-当前版本向有仓库访问权限的成员开放。到 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4) 下载安装包、隔离启动入口和 `SHA256SUMS`；每版提供对应构建来源与校验清单。
+当前版本向有仓库访问权限的成员开放。到 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5) 下载安装包、隔离启动入口和 `SHA256SUMS`；每版提供对应构建来源与校验清单。
 
 | 平台 | 当前安装包 |
 |---|---|
@@ -92,7 +92,7 @@ npm run package:win
 
 通过 [Issues](https://github.com/NocodeMrLi/thoughtline/issues) 报告问题或建议。请附系统与应用版本、复现步骤、预期／实际结果及经过脱敏的截图或日志；不要上传真实念头或个人数据。
 
-Star 与下载徽章更新于 2026-10-09；下载数统计发布资产下载次数，代表 API 快照。
+Star 与下载徽章更新于 2026-10-10；下载数统计发布资产下载次数，代表 API 快照。
 
 <a id="license"></a>
 ## 许可与致谢

@@ -4,11 +4,11 @@
 
 <p align="center">
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 29" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/preview.svg" alt="Version: 0.0.17-preview.4" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="badges/preview.svg" alt="Version: 0.0.17-preview.5" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   一本のロープとクリップ、紙で日々のアイデアを残します。
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><ins>Thoughtline をダウンロード</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><ins>Thoughtline をダウンロード</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.4</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.5</sub></p>
 
 Thoughtline は macOS と Windows 向けの軽量なデスクトップメモアプリです。画面上端からメモを呼び出し、思いつきを書き留めて作業に戻れます。
 
@@ -30,7 +30,7 @@ Thoughtline は macOS と Windows 向けの軽量なデスクトップメモア�
 
 - ショートカットでタイトル、本文、分類を記録し、未完成のメモを下書きに保存。
 - デスクトップにはロープ、クリップ、紙だけを表示。新しいメモは「通用」に分類。
-- クリップ全体を移動、紙を一枚取り出し、互換性のあるクリップを結合。整理は取り消し可能。
+- クリップ全体を移動、紙を一枚取り出し、互換性のあるクリップを結合。整理は取り消し可能。 自動整理で順序を変えずに間隔をそろえ、位置だけを元に戻せます。
 - 詳細画面やカレンダー内で直接編集。短い入力停止後に自動保存し、ページを即座に切り替え。
 - 日・月・年で振り返り、検索や状態フィルターで収納済みのメモも表示。
 - 削除したメモは「最近削除した項目」から復元。プロジェクト削除でも本文は保持。
@@ -42,7 +42,7 @@ Thoughtline は macOS と Windows 向けの軽量なデスクトップメモア�
 
 ## ダウンロードとインストール
 
-リポジトリへのアクセス権を持つメンバーがダウンロードできます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4).
+リポジトリへのアクセス権を持つメンバーがダウンロードできます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5).
 
 | Platform | Package |
 |---|---|
@@ -87,7 +87,7 @@ npm run package:win
 
 不具合や提案は Issues へ。バージョン、再現手順、期待結果と実際の結果、個人情報を除いた証拠を添えてください。実際のメモや個人データをアップロードしないでください。 [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
 
-Starとダウンロード数は2026-10-09のAPIスナップショットです。ダウンロード数はリリース資産の取得回数です。
+Starとダウンロード数は2026-10-10のAPIスナップショットです。ダウンロード数はリリース資産の取得回数です。
 
 <a id="license"></a>
 ## ライセンスと謝辞

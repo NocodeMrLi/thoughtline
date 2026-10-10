@@ -4,11 +4,11 @@
 
 <p align="center">
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 3" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 29" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/preview.svg" alt="Version: 0.0.17-preview.4" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="badges/preview.svg" alt="Version: 0.0.17-preview.5" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   Uma corda, alguns prendedores e folhas para as ideias do dia a dia.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4"><ins>Baixar Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><ins>Baixar Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.4</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.5</sub></p>
 
 Thoughtline é uma ferramenta leve para macOS e Windows. Abra suas ideias na borda superior da tela, registre um pensamento e volte ao que estava fazendo.
 
@@ -30,7 +30,7 @@ Thoughtline é uma ferramenta leve para macOS e Windows. Abra suas ideias na bor
 
 - Registre título, texto e categoria com um atalho; mantenha notas incompletas como rascunhos.
 - Uma corda na área de trabalho com prendedores e papel; novas ideias usam a categoria Geral.
-- Mova um prendedor inteiro ou separe uma folha; una prendedores compatíveis e desfaça a organização.
+- Mova um prendedor inteiro ou separe uma folha; una prendedores compatíveis e desfaça a organização. A organização automática compacta os espaços sem mudar a ordem e permite desfazer as posições.
 - Edite na visualização detalhada ou no calendário, com salvamento após uma breve pausa e troca imediata de página.
 - Navegue por dia, mês ou ano; pesquise e filtre também ideias arquivadas.
 - Restaure notas em Excluídos recentemente. Excluir um projeto mantém suas ideias.
@@ -42,7 +42,7 @@ Thoughtline é uma ferramenta leve para macOS e Windows. Abra suas ideias na bor
 
 ## Download e instalação
 
-Os downloads estão disponíveis para membros com acesso ao repositório. Releases inclui pacotes, inicializadores isolados, SHA256SUMS e origem das compilações. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.4).
+Os downloads estão disponíveis para membros com acesso ao repositório. Releases inclui pacotes, inicializadores isolados, SHA256SUMS e origem das compilações. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5).
 
 | Platform | Package |
 |---|---|
@@ -87,7 +87,7 @@ As verificações automáticas e de pacotes aplicáveis passaram. IME, DPI, múl
 
 Use Issues para problemas e ideias. Inclua versões, passos, resultados esperados e reais e evidências sem informações pessoais. Não envie pensamentos ou dados reais. [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
 
-Estrelas e downloads: retrato da API em 2026-10-09. Downloads contam arquivos das publicações.
+Estrelas e downloads: retrato da API em 2026-10-10. Downloads contam arquivos das publicações.
 
 <a id="license"></a>
 ## Licença e agradecimentos

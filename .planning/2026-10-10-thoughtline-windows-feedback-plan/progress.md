@@ -8,3 +8,7 @@ No App/test process launched or disposable test/build directory created, therefo
 
 ## Authorized second round execution
 Canonical document saved/read back before edits. Mac latest stage: typecheck/build exit0, 229 units pass /4 platform skips; seven workflow checks pass with isolated profiles removed and owned processes closed. Windows physical OS/DPI still unknown. Native Menu programmatic cancel characterized on Mac; real outside mouse not yet accepted.
+
+Stage D: 60453773034347e1b49ccfd5d1cd42657e9ac60c frozen/pushed; Windows38018943609 successful all steps/237 units. Mac233+4 platform skips, packaged six data and three appearance cases and packaged top-edge pass. Controlled native Windows external-process mouse3 repeats/Agent submenu/Esc pass. Mac physical outside click/real IME/DPI/multi-display/receivers still open. Artifact transfer using bounded authenticated download after original owned GH transfer stalled; no credentials emitted; preserving all failures.
+
+Final release5 verified23 server digests, tag6045377; original4 hashes unchanged. Reclaimed875.8MiB clone/build/download duplicates; user app67908 protected. New README7language links/metrics and auto arrangement. QA and delivery report complete. Physical gaps stay explicit, no user acceptance claim.
