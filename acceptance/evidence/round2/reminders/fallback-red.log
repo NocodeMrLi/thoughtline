@@ -1,0 +1,24 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/reminderFallback.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/reminderFallback.test.ts [ tests/unit/reminderFallback.test.ts ]
+Error: Cannot find module '../../src/shared/reminderFallback' imported from /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/unit/reminderFallback.test.ts
+ ❯ tests/unit/reminderFallback.test.ts:2:1
+      1| import {afterEach,describe,expect,it,vi} from 'vitest';
+      2| import {ReminderFallback} from '../../src/shared/reminderFallback';
+       | ^
+      3| import {initialSnapshot} from '../../src/shared/ideaCommands';
+      4| import type {Snapshot} from '../../src/shared/contracts';
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  18:55:29
+   Duration  123ms (worker 97%, environment 3%)
+

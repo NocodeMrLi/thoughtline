@@ -1,0 +1,18 @@
+{
+  "attempts": [
+    {
+      "failed": true,
+      "stage": "native-raw-compiled-vs-signed",
+      "expected": "45d791c13878a1204253b93cb9b62d1e8c610810359dc7099f6181953eed4565",
+      "actual": "a87d8a1f2378a57b5e40fb5e2e3a7345de9ed87b2ecdccce9ab73f78ca00e004",
+      "resolution": "Exact repeated ad-hoc signing reproduces shipped bytes. Signature stripping alone retained as a failed normalization attempt."
+    },
+    {
+      "failed": true,
+      "stage": "pair-helper-old-binding-path",
+      "read": "9628a1427846cfc04fb47366883a5c666aff8a16",
+      "expected": "f1726cc96f6aa57e12ea5eb07af7f3f0d7aa06e3",
+      "resolution": "Correct only external helper to new proven binding; final pair proof passes, production inputs unchanged."
+    }
+  ]
+}

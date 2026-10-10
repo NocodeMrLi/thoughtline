@@ -5,7 +5,7 @@ Execute the seven Windows feedback repairs with Mac counterparts, using the cano
 
 ## Current Phase
 
-0.0.20 delivered at 9628a142;0.0.21 implements approved reminders/title-only/four More menus. Canonical append/readback complete before fixes. Mac source unit/type/build and 16 menu cases + two title-only modes + nine reminder UI cases passed; native permission/delivery and Windows/actual packages pending. User requires complete today-wide click-by-click acceptance report after completion.
+Final0.0.21 production/build/test source frozen at f1726cc96f6aa57e12ea5eb07af7f3f0d7aa06e3. Mac285 pass/4 Windows skips; source More16/title-only2/capacity9/reminder12 passed. FinalMac DMG strict verification and 24 new actual-package cases +capacity/positioning/appearance/split/top-edge passed. NativeMac permission denied; real nonactivating light fallback and exact signing transformation verified. WindowsCI38047064252 success (289 passed), actual Windows24 checks passed. Private regular v0.0.21 release408897458 published,32 assets matched; owned1096.9MiB cleanup complete. Physical/user acceptance remains pending.
 
 ## Phases
 - [x] Inspect current source, skills, docs and protect installed app and other worktrees.
@@ -61,5 +61,5 @@ Finalsource9628a1427846cfc04fb47366883a5c666aff8a16; private regular32asset rele
 - [x] One-time persisted per-idea scheduling and native permission/notification bridge.
 - [x] Shared light in-window reminder and swap popovers; synced markers in detail/calendar.
 - [x] Audit all three reader More entry points and calendar header as one standard.
-- [ ] Source and actual dual-package regressions, native delivery limits separately recorded.
-- [ ] Same-source immutable private new release, README/docs and owned cleanup.
+- [x] Source and actual dual-package regressions, native delivery limits separately recorded.
+- [x] Same-source immutable private new release, README/docs and owned cleanup.

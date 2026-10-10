@@ -1,9 +1,9 @@
 {
-  "stage": "Private preview.3 published after exact-source dual-package and scoped consumer review; independent physical/receiver acceptance pending",
+  "stage": "0.0.21 private regular release published; dual source and actual package regressions passed; physical/user acceptance pending",
   "asOf": "2026-10-10 Asia/Shanghai",
   "branch": "main",
-  "lastCommittedSource": "01017c9525ac971b6e97461ef2910140944eda19",
-  "currentCandidateVersion": "0.0.17-preview.3",
+  "lastCommittedSource": "f1726cc96f6aa57e12ea5eb07af7f3f0d7aa06e3",
+  "currentCandidateVersion": "0.0.21",
   "formalAcceptance": false,
   "round1": {
     "plan": "/Users/lihongwei/安安的成长笔记📒/晾念头 Thoughtline/Thoughtline第一轮修复优化.md",
@@ -715,5 +715,74 @@
       "receipt": "evidence/appearance/controller-final/controller-own-clone-cleanup-receipt.json"
     },
     "readmeDescriptions": "7 README translations and preview badge updated; actual app Chinese/English only; hero pixels unchanged"
+  },
+  "round2": {
+    "version": "0.0.21",
+    "source": "f1726cc96f6aa57e12ea5eb07af7f3f0d7aa06e3",
+    "plan": "/Users/lihongwei/安安的成长笔记📒/晾念头 Thoughtline/Thoughtline第二轮修复优化.md",
+    "report": "docs/releases/round2-v0.0.21-delivery.md",
+    "release": {
+      "passed": true,
+      "verifiedAt": "2026-10-10T11:25:44.273Z",
+      "releaseId": 408897458,
+      "url": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21",
+      "publishedAt": "2026-10-10T11:25:29Z",
+      "privateRepository": true,
+      "draft": false,
+      "prerelease": false,
+      "tag": "v0.0.21",
+      "source": "f1726cc96f6aa57e12ea5eb07af7f3f0d7aa06e3",
+      "tagSource": "f1726cc96f6aa57e12ea5eb07af7f3f0d7aa06e3",
+      "assets": 32,
+      "checksumTargets": 31,
+      "allAssetsServerDigestAndSizeMatched": true,
+      "previousV0020Unchanged": true,
+      "mac": {
+        "name": "Thoughtline-0.0.21-mac-arm64.dmg",
+        "bytes": 133457771,
+        "sha256": "696f3267a17d4f8a802221ab21c6384ce81176d698700cef394130bafbc205f8"
+      },
+      "windows": {
+        "name": "Thoughtline-0.0.21-win-x64.exe",
+        "bytes": 113105320,
+        "sha256": "9c466e8dce23550c076a64c5b7dbb2a528d3b8d227d2395291754a34b71d9542"
+      }
+    },
+    "tests": {
+      "macUnitPassed": 285,
+      "macWindowsOnlySkipped": 4,
+      "windowsUnitPassed": 289,
+      "windowsRun": 38047064252,
+      "windowsResult": "success",
+      "macActualPackageNewChecks": 24,
+      "windowsActualPackageNewChecks": 24,
+      "moreMenuCombinations": 16,
+      "titleOnlyPaths": 2,
+      "sourceReminderChecks": 12,
+      "sourceCapacityChecks": 9,
+      "macNativeNotification": "denied; no show event; real nonactivating light fallback passed",
+      "windowsNativeNotification": "permission unknown; native show event confirmed; no duplicate fallback",
+      "controlledNativeFailureFallbackBothPlatforms": "passed",
+      "actualWindowsDisabledNotificationFallback": "not forced or physically verified"
+    },
+    "evidence": "acceptance/evidence/round2/reminders/",
+    "cleanup": {
+      "ownedAllocatedMiB": 1096.9140625,
+      "netApfsGainClaimed": false,
+      "receipt": "acceptance/evidence/round2/reminders/cleanup-release.json",
+      "userAppWorktreesCachesPreserved": true
+    },
+    "physicalAcceptance": false,
+    "remaining": [
+      "physical IME and 100/125/150 percent DPI",
+      "multiscreen and display disconnect",
+      "Mac native menu physical desktop click",
+      "real receiver text drag stability",
+      "OS notification physical banner/click and Do Not Disturb",
+      "animation handfeel",
+      "normal clean LaunchServices launch/exit"
+    ],
+    "readmeHeroGif": "deferred by user until stable actual acceptance",
+    "signing": "Mac local ad-hoc; Windows unsigned; commercial signing/notarization not planned"
   }
 }

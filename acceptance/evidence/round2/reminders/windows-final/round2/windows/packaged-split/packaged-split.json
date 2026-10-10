@@ -1,0 +1,93 @@
+{
+  "executable": "D:\\a\\_temp\\Thoughtline-installer-preflight\\Thoughtline.exe",
+  "packaged": true,
+  "platform": "win32",
+  "version": "0.0.21",
+  "scope": "actual packaged executable, synthetic isolated data, native menu callback interception; no physical click",
+  "pids": [
+    4224,
+    8492,
+    8624,
+    2644,
+    6580
+  ],
+  "checks": [
+    "packaged-English-menu-splits-current-thought-without-opening-window",
+    "packaged-right-click-undo-preserves-original-stack-and-text",
+    "packaged-Merge-targets-current-paper-and-keeps-content",
+    "packaged-merge-undo-restores-both-groups"
+  ],
+  "cleanup": {
+    "normalQuit": true,
+    "profile": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-packaged-split-DeuUBi",
+    "profileRemoved": true,
+    "ownedPids": [
+      4224,
+      8492,
+      8624,
+      2644,
+      6580
+    ],
+    "allExited": true
+  },
+  "dataRemoved": true,
+  "passed": true,
+  "worker": {
+    "pid": 6460,
+    "code": 0,
+    "signal": null
+  },
+  "stage": "worker-completed",
+  "launchEvents": [
+    {
+      "time": "2026-10-10T11:13:20.329Z",
+      "type": "spawn",
+      "pid": 4224,
+      "shell": true,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-10T11:13:20.392Z",
+      "type": "stderr",
+      "pid": 4224,
+      "text": "Debugger listening on ws://127.0.0.1:60782/19958013-862f-48e4-a2a3-c6b1f5b499fc\r\n"
+    },
+    {
+      "time": "2026-10-10T11:13:20.404Z",
+      "type": "stderr",
+      "pid": 4224,
+      "text": "For help, see: https://nodejs.org/learn/getting-started/debugging\r\n"
+    },
+    {
+      "time": "2026-10-10T11:13:20.460Z",
+      "type": "stderr",
+      "pid": 4224,
+      "text": "Debugger attached.\r\n"
+    },
+    {
+      "time": "2026-10-10T11:13:20.501Z",
+      "type": "stderr",
+      "pid": 4224,
+      "text": "\r\nDevTools listening on ws://127.0.0.1:60784/devtools/browser/07308014-666d-4821-a081-b4f920909713\r\n"
+    },
+    {
+      "time": "2026-10-10T11:13:22.245Z",
+      "type": "stderr",
+      "pid": 4224,
+      "text": "Debugger ending on ws://127.0.0.1:60782/19958013-862f-48e4-a2a3-c6b1f5b499fc\r\nFor help, see: https://nodejs.org/learn/getting-started/debugging\r\n"
+    },
+    {
+      "time": "2026-10-10T11:13:22.438Z",
+      "type": "exit",
+      "pid": 4224,
+      "code": 0,
+      "signal": null
+    }
+  ],
+  "observedPidState": [
+    {
+      "pid": 4224,
+      "alive": false
+    }
+  ]
+}

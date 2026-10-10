@@ -1,0 +1,156 @@
+{
+  "platform": "darwin",
+  "scope": "Source UI + production IPC/scheduler with fixture-only native-notification and Mac-permission doubles; not proof of physical system notification delivery.",
+  "cases": [
+    "draft-reminder-persists-but-does-not-deliver-until-submit",
+    "invalid-custom-time-keeps-original-reminder",
+    "due-consumed-once-native-confirmation-and-click-route",
+    "detail-cancel-clears-shared-marker",
+    "calendar-list-and-detail-share-the-persisted-time",
+    "form-hover-preserves-input-and-Escape-cancels-without-mutation",
+    "time-and-more-panels-are-mutually-exclusive",
+    "denied-system-permission-is-visible-without-claiming-delivery",
+    "native-denial-fallback-visible-with-hidden-rope-nonfocused-and-click-opens-correct-thought",
+    "cancel-reminder-withdraws-fallback-and-stale-click-cannot-open"
+  ],
+  "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Reminder:/ })\u001b[22m\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/reminder-workflow.cjs:19:189",
+  "notificationDiagnostics": {
+    "events": [
+      {
+        "title": "提醒正文保留",
+        "id": "d917309aa94246c6",
+        "clickListeners": 0
+      }
+    ],
+    "hasActivation": "undefined"
+  },
+  "finalInfo": {
+    "lightReminder": null,
+    "preferenceCommit": {
+      "version": 1,
+      "sequence": 1,
+      "own": false
+    },
+    "preferences": {
+      "schemaVersion": 1,
+      "version": 1,
+      "locale": "en",
+      "theme": "dark"
+    },
+    "preferenceError": null,
+    "platform": "mac",
+    "snapshot": {
+      "schemaVersion": 3,
+      "revision": 14,
+      "clips": [
+        {
+          "id": "clip:cbecda5b-d9e5-464e-a732-96fae1808bfd",
+          "agentId": "general",
+          "ideaIds": [
+            "cbecda5b-d9e5-464e-a732-96fae1808bfd"
+          ],
+          "currentId": "cbecda5b-d9e5-464e-a732-96fae1808bfd",
+          "position": null
+        }
+      ],
+      "ideas": [
+        {
+          "text": "提醒正文保留",
+          "title": "提醒正文保留",
+          "project": "",
+          "agentId": "general",
+          "id": "cbecda5b-d9e5-464e-a732-96fae1808bfd",
+          "status": "hanging",
+          "createdAt": "2026-10-10T10:58:50.865Z",
+          "updatedAt": "2026-10-10T10:58:59.378Z",
+          "createdDay": "2026-10-10",
+          "creationTimeZone": "Asia/Shanghai"
+        }
+      ],
+      "agents": [
+        {
+          "id": "general",
+          "name": "通用",
+          "color": "#A0A3AA"
+        },
+        {
+          "id": "preset:life-inspiration",
+          "name": "生活灵感",
+          "color": "#6CA78C"
+        },
+        {
+          "id": "preset:work-notes",
+          "name": "工作记录",
+          "color": "#D79551"
+        },
+        {
+          "id": "preset:manager",
+          "name": "直属领导",
+          "color": "#9574CE"
+        },
+        {
+          "id": "preset:colleague",
+          "name": "同事",
+          "color": "#8AADD4"
+        },
+        {
+          "id": "codex",
+          "name": "Codex",
+          "color": "#4C90D9"
+        }
+      ],
+      "draft": null,
+      "settings": {
+        "writeHotkey": "Control+Alt+N",
+        "reducedMotion": false
+      }
+    },
+    "displayId": "1",
+    "width": 1440,
+    "dark": true,
+    "composerSession": 2,
+    "composerDraftSequence": 1,
+    "composerMaterial": "opaque",
+    "composerContext": {
+      "mode": "new",
+      "ideaId": null,
+      "draft": {
+        "text": "提醒正文保留",
+        "title": "",
+        "project": "",
+        "agentId": "general",
+        "reminderAt": "2026-10-10T11:58:50.797Z"
+      }
+    },
+    "placementNotice": null,
+    "arrangeSession": 0,
+    "manageVisit": 6,
+    "calendarReturning": false,
+    "manageSession": 6,
+    "manageSelection": "cbecda5b-d9e5-464e-a732-96fae1808bfd",
+    "manageMode": "detail",
+    "manageTitles": false,
+    "manageMaterial": "opaque",
+    "manageEditingRequested": false,
+    "canUndoClips": true,
+    "undoPlacementKind": "hang",
+    "dragCancelSession": 2,
+    "textDragActive": false,
+    "shelfAgentId": "all",
+    "hotkeyRegistered": true,
+    "shelfVisible": false,
+    "interactionLocked": true,
+    "presentationSession": 5,
+    "layoutLocked": false
+  },
+  "pids": [
+    95604,
+    95604,
+    95605,
+    95606,
+    95607,
+    95608
+  ],
+  "normalQuit": true,
+  "profileRemoved": true
+}

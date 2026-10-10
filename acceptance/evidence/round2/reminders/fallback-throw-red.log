@@ -1,0 +1,29 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/reminderScheduler.test.ts (7 tests | 1 failed) 25ms
+   ❯ reminder commands and resident scheduler (7)
+     × treats a thrown native delivery as a failure without consuming or notifying twice 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/reminderScheduler.test.ts > reminder commands and resident scheduler > treats a thrown native delivery as a failure without consuming or notifying twice
+AssertionError: expected +0 to be 1 // Object.is equality
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/unit/reminderScheduler.test.ts:12:470
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 6 passed (7)
+   Start at  19:01:21
+   Duration  210ms (transform 63%, tests 21%, import 15%, worker 2%)
+

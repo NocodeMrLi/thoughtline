@@ -1,0 +1,49 @@
+
+> thoughtline@0.0.21 verify
+> node scripts/verify.cjs
+
+
+> thoughtline@0.0.21 typecheck
+> node node_modules/typescript/bin/tsc --noEmit
+
+
+> thoughtline@0.0.21 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+
+ Test Files  50 passed | 1 skipped (51)
+      Tests  283 passed | 4 skipped (287)
+   Start at  19:00:07
+   Duration  2.07s (tests 63%, transform 22%, import 11%, worker 3%)
+
+    Isolate  51 workers spawned · ~120ms startup each (spawn + environment, per file)
+             at least ~753ms faster with isolate: false — reuses workers across files instead of one per file
+
+
+> thoughtline@0.0.21 build
+> node node_modules/electron-vite/bin/electron-vite.js build && node scripts/build-notification-native.cjs
+
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 35 modules transformed.
+rendering chunks...
+out/main/index.js  193.66 kB
+✓ built in 221ms
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 1 modules transformed.
+rendering chunks...
+out/preload/index.js  4.89 kB
+✓ built in 7ms
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 73 modules transformed.
+rendering chunks...
+../../out/renderer/index.html                                    0.52 kB
+../../out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg   98.37 kB
+../../out/renderer/assets/index-UCPlz4fg.css                    49.78 kB
+../../out/renderer/assets/index-0tsaAOtb.js                    883.22 kB
+✓ built in 1.14s
