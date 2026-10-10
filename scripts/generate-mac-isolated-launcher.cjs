@@ -84,6 +84,9 @@ if [[ "\${1:-}" == '--check-only' ]]; then
  print -- '只读包检查完成；未启动 App。'
  exit 0
 fi
+if /usr/bin/pgrep -f '[/]Thoughtline[.]app/Contents/MacOS/Thoughtline([[:space:]]|$)' >/dev/null; then
+ fail '请先正常退出已运行的 Thoughtline，再启动隔离测试；现有应用未关闭。'
+fi
 print -- '将通过系统正常打开流程启动测试 App。若系统拦截，请自行处理安全提示。'
 /usr/bin/open -n -W "$candidate_app" \\
  --env "THOUGHTLINE_DATA_DIR=$experience_data" \\
