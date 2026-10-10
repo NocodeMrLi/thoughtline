@@ -1,0 +1,38 @@
+{
+  "platform": "darwin",
+  "version": "0.0.20",
+  "scope": "Synthetic source UI/IPC. No physical IME acceptance.",
+  "cases": [
+    {
+      "mode": "detail",
+      "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-title-edit-S2qUTu",
+      "failure": "locator.click: Error: strict mode violation: getByRole('button', { name: '完成编辑', exact: true }) resolved to 2 elements:\n    1) <button>完成编辑</button> aka getByText('完成编辑')\n    2) <button aria-label=\"完成编辑\" aria-pressed=\"true\" class=\"icon-button \">…</button> aka getByLabel('完成编辑')\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '完成编辑', exact: true })\u001b[22m\n\n    at titleChecks (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/title-edit-checks.cjs:11:89)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/title-edit-workflow.cjs:4:488",
+      "pids": [
+        48566,
+        48566,
+        48567,
+        48568,
+        48572,
+        48573
+      ],
+      "normalQuit": true,
+      "profileRemoved": true
+    },
+    {
+      "mode": "calendar",
+      "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-title-edit-PKDSBD",
+      "failure": "locator.click: Error: strict mode violation: getByRole('button', { name: '完成编辑', exact: true }) resolved to 2 elements:\n    1) <button>完成编辑</button> aka getByText('完成编辑')\n    2) <button aria-label=\"完成编辑\" aria-pressed=\"true\" class=\"icon-button \">…</button> aka getByLabel('完成编辑')\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '完成编辑', exact: true })\u001b[22m\n\n    at titleChecks (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/title-edit-checks.cjs:11:89)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/title-edit-workflow.cjs:4:488",
+      "pids": [
+        48577,
+        48577,
+        48579,
+        48580,
+        48582,
+        48584
+      ],
+      "normalQuit": true,
+      "profileRemoved": true
+    }
+  ],
+  "passed": false
+}

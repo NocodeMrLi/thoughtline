@@ -1,0 +1,70 @@
+diff --git a/.github/workflows/test-packages.yml b/.github/workflows/test-packages.yml
+index 55b5dd8..f1ee09d 100644
+--- a/.github/workflows/test-packages.yml
++++ b/.github/workflows/test-packages.yml
+@@ -42,6 +42,8 @@ jobs:
+           if ($LASTEXITCODE -ne 0) { throw 'Capacity and swap workflow failed' }
+           & node tests/electron/positioning-workflow.cjs
+           if ($LASTEXITCODE -ne 0) { throw 'Tag positioning and effective status workflow failed' }
++          & node tests/electron/title-edit-workflow.cjs
++          if ($LASTEXITCODE -ne 0) { throw 'Optional title live input regression failed' }
+           & node tests/electron/round2-native-menu.cjs
+           if ($LASTEXITCODE -ne 0) { throw 'Second round native menu failed' }
+       - name: Source Electron UI regression on Windows
+diff --git a/scripts/generate-mac-isolated-launcher.cjs b/scripts/generate-mac-isolated-launcher.cjs
+index a933626..911fe98 100644
+--- a/scripts/generate-mac-isolated-launcher.cjs
++++ b/scripts/generate-mac-isolated-launcher.cjs
+@@ -88,11 +88,9 @@ if /usr/bin/pgrep -f '[/]Thoughtline[.]app/Contents/MacOS/Thoughtline([[:space:]
+  fail '请先正常退出已运行的 Thoughtline，再启动隔离测试；现有应用未关闭。'
+ fi
+ print -- '将通过系统正常打开流程启动测试 App。若系统拦截，请自行处理安全提示。'
+-/usr/bin/open -n -W "$candidate_app" \\
+- --env "THOUGHTLINE_DATA_DIR=$experience_data" \\
+- --env 'ELECTRON_RENDERER_URL=' \\
+- --env 'ELECTRON_RUN_AS_NODE=' \\
+- --env 'NODE_OPTIONS='
++/usr/bin/env -u ELECTRON_RENDERER_URL -u ELECTRON_RUN_AS_NODE -u NODE_OPTIONS \\
++ /usr/bin/open -n -W "$candidate_app" \\
++ --env "THOUGHTLINE_DATA_DIR=$experience_data"
+ print -- "测试 App 已正常退出。数据保留在 $experience_data。"
+ `;
+ if (fs.existsSync(output)) {
+diff --git a/src/renderer/components/InlineIdeaEditor.tsx b/src/renderer/components/InlineIdeaEditor.tsx
+index 735a04f..a38b59f 100644
+--- a/src/renderer/components/InlineIdeaEditor.tsx
++++ b/src/renderer/components/InlineIdeaEditor.tsx
+@@ -21,7 +21,9 @@ export function InlineIdeaEditor({idea,info,onDone}:{idea:Idea;info:PilotInfo;on
+    if(!splitAllowed.current)throw Error(t("更改归属会将这张纸移至独立夹子，请先确认。"));
+    if(live.current)setStatus(t("保存中"));const result=await bridge.updateIdea(idea.id,value,base.current,info.manageSession);if(!result.ok)throw Error(result.message);
+    const saved=result.value.ideas.find(i=>i.id===idea.id);if(!saved)throw Error(t("保存后找不到原记录，请保留正文。"));base.current=ideaDraft(saved);
+-   if(live.current){setError('');if(latest.current===value){latest.current=base.current;setDraft(base.current);setStatus(t("已保存"));}else setStatus(t("保存中"));}
++   // Saved records may normalize an optional name (e.g. body-derived fallback).
++   // A checkpoint must never replace the live input, even when it is empty.
++   if(live.current){setError('');setStatus(t(latest.current===value?"已保存":"保存中"));}
+   },e=>{if(live.current){setError(e instanceof Error?e.message:'保存未成功，文字已保留。');setStatus(t("尚未保存"));}},350,1500);
+   saver.current=worker;
+   const off=registerLeaveGuard(async()=>{
+diff --git a/tests/electron/packaged-positioning-worker.cjs b/tests/electron/packaged-positioning-worker.cjs
+index b9a2575..e4dba49 100644
+--- a/tests/electron/packaged-positioning-worker.cjs
++++ b/tests/electron/packaged-positioning-worker.cjs
+@@ -1,5 +1,6 @@
+ const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=require('node:path'),assert=require('node:assert/strict');
+ const {sanitizedPackagedEnv,observeLaunch}=require('./packaged-launch.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs'),{legacyFixture,freshChecks,legacyChecks}=require('./positioning-checks.cjs');
++const {titleFixture,titleChecks}=require('./title-edit-checks.cjs');
+ (async()=>{
+  const dir=process.env.THOUGHTLINE_OWNED_PROFILE,executable=path.resolve(process.env.THOUGHTLINE_EXECUTABLE),evidence=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR);assert(dir,'Supervisor-owned synthetic profile required');const receipt={packaged:true,executable,version:require('../../package.json').version,platform:process.platform,arch:process.arch,checks:[],pids:[],scope:'Actual package, isolated synthetic data, controlled UI/IPC. No physical IME, external receiver or display acceptance.'};let app,launchFailed=false;
+  const launch=async()=>{const restore=observeLaunch(executable,evidence);try{app=await _electron.launch({executablePath:executable,args:[],env:sanitizedPackagedEnv(process.env,dir),timeout:30000});}catch(e){launchFailed=true;throw e;}finally{restore();}assert.equal(await app.evaluate(({app})=>app.getPath('userData')),dir);assert.equal(await app.evaluate(({app})=>app.getVersion()),receipt.version);const shelf=await app.firstWindow();await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});return shelf;};
+@@ -8,7 +9,10 @@ const {sanitizedPackagedEnv,observeLaunch}=require('./packaged-launch.cjs'),{cle
+   await fs.writeFile(path.join(dir,'preferences.json'),JSON.stringify({schemaVersion:1,version:0,locale:'zh-CN',theme:'system'}));let shelf=await launch();receipt.checks.push(...await freshChecks(app,shelf,evidence));await close();
+   // Reuse only this supervisor-owned synthetic profile; no installed user data.
+   await fs.writeFile(path.join(dir,'preferences.json'),JSON.stringify({schemaVersion:1,version:0,locale:'zh-CN',theme:'light'}));await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify(legacyFixture()));shelf=await launch();const legacy=await legacyChecks(app,shelf,evidence);receipt.checks.push(...legacy.checks);await close();
+-  shelf=await launch();assert.deepEqual((await shelf.evaluate(()=>window.thoughtline.info())).snapshot,legacy.initial);receipt.checks.push('actual-package-restart-preserves-old-tags-content-position-and-draft');
++  shelf=await launch();assert.deepEqual((await shelf.evaluate(()=>window.thoughtline.info())).snapshot,legacy.initial);receipt.checks.push('actual-package-restart-preserves-old-tags-content-position-and-draft');await close();
++  await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify(titleFixture()));shelf=await launch();receipt.titleCases=[];
++  for(const mode of ['detail','calendar'])receipt.titleCases.push(await titleChecks(app,shelf,mode,evidence));receipt.checks.push('actual-package-detail-and-calendar-empty-title-editing-does-not-refill');
++  const named=(await shelf.evaluate(()=>window.thoughtline.info())).snapshot;await close();shelf=await launch();assert.deepEqual((await shelf.evaluate(()=>window.thoughtline.info())).snapshot,named);receipt.checks.push('actual-package-restart-preserves-newly-typed-title-and-original-body');
+  }catch(e){receipt.failure=e.stack;}
+  finally{receipt.cleanup={normalQuit:false,profile:dir,profileRemoved:false,ownedPids:[],allExited:false};try{await close();receipt.pids=[...new Set(receipt.pids)];receipt.cleanup.normalQuit=true;if(!launchFailed&&receipt.pids.length){await cleanupIdleFixture(dir,receipt.pids);receipt.cleanup.profileRemoved=true;receipt.cleanup.allExited=true;}else receipt.cleanup.reason='Incomplete owned lifecycle; retain for audit';}catch(e){receipt.cleanupFailure=e.stack;}receipt.cleanup.ownedPids=receipt.pids;receipt.passed=!receipt.failure&&!receipt.cleanupFailure&&receipt.cleanup.profileRemoved;await fs.writeFile(path.join(evidence,'packaged-positioning-worker.json'),JSON.stringify(receipt,null,2));console.log(JSON.stringify(receipt));if(!receipt.passed)process.exitCode=1;}
+ })().catch(e=>{console.error(e);process.exitCode=1;});

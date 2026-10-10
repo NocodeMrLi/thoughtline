@@ -21,7 +21,9 @@ export function InlineIdeaEditor({idea,info,onDone}:{idea:Idea;info:PilotInfo;on
    if(!splitAllowed.current)throw Error(t("更改归属会将这张纸移至独立夹子，请先确认。"));
    if(live.current)setStatus(t("保存中"));const result=await bridge.updateIdea(idea.id,value,base.current,info.manageSession);if(!result.ok)throw Error(result.message);
    const saved=result.value.ideas.find(i=>i.id===idea.id);if(!saved)throw Error(t("保存后找不到原记录，请保留正文。"));base.current=ideaDraft(saved);
-   if(live.current){setError('');if(latest.current===value){latest.current=base.current;setDraft(base.current);setStatus(t("已保存"));}else setStatus(t("保存中"));}
+   // Saved records may normalize an optional name (e.g. body-derived fallback).
+   // A checkpoint must never replace the live input, even when it is empty.
+   if(live.current){setError('');setStatus(t(latest.current===value?"已保存":"保存中"));}
   },e=>{if(live.current){setError(e instanceof Error?e.message:'保存未成功，文字已保留。');setStatus(t("尚未保存"));}},350,1500);
   saver.current=worker;
   const off=registerLeaveGuard(async()=>{

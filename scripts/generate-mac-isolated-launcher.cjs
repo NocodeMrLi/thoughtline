@@ -88,11 +88,9 @@ if /usr/bin/pgrep -f '[/]Thoughtline[.]app/Contents/MacOS/Thoughtline([[:space:]
  fail '请先正常退出已运行的 Thoughtline，再启动隔离测试；现有应用未关闭。'
 fi
 print -- '将通过系统正常打开流程启动测试 App。若系统拦截，请自行处理安全提示。'
-/usr/bin/open -n -W "$candidate_app" \\
- --env "THOUGHTLINE_DATA_DIR=$experience_data" \\
- --env 'ELECTRON_RENDERER_URL=' \\
- --env 'ELECTRON_RUN_AS_NODE=' \\
- --env 'NODE_OPTIONS='
+/usr/bin/env -u ELECTRON_RENDERER_URL -u ELECTRON_RUN_AS_NODE -u NODE_OPTIONS \\
+ /usr/bin/open -n -W "$candidate_app" \\
+ --env "THOUGHTLINE_DATA_DIR=$experience_data"
 print -- "测试 App 已正常退出。数据保留在 $experience_data。"
 `;
 if (fs.existsSync(output)) {

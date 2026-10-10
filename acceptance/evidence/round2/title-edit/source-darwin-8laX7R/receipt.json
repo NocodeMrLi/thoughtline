@@ -1,0 +1,38 @@
+{
+  "platform": "darwin",
+  "version": "0.0.20",
+  "scope": "Synthetic source UI/IPC. No physical IME acceptance.",
+  "cases": [
+    {
+      "mode": "detail",
+      "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-title-edit-ko26G6",
+      "failure": "AssertionError [ERR_ASSERTION]: Slow backspace must not reinsert generated body text\n\n'正文第一行 保留😀' !== ''\n\n    at titleChecks (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/title-edit-checks.cjs:8:112)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/title-edit-workflow.cjs:4:488",
+      "pids": [
+        48298,
+        48298,
+        48299,
+        48300,
+        48304,
+        48305
+      ],
+      "normalQuit": true,
+      "profileRemoved": true
+    },
+    {
+      "mode": "calendar",
+      "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-title-edit-itgiVT",
+      "failure": "AssertionError [ERR_ASSERTION]: Slow backspace must not reinsert generated body text\n\n'正文第一行 保留😀' !== ''\n\n    at titleChecks (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/title-edit-checks.cjs:8:112)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/title-edit-workflow.cjs:4:488",
+      "pids": [
+        48308,
+        48308,
+        48310,
+        48311,
+        48313,
+        48314
+      ],
+      "normalQuit": true,
+      "profileRemoved": true
+    }
+  ],
+  "passed": false
+}
