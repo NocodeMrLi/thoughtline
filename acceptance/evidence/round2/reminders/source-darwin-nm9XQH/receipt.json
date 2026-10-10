@@ -1,0 +1,199 @@
+{
+  "platform": "darwin",
+  "scope": "Source UI + production IPC/scheduler with fixture-only native-notification and Mac-permission doubles; not proof of physical system notification delivery.",
+  "cases": [
+    "draft-reminder-persists-but-does-not-deliver-until-submit",
+    "invalid-custom-time-keeps-original-reminder",
+    "due-consumed-once-native-confirmation-and-click-route",
+    "detail-cancel-clears-shared-marker",
+    "calendar-list-and-detail-share-the-persisted-time",
+    "form-hover-preserves-input-and-Escape-cancels-without-mutation",
+    "time-and-more-panels-are-mutually-exclusive",
+    "denied-system-permission-is-visible-without-claiming-delivery",
+    "English-dark-compact-panel-and-next-local-morning-preset"
+  ],
+  "footerGeometry": [
+    {
+      "width": 350,
+      "height": 360,
+      "scroll": 348,
+      "client": 348,
+      "controls": [
+        {
+          "left": 13,
+          "right": 113,
+          "top": 315,
+          "bottom": 347
+        },
+        {
+          "left": 145.875,
+          "right": 204,
+          "top": 315,
+          "bottom": 347
+        },
+        {
+          "left": 166.6796875,
+          "right": 262,
+          "top": 351,
+          "bottom": 383
+        },
+        {
+          "left": 265,
+          "right": 337,
+          "top": 351,
+          "bottom": 383
+        }
+      ]
+    }
+  ],
+  "failure": "AssertionError [ERR_ASSERTION]: configured reminder must keep footer actions in the viewport\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/reminder-workflow.cjs:14:1757",
+  "notificationDiagnostics": {
+    "events": [
+      {
+        "title": "提醒正文保留",
+        "id": "19b5dfa6c10240d1",
+        "clickListeners": 0
+      }
+    ],
+    "hasActivation": "undefined"
+  },
+  "finalInfo": {
+    "preferenceCommit": {
+      "version": 1,
+      "sequence": 1,
+      "own": false
+    },
+    "preferences": {
+      "schemaVersion": 1,
+      "version": 1,
+      "locale": "en",
+      "theme": "dark"
+    },
+    "preferenceError": null,
+    "platform": "mac",
+    "snapshot": {
+      "schemaVersion": 3,
+      "revision": 9,
+      "clips": [
+        {
+          "id": "clip:b31a6ad3-4cc0-48a7-829f-34d86486ec5e",
+          "agentId": "general",
+          "ideaIds": [
+            "b31a6ad3-4cc0-48a7-829f-34d86486ec5e"
+          ],
+          "currentId": "b31a6ad3-4cc0-48a7-829f-34d86486ec5e",
+          "position": null
+        }
+      ],
+      "ideas": [
+        {
+          "text": "提醒正文保留",
+          "title": "提醒正文保留",
+          "project": "",
+          "agentId": "general",
+          "id": "b31a6ad3-4cc0-48a7-829f-34d86486ec5e",
+          "status": "hanging",
+          "createdAt": "2026-10-10T10:44:18.583Z",
+          "updatedAt": "2026-10-10T10:44:23.133Z",
+          "createdDay": "2026-10-10",
+          "creationTimeZone": "Asia/Shanghai",
+          "reminder": {
+            "at": "2026-10-11T01:00:00.000Z",
+            "state": "scheduled"
+          }
+        }
+      ],
+      "agents": [
+        {
+          "id": "general",
+          "name": "通用",
+          "color": "#A0A3AA"
+        },
+        {
+          "id": "preset:life-inspiration",
+          "name": "生活灵感",
+          "color": "#6CA78C"
+        },
+        {
+          "id": "preset:work-notes",
+          "name": "工作记录",
+          "color": "#D79551"
+        },
+        {
+          "id": "preset:manager",
+          "name": "直属领导",
+          "color": "#9574CE"
+        },
+        {
+          "id": "preset:colleague",
+          "name": "同事",
+          "color": "#8AADD4"
+        },
+        {
+          "id": "codex",
+          "name": "Codex",
+          "color": "#4C90D9"
+        }
+      ],
+      "draft": {
+        "text": "窄窗提醒布局",
+        "title": "",
+        "project": "",
+        "agentId": "general",
+        "reminderAt": "2026-10-10T11:44:23.542Z"
+      },
+      "settings": {
+        "writeHotkey": "Control+Alt+N",
+        "reducedMotion": false
+      }
+    },
+    "displayId": "1",
+    "width": 1440,
+    "dark": true,
+    "composerSession": 3,
+    "composerDraftSequence": 1,
+    "composerMaterial": "opaque",
+    "composerContext": {
+      "mode": "new",
+      "ideaId": null,
+      "draft": {
+        "text": "窄窗提醒布局",
+        "title": "",
+        "project": "",
+        "agentId": "general",
+        "reminderAt": "2026-10-10T11:44:23.542Z"
+      }
+    },
+    "placementNotice": null,
+    "arrangeSession": 0,
+    "manageVisit": 5,
+    "calendarReturning": false,
+    "manageSession": 5,
+    "manageSelection": null,
+    "manageMode": "browse",
+    "manageTitles": false,
+    "manageMaterial": "opaque",
+    "manageEditingRequested": false,
+    "canUndoClips": true,
+    "undoPlacementKind": "hang",
+    "dragCancelSession": 2,
+    "textDragActive": false,
+    "shelfAgentId": "all",
+    "hotkeyRegistered": true,
+    "shelfVisible": true,
+    "interactionLocked": true,
+    "presentationSession": 2,
+    "layoutLocked": false
+  },
+  "pids": [
+    84536,
+    84536,
+    84537,
+    84538,
+    84539,
+    84540,
+    84541
+  ],
+  "normalQuit": true,
+  "profileRemoved": true
+}
