@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 29" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="badges/preview.svg" alt="Version: 0.0.17-preview.5" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.18"><img src="badges/preview.svg" alt="Version: 0.0.18" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.18"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   Uma corda, alguns prendedores e folhas para as ideias do dia a dia.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><ins>Baixar Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.18"><ins>Baixar Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.5</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.18</sub></p>
 
 Thoughtline é uma ferramenta leve para macOS e Windows. Abra suas ideias na borda superior da tela, registre um pensamento e volte ao que estava fazendo.
 
@@ -30,7 +30,7 @@ Thoughtline é uma ferramenta leve para macOS e Windows. Abra suas ideias na bor
 
 - Registre título, texto e categoria com um atalho; mantenha notas incompletas como rascunhos.
 - Uma corda na área de trabalho com prendedores e papel; novas ideias usam a categoria Geral.
-- Mova um prendedor inteiro ou separe uma folha; una prendedores compatíveis e desfaça a organização. A organização automática compacta os espaços sem mudar a ordem e permite desfazer as posições.
+- Mova um prendedor ou separe uma folha. No menu de contexto, **Merge** permite escolher um prendedor compatível e **Split** separa a ideia atual. Quando necessário, a separação reúne os espaços dispersos; a organização automática mantém a ordem da esquerda para a direita. Você pode desfazer a organização.
 - Edite na visualização detalhada ou no calendário, com salvamento após uma breve pausa e troca imediata de página.
 - Navegue por dia, mês ou ano; pesquise e filtre também ideias arquivadas.
 - Restaure notas em Excluídos recentemente. Excluir um projeto mantém suas ideias.
@@ -42,7 +42,7 @@ Thoughtline é uma ferramenta leve para macOS e Windows. Abra suas ideias na bor
 
 ## Download e instalação
 
-Os downloads estão disponíveis para membros com acesso ao repositório. Releases inclui pacotes, inicializadores isolados, SHA256SUMS e origem das compilações. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5).
+Os downloads estão disponíveis para membros com acesso ao repositório. Releases inclui pacotes, inicializadores isolados, SHA256SUMS e origem das compilações. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.18).
 
 | Platform | Package |
 |---|---|

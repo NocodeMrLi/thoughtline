@@ -39,3 +39,5 @@ User approved short Merge/Split labels and automatic gap compaction, all appende
 ### 实施细节追加｜合并目标必须可见
 
 复查发现旧候选菜单还列出绳上容量溢出的隐藏夹子，多张源夹子合入后无法直接看到目标页，违反“加入已有夹子直接显示新念头”。因此目标限定为当前绳上可见、同Agent、排除自身的夹子；仍按左右顺序显示标题/张数。完整保留隐藏念头，可从Thoughtline日历查看，不把当前纸张无提示移入隐藏目标。新增真实源码回归先记录失败再修复。4184dca及CI38023968951改为中间候选证据，新0.0.18未tag/发布，将再次冻结最终源码；不覆盖历史提交。
+
+Final0.0.18 regular private release26 server digests/sizes verified; tag/sourcea7c69962590728037048436989f668fe5cab85e5,Windows38024364214 successful all steps/241 units,Mac237+4. Current source split12 re-run green after visible-target fix; merge8 green.240 same-source inputs213 precise CRLF differences; Mac33 asar inputs and installed Windows payload proven. Preserve all earlier candidates as evidence, not delivered packages. Removed2189.4MiB du-allocated owned copies; no force termination. App67908/12 worktrees/dependencies/old5 rollback untouched. Canonical second round/00/07/master read back with original prefixes preserved. Final documentation commit next, physical acceptance remains open.

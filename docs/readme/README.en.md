@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 29" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="badges/preview.svg" alt="Version: 0.0.17-preview.5" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.18"><img src="badges/preview.svg" alt="Version: 0.0.18" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.18"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   A rope, a few clips, and sheets of paper for everyday ideas.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5"><ins>Download Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.18"><ins>Download Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.17-preview.5</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.18</sub></p>
 
 Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ideas at the top edge of the screen, capture a thought, and return to what you were doing.
 
@@ -30,7 +30,7 @@ Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ide
 
 - Capture titles, text, and categories with a shortcut; keep unfinished notes as drafts.
 - A desktop rope with clips and paper, with new thoughts assigned to General.
-- Move a whole clip or detach one sheet; merge compatible clips, or use Arrange clips to gather fragmented space; undo restores positions.
+- Move a whole clip or pull out one paper. Right-click **Merge** to choose a compatible clip, or **Split** to separate the current thought. Splitting compacts fragmented spacing when needed; **Auto arrange** keeps left-to-right order. Arrangement can be undone.
 - Edit directly in the detail view or calendar; autosave after a short pause and turn pages instantly.
 - Browse by day, month, or year; search and filter, including archived thoughts.
 - Recover deleted thoughts from Recently Deleted. Removing a project keeps its thoughts.
@@ -42,7 +42,7 @@ Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ide
 
 ## Download and install
 
-Downloads are available to members with repository access. Releases include packages, isolated launchers, SHA256SUMS, and build provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.17-preview.5).
+Downloads are available to members with repository access. Releases include packages, isolated launchers, SHA256SUMS, and build provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.18).
 
 | Platform | Package |
 |---|---|
