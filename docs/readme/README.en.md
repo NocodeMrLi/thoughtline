@@ -30,7 +30,7 @@ Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ide
 
 - Capture titles, text, and categories with a shortcut; keep unfinished notes as drafts.
 - A desktop rope with clips and paper, with new thoughts assigned to General.
-- Move a whole clip or detach one sheet; merge compatible clips and undo organization.
+- Move a whole clip or detach one sheet; merge compatible clips, or use Arrange clips to gather fragmented space; undo restores positions.
 - Edit directly in the detail view or calendar; autosave after a short pause and turn pages instantly.
 - Browse by day, month, or year; search and filter, including archived thoughts.
 - Recover deleted thoughts from Recently Deleted. Removing a project keeps its thoughts.

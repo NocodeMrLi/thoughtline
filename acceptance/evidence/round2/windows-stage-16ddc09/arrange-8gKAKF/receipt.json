@@ -1,0 +1,29 @@
+{
+  "platform": "win32",
+  "scope": "isolated native-menu protocol, real source renderer/IPC/repository; no physical menu click",
+  "cases": [
+    {
+      "name": "native-menu-arranges-filtered-full-rope-with-data-intact",
+      "passed": true
+    }
+  ],
+  "pids": [
+    2084,
+    3812,
+    5304,
+    5056,
+    5484,
+    6312,
+    5500
+  ],
+  "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-arrange-9LaPwm",
+  "motionProbe": {
+    "durations": [],
+    "locked": "false",
+    "reduced": "true"
+  },
+  "failure": "AssertionError [ERR_ASSERTION]: short arrangement animation retained\n    at D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-arrange-workflow.cjs:9:326",
+  "normalClose": true,
+  "dataRemoved": true,
+  "passed": false
+}
