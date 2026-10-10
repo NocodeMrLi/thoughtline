@@ -13,3 +13,9 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 .composer .primary{background:var(--accent);color:#FFFFFF}
 @media(forced-colors:active){.composer .primary{background:Highlight;color:HighlightText}.composer[data-material=opaque] textarea,:root[data-theme=dark] .composer[data-material=opaque] textarea{background:Canvas;color:CanvasText}}
 .composer[data-material=opaque] input,.composer[data-material=opaque] select,:root[data-theme=dark] .composer[data-material=opaque] input,:root[data-theme=dark] .composer[data-material=opaque] select{background:var(--surface);color:var(--text)}
+
+/* Paint the complete focus ring inside scrolling editor bounds. */
+.inline-editor{--editor-focus:var(--editor-focus-light,var(--focus))}
+:root[data-theme=dark] .inline-editor{--editor-focus:var(--editor-focus-dark,var(--focus))}
+.inline-editor>input:focus-visible,.inline-editor>textarea:focus-visible,.idea-reader>textarea:focus-visible{outline:2px solid var(--editor-focus,var(--focus));outline-offset:-3px;border-color:var(--editor-focus,var(--focus))}
+@media(forced-colors:active){.inline-editor>input:focus-visible,.inline-editor>textarea:focus-visible,.idea-reader>textarea:focus-visible{outline-color:Highlight;border-color:Highlight}}

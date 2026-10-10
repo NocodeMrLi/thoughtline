@@ -56,6 +56,7 @@ else app.whenReady().then(async()=>{
  let snapshot:Snapshot=loaded.snapshot;let displayId=String(screen.getPrimaryDisplay().id);let width=screen.getPrimaryDisplay().bounds.width;
  let draftSequence=0,draftWritableSession:number|null=null;let composerWrites:Promise<unknown>=Promise.resolve();
  const composerWrite=<T>(action:()=>Promise<T>):Promise<T>=>{const next=composerWrites.then(action,action);composerWrites=next;return next;};
+ let manageVisit=0,calendarReturning=false,calendarReturnBounds:Electron.Rectangle|null=null;
  let composerSession=0,manageSession=0,manageSelection:string|null=null;
  let manageEditingOwner:{session:number;ideaId:string}|null=null,manageEditingRequested=false;
  let dragCancelSession=0,dragEscape=false;let textDragTimer:ReturnType<typeof setTimeout>|null=null;let textDragOwner:string|null=null;
@@ -66,7 +67,7 @@ else app.whenReady().then(async()=>{
  const preload=join(__dirname,'../preload/index.js');shelf=createShelf(preload);
  const host=createHost(shelf,()=>composer);
  let preferenceCommit:{version:number;sequence:number;sender:number}|null=null;
- const info=(viewer?:number):PilotInfo=>({preferenceCommit:preferenceCommit?{version:preferenceCommit.version,sequence:preferenceCommit.sequence,own:preferenceCommit.sender===viewer}:null,preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,manageSession,manageSelection,manageMode,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
+ const info=(viewer?:number):PilotInfo=>({preferenceCommit:preferenceCommit?{version:preferenceCommit.version,sequence:preferenceCommit.sequence,own:preferenceCommit.sender===viewer}:null,preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,manageVisit,calendarReturning,manageSession,manageSelection,manageMode,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
  const publish=()=>{for(const w of [shelf,composer,manage])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info(w.webContents.id));};
  const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:(BrowserWindow|null)[]=[shelf,composer,manage])=>allowed.some(w=>w?.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
  const prepareWindow=(w:BrowserWindow|null):Promise<boolean>=>{
@@ -204,7 +205,7 @@ else app.whenReady().then(async()=>{
   if(composer?.isVisible())return invalid(t("请先保存或取消当前输入。"));
   if(id&&!snapshot.ideas.some(x=>x.id===id))return invalid(t("找不到这条念头。"));
   if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
-  try{await ensureManage();}catch{return {ok:false,code:'IO',message:t("浏览浮层未能打开，请重试。")};}if(quitting)return invalid(t("正在退出。"));if(composer?.isVisible())return invalid(t("请先保存或取消当前输入。"));manageSelection=id??null;manageMode=id?'detail':'browse';manageTitles=!!titles;manageEditingRequested=false;manageSession++;lock('manage',true);publish();if(id){const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint()),p=screen.getCursorScreenPoint();const b=boundsFor(420,500);b.x=Math.round(Math.max(d.workArea.x+12,Math.min(d.workArea.x+d.workArea.width-b.width-12,p.x-b.width/2)));b.y=Math.round(Math.max(d.workArea.y+12,Math.min(d.workArea.y+d.workArea.height-b.height-12,p.y+24)));setManageBounds(b);}else setManageBounds(calendarBounds());manage!.show();manage!.focus();refreshTray();return done();
+  try{await ensureManage();}catch{return {ok:false,code:'IO',message:t("浏览浮层未能打开，请重试。")};}if(quitting)return invalid(t("正在退出。"));if(composer?.isVisible())return invalid(t("请先保存或取消当前输入。"));manageSelection=id??null;manageMode=id?'detail':'browse';manageTitles=!!titles;manageEditingRequested=false;manageVisit++;calendarReturning=false;manageSession++;lock('manage',true);publish();if(id){const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint()),p=screen.getCursorScreenPoint();const b=boundsFor(420,500);b.x=Math.round(Math.max(d.workArea.x+12,Math.min(d.workArea.x+d.workArea.width-b.width-12,p.x-b.width/2)));b.y=Math.round(Math.max(d.workArea.y+12,Math.min(d.workArea.y+d.workArea.height-b.height-12,p.y+24)));setManageBounds(b);}else setManageBounds(calendarBounds());manage!.show();manage!.focus();refreshTray();return done();
  });
  const selectShelfAgent=async(id:string)=>{if(!await prepareWindow(shelf))return invalid(t("页码尚未保存，筛选已保留。"));shelfAgentId=id==='all'||snapshot.agents.some(a=>a.id===id)?id:'all';refreshTray();publish();};
  const agentFilterMenu=():Electron.MenuItemConstructorOptions[]=>[
@@ -217,7 +218,7 @@ else app.whenReady().then(async()=>{
   if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
   try{await ensureManage();}catch{return invalid(t("浏览浮层未能打开，请重试。"));}
   if(quitting||composer?.isVisible())return invalid(t("请先结束当前输入。"));
-  manageMode='browse';manageSelection=null;manageTitles=false;manageEditingRequested=false;manageSession++;lock('manage',true);setManageBounds(calendarBounds());publish();manage!.show();manage!.focus();refreshTray();return done();
+  manageMode='browse';manageSelection=null;manageTitles=false;manageEditingRequested=false;manageVisit++;calendarReturning=false;manageSession++;lock('manage',true);setManageBounds(calendarBounds());publish();manage!.show();manage!.focus();refreshTray();return done();
  };
  ipcMain.handle('thoughtline:shelf-menu',(e,id:string):Result<void>=>{
   if(!trusted(e,[shelf])||typeof id!=='string')return invalid(t("无效操作"));
@@ -226,6 +227,7 @@ else app.whenReady().then(async()=>{
   lock('menu',true);
   const menu=Menu.buildFromTemplate([
    {label:t("查看全文"),click:()=>{void openBrowseDetail(id);}},
+   {label:t("收起当前念头"),click:()=>{void (async()=>{if(!await prepareViews())return;const r=await composerWrite(()=>{const current=snapshot.ideas.find(i=>i.id===id&&i.status==='hanging');return current?save(changeStatus({...snapshot,clips:captureClipPositions(snapshot.clips,width)},id,'archived',new Date().toISOString()),snapshot.revision):Promise.resolve(invalid(t("找不到这条念头。")));});if(!r.ok){placementNotice=r.message;publish();}})();}},
    {label:t('onlyAgent',{name:agentLabel(preferences.current.locale,snapshot.agents.find(a=>a.id===idea.agentId))||t('这个 Agent')}),click:()=>selectShelfAgent(idea.agentId)},
    {label:t("显示全部"),click:()=>selectShelfAgent('all')},
    {label:t("筛选 Agent"),submenu:agentFilterMenu()},
@@ -239,15 +241,20 @@ else app.whenReady().then(async()=>{
   if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
   try{await ensureManage();}catch{return invalid(t("全文浮层未能打开，请重试。"));}
   if(quitting||composer?.isVisible())return invalid(t("请先结束当前输入。"));
-  manageMode='detail';manageSelection=id;manageTitles=false;manageEditingRequested=false;manageSession++;lock('manage',true);setManageBounds(boundsFor(420,500));publish();manage!.show();manage!.focus();refreshTray();return done();
+  manageMode='detail';manageSelection=id;manageTitles=false;manageEditingRequested=false;manageVisit++;calendarReturning=false;manageSession++;lock('manage',true);setManageBounds(boundsFor(420,500));publish();manage!.show();manage!.focus();refreshTray();return done();
  };
  ipcMain.handle('thoughtline:close-manage',async e=>{if(!trusted(e,[manage]))return invalid(t("无效操作"));if(!await prepareWindow(manage))return invalid(t("最后修改尚未保存，窗口已保留。"));hideManage();return done();});
- const openSettings=async():Promise<Result<void>>=>{
+ const openSettings=async(fromCalendar=false):Promise<Result<void>>=>{
   if(composer?.isVisible())return invalid(t("请先保存或取消当前输入。"));
   if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
-  try{await ensureManage();}catch{return {ok:false,code:'IO',message:t("设置浮层未能打开，请重试。")};}if(quitting)return invalid(t("正在退出。"));if(composer?.isVisible())return invalid(t("请先保存或取消当前输入。"));cancelDrag();manageMode='settings';manageTitles=false;manageSelection=null;manageEditingRequested=false;manageSession++;lock('manage',true);setManageBounds(boundsFor(500,600));publish();manage!.show();manage!.focus();refreshTray();return done();
+  try{await ensureManage();}catch{return {ok:false,code:'IO',message:t("设置浮层未能打开，请重试。")};}if(quitting)return invalid(t("正在退出。"));if(composer?.isVisible())return invalid(t("请先保存或取消当前输入。"));calendarReturnBounds=fromCalendar&&manage?.isVisible()?manage.getBounds():null;if(!fromCalendar)manageVisit++;calendarReturning=false;cancelDrag();manageMode='settings';manageTitles=false;manageSelection=null;manageEditingRequested=false;manageSession++;lock('manage',true);setManageBounds(boundsFor(500,600));publish();manage!.show();manage!.focus();refreshTray();return done();
  };
- ipcMain.handle('thoughtline:open-settings',e=>trusted(e)?openSettings():invalid(t("无效操作")));
+ ipcMain.handle('thoughtline:open-settings',e=>trusted(e)?openSettings(trusted(e,[manage])&&manageMode==='browse'&&!!manage?.isVisible()):invalid(t("无效操作")));
+ ipcMain.handle('thoughtline:return-calendar',async e=>{
+  if(!trusted(e,[manage])||manageMode!=='settings'||settingsBusy||storageBusy)return invalid(t('无效操作'));
+  if(!await prepareWindow(manage))return invalid(t('最后修改尚未保存，窗口已保留。'));
+  calendarReturning=calendarReturnBounds!==null;manageMode='browse';manageSelection=null;manageEditingRequested=false;manageSession++;setManageBounds(calendarReturnBounds??calendarBounds());calendarReturnBounds=null;publish();manage!.show();manage!.focus();return done();
+ });
  const storageState=()=>({directory:dataDir,profileDirectory:profileDir,revision:snapshot.revision});
  ipcMain.handle('thoughtline:storage-info',e=>trusted(e,[manage])?{ok:true,value:storageState()}:invalid(t("无效操作")));
  ipcMain.handle('thoughtline:open-storage-directory',async e=>{

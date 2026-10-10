@@ -38,7 +38,7 @@ Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ide
 - Keep data locally; inspect the actual folder, move it, or export an independent backup.
 - Switch Chinese/English and light/dark directly in the first-level windows, or follow the system; paper stays soft and readable.
 
-<p align="center"><img src="images/thought-calendar.png" alt="Thought calendar with synthetic demonstration data." width="740" /><br /><sub>Thought calendar with synthetic demonstration data.</sub></p>
+<p align="center"><img src="images/thought-calendar.png" alt="Thoughtline Calendar with synthetic demonstration data." width="740" /><br /><sub>Thoughtline Calendar with synthetic demonstration data.</sub></p>
 
 ## Download and install
 

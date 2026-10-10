@@ -1,0 +1,105 @@
+{
+  "platform": "darwin",
+  "arch": "arm64",
+  "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-round2-1OEs2Q",
+  "evidence": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round2/t4-MIq32Z",
+  "cases": [
+    {
+      "name": "hint-delay-small-dismiss-on-menu",
+      "passed": true,
+      "detail": {
+        "x": 260,
+        "y": 415,
+        "width": 60,
+        "height": 24
+      }
+    },
+    {
+      "name": "focus-ring-inside-editor-edges",
+      "passed": true,
+      "detail": {
+        "outline": "2px",
+        "offset": "-3px",
+        "shadow": "none",
+        "border": "rgb(102, 105, 114)",
+        "x": 15,
+        "right": 405,
+        "parentX": 15,
+        "parentRight": 405
+      }
+    },
+    {
+      "name": "calendar-fills-resized-height-and-arrows",
+      "passed": true,
+      "detail": {
+        "content": {
+          "height": 498,
+          "bottom": 645,
+          "width": 912
+        },
+        "grid": {
+          "height": 488,
+          "bottom": 637,
+          "width": 904
+        },
+        "cell": {
+          "height": 87,
+          "bottom": 269,
+          "width": 124.859375
+        },
+        "arrow": {
+          "height": 36,
+          "bottom": 137,
+          "width": 36
+        },
+        "svg": 18
+      }
+    },
+    {
+      "name": "settings-back-restores-month-and-window",
+      "passed": true,
+      "detail": {
+        "title": "2026年9月",
+        "width": 950
+      }
+    },
+    {
+      "name": "menu-stash-current-preserves-other-pages",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    'r2-0',\n+   'r2-1',\n    'r2-2'\n  ]\n"
+    },
+    {
+      "name": "navigation-performance-baseline",
+      "passed": true,
+      "detail": {
+        "samples": [
+          70,
+          66,
+          67,
+          67,
+          66,
+          65,
+          69,
+          67,
+          65,
+          67
+        ],
+        "p50": 67,
+        "p95": 70,
+        "scope": "Playwright input plus two actual renderer frames, controlled environment"
+      }
+    }
+  ],
+  "pids": [
+    3842,
+    3844,
+    3845,
+    3846,
+    3848,
+    3849
+  ],
+  "nativeOutsideClick": "not exercised by protocol fixture",
+  "normalClose": true,
+  "dataRemoved": true,
+  "passed": false
+}

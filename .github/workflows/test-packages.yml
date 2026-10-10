@@ -21,6 +21,17 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm run verify
+      - name: Second round UI and real native menu characterization
+        shell: pwsh
+        env:
+          THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round2/windows
+          THOUGHTLINE_FAKE_CLIPBOARD: '1'
+        run: |
+          New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
+          & node tests/electron/round2-workflow.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Second round UI failed' }
+          & node tests/electron/round2-native-menu.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Second round native menu failed' }
       - name: Source Electron UI regression on Windows
         shell: pwsh
         env:
@@ -116,6 +127,7 @@ jobs:
           path: |
             acceptance/evidence/round1/p6-windows-source/**
             acceptance/evidence/appearance/windows-source/**
+            acceptance/evidence/round2/windows/**
             acceptance/evidence/top-edge-20261010/windows-source/**
             acceptance/evidence/top-edge-20261010/windows-packaged/**
             acceptance/evidence/appearance/windows-packaged/**

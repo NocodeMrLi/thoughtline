@@ -1,10 +1,11 @@
 import {useLocale} from '../LocaleContext';
-import {useEffect,useRef,useState,type ChangeEvent,type CompositionEvent,type FocusEvent} from 'react';
+import {useEffect,useRef,useState,type ChangeEvent,type CompositionEvent,type CSSProperties,type FocusEvent} from 'react';
 import type {PilotInfo} from '../../shared/bridge';
 import type {Draft,Idea,Result,Snapshot} from '../../shared/contracts';
 import {DraftAutosaver} from '../../shared/draftAutosaver';
 import {CompositionSession} from '../../shared/compositionSession';
 import {registerLeaveGuard} from '../hooks/leaveGuards';
+import {agentInkColors} from './agentInk';
 import {ProjectOptions} from './ProjectOptions';
 export const ideaDraft=(idea:Idea):Draft=>({text:idea.text,title:idea.title,project:idea.project,agentId:idea.agentId});
 export function InlineIdeaEditor({idea,info,onDone}:{idea:Idea;info:PilotInfo;onDone:()=>void}){
@@ -39,7 +40,8 @@ export function InlineIdeaEditor({idea,info,onDone}:{idea:Idea;info:PilotInfo;on
  });
  const flush=async()=>{if(composition.current.composing){setError('请先完成输入法选字。');return false;}try{await saver.current?.flush();return true;}catch{return false;}};
  const projects=[...new Set(info.snapshot.ideas.map(i=>i.project).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
- return <section data-inline-editor className="inline-editor" aria-label={t("原地编辑念头")} onKeyDown={e=>{if(e.key==='Escape'){e.stopPropagation();if(!e.nativeEvent.isComposing&&!composition.current.composing){e.preventDefault();void flush().then(ok=>{if(ok&&live.current)onDone();});}}}}>
+ const ink=agentInkColors(info.snapshot.agents.find(a=>a.id===draft.agentId)?.color??'#A0A3AA');
+ return <section style={{'--editor-focus-light':ink.light,'--editor-focus-dark':ink.dark} as CSSProperties} data-inline-editor className="inline-editor" aria-label={t("原地编辑念头")} onKeyDown={e=>{if(e.key==='Escape'){e.stopPropagation();if(!e.nativeEvent.isComposing&&!composition.current.composing){e.preventDefault();void flush().then(ok=>{if(ok&&live.current)onDone();});}}}}>
   <input aria-label={t("编辑标题")} placeholder={t("名称（可选）")} maxLength={50} value={draft.title} {...events('title')}/>
   <textarea ref={text} aria-label={t("编辑正文")} value={draft.text} spellCheck={false} {...events('text')}/>
   <div className="inline-properties"><button aria-label={t("projectValue",{p0:draft.project||t("未分组")})} aria-expanded={projectOpen} onClick={()=>setProjectOpen(!projectOpen)}>{t("项目：")}{draft.project||t("未分组")} ⌄</button><label>{t("给谁：")}<select aria-label={t("编辑归属 Agent")} value={draft.agentId} onChange={e=>{setConfirmAgent(false);update({...latest.current,agentId:e.target.value});}}>{info.snapshot.agents.map(a=><option key={a.id} value={a.id}>{agentName(a)}</option>)}</select></label></div>

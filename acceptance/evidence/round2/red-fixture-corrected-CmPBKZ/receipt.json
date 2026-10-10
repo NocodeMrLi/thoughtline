@@ -1,0 +1,66 @@
+{
+  "platform": "darwin",
+  "arch": "arm64",
+  "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-round2-RI7wLj",
+  "evidence": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round2/red-fixture-corrected-CmPBKZ",
+  "cases": [
+    {
+      "name": "hint-delay-small-dismiss-on-menu",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: hover must not show hint immediately\n\n1 !== 0\n"
+    },
+    {
+      "name": "focus-ring-inside-editor-edges",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: focus stroke must fit clipping ancestor"
+    },
+    {
+      "name": "calendar-fills-resized-height-and-arrows",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: calendar must use available height"
+    },
+    {
+      "name": "settings-back-restores-month-and-window",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: settings must expose return\n\n0 !== 1\n"
+    },
+    {
+      "name": "menu-stash-current-preserves-other-pages",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: calendar entry uses unified name"
+    },
+    {
+      "name": "navigation-performance-baseline",
+      "passed": true,
+      "detail": {
+        "samples": [
+          41,
+          68,
+          67,
+          66,
+          66,
+          67,
+          67,
+          64,
+          69,
+          64
+        ],
+        "p50": 66,
+        "p95": 69,
+        "scope": "Playwright input plus two actual renderer frames, controlled environment"
+      }
+    }
+  ],
+  "pids": [
+    3379,
+    3380,
+    3381,
+    3382,
+    3383,
+    3388
+  ],
+  "nativeOutsideClick": "not exercised by protocol fixture",
+  "normalClose": true,
+  "dataRemoved": true,
+  "passed": false
+}

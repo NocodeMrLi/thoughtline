@@ -13,7 +13,7 @@ const {_electron}=require('playwright');const {launchOptions,warmViews,waitForIn
   await shelf.evaluate(()=>window.thoughtline.dragLock(false));
   const id=(await shelf.evaluate(()=>window.thoughtline.info())).snapshot.ideas[0].id;
   assert((await shelf.evaluate(id=>window.thoughtline.shelfMenu(id),id)).ok);
-  const menu=await app.evaluate(()=>globalThis.thoughtlineTestPopup.menu.items.map(i=>i.label));assert(menu.includes('筛选 Agent')&&menu.includes('查找 / 已收起'));
+  const menu=await app.evaluate(()=>globalThis.thoughtlineTestPopup.menu.items.map(i=>i.label));assert(menu.includes('筛选 Agent')&&menu.includes('Thoughtline日历'));
   await app.evaluate(()=>{const p=globalThis.thoughtlineTestPopup;p.menu.items.find(i=>i.label.startsWith('只看 ')).click();p.options.callback();});
   await waitForInfo(shelf,i=>i.shelfAgentId==='codex');assert.equal(await shelf.locator('nav').count(),0);
   assert((await shelf.evaluate(id=>window.thoughtline.shelfMenu(id),id)).ok);await app.evaluate(()=>{const p=globalThis.thoughtlineTestPopup;p.menu.items.find(i=>i.label==='显示全部').click();p.options.callback();});

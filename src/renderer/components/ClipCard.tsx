@@ -37,8 +37,8 @@ export function ClipCard({clip,ideas,agent,onChange,onGrab,onError,reduced,textD
     <use className="paper-shading" href={`#${paperId}-outline`} fill={`url(#${paperId}-down)`}/>
     <g data-part="paper-pressure"><ellipse cx="79" cy="5.6" rx="10" ry="3.4" fill={`url(#${paperId}-pressure)`}/><path d="M73.5 5.8Q79 6.4 84.5 5.8" fill="none" stroke="#FFFFFF" strokeOpacity=".15" strokeWidth=".45"/></g>
    </svg>
-   <button className="paper-grip" aria-label={t("dragPaper",{p0:idea.title})} title={t("拖动纸张上缘，抽出当前一张；拖正文复制文字")} onPointerDown={e=>onGrab(e,{...clip,currentId:page.id},'paper')}/>
-   <button className="card-copy" draggable data-exporting={exporting} title={t("点击复制；拖动正文到支持文字拖放的输入框")} onDragStart={e=>{
+   <button className="paper-grip" aria-label={t("dragPaper",{p0:idea.title})}  onPointerDown={e=>onGrab(e,{...clip,currentId:page.id},'paper')}/>
+   <button className="card-copy" draggable data-exporting={exporting}  onDragStart={e=>{
     e.dataTransfer.clearData();e.dataTransfer.setData('text/plain',idea.text);e.dataTransfer.effectAllowed='copy';ignoreCopyUntil.current=Infinity;setExporting(true);exportId.current=idea.id;window.thoughtline.textDrag(true,idea.id);
    }} onDragEnd={()=>{ignoreCopyUntil.current=performance.now()+160;setExporting(false);if(exportId.current)window.thoughtline.textDrag(false,exportId.current);exportId.current=null;}} aria-label={t("copyPaper",{p0:agentName(agent)||t('通用'),p1:idea.title})} onClick={async()=>{
     if(performance.now()<ignoreCopyUntil.current)return;const id=idea.id,r=await window.thoughtline.copy(id);if(!r.ok){onError(r.message);return;}if(current.current!==id)return;
