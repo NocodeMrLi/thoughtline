@@ -1,5 +1,9 @@
 // Central typed application text; user text is never translated.
 export const zh = {
+ "轻提醒": "轻提醒",
+ "点击查看": "点击查看",
+ "关闭提醒": "关闭提醒",
+ "将使用顶部轻提醒": "将使用顶部轻提醒",
  "生活灵感": "生活灵感",
  "工作记录": "工作记录",
  "直属领导": "直属领导",
@@ -453,6 +457,10 @@ export const zh = {
  "savedBackup": "独立备份已保存到 {p0}。当前数据位置未更改。"
 } as const;
 export const en = {
+ "轻提醒": "Reminder",
+ "点击查看": "Click to view",
+ "关闭提醒": "Dismiss reminder",
+ "将使用顶部轻提醒": "A light reminder will appear at the top",
  "生活灵感": "Everyday ideas",
  "工作记录": "Work notes",
  "直属领导": "Direct manager",

@@ -39,7 +39,7 @@ Thoughtline é uma ferramenta leve para macOS e Windows. Abra suas ideias na bor
 - Alterne chinês/inglês e modo claro/escuro nas primeiras janelas, ou acompanhe o sistema; o papel continua suave e legível.
 - Se a corda estiver cheia, salve a ideia ou escolha **Swap onto line** na mesma janela; a ideia anterior fica arquivada. Pendurar novamente pelo calendário aparece imediatamente. Os menus fecham quando o ponteiro sai.
 
-- Um título ou texto é suficiente; o corpo pode ficar vazio. O sino define um lembrete único, também visível no calendário. As notificações exigem permissão e abrem a nota. Com o aplicativo totalmente fechado, os lembretes perdidos são agrupados ao reiniciar.
+- Um título ou texto é suficiente; o corpo pode ficar vazio. O sino define um lembrete único, também visível no calendário. As notificações exigem permissão e abrem a nota. Com o aplicativo totalmente fechado, os lembretes perdidos são agrupados ao reiniciar. Se a notificação do sistema não estiver disponível, um aviso pequeno e clicável aparece no topo, sem tirar o foco nem criar outra janela.
 
 <p align="center"><img src="images/thought-calendar.png" alt="Calendário de ideias com dados sintéticos de demonstração." width="740" /><br /><sub>Calendário de ideias com dados sintéticos de demonstração.</sub></p>
 

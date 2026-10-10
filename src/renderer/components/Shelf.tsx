@@ -87,12 +87,12 @@ export function Shelf({info}:{info:PilotInfo}){
  },[info.arrangeSession,info.snapshot.revision,info.interactionLocked,info.width,info.displayId,agentId,reduced]);
  useLayoutEffect(()=>{
   const publish=()=>{
-   const rects=Array.from(root.current?.querySelectorAll<HTMLElement>('[data-hit]')??[]).map(el=>{const r=el.getBoundingClientRect();const x=Math.max(0,r.x),y=Math.max(0,r.y);return {x,y,width:Math.max(0,Math.min(info.width,r.right)-x),height:Math.max(0,Math.min(innerHeight,r.bottom)-y)};}).filter(r=>r.width>0&&r.height>0);
+   const rects=Array.from(root.current?.querySelectorAll<HTMLElement>('[data-hit]')??[]).filter(el=>info.shelfVisible||!el.closest('.shelf-root')).map(el=>{const r=el.getBoundingClientRect();const x=Math.max(0,r.x),y=Math.max(0,r.y);return {x,y,width:Math.max(0,Math.min(info.width,r.right)-x),height:Math.max(0,Math.min(innerHeight,r.bottom)-y)};}).filter(r=>r.width>0&&r.height>0);
    window.thoughtline.hitRects({displayId:info.displayId,layoutRevision:++layoutRevision.current,rects});
   };
   publish();let frame=0;const duringMotion=()=>{publish();if(arrangement.current.some(a=>a.playState==='running'))frame=requestAnimationFrame(duringMotion);};if(arrangement.current.length)frame=requestAnimationFrame(duringMotion);const observer=new ResizeObserver(publish);root.current?.querySelectorAll('[data-hit]').forEach(el=>observer.observe(el));return()=>{cancelAnimationFrame(frame);observer.disconnect();};
- },[info.width,info.displayId,info.snapshot.revision,info.interactionLocked,info.arrangeSession,agentId,sag,progress,dragView,placement,error,notice]);
- return <div ref={root} data-view="shelf" data-visible={info.shelfVisible} data-locked={info.interactionLocked} data-progress={progress} data-reduced={reduced} className="shelf-root" style={{transform:reduced?'none':`translate3d(0,${(progress-1)*250}px,0)`,opacity:progress,willChange:!reduced&&progress>0&&progress<1?'transform, opacity':undefined}}>
+ },[info.width,info.displayId,info.snapshot.revision,info.interactionLocked,info.arrangeSession,agentId,sag,progress,dragView,placement,error,notice,info.lightReminder,info.shelfVisible]);
+ return <div ref={root} className="shelf-stage" data-reduced-motion={info.snapshot.settings.reducedMotion}><div data-view="shelf" data-visible={info.shelfVisible} data-locked={info.interactionLocked} data-progress={progress} data-reduced={reduced} className="shelf-root" style={{transform:reduced?'none':`translate3d(0,${(progress-1)*250}px,0)`,opacity:progress,willChange:!reduced&&progress>0&&progress<1?'transform, opacity':undefined}}>
   <svg className="rope" data-sag={sag} data-left={rope.left} data-length={rope.length} data-layout-width={info.width} data-end-fade=".08" width="100%" height="140" aria-hidden="true">
    <defs><linearGradient id={`${ropeId}-ends`} gradientUnits="userSpaceOnUse" x1={rope.left} x2={rope.left+rope.length} y1="0" y2="0"><stop stopColor="white" stopOpacity="0"/><stop offset=".08" stopColor="white"/><stop offset=".92" stopColor="white"/><stop offset="1" stopColor="white" stopOpacity="0"/></linearGradient><mask id={`${ropeId}-mask`} maskUnits="userSpaceOnUse" x="0" y="0" width={info.width} height="140"><rect width={info.width} height="140" fill={`url(#${ropeId}-ends)`}/></mask></defs>
    {['rope-shadow','rope-core','rope-light'].map(c=><path key={c} className={c} mask={`url(#${ropeId}-mask)`} d={`M ${rope.left} ${rope.top} Q ${info.width/2} ${rope.top+2*sag} ${rope.left+rope.length} ${rope.top}`}/>)}</svg>
@@ -106,5 +106,10 @@ export function Shelf({info}:{info:PilotInfo}){
   {dragView&&<><div className="source-ghost" style={{left:dragView.origin,top:fixedRopeY(dragView.origin,rope)+6}}/><span className="drag-message" role="status">{dragView.ready?t("松开合并"):dragView.target?(info.snapshot.clips.find(c=>c.id===dragView.target)?.agentId===dragView.clip.agentId?t("停留后合夹"):t("不同 Agent 不能合夹")):dragView.mode==='paper'?(dragView.valid?t("松开将当前纸张挂到空位 · Esc取消"):t("绳上暂时放不下 · Esc取消")):t("拖动调整位置 · Esc取消")}</span></>}
   {(error||notice)&&<button data-hit className="shelf-error" role={error?'alert':'status'} onClick={()=>{setError('');setNotice('');}}>{m(error||notice)}</button>}
   {!error&&!notice&&placement&&<button data-hit className="shelf-error" role="status" onClick={()=>{setDismissedPlacement(placement);if(layout.overflow.length)void browse();}}>{m(placement)}</button>}
+ </div>
+ {info.lightReminder&&<aside className="light-reminder" data-hit data-reminder-key={info.lightReminder.key} role="status" aria-live="polite">
+  <button className="light-reminder-open" onClick={()=>{void window.thoughtline.reminderAction(info.lightReminder!.key,true).then(r=>{if(!r.ok)setError(r.message);});}}><span className="light-reminder-brand">Thoughtline · {t('轻提醒')}{info.lightReminder.count>1?' ('+info.lightReminder.count+')':''}</span><strong>{info.lightReminder.title}</strong><span className="light-reminder-hint">{error?m(error):t('点击查看')}</span></button>
+  <button className="light-reminder-close" aria-label={t('关闭提醒')} onClick={()=>{void window.thoughtline.reminderAction(info.lightReminder!.key,false);}}>×</button>
+ </aside>}
  </div>;
 }

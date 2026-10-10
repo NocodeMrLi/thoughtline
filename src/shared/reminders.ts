@@ -23,7 +23,7 @@ export class ReminderScheduler{
  async tick(startup=false){if(this.busy||this.stopped)return;this.busy=true;this.retry=false;
   try{const now=this.now(),claims=dueReminders(this.ports.snapshot(),now);if(!claims.length)return;const time=new Date(now).toISOString(),missed=startup||claims.some(c=>now-Date.parse(c.at)>60000);if(!await this.ports.consume(claims,missed?'missed':'notified',time)){this.retry=true;return;}
    const available=claims.filter(c=>this.ports.snapshot().ideas.some(i=>i.id===c.id&&i.status!=='deleted'&&i.reminder?.at===c.at&&['notified','missed'].includes(i.reminder.state)));
-   if(available.length&&!await this.ports.notify(available.map(c=>c.id),missed))await this.ports.failed(available,time);
+   if(available.length){let delivered=false;try{delivered=await this.ports.notify(available.map(c=>c.id),missed);}catch(e){this.ports.onError?.(e);}if(!delivered)await this.ports.failed(available,time);}
   }catch(e){this.retry=true;this.ports.onError?.(e);}finally{this.busy=false;this.refresh();}
  }
  stop(){this.stopped=true;if(this.timer)clearTimeout(this.timer);this.timer=null;}

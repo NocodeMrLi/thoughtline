@@ -5,23 +5,26 @@ export class EdgeController{
  private state=initialShelf();private timer:ReturnType<typeof setTimeout>|null=null;
  private rects:Rect[]=[];private layoutRevision=-1;private displayId='';private paused=false;
  private pauses={manual:false,sleep:false,lock:false,paused:false};
- private nativeVisible=false;private hideTimer:ReturnType<typeof setTimeout>|null=null;private presentationSession=0;
+ private nativeVisible=false;private hideTimer:ReturnType<typeof setTimeout>|null=null;private presentationSession=0;private reminderOverlay=false;
  private seam:SeamTickState={};private proximityDelay=400;
  private bounds:Rect={x:0,y:0,width:1200,height:340};
  constructor(private host:PlatformHost,private onDisplay:(id:string,width:number)=>void,private onStateChange:()=>void=()=>{}){}
  presentation(){return {shelfVisible:this.state.phase!=='hidden',interactionLocked:this.state.locks.length>0,presentationSession:this.presentationSession};}
+ reminder(active:boolean){if(this.reminderOverlay===active)return;this.reminderOverlay=active;if(this.paused)return;if(active){this.cancelHide();this.host.showShelf(this.bounds);this.nativeVisible=true;}else if(this.state.phase==='hidden')this.forceHide();}
  start(){this.poll();}
  stop(){if(this.timer)clearTimeout(this.timer);this.timer=null;this.forceHide();}
  private cancelHide(){if(this.hideTimer)clearTimeout(this.hideTimer);this.hideTimer=null;}
  private forceHide(){this.cancelHide();this.presentationSession++;this.host.setShelfInteractive(false);this.host.hideShelf();this.nativeVisible=false;}
- presentationFinished(session:number){if(session!==this.presentationSession||this.state.phase!=='hidden'||!this.hideTimer)return;this.cancelHide();this.host.hideShelf();this.nativeVisible=false;}
+ presentationFinished(session:number){if(session!==this.presentationSession||this.state.phase!=='hidden'||!this.hideTimer)return;this.cancelHide();if(this.reminderOverlay&&!this.paused)return;this.host.hideShelf();this.nativeVisible=false;}
  layout(payload:HitLayout){if(payload.displayId!==this.displayId||payload.layoutRevision<=this.layoutRevision)return;this.layoutRevision=payload.layoutRevision;this.rects=payload.rects;}
  event(event:ShelfEvent){const before=this.state.phase;const locked=this.state.locks.length>0;this.state=shelfTransition(this.state,event);const session=this.presentationSession;this.render(before,event.type==='suspend');if(session!==this.presentationSession||before!==this.state.phase||locked!==(this.state.locks.length>0))this.onStateChange();}
  isManuallyPaused(){return this.pauses.manual;}
  pause(value:boolean,reason:PauseReason='manual'){this.pauses=pauseTransition(this.pauses,reason,value);if(this.paused===this.pauses.paused)return;this.paused=this.pauses.paused;this.event({type:this.paused?'suspend':'resume',now:Date.now()});}
  private render(before:string,immediate:boolean){
   if(immediate){this.forceHide();return;}
+  if(this.reminderOverlay&&!this.paused&&!this.nativeVisible){this.host.showShelf(this.bounds);this.nativeVisible=true;}
   if(this.state.phase==='hidden'){
+   if(this.reminderOverlay){this.cancelHide();return;}
    this.host.setShelfInteractive(false);
    if(this.nativeVisible&&before!=='hidden'){
     this.cancelHide();const session=++this.presentationSession;
@@ -51,9 +54,9 @@ export class EdgeController{
    const corridor=point.y>=d.bounds.y&&local.y<Math.min(300,this.bounds.height)&&local.x>=0&&local.x<this.bounds.width;
    this.event({type:'pointer',zone:edge?'edge':hit?'card':corridor?'corridor':'outside',now:Date.now()});
    this.event({type:'tick',now:Date.now()});
-   this.host.setShelfInteractive(this.state.phase!=='hidden'&&(hit||this.state.locks.includes('drag')||this.state.locks.includes('text-drag')));
+   this.host.setShelfInteractive((this.state.phase!=='hidden'||this.reminderOverlay)&&(hit||this.state.locks.includes('drag')||this.state.locks.includes('text-drag')));
   }
-  const delay=this.paused?1000:this.state.phase!=='hidden'?16:this.proximityDelay;
+  const delay=this.paused?1000:this.state.phase!=='hidden'||this.reminderOverlay?16:this.proximityDelay;
   this.timer=setTimeout(this.poll,delay);
  };
 }

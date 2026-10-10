@@ -39,7 +39,7 @@ Thoughtline est un outil léger pour macOS et Windows. Retrouvez vos idées au b
 - Passez du chinois à l’anglais et du mode clair au mode sombre dès les premières fenêtres, ou suivez le système ; le papier reste doux et lisible.
 - Si la corde est pleine, enregistrez la pensée ou choisissez **Swap onto line** dans la même fenêtre ; la pensée précédente est rangée et conservée. Le calendrier affiche immédiatement la pensée raccrochée. Les menus se ferment lorsque le pointeur les quitte.
 
-- Un titre ou un texte suffit ; le corps peut rester vide. La cloche définit un rappel unique, également visible dans le calendrier. Les notifications nécessitent une autorisation et ouvrent la note. Après une fermeture complète, les rappels manqués sont regroupés au redémarrage.
+- Un titre ou un texte suffit ; le corps peut rester vide. La cloche définit un rappel unique, également visible dans le calendrier. Les notifications nécessitent une autorisation et ouvrent la note. Après une fermeture complète, les rappels manqués sont regroupés au redémarrage. Si la notification système est indisponible, un petit rappel cliquable apparaît en haut, sans prendre le focus ni ouvrir une nouvelle fenêtre.
 
 <p align="center"><img src="images/thought-calendar.png" alt="Calendrier d’idées avec des données de démonstration synthétiques." width="740" /><br /><sub>Calendrier d’idées avec des données de démonstration synthétiques.</sub></p>
 

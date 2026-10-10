@@ -22,6 +22,7 @@ import {placeIdea,placementPlan,undoPlacement,type PlacementIntent,type Placemen
 import {ReminderScheduler,markReminders,setIdeaReminder,type ReminderClaim} from '../shared/reminders';
 import {validReminder,validReminderTime} from '../shared/reminderTime';
 import {ReminderNotifications,notificationAccess} from './reminderNotifications';
+import {ReminderFallback} from '../shared/reminderFallback';
 app.setName('Thoughtline');
 app.setPath('userData',process.env.THOUGHTLINE_DATA_DIR||join(app.getPath('appData'),'Thoughtline'));
 let startupLocale:'zh-CN'|'en'='zh-CN';
@@ -71,9 +72,10 @@ else app.whenReady().then(async()=>{
  const preload=join(__dirname,'../preload/index.js');shelf=createShelf(preload);
  const host=createHost(shelf,()=>composer);
  let preferenceCommit:{version:number;sequence:number;sender:number}|null=null;
- const info=(viewer?:number):PilotInfo=>({preferenceCommit:preferenceCommit?{version:preferenceCommit.version,sequence:preferenceCommit.sequence,own:preferenceCommit.sender===viewer}:null,preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,arrangeSession,manageVisit,calendarReturning,manageSession,manageSelection,manageMode,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,undoPlacementKind:undoClips?.placementKind,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation(),layoutLocked:dragEscape||!!textDragOwner});
+ let reminderFallback:ReminderFallback|null=null;
+ const info=(viewer?:number):PilotInfo=>({lightReminder:reminderFallback?.current??null,preferenceCommit:preferenceCommit?{version:preferenceCommit.version,sequence:preferenceCommit.sequence,own:preferenceCommit.sender===viewer}:null,preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,arrangeSession,manageVisit,calendarReturning,manageSession,manageSelection,manageMode,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,undoPlacementKind:undoClips?.placementKind,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation(),layoutLocked:dragEscape||!!textDragOwner});
  let reminderScheduler:ReminderScheduler|null=null,reminderNotices:ReminderNotifications|null=null;
- const publish=()=>{reminderNotices?.sync();reminderScheduler?.refresh();for(const w of [shelf,composer,manage])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info(w.webContents.id));};
+ const publish=()=>{reminderFallback?.sync();edge.reminder(!!reminderFallback?.current);reminderNotices?.sync();reminderScheduler?.refresh();for(const w of [shelf,composer,manage])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info(w.webContents.id));};
  const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:(BrowserWindow|null)[]=[shelf,composer,manage])=>allowed.some(w=>w?.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
  const prepareWindow=(w:BrowserWindow|null):Promise<boolean>=>{
   if(!w||w.isDestroyed())return Promise.resolve(true);
@@ -279,7 +281,7 @@ else app.whenReady().then(async()=>{
   activeShelfMenu={menu,finish};
   try{if(process.platform==='win32'){shelf.setFocusable(true);shelf.focus();}menu.popup({window:shelf,callback:finish});}catch{finish();return invalid(t("菜单未能打开，请从托盘查找念头。"));}return done();
  });
- const openBrowseDetail=async(id:string)=>{
+ const openBrowseDetail=async(id:string):Promise<Result<void>>=>{
   if(composer?.isVisible())return invalid(t("请先保存或取消当前输入。"));
   if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
   try{await ensureManage();}catch{return invalid(t("全文浮层未能打开，请重试。"));}
@@ -295,17 +297,25 @@ else app.whenReady().then(async()=>{
   if(!trusted(e,[manage])||!manage?.isVisible()||quitting||session!==manageSession||typeof id!=='string'||!(at===null||validReminderTime(at))||!(expected===null||validReminder(expected)))return invalid(t('无效操作'));
   const r=setIdeaReminder(snapshot,id,at,expected,new Date().toISOString());return r.ok?reminderCommit(r.value):r;
  }));
- reminderNotices=new ReminderNotifications(()=>snapshot,()=>preferences.current.locale,async id=>{
-  if(quitting||quitInFlight)return;
+ const openReminder=async(id:string):Promise<Result<void>>=>{
+  if(quitting||quitInFlight)return invalid(t("正在退出。"));
   if(composer?.isVisible()){
    const draft=await captureDraft();const r=draft.ok?await composerWrite(()=>save({ok:true,value:{...snapshot,draft:draft.value}},snapshot.revision)):draft;
-   composer?.webContents.send('thoughtline:quit-error',r.ok?'':r.message);if(!r.ok)return;closeConfirmedComposer();
+   composer?.webContents.send('thoughtline:quit-error',r.ok?'':r.message);if(!r.ok)return r;closeConfirmedComposer();
   }
-  if(snapshot.ideas.some(i=>i.id===id&&i.status!=='deleted'))await openBrowseDetail(id);
+  if(snapshot.ideas.some(i=>i.id===id&&i.status!=='deleted'))return openBrowseDetail(id);
+  return invalid(t('找不到这条念头。'));
+ };
+ reminderNotices=new ReminderNotifications(()=>snapshot,()=>preferences.current.locale,async id=>{await openReminder(id);});
+ reminderFallback=new ReminderFallback(()=>snapshot,publish);
+ ipcMain.handle('thoughtline:reminder-action',async(e,key:unknown,open:unknown)=>{
+  if(!trusted(e,[shelf])||typeof key!=='string'||typeof open!=='boolean'||quitting)return invalid(t('无效操作'));
+  const id=reminderFallback!.target(key);if(!id)return invalid(t('找不到这条念头。'));
+  const r=open?await openReminder(id):done();if(r.ok)reminderFallback!.dismiss(key);return r;
  });
  const consumeReminders=(claims:ReminderClaim[],state:'notified'|'missed'|'failed',now:string)=>composerWrite(async()=>{if(quitting)return false;const r=await reminderCommit(markReminders(snapshot,claims,state,now));return r.ok;});
- reminderScheduler=new ReminderScheduler({snapshot:()=>snapshot,consume:(c,s,n)=>consumeReminders(c,s,n),failed:async(c,n)=>{await consumeReminders(c,'failed',n);},notify:(ids,missed)=>reminderNotices!.show(ids,missed),onError:()=>{/* A persisted scheduled reminder remains retryable after a storage failure. */}});
- app.on('will-quit',()=>reminderScheduler?.stop());
+ reminderScheduler=new ReminderScheduler({snapshot:()=>snapshot,consume:(c,s,n)=>consumeReminders(c,s,n),failed:async(c,n)=>{if(await consumeReminders(c,'failed',n)&&!quitting)reminderFallback!.show(c);},notify:(ids,missed)=>reminderNotices!.show(ids,missed),onError:()=>{/* A persisted scheduled reminder remains retryable after a storage failure. */}});
+ app.on('will-quit',()=>{reminderScheduler?.stop();reminderFallback?.stop();});
  ipcMain.handle('thoughtline:close-manage',async e=>{if(!trusted(e,[manage]))return invalid(t("无效操作"));if(!await prepareWindow(manage))return invalid(t("最后修改尚未保存，窗口已保留。"));hideManage();return done();});
  const openSettings=async(fromCalendar=false):Promise<Result<void>>=>{
   if(composer?.isVisible())return invalid(t("请先保存或取消当前输入。"));
@@ -485,7 +495,8 @@ else app.whenReady().then(async()=>{
  tray.setToolTip(t("晾念头 / Thoughtline"));
  refreshTray=()=>{tray.setToolTip(t('晾念头 / Thoughtline'));tray.setContextMenu(Menu.buildFromTemplate([{label:t("晾念头 / Thoughtline"),enabled:false},{label:t('trayWrite',{hotkey:displayWriteHotkey(snapshot.settings.writeHotkey,host.platform).replace('空格',t('空格')),failure:globalShortcut.isRegistered(snapshot.settings.writeHotkey)?'':t('（注册失败）')}),enabled:!composer?.isVisible()&&!(manage?.isVisible()&&manageMode==='settings'),click:()=>{void openComposer();}},{type:'separator'},{label:t("查找 / 已收起"),enabled:!composer?.isVisible(),click:browseFromTray},{label:t("筛选 Agent"),submenu:agentFilterMenu()},{label:t("设置"),enabled:!composer?.isVisible(),click:()=>{openSettings();}},{label:t("暂停悬停"),type:'checkbox',checked:edge.isManuallyPaused(),click:item=>{cancelDrag();edge.pause(item.checked);}},{label:t("退出"),click:()=>app.quit()}]));};
  refreshTray();
- nativeTheme.on('updated',publish);powerMonitor.on('suspend',()=>{reminderScheduler?.stop();cancelDrag();edge.pause(true,'sleep');});powerMonitor.on('lock-screen',()=>{cancelDrag();edge.pause(true,'lock');});powerMonitor.on('resume',()=>{edge.pause(false,'sleep');reminderScheduler?.start();});powerMonitor.on('unlock-screen',()=>edge.pause(false,'lock'));
+ let reminderSleeping=false,reminderLocked=false;const resumeReminders=()=>{if(!reminderSleeping&&!reminderLocked)reminderScheduler?.start();};
+ nativeTheme.on('updated',publish);powerMonitor.on('suspend',()=>{reminderSleeping=true;reminderScheduler?.stop();cancelDrag();edge.pause(true,'sleep');});powerMonitor.on('lock-screen',()=>{reminderLocked=true;reminderScheduler?.stop();cancelDrag();edge.pause(true,'lock');});powerMonitor.on('resume',()=>{reminderSleeping=false;edge.pause(false,'sleep');resumeReminders();});powerMonitor.on('unlock-screen',()=>{reminderLocked=false;edge.pause(false,'lock');resumeReminders();});
  const clampManage=()=>{cancelDrag();if(manage?.isVisible())setManageBounds(manage.getBounds());};
  screen.on('display-metrics-changed',clampManage);screen.on('display-removed',clampManage);app.dock?.hide();publish();edge.start();reminderNotices.restore();reminderScheduler.start();
 }).catch(error=>{console.error(error);dialog.showErrorBox(t("晾念头启动未成功"),error instanceof Error?error.message:t("启动发生错误，请保留数据后重试。"));app.quit();});

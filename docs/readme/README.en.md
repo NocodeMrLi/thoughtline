@@ -39,7 +39,7 @@ Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ide
 - Switch Chinese/English and light/dark directly in the first-level windows, or follow the system; paper stays soft and readable.
 - When the line is full, save the thought or choose **Swap onto line** in the same window; the old thought is put away and retained. Hanging from the calendar appears immediately. More menus close when the pointer leaves.
 
-- Title-only thoughts and reminders: enter a title or text; the body may be empty. The bell sets a one-time reminder, shared with the calendar. System notifications require permission and open the thought when clicked. Fully quitting pauses delivery; missed reminders are grouped on restart.
+- Title-only thoughts and reminders: enter a title or text; the body may be empty. The bell sets a one-time reminder, shared with the calendar. System notifications require permission and open the thought when clicked. Fully quitting pauses delivery; missed reminders are grouped on restart. If system delivery is unavailable, a light reminder at the top provides a clickable fallback without taking focus or adding a window.
 
 <p align="center"><img src="images/thought-calendar.png" alt="Thoughtline Calendar with synthetic demonstration data." width="740" /><br /><sub>Thoughtline Calendar with synthetic demonstration data.</sub></p>
 
