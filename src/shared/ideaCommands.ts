@@ -3,7 +3,9 @@ import {captureClipPositions} from './clipLayout';
 import {visibleSlots} from './ropeGeometry';
 import {independentClip,pruneClips} from './clipModel';
 import {ideaDay} from './ideaHistory';
+import {validReminder,validReminderTime} from './reminderTime';
 import {DEFAULT_TAGS} from './tagPresets';
+import {hasIdeaContent} from './ideaContent';
 const invalid=<T>(message:string):Result<T>=>({ok:false,code:'INVALID',message});
 const plain=(x:unknown):x is Record<string,unknown>=>!!x&&typeof x==='object'&&!Array.isArray(x);
 const textOK=(s:unknown,max:number)=>typeof s==='string'&&Array.from(s).length<=max;
@@ -20,12 +22,13 @@ export function validateSnapshot(input:unknown):Result<Snapshot>{
     agents.add(a.id);
   }
   if(!agents.size||!agents.has('general'))return invalid('缺少通用标签。');
-  const draftOK=(d:Record<string,unknown>)=>bodyOK(d.text,true)&&textOK(d.title,50)&&textOK(d.project,40)&&typeof d.agentId==='string'&&agents.has(d.agentId);
+  const draftOK=(d:Record<string,unknown>)=>bodyOK(d.text,true)&&textOK(d.title,50)&&textOK(d.project,40)&&typeof d.agentId==='string'&&agents.has(d.agentId)&&(d.reminderAt===undefined||validReminderTime(d.reminderAt));
   const ids=new Set<string>();
   for(const idea of input.ideas){
-    if(!plain(idea)||typeof idea.id!=='string'||!idea.id||ids.has(idea.id)||!draftOK(idea)||!bodyOK(idea.text)||!['hanging','archived',...(input.schemaVersion===3?['deleted']:[])].includes(String(idea.status))||typeof idea.createdAt!=='string'||!Number.isFinite(Date.parse(idea.createdAt))||typeof idea.updatedAt!=='string'||!Number.isFinite(Date.parse(idea.updatedAt)))return invalid('念头正文或归属无效。');
+    if(!plain(idea)||typeof idea.id!=='string'||!idea.id||ids.has(idea.id)||!draftOK(idea)||!hasIdeaContent(idea as unknown as Draft)||!['hanging','archived',...(input.schemaVersion===3?['deleted']:[])].includes(String(idea.status))||typeof idea.createdAt!=='string'||!Number.isFinite(Date.parse(idea.createdAt))||typeof idea.updatedAt!=='string'||!Number.isFinite(Date.parse(idea.updatedAt)))return invalid('念头正文或归属无效。');
     if((idea.createdDay!==undefined||idea.creationTimeZone!==undefined)&&(!dayOK(idea.createdDay)||typeof idea.creationTimeZone!=='string'||!idea.creationTimeZone.trim()))return invalid('念头创建日或时区无效。');
     if(idea.deletedAt!==undefined&&(typeof idea.deletedAt!=='string'||!Number.isFinite(Date.parse(idea.deletedAt)))||idea.deletedFrom!==undefined&&!['hanging','archived'].includes(String(idea.deletedFrom))||idea.status==='deleted'&&(idea.deletedAt===undefined||idea.deletedFrom===undefined))return invalid('最近删除恢复信息无效。');
+    if(idea.reminder!==undefined&&!validReminder(idea.reminder))return invalid('提醒数据无效。');
     ids.add(idea.id);
   }
   if(input.draft!==null&&(!plain(input.draft)||!draftOK(input.draft)))return invalid('草稿无效。');
@@ -46,10 +49,13 @@ export function validateSnapshot(input:unknown):Result<Snapshot>{
   return {ok:true,value:structuredClone(normalized) as Snapshot};
 }
 export function newIdea(s:Snapshot,draft:Draft,id:string,now:string):Result<Snapshot>{
-  if(!bodyOK(draft.text)||!Number.isFinite(Date.parse(now)))return invalid('请输入念头，正文不超过1MiB。');
+  if(!bodyOK(draft.text,true)||!Number.isFinite(Date.parse(now)))return invalid('请输入念头，正文不超过1MiB。');
+  if(!hasIdeaContent(draft))return invalid('请填写标题或正文。');
+  if(draft.reminderAt!==undefined&&(!validReminderTime(draft.reminderAt)||Date.parse(draft.reminderAt)<=Date.parse(now)))return invalid('请选择未来的提醒时间。');
   const checked=validateSnapshot(s);if(!checked.ok)return checked;const base=checked.value;
+  const {reminderAt,...fields}=draft;
   const title=draft.title.trim()||Array.from((draft.text.split('\n').find(x=>x.trim())??'').trim()).slice(0,50).join('');
-  return validateSnapshot({...base,clips:[...base.clips,independentClip(base,id,draft.agentId)],draft:null,ideas:[...base.ideas,{...draft,title,id,status:'hanging',createdAt:now,updatedAt:now,createdDay:localDay(now),creationTimeZone:Intl.DateTimeFormat().resolvedOptions().timeZone}]});
+  return validateSnapshot({...base,clips:[...base.clips,independentClip(base,id,draft.agentId)],draft:null,ideas:[...base.ideas,{...fields,...(reminderAt?{reminder:{at:reminderAt,state:'scheduled'}}:{}),title,id,status:'hanging',createdAt:now,updatedAt:now,createdDay:localDay(now),creationTimeZone:Intl.DateTimeFormat().resolvedOptions().timeZone}]});
 }
 export function changeStatus(s:Snapshot,id:string,status:'hanging'|'archived',now:string):Result<Snapshot>{
   if(!s.ideas.some(x=>x.id===id&&x.status!=='deleted'))return invalid('找不到可操作的念头。');
@@ -66,7 +72,8 @@ export function removeAgent(s:Snapshot,id:string,replacement:string):Result<Snap
   return validateSnapshot({...s,clips:s.clips.map(c=>c.agentId===id?{...c,agentId:replacement}:c),agents:s.agents.filter(x=>x.id!==id),ideas:s.ideas.map(x=>x.agentId===id?{...x,agentId:replacement}:x),draft:s.draft?.agentId===id?{...s.draft,agentId:replacement}:s.draft});
 }
 export function editIdea(s:Snapshot,id:string,draft:Draft,now:string):Result<Snapshot>{
-  if(!s.ideas.some(x=>x.id===id&&x.status!=='deleted')||!draft||!bodyOK(draft.text)||!textOK(draft.title,50)||!textOK(draft.project,40))return invalid('正文、标题或项目无效，请保留文字后重试。');
+  if(!s.ideas.some(x=>x.id===id&&x.status!=='deleted')||!draft||!bodyOK(draft.text,true)||!textOK(draft.title,50)||!textOK(draft.project,40))return invalid('正文、标题或项目无效，请保留文字后重试。');
+  if(!hasIdeaContent(draft))return invalid('请填写标题或正文。');
   const title=draft.title.trim()||Array.from(draft.text.split('\n').find(x=>x.trim())?.trim()??'').slice(0,50).join('');
   const ideas=s.ideas.map(x=>x.id===id?{...x,text:draft.text,title,project:draft.project,agentId:draft.agentId,updatedAt:now}:x);
   let clips=pruneClips(s.clips,ideas);const updated=ideas.find(i=>i.id===id)!;if(updated.status==='hanging'&&!clips.some(c=>c.ideaIds.includes(id)))clips=[...clips,independentClip({...s,clips},id,updated.agentId)];
@@ -84,7 +91,7 @@ export function deleteIdea(s:Snapshot,id:string,now:string):Result<Snapshot>{
   const idea=s.ideas.find(i=>i.id===id);
   if(!idea||idea.status==='deleted'||!Number.isFinite(Date.parse(now)))return invalid('找不到可删除的念头或删除时间无效。');
   const deletedFrom=idea.status;
-  const ideas=s.ideas.map(i=>i.id===id?{...i,status:'deleted' as const,deletedFrom,deletedAt:now,updatedAt:now}:i);
+  const ideas=s.ideas.map(i=>i.id===id?{...i,...(i.reminder?{reminder:{...i.reminder,state:'cancelled' as const}}:{}),status:'deleted' as const,deletedFrom,deletedAt:now,updatedAt:now}:i);
   return validateSnapshot({...s,ideas,clips:pruneClips(s.clips,ideas)});
 }
 export function restoreIdea(s:Snapshot,id:string,now:string):Result<Snapshot>{

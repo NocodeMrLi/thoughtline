@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><img src="badges/preview.svg" alt="Version: 0.0.20" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21"><img src="badges/preview.svg" alt="Version: 0.0.21" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   Une corde, quelques pinces et des feuilles pour les idées du quotidien.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><ins>Télécharger Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21"><ins>Télécharger Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.20</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.21</sub></p>
 
 Thoughtline est un outil léger pour macOS et Windows. Retrouvez vos idées au bord supérieur de l’écran, notez une pensée, puis reprenez votre activité.
 
@@ -39,11 +39,13 @@ Thoughtline est un outil léger pour macOS et Windows. Retrouvez vos idées au b
 - Passez du chinois à l’anglais et du mode clair au mode sombre dès les premières fenêtres, ou suivez le système ; le papier reste doux et lisible.
 - Si la corde est pleine, enregistrez la pensée ou choisissez **Swap onto line** dans la même fenêtre ; la pensée précédente est rangée et conservée. Le calendrier affiche immédiatement la pensée raccrochée. Les menus se ferment lorsque le pointeur les quitte.
 
+- Un titre ou un texte suffit ; le corps peut rester vide. La cloche définit un rappel unique, également visible dans le calendrier. Les notifications nécessitent une autorisation et ouvrent la note. Après une fermeture complète, les rappels manqués sont regroupés au redémarrage.
+
 <p align="center"><img src="images/thought-calendar.png" alt="Calendrier d’idées avec des données de démonstration synthétiques." width="740" /><br /><sub>Calendrier d’idées avec des données de démonstration synthétiques.</sub></p>
 
 ## Téléchargement et installation
 
-Les téléchargements sont réservés aux membres ayant accès au dépôt. Releases contient les paquets, lanceurs isolés, SHA256SUMS et informations de provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20).
+Les téléchargements sont réservés aux membres ayant accès au dépôt. Releases contient les paquets, lanceurs isolés, SHA256SUMS et informations de provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21).
 
 | Platform | Package |
 |---|---|
@@ -94,3 +96,5 @@ Signalez les problèmes dans Issues avec versions, étapes, résultats attendus 
 ## Licence et remerciements
 
 Le projet est UNLICENSED ; aucune permission d’utilisation open source n’a été accordée. Une future publication précisera la licence et les contributions. Consultez les avis tiers pour le code et les licences inclus. [Third-party notices](../../THIRD_PARTY_NOTICES.md).
+
+0.0.21 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.

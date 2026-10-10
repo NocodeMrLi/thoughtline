@@ -1,5 +1,8 @@
 import {contextBridge,ipcRenderer} from 'electron';import type {ThoughtlineBridge} from '../shared/bridge';
 const api:ThoughtlineBridge={
+ notificationAccess:request=>ipcRenderer.invoke('thoughtline:notification-access',request===true),
+ openNotificationSettings:()=>ipcRenderer.invoke('thoughtline:notification-settings'),
+ setReminder:(id,at,expected,session)=>ipcRenderer.invoke('thoughtline:set-reminder',id,at,expected,session),
  setPreferences:(patch,sequence)=>ipcRenderer.invoke('thoughtline:preferences',patch,sequence),
  storageInfo:()=>ipcRenderer.invoke('thoughtline:storage-info'),
  openStorageDirectory:()=>ipcRenderer.invoke('thoughtline:open-storage-directory'),

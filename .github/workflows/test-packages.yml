@@ -44,6 +44,10 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Tag positioning and effective status workflow failed' }
           & node tests/electron/title-edit-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Optional title live input regression failed' }
+          foreach ($test in @('more-menu-workflow', 'title-only-workflow', 'reminder-workflow')) {
+            & node "tests/electron/$test.cjs"
+            if ($LASTEXITCODE -ne 0) { throw "$test failed" }
+          }
           & node tests/electron/round2-native-menu.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Second round native menu failed' }
       - name: Source Electron UI regression on Windows
@@ -109,6 +113,8 @@ jobs:
           THOUGHTLINE_EXECUTABLE: dist/win-unpacked/Thoughtline.exe
           THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round2/windows/packaged-capacity
         run: |
+          & node tests/electron/packaged-round21.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Actual packaged reminder/title/More regression failed' }
           & node tests/electron/packaged-capacity.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Actual packaged capacity regression failed' }
           & node tests/electron/packaged-positioning.cjs

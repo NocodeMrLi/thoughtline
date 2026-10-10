@@ -18,6 +18,7 @@ try {
   const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
   const inputVector = sourceInputVector();
   run(process.execPath, ['node_modules/electron-vite/bin/electron-vite.js', 'build']);
+  run(process.execPath, ['scripts/build-notification-native.cjs']);
   const builderArgs = ['node_modules/electron-builder/cli.js', '--mac', 'dmg', '--publish', 'never'];
   const localZip = process.env.THOUGHTLINE_ELECTRON_DIST_ZIP;
   if (localZip) {

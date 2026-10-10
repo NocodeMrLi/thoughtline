@@ -12,9 +12,9 @@ test('编辑只更新目标正文与归属，不重挂已收起记录或丢新�
  expect(next.ideas[0]).toMatchObject({id:'one',text:'  修改\n完整正文\n',agentId:'claude',status:'archived',createdAt:now,updatedAt:later});
  expect(next.draft?.text).toBe('另外的新建草稿');expect(s.ideas[0].text).toBe('原文\n第二行');
 });
-test('编辑拒绝空正文、未知Agent和不存在的ID，原记录不改变',()=>{
+test('编辑拒绝同时空标题正文、未知Agent和不存在的ID，原记录不改变',()=>{
  const s=fixture();
- for(const [id,input] of [['missing',draft],['one',{...draft,text:'  '}],['one',{...draft,agentId:'missing'}]] as const){
+ for(const [id,input] of [['missing',draft],['one',{...draft,text:'  ',title:'  '}],['one',{...draft,agentId:'missing'}]] as const){
   expect(commands.editIdea(s,id,input,later)).toMatchObject({ok:false,code:'INVALID'});
  }
  expect(s.ideas[0].text).toBe('原文\n第二行');

@@ -1,7 +1,7 @@
 const fs=require('node:fs/promises'),path=require('node:path');
 // Protocol fixtures emulate the shortcut registry by default; only smoke/lifecycle opt into real OS registration.
 // Production has no new IPC entry or test-only startup behavior.
-async function launchOptions(dir,{realShortcuts=false,seedLocale='zh-CN',osLocale,stationaryTopCursor=false}={}){
+async function launchOptions(dir,{realShortcuts=false,seedLocale='zh-CN',osLocale,stationaryTopCursor=false,fakeNotifications=false}={}){
  if(process.env.THOUGHTLINE_EXECUTABLE)throw Error('These protocol fixtures require the source runtime. Use the packaged acceptance fixture for a frozen App.');
  if(seedLocale)await fs.writeFile(path.join(dir,'preferences.json'),JSON.stringify({schemaVersion:1,version:0,locale:seedLocale,theme:'system'}),{flag:'wx'}).catch(e=>{if(e.code!=='EEXIST')throw e;});
  const buildDir=path.resolve(process.env.THOUGHTLINE_BUILD_DIR||'out');
@@ -12,6 +12,7 @@ async function launchOptions(dir,{realShortcuts=false,seedLocale='zh-CN',osLocal
  // the host OS cursor or borrowing a drag lock that production actions cancel.
  if(stationaryTopCursor)await fs.writeFile(entry,`require('electron').app.once('ready',()=>{const {screen}=require('electron');screen.getCursorScreenPoint=()=>{const d=screen.getPrimaryDisplay();return {x:d.bounds.x+d.bounds.width/2,y:d.bounds.y+1};};});\n`+await fs.readFile(entry,'utf8'));
  if(process.env.THOUGHTLINE_FAKE_CLIPBOARD==='1')await fs.writeFile(entry,`const clipboard=require('electron').clipboard;let fixtureText='';clipboard.readText=()=>fixtureText;clipboard.writeText=text=>{fixtureText=text;};`+await fs.readFile(entry,'utf8'));
+ if(fakeNotifications)await fs.writeFile(entry,`const electron=require('electron'),{EventEmitter}=require('node:events');globalThis.thoughtlineTestNotifications=[];globalThis.thoughtlineTestNotificationAccess="granted";class FixtureNotice extends EventEmitter{static isSupported(){return true;}static async getHistory(){return [];}static handleActivation(callback){globalThis.thoughtlineTestNotificationActivation=callback;}constructor(options){super();this.options=options;globalThis.thoughtlineTestNotifications.push(this);}show(){this.emit('show');}close(){this.emit('close');}}const Module=require('node:module'),load=Module._load,proxy=new Proxy(electron,{get:(target,key)=>key==='Notification'?FixtureNotice:Reflect.get(target,key)});Module._load=function(name,...args){return name==='electron'?proxy:load.call(this,name,...args);};const child=require('node:child_process'),exec=child.execFile;child.execFile=function(file,args,options,callback){if(file==='powershell.exe'&&args.join(' ').includes('CreateToastNotifier')){callback(null,globalThis.thoughtlineTestNotificationAccess==='denied'?'DisabledForApplication':'Enabled');return {kill(){}};}return exec.call(this,file,args,options,callback);};const nativePath=${JSON.stringify(path.join(buildDir,'main/notification-permission.node'))};require.cache[nativePath]={id:nativePath,filename:nativePath,loaded:true,exports:{getStatus:(_request,callback)=>callback(globalThis.thoughtlineTestNotificationAccess)}};\n`+await fs.readFile(entry,'utf8'));
  return {executablePath:require('electron'),args:[entry],env:{...process.env,THOUGHTLINE_DATA_DIR:dir},timeout:15000};
 }
 async function openComposer(app,shelf){

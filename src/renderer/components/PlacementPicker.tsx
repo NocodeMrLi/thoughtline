@@ -1,11 +1,12 @@
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useRef,useState,type RefObject} from 'react';
 import type {PilotInfo} from '../../shared/bridge';
 import type {PlacementIntent} from '../../shared/ideaPlacement';
 import {layoutClips} from '../../shared/clipLayout';
 import {ideaDay} from '../../shared/ideaHistory';
 import {useLocale} from '../LocaleContext';
 import {ActionIcon} from './ActionIcon';
-export function PlacementPicker({info,agentId,sourceId,busy,error='',onCancel,onConfirm}:{info:PilotInfo;agentId:string;sourceId?:string;busy:boolean;error?:string;onCancel:()=>void;onConfirm:(intent:PlacementIntent,reveal:boolean)=>void}){
+import {CompactPopover} from './CompactPopover';
+export function PlacementPicker({info,agentId,sourceId,busy,error='',anchor,onCancel,onConfirm}:{info:PilotInfo;agentId:string;sourceId?:string;busy:boolean;error?:string;anchor:RefObject<HTMLElement|null>;onCancel:()=>void;onConfirm:(intent:PlacementIntent,reveal:boolean)=>void}){
  const {t,m,agentName}=useLocale(),dialog=useRef<HTMLDivElement>(null);
  const [choice,setChoice]=useState<{clipId:string;ideaId:string;expectedIds:string[];wholeClip:boolean}|null>(null),[older,setOlder]=useState(false),[reveal,setReveal]=useState(false);
  const currentFilter=info.shelfAgentId,hidden=currentFilter!=='all'&&currentFilter!==agentId;
@@ -17,7 +18,7 @@ export function PlacementPicker({info,agentId,sourceId,busy,error='',onCancel,on
  const picked=choice&&info.snapshot.ideas.find(i=>i.id===choice.ideaId);
  useEffect(()=>{const previous=document.activeElement as HTMLElement|null;dialog.current?.querySelector<HTMLButtonElement>('button')?.focus();return()=>{if(previous?.isConnected)previous.focus();};},[]);
  useEffect(()=>{if(!busy&&error&&!dialog.current?.contains(document.activeElement))dialog.current?.querySelector<HTMLButtonElement>('.placement-confirm .primary:not(:disabled),button:not(:disabled)')?.focus();},[busy,error]);
- return <div ref={dialog} className="placement-picker" role="dialog" aria-modal="true" aria-label={t('换上')} onKeyDown={e=>{
+ return <CompactPopover anchor={anchor} label={t('换上')} className="placement-popover" busy={busy} onClose={onCancel}><div ref={dialog} className="placement-picker" onKeyDown={e=>{
   if(e.nativeEvent.isComposing||e.nativeEvent.keyCode===229)return;
   if(e.key==='Escape'){e.preventDefault();e.stopPropagation();if(!busy)onCancel();}
   if(e.key==='Tab'){const nodes=[...dialog.current?.querySelectorAll<HTMLElement>('button:not(:disabled),select:not(:disabled),input:not(:disabled)')??[]],first=nodes[0],last=nodes.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}}
@@ -32,5 +33,5 @@ export function PlacementPicker({info,agentId,sourceId,busy,error='',onCancel,on
   })}{!targets.length&&<p className="empty-list">{t('没有可换下的可见夹子。')}</p>}</div>
   {hidden&&<label className="placement-filter"><input type="checkbox" checked={reveal} onChange={e=>setReveal(e.target.checked)}/>{t('显示全部Agent后挂上')}</label>}
   <div className="placement-confirm"><span role="status">{choice&&!valid?t('目标夹子已变化，请重新选择。'):picked?(choice!.wholeClip?t('swapWholePreview',{count:choice!.expectedIds.length}):t('swapPreview',{title:picked.title})):t('旧念头会收起，内容保留。')}</span><button className="primary" disabled={busy||!valid||hidden&&!reveal} onClick={()=>valid&&choice&&onConfirm({kind:'swap',targetClipId:choice.clipId,targetIdeaId:choice.ideaId,expectedIds:choice.expectedIds,wholeClip:choice.wholeClip},reveal)}>{busy?t('保存中…'):t('换上')}</button></div>
- </div>;
+ </div></CompactPopover>;
 }

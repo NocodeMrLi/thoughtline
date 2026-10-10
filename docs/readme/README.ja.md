@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><img src="badges/preview.svg" alt="Version: 0.0.20" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21"><img src="badges/preview.svg" alt="Version: 0.0.21" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   一本のロープとクリップ、紙で日々のアイデアを残します。
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><ins>Thoughtline をダウンロード</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21"><ins>Thoughtline をダウンロード</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.20</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.21</sub></p>
 
 Thoughtline は macOS と Windows 向けの軽量なデスクトップメモアプリです。画面上端からメモを呼び出し、思いつきを書き留めて作業に戻れます。
 
@@ -39,11 +39,13 @@ Thoughtline は macOS と Windows 向けの軽量なデスクトップメモア�
 - 最初の画面から中国語／Englishとライト／ダークを切り替え、システムにも連動できます。紙は柔らかく読みやすい質感を保ちます。
 - ロープが満杯でも保存するか、同じ画面の **Swap onto line** で入れ替えられます。元のメモは収納して保持。カレンダーから掛け直すとすぐ表示され、その他メニューはマウスを離すと閉じます。
 
+- タイトルまたは本文があれば保存できます。ベルで一度だけのリマインダーを設定し、カレンダーにも表示します。システム通知には許可が必要です。完全終了中は通知できず、再起動時に未通知分をまとめます。
+
 <p align="center"><img src="images/thought-calendar.png" alt="合成データを使ったメモカレンダーの例。" width="740" /><br /><sub>合成データを使ったメモカレンダーの例。</sub></p>
 
 ## ダウンロードとインストール
 
-リポジトリへのアクセス権を持つメンバーがダウンロードできます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20).
+リポジトリへのアクセス権を持つメンバーがダウンロードできます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21).
 
 | Platform | Package |
 |---|---|
@@ -94,3 +96,5 @@ Starとダウンロード数は2026-10-10のAPIスナップショットです。
 ## ライセンスと謝辞
 
 現在は UNLICENSED で、オープンソースの利用許諾は付与されていません。将来の公開時にライセンスと貢献方法を定めます。同梱コードのライセンスは第三者声明を参照してください。 [Third-party notices](../../THIRD_PARTY_NOTICES.md).
+
+0.0.21 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.

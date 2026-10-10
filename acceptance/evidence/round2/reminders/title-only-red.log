@@ -1,0 +1,95 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/titleOnly.test.ts (4 tests | 4 failed) 27ms
+   × title-only creation preserves exact empty body and a single clip 4ms
+   × clearing the body while retaining title saves and survives archive/delete/restore 19ms
+   × both empty or whitespace-only fields are rejected without losing last saved content 2ms
+   × title-only body keeps whitespace and existing text limits still apply 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/titleOnly.test.ts > title-only creation preserves exact empty body and a single clip
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ value tests/unit/titleOnly.test.ts:4:47
+      2| import {initialSnapshot,newIdea,editIdea,validateSnapshot,deleteIdea,r…
+      3| import type {Result,Snapshot} from '../../src/shared/contracts';
+      4| const value=<T>(r:Result<T>):T=>{expect(r.ok).toBe(true);if(!r.ok)thro…
+       |                                               ^
+      5| const now='2026-10-10T00:00:00.000Z',fields={text:'',title:'日报',agentI…
+      6| test('title-only creation preserves exact empty body and a single clip…
+ ❯ tests/unit/titleOnly.test.ts:7:10
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/unit/titleOnly.test.ts > clearing the body while retaining title saves and survives archive/delete/restore
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ value tests/unit/titleOnly.test.ts:4:47
+      2| import {initialSnapshot,newIdea,editIdea,validateSnapshot,deleteIdea,r…
+      3| import type {Result,Snapshot} from '../../src/shared/contracts';
+      4| const value=<T>(r:Result<T>):T=>{expect(r.ok).toBe(true);if(!r.ok)thro…
+       |                                               ^
+      5| const now='2026-10-10T00:00:00.000Z',fields={text:'',title:'日报',agentI…
+      6| test('title-only creation preserves exact empty body and a single clip…
+ ❯ tests/unit/titleOnly.test.ts:10:77
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/unit/titleOnly.test.ts > both empty or whitespace-only fields are rejected without losing last saved content
+AssertionError: expected { ok: false, code: 'INVALID', …(1) } to match object { ok: false, message: '请填写标题或正文。' }
+(1 matching property omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "message": "请填写标题或正文。",
++   "message": "正文、标题或项目无效，请保留文字后重试。",
+    "ok": false,
+  }
+
+ ❯ tests/unit/titleOnly.test.ts:15:201
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/unit/titleOnly.test.ts > title-only body keeps whitespace and existing text limits still apply
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ value tests/unit/titleOnly.test.ts:4:47
+      2| import {initialSnapshot,newIdea,editIdea,validateSnapshot,deleteIdea,r…
+      3| import type {Result,Snapshot} from '../../src/shared/contracts';
+      4| const value=<T>(r:Result<T>):T=>{expect(r.ok).toBe(true);if(!r.ok)thro…
+       |                                               ^
+      5| const now='2026-10-10T00:00:00.000Z',fields={text:'',title:'日报',agentI…
+      6| test('title-only creation preserves exact empty body and a single clip…
+ ❯ tests/unit/titleOnly.test.ts:19:10
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed (4)
+   Start at  17:54:19
+   Duration  194ms (transform 60%, tests 26%, import 12%, worker 3%)
+

@@ -1,0 +1,77 @@
+
+> thoughtline@0.0.20 verify
+> node scripts/verify.cjs
+
+
+> thoughtline@0.0.20 typecheck
+> node node_modules/typescript/bin/tsc --noEmit
+
+
+> thoughtline@0.0.20 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/ideaWorkflow.test.ts (7 tests | 1 failed) 76ms
+   × 编辑拒绝空正文、未知Agent和不存在的ID，原记录不改变 11ms
+ ❯ tests/unit/p3IdeaCommands.test.ts (13 tests | 1 failed) 87ms
+   × CAS拒绝deleted、缺失ID和非法expected字段，无效草稿不覆盖 31ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/ideaWorkflow.test.ts > 编辑拒绝空正文、未知Agent和不存在的ID，原记录不改变
+AssertionError: expected { ok: true, value: { …(7) } } to match object { ok: false, code: 'INVALID' }
+(8 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "code": "INVALID",
+-   "ok": false,
++   "ok": true,
+  }
+
+ ❯ tests/unit/ideaWorkflow.test.ts:18:47
+     16|  const s=fixture();
+     17|  for(const [id,input] of [['missing',draft],['one',{...draft,text:'  '…
+     18|   expect(commands.editIdea(s,id,input,later)).toMatchObject({ok:false,…
+       |                                               ^
+     19|  }
+     20|  expect(s.ideas[0].text).toBe('原文\n第二行');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/p3IdeaCommands.test.ts > CAS拒绝deleted、缺失ID和非法expected字段，无效草稿不覆盖
+AssertionError: expected { ok: true, value: { …(7) } } to match object { ok: false, code: 'INVALID' }
+(8 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "code": "INVALID",
+-   "ok": false,
++   "ok": true,
+  }
+
+ ❯ tests/unit/p3IdeaCommands.test.ts:88:62
+     86|  expect(cas(s,'missing',original,original,later)).toMatchObject({ok:fa…
+     87|  expect(cas(s,'one',original,{...original,text:undefined} as unknown a…
+     88|  expect(cas(s,'one',{...original,text:'  '},original,later)).toMatchOb…
+       |                                                              ^
+     89| });
+     90|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 44 passed | 1 skipped (47)
+      Tests  2 failed | 271 passed | 4 skipped (277)
+   Start at  17:57:25
+   Duration  2.01s (tests 64%, transform 24%, import 10%, worker 3%)
+
+    Isolate  47 workers spawned · ~120ms startup each (spawn + environment, per file)
+             at least ~686ms faster with isolate: false — reuses workers across files instead of one per file
+

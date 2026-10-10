@@ -85,7 +85,7 @@ test('CAS拒绝deleted、缺失ID和非法expected字段，无效草稿不覆盖
  expect(cas(deleted,'one',original,original,later)).toMatchObject({ok:false,code:'INVALID'});
  expect(cas(s,'missing',original,original,later)).toMatchObject({ok:false,code:'INVALID'});
  expect(cas(s,'one',original,{...original,text:undefined} as unknown as Draft,later)).toMatchObject({ok:false,code:'INVALID'});
- expect(cas(s,'one',{...original,text:'  '},original,later)).toMatchObject({ok:false,code:'INVALID'});expect(s.ideas[0].text).toBe(original.text);
+ expect(cas(s,'one',{...original,text:'  ',title:'  '},original,later)).toMatchObject({ok:false,code:'INVALID'});expect(s.ideas[0].text).toBe(original.text);
 });
 
 test('schema3验证trash恢复元数据与夹子归属，旧schema不得引入deleted',()=>{

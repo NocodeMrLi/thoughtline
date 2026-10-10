@@ -1,6 +1,6 @@
 {
   "name": "thoughtline",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "private": true,
   "description": "Thoughtline desktop thoughts on a clothesline",
   "main": "out/main/index.js",
@@ -8,7 +8,7 @@
     "dev": "node node_modules/electron-vite/bin/electron-vite.js dev",
     "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
     "test": "node node_modules/vitest/vitest.mjs run",
-    "build": "node node_modules/electron-vite/bin/electron-vite.js build",
+    "build": "node node_modules/electron-vite/bin/electron-vite.js build && node scripts/build-notification-native.cjs",
     "verify": "node scripts/verify.cjs",
     "smoke": "node tests/electron/smoke.cjs",
     "package:mac": "node scripts/package-mac.cjs",
@@ -38,6 +38,7 @@
     "electron": "44.7.0",
     "electron-builder": "26.15.3",
     "electron-vite": "5.0.0",
+    "node-api-headers": "1.9.0",
     "playwright": "1.62.1",
     "typescript": "7.0.2",
     "vitest": "5.0.3"
@@ -98,6 +99,9 @@
       "installerIcon": "assets/app-icon.ico",
       "uninstallerIcon": "assets/app-icon.ico",
       "installerHeaderIcon": "assets/app-icon.ico"
-    }
+    },
+    "asarUnpack": [
+      "out/main/*.node"
+    ]
   }
 }

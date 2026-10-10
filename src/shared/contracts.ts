@@ -1,14 +1,16 @@
 export type Point = { x: number; y: number };
 export type Rect = Point & { width: number; height: number };
 export type AgentId = string;
+export type Reminder = {at:string;state:'scheduled'|'notified'|'missed'|'failed'|'cancelled';attemptedAt?:string};
 export type Idea = {
   id: string; text: string; title: string; project: string; agentId: AgentId;
   status: 'hanging' | 'archived' | 'deleted'; createdAt: string; updatedAt: string;
   createdDay?: string; creationTimeZone?: string;
   deletedAt?: string; deletedFrom?: 'hanging' | 'archived';
+  reminder?: Reminder;
 };
 export type AgentTag = { id: AgentId; name: string; color: string };
-export type Draft = { text: string; title: string; project: string; agentId: AgentId };
+export type Draft = { text: string; title: string; project: string; agentId: AgentId; reminderAt?:string };
 export type Clip = {id:string; agentId:AgentId; ideaIds:string[]; currentId:string; position:number|null};
 export type Snapshot = {
   schemaVersion: 2 | 3; revision: number; clips:Clip[]; ideas: Idea[]; agents: AgentTag[]; draft: Draft | null;

@@ -53,6 +53,6 @@ export function InlineIdeaEditor({idea,info,onDone}:{idea:Idea;info:PilotInfo;on
   }}><label>{t("项目")}<input aria-label={t("编辑项目")} maxLength={40} value={draft.project} {...events('project')}/></label></ProjectOptions></div>}
   {needsSplit&&<label className="inline-split-confirm"><input type="checkbox" checked={confirmAgent} onChange={e=>{setConfirmAgent(e.target.checked);if(e.target.checked){splitAllowed.current=true;void flush();}}}/>{t("更改归属会将当前纸张移至独立夹子")}</label>}
   <div className="inline-save-status"><span role="status">{m(status)}</span><button onClick={()=>void flush().then(ok=>{if(ok&&live.current)onDone();})}>{t("完成编辑")}</button>{error&&<button onClick={()=>void flush()}>{t("重试保存")}</button>}</div>
-  {error&&<div className="inline-save-error"><p role="alert">{m(error)}{t("文字仍在这里。")}</p><button onClick={()=>{text.current?.focus();text.current?.select();}}>{t("选中正文以复制")}</button></div>}
+  {error&&<div className="inline-save-error"><p role="alert">{m(error)}</p></div>}
  </section>;
 }

@@ -1,5 +1,6 @@
 import type {Preferences,PreferencePatch} from './preferences';
-import type {Draft,Rect,Result,Snapshot} from './contracts';
+import type {Draft,Rect,Result,Snapshot,Reminder} from './contracts';
+export type NotificationAccess={status:'granted'|'denied'|'not-determined'|'unknown'|'unsupported'};
 import type {PlacementIntent} from './ideaPlacement';
 export type ComposerContext={mode:'new'|'edit';ideaId:string|null;draft:Draft};
 export type AgentMutation={kind:'add';name:string;color:string}|{kind:'update';id:string;name:string;color:string}|{kind:'remove';id:string;replacement:string};
@@ -8,6 +9,9 @@ export type PilotInfo={preferenceCommit?:{version:number;sequence:number;own:boo
 export type HitLayout={layoutRevision:number;displayId:string;rects:Rect[]};
 export type StorageInfo={directory:string;profileDirectory:string;revision:number};
 export interface ThoughtlineBridge{
+ notificationAccess(request?:boolean):Promise<Result<NotificationAccess>>;
+ openNotificationSettings():Promise<Result<void>>;
+ setReminder(id:string,at:string|null,expected:Reminder|null,manageSession:number):Promise<Result<Snapshot>>;
  setPreferences(patch:PreferencePatch,sequence:number):Promise<Result<Preferences>>;
  storageInfo():Promise<Result<StorageInfo>>;
  openStorageDirectory():Promise<Result<void>>;

@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><img src="badges/preview.svg" alt="Version: 0.0.20" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21"><img src="badges/preview.svg" alt="Version: 0.0.21" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   A rope, a few clips, and sheets of paper for everyday ideas.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><ins>Download Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21"><ins>Download Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.20</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.21</sub></p>
 
 Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ideas at the top edge of the screen, capture a thought, and return to what you were doing.
 
@@ -39,11 +39,13 @@ Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ide
 - Switch Chinese/English and light/dark directly in the first-level windows, or follow the system; paper stays soft and readable.
 - When the line is full, save the thought or choose **Swap onto line** in the same window; the old thought is put away and retained. Hanging from the calendar appears immediately. More menus close when the pointer leaves.
 
+- Title-only thoughts and reminders: enter a title or text; the body may be empty. The bell sets a one-time reminder, shared with the calendar. System notifications require permission and open the thought when clicked. Fully quitting pauses delivery; missed reminders are grouped on restart.
+
 <p align="center"><img src="images/thought-calendar.png" alt="Thoughtline Calendar with synthetic demonstration data." width="740" /><br /><sub>Thoughtline Calendar with synthetic demonstration data.</sub></p>
 
 ## Download and install
 
-Downloads are available to members with repository access. Releases include packages, isolated launchers, SHA256SUMS, and build provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20).
+Downloads are available to members with repository access. Releases include packages, isolated launchers, SHA256SUMS, and build provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21).
 
 | Platform | Package |
 |---|---|
@@ -94,3 +96,5 @@ Stars and downloads are an API snapshot dated 2026-10-10. Downloads count releas
 ## License and acknowledgments
 
 The project is currently UNLICENSED; no open-source permission has been granted. A future public release will specify its license and contribution process. See the third-party notices for included code and licenses. [Third-party notices](../../THIRD_PARTY_NOTICES.md).
+
+0.0.21 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.

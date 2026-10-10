@@ -5,7 +5,7 @@ Execute the seven Windows feedback repairs with Mac counterparts, using the cano
 
 ## Current Phase
 
-0.0.19 production frozen/pushed a1d15d64f3544c675dbb1ae60da0e3293420667e. Final Mac248 units/4 Windows-only skips/type/build and actual package receipts verified; WindowsCI38036690747 completed success/252units/source+installed+packaged checks. 247 canonical sources/220 verified CRLF differences, exact actual payload proof; MacDMGe4fab796,WindowsEXE4a39695e. New immutable tag v0.0.19 regular private release33assets allserverdigests/sizes verified. Removed802.8MiB owned copies; userApp67908/otherQA34617/12 worktrees preserved; native launch exit failure retained. User requires prior completion report before final six-default tags and status-plan archive/implementation. Do not implement next labels before that report.
+0.0.20 delivered at 9628a142;0.0.21 implements approved reminders/title-only/four More menus. Canonical append/readback complete before fixes. Mac source unit/type/build and 16 menu cases + two title-only modes + nine reminder UI cases passed; native permission/delivery and Windows/actual packages pending. User requires complete today-wide click-by-click acceptance report after completion.
 
 ## Phases
 - [x] Inspect current source, skills, docs and protect installed app and other worktrees.
@@ -54,3 +54,12 @@ Completed: short Merge/Split actions and automatic spacing, including right-clic
 
 ## Latest0.0.20 delivery
 Finalsource9628a1427846cfc04fb47366883a5c666aff8a16; private regular32asset release408840229. Mac258+4 skip/Windows262, CI38040607416 and actual-package title/positioning/capacity/appearance/split/topedge pass.257inputs/230 exactCRLF differences,33Macpayload inputs and installedWindows binding.1085.9MiB ownedcleanup. Canonical/00/07/master fullcontent backedup/readback. Approved reminder+lightpopover plan archived for subsequent development, not implemented/in0.0.20. Physical acceptance gaps remain.
+
+## Approved reminders and unified four More menus 0.0.21
+- [x] Record implementation and compatibility before changes.
+- [x] Meaningful red reminder persistence, due/cancel/restart and four-menu checks.
+- [x] One-time persisted per-idea scheduling and native permission/notification bridge.
+- [x] Shared light in-window reminder and swap popovers; synced markers in detail/calendar.
+- [x] Audit all three reader More entry points and calendar header as one standard.
+- [ ] Source and actual dual-package regressions, native delivery limits separately recorded.
+- [ ] Same-source immutable private new release, README/docs and owned cleanup.

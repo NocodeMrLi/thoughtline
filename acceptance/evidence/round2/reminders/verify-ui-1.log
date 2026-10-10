@@ -1,0 +1,49 @@
+
+> thoughtline@0.0.20 verify
+> node scripts/verify.cjs
+
+
+> thoughtline@0.0.20 typecheck
+> node node_modules/typescript/bin/tsc --noEmit
+
+
+> thoughtline@0.0.20 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+
+ Test Files  47 passed | 1 skipped (48)
+      Tests  275 passed | 4 skipped (279)
+   Start at  18:13:38
+   Duration  2.41s (tests 64%, transform 25%, import 9%, worker 2%)
+
+    Isolate  48 workers spawned · ~143ms startup each (spawn + environment, per file)
+             at least ~840ms faster with isolate: false — reuses workers across files instead of one per file
+
+
+> thoughtline@0.0.20 build
+> node node_modules/electron-vite/bin/electron-vite.js build && node scripts/build-notification-native.cjs
+
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 34 modules transformed.
+rendering chunks...
+out/main/index.js  188.50 kB
+✓ built in 214ms
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 1 modules transformed.
+rendering chunks...
+out/preload/index.js  4.78 kB
+✓ built in 9ms
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 73 modules transformed.
+rendering chunks...
+../../out/renderer/index.html                                    0.52 kB
+../../out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg   98.37 kB
+../../out/renderer/assets/index-15D9I6Gz.css                    48.29 kB
+../../out/renderer/assets/index-CIswK_Dx.js                    880.57 kB
+✓ built in 1.07s
