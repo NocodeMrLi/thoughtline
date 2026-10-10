@@ -22,7 +22,7 @@ try {
   const localZip = process.env.THOUGHTLINE_ELECTRON_DIST_ZIP;
   if (localZip) {
     const audit = JSON.parse(readFileSync('acceptance/evidence/round1/p6-electron-cache-binding.json', 'utf8'));
-    if (pkg.version !== '0.0.17-preview.3' || audit.version !== '44.7.0' ||
+    if (pkg.version !== '0.0.17-preview.4' || audit.version !== '44.7.0' ||
         audit.checkedEntries !== 273 || audit.mismatches.length !== 0 ||
         resolve(localZip) !== audit.cachedZip) throw new Error('Unverified local Electron distribution.');
     const zipHash = createHash('sha256').update(readFileSync(localZip)).digest('hex');

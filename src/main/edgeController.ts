@@ -46,7 +46,9 @@ export class EdgeController{
    const local=toLocal(point,this.bounds);const hit=this.rects.some(r=>contains(r,local));
    const probe=probeSeamAware({cursor:point,workArea:d.bounds,stickPosition:'top',hotZoneWidth:3,now:Date.now()},this.seam);this.seam=probe.nextState;
    const edge=probe.armedInEdge;this.proximityDelay=probe.probe.distFromEdge>=0&&probe.probe.distFromEdge<=3?16:isNearProximity(probe.probe.distFromEdge)?100:400;
-   const corridor=local.y>=0&&local.y<Math.min(300,this.bounds.height)&&local.x>=0&&local.x<this.bounds.width;
+   // Include the menu-bar gap above the panel: users cross it on the way from
+   // the physical top edge to paper. This corridor does not capture mouse input.
+   const corridor=point.y>=d.bounds.y&&local.y<Math.min(300,this.bounds.height)&&local.x>=0&&local.x<this.bounds.width;
    this.event({type:'pointer',zone:edge?'edge':hit?'card':corridor?'corridor':'outside',now:Date.now()});
    this.event({type:'tick',now:Date.now()});
    this.host.setShelfInteractive(this.state.phase!=='hidden'&&(hit||this.state.locks.includes('drag')||this.state.locks.includes('text-drag')));

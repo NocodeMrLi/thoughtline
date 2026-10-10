@@ -54,6 +54,14 @@ jobs:
       - run: npm run package:win
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - name: Top edge geometry and slow pointer path on Windows
+        shell: pwsh
+        env:
+          THOUGHTLINE_VERIFY: '1'
+          THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/top-edge-20261010/windows-source
+        run: |
+          & node tests/electron/top-edge-probe.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Windows source top edge regression failed' }
       - name: Bind package to source and compiled outputs
         run: node scripts/windows-build-manifest.cjs
       - name: Parse user isolation launcher without launching
@@ -105,6 +113,8 @@ jobs:
           path: |
             acceptance/evidence/round1/p6-windows-source/**
             acceptance/evidence/appearance/windows-source/**
+            acceptance/evidence/top-edge-20261010/windows-source/**
+            acceptance/evidence/top-edge-20261010/windows-packaged/**
             acceptance/evidence/appearance/windows-packaged/**
           if-no-files-found: warn
           retention-days: 30

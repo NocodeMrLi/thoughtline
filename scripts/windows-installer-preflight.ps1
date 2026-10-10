@@ -27,7 +27,7 @@ try {
   if (!(Test-Path $exe)) { throw 'Installed executable missing' }
   if ((Snapshot-Hashes) -ne $seed) { throw 'Fresh install changed pre-existing fixture data' }
   $report.installPreservesExistingData = $true
-  $isolated = Join-Path $env:LOCALAPPDATA 'Thoughtline-Preflight\0.0.17-preview.3\user-data'
+  $isolated = Join-Path $env:LOCALAPPDATA 'Thoughtline-Preflight\0.0.17-preview.4\user-data'
   if (Test-Path $isolated) { throw 'Unexpected existing isolation fixture' }
   & ./docs/delivery/Start-Thoughtline-Isolated.ps1 -Executable $exe -CheckOnly
   if (Test-Path $isolated) { throw 'Check-only launcher created a profile' }
@@ -52,6 +52,14 @@ try {
     & node tests/electron/packaged-appearance.cjs 2>&1 | Tee-Object -FilePath (Join-Path $env:THOUGHTLINE_EVIDENCE_DIR 'workflow.log')
     if ($LASTEXITCODE -ne 0) { throw 'Actual installed package appearance preflight failed' }
     $report.packagedEnglishAppearance = $true
+    $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/top-edge-20261010/windows-packaged'
+    $priorTopEdgeVerify = $env:THOUGHTLINE_VERIFY
+    try {
+      $env:THOUGHTLINE_VERIFY = '1'
+      & node tests/electron/top-edge-probe.cjs
+      if ($LASTEXITCODE -ne 0) { throw 'Actual installed Windows top edge regression failed' }
+      $report.packagedTopEdgeGeometryAndPointerPath = $true
+    } finally { $env:THOUGHTLINE_VERIFY = $priorTopEdgeVerify }
   } finally {
     $env:THOUGHTLINE_EXECUTABLE = $priorAppearanceExecutable
     $env:THOUGHTLINE_EVIDENCE_DIR = $priorAppearanceEvidence

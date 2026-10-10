@@ -24,12 +24,26 @@ test('操作锁保持显示，解锁重新计时而非立刻过期关闭',()=>{
   expect(step(s,{type:'tick',now:5001}).phase).toBe('peek');
   expect(step(s,{type:'tick',now:5500}).phase).toBe('hidden');
 });
-test('到达走廊给予600ms宽限，不能永久保持',()=>{
+test('从顶边到纸张的慢速路径保持显示，离开操作区域500ms后收起',()=>{
   let s=step(initialShelf(),{type:'pointer',zone:'edge',now:0});
   s=step(s,{type:'tick',now:250});
   s=step(s,{type:'pointer',zone:'corridor',now:300});
   expect(step(s,{type:'tick',now:899}).phase).toBe('revealed');
-  expect(step(s,{type:'tick',now:900}).phase).toBe('hidden');
+  s=step(s,{type:'tick',now:3000});expect(s.phase).toBe('revealed');
+  s=step(s,{type:'pointer',zone:'card',now:3100});
+  s=step(s,{type:'pointer',zone:'corridor',now:3200});
+  expect(step(s,{type:'tick',now:6000}).phase).toBe('revealed');
+  s=step(s,{type:'pointer',zone:'outside',now:6100});
+  expect(step(s,{type:'tick',now:6599}).phase).toBe('revealed');
+  expect(step(s,{type:'tick',now:6600}).phase).toBe('hidden');
+});
+test('隐藏时经过走廊不会唤出；自动预览只有进入有效区域才转为停留',()=>{
+ let s=step(initialShelf(),{type:'pointer',zone:'corridor',now:0});
+ expect(step(s,{type:'tick',now:9000}).phase).toBe('hidden');
+ s=step(s,{type:'peek',now:9001});
+ s=step(s,{type:'pointer',zone:'outside',now:9002});
+ s=step(s,{type:'pointer',zone:'corridor',now:9100});
+ expect(step(s,{type:'tick',now:15000}).phase).toBe('revealed');
 });
 test('Peek2300ms结束，睡眠关闭并清过期边缘计时',()=>{
   let s=step(initialShelf(),{type:'peek',now:0});

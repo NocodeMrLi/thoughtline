@@ -1,0 +1,70 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/shelfState.test.ts (14 tests | 2 failed) 11ms
+   × 从顶边到纸张的慢速路径保持显示，离开操作区域500ms后收起 4ms
+   × 隐藏时经过走廊不会唤出；自动预览只有进入有效区域才转为停留 1ms
+ ❯ tests/unit/topEdge.test.ts (2 tests | 2 failed) 7ms
+   × mac: menu-bar gap and slow corridor remain operable without intercepting empty space 6ms
+   × windows: menu-bar gap and slow corridor remain operable without intercepting empty space 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/shelfState.test.ts > 从顶边到纸张的慢速路径保持显示，离开操作区域500ms后收起
+AssertionError: expected 'hidden' to be 'revealed' // Object.is equality
+
+Expected: "revealed"
+Received: "hidden"
+
+ ❯ tests/unit/shelfState.test.ts:32:52
+     30|   s=step(s,{type:'pointer',zone:'corridor',now:300});
+     31|   expect(step(s,{type:'tick',now:899}).phase).toBe('revealed');
+     32|   s=step(s,{type:'tick',now:3000});expect(s.phase).toBe('revealed');
+       |                                                    ^
+     33|   s=step(s,{type:'pointer',zone:'card',now:3100});
+     34|   s=step(s,{type:'pointer',zone:'corridor',now:3200});
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/unit/shelfState.test.ts > 隐藏时经过走廊不会唤出；自动预览只有进入有效区域才转为停留
+AssertionError: expected 'hidden' to be 'revealed' // Object.is equality
+
+Expected: "revealed"
+Received: "hidden"
+
+ ❯ tests/unit/shelfState.test.ts:46:48
+     44|  s=step(s,{type:'pointer',zone:'outside',now:9002});
+     45|  s=step(s,{type:'pointer',zone:'corridor',now:9100});
+     46|  expect(step(s,{type:'tick',now:15000}).phase).toBe('revealed');
+       |                                                ^
+     47| });
+     48| test('Peek2300ms结束，睡眠关闭并清过期边缘计时',()=>{
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/unit/topEdge.test.ts > mac: menu-bar gap and slow corridor remain operable without intercepting empty space
+ FAIL  tests/unit/topEdge.test.ts > windows: menu-bar gap and slow corridor remain operable without intercepting empty space
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/topEdge.test.ts:12:93
+     10|  try{
+     11|   edge.start();vi.advanceTimersByTime(300);expect(edge.presentation().…
+     12|   point={x:-720,y:10};vi.advanceTimersByTime(1200);expect(edge.present…
+       |                                                                                             ^
+     13|   point={x:-720,y:33};vi.advanceTimersByTime(2000);expect(edge.present…
+     14|   edge.layout({displayId:'1',layoutRevision:1,rects:[{x:640,y:64,width…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  4 failed | 12 passed (16)
+   Start at  08:18:11
+   Duration  178ms (transform 68%, import 16%, tests 12%, worker 4%)
+
