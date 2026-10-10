@@ -19,7 +19,14 @@ export function splitClip(s:Snapshot,id:string,ideaId:string,newId:string,width?
  const free=width===undefined?null:availableClipPosition(shown!.visible.map(p=>p.x),width,(sourceX??width/2)+MIN_SPACING);
  const fresh={id:newId,agentId:clip.agentId,ideaIds:[ideaId],currentId:ideaId,position:free!==null&&width!==undefined?normalizedPosition(free,width):null};
  const clips=width!==undefined&&free===null?[...s.clips.map(c=>c.id===id?{...c,ideaIds,currentId}:c),fresh]:s.clips.flatMap(c=>c.id===id?[{...c,ideaIds,currentId},fresh]:[c]);
- return validateSnapshot({...s,clips});
+ const result=validateSnapshot({...s,clips});
+ // A menu split may reclaim fragmented spacing, but never moves hand-placed clips
+ // when an existing gap is available. Genuine capacity overflow stays explicit.
+ if(result.ok&&width!==undefined&&free===null){
+  const arranged=arrangeClips(result.value,width);
+  if(arranged.ok&&layoutClips(arranged.value.clips,width).overflow.length===0)return arranged;
+ }
+ return result;
 }
 export function moveClip(s:Snapshot,id:string,position:number,beforeId:string|null,width?:number,agentId='all'):Result<Snapshot>{
  const clip=s.clips.find(c=>c.id===id);if(!clip||!Number.isFinite(position)||position<0||position>1||beforeId===id||beforeId!==null&&!s.clips.some(c=>c.id===beforeId))return invalid('夹子位置无效。');
@@ -63,7 +70,7 @@ export function dropClipIdea(s:Snapshot,id:string,ideaId:string,targetId:string|
   free=availableClipPosition(shown.map(p=>p.x),width,min+position*(max-min));
   if(free===null)return invalid('绳上暂时放不下，纸张保持原位。');
  }
- const next=source.ideaIds.length>1?splitClip(s,id,ideaId,newId,width):{ok:true as const,value:s};if(!next.ok)return next;
+ const next=source.ideaIds.length>1?splitClip(s,id,ideaId,newId,targetId?undefined:width):{ok:true as const,value:s};if(!next.ok)return next;
  const moving=source.ideaIds.length>1?newId:id;
  if(targetId)return mergeClips(next.value,moving,targetId);
  return validateSnapshot({...next.value,clips:next.value.clips.map(c=>c.id===moving?{...c,position:normalizedPosition(free!,width)}:c)});

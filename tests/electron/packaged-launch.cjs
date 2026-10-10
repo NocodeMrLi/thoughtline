@@ -35,17 +35,18 @@ function observeLaunch(executable, out) {
   return () => { childProcess.spawn = original; };
 }
 
-async function runPackagedFixture({ executable = process.env.THOUGHTLINE_EXECUTABLE, out = process.env.THOUGHTLINE_EVIDENCE_DIR || 'acceptance/evidence/appearance/packaged', worker = path.join(__dirname, 'packaged-appearance-worker.cjs') } = {}) {
+async function runPackagedFixture({ executable = process.env.THOUGHTLINE_EXECUTABLE, out = process.env.THOUGHTLINE_EVIDENCE_DIR || 'acceptance/evidence/appearance/packaged', worker = path.join(__dirname, 'packaged-appearance-worker.cjs'), fixture = 'appearance' } = {}) {
+  if (!/^[a-z-]+$/.test(fixture)) throw Error('Invalid fixture name');
   if (!executable) throw Error('THOUGHTLINE_EXECUTABLE must identify the actual frozen package');
   executable = path.resolve(executable); out = path.resolve(out);
   fs.mkdirSync(out, { recursive: true });
   // Each invocation owns a new profile. Do not accept a stale prior worker result.
-  const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'thoughtline-packaged-appearance-'));
-  const workerResult = path.join(out, 'packaged-appearance-worker.json');
+  const profile = fs.mkdtempSync(path.join(os.tmpdir(), `thoughtline-packaged-${fixture}-`));
+  const workerResult = path.join(out, `packaged-${fixture}-worker.json`);
   fs.rmSync(workerResult, { force: true });
   fs.writeFileSync(path.join(out, 'launch-events.jsonl'), '');
   let result = { passed: false, packaged: true, executable, version: require('../../package.json').version, host: { platform: process.platform, arch: process.arch, release: os.release() }, checks: [], stage: 'worker-starting', cleanup: { normalQuit: false, profile, profileRemoved: false, ownedPids: [], allExited: false } };
-  const save = () => fs.writeFileSync(path.join(out, 'packaged-appearance.json'), JSON.stringify(result, null, 2));
+  const save = () => fs.writeFileSync(path.join(out, `packaged-${fixture}.json`), JSON.stringify(result, null, 2));
   save();
   const stdout = fs.openSync(path.join(out, 'worker.stdout.log'), 'w');
   const stderr = fs.openSync(path.join(out, 'worker.stderr.log'), 'w');

@@ -1,5 +1,5 @@
 import {PreferenceRepository} from './store/preferences';
-import {translator,localizeMessage,agentLabel,type Translator} from '../shared/i18n';
+import {translator,localizeMessage,agentLabel,countThoughts,type Translator} from '../shared/i18n';
 import {app,BrowserWindow,dialog,shell,clipboard,globalShortcut,ipcMain,nativeImage,nativeTheme,powerMonitor,screen,Tray,Menu} from 'electron';
 import {join} from 'node:path';
 import {randomUUID} from 'node:crypto';
@@ -229,9 +229,18 @@ else app.whenReady().then(async()=>{
   const clip=snapshot.clips.find(c=>c.ideaIds.includes(id));
   if(!edge.presentation().shelfVisible)return invalid(t("挂绳已收起。"));
   closeShelfMenu();lock('menu',true);
+  const allPositions=layoutClips(snapshot.clips,width);
+  const mergeTargets=clip?[...allPositions.visible.map(p=>p.clip),...allPositions.overflow].filter(c=>c.id!==clip.id&&c.agentId===clip.agentId):[];
+  const mergeItems=mergeTargets.map(target=>{
+   const targetIdea=snapshot.ideas.find(i=>i.id===target.currentId);
+   const characters=Array.from((targetIdea?.title||targetIdea?.text.trim().split('\n')[0]||t('无标题')).replace(/\s+/g,' '));
+   const title=characters.slice(0,24).join('')+(characters.length>24?'…':'');
+   return {label:`${title} · ${countThoughts(preferences.current.locale,target.ideaIds.length)}`,click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'paperDrop',id:clip!.id,ideaId:id,targetId:target.id,position:null},snapshot.revision);if(!r.ok){placementNotice=r.message;publish();}})();}};
+  });
   const menu=Menu.buildFromTemplate([
    {label:t("查看全文"),click:()=>{void openBrowseDetail(id);}},
-   ...(clip&&clip.ideaIds.length>1?[{label:t("拆出当前念头"),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'split',id:clip.id,ideaId:id},snapshot.revision);if(!r.ok){placementNotice=r.message;publish();}})();}}]:[]),
+   {label:t("合并"),enabled:!!clip,submenu:mergeItems.length?mergeItems:[{label:t("没有可合并的夹子"),enabled:false}]},
+   ...(clip&&clip.ideaIds.length>1?[{label:t("拆分"),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'split',id:clip.id,ideaId:id},snapshot.revision);if(!r.ok){placementNotice=r.message;publish();}})();}}]:[]),
    {label:t("收起当前念头"),click:()=>{void (async()=>{if(!await prepareViews())return;const r=await composerWrite(()=>{const current=snapshot.ideas.find(i=>i.id===id&&i.status==='hanging');return current?save(changeStatus({...snapshot,clips:captureClipPositions(snapshot.clips,width)},id,'archived',new Date().toISOString()),snapshot.revision):Promise.resolve(invalid(t("找不到这条念头。")));});if(!r.ok){placementNotice=r.message;publish();}})();}},
    {label:t('onlyAgent',{name:agentLabel(preferences.current.locale,snapshot.agents.find(a=>a.id===idea.agentId))||t('这个 Agent')}),click:()=>selectShelfAgent(idea.agentId)},
    {label:t("显示全部"),click:()=>selectShelfAgent('all')},
@@ -410,7 +419,8 @@ else app.whenReady().then(async()=>{
   }else if(c.kind==='undo'){
    if(!oldUndo||oldUndo.revision!==revision)return invalid(t("没有可撤销的夹子操作。"));next=oldUndo.positionsOnly?{ok:true,value:{...snapshot,clips:oldUndo.snapshot.clips.flatMap(old=>{const current=snapshot.clips.find(c=>c.id===old.id);return current?[{...current,position:old.position}]:[]})}}:{ok:true,value:{...oldUndo.snapshot,revision}};
   }else return invalid(t("夹子操作无效"));
-  const r=await save(next,revision,()=>{if(c.kind==='arrange'||c.kind==='undo'&&oldUndo?.positionsOnly)arrangeSession++;});
+  const repositioned=next.ok&&['split','splitAll','undo'].includes(c.kind)&&next.value.clips.some(clip=>{const old=previous.clips.find(old=>old.id===clip.id);return old&&old.position!==clip.position;});
+  const r=await save(next,revision,()=>{if(c.kind==='arrange'||c.kind==='undo'&&oldUndo?.positionsOnly||repositioned)arrangeSession++;});
   if(r.ok){placementNotice=['arrange','split','splitAll'].includes(c.kind)&&layoutClips(snapshot.clips,width).overflow.length?t("已保存，绳上暂时放不下，可在念头日历查看"):null;if(c.kind==='split'){manageSelection=c.ideaId;manageSession++;}undoClips=c.kind==='undo'?null:c.kind==='select'?(oldUndo?{...oldUndo,revision:r.value.revision}:null):{snapshot:previous,revision:r.value.revision,positionsOnly:c.kind==='arrange'};publish();}
   return r;
  });

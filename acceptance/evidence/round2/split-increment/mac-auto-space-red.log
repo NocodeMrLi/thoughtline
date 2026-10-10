@@ -1,0 +1,33 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/clipCommands.test.ts (7 tests | 1 failed) 33ms
+   × 拆分遇零散间距时自动腾位，总容量足够就全部可见且内容不变 7ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/clipCommands.test.ts > 拆分遇零散间距时自动腾位，总容量足够就全部可见且内容不变
+AssertionError: expected [ { id: 'separate', …(4) } ] to have a length of +0 but got 1
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ tests/unit/clipCommands.test.ts:42:25
+     40|  expect(before.visible).toHaveLength(3);expect(availableClipPosition(b…
+     41|  const next=value(splitClip(s,'clip:a','b','separate',width)),shown=la…
+     42|  expect(shown.overflow).toHaveLength(0);expect(shown.visible).toHaveLe…
+       |                         ^
+     43|  expect(next.clips.find(c=>c.id==='clip:a')?.ideaIds).toEqual(['a']);
+     44|  for(let i=1;i<shown.visible.length;i++)expect(shown.visible[i].x-show…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 6 passed (7)
+   Start at  12:14:30
+   Duration  202ms (transform 58%, tests 29%, import 11%, worker 3%)
+

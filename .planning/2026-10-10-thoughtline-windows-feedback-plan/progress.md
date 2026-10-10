@@ -20,3 +20,12 @@ Handoff: delivery documentation e48a6a6 pushed. Current main production input ve
 Increment RED verified missing stacked-menu action. Protocol helper failures (Electron evaluate receives module first; require absent in debugger context; calendar DOM mode differs from IPC browse) retained and corrected without weakening assertions. Main notification previously not rendered on Shelf; add temporary actionable full-capacity notice and write-failure visibility. No persistent toolbar. New release version0.0.18.
 
 Increment implementation complete: Mac12 split/menu workflow cases pass,233 units/4 platform skips and type/build pass; existing reader9 and arrangement7 regression pass. Source uses original split/undo commands, no schema changes. Preparing frozen0.0.18 dual builds; physical acceptance pending. All fixture profiles removed after normal process exit.
+
+User approved short Merge/Split labels and automatic gap compaction, all appended to the same canonical document before implementation. Existing aaad6d6 candidate never published/tagged; failed packaged probe used management-only storageInfo from Shelf. Fix fixture by checking app.userData, preserve trusted IPC restrictions. Windows38023082102 failed on the same fixture. Auto-space unit RED and missing Merge menu RED retained.
+
+
+### 测试证据追加｜合并／拆分落地与首个候选失败定位
+
+已按最新确认实现短名称“合并／拆分”、兼容目标子菜单、当前一张合并、展开拆分保留、零散间距自动腾位及真满容量提示；旧aaad6d6候选不发布，0.0.18重新冻结前仍为开发状态。Mac源码合并7项、拆分12项、自动整理7项及原阅读9项通过，235单测通过／4项Windows适用跳过，类型检查与构建通过。
+
+补充准确失败定位：Mac首次包检查错误调用仅管理窗可用的storageInfo，已改核对主进程实际userData路径。Windows CI38023082102则在新增包菜单夹具启动时出现Process failed to launch，之前的实际包外观夹具成功；不是同一个失败原因，不能据此称应用在Windows不能启动。新增夹具曾把ELECTRON_RUN_AS_NODE等环境变量设为空串，已改为复用去除运行覆盖项的受监督启动，保留stderr、进程与隔离目录收据。8项夹具契约检查通过；实际新版双端安装包仍待重新测试。未放宽产品IPC权限或测试断言，两端失败原件全部保留。
