@@ -4,7 +4,8 @@
 Execute the seven Windows feedback repairs with Mac counterparts, using the canonical Thoughtline第二轮修复优化.md saved in the requested project directory.
 
 ## Current Phase
-Approved Merge/Split and automatic space reclamation complete. Final source/tag a7c69962590728037048436989f668fe5cab85e5; Windows38024364214 all steps success,241 units; Mac237 units/4 platform skips, source8 merge/12 split and final actual-package checks pass. Private0.0.18 release26 assets verified, README7 translations and canonical project docs updated,2189.4MiB owned temporary copies removed (du allocation). User app67908,12 worktrees, dependencies, old rollback and failure evidence preserved. Final documentation and evidence ready for verified main push; package/tag source is unchanged. Physical IME/DPI/multi-display/receivers/Mac desktop outside click/animation feel remain for independent acceptance.
+
+0.0.19 production frozen/pushed a1d15d64f3544c675dbb1ae60da0e3293420667e. Final Mac248 units/4 Windows-only skips/type/build and actual package receipts verified; WindowsCI38036690747 completed success/252units/source+installed+packaged checks. 247 canonical sources/220 verified CRLF differences, exact actual payload proof; MacDMGe4fab796,WindowsEXE4a39695e. New immutable tag v0.0.19 regular private release33assets allserverdigests/sizes verified. Removed802.8MiB owned copies; userApp67908/otherQA34617/12 worktrees preserved; native launch exit failure retained. User requires prior completion report before final six-default tags and status-plan archive/implementation. Do not implement next labels before that report.
 
 ## Phases
 - [x] Inspect current source, skills, docs and protect installed app and other worktrees.
@@ -38,5 +39,5 @@ Completed: short Merge/Split actions and automatic spacing, including right-clic
 - [x] Red evidence and root causes.
 - [x] Atomic placement / swap / narrow undo and Composer / Reader chooser.
 - [x] Immediate shelf presentation with Calendar open and compact menus.
-- [ ] Dual-platform regression and exact-source new package verification.
-- [ ] Documentation, new immutable release and owned test cleanup.
+- [x] Dual-platform regression and exact-source new package verification.
+- [x] Documentation, new immutable release and owned test cleanup.

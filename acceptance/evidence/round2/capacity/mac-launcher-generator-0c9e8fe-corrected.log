@@ -1,0 +1,26 @@
+node:child_process:981
+    throw err;
+    ^
+
+Error: Command failed: /usr/bin/hdiutil attach /Users/lihongwei/Documents/Codex/2026-10-10/thoughtline-round2-repair/delivery/v0.0.19/Thoughtline-0.0.19-mac-arm64.dmg -readonly -nobrowse -noautoopen -mountpoint /var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-launcher-check-OEeeye
+hdiutil: attach failed - 资源忙
+
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at checkExecSyncError (node:child_process:942:11)
+    at execFileSync (node:child_process:978:15)
+    at run (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/scripts/generate-mac-isolated-launcher.cjs:17:28)
+    at Object.<anonymous> (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/scripts/generate-mac-isolated-launcher.cjs:28:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12) {
+  status: 1,
+  signal: null,
+  output: [ null, '', 'hdiutil: attach failed - 资源忙\n' ],
+  pid: 13330,
+  stdout: '',
+  stderr: 'hdiutil: attach failed - 资源忙\n'
+}
+
+Node.js v24.19.0

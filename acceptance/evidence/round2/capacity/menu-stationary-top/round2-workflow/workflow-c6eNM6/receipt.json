@@ -1,0 +1,147 @@
+{
+  "platform": "darwin",
+  "arch": "arm64",
+  "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-round2-4wbJe2",
+  "evidence": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round2/capacity/menu-stationary-top/round2-workflow/workflow-c6eNM6",
+  "cases": [
+    {
+      "name": "hint-delay-small-dismiss-on-menu",
+      "passed": true,
+      "detail": {
+        "x": 260,
+        "y": 415,
+        "width": 60,
+        "height": 24
+      }
+    },
+    {
+      "name": "focus-ring-inside-editor-edges",
+      "passed": true,
+      "detail": {
+        "outline": "2px",
+        "offset": "-3px",
+        "shadow": "none",
+        "border": "rgb(102, 105, 114)",
+        "x": 15,
+        "right": 405,
+        "parentX": 15,
+        "parentRight": 405
+      }
+    },
+    {
+      "name": "calendar-fills-resized-height-and-arrows",
+      "passed": true,
+      "detail": {
+        "content": {
+          "height": 498,
+          "bottom": 645,
+          "width": 912
+        },
+        "grid": {
+          "height": 488,
+          "bottom": 637,
+          "width": 904
+        },
+        "cell": {
+          "height": 87,
+          "bottom": 269,
+          "width": 124.859375
+        },
+        "arrow": {
+          "height": 36,
+          "bottom": 137,
+          "width": 36
+        },
+        "svg": 18
+      }
+    },
+    {
+      "name": "settings-back-restores-month-and-window",
+      "passed": true,
+      "detail": {
+        "title": "2026年9月",
+        "width": 950
+      }
+    },
+    {
+      "name": "settings-dirty-return-retains-draft-and-close-cancels",
+      "passed": true,
+      "detail": {
+        "draftRetained": true,
+        "closeCanceled": true
+      }
+    },
+    {
+      "name": "settings-external-update-does-not-invent-dirty-draft",
+      "passed": true,
+      "detail": {
+        "externalChangeRebased": true,
+        "navigationAllowed": true
+      }
+    },
+    {
+      "name": "settings-discard-clears-hidden-close-guard",
+      "passed": true,
+      "detail": {
+        "discardAllowsNextVisit": true
+      }
+    },
+    {
+      "name": "menu-stash-current-preserves-other-pages",
+      "passed": true,
+      "detail": {
+        "labels": [
+          "查看全文",
+          "合并",
+          "拆分",
+          "收起当前念头",
+          "只看 通用",
+          "显示全部 Agent",
+          "自动整理",
+          "撤销挂上",
+          "筛选 Agent",
+          "",
+          "Thoughtline日历"
+        ],
+        "ids": [
+          "r2-0",
+          "r2-2"
+        ],
+        "current": "r2-2"
+      }
+    },
+    {
+      "name": "navigation-performance-baseline",
+      "passed": true,
+      "detail": {
+        "samples": [
+          48,
+          67,
+          67,
+          66,
+          67,
+          67,
+          67,
+          65,
+          68,
+          67
+        ],
+        "p50": 67,
+        "p95": 68,
+        "scope": "Playwright input plus two actual renderer frames, controlled environment"
+      }
+    }
+  ],
+  "pids": [
+    13964,
+    13965,
+    13966,
+    13967,
+    13968,
+    13969
+  ],
+  "nativeOutsideClick": "not exercised by protocol fixture",
+  "normalClose": true,
+  "dataRemoved": true,
+  "passed": true
+}

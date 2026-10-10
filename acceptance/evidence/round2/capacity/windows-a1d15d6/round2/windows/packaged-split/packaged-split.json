@@ -1,0 +1,93 @@
+{
+  "executable": "D:\\a\\_temp\\Thoughtline-installer-preflight\\Thoughtline.exe",
+  "packaged": true,
+  "platform": "win32",
+  "version": "0.0.19",
+  "scope": "actual packaged executable, synthetic isolated data, native menu callback interception; no physical click",
+  "pids": [
+    5028,
+    5764,
+    768,
+    6644,
+    7860
+  ],
+  "checks": [
+    "packaged-English-menu-splits-current-thought-without-opening-window",
+    "packaged-right-click-undo-preserves-original-stack-and-text",
+    "packaged-Merge-targets-current-paper-and-keeps-content",
+    "packaged-merge-undo-restores-both-groups"
+  ],
+  "cleanup": {
+    "normalQuit": true,
+    "profile": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-packaged-split-wska78",
+    "profileRemoved": true,
+    "ownedPids": [
+      5028,
+      5764,
+      768,
+      6644,
+      7860
+    ],
+    "allExited": true
+  },
+  "dataRemoved": true,
+  "passed": true,
+  "worker": {
+    "pid": 5220,
+    "code": 0,
+    "signal": null
+  },
+  "stage": "worker-completed",
+  "launchEvents": [
+    {
+      "time": "2026-10-10T08:12:20.858Z",
+      "type": "spawn",
+      "pid": 5028,
+      "shell": true,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-10T08:12:20.918Z",
+      "type": "stderr",
+      "pid": 5028,
+      "text": "Debugger listening on ws://127.0.0.1:60568/213c40ce-ca75-4772-9e2e-2bb99999a79e\r\n"
+    },
+    {
+      "time": "2026-10-10T08:12:20.926Z",
+      "type": "stderr",
+      "pid": 5028,
+      "text": "For help, see: https://nodejs.org/learn/getting-started/debugging\r\n"
+    },
+    {
+      "time": "2026-10-10T08:12:20.930Z",
+      "type": "stderr",
+      "pid": 5028,
+      "text": "Debugger attached.\r\n"
+    },
+    {
+      "time": "2026-10-10T08:12:21.036Z",
+      "type": "stderr",
+      "pid": 5028,
+      "text": "\r\nDevTools listening on ws://127.0.0.1:60570/devtools/browser/8e553051-ba9c-4a49-8d02-eece5b8c5b7b\r\n"
+    },
+    {
+      "time": "2026-10-10T08:12:22.716Z",
+      "type": "stderr",
+      "pid": 5028,
+      "text": "Debugger ending on ws://127.0.0.1:60568/213c40ce-ca75-4772-9e2e-2bb99999a79e\r\nFor help, see: https://nodejs.org/learn/getting-started/debugging\r\n"
+    },
+    {
+      "time": "2026-10-10T08:12:23.032Z",
+      "type": "exit",
+      "pid": 5028,
+      "code": 0,
+      "signal": null
+    }
+  ],
+  "observedPidState": [
+    {
+      "pid": 5028,
+      "alive": false
+    }
+  ]
+}

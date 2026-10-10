@@ -4,11 +4,11 @@
 
 <p align="center">
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 29" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.18"><img src="badges/preview.svg" alt="Version: 0.0.18" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><img src="badges/preview.svg" alt="Version: 0.0.19" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.18"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   一本のロープとクリップ、紙で日々のアイデアを残します。
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.18"><ins>Thoughtline をダウンロード</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><ins>Thoughtline をダウンロード</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.18</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.19</sub></p>
 
 Thoughtline は macOS と Windows 向けの軽量なデスクトップメモアプリです。画面上端からメモを呼び出し、思いつきを書き留めて作業に戻れます。
 
@@ -37,12 +37,13 @@ Thoughtline は macOS と Windows 向けの軽量なデスクトップメモア�
 - 本文をコピー、またはプレーンテキストとしてドラッグ。元のメモを保持し、自動送信しません。
 - データをローカル保存し、実際のフォルダー表示、移動、独立したバックアップ出力に対応。
 - 最初の画面から中国語／Englishとライト／ダークを切り替え、システムにも連動できます。紙は柔らかく読みやすい質感を保ちます。
+- ロープが満杯でも保存するか、同じ画面の **Swap onto line** で入れ替えられます。元のメモは収納して保持。カレンダーから掛け直すとすぐ表示され、その他メニューはマウスを離すと閉じます。
 
 <p align="center"><img src="images/thought-calendar.png" alt="合成データを使ったメモカレンダーの例。" width="740" /><br /><sub>合成データを使ったメモカレンダーの例。</sub></p>
 
 ## ダウンロードとインストール
 
-リポジトリへのアクセス権を持つメンバーがダウンロードできます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.18).
+リポジトリへのアクセス権を持つメンバーがダウンロードできます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19).
 
 | Platform | Package |
 |---|---|

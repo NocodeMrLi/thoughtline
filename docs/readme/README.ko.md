@@ -4,11 +4,11 @@
 
 <p align="center">
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 29" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.18"><img src="badges/preview.svg" alt="Version: 0.0.18" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><img src="badges/preview.svg" alt="Version: 0.0.19" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.18"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   줄 하나와 집게, 종이로 일상의 아이디어를 남깁니다.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.18"><ins>Thoughtline 다운로드</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><ins>Thoughtline 다운로드</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.18</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.19</sub></p>
 
 Thoughtline은 macOS와 Windows용 가벼운 데스크톱 메모 도구입니다. 화면 위쪽 가장자리에서 생각을 꺼내 보고, 기록한 뒤 하던 일로 돌아가세요.
 
@@ -37,12 +37,13 @@ Thoughtline은 macOS와 Windows용 가벼운 데스크톱 메모 도구입니다
 - 본문을 복사하거나 일반 텍스트로 드래그합니다. 원본을 유지하고 자동 전송하지 않습니다.
 - 데이터를 로컬에 저장하고 실제 폴더 확인, 이동, 독립 백업 내보내기를 지원합니다.
 - 첫 화면에서 중국어/English와 밝게/어둡게 모드를 바꾸거나 시스템 설정을 따릅니다. 종이는 부드럽고 읽기 편한 질감을 유지합니다.
+- 줄이 가득 차면 저장하거나 같은 창에서 **Swap onto line**으로 교체할 수 있습니다. 이전 생각은 보관됩니다. 캘린더에서 다시 걸면 즉시 표시되며, 더 보기 메뉴는 포인터가 벗어나면 닫힙니다.
 
 <p align="center"><img src="images/thought-calendar.png" alt="합성 시연 데이터를 사용한 생각 달력." width="740" /><br /><sub>합성 시연 데이터를 사용한 생각 달력.</sub></p>
 
 ## 다운로드 및 설치
 
-저장소 접근 권한이 있는 구성원에게 다운로드를 제공합니다. Releases에서 패키지, 격리 실행 스크립트, SHA256SUMS와 빌드 정보를 확인하세요. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.18).
+저장소 접근 권한이 있는 구성원에게 다운로드를 제공합니다. Releases에서 패키지, 격리 실행 스크립트, SHA256SUMS와 빌드 정보를 확인하세요. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19).
 
 | Platform | Package |
 |---|---|

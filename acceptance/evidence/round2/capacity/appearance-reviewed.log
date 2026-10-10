@@ -1,0 +1,33 @@
+PASS light-rendered-custom-Agent-contrast
+PASS dark-rendered-custom-Agent-contrast
+PASS custom-clip-color-and-user-names-unchanged
+FAIL English-drag-persists-position-without-redundant-toast other clips are unchanged
++ actual - expected
+... Skipped lines
+
+  [
+    {
+      agentId: 'agent1',
+      currentId: 'b',
+      id: 'c1',
+...
+      ],
++     position: 0.5
+-     position: null
+    },
+    {
+      agentId: 'agent2',
+      currentId: 'c',
+      id: 'c2',
+...
+      ],
++     position: 0.8273809523809523
+-     position: null
+    }
+  ]
+
+PASS locale-switch-keeps-position-and-no-obsolete-drag-toast
+PASS out-of-bounds-cancel-preserves-snapshot-without-redundant-toast
+Error: Timed out waiting for acknowledged main-process state
+    at waitForInfo (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/window-fixture.cjs:28:258)
+    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:24:288

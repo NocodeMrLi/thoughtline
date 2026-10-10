@@ -1,0 +1,27 @@
+windows-test-package	Appearance review fixes on Windows	﻿2026-10-10T07:27:27.7837657Z ##[group]Run New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:27.7838455Z ^[[36;1mNew-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:27.7839299Z ^[[36;1m& node tests/electron/appearance-fix-workflow.cjs 2>&1 | Tee-Object -FilePath (Join-Path $env:THOUGHTLINE_EVIDENCE_DIR 'workflow.log')^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:27.7840109Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw "Appearance review fixes failed: $LASTEXITCODE" }^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:27.7913991Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:27.7914362Z env:
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:27.7914710Z   THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/appearance/windows-source/fix-round1
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:27.7915154Z   THOUGHTLINE_FAKE_CLIPBOARD: 1
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:27.7915407Z ##[endgroup]
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:31.0736264Z PASS light-rendered-custom-Agent-contrast
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:31.4446721Z PASS dark-rendered-custom-Agent-contrast
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:31.5660061Z PASS custom-clip-color-and-user-names-unchanged
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:42.3845572Z ^[[31;1mlocator.waitFor: Timeout 10000ms exceeded.^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:42.3878067Z ^[[31;1mCall log:^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:42.3889181Z ^[[31;1m^[[2m  - waiting for locator('.shelf-error') to be visible^[[22m^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:42.3898120Z ^[[31;1m^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:42.3907936Z ^[[31;1m    at move (D:\a\thoughtline\thoughtline\tests\electron\appearance-fix-workflow.cjs:11:458)^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:42.3916882Z ^[[31;1m    at async D:\a\thoughtline\thoughtline\tests\electron\appearance-fix-workflow.cjs:19:28 {^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:42.3925530Z ^[[31;1m  log: [ "  - waiting for locator('.shelf-error') to be visible" ],^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:42.3934175Z ^[[31;1m  name: 'TimeoutError'^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:42.3942430Z ^[[31;1m}^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:42.5106869Z ^[[31;1mException: ^[[0mD:\a\_temp\3ec65fa3-fab2-463b-b512-cf187ec66d64.ps1:4^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:42.5107914Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:42.5111824Z ^[[31;1m^[[0m^[[36;1m^[[36;1m   4 | ^[[0m … CODE -ne 0) { ^[[36;1mthrow "Appearance review fixes failed: $LASTEXITCODE"^[[0m }^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:42.5113748Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:42.5115410Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mAppearance review fixes failed: 1^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-10T07:27:42.5361345Z ##[error]Process completed with exit code 1.

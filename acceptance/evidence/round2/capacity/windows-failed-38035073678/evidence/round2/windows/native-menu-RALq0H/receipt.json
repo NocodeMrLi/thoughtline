@@ -1,0 +1,51 @@
+{
+  "platform": "win32",
+  "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-native-menu-JBKcvv",
+  "evidence": "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round2\\windows\\native-menu-RALq0H",
+  "probes": [
+    {
+      "kind": "production-first",
+      "closed": true,
+      "ownerFocusable": true,
+      "ownerFocused": true,
+      "receiverClicks": 1
+    },
+    {
+      "kind": "production-repeat",
+      "closed": true,
+      "ownerFocusable": true,
+      "ownerFocused": true,
+      "receiverClicks": 1
+    },
+    {
+      "kind": "production-third",
+      "closed": true,
+      "ownerFocusable": true,
+      "ownerFocused": true,
+      "receiverClicks": 1
+    }
+  ],
+  "pids": [
+    7516,
+    1440,
+    8504,
+    7288,
+    7116,
+    2464,
+    2944
+  ],
+  "scope": "native Menu owner/cancel characterization; hosted Windows is not physical user-device acceptance",
+  "externalReceiver": true,
+  "failure": "AssertionError [ERR_ASSERTION]: Escape cancels native menu\n    at D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-native-menu.cjs:20:494",
+  "receiverPids": [
+    6524,
+    1532,
+    7572,
+    6828,
+    7928
+  ],
+  "receiverRemoved": true,
+  "normalClose": true,
+  "dataRemoved": true,
+  "passed": false
+}

@@ -1,0 +1,65 @@
+{
+  "checks": [
+    "light-rendered-custom-Agent-contrast",
+    "dark-rendered-custom-Agent-contrast",
+    "custom-clip-color-and-user-names-unchanged",
+    "locale-switch-keeps-position-and-no-obsolete-drag-toast",
+    "out-of-bounds-cancel-preserves-snapshot-without-redundant-toast",
+    "locale-broadcast-does-not-cancel-active-drag",
+    "actual-page-save-IO-current-English-diagnostic-bytes",
+    "existing-save-error-renders-current-Chinese-and-preserves-diagnostic"
+  ],
+  "failures": [
+    {
+      "name": "English-drag-persists-position-without-redundant-toast",
+      "error": "AssertionError [ERR_ASSERTION]: stationary clip position differs by more than floating-point roundoff\n    at stationaryClips (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\appearance-fix-workflow.cjs:11:232)\n    at move (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\appearance-fix-workflow.cjs:15:129)\n    at async check (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\appearance-fix-workflow.cjs:6:39)\n    at async D:\\a\\thoughtline\\thoughtline\\tests\\electron\\appearance-fix-workflow.cjs:24:28"
+    },
+    {
+      "name": "active-drag-completes-after-locale-switch-with-content-retained",
+      "error": "AssertionError [ERR_ASSERTION]: stationary clip position differs by more than floating-point roundoff\n    at stationaryClips (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\appearance-fix-workflow.cjs:11:232)\n    at D:\\a\\thoughtline\\thoughtline\\tests\\electron\\appearance-fix-workflow.cjs:25:1721\n    at check (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\appearance-fix-workflow.cjs:6:45)\n    at D:\\a\\thoughtline\\thoughtline\\tests\\electron\\appearance-fix-workflow.cjs:25:1507"
+    }
+  ],
+  "contrast": [
+    {
+      "theme": "light",
+      "samples": [
+        {
+          "text": "Custom 中文 0 · 项目，原文",
+          "ink": "rgb(38, 107, 180)",
+          "paper": "rgb(245, 239, 223)"
+        },
+        {
+          "text": "Custom 中文 1 · 项目，原文",
+          "ink": "rgb(59, 107, 161)",
+          "paper": "rgb(245, 239, 223)"
+        },
+        {
+          "text": "Custom 中文 2 · 项目，原文",
+          "ink": "rgb(102, 105, 114)",
+          "paper": "rgb(245, 239, 223)"
+        }
+      ]
+    },
+    {
+      "theme": "dark",
+      "samples": [
+        {
+          "text": "Custom 中文 0 · 项目，原文",
+          "ink": "rgb(130, 178, 228)",
+          "paper": "rgb(56, 56, 49)"
+        },
+        {
+          "text": "Custom 中文 1 · 项目，原文",
+          "ink": "rgb(143, 177, 214)",
+          "paper": "rgb(56, 56, 49)"
+        },
+        {
+          "text": "Custom 中文 2 · 项目，原文",
+          "ink": "rgb(171, 174, 180)",
+          "paper": "rgb(56, 56, 49)"
+        }
+      ]
+    }
+  ],
+  "scope": "isolated source rendered DOM/IPC/controlled pointer, IO and native-dialog interception; not physical acceptance"
+}

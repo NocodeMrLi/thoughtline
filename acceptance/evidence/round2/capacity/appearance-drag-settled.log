@@ -1,0 +1,40 @@
+PASS light-rendered-custom-Agent-contrast
+PASS dark-rendered-custom-Agent-contrast
+PASS custom-clip-color-and-user-names-unchanged
+PASS English-drag-persists-position-without-redundant-toast
+PASS locale-switch-keeps-position-and-no-obsolete-drag-toast
+PASS out-of-bounds-cancel-preserves-snapshot-without-redundant-toast
+PASS locale-broadcast-does-not-cancel-active-drag
+FAIL active-drag-completes-after-locale-switch-with-content-retained Expected values to be strictly deep-equal:
++ actual - expected
+... Skipped lines
+
+  [
+    {
+      agentId: 'agent1',
+      currentId: 'b',
+      id: 'c1',
+...
+      ],
++     position: 0.5154761904761906
+-     position: 0.5
+    },
+    {
+      agentId: 'agent2',
+      currentId: 'c',
+      id: 'c2',
+
+PASS actual-page-save-IO-current-English-diagnostic-bytes
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert((await shelf.evaluate(()=>window.thoughtline.openManage())).ok)
+
+    at choose (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:10:37)
+    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:25:447 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

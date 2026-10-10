@@ -1,0 +1,63 @@
+PASS light-rendered-custom-Agent-contrast
+PASS dark-rendered-custom-Agent-contrast
+PASS custom-clip-color-and-user-names-unchanged
+FAIL English-drag-persists-position-without-redundant-toast other clips are unchanged
++ actual - expected
+... Skipped lines
+
+  [
+    {
+      agentId: 'agent1',
+      currentId: 'b',
+      id: 'c1',
+...
+      ],
++     position: 0.9000000000000001
+-     position: 0.9
+    }
+  ]
+
+PASS locale-switch-keeps-position-and-no-obsolete-drag-toast
+PASS out-of-bounds-cancel-preserves-snapshot-without-redundant-toast
+PASS locale-broadcast-does-not-cancel-active-drag
+PASS active-drag-completes-after-locale-switch-with-content-retained
+PASS actual-page-save-IO-current-English-diagnostic-bytes
+PASS existing-save-error-renders-current-Chinese-and-preserves-diagnostic
+locator.click: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-clip-id=c0] .page-arrow').first()[22m
+[2m    - locator resolved to <button class="page-arrow" aria-label="Previous paper">‹</button>[22m
+[2m  - attempting click action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is not visible[22m
+[2m    - retrying click action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is not visible[22m
+[2m    - retrying click action[22m
+[2m      - waiting 100ms[22m
+[2m    19 × waiting for element to be visible, enabled and stable[22m
+[2m       - element is not visible[22m
+[2m     - retrying click action[22m
+[2m       - waiting 500ms[22m
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:25:1054 {
+  log: [
+    "  - waiting for locator('[data-clip-id=c0] .page-arrow').first()",
+    '    - locator resolved to <button class="page-arrow" aria-label="Previous paper">‹</button>',
+    '  - attempting click action',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is not visible',
+    '    - retrying click action',
+    '    - waiting 20ms',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is not visible',
+    '    - retrying click action',
+    '      - waiting 100ms',
+    '    19 × waiting for element to be visible, enabled and stable',
+    '       - element is not visible',
+    '     - retrying click action',
+    '       - waiting 500ms'
+  ],
+  name: 'TimeoutError'
+}

@@ -1,0 +1,196 @@
+{
+  "platform": "win32",
+  "arch": "x64",
+  "evidence": "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round2\\windows\\capacity-mcqLLo",
+  "cases": [
+    {
+      "name": "calendar-open-immediate-hang",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-RwTzx4",
+      "passed": true,
+      "detail": {
+        "calendarKeptOpen": true,
+        "shelfUpdated": true
+      },
+      "pids": [
+        7832,
+        7924,
+        8044,
+        7556,
+        3336,
+        8444,
+        7664
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "more-menu-content-width",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-VvlQwn",
+      "passed": true,
+      "detail": {
+        "menu": 219.046875,
+        "content": 189.046875,
+        "button": "color(srgb 0.939647 0.931529 0.900863)",
+        "detailAndCalendarReaderAndHeaderLeaveClose": true,
+        "bridgeSafe": true
+      },
+      "pids": [
+        3704,
+        2608,
+        2748,
+        3452,
+        1780,
+        4844,
+        2844
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "new-swap-cancel-confirm-undo",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-fMLySk",
+      "passed": false,
+      "detail": {
+        "incomingId": "6783fc0f-29dd-4c55-b173-59037d40017c",
+        "slot": "clip:c0",
+        "cancelKeptText": true,
+        "undoKeepsNewRecord": true
+      },
+      "error": "page.screenshot: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\n    at run (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-capacity-workflow.cjs:13:65)\n    at async D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-capacity-workflow.cjs:34:2",
+      "pids": [
+        2908,
+        3084,
+        9120,
+        6860,
+        1436,
+        7004
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "calendar-swap-open-focus-retained",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-TmBFJw",
+      "passed": true,
+      "detail": {
+        "readerKeptOpen": true,
+        "focusRetained": true,
+        "successExpires": true
+      },
+      "pids": [
+        2044,
+        6416,
+        6652,
+        6388,
+        7256,
+        6944,
+        5460
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "stale-target-retains-draft",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-Zxy1Gw",
+      "passed": false,
+      "detail": {
+        "staleChoiceDisabled": true,
+        "noDuplicate": true
+      },
+      "error": "page.screenshot: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\n    at run (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-capacity-workflow.cjs:13:65)\n    at async D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-capacity-workflow.cjs:49:2",
+      "pids": [
+        2128,
+        6564,
+        7308,
+        540,
+        7048,
+        7636
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "write-failure-in-picker-keeps-old-and-new-content",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-v0zBeO",
+      "passed": true,
+      "detail": {
+        "failedWriteAtomic": true,
+        "pickerRetained": true,
+        "retrySucceeded": true
+      },
+      "pids": [
+        1456,
+        6272,
+        6624,
+        796,
+        3588,
+        2152,
+        5940
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "composer-write-failure-keeps-focus-and-draft",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-4MotbC",
+      "passed": false,
+      "detail": {
+        "failedDraftKept": true,
+        "pickerFocusRetained": true,
+        "retrySucceeded": true
+      },
+      "error": "page.screenshot: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\n    at run (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-capacity-workflow.cjs:13:65)\n    at async D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-capacity-workflow.cjs:61:2",
+      "pids": [
+        1112,
+        7156,
+        4268,
+        8976,
+        5684,
+        2180
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "native-show-all-Agent-label-and-selection",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-Rk8ZOQ",
+      "passed": true,
+      "detail": {
+        "filterOnly": true,
+        "checkmarkTracksFilter": true
+      },
+      "pids": [
+        2676,
+        784,
+        628,
+        2076,
+        3124,
+        8728,
+        4564
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "full-composer-save-stays-out-of-reader",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-NkhWHc",
+      "passed": false,
+      "detail": {
+        "archived": true,
+        "noReaderJump": true
+      },
+      "error": "page.screenshot: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\n    at run (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-capacity-workflow.cjs:13:65)\n    at async D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-capacity-workflow.cjs:74:2",
+      "pids": [
+        8696,
+        236,
+        8240,
+        5336,
+        9092,
+        1468
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    }
+  ],
+  "passed": false
+}

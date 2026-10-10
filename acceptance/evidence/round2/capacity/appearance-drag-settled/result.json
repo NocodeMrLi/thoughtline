@@ -1,0 +1,61 @@
+{
+  "checks": [
+    "light-rendered-custom-Agent-contrast",
+    "dark-rendered-custom-Agent-contrast",
+    "custom-clip-color-and-user-names-unchanged",
+    "English-drag-persists-position-without-redundant-toast",
+    "locale-switch-keeps-position-and-no-obsolete-drag-toast",
+    "out-of-bounds-cancel-preserves-snapshot-without-redundant-toast",
+    "locale-broadcast-does-not-cancel-active-drag",
+    "actual-page-save-IO-current-English-diagnostic-bytes"
+  ],
+  "failures": [
+    {
+      "name": "active-drag-completes-after-locale-switch-with-content-retained",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n... Skipped lines\n\n  [\n    {\n      agentId: 'agent1',\n      currentId: 'b',\n      id: 'c1',\n...\n      ],\n+     position: 0.5154761904761906\n-     position: 0.5\n    },\n    {\n      agentId: 'agent2',\n      currentId: 'c',\n      id: 'c2',\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:24:1725\n    at check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:6:45)\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/appearance-fix-workflow.cjs:24:1507"
+    }
+  ],
+  "contrast": [
+    {
+      "theme": "light",
+      "samples": [
+        {
+          "text": "Custom 中文 0 · 项目，原文",
+          "ink": "rgb(38, 107, 180)",
+          "paper": "rgb(245, 239, 223)"
+        },
+        {
+          "text": "Custom 中文 1 · 项目，原文",
+          "ink": "rgb(59, 107, 161)",
+          "paper": "rgb(245, 239, 223)"
+        },
+        {
+          "text": "Custom 中文 2 · 项目，原文",
+          "ink": "rgb(102, 105, 114)",
+          "paper": "rgb(245, 239, 223)"
+        }
+      ]
+    },
+    {
+      "theme": "dark",
+      "samples": [
+        {
+          "text": "Custom 中文 0 · 项目，原文",
+          "ink": "rgb(130, 178, 228)",
+          "paper": "rgb(56, 56, 49)"
+        },
+        {
+          "text": "Custom 中文 1 · 项目，原文",
+          "ink": "rgb(143, 177, 214)",
+          "paper": "rgb(56, 56, 49)"
+        },
+        {
+          "text": "Custom 中文 2 · 项目，原文",
+          "ink": "rgb(171, 174, 180)",
+          "paper": "rgb(56, 56, 49)"
+        }
+      ]
+    }
+  ],
+  "scope": "isolated source rendered DOM/IPC/controlled pointer, IO and native-dialog interception; not physical acceptance"
+}

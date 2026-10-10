@@ -1,0 +1,13 @@
+{
+  "pid": 2690,
+  "ownedExecutable": "/Users/lihongwei/Documents/Codex/2026-10-10/thoughtline-round2-repair/delivery/v0.0.19/isolated-experience/mount/Thoughtline.app/Contents/MacOS/Thoughtline",
+  "cause": "Incorrect check-only invocation used unsupported environment variable; actual launcher started while user app remained running. Native Quit accepted but Node cleanupHandles waited >5min, no owned visible windows or saved thought data.",
+  "normalQuitAccepted": true,
+  "normalExit": false,
+  "sample": "mac-launcher-quit-sample.log",
+  "action": "SIGTERM to this exact disposable PID only; preserve user application PID67908",
+  "userAppPreserved": true,
+  "ownedGpuPid": 2693,
+  "gpuAction": "SIGTERM to owned GPU helper after parent accepted Quit and main SIGTERM failed to exit",
+  "finalAction": "SIGKILL to exact owned parent only after accepted native Quit, repeated graceful requests, >5min Node cleanup wait and dead GPU helper; no own saved record, no other app touched"
+}

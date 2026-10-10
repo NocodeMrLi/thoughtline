@@ -1,0 +1,21 @@
+PASS light-rendered-custom-Agent-contrast
+PASS dark-rendered-custom-Agent-contrast
+PASS custom-clip-color-and-user-names-unchanged
+FAIL English-drag-persists-position-without-redundant-toast stationary clip position differs by more than floating-point roundoff
+PASS locale-switch-keeps-position-and-no-obsolete-drag-toast
+PASS out-of-bounds-cancel-preserves-snapshot-without-redundant-toast
+PASS locale-broadcast-does-not-cancel-active-drag
+FAIL active-drag-completes-after-locale-switch-with-content-retained stationary clip position differs by more than floating-point roundoff
+PASS actual-page-save-IO-current-English-diagnostic-bytes
+PASS existing-save-error-renders-current-Chinese-and-preserves-diagnostic
+AssertionError [ERR_ASSERTION]: stationary clip position differs by more than floating-point roundoff
+    at stationaryClips (D:\a\thoughtline\thoughtline\tests\electron\appearance-fix-workflow.cjs:11:232)
+    at move (D:\a\thoughtline\thoughtline\tests\electron\appearance-fix-workflow.cjs:15:129)
+    at async D:\a\thoughtline\thoughtline\tests\electron\appearance-fix-workflow.cjs:26:1186 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
