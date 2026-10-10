@@ -1,3 +1,4 @@
+import {legacySnapshot} from '../helpers/legacySnapshot';
 import {expect,test} from 'vitest';
 import * as commands from '../../src/shared/ideaCommands';
 import {mergeClips} from '../../src/shared/clipCommands';
@@ -7,7 +8,7 @@ const api=<K extends 'deleteIdea'|'restoreIdea'|'permanentlyDeleteIdea'|'editIde
 const value=<T>(r:Result<T>):T=>{expect(r.ok).toBe(true);if(!r.ok)throw Error(r.message);return r.value;};
 const now='2026-01-01T18:30:00Z',later='2026-10-09T12:00:00Z';
 const original:Draft={text:'  原文 🧵\n结尾 😄\n ',title:'旧标题',project:'旧项目',agentId:'general'};
-const fixture=()=>value(commands.newIdea(commands.initialSnapshot(),original,'one',now));
+const fixture=()=>value(commands.newIdea(legacySnapshot(),original,'one',now));
 
 test('软删除保全全文/ID/创建日/归属并从物理组移出，恢复挂着记录独立成夹保留原组',()=>{
  const del=api('deleteIdea'),restore=api('restoreIdea');let s=fixture();

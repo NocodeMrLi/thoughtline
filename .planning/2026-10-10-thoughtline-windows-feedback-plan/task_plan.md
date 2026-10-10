@@ -41,3 +41,12 @@ Completed: short Merge/Split actions and automatic spacing, including right-clic
 - [x] Immediate shelf presentation with Calendar open and compact menus.
 - [x] Dual-platform regression and exact-source new package verification.
 - [x] Documentation, new immutable release and owned test cleanup.
+
+
+## Approved positioning and status increment 0.0.20
+- [x] Prior0.0.19 complete report delivered to user before next archive.
+- [x] Same canonical second-round plan appended/backed up/read back; six fresh defaults +generic labels +effective on/off-line status.
+- [x] Failing meaningful behavior tests before implementation.
+- [x] Minimal model/i18n/menu/calendar/reader changes preserving schema/userdata.
+- [ ] Mac/Windows regression and actual same-source packages.
+- [ ] Documented immutable private new release/owned cleanup.

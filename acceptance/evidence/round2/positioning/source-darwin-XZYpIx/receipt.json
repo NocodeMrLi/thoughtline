@@ -1,0 +1,28 @@
+{
+  "platform": "darwin",
+  "version": "0.0.20",
+  "evidence": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round2/positioning/source-darwin-XZYpIx",
+  "cases": [
+    {
+      "kind": "fresh",
+      "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-positioning-SgxmMN",
+      "failure": "TypeError: Cannot read properties of undefined (reading 'directory')\n    at freshChecks (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/positioning-checks.cjs:15:82)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/positioning-workflow.cjs:7:32",
+      "pids": [
+        26850,
+        26850,
+        26851,
+        26852,
+        26853
+      ],
+      "normalQuit": true,
+      "profileRemoved": true
+    },
+    {
+      "kind": "legacy",
+      "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-positioning-9h48XX",
+      "failure": "electron.launch: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - <launching> /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron --inspect=0 --remote-debugging-port=0 /var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-positioning-9h48XX/protocol-entry.cjs\u001b[22m\n\u001b[2m  - <launched> pid=26854\u001b[22m\n\u001b[2m  - [pid=26854][err] Debugger listening on ws://127.0.0.1:51587/5f08452a-66e0-4755-8f51-c7882f8151bf\u001b[22m\n\u001b[2m  - [pid=26854][err] For help, see: https://nodejs.org/learn/getting-started/debugging\u001b[22m\n\u001b[2m  - <ws connecting> ws://127.0.0.1:51587/5f08452a-66e0-4755-8f51-c7882f8151bf\u001b[22m\n\u001b[2m  - [pid=26854][err] Debugger attached.\u001b[22m\n\u001b[2m  - <ws connected> ws://127.0.0.1:51587/5f08452a-66e0-4755-8f51-c7882f8151bf\u001b[22m\n\u001b[2m  - [pid=26854][err]\u001b[22m\n\u001b[2m  - [pid=26854][err] DevTools listening on ws://127.0.0.1:51589/devtools/browser/43a39db4-a49d-4fe4-842f-eef53d083722\u001b[22m\n\u001b[2m  - <ws connecting> ws://127.0.0.1:51589/devtools/browser/43a39db4-a49d-4fe4-842f-eef53d083722\u001b[22m\n\u001b[2m  - <ws connected> ws://127.0.0.1:51589/devtools/browser/43a39db4-a49d-4fe4-842f-eef53d083722\u001b[22m\n\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/positioning-workflow.cjs:6:109",
+      "cleanupFailure": "AssertionError [ERR_ASSERTION]: must audit a launched process\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/positioning-workflow.cjs:9:194"
+    }
+  ],
+  "passed": false
+}

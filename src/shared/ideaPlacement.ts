@@ -36,7 +36,7 @@ export function placeIdea(s:Snapshot,source:PlacementSource,intent:PlacementInte
  if(typeof intent.wholeClip!=='boolean')return invalid('目标夹子已变化，请重新选择。');
  const target=before.clips.find(c=>c.id===intent.targetClipId),incoming=created.value.ideas.find(i=>i.id===source.id)!;
  if(!target||!target.ideaIds.includes(intent.targetIdeaId)||target.ideaIds.includes(source.id)||!Array.isArray(intent.expectedIds)||JSON.stringify(target.ideaIds)!==JSON.stringify(intent.expectedIds)||!layoutClips(before.clips,width).visible.some(p=>p.clip.id===target.id))return invalid('目标夹子已变化，请重新选择。');
- if(target.ideaIds.length>1&&target.agentId!==incoming.agentId&&!intent.wholeClip)return invalid('不同Agent的叠纸需明确收起整夹后换上。');
+ if(target.ideaIds.length>1&&target.agentId!==incoming.agentId&&!intent.wholeClip)return invalid('不同标签的叠纸需明确收起整夹后换上。');
  const outgoing=intent.wholeClip?target.ideaIds:[intent.targetIdeaId],outIds=new Set(outgoing);
  const ideas=created.value.ideas.map(i=>outIds.has(i.id)?{...i,status:'archived' as const,updatedAt:now}:i);
  const clips=created.value.clips.flatMap(c=>{

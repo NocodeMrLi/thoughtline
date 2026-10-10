@@ -1,0 +1,51 @@
+{
+  "platform": "darwin",
+  "version": "0.0.20",
+  "evidence": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round2/positioning/source-darwin-0Tagvi",
+  "cases": [
+    {
+      "kind": "fresh",
+      "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-positioning-lYtJSD",
+      "checks": [
+        "fresh-six-presets-cover-everyday-work-people-development",
+        "English-tag-settings-and-translated-preset-display",
+        "custom-tag-remains-literal-in-English",
+        "renamed-built-in-remains-literal",
+        "composer-general-default-generic-placeholder-specific-person-and-save",
+        "restart-preserves-identities-content-dates-tag-customizations-and-draft"
+      ],
+      "pids": [
+        27123,
+        27123,
+        27124,
+        27125,
+        27126,
+        27127,
+        27129,
+        27130,
+        27130,
+        27133,
+        27134,
+        27135
+      ],
+      "passed": true,
+      "normalQuit": true,
+      "profileRemoved": true
+    },
+    {
+      "kind": "legacy",
+      "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-positioning-Ms7EM6",
+      "failure": "page.waitForSelector: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.hanging[data-clip-id=\"clip:legacy32\"]')\u001b[22m\n\n    at legacyChecks (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/positioning-checks.cjs:32:993)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/positioning-workflow.cjs:7:87",
+      "pids": [
+        27136,
+        27136,
+        27137,
+        27138,
+        27142
+      ],
+      "normalQuit": true,
+      "profileRemoved": true
+    }
+  ],
+  "passed": false
+}

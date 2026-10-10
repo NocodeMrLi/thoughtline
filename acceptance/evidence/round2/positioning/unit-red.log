@@ -1,0 +1,189 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/positioning.test.ts (10 tests | 7 failed) 32ms
+   × fresh profile has only six compact presets spanning everyday, work, specific people and development 5ms
+   × all app-owned messages use generic tag terminology in both languages 1ms
+   × preset display translates only intact built-in names; user labels and renamed presets remain literal 1ms
+   × native filter wording restores all tags and retains arbitrary user names 0ms
+   × legacy hanging capacity overflow is off-line without mutating snapshot or creation dates 2ms
+   × width changes recompute capacity status; tag-hidden normal clip remains on-line 2ms
+   × legacy overflow actually shown by active tag filter is on-line 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/positioning.test.ts > fresh profile has only six compact presets spanning everyday, work, specific people and development
+AssertionError: expected [ 'Codex', 'Claude', 'Cursor', '通用' ] to deeply equal [ '通用', '生活灵感', '工作记录', '直属领导', …(2) ]
+
+- Expected
++ Received
+
+  [
++   "Codex",
++   "Claude",
++   "Cursor",
+    "通用",
+-   "生活灵感",
+-   "工作记录",
+-   "直属领导",
+-   "同事",
+-   "Codex",
+  ]
+
+ ❯ tests/unit/positioning.test.ts:13:50
+     11| const ids=(index:Map<string,{id:string}[]>)=>[...index.values()].flat(…
+     12| test('fresh profile has only six compact presets spanning everyday, wo…
+     13|  expect(initialSnapshot().agents.map(a=>a.name)).toEqual(['通用','生活灵感',…
+       |                                                  ^
+     14|  expect(new Set(initialSnapshot().agents.map(a=>a.id)).size).toBe(6);
+     15| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  tests/unit/positioning.test.ts > all app-owned messages use generic tag terminology in both languages
+AssertionError: expected [ 'zh-CN:显示全部Agent后挂上', …(52) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "zh-CN:显示全部Agent后挂上",
++   "zh-CN:当前Agent筛选会隐藏这张纸，请选择显示全部Agent后挂上。",
++   "zh-CN:不同Agent的叠纸需明确收起整夹后换上。",
++   "zh-CN:显示全部 Agent",
++   "zh-CN:这个 Agent",
++   "zh-CN:筛选 Agent",
++   "zh-CN:Agent内容无效",
++   "zh-CN:夹子颜色和文字一起区分 Agent。这里只记录归属，不连接 Agent 账户。",
++   "zh-CN:新增 Agent",
++   "zh-CN:Agent 标签",
++   "zh-CN:保存后会移至新Agent的独立夹子，请先确认。",
++   "zh-CN:先写下来，稍后交给 Agent。",
++   "zh-CN:保存后移至新Agent的独立夹子",
++   "zh-CN:念头归属 Agent",
++   "zh-CN:编辑归属 Agent",
++   "zh-CN:念头、项目或 Agent",
++   "zh-CN:筛选Agent",
++   "zh-CN:全部 Agent",
++   "zh-CN:不同 Agent 无法合夹，位置保持。",
++   "zh-CN:不同 Agent 不能合夹",
++   "zh-CN:不同Agent的夹子不能合并。",
++   "zh-CN:Agent标签无效。",
++   "zh-CN:夹子成员重复、缺失或Agent不一致。",
++   "zh-CN:找不到这个Agent。",
++   "zh-CN:请选择存在的替代Agent，通用标签不能移除。",
++   "en:显示全部Agent后挂上",
++   "en:当前Agent筛选会隐藏这张纸，请选择显示全部Agent后挂上。",
++   "en:不同Agent的叠纸需明确收起整夹后换上。",
++   "en:显示全部 Agent",
++   "en:这个 Agent",
++   "en:筛选 Agent",
++   "en:Agent内容无效",
++   "en:夹子颜色和文字一起区分 Agent。这里只记录归属，不连接 Agent 账户。",
++   "en:新增 Agent",
++   "en:Agent 标签",
++   "en:保存后会移至新Agent的独立夹子，请先确认。",
++   "en:先写下来，稍后交给 Agent。",
++   "en:保存后移至新Agent的独立夹子",
++   "en:给谁：",
++   "en:念头归属 Agent",
++   "en:更改归属会将这张纸移至独立夹子，请先确认。",
++   "en:编辑归属 Agent",
++   "en:更改归属会将当前纸张移至独立夹子",
++   "en:念头、项目或 Agent",
++   "en:筛选Agent",
++   "en:全部 Agent",
++   "en:不同 Agent 无法合夹，位置保持。",
++   "en:不同 Agent 不能合夹",
++   "en:不同Agent的夹子不能合并。",
++   "en:Agent标签无效。",
++   "en:夹子成员重复、缺失或Agent不一致。",
++   "en:找不到这个Agent。",
++   "en:请选择存在的替代Agent，通用标签不能移除。",
++ ]
+
+ ❯ tests/unit/positioning.test.ts:22:169
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  tests/unit/positioning.test.ts > preset display translates only intact built-in names; user labels and renamed presets remain literal
+AssertionError: expected '生活灵感' to be 'Everyday ideas' // Object.is equality
+
+Expected: "Everyday ideas"
+Received: "生活灵感"
+
+ ❯ tests/unit/positioning.test.ts:26:63
+     24| });
+     25| test('preset display translates only intact built-in names; user label…
+     26|  expect(agentLabel('en',{id:'life-inspiration',name:'生活灵感'})).toBe('Ev…
+       |                                                               ^
+     27|  expect(agentLabel('en',{id:'life-inspiration',name:'我的Agent生活记录'})).t…
+     28| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  tests/unit/positioning.test.ts > native filter wording restores all tags and retains arbitrary user names
+AssertionError: expected '显示全部 Agent' to be '显示全部标签' // Object.is equality
+
+Expected: "显示全部标签"
+Received: "显示全部 Agent"
+
+ ❯ tests/unit/positioning.test.ts:30:42
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  tests/unit/positioning.test.ts > legacy hanging capacity overflow is off-line without mutating snapshot or creation dates
+AssertionError: expected [ 'id0', 'id1', 'id2', 'id3', …(4) ] to deeply equal [ 'id0', 'id1' ]
+
+- Expected
++ Received
+
+  [
+    "id0",
+    "id1",
++   "id2",
++   "id3",
++   "id4",
++   "id5",
++   "id6",
++   "id7",
+  ]
+
+ ❯ tests/unit/positioning.test.ts:38:82
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  tests/unit/positioning.test.ts > width changes recompute capacity status; tag-hidden normal clip remains on-line
+AssertionError: expected [ 'id0', 'id1', 'id2', 'id3', …(2) ] to not have a length of 6
+ ❯ tests/unit/positioning.test.ts:43:86
+     41|  const s=fixture(6);s.agents.push({id:'custom',name:'日报',color:'#8899A…
+     42|  expect(ids(calendarIndex(s,{status:'hanging'},{width:2560,shelfAgentI…
+     43|  expect(ids(calendarIndex(s,{status:'hanging'},{width:800,shelfAgentId…
+       |                                                                                      ^
+     44| });
+     45| test('legacy overflow actually shown by active tag filter is on-line',…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  tests/unit/positioning.test.ts > legacy overflow actually shown by active tag filter is on-line
+AssertionError: expected [] to include 'id7'
+ ❯ tests/unit/positioning.test.ts:47:83
+     45| test('legacy overflow actually shown by active tag filter is on-line',…
+     46|  const s=fixture(8);s.agents.push({id:'custom',name:'日报',color:'#8899A…
+     47|  expect(ids(calendarIndex(s,{status:'archived'},{width:800,shelfAgentI…
+       |                                                                                   ^
+     48| });
+     49| test('all stack members count on-line, including the page that is not …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  7 failed | 3 passed (10)
+   Start at  16:37:01
+   Duration  218ms (transform 62%, tests 23%, import 13%, worker 2%)
+

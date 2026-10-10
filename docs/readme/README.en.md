@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><img src="badges/preview.svg" alt="Version: 0.0.19" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><img src="badges/preview.svg" alt="Version: 0.0.20" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   A rope, a few clips, and sheets of paper for everyday ideas.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><ins>Download Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><ins>Download Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.19</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.20</sub></p>
 
 Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ideas at the top edge of the screen, capture a thought, and return to what you were doing.
 
@@ -43,7 +43,7 @@ Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ide
 
 ## Download and install
 
-Downloads are available to members with repository access. Releases include packages, isolated launchers, SHA256SUMS, and build provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19).
+Downloads are available to members with repository access. Releases include packages, isolated launchers, SHA256SUMS, and build provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20).
 
 | Platform | Package |
 |---|---|
@@ -59,7 +59,7 @@ Before upgrading, quit normally and back up your data. Commercial signing certif
 3. Move the pointer to the top screen edge to reveal the rope; open a sheet to read, copy, edit, or archive it.
 4. Use the calendar to find archived thoughts or restore items from Recently Deleted.
 
-Codex, Claude, and Cursor labels describe categories. Copy or drag text yourself; receiving behavior in other applications is still being verified.
+Tags describe purposes, people or tools: everyday ideas, work notes, a direct manager, a colleague or Codex. Add your own tags for daily reports, design plans or clients. Fresh installations provide six concise presets; existing tags and colors stay intact. Thoughtline Calendar filters All statuses / On the line / Off the line. Off the line includes saved-only and put-away thoughts, and legacy records that exceed line capacity. Copy or drag text yourself; receiving behavior in other applications still needs separate verification.
 
 ## Data and backups
 

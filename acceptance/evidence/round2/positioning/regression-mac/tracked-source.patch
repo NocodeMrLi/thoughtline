@@ -1,0 +1,1039 @@
+diff --git a/.github/workflows/test-packages.yml b/.github/workflows/test-packages.yml
+index e7758d4..55b5dd8 100644
+--- a/.github/workflows/test-packages.yml
++++ b/.github/workflows/test-packages.yml
+@@ -40,6 +40,8 @@ jobs:
+           if ($LASTEXITCODE -ne 0) { throw 'Second round merge menu failed' }
+           & node tests/electron/round2-capacity-workflow.cjs
+           if ($LASTEXITCODE -ne 0) { throw 'Capacity and swap workflow failed' }
++          & node tests/electron/positioning-workflow.cjs
++          if ($LASTEXITCODE -ne 0) { throw 'Tag positioning and effective status workflow failed' }
+           & node tests/electron/round2-native-menu.cjs
+           if ($LASTEXITCODE -ne 0) { throw 'Second round native menu failed' }
+       - name: Source Electron UI regression on Windows
+@@ -107,6 +109,8 @@ jobs:
+         run: |
+           & node tests/electron/packaged-capacity.cjs
+           if ($LASTEXITCODE -ne 0) { throw 'Actual packaged capacity regression failed' }
++          & node tests/electron/packaged-positioning.cjs
++          if ($LASTEXITCODE -ne 0) { throw 'Actual packaged tag positioning regression failed' }
+       - name: Hash test installers
+         shell: pwsh
+         run: |
+diff --git a/docs/delivery/Start-Thoughtline-Isolated.ps1 b/docs/delivery/Start-Thoughtline-Isolated.ps1
+index ab12fba..c26e227 100644
+--- a/docs/delivery/Start-Thoughtline-Isolated.ps1
++++ b/docs/delivery/Start-Thoughtline-Isolated.ps1
+@@ -5,10 +5,10 @@ param(
+ $ErrorActionPreference = 'Stop'
+ $exe = (Resolve-Path -LiteralPath $Executable).Path
+ if ((Split-Path $exe -Leaf) -ne 'Thoughtline.exe') { throw 'Select the installed Thoughtline.exe' }
+-if ((Get-Item -LiteralPath $exe).VersionInfo.FileVersion -ne '0.0.19') { throw 'This launcher requires the 0.0.19 functional preflight executable' }
++if ((Get-Item -LiteralPath $exe).VersionInfo.FileVersion -ne '0.0.20') { throw 'This launcher requires the 0.0.20 functional preflight executable' }
+ if (!$env:LOCALAPPDATA) { throw 'Windows LOCALAPPDATA is unavailable' }
+ if (Get-Process -Name Thoughtline -ErrorAction SilentlyContinue) { throw 'Exit other Thoughtline versions from their tray menus first. No processes were stopped.' }
+-$data = Join-Path $env:LOCALAPPDATA 'Thoughtline-Preflight\0.0.19\user-data'
++$data = Join-Path $env:LOCALAPPDATA 'Thoughtline-Preflight\0.0.20\user-data'
+ $normal = Join-Path $env:APPDATA 'Thoughtline'
+ if ($data -eq $normal) { throw 'Isolated profile must differ from the normal profile' }
+ Write-Output "Executable: $exe"
+diff --git a/package-lock.json b/package-lock.json
+index 42e3c29..58d99ab 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -1,12 +1,12 @@
+ {
+   "name": "thoughtline",
+-  "version": "0.0.19",
++  "version": "0.0.20",
+   "lockfileVersion": 3,
+   "requires": true,
+   "packages": {
+     "": {
+       "name": "thoughtline",
+-      "version": "0.0.19",
++      "version": "0.0.20",
+       "dependencies": {
+         "react": "19.3.0",
+         "react-dom": "19.3.0"
+diff --git a/package.json b/package.json
+index 91234e4..ca1bb2e 100644
+--- a/package.json
++++ b/package.json
+@@ -1,6 +1,6 @@
+ {
+   "name": "thoughtline",
+-  "version": "0.0.19",
++  "version": "0.0.20",
+   "private": true,
+   "description": "Thoughtline desktop thoughts on a clothesline",
+   "main": "out/main/index.js",
+diff --git a/src/renderer/components/AgentSettings.tsx b/src/renderer/components/AgentSettings.tsx
+index aa48d4b..de5df82 100644
+--- a/src/renderer/components/AgentSettings.tsx
++++ b/src/renderer/components/AgentSettings.tsx
+@@ -13,6 +13,6 @@ export function AgentSettings({info,busy,run}:{info:PilotInfo;busy:boolean;run:(
+   <label>{t("编辑标签")}<select value={chosen.id} disabled={busy} onChange={e=>setId(e.target.value)}>{info.snapshot.agents.map(a=><option key={a.id} value={a.id}>{agentName(a)}</option>)}</select></label>
+   <div className="agent-form"><label>{t("名称")}<input maxLength={40} value={name} disabled={busy} onChange={e=>setName(e.target.value)}/></label><label>{t("夹子颜色")}<input type="color" value={color} disabled={busy} onChange={e=>setColor(e.target.value)}/></label><button disabled={busy||!name.trim()} onClick={()=>void change({kind:'update',id:chosen.id,name,color},t("标签已更新，念头归属保持不变。"))}>{t("保存标签")}</button></div>
+   {chosen.id!=='general'&&<div className="agent-form migration"><label>{t("移除前，将念头和草稿迁到")}<select value={replacement} disabled={busy} onChange={e=>setReplacement(e.target.value)}>{info.snapshot.agents.filter(a=>a.id!==chosen.id).map(a=><option key={a.id} value={a.id}>{agentName(a)}</option>)}</select></label><button disabled={busy||replacement===chosen.id} onClick={()=>void change({kind:'remove',id:chosen.id,replacement},t("标签已移除，全文已迁移。"))}>{t("移除并迁移")}</button></div>}
+-  <hr/><h2>{t("新增 Agent")}</h2><div className="agent-form"><label>{t("名称")}<input maxLength={40} value={newName} disabled={busy} onChange={e=>setNewName(e.target.value)}/></label><label>{t("夹子颜色")}<input type="color" value={newColor} disabled={busy} onChange={e=>setNewColor(e.target.value)}/></label><button disabled={busy||!newName.trim()} onClick={async()=>{if(await change({kind:'add',name:newName,color:newColor},t("新标签已添加。")))setNewName('');}}>{t("添加标签")}</button></div>
++  <hr/><h2>{t("新增 Agent")}</h2><div className="agent-form"><label>{t("名称")}<input placeholder={t("例如：日报、直属领导、客户")} maxLength={40} value={newName} disabled={busy} onChange={e=>setNewName(e.target.value)}/></label><label>{t("夹子颜色")}<input type="color" value={newColor} disabled={busy} onChange={e=>setNewColor(e.target.value)}/></label><button disabled={busy||!newName.trim()} onClick={async()=>{if(await change({kind:'add',name:newName,color:newColor},t("新标签已添加。")))setNewName('');}}>{t("添加标签")}</button></div>
+  </section>;
+ }
+diff --git a/src/renderer/components/Calendar.tsx b/src/renderer/components/Calendar.tsx
+index 640d5ec..60d9233 100644
+--- a/src/renderer/components/Calendar.tsx
++++ b/src/renderer/components/Calendar.tsx
+@@ -8,6 +8,7 @@ import type {Idea,Result} from '../../shared/contracts';
+ import {prepareLeave} from '../hooks/leaveGuards';
+ import {IdeaReader} from './IdeaReader';
+ import {AgentSettings} from './AgentSettings';
++import {onLineIdeaIds} from '../../shared/ideaVisibility';
+ import {ActionIcon,IconButton} from './ActionIcon';
+ import brandLogoUrl from '../../../assets/source/approved-TL-brand-logo.jpg?url';
+ import {calendarIndex,ideaDay} from '../../shared/ideaHistory';
+@@ -92,12 +93,13 @@ export function Calendar({info,restore,onRemember}:{info:PilotInfo;restore?:Cale
+  },[nav,selected,info.snapshot.settings.reducedMotion]);
+  useEffect(()=>{const media=window.matchMedia('(prefers-reduced-motion: reduce)'),contrast=window.matchMedia('(forced-colors: active)');const check=()=>{if(info.snapshot.settings.reducedMotion||media.matches||contrast.matches||document.documentElement.dataset.motion==='reduce')cancelMotion();};check();media.addEventListener('change',check);contrast.addEventListener('change',check);return()=>{media.removeEventListener('change',check);contrast.removeEventListener('change',check);cancelMotion();};},[info.manageSession,info.snapshot.settings.reducedMotion]);
+  const names=useMemo(()=>new Map(info.snapshot.agents.map(a=>[a.id,agentName(a)])),[info.snapshot.agents,locale]);
++ const onLine=useMemo(()=>onLineIdeaIds(info.snapshot,info.width,info.shelfAgentId),[info.snapshot.clips,info.width,info.shelfAgentId]);
+  const index=useMemo(()=>{
+-  const normal=calendarIndex(info.snapshot,{query,status});
++  const normal=calendarIndex(info.snapshot,{query,status},{width:info.width,shelfAgentId:info.shelfAgentId,names});
+   const needle=query.trim().toLocaleLowerCase();
+   const trash=info.snapshot.ideas.filter(i=>i.status==='deleted'&&(!needle||[i.text,i.title,i.project,names.get(i.agentId)??''].join('\n').toLocaleLowerCase().includes(needle))).sort((a,b)=>(b.deletedAt??'').localeCompare(a.deletedAt??''));
+   return {normal,trash,days:[...normal.keys()]};
+- },[info.snapshot,query,status,names]);
++ },[info.snapshot,query,status,names,info.width,info.shelfAgentId]);
+  const year=nav.month.slice(0,4),monthCount=(m:string)=>index.days.filter(d=>d.startsWith(m)).reduce((n,d)=>n+index.normal.get(d)!.length,0),yearCount=(y:string)=>index.days.filter(d=>d.startsWith(y+'-')).reduce((n,d)=>n+index.normal.get(d)!.length,0);
+  const filteredDays=index.days.filter(d=>query.trim()?true:nav.level==='yearIdeas'?d.startsWith(year+'-'):nav.level==='day'?d===nav.day:d.startsWith(nav.month));
+  const cards=nav.level==='trash'?index.trash:filteredDays.flatMap(d=>index.normal.get(d)!);
+@@ -128,12 +130,12 @@ export function Calendar({info,restore,onRemember}:{info:PilotInfo;restore?:Cale
+   <header className="auxiliary-header"><div className="calendar-heading">{(selected||history.length>0||nav.level!=='month')&&<IconButton icon="back" label={t("返回")} onClick={()=>void back()}/>}<button className="calendar-title" onClick={()=>{if(nav.level==='month'&&!selected){void go({...nav,level:'year',scroll:0,limit:9},{from:host.current?.querySelector('.month-grid')??null,to:`[data-month="${nav.month}"]`,kind:'month-to-year'});}}} title={nav.level==='month'?t("查看全年十二个月"):undefined}>{idea?.title??label}</button></div><div className="calendar-header-actions">{info.canUndoClips&&<IconButton icon="undo" label={t(info.undoPlacementKind==='swap'?'撤销换上':info.undoPlacementKind==='hang'?'撤销挂上':'撤销整理')} disabled={busy} onClick={()=>void run(async()=>{const current=await window.thoughtline.info();if(current.manageSession!==info.manageSession)return {ok:false,code:'CONFLICT',message:t('内容已变化，请重新操作。')};return window.thoughtline.clipChange({kind:'undo'},current.snapshot.revision);})}/>}<span ref={toolsAnchor}><IconButton icon="more" label={t("日历更多选项")} aria-expanded={tools} onClick={()=>setTools(!tools)}/></span><PreferencesControl info={info}/><button className="close" aria-label={t("关闭日历")} onClick={()=>void window.thoughtline.closeManage()}>×</button></div></header>
+   {tools&&<ReaderMoreMenu anchor={toolsAnchor} onClose={closeTools} side="below" label={t("日历更多选项")} className="calendar-tools"><button onClick={()=>void go({...nav,level:'trash',scroll:0,limit:9})}>{t("最近删除")}</button><button onClick={()=>void run(()=>window.thoughtline.openSettings())}>{t("存储与设置")}</button><button onClick={()=>void go({...nav,level:'agents',scroll:0,limit:9})}>{t("Agent 标签")}</button></ReaderMoreMenu>}
+   {idea?<IdeaReader key={idea.id+':'+info.manageSession} idea={idea} info={info}/>:<>
+-   {nav.level!=='agents'&&<div className="calendar-search"><input aria-label={t("搜索念头")} placeholder={t("搜索正文、名称或项目")} value={query} onChange={e=>{navigationIntent.current++;cancelMotion();setQuery(e.target.value);restoreScroll.current=0;if(scroll.current)scroll.current.scrollTop=0;setNav(n=>({...n,scroll:0,limit:9}));}}/><select aria-label={t("筛选念头状态")} value={status} onChange={e=>{navigationIntent.current++;cancelMotion();setStatus(e.target.value as typeof status);restoreScroll.current=0;if(scroll.current)scroll.current.scrollTop=0;setNav(n=>({...n,scroll:0,limit:9}));}}><option value="all">{t("全部状态")}</option><option value="hanging">{t("挂着")}</option><option value="archived">{t("已收起")}</option></select></div>}
++   {nav.level!=='agents'&&<div className="calendar-search"><input aria-label={t("搜索念头")} placeholder={t("搜索正文、名称或项目")} value={query} onChange={e=>{navigationIntent.current++;cancelMotion();setQuery(e.target.value);restoreScroll.current=0;if(scroll.current)scroll.current.scrollTop=0;setNav(n=>({...n,scroll:0,limit:9}));}}/><select aria-label={t("筛选念头状态")} value={status} onChange={e=>{navigationIntent.current++;cancelMotion();setStatus(e.target.value as typeof status);restoreScroll.current=0;if(scroll.current)scroll.current.scrollTop=0;setNav(n=>({...n,scroll:0,limit:9}));}}><option value="all">{t("全部状态")}</option><option value="hanging">{t("挂着")}</option><option value="archived">{t("未挂上")}</option></select></div>}
+    {(grid||yearGrid)&&<div className="calendar-navigation"><button aria-label={yearGrid?t("上一年"):t("上个月")} onClick={()=>{navigationIntent.current++;cancelMotion();restoreScroll.current=0;setNav(n=>({...n,month:shiftMonth(n.month,yearGrid?-12:-1)}));}}><ActionIcon name="chevronLeft"/></button><button onClick={()=>{navigationIntent.current++;cancelMotion();restoreScroll.current=0;setNav(initial);}}>{t("今天")}</button><button onClick={()=>void go({...nav,level:yearGrid?'yearIdeas':'monthIdeas',scroll:0,limit:9})}>{yearGrid?t('yearThoughts',{count:yearCount(year)}):t('monthThoughts',{count:monthCount(nav.month)})}</button><button aria-label={yearGrid?t("下一年"):t("下个月")} onClick={()=>{navigationIntent.current++;cancelMotion();restoreScroll.current=0;setNav(n=>({...n,month:shiftMonth(n.month,yearGrid?12:1)}));}}><ActionIcon name="chevronRight"/></button></div>}
+    <div ref={scroll} className="calendar-content" data-calendar-scroll>
+     {grid?<div className="month-grid" style={{gridTemplateRows:`28px repeat(${weeks},minmax(57px,1fr))`}} aria-label={t('calendarLabel',{date:date(nav.month,'month')})}>{[t("日"),t("一"),t("二"),t("三"),t("四"),t("五"),t("六")].map(d=><span className="weekday" key={d}>{d}</span>)}{Array.from({length:offset},(_,i)=><span key={'blank'+i}/>)}{Array.from({length:monthDays},(_,i)=>{const day=nav.month+'-'+pad(i+1),count=index.normal.get(day)?.length??0;return <button key={day} className="date-cell" data-day={day} aria-current={day===today?'date':undefined} aria-label={t('dayCount',{date:date(day),count:countThoughts(locale,count)})} onClick={e=>void go({...nav,level:'day',day,scroll:0,limit:9},{from:e.currentTarget,to:'.calendar-paper-groups',kind:'month-to-day'})}><span>{i+1}</span>{count>0&&<span className="day-count"><MiniClip/>{count}</span>}</button>;})}{Array.from({length:weeks*7-offset-monthDays},(_,i)=><span key={'tail'+i}/> )}</div>:yearGrid?<div className="year-grid" aria-label={t('yearMonths',{year})}>{Array.from({length:12},(_,i)=>{const month=year+'-'+pad(i+1),count=monthCount(month);return <button key={month} data-month={month} onClick={e=>void go({...nav,level:'month',month,scroll:0,limit:9},{from:e.currentTarget,to:'.month-grid',kind:'year-to-month'})}><strong>{date(month,'monthName')}</strong><span>{count>0&&<MiniClip/>}{countThoughts(locale,count)}</span></button>;})}</div>:nav.level==='agents'?<AgentSettings info={info} busy={busy} run={run}/>:<div className="calendar-paper-groups">
+      {shown.length===0&&<p className="empty-list">{nav.level==='trash'?t("最近删除为空，不会自动清空。"):t("这里还没有念头。")}</p>}
+-     {[...new Set(shown.map(dayKey))].map(day=><section key={day} className="calendar-day-papers"><h2>{date(day)}</h2><div className="paper-grid">{shown.filter(i=>dayKey(i)===day).map(i=><button className="calendar-paper" data-idea-id={i.id} key={i.id} onClick={e=>void openIdea(i.id,e.currentTarget)}><MiniClip/><strong>{i.title}</strong><span className="calendar-paper-text">{i.text}</span><small>{names.get(i.agentId)}{i.project?' · '+i.project:''}{i.status==='archived'?t(" · 已收起"):''}</small></button>)}</div></section>)}
++     {[...new Set(shown.map(dayKey))].map(day=><section key={day} className="calendar-day-papers"><h2>{date(day)}</h2><div className="paper-grid">{shown.filter(i=>dayKey(i)===day).map(i=><button className="calendar-paper" data-idea-id={i.id} key={i.id} onClick={e=>void openIdea(i.id,e.currentTarget)}><MiniClip/><strong>{i.title}</strong><span className="calendar-paper-text">{i.text}</span><small>{names.get(i.agentId)}{i.project?' · '+i.project:''}{!onLine.has(i.id)?t(" · 未挂上"):''}</small></button>)}</div></section>)}
+      {shown.length<cards.length&&<button className="calendar-load-more" onClick={()=>{navigationIntent.current++;cancelMotion();restoreScroll.current=scroll.current?.scrollTop??0;setNav(n=>({...n,limit:n.limit+18}));}}>{t('showMore',{count:countThoughts(locale,cards.length-shown.length)})}</button>}
+     </div>}
+    </div>
+diff --git a/src/renderer/components/IdeaReader.tsx b/src/renderer/components/IdeaReader.tsx
+index 19b0d06..e941774 100644
+--- a/src/renderer/components/IdeaReader.tsx
++++ b/src/renderer/components/IdeaReader.tsx
+@@ -8,7 +8,7 @@ import {flushPageSelections} from '../hooks/useClipPage';
+ import {InlineIdeaEditor} from './InlineIdeaEditor';
+ import {IconButton,ActionIcon} from './ActionIcon';
+ import {placementPlan} from '../../shared/ideaPlacement';
+-import {layoutClips} from '../../shared/clipLayout';
++import {onLineIdeaIds} from '../../shared/ideaVisibility';
+ import {PlacementPicker} from './PlacementPicker';
+ import {ReaderMoreMenu} from './ReaderMoreMenu';
+ export function IdeaReader({idea,info,initialEdit=false}:{idea:Idea;info:PilotInfo;initialEdit?:boolean}){
+@@ -17,7 +17,7 @@ export function IdeaReader({idea,info,initialEdit=false}:{idea:Idea;info:PilotIn
+  const [picker,setPicker]=useState(false),[reveal,setReveal]=useState(false),moreAnchor=useRef<HTMLSpanElement>(null);
+  const closeMenu=useCallback(()=>{setMenu(false);setPermanent(false);},[]);
+  const plan=placementPlan(info.snapshot,info.width,idea.id),filteredOut=info.shelfAgentId!=='all'&&info.shelfAgentId!==idea.agentId;
+- const onLine=layoutClips(info.snapshot.clips,info.width).visible.some(p=>p.clip.ideaIds.includes(idea.id));
++ const onLine=idea.status==='hanging'&&onLineIdeaIds(info.snapshot,info.width,info.shelfAgentId).has(idea.id);
+  useEffect(()=>{if(!notice)return;const timer=setTimeout(()=>setNotice(''),1600);return()=>clearTimeout(timer);},[notice,idea.id]);
+  useEffect(()=>{setMenu(false);setPermanent(false);setError('');setNotice('');},[idea.id]);
+  useEffect(()=>{if(initialEdit)setEditing(true);},[initialEdit]);
+diff --git a/src/renderer/components/Manage.tsx b/src/renderer/components/Manage.tsx
+index a170954..149f1d8 100644
+--- a/src/renderer/components/Manage.tsx
++++ b/src/renderer/components/Manage.tsx
+@@ -11,9 +11,9 @@ export function Manage({info}:{info:PilotInfo}){
+  const run=async(task:()=>Promise<Result<unknown>>,message='')=>{if(busy)return false;setBusy(true);setError('');setNotice('');try{const r=await task();if(!r.ok){setError(r.message);return false;}setNotice(message);return true;}catch{setError('操作未成功，请保留内容后重试。');return false;}finally{setBusy(false);}};
+  const setIdeaStatus=async(id:string,next:'hanging'|'archived',allowUndo=true)=>{const old=info.snapshot.ideas.find(i=>i.id===id)?.status;if(await run(()=>window.thoughtline.setStatus(id,next,info.snapshot.revision),next==='archived'?'已收起，正文仍在。':'已重新挂上。')){setUndo(allowUndo&&(old==='hanging'||old==='archived')?{id,status:old}:null);}};
+  return <main data-view="manage" className="manage" onKeyDown={e=>{if(e.key==='Escape'&&!e.nativeEvent.isComposing&&e.nativeEvent.keyCode!==229&&!busy){e.preventDefault();void window.thoughtline.closeManage();}}}>
+-  <header><div className="section-tabs"><button aria-pressed={section==='ideas'} onClick={()=>setSection('ideas')}>念头</button><button aria-pressed={section==='agents'} onClick={()=>setSection('agents')}>Agent 标签</button></div><button className="close" aria-label="关闭浏览" disabled={busy} onClick={()=>void window.thoughtline.closeManage()}>×</button></header>
++  <header><div className="section-tabs"><button aria-pressed={section==='ideas'} onClick={()=>setSection('ideas')}>念头</button><button aria-pressed={section==='agents'} onClick={()=>setSection('agents')}>Thoughtline标签</button></div><button className="close" aria-label="关闭浏览" disabled={busy} onClick={()=>void window.thoughtline.closeManage()}>×</button></header>
+   {section==='ideas'?<>
+-   <div className="search-row"><label htmlFor="idea-search">搜索全文</label><input id="idea-search" ref={search} value={query} placeholder="念头、项目或 Agent" onChange={e=>setQuery(e.target.value)}/><select aria-label="筛选Agent" value={agent} onChange={e=>setAgent(e.target.value)}><option value="all">全部 Agent</option>{info.snapshot.agents.map(a=><option key={a.id} value={a.id}>{a.name}</option>)}</select></div>
++   <div className="search-row"><label htmlFor="idea-search">搜索全文</label><input id="idea-search" ref={search} value={query} placeholder="念头、项目或标签" onChange={e=>setQuery(e.target.value)}/><select aria-label="筛选标签" value={agent} onChange={e=>setAgent(e.target.value)}><option value="all">全部标签</option>{info.snapshot.agents.map(a=><option key={a.id} value={a.id}>{a.name}</option>)}</select></div>
+    <nav className="status-tabs" aria-label="念头状态">{([['all','全部'],['hanging','挂着'],['archived','已收起']] as const).map(([v,label])=><button key={v} aria-pressed={status===v} onClick={()=>setStatus(v)}>{label}</button>)}<span>{results.length} 条</span></nav>
+    <div className="manage-body"><div className="idea-list" aria-label="搜索结果">{rows.map(i=><button key={i.id} data-idea-id={i.id} aria-pressed={idea?.id===i.id} onClick={()=>setSelected(i.id)}><strong>{i.title}</strong><span>{info.snapshot.agents.find(a=>a.id===i.agentId)?.name} · {i.status==='hanging'?'挂着':'已收起'}</span></button>)}{!rows.length&&<p className="empty-list">没有匹配的念头。更换条件试试。</p>}</div>
+     <section className="idea-detail" aria-label="念头全文">{idea?<><div className="detail-meta"><strong>{idea.title}</strong><span>{idea.project}</span></div><textarea data-full-text aria-label="完整正文，可手动选中复制" readOnly value={idea.text}/><div className="detail-actions"><button disabled={busy} onClick={()=>void run(()=>window.thoughtline.copy(idea.id),'已复制完整正文。')}>复制全文</button><button disabled={busy} onClick={()=>void run(()=>window.thoughtline.openEdit(idea.id))}>编辑</button><button disabled={busy} onClick={()=>void setIdeaStatus(idea.id,idea.status==='hanging'?'archived':'hanging')}>{idea.status==='hanging'?'收起':'重新挂上'}</button></div></>:<p className="empty-list">正文会显示在这里。原文和换行完整保留。</p>}</section>
+@@ -29,10 +29,10 @@ function AgentSettings({info,busy,run}:{info:PilotInfo;busy:boolean;run:(task:()
+  useEffect(()=>{setId(chosen.id);setName(chosen.name);setColor(chosen.color);},[chosen.id,chosen.name,chosen.color]);
+  const change=(c:AgentMutation,message:string)=>run(()=>window.thoughtline.agentChange(c,info.snapshot.revision),message);
+  return <section className="agent-settings">
+-  <p>夹子颜色和文字一起区分 Agent。这里只记录归属，不连接 Agent 账户。</p>
++  <p>用标签区分用途、角色或工具；夹子颜色和文字帮助辨认。</p>
+   <label>编辑标签<select value={chosen.id} disabled={busy} onChange={e=>setId(e.target.value)}>{info.snapshot.agents.map(a=><option key={a.id} value={a.id}>{a.name}</option>)}</select></label>
+   <div className="agent-form"><label>名称<input maxLength={40} value={name} disabled={busy} onChange={e=>setName(e.target.value)}/></label><label>夹子颜色<input type="color" value={color} disabled={busy} onChange={e=>setColor(e.target.value)}/></label><button disabled={busy||!name.trim()} onClick={()=>void change({kind:'update',id:chosen.id,name,color},'标签已更新，念头归属保持不变。')}>保存标签</button></div>
+   {chosen.id!=='general'&&<div className="agent-form migration"><label>移除前，将念头和草稿迁到<select value={replacement} disabled={busy} onChange={e=>setReplacement(e.target.value)}>{info.snapshot.agents.filter(a=>a.id!==chosen.id).map(a=><option key={a.id} value={a.id}>{a.name}</option>)}</select></label><button disabled={busy||replacement===chosen.id} onClick={()=>void change({kind:'remove',id:chosen.id,replacement},'标签已移除，全文已迁移。')}>移除并迁移</button></div>}
+-  <hr/><h2>新增 Agent</h2><div className="agent-form"><label>名称<input maxLength={40} value={newName} disabled={busy} onChange={e=>setNewName(e.target.value)}/></label><label>夹子颜色<input type="color" value={newColor} disabled={busy} onChange={e=>setNewColor(e.target.value)}/></label><button disabled={busy||!newName.trim()} onClick={async()=>{if(await change({kind:'add',name:newName,color:newColor},'新标签已添加。'))setNewName('');}}>添加标签</button></div>
++  <hr/><h2>新增标签</h2><div className="agent-form"><label>名称<input maxLength={40} value={newName} disabled={busy} onChange={e=>setNewName(e.target.value)}/></label><label>夹子颜色<input type="color" value={newColor} disabled={busy} onChange={e=>setNewColor(e.target.value)}/></label><button disabled={busy||!newName.trim()} onClick={async()=>{if(await change({kind:'add',name:newName,color:newColor},'新标签已添加。'))setNewName('');}}>添加标签</button></div>
+  </section>;
+ }
+diff --git a/src/shared/clipCommands.ts b/src/shared/clipCommands.ts
+index 4723b73..2489136 100644
+--- a/src/shared/clipCommands.ts
++++ b/src/shared/clipCommands.ts
+@@ -5,7 +5,7 @@ const invalid=(message:string):Result<Snapshot>=>({ok:false,code:'INVALID',messa
+ export function mergeClips(s:Snapshot,sourceId:string,targetId:string):Result<Snapshot>{
+  const source=s.clips.find(c=>c.id===sourceId),target=s.clips.find(c=>c.id===targetId);
+  if(!source||!target||source===target)return invalid('请选择两个不同夹子。');
+- if(source.agentId!==target.agentId)return invalid('不同Agent的夹子不能合并。');
++ if(source.agentId!==target.agentId)return invalid('不同标签的夹子不能合并。');
+  return validateSnapshot({...s,clips:s.clips.filter(c=>c.id!==sourceId).map(c=>c.id===targetId?{...c,ideaIds:[...c.ideaIds,...source.ideaIds],currentId:source.ideaIds[0]}:c)});
+ }
+ export function selectClipIdea(s:Snapshot,id:string,ideaId:string):Result<Snapshot>{
+@@ -62,7 +62,7 @@ export function dropClipIdea(s:Snapshot,id:string,ideaId:string,targetId:string|
+  const source=s.clips.find(c=>c.id===id);if(!source?.ideaIds.includes(ideaId))return invalid('当前纸张已变化，请重新拖动。');
+  if(targetId===id)return invalid('已在这个夹子中。');
+  const target=targetId?s.clips.find(c=>c.id===targetId):null;
+- if(targetId&&(!target||target.agentId!==source.agentId))return invalid('不同Agent的夹子不能合并。');
++ if(targetId&&(!target||target.agentId!==source.agentId))return invalid('不同标签的夹子不能合并。');
+  let free:number|null=null;
+  if(!targetId){
+   if(position===null||!Number.isFinite(position)||position<0||position>1)return invalid('落点无效。');
+diff --git a/src/shared/i18n.ts b/src/shared/i18n.ts
+index 02ff09f..01ea14f 100644
+--- a/src/shared/i18n.ts
++++ b/src/shared/i18n.ts
+@@ -1,4 +1,5 @@
+ import {zh,en} from './messages';import type {Locale} from './preferences';
++import {DEFAULT_TAGS} from './tagPresets';
+ export const dictionaries={'zh-CN':zh,en};export type MessageKey=keyof typeof zh;
+ type Slots<S extends string>=S extends `${string}{${infer P}}${infer Rest}`?P|Slots<Rest>:never;
+ type Args<K extends MessageKey>=[Slots<(typeof zh)[K]>] extends [never]?[]:[params:Record<Slots<(typeof zh)[K]>,string|number>];
+@@ -7,14 +8,18 @@ export const translator=(locale:Locale):Translator=>(key,...args)=>translate(loc
+ export function translate<K extends MessageKey>(locale:Locale,key:K,...args:Args<K>):string {const params=args[0] as Record<string,string|number>|undefined;return dictionaries[locale][key].replace(/\{(\w+)\}/g,(_,p)=>String(params?.[p]??`{${p}}`));}
+ export const countThoughts=(locale:Locale,n:number)=>locale==='en'?`${n} ${new Intl.PluralRules('en').select(n)==='one'?'thought':'thoughts'}`:`${n}条念头`;
+ export function formatCalendarDate(locale:Locale,key:string,kind:'day'|'month'|'year'|'monthName'='day'):string{const [y,m=1,d=1]=key.split('-').map(Number);return new Intl.DateTimeFormat(locale,{timeZone:'UTC',...(kind==='year'?{year:'numeric' as const}:kind==='monthName'?{month:'long' as const}:kind==='month'?{year:'numeric' as const,month:'long' as const}:{year:'numeric' as const,month:'long' as const,day:'numeric' as const})}).format(new Date(Date.UTC(y,m-1,d,12)));}
+-export const agentLabel=(locale:Locale,agent:{id:string;name:string}|undefined)=>agent?(agent.id==='general'?translate(locale,'通用'):agent.name):'';
++export const agentLabel=(locale:Locale,agent:{id:string;name:string}|undefined)=>{
++ if(!agent)return '';
++ const preset=DEFAULT_TAGS.find(a=>a.id===agent.id&&a.name===agent.name);
++ return preset&&preset.name!=='Codex'?translate(locale,preset.name):agent.name;
++};
+ // Reverse only complete app-owned status/error envelopes, never arbitrary UI/date templates.
+ const exactMessages=(Object.keys(zh) as MessageKey[]).filter(key=>!zh[key].includes('{'));
+ const envelopes=['localSaveFailureDetail','storageFailure','outerStorageFailure','fileMismatch','changedLocation','savedBackup'] as const;
+ /** App diagnostics and path slots stay byte-for-byte intact. Only nested app-error wrappers recurse. */
+ export function localizeMessage(locale:Locale,message:string|null|undefined):string{
+  if(!message)return '';
+- for(const key of exactMessages)if(message===zh[key]||message===en[key])return dictionaries[locale][key];
++ for(const key of exactMessages)if(message===key||message===zh[key]||message===en[key])return dictionaries[locale][key];
+  for(const key of envelopes)for(const source of ['zh-CN','en'] as const){
+   const template=dictionaries[source][key],slot=template.match(/\{\w+\}/)![0],at=template.indexOf(slot),prefix=template.slice(0,at),suffix=template.slice(at+slot.length);
+   if(message.startsWith(prefix)&&message.endsWith(suffix)&&message.length>=prefix.length+suffix.length){
+diff --git a/src/shared/ideaCommands.ts b/src/shared/ideaCommands.ts
+index 9c5cb11..f26e5c9 100644
+--- a/src/shared/ideaCommands.ts
++++ b/src/shared/ideaCommands.ts
+@@ -3,19 +3,20 @@ import {captureClipPositions} from './clipLayout';
+ import {visibleSlots} from './ropeGeometry';
+ import {independentClip,pruneClips} from './clipModel';
+ import {ideaDay} from './ideaHistory';
++import {DEFAULT_TAGS} from './tagPresets';
+ const invalid=<T>(message:string):Result<T>=>({ok:false,code:'INVALID',message});
+ const plain=(x:unknown):x is Record<string,unknown>=>!!x&&typeof x==='object'&&!Array.isArray(x);
+ const textOK=(s:unknown,max:number)=>typeof s==='string'&&Array.from(s).length<=max;
+ const bodyOK=(s:unknown,empty=false)=>typeof s==='string'&&(empty||!!s.trim())&&new TextEncoder().encode(s).length<=1048576;
+ const dayOK=(s:unknown):s is string=>typeof s==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(s)&&Number.isFinite(Date.parse(s+'T00:00:00Z'))&&new Date(s+'T00:00:00Z').toISOString().slice(0,10)===s;
+ const localDay=(createdAt:string)=>{const d=new Date(createdAt);return `${String(d.getFullYear()).padStart(4,'0')}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
+-export function initialSnapshot():Snapshot{return {schemaVersion:3,revision:0,clips:[],ideas:[],agents:[{id:'codex',name:'Codex',color:'#4C90D9'},{id:'claude',name:'Claude',color:'#D79551'},{id:'cursor',name:'Cursor',color:'#9574CE'},{id:'general',name:'通用',color:'#A0A3AA'}],draft:null,settings:{writeHotkey:'Control+Alt+N',reducedMotion:false}};}
++export function initialSnapshot():Snapshot{return {schemaVersion:3,revision:0,clips:[],ideas:[],agents:DEFAULT_TAGS.map(tag=>({...tag})),draft:null,settings:{writeHotkey:'Control+Alt+N',reducedMotion:false}};}
+ export function validateSnapshot(input:unknown):Result<Snapshot>{
+   if(!plain(input)||typeof input.schemaVersion!=='number'||![1,2,3].includes(input.schemaVersion))return invalid('无法读取这个数据版本，原文件已保留。');
+   if(!Number.isSafeInteger(input.revision)||Number(input.revision)<0||!Array.isArray(input.agents)||!Array.isArray(input.ideas)||!plain(input.settings))return invalid('数据结构不完整。');
+   const agents=new Set<string>();
+   for(const a of input.agents){
+-    if(!plain(a)||typeof a.id!=='string'||!a.id||agents.has(a.id)||!textOK(a.name,40)||!(a.name as string).trim()||typeof a.color!=='string'||!/^#[0-9a-f]{6}$/i.test(a.color))return invalid('Agent标签无效。');
++    if(!plain(a)||typeof a.id!=='string'||!a.id||agents.has(a.id)||!textOK(a.name,40)||!(a.name as string).trim()||typeof a.color!=='string'||!/^#[0-9a-f]{6}$/i.test(a.color))return invalid('标签无效。');
+     agents.add(a.id);
+   }
+   if(!agents.size||!agents.has('general'))return invalid('缺少通用标签。');
+@@ -39,7 +40,7 @@ export function validateSnapshot(input:unknown):Result<Snapshot>{
+   for(const c of normalized.clips){
+    if(!plain(c)||typeof c.id!=='string'||!c.id||clipIds.has(c.id)||typeof c.agentId!=='string'||!agents.has(c.agentId)||!Array.isArray(c.ideaIds)||!c.ideaIds.length||typeof c.currentId!=='string'||!c.ideaIds.includes(c.currentId)||!(c.position===null||typeof c.position==='number'&&Number.isFinite(c.position)&&c.position>=0&&c.position<=1))return invalid('夹子结构或位置无效。');
+    clipIds.add(c.id);
+-   for(const id of c.ideaIds){const i=byId.get(id);if(typeof id!=='string'||members.has(id)||!i||i.status!=='hanging'||i.agentId!==c.agentId)return invalid('夹子成员重复、缺失或Agent不一致。');members.add(id);}
++   for(const id of c.ideaIds){const i=byId.get(id);if(typeof id!=='string'||members.has(id)||!i||i.status!=='hanging'||i.agentId!==c.agentId)return invalid('夹子成员重复、缺失或标签不一致。');members.add(id);}
+   }
+   if(ideas.some(i=>i.status==='hanging'&&!members.has(i.id)))return invalid('挂着的念头没有夹子。');
+   return {ok:true,value:structuredClone(normalized) as Snapshot};
+@@ -57,11 +58,11 @@ export function changeStatus(s:Snapshot,id:string,status:'hanging'|'archived',no
+   return validateSnapshot({...s,clips,ideas});
+ }
+ export function renameAgent(s:Snapshot,id:string,name:string):Result<Snapshot>{
+-  if(!s.agents.some(x=>x.id===id))return invalid('找不到这个Agent。');
++  if(!s.agents.some(x=>x.id===id))return invalid('找不到这个标签。');
+   return validateSnapshot({...s,agents:s.agents.map(x=>x.id===id?{...x,name}:x)});
+ }
+ export function removeAgent(s:Snapshot,id:string,replacement:string):Result<Snapshot>{
+-  if(id==='general'||id===replacement||!s.agents.some(x=>x.id===id)||!s.agents.some(x=>x.id===replacement))return invalid('请选择存在的替代Agent，通用标签不能移除。');
++  if(id==='general'||id===replacement||!s.agents.some(x=>x.id===id)||!s.agents.some(x=>x.id===replacement))return invalid('请选择存在的替代标签，通用标签不能移除。');
+   return validateSnapshot({...s,clips:s.clips.map(c=>c.agentId===id?{...c,agentId:replacement}:c),agents:s.agents.filter(x=>x.id!==id),ideas:s.ideas.map(x=>x.agentId===id?{...x,agentId:replacement}:x),draft:s.draft?.agentId===id?{...s.draft,agentId:replacement}:s.draft});
+ }
+ export function editIdea(s:Snapshot,id:string,draft:Draft,now:string):Result<Snapshot>{
+@@ -101,7 +102,7 @@ export function addAgent(s:Snapshot,a:AgentTag):Result<Snapshot>{
+   return validateSnapshot({...s,agents:[...s.agents,{id:a?.id,name:a?.name,color:a?.color}]});
+ }
+ export function updateAgent(s:Snapshot,id:string,patch:Pick<AgentTag,'name'|'color'>):Result<Snapshot>{
+-  if(!s.agents.some(a=>a.id===id))return invalid('找不到这个Agent。');
++  if(!s.agents.some(a=>a.id===id))return invalid('找不到这个标签。');
+   return validateSnapshot({...s,agents:s.agents.map(a=>a.id===id?{...a,name:patch?.name,color:patch?.color}:a)});
+ }
+ export type IdeaQuery={status:'all'|'hanging'|'archived';query?:string;agentId?:string};
+diff --git a/src/shared/ideaHistory.ts b/src/shared/ideaHistory.ts
+index 8160b97..3b32c8d 100644
+--- a/src/shared/ideaHistory.ts
++++ b/src/shared/ideaHistory.ts
+@@ -1,5 +1,7 @@
+ import type {Idea,Snapshot} from './contracts';
+ import type {IdeaQuery} from './ideaCommands';
++import {onLineIdeaIds} from './ideaVisibility';
++export type CalendarVisibility={width:number;shelfAgentId?:string;names?:ReadonlyMap<string,string>};
+ 
+ // Old snapshots retain the date written with their original offset. A missing
+ // offset is interpreted in UTC, never in the timezone used at migration time.
+@@ -11,9 +13,10 @@ export function ideaDay(idea:Idea):string{
+  return new Date(Number.isFinite(utc)?utc:Date.parse(idea.createdAt)).toISOString().slice(0,10);
+ }
+ 
+-export function calendarIndex(s:Snapshot,filters:Partial<IdeaQuery>={}):Map<string,Idea[]>{
++export function calendarIndex(s:Snapshot,filters:Partial<IdeaQuery>={},visibility?:CalendarVisibility):Map<string,Idea[]>{
+  const query=(filters.query??'').trim().toLowerCase(),names=new Map(s.agents.map(a=>[a.id,a.name]));
+- const ideas=s.ideas.filter(i=>i.status!=='deleted'&&(!filters.status||filters.status==='all'||i.status===filters.status)&&(!filters.agentId||filters.agentId==='all'||i.agentId===filters.agentId)&&(!query||[i.text,i.title,i.project,names.get(i.agentId)??''].join('\n').toLowerCase().includes(query)))
++ const onLine=visibility?onLineIdeaIds(s,visibility.width,visibility.shelfAgentId):null;
++ const ideas=s.ideas.filter(i=>i.status!=='deleted'&&(!filters.status||filters.status==='all'||(onLine?(i.status==='hanging'&&onLine.has(i.id)?'hanging':'archived'):i.status)===filters.status)&&(!filters.agentId||filters.agentId==='all'||i.agentId===filters.agentId)&&(!query||[i.text,i.title,i.project,names.get(i.agentId)??'',visibility?.names?.get(i.agentId)??''].join('\n').toLowerCase().includes(query)))
+   .sort((a,b)=>Date.parse(a.createdAt)-Date.parse(b.createdAt)||(a.id<b.id?-1:a.id>b.id?1:0));
+  const days=new Map<string,Idea[]>();
+  for(const idea of ideas){const day=ideaDay(idea),entries=days.get(day);if(entries)entries.push(idea);else days.set(day,[idea]);}
+diff --git a/src/shared/ideaPlacement.ts b/src/shared/ideaPlacement.ts
+index 147d9e4..3997aed 100644
+--- a/src/shared/ideaPlacement.ts
++++ b/src/shared/ideaPlacement.ts
+@@ -36,7 +36,7 @@ export function placeIdea(s:Snapshot,source:PlacementSource,intent:PlacementInte
+  if(typeof intent.wholeClip!=='boolean')return invalid('目标夹子已变化，请重新选择。');
+  const target=before.clips.find(c=>c.id===intent.targetClipId),incoming=created.value.ideas.find(i=>i.id===source.id)!;
+  if(!target||!target.ideaIds.includes(intent.targetIdeaId)||target.ideaIds.includes(source.id)||!Array.isArray(intent.expectedIds)||JSON.stringify(target.ideaIds)!==JSON.stringify(intent.expectedIds)||!layoutClips(before.clips,width).visible.some(p=>p.clip.id===target.id))return invalid('目标夹子已变化，请重新选择。');
+- if(target.ideaIds.length>1&&target.agentId!==incoming.agentId&&!intent.wholeClip)return invalid('不同Agent的叠纸需明确收起整夹后换上。');
++ if(target.ideaIds.length>1&&target.agentId!==incoming.agentId&&!intent.wholeClip)return invalid('不同标签的叠纸需明确收起整夹后换上。');
+  const outgoing=intent.wholeClip?target.ideaIds:[intent.targetIdeaId],outIds=new Set(outgoing);
+  const ideas=created.value.ideas.map(i=>outIds.has(i.id)?{...i,status:'archived' as const,updatedAt:now}:i);
+  const clips=created.value.clips.flatMap(c=>{
+diff --git a/src/shared/messages.ts b/src/shared/messages.ts
+index 5dd2353..ccb5a5d 100644
+--- a/src/shared/messages.ts
++++ b/src/shared/messages.ts
+@@ -1,5 +1,12 @@
+ // Central typed application text; user text is never translated.
+ export const zh = {
++ "生活灵感": "生活灵感",
++ "工作记录": "工作记录",
++ "直属领导": "直属领导",
++ "同事": "同事",
++ "未挂上": "未挂上",
++ " · 未挂上": " · 未挂上",
++ "例如：日报、直属领导、客户": "例如：日报、直属领导、客户",
+  "撤销换上": "撤销换上",
+  "撤销挂上": "撤销挂上",
+  "整理挂上": "整理挂上",
+@@ -11,23 +18,23 @@ export const zh = {
+  "换下一张": "换下一张",
+  "选择夹子中的一张": "选择夹子中的一张",
+  "没有可换下的可见夹子。": "没有可换下的可见夹子。",
+- "显示全部Agent后挂上": "显示全部Agent后挂上",
++ "显示全部Agent后挂上": "显示全部标签后挂上",
+  "旧念头会收起，内容保留。": "旧念头会收起，内容保留。",
+  "swapWhole": "收起整夹（{count}张）",
+  "swapPreview": "收起『{title}』，换上当前念头",
+  "swapWholePreview": "收起整夹（{count}张），换上当前念头",
+  "目标夹子已变化，请重新选择。": "目标夹子已变化，请重新选择。",
+- "当前Agent筛选会隐藏这张纸，请选择显示全部Agent后挂上。": "当前Agent筛选会隐藏这张纸，请选择显示全部Agent后挂上。",
++ "当前Agent筛选会隐藏这张纸，请选择显示全部Agent后挂上。": "当前标签筛选会隐藏这张纸，请选择显示全部标签后挂上。",
+  "绳上已满，可保存或换上一张。": "绳上已满，可保存或换上一张。",
+  "已保存到Thoughtline日历。": "已保存到Thoughtline日历。",
+  "已换上，旧念头已收起。": "已换上，旧念头已收起。",
+  "挂绳空间已变化，请选择保存、整理挂上或换上。": "挂绳空间已变化，请选择保存、整理挂上或换上。",
+  "绳上已满，请选择保存或换上。": "绳上已满，请选择保存或换上。",
+  "挂绳状态已变化，请重新选择。": "挂绳状态已变化，请重新选择。",
+- "不同Agent的叠纸需明确收起整夹后换上。": "不同Agent的叠纸需明确收起整夹后换上。",
++ "不同Agent的叠纸需明确收起整夹后换上。": "不同标签的叠纸需明确收起整夹后换上。",
+  "换上记录已变化，不能撤销。": "换上记录已变化，不能撤销。",
+  "夹子已变化，不能撤销换上。": "夹子已变化，不能撤销换上。",
+- "显示全部 Agent": "显示全部 Agent",
++ "显示全部 Agent": "显示全部标签",
+ 
+  "自动整理": "自动整理",
+  "返回Thoughtline日历": "返回Thoughtline日历",
+@@ -67,9 +74,9 @@ export const zh = {
+  "请先结束当前输入。": "请先结束当前输入。",
+  "挂绳已收起。": "挂绳已收起。",
+  "查看全文": "查看全文",
+- "这个 Agent": "这个 Agent",
++ "这个 Agent": "这个标签",
+  "显示全部": "显示全部",
+- "筛选 Agent": "筛选 Agent",
++ "筛选 Agent": "筛选标签",
+  "查找 / 已收起": "Thoughtline日历",
+  "菜单未能打开，请从托盘查找念头。": "菜单未能打开，请从托盘查找念头。",
+  "全文浮层未能打开，请重试。": "全文浮层未能打开，请重试。",
+@@ -91,7 +98,7 @@ export const zh = {
+  "内容已更新，请重新操作。": "内容已更新，请重新操作。",
+  "已恢复，绳上暂时放不下，可在念头日历查看": "已恢复，绳上暂时放不下，可在Thoughtline日历查看",
+  "内容已变化，请重新操作。": "内容已变化，请重新操作。",
+- "Agent内容无效": "Agent内容无效",
++ "Agent内容无效": "标签内容无效",
+  "未分组不能删除。": "未分组不能删除。",
+  "内容已更新，请重新删除分组。": "内容已更新，请重新删除分组。",
+  "Esc快捷键被占用，拖动未开始，请释放快捷键后重试。": "Esc快捷键被占用，拖动未开始，请释放快捷键后重试。",
+@@ -134,7 +141,7 @@ export const zh = {
+  "备份文件清单非法。": "备份文件清单非法。",
+  "备份缺失文件或含未知文件。": "备份缺失文件或含未知文件。",
+  "备份版本或修订号不一致。": "备份版本或修订号不一致。",
+- "夹子颜色和文字一起区分 Agent。这里只记录归属，不连接 Agent 账户。": "夹子颜色和文字一起区分 Agent。这里只记录归属，不连接 Agent 账户。",
++ "夹子颜色和文字一起区分 Agent。这里只记录归属，不连接 Agent 账户。": "用标签区分用途、角色或工具；夹子颜色和文字帮助辨认。",
+  "编辑标签": "编辑标签",
+  "名称": "名称",
+  "夹子颜色": "夹子颜色",
+@@ -143,12 +150,12 @@ export const zh = {
+  "移除前，将念头和草稿迁到": "移除前，将念头和草稿迁到",
+  "标签已移除，全文已迁移。": "标签已移除，全文已迁移。",
+  "移除并迁移": "移除并迁移",
+- "新增 Agent": "新增 Agent",
++ "新增 Agent": "新增标签",
+  "新标签已添加。": "新标签已添加。",
+  "添加标签": "添加标签",
+  "操作未成功，内容已保留。": "操作未成功，内容已保留。",
+  "最近删除": "最近删除",
+- "Agent 标签": "Agent 标签",
++ "Agent 标签": "Thoughtline标签",
+  "返回": "返回",
+  "查看全年十二个月": "查看全年十二个月",
+  "日历更多选项": "日历更多选项",
+@@ -186,7 +193,7 @@ export const zh = {
+  "下一张便签": "下一张便签",
+  "已复制": "已复制",
+  "草稿自动保存未成功，文字仍在窗口中；请重试保存或关闭。": "草稿自动保存未成功，文字仍在窗口中；请重试保存或关闭。",
+- "保存后会移至新Agent的独立夹子，请先确认。": "保存后会移至新Agent的独立夹子，请先确认。",
++ "保存后会移至新Agent的独立夹子，请先确认。": "保存后会移至新标签的独立夹子，请先确认。",
+  "保存未成功，文字已保留，请重试。": "保存未成功，文字已保留，请重试。",
+  "草稿保存未成功，文字已保留。": "草稿保存未成功，文字已保留。",
+  "编辑念头": "编辑念头",
+@@ -197,12 +204,12 @@ export const zh = {
+  "名称可选，可点击直接编辑；留空时使用正文首行。": "名称可选，可点击直接编辑；留空时使用正文首行。",
+  "取消编辑并关闭": "取消编辑并关闭",
+  "保存草稿并关闭": "保存草稿并关闭",
+- "先写下来，稍后交给 Agent。": "先写下来，稍后交给 Agent。",
+- "保存后移至新Agent的独立夹子": "保存后移至新Agent的独立夹子",
++ "先写下来，稍后交给 Agent。": "先记下来，灵感、工作或想说的话。",
++ "保存后移至新Agent的独立夹子": "保存后移至新标签的独立夹子",
+  "未分组": "未分组",
+  "项目：": "项目：",
+- "给谁：": "给谁：",
+- "念头归属 Agent": "念头归属 Agent",
++ "给谁：": "标签：",
++ "念头归属 Agent": "念头标签",
+  "保存中…": "保存中…",
+  "保存修改": "保存修改",
+  "挂上": "挂上",
+@@ -265,7 +272,7 @@ export const zh = {
+  "原地编辑念头": "原地编辑念头",
+  "编辑标题": "编辑标题",
+  "编辑正文": "编辑正文",
+- "编辑归属 Agent": "编辑归属 Agent",
++ "编辑归属 Agent": "编辑标签归属",
+  "请先保存最后修改再删除分组。": "请先保存最后修改再删除分组。",
+  "编辑项目": "编辑项目",
+  "更改归属会将当前纸张移至独立夹子": "更改归属会将当前纸张移至独立夹子",
+@@ -278,9 +285,9 @@ export const zh = {
+  "念头": "念头",
+  "关闭浏览": "关闭浏览",
+  "搜索全文": "搜索全文",
+- "念头、项目或 Agent": "念头、项目或 Agent",
+- "筛选Agent": "筛选Agent",
+- "全部 Agent": "全部 Agent",
++ "念头、项目或 Agent": "念头、项目或标签",
++ "筛选Agent": "筛选标签",
++ "全部 Agent": "全部标签",
+  "念头状态": "念头状态",
+  "搜索结果": "搜索结果",
+  "没有匹配的念头。更换条件试试。": "没有匹配的念头。更换条件试试。",
+@@ -329,7 +336,7 @@ export const zh = {
+  "布局已变化，拖动已取消": "布局已变化，拖动已取消",
+  "当前纸张已合入目标夹子": "当前纸张已合入目标夹子",
+  "已合夹 · 可在详情中拆出或撤销": "已合夹 · 可在详情中拆出或撤销",
+- "不同 Agent 无法合夹，位置保持。": "不同 Agent 无法合夹，位置保持。",
++ "不同 Agent 无法合夹，位置保持。": "不同标签无法合夹，位置保持。",
+  "未达到合夹停留时间，位置保持。": "未达到合夹停留时间，位置保持。",
+  "当前纸张已挂到空位": "当前纸张已挂到空位",
+  "无合法空位，纸张保持原位": "无合法空位，纸张保持原位",
+@@ -337,13 +344,13 @@ export const zh = {
+  "拖动已取消": "拖动已取消",
+  "松开合并": "松开合并",
+  "停留后合夹": "停留后合夹",
+- "不同 Agent 不能合夹": "不同 Agent 不能合夹",
++ "不同 Agent 不能合夹": "不同标签不能合夹",
+  "松开将当前纸张挂到空位 · Esc取消": "松开将当前纸张挂到空位 · Esc取消",
+  "绳上暂时放不下 · Esc取消": "绳上暂时放不下 · Esc取消",
+  "拖动调整位置 · Esc取消": "拖动调整位置 · Esc取消",
+  "页码尚未保存，请重试。": "页码尚未保存，请重试。",
+  "请选择两个不同夹子。": "请选择两个不同夹子。",
+- "不同Agent的夹子不能合并。": "不同Agent的夹子不能合并。",
++ "不同Agent的夹子不能合并。": "不同标签的夹子不能合并。",
+  "这张便签不在当前夹子中。": "这张便签不在当前夹子中。",
+  "无法拆出这张便签。": "无法拆出这张便签。",
+  "夹子位置无效。": "夹子位置无效。",
+@@ -354,7 +361,7 @@ export const zh = {
+  "空格": "空格",
+  "无法读取这个数据版本，原文件已保留。": "无法读取这个数据版本，原文件已保留。",
+  "数据结构不完整。": "数据结构不完整。",
+- "Agent标签无效。": "Agent标签无效。",
++ "Agent标签无效。": "标签无效。",
+  "缺少通用标签。": "缺少通用标签。",
+  "念头正文或归属无效。": "念头正文或归属无效。",
+  "念头创建日或时区无效。": "念头创建日或时区无效。",
+@@ -365,12 +372,12 @@ export const zh = {
+  "念头创建日无法迁移，原文件已保留。": "念头创建日无法迁移，原文件已保留。",
+  "夹子数据缺失。": "夹子数据缺失。",
+  "夹子结构或位置无效。": "夹子结构或位置无效。",
+- "夹子成员重复、缺失或Agent不一致。": "夹子成员重复、缺失或Agent不一致。",
++ "夹子成员重复、缺失或Agent不一致。": "夹子成员重复、缺失或标签不一致。",
+  "挂着的念头没有夹子。": "挂着的念头没有夹子。",
+  "请输入念头，正文不超过1MiB。": "请输入念头，正文不超过1MiB。",
+  "找不到可操作的念头。": "找不到可操作的念头。",
+- "找不到这个Agent。": "找不到这个Agent。",
+- "请选择存在的替代Agent，通用标签不能移除。": "请选择存在的替代Agent，通用标签不能移除。",
++ "找不到这个Agent。": "找不到这个标签。",
++ "请选择存在的替代Agent，通用标签不能移除。": "请选择存在的替代标签，通用标签不能移除。",
+  "正文、标题或项目无效，请保留文字后重试。": "正文、标题或项目无效，请保留文字后重试。",
+  "找不到可编辑的念头或原内容无效。": "找不到可编辑的念头或原内容无效。",
+  "这条念头已更新，请保留当前文字并重新读取。": "这条念头已更新，请保留当前文字并重新读取。",
+@@ -421,6 +428,13 @@ export const zh = {
+  "savedBackup": "独立备份已保存到 {p0}。当前数据位置未更改。"
+ } as const;
+ export const en = {
++ "生活灵感": "Everyday ideas",
++ "工作记录": "Work notes",
++ "直属领导": "Direct manager",
++ "同事": "Colleague",
++ "未挂上": "Off line",
++ " · 未挂上": " · Off line",
++ "例如：日报、直属领导、客户": "For example: Daily report, Manager, Client",
+  "撤销换上": "Undo swap",
+  "撤销挂上": "Undo hang",
+  "整理挂上": "Arrange and hang",
+@@ -432,23 +446,23 @@ export const en = {
+  "换下一张": "Put away one thought",
+  "选择夹子中的一张": "Choose one thought in this clip",
+  "没有可换下的可见夹子。": "No visible clips are available to replace.",
+- "显示全部Agent后挂上": "Show all Agents and hang",
++ "显示全部Agent后挂上": "Show all tags and hang",
+  "旧念头会收起，内容保留。": "The old thought is put away; its content is kept.",
+  "swapWhole": "Put away the whole clip ({count} thoughts)",
+  "swapPreview": "Put away “{title}” and hang this thought",
+  "swapWholePreview": "Put away {count} thoughts and hang this thought",
+  "目标夹子已变化，请重新选择。": "The target clip changed. Please choose again.",
+- "当前Agent筛选会隐藏这张纸，请选择显示全部Agent后挂上。": "The current Agent filter hides this thought. Choose to show all Agents before hanging.",
++ "当前Agent筛选会隐藏这张纸，请选择显示全部Agent后挂上。": "The current tag filter hides this thought. Choose to show all tags before hanging.",
+  "绳上已满，可保存或换上一张。": "The line is full. Save or swap a thought onto it.",
+  "已保存到Thoughtline日历。": "Saved to Thoughtline Calendar.",
+  "已换上，旧念头已收起。": "Swapped onto the line; the old thought is put away.",
+  "挂绳空间已变化，请选择保存、整理挂上或换上。": "Space on the line changed. Save, arrange and hang, or swap instead.",
+  "绳上已满，请选择保存或换上。": "The line is full. Save or swap instead.",
+  "挂绳状态已变化，请重新选择。": "The line changed. Please choose again.",
+- "不同Agent的叠纸需明确收起整夹后换上。": "To swap between Agents, explicitly put away the whole clip.",
++ "不同Agent的叠纸需明确收起整夹后换上。": "To swap between tags, explicitly put away the whole clip.",
+  "换上记录已变化，不能撤销。": "The swapped thoughts changed; this swap cannot be undone.",
+  "夹子已变化，不能撤销换上。": "The clip changed; this swap cannot be undone.",
+- "显示全部 Agent": "Show all Agents",
++ "显示全部 Agent": "Show all tags",
+ 
+  "自动整理": "Arrange clips",
+  "返回Thoughtline日历": "Back to Thoughtline Calendar",
+@@ -488,9 +502,9 @@ export const en = {
+  "请先结束当前输入。": "Finish your current input first.",
+  "挂绳已收起。": "The rope is hidden.",
+  "查看全文": "View full text",
+- "这个 Agent": "this Agent",
++ "这个 Agent": "this tag",
+  "显示全部": "Show all",
+- "筛选 Agent": "Filter by Agent",
++ "筛选 Agent": "Filter tags",
+  "查找 / 已收起": "Thoughtline Calendar",
+  "菜单未能打开，请从托盘查找念头。": "Could not open the menu. Find your thought from the tray.",
+  "全文浮层未能打开，请重试。": "Could not open the reader. Please retry.",
+@@ -512,7 +526,7 @@ export const en = {
+  "内容已更新，请重新操作。": "Content was updated. Please try again.",
+  "已恢复，绳上暂时放不下，可在念头日历查看": "Restored; no room on the rope yet. View it in the calendar.",
+  "内容已变化，请重新操作。": "Content changed. Please try again.",
+- "Agent内容无效": "Invalid Agent content",
++ "Agent内容无效": "Invalid tag content",
+  "未分组不能删除。": "Ungrouped cannot be deleted.",
+  "内容已更新，请重新删除分组。": "Content was updated. Try deleting the project again.",
+  "Esc快捷键被占用，拖动未开始，请释放快捷键后重试。": "Escape is in use. Drag did not start; release the shortcut and retry.",
+@@ -555,21 +569,21 @@ export const en = {
+  "备份文件清单非法。": "Invalid backup file list.",
+  "备份缺失文件或含未知文件。": "The backup has missing or unknown files.",
+  "备份版本或修订号不一致。": "Backup versions or revisions do not match.",
+- "夹子颜色和文字一起区分 Agent。这里只记录归属，不连接 Agent 账户。": "Clip color and text identify Agents. These are labels; no Agent accounts are connected.",
+- "编辑标签": "Edit label",
++ "夹子颜色和文字一起区分 Agent。这里只记录归属，不连接 Agent 账户。": "Use tags for purposes, people or tools; clip color and text help you recognize them.",
++ "编辑标签": "Edit tag",
+  "名称": "Name",
+  "夹子颜色": "Clip color",
+- "标签已更新，念头归属保持不变。": "Label updated. Thought assignments are unchanged.",
+- "保存标签": "Save label",
++ "标签已更新，念头归属保持不变。": "Tag updated. Thought assignments are unchanged.",
++ "保存标签": "Save tag",
+  "移除前，将念头和草稿迁到": "Before removing, move thoughts and drafts to",
+- "标签已移除，全文已迁移。": "Label removed. All text was moved.",
++ "标签已移除，全文已迁移。": "Tag removed. All text was moved.",
+  "移除并迁移": "Remove and move",
+- "新增 Agent": "Add Agent",
+- "新标签已添加。": "New label added.",
+- "添加标签": "Add label",
++ "新增 Agent": "Add tag",
++ "新标签已添加。": "New tag added.",
++ "添加标签": "Add tag",
+  "操作未成功，内容已保留。": "The operation failed. Content is preserved.",
+  "最近删除": "Recently deleted",
+- "Agent 标签": "Agent labels",
++ "Agent 标签": "Thoughtline Tags",
+  "返回": "Back",
+  "查看全年十二个月": "View all twelve months",
+  "日历更多选项": "More calendar options",
+@@ -579,7 +593,7 @@ export const en = {
+  "搜索正文、名称或项目": "Search text, names or projects",
+  "筛选念头状态": "Filter thought status",
+  "全部状态": "All statuses",
+- "挂着": "Hanging",
++ "挂着": "On line",
+  "已收起": "Archived",
+  "上一年": "Previous year",
+  "上个月": "Previous month",
+@@ -607,7 +621,7 @@ export const en = {
+  "下一张便签": "Next paper",
+  "已复制": "Copied",
+  "草稿自动保存未成功，文字仍在窗口中；请重试保存或关闭。": "Draft autosave failed. Your text remains here; retry saving or closing.",
+- "保存后会移至新Agent的独立夹子，请先确认。": "Saving will move this paper to a separate clip for the new Agent. Confirm first.",
++ "保存后会移至新Agent的独立夹子，请先确认。": "Saving will move this paper to a separate clip for the new tag. Confirm first.",
+  "保存未成功，文字已保留，请重试。": "Save failed. Your text is preserved; please retry.",
+  "草稿保存未成功，文字已保留。": "Draft save failed. Your text is preserved.",
+  "编辑念头": "Edit thought",
+@@ -618,12 +632,12 @@ export const en = {
+  "名称可选，可点击直接编辑；留空时使用正文首行。": "The name is optional. Click to edit; leave blank to use the first line.",
+  "取消编辑并关闭": "Cancel editing and close",
+  "保存草稿并关闭": "Save draft and close",
+- "先写下来，稍后交给 Agent。": "Write it down. Hand it to an Agent later.",
+- "保存后移至新Agent的独立夹子": "Move to a separate clip for the new Agent on save",
++ "先写下来，稍后交给 Agent。": "Capture an idea, a work note or something you want to say.",
++ "保存后移至新Agent的独立夹子": "Move to a separate clip for the new tag on save",
+  "未分组": "Ungrouped",
+  "项目：": "Project:",
+- "给谁：": "Agent:",
+- "念头归属 Agent": "Assigned Agent",
++ "给谁：": "Tag:",
++ "念头归属 Agent": "Thought tag",
+  "保存中…": "Saving…",
+  "保存修改": "Save changes",
+  "挂上": "Hang",
+@@ -676,7 +690,7 @@ export const en = {
+  "确认永久删除这条念头": "Confirm permanent deletion",
+  "取消": "Cancel",
+  "已保存": "Saved",
+- "更改归属会将这张纸移至独立夹子，请先确认。": "Changing the Agent moves this paper to a separate clip. Confirm first.",
++ "更改归属会将这张纸移至独立夹子，请先确认。": "Changing the tag moves this paper to a separate clip. Confirm first.",
+  "保存中": "Saving",
+  "保存后找不到原记录，请保留正文。": "Original record not found after saving. Keep your text.",
+  "保存未成功，文字已保留。": "Save failed. Your text is preserved.",
+@@ -686,10 +700,10 @@ export const en = {
+  "原地编辑念头": "Edit thought in place",
+  "编辑标题": "Edit title",
+  "编辑正文": "Edit text",
+- "编辑归属 Agent": "Edit assigned Agent",
++ "编辑归属 Agent": "Edit thought tag",
+  "请先保存最后修改再删除分组。": "Save your latest changes before deleting the project.",
+  "编辑项目": "Edit project",
+- "更改归属会将当前纸张移至独立夹子": "Changing the Agent moves this paper to a separate clip",
++ "更改归属会将当前纸张移至独立夹子": "Changing the tag moves this paper to a separate clip",
+  "重试保存": "Retry save",
+  "文字仍在这里。": "Your text is still here.",
+  "选中正文以复制": "Select text to copy",
+@@ -699,9 +713,9 @@ export const en = {
+  "念头": "Thoughts",
+  "关闭浏览": "Close browser",
+  "搜索全文": "Search full text",
+- "念头、项目或 Agent": "Thoughts, projects or Agents",
+- "筛选Agent": "Filter Agents",
+- "全部 Agent": "All Agents",
++ "念头、项目或 Agent": "Thoughts, projects or tags",
++ "筛选Agent": "Filter tags",
++ "全部 Agent": "All tags",
+  "念头状态": "Thought status",
+  "搜索结果": "Search results",
+  "没有匹配的念头。更换条件试试。": "No matching thoughts. Try different filters.",
+@@ -750,7 +764,7 @@ export const en = {
+  "布局已变化，拖动已取消": "Layout changed; drag canceled",
+  "当前纸张已合入目标夹子": "Paper moved into the target clip",
+  "已合夹 · 可在详情中拆出或撤销": "Clips merged · Separate or undo in detail",
+- "不同 Agent 无法合夹，位置保持。": "Different Agents cannot share a clip. Position unchanged.",
++ "不同 Agent 无法合夹，位置保持。": "Different tags cannot share a clip. Position unchanged.",
+  "未达到合夹停留时间，位置保持。": "Hold longer to merge clips. Position unchanged.",
+  "当前纸张已挂到空位": "Paper hung in the available space",
+  "无合法空位，纸张保持原位": "No available space. Paper unchanged",
+@@ -758,13 +772,13 @@ export const en = {
+  "拖动已取消": "Drag canceled",
+  "松开合并": "Release to merge",
+  "停留后合夹": "Hold to merge",
+- "不同 Agent 不能合夹": "Different Agents cannot share a clip",
++ "不同 Agent 不能合夹": "Different tags cannot share a clip",
+  "松开将当前纸张挂到空位 · Esc取消": "Release to hang paper · Escape to cancel",
+  "绳上暂时放不下 · Esc取消": "No room on the rope · Escape to cancel",
+  "拖动调整位置 · Esc取消": "Drag to reposition · Escape to cancel",
+  "页码尚未保存，请重试。": "Page selection is unsaved. Please retry.",
+  "请选择两个不同夹子。": "Choose two different clips.",
+- "不同Agent的夹子不能合并。": "Clips assigned to different Agents cannot merge.",
++ "不同Agent的夹子不能合并。": "Clips assigned to different tags cannot merge.",
+  "这张便签不在当前夹子中。": "This paper is not in the current clip.",
+  "无法拆出这张便签。": "Cannot separate this paper.",
+  "夹子位置无效。": "Invalid clip position.",
+@@ -775,8 +789,8 @@ export const en = {
+  "空格": "Space",
+  "无法读取这个数据版本，原文件已保留。": "Cannot read this data version. Original file preserved.",
+  "数据结构不完整。": "Incomplete data structure.",
+- "Agent标签无效。": "Invalid Agent label.",
+- "缺少通用标签。": "General label missing.",
++ "Agent标签无效。": "Invalid tag.",
++ "缺少通用标签。": "General tag missing.",
+  "念头正文或归属无效。": "Invalid thought text or assignment.",
+  "念头创建日或时区无效。": "Invalid thought creation date or time zone.",
+  "最近删除恢复信息无效。": "Invalid restoration data.",
+@@ -786,12 +800,12 @@ export const en = {
+  "念头创建日无法迁移，原文件已保留。": "Cannot migrate thought creation date. Original file preserved.",
+  "夹子数据缺失。": "Clip data missing.",
+  "夹子结构或位置无效。": "Invalid clip structure or position.",
+- "夹子成员重复、缺失或Agent不一致。": "Clip members are duplicated, missing or assigned to different Agents.",
++ "夹子成员重复、缺失或Agent不一致。": "Clip members are duplicated, missing or assigned to different tags.",
+  "挂着的念头没有夹子。": "A hanging thought has no clip.",
+  "请输入念头，正文不超过1MiB。": "Enter a thought, up to 1 MiB of text.",
+  "找不到可操作的念头。": "No available thought found.",
+- "找不到这个Agent。": "Agent not found.",
+- "请选择存在的替代Agent，通用标签不能移除。": "Choose an existing replacement Agent. General cannot be removed.",
++ "找不到这个Agent。": "tag not found.",
++ "请选择存在的替代Agent，通用标签不能移除。": "Choose an existing replacement tag. General cannot be removed.",
+  "正文、标题或项目无效，请保留文字后重试。": "Invalid text, title or project. Keep your text and retry.",
+  "找不到可编辑的念头或原内容无效。": "No editable thought found, or original content is invalid.",
+  "这条念头已更新，请保留当前文字并重新读取。": "This thought was updated. Keep your current text and reload.",
+diff --git a/tests/electron/appearance-workflow.cjs b/tests/electron/appearance-workflow.cjs
+index 22f617a..2313fe4 100644
+--- a/tests/electron/appearance-workflow.cjs
++++ b/tests/electron/appearance-workflow.cjs
+@@ -15,7 +15,7 @@ try{
+  const text='用户文字 通用 未分组\n'+Array.from({length:30},(_,i)=>`第${i}行`).join('\n');await composer.locator('#idea-text').fill(text);await waitForInfo(shelf,i=>i.snapshot.draft?.text===text);
+  await composer.evaluate(()=>{const e=document.querySelector('#idea-text');e.focus();e.setSelectionRange(3,8);e.scrollTop=70;globalThis.appearanceEditor=e;e.dispatchEvent(new CompositionEvent('compositionstart',{bubbles:true,data:'候'}));const setter=Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value').set;setter.call(e,e.value+'候选');e.dispatchEvent(new InputEvent('input',{bubbles:true,inputType:'insertCompositionText',data:'候选',isComposing:true}));e.setSelectionRange(3,8);e.scrollTop=70;});
+  const capture=()=>composer.evaluate(()=>{const e=document.querySelector('#idea-text');return {same:e===globalThis.appearanceEditor,value:e.value,start:e.selectionStart,end:e.selectionEnd,scroll:e.scrollTop,focus:e===document.activeElement};});const before=await capture(),raw=await fs.readFile(path.join(dir,'snapshot.json'),'utf8');
+- await choose(composer,'locale',1);await choose(composer,'theme',1);assert.deepEqual(await capture(),before);assert.equal(await fs.readFile(path.join(dir,'snapshot.json'),'utf8'),raw);assert.equal(await composer.locator('#idea-text').getAttribute('placeholder'),'Write it down. Hand it to an Agent later.');assert.equal(await composer.locator('select option[value=general]').textContent(),'General');assert.equal(await composer.locator('select option[value=custom]').textContent(),'通用');await shelf.waitForFunction(()=>document.documentElement.lang==='en'&&document.documentElement.dataset.theme==='dark');mark('composition-node-focus-selection-scroll-candidate-and-note-bytes-preserved');
++ await choose(composer,'locale',1);await choose(composer,'theme',1);assert.deepEqual(await capture(),before);assert.equal(await fs.readFile(path.join(dir,'snapshot.json'),'utf8'),raw);assert.equal(await composer.locator('#idea-text').getAttribute('placeholder'),'Capture an idea, a work note or something you want to say.');assert.equal(await composer.locator('select option[value=general]').textContent(),'General');assert.equal(await composer.locator('select option[value=custom]').textContent(),'通用');await shelf.waitForFunction(()=>document.documentElement.lang==='en'&&document.documentElement.dataset.theme==='dark');mark('composition-node-focus-selection-scroll-candidate-and-note-bytes-preserved');
+  // Both intents precede the first write; its broadcast must not hide the newest failure.
+  for(const reject of [false,true]){
+   await choose(composer,'locale',0);await choose(composer,'theme',0);const retained=await capture(),noteBytes=await fs.readFile(path.join(dir,'snapshot.json'),'utf8');
+diff --git a/tests/electron/clean-shelf-workflow.cjs b/tests/electron/clean-shelf-workflow.cjs
+index b54115f..b662ea1 100644
+--- a/tests/electron/clean-shelf-workflow.cjs
++++ b/tests/electron/clean-shelf-workflow.cjs
+@@ -13,7 +13,7 @@ const {_electron}=require('playwright');const {launchOptions,warmViews,waitForIn
+   await shelf.evaluate(()=>window.thoughtline.dragLock(false));
+   const id=(await shelf.evaluate(()=>window.thoughtline.info())).snapshot.ideas[0].id;
+   assert((await shelf.evaluate(id=>window.thoughtline.shelfMenu(id),id)).ok);
+-  const menu=await app.evaluate(()=>globalThis.thoughtlineTestPopup.menu.items.map(i=>i.label));assert(menu.includes('筛选 Agent')&&menu.includes('Thoughtline日历'));
++  const menu=await app.evaluate(()=>globalThis.thoughtlineTestPopup.menu.items.map(i=>i.label));assert(menu.includes('筛选标签')&&menu.includes('Thoughtline日历'));
+   await app.evaluate(()=>{const p=globalThis.thoughtlineTestPopup;p.menu.items.find(i=>i.label.startsWith('只看 ')).click();p.options.callback();});
+   await waitForInfo(shelf,i=>i.shelfAgentId==='codex');assert.equal(await shelf.locator('nav').count(),0);
+   assert((await shelf.evaluate(id=>window.thoughtline.shelfMenu(id),id)).ok);await app.evaluate(()=>{const p=globalThis.thoughtlineTestPopup;p.menu.items.find(i=>i.label==='显示全部').click();p.options.callback();});
+diff --git a/tests/electron/empty-shelf-workflow.cjs b/tests/electron/empty-shelf-workflow.cjs
+index 68c3e71..fedce29 100644
+--- a/tests/electron/empty-shelf-workflow.cjs
++++ b/tests/electron/empty-shelf-workflow.cjs
+@@ -12,7 +12,7 @@ const {_electron}=require('playwright'),{launchOptions,waitForInfo}=require('./w
+   await app.evaluate(()=>globalThis.thoughtlineTestTray.items.find(i=>i.label.startsWith('写念头：')).click());await waitForInfo(shelf,i=>i.interactionLocked);
+   let composer;const until=Date.now()+10000;while(!composer&&Date.now()<until){composer=(await app.windows()).find(p=>p.url().includes('view=composer'));if(!composer)await new Promise(r=>setTimeout(r,25));}assert(composer);await composer.waitForSelector('#idea-text');assert.equal(await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer').isVisible()),true);
+   const submitted=await composer.evaluate(async()=>{const i=await window.thoughtline.info();return window.thoughtline.submit({text:'托盘新建原样正文',title:'托盘新建',project:'',agentId:'codex'},i.snapshot.revision);});assert(submitted.ok,submitted.message);await waitForInfo(shelf,i=>!i.interactionLocked);await shelf.waitForSelector('.idea-card');
+-  await app.evaluate(()=>{const submenu=globalThis.thoughtlineTestTray.items.find(i=>i.label==='筛选 Agent').submenu;submenu.items.find(i=>i.label.includes('Claude')).click();});await waitForInfo(shelf,i=>i.shelfAgentId==='claude');await shelf.waitForFunction(()=>!document.querySelector('.idea-card'));
++  await app.evaluate(()=>{const submenu=globalThis.thoughtlineTestTray.items.find(i=>i.label==='筛选标签').submenu;submenu.items.find(i=>i.label.includes('Claude')).click();});await waitForInfo(shelf,i=>i.shelfAgentId==='claude');await shelf.waitForFunction(()=>!document.querySelector('.idea-card'));
+   assert.equal((await shelf.locator('[data-view=shelf]').textContent()).trim(),'','empty filtered shelf must also remain rope-only');assert.equal(await shelf.locator('[data-hit]').count(),0);
+   assert((await shelf.evaluate(()=>window.thoughtline.openSettings())).ok);const manage=(await app.windows()).find(p=>p.url().includes('view=manage'));assert(manage);await manage.waitForSelector('[data-mode=settings]');
+   const writeEnabled=()=>app.evaluate(()=>globalThis.thoughtlineTestTray.items.find(i=>i.label.startsWith('写念头：')).enabled);assert.equal(await writeEnabled(),false,'settings show must disable tray write immediately');
+diff --git a/tests/electron/final-reader-placement-workflow.cjs b/tests/electron/final-reader-placement-workflow.cjs
+index 443550f..0d509b3 100644
+--- a/tests/electron/final-reader-placement-workflow.cjs
++++ b/tests/electron/final-reader-placement-workflow.cjs
+@@ -36,7 +36,7 @@ const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=requ
+   await run('calendar-normal-delete-neighbor',async()=>{await calendar();await open('d');await del();await manage.waitForSelector('[data-reader-id="e"]',{timeout:2500});return {reader:'e'};});
+   await run('detail-normal-delete-neighbor-and-empty',async()=>{assert((await shelf.evaluate(()=>window.thoughtline.openManage('e'))).ok);await manage.waitForSelector('[data-reader-id="e"]');await del();await manage.waitForSelector('[data-reader-id="f"]',{timeout:2500});await del();await manage.waitForSelector('.compact-detail>.empty-list',{timeout:2500});await manage.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));assert.equal(await manage.locator('[data-reader-id]').count(),0);return {neighbor:'f',lastDeleteEmpty:true};});
+   await run('detail-last-deleted-selection-stays-empty',async()=>{assert((await shelf.evaluate(()=>window.thoughtline.openManage('q'))).ok);await manage.waitForSelector('[data-reader-id="q"]');await manage.getByRole('button',{name:'下一张便签'}).click();await manage.waitForSelector('[data-reader-id="r"]');await manage.getByRole('button',{name:'拆分'}).click();await waitForInfo(manage,i=>i.snapshot.clips.some(c=>c.ideaIds.length===1&&c.ideaIds[0]==='r'));await del();await manage.waitForSelector('.compact-detail>.empty-list',{timeout:2500});await manage.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));assert.equal(await manage.locator('[data-reader-id]').count(),0);assert.equal((await manage.evaluate(()=>window.thoughtline.info())).snapshot.ideas.find(i=>i.id==='q').status,'hanging');return {noFallbackToOldManageSelection:true};});
+-  await run('agent-auto-split-full-rope-recovery-action-and-stable-body',async()=>{assert((await shelf.evaluate(()=>window.thoughtline.openManage('h'))).ok);await manage.waitForSelector('[data-reader-id="h"]');const before=(await manage.evaluate(()=>window.thoughtline.info())).snapshot;await manage.getByRole('button',{name:'编辑',exact:true}).click();await manage.getByRole('combobox',{name:'编辑归属 Agent'}).selectOption('codex');await manage.getByRole('checkbox',{name:/独立夹子/}).check();let current=await waitForInfo(manage,i=>i.snapshot.ideas.find(x=>x.id==='h').agentId==='codex');await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill('after split body 中文😀');current=await waitForInfo(manage,i=>i.snapshot.ideas.find(x=>x.id==='h').text==='after split body 中文😀');assert.deepEqual(current.snapshot.ideas.map(i=>i.id),before.ideas.map(i=>i.id));assert.equal(current.snapshot.clips.find(c=>c.ideaIds.includes('h')).currentId,'h');assert.deepEqual(current.snapshot.clips.find(c=>c.id==='agents').ideaIds,['g']);const notice=await manage.locator('.reader-notice').textContent();await manage.screenshot({path:path.join(evidence,'agent-full-rope-notice.png')});assert.equal(notice,'','approved capacity UI removes stale duplicated global notices');assert.equal(await manage.getByRole('button',{name:'换上',exact:true}).count(),1,'overflow thought must expose a direct recovery action in this window');assert.equal(await manage.getByRole('textbox',{name:'编辑正文',exact:true}).inputValue(),'after split body 中文😀');return {notice,swapRecoveryPresent:true,idsStable:true,subsequentEditStable:true};});
++  await run('agent-auto-split-full-rope-recovery-action-and-stable-body',async()=>{assert((await shelf.evaluate(()=>window.thoughtline.openManage('h'))).ok);await manage.waitForSelector('[data-reader-id="h"]');const before=(await manage.evaluate(()=>window.thoughtline.info())).snapshot;await manage.getByRole('button',{name:'编辑',exact:true}).click();await manage.getByRole('combobox',{name:'编辑标签归属'}).selectOption('codex');await manage.getByRole('checkbox',{name:/独立夹子/}).check();let current=await waitForInfo(manage,i=>i.snapshot.ideas.find(x=>x.id==='h').agentId==='codex');await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill('after split body 中文😀');current=await waitForInfo(manage,i=>i.snapshot.ideas.find(x=>x.id==='h').text==='after split body 中文😀');assert.deepEqual(current.snapshot.ideas.map(i=>i.id),before.ideas.map(i=>i.id));assert.equal(current.snapshot.clips.find(c=>c.ideaIds.includes('h')).currentId,'h');assert.deepEqual(current.snapshot.clips.find(c=>c.id==='agents').ideaIds,['g']);const notice=await manage.locator('.reader-notice').textContent();await manage.screenshot({path:path.join(evidence,'agent-full-rope-notice.png')});assert.equal(notice,'','approved capacity UI removes stale duplicated global notices');assert.equal(await manage.getByRole('button',{name:'换上',exact:true}).count(),1,'overflow thought must expose a direct recovery action in this window');assert.equal(await manage.getByRole('textbox',{name:'编辑正文',exact:true}).inputValue(),'after split body 中文😀');return {notice,swapRecoveryPresent:true,idsStable:true,subsequentEditStable:true};});
+  }catch(e){receipt.failure=e.stack;process.exitCode=1;}finally{
+   try{if(app){await app.evaluate(({ipcMain})=>{globalThis.finalRelease?.();if(globalThis.finalHistory){ipcMain.removeHandler('thoughtline:idea-history');ipcMain.handle('thoughtline:idea-history',globalThis.finalHistory);}});if(manage)assert((await manage.evaluate(()=>window.thoughtline.closeManage())).ok);receipt.pids=[...new Set([app.process().pid,...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid))])];await app.close();receipt.normalClose=true;await cleanupIdleFixture(dir,receipt.pids);receipt.pidChecks=receipt.pids.map(pid=>{try{process.kill(pid,0);return {pid,status:'ALIVE'};}catch(e){return {pid,status:e.code};}});receipt.stat=await fs.stat(dir).then(()=> 'EXISTS',e=>e.code);}}
+   catch(e){receipt.cleanupFailure=e.stack;process.exitCode=1;}receipt.passed=!receipt.failure&&!receipt.cleanupFailure&&receipt.cases.every(x=>x.passed)&&receipt.stat==='ENOENT';if(!receipt.passed)process.exitCode=1;await fs.writeFile(path.join(evidence,'receipt.json'),JSON.stringify(receipt,null,2));console.log(JSON.stringify(receipt));
+diff --git a/tests/electron/inline-edit-workflow.cjs b/tests/electron/inline-edit-workflow.cjs
+index 35ba661..bacef2d 100644
+--- a/tests/electron/inline-edit-workflow.cjs
++++ b/tests/electron/inline-edit-workflow.cjs
+@@ -5,7 +5,7 @@ const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs'),{cle
+  const edited='  新正文\n'+('中文😀\n'.repeat(200))+'尾部  ';await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill(edited);await manage.getByRole('textbox',{name:'编辑标题',exact:true}).fill('新标题');await waitForInfo(manage,i=>i.snapshot.ideas[0].text===edited&&i.snapshot.ideas[0].title==='新标题');assert.equal((await manage.evaluate(()=>window.thoughtline.info())).snapshot.ideas[0].createdAt,idea.createdAt);
+  await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill('最后一击\n');assert.equal((await manage.evaluate(()=>window.thoughtline.closeManage())).ok,true);assert.equal(JSON.parse(await fs.readFile(path.join(dir,'snapshot.json'),'utf8')).ideas[0].text,'最后一击\n');
+  await shelf.evaluate(()=>window.thoughtline.openManage('i'));await manage.getByRole('button',{name:'编辑',exact:true}).click();await manage.waitForSelector('[data-inline-editor]');await manage.getByRole('textbox',{name:'编辑正文',exact:true}).evaluate(el=>{el.dispatchEvent(new CompositionEvent('compositionstart',{bubbles:true,data:''}));const setter=Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value').set;setter.call(el,'未确认候选');el.dispatchEvent(new InputEvent('input',{bubbles:true,data:'未确认候选',isComposing:true,inputType:'insertCompositionText'}));});const composingClose=await manage.evaluate(()=>window.thoughtline.closeManage());assert.equal(composingClose.ok,false);await manage.getByRole('button',{name:'打开本夹标题列表'}).click();await manage.waitForTimeout(200);assert.equal(await manage.locator('[data-inline-editor]').count(),1,'IME composing must keep editor mounted');assert.equal(JSON.parse(await fs.readFile(path.join(dir,'snapshot.json'),'utf8')).ideas[0].text,'最后一击\n');await manage.getByRole('textbox',{name:'编辑正文',exact:true}).evaluate(el=>el.dispatchEvent(new CompositionEvent('compositionend',{bubbles:true,data:'未确认候选'})));await waitForInfo(manage,i=>i.snapshot.ideas[0].text==='未确认候选');
+- await app.evaluate(()=>{globalThis.round1FailSave=true;});if(process.env.THOUGHTLINE_INLINE_FAILURE_PROBE==='1')throw Error('controlled failure after save fault armed');await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill('故障时不能丢失😀\n');await manage.waitForFunction(()=>document.querySelector('[data-inline-editor] [role=alert]')?.textContent.includes('保存'));const refused=await manage.evaluate(()=>window.thoughtline.closeManage());assert.equal(refused.ok,false);await manage.getByRole('button',{name:'打开本夹标题列表'}).click();await manage.waitForTimeout(500);assert.equal(await manage.locator('[data-inline-editor]').count(),1,'failed save must keep editor mounted');assert.equal(await manage.getByRole('textbox',{name:'编辑正文',exact:true}).inputValue(),'故障时不能丢失😀\n');await app.evaluate(()=>{globalThis.round1FailSave=false;});await manage.getByRole('button',{name:'重试保存',exact:true}).click();await waitForInfo(manage,i=>i.snapshot.ideas[0].text==='故障时不能丢失😀\n');await manage.getByRole('combobox',{name:'编辑归属 Agent'}).selectOption('other');await manage.getByRole('checkbox',{name:/独立夹子/}).check();await waitForInfo(manage,i=>i.snapshot.ideas[0].agentId==='other');assert.equal(await manage.locator('[data-reader-id=i]').count(),1,'Agent split keeps same reader');const afterSplit='故障时不能丢失😀\n跨夹后继续输入';await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill(afterSplit);await waitForInfo(manage,i=>i.snapshot.ideas[0].text===afterSplit);assert.equal((await manage.evaluate(()=>window.thoughtline.info())).snapshot.ideas[1].text,'相邻正文');await manage.screenshot({path:path.join(evidence,'inline-editor.png')});assert.equal((await manage.evaluate(()=>window.thoughtline.closeManage())).ok,true);
++ await app.evaluate(()=>{globalThis.round1FailSave=true;});if(process.env.THOUGHTLINE_INLINE_FAILURE_PROBE==='1')throw Error('controlled failure after save fault armed');await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill('故障时不能丢失😀\n');await manage.waitForFunction(()=>document.querySelector('[data-inline-editor] [role=alert]')?.textContent.includes('保存'));const refused=await manage.evaluate(()=>window.thoughtline.closeManage());assert.equal(refused.ok,false);await manage.getByRole('button',{name:'打开本夹标题列表'}).click();await manage.waitForTimeout(500);assert.equal(await manage.locator('[data-inline-editor]').count(),1,'failed save must keep editor mounted');assert.equal(await manage.getByRole('textbox',{name:'编辑正文',exact:true}).inputValue(),'故障时不能丢失😀\n');await app.evaluate(()=>{globalThis.round1FailSave=false;});await manage.getByRole('button',{name:'重试保存',exact:true}).click();await waitForInfo(manage,i=>i.snapshot.ideas[0].text==='故障时不能丢失😀\n');await manage.getByRole('combobox',{name:'编辑标签归属'}).selectOption('other');await manage.getByRole('checkbox',{name:/独立夹子/}).check();await waitForInfo(manage,i=>i.snapshot.ideas[0].agentId==='other');assert.equal(await manage.locator('[data-reader-id=i]').count(),1,'Agent split keeps same reader');const afterSplit='故障时不能丢失😀\n跨夹后继续输入';await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill(afterSplit);await waitForInfo(manage,i=>i.snapshot.ideas[0].text===afterSplit);assert.equal((await manage.evaluate(()=>window.thoughtline.info())).snapshot.ideas[1].text,'相邻正文');await manage.screenshot({path:path.join(evidence,'inline-editor.png')});assert.equal((await manage.evaluate(()=>window.thoughtline.closeManage())).ok,true);
+  const stored=JSON.parse(await fs.readFile(path.join(dir,'snapshot.json'),'utf8'));assert.equal(stored.ideas[0].text,'故障时不能丢失😀\n跨夹后继续输入');assert.equal(stored.ideas[0].id,'i');assert.equal(stored.ideas[0].createdAt,idea.createdAt);console.log(JSON.stringify({scope:'isolated source Electron DOM/IPC on actual runner OS, synthetic composition events and disk fault; not physical IME',host:{platform:process.platform,arch:process.arch,release:os.release()},inline:true,autosave:true,lastInputClose:true,compositionCloseBlocked:true,failureRetained:true,retryPersisted:true,identityDatePreserved:true,groupAgentSplitKeepsEditor:true}));
+  }catch(error){failure=error;throw error;}finally{
+   const audit={directory:dir,pids:[],normalClose:false,injectionCleared:false,manageCloseOk:null,allExited:false,dataRemoved:false,failedStage:failure?String(failure?.stack||failure):null};
+diff --git a/tests/electron/inline-properties-workflow.cjs b/tests/electron/inline-properties-workflow.cjs
+index 731f5a1..e7bc875 100644
+--- a/tests/electron/inline-properties-workflow.cjs
++++ b/tests/electron/inline-properties-workflow.cjs
+@@ -8,7 +8,7 @@ const output=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evid
+  await composer.locator('.composer-project').click();await composer.getByLabel('项目',{exact:true}).fill('新项目');await composer.getByLabel('项目',{exact:true}).press('Escape');assert.equal(await composer.locator('.composer-project b').textContent(),'新项目');assert.equal(await composer.locator('#composer-project-picker').count(),0);assert(await composer.locator('.composer-project').evaluate(e=>document.activeElement===e));mark('new-project-escape-closes-picker-not-composer');
+  await composer.locator('.composer-project').click();await composer.getByLabel('项目',{exact:true}).fill('长'.repeat(40));await composer.getByRole('button',{name:'完成',exact:true}).click();await composer.locator('select').selectOption('long');await composer.getByLabel('名称',{exact:true}).fill('标题'.repeat(25));await composer.locator('#idea-text').fill('长字段仍可提交的正文');const geometry=await composer.evaluate(()=>{const box=s=>{const r=document.querySelector(s).getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width,height:r.height};};return {project:box('.composer-project'),agent:box('.composer-agent'),button:box('.primary'),footer:box('footer'),width:innerWidth,height:innerHeight};});for(const r of [geometry.project,geometry.agent,geometry.button])assert(r.x>=0&&r.right<=geometry.width&&r.bottom<=geometry.height&&r.height===32);assert(geometry.agent.right<geometry.button.x);assert.equal(geometry.button.width,72);mark('long-project-agent-title-keep-full-submit-button-inside');
+  await composer.getByRole('button',{name:'保存草稿并关闭',exact:true}).click();await waitForInfo(shelf,i=>!i.interactionLocked);composer=await openComposer(app,shelf);assert.equal(await composer.locator('.composer-project b').textContent(),'长'.repeat(40));assert.equal(await composer.locator('select').inputValue(),'long');assert.equal(await composer.getByLabel('名称',{exact:true}).inputValue(),'标题'.repeat(25));assert(await composer.locator('#idea-text').evaluate(e=>document.activeElement===e));mark('reopen-restores-visible-properties-title-and-body-focus');await composer.getByRole('button',{name:'保存草稿并关闭',exact:true}).click();await waitForInfo(shelf,i=>!i.interactionLocked);
+- const r=await shelf.evaluate(()=>window.thoughtline.openEdit('idea1'));assert(r.ok);const manage=(await app.windows()).find(p=>p.url().includes('view=manage'));await manage.waitForSelector('[data-inline-editor]');await manage.getByRole('combobox',{name:'编辑归属 Agent'}).selectOption('general');await manage.waitForSelector('.inline-split-confirm');await manage.waitForTimeout(500);assert.equal((await shelf.evaluate(()=>window.thoughtline.info())).snapshot.ideas.find(i=>i.id==='idea1').agentId,'codex','cross-Agent grouped edit requires explicit confirmation');const confirm=manage.locator('.inline-split-confirm input');await confirm.check();assert(await confirm.isChecked());await manage.screenshot({path:path.join(output,'grouped-edit-confirmation-renderer.png'),omitBackground:true});await waitForInfo(shelf,i=>i.snapshot.ideas.find(n=>n.id==='idea1')?.agentId==='general');assert.equal((await manage.evaluate(()=>window.thoughtline.closeManage())).ok,true);const result=(await shelf.evaluate(()=>window.thoughtline.info())).snapshot;assert.equal(result.ideas.find(i=>i.id==='idea1').text,'组内原文1');assert.equal(result.ideas.find(i=>i.id==='idea2').text,'组内原文2');assert(result.clips.some(c=>c.agentId==='codex'&&c.ideaIds.length===1&&c.ideaIds[0]==='idea2'));mark('grouped-edit-warning-confirmation-scroll-reachable-and-splits-with-text-preserved');
++ const r=await shelf.evaluate(()=>window.thoughtline.openEdit('idea1'));assert(r.ok);const manage=(await app.windows()).find(p=>p.url().includes('view=manage'));await manage.waitForSelector('[data-inline-editor]');await manage.getByRole('combobox',{name:'编辑标签归属'}).selectOption('general');await manage.waitForSelector('.inline-split-confirm');await manage.waitForTimeout(500);assert.equal((await shelf.evaluate(()=>window.thoughtline.info())).snapshot.ideas.find(i=>i.id==='idea1').agentId,'codex','cross-Agent grouped edit requires explicit confirmation');const confirm=manage.locator('.inline-split-confirm input');await confirm.check();assert(await confirm.isChecked());await manage.screenshot({path:path.join(output,'grouped-edit-confirmation-renderer.png'),omitBackground:true});await waitForInfo(shelf,i=>i.snapshot.ideas.find(n=>n.id==='idea1')?.agentId==='general');assert.equal((await manage.evaluate(()=>window.thoughtline.closeManage())).ok,true);const result=(await shelf.evaluate(()=>window.thoughtline.info())).snapshot;assert.equal(result.ideas.find(i=>i.id==='idea1').text,'组内原文1');assert.equal(result.ideas.find(i=>i.id==='idea2').text,'组内原文2');assert(result.clips.some(c=>c.agentId==='codex'&&c.ideaIds.length===1&&c.ideaIds[0]==='idea2'));mark('grouped-edit-warning-confirmation-scroll-reachable-and-splits-with-text-preserved');
+  await fs.writeFile(path.join(output,'properties-native.json'),JSON.stringify({scope:'actual Mac source DOM/keyboard protocol and trusted IPC; not physical key/IME or Windows acceptance',checks,geometry},null,2)+'\n');
+  }finally{if(app){pids.push(...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)),app.process().pid);await app.close();}await cleanupIdleFixture(dir,pids);await fs.writeFile(path.join(output,'properties-cleanup.json'),JSON.stringify({ownPids:[...new Set(pids)],allExited:true,fakeDataRemoved:true},null,2)+'\n');}
+ })().catch(e=>{console.error(e);process.exitCode=1;});
+diff --git a/tests/electron/round2-capacity-workflow.cjs b/tests/electron/round2-capacity-workflow.cjs
+index 3111fd4..966280d 100644
+--- a/tests/electron/round2-capacity-workflow.cjs
++++ b/tests/electron/round2-capacity-workflow.cjs
+@@ -87,9 +87,9 @@ const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=requ
+  });
+  await run('native-show-all-Agent-label-and-selection',1,async(app,{shelf,manage})=>{
+   assert((await shelf.evaluate(()=>window.thoughtline.openManage('c0'))).ok);assert((await shelf.evaluate(async()=>{const i=await window.thoughtline.info();return window.thoughtline.setStatus('c0','hanging',i.snapshot.revision);})).ok);await waitForInfo(shelf,i=>i.shelfVisible);assert((await shelf.evaluate(()=>window.thoughtline.shelfMenu('c0'))).ok);
+-  const initial=await app.evaluate(()=>{const item=globalThis.thoughtlineTestPopup.menu.items.find(x=>x.label==='显示全部 Agent');return {checked:item.checked,type:item.type};});assert.deepEqual(initial,{checked:true,type:'checkbox'});
+-  await app.evaluate(()=>{const {menu,options}=globalThis.thoughtlineTestPopup;menu.items.find(x=>x.label==='只看 通用').click();options.callback();});await waitForInfo(shelf,i=>i.shelfAgentId==='general');assert((await shelf.evaluate(()=>window.thoughtline.shelfMenu('c0'))).ok);assert.equal(await app.evaluate(()=>globalThis.thoughtlineTestPopup.menu.items.find(x=>x.label==='显示全部 Agent').checked),false);
+-  await app.evaluate(()=>{const {menu,options}=globalThis.thoughtlineTestPopup;menu.items.find(x=>x.label==='显示全部 Agent').click();options.callback();});await waitForInfo(shelf,i=>i.shelfAgentId==='all');assert.equal((await shelf.evaluate(()=>window.thoughtline.info())).snapshot.ideas.find(x=>x.id==='history').status,'archived');return {filterOnly:true,checkmarkTracksFilter:true};
++  const initial=await app.evaluate(()=>{const item=globalThis.thoughtlineTestPopup.menu.items.find(x=>x.label==='显示全部标签');return {checked:item.checked,type:item.type};});assert.deepEqual(initial,{checked:true,type:'checkbox'});
++  await app.evaluate(()=>{const {menu,options}=globalThis.thoughtlineTestPopup;menu.items.find(x=>x.label==='只看 通用').click();options.callback();});await waitForInfo(shelf,i=>i.shelfAgentId==='general');assert((await shelf.evaluate(()=>window.thoughtline.shelfMenu('c0'))).ok);assert.equal(await app.evaluate(()=>globalThis.thoughtlineTestPopup.menu.items.find(x=>x.label==='显示全部标签').checked),false);
++  await app.evaluate(()=>{const {menu,options}=globalThis.thoughtlineTestPopup;menu.items.find(x=>x.label==='显示全部标签').click();options.callback();});await waitForInfo(shelf,i=>i.shelfAgentId==='all');assert.equal((await shelf.evaluate(()=>window.thoughtline.info())).snapshot.ideas.find(x=>x.id==='history').status,'archived');return {filterOnly:true,checkmarkTracksFilter:true};
+  });
+  await run('full-composer-save-stays-out-of-reader',40,async(app,{shelf,manage})=>{
+   const composer=await openComposer(app,shelf);await composer.locator('#idea-text').fill('新建原文 中文😀\n首尾保留 ');
+diff --git a/tests/electron/round2-native-menu.cjs b/tests/electron/round2-native-menu.cjs
+index 989f750..77cb0a1 100644
+--- a/tests/electron/round2-native-menu.cjs
++++ b/tests/electron/round2-native-menu.cjs
+@@ -17,7 +17,7 @@ try{
+    const probe=await app.evaluate(async()=>({closed:globalThis.nativeMenuProbe.closed,ownerFocusable:globalThis.nativeMenuProbe.ownerFocusable,ownerFocused:globalThis.nativeMenuProbe.ownerFocused,}));probe.receiverClicks=await receiverPage.evaluate(()=>window.clicks||0);receipt.probes.push({kind,...probe});await app.evaluate(()=>globalThis.nativeMenuProbe.menu.closePopup());await pending;
+   }
+   const keys=async(values)=>{const command=`Add-Type -TypeDefinition 'using System;using System.Runtime.InteropServices;public class ThoughtlineNativeKeys{[DllImport("user32.dll")]public static extern void keybd_event(byte key,byte scan,uint flags,UIntPtr extra);}';foreach($key in @(${values.join(',')})){[ThoughtlineNativeKeys]::keybd_event($key,0,0,[UIntPtr]::Zero);[ThoughtlineNativeKeys]::keybd_event($key,0,2,[UIntPtr]::Zero);Start-Sleep -Milliseconds 40}`;await promisify(execFile)('powershell.exe',['-NoProfile','-NonInteractive','-EncodedCommand',Buffer.from(command,'utf16le').toString('base64')]);};
+-  const submenuPending=shelf.evaluate(id=>window.thoughtline.shelfMenu(id),id);await new Promise(r=>setTimeout(r,150));const filterIndex=await app.evaluate(()=>globalThis.nativeMenuProbe.menu.items.findIndex(i=>i.label==='筛选 Agent'));assert(filterIndex>=0);await keys([...Array(filterIndex+1).fill(40),39]);await new Promise(r=>setTimeout(r,150));assert(await app.evaluate(()=>!globalThis.nativeMenuProbe.closed),'Agent submenu must retain root menu');await keys([27,27]);await submenuPending;const escapeDeadline=Date.now()+3000;while(!await app.evaluate(()=>globalThis.nativeMenuProbe.closed)&&Date.now()<escapeDeadline)await new Promise(r=>setTimeout(r,25));assert(await app.evaluate(()=>globalThis.nativeMenuProbe.closed),'Escape cancels native menu');receipt.submenuAndEscape=true;receipt.escapeClosureWait='polls actual native popup callback, not IPC completion';
++  const submenuPending=shelf.evaluate(id=>window.thoughtline.shelfMenu(id),id);await new Promise(r=>setTimeout(r,150));const filterIndex=await app.evaluate(()=>globalThis.nativeMenuProbe.menu.items.findIndex(i=>i.label==='筛选标签'));assert(filterIndex>=0);await keys([...Array(filterIndex+1).fill(40),39]);await new Promise(r=>setTimeout(r,150));assert(await app.evaluate(()=>!globalThis.nativeMenuProbe.closed),'Agent submenu must retain root menu');await keys([27,27]);await submenuPending;const escapeDeadline=Date.now()+3000;while(!await app.evaluate(()=>globalThis.nativeMenuProbe.closed)&&Date.now()<escapeDeadline)await new Promise(r=>setTimeout(r,25));assert(await app.evaluate(()=>globalThis.nativeMenuProbe.closed),'Escape cancels native menu');receipt.submenuAndEscape=true;receipt.escapeClosureWait='polls actual native popup callback, not IPC completion';
+   assert(receipt.probes.every(p=>p.closed&&p.ownerFocusable&&p.ownerFocused),'production native popup must cancel on repeated real external-process mouse input');assert(await app.evaluate(({BrowserWindow})=>!BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Shelf').isFocusable()),'native menu finish restores nonactivating shelf');assert(receipt.probes[1].receiverClicks>0,'outside mouse input must reach synthetic receiver');
+  }else{
+   await app.evaluate(()=>{setTimeout(()=>globalThis.nativeMenuProbe?.menu.closePopup(),300);});await shelf.evaluate(id=>window.thoughtline.shelfMenu(id),id);await new Promise(r=>setTimeout(r,350));receipt.probes.push(await app.evaluate(()=>({closed:globalThis.nativeMenuProbe.closed,ownerFocusable:globalThis.nativeMenuProbe.ownerFocusable,ownerFocused:globalThis.nativeMenuProbe.ownerFocused})));assert(receipt.probes[0].closed);receipt.nativeOutsideClick='not tested: no OS mouse injection on user Mac desktop';
+diff --git a/tests/electron/workflow.cjs b/tests/electron/workflow.cjs
+index 6bd2d1b..b447fef 100644
+--- a/tests/electron/workflow.cjs
++++ b/tests/electron/workflow.cjs
+@@ -20,7 +20,7 @@ const assert=require('node:assert/strict');const path=require('node:path');const
+   await result(manage,'openEdit',id);await manage.waitForSelector('[data-inline-editor]');assert.equal(await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer').isVisible()),false);
+   const firstEdit='自动保存后关闭\n原文改动';await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill(firstEdit);assert.equal((await manage.evaluate(()=>window.thoughtline.closeManage())).ok,true);await waitForInfo(shelf,i=>i.snapshot.ideas[0].text===firstEdit);assert.equal(JSON.parse(await fs.readFile(path.join(dir,'snapshot.json'),'utf8')).ideas[0].text,firstEdit);
+   await result(shelf,'openManage',id);await manage.waitForSelector('[data-mode=detail]');await manage.getByRole('button',{name:'编辑',exact:true}).click();await manage.waitForSelector('[data-inline-editor]');
+-  const edited=full+'\n已编辑';await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill(edited);await manage.getByRole('combobox',{name:'编辑归属 Agent'}).selectOption('claude');await manage.getByRole('button',{name:'完成编辑',exact:true}).first().click();await waitForInfo(manage,i=>i.snapshot.ideas[0].text===edited&&i.snapshot.ideas[0].agentId==='claude');
++  const edited=full+'\n已编辑';await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill(edited);await manage.getByRole('combobox',{name:'编辑标签归属'}).selectOption('claude');await manage.getByRole('button',{name:'完成编辑',exact:true}).first().click();await waitForInfo(manage,i=>i.snapshot.ideas[0].text===edited&&i.snapshot.ideas[0].agentId==='claude');
+   info=await manage.evaluate(()=>window.thoughtline.info());await result(manage,'setStatus',id,'archived',info.snapshot.revision);
+   await result(shelf,'openManage');await manage.waitForSelector('[data-mode=calendar]');await manage.getByRole('textbox',{name:'搜索念头'}).fill('已编辑');
+   await manage.waitForSelector('[data-idea-id="'+id+'"]');
+diff --git a/tests/unit/agentPalette.test.ts b/tests/unit/agentPalette.test.ts
+index 731a5e2..418a3fd 100644
+--- a/tests/unit/agentPalette.test.ts
++++ b/tests/unit/agentPalette.test.ts
+@@ -1,8 +1,8 @@
+ import {expect,test} from 'vitest';
+ import {initialSnapshot,validateSnapshot} from '../../src/shared/ideaCommands';
+-test('13设计新默认Codex蓝/Claude橙/柔紫Cursor，样板Agent不强制预置',()=>{
++test('新默认六标签保持通用灰和Codex蓝，其他用途使用克制颜色',()=>{
+  const agents=initialSnapshot().agents;
+- expect(Object.fromEntries(agents.map(a=>[a.id,a.color]))).toEqual({codex:'#4C90D9',claude:'#D79551',cursor:'#9574CE',general:'#A0A3AA'});
++ expect(Object.fromEntries(agents.map(a=>[a.id,a.color]))).toEqual({general:'#A0A3AA','preset:life-inspiration':'#6CA78C','preset:work-notes':'#D79551','preset:manager':'#9574CE','preset:colleague':'#8AADD4',codex:'#4C90D9'});
+  expect(agents.some(a=>['gemini','workbuddy'].includes(a.id))).toBe(false);
+ });
+ test('升级不替换既有Agent颜色，包括用户选回旧默认色',()=>{
+diff --git a/tests/unit/arrangeClips.test.ts b/tests/unit/arrangeClips.test.ts
+index 5d7a5f1..062777a 100644
+--- a/tests/unit/arrangeClips.test.ts
++++ b/tests/unit/arrangeClips.test.ts
+@@ -1,10 +1,11 @@
++import {legacySnapshot} from '../helpers/legacySnapshot';
+ import {expect,test} from 'vitest';
+ import {arrangeClips} from '../../src/shared/clipCommands';
+ import {initialSnapshot,newIdea} from '../../src/shared/ideaCommands';
+ import {availableClipPosition,clipTravelBounds,layoutClips,MIN_SPACING} from '../../src/shared/clipLayout';
+ import type {Result,Snapshot} from '../../src/shared/contracts';
+ const value=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);return r.value;};
+-const fixture=(count:number)=>{let s=initialSnapshot();for(let i=0;i<count;i++)s=value(newIdea(s,{text:'正文 中文😀\n'+i,title:'念头'+i,project:'保留',agentId:i%2?'claude':'codex'},'i'+i,'2026-10-10T00:00:00Z'));return s;};
++const fixture=(count:number)=>{let s=legacySnapshot();for(let i=0;i<count;i++)s=value(newIdea(s,{text:'正文 中文😀\n'+i,title:'念头'+i,project:'保留',agentId:i%2?'claude':'codex'},'i'+i,'2026-10-10T00:00:00Z'));return s;};
+ test('碎片间距压紧后能容纳下一夹子，保留左右顺序与全部念头',()=>{
+  const width=1400,s=fixture(3),{min,max}=clipTravelBounds(width);s.clips.forEach((c,i)=>c.position=i/2);const before=layoutClips(s.clips,width).visible;
+  expect(availableClipPosition(before.map(p=>p.x),width,width/2)).toBe(null);
+@@ -20,7 +21,7 @@ test('混合Agent和满容量：不漏ID、不拆合、不重排组内、不误
+  expect(value(arrangeClips(next,740))).toEqual(next);
+ });
+ test('空绳与无效宽度不造数据，极窄窗口不重挂历史',()=>{
+- expect(value(arrangeClips(initialSnapshot(),740)).clips).toHaveLength(0);expect(arrangeClips(fixture(1),NaN).ok).toBe(false);expect(arrangeClips(fixture(1),-1).ok).toBe(false);
++ expect(value(arrangeClips(legacySnapshot(),740)).clips).toHaveLength(0);expect(arrangeClips(fixture(1),NaN).ok).toBe(false);expect(arrangeClips(fixture(1),-1).ok).toBe(false);
+  const s=fixture(2),next=value(arrangeClips(s,10));expect(next.ideas).toEqual(s.ideas);expect(next.clips.map(c=>c.id)).toEqual(s.clips.map(c=>c.id));
+ });
+ 
+diff --git a/tests/unit/centeredRope.test.ts b/tests/unit/centeredRope.test.ts
+index fe4e79b..b62b07e 100644
+--- a/tests/unit/centeredRope.test.ts
++++ b/tests/unit/centeredRope.test.ts
+@@ -1,3 +1,4 @@
++import {legacySnapshot} from '../helpers/legacySnapshot';
+ import {expect,test} from 'vitest';
+ import {fixedRope,fixedRopeY} from '../../src/shared/ropeGeometry';
+ import {layoutClips,normalizedPosition,captureClipPositions,MIN_SPACING,CARD_WIDTH} from '../../src/shared/clipLayout';
+@@ -26,7 +27,7 @@ test('旧比例位置映射到新夹区，无数据改写或丢失，捕获后
+ });
+ test('移到新夹区最右侧时为已有夹子留最小间距，不把可容纳的移动夹藏入溢出',()=>{
+  const captured=captureClipPositions(clips(3),1440),moving={...captured[0],position:1};
+- const snapshot={...initialSnapshot(),clips:captured,ideas:captured.map(c=>({id:c.currentId,text:'正文',title:'标签',project:'',agentId:c.agentId,status:'hanging' as const,createdAt:'2026-10-09T00:00:00Z',updatedAt:'2026-10-09T00:00:00Z'}))};const r=moveClip(snapshot,moving.id,1,null,1440);expect(r.ok).toBe(true);if(!r.ok)throw Error(r.message);const after=layoutClips(r.value.clips,1440);expect(after.visible.map(p=>p.clip.id)).toEqual(['1','2','0']);expect(after.overflow).toHaveLength(0);
++ const snapshot={...legacySnapshot(),clips:captured,ideas:captured.map(c=>({id:c.currentId,text:'正文',title:'标签',project:'',agentId:c.agentId,status:'hanging' as const,createdAt:'2026-10-09T00:00:00Z',updatedAt:'2026-10-09T00:00:00Z'}))};const r=moveClip(snapshot,moving.id,1,null,1440);expect(r.ok).toBe(true);if(!r.ok)throw Error(r.message);const after=layoutClips(r.value.clips,1440);expect(after.visible.map(p=>p.clip.id)).toEqual(['1','2','0']);expect(after.overflow).toHaveLength(0);
+  for(let i=1;i<after.visible.length;i++)expect(after.visible[i].x-after.visible[i-1].x).toBeGreaterThanOrEqual(MIN_SPACING);
+  expect(after.visible.at(-1)!.x).toBeCloseTo(1440*.15+1440*.7*5/6,8);
+ });
+diff --git a/tests/unit/clipCommands.test.ts b/tests/unit/clipCommands.test.ts
+index 846d8a5..d27fa89 100644
+--- a/tests/unit/clipCommands.test.ts
++++ b/tests/unit/clipCommands.test.ts
+@@ -1,8 +1,9 @@
++import {legacySnapshot} from '../helpers/legacySnapshot';
+ import {expect,test} from 'vitest';
+ import {initialSnapshot,newIdea,validateSnapshot} from '../../src/shared/ideaCommands';
+ const now='2026-10-08T00:00:00Z';
+ test('schema1迁移将每条挂着记录变为独立夹子，已收起不占位，原文保全',()=>{
+- let s=initialSnapshot();const r=newIdea(s,{text:' 原文\n',title:'',project:'',agentId:'codex'},'one',now);if(!r.ok)throw Error(r.message);s=r.value;
++ let s=legacySnapshot();const r=newIdea(s,{text:' 原文\n',title:'',project:'',agentId:'codex'},'one',now);if(!r.ok)throw Error(r.message);s=r.value;
+  const legacy={...s,schemaVersion:1,clips:undefined,ideas:[...s.ideas,{...s.ideas[0],id:'history',status:'archived'}]};
+  const migrated=validateSnapshot(legacy);expect(migrated.ok).toBe(true);if(!migrated.ok)return;
+  expect(migrated.value.schemaVersion).toBe(3);expect((migrated.value as any).clips).toHaveLength(1);
+@@ -11,7 +12,7 @@ test('schema1迁移将每条挂着记录变为独立夹子，已收起不占位
+ import {mergeClips,splitClip,selectClipIdea,moveClip,dropClipIdea} from '../../src/shared/clipCommands';
+ import type {Result,Snapshot} from '../../src/shared/contracts';
+ const value=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);return r.value;};
+-const fixture=()=>{let s=initialSnapshot();for(const id of ['a','b','c'])s=value(newIdea(s,{text:' '+id+'\n正文\n',title:id,project:id,agentId:'codex'},id,now));return s;};
++const fixture=()=>{let s=legacySnapshot();for(const id of ['a','b','c'])s=value(newIdea(s,{text:' '+id+'\n正文\n',title:id,project:id,agentId:'codex'},id,now));return s;};
+ test('同Agent合夹保持独立全文/顺序/目标位置与总重量，源第一张成为当前张',()=>{
+  const s=fixture();s.clips[1].position=.4;const next=value(mergeClips(s,s.clips[0].id,s.clips[1].id));
+  expect(next.clips[0]).toMatchObject({id:'clip:b',ideaIds:['b','a'],currentId:'a',position:.4});expect(next.ideas).toEqual(s.ideas);expect(next.clips).toHaveLength(2);expect(s.clips).toHaveLength(3);
+diff --git a/tests/unit/clipProjection.test.ts b/tests/unit/clipProjection.test.ts
+index 13ce7f0..ffa5123 100644
+--- a/tests/unit/clipProjection.test.ts
++++ b/tests/unit/clipProjection.test.ts
+@@ -1,10 +1,11 @@
++import {legacySnapshot} from '../helpers/legacySnapshot';
+ import {expect,test} from 'vitest';
+ import {layoutClips,captureClipPositions,clipTravelBounds,MIN_SPACING} from '../../src/shared/clipLayout';
+ import {moveClip,mergeClips} from '../../src/shared/clipCommands';
+ import {initialSnapshot} from '../../src/shared/ideaCommands';
+ import type {Clip,Snapshot,Result} from '../../src/shared/contracts';
+ const fixed=(clips:Clip[],width:number,agent='all')=>{const selected=clips.filter(c=>agent==='all'||c.agentId===agent),before=layoutClips(selected,width),captured=captureClipPositions(clips,width,agent),after=layoutClips(captured.filter(c=>agent==='all'||c.agentId===agent),width);expect(after.visible.map(p=>p.clip.id)).toEqual(before.visible.map(p=>p.clip.id));expect(after.overflow.map(c=>c.id)).toEqual(before.overflow.map(c=>c.id));after.visible.forEach((p,i)=>expect(p.x).toBeCloseTo(before.visible[i].x,8));return captured;};
+-const fixture=(count:number):Snapshot=>({...initialSnapshot(),clips:Array.from({length:count},(_,i)=>({id:String(i),agentId:'codex',ideaIds:['i'+i],currentId:'i'+i,position:null})),ideas:Array.from({length:count},(_,i)=>({id:'i'+i,text:' 完整正文 '+i+'\n😀 ',title:'标签'+i,project:'',agentId:'codex',status:'hanging',createdAt:'2026-10-09T00:00:00Z',updatedAt:'2026-10-09T00:00:00Z',createdDay:'2026-10-09',creationTimeZone:'legacy-offset'}))});
++const fixture=(count:number):Snapshot=>({...legacySnapshot(),clips:Array.from({length:count},(_,i)=>({id:String(i),agentId:'codex',ideaIds:['i'+i],currentId:'i'+i,position:null})),ideas:Array.from({length:count},(_,i)=>({id:'i'+i,text:' 完整正文 '+i+'\n😀 ',title:'标签'+i,project:'',agentId:'codex',status:'hanging',createdAt:'2026-10-09T00:00:00Z',updatedAt:'2026-10-09T00:00:00Z',createdDay:'2026-10-09',creationTimeZone:'legacy-offset'}))});
+ const value=(r:Result<Snapshot>)=>{expect(r.ok).toBe(true);if(!r.ok)throw Error(r.message);return r.value;};
+ test('QA混合合法ratio/null：捕获必须保持展示身份、溢出身份和每个中心',()=>{const clips=fixture(4).clips.map((c,i)=>({...c,position:[.8,null,.2,1][i]})),original=structuredClone(clips);fixed(clips,1440);expect(clips).toEqual(original);});
+ test('确定性3000混合旧比例/未定位及筛选压力：捕获是布局固定点',()=>{let seed=11;const rnd=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32;};for(let n=0;n<3000;n++){const count=1+Math.floor(rnd()*20),width=[184.5,380,800,1440,1920,2560][n%6],clips=fixture(count).clips.map((c,i)=>({...c,agentId:i%2?'claude':'codex',position:rnd()<.4?null:rnd()}));const agent=n%3?'all':'codex',captured=fixed(clips,width,agent);for(let i=0;i<count;i++)if(agent!=='all'&&clips[i].agentId!==agent)expect(captured[i]).toEqual(clips[i]);}});
+diff --git a/tests/unit/ideaHistory.test.ts b/tests/unit/ideaHistory.test.ts
+index 7ca331d..a86da07 100644
+--- a/tests/unit/ideaHistory.test.ts
++++ b/tests/unit/ideaHistory.test.ts
+@@ -1,3 +1,4 @@
++import {legacySnapshot} from '../helpers/legacySnapshot';
+ import {expect,test} from 'vitest';
+ import {initialSnapshot,newIdea,changeStatus,validateSnapshot} from '../../src/shared/ideaCommands';
+ import {ideaDay,calendarIndex} from '../../src/shared/ideaHistory';
+@@ -11,7 +12,7 @@ test('ideaDay优先冻结日，旧fixture从原偏移日期回退而不随现在
+ });
+ 
+ test('calendarIndex以Map索引hanging/archived，trash不计数且同日稳定创建顺序',()=>{
+- let s=initialSnapshot();
++ let s=legacySnapshot();
+  s=value(newIdea(s,draft,'hanging','2026-01-02T03:00:00Z'));s=value(newIdea(s,draft,'archived','2026-01-02T01:00:00Z'));s=value(changeStatus(s,'archived','archived','2026-01-03T12:00:00Z'));
+  s=value(validateSnapshot({...s,ideas:s.ideas.map(i=>({...i,createdDay:'2026-01-02',creationTimeZone:'UTC'})).concat([{...s.ideas[0],id:'trash',status:'deleted',deletedFrom:'hanging',deletedAt:'2026-01-03T12:00:00Z',createdDay:'2026-01-03',creationTimeZone:'UTC'}])}));
+  const index=calendarIndex(s);expect(index).toBeInstanceOf(Map);expect([...index.keys()]).toEqual(['2026-01-02']);expect(index.get('2026-01-02')!.map(i=>i.id)).toEqual(['archived','hanging']);
+@@ -19,7 +20,7 @@ test('calendarIndex以Map索引hanging/archived，trash不计数且同日稳定
+ });
+ 
+ test('calendarIndex复用Agent/正文/项目过滤并按冻结日分组，空结果无假日期',()=>{
+- let s=initialSnapshot();s=value(newIdea(s,draft,'first','2026-01-01T23:00:00Z'));s=value(newIdea(s,{...draft,text:'待找 😄\n',agentId:'claude',project:'项目B'},'second','2026-01-01T22:00:00Z'));
++ let s=legacySnapshot();s=value(newIdea(s,draft,'first','2026-01-01T23:00:00Z'));s=value(newIdea(s,{...draft,text:'待找 😄\n',agentId:'claude',project:'项目B'},'second','2026-01-01T22:00:00Z'));
+  s=value(validateSnapshot({...s,ideas:s.ideas.map(i=>({...i,createdDay:i.id==='first'?'2026-01-02':'2026-01-01',creationTimeZone:'UTC'}))}));
+  expect([...calendarIndex(s).keys()]).toEqual(['2026-01-01','2026-01-02']);
+  expect(calendarIndex(s,{query:'项目B',agentId:'claude',status:'all'}).get('2026-01-01')!.map(i=>i.id)).toEqual(['second']);
+diff --git a/tests/unit/ideaWorkflow.test.ts b/tests/unit/ideaWorkflow.test.ts
+index 219bfeb..906639e 100644
+--- a/tests/unit/ideaWorkflow.test.ts
++++ b/tests/unit/ideaWorkflow.test.ts
+@@ -1,10 +1,11 @@
++import {legacySnapshot} from '../helpers/legacySnapshot';
+ import {expect,test} from 'vitest';
+ import * as commands from '../../src/shared/ideaCommands';
+ import type {Result,Snapshot,Draft} from '../../src/shared/contracts';
+ const unwrap=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);return r.value;};
+ const now='2026-10-08T00:00:00.000Z';const later='2026-10-09T00:00:00.000Z';
+ const draft:Draft={text:'原文\n第二行',title:'原标题',project:'项目A',agentId:'codex'};
+-const fixture=()=>unwrap(commands.newIdea(commands.initialSnapshot(),draft,'one',now));
++const fixture=()=>unwrap(commands.newIdea(legacySnapshot(),draft,'one',now));
+ test('编辑只更新目标正文与归属，不重挂已收起记录或丢新建草稿',()=>{
+  let s=fixture();s=unwrap(commands.changeStatus(s,'one','archived',later));s.draft={...draft,text:'另外的新建草稿'};
+  const next=unwrap(commands.editIdea(s,'one',{...draft,text:'  修改\n完整正文\n',agentId:'claude'},later));
+@@ -36,7 +37,7 @@ test('搜索覆盖正文/项目/Agent且保留稳定顺序，已收起也能找
+  expect(commands.findIdeas(s,{status:'hanging',query:'找回'})).toEqual([]);
+ });
+ test('筛选与可见容量不减少总重量，也不删除溢出记录',()=>{
+- let s=commands.initialSnapshot();
++ let s=legacySnapshot();
+  for(let i=0;i<8;i++)s=unwrap(commands.newIdea(s,{...draft,agentId:i<2?'claude':'codex'},'id'+i,now));
+  const all=commands.shelfSelection(s,'all',1000);
+  expect(all.totalHanging).toBe(8);expect(all.visible.map(x=>x.id)).toEqual(['id0','id1','id2']);expect(all.overflow).toBe(5);
+@@ -44,7 +45,7 @@ test('筛选与可见容量不减少总重量，也不删除溢出记录',()=>{
+  expect(filtered.totalHanging).toBe(8);expect(filtered.visible.map(x=>x.id)).toEqual(['id0','id1']);expect(filtered.overflow).toBe(0);expect(s.ideas).toHaveLength(8);
+ });
+ test('大量历史不计重量，持续挂着也只占有限展示槽位',()=>{
+- let s=commands.initialSnapshot();
++ let s=legacySnapshot();
+  for(let i=0;i<40;i++)s=unwrap(commands.newIdea(s,{...draft},'idea'+String(i).padStart(3,'0'),now));
+  for(let i=0;i<35;i++)s=unwrap(commands.changeStatus(s,s.ideas[i].id,'archived',later));
+  const picked=commands.shelfSelection(s,'all',1000);
+@@ -53,6 +54,6 @@ test('大量历史不计重量，持续挂着也只占有限展示槽位',()=>{
+ });
+ test('未填名称时从首个非空正文行生成找回标签，原文不裁剪',()=>{
+  const text='\n  \n  这是一条找回标签\n正文';
+- const s=unwrap(commands.newIdea(commands.initialSnapshot(),{...draft,text,title:''},'label',now));
++ const s=unwrap(commands.newIdea(legacySnapshot(),{...draft,text,title:''},'label',now));
+  expect(s.ideas[0].title).toBe('这是一条找回标签');expect(s.ideas[0].text).toBe(text);
+ });
+diff --git a/tests/unit/p3IdeaCommands.test.ts b/tests/unit/p3IdeaCommands.test.ts
+index 7115df9..9bb492d 100644
+--- a/tests/unit/p3IdeaCommands.test.ts
++++ b/tests/unit/p3IdeaCommands.test.ts
+@@ -1,3 +1,4 @@
++import {legacySnapshot} from '../helpers/legacySnapshot';
+ import {expect,test} from 'vitest';
+ import * as commands from '../../src/shared/ideaCommands';
+ import {mergeClips} from '../../src/shared/clipCommands';
+@@ -7,7 +8,7 @@ const api=<K extends 'deleteIdea'|'restoreIdea'|'permanentlyDeleteIdea'|'editIde
+ const value=<T>(r:Result<T>):T=>{expect(r.ok).toBe(true);if(!r.ok)throw Error(r.message);return r.value;};
+ const now='2026-01-01T18:30:00Z',later='2026-10-09T12:00:00Z';
+ const original:Draft={text:'  原文 🧵\n结尾 😄\n ',title:'旧标题',project:'旧项目',agentId:'general'};
+-const fixture=()=>value(commands.newIdea(commands.initialSnapshot(),original,'one',now));
++const fixture=()=>value(commands.newIdea(legacySnapshot(),original,'one',now));
+ 
+ test('软删除保全全文/ID/创建日/归属并从物理组移出，恢复挂着记录独立成夹保留原组',()=>{
+  const del=api('deleteIdea'),restore=api('restoreIdea');let s=fixture();

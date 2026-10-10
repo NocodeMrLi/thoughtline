@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><img src="badges/preview.svg" alt="Version: 0.0.19" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><img src="badges/preview.svg" alt="Version: 0.0.20" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   줄 하나와 집게, 종이로 일상의 아이디어를 남깁니다.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><ins>Thoughtline 다운로드</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><ins>Thoughtline 다운로드</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.19</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.20</sub></p>
 
 Thoughtline은 macOS와 Windows용 가벼운 데스크톱 메모 도구입니다. 화면 위쪽 가장자리에서 생각을 꺼내 보고, 기록한 뒤 하던 일로 돌아가세요.
 
@@ -43,7 +43,7 @@ Thoughtline은 macOS와 Windows용 가벼운 데스크톱 메모 도구입니다
 
 ## 다운로드 및 설치
 
-저장소 접근 권한이 있는 구성원에게 다운로드를 제공합니다. Releases에서 패키지, 격리 실행 스크립트, SHA256SUMS와 빌드 정보를 확인하세요. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19).
+저장소 접근 권한이 있는 구성원에게 다운로드를 제공합니다. Releases에서 패키지, 격리 실행 스크립트, SHA256SUMS와 빌드 정보를 확인하세요. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20).
 
 | Platform | Package |
 |---|---|
@@ -59,7 +59,7 @@ Thoughtline은 macOS와 Windows용 가벼운 데스크톱 메모 도구입니다
 3. 포인터를 화면 위쪽 가장자리로 옮겨 줄을 표시하고 종이를 열어 읽기, 복사, 편집, 보관합니다.
 4. 달력에서 보관한 메모를 찾거나 최근 삭제에서 복원합니다.
 
-Codex, Claude, Cursor는 분류 라벨입니다. 다른 앱에는 직접 복사하거나 본문을 드래그하세요. 실제 입력칸의 수신 동작은 검증 중입니다.
+라벨은 용도, 사람 또는 도구를 나타냅니다. 일상 아이디어, 업무 기록, 직속 상사, 동료, Codex뿐 아니라 일일 보고나 디자인 계획, 고객 라벨을 직접 추가할 수 있습니다. 새 설치에는 여섯 가지 간결한 라벨을 제공하고 기존 라벨과 색상은 유지합니다. 날짜 화면에서는 전체 / 줄에 걸림 / 줄 밖으로 필터링합니다. 저장만 한 메모, 보관한 메모와 기존 용량 초과 기록도 찾을 수 있습니다. 다른 앱에는 직접 복사하거나 본문을 드래그하며 실제 입력칸의 수신 동작은 별도로 검증합니다.
 
 ## 데이터와 백업
 

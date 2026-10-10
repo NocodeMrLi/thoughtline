@@ -1,10 +1,11 @@
+import {legacySnapshot} from '../helpers/legacySnapshot';
 import {expect,test} from 'vitest';
 import {arrangeClips} from '../../src/shared/clipCommands';
 import {initialSnapshot,newIdea} from '../../src/shared/ideaCommands';
 import {availableClipPosition,clipTravelBounds,layoutClips,MIN_SPACING} from '../../src/shared/clipLayout';
 import type {Result,Snapshot} from '../../src/shared/contracts';
 const value=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);return r.value;};
-const fixture=(count:number)=>{let s=initialSnapshot();for(let i=0;i<count;i++)s=value(newIdea(s,{text:'正文 中文😀\n'+i,title:'念头'+i,project:'保留',agentId:i%2?'claude':'codex'},'i'+i,'2026-10-10T00:00:00Z'));return s;};
+const fixture=(count:number)=>{let s=legacySnapshot();for(let i=0;i<count;i++)s=value(newIdea(s,{text:'正文 中文😀\n'+i,title:'念头'+i,project:'保留',agentId:i%2?'claude':'codex'},'i'+i,'2026-10-10T00:00:00Z'));return s;};
 test('碎片间距压紧后能容纳下一夹子，保留左右顺序与全部念头',()=>{
  const width=1400,s=fixture(3),{min,max}=clipTravelBounds(width);s.clips.forEach((c,i)=>c.position=i/2);const before=layoutClips(s.clips,width).visible;
  expect(availableClipPosition(before.map(p=>p.x),width,width/2)).toBe(null);
@@ -20,7 +21,7 @@ test('混合Agent和满容量：不漏ID、不拆合、不重排组内、不误�
  expect(value(arrangeClips(next,740))).toEqual(next);
 });
 test('空绳与无效宽度不造数据，极窄窗口不重挂历史',()=>{
- expect(value(arrangeClips(initialSnapshot(),740)).clips).toHaveLength(0);expect(arrangeClips(fixture(1),NaN).ok).toBe(false);expect(arrangeClips(fixture(1),-1).ok).toBe(false);
+ expect(value(arrangeClips(legacySnapshot(),740)).clips).toHaveLength(0);expect(arrangeClips(fixture(1),NaN).ok).toBe(false);expect(arrangeClips(fixture(1),-1).ok).toBe(false);
  const s=fixture(2),next=value(arrangeClips(s,10));expect(next.ideas).toEqual(s.ideas);expect(next.clips.map(c=>c.id)).toEqual(s.clips.map(c=>c.id));
 });
 

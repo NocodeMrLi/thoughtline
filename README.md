@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="docs/readme/badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="docs/readme/badges/downloads.svg" alt="Release asset downloads: 30" /></a>
   <a href="#license"><img src="docs/readme/badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><img src="docs/readme/badges/preview.svg" alt="Version: 0.0.19" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><img src="docs/readme/badges/preview.svg" alt="Version: 0.0.20" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="docs/readme/badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><img src="docs/readme/badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><img src="docs/readme/badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,19 +20,19 @@
   用一根绳、几只夹子和几张纸，轻轻留住工作与生活里的念头。
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><ins>下载 Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><ins>下载 Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.19</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.20</sub></p>
 
 Thoughtline 是一款面向 macOS 和 Windows 的轻量桌面念头工具。需要时，在屏幕顶边呼出晾衣绳；写下、整理、取用，再回到手头的事情。
 
 ## 功能
 
-- **随手记下**：快捷键打开新建窗，记录标题、正文和归属；未提交内容可以保存为草稿。
+- **随手记下**：快捷键打开新建窗，记录标题、正文和标签；未提交内容可以保存为草稿。
 - **晾在桌面**：常驻界面只有绳、夹子和纸张。夹子正面夹住薄纸，新念头默认归属“通用”。
 - **顺手整理**：拖木夹移动整组，拖纸张上缘抽出一张；右键“合并”选择兼容夹子，“拆分”抽出当前一张。间距零散时拆分会自动腾位；“自动整理”按左右顺序收拢间距，整理可撤销。
 - **原地修改**：在展开窗或日历里直接编辑，短暂停顿后自动保存；组内翻页即时显示。
-- **按日期回看**：Thoughtline日历支持日、月、年浏览、搜索与状态筛选；已收起的念头仍可找到。
+- **按日期回看**：Thoughtline日历支持日、月、年浏览、搜索与状态筛选；未挂上的念头仍可找到。
 - **留下退路**：删除念头进入最近删除，可以恢复；删除项目只解除归属，保留念头内容。
 - **取用正文**：显式复制或从正文拖出纯文本，原纸张保留，不自动发送。
 - **自己管理数据**：念头保存在本机，可查看实际目录、更改保存位置、导出独立备份。
@@ -46,7 +46,7 @@ Thoughtline 是一款面向 macOS 和 Windows 的轻量桌面念头工具。需�
 
 ## 下载与安装
 
-当前版本向有仓库访问权限的成员开放。到 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19) 下载安装包、隔离启动入口和 `SHA256SUMS`；每版提供对应构建来源与校验清单。
+当前版本向有仓库访问权限的成员开放。到 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20) 下载安装包、隔离启动入口和 `SHA256SUMS`；每版提供对应构建来源与校验清单。
 
 | 平台 | 当前安装包 |
 |---|---|
@@ -62,7 +62,7 @@ Thoughtline 是一款面向 macOS 和 Windows 的轻量桌面念头工具。需�
 3. 将鼠标移到屏幕顶边，呼出绳上的念头。移向或操作纸张时保持展开，离开操作区域后收起。展开纸张可阅读、复制、编辑或收起。
 4. 从日历回看、搜索已收起的念头，或在最近删除中恢复内容。
 
-Codex、Claude、Cursor 等标签表示念头归属。向其他软件取用内容时，由用户复制或拖动正文；目标输入框的实际接收效果仍需分别验证。
+标签可以表示用途、角色或工具，例如生活灵感、工作记录、直属领导、同事或 Codex；也可自己添加日报、设计方案、客户等标签。新安装提供六个精简标签，旧用户的标签与颜色保持不变。Thoughtline日历用“全部状态／挂着／未挂上”筛选；“未挂上”包含直接保存和主动收起的念头，旧数据因绳上容量而未显示的记录也能找到。向其他软件取用内容时，由用户复制或拖动正文；目标输入框的实际接收效果仍需分别验证。
 
 ## 数据与备份
 

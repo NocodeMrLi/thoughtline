@@ -1,0 +1,51 @@
+
+> thoughtline@0.0.20 verify
+> node scripts/verify.cjs
+
+
+> thoughtline@0.0.20 typecheck
+> node node_modules/typescript/bin/tsc --noEmit
+
+
+> thoughtline@0.0.20 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/agentPalette.test.ts (2 tests | 1 failed) 10ms
+   × 新默认六标签保持通用灰和Codex蓝，其他用途使用克制颜色 7ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/agentPalette.test.ts > 新默认六标签保持通用灰和Codex蓝，其他用途使用克制颜色
+AssertionError: expected { general: '#A0A3AA', …(5) } to deeply equal { general: '#A0A3AA', …(5) }
+
+- Expected
++ Received
+
+  {
+    "codex": "#4C90D9",
+-   "colleague": "#8AADD4",
+    "general": "#A0A3AA",
+-   "manager": "#9574CE",
++   "preset:colleague": "#8AADD4",
+    "preset:life-inspiration": "#6CA78C",
++   "preset:manager": "#9574CE",
+    "preset:work-notes": "#D79551",
+  }
+
+ ❯ tests/unit/agentPalette.test.ts:5:60
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 42 passed | 1 skipped (44)
+      Tests  1 failed | 257 passed | 4 skipped (262)
+   Start at  16:49:56
+   Duration  2.01s (tests 65%, transform 22%, import 10%, worker 3%)
+
+    Isolate  44 workers spawned · ~129ms startup each (spawn + environment, per file)
+             at least ~684ms faster with isolate: false — reuses workers across files instead of one per file
+

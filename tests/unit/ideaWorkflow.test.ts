@@ -1,10 +1,11 @@
+import {legacySnapshot} from '../helpers/legacySnapshot';
 import {expect,test} from 'vitest';
 import * as commands from '../../src/shared/ideaCommands';
 import type {Result,Snapshot,Draft} from '../../src/shared/contracts';
 const unwrap=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);return r.value;};
 const now='2026-10-08T00:00:00.000Z';const later='2026-10-09T00:00:00.000Z';
 const draft:Draft={text:'原文\n第二行',title:'原标题',project:'项目A',agentId:'codex'};
-const fixture=()=>unwrap(commands.newIdea(commands.initialSnapshot(),draft,'one',now));
+const fixture=()=>unwrap(commands.newIdea(legacySnapshot(),draft,'one',now));
 test('编辑只更新目标正文与归属，不重挂已收起记录或丢新建草稿',()=>{
  let s=fixture();s=unwrap(commands.changeStatus(s,'one','archived',later));s.draft={...draft,text:'另外的新建草稿'};
  const next=unwrap(commands.editIdea(s,'one',{...draft,text:'  修改\n完整正文\n',agentId:'claude'},later));
@@ -36,7 +37,7 @@ test('搜索覆盖正文/项目/Agent且保留稳定顺序，已收起也能找�
  expect(commands.findIdeas(s,{status:'hanging',query:'找回'})).toEqual([]);
 });
 test('筛选与可见容量不减少总重量，也不删除溢出记录',()=>{
- let s=commands.initialSnapshot();
+ let s=legacySnapshot();
  for(let i=0;i<8;i++)s=unwrap(commands.newIdea(s,{...draft,agentId:i<2?'claude':'codex'},'id'+i,now));
  const all=commands.shelfSelection(s,'all',1000);
  expect(all.totalHanging).toBe(8);expect(all.visible.map(x=>x.id)).toEqual(['id0','id1','id2']);expect(all.overflow).toBe(5);
@@ -44,7 +45,7 @@ test('筛选与可见容量不减少总重量，也不删除溢出记录',()=>{
  expect(filtered.totalHanging).toBe(8);expect(filtered.visible.map(x=>x.id)).toEqual(['id0','id1']);expect(filtered.overflow).toBe(0);expect(s.ideas).toHaveLength(8);
 });
 test('大量历史不计重量，持续挂着也只占有限展示槽位',()=>{
- let s=commands.initialSnapshot();
+ let s=legacySnapshot();
  for(let i=0;i<40;i++)s=unwrap(commands.newIdea(s,{...draft},'idea'+String(i).padStart(3,'0'),now));
  for(let i=0;i<35;i++)s=unwrap(commands.changeStatus(s,s.ideas[i].id,'archived',later));
  const picked=commands.shelfSelection(s,'all',1000);
@@ -53,6 +54,6 @@ test('大量历史不计重量，持续挂着也只占有限展示槽位',()=>{
 });
 test('未填名称时从首个非空正文行生成找回标签，原文不裁剪',()=>{
  const text='\n  \n  这是一条找回标签\n正文';
- const s=unwrap(commands.newIdea(commands.initialSnapshot(),{...draft,text,title:''},'label',now));
+ const s=unwrap(commands.newIdea(legacySnapshot(),{...draft,text,title:''},'label',now));
  expect(s.ideas[0].title).toBe('这是一条找回标签');expect(s.ideas[0].text).toBe(text);
 });

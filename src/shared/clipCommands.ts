@@ -5,7 +5,7 @@ const invalid=(message:string):Result<Snapshot>=>({ok:false,code:'INVALID',messa
 export function mergeClips(s:Snapshot,sourceId:string,targetId:string):Result<Snapshot>{
  const source=s.clips.find(c=>c.id===sourceId),target=s.clips.find(c=>c.id===targetId);
  if(!source||!target||source===target)return invalid('请选择两个不同夹子。');
- if(source.agentId!==target.agentId)return invalid('不同Agent的夹子不能合并。');
+ if(source.agentId!==target.agentId)return invalid('不同标签的夹子不能合并。');
  return validateSnapshot({...s,clips:s.clips.filter(c=>c.id!==sourceId).map(c=>c.id===targetId?{...c,ideaIds:[...c.ideaIds,...source.ideaIds],currentId:source.ideaIds[0]}:c)});
 }
 export function selectClipIdea(s:Snapshot,id:string,ideaId:string):Result<Snapshot>{
@@ -62,7 +62,7 @@ export function dropClipIdea(s:Snapshot,id:string,ideaId:string,targetId:string|
  const source=s.clips.find(c=>c.id===id);if(!source?.ideaIds.includes(ideaId))return invalid('当前纸张已变化，请重新拖动。');
  if(targetId===id)return invalid('已在这个夹子中。');
  const target=targetId?s.clips.find(c=>c.id===targetId):null;
- if(targetId&&(!target||target.agentId!==source.agentId))return invalid('不同Agent的夹子不能合并。');
+ if(targetId&&(!target||target.agentId!==source.agentId))return invalid('不同标签的夹子不能合并。');
  let free:number|null=null;
  if(!targetId){
   if(position===null||!Number.isFinite(position)||position<0||position>1)return invalid('落点无效。');

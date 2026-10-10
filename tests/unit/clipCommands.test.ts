@@ -1,8 +1,9 @@
+import {legacySnapshot} from '../helpers/legacySnapshot';
 import {expect,test} from 'vitest';
 import {initialSnapshot,newIdea,validateSnapshot} from '../../src/shared/ideaCommands';
 const now='2026-10-08T00:00:00Z';
 test('schema1迁移将每条挂着记录变为独立夹子，已收起不占位，原文保全',()=>{
- let s=initialSnapshot();const r=newIdea(s,{text:' 原文\n',title:'',project:'',agentId:'codex'},'one',now);if(!r.ok)throw Error(r.message);s=r.value;
+ let s=legacySnapshot();const r=newIdea(s,{text:' 原文\n',title:'',project:'',agentId:'codex'},'one',now);if(!r.ok)throw Error(r.message);s=r.value;
  const legacy={...s,schemaVersion:1,clips:undefined,ideas:[...s.ideas,{...s.ideas[0],id:'history',status:'archived'}]};
  const migrated=validateSnapshot(legacy);expect(migrated.ok).toBe(true);if(!migrated.ok)return;
  expect(migrated.value.schemaVersion).toBe(3);expect((migrated.value as any).clips).toHaveLength(1);
@@ -11,7 +12,7 @@ test('schema1迁移将每条挂着记录变为独立夹子，已收起不占位�
 import {mergeClips,splitClip,selectClipIdea,moveClip,dropClipIdea} from '../../src/shared/clipCommands';
 import type {Result,Snapshot} from '../../src/shared/contracts';
 const value=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);return r.value;};
-const fixture=()=>{let s=initialSnapshot();for(const id of ['a','b','c'])s=value(newIdea(s,{text:' '+id+'\n正文\n',title:id,project:id,agentId:'codex'},id,now));return s;};
+const fixture=()=>{let s=legacySnapshot();for(const id of ['a','b','c'])s=value(newIdea(s,{text:' '+id+'\n正文\n',title:id,project:id,agentId:'codex'},id,now));return s;};
 test('同Agent合夹保持独立全文/顺序/目标位置与总重量，源第一张成为当前张',()=>{
  const s=fixture();s.clips[1].position=.4;const next=value(mergeClips(s,s.clips[0].id,s.clips[1].id));
  expect(next.clips[0]).toMatchObject({id:'clip:b',ideaIds:['b','a'],currentId:'a',position:.4});expect(next.ideas).toEqual(s.ideas);expect(next.clips).toHaveLength(2);expect(s.clips).toHaveLength(3);

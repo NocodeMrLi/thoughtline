@@ -3,19 +3,20 @@ import {captureClipPositions} from './clipLayout';
 import {visibleSlots} from './ropeGeometry';
 import {independentClip,pruneClips} from './clipModel';
 import {ideaDay} from './ideaHistory';
+import {DEFAULT_TAGS} from './tagPresets';
 const invalid=<T>(message:string):Result<T>=>({ok:false,code:'INVALID',message});
 const plain=(x:unknown):x is Record<string,unknown>=>!!x&&typeof x==='object'&&!Array.isArray(x);
 const textOK=(s:unknown,max:number)=>typeof s==='string'&&Array.from(s).length<=max;
 const bodyOK=(s:unknown,empty=false)=>typeof s==='string'&&(empty||!!s.trim())&&new TextEncoder().encode(s).length<=1048576;
 const dayOK=(s:unknown):s is string=>typeof s==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(s)&&Number.isFinite(Date.parse(s+'T00:00:00Z'))&&new Date(s+'T00:00:00Z').toISOString().slice(0,10)===s;
 const localDay=(createdAt:string)=>{const d=new Date(createdAt);return `${String(d.getFullYear()).padStart(4,'0')}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
-export function initialSnapshot():Snapshot{return {schemaVersion:3,revision:0,clips:[],ideas:[],agents:[{id:'codex',name:'Codex',color:'#4C90D9'},{id:'claude',name:'Claude',color:'#D79551'},{id:'cursor',name:'Cursor',color:'#9574CE'},{id:'general',name:'通用',color:'#A0A3AA'}],draft:null,settings:{writeHotkey:'Control+Alt+N',reducedMotion:false}};}
+export function initialSnapshot():Snapshot{return {schemaVersion:3,revision:0,clips:[],ideas:[],agents:DEFAULT_TAGS.map(tag=>({...tag})),draft:null,settings:{writeHotkey:'Control+Alt+N',reducedMotion:false}};}
 export function validateSnapshot(input:unknown):Result<Snapshot>{
   if(!plain(input)||typeof input.schemaVersion!=='number'||![1,2,3].includes(input.schemaVersion))return invalid('无法读取这个数据版本，原文件已保留。');
   if(!Number.isSafeInteger(input.revision)||Number(input.revision)<0||!Array.isArray(input.agents)||!Array.isArray(input.ideas)||!plain(input.settings))return invalid('数据结构不完整。');
   const agents=new Set<string>();
   for(const a of input.agents){
-    if(!plain(a)||typeof a.id!=='string'||!a.id||agents.has(a.id)||!textOK(a.name,40)||!(a.name as string).trim()||typeof a.color!=='string'||!/^#[0-9a-f]{6}$/i.test(a.color))return invalid('Agent标签无效。');
+    if(!plain(a)||typeof a.id!=='string'||!a.id||agents.has(a.id)||!textOK(a.name,40)||!(a.name as string).trim()||typeof a.color!=='string'||!/^#[0-9a-f]{6}$/i.test(a.color))return invalid('标签无效。');
     agents.add(a.id);
   }
   if(!agents.size||!agents.has('general'))return invalid('缺少通用标签。');
@@ -39,7 +40,7 @@ export function validateSnapshot(input:unknown):Result<Snapshot>{
   for(const c of normalized.clips){
    if(!plain(c)||typeof c.id!=='string'||!c.id||clipIds.has(c.id)||typeof c.agentId!=='string'||!agents.has(c.agentId)||!Array.isArray(c.ideaIds)||!c.ideaIds.length||typeof c.currentId!=='string'||!c.ideaIds.includes(c.currentId)||!(c.position===null||typeof c.position==='number'&&Number.isFinite(c.position)&&c.position>=0&&c.position<=1))return invalid('夹子结构或位置无效。');
    clipIds.add(c.id);
-   for(const id of c.ideaIds){const i=byId.get(id);if(typeof id!=='string'||members.has(id)||!i||i.status!=='hanging'||i.agentId!==c.agentId)return invalid('夹子成员重复、缺失或Agent不一致。');members.add(id);}
+   for(const id of c.ideaIds){const i=byId.get(id);if(typeof id!=='string'||members.has(id)||!i||i.status!=='hanging'||i.agentId!==c.agentId)return invalid('夹子成员重复、缺失或标签不一致。');members.add(id);}
   }
   if(ideas.some(i=>i.status==='hanging'&&!members.has(i.id)))return invalid('挂着的念头没有夹子。');
   return {ok:true,value:structuredClone(normalized) as Snapshot};
@@ -57,11 +58,11 @@ export function changeStatus(s:Snapshot,id:string,status:'hanging'|'archived',no
   return validateSnapshot({...s,clips,ideas});
 }
 export function renameAgent(s:Snapshot,id:string,name:string):Result<Snapshot>{
-  if(!s.agents.some(x=>x.id===id))return invalid('找不到这个Agent。');
+  if(!s.agents.some(x=>x.id===id))return invalid('找不到这个标签。');
   return validateSnapshot({...s,agents:s.agents.map(x=>x.id===id?{...x,name}:x)});
 }
 export function removeAgent(s:Snapshot,id:string,replacement:string):Result<Snapshot>{
-  if(id==='general'||id===replacement||!s.agents.some(x=>x.id===id)||!s.agents.some(x=>x.id===replacement))return invalid('请选择存在的替代Agent，通用标签不能移除。');
+  if(id==='general'||id===replacement||!s.agents.some(x=>x.id===id)||!s.agents.some(x=>x.id===replacement))return invalid('请选择存在的替代标签，通用标签不能移除。');
   return validateSnapshot({...s,clips:s.clips.map(c=>c.agentId===id?{...c,agentId:replacement}:c),agents:s.agents.filter(x=>x.id!==id),ideas:s.ideas.map(x=>x.agentId===id?{...x,agentId:replacement}:x),draft:s.draft?.agentId===id?{...s.draft,agentId:replacement}:s.draft});
 }
 export function editIdea(s:Snapshot,id:string,draft:Draft,now:string):Result<Snapshot>{
@@ -101,7 +102,7 @@ export function addAgent(s:Snapshot,a:AgentTag):Result<Snapshot>{
   return validateSnapshot({...s,agents:[...s.agents,{id:a?.id,name:a?.name,color:a?.color}]});
 }
 export function updateAgent(s:Snapshot,id:string,patch:Pick<AgentTag,'name'|'color'>):Result<Snapshot>{
-  if(!s.agents.some(a=>a.id===id))return invalid('找不到这个Agent。');
+  if(!s.agents.some(a=>a.id===id))return invalid('找不到这个标签。');
   return validateSnapshot({...s,agents:s.agents.map(a=>a.id===id?{...a,name:patch?.name,color:patch?.color}:a)});
 }
 export type IdeaQuery={status:'all'|'hanging'|'archived';query?:string;agentId?:string};

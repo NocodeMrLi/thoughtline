@@ -8,7 +8,7 @@ import {flushPageSelections} from '../hooks/useClipPage';
 import {InlineIdeaEditor} from './InlineIdeaEditor';
 import {IconButton,ActionIcon} from './ActionIcon';
 import {placementPlan} from '../../shared/ideaPlacement';
-import {layoutClips} from '../../shared/clipLayout';
+import {onLineIdeaIds} from '../../shared/ideaVisibility';
 import {PlacementPicker} from './PlacementPicker';
 import {ReaderMoreMenu} from './ReaderMoreMenu';
 export function IdeaReader({idea,info,initialEdit=false}:{idea:Idea;info:PilotInfo;initialEdit?:boolean}){
@@ -17,7 +17,7 @@ export function IdeaReader({idea,info,initialEdit=false}:{idea:Idea;info:PilotIn
  const [picker,setPicker]=useState(false),[reveal,setReveal]=useState(false),moreAnchor=useRef<HTMLSpanElement>(null);
  const closeMenu=useCallback(()=>{setMenu(false);setPermanent(false);},[]);
  const plan=placementPlan(info.snapshot,info.width,idea.id),filteredOut=info.shelfAgentId!=='all'&&info.shelfAgentId!==idea.agentId;
- const onLine=layoutClips(info.snapshot.clips,info.width).visible.some(p=>p.clip.ideaIds.includes(idea.id));
+ const onLine=idea.status==='hanging'&&onLineIdeaIds(info.snapshot,info.width,info.shelfAgentId).has(idea.id);
  useEffect(()=>{if(!notice)return;const timer=setTimeout(()=>setNotice(''),1600);return()=>clearTimeout(timer);},[notice,idea.id]);
  useEffect(()=>{setMenu(false);setPermanent(false);setError('');setNotice('');},[idea.id]);
  useEffect(()=>{if(initialEdit)setEditing(true);},[initialEdit]);

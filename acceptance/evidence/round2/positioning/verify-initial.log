@@ -1,0 +1,274 @@
+
+> thoughtline@0.0.19 verify
+> node scripts/verify.cjs
+
+
+> thoughtline@0.0.19 typecheck
+> node node_modules/typescript/bin/tsc --noEmit
+
+
+> thoughtline@0.0.19 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/clipProjection.test.ts (6 tests | 1 failed) 173ms
+   × 混合比例与筛选移动压力：旧可见身份保留，其他Agent位置不动 4ms
+ ❯ tests/unit/ideaWorkflow.test.ts (7 tests | 3 failed) 81ms
+   × 编辑只更新目标正文与归属，不重挂已收起记录或丢新建草稿 26ms
+   × 搜索覆盖正文/项目/Agent且保留稳定顺序，已收起也能找回 1ms
+   × 筛选与可见容量不减少总重量，也不删除溢出记录 0ms
+ ❯ tests/unit/p3IdeaCommands.test.ts (13 tests | 3 failed) 59ms
+   × CAS逐字段检测agentId已改变，旧回调冲突不覆写新内容 11ms
+   × CAS允许无关revision/窗口位置/其他念头/状态变化，不丢当前草稿与创建日 3ms
+   × CAS先成功后旧回调冲突，Agent变化拆到独立夹而不动其余组成员 3ms
+ ❯ tests/unit/clipCommands.test.ts (8 tests | 1 failed) 47ms
+   × 改Agent只拆出当前成员，收起当前成员后展示相邻张 10ms
+ ❯ tests/unit/arrangeClips.test.ts (4 tests | 4 failed) 32ms
+   × 碎片间距压紧后能容纳下一夹子，保留左右顺序与全部念头 24ms
+   × 混合Agent和满容量：不漏ID、不拆合、不重排组内、不误改当前页 1ms
+   × 空绳与无效宽度不造数据，极窄窗口不重挂历史 4ms
+   × 窗口宽度变化使用同一间距，足够容量时集中完整空位 1ms
+ ❯ tests/unit/ideaHistory.test.ts (3 tests | 1 failed) 42ms
+   × calendarIndex复用Agent/正文/项目过滤并按冻结日分组，空结果无假日期 5ms
+ ❯ tests/unit/centeredRope.test.ts (4 tests | 1 failed) 17ms
+   × 移到新夹区最右侧时为已有夹子留最小间距，不把可容纳的移动夹藏入溢出 9ms
+ ❯ tests/unit/agentPalette.test.ts (2 tests | 1 failed) 6ms
+   × 13设计新默认Codex蓝/Claude橙/柔紫Cursor，样板Agent不强制预置 5ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 15 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/agentPalette.test.ts > 13设计新默认Codex蓝/Claude橙/柔紫Cursor，样板Agent不强制预置
+AssertionError: expected { general: '#A0A3AA', …(5) } to deeply equal { codex: '#4C90D9', …(3) }
+
+- Expected
++ Received
+
+  {
+-   "claude": "#D79551",
+    "codex": "#4C90D9",
+-   "cursor": "#9574CE",
++   "colleague": "#8AADD4",
+    "general": "#A0A3AA",
++   "life-inspiration": "#6CA78C",
++   "manager": "#9574CE",
++   "work-notes": "#D79551",
+  }
+
+ ❯ tests/unit/agentPalette.test.ts:5:60
+      3| test('13设计新默认Codex蓝/Claude橙/柔紫Cursor，样板Agent不强制预置',()=>{
+      4|  const agents=initialSnapshot().agents;
+      5|  expect(Object.fromEntries(agents.map(a=>[a.id,a.color]))).toEqual({co…
+       |                                                            ^
+      6|  expect(agents.some(a=>['gemini','workbuddy'].includes(a.id))).toBe(fa…
+      7| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/15]⎯
+
+ FAIL  tests/unit/arrangeClips.test.ts > 碎片间距压紧后能容纳下一夹子，保留左右顺序与全部念头
+Error: 念头正文或归属无效。
+ ❯ value tests/unit/arrangeClips.test.ts:6:49
+
+ ❯ fixture tests/unit/arrangeClips.test.ts:7:82
+ ❯ tests/unit/arrangeClips.test.ts:9:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/15]⎯
+
+ FAIL  tests/unit/arrangeClips.test.ts > 混合Agent和满容量：不漏ID、不拆合、不重排组内、不误改当前页
+Error: 念头正文或归属无效。
+ ❯ value tests/unit/arrangeClips.test.ts:6:49
+
+ ❯ fixture tests/unit/arrangeClips.test.ts:7:82
+ ❯ tests/unit/arrangeClips.test.ts:16:10
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/15]⎯
+
+ FAIL  tests/unit/arrangeClips.test.ts > 空绳与无效宽度不造数据，极窄窗口不重挂历史
+Error: 念头正文或归属无效。
+ ❯ value tests/unit/arrangeClips.test.ts:6:49
+
+ ❯ fixture tests/unit/arrangeClips.test.ts:7:82
+ ❯ tests/unit/arrangeClips.test.ts:24:10
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/15]⎯
+
+ FAIL  tests/unit/arrangeClips.test.ts > 窗口宽度变化使用同一间距，足够容量时集中完整空位
+Error: 念头正文或归属无效。
+ ❯ value tests/unit/arrangeClips.test.ts:6:49
+
+ ❯ fixture tests/unit/arrangeClips.test.ts:7:82
+ ❯ tests/unit/arrangeClips.test.ts:28:51
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/15]⎯
+
+ FAIL  tests/unit/centeredRope.test.ts > 移到新夹区最右侧时为已有夹子留最小间距，不把可容纳的移动夹藏入溢出
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/centeredRope.test.ts:29:301
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/15]⎯
+
+ FAIL  tests/unit/clipCommands.test.ts > 改Agent只拆出当前成员，收起当前成员后展示相邻张
+Error: 念头正文或归属无效。
+ ❯ value tests/unit/clipCommands.test.ts:13:49
+     11| import {mergeClips,splitClip,selectClipIdea,moveClip,dropClipIdea} fro…
+     12| import type {Result,Snapshot} from '../../src/shared/contracts';
+     13| const value=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);retur…
+       |                                                 ^
+     14| const fixture=()=>{let s=initialSnapshot();for(const id of ['a','b','c…
+     15| test('同Agent合夹保持独立全文/顺序/目标位置与总重量，源第一张成为当前张',()=>{
+ ❯ tests/unit/clipCommands.test.ts:58:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/15]⎯
+
+ FAIL  tests/unit/clipProjection.test.ts > 混合比例与筛选移动压力：旧可见身份保留，其他Agent位置不动
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ value tests/unit/clipProjection.test.ts:8:49
+
+ ❯ tests/unit/clipProjection.test.ts:14:824
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/15]⎯
+
+ FAIL  tests/unit/ideaHistory.test.ts > calendarIndex复用Agent/正文/项目过滤并按冻结日分组，空结果无假日期
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ value tests/unit/ideaHistory.test.ts:6:47
+      4| import type {Idea,Result} from '../../src/shared/contracts';
+      5|
+      6| const value=<T>(r:Result<T>):T=>{expect(r.ok).toBe(true);if(!r.ok)thro…
+       |                                               ^
+      7| const draft={text:'完整正文',title:'标题',project:'项目A',agentId:'general'};
+      8| test('ideaDay优先冻结日，旧fixture从原偏移日期回退而不随现在时区改变',()=>{
+ ❯ tests/unit/ideaHistory.test.ts:22:85
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/15]⎯
+
+ FAIL  tests/unit/ideaWorkflow.test.ts > 编辑只更新目标正文与归属，不重挂已收起记录或丢新建草稿
+Error: 念头正文或归属无效。
+ ❯ unwrap tests/unit/ideaWorkflow.test.ts:4:50
+      2| import * as commands from '../../src/shared/ideaCommands';
+      3| import type {Result,Snapshot,Draft} from '../../src/shared/contracts';
+      4| const unwrap=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);retu…
+       |                                                  ^
+      5| const now='2026-10-08T00:00:00.000Z';const later='2026-10-09T00:00:00.…
+      6| const draft:Draft={text:'原文\n第二行',title:'原标题',project:'项目A',agentId:'c…
+ ❯ tests/unit/ideaWorkflow.test.ts:10:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/15]⎯
+
+ FAIL  tests/unit/ideaWorkflow.test.ts > 搜索覆盖正文/项目/Agent且保留稳定顺序，已收起也能找回
+Error: 念头正文或归属无效。
+ ❯ unwrap tests/unit/ideaWorkflow.test.ts:4:50
+      2| import * as commands from '../../src/shared/ideaCommands';
+      3| import type {Result,Snapshot,Draft} from '../../src/shared/contracts';
+      4| const unwrap=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);retu…
+       |                                                  ^
+      5| const now='2026-10-08T00:00:00.000Z';const later='2026-10-09T00:00:00.…
+      6| const draft:Draft={text:'原文\n第二行',title:'原标题',project:'项目A',agentId:'c…
+ ❯ tests/unit/ideaWorkflow.test.ts:31:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/15]⎯
+
+ FAIL  tests/unit/ideaWorkflow.test.ts > 筛选与可见容量不减少总重量，也不删除溢出记录
+Error: 念头正文或归属无效。
+ ❯ unwrap tests/unit/ideaWorkflow.test.ts:4:50
+      2| import * as commands from '../../src/shared/ideaCommands';
+      3| import type {Result,Snapshot,Draft} from '../../src/shared/contracts';
+      4| const unwrap=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);retu…
+       |                                                  ^
+      5| const now='2026-10-08T00:00:00.000Z';const later='2026-10-09T00:00:00.…
+      6| const draft:Draft={text:'原文\n第二行',title:'原标题',project:'项目A',agentId:'c…
+ ❯ tests/unit/ideaWorkflow.test.ts:40:24
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/15]⎯
+
+ FAIL  tests/unit/p3IdeaCommands.test.ts > CAS逐字段检测agentId已改变，旧回调冲突不覆写新内容
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ value tests/unit/p3IdeaCommands.test.ts:7:47
+      5|
+      6| const api=<K extends 'deleteIdea'|'restoreIdea'|'permanentlyDeleteIdea…
+      7| const value=<T>(r:Result<T>):T=>{expect(r.ok).toBe(true);if(!r.ok)thro…
+       |                                               ^
+      8| const now='2026-01-01T18:30:00Z',later='2026-10-09T12:00:00Z';
+      9| const original:Draft={text:'  原文 🧵\n结尾 😄\n ',title:'旧标题',project:'旧项…
+ ❯ tests/unit/p3IdeaCommands.test.ts:61:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/15]⎯
+
+ FAIL  tests/unit/p3IdeaCommands.test.ts > CAS允许无关revision/窗口位置/其他念头/状态变化，不丢当前草稿与创建日
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ value tests/unit/p3IdeaCommands.test.ts:7:47
+      5|
+      6| const api=<K extends 'deleteIdea'|'restoreIdea'|'permanentlyDeleteIdea…
+      7| const value=<T>(r:Result<T>):T=>{expect(r.ok).toBe(true);if(!r.ok)thro…
+       |                                               ^
+      8| const now='2026-01-01T18:30:00Z',later='2026-10-09T12:00:00Z';
+      9| const original:Draft={text:'  原文 🧵\n结尾 😄\n ',title:'旧标题',project:'旧项…
+ ❯ tests/unit/p3IdeaCommands.test.ts:69:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/15]⎯
+
+ FAIL  tests/unit/p3IdeaCommands.test.ts > CAS先成功后旧回调冲突，Agent变化拆到独立夹而不动其余组成员
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ value tests/unit/p3IdeaCommands.test.ts:7:47
+      5|
+      6| const api=<K extends 'deleteIdea'|'restoreIdea'|'permanentlyDeleteIdea…
+      7| const value=<T>(r:Result<T>):T=>{expect(r.ok).toBe(true);if(!r.ok)thro…
+       |                                               ^
+      8| const now='2026-01-01T18:30:00Z',later='2026-10-09T12:00:00Z';
+      9| const original:Draft={text:'  原文 🧵\n结尾 😄\n ',title:'旧标题',project:'旧项…
+ ❯ tests/unit/p3IdeaCommands.test.ts:76:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/15]⎯
+
+
+ Test Files  8 failed | 35 passed | 1 skipped (44)
+      Tests  15 failed | 243 passed | 4 skipped (262)
+   Start at  16:38:58
+   Duration  2.01s (tests 62%, transform 23%, import 12%, worker 3%)
+
+    Isolate  44 workers spawned · ~128ms startup each (spawn + environment, per file)
+             at least ~678ms faster with isolate: false — reuses workers across files instead of one per file
+

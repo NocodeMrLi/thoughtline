@@ -40,6 +40,8 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Second round merge menu failed' }
           & node tests/electron/round2-capacity-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Capacity and swap workflow failed' }
+          & node tests/electron/positioning-workflow.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Tag positioning and effective status workflow failed' }
           & node tests/electron/round2-native-menu.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Second round native menu failed' }
       - name: Source Electron UI regression on Windows
@@ -107,6 +109,8 @@ jobs:
         run: |
           & node tests/electron/packaged-capacity.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Actual packaged capacity regression failed' }
+          & node tests/electron/packaged-positioning.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Actual packaged tag positioning regression failed' }
       - name: Hash test installers
         shell: pwsh
         run: |

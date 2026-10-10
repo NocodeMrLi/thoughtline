@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><img src="badges/preview.svg" alt="Version: 0.0.19" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><img src="badges/preview.svg" alt="Version: 0.0.20" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   一本のロープとクリップ、紙で日々のアイデアを残します。
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19"><ins>Thoughtline をダウンロード</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20"><ins>Thoughtline をダウンロード</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.19</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.20</sub></p>
 
 Thoughtline は macOS と Windows 向けの軽量なデスクトップメモアプリです。画面上端からメモを呼び出し、思いつきを書き留めて作業に戻れます。
 
@@ -43,7 +43,7 @@ Thoughtline は macOS と Windows 向けの軽量なデスクトップメモア�
 
 ## ダウンロードとインストール
 
-リポジトリへのアクセス権を持つメンバーがダウンロードできます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.19).
+リポジトリへのアクセス権を持つメンバーがダウンロードできます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.20).
 
 | Platform | Package |
 |---|---|
@@ -59,7 +59,7 @@ Thoughtline は macOS と Windows 向けの軽量なデスクトップメモア�
 3. ポインターを画面上端へ動かしてロープを表示し、紙を開いて閲覧・コピー・編集・収納します。
 4. カレンダーで収納済みメモを探し、最近削除した項目から復元できます。
 
-Codex、Claude、Cursor は分類ラベルです。他のアプリには自分でコピーまたはドラッグします。実際の入力欄での受け取りは検証中です。
+ラベルは用途・相手・ツールを表します。生活のアイデア、仕事のメモ、直属の上司、同僚、Codex のほか、日報や設計案、顧客などを追加できます。新規インストールには6個の簡潔なラベルを用意し、既存のラベルと色は保持します。日付一覧は「すべて／ロープ上／ロープ外」で絞り込み、保存のみ・収納済み・容量超過の過去のメモを探せます。他のアプリには自分でコピーまたはドラッグします。実際の入力欄での受け取りは個別に検証します。
 
 ## データとバックアップ
 
