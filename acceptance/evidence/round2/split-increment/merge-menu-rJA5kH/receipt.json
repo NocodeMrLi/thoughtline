@@ -1,0 +1,63 @@
+{
+  "platform": "darwin",
+  "scope": "isolated source native-menu callbacks/renderer/IPC/repository, not physical menu click",
+  "cases": [
+    {
+      "name": "compatible-targets-exclude-self-and-show-title-count",
+      "passed": true
+    },
+    {
+      "name": "captured-one-paper-merge-preserves-projects-content-order-and-position",
+      "passed": true
+    },
+    {
+      "name": "merge-undo-restores-both-stacks",
+      "passed": true
+    },
+    {
+      "name": "stale-target-rejected-without-moving-paper",
+      "passed": true
+    },
+    {
+      "name": "no-compatible-target-has-readable-disabled-reason",
+      "passed": true
+    },
+    {
+      "name": "single-source-merge-removes-only-empty-source-clip",
+      "passed": true
+    },
+    {
+      "name": "English-short-Merge-label-and-localized-count",
+      "passed": true
+    }
+  ],
+  "pids": [
+    33290,
+    33294,
+    33295,
+    33296,
+    33298,
+    33299,
+    33301,
+    33304,
+    33305,
+    33306,
+    33307,
+    33310,
+    33311,
+    33312,
+    33313,
+    33314,
+    33315,
+    33317,
+    33321,
+    33322,
+    33323,
+    33324,
+    33325,
+    33326
+  ],
+  "failure": "AssertionError [ERR_ASSERTION]: Merge must not move the current paper into an invisible clip\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-merge-menu-workflow.cjs:25:162",
+  "dataRemoved": true,
+  "passed": false
+}

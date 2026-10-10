@@ -1,0 +1,57 @@
+
+> thoughtline@0.0.18 verify
+> node scripts/verify.cjs
+
+
+> thoughtline@0.0.18 typecheck
+> node node_modules/typescript/bin/tsc --noEmit
+
+
+> thoughtline@0.0.18 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+
+ Test Files  41 passed | 1 skipped (42)
+      Tests  237 passed | 4 skipped (241)
+   Start at  12:30:38
+   Duration  1.74s (tests 65%, transform 21%, import 10%, worker 3%)
+
+    Isolate  42 workers spawned · ~119ms startup each (spawn + environment, per file)
+             at least ~595ms faster with isolate: false — reuses workers across files instead of one per file
+
+
+> thoughtline@0.0.18 build
+> node node_modules/electron-vite/bin/electron-vite.js build
+
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 26 modules transformed.
+
+(!) outDir /Users/lihongwei/Documents/Codex/2026-10-10/thoughtline-round2-repair/split-runtime/out/main is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+rendering chunks...
+../../../Documents/Codex/2026-10-10/thoughtline-round2-repair/split-runtime/out/main/index.js  160.99 kB
+✓ built in 186ms
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 1 modules transformed.
+
+(!) outDir /Users/lihongwei/Documents/Codex/2026-10-10/thoughtline-round2-repair/split-runtime/out/preload is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+rendering chunks...
+../../../Documents/Codex/2026-10-10/thoughtline-round2-repair/split-runtime/out/preload/index.js  4.25 kB
+✓ built in 8ms
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 61 modules transformed.
+rendering chunks...
+../../../../../Documents/Codex/2026-10-10/thoughtline-round2-repair/split-runtime/out/renderer/index.html                                    0.52 kB
+../../../../../Documents/Codex/2026-10-10/thoughtline-round2-repair/split-runtime/out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg   98.37 kB
+../../../../../Documents/Codex/2026-10-10/thoughtline-round2-repair/split-runtime/out/renderer/assets/index-CxPiAhOj.css                    42.90 kB
+../../../../../Documents/Codex/2026-10-10/thoughtline-round2-repair/split-runtime/out/renderer/assets/index-FAzTiISZ.js                    844.05 kB
+✓ built in 1.01s

@@ -1,0 +1,154 @@
+{
+  "passed": true,
+  "packaged": true,
+  "executable": "/Users/lihongwei/Documents/Codex/2026-10-10/thoughtline-round2-repair/v18-final-source-1zl9mqk7/dist/mac-arm64/Thoughtline.app/Contents/MacOS/Thoughtline",
+  "version": "0.0.18",
+  "host": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "release": "24.3.0"
+  },
+  "checks": [
+    "exact-English-dark-UI-and-user-text",
+    "dirty-editor-focus-selection-content-preserved",
+    "package-restart-stored-preferences-date-content-English-calendar"
+  ],
+  "scope": "actual isolated package DOM/IPC; no physical IME/DPI/multi-display/receiver acceptance",
+  "asarSha256": "79e44475974c7a96e93dbf9fdead6aebfdd9ad7a0612191c71bb601e754e9d69",
+  "cleanup": {
+    "normalQuit": true,
+    "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-packaged-appearance-RL8tZf",
+    "profileRemoved": true,
+    "ownedPids": [
+      32953,
+      32954,
+      32955,
+      32956,
+      32957,
+      32973,
+      32975,
+      32976,
+      32978,
+      32979
+    ],
+    "allExited": true
+  },
+  "worker": {
+    "pid": 32952,
+    "code": 0,
+    "signal": null
+  },
+  "stage": "worker-completed",
+  "launchEvents": [
+    {
+      "time": "2026-10-10T04:26:52.431Z",
+      "type": "spawn",
+      "pid": 32953,
+      "shell": false,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-10T04:26:52.550Z",
+      "type": "stderr",
+      "pid": 32953,
+      "text": "Debugger listening on ws://127.0.0.1:51129/49b4966e-5d38-4bd1-9aa1-81ab4c9bd33c\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-10T04:26:52.554Z",
+      "type": "stderr",
+      "pid": 32953,
+      "text": "Debugger attached.\n"
+    },
+    {
+      "time": "2026-10-10T04:26:52.568Z",
+      "type": "stderr",
+      "pid": 32953,
+      "text": "\nDevTools listening on ws://127.0.0.1:51131/devtools/browser/d0a0831d-e4cb-4b73-8bfa-2916c71414b5\n"
+    },
+    {
+      "time": "2026-10-10T04:26:53.238Z",
+      "type": "stderr",
+      "pid": 32953,
+      "text": "2026-10-10 12:26:53.238 Thoughtline[32953:7491875] +[IMKClient subclass]: chose IMKClient_Modern\n2026-10-10 12:26:53.238 Thoughtline[32953:7491875] +[IMKInputSession subclass]: chose IMKInputSession_Modern\n"
+    },
+    {
+      "time": "2026-10-10T04:26:53.285Z",
+      "type": "stderr",
+      "pid": 32953,
+      "text": "2026-10-10 12:26:53.285 Thoughtline[32953:7491875] _TIPropertyValueIsValid called with 11 on nil context!\n2026-10-10 12:26:53.285 Thoughtline[32953:7491875] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 11, bailing.\n2026-10-10 12:26:53.285 Thoughtline[32953:7491875] _TIPropertyValueIsValid called with 12 on nil context!\n2026-10-10 12:26:53.285 Thoughtline[32953:7491875] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 12, bailing.\n"
+    },
+    {
+      "time": "2026-10-10T04:26:53.682Z",
+      "type": "stderr",
+      "pid": 32953,
+      "text": "2026-10-10 12:26:53.682 Thoughtline[32953:7491875] _TIPropertyValueIsValid called with 12 on nil context!\n2026-10-10 12:26:53.682 Thoughtline[32953:7491875] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 12, bailing.\n"
+    },
+    {
+      "time": "2026-10-10T04:26:54.318Z",
+      "type": "stderr",
+      "pid": 32953,
+      "text": "Debugger ending on ws://127.0.0.1:51129/49b4966e-5d38-4bd1-9aa1-81ab4c9bd33c\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-10T04:26:54.371Z",
+      "type": "exit",
+      "pid": 32953,
+      "code": 0,
+      "signal": null
+    },
+    {
+      "time": "2026-10-10T04:26:54.374Z",
+      "type": "spawn",
+      "pid": 32973,
+      "shell": false,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-10T04:26:54.541Z",
+      "type": "stderr",
+      "pid": 32973,
+      "text": "Debugger listening on ws://127.0.0.1:51145/bc28cda2-558b-4c3b-8622-fa30c6a8b358\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-10T04:26:54.545Z",
+      "type": "stderr",
+      "pid": 32973,
+      "text": "Debugger attached.\n"
+    },
+    {
+      "time": "2026-10-10T04:26:54.564Z",
+      "type": "stderr",
+      "pid": 32973,
+      "text": "\nDevTools listening on ws://127.0.0.1:51155/devtools/browser/976201d7-8d4d-41e9-a1e1-899c383c7420\n"
+    },
+    {
+      "time": "2026-10-10T04:26:55.119Z",
+      "type": "stderr",
+      "pid": 32973,
+      "text": "Debugger ending on ws://127.0.0.1:51145/bc28cda2-558b-4c3b-8622-fa30c6a8b358\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-10T04:26:55.349Z",
+      "type": "stderr",
+      "pid": 32973,
+      "text": "2026-10-10 12:26:55.348 Thoughtline[32973:7492268] +[IMKClient subclass]: chose IMKClient_Modern\n2026-10-10 12:26:55.348 Thoughtline[32973:7492268] +[IMKInputSession subclass]: chose IMKInputSession_Modern\n"
+    },
+    {
+      "time": "2026-10-10T04:26:55.429Z",
+      "type": "exit",
+      "pid": 32973,
+      "code": 0,
+      "signal": null
+    }
+  ],
+  "observedPidState": [
+    {
+      "pid": 32953,
+      "alive": false
+    },
+    {
+      "pid": 32973,
+      "alive": false
+    }
+  ]
+}

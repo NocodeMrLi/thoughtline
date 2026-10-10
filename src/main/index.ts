@@ -230,7 +230,7 @@ else app.whenReady().then(async()=>{
   if(!edge.presentation().shelfVisible)return invalid(t("挂绳已收起。"));
   closeShelfMenu();lock('menu',true);
   const allPositions=layoutClips(snapshot.clips,width);
-  const mergeTargets=clip?[...allPositions.visible.map(p=>p.clip),...allPositions.overflow].filter(c=>c.id!==clip.id&&c.agentId===clip.agentId):[];
+  const mergeTargets=clip?allPositions.visible.map(p=>p.clip).filter(c=>c.id!==clip.id&&c.agentId===clip.agentId):[];
   const mergeItems=mergeTargets.map(target=>{
    const targetIdea=snapshot.ideas.find(i=>i.id===target.currentId);
    const characters=Array.from((targetIdea?.title||targetIdea?.text.trim().split('\n')[0]||t('无标题')).replace(/\s+/g,' '));
