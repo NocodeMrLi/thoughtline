@@ -34,3 +34,5 @@
 
 ## Execution findings
 User approved plan save then implementation, canonical second round doc saved. Nine latest Mac checks pass. Existing calendar geometry regression exposed untouched settings falsely becoming dirty after external save; fixed with per-field baseline rebasing, retained failing receipt. Explicit discard clears hidden guard; prompt supports keyboard focus and Escape. Native Windows outside-click pending owner comparison.
+
+Right-click menu currently lacks split; IdeaReader already shares split/splitAll commands. Existing split searches full rope gaps and explicitly reports true overflow with calendar entry. Reuse it instead of a new write route. UI skill searches did not return a verified menu/undo match; project UX contract and existing implementation are fallback design basis.

@@ -27,3 +27,6 @@ Paper remains matte; resident UI rope/clip/paper only. Native outside-click cann
 - Compaction hook configured WordPet directory absent; no fabricated refresh.
 - Initial shelf menu fixture attempted while hidden; corrected setup, preserved failure.
 - Async waitForFunction returned before IPC acknowledgement; replaced with established waitForInfo polling; assertions retained.
+
+## Authorized incremental delivery
+Current phase: implement right-click Separate current thought in this same round2 plan; preserve reader action, stale-target safety, undo, overflow notice, new version0.0.18 and private dual packages. No new proposal document.

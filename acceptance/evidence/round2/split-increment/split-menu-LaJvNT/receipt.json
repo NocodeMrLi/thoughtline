@@ -1,0 +1,48 @@
+{
+  "platform": "darwin",
+  "scope": "isolated source protocol and repository; native popup stub, no physical click",
+  "cases": [
+    {
+      "name": "single-clip-has-no-split",
+      "passed": true
+    },
+    {
+      "name": "cancelled-menu-does-not-mutate",
+      "passed": true
+    },
+    {
+      "name": "captured-current-id-survives-background-page-change-without-opening-reader",
+      "passed": true
+    },
+    {
+      "name": "right-click-split-can-be-undone",
+      "passed": true
+    },
+    {
+      "name": "first-middle-last-pages-and-repeated-undo-preserve-order-content",
+      "passed": true
+    },
+    {
+      "name": "stale-clip-target-is-rejected",
+      "passed": true
+    }
+  ],
+  "pids": [
+    12200,
+    12201,
+    12202,
+    12203,
+    12208,
+    12209,
+    12220,
+    12223,
+    12224,
+    12225,
+    12226,
+    12227
+  ],
+  "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-split-menu-sDftUw",
+  "failure": "electronApplication.evaluate: ReferenceError: require is not defined\n    at eval (eval at evaluate (:311:30), <anonymous>:1:15)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-split-menu-workflow.cjs:58:13",
+  "dataRemoved": true,
+  "passed": false
+}

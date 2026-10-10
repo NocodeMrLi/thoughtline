@@ -34,6 +34,8 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Second round calendar return failed' }
           & node tests/electron/round2-arrange-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Second round arrangement failed' }
+          & node tests/electron/round2-split-menu-workflow.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Second round split menu failed' }
           & node tests/electron/round2-native-menu.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Second round native menu failed' }
       - name: Source Electron UI regression on Windows

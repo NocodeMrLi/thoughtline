@@ -14,3 +14,9 @@ Stage D: 60453773034347e1b49ccfd5d1cd42657e9ac60c frozen/pushed; Windows38018943
 Final release5 verified23 server digests, tag6045377; original4 hashes unchanged. Reclaimed875.8MiB clone/build/download duplicates; user app67908 protected. New README7language links/metrics and auto arrangement. QA and delivery report complete. Physical gaps stay explicit, no user acceptance claim.
 
 Handoff: delivery documentation e48a6a6 pushed. Current main production input vector/hash matches frozen6045377 exactly; only docs/evidence changed after build. Private regular release5 verified23 assets; all original4/6 releases retained. Task implementation/controlled delivery complete; independent physical acceptance is the next user-managed phase.
+
+2026-10-10: Right-click split plan appended/read back in canonical second-round document before code. Main0823 clean and synced. Initial exec failed due missing default cwd; explicit project or / workdir fixes it. WordPet hook directory absent. User app67908 and older QA processes preserved.
+
+Increment RED verified missing stacked-menu action. Protocol helper failures (Electron evaluate receives module first; require absent in debugger context; calendar DOM mode differs from IPC browse) retained and corrected without weakening assertions. Main notification previously not rendered on Shelf; add temporary actionable full-capacity notice and write-failure visibility. No persistent toolbar. New release version0.0.18.
+
+Increment implementation complete: Mac12 split/menu workflow cases pass,233 units/4 platform skips and type/build pass; existing reader9 and arrangement7 regression pass. Source uses original split/undo commands, no schema changes. Preparing frozen0.0.18 dual builds; physical acceptance pending. All fixture profiles removed after normal process exit.

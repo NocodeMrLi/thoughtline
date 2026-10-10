@@ -13,6 +13,9 @@ export function Shelf({info}:{info:PilotInfo}){
  const {t,m}=useLocale();
  const ropeId=useId().replace(/:/g,'');
  const root=useRef<HTMLDivElement>(null),layoutRevision=useRef(0);const agentId=info.shelfAgentId;const [error,setError]=useState(''),[notice,setNotice]=useState(''),[dragView,setDragView]=useState<Drag|null>(null);
+ const [dismissedPlacement,setDismissedPlacement]=useState<string|null>(null);
+ useEffect(()=>{setDismissedPlacement(null);},[info.placementNotice,info.snapshot.revision]);
+ const placement=info.placementNotice!==dismissedPlacement?info.placementNotice:null;
  const drag=useRef<Drag|null>(null),mergeTimer=useRef<ReturnType<typeof setTimeout>|null>(null);const infoRef=useRef(info);infoRef.current=info;
  const filtered=info.snapshot.clips.filter(c=>agentId==='all'||c.agentId===agentId);const rope=fixedRope(info.width);const layout=layoutClips(filtered,info.width);
  const held=useRef({displayId:info.displayId,width:info.width,layout});
@@ -87,7 +90,7 @@ export function Shelf({info}:{info:PilotInfo}){
    window.thoughtline.hitRects({displayId:info.displayId,layoutRevision:++layoutRevision.current,rects});
   };
   publish();let frame=0;const duringMotion=()=>{publish();if(arrangement.current.some(a=>a.playState==='running'))frame=requestAnimationFrame(duringMotion);};if(arrangement.current.length)frame=requestAnimationFrame(duringMotion);const observer=new ResizeObserver(publish);root.current?.querySelectorAll('[data-hit]').forEach(el=>observer.observe(el));return()=>{cancelAnimationFrame(frame);observer.disconnect();};
- },[info.width,info.displayId,info.snapshot.revision,info.interactionLocked,info.arrangeSession,agentId,sag,progress,dragView]);
+ },[info.width,info.displayId,info.snapshot.revision,info.interactionLocked,info.arrangeSession,agentId,sag,progress,dragView,placement,error,notice]);
  return <div ref={root} data-view="shelf" data-visible={info.shelfVisible} data-locked={info.interactionLocked} data-progress={progress} data-reduced={reduced} className="shelf-root" style={{transform:reduced?'none':`translate3d(0,${(progress-1)*250}px,0)`,opacity:progress,willChange:!reduced&&progress>0&&progress<1?'transform, opacity':undefined}}>
   <svg className="rope" data-sag={sag} data-left={rope.left} data-length={rope.length} data-layout-width={info.width} data-end-fade=".08" width="100%" height="140" aria-hidden="true">
    <defs><linearGradient id={`${ropeId}-ends`} gradientUnits="userSpaceOnUse" x1={rope.left} x2={rope.left+rope.length} y1="0" y2="0"><stop stopColor="white" stopOpacity="0"/><stop offset=".08" stopColor="white"/><stop offset=".92" stopColor="white"/><stop offset="1" stopColor="white" stopOpacity="0"/></linearGradient><mask id={`${ropeId}-mask`} maskUnits="userSpaceOnUse" x="0" y="0" width={info.width} height="140"><rect width={info.width} height="140" fill={`url(#${ropeId}-ends)`}/></mask></defs>
@@ -101,5 +104,6 @@ export function Shelf({info}:{info:PilotInfo}){
   {dragView?.mode==='paper'&&dragView.active&&<div className="paper-drag-preview" data-valid={dragView.valid} aria-hidden="true" style={{left:dragView.x,top:fixedRopeY(dragView.x,rope)}}><ClipCard clip={{...dragView.clip,ideaIds:[dragView.ideaId],currentId:dragView.ideaId}} ideas={info.snapshot.ideas} agent={info.snapshot.agents.find(a=>a.id===dragView.clip.agentId)} onChange={change} onGrab={()=>{}} onError={()=>{}} reduced={true} textDragActive={false} ropeContact="M0 27H18"/></div>}
   {dragView&&<><div className="source-ghost" style={{left:dragView.origin,top:fixedRopeY(dragView.origin,rope)+6}}/><span className="drag-message" role="status">{dragView.ready?t("松开合并"):dragView.target?(info.snapshot.clips.find(c=>c.id===dragView.target)?.agentId===dragView.clip.agentId?t("停留后合夹"):t("不同 Agent 不能合夹")):dragView.mode==='paper'?(dragView.valid?t("松开将当前纸张挂到空位 · Esc取消"):t("绳上暂时放不下 · Esc取消")):t("拖动调整位置 · Esc取消")}</span></>}
   {(error||notice)&&<button data-hit className="shelf-error" role={error?'alert':'status'} onClick={()=>{setError('');setNotice('');}}>{m(error||notice)}</button>}
+  {!error&&!notice&&placement&&<button data-hit className="shelf-error" role="status" onClick={()=>{setDismissedPlacement(placement);if(layout.overflow.length)void browse();}}>{m(placement)}</button>}
  </div>;
 }

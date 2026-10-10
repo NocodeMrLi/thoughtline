@@ -226,15 +226,17 @@ else app.whenReady().then(async()=>{
  ipcMain.handle('thoughtline:shelf-menu',(e,id:string):Result<void>=>{
   if(!trusted(e,[shelf])||typeof id!=='string')return invalid(t("无效操作"));
   const idea=snapshot.ideas.find(i=>i.id===id);if(!idea)return invalid(t("找不到这条念头。"));
+  const clip=snapshot.clips.find(c=>c.ideaIds.includes(id));
   if(!edge.presentation().shelfVisible)return invalid(t("挂绳已收起。"));
   closeShelfMenu();lock('menu',true);
   const menu=Menu.buildFromTemplate([
    {label:t("查看全文"),click:()=>{void openBrowseDetail(id);}},
+   ...(clip&&clip.ideaIds.length>1?[{label:t("拆出当前念头"),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'split',id:clip.id,ideaId:id},snapshot.revision);if(!r.ok){placementNotice=r.message;publish();}})();}}]:[]),
    {label:t("收起当前念头"),click:()=>{void (async()=>{if(!await prepareViews())return;const r=await composerWrite(()=>{const current=snapshot.ideas.find(i=>i.id===id&&i.status==='hanging');return current?save(changeStatus({...snapshot,clips:captureClipPositions(snapshot.clips,width)},id,'archived',new Date().toISOString()),snapshot.revision):Promise.resolve(invalid(t("找不到这条念头。")));});if(!r.ok){placementNotice=r.message;publish();}})();}},
    {label:t('onlyAgent',{name:agentLabel(preferences.current.locale,snapshot.agents.find(a=>a.id===idea.agentId))||t('这个 Agent')}),click:()=>selectShelfAgent(idea.agentId)},
    {label:t("显示全部"),click:()=>selectShelfAgent('all')},
    {label:t('自动整理'),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'arrange'},snapshot.revision);if(!r.ok){placementNotice=r.message;publish();}})();}},
-   ...(undoClips?.positionsOnly?[{label:t('撤销整理'),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'undo'},snapshot.revision);if(!r.ok){placementNotice=r.message;publish();}})();}}]:[]),
+   ...(undoClips?[{label:t('撤销整理'),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'undo'},snapshot.revision);if(!r.ok){placementNotice=r.message;publish();}})();}}]:[]),
 
    {label:t("筛选 Agent"),submenu:agentFilterMenu()},
    {type:'separator'},

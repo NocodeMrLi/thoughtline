@@ -1,0 +1,111 @@
+{
+  "evidence": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round2/split-increment/reader-placement-1ShxhJ",
+  "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-final-reader-3OPYJ1",
+  "cases": [
+    {
+      "name": "raw-cross",
+      "passed": true,
+      "oldSession": 2,
+      "session": 3,
+      "reader": "c",
+      "editors": 1,
+      "draft": "UNSAVED cross C",
+      "persisted": "final probe c"
+    },
+    {
+      "name": "real-main-cross-session-late-delete",
+      "passed": true,
+      "session": 3,
+      "reader": "c",
+      "editors": 1,
+      "draft": "UNSAVED cross C",
+      "persisted": "final probe c"
+    },
+    {
+      "name": "raw-same",
+      "passed": true,
+      "oldSession": 4,
+      "session": 4,
+      "reader": "c",
+      "editors": 1,
+      "draft": "UNSAVED same C",
+      "persisted": "UNSAVED cross C"
+    },
+    {
+      "name": "same-session-back-new-dirty-reader",
+      "passed": true,
+      "session": 4,
+      "reader": "c",
+      "editors": 1,
+      "draft": "UNSAVED same C",
+      "persisted": "UNSAVED cross C"
+    },
+    {
+      "name": "detail-fast-queued-flips-and-delayed-finish",
+      "passed": true,
+      "sequentialFlipsRetained": true,
+      "delayedFinishWaitedForSave": true
+    },
+    {
+      "name": "calendar-normal-delete-neighbor",
+      "passed": true,
+      "reader": "e"
+    },
+    {
+      "name": "detail-normal-delete-neighbor-and-empty",
+      "passed": true,
+      "neighbor": "f",
+      "lastDeleteEmpty": true
+    },
+    {
+      "name": "detail-last-deleted-selection-stays-empty",
+      "passed": true,
+      "noFallbackToOldManageSelection": true
+    },
+    {
+      "name": "agent-auto-split-full-rope-notice-and-stable-body",
+      "passed": true,
+      "notice": "已保存，绳上暂时放不下，可在Thoughtline日历查看",
+      "idsStable": true,
+      "subsequentEditStable": true
+    }
+  ],
+  "pids": [
+    12579,
+    12580,
+    12581,
+    12582,
+    12583,
+    12584
+  ],
+  "scope": "Real source Electron main routing and persisted mutations; controlled reply hold, synthetic data only",
+  "normalClose": true,
+  "pidChecks": [
+    {
+      "pid": 12579,
+      "status": "ESRCH"
+    },
+    {
+      "pid": 12580,
+      "status": "ESRCH"
+    },
+    {
+      "pid": 12581,
+      "status": "ESRCH"
+    },
+    {
+      "pid": 12582,
+      "status": "ESRCH"
+    },
+    {
+      "pid": 12583,
+      "status": "ESRCH"
+    },
+    {
+      "pid": 12584,
+      "status": "ESRCH"
+    }
+  ],
+  "stat": "ENOENT",
+  "passed": true
+}

@@ -1,0 +1,73 @@
+{
+  "platform": "darwin",
+  "scope": "isolated source protocol and repository; native popup stub, no physical click",
+  "cases": [
+    {
+      "name": "single-clip-has-no-split",
+      "passed": true
+    },
+    {
+      "name": "cancelled-menu-does-not-mutate",
+      "passed": true
+    },
+    {
+      "name": "captured-current-id-survives-background-page-change-without-opening-reader",
+      "passed": true
+    },
+    {
+      "name": "right-click-split-can-be-undone",
+      "passed": true
+    },
+    {
+      "name": "first-middle-last-pages-and-repeated-undo-preserve-order-content",
+      "passed": true
+    },
+    {
+      "name": "stale-clip-target-is-rejected",
+      "passed": true
+    },
+    {
+      "name": "write-failure-visible-on-shelf-with-original-data-intact",
+      "passed": true
+    },
+    {
+      "name": "split-undo-cannot-revive-deleted-project",
+      "passed": true
+    },
+    {
+      "name": "expanded-reader-split-remains-available",
+      "passed": true
+    },
+    {
+      "name": "restart-retains-split-ids-content-order-and-page",
+      "passed": true
+    }
+  ],
+  "pids": [
+    12262,
+    12263,
+    12264,
+    12265,
+    12267,
+    12271,
+    12287,
+    12293,
+    12294,
+    12295,
+    12309,
+    12318,
+    12325,
+    12331,
+    12332,
+    12335,
+    12346,
+    12352,
+    12353,
+    12355,
+    12364
+  ],
+  "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-split-menu-MZUBIx",
+  "failure": "page.waitForSelector: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-mode=browse]') to be visible\u001b[22m\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-split-menu-workflow.cjs:73:80",
+  "dataRemoved": true,
+  "passed": false
+}
