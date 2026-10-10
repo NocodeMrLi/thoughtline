@@ -1,0 +1,42 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/arrangeClips.test.ts (3 tests | 3 failed) 27ms
+   × 碎片间距压紧后能容纳下一夹子，保留左右顺序与全部念头 25ms
+   × 混合Agent和满容量：不漏ID、不拆合、不重排组内、不误改当前页 2ms
+   × 空绳与无效宽度不造数据，极窄窗口不重挂历史 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/arrangeClips.test.ts > 碎片间距压紧后能容纳下一夹子，保留左右顺序与全部念头
+TypeError: arrangeClips is not a function
+ ❯ tests/unit/arrangeClips.test.ts:11:23
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/arrangeClips.test.ts > 混合Agent和满容量：不漏ID、不拆合、不重排组内、不误改当前页
+TypeError: arrangeClips is not a function
+ ❯ tests/unit/arrangeClips.test.ts:17:19
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/arrangeClips.test.ts > 空绳与无效宽度不造数据，极窄窗口不重挂历史
+TypeError: arrangeClips is not a function
+ ❯ tests/unit/arrangeClips.test.ts:23:15
+     21| });
+     22| test('空绳与无效宽度不造数据，极窄窗口不重挂历史',()=>{
+     23|  expect(value(arrangeClips(initialSnapshot(),740)).clips).toHaveLength…
+       |               ^
+     24|  const s=fixture(2),next=value(arrangeClips(s,10));expect(next.ideas).…
+     25| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  10:47:46
+   Duration  188ms (transform 60%, tests 26%, import 10%, worker 4%)
+

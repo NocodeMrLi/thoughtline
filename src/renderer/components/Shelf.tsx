@@ -18,6 +18,9 @@ export function Shelf({info}:{info:PilotInfo}){
  const held=useRef({displayId:info.displayId,width:info.width,layout});
  if(!info.interactionLocked||held.current.displayId!==info.displayId||held.current.width!==info.width)held.current={displayId:info.displayId,width:info.width,layout};
  const visible=held.current.layout.visible;const visibleRef=useRef(visible);visibleRef.current=visible;const {sag,progress,reduced}=useShelfMotion(info);
+ const arrangement=useRef<Animation[]>([]),lastPositions=useRef(new Map<string,string>()),motionSession=useRef(info.arrangeSession??0);
+ const stopArrangement=()=>{for(const animation of arrangement.current)animation.cancel();arrangement.current=[];};
+ useEffect(()=>{window.addEventListener('pointerdown',stopArrangement,true);return()=>{window.removeEventListener('pointerdown',stopArrangement,true);stopArrangement();};},[]);
  const reset=()=>{if(mergeTimer.current)clearTimeout(mergeTimer.current);mergeTimer.current=null;const wasActive=drag.current?.active;drag.current=null;setDragView(null);if(wasActive)void window.thoughtline.dragLock(false);};
  useEffect(()=>{reset();},[info.displayId,info.width,info.dragCancelSession]);
  useEffect(()=>()=>{if(mergeTimer.current)clearTimeout(mergeTimer.current);void window.thoughtline.dragLock(false);},[]);
@@ -69,12 +72,22 @@ export function Shelf({info}:{info:PilotInfo}){
   return()=>{window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',up);window.removeEventListener('pointercancel',cancel);};
  },[]);
  useLayoutEffect(()=>{
+  stopArrangement();
+  const nodes=[...root.current?.querySelectorAll<HTMLElement>('.hanging[data-clip-id]')??[]],next=new Map(nodes.map(node=>[node.dataset.clipId!,node.style.transform]));
+  if(!info.interactionLocked){
+   if(!reduced&&(info.arrangeSession??0)!==motionSession.current){for(const node of nodes){const from=lastPositions.current.get(node.dataset.clipId!);if(from&&from!==node.style.transform)arrangement.current.push(node.animate([{transform:from},{transform:node.style.transform}],{duration:180,easing:'cubic-bezier(.22,1,.36,1)'}));}}
+   motionSession.current=info.arrangeSession??0;
+  }
+  lastPositions.current=next;
+  return stopArrangement;
+ },[info.arrangeSession,info.snapshot.revision,info.interactionLocked,info.width,info.displayId,agentId,reduced]);
+ useLayoutEffect(()=>{
   const publish=()=>{
    const rects=Array.from(root.current?.querySelectorAll<HTMLElement>('[data-hit]')??[]).map(el=>{const r=el.getBoundingClientRect();const x=Math.max(0,r.x),y=Math.max(0,r.y);return {x,y,width:Math.max(0,Math.min(info.width,r.right)-x),height:Math.max(0,Math.min(innerHeight,r.bottom)-y)};}).filter(r=>r.width>0&&r.height>0);
    window.thoughtline.hitRects({displayId:info.displayId,layoutRevision:++layoutRevision.current,rects});
   };
-  publish();const observer=new ResizeObserver(publish);root.current?.querySelectorAll('[data-hit]').forEach(el=>observer.observe(el));return()=>observer.disconnect();
- },[info.width,info.displayId,info.snapshot.revision,agentId,sag,progress,dragView]);
+  publish();let frame=0;const duringMotion=()=>{publish();if(arrangement.current.some(a=>a.playState==='running'))frame=requestAnimationFrame(duringMotion);};if(arrangement.current.length)frame=requestAnimationFrame(duringMotion);const observer=new ResizeObserver(publish);root.current?.querySelectorAll('[data-hit]').forEach(el=>observer.observe(el));return()=>{cancelAnimationFrame(frame);observer.disconnect();};
+ },[info.width,info.displayId,info.snapshot.revision,info.interactionLocked,info.arrangeSession,agentId,sag,progress,dragView]);
  return <div ref={root} data-view="shelf" data-visible={info.shelfVisible} data-locked={info.interactionLocked} data-progress={progress} data-reduced={reduced} className="shelf-root" style={{transform:reduced?'none':`translate3d(0,${(progress-1)*250}px,0)`,opacity:progress,willChange:!reduced&&progress>0&&progress<1?'transform, opacity':undefined}}>
   <svg className="rope" data-sag={sag} data-left={rope.left} data-length={rope.length} data-layout-width={info.width} data-end-fade=".08" width="100%" height="140" aria-hidden="true">
    <defs><linearGradient id={`${ropeId}-ends`} gradientUnits="userSpaceOnUse" x1={rope.left} x2={rope.left+rope.length} y1="0" y2="0"><stop stopColor="white" stopOpacity="0"/><stop offset=".08" stopColor="white"/><stop offset=".92" stopColor="white"/><stop offset="1" stopColor="white" stopOpacity="0"/></linearGradient><mask id={`${ropeId}-mask`} maskUnits="userSpaceOnUse" x="0" y="0" width={info.width} height="140"><rect width={info.width} height="140" fill={`url(#${ropeId}-ends)`}/></mask></defs>

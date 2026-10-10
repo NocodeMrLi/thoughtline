@@ -1,5 +1,6 @@
 // Central typed application text; user text is never translated.
 export const zh = {
+ "自动整理": "自动整理",
  "返回Thoughtline日历": "返回Thoughtline日历",
  "设置尚未保存": "设置尚未保存",
  "设置尚未保存，要保存后关闭吗？": "设置尚未保存，要保存后关闭吗？",
@@ -386,6 +387,7 @@ export const zh = {
  "savedBackup": "独立备份已保存到 {p0}。当前数据位置未更改。"
 } as const;
 export const en = {
+ "自动整理": "Arrange clips",
  "返回Thoughtline日历": "Back to Thoughtline Calendar",
  "设置尚未保存": "Unsaved settings",
  "设置尚未保存，要保存后关闭吗？": "Save your settings before closing?",

@@ -16,7 +16,7 @@ import {validWriteHotkey,displayWriteHotkey} from '../shared/composerKeys';
 import {newIdea,changeStatus,addAgent,updateAgent,removeAgent,removeProject,editIdeaIfUnchanged,deleteIdea,restoreIdea,permanentlyDeleteIdea} from '../shared/ideaCommands';
 import type {Draft,Result,Snapshot} from '../shared/contracts';
 import type {PilotInfo,HitLayout,ComposerContext,AgentMutation,ClipMutation} from '../shared/bridge';
-import {mergeClips,splitClip,moveClip,selectClipIdea,dropClipIdea} from '../shared/clipCommands';
+import {mergeClips,splitClip,moveClip,selectClipIdea,dropClipIdea,arrangeClips} from '../shared/clipCommands';
 import {captureClipPositions,layoutClips} from '../shared/clipLayout';
 app.setName('Thoughtline');
 app.setPath('userData',process.env.THOUGHTLINE_DATA_DIR||join(app.getPath('appData'),'Thoughtline'));
@@ -56,18 +56,18 @@ else app.whenReady().then(async()=>{
  let snapshot:Snapshot=loaded.snapshot;let displayId=String(screen.getPrimaryDisplay().id);let width=screen.getPrimaryDisplay().bounds.width;
  let draftSequence=0,draftWritableSession:number|null=null;let composerWrites:Promise<unknown>=Promise.resolve();
  const composerWrite=<T>(action:()=>Promise<T>):Promise<T>=>{const next=composerWrites.then(action,action);composerWrites=next;return next;};
- let manageVisit=0,calendarReturning=false,calendarReturnBounds:Electron.Rectangle|null=null;
+ let arrangeSession=0,manageVisit=0,calendarReturning=false,calendarReturnBounds:Electron.Rectangle|null=null;
  let composerSession=0,manageSession=0,manageSelection:string|null=null;
  let manageEditingOwner:{session:number;ideaId:string}|null=null,manageEditingRequested=false;
  let dragCancelSession=0,dragEscape=false;let textDragTimer:ReturnType<typeof setTimeout>|null=null;let textDragOwner:string|null=null;
  let placementNotice:string|null=null;let shelfAgentId='all';let settingsBusy=false;let storageBusy=false;let refreshTray=()=>{};
  let geometryTimer:ReturnType<typeof setTimeout>|null=null,boundsIgnoreUntil=0;
- let manageMode:'browse'|'detail'|'settings'='browse',manageTitles=false;let undoClips:{snapshot:Snapshot;revision:number}|null=null;
+ let manageMode:'browse'|'detail'|'settings'='browse',manageTitles=false;let undoClips:{snapshot:Snapshot;revision:number;positionsOnly?:boolean}|null=null;
  let composerContext:ComposerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
  const preload=join(__dirname,'../preload/index.js');shelf=createShelf(preload);
  const host=createHost(shelf,()=>composer);
  let preferenceCommit:{version:number;sequence:number;sender:number}|null=null;
- const info=(viewer?:number):PilotInfo=>({preferenceCommit:preferenceCommit?{version:preferenceCommit.version,sequence:preferenceCommit.sequence,own:preferenceCommit.sender===viewer}:null,preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,manageVisit,calendarReturning,manageSession,manageSelection,manageMode,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
+ const info=(viewer?:number):PilotInfo=>({preferenceCommit:preferenceCommit?{version:preferenceCommit.version,sequence:preferenceCommit.sequence,own:preferenceCommit.sender===viewer}:null,preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,arrangeSession,manageVisit,calendarReturning,manageSession,manageSelection,manageMode,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
  const publish=()=>{for(const w of [shelf,composer,manage])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info(w.webContents.id));};
  const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:(BrowserWindow|null)[]=[shelf,composer,manage])=>allowed.some(w=>w?.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
  const prepareWindow=(w:BrowserWindow|null):Promise<boolean>=>{
@@ -90,7 +90,7 @@ else app.whenReady().then(async()=>{
   if(geometryTimer)clearTimeout(geometryTimer);
   geometryTimer=setTimeout(()=>{geometryTimer=null;const bounds=manage?.getBounds();if(!bounds||!manage?.isVisible()||manageMode!=='browse')return;
    void composerWrite(async()=>{const saved=await repository.commit({...snapshot,settings:{...snapshot.settings,calendarBounds:bounds}},snapshot.revision);
-    if(saved.ok){snapshot=saved.value;if(undoClips)undoClips={snapshot:{...undoClips.snapshot,settings:{...undoClips.snapshot.settings,calendarBounds:bounds}},revision:snapshot.revision};publish();}
+    if(saved.ok){snapshot=saved.value;if(undoClips)undoClips={...undoClips,snapshot:{...undoClips.snapshot,settings:{...undoClips.snapshot.settings,calendarBounds:bounds}},revision:snapshot.revision};publish();}
    });
   },350);
  };
@@ -141,9 +141,9 @@ else app.whenReady().then(async()=>{
   composerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
   composerSession++;draftWritableSession=composerSession;draftSequence=0;try{await ensureComposer();}catch{return {ok:false,code:'IO',message:t("输入浮层未能打开，请重试。原数据已保留。")};}if(quitting)return invalid(t("正在退出。"));if(manage?.isVisible()&&manageMode==='settings')return invalid(t("请先关闭设置。"));composerSafeToRelease=false;lock('composer',true);hideManage();publish();host.showComposer(boundsFor(COMPOSER_SIZE.width,COMPOSER_SIZE.height));return done();
  };
- const save=async(next:Result<Snapshot>,revision:number):Promise<Result<Snapshot>>=>{
+ const save=async(next:Result<Snapshot>,revision:number,onCommitted?:()=>void):Promise<Result<Snapshot>>=>{
   if(!next.ok)return next;const r=await repository.commit(next.value,revision);
-  if(r.ok){snapshot=r.value;undoClips=null;if(shelfAgentId!=='all'&&!snapshot.agents.some(a=>a.id===shelfAgentId))shelfAgentId='all';refreshTray();publish();}return r;
+  if(r.ok){snapshot=r.value;undoClips=null;if(shelfAgentId!=='all'&&!snapshot.agents.some(a=>a.id===shelfAgentId))shelfAgentId='all';refreshTray();onCommitted?.();publish();}return r;
  };
  const captureDraft=():Promise<Result<Draft>>=>new Promise(resolve=>{
   const id=randomUUID();let finished=false;
@@ -183,7 +183,7 @@ else app.whenReady().then(async()=>{
   if(sequence<=draftSequence)return {ok:true,value:snapshot};draftSequence=sequence;
   if(snapshot.draft&&['text','title','project','agentId'].every(key=>snapshot.draft![key as keyof Draft]===draft[key as keyof Draft]))return {ok:true,value:snapshot};
   const saved=await repository.commit({...snapshot,draft},snapshot.revision);
-  if(saved.ok){snapshot=saved.value;composerContext={...composerContext,draft};if(undoClips)undoClips={snapshot:{...undoClips.snapshot,draft},revision:snapshot.revision};publish();}
+  if(saved.ok){snapshot=saved.value;composerContext={...composerContext,draft};if(undoClips)undoClips={...undoClips,snapshot:{...undoClips.snapshot,draft},revision:snapshot.revision};publish();}
   return saved;
  }));
  ipcMain.handle('thoughtline:submit',async(e,draft:Draft,revision:number)=>{let overflowId:string|null=null;const committed=await composerWrite(async():Promise<Result<Snapshot>>=>{
@@ -220,21 +220,30 @@ else app.whenReady().then(async()=>{
   if(quitting||composer?.isVisible())return invalid(t("请先结束当前输入。"));
   manageMode='browse';manageSelection=null;manageTitles=false;manageEditingRequested=false;manageVisit++;calendarReturning=false;manageSession++;lock('manage',true);setManageBounds(calendarBounds());publish();manage!.show();manage!.focus();refreshTray();return done();
  };
+ let activeShelfMenu:{menu:Menu;finish:()=>void}|null=null;
+ const closeShelfMenu=()=>{const active=activeShelfMenu;if(!active)return;try{active.menu.closePopup();}finally{active.finish();}};
+ shelf.on('hide',closeShelfMenu);app.on('before-quit',closeShelfMenu);
  ipcMain.handle('thoughtline:shelf-menu',(e,id:string):Result<void>=>{
   if(!trusted(e,[shelf])||typeof id!=='string')return invalid(t("无效操作"));
   const idea=snapshot.ideas.find(i=>i.id===id);if(!idea)return invalid(t("找不到这条念头。"));
   if(!edge.presentation().shelfVisible)return invalid(t("挂绳已收起。"));
-  lock('menu',true);
+  closeShelfMenu();lock('menu',true);
   const menu=Menu.buildFromTemplate([
    {label:t("查看全文"),click:()=>{void openBrowseDetail(id);}},
    {label:t("收起当前念头"),click:()=>{void (async()=>{if(!await prepareViews())return;const r=await composerWrite(()=>{const current=snapshot.ideas.find(i=>i.id===id&&i.status==='hanging');return current?save(changeStatus({...snapshot,clips:captureClipPositions(snapshot.clips,width)},id,'archived',new Date().toISOString()),snapshot.revision):Promise.resolve(invalid(t("找不到这条念头。")));});if(!r.ok){placementNotice=r.message;publish();}})();}},
    {label:t('onlyAgent',{name:agentLabel(preferences.current.locale,snapshot.agents.find(a=>a.id===idea.agentId))||t('这个 Agent')}),click:()=>selectShelfAgent(idea.agentId)},
    {label:t("显示全部"),click:()=>selectShelfAgent('all')},
+   {label:t('自动整理'),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'arrange'},snapshot.revision);if(!r.ok){placementNotice=r.message;publish();}})();}},
+   ...(undoClips?.positionsOnly?[{label:t('撤销整理'),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'undo'},snapshot.revision);if(!r.ok){placementNotice=r.message;publish();}})();}}]:[]),
+
    {label:t("筛选 Agent"),submenu:agentFilterMenu()},
    {type:'separator'},
    {label:t("查找 / 已收起"),click:browseFromTray}
   ]);
-  try{menu.popup({window:shelf,callback:()=>lock('menu',false)});}catch{lock('menu',false);return invalid(t("菜单未能打开，请从托盘查找念头。"));}return done();
+  let finished=false;
+  const finish=()=>{if(finished)return;finished=true;if(activeShelfMenu?.menu!==menu)return;activeShelfMenu=null;if(process.platform==='win32'&&!shelf.isDestroyed()){if(shelf.isFocused())shelf.blur();shelf.setFocusable(false);}lock('menu',false);};
+  activeShelfMenu={menu,finish};
+  try{if(process.platform==='win32'){shelf.setFocusable(true);shelf.focus();}menu.popup({window:shelf,callback:finish});}catch{finish();return invalid(t("菜单未能打开，请从托盘查找念头。"));}return done();
  });
  const openBrowseDetail=async(id:string)=>{
   if(composer?.isVisible())return invalid(t("请先保存或取消当前输入。"));
@@ -357,7 +366,7 @@ else app.whenReady().then(async()=>{
   const saved=await save(removeProject(snapshot,project,now),revision);
   if(saved.ok){
    if(composerContext.draft.project===project)composerContext={...composerContext,draft:{...composerContext.draft,project:''}};
-   if(priorUndo){const cleaned=removeProject(priorUndo.snapshot,project,now);if(cleaned.ok)undoClips={snapshot:cleaned.value,revision:snapshot.revision};}
+   if(priorUndo){const cleaned=removeProject(priorUndo.snapshot,project,now);if(cleaned.ok)undoClips={...priorUndo,snapshot:cleaned.value,revision:snapshot.revision};}
    publish();
   }
   return saved;
@@ -381,13 +390,12 @@ else app.whenReady().then(async()=>{
   const generation=sequence===priorRequest?.sequence?priorRequest.generation:++pageGeneration;if(sequence!==priorRequest?.sequence){pageSequences.set(key,{sequence,generation});pageGenerations.set(id,generation);}
   return composerWrite(async()=>{if(generation!==pageGenerations.get(id))return {ok:true as const,value:snapshot};const prior=undoClips;const r=await save(selectClipIdea(snapshot,id,ideaId),snapshot.revision);if(r.ok){if(prior)undoClips={...prior,revision:snapshot.revision};publish();}return r;});
  });
- ipcMain.handle('thoughtline:clip',async(e,c:ClipMutation,revision:number)=>{
-  if(!trusted(e,[shelf,manage])||!c||typeof c!=='object')return invalid(t("无效操作"));
-  return composerWrite(async()=>{
+ const applyClipChange=(c:ClipMutation,revision:number)=>composerWrite(async()=>{
   if(revision!==snapshot.revision)return {ok:false,code:'CONFLICT',message:t("布局已变化，请重新操作。")};
   const previous=snapshot,oldUndo=undoClips;let next:Result<Snapshot>;
   const positioned=()=>({...snapshot,clips:captureClipPositions(snapshot.clips,width,shelfAgentId)});
-  if(c.kind==='merge'&&typeof c.sourceId==='string'&&typeof c.targetId==='string')next=mergeClips(positioned(),c.sourceId,c.targetId);
+  if(c.kind==='arrange')next=arrangeClips(snapshot,width);
+  else if(c.kind==='merge'&&typeof c.sourceId==='string'&&typeof c.targetId==='string')next=mergeClips(positioned(),c.sourceId,c.targetId);
   else if(c.kind==='move'&&typeof c.id==='string'&&typeof c.position==='number'&&(c.beforeId===null||typeof c.beforeId==='string'))next=moveClip(positioned(),c.id,c.position,c.beforeId,width,shelfAgentId);
   else if(c.kind==='paperDrop'&&typeof c.id==='string'&&typeof c.ideaId==='string'&&(c.targetId===null||typeof c.targetId==='string')&&(c.position===null||typeof c.position==='number'))next=dropClipIdea(positioned(),c.id,c.ideaId,c.targetId,c.position,randomUUID(),width);
   else if(c.kind==='select'&&typeof c.id==='string'&&typeof c.ideaId==='string')next=selectClipIdea(snapshot,c.id,c.ideaId);
@@ -398,12 +406,15 @@ else app.whenReady().then(async()=>{
   }else if(c.kind==='archiveAll'&&typeof c.id==='string'){
    const clip=snapshot.clips.find(x=>x.id===c.id);if(!clip)return invalid(t("找不到夹子。"));next={ok:true,value:snapshot};for(const id of clip.ideaIds){if(!next.ok)break;next=changeStatus(next.value,id,'archived',new Date().toISOString());}
   }else if(c.kind==='undo'){
-   if(!oldUndo||oldUndo.revision!==revision)return invalid(t("没有可撤销的夹子操作。"));next={ok:true,value:{...oldUndo.snapshot,revision}};
+   if(!oldUndo||oldUndo.revision!==revision)return invalid(t("没有可撤销的夹子操作。"));next=oldUndo.positionsOnly?{ok:true,value:{...snapshot,clips:oldUndo.snapshot.clips.flatMap(old=>{const current=snapshot.clips.find(c=>c.id===old.id);return current?[{...current,position:old.position}]:[]})}}:{ok:true,value:{...oldUndo.snapshot,revision}};
   }else return invalid(t("夹子操作无效"));
-  const r=await save(next,revision);
-  if(r.ok){placementNotice=['split','splitAll'].includes(c.kind)&&layoutClips(snapshot.clips,width).overflow.length?t("已保存，绳上暂时放不下，可在念头日历查看"):null;if(c.kind==='split'){manageSelection=c.ideaId;manageSession++;}undoClips=c.kind==='undo'?null:c.kind==='select'?(oldUndo?{...oldUndo,revision:r.value.revision}:null):{snapshot:previous,revision:r.value.revision};publish();}
+  const r=await save(next,revision,()=>{if(c.kind==='arrange'||c.kind==='undo'&&oldUndo?.positionsOnly)arrangeSession++;});
+  if(r.ok){placementNotice=['arrange','split','splitAll'].includes(c.kind)&&layoutClips(snapshot.clips,width).overflow.length?t("已保存，绳上暂时放不下，可在念头日历查看"):null;if(c.kind==='split'){manageSelection=c.ideaId;manageSession++;}undoClips=c.kind==='undo'?null:c.kind==='select'?(oldUndo?{...oldUndo,revision:r.value.revision}:null):{snapshot:previous,revision:r.value.revision,positionsOnly:c.kind==='arrange'};publish();}
   return r;
-  });
+ });
+ ipcMain.handle('thoughtline:clip',async(e,c:ClipMutation,revision:number)=>{
+  if(!trusted(e,[shelf,manage])||!c||typeof c!=='object')return invalid(t('无效操作'));
+  return applyClipChange(c,revision);
  });
  await loadView(shelf,'shelf');
  globalShortcut.register(snapshot.settings.writeHotkey,()=>{openComposer();});

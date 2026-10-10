@@ -1,0 +1,23 @@
+{
+  "platform": "darwin",
+  "scope": "isolated native-menu protocol, real source renderer/IPC/repository; no physical menu click",
+  "cases": [
+    {
+      "name": "native-menu-arranges-filtered-full-rope-with-data-intact",
+      "passed": true
+    }
+  ],
+  "pids": [
+    5428,
+    5429,
+    5430,
+    5431,
+    5432,
+    5433
+  ],
+  "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-arrange-5lGQNx",
+  "failure": "AssertionError [ERR_ASSERTION]: short arrangement animation retained\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-arrange-workflow.cjs:8:176",
+  "normalClose": true,
+  "dataRemoved": true,
+  "passed": false
+}

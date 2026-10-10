@@ -68,3 +68,13 @@ export function dropClipIdea(s:Snapshot,id:string,ideaId:string,targetId:string|
  if(targetId)return mergeClips(next.value,moving,targetId);
  return validateSnapshot({...next.value,clips:next.value.clips.map(c=>c.id===moving?{...c,position:normalizedPosition(free!,width)}:c)});
 }
+
+// Explicit arrangement compacts fragmented space, independently of the active Agent filter.
+export function arrangeClips(s:Snapshot,width:number):Result<Snapshot>{
+ if(!Number.isFinite(width)||width<0)return invalid('夹子位置无效。');
+ const {min,max}=clipTravelBounds(width);if(max<min||!s.clips.length)return validateSnapshot(s);
+ const shown=layoutClips(s.clips,width),ordered=[...shown.visible.map(p=>p.clip),...shown.overflow];
+ const capacity=Math.max(0,1+Math.floor((max-min+1e-8)/MIN_SPACING)),count=Math.min(capacity,ordered.length);
+ const reserve=count<capacity?1:0,start=(min+max-(count-1+reserve)*MIN_SPACING)/2;
+ return validateSnapshot({...s,clips:ordered.map((clip,index)=>({...clip,position:index<count?normalizedPosition(start+index*MIN_SPACING,width):null}))});
+}
