@@ -9,7 +9,7 @@ const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:
  try{
   const now=new Date().toISOString(),ideas=[0,1,2].map(n=>({id:'r2-'+n,text:'正文中文😀\n第二行 '+n,title:'测试 '+n,agentId:'general',project:'保留分组',status:'hanging',createdAt:now,updatedAt:now}));
   await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:2,revision:0,ideas,clips:[{id:'group',ideaIds:ideas.map(i=>i.id),currentId:'r2-1',agentId:'general',position:.4}],agents:[{id:'general',name:'通用',color:'#A0A3AA'}],draft:null,settings:{writeHotkey:'Control+Alt+N',reducedMotion:false}}));
-  app=await _electron.launch(await launchOptions(dir));({manage,shelf}=await warmViews(app));assert.equal((await manage.evaluate(()=>window.thoughtline.storageInfo())).value.directory,dir);
+  app=await _electron.launch(await launchOptions(dir,{stationaryTopCursor:true}));({manage,shelf}=await warmViews(app));assert.equal((await manage.evaluate(()=>window.thoughtline.storageInfo())).value.directory,dir);
   await shelf.evaluate(()=>window.thoughtline.openManage('r2-1'));await manage.waitForSelector('.idea-reader');
   await check('hint-delay-small-dismiss-on-menu',async()=>{
    const b=manage.getByRole('button',{name:'更多操作',exact:true});await b.hover();await manage.waitForTimeout(120);assert.equal(await manage.locator('.icon-tooltip').count(),0,'hover must not show hint immediately');await manage.waitForTimeout(550);

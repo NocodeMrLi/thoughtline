@@ -21,7 +21,7 @@ const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:
  const close=async()=>{if(app){receipt.pids.push(app.process().pid,...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)));await app.close();app=null;}};
  const start=async(data)=>{
   await close();if(data)await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify(data));
-  const options=await launchOptions(dir);
+  const options=await launchOptions(dir,{stationaryTopCursor:true});
   await fs.appendFile(options.args[0],"\nglobalThis.thoughtlineTestIO=require('node:fs/promises');\n");
   app=await _electron.launch(options);({shelf,manage}=await warmViews(app));
   assert.equal((await manage.evaluate(()=>window.thoughtline.storageInfo())).value.directory,dir);
@@ -67,7 +67,7 @@ const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:
   await shelf.evaluate(()=>window.thoughtline.openManage('b'));await manage.waitForSelector('[data-reader-id="b"]');
   await manage.getByRole('button',{name:'拆分',exact:true}).click();i=await waitForInfo(shelf,i=>i.snapshot.clips.some(c=>c.ideaIds.length===1&&c.currentId==='b'));pass('expanded-reader-split-remains-available');
   await manage.evaluate(()=>window.thoughtline.closeManage());await close();const disk=JSON.parse(await fs.readFile(path.join(dir,'snapshot.json'),'utf8'));
-  app=await _electron.launch(await launchOptions(dir));shelf=await app.firstWindow();await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});assert.deepEqual((await info()).snapshot,disk);pass('restart-retains-split-ids-content-order-and-page');
+  app=await _electron.launch(await launchOptions(dir,{stationaryTopCursor:true}));shelf=await app.firstWindow();await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});assert.deepEqual((await info()).snapshot,disk);pass('restart-retains-split-ids-content-order-and-page');
   await start(seed('b',40));const fullBefore=(await info()).snapshot;await menu('b');await click('拆分');i=await waitForInfo(shelf,i=>!!i.placementNotice?.includes('放不下'));
   assert.deepEqual(i.snapshot.ideas,fullBefore.ideas);assert(i.snapshot.clips.some(c=>c.ideaIds.length===1&&c.currentId==='b'));
   await shelf.getByRole('status').filter({hasText:'放不下'}).click();await manage.waitForSelector('[data-mode=calendar]');pass('true-full-rope-has-explicit-calendar-entry-and-preserved-content');
