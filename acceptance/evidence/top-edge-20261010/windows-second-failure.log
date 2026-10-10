@@ -1,0 +1,100 @@
+windows-test-package	Run npm run verify	﻿2026-10-10T00:24:10.9101813Z ##[group]Run npm run verify
+windows-test-package	Run npm run verify	2026-10-10T00:24:10.9102358Z ^[[36;1mnpm run verify^[[0m
+windows-test-package	Run npm run verify	2026-10-10T00:24:10.9182745Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Run npm run verify	2026-10-10T00:24:10.9183118Z ##[endgroup]
+windows-test-package	Run npm run verify	2026-10-10T00:24:11.8248865Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:11.8250019Z > thoughtline@0.0.17-preview.4 verify
+windows-test-package	Run npm run verify	2026-10-10T00:24:11.8250860Z > node scripts/verify.cjs
+windows-test-package	Run npm run verify	2026-10-10T00:24:11.8256206Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:12.1786615Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:12.1787649Z > thoughtline@0.0.17-preview.4 typecheck
+windows-test-package	Run npm run verify	2026-10-10T00:24:12.1788799Z > node node_modules/typescript/bin/tsc --noEmit
+windows-test-package	Run npm run verify	2026-10-10T00:24:12.1789419Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:13.7134573Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:13.7135579Z > thoughtline@0.0.17-preview.4 test
+windows-test-package	Run npm run verify	2026-10-10T00:24:13.7136538Z > node node_modules/vitest/vitest.mjs run
+windows-test-package	Run npm run verify	2026-10-10T00:24:13.7137118Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:14.3662458Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:14.3672180Z ^[[1m^[[30m^[[46m RUN ^[[49m^[[39m^[[22m ^[[36mv5.0.3 ^[[39m^[[90mD:/a/thoughtline/thoughtline^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:14.3672932Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:15.7968175Z  ^[[32m✓^[[39m tests/unit/storageLocations.test.ts ^[[2m(^[[22m^[[2m14 tests^[[22m^[[2m)^[[22m^[[33m 762^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:15.7969854Z  ^[[32m✓^[[39m tests/unit/p3IdeaCommands.test.ts ^[[2m(^[[22m^[[2m13 tests^[[22m^[[2m)^[[22m^[[32m 44^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:16.7972750Z  ^[[32m✓^[[39m tests/unit/repository.test.ts ^[[2m(^[[22m^[[2m11 tests^[[22m^[[2m)^[[22m^[[32m 290^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:16.7998236Z  ^[[32m✓^[[39m tests/unit/p3Repository.test.ts ^[[2m(^[[22m^[[2m9 tests^[[22m^[[2m)^[[22m^[[32m 255^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:16.9466012Z  ^[[32m✓^[[39m tests/unit/p3Schema.test.ts ^[[2m(^[[22m^[[2m19 tests^[[22m^[[2m)^[[22m^[[32m 38^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:17.1500917Z  ^[[32m✓^[[39m tests/unit/shelfState.test.ts ^[[2m(^[[22m^[[2m14 tests^[[22m^[[2m)^[[22m^[[32m 9^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:18.1293051Z  ^[[32m✓^[[39m tests/unit/clipProjection.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[33m 773^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:18.1294969Z    ^[[33m^[[2m✓^[[22m^[[39m 确定性3000混合旧比例/未定位及筛选压力：捕获是布局固定点^[[32m 300^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:18.1314748Z    ^[[33m^[[2m✓^[[22m^[[39m 混合比例与筛选移动压力：旧可见身份保留，其他Agent位置不动^[[33m 455^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:19.1087511Z  ^[[32m✓^[[39m tests/unit/packagedLaunch.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[33m 796^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:19.1089625Z    ^[[33m^[[2m✓^[[22m^[[39m actual Playwright early process death retains a failed supervisor receipt^[[33m 632^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:19.5622768Z  ^[[32m✓^[[39m tests/unit/preferences.test.ts ^[[2m(^[[22m^[[2m16 tests^[[22m^[[2m)^[[22m^[[32m 189^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:19.8638202Z  ^[[32m✓^[[39m tests/unit/ideaWorkflow.test.ts ^[[2m(^[[22m^[[2m7 tests^[[22m^[[2m)^[[22m^[[32m 124^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:20.2207350Z  ^[[32m✓^[[39m tests/unit/i18n.test.ts ^[[2m(^[[22m^[[2m11 tests^[[22m^[[2m)^[[22m^[[32m 70^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:20.4594486Z  ^[[32m✓^[[39m tests/unit/clipCommands.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[32m 43^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:20.6516406Z  ^[[32m✓^[[39m tests/unit/centeredRope.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 21^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:20.8535039Z  ^[[32m✓^[[39m tests/unit/draftAutosaver.test.ts ^[[2m(^[[22m^[[2m7 tests^[[22m^[[2m)^[[22m^[[32m 18^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:21.0551561Z  ^[[32m✓^[[39m tests/unit/preferenceOrdering.test.ts ^[[2m(^[[22m^[[2m8 tests^[[22m^[[2m)^[[22m^[[32m 13^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:21.2522535Z  ^[[32m✓^[[39m tests/unit/ideaHistory.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 27^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:21.4587221Z  ^[[32m✓^[[39m tests/unit/agentSplitPlacement.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[32m 21^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:21.6712763Z  ^[[32m✓^[[39m tests/unit/ideaCommands.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 29^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:21.9466580Z  ^[[32m✓^[[39m tests/unit/projectDeletion.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 78^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:22.1488837Z  ^[[32m✓^[[39m tests/unit/clipLayout.test.ts ^[[2m(^[[22m^[[2m5 tests^[[22m^[[2m)^[[22m^[[32m 8^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:22.3472177Z  ^[[31m❯^[[39m tests/unit/macLauncherGenerator.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m | ^[[22m^[[31m1 failed^[[39m^[[2m)^[[22m^[[32m 14^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:22.3474968Z ^[[31m   ^[[31m×^[[31m Mac generator emits ASCII launcher and matching manifest without rewriting legacy assets^[[39m^[[32m 12^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:22.5833951Z  ^[[32m✓^[[39m tests/unit/paperDrop.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 57^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:22.7841921Z  ^[[32m✓^[[39m tests/unit/shortcuts.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 6^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:27.6271946Z ^[[90mstdout^[[2m | tests/unit/shelfPresentation.test.ts
+windows-test-package	Run npm run verify	2026-10-10T00:24:27.6273901Z ^[[22m^[[39mDownloading Electron binary...
+windows-test-package	Run npm run verify	2026-10-10T00:24:27.6376847Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:27.6775176Z  ^[[32m✓^[[39m tests/unit/shelfPresentation.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 9^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:27.8794631Z  ^[[32m✓^[[39m tests/unit/spaceAllocation.test.ts ^[[2m(^[[22m^[[2m7 tests^[[22m^[[2m)^[[22m^[[32m 12^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:28.0773493Z  ^[[32m✓^[[39m tests/unit/fixedRope.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 8^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:28.2852057Z  ^[[32m✓^[[39m tests/unit/motion.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 8^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:30.3200197Z  ^[[32m✓^[[39m tests/unit/windowsAtomicWrite.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[33m 1841^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:30.3202058Z    ^[[33m^[[2m✓^[[22m^[[39m Windows transient EPERM retries without losing the old snapshot^[[33m 464^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:30.3210055Z    ^[[33m^[[2m✓^[[22m^[[39m Windows transient EBUSY retries without losing the old snapshot^[[33m 454^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:30.3219330Z    ^[[33m^[[2m✓^[[22m^[[39m Windows transient EACCES retries without losing the old snapshot^[[33m 460^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:30.3221453Z    ^[[33m^[[2m✓^[[22m^[[39m Windows exhausted rename retries preserve the prior snapshot and remove only the temporary file^[[33m 460^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:30.5424600Z  ^[[32m✓^[[39m tests/unit/agentInk.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 14^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:30.8391310Z  ^[[32m✓^[[39m tests/unit/idleFixtureCleanup.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 89^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:31.0653258Z  ^[[32m✓^[[39m tests/unit/topEdge.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 18^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:31.2540251Z  ^[[32m✓^[[39m tests/unit/compositionSession.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:31.4679245Z  ^[[32m✓^[[39m tests/unit/shortcutKeys.test.ts ^[[2m(^[[22m^[[2m6 tests^[[22m^[[2m)^[[22m^[[32m 7^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:31.6476862Z  ^[[32m✓^[[39m tests/unit/ropeGeometry.test.ts ^[[2m(^[[22m^[[2m3 tests^[[22m^[[2m)^[[22m^[[32m 6^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:31.8326819Z  ^[[32m✓^[[39m tests/unit/manageGeometry.test.ts ^[[2m(^[[22m^[[2m4 tests^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:32.0171328Z  ^[[32m✓^[[39m tests/unit/visibilityMotion.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 8^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:32.2034941Z  ^[[32m✓^[[39m tests/unit/compositionFlush.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 11^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:32.3816357Z  ^[[32m✓^[[39m tests/unit/platformHost.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:32.6724828Z  ^[[32m✓^[[39m tests/unit/agentPalette.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 7^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:32.9109372Z  ^[[32m✓^[[39m tests/unit/composerMaterial.test.ts ^[[2m(^[[22m^[[2m1 test^[[22m^[[2m)^[[22m^[[32m 4^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1045624Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1046954Z  ^[[32m✓^[[39m tests/unit/composer.test.ts ^[[2m(^[[22m^[[2m2 tests^[[22m^[[2m)^[[22m^[[32m 5^[[2mms^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1054094Z ^[[31m⎯⎯⎯⎯⎯⎯⎯^[[39m^[[1m^[[41m Failed Tests 1 ^[[49m^[[22m^[[31m⎯⎯⎯⎯⎯⎯⎯^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1054919Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1058458Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1059321Z ^[[2m Test Files ^[[22m ^[[1m^[[31m1 failed^[[39m^[[22m^[[2m | ^[[22m^[[1m^[[32m40 passed^[[39m^[[22m^[[90m (41)^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1122027Z ^[[41m^[[1m FAIL ^[[22m^[[49m tests/unit/macLauncherGenerator.test.ts^[[2m > ^[[22mMac generator emits ASCII launcher and matching manifest without rewriting legacy assets
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1123801Z ^[[2m      Tests ^[[22m ^[[1m^[[31m1 failed^[[39m^[[22m^[[2m | ^[[22m^[[1m^[[32m232 passed^[[39m^[[22m^[[90m (233)^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1126593Z ^[[31m^[[1mError^[[22m: ENOENT: no such file or directory, stat 'C:\Users\RUNNER~1\AppData\Local\Temp\thoughtline-launcher-unit-PjDq4Q\Thoughtline-0.0.17-preview.4-mac-arm64.dmg'^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1127967Z ^[[2m   Start at ^[[22m 00:24:14
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1128989Z ^[[90m ^[[2m❯^[[22m scripts/generate-mac-isolated-launcher.cjs:^[[2m22:11^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1130039Z ^[[2m   Duration ^[[22m 18.71s^[[2m (tests 47%, import 44%, transform 7%, worker 2%)^[[22m
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1132094Z ^[[36m ^[[2m❯^[[22m tests/unit/macLauncherGenerator.test.ts:^[[2m7:5^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1132613Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1132854Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1133693Z ^[[2m    Isolate ^[[22m ^[[33m41 workers spawned^[[39m^[[2m · ~148ms startup each (spawn + environment, per file)^[[22m
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1134549Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1136076Z ^[[2m            ^[[22m ^[[2mat least ~5.91s faster with ^[[22m^[[33misolate: false^[[39m^[[2m — reuses workers across files instead of one per file^[[22m
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1137473Z ^[[31m^[[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯^[[22m^[[39m
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1137811Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1138029Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1138039Z 
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.1177003Z ##[error]Error: ENOENT: no such file or directory, stat 'C:\Users\RUNNER~1\AppData\Local\Temp\thoughtline-launcher-unit-PjDq4Q\Thoughtline-0.0.17-preview.4-mac-arm64.dmg'
+windows-test-package	Run npm run verify	 ❯ scripts/generate-mac-isolated-launcher.cjs:22:11
+windows-test-package	Run npm run verify	 ❯ tests/unit/macLauncherGenerator.test.ts:7:5
+windows-test-package	Run npm run verify	
+windows-test-package	Run npm run verify	⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+windows-test-package	Run npm run verify	Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'stat', path: 'C:\Users\RUNNER~1\AppData\Local\Temp\thoughtline-launcher-unit-PjDq4Q\Thoughtline-0.0.17-preview.4-mac-arm64.dmg' }
+windows-test-package	Run npm run verify	
+windows-test-package	Run npm run verify	2026-10-10T00:24:33.2374256Z ##[error]Process completed with exit code 1.

@@ -1,0 +1,22 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/macLauncherGenerator.test.ts (1 test | 1 failed) 6ms
+   × Mac generator emits ASCII launcher and matching manifest without rewriting legacy assets 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/macLauncherGenerator.test.ts > Mac generator emits ASCII launcher and matching manifest without rewriting legacy assets
+Error: ENOENT: no such file or directory, stat '/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-launcher-unit-VJ6ZUw/Thoughtline-0.0.17-preview.4-mac-arm64.dmg'
+ ❯ scripts/generate-mac-isolated-launcher.cjs:22:11
+ ❯ tests/unit/macLauncherGenerator.test.ts:7:5
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  08:25:03
+   Duration  120ms (transform 52%, import 25%, tests 16%, worker 7%)
+

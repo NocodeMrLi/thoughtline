@@ -1,0 +1,26 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/macLauncherGenerator.test.ts (1 test | 1 failed) 6ms
+   × Mac generator emits ASCII launcher and matching manifest without rewriting legacy assets 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/macLauncherGenerator.test.ts > Mac generator emits ASCII launcher and matching manifest without rewriting legacy assets
+Error: Cannot find module '../../package.json'
+Require stack:
+- /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/scripts/generate-mac-isolated-launcher.cjs
+ ❯ tests/unit/macLauncherGenerator.test.ts:4:189
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 39 passed | 1 skipped (41)
+      Tests  1 failed | 228 passed | 4 skipped (233)
+   Start at  08:25:03
+   Duration  1.81s (tests 64%, transform 24%, import 10%, worker 3%)
+
+    Isolate  41 workers spawned · ~120ms startup each (spawn + environment, per file)
+             at least ~582ms faster with isolate: false — reuses workers across files instead of one per file
+
