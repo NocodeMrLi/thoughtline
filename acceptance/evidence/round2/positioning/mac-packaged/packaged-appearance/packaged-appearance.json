@@ -1,0 +1,148 @@
+{
+  "passed": true,
+  "packaged": true,
+  "executable": "/Users/lihongwei/Documents/Codex/2026-10-10/thoughtline-round2-repair/positioning-increment/package-source/dist/mac-arm64/Thoughtline.app/Contents/MacOS/Thoughtline",
+  "version": "0.0.20",
+  "host": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "release": "24.3.0"
+  },
+  "checks": [
+    "exact-English-dark-UI-and-user-text",
+    "dirty-editor-focus-selection-content-preserved",
+    "package-restart-stored-preferences-date-content-English-calendar"
+  ],
+  "scope": "actual isolated package DOM/IPC; no physical IME/DPI/multi-display/receiver acceptance",
+  "asarSha256": "35a2afe417569827550a6035141625c1d506379d51195f4058e7ea3fa0d3d92d",
+  "cleanup": {
+    "normalQuit": true,
+    "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-packaged-appearance-DAAQic",
+    "profileRemoved": true,
+    "ownedPids": [
+      38084,
+      38086,
+      38087,
+      38088,
+      38089,
+      38092,
+      38093,
+      38094,
+      38095,
+      38096
+    ],
+    "allExited": true
+  },
+  "worker": {
+    "pid": 38080,
+    "code": 0,
+    "signal": null
+  },
+  "stage": "worker-completed",
+  "launchEvents": [
+    {
+      "time": "2026-10-10T08:58:51.777Z",
+      "type": "spawn",
+      "pid": 38084,
+      "shell": false,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-10T08:58:51.900Z",
+      "type": "stderr",
+      "pid": 38084,
+      "text": "Debugger listening on ws://127.0.0.1:52715/983fb348-2867-4f00-95a7-ff9ac0d0b25b\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-10T08:58:51.904Z",
+      "type": "stderr",
+      "pid": 38084,
+      "text": "Debugger attached.\n"
+    },
+    {
+      "time": "2026-10-10T08:58:51.918Z",
+      "type": "stderr",
+      "pid": 38084,
+      "text": "\nDevTools listening on ws://127.0.0.1:52717/devtools/browser/fb578171-48c6-4dac-a267-26a118ae6df7\n"
+    },
+    {
+      "time": "2026-10-10T08:58:52.568Z",
+      "type": "stderr",
+      "pid": 38084,
+      "text": "2026-10-10 16:58:52.568 Thoughtline[38084:8500205] +[IMKClient subclass]: chose IMKClient_Modern\n2026-10-10 16:58:52.568 Thoughtline[38084:8500205] +[IMKInputSession subclass]: chose IMKInputSession_Modern\n"
+    },
+    {
+      "time": "2026-10-10T08:58:53.106Z",
+      "type": "stderr",
+      "pid": 38084,
+      "text": "Debugger ending on ws://127.0.0.1:52715/983fb348-2867-4f00-95a7-ff9ac0d0b25b\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-10T08:58:53.155Z",
+      "type": "exit",
+      "pid": 38084,
+      "code": 0,
+      "signal": null
+    },
+    {
+      "time": "2026-10-10T08:58:53.159Z",
+      "type": "spawn",
+      "pid": 38092,
+      "shell": false,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-10T08:58:53.292Z",
+      "type": "stderr",
+      "pid": 38092,
+      "text": "Debugger listening on ws://127.0.0.1:52719/6168ebe7-4324-47cb-8986-e7342bd39c03\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-10T08:58:53.293Z",
+      "type": "stderr",
+      "pid": 38092,
+      "text": "Debugger attached.\n"
+    },
+    {
+      "time": "2026-10-10T08:58:53.311Z",
+      "type": "stderr",
+      "pid": 38092,
+      "text": "\nDevTools listening on ws://127.0.0.1:52721/devtools/browser/02ca263d-2c7a-4c7b-a5a8-f9f7433d31c9\n"
+    },
+    {
+      "time": "2026-10-10T08:58:53.796Z",
+      "type": "stderr",
+      "pid": 38092,
+      "text": "Debugger ending on ws://127.0.0.1:52719/6168ebe7-4324-47cb-8986-e7342bd39c03\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-10T08:58:53.938Z",
+      "type": "stderr",
+      "pid": 38092,
+      "text": "2026-10-10 16:58:53.937 Thoughtline[38092:8500375] +[IMKClient subclass]: chose IMKClient_Modern\n"
+    },
+    {
+      "time": "2026-10-10T08:58:53.938Z",
+      "type": "stderr",
+      "pid": 38092,
+      "text": "2026-10-10 16:58:53.937 Thoughtline[38092:8500375] +[IMKInputSession subclass]: chose IMKInputSession_Modern\n"
+    },
+    {
+      "time": "2026-10-10T08:58:53.982Z",
+      "type": "exit",
+      "pid": 38092,
+      "code": 0,
+      "signal": null
+    }
+  ],
+  "observedPidState": [
+    {
+      "pid": 38084,
+      "alive": false
+    },
+    {
+      "pid": 38092,
+      "alive": false
+    }
+  ]
+}
