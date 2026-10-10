@@ -28,3 +28,6 @@
 .calendar-navigation button:first-child,.calendar-navigation button:last-child{flex-shrink:0}
 
 .app-settings{position:relative}.settings-leave-prompt{position:absolute;z-index:12;inset:auto 12px 12px;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:9px;box-shadow:0 4px 14px #00000024}.settings-leave-prompt p{margin:0 0 10px}.settings-leave-prompt button{margin:3px;font-size:12px}
+
+/* Navigation owns scroll restoration; browser anchoring must not offset the saved position. */
+.calendar-content{overflow-anchor:none}

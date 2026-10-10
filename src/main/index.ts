@@ -267,7 +267,9 @@ else app.whenReady().then(async()=>{
   if(composer?.isVisible())return invalid(t("请先保存当前输入。"));
   storageBusy=true;
   try{
-   if(!await prepareViews())return invalid(t("最后修改尚未保存或输入法尚未确认，仍使用原位置。"));
+   // Storage operations keep Settings mounted; its busy/dirty close guard is not a navigation request.
+   const ready=await prepareWindow(shelf)&&(manageMode==='settings'||await prepareWindow(manage));
+   if(!ready)return invalid(t("最后修改尚未保存或输入法尚未确认，仍使用原位置。"));
    const choice=await dialog.showOpenDialog(manage!,{title:kind==='migrate'?t("选择新的空念头文件夹"):t("选择独立备份的保存文件夹"),properties:['openDirectory','createDirectory']});
    if(choice.canceled||!choice.filePaths[0])return {ok:true,value:{...storageState(),canceled:true}};
    return await composerWrite(async()=>{

@@ -49,14 +49,14 @@ export function Calendar({info,restore,onRemember}:{info:PilotInfo;restore?:Cale
  const {t,m,locale,agentName}=useLocale();
  const [today,setToday]=useState(todayKey);
  const initial:Nav={level:'month',month:today.slice(0,7),day:today,scroll:0,limit:9};
- const [nav,setNav]=useState<Nav>(initial),[history,setHistory]=useState<Nav[]>([]),[selected,setSelected]=useState<string|null>(null),[query,setQuery]=useState(''),[status,setStatus]=useState<'all'|'hanging'|'archived'>('all'),[tools,setTools]=useState(false),[error,setError]=useState(''),[busy,setBusy]=useState(false),[notice,setNotice]=useState('');
- const host=useRef<HTMLElement>(null),scroll=useRef<HTMLDivElement>(null),restoreScroll=useRef(0),readerScroll=useRef(0);
+ const [nav,setNav]=useState<Nav>(restore?.nav??initial),[history,setHistory]=useState<Nav[]>(restore?.history??[]),[selected,setSelected]=useState<string|null>(restore?.selected??null),[query,setQuery]=useState(restore?.query??''),[status,setStatus]=useState<'all'|'hanging'|'archived'>(restore?.status??'all'),[tools,setTools]=useState(false),[error,setError]=useState(''),[busy,setBusy]=useState(false),[notice,setNotice]=useState('');
+ const host=useRef<HTMLElement>(null),scroll=useRef<HTMLDivElement>(null),restoreScroll=useRef(restore?.nav.scroll??0),readerScroll=useRef(restore?.readerScroll??0);
  const motionRequest=useRef<MotionRequest|null>(null),motionCleanup=useRef<(()=>void)|null>(null),navigationIntent=useRef(0),activeSession=useRef(info.manageSession),mounted=useRef(true);
  activeSession.current=info.manageSession;
  const cancelMotion=()=>{motionCleanup.current?.();motionCleanup.current=null;motionRequest.current=null;};
  const captureMotion=(from:Element|null,to:string,kind:MotionKind)=>{cancelMotion();const rect=from?(from.classList.contains('calendar-paper-groups')||from.classList.contains('month-grid')||from.classList.contains('year-grid')?visibleRect(from,scroll.current):rectOf(from)):null;if(rect)motionRequest.current={from:rect,to,kind,visual:from instanceof HTMLElement&&!from.classList.contains('idea-reader')?motionVisual(from,rect):null};};
  const currentIntent=(session:number,intent:number)=>mounted.current&&activeSession.current===session&&navigationIntent.current===intent;
- useEffect(()=>{navigationIntent.current++;restoreScroll.current=restore?.nav.scroll??0;readerScroll.current=restore?.readerScroll??0;setNav(restore?.nav??initial);setHistory(restore?.history??[]);setSelected(restore?.selected??null);setQuery(restore?.query??'');setStatus(restore?.status??'all');setTools(false);setBusy(false);setError('');},[info.manageSession]);
+ useLayoutEffect(()=>{navigationIntent.current++;restoreScroll.current=restore?.nav.scroll??0;readerScroll.current=restore?.readerScroll??0;setNav(restore?.nav??initial);setHistory(restore?.history??[]);setSelected(restore?.selected??null);setQuery(restore?.query??'');setStatus(restore?.status??'all');setTools(false);setBusy(false);setError('');},[info.manageSession]);
  const rememberedState=useRef({nav,history,selected,query,status});rememberedState.current={nav,history,selected,query,status};
  useLayoutEffect(()=>()=>{const state=rememberedState.current;onRemember?.({...state,nav:{...state.nav,scroll:scroll.current?.scrollTop??state.nav.scroll},readerScroll:readerScroll.current});},[]);
  useEffect(()=>()=>{mounted.current=false;navigationIntent.current++;cancelMotion();},[]);
