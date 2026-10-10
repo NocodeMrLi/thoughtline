@@ -13,13 +13,14 @@ export function Shelf({info}:{info:PilotInfo}){
  const {t,m}=useLocale();
  const ropeId=useId().replace(/:/g,'');
  const root=useRef<HTMLDivElement>(null),layoutRevision=useRef(0);const agentId=info.shelfAgentId;const [error,setError]=useState(''),[notice,setNotice]=useState(''),[dragView,setDragView]=useState<Drag|null>(null);
+ useEffect(()=>{if(!notice)return;const timer=setTimeout(()=>setNotice(''),1600);return()=>clearTimeout(timer);},[notice]);
  const [dismissedPlacement,setDismissedPlacement]=useState<string|null>(null);
  useEffect(()=>{setDismissedPlacement(null);},[info.placementNotice,info.snapshot.revision]);
  const placement=info.placementNotice!==dismissedPlacement?info.placementNotice:null;
  const drag=useRef<Drag|null>(null),mergeTimer=useRef<ReturnType<typeof setTimeout>|null>(null);const infoRef=useRef(info);infoRef.current=info;
  const filtered=info.snapshot.clips.filter(c=>agentId==='all'||c.agentId===agentId);const rope=fixedRope(info.width);const layout=layoutClips(filtered,info.width);
  const held=useRef({displayId:info.displayId,width:info.width,layout});
- if(!info.interactionLocked||held.current.displayId!==info.displayId||held.current.width!==info.width)held.current={displayId:info.displayId,width:info.width,layout};
+ if(!info.layoutLocked||held.current.displayId!==info.displayId||held.current.width!==info.width)held.current={displayId:info.displayId,width:info.width,layout};
  const visible=held.current.layout.visible;const visibleRef=useRef(visible);visibleRef.current=visible;const {sag,progress,reduced}=useShelfMotion(info);
  const arrangement=useRef<Animation[]>([]),lastPositions=useRef(new Map<string,string>()),motionSession=useRef(info.arrangeSession??0);
  const stopArrangement=()=>{for(const animation of arrangement.current)animation.cancel();arrangement.current=[];};
@@ -61,15 +62,15 @@ export function Shelf({info}:{info:PilotInfo}){
    const target=visibleRef.current.find(p=>p.clip.id===d.target);let message='';
    const outside=e.clientY<0||e.clientY>300||e.clientX<0||e.clientX>infoRef.current.width;
    if(!outside){
-    if(d.ready&&target?.clip.agentId===d.clip.agentId){if(await change(d.mode==='paper'?{kind:'paperDrop',id:d.clip.id,ideaId:d.ideaId,targetId:target.clip.id,position:null}:{kind:'merge',sourceId:d.clip.id,targetId:target.clip.id},d.revision))message=d.mode==='paper'?"当前纸张已合入目标夹子":"已合夹 · 可在详情中拆出或撤销";}
+    if(d.ready&&target?.clip.agentId===d.clip.agentId){await change(d.mode==='paper'?{kind:'paperDrop',id:d.clip.id,ideaId:d.ideaId,targetId:target.clip.id,position:null}:{kind:'merge',sourceId:d.clip.id,targetId:target.clip.id},d.revision);}
     else if(d.target){message=target?.clip.agentId!==d.clip.agentId?"不同 Agent 无法合夹，位置保持。":"未达到合夹停留时间，位置保持。";}
-    else if(d.mode==='paper'){if(d.valid&&await change({kind:'paperDrop',id:d.clip.id,ideaId:d.ideaId,targetId:null,position:normalizedPosition(d.x,infoRef.current.width)},d.revision))message="当前纸张已挂到空位";else message="无合法空位，纸张保持原位";}
+    else if(d.mode==='paper'){if(d.valid)await change({kind:'paperDrop',id:d.clip.id,ideaId:d.ideaId,targetId:null,position:normalizedPosition(d.x,infoRef.current.width)},d.revision);else message="无合法空位，纸张保持原位";}
     else{
      const before=visibleRef.current.find(p=>p.clip.id!==d.clip.id&&p.x>d.x)?.clip.id??null;
-     if(await change({kind:'move',id:d.clip.id,position:normalizedPosition(d.x,infoRef.current.width),beforeId:before},d.revision))message="夹子位置已保存";
+     await change({kind:'move',id:d.clip.id,position:normalizedPosition(d.x,infoRef.current.width),beforeId:before},d.revision);
     }
    }
-   setNotice(outside?'拖动已取消':message);reset();
+   setNotice(outside?'':message);reset();
   };
   const cancel=()=>reset();window.addEventListener('pointermove',move);window.addEventListener('pointerup',up);window.addEventListener('pointercancel',cancel);
   return()=>{window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',up);window.removeEventListener('pointercancel',cancel);};
@@ -77,7 +78,7 @@ export function Shelf({info}:{info:PilotInfo}){
  useLayoutEffect(()=>{
   stopArrangement();
   const nodes=[...root.current?.querySelectorAll<HTMLElement>('.hanging[data-clip-id]')??[]],next=new Map(nodes.map(node=>[node.dataset.clipId!,node.style.transform]));
-  if(!info.interactionLocked){
+  if(!info.layoutLocked){
    if(!reduced&&(info.arrangeSession??0)!==motionSession.current){for(const node of nodes){const from=lastPositions.current.get(node.dataset.clipId!);if(from&&from!==node.style.transform)arrangement.current.push(node.animate([{transform:from},{transform:node.style.transform}],{duration:180,easing:'cubic-bezier(.22,1,.36,1)'}));}}
    motionSession.current=info.arrangeSession??0;
   }

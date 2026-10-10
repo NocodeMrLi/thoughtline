@@ -1,0 +1,60 @@
+{
+  "platform": "darwin",
+  "scope": "isolated native-menu protocol, real source renderer/IPC/repository; no physical menu click",
+  "cases": [
+    {
+      "name": "native-menu-arranges-filtered-full-rope-with-data-intact",
+      "passed": true
+    },
+    {
+      "name": "finite-transform-animation",
+      "passed": true,
+      "duration": 180
+    },
+    {
+      "name": "position-only-undo-preserves-new-current-page",
+      "passed": true
+    },
+    {
+      "name": "arrange-undo-cannot-revive-deleted-project",
+      "passed": true
+    },
+    {
+      "name": "system-reduced-motion-no-animation",
+      "passed": true
+    },
+    {
+      "name": "reduced-motion-arrangement-no-animation",
+      "passed": true
+    },
+    {
+      "name": "arranged-positions-survive-restart",
+      "passed": true
+    }
+  ],
+  "pids": [
+    49104,
+    49105,
+    49106,
+    49108,
+    49109,
+    49110,
+    49122,
+    49123,
+    49124,
+    49125
+  ],
+  "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-arrange-Q32rpb",
+  "normalMotionScope": "Owned renderer emulates no-preference; host OS settings unchanged",
+  "motionProbe": {
+    "durations": [
+      180,
+      180
+    ],
+    "locked": "false",
+    "reduced": "false"
+  },
+  "normalClose": true,
+  "dataRemoved": true,
+  "passed": true
+}

@@ -1,0 +1,184 @@
+{
+  "platform": "darwin",
+  "arch": "arm64",
+  "evidence": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round2/capacity/delivery-final-yB6Yf2",
+  "cases": [
+    {
+      "name": "calendar-open-immediate-hang",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-sru5hJ",
+      "passed": true,
+      "detail": {
+        "calendarKeptOpen": true,
+        "shelfUpdated": true
+      },
+      "pids": [
+        49531,
+        49532,
+        49533,
+        49534,
+        49535,
+        49536
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "more-menu-content-width",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-TgAZ7f",
+      "passed": true,
+      "detail": {
+        "menu": 217.5703125,
+        "content": 187.5703125,
+        "button": "color(srgb 0.939647 0.931529 0.900863)",
+        "detailAndCalendarReaderAndHeaderLeaveClose": true,
+        "bridgeSafe": true
+      },
+      "pids": [
+        49540,
+        49543,
+        49544,
+        49546,
+        49547,
+        49548
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "new-swap-cancel-confirm-undo",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-FAPMil",
+      "passed": true,
+      "detail": {
+        "incomingId": "919b6634-e5bc-48bc-aba2-481632040102",
+        "slot": "clip:c0",
+        "cancelKeptText": true,
+        "undoKeepsNewRecord": true
+      },
+      "pids": [
+        49550,
+        49554,
+        49555,
+        49556,
+        49557,
+        49559
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "calendar-swap-open-focus-retained",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-EfcLym",
+      "passed": true,
+      "detail": {
+        "readerKeptOpen": true,
+        "focusRetained": true,
+        "successExpires": true
+      },
+      "pids": [
+        49560,
+        49561,
+        49562,
+        49563,
+        49564,
+        49565
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "stale-target-retains-draft",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-W8h2To",
+      "passed": true,
+      "detail": {
+        "staleChoiceDisabled": true,
+        "noDuplicate": true
+      },
+      "pids": [
+        49569,
+        49570,
+        49571,
+        49572,
+        49573,
+        49574
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "write-failure-in-picker-keeps-old-and-new-content",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-6JrYT0",
+      "passed": true,
+      "detail": {
+        "failedWriteAtomic": true,
+        "pickerRetained": true,
+        "retrySucceeded": true
+      },
+      "pids": [
+        49575,
+        49576,
+        49577,
+        49578,
+        49580,
+        49581
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "composer-write-failure-keeps-focus-and-draft",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-WeIDLR",
+      "passed": true,
+      "detail": {
+        "failedDraftKept": true,
+        "pickerFocusRetained": true,
+        "retrySucceeded": true
+      },
+      "pids": [
+        49585,
+        49586,
+        49587,
+        49588,
+        49589,
+        49590
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "native-show-all-Agent-label-and-selection",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-ILPP7I",
+      "passed": false,
+      "error": "Error: Timed out waiting for acknowledged main-process state\n    at waitForInfo (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/window-fixture.cjs:28:258)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-capacity-workflow.cjs:69:78\n    at async run (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-capacity-workflow.cjs:13:18)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-capacity-workflow.cjs:68:2",
+      "pids": [
+        49591,
+        49592,
+        49593,
+        49594,
+        49595,
+        49596
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "full-composer-save-stays-out-of-reader",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-vz72VH",
+      "passed": true,
+      "detail": {
+        "archived": true,
+        "noReaderJump": true
+      },
+      "pids": [
+        49605,
+        49607,
+        49608,
+        49610,
+        49611,
+        49615
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    }
+  ],
+  "passed": false
+}

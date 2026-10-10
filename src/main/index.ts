@@ -13,11 +13,12 @@ import {FileRepository} from './store/repository';
 import {loadStorageDirectory,loadStorageLocation,commitStorageDirectory,migrateStorage,exportBackup as writeBackup} from './store/storageLocations';
 import {swapShortcut} from './shortcuts';
 import {validWriteHotkey,displayWriteHotkey} from '../shared/composerKeys';
-import {newIdea,changeStatus,addAgent,updateAgent,removeAgent,removeProject,editIdeaIfUnchanged,deleteIdea,restoreIdea,permanentlyDeleteIdea} from '../shared/ideaCommands';
+import {changeStatus,addAgent,updateAgent,removeAgent,removeProject,editIdeaIfUnchanged,deleteIdea,restoreIdea,permanentlyDeleteIdea} from '../shared/ideaCommands';
 import type {Draft,Result,Snapshot} from '../shared/contracts';
 import type {PilotInfo,HitLayout,ComposerContext,AgentMutation,ClipMutation} from '../shared/bridge';
 import {mergeClips,splitClip,moveClip,selectClipIdea,dropClipIdea,arrangeClips} from '../shared/clipCommands';
 import {captureClipPositions,layoutClips} from '../shared/clipLayout';
+import {placeIdea,placementPlan,undoPlacement,type PlacementIntent,type PlacementSource,type PlacementUndo} from '../shared/ideaPlacement';
 app.setName('Thoughtline');
 app.setPath('userData',process.env.THOUGHTLINE_DATA_DIR||join(app.getPath('appData'),'Thoughtline'));
 let startupLocale:'zh-CN'|'en'='zh-CN';
@@ -62,12 +63,12 @@ else app.whenReady().then(async()=>{
  let dragCancelSession=0,dragEscape=false;let textDragTimer:ReturnType<typeof setTimeout>|null=null;let textDragOwner:string|null=null;
  let placementNotice:string|null=null;let shelfAgentId='all';let settingsBusy=false;let storageBusy=false;let refreshTray=()=>{};
  let geometryTimer:ReturnType<typeof setTimeout>|null=null,boundsIgnoreUntil=0;
- let manageMode:'browse'|'detail'|'settings'='browse',manageTitles=false;let undoClips:{snapshot:Snapshot;revision:number;positionsOnly?:boolean}|null=null;
+ let manageMode:'browse'|'detail'|'settings'='browse',manageTitles=false;let undoClips:{snapshot:Snapshot;revision:number;positionsOnly?:boolean;placement?:PlacementUndo;placementKind?:'hang'|'arrange'|'swap'}|null=null;
  let composerContext:ComposerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
  const preload=join(__dirname,'../preload/index.js');shelf=createShelf(preload);
  const host=createHost(shelf,()=>composer);
  let preferenceCommit:{version:number;sequence:number;sender:number}|null=null;
- const info=(viewer?:number):PilotInfo=>({preferenceCommit:preferenceCommit?{version:preferenceCommit.version,sequence:preferenceCommit.sequence,own:preferenceCommit.sender===viewer}:null,preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,arrangeSession,manageVisit,calendarReturning,manageSession,manageSelection,manageMode,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation()});
+ const info=(viewer?:number):PilotInfo=>({preferenceCommit:preferenceCommit?{version:preferenceCommit.version,sequence:preferenceCommit.sequence,own:preferenceCommit.sender===viewer}:null,preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,arrangeSession,manageVisit,calendarReturning,manageSession,manageSelection,manageMode,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,undoPlacementKind:undoClips?.placementKind,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation(),layoutLocked:dragEscape||!!textDragOwner});
  const publish=()=>{for(const w of [shelf,composer,manage])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info(w.webContents.id));};
  const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:(BrowserWindow|null)[]=[shelf,composer,manage])=>allowed.some(w=>w?.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
  const prepareWindow=(w:BrowserWindow|null):Promise<boolean>=>{
@@ -186,15 +187,33 @@ else app.whenReady().then(async()=>{
   if(saved.ok){snapshot=saved.value;composerContext={...composerContext,draft};if(undoClips)undoClips={...undoClips,snapshot:{...undoClips.snapshot,draft},revision:snapshot.revision};publish();}
   return saved;
  }));
- ipcMain.handle('thoughtline:submit',async(e,draft:Draft,revision:number)=>{let overflowId:string|null=null;const committed=await composerWrite(async():Promise<Result<Snapshot>>=>{
+ const commitPlacement=async(source:PlacementSource,intent:PlacementIntent,revision:number,reveal=false):Promise<Result<Snapshot>>=>{
+  if(!intent||!['save','hang','arrange','swap'].includes(intent.kind))return invalid(t('无效操作'));
+  if(revision!==snapshot.revision)return {ok:false,code:'CONFLICT',message:t('内容已变化，请重新操作。')};
+  const agentId=source.draft?.agentId??snapshot.ideas.find(i=>i.id===source.id)?.agentId;
+  if(intent.kind!=='save'&&shelfAgentId!=='all'&&shelfAgentId!==agentId&&!reveal)return invalid(t('当前Agent筛选会隐藏这张纸，请选择显示全部Agent后挂上。'));
+  const before=snapshot,next=placeIdea(snapshot,source,intent,width,new Date().toISOString());
+  const r=await save(next,revision);if(!r.ok)return r;
+  placementNotice=null;
+  if(intent.kind!=='save'){
+   if(reveal)shelfAgentId='all';
+   undoClips={snapshot:before,revision:snapshot.revision,placement:{before,after:snapshot,incomingId:source.id},placementKind:intent.kind};
+   if(intent.kind==='arrange')arrangeSession++;
+   edge.event({type:'peek',now:Date.now()});
+  }
+  publish();return r;
+ };
+ ipcMain.handle('thoughtline:submit',async(e,draft:Draft,revision:number,intent?:PlacementIntent,reveal=false)=>composerWrite(async():Promise<Result<Snapshot>>=>{
   if(!trusted(e,[composer])||!draftShape(draft))return invalid(t("无效内容"));
-  const now=new Date().toISOString(),createdId=randomUUID();
+  const createdId=randomUUID();
   if(composerContext.mode!=='new')return invalid(t("已有念头请在原窗口编辑。"));
-  const next=newIdea({...snapshot,clips:captureClipPositions(snapshot.clips,width)},draft,createdId,now);
-  const committed=await save(next,revision);if(!committed.ok)return committed;
-  closeConfirmedComposer();lock('composer',false);edge.event({type:'peek',now:Date.now()});placementNotice=null;const createdClip=snapshot.clips.find(c=>c.ideaIds.includes(createdId));if(createdClip&&layoutClips(snapshot.clips,width).overflow.some(c=>c.id===createdClip.id)){placementNotice=t("已保存，绳上暂时放不下");overflowId=createdId;}publish();return committed;
- });if(committed.ok&&overflowId)await openBrowseDetail(overflowId);return committed;
- });
+  const committed=await commitPlacement({draft,id:createdId},intent??{kind:placementPlan(snapshot,width)==='full'?'save':'hang'},revision,reveal===true);if(!committed.ok)return committed;
+  closeConfirmedComposer();lock('composer',false);publish();return committed;
+ }));
+ ipcMain.handle('thoughtline:place-idea',(e,id:string,intent:PlacementIntent,revision:number,reveal=false,session?:number)=>composerWrite(async()=>{
+  if(!trusted(e,[manage])||!manage?.isVisible()||session!==manageSession||typeof id!=='string'||!intent||!['hang','arrange','swap'].includes(intent.kind))return invalid(t('无效操作'));
+  return commitPlacement({id},intent,revision,reveal===true);
+ }));
  ipcMain.handle('thoughtline:close',(e,draft:Draft)=>composerWrite(async():Promise<Result<Snapshot>>=>{
   if(!trusted(e,[composer])||!draftShape(draft))return invalid(t("无效操作"));
   const saved=await save({ok:true,value:{...snapshot,draft}},snapshot.revision);if(!saved.ok)return saved;
@@ -243,9 +262,9 @@ else app.whenReady().then(async()=>{
    ...(clip&&clip.ideaIds.length>1?[{label:t("拆分"),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'split',id:clip.id,ideaId:id},snapshot.revision);if(!r.ok){placementNotice=r.message;publish();}})();}}]:[]),
    {label:t("收起当前念头"),click:()=>{void (async()=>{if(!await prepareViews())return;const r=await composerWrite(()=>{const current=snapshot.ideas.find(i=>i.id===id&&i.status==='hanging');return current?save(changeStatus({...snapshot,clips:captureClipPositions(snapshot.clips,width)},id,'archived',new Date().toISOString()),snapshot.revision):Promise.resolve(invalid(t("找不到这条念头。")));});if(!r.ok){placementNotice=r.message;publish();}})();}},
    {label:t('onlyAgent',{name:agentLabel(preferences.current.locale,snapshot.agents.find(a=>a.id===idea.agentId))||t('这个 Agent')}),click:()=>selectShelfAgent(idea.agentId)},
-   {label:t("显示全部"),click:()=>selectShelfAgent('all')},
+   {label:t('显示全部 Agent'),type:'checkbox',checked:shelfAgentId==='all',click:()=>selectShelfAgent('all')},
    {label:t('自动整理'),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'arrange'},snapshot.revision);if(!r.ok){placementNotice=r.message;publish();}})();}},
-   ...(undoClips?[{label:t('撤销整理'),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'undo'},snapshot.revision);if(!r.ok){placementNotice=r.message;publish();}})();}}]:[]),
+   ...(undoClips?[{label:t(undoClips.placementKind==='swap'?'撤销换上':undoClips.placementKind==='hang'?'撤销挂上':'撤销整理'),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'undo'},snapshot.revision);if(!r.ok){placementNotice=r.message;publish();}})();}}]:[]),
 
    {label:t("筛选 Agent"),submenu:agentFilterMenu()},
    {type:'separator'},
@@ -337,7 +356,9 @@ else app.whenReady().then(async()=>{
   return composerWrite(async():Promise<Result<Snapshot>>=>{
    if(!trusted(e,[manage])||session!==manageSession||!manage?.isVisible()||manageEditingOwner?.session!==session||manageEditingOwner.ideaId!==id)return invalid(t("编辑会话已结束，文字仍在窗口中。"));
    const priorClips=new Set(snapshot.clips.map(c=>c.id));
+   const priorUndo=undoClips;
    const saved=await save(editIdeaIfUnchanged(snapshot,id,draft,expectedDraft,new Date().toISOString(),width),snapshot.revision);
+   if(saved.ok&&priorUndo?.placement){undoClips={...priorUndo,revision:snapshot.revision};publish();}
    if(saved.ok&&snapshot.clips.some(c=>!priorClips.has(c.id)&&c.ideaIds.includes(id))){
     placementNotice=layoutClips(snapshot.clips,width).overflow.some(c=>c.ideaIds.includes(id))?t("已保存，绳上暂时放不下，可在念头日历查看"):null;publish();
    }
@@ -355,8 +376,9 @@ else app.whenReady().then(async()=>{
  ipcMain.handle('thoughtline:status',async(e,id:string,status:'hanging'|'archived',revision:number)=>{
   if(!trusted(e,[shelf,manage])||typeof id!=='string'||!['hanging','archived'].includes(status))return invalid(t("无效操作"));
   return composerWrite(async()=>{if(revision!==snapshot.revision)return {ok:false as const,code:'CONFLICT' as const,message:t("内容已变化，请重新操作。")};
+  if(status==='hanging')return commitPlacement({id},{kind:'hang'},revision);
   const r=await save(changeStatus({...snapshot,clips:captureClipPositions(snapshot.clips,width)},id,status,new Date().toISOString()),revision);
-  if(r.ok){placementNotice=status==='hanging'&&layoutClips(snapshot.clips,width).overflow.some(c=>c.ideaIds.includes(id))?t("已保存，绳上暂时放不下"):null;edge.event({type:'peek',now:Date.now()});publish();}return r;
+  if(r.ok){placementNotice=null;edge.event({type:'peek',now:Date.now()});publish();}return r;
   });
  });
  ipcMain.handle('thoughtline:agent',(e,c:AgentMutation,revision:number)=>{
@@ -417,7 +439,7 @@ else app.whenReady().then(async()=>{
   }else if(c.kind==='archiveAll'&&typeof c.id==='string'){
    const clip=snapshot.clips.find(x=>x.id===c.id);if(!clip)return invalid(t("找不到夹子。"));next={ok:true,value:snapshot};for(const id of clip.ideaIds){if(!next.ok)break;next=changeStatus(next.value,id,'archived',new Date().toISOString());}
   }else if(c.kind==='undo'){
-   if(!oldUndo||oldUndo.revision!==revision)return invalid(t("没有可撤销的夹子操作。"));next=oldUndo.positionsOnly?{ok:true,value:{...snapshot,clips:oldUndo.snapshot.clips.flatMap(old=>{const current=snapshot.clips.find(c=>c.id===old.id);return current?[{...current,position:old.position}]:[]})}}:{ok:true,value:{...oldUndo.snapshot,revision}};
+   if(!oldUndo||oldUndo.revision!==revision)return invalid(t("没有可撤销的夹子操作。"));next=oldUndo.placement?undoPlacement(snapshot,oldUndo.placement):oldUndo.positionsOnly?{ok:true,value:{...snapshot,clips:oldUndo.snapshot.clips.flatMap(old=>{const current=snapshot.clips.find(c=>c.id===old.id);return current?[{...current,position:old.position}]:[]})}}:{ok:true,value:{...oldUndo.snapshot,revision}};
   }else return invalid(t("夹子操作无效"));
   const repositioned=next.ok&&['split','splitAll','undo'].includes(c.kind)&&next.value.clips.some(clip=>{const old=previous.clips.find(old=>old.id===clip.id);return old&&old.position!==clip.position;});
   const r=await save(next,revision,()=>{if(c.kind==='arrange'||c.kind==='undo'&&oldUndo?.positionsOnly||repositioned)arrangeSession++;});

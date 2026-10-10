@@ -1,0 +1,57 @@
+
+> thoughtline@0.0.19 verify
+> node scripts/verify.cjs
+
+
+> thoughtline@0.0.19 typecheck
+> node node_modules/typescript/bin/tsc --noEmit
+
+
+> thoughtline@0.0.19 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+
+ Test Files  42 passed | 1 skipped (43)
+      Tests  247 passed | 4 skipped (251)
+   Start at  14:49:09
+   Duration  1.89s (tests 64%, transform 21%, import 12%, worker 3%)
+
+    Isolate  43 workers spawned · ~126ms startup each (spawn + environment, per file)
+             at least ~645ms faster with isolate: false — reuses workers across files instead of one per file
+
+
+> thoughtline@0.0.19 build
+> node node_modules/electron-vite/bin/electron-vite.js build
+
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 27 modules transformed.
+
+(!) outDir /Users/lihongwei/Documents/Codex/2026-10-10/thoughtline-round2-repair/capacity-increment/runtime/out/main is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+rendering chunks...
+../../../Documents/Codex/2026-10-10/thoughtline-round2-repair/capacity-increment/runtime/out/main/index.js  172.10 kB
+✓ built in 193ms
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 1 modules transformed.
+
+(!) outDir /Users/lihongwei/Documents/Codex/2026-10-10/thoughtline-round2-repair/capacity-increment/runtime/out/preload is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+rendering chunks...
+../../../Documents/Codex/2026-10-10/thoughtline-round2-repair/capacity-increment/runtime/out/preload/index.js  4.43 kB
+✓ built in 6ms
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 67 modules transformed.
+rendering chunks...
+../../../../../Documents/Codex/2026-10-10/thoughtline-round2-repair/capacity-increment/runtime/out/renderer/index.html                                    0.52 kB
+../../../../../Documents/Codex/2026-10-10/thoughtline-round2-repair/capacity-increment/runtime/out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg   98.37 kB
+../../../../../Documents/Codex/2026-10-10/thoughtline-round2-repair/capacity-increment/runtime/out/renderer/assets/index-BdKiLbdK.css                    46.28 kB
+../../../../../Documents/Codex/2026-10-10/thoughtline-round2-repair/capacity-increment/runtime/out/renderer/assets/index-D2QH8mUh.js                    862.70 kB
+✓ built in 1.02s

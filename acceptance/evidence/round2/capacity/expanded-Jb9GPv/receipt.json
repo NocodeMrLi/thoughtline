@@ -1,0 +1,148 @@
+{
+  "platform": "darwin",
+  "arch": "arm64",
+  "evidence": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round2/capacity/expanded-Jb9GPv",
+  "cases": [
+    {
+      "name": "calendar-open-immediate-hang",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-n3rJmN",
+      "passed": true,
+      "detail": {
+        "calendarKeptOpen": true,
+        "shelfUpdated": true
+      },
+      "pids": [
+        48029,
+        48031,
+        48032,
+        48033,
+        48034,
+        48036
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "more-menu-content-width",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-L4AMCs",
+      "passed": true,
+      "detail": {
+        "menu": 217.5703125,
+        "content": 187.5703125,
+        "button": "color(srgb 0.939647 0.931529 0.900863)",
+        "readerAndCalendarLeaveClose": true,
+        "bridgeSafe": true
+      },
+      "pids": [
+        48037,
+        48040,
+        48041,
+        48044,
+        48046,
+        48050
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "new-swap-cancel-confirm-undo",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-W2IuES",
+      "passed": true,
+      "detail": {
+        "incomingId": "b2b6870d-c41c-4d97-8636-4de37f4abf91",
+        "slot": "clip:c0",
+        "cancelKeptText": true,
+        "undoKeepsNewRecord": true
+      },
+      "pids": [
+        48051,
+        48052,
+        48053,
+        48054,
+        48055,
+        48056
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "calendar-swap-open-focus-retained",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-Uy8nLE",
+      "passed": true,
+      "detail": {
+        "readerKeptOpen": true,
+        "focusRetained": true,
+        "successExpires": true
+      },
+      "pids": [
+        48062,
+        48063,
+        48064,
+        48065,
+        48066,
+        48067
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "stale-target-retains-draft",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-25mIUe",
+      "passed": true,
+      "detail": {
+        "staleChoiceDisabled": true,
+        "noDuplicate": true
+      },
+      "pids": [
+        48073,
+        48074,
+        48075,
+        48076,
+        48077,
+        48078
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "write-failure-in-picker-keeps-old-and-new-content",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-aqYL74",
+      "passed": true,
+      "detail": {
+        "failedWriteAtomic": true,
+        "pickerRetained": true,
+        "retrySucceeded": true
+      },
+      "pids": [
+        48080,
+        48081,
+        48082,
+        48083,
+        48084,
+        48085
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "full-composer-save-stays-out-of-reader",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-jOX32E",
+      "passed": true,
+      "detail": {
+        "archived": true,
+        "noReaderJump": true
+      },
+      "pids": [
+        48089,
+        48091,
+        48092,
+        48094,
+        48096,
+        48097
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    }
+  ],
+  "passed": true
+}

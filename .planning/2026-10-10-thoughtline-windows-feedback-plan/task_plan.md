@@ -30,3 +30,13 @@ Paper remains matte; resident UI rope/clip/paper only. Native outside-click cann
 
 ## Authorized incremental delivery
 Completed: short Merge/Split actions and automatic spacing, including right-click separation of the current thought in this same round2 plan; preserve reader action, stale-target safety, undo, overflow notice, new version0.0.18 and private dual packages. No new proposal document.
+
+
+## Approved capacity / swap increment (2026-10-10)
+- [x] User approved, label 整理挂上, open-calendar immediate presentation and compact More actions included.
+- [x] Canonical second-round document appended and read back before implementation.
+- [x] Red evidence and root causes.
+- [x] Atomic placement / swap / narrow undo and Composer / Reader chooser.
+- [x] Immediate shelf presentation with Calendar open and compact menus.
+- [ ] Dual-platform regression and exact-source new package verification.
+- [ ] Documentation, new immutable release and owned test cleanup.

@@ -1,0 +1,56 @@
+{
+  "platform": "darwin",
+  "arch": "arm64",
+  "evidence": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round2/capacity/baseline-red-lXCY2o",
+  "cases": [
+    {
+      "name": "calendar-open-immediate-hang",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-Jorj0o",
+      "passed": false,
+      "error": "page.waitForSelector: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.hanging[data-clip-id=\"clip:history\"]')\u001b[22m\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-capacity-workflow.cjs:19:15\n    at async run (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-capacity-workflow.cjs:13:18)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-capacity-workflow.cjs:16:2",
+      "pids": [
+        47180,
+        47184,
+        47185,
+        47187,
+        47189,
+        47190
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "more-menu-content-width",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-mDqDan",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: menu must fit content rather than impose a 290px blank strip\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-capacity-workflow.cjs:25:3\n    at async run (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-capacity-workflow.cjs:13:18)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-capacity-workflow.cjs:22:2",
+      "pids": [
+        47195,
+        47197,
+        47198,
+        47200,
+        47201,
+        47202
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "full-composer-save-stays-out-of-reader",
+      "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-capacity-NlAuQ4",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: full capacity must be known before submission\n\n'挂上' !== '保存'\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-capacity-workflow.cjs:29:69\n    at async run (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-capacity-workflow.cjs:13:18)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-capacity-workflow.cjs:27:2",
+      "pids": [
+        47204,
+        47207,
+        47208,
+        47209,
+        47210,
+        47211
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    }
+  ],
+  "passed": false
+}

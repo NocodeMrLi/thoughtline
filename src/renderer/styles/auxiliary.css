@@ -31,3 +31,23 @@
 
 /* Navigation owns scroll restoration; browser anchoring must not offset the saved position. */
 .calendar-content{overflow-anchor:none}
+
+/* Compact action popovers share their natural content width across both platforms. */
+.reader-more{inset:auto;right:auto;bottom:auto;width:max-content;min-width:160px;max-width:calc(100vw - 16px);max-height:calc(100vh - 16px);padding:4px;gap:2px;border-radius:9px;animation:action-menu-in 100ms ease-out}
+.reader-more>button{width:100%;min-height:32px;padding:6px 10px;border-radius:5px;background:color-mix(in srgb,var(--surface),var(--text) 3%);white-space:normal}
+.reader-more>button:hover,.reader-more>button:focus-visible{background:color-mix(in srgb,var(--surface),var(--text) 9%)}
+.reader-more>button svg{flex-shrink:0}.reader-more>button:focus-visible{outline-offset:-2px}
+.calendar-tools.reader-more{left:auto;right:auto;top:auto;min-width:160px;max-height:calc(100vh - 16px)}
+@keyframes action-menu-in{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+.capacity-help,.placement-filter{font-size:11px;color:var(--muted);line-height:16px}.placement-filter{display:flex;align-items:center;gap:5px}.placement-filter input{margin:0}
+.composer-swap{display:flex;align-items:center;gap:3px;padding:5px 6px;border:0;background:transparent;font-size:12px}.composer-swap:hover{background:color-mix(in srgb,var(--surface),var(--text) 6%)}
+.placement-picker{position:absolute;inset:42px 10px 10px;z-index:15;display:flex;flex-direction:column;gap:6px;padding:8px;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:0 4px 18px #0002;-webkit-app-region:no-drag}
+.idea-reader>.placement-picker{inset:0}.placement-heading{display:flex;align-items:center;gap:6px;font-size:12px;min-height:28px}.placement-heading>button:first-child{display:flex;align-items:center;justify-content:center;width:28px;height:28px;padding:3px;border:0;background:transparent}.placement-heading>strong{flex:1}
+.placement-targets{flex:1;min-height:0;overflow:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:6px;align-content:start}
+.placement-target{border:1px solid var(--border);border-radius:7px;overflow:hidden}.placement-target[data-chosen=true]{border-color:var(--focus);box-shadow:inset 0 0 0 1px var(--focus)}
+.placement-target>button{display:flex;align-items:center;gap:8px;width:100%;padding:7px;background:transparent;border:0;text-align:left;font-size:12px}.placement-target>button:hover{background:color-mix(in srgb,var(--surface),var(--text) 5%)}
+.placement-mini-paper{width:30px;height:42px;flex-shrink:0;overflow:hidden;font-size:4px;line-height:5px;padding:3px;background:var(--paper);color:var(--paper-text);border-radius:2px 2px 5px 3px;box-shadow:0 1px 2px #0003;white-space:pre-wrap}
+.placement-target-text{min-width:0;display:flex;flex-direction:column;gap:2px}.placement-target-text strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.placement-target-text small,.placement-target-text>span{font-size:10px;color:var(--muted)}
+.placement-target select{font-size:11px;max-width:calc(100% - 12px);margin:0 6px 6px;padding:4px}.placement-confirm{display:flex;align-items:center;gap:8px;font-size:11px;min-height:32px}.placement-confirm>span{flex:1;min-width:0;color:var(--muted)}.placement-confirm>.primary{flex-shrink:0;font-size:12px;padding:7px 12px}
+@media(prefers-reduced-motion:reduce){.reader-more{animation:none}}
+:root[data-motion=reduce] .reader-more{animation:none}

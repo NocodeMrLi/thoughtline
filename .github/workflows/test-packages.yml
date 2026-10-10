@@ -38,6 +38,8 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Second round split menu failed' }
           & node tests/electron/round2-merge-menu-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Second round merge menu failed' }
+          & node tests/electron/round2-capacity-workflow.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Capacity and swap workflow failed' }
           & node tests/electron/round2-native-menu.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Second round native menu failed' }
       - name: Source Electron UI regression on Windows
@@ -97,6 +99,14 @@ jobs:
       - name: Disposable runner installation and data retention preflight
         shell: pwsh
         run: ./scripts/windows-installer-preflight.ps1
+      - name: Actual Windows package capacity and menu regression
+        shell: pwsh
+        env:
+          THOUGHTLINE_EXECUTABLE: dist/win-unpacked/Thoughtline.exe
+          THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round2/windows/packaged-capacity
+        run: |
+          & node tests/electron/packaged-capacity.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Actual packaged capacity regression failed' }
       - name: Hash test installers
         shell: pwsh
         run: |

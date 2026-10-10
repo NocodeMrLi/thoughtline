@@ -1,0 +1,29 @@
+
+> thoughtline@0.0.18 test
+> node node_modules/vitest/vitest.mjs run tests/unit/ideaPlacement.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/ideaPlacement.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/ideaPlacement.test.ts [ tests/unit/ideaPlacement.test.ts ]
+Error: Cannot find module '../../src/shared/ideaPlacement' imported from /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/unit/ideaPlacement.test.ts
+ ❯ tests/unit/ideaPlacement.test.ts:5:1
+      3| import {mergeClips} from '../../src/shared/clipCommands';
+      4| import {layoutClips} from '../../src/shared/clipLayout';
+      5| import {placementPlan,placeIdea,undoPlacement,type PlacementIntent} fr…
+       | ^
+      6| import type {Snapshot,Result} from '../../src/shared/contracts';
+      7| const now='2026-10-10T00:00:00Z',draft={text:' 完整中文😀\n第二行 ',title:'新念…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  14:26:49
+   Duration  201ms (worker 98%, environment 2%)
+

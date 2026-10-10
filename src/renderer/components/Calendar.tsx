@@ -1,7 +1,8 @@
+import {ReaderMoreMenu} from './ReaderMoreMenu';
 import {formatCalendarDate,countThoughts} from '../../shared/i18n';
 import {PreferencesControl} from './PreferencesControl';
 import {useLocale} from '../LocaleContext';
-import {useEffect,useLayoutEffect,useMemo,useRef,useState} from 'react';
+import {useCallback,useEffect,useLayoutEffect,useMemo,useRef,useState} from 'react';
 import type {PilotInfo} from '../../shared/bridge';
 import type {Idea,Result} from '../../shared/contracts';
 import {prepareLeave} from '../hooks/leaveGuards';
@@ -50,6 +51,7 @@ export function Calendar({info,restore,onRemember}:{info:PilotInfo;restore?:Cale
  const [today,setToday]=useState(todayKey);
  const initial:Nav={level:'month',month:today.slice(0,7),day:today,scroll:0,limit:9};
  const [nav,setNav]=useState<Nav>(restore?.nav??initial),[history,setHistory]=useState<Nav[]>(restore?.history??[]),[selected,setSelected]=useState<string|null>(restore?.selected??null),[query,setQuery]=useState(restore?.query??''),[status,setStatus]=useState<'all'|'hanging'|'archived'>(restore?.status??'all'),[tools,setTools]=useState(false),[error,setError]=useState(''),[busy,setBusy]=useState(false),[notice,setNotice]=useState('');
+ const toolsAnchor=useRef<HTMLSpanElement>(null),closeTools=useCallback(()=>setTools(false),[]);
  const host=useRef<HTMLElement>(null),scroll=useRef<HTMLDivElement>(null),restoreScroll=useRef(restore?.nav.scroll??0),readerScroll=useRef(restore?.readerScroll??0);
  const motionRequest=useRef<MotionRequest|null>(null),motionCleanup=useRef<(()=>void)|null>(null),navigationIntent=useRef(0),activeSession=useRef(info.manageSession),mounted=useRef(true);
  activeSession.current=info.manageSession;
@@ -123,8 +125,8 @@ export function Calendar({info,restore,onRemember}:{info:PilotInfo;restore?:Cale
  const monthDays=new Date(Date.UTC(Number(year),Number(nav.month.slice(5)),0)).getUTCDate(),offset=new Date(nav.month+'-01T12:00:00Z').getUTCDay();
  const weeks=Math.ceil((offset+monthDays)/7);
  return <main ref={host} data-view="manage" data-mode="calendar" data-material={info.manageMaterial} data-platform={info.platform} className="manage thought-calendar">
-  <header className="auxiliary-header"><div className="calendar-heading">{(selected||history.length>0||nav.level!=='month')&&<IconButton icon="back" label={t("返回")} onClick={()=>void back()}/>}<button className="calendar-title" onClick={()=>{if(nav.level==='month'&&!selected){void go({...nav,level:'year',scroll:0,limit:9},{from:host.current?.querySelector('.month-grid')??null,to:`[data-month="${nav.month}"]`,kind:'month-to-year'});}}} title={nav.level==='month'?t("查看全年十二个月"):undefined}>{idea?.title??label}</button></div><div className="calendar-header-actions"><IconButton icon="more" label={t("日历更多选项")} aria-expanded={tools} onClick={()=>setTools(!tools)}/><PreferencesControl info={info}/><button className="close" aria-label={t("关闭日历")} onClick={()=>void window.thoughtline.closeManage()}>×</button></div></header>
-  {tools&&<div className="calendar-tools"><button onClick={()=>void go({...nav,level:'trash',scroll:0,limit:9})}>{t("最近删除")}</button><button onClick={()=>void run(()=>window.thoughtline.openSettings())}>{t("存储与设置")}</button><button onClick={()=>void go({...nav,level:'agents',scroll:0,limit:9})}>{t("Agent 标签")}</button></div>}
+  <header className="auxiliary-header"><div className="calendar-heading">{(selected||history.length>0||nav.level!=='month')&&<IconButton icon="back" label={t("返回")} onClick={()=>void back()}/>}<button className="calendar-title" onClick={()=>{if(nav.level==='month'&&!selected){void go({...nav,level:'year',scroll:0,limit:9},{from:host.current?.querySelector('.month-grid')??null,to:`[data-month="${nav.month}"]`,kind:'month-to-year'});}}} title={nav.level==='month'?t("查看全年十二个月"):undefined}>{idea?.title??label}</button></div><div className="calendar-header-actions">{info.canUndoClips&&<IconButton icon="undo" label={t(info.undoPlacementKind==='swap'?'撤销换上':info.undoPlacementKind==='hang'?'撤销挂上':'撤销整理')} disabled={busy} onClick={()=>void run(async()=>{const current=await window.thoughtline.info();if(current.manageSession!==info.manageSession)return {ok:false,code:'CONFLICT',message:t('内容已变化，请重新操作。')};return window.thoughtline.clipChange({kind:'undo'},current.snapshot.revision);})}/>}<span ref={toolsAnchor}><IconButton icon="more" label={t("日历更多选项")} aria-expanded={tools} onClick={()=>setTools(!tools)}/></span><PreferencesControl info={info}/><button className="close" aria-label={t("关闭日历")} onClick={()=>void window.thoughtline.closeManage()}>×</button></div></header>
+  {tools&&<ReaderMoreMenu anchor={toolsAnchor} onClose={closeTools} side="below" label={t("日历更多选项")} className="calendar-tools"><button onClick={()=>void go({...nav,level:'trash',scroll:0,limit:9})}>{t("最近删除")}</button><button onClick={()=>void run(()=>window.thoughtline.openSettings())}>{t("存储与设置")}</button><button onClick={()=>void go({...nav,level:'agents',scroll:0,limit:9})}>{t("Agent 标签")}</button></ReaderMoreMenu>}
   {idea?<IdeaReader key={idea.id+':'+info.manageSession} idea={idea} info={info}/>:<>
    {nav.level!=='agents'&&<div className="calendar-search"><input aria-label={t("搜索念头")} placeholder={t("搜索正文、名称或项目")} value={query} onChange={e=>{navigationIntent.current++;cancelMotion();setQuery(e.target.value);restoreScroll.current=0;if(scroll.current)scroll.current.scrollTop=0;setNav(n=>({...n,scroll:0,limit:9}));}}/><select aria-label={t("筛选念头状态")} value={status} onChange={e=>{navigationIntent.current++;cancelMotion();setStatus(e.target.value as typeof status);restoreScroll.current=0;if(scroll.current)scroll.current.scrollTop=0;setNav(n=>({...n,scroll:0,limit:9}));}}><option value="all">{t("全部状态")}</option><option value="hanging">{t("挂着")}</option><option value="archived">{t("已收起")}</option></select></div>}
    {(grid||yearGrid)&&<div className="calendar-navigation"><button aria-label={yearGrid?t("上一年"):t("上个月")} onClick={()=>{navigationIntent.current++;cancelMotion();restoreScroll.current=0;setNav(n=>({...n,month:shiftMonth(n.month,yearGrid?-12:-1)}));}}><ActionIcon name="chevronLeft"/></button><button onClick={()=>{navigationIntent.current++;cancelMotion();restoreScroll.current=0;setNav(initial);}}>{t("今天")}</button><button onClick={()=>void go({...nav,level:yearGrid?'yearIdeas':'monthIdeas',scroll:0,limit:9})}>{yearGrid?t('yearThoughts',{count:yearCount(year)}):t('monthThoughts',{count:monthCount(nav.month)})}</button><button aria-label={yearGrid?t("下一年"):t("下个月")} onClick={()=>{navigationIntent.current++;cancelMotion();restoreScroll.current=0;setNav(n=>({...n,month:shiftMonth(n.month,yearGrid?12:1)}));}}><ActionIcon name="chevronRight"/></button></div>}
@@ -136,7 +138,7 @@ export function Calendar({info,restore,onRemember}:{info:PilotInfo;restore?:Cale
     </div>}
    </div>
   </>}
-  <footer className="calendar-footer"><span role="status">{m(info.placementNotice||notice)}</span>{error&&<span className="error" role="alert">{m(error)}</span>}</footer>
+  <footer className="calendar-footer"><span role="status">{m(notice)}</span>{error&&<span className="error" role="alert">{m(error)}</span>}</footer>
  </main>;
 }
 function MiniClip(){return <span className="mini-clip" aria-hidden="true"><svg viewBox="120 260 260 200" focusable="false"><image href={brandLogoUrl} width="1254" height="1254"/></svg></span>;}
