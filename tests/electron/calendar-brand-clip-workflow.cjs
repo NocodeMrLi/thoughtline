@@ -1,6 +1,7 @@
 const {_electron}=require('playwright');
 const {launchOptions}=require('./window-fixture.cjs');
 const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
+const {sampleCalendarMotion,resumeCalendarMotion}=require('./calendar-motion-sampler.cjs');
 const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto'),assert=require('node:assert/strict');
 
 const root=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round1/calendar-brand-clip');
@@ -39,10 +40,10 @@ const alive=pid=>{try{process.kill(pid,0);return true;}catch(error){if(error.cod
   receipt.stage='paper';await manage.locator(`[data-month="${month}"]`).click();await manage.waitForSelector('.month-grid');await pause(260);
   await manage.locator(`[data-day="${day}"]`).click();await manage.waitForSelector('.calendar-paper');await pause(260);
   assert.equal(await manage.locator('.calendar-content .calendar-paper .mini-clip').count(),3);receipt.checks.paperMarker=await imageCheck('.calendar-content .calendar-paper .mini-clip');await shot('day-paper.png');
-  receipt.stage='motion';await manage.getByRole('button',{name:'返回',exact:true}).click();await manage.waitForSelector('[data-calendar-motion]');
+  receipt.stage='motion';await sampleCalendarMotion(manage,()=>manage.getByRole('button',{name:'返回',exact:true}).click());
   await manage.locator('[data-calendar-motion]').evaluate(el=>{for(const animation of el.getAnimations()) {animation.pause();animation.currentTime=55;}});
   const clone=await imageCheck('[data-calendar-motion] .mini-clip');assert(clone.loaded.ok&&clone.clip.startsWith('polygon('));assert.equal(await manage.locator('[data-calendar-motion] [id],[data-calendar-motion] [aria-hidden]').count(),0);receipt.checks.motionClone=clone;await shot('day-to-month-motion.png');
-  await manage.locator('[data-calendar-motion]').evaluate(el=>{for(const animation of el.getAnimations())animation.play();});await pause(260);
+  await resumeCalendarMotion(manage);await pause(260);
   receipt.stage='count-widths';receipt.checks.countWidths={};
   for(const width of [350,421,500,740]){
    await app.evaluate(({BrowserWindow},width)=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Manage').setSize(width,620),width);

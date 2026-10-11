@@ -1,5 +1,6 @@
 const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');
 const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
+const {sampleCalendarMotion,resumeCalendarMotion}=require('./calendar-motion-sampler.cjs');
 const {_electron}=require('playwright');
 const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
 
@@ -38,30 +39,30 @@ const near=(a,b)=>Math.abs(a-b)<3;
   const check=(motion,kind,from,to,duration)=>{assert.equal(motion.kind,kind);assert.equal(motion.duration,duration);assert(near(motion.from.left,from.x)&&near(motion.from.top,from.y),'motion source must match clicked/current content');assert(near(motion.to.left,to.x)&&near(motion.to.top,to.y),'motion destination must match hierarchy anchor');assert.equal(motion.pointer,'none');assert.equal(motion.inert,true);};
 
   stage='month-to-day';const dateCell=await box(`[data-day="${day}"]`);
-  await manage.locator(`[data-day="${day}"]`).click();
+  await sampleCalendarMotion(manage,()=>manage.locator(`[data-day="${day}"]`).click());
   const enterDay=await layer();assert.equal(enterDay.sourceClass,'date-cell');
   assert(near(enterDay.from.left,dateCell.x)&&near(enterDay.from.top,dateCell.y));assert.equal(enterDay.kind,'month-to-day');assert.equal(enterDay.duration,230);
   assert(await manage.locator('.calendar-paper-groups').evaluate(el=>el.getAnimations().some(a=>a.effect.getKeyframes().some(k=>String(k.transform).includes('scale')))),'real day content expands');
-  await delay(270);const dayPapers=await box('.calendar-paper-groups');assert(near(enterDay.to.left,dayPapers.x)&&near(enterDay.to.top,dayPapers.y));
+  await resumeCalendarMotion(manage);await delay(270);const dayPapers=await box('.calendar-paper-groups');assert(near(enterDay.to.left,dayPapers.x)&&near(enterDay.to.top,dayPapers.y));
 
-  stage='day-to-month';await manage.getByRole('button',{name:'返回',exact:true}).click();
+  stage='day-to-month';await sampleCalendarMotion(manage,()=>manage.getByRole('button',{name:'返回',exact:true}).click());
   const exitDay=await layer(),dateAgain=await box(`[data-day="${day}"]`);
   check(exitDay,'day-to-month',dayPapers,dateAgain,210);assert.equal(exitDay.sourceClass,'calendar-paper-groups');assert.equal(await manage.locator('[data-calendar-motion] .calendar-paper').count(),1,'visible paper content shrinks into its date');
-  await delay(250);
+  await resumeCalendarMotion(manage);await delay(250);
 
-  stage='month-to-year';const monthGrid=await box('.month-grid');await manage.locator('.calendar-title').click();
+  stage='month-to-year';const monthGrid=await box('.month-grid');await sampleCalendarMotion(manage,()=>manage.locator('.calendar-title').click());
   const exitMonth=await layer(),yearTile=await box(`[data-month="${month}"]`);
   check(exitMonth,'month-to-year',monthGrid,yearTile,210);assert.equal(exitMonth.sourceClass,'month-grid');
-  await delay(250);
+  await resumeCalendarMotion(manage);await delay(250);
 
-  stage='year-to-month';const tileBefore=await box(`[data-month="${month}"]`);await manage.locator(`[data-month="${month}"]`).click();
+  stage='year-to-month';const tileBefore=await box(`[data-month="${month}"]`);await sampleCalendarMotion(manage,()=>manage.locator(`[data-month="${month}"]`).click());
   const enterMonth=await layer();assert.equal(enterMonth.kind,'year-to-month');assert.equal(enterMonth.duration,230);assert(near(enterMonth.from.left,tileBefore.x)&&near(enterMonth.from.top,tileBefore.y));
   assert(await manage.locator('.month-grid').evaluate(el=>el.getAnimations().some(a=>a.effect.getKeyframes().some(k=>String(k.transform).includes('scale')))),'real month content expands');
-  await delay(270);const gridAfter=await box('.month-grid');assert(near(enterMonth.to.left,gridAfter.x)&&near(enterMonth.to.top,gridAfter.y));
+  await resumeCalendarMotion(manage);await delay(270);const gridAfter=await box('.month-grid');assert(near(enterMonth.to.left,gridAfter.x)&&near(enterMonth.to.top,gridAfter.y));
 
-  stage='month-back-to-year';await manage.getByRole('button',{name:'返回',exact:true}).click();
+  stage='month-back-to-year';await sampleCalendarMotion(manage,()=>manage.getByRole('button',{name:'返回',exact:true}).click());
   const backToYear=await layer(),sameTile=await box(`[data-month="${month}"]`);
-  check(backToYear,'month-to-year',gridAfter,sameTile,210);await delay(250);
+  check(backToYear,'month-to-year',gridAfter,sameTile,210);await resumeCalendarMotion(manage);await delay(250);
 
   stage='persisted-data';const disk=JSON.parse(await fs.readFile(path.join(dir,'snapshot.json'),'utf8'));
   assert.deepEqual(disk.settings.calendarBounds,expected);assert.equal(disk.settings.reducedMotion,false);assert.equal(disk.ideas[0].text,idea.text);

@@ -1,5 +1,6 @@
 const {launchOptions,warmViews}=require('./window-fixture.cjs');
 const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
+const {sampleCalendarMotion,resumeCalendarMotion}=require('./calendar-motion-sampler.cjs');
 const {_electron}=require('playwright');
 const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
 
@@ -29,7 +30,7 @@ const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
   await run('empty-day-visible-return',async()=>{
    await manage.locator(`[data-day="${emptyDay}"]`).click();
    await manage.locator('.calendar-paper-groups .empty-list').waitFor();await settle();
-   await back();
+   await sampleCalendarMotion(manage,back);
    const visual=await manage.locator('[data-calendar-motion]').evaluate(el=>({kind:el.dataset.calendarMotion,text:el.textContent,emptyCount:el.querySelectorAll('.empty-list').length}));
    await manage.locator('[data-calendar-motion]').evaluate((el,day)=>{for(const animation of [...el.getAnimations(),...document.querySelector(`[data-day="${day}"]`).getAnimations()]){animation.pause();animation.currentTime=25;}},emptyDay);
    await manage.screenshot({path:path.join(evidence,'empty-day-return-controlled-early.png'),animations:'allow'});
@@ -44,7 +45,7 @@ const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
   await settle();await month();
 
   await run('scroll-interrupts-active-motion',async()=>{
-   await manage.locator(`[data-day="${day}"]`).click();
+   await sampleCalendarMotion(manage,()=>manage.locator(`[data-day="${day}"]`).click());
    assert.equal(await manage.locator('[data-calendar-motion]').count(),1);
    const scrolled=await manage.locator('[data-calendar-scroll]').evaluate(async el=>{el.scrollTop=180;await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));return el.scrollTop;});
    assert(scrolled>0,'fixture must actually scroll the day papers');
@@ -53,15 +54,15 @@ const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
   });
   await settle();
   await run('restored-scroll-keeps-return-motion',async()=>{
-   await back();
+   await sampleCalendarMotion(manage,back);
    await manage.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
    assert.equal(await manage.locator('[data-calendar-motion]').count(),1,'restoring previous month scroll must not count as user interruption');
-   return {kind:await manage.locator('[data-calendar-motion]').getAttribute('data-calendar-motion')};
+   const kind=await manage.locator('[data-calendar-motion]').getAttribute('data-calendar-motion');await resumeCalendarMotion(manage);return {kind};
   });
   await settle();await month();
 
   await run('resize-interrupts-active-motion',async()=>{
-   await manage.locator(`[data-day="${day}"]`).click();
+   await sampleCalendarMotion(manage,()=>manage.locator(`[data-day="${day}"]`).click());
    assert.equal(await manage.locator('[data-calendar-motion]').count(),1);
    const size=await app.evaluate(({BrowserWindow})=>{const w=BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Manage'),s=w.getSize();w.setSize(s[0]+40,s[1]);return s;});
    await manage.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
