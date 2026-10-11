@@ -1,0 +1,448 @@
+{
+  "packaged": true,
+  "executable": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/dist/mac-arm64/Thoughtline.app/Contents/MacOS/Thoughtline",
+  "version": "0.0.22",
+  "platform": "darwin",
+  "arch": "arm64",
+  "checks": [
+    "fresh-six-presets-cover-everyday-work-people-development",
+    "English-tag-settings-and-translated-preset-display",
+    "custom-tag-remains-literal-in-English",
+    "renamed-built-in-remains-literal",
+    "legacy-tag-ids-colors-names-and-draft-not-reset-or-expanded",
+    "capacity-derived-status-counts-include-all-stack-pages-and-two-offline-kinds-without-writes",
+    "actual-package-restart-preserves-old-tags-content-position-and-draft",
+    "actual-package-detail-and-calendar-empty-title-editing-does-not-refill",
+    "actual-package-restart-preserves-newly-typed-title-and-original-body"
+  ],
+  "pids": [
+    65209,
+    65210,
+    65211,
+    65212,
+    65213,
+    65217,
+    65218,
+    65219,
+    65220,
+    65222,
+    65239,
+    65241,
+    65242,
+    65243,
+    65244,
+    65245,
+    65246,
+    65247,
+    65248,
+    65258,
+    65260,
+    65261,
+    65263
+  ],
+  "scope": "Actual package, isolated synthetic data, controlled UI/IPC. No physical IME, external receiver or display acceptance.",
+  "titleCases": [
+    {
+      "mode": "detail",
+      "slowBackspace": true,
+      "emptyAcrossAutosave": true,
+      "focusCaretKept": true,
+      "typingWithoutSelectAll": true,
+      "compositionCloseBlockedAndCommitKept": true,
+      "contentIdentityDateKept": true
+    },
+    {
+      "mode": "calendar",
+      "slowBackspace": true,
+      "emptyAcrossAutosave": true,
+      "focusCaretKept": true,
+      "typingWithoutSelectAll": true,
+      "compositionCloseBlockedAndCommitKept": true,
+      "contentIdentityDateKept": true
+    }
+  ],
+  "cleanup": {
+    "normalQuit": true,
+    "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-packaged-positioning-MoebpD",
+    "profileRemoved": true,
+    "ownedPids": [
+      65209,
+      65210,
+      65211,
+      65212,
+      65213,
+      65217,
+      65218,
+      65219,
+      65220,
+      65222,
+      65239,
+      65241,
+      65242,
+      65243,
+      65244,
+      65245,
+      65246,
+      65247,
+      65248,
+      65258,
+      65260,
+      65261,
+      65263
+    ],
+    "allExited": true
+  },
+  "passed": true,
+  "worker": {
+    "pid": 65208,
+    "code": 0,
+    "signal": null
+  },
+  "stage": "worker-completed",
+  "launchEvents": [
+    {
+      "time": "2026-10-11T04:48:54.372Z",
+      "type": "spawn",
+      "pid": 65209,
+      "shell": false,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-11T04:48:54.521Z",
+      "type": "stderr",
+      "pid": 65209,
+      "text": "Debugger listening on ws://127.0.0.1:50100/08006516-5b17-42cb-bd25-74bf0394154f\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-11T04:48:54.593Z",
+      "type": "stderr",
+      "pid": 65209,
+      "text": "\nDevTools listening on ws://127.0.0.1:50102/devtools/browser/3a08a81a-4486-4750-ae67-e93d1074ff0b\n"
+    },
+    {
+      "time": "2026-10-11T04:48:54.629Z",
+      "type": "stderr",
+      "pid": 65209,
+      "text": "Debugger attached.\n"
+    },
+    {
+      "time": "2026-10-11T04:48:54.706Z",
+      "type": "stderr",
+      "pid": 65209,
+      "text": "2026-10-11 12:48:54.705 Thoughtline[65209:9516563] NSWindow does not support nonactivating panel styleMask 0x80\n"
+    },
+    {
+      "time": "2026-10-11T04:48:54.734Z",
+      "type": "stderr",
+      "pid": 65209,
+      "text": "2026-10-11 12:48:54.734 Thoughtline[65209:9516563] NSWindow does not support nonactivating panel styleMask 0x80\n"
+    },
+    {
+      "time": "2026-10-11T04:48:55.219Z",
+      "type": "stderr",
+      "pid": 65209,
+      "text": "2026-10-11 12:48:55.219 Thoughtline[65209:9516563] +[IMKClient subclass]: chose IMKClient_Modern\n"
+    },
+    {
+      "time": "2026-10-11T04:48:55.220Z",
+      "type": "stderr",
+      "pid": 65209,
+      "text": "2026-10-11 12:48:55.219 Thoughtline[65209:9516563] +[IMKInputSession subclass]: chose IMKInputSession_Modern\n"
+    },
+    {
+      "time": "2026-10-11T04:48:55.248Z",
+      "type": "stderr",
+      "pid": 65209,
+      "text": "2026-10-11 12:48:55.248 Thoughtline[65209:9516563] _TIPropertyValueIsValid called with 11 on nil context!\n2026-10-11 12:48:55.248 Thoughtline[65209:9516563] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 11, bailing.\n"
+    },
+    {
+      "time": "2026-10-11T04:48:55.248Z",
+      "type": "stderr",
+      "pid": 65209,
+      "text": "2026-10-11 12:48:55.248 Thoughtline[65209:9516563] _TIPropertyValueIsValid called with 12 on nil context!\n2026-10-11 12:48:55.248 Thoughtline[65209:9516563] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 12, bailing.\n"
+    },
+    {
+      "time": "2026-10-11T04:48:55.350Z",
+      "type": "stderr",
+      "pid": 65209,
+      "text": "2026-10-11 12:48:55.350 Thoughtline[65209:9516563] _TIPropertyValueIsValid called with 12 on nil context!\n2026-10-11 12:48:55.350 Thoughtline[65209:9516563] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 12, bailing.\n"
+    },
+    {
+      "time": "2026-10-11T04:48:55.671Z",
+      "type": "stderr",
+      "pid": 65209,
+      "text": "Debugger ending on ws://127.0.0.1:50100/08006516-5b17-42cb-bd25-74bf0394154f\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-11T04:48:55.818Z",
+      "type": "stderr",
+      "pid": 65209,
+      "text": "[65209:1011/124855.817090:ERROR:base/process/process_mac.cc:53] task_policy_set TASK_CATEGORY_POLICY: (os/kern) invalid argument (4)\n[65209:1011/124855.818061:ERROR:base/process/process_mac.cc:98] task_policy_set TASK_SUPPRESSION_POLICY: (os/kern) invalid argument (4)\n"
+    },
+    {
+      "time": "2026-10-11T04:48:55.834Z",
+      "type": "stderr",
+      "pid": 65209,
+      "text": "2026-10-11 12:48:55.834 Thoughtline[65209:9516563] _TIPropertyValueIsValid called with 11 on nil context!\n2026-10-11 12:48:55.834 Thoughtline[65209:9516563] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 11, bailing.\n"
+    },
+    {
+      "time": "2026-10-11T04:48:55.834Z",
+      "type": "stderr",
+      "pid": 65209,
+      "text": "2026-10-11 12:48:55.834 Thoughtline[65209:9516563] _TIPropertyValueIsValid called with 12 on nil context!\n2026-10-11 12:48:55.834 Thoughtline[65209:9516563] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 12, bailing.\n"
+    },
+    {
+      "time": "2026-10-11T04:48:55.863Z",
+      "type": "exit",
+      "pid": 65209,
+      "code": 0,
+      "signal": null
+    },
+    {
+      "time": "2026-10-11T04:48:55.866Z",
+      "type": "spawn",
+      "pid": 65217,
+      "shell": false,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-11T04:48:56.004Z",
+      "type": "stderr",
+      "pid": 65217,
+      "text": "Debugger listening on ws://127.0.0.1:50104/d159f60e-2d94-4c14-b8df-18314595c46e\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-11T04:48:56.005Z",
+      "type": "stderr",
+      "pid": 65217,
+      "text": "Debugger attached.\n"
+    },
+    {
+      "time": "2026-10-11T04:48:56.024Z",
+      "type": "stderr",
+      "pid": 65217,
+      "text": "\nDevTools listening on ws://127.0.0.1:50106/devtools/browser/9228bfb2-f00a-42e6-ad74-df86a3685003\n"
+    },
+    {
+      "time": "2026-10-11T04:48:56.087Z",
+      "type": "stderr",
+      "pid": 65217,
+      "text": "2026-10-11 12:48:56.086 Thoughtline[65217:9516768] NSWindow does not support nonactivating panel styleMask 0x80\n"
+    },
+    {
+      "time": "2026-10-11T04:48:56.114Z",
+      "type": "stderr",
+      "pid": 65217,
+      "text": "2026-10-11 12:48:56.114 Thoughtline[65217:9516768] NSWindow does not support nonactivating panel styleMask 0x80\n"
+    },
+    {
+      "time": "2026-10-11T04:48:56.639Z",
+      "type": "stderr",
+      "pid": 65217,
+      "text": "2026-10-11 12:48:56.639 Thoughtline[65217:9516768] +[IMKClient subclass]: chose IMKClient_Modern\n2026-10-11 12:48:56.639 Thoughtline[65217:9516768] +[IMKInputSession subclass]: chose IMKInputSession_Modern\n"
+    },
+    {
+      "time": "2026-10-11T04:48:56.702Z",
+      "type": "stderr",
+      "pid": 65217,
+      "text": "2026-10-11 12:48:56.702 Thoughtline[65217:9516768] _TIPropertyValueIsValid called with 11 on nil context!\n2026-10-11 12:48:56.702 Thoughtline[65217:9516768] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 11, bailing.\n"
+    },
+    {
+      "time": "2026-10-11T04:48:56.703Z",
+      "type": "stderr",
+      "pid": 65217,
+      "text": "2026-10-11 12:48:56.702 Thoughtline[65217:9516768] _TIPropertyValueIsValid called with 12 on nil context!\n2026-10-11 12:48:56.702 Thoughtline[65217:9516768] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 12, bailing.\n"
+    },
+    {
+      "time": "2026-10-11T04:48:56.711Z",
+      "type": "stderr",
+      "pid": 65217,
+      "text": "Debugger ending on ws://127.0.0.1:50104/d159f60e-2d94-4c14-b8df-18314595c46e\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-11T04:48:57.181Z",
+      "type": "exit",
+      "pid": 65217,
+      "code": 0,
+      "signal": null
+    },
+    {
+      "time": "2026-10-11T04:48:57.183Z",
+      "type": "spawn",
+      "pid": 65239,
+      "shell": false,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-11T04:48:57.316Z",
+      "type": "stderr",
+      "pid": 65239,
+      "text": "Debugger listening on ws://127.0.0.1:50108/8ecc88f0-1e66-4cea-b2a1-51203d1699a5\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-11T04:48:57.317Z",
+      "type": "stderr",
+      "pid": 65239,
+      "text": "Debugger attached.\n"
+    },
+    {
+      "time": "2026-10-11T04:48:57.336Z",
+      "type": "stderr",
+      "pid": 65239,
+      "text": "\nDevTools listening on ws://127.0.0.1:50110/devtools/browser/8bb12db6-6eb5-431e-bebf-437d36e99ed2\n"
+    },
+    {
+      "time": "2026-10-11T04:48:57.400Z",
+      "type": "stderr",
+      "pid": 65239,
+      "text": "2026-10-11 12:48:57.400 Thoughtline[65239:9517106] NSWindow does not support nonactivating panel styleMask 0x80\n"
+    },
+    {
+      "time": "2026-10-11T04:48:57.431Z",
+      "type": "stderr",
+      "pid": 65239,
+      "text": "2026-10-11 12:48:57.431 Thoughtline[65239:9517106] NSWindow does not support nonactivating panel styleMask 0x80\n"
+    },
+    {
+      "time": "2026-10-11T04:48:57.637Z",
+      "type": "stderr",
+      "pid": 65239,
+      "text": "Debugger ending on ws://127.0.0.1:50108/8ecc88f0-1e66-4cea-b2a1-51203d1699a5\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-11T04:48:57.766Z",
+      "type": "exit",
+      "pid": 65239,
+      "code": 0,
+      "signal": null
+    },
+    {
+      "time": "2026-10-11T04:48:57.768Z",
+      "type": "spawn",
+      "pid": 65244,
+      "shell": false,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-11T04:48:57.882Z",
+      "type": "stderr",
+      "pid": 65244,
+      "text": "Debugger listening on ws://127.0.0.1:50112/8114aa9b-4df0-43a0-b74e-70c231119c8b\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-11T04:48:57.883Z",
+      "type": "stderr",
+      "pid": 65244,
+      "text": "Debugger attached.\n"
+    },
+    {
+      "time": "2026-10-11T04:48:57.900Z",
+      "type": "stderr",
+      "pid": 65244,
+      "text": "\nDevTools listening on ws://127.0.0.1:50114/devtools/browser/b2fb34b8-cd7e-403e-9fd0-0aa95660f408\n"
+    },
+    {
+      "time": "2026-10-11T04:48:57.966Z",
+      "type": "stderr",
+      "pid": 65244,
+      "text": "2026-10-11 12:48:57.966 Thoughtline[65244:9517232] NSWindow does not support nonactivating panel styleMask 0x80\n"
+    },
+    {
+      "time": "2026-10-11T04:48:57.994Z",
+      "type": "stderr",
+      "pid": 65244,
+      "text": "2026-10-11 12:48:57.994 Thoughtline[65244:9517232] NSWindow does not support nonactivating panel styleMask 0x80\n"
+    },
+    {
+      "time": "2026-10-11T04:48:58.490Z",
+      "type": "stderr",
+      "pid": 65244,
+      "text": "2026-10-11 12:48:58.490 Thoughtline[65244:9517232] +[IMKClient subclass]: chose IMKClient_Modern\n2026-10-11 12:48:58.490 Thoughtline[65244:9517232] +[IMKInputSession subclass]: chose IMKInputSession_Modern\n"
+    },
+    {
+      "time": "2026-10-11T04:49:09.717Z",
+      "type": "stderr",
+      "pid": 65244,
+      "text": "Debugger ending on ws://127.0.0.1:50112/8114aa9b-4df0-43a0-b74e-70c231119c8b\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-11T04:49:09.775Z",
+      "type": "exit",
+      "pid": 65244,
+      "code": 0,
+      "signal": null
+    },
+    {
+      "time": "2026-10-11T04:49:09.776Z",
+      "type": "spawn",
+      "pid": 65258,
+      "shell": false,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-11T04:49:09.922Z",
+      "type": "stderr",
+      "pid": 65258,
+      "text": "Debugger listening on ws://127.0.0.1:50116/c51b73fc-26f9-4094-b624-669a353ec162\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-11T04:49:09.923Z",
+      "type": "stderr",
+      "pid": 65258,
+      "text": "Debugger attached.\n"
+    },
+    {
+      "time": "2026-10-11T04:49:09.943Z",
+      "type": "stderr",
+      "pid": 65258,
+      "text": "\nDevTools listening on ws://127.0.0.1:50118/devtools/browser/619a0f46-8408-48ad-b921-0fb2e3f6d17e\n"
+    },
+    {
+      "time": "2026-10-11T04:49:10.012Z",
+      "type": "stderr",
+      "pid": 65258,
+      "text": "2026-10-11 12:49:10.012 Thoughtline[65258:9518186] NSWindow does not support nonactivating panel styleMask 0x80\n"
+    },
+    {
+      "time": "2026-10-11T04:49:10.041Z",
+      "type": "stderr",
+      "pid": 65258,
+      "text": "2026-10-11 12:49:10.041 Thoughtline[65258:9518186] NSWindow does not support nonactivating panel styleMask 0x80\n"
+    },
+    {
+      "time": "2026-10-11T04:49:10.194Z",
+      "type": "stderr",
+      "pid": 65258,
+      "text": "Debugger ending on ws://127.0.0.1:50116/c51b73fc-26f9-4094-b624-669a353ec162\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-11T04:49:10.239Z",
+      "type": "exit",
+      "pid": 65258,
+      "code": 0,
+      "signal": null
+    }
+  ],
+  "observedPidState": [
+    {
+      "pid": 65209,
+      "alive": false
+    },
+    {
+      "pid": 65217,
+      "alive": false
+    },
+    {
+      "pid": 65239,
+      "alive": false
+    },
+    {
+      "pid": 65244,
+      "alive": false
+    },
+    {
+      "pid": 65258,
+      "alive": false
+    }
+  ]
+}

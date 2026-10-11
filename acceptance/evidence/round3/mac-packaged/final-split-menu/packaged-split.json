@@ -1,0 +1,97 @@
+{
+  "executable": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/dist/mac-arm64/Thoughtline.app/Contents/MacOS/Thoughtline",
+  "packaged": true,
+  "platform": "darwin",
+  "version": "0.0.22",
+  "scope": "actual packaged executable, synthetic isolated data, native menu callback interception; no physical click",
+  "pids": [
+    65268,
+    65269,
+    65270,
+    65271
+  ],
+  "checks": [
+    "packaged-English-menu-splits-current-thought-without-opening-window",
+    "packaged-right-click-undo-preserves-original-stack-and-text",
+    "packaged-Merge-targets-current-paper-and-keeps-content",
+    "packaged-merge-undo-restores-both-groups"
+  ],
+  "cleanup": {
+    "normalQuit": true,
+    "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-packaged-split-GKTdZa",
+    "profileRemoved": true,
+    "ownedPids": [
+      65268,
+      65269,
+      65270,
+      65271
+    ],
+    "allExited": true
+  },
+  "dataRemoved": true,
+  "passed": true,
+  "worker": {
+    "pid": 65264,
+    "code": 0,
+    "signal": null
+  },
+  "stage": "worker-completed",
+  "launchEvents": [
+    {
+      "time": "2026-10-11T04:49:10.547Z",
+      "type": "spawn",
+      "pid": 65268,
+      "shell": false,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-11T04:49:10.660Z",
+      "type": "stderr",
+      "pid": 65268,
+      "text": "Debugger listening on ws://127.0.0.1:50135/92bd058b-5a63-414e-8e41-1020dc84dfc6\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-11T04:49:10.665Z",
+      "type": "stderr",
+      "pid": 65268,
+      "text": "Debugger attached.\n"
+    },
+    {
+      "time": "2026-10-11T04:49:10.678Z",
+      "type": "stderr",
+      "pid": 65268,
+      "text": "\nDevTools listening on ws://127.0.0.1:50137/devtools/browser/50b4a8b9-164b-4c09-9755-d816105272bc\n"
+    },
+    {
+      "time": "2026-10-11T04:49:10.744Z",
+      "type": "stderr",
+      "pid": 65268,
+      "text": "2026-10-11 12:49:10.744 Thoughtline[65268:9518417] NSWindow does not support nonactivating panel styleMask 0x80\n"
+    },
+    {
+      "time": "2026-10-11T04:49:10.773Z",
+      "type": "stderr",
+      "pid": 65268,
+      "text": "2026-10-11 12:49:10.771 Thoughtline[65268:9518417] NSWindow does not support nonactivating panel styleMask 0x80\n"
+    },
+    {
+      "time": "2026-10-11T04:49:11.198Z",
+      "type": "stderr",
+      "pid": 65268,
+      "text": "Debugger ending on ws://127.0.0.1:50135/92bd058b-5a63-414e-8e41-1020dc84dfc6\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-11T04:49:11.228Z",
+      "type": "exit",
+      "pid": 65268,
+      "code": 0,
+      "signal": null
+    }
+  ],
+  "observedPidState": [
+    {
+      "pid": 65268,
+      "alive": false
+    }
+  ]
+}
