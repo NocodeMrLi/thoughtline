@@ -59,7 +59,8 @@ const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:
   await start(seed());const failureBefore=(await info()).snapshot;
   await app.evaluate(()=>{const io=globalThis.thoughtlineTestIO;globalThis.splitOriginalWrite=io.writeFile;io.writeFile=async(p,...args)=>{if(String(p).includes('snapshot'))throw Error('owned-split-write-failure');return globalThis.splitOriginalWrite(p,...args);};});
   await menu('b');await click('拆分');await waitForInfo(shelf,i=>i.placementNotice?.includes('owned-split-write-failure'));assert.deepEqual((await info()).snapshot,failureBefore);
-  await shelf.getByRole('status').filter({hasText:'owned-split-write-failure'}).waitFor();
+  await shelf.getByRole('alert').filter({hasText:'owned-split-write-failure'}).waitFor();
+  await shelf.waitForTimeout(4300);assert.equal(await shelf.getByRole('alert').filter({hasText:'owned-split-write-failure'}).count(),1,'IO failure must remain visible beyond the long notice timeout');
   await app.evaluate(()=>{globalThis.thoughtlineTestIO.writeFile=globalThis.splitOriginalWrite;});pass('write-failure-visible-on-shelf-with-original-data-intact');
   await menu('b');await click('拆分');i=await waitForInfo(shelf,i=>i.snapshot.clips.some(c=>c.ideaIds.length===1&&c.currentId==='b'));
   assert((await manage.evaluate(rev=>window.thoughtline.projectDelete('可删除分组',rev),i.snapshot.revision)).ok);await change({kind:'undo'});
