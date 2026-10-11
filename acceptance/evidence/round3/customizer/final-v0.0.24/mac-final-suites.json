@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "version": "0.0.24",
+  "source": "62d9302351d6d339f417007e1dce3da4cecafc3b",
+  "actualPackageChecks": 84,
+  "suites": [
+    {
+      "receipt": "acceptance/evidence/round3/customizer/final-v0.0.24/mac-reader/final-3jaoQe/receipt.json",
+      "checks": 10,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "receipt": "acceptance/evidence/round3/customizer/final-v0.0.24/mac-customizer/final-CJbT3H/receipt.json",
+      "checks": 6,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "receipt": "acceptance/evidence/round3/customizer/final-v0.0.24/mac-appearance/final-dYJw7J/receipt.json",
+      "checks": 14,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "receipt": "acceptance/evidence/round3/customizer/final-v0.0.24/mac-round3/packaged-round-three.json",
+      "checks": 10,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "receipt": "acceptance/evidence/round3/customizer/final-v0.0.24/mac-round21/packaged-round-twenty-one.json",
+      "checks": 24,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "receipt": "acceptance/evidence/round3/customizer/final-v0.0.24/mac-capacity/packaged-capacity.json",
+      "checks": 4,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "receipt": "acceptance/evidence/round3/customizer/final-v0.0.24/mac-positioning/packaged-positioning.json",
+      "checks": 9,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "receipt": "acceptance/evidence/round3/customizer/final-v0.0.24/mac-split/packaged-split.json",
+      "checks": 4,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "receipt": "acceptance/evidence/round3/customizer/final-v0.0.24/mac-basic-appearance/packaged-appearance.json",
+      "checks": 3,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    }
+  ],
+  "nativeNotification": {
+    "scope": "Real native permission query and scheduler delivery events; no automatic permission granting, physical banner/click, or OS settings changes.",
+    "access": "granted",
+    "events": [
+      {
+        "event": "show",
+        "data": [
+          "[object Object]"
+        ]
+      }
+    ],
+    "state": "notified"
+  },
+  "scope": "Final actual Mac package. 24 language/theme/dimension, 20 reader paper/theme/entry, 30 appearance combinations are subchecks, not double-counted. Physical IME/DPI/actual-app fullscreen/banner/click/DND/animation/LaunchServices/user acceptance separate.",
+  "restartScope": "Restored state, appearance and content persistence after restart. JSON round-trip validates original deleted-clip metadata; deletion-in-progress restart and tag-filter restore notice require additional physical/targeted confirmation."
+}

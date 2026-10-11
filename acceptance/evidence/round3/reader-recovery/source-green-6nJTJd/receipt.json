@@ -1,0 +1,21 @@
+{
+  "platform": "darwin",
+  "packaged": false,
+  "checks": [
+    "readonly-title-body-selected-paper-and-pink-border-stay-on-focus",
+    "edit-finish-keeps-paper-and-color-without-content-change"
+  ],
+  "pids": [
+    35344,
+    35344,
+    35345,
+    35346,
+    35347,
+    35352
+  ],
+  "scope": "Owned actual Electron pages and repository; no physical IME/DPI/user acceptance",
+  "passed": false,
+  "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '念头日历', exact: true })\u001b[22m\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-reader-recovery-workflow.cjs:15:782",
+  "normalQuit": true,
+  "profileRemoved": true
+}

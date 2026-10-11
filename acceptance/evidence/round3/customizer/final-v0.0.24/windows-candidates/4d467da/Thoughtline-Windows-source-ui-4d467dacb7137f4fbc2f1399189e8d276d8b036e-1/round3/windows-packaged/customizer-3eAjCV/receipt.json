@@ -1,0 +1,19 @@
+{
+  "platform": "win32",
+  "packaged": true,
+  "checks": [],
+  "geometry": [],
+  "scope": "isolated actual Electron windows; controlled dimensions, not physical DPI or user acceptance",
+  "pids": [
+    8648,
+    4260,
+    5868,
+    4112,
+    7036,
+    4200
+  ],
+  "passed": false,
+  "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '更换挂绳', exact: true })\u001b[22m\n\n    at choose (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round3-customizer-workflow.cjs:12:71)\n    at open (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round3-customizer-workflow.cjs:13:26)\n    at D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round3-customizer-workflow.cjs:19:185",
+  "normalQuit": true,
+  "profileRemoved": true
+}

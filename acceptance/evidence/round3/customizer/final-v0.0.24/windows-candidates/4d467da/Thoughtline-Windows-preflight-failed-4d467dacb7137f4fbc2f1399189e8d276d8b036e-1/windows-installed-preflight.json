@@ -1,0 +1,40 @@
+{
+  "scope": "Hosted Windows runner packaged app; synthetic fixture, no physical IME/mouse/desktop acceptance",
+  "version": "0.0.24",
+  "headSha": "4d467dacb7137f4fbc2f1399189e8d276d8b036e",
+  "checks": {
+    "existingSchema2Read": true,
+    "singleInstance": true,
+    "packagedCommitAndNormalQuit": true,
+    "exactSchema2BackupRestart": true,
+    "locationConfigPreserved": true,
+    "packagedOutputsMatchBuild": true,
+    "compiledWindowsTrayUsesApprovedIco": true
+  },
+  "runtime": {
+    "version": "0.0.24",
+    "dataDir": "C:\\Users\\runneradmin\\AppData\\Roaming\\Thoughtline",
+    "arch": "x64",
+    "platform": "win32",
+    "electron": "44.7.0",
+    "shelf": [
+      {
+        "title": "Thoughtline Shelf",
+        "visible": false,
+        "focusable": false
+      }
+    ]
+  },
+  "packagedHashes": {
+    "out/main/index.js": "8c65671a047739473c2a122aabcc78ba00162baab4a8d10ab7bea48c77c89c66",
+    "out/preload/index.js": "2ef3694646187d2b8139a9d2b07d6f1f0371e910ff69cf0d01248b1405ab4048",
+    "out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg": "313485e59395e3165f6504964efd72f4a3811150ac337834be3e2759f279f778",
+    "out/renderer/assets/index-BVk-zGir.css": "06ceaa95930e187c95c6f9464206c287f7e15807ee956fa769e324b9a426abbd",
+    "out/renderer/assets/index-ZY3M3KCO.js": "1f2653d73de93c14f703f41c24b336d07666350ce8e2825d32ba11c0620c4191",
+    "out/renderer/index.html": "56e171e6fc1fee769c65ce4589bbf501e1e0c18606dd06a934e8e21b9568efd0",
+    "assets/app-icon.png": "343785a7f5033a47815aa91c48b71c2107142fcbfc6ed90f65d7e2725cbc81d2",
+    "assets/app-icon.ico": "bb6ae2a33ae37645a74f18162a706b622fd5560d9f1b4e77944c4c6acdb7fb26",
+    "assets/tray-win.ico": "554d68ea46760d7b863ce2f5380459be5236cb0e39cc6a1427791ca6f4f5f7c8"
+  },
+  "passed": true
+}

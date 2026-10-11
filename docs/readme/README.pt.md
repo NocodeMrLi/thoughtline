@@ -33,9 +33,9 @@ Thoughtline é uma ferramenta leve para macOS e Windows. Abra suas ideias na bor
 - Escolha 4, 6 ou 8 prendedores em Calendário → Mais → Armazenamento e configurações; o padrão é 6. As folhas se ajustam proporcionalmente à tela, com aumento moderado na opção 4. Novas ideias salvas com a corda cheia ocupam vagas liberadas, da mais recente à mais antiga; registros antigos e ideias arquivadas manualmente não voltam automaticamente.
 - Personalize corda e papel em Calendário → Mais → Armazenamento e configurações → Aparência. A corda clássica permite cores livres; o algodão mantém seu tom natural e a trepadeira permanece verde. Os prendedores seguem as cores das etiquetas. Escolha cinco tons suaves de papel e folhas lisas, pautadas ou com linhas tracejadas. A prévia só é salva ao Aplicar; Cancelar ou Voltar a descarta. As configurações separam Aparência, Controles e Dados e backup. Os menus separam cor e superfície; a prévia completa e Aplicar permanecem visíveis.
 - Mova um prendedor ou separe uma folha. No menu de contexto, **Merge** permite escolher um prendedor compatível e **Split** separa a ideia atual. Quando necessário, a separação reúne os espaços dispersos; a organização automática mantém a ordem da esquerda para a direita. Você pode desfazer a organização.
-- Edite na visualização detalhada ou no calendário, com salvamento após uma breve pausa e troca imediata de página.
+- Edite na visualização detalhada ou no calendário, com salvamento após uma breve pausa e troca imediata de página. Leitura e edição usam a borda da etiqueta e o tom de papel escolhido.
 - Navegue por dia, mês ou ano; pesquise e filtre também ideias arquivadas.
-- Restaure notas em Excluídos recentemente. Excluir um projeto mantém suas ideias.
+- Restaure notas em Excluídos recentemente. Excluir um projeto mantém suas ideias. Ideias penduradas voltam ao prendedor original ou a uma vaga; se a corda estiver cheia, voltam ao calendário e podem ser trocadas.
 - Copie ou arraste texto simples. A nota original permanece e nada é enviado automaticamente.
 - Guarde dados localmente; veja a pasta real, mova-a ou exporte um backup independente.
 - Alterne chinês/inglês e modo claro/escuro nas primeiras janelas, ou acompanhe o sistema; o papel continua suave e legível.

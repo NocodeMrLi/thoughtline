@@ -1,0 +1,18 @@
+{
+  "platform": "darwin",
+  "packaged": false,
+  "checks": [],
+  "geometry": [],
+  "scope": "isolated actual Electron windows; controlled dimensions, not physical DPI or user acceptance",
+  "pids": [
+    34353,
+    34353,
+    34356,
+    34358,
+    34361
+  ],
+  "passed": false,
+  "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert((await shelf.evaluate(request=>window.thoughtline.setPreferences({locale:'zh-CN',theme:'light'},request),preferenceRequest++)).ok)\n\n    at launch (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-customizer-workflow.cjs:11:193)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-customizer-workflow.cjs:19:3",
+  "normalQuit": true,
+  "profileRemoved": true
+}

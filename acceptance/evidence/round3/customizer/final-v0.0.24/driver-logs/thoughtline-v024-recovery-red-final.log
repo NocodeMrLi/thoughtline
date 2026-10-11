@@ -1,0 +1,103 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/round3Recovery.test.ts (6 tests | 5 failed) 48ms
+   × restores a deleted stacked page into the original compatible clip without consuming a full-rope slot 39ms
+   × full-rope restore preserves all current clips and content in calendar, without auto-backfill enrollment 2ms
+   × restores original solitary clip identity and position if it is still free 1ms
+   × legacy deleted records without original clip metadata still respect capacity 2ms
+   × rejects malformed recovery metadata and accepts a valid JSON round trip 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/round3Recovery.test.ts > restores a deleted stacked page into the original compatible clip without consuming a full-rope slot
+AssertionError: expected [ { id: 'clip:two', …(4) }, …(4) ] to have a length of 4 but got 5
+
+- Expected
++ Received
+
+- 4
++ 5
+
+ ❯ tests/unit/round3Recovery.test.ts:10:344
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/unit/round3Recovery.test.ts > full-rope restore preserves all current clips and content in calendar, without auto-backfill enrollment
+AssertionError: expected [ { id: 'clip:two', …(4) }, …(4) ] to deeply equal [ { id: 'clip:two', …(4) }, …(3) ]
+
+- Expected
++ Received
+
+@@ -33,6 +33,15 @@
+      "ideaIds": [
+        "replacement",
+      ],
+      "position": null,
+    },
++   {
++     "agentId": "general",
++     "currentId": "one",
++     "id": "clip:one",
++     "ideaIds": [
++       "one",
++     ],
++     "position": null,
++   },
+  ]
+
+ ❯ tests/unit/round3Recovery.test.ts:11:275
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/unit/round3Recovery.test.ts > restores original solitary clip identity and position if it is still free
+AssertionError: expected { id: 'clip:one', …(4) } to match object { id: 'clip:one', position: 0.12 }
+(3 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "id": "clip:one",
+-   "position": 0.12,
++   "position": null,
+  }
+
+ ❯ tests/unit/round3Recovery.test.ts:12:252
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/unit/round3Recovery.test.ts > legacy deleted records without original clip metadata still respect capacity
+AssertionError: expected 'hanging' to be 'archived' // Object.is equality
+
+Expected: "archived"
+Received: "hanging"
+
+ ❯ tests/unit/round3Recovery.test.ts:14:283
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/unit/round3Recovery.test.ts > rejects malformed recovery metadata and accepts a valid JSON round trip
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/round3Recovery.test.ts:15:422
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 1 passed (6)
+   Start at  00:21:49
+   Duration  222ms (transform 57%, tests 32%, import 9%, worker 2%)
+

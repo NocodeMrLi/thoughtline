@@ -99,3 +99,8 @@ Windows f39226e第二次已通过标题独存/本轮新外观/第二轮/存储�
 Mac verify315通过4跳过，版本0.0.24。补位20次merge／undo、原先最新待挂补位、IO原子失败及4/8/6全部通过；连续两次按最新到次新与同时间确定顺序单测通过。未改自动补位产品行为，未读真实数据；用户那次操作候选来源／筛选仍需对应条件，不能称已证明其原因。定制最小350×360留白与焦点红例修复后，24组合通过；去掉页面重复定制标题，标题移入原窗口header以增大预览。新外点测试预览中心被菜单覆盖导致超时，改明确预览左上角真实点击，不使用force。首次测试清理滞留自有15406通过已核本机inspector重发app.quit正常退出，未发送系统终止信号。
 
 0.0.24源码验证：315通过/4Windows专用跳过，类型/构建通过。定制页6点含中英/昼夜/740×540、480×420、350×360共24组合；原外观14点、更多菜单及设置生命周期通过。补位4点含20次合并/撤销，连续两次排序另有单测，未复现产品漏补，不修改候选来源规则。实际新包及Windows仍待验证。
+
+
+## 2026-10-12 0.0.24最终收口
+
+Final source62d9302351d6d339f417007e1dce3da4cecafc3b; WindowsCI38157102205 success, Mac323+4skip/Win327, final packaged84each. 306input objects/modes and279exactCRLF proof; Mac native signature replay/Windows9installed hashes bound. Release409807192 formal/private33assets all sizes+digests checked, prior23/22/21 unchanged. Cleanup ownedAllocated1179.05MiB, no net space claim; user/QA no signals. Docs/README/gates updated; main docs/evidence push pending final readback. Click report chat only; physical/user acceptance and deleted-in-progress restart/filter notice targeted confirmation remain pending.

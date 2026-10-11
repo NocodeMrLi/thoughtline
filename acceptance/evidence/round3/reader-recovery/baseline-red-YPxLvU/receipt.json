@@ -1,0 +1,17 @@
+{
+  "platform": "darwin",
+  "packaged": false,
+  "checks": [],
+  "pids": [
+    34694,
+    34694,
+    34695,
+    34696,
+    34697
+  ],
+  "scope": "Owned actual Electron pages and repository; no physical IME/DPI/user acceptance",
+  "passed": false,
+  "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert((await shelf.evaluate(request=>window.thoughtline.setPreferences({locale:'zh-CN',theme:'dark'},request),sequence++)).ok)\n\n    at launch (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-reader-recovery-workflow.cjs:5:717)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-reader-recovery-workflow.cjs:12:791",
+  "normalQuit": true,
+  "profileRemoved": true
+}

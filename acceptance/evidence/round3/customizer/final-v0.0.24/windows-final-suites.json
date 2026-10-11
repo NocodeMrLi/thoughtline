@@ -1,0 +1,107 @@
+{
+  "passed": true,
+  "source": "62d9302351d6d339f417007e1dce3da4cecafc3b",
+  "version": "0.0.24",
+  "windowsRun": 38157102205,
+  "checkpoints": 84,
+  "suites": [
+    {
+      "file": "acceptance/evidence/round3/customizer/final-v0.0.24/windows-final/round3/windows-packaged/packaged-round-three.json",
+      "checks": 10,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/customizer/final-v0.0.24/windows-final/round3/windows-packaged/appearance-KYRe2U/receipt.json",
+      "checks": 14,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/customizer/final-v0.0.24/windows-final/round3/windows-packaged/customizer-NXevTS/receipt.json",
+      "checks": 6,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/customizer/final-v0.0.24/windows-final/round3/windows-packaged/reader-SF0xZi/receipt.json",
+      "checks": 10,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/customizer/final-v0.0.24/windows-final/round2/windows/packaged-capacity/packaged-round-twenty-one.json",
+      "checks": 24,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/customizer/final-v0.0.24/windows-final/round2/windows/packaged-capacity/packaged-capacity.json",
+      "checks": 4,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/customizer/final-v0.0.24/windows-final/round2/windows/packaged-capacity/packaged-positioning.json",
+      "checks": 9,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/customizer/final-v0.0.24/windows-final/round2/windows/packaged-split/packaged-split.json",
+      "checks": 4,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/customizer/final-v0.0.24/windows-final/appearance/windows-packaged/packaged-appearance.json",
+      "checks": 3,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    }
+  ],
+  "installedRound3": {
+    "checks": 10,
+    "countedAgain": false,
+    "passed": true
+  },
+  "native": {
+    "scope": "Real native permission query and scheduler delivery events; no automatic permission granting, physical banner/click, or OS settings changes.",
+    "access": "unknown",
+    "events": [
+      {
+        "event": "show",
+        "data": [
+          "[object Object]"
+        ]
+      },
+      {
+        "event": "close",
+        "data": [
+          "[object Object]"
+        ]
+      }
+    ],
+    "state": "notified"
+  },
+  "sourceChecks": {
+    "unitPassed": 327,
+    "typecheck": true,
+    "build": true,
+    "customizer": 6,
+    "customizerSubCombinations": 24,
+    "reader": 10,
+    "readerSubCombinations": 20,
+    "appearance": 14
+  },
+  "scope": "Same frozen source Windows runner runtime, real NSIS install/reinstall/uninstall and actual package; no physical device acceptance"
+}

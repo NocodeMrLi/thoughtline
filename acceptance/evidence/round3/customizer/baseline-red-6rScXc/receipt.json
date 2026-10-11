@@ -1,0 +1,60 @@
+{
+  "platform": "darwin",
+  "packaged": false,
+  "checks": [],
+  "geometry": [
+    {
+      "label": "baseline-rope",
+      "viewport": {
+        "width": 500,
+        "height": 600
+      },
+      "preview": {
+        "top": 200,
+        "bottom": 495,
+        "left": 39,
+        "right": 446,
+        "width": 407,
+        "height": 295
+      },
+      "paper": {
+        "top": 256,
+        "bottom": 448.1000061035156,
+        "left": 174.5,
+        "right": 310.5,
+        "width": 136,
+        "height": 192.10000610351562
+      },
+      "clip": {
+        "top": 229.64999389648438,
+        "bottom": 267.04998779296875,
+        "left": 229.49765014648438,
+        "right": 255.49569702148438,
+        "width": 25.998046875,
+        "height": 37.399993896484375
+      },
+      "actions": {
+        "top": 661,
+        "bottom": 697,
+        "left": 39,
+        "right": 446,
+        "width": 407,
+        "height": 36
+      },
+      "scroll": 0
+    }
+  ],
+  "scope": "isolated actual Electron windows; controlled dimensions, not physical DPI or user acceptance",
+  "pids": [
+    15052,
+    15052,
+    15058,
+    15059,
+    15063,
+    15064
+  ],
+  "passed": false,
+  "error": "AssertionError [ERR_ASSERTION]: actions must be visible without scrolling\n    at fit (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-customizer-workflow.cjs:15:567)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-customizer-workflow.cjs:19:115",
+  "normalQuit": true,
+  "profileRemoved": true
+}

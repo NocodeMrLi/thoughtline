@@ -1,0 +1,18 @@
+{
+  "source": "ebca6770db4c3ee50f064df8b3e5751ff889194e",
+  "passed": true,
+  "review": "Main-window source/diff/state-contract audit; no delegated agent",
+  "checks": [
+    "metadata optional and validated; no legacy guessed group",
+    "restore stored state uses capacity and all-tag membership rather than deletion entry",
+    "original compatible visible group reused, preserves content/date and cancelled reminder",
+    "full calendar-only/manual restoration does not evict existing clips or silently enroll backfill",
+    "persistent IO error with unchanged snapshot and explicit retry",
+    "current restored reader remains visible for local outcome and swap",
+    "one paper frame carries palette and readable tag hue in read/edit",
+    "no accounts, network sync, continuous clipboard or reference source changes"
+  ],
+  "remaining": [
+    "physical display and receiving-app conditions separately pending"
+  ]
+}

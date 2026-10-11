@@ -33,9 +33,9 @@ Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ide
 - Choose 4, 6 or 8 clips in Calendar → More → Storage & Settings; the default is 6. Sheets scale proportionally to the display, with only a modest increase at 4. Newly saved thoughts waiting on a full line fill freed slots, newest first; legacy off-line and manually archived thoughts remain under your control. Separate dropdowns keep the full preview and Apply visible while adjusting.
 - Customize rope and paper in Calendar → More → Storage and settings → Appearance. The classic cord supports custom colors; braided cotton keeps its natural fiber tone, and the vine stays green. Clip colors continue to follow tags. Choose five soft paper presets and blank, ruled or dashed paper. Preview before Apply; Cancel or Back discards the preview. Settings separates Appearance, Controls, and Data.
 - Move a whole clip or pull out one paper. Right-click **Merge** to choose a compatible clip, or **Split** to separate the current thought. Splitting compacts fragmented spacing when needed; **Auto arrange** keeps left-to-right order. Arrangement can be undone.
-- Edit directly in the detail view or calendar; autosave after a short pause and turn pages instantly.
+- Edit directly in the detail view or calendar; autosave after a short pause and turn pages instantly. Reading and editing share the tag-colored border and selected paper tone.
 - Browse by day, month, or year; search and filter, including archived thoughts.
-- Recover deleted thoughts from Recently Deleted. Removing a project keeps its thoughts.
+- Recover deleted thoughts from Recently Deleted. Removing a project keeps its thoughts. Previously hanging thoughts return to their original clip or a free slot; when full, restore to the calendar and choose Swap in.
 - Copy text or drag the body as plain text. The source note stays in place; nothing is sent automatically.
 - Keep data locally; inspect the actual folder, move it, or export an independent backup.
 - Switch Chinese/English and light/dark directly in the first-level windows, or follow the system; paper stays soft and readable.

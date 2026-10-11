@@ -1,0 +1,26 @@
+{
+  "status": "Mac and source verification passed; final Windows package evidence pending",
+  "version": "0.0.24",
+  "source": "4d467dacb7137f4fbc2f1399189e8d276d8b036e",
+  "productQueueModified": false,
+  "priority": "createdAt descending, id deterministic for equal time",
+  "eligible": [
+    "waiting after full-rope save",
+    "capacity overflow after lowering capacity"
+  ],
+  "excluded": [
+    "legacy unspecified origin",
+    "manual archive",
+    "replacement victim",
+    "draft",
+    "deleted"
+  ],
+  "tagFilterApplies": true,
+  "wholeClipMustVacateSlot": true,
+  "sourceMergeUndoRepetitions": 20,
+  "sequentialAndTieUnitChecks": 2,
+  "macActualPackage": "mac-backfill-complete/packaged-round-three.json",
+  "sourceReceipt": "acceptance/evidence/round3/capacity/v024-backfill-final-QkzVUP/receipt.json",
+  "userObservedCauseConfirmed": false,
+  "scope": "Existing approved queue semantics verified; no instability reproduced in tested paths, no claim all user conditions passed"
+}

@@ -1,0 +1,62 @@
+{
+  "platform": "darwin",
+  "packaged": false,
+  "checks": [
+    "default-complete-preview-and-actions"
+  ],
+  "geometry": [
+    {
+      "label": "baseline-rope",
+      "viewport": {
+        "width": 500,
+        "height": 600
+      },
+      "preview": {
+        "top": 171,
+        "bottom": 445.5,
+        "left": 22,
+        "right": 478,
+        "width": 456,
+        "height": 274.5
+      },
+      "paper": {
+        "top": 227.34666442871094,
+        "bottom": 422.46002197265625,
+        "left": 180.92813110351562,
+        "right": 319.06146240234375,
+        "width": 138.13333129882812,
+        "height": 195.1133575439453
+      },
+      "clip": {
+        "top": 200.5833282470703,
+        "bottom": 238.57000732421875,
+        "left": 238.77145385742188,
+        "right": 261.2181396484375,
+        "width": 22.446685791015625,
+        "height": 37.98667907714844
+      },
+      "actions": {
+        "top": 540,
+        "bottom": 580,
+        "left": 22,
+        "right": 478,
+        "width": 456,
+        "height": 40
+      },
+      "scroll": 0
+    }
+  ],
+  "scope": "isolated actual Electron windows; controlled dimensions, not physical DPI or user acceptance",
+  "pids": [
+    15286,
+    15286,
+    15287,
+    15288,
+    15289,
+    15298
+  ],
+  "passed": false,
+  "error": "TypeError: Cannot read properties of null (reading 'width')\n    at menu (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-customizer-workflow.cjs:17:232)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-customizer-workflow.cjs:20:3",
+  "normalQuit": true,
+  "profileRemoved": true
+}

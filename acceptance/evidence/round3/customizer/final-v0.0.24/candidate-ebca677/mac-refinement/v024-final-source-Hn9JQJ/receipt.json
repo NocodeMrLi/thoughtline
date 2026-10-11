@@ -1,0 +1,370 @@
+{
+  "platform": "darwin",
+  "scope": "owned source renderer/IPC, isolated data, own native window captures; not physical user acceptance",
+  "cases": [
+    {
+      "name": "full-split-notice-expires-and-does-not-revive",
+      "observation": {
+        "expired": true,
+        "revisionDidNotRevive": true,
+        "ideasUnchanged": true
+      },
+      "passed": true,
+      "pids": [
+        52837,
+        52837,
+        52839,
+        52840,
+        52842,
+        52845,
+        52847
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "notice-hover-focus-and-same-message-restart",
+      "observation": {
+        "focus": true,
+        "hover": true,
+        "repeat": true
+      },
+      "passed": true,
+      "pids": [
+        52850,
+        52850,
+        52851,
+        52852,
+        52853,
+        52854,
+        52858
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "settings-tabs-data-spacing-and-controls-draft",
+      "observation": {
+        "tabs": 3,
+        "bounds": {
+          "titleInset": 21,
+          "buttonHintGap": 12
+        },
+        "draftProtected": true
+      },
+      "passed": true,
+      "pids": [
+        52882,
+        52882,
+        52884,
+        52885,
+        52887,
+        52888,
+        52892
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "native-shell-one-contour-and-all-settings-views",
+      "observation": {
+        "shape": {
+          "border": "0px",
+          "radius": "0px",
+          "shadow": "none",
+          "image": "radial-gradient(at 5% 0%, rgba(209, 226, 239, 0.094), rgba(0, 0, 0, 0) 58%), radial-gradient(at 100% 35%, rgba(113, 146, 173, 0.12), rgba(0, 0, 0, 0) 62%), radial-gradient(at 5% 100%, rgba(186, 169, 138, 0.07), rgba(0, 0, 0, 0) 64%)"
+        },
+        "nativeCaptured": true,
+        "sizes": [
+          {
+            "locale": "zh-CN",
+            "width": 350
+          },
+          {
+            "locale": "zh-CN",
+            "width": 480
+          },
+          {
+            "locale": "zh-CN",
+            "width": 740
+          },
+          {
+            "locale": "zh-CN",
+            "width": 350
+          },
+          {
+            "locale": "zh-CN",
+            "width": 480
+          },
+          {
+            "locale": "zh-CN",
+            "width": 740
+          },
+          {
+            "locale": "zh-CN",
+            "width": 350
+          },
+          {
+            "locale": "zh-CN",
+            "width": 480
+          },
+          {
+            "locale": "zh-CN",
+            "width": 740
+          },
+          {
+            "locale": "en",
+            "width": 350
+          },
+          {
+            "locale": "en",
+            "width": 480
+          },
+          {
+            "locale": "en",
+            "width": 740
+          },
+          {
+            "locale": "en",
+            "width": 350
+          },
+          {
+            "locale": "en",
+            "width": 480
+          },
+          {
+            "locale": "en",
+            "width": 740
+          },
+          {
+            "locale": "en",
+            "width": 350
+          },
+          {
+            "locale": "en",
+            "width": 480
+          },
+          {
+            "locale": "en",
+            "width": 740
+          }
+        ]
+      },
+      "passed": true,
+      "pids": [
+        52896,
+        52896,
+        52897,
+        52898,
+        52899,
+        52900,
+        52901
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "all-view-corners-in-both-themes",
+      "observation": {
+        "scenes": [
+          {
+            "name": "light-new",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          },
+          {
+            "name": "light-reminder",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          },
+          {
+            "name": "light-swap",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          },
+          {
+            "name": "light-expanded",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          },
+          {
+            "name": "light-calendar",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          },
+          {
+            "name": "light-calendar-detail",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          },
+          {
+            "name": "light-tags",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          },
+          {
+            "name": "light-trash-detail",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          },
+          {
+            "name": "light-storage",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          },
+          {
+            "name": "dark-new",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          },
+          {
+            "name": "dark-reminder",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          },
+          {
+            "name": "dark-swap",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          },
+          {
+            "name": "dark-expanded",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          },
+          {
+            "name": "dark-calendar",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          },
+          {
+            "name": "dark-calendar-detail",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          },
+          {
+            "name": "dark-tags",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          },
+          {
+            "name": "dark-trash-detail",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          },
+          {
+            "name": "dark-storage",
+            "shell": {
+              "border": "0px",
+              "radius": "0px",
+              "shadow": "none",
+              "material": "vibrancy"
+            }
+          }
+        ]
+      },
+      "passed": true,
+      "pids": [
+        52913,
+        52913,
+        52914,
+        52915,
+        52916,
+        52917,
+        52918
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "real-owned-IO-errors-do-not-expire-or-change-saved-data",
+      "observation": {
+        "menuErrorPreserved": true,
+        "settingsErrorPreserved": true,
+        "originalSavedDataPreserved": true,
+        "retrySucceeded": true
+      },
+      "passed": true,
+      "pids": [
+        52929,
+        52929,
+        52930,
+        52931,
+        52932,
+        52934,
+        52938
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    }
+  ],
+  "passed": true
+}

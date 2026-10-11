@@ -33,9 +33,9 @@ Thoughtline es una herramienta ligera para macOS y Windows. Muestra tus ideas en
 - Elige 4, 6 u 8 pinzas en Calendario → Más → Almacenamiento y ajustes; por defecto son 6. El papel se escala proporcionalmente a la pantalla, con un aumento moderado al elegir 4. Las ideas nuevas guardadas con la cuerda llena ocupan los huecos libres, empezando por las más recientes; las antiguas y las archivadas manualmente no vuelven automáticamente.
 - Personalice cuerda y papel en Calendario → Más → Almacenamiento y ajustes → Apariencia. La cuerda clásica permite elegir cualquier color; el algodón conserva su tono natural y la enredadera permanece verde. Las pinzas siguen los colores de las etiquetas. Elija cinco tonos suaves de papel y hojas en blanco, con líneas o líneas discontinuas. La vista previa solo se guarda al Aplicar; Cancelar o Volver la descarta. Ajustes separa Apariencia, Controles y Datos y copias de seguridad. Los menús separan color y superficie; la vista previa completa y Aplicar permanecen visibles.
 - Mueve una pinza o separa una hoja. Con el botón derecho, **Merge** permite elegir una pinza compatible y **Split** separa la idea actual. Si hace falta, la separación reúne los espacios dispersos; la organización automática conserva el orden de izquierda a derecha. Puedes deshacer la organización.
-- Edita en la vista de detalle o el calendario, con guardado automático tras una pausa y cambio inmediato de página.
+- Edita en la vista de detalle o el calendario, con guardado automático tras una pausa y cambio inmediato de página. La lectura y la edición comparten el borde de la etiqueta y el tono de papel elegido.
 - Explora por día, mes o año; busca y filtra también las ideas archivadas.
-- Restaura notas desde Eliminados recientemente. Borrar un proyecto conserva sus ideas.
+- Restaura notas desde Eliminados recientemente. Borrar un proyecto conserva sus ideas. Las ideas colgadas vuelven a su pinza o a un espacio libre; si está lleno, se restauran en el calendario y puedes intercambiarlas.
 - Copia o arrastra el texto sin formato. La nota original se mantiene y no se envía nada automáticamente.
 - Guarda los datos localmente; consulta la carpeta real, muévelos o exporta una copia independiente.
 - Cambia entre chino/inglés y modo claro/oscuro desde las primeras ventanas, o sigue el sistema; el papel sigue siendo suave y legible.

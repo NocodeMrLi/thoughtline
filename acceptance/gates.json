@@ -1,9 +1,9 @@
 {
-  "stage": "round3-v0.0.23-user-checklist-accepted-physical-coverage-pending",
-  "asOf": "2026-10-11",
+  "stage": "round3-v0.0.24-released-owner-and-physical-acceptance-pending",
+  "asOf": "2026-10-11T17:15:30.199629+00:00",
   "branch": "main",
-  "lastCommittedSource": "2b363d18e1329aa195c1f3fadc1cee70a9c9de2d",
-  "currentCandidateVersion": "0.0.23",
+  "lastCommittedSource": "62d9302351d6d339f417007e1dce3da4cecafc3b",
+  "currentCandidateVersion": "0.0.24",
   "formalAcceptance": false,
   "round1": {
     "plan": "/Users/lihongwei/安安的成长笔记📒/晾念头 Thoughtline/Thoughtline第一轮修复优化.md",
@@ -786,10 +786,10 @@
     "signing": "Mac local ad-hoc; Windows unsigned; commercial signing/notarization not planned"
   },
   "round3": {
-    "version": "0.0.23",
-    "status": "released-user-checklist-accepted-physical-coverage-pending",
-    "source": "2b363d18e1329aa195c1f3fadc1cee70a9c9de2d",
-    "finalWindowsRun": 38142369778,
+    "version": "0.0.24",
+    "status": "released-awaiting-owner-and-remaining-physical-acceptance",
+    "source": "62d9302351d6d339f417007e1dce3da4cecafc3b",
+    "finalWindowsRun": 38157102205,
     "formalAcceptance": false,
     "physicalAcceptance": false,
     "capacity": {
@@ -799,19 +799,19 @@
         8
       ],
       "default": 6,
-      "legacyArchivedQueueMigration": false,
       "proportionalScaling": true,
-      "fourSlotGrowthCapped": true
+      "legacyOffRopeUnchanged": true,
+      "backfillNewestCreatedEligibleOnly": true,
+      "backfillVerification": "acceptance/evidence/round3/customizer/final-v0.0.24/backfill-verification.json"
     },
     "appearance": {
-      "ropeStyles": [
+      "styles": [
         "classic",
         "cotton",
         "vine"
       ],
-      "customColors": "classic-only",
-      "naturalMaterialsFixedColor": true,
-      "paperPresets": [
+      "naturalMaterialColorsLocked": true,
+      "paperColors": [
         "warm",
         "ivory",
         "apricot",
@@ -823,457 +823,695 @@
         "ruled",
         "dashed"
       ],
-      "paperArbitraryColor": false,
-      "matteOpaquePaper": true,
-      "clipTagColorPreserved": true,
-      "previewApplyCancelPersistent": true
+      "completePreviewSeparateDropdowns": true,
+      "readEditTagBorderAndSelectedPaper": true,
+      "source": "R3-16/18/19 plus earlier approved third-round styles"
+    },
+    "recovery": {
+      "originalCompatibleVisibleClipFirst": true,
+      "calendarOnlyOriginalOffRope": true,
+      "fullCalendarAndExplicitSwapNoEviction": true,
+      "legacyMetadataOptional": true,
+      "preservesCreationAndCancelledReminder": true,
+      "restoredReaderKeptForResultAndSwap": true
     },
     "sourceValidation": {
-      "macUnitPassed": 313,
+      "macUnitPassed": 323,
       "macWindowsOnlySkipped": 4,
-      "windowsUnitPassed": 317,
+      "windowsUnitPassed": 327,
       "typecheck": "passed",
       "build": "passed",
-      "macLog": "acceptance/evidence/round3/refinement/final-v0.0.23/mac-verify.log",
-      "windowsLog": "acceptance/evidence/round3/refinement/final-v0.0.23/windows-final-run.log"
+      "mac": "acceptance/evidence/round3/customizer/final-v0.0.24/mac-source-validation.json",
+      "windowsRun": 38157102205
     },
     "tests": {
-      "macActualPackageChecks": 68,
-      "windowsActualPackageChecks": 68,
+      "macActualPackageChecks": 84,
+      "windowsActualPackageChecks": 84,
+      "macFinalSuites": "acceptance/evidence/round3/customizer/final-v0.0.24/mac-final-suites.json",
+      "windowsFinalSuites": "acceptance/evidence/round3/customizer/final-v0.0.24/windows-final-suites.json",
       "windowsInstalledRound3RepeatChecks": 10,
-      "macNativeMaterialChecks": 7,
-      "macNativeNotification": "permission granted; native show event; physical banner/click/DND pending",
-      "windowsNativeNotification": "permission unknown; native show event; physical banner/click/DND pending",
-      "windowsInstallerRetention": "install/reinstall/ordinary uninstall preserve data",
-      "macFinalSuites": "acceptance/evidence/round3/refinement/final-v0.0.23/mac-final-suites.json",
-      "windowsFinalSuites": "acceptance/evidence/round3/refinement/final-v0.0.23/windows-final-suites.json",
-      "macRuntimeReuse": "acceptance/evidence/round3/refinement/final-v0.0.23/mac-runtime-evidence-reuse.json",
-      "runtimeReuseScope": "all 34 outputs and actual Mac asar byte identical; signature replay separate",
-      "sourceUI": "both platform source workflows passed; 30 paper/pattern/theme and 12 localized narrow customizers are child checks, not extra package checkpoints",
-      "historicalTitleTimeout": "f392 first Windows detail 4-second persistence wait timed out; same-head second and final CI passed; exact old cause unconfirmed",
-      "failedRunsRetained": [
-        38138929154,
-        38139291246,
-        38140593042,
-        38141358266
-      ]
+      "windowsInstallReinstallUninstallRetention": "passed",
+      "macNativeNotification": "granted; real native show; physical banner/click/DND pending",
+      "windowsNativeNotification": {
+        "scope": "Real native permission query and scheduler delivery events; no automatic permission granting, physical banner/click, or OS settings changes.",
+        "access": "unknown",
+        "events": [
+          {
+            "event": "show",
+            "data": [
+              "[object Object]"
+            ]
+          },
+          {
+            "event": "close",
+            "data": [
+              "[object Object]"
+            ]
+          }
+        ],
+        "state": "notified"
+      },
+      "failedWindowsRuns": [
+        38153672611,
+        38156287329
+      ],
+      "macRound21CandidateFailureRetained": true,
+      "finalPagerLeaveGuardsVerified": true
     },
-    "evidence": "acceptance/evidence/round3/refinement/final-v0.0.23",
-    "sourcePairProof": "acceptance/evidence/round3/refinement/final-v0.0.23/source-pair-proof.json",
+    "sourcePairProof": "acceptance/evidence/round3/customizer/final-v0.0.24/source-pair-proof.json",
     "packageBinding": {
-      "mac": "acceptance/evidence/round3/refinement/final-v0.0.23/mac-package-binding.json",
-      "windows": "acceptance/evidence/round3/refinement/final-v0.0.23/windows-package-binding.json"
+      "mac": "acceptance/evidence/round3/customizer/final-v0.0.24/mac-package-binding.json",
+      "windows": "acceptance/evidence/round3/customizer/final-v0.0.24/windows-package-binding.json"
     },
     "release": {
-      "passed": true,
-      "verifiedAt": "2026-10-11T13:42:40.174Z",
-      "releaseId": 409692021,
-      "url": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.23",
-      "publishedAt": "2026-10-11T13:42:33Z",
-      "privateRepository": true,
+      "version": "0.0.24",
+      "source": "62d9302351d6d339f417007e1dce3da4cecafc3b",
+      "published": true,
+      "releaseId": 409807192,
+      "url": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.24",
       "draft": false,
       "prerelease": false,
-      "tag": "v0.0.23",
-      "source": "2b363d18e1329aa195c1f3fadc1cee70a9c9de2d",
-      "tagSource": "2b363d18e1329aa195c1f3fadc1cee70a9c9de2d",
-      "assets": 31,
-      "checksumTargets": 30,
+      "private": true,
+      "assets": 33,
       "allAssetsServerDigestAndSizeMatched": true,
-      "previousV0022Unchanged": true,
-      "previousV0021Unchanged": true,
-      "attachments": [
-        {
-          "name": "cleanup-release.json",
-          "id": 630847969,
-          "bytes": 6200,
-          "sha256": "5fc3ac21b4eabd73ef89a82a70ad701913e1503e6f15fc42d901355f0532e81f"
-        },
-        {
-          "name": "DELIVERY.md",
-          "id": 630847757,
-          "bytes": 4566,
-          "sha256": "5c851f4d60c4dfa648889247f542a5dee375d9342f4c7add2a5f1a2243e10336"
-        },
-        {
-          "name": "gates.json",
-          "id": 630847972,
-          "bytes": 58787,
-          "sha256": "11f7462ceedc6940634865e633cc3a87ac3575eb58a4a0ba5c980947ef52c5d1"
-        },
-        {
-          "name": "mac-build-manifest.json",
-          "id": 630847978,
-          "bytes": 72932,
-          "sha256": "7aa645c630e60bf76bd4f2eb94aa57358f3afb43c469260f4628180d99338da3"
-        },
-        {
-          "name": "mac-final-suites.json",
-          "id": 630848075,
-          "bytes": 2489,
-          "sha256": "71b2ff504585cd0800a17caf25a28566f8e179870b604b0e894f9b5be3587563"
-        },
-        {
-          "name": "mac-launcher-generation.json",
-          "id": 630848076,
-          "bytes": 830,
-          "sha256": "0d80290b5bcbf71727c32ea620659e61a0190ba38871c603f824f738222d5872"
-        },
-        {
-          "name": "mac-native-material.json",
-          "id": 630848080,
-          "bytes": 8555,
-          "sha256": "29b60fbcaee6f3900cf2d030bb501829273f092a8c9353c80484a8f9959085e7"
-        },
-        {
-          "name": "mac-package-binding.json",
-          "id": 630848172,
-          "bytes": 2210,
-          "sha256": "9c0254270d14f03381355902265c7aba8c7c83cb6bab0e7b0570e615550e1bf5"
-        },
-        {
-          "name": "mac-runtime-evidence-reuse.json",
-          "id": 630848194,
-          "bytes": 499,
-          "sha256": "dd1c4a8d9bb3fe5bc84aa9c5d12b91f6c5cb89681676502e28ced71ff1b836dd"
-        },
-        {
-          "name": "mac-signature-verification.json",
-          "id": 630848199,
-          "bytes": 361,
-          "sha256": "c71a0c365b9d3f0762d2e5fdca6cbac27d56c0139114974e8673aaaaac0b1eb1"
-        },
-        {
-          "name": "SHA256SUMS.txt",
-          "id": 630847752,
-          "bytes": 2845,
-          "sha256": "3502ecc80880698bd690c9c73450e8146a6d2158632d2aa370515bee30fab0af"
-        },
-        {
-          "name": "source-pair-proof.json",
-          "id": 630848259,
-          "bytes": 12361,
-          "sha256": "b59b5a176953d08d557bdcb4abc48b3891585a0d6b2cb3861ff3ec92d59f75f3"
-        },
-        {
-          "name": "Start-Thoughtline-Isolated-Mac.command",
-          "id": 630847759,
-          "bytes": 3156,
-          "sha256": "d9cdb9516eb2d8043adbed4acfc1a46a22c2ac3dd1ac983180eb71046e5cc385"
-        },
-        {
-          "name": "Start-Thoughtline-Isolated.ps1",
-          "id": 630847758,
-          "bytes": 1646,
-          "sha256": "63338406f01681f499fa098aa0a2c73219dc1bc471f8ff01432afc04fbc5b4c6"
-        },
-        {
-          "name": "Thoughtline-0.0.23-mac-arm64.dmg",
-          "id": 630847753,
-          "bytes": 133482597,
-          "sha256": "d651f12dd9d4740e55c9b0952fadab4bd25e1da909a21b8127ab08072871033a"
-        },
-        {
-          "name": "Thoughtline-0.0.23-win-x64.exe",
-          "id": 630847952,
-          "bytes": 113115837,
-          "sha256": "f80e27239390ea1aadad578ed9563babc0d0e62896286d2c7ac2e42ec8d93a95"
-        },
-        {
-          "name": "windows-build-manifest.json",
-          "id": 630848264,
-          "bytes": 73294,
-          "sha256": "5bb5b5dbf50e820956d50ec2416b4d3bb9b4554fc19f47b50379c2480aa75aef"
-        },
-        {
-          "name": "windows-final-run.json",
-          "id": 630848277,
-          "bytes": 4942,
-          "sha256": "1209292c67d8625c99420c869a6c66586d090125e3d22c16255c0a835af85b8f"
-        },
-        {
-          "name": "windows-final-suites.json",
-          "id": 630848334,
-          "bytes": 2701,
-          "sha256": "60a06953091d05e5f2aa8bd993a66a7c55440080b3e43bee8069906e26c85e0f"
-        },
-        {
-          "name": "windows-installed-preflight.json",
-          "id": 630848344,
-          "bytes": 1766,
-          "sha256": "330bae035636cb26208be2876df63cee3b24dda251c26c40fb2fdbc5f1e701ce"
-        },
-        {
-          "name": "windows-installed-round-three.json",
-          "id": 630848382,
-          "bytes": 10392,
-          "sha256": "0c40fd05ddfebe8f885a43416893895012003a665945447cc1ab1aade5c80aa0"
-        },
-        {
-          "name": "windows-installer-preflight.json",
-          "id": 630848460,
-          "bytes": 1230,
-          "sha256": "1a9fb654240ed51ba3dbb7cfdd32057c706968446f409c946f6725cfe2146f2e"
-        },
-        {
-          "name": "windows-package-binding.json",
-          "id": 630848463,
-          "bytes": 521,
-          "sha256": "716ea5cc5c5e410df9a2e4be01437a66eb0432a38f466ed24cee7864e179ef26"
-        },
-        {
-          "name": "windows-packaged-appearance-customization.json",
-          "id": 630848479,
-          "bytes": 29465,
-          "sha256": "3c280aa50483543abeb45ad5beacc2c9d3005d27cca05819944dc2a9a5b1a03c"
-        },
-        {
-          "name": "windows-packaged-appearance.json",
-          "id": 630848543,
-          "bytes": 3568,
-          "sha256": "c06dd870c3c254d8b6b309e01a32fac15551658718e428c7697bdfbe065de69a"
-        },
-        {
-          "name": "windows-packaged-capacity.json",
-          "id": 630848558,
-          "bytes": 3683,
-          "sha256": "b9c171363c0a5028e20986bd35a9bcf4cf7d5fbd269b69dbddc64c1b87707676"
-        },
-        {
-          "name": "windows-packaged-positioning.json",
-          "id": 630848587,
-          "bytes": 8724,
-          "sha256": "de163f47863399cf92e33ca870f85394856fb23d65089e039432507ed962c30c"
-        },
-        {
-          "name": "windows-packaged-round-three.json",
-          "id": 630848665,
-          "bytes": 10285,
-          "sha256": "1f0b493007fb4526f94aefe03bbaf64f8f86c289ff90c05f74cfcb96061c648a"
-        },
-        {
-          "name": "windows-packaged-round-twenty-one.json",
-          "id": 630848676,
-          "bytes": 29861,
-          "sha256": "8b48358d497da5e6f173ed3d38aaef3eeda3d1040e38c630265fc3968f161515"
-        },
-        {
-          "name": "windows-packaged-split.json",
-          "id": 630848688,
-          "bytes": 2413,
-          "sha256": "bd4ce1f695cf1359146d26f7b422cf4f4e557c2e4a0243da3572cc90bcdcd648"
-        },
-        {
-          "name": "windows-pe-icons.json",
-          "id": 630848714,
-          "bytes": 12804,
-          "sha256": "721b9eac8d27761a9ac8d7d89c4e0f1a492378df38d98ca2a77897d884535a0c"
-        }
-      ],
-      "formalAcceptance": false,
-      "physicalAcceptance": false,
-      "published": true
+      "verification": "acceptance/evidence/round3/customizer/final-v0.0.24/release-verification.json",
+      "attachedDeliverySnapshot": "pre-publication; current project report and publication readback are final"
     },
     "remaining": [
-      "cross-platform/physical-environment coverage beyond accepted ten-item v0.0.23 user checklist",
-      "physical actual-app maximized and full-screen top-edge invocation",
-      "physical IME, 100/125/150% DPI, multiscreen disconnect/switch",
-      "Mac native menu outside-click on blank desktop",
-      "real receiving-app pure-text drag, not txt attachment",
-      "physical notification banner/click/DND",
-      "animation feel",
-      "clean LaunchServices normal start and exit"
+      "owner acceptance of v0.0.24 checklist",
+      "physical IME/focus,100/125/150% DPI,multiscreen/disconnect",
+      "actual receiving-app pure-text drag and Mac native menu desktop outside click",
+      "real WeChat/Codex/ChatGPT maximized/fullscreen top edge",
+      "physical native notification banner/click/DND, animation feel, clean LaunchServices launch/quit",
+      "deletion-in-progress restart to original group and tag-filter restore notice targeted physical confirmation"
     ],
     "cleanup": {
       "passed": true,
-      "verifiedAt": "2026-10-11T13:35:09.796314+00:00",
-      "source": "2b363d18e1329aa195c1f3fadc1cee70a9c9de2d",
+      "phase": "Final Mac/Windows owned test artifacts cleaned; release upload verification pending",
       "removed": [
         {
           "path": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/dist/mac-arm64",
-          "allocatedKiB": 307916,
-          "absent": true,
-          "ownership": "rebuilt own final v0.0.23 App; signed DMG and final delivery retained"
+          "allocatedKiB": 307924,
+          "ownership": "own v0.0.24 build / check-only empty directories / recompiled test probe, final DMG+proof retained",
+          "absent": true
         },
         {
-          "path": "/Users/lihongwei/Documents/Codex/2026-10-11/thoughtline-round3-refinement/delivery/v0.0.23/isolated-experience",
-          "absent": true,
-          "ownership": "own empty check-only mount/profile directories; App was not launched"
+          "path": "/Users/lihongwei/Documents/Codex/2026-10-12/thoughtline-round3-customizer/delivery/v0.0.24/isolated-experience",
+          "allocatedKiB": 0,
+          "ownership": "own v0.0.24 build / check-only empty directories / recompiled test probe, final DMG+proof retained",
+          "absent": true
         },
         {
-          "path": "/Users/lihongwei/Documents/Codex/2026-10-11/thoughtline-round3-refinement/windows-ci-first-failed",
-          "allocatedKiB": 7324,
-          "entries": 87,
-          "absent": true,
-          "reason": "own CI download duplicates; final package/proofs or failed receipts and logs retained"
+          "path": "/tmp/thoughtline-r3-window-state.node",
+          "allocatedKiB": 52,
+          "ownership": "own v0.0.24 build / check-only empty directories / recompiled test probe, final DMG+proof retained",
+          "sha256": "1b073806fa0a4bf2b09f50a0540cd91f20ef20558d080150cb94f5472dc0b1c2",
+          "absent": true
         },
         {
-          "path": "/Users/lihongwei/Documents/Codex/2026-10-11/thoughtline-round3-refinement/windows-ci-f392-first-failed",
-          "allocatedKiB": 11856,
-          "entries": 140,
-          "absent": true,
-          "reason": "own CI download duplicates; final package/proofs or failed receipts and logs retained"
+          "path": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/dist/mac-arm64",
+          "allocatedKiB": 307932,
+          "ownership": "owned current-build, test probe, check-only profile, superseded nonpublished candidate or failed CI download; final package and light evidence preserved",
+          "candidatePackages": [],
+          "absent": true
         },
         {
-          "path": "/Users/lihongwei/Documents/Codex/2026-10-11/thoughtline-round3-refinement/windows-ci-f392-second-failed",
-          "allocatedKiB": 24296,
-          "entries": 236,
-          "absent": true,
-          "reason": "own CI download duplicates; final package/proofs or failed receipts and logs retained"
+          "path": "/tmp/thoughtline-r3-window-state.node",
+          "allocatedKiB": 52,
+          "ownership": "owned current-build, test probe, check-only profile, superseded nonpublished candidate or failed CI download; final package and light evidence preserved",
+          "absent": true
         },
         {
-          "path": "/Users/lihongwei/Documents/Codex/2026-10-11/thoughtline-round3-refinement/windows-ci-data-tab-failed",
-          "allocatedKiB": 24932,
-          "entries": 249,
-          "absent": true,
-          "reason": "own CI download duplicates; final package/proofs or failed receipts and logs retained"
+          "path": "/Users/lihongwei/Documents/Codex/2026-10-12/thoughtline-round3-customizer/delivery/v0.0.24/isolated-experience",
+          "allocatedKiB": 0,
+          "ownership": "owned current-build, test probe, check-only profile, superseded nonpublished candidate or failed CI download; final package and light evidence preserved",
+          "candidatePackages": [],
+          "absent": true
         },
         {
-          "path": "/Users/lihongwei/Documents/Codex/2026-10-11/thoughtline-round3-refinement/windows-ci-launcher-failed",
-          "allocatedKiB": 76,
-          "entries": 3,
-          "absent": true,
-          "reason": "own CI download duplicates; final package/proofs or failed receipts and logs retained"
+          "path": "/Users/lihongwei/Documents/Codex/2026-10-12/thoughtline-round3-customizer/candidate-4d467da-delivery",
+          "allocatedKiB": 130452,
+          "ownership": "owned current-build, test probe, check-only profile, superseded nonpublished candidate or failed CI download; final package and light evidence preserved",
+          "candidatePackages": [
+            {
+              "name": "Thoughtline-0.0.24-mac-arm64.dmg",
+              "bytes": 133482737,
+              "sha256": "6d4795af7320bd300134a0940cf7d02e32f31a0e165ddd1c61ea5578b7aa36a1"
+            }
+          ],
+          "absent": true
         },
         {
-          "path": "/Users/lihongwei/Documents/Codex/2026-10-11/thoughtline-round3-refinement/windows-ci-final-38142369778",
-          "allocatedKiB": 141652,
-          "entries": 345,
-          "absent": true,
-          "reason": "own CI download duplicates; final package/proofs or failed receipts and logs retained"
+          "path": "/Users/lihongwei/Documents/Codex/2026-10-12/thoughtline-round3-customizer/candidate-ebca677-delivery",
+          "allocatedKiB": 130432,
+          "ownership": "owned current-build, test probe, check-only profile, superseded nonpublished candidate or failed CI download; final package and light evidence preserved",
+          "candidatePackages": [
+            {
+              "name": "Thoughtline-0.0.24-mac-arm64.dmg",
+              "bytes": 133471667,
+              "sha256": "1fafad999065e71ed06f4e7ecabfe51aecf9e5f602f8ea7ea0d96b41357b5e7d"
+            }
+          ],
+          "absent": true
         },
         {
-          "path": "/tmp/thoughtline-r3-v023-delivery-verify.log",
-          "bytes": 1551,
-          "absent": true,
-          "reason": "own driver log relocated to retained evidence"
+          "path": "/Users/lihongwei/Documents/Codex/2026-10-12/thoughtline-round3-customizer/windows-ci-final-38153672611",
+          "allocatedKiB": 32020,
+          "ownership": "owned current-build, test probe, check-only profile, superseded nonpublished candidate or failed CI download; final package and light evidence preserved",
+          "candidatePackages": [],
+          "absent": true
         },
         {
-          "path": "/tmp/thoughtline-r3-v023-release-binding.log",
-          "bytes": 0,
-          "absent": true,
-          "reason": "own driver log relocated to retained evidence"
+          "path": "/Users/lihongwei/Documents/Codex/2026-10-12/thoughtline-round3-customizer/windows-ebca-failed",
+          "allocatedKiB": 16656,
+          "ownership": "owned current-build, test probe, check-only profile, superseded nonpublished candidate or failed CI download; final package and light evidence preserved",
+          "candidatePackages": [],
+          "absent": true
         },
         {
-          "path": "/tmp/thoughtline-r3-v023-launcher-version-red.log",
-          "bytes": 1314,
-          "absent": true,
-          "reason": "own driver log relocated to retained evidence"
+          "path": "/Users/lihongwei/Documents/Codex/2026-10-12/thoughtline-round3-customizer/windows-ci-final-38157102205",
+          "allocatedKiB": 149692,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
         },
         {
-          "path": "/tmp/thoughtline-r3-v023-frozen-build.log",
-          "bytes": 3825,
-          "absent": true,
-          "reason": "own driver log relocated to retained evidence"
+          "path": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/dist/Thoughtline-0.0.24-mac-arm64.dmg",
+          "allocatedKiB": 131076,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
         },
         {
-          "path": "/tmp/thoughtline-r3-v023-appearance-io-restart.log",
-          "bytes": 18071,
-          "absent": true,
-          "reason": "own driver log relocated to retained evidence"
+          "path": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/dist/Thoughtline-0.0.24-mac-arm64.dmg.blockmap",
+          "allocatedKiB": 140,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
         },
         {
-          "path": "/tmp/thoughtline-r3-v023-data-final-build.log",
-          "bytes": 3825,
-          "absent": true,
-          "reason": "own driver log relocated to retained evidence"
+          "path": "/tmp/thoughtline-v024-customizer-final2.log",
+          "allocatedKiB": 16,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
         },
         {
-          "path": "/tmp/thoughtline-r3-v023-final-check-only.log",
-          "bytes": 231,
-          "absent": true,
-          "reason": "own driver log relocated to retained evidence"
+          "path": "/tmp/thoughtline-v024-pager-package.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
         },
         {
-          "path": "/tmp/thoughtline-r3-v023-fix-data-tab-green.log",
-          "bytes": 689,
-          "absent": true,
-          "reason": "own driver log relocated to retained evidence"
+          "path": "/tmp/thoughtline-v024-title-edit-final.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
         },
         {
-          "path": "/tmp/thoughtline-r3-v023-delivery-commit.log",
-          "bytes": 176,
-          "absent": true,
-          "reason": "own driver log relocated to retained evidence"
+          "path": "/tmp/thoughtline-v024-customizer-final.log",
+          "allocatedKiB": 16,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
         },
         {
-          "path": "/tmp/thoughtline-r3-v023-windows-review-failed.log",
-          "bytes": 5230,
-          "absent": true,
-          "reason": "own driver log relocated to retained evidence"
+          "path": "/tmp/thoughtline-v024-reader-red-valid.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
         },
         {
-          "path": "/tmp/thoughtline-r3-v023-windows-install-failed.log",
-          "bytes": 1925,
-          "absent": true,
-          "reason": "own driver log relocated to retained evidence"
+          "path": "/tmp/thoughtline-v024-reader-green2.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
         },
         {
-          "path": "/tmp/thoughtline-r3-v023-appearance.log",
-          "bytes": 17920,
-          "absent": true,
-          "reason": "own driver log relocated to retained evidence"
+          "path": "/tmp/thoughtline-v024-explicit-locale-source.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
         },
         {
-          "path": "/tmp/thoughtline-r3-v023-data-tab-commit.log",
-          "bytes": 126,
-          "absent": true,
-          "reason": "own driver log relocated to retained evidence"
+          "path": "/tmp/thoughtline-v024-settings-lifecycle.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
         },
         {
-          "path": "/tmp/thoughtline-r3-v023-fix-data-tab.log",
-          "bytes": 940,
-          "absent": true,
-          "reason": "own driver log relocated to retained evidence"
+          "path": "/tmp/thoughtline-v024-recovery-red-corrected.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
         },
         {
-          "path": "/tmp/thoughtline-r3-v023-release-launcher-check.log",
-          "bytes": 231,
-          "absent": true,
-          "reason": "own driver log relocated to retained evidence"
+          "path": "/tmp/thoughtline-v024-final-verify.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-title-only-final.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-windows-download.log",
+          "allocatedKiB": 0,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-pager-verify.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-reader-package.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-reader-green.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-customizer.log",
+          "allocatedKiB": 16,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-round3-appearance-workflow.log",
+          "allocatedKiB": 20,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-round3-complete.log",
+          "allocatedKiB": 16,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-round3-package.log",
+          "allocatedKiB": 12,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-recovery-green.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-pager-launcher-check.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-mac-round21.log",
+          "allocatedKiB": 24,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-verify.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-mac-positioning.log",
+          "allocatedKiB": 12,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-recovery-red.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-reader-pager.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-mac-appearance.log",
+          "allocatedKiB": 20,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-customizer-package.log",
+          "allocatedKiB": 16,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-split-package.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-mac-reader.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-calendar-corrected.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-more-final.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-positioning-package.log",
+          "allocatedKiB": 12,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-mac-basic-appearance.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-windows-ebca-download.log",
+          "allocatedKiB": 0,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-package.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-more-menu-workflow.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-mac-capacity.log",
+          "allocatedKiB": 8,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-mac-split.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-windows.log",
+          "allocatedKiB": 324,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-inline-pager.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-package.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-windows-ebca-failed.log",
+          "allocatedKiB": 8,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-recovery-red-final.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-refinement-source.log",
+          "allocatedKiB": 8,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-more-final-correct.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-capacity-package.log",
+          "allocatedKiB": 8,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-round21-package.log",
+          "allocatedKiB": 28,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-reader-final2.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-reader-build.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-round3.log",
+          "allocatedKiB": 12,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-appearance-package.log",
+          "allocatedKiB": 20,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-package-final.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-appearance.log",
+          "allocatedKiB": 20,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-reader-final.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-binding.log",
+          "allocatedKiB": 0,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-backfill.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-calendar-final.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-pager-final-verify.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-inline-pager-fixed.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-reader-verify.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-launcher-check.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-mac-customizer.log",
+          "allocatedKiB": 16,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-launcher-generation.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-reader-pager-fixed.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-round21-package-rerun.log",
+          "allocatedKiB": 24,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-mac-binding.log",
+          "allocatedKiB": 0,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-run-watch.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-title-final.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-binding-final.log",
+          "allocatedKiB": 0,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-mac-basic-appearance.log",
+          "allocatedKiB": 8,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-pager-launcher-generation.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-customizer.log",
+          "allocatedKiB": 8,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-reader-red.log",
+          "allocatedKiB": 4,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-appearance-final.log",
+          "allocatedKiB": 20,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-mac-round3.log",
+          "allocatedKiB": 12,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-run.json",
+          "allocatedKiB": 8,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-final-windows-progress.json",
+          "allocatedKiB": 8,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-pager-windows-progress.json",
+          "allocatedKiB": 8,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
+        },
+        {
+          "path": "/tmp/thoughtline-v024-prior-release.json",
+          "allocatedKiB": 16,
+          "ownership": "owned final CI download, duplicate current Mac DMG/blockmap or copied current driver log",
+          "absent": true
         }
       ],
-      "ownedAllocatedMiB": 505.91015625,
+      "allocatedMiB": 300.7578125,
+      "netAPFSFreeSpaceClaim": false,
+      "protected": [
+        "real user App and data",
+        "other QA",
+        "shared dependencies/cache",
+        "worktrees",
+        "all old releases/packages",
+        "failed and final evidence",
+        "final delivery"
+      ],
+      "source": "62d9302351d6d339f417007e1dce3da4cecafc3b",
+      "ownedAllocatedMiB": 1179.0546875,
       "netApfsGainClaimed": false,
       "signalsSent": 0,
-      "protected": [
-        {
-          "identity": "/Applications/Thoughtline.app/Contents/MacOS/Thoughtline",
-          "currentProcesses": [
-            "95076 /Applications/Thoughtline.app/Contents/MacOS/Thoughtline"
-          ]
-        },
-        {
-          "identity": "/Users/lihongwei/Documents/Codex/2026-10-09/task-2/qa-thoughtline/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron",
-          "currentProcesses": [
-            "34617 /Users/lihongwei/Documents/Codex/2026-10-09/task-2/qa-thoughtline/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron"
-          ]
-        }
+      "protectedProcessSnapshot": [
+        "12627 /Applications/Thoughtline.app/Contents/MacOS/Thoughtline",
+        "34617 /Users/lihongwei/Documents/Codex/2026-10-09/task-2/qa-thoughtline/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron"
       ],
-      "noThoughtlineTestMounts": true,
-      "userDataDependenciesCachesWorktreesHistoricalPackagesFailedEvidenceAndFinalDeliveryPreserved": true,
-      "scope": "Named own built App, empty check-only directories, CI downloads and relocated logs only; previous stage cleanup separately recorded without double-counting"
+      "updatedAt": "2026-10-11T17:09:05.797674+00:00",
+      "ownedTemporaryProfileAudit": "owned-profile-cleanup-audit.json"
     },
     "userAcceptance": {
-      "version": "0.0.23",
-      "asOf": "2026-10-11",
-      "status": "accepted-for-ten-item-user-checklist",
-      "reportedBy": "project owner in this conversation",
-      "verbatimFeedback": "以上修复我觉得没什么问题了",
-      "scope": [
-        "transient notice expiry",
-        "single outer window contour",
-        "settings tabs/headings/spacing",
-        "unsaved controls draft across settings tabs",
-        "classic rope custom colors",
-        "cotton/vine natural fixed colors",
-        "vine actual clip-jaw contact at 4/6/8 and drag",
-        "five soft paper colors",
-        "ruled/dashed alignment and plain-text content",
-        "appearance preview/cancel/scoped defaults/restart"
-      ],
-      "platformCoverage": "not individually specified by user; do not infer both physical platforms passed",
-      "physicalCoverage": "remaining conditions not individually confirmed",
-      "fullFormalAcceptance": false
+      "status": "pending-current-v0.0.24",
+      "prior0.0.22And0.0.23ApprovalPreservedInHistory": true
     }
   },
   "releaseHistory": {
@@ -1621,6 +1859,497 @@
         "verbatimFeedback": "0.0.22 我测试过了 没有什么问题",
         "status": "owner-reported-no-issues",
         "platformCoverage": "not individually specified"
+      }
+    },
+    "0.0.23": {
+      "version": "0.0.23",
+      "status": "released-user-checklist-accepted-physical-coverage-pending",
+      "source": "2b363d18e1329aa195c1f3fadc1cee70a9c9de2d",
+      "finalWindowsRun": 38142369778,
+      "formalAcceptance": false,
+      "physicalAcceptance": false,
+      "capacity": {
+        "choices": [
+          4,
+          6,
+          8
+        ],
+        "default": 6,
+        "legacyArchivedQueueMigration": false,
+        "proportionalScaling": true,
+        "fourSlotGrowthCapped": true
+      },
+      "appearance": {
+        "ropeStyles": [
+          "classic",
+          "cotton",
+          "vine"
+        ],
+        "customColors": "classic-only",
+        "naturalMaterialsFixedColor": true,
+        "paperPresets": [
+          "warm",
+          "ivory",
+          "apricot",
+          "sage",
+          "blue"
+        ],
+        "paperPatterns": [
+          "blank",
+          "ruled",
+          "dashed"
+        ],
+        "paperArbitraryColor": false,
+        "matteOpaquePaper": true,
+        "clipTagColorPreserved": true,
+        "previewApplyCancelPersistent": true
+      },
+      "sourceValidation": {
+        "macUnitPassed": 313,
+        "macWindowsOnlySkipped": 4,
+        "windowsUnitPassed": 317,
+        "typecheck": "passed",
+        "build": "passed",
+        "macLog": "acceptance/evidence/round3/refinement/final-v0.0.23/mac-verify.log",
+        "windowsLog": "acceptance/evidence/round3/refinement/final-v0.0.23/windows-final-run.log"
+      },
+      "tests": {
+        "macActualPackageChecks": 68,
+        "windowsActualPackageChecks": 68,
+        "windowsInstalledRound3RepeatChecks": 10,
+        "macNativeMaterialChecks": 7,
+        "macNativeNotification": "permission granted; native show event; physical banner/click/DND pending",
+        "windowsNativeNotification": "permission unknown; native show event; physical banner/click/DND pending",
+        "windowsInstallerRetention": "install/reinstall/ordinary uninstall preserve data",
+        "macFinalSuites": "acceptance/evidence/round3/refinement/final-v0.0.23/mac-final-suites.json",
+        "windowsFinalSuites": "acceptance/evidence/round3/refinement/final-v0.0.23/windows-final-suites.json",
+        "macRuntimeReuse": "acceptance/evidence/round3/refinement/final-v0.0.23/mac-runtime-evidence-reuse.json",
+        "runtimeReuseScope": "all 34 outputs and actual Mac asar byte identical; signature replay separate",
+        "sourceUI": "both platform source workflows passed; 30 paper/pattern/theme and 12 localized narrow customizers are child checks, not extra package checkpoints",
+        "historicalTitleTimeout": "f392 first Windows detail 4-second persistence wait timed out; same-head second and final CI passed; exact old cause unconfirmed",
+        "failedRunsRetained": [
+          38138929154,
+          38139291246,
+          38140593042,
+          38141358266
+        ]
+      },
+      "evidence": "acceptance/evidence/round3/refinement/final-v0.0.23",
+      "sourcePairProof": "acceptance/evidence/round3/refinement/final-v0.0.23/source-pair-proof.json",
+      "packageBinding": {
+        "mac": "acceptance/evidence/round3/refinement/final-v0.0.23/mac-package-binding.json",
+        "windows": "acceptance/evidence/round3/refinement/final-v0.0.23/windows-package-binding.json"
+      },
+      "release": {
+        "passed": true,
+        "verifiedAt": "2026-10-11T13:42:40.174Z",
+        "releaseId": 409692021,
+        "url": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.23",
+        "publishedAt": "2026-10-11T13:42:33Z",
+        "privateRepository": true,
+        "draft": false,
+        "prerelease": false,
+        "tag": "v0.0.23",
+        "source": "2b363d18e1329aa195c1f3fadc1cee70a9c9de2d",
+        "tagSource": "2b363d18e1329aa195c1f3fadc1cee70a9c9de2d",
+        "assets": 31,
+        "checksumTargets": 30,
+        "allAssetsServerDigestAndSizeMatched": true,
+        "previousV0022Unchanged": true,
+        "previousV0021Unchanged": true,
+        "attachments": [
+          {
+            "name": "cleanup-release.json",
+            "id": 630847969,
+            "bytes": 6200,
+            "sha256": "5fc3ac21b4eabd73ef89a82a70ad701913e1503e6f15fc42d901355f0532e81f"
+          },
+          {
+            "name": "DELIVERY.md",
+            "id": 630847757,
+            "bytes": 4566,
+            "sha256": "5c851f4d60c4dfa648889247f542a5dee375d9342f4c7add2a5f1a2243e10336"
+          },
+          {
+            "name": "gates.json",
+            "id": 630847972,
+            "bytes": 58787,
+            "sha256": "11f7462ceedc6940634865e633cc3a87ac3575eb58a4a0ba5c980947ef52c5d1"
+          },
+          {
+            "name": "mac-build-manifest.json",
+            "id": 630847978,
+            "bytes": 72932,
+            "sha256": "7aa645c630e60bf76bd4f2eb94aa57358f3afb43c469260f4628180d99338da3"
+          },
+          {
+            "name": "mac-final-suites.json",
+            "id": 630848075,
+            "bytes": 2489,
+            "sha256": "71b2ff504585cd0800a17caf25a28566f8e179870b604b0e894f9b5be3587563"
+          },
+          {
+            "name": "mac-launcher-generation.json",
+            "id": 630848076,
+            "bytes": 830,
+            "sha256": "0d80290b5bcbf71727c32ea620659e61a0190ba38871c603f824f738222d5872"
+          },
+          {
+            "name": "mac-native-material.json",
+            "id": 630848080,
+            "bytes": 8555,
+            "sha256": "29b60fbcaee6f3900cf2d030bb501829273f092a8c9353c80484a8f9959085e7"
+          },
+          {
+            "name": "mac-package-binding.json",
+            "id": 630848172,
+            "bytes": 2210,
+            "sha256": "9c0254270d14f03381355902265c7aba8c7c83cb6bab0e7b0570e615550e1bf5"
+          },
+          {
+            "name": "mac-runtime-evidence-reuse.json",
+            "id": 630848194,
+            "bytes": 499,
+            "sha256": "dd1c4a8d9bb3fe5bc84aa9c5d12b91f6c5cb89681676502e28ced71ff1b836dd"
+          },
+          {
+            "name": "mac-signature-verification.json",
+            "id": 630848199,
+            "bytes": 361,
+            "sha256": "c71a0c365b9d3f0762d2e5fdca6cbac27d56c0139114974e8673aaaaac0b1eb1"
+          },
+          {
+            "name": "SHA256SUMS.txt",
+            "id": 630847752,
+            "bytes": 2845,
+            "sha256": "3502ecc80880698bd690c9c73450e8146a6d2158632d2aa370515bee30fab0af"
+          },
+          {
+            "name": "source-pair-proof.json",
+            "id": 630848259,
+            "bytes": 12361,
+            "sha256": "b59b5a176953d08d557bdcb4abc48b3891585a0d6b2cb3861ff3ec92d59f75f3"
+          },
+          {
+            "name": "Start-Thoughtline-Isolated-Mac.command",
+            "id": 630847759,
+            "bytes": 3156,
+            "sha256": "d9cdb9516eb2d8043adbed4acfc1a46a22c2ac3dd1ac983180eb71046e5cc385"
+          },
+          {
+            "name": "Start-Thoughtline-Isolated.ps1",
+            "id": 630847758,
+            "bytes": 1646,
+            "sha256": "63338406f01681f499fa098aa0a2c73219dc1bc471f8ff01432afc04fbc5b4c6"
+          },
+          {
+            "name": "Thoughtline-0.0.23-mac-arm64.dmg",
+            "id": 630847753,
+            "bytes": 133482597,
+            "sha256": "d651f12dd9d4740e55c9b0952fadab4bd25e1da909a21b8127ab08072871033a"
+          },
+          {
+            "name": "Thoughtline-0.0.23-win-x64.exe",
+            "id": 630847952,
+            "bytes": 113115837,
+            "sha256": "f80e27239390ea1aadad578ed9563babc0d0e62896286d2c7ac2e42ec8d93a95"
+          },
+          {
+            "name": "windows-build-manifest.json",
+            "id": 630848264,
+            "bytes": 73294,
+            "sha256": "5bb5b5dbf50e820956d50ec2416b4d3bb9b4554fc19f47b50379c2480aa75aef"
+          },
+          {
+            "name": "windows-final-run.json",
+            "id": 630848277,
+            "bytes": 4942,
+            "sha256": "1209292c67d8625c99420c869a6c66586d090125e3d22c16255c0a835af85b8f"
+          },
+          {
+            "name": "windows-final-suites.json",
+            "id": 630848334,
+            "bytes": 2701,
+            "sha256": "60a06953091d05e5f2aa8bd993a66a7c55440080b3e43bee8069906e26c85e0f"
+          },
+          {
+            "name": "windows-installed-preflight.json",
+            "id": 630848344,
+            "bytes": 1766,
+            "sha256": "330bae035636cb26208be2876df63cee3b24dda251c26c40fb2fdbc5f1e701ce"
+          },
+          {
+            "name": "windows-installed-round-three.json",
+            "id": 630848382,
+            "bytes": 10392,
+            "sha256": "0c40fd05ddfebe8f885a43416893895012003a665945447cc1ab1aade5c80aa0"
+          },
+          {
+            "name": "windows-installer-preflight.json",
+            "id": 630848460,
+            "bytes": 1230,
+            "sha256": "1a9fb654240ed51ba3dbb7cfdd32057c706968446f409c946f6725cfe2146f2e"
+          },
+          {
+            "name": "windows-package-binding.json",
+            "id": 630848463,
+            "bytes": 521,
+            "sha256": "716ea5cc5c5e410df9a2e4be01437a66eb0432a38f466ed24cee7864e179ef26"
+          },
+          {
+            "name": "windows-packaged-appearance-customization.json",
+            "id": 630848479,
+            "bytes": 29465,
+            "sha256": "3c280aa50483543abeb45ad5beacc2c9d3005d27cca05819944dc2a9a5b1a03c"
+          },
+          {
+            "name": "windows-packaged-appearance.json",
+            "id": 630848543,
+            "bytes": 3568,
+            "sha256": "c06dd870c3c254d8b6b309e01a32fac15551658718e428c7697bdfbe065de69a"
+          },
+          {
+            "name": "windows-packaged-capacity.json",
+            "id": 630848558,
+            "bytes": 3683,
+            "sha256": "b9c171363c0a5028e20986bd35a9bcf4cf7d5fbd269b69dbddc64c1b87707676"
+          },
+          {
+            "name": "windows-packaged-positioning.json",
+            "id": 630848587,
+            "bytes": 8724,
+            "sha256": "de163f47863399cf92e33ca870f85394856fb23d65089e039432507ed962c30c"
+          },
+          {
+            "name": "windows-packaged-round-three.json",
+            "id": 630848665,
+            "bytes": 10285,
+            "sha256": "1f0b493007fb4526f94aefe03bbaf64f8f86c289ff90c05f74cfcb96061c648a"
+          },
+          {
+            "name": "windows-packaged-round-twenty-one.json",
+            "id": 630848676,
+            "bytes": 29861,
+            "sha256": "8b48358d497da5e6f173ed3d38aaef3eeda3d1040e38c630265fc3968f161515"
+          },
+          {
+            "name": "windows-packaged-split.json",
+            "id": 630848688,
+            "bytes": 2413,
+            "sha256": "bd4ce1f695cf1359146d26f7b422cf4f4e557c2e4a0243da3572cc90bcdcd648"
+          },
+          {
+            "name": "windows-pe-icons.json",
+            "id": 630848714,
+            "bytes": 12804,
+            "sha256": "721b9eac8d27761a9ac8d7d89c4e0f1a492378df38d98ca2a77897d884535a0c"
+          }
+        ],
+        "formalAcceptance": false,
+        "physicalAcceptance": false,
+        "published": true
+      },
+      "remaining": [
+        "cross-platform/physical-environment coverage beyond accepted ten-item v0.0.23 user checklist",
+        "physical actual-app maximized and full-screen top-edge invocation",
+        "physical IME, 100/125/150% DPI, multiscreen disconnect/switch",
+        "Mac native menu outside-click on blank desktop",
+        "real receiving-app pure-text drag, not txt attachment",
+        "physical notification banner/click/DND",
+        "animation feel",
+        "clean LaunchServices normal start and exit"
+      ],
+      "cleanup": {
+        "passed": true,
+        "verifiedAt": "2026-10-11T13:35:09.796314+00:00",
+        "source": "2b363d18e1329aa195c1f3fadc1cee70a9c9de2d",
+        "removed": [
+          {
+            "path": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/dist/mac-arm64",
+            "allocatedKiB": 307916,
+            "absent": true,
+            "ownership": "rebuilt own final v0.0.23 App; signed DMG and final delivery retained"
+          },
+          {
+            "path": "/Users/lihongwei/Documents/Codex/2026-10-11/thoughtline-round3-refinement/delivery/v0.0.23/isolated-experience",
+            "absent": true,
+            "ownership": "own empty check-only mount/profile directories; App was not launched"
+          },
+          {
+            "path": "/Users/lihongwei/Documents/Codex/2026-10-11/thoughtline-round3-refinement/windows-ci-first-failed",
+            "allocatedKiB": 7324,
+            "entries": 87,
+            "absent": true,
+            "reason": "own CI download duplicates; final package/proofs or failed receipts and logs retained"
+          },
+          {
+            "path": "/Users/lihongwei/Documents/Codex/2026-10-11/thoughtline-round3-refinement/windows-ci-f392-first-failed",
+            "allocatedKiB": 11856,
+            "entries": 140,
+            "absent": true,
+            "reason": "own CI download duplicates; final package/proofs or failed receipts and logs retained"
+          },
+          {
+            "path": "/Users/lihongwei/Documents/Codex/2026-10-11/thoughtline-round3-refinement/windows-ci-f392-second-failed",
+            "allocatedKiB": 24296,
+            "entries": 236,
+            "absent": true,
+            "reason": "own CI download duplicates; final package/proofs or failed receipts and logs retained"
+          },
+          {
+            "path": "/Users/lihongwei/Documents/Codex/2026-10-11/thoughtline-round3-refinement/windows-ci-data-tab-failed",
+            "allocatedKiB": 24932,
+            "entries": 249,
+            "absent": true,
+            "reason": "own CI download duplicates; final package/proofs or failed receipts and logs retained"
+          },
+          {
+            "path": "/Users/lihongwei/Documents/Codex/2026-10-11/thoughtline-round3-refinement/windows-ci-launcher-failed",
+            "allocatedKiB": 76,
+            "entries": 3,
+            "absent": true,
+            "reason": "own CI download duplicates; final package/proofs or failed receipts and logs retained"
+          },
+          {
+            "path": "/Users/lihongwei/Documents/Codex/2026-10-11/thoughtline-round3-refinement/windows-ci-final-38142369778",
+            "allocatedKiB": 141652,
+            "entries": 345,
+            "absent": true,
+            "reason": "own CI download duplicates; final package/proofs or failed receipts and logs retained"
+          },
+          {
+            "path": "/tmp/thoughtline-r3-v023-delivery-verify.log",
+            "bytes": 1551,
+            "absent": true,
+            "reason": "own driver log relocated to retained evidence"
+          },
+          {
+            "path": "/tmp/thoughtline-r3-v023-release-binding.log",
+            "bytes": 0,
+            "absent": true,
+            "reason": "own driver log relocated to retained evidence"
+          },
+          {
+            "path": "/tmp/thoughtline-r3-v023-launcher-version-red.log",
+            "bytes": 1314,
+            "absent": true,
+            "reason": "own driver log relocated to retained evidence"
+          },
+          {
+            "path": "/tmp/thoughtline-r3-v023-frozen-build.log",
+            "bytes": 3825,
+            "absent": true,
+            "reason": "own driver log relocated to retained evidence"
+          },
+          {
+            "path": "/tmp/thoughtline-r3-v023-appearance-io-restart.log",
+            "bytes": 18071,
+            "absent": true,
+            "reason": "own driver log relocated to retained evidence"
+          },
+          {
+            "path": "/tmp/thoughtline-r3-v023-data-final-build.log",
+            "bytes": 3825,
+            "absent": true,
+            "reason": "own driver log relocated to retained evidence"
+          },
+          {
+            "path": "/tmp/thoughtline-r3-v023-final-check-only.log",
+            "bytes": 231,
+            "absent": true,
+            "reason": "own driver log relocated to retained evidence"
+          },
+          {
+            "path": "/tmp/thoughtline-r3-v023-fix-data-tab-green.log",
+            "bytes": 689,
+            "absent": true,
+            "reason": "own driver log relocated to retained evidence"
+          },
+          {
+            "path": "/tmp/thoughtline-r3-v023-delivery-commit.log",
+            "bytes": 176,
+            "absent": true,
+            "reason": "own driver log relocated to retained evidence"
+          },
+          {
+            "path": "/tmp/thoughtline-r3-v023-windows-review-failed.log",
+            "bytes": 5230,
+            "absent": true,
+            "reason": "own driver log relocated to retained evidence"
+          },
+          {
+            "path": "/tmp/thoughtline-r3-v023-windows-install-failed.log",
+            "bytes": 1925,
+            "absent": true,
+            "reason": "own driver log relocated to retained evidence"
+          },
+          {
+            "path": "/tmp/thoughtline-r3-v023-appearance.log",
+            "bytes": 17920,
+            "absent": true,
+            "reason": "own driver log relocated to retained evidence"
+          },
+          {
+            "path": "/tmp/thoughtline-r3-v023-data-tab-commit.log",
+            "bytes": 126,
+            "absent": true,
+            "reason": "own driver log relocated to retained evidence"
+          },
+          {
+            "path": "/tmp/thoughtline-r3-v023-fix-data-tab.log",
+            "bytes": 940,
+            "absent": true,
+            "reason": "own driver log relocated to retained evidence"
+          },
+          {
+            "path": "/tmp/thoughtline-r3-v023-release-launcher-check.log",
+            "bytes": 231,
+            "absent": true,
+            "reason": "own driver log relocated to retained evidence"
+          }
+        ],
+        "ownedAllocatedMiB": 505.91015625,
+        "netApfsGainClaimed": false,
+        "signalsSent": 0,
+        "protected": [
+          {
+            "identity": "/Applications/Thoughtline.app/Contents/MacOS/Thoughtline",
+            "currentProcesses": [
+              "95076 /Applications/Thoughtline.app/Contents/MacOS/Thoughtline"
+            ]
+          },
+          {
+            "identity": "/Users/lihongwei/Documents/Codex/2026-10-09/task-2/qa-thoughtline/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron",
+            "currentProcesses": [
+              "34617 /Users/lihongwei/Documents/Codex/2026-10-09/task-2/qa-thoughtline/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron"
+            ]
+          }
+        ],
+        "noThoughtlineTestMounts": true,
+        "userDataDependenciesCachesWorktreesHistoricalPackagesFailedEvidenceAndFinalDeliveryPreserved": true,
+        "scope": "Named own built App, empty check-only directories, CI downloads and relocated logs only; previous stage cleanup separately recorded without double-counting"
+      },
+      "userAcceptance": {
+        "version": "0.0.23",
+        "asOf": "2026-10-11",
+        "status": "accepted-for-ten-item-user-checklist",
+        "reportedBy": "project owner in this conversation",
+        "verbatimFeedback": "以上修复我觉得没什么问题了",
+        "scope": [
+          "transient notice expiry",
+          "single outer window contour",
+          "settings tabs/headings/spacing",
+          "unsaved controls draft across settings tabs",
+          "classic rope custom colors",
+          "cotton/vine natural fixed colors",
+          "vine actual clip-jaw contact at 4/6/8 and drag",
+          "five soft paper colors",
+          "ruled/dashed alignment and plain-text content",
+          "appearance preview/cancel/scoped defaults/restart"
+        ],
+        "platformCoverage": "not individually specified by user; do not infer both physical platforms passed",
+        "physicalCoverage": "remaining conditions not individually confirmed",
+        "fullFormalAcceptance": false
       }
     }
   },

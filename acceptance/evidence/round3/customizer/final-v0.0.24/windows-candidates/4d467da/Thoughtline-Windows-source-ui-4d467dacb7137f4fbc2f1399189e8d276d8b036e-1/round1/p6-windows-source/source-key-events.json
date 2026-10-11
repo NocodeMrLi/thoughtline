@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "host": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "release": "24.3.0"
+  },
+  "scope": "Source Electron on the actual runner OS with emulated shortcut registration and DOM keyboard events; no physical IME, DPI, focus, display, or receiver acceptance",
+  "electron": "44.7.0",
+  "checks": {
+    "enterInsertsNewline": true,
+    "keyCode229GuardsSubmit": true,
+    "platformSubmitShortcut": "Meta+Enter",
+    "preservedEmojiAndLineBreak": true,
+    "draftClearedAfterSubmit": true
+  },
+  "revisions": {
+    "before": 0,
+    "after": 2
+  },
+  "cleanup": {
+    "directory": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-source-key-events-HGWXbj",
+    "ownedPids": [
+      52866,
+      52867,
+      52868,
+      52869,
+      52873
+    ],
+    "normalClose": true,
+    "fakeDataRemoved": true,
+    "allExited": true
+  }
+}

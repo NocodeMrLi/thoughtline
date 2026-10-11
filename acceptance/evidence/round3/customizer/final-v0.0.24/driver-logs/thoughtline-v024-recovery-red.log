@@ -1,0 +1,117 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/round3Recovery.test.ts (6 tests | 6 failed) 45ms
+   × restores a deleted stacked page into the original compatible clip without consuming a full-rope slot 36ms
+   × full-rope restore preserves all current clips and content in calendar, without auto-backfill enrollment 3ms
+   × restores original solitary clip identity and position if it is still free 2ms
+   × preserves original calendar-only state and cancelled reminder 1ms
+   × legacy deleted records without original clip metadata still respect capacity 2ms
+   × rejects malformed recovery metadata and accepts a valid JSON round trip 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/round3Recovery.test.ts > restores a deleted stacked page into the original compatible clip without consuming a full-rope slot
+AssertionError: expected [ { id: 'clip:two', …(4) }, …(4) ] to have a length of 4 but got 5
+
+- Expected
++ Received
+
+- 4
++ 5
+
+ ❯ tests/unit/round3Recovery.test.ts:10:344
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  tests/unit/round3Recovery.test.ts > full-rope restore preserves all current clips and content in calendar, without auto-backfill enrollment
+AssertionError: expected [ { id: 'clip:two', …(4) }, …(4) ] to deeply equal [ { id: 'clip:two', …(4) }, …(3) ]
+
+- Expected
++ Received
+
+@@ -33,6 +33,15 @@
+      "ideaIds": [
+        "replacement",
+      ],
+      "position": null,
+    },
++   {
++     "agentId": "general",
++     "currentId": "one",
++     "id": "clip:one",
++     "ideaIds": [
++       "one",
++     ],
++     "position": null,
++   },
+  ]
+
+ ❯ tests/unit/round3Recovery.test.ts:11:275
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  tests/unit/round3Recovery.test.ts > restores original solitary clip identity and position if it is still free
+AssertionError: expected { id: 'clip:one', …(4) } to match object { id: 'clip:one', position: 0.12 }
+(3 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "id": "clip:one",
+-   "position": 0.12,
++   "position": null,
+  }
+
+ ❯ tests/unit/round3Recovery.test.ts:12:252
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  tests/unit/round3Recovery.test.ts > preserves original calendar-only state and cancelled reminder
+Error: 提醒数据无效。
+ ❯ v tests/unit/round3Recovery.test.ts:6:45
+      4| import {backfillIdeas} from '../../src/shared/ideaPlacement';
+      5| import type {Snapshot,Result} from '../../src/shared/contracts';
+      6| const v=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);return r.…
+       |                                             ^
+      7| const at='2026-10-12T01:00:00Z',later='2026-10-12T02:00:00Z';
+      8| const add=(s:Snapshot,id:string)=>v(newIdea(s,{text:'原文 '+id,title:id,…
+ ❯ tests/unit/round3Recovery.test.ts:13:137
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  tests/unit/round3Recovery.test.ts > legacy deleted records without original clip metadata still respect capacity
+AssertionError: expected 'hanging' to be 'archived' // Object.is equality
+
+Expected: "archived"
+Received: "hanging"
+
+ ❯ tests/unit/round3Recovery.test.ts:14:244
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  tests/unit/round3Recovery.test.ts > rejects malformed recovery metadata and accepts a valid JSON round trip
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/round3Recovery.test.ts:15:422
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  6 failed (6)
+   Start at  00:20:23
+   Duration  231ms (transform 58%, tests 31%, import 9%, worker 2%)
+

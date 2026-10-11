@@ -1,0 +1,21 @@
+{
+  "platform": "darwin",
+  "cases": [
+    {
+      "name": "merge-backfill-write-failure-is-atomic",
+      "passed": true
+    },
+    {
+      "name": "merge-newest-backfill-and-atomic-undo",
+      "passed": true
+    },
+    {
+      "name": "twenty-repeat-merge-undo-and-two-sequential-newest-eligible-fills",
+      "passed": true
+    }
+  ],
+  "scope": "actual source settings/renderer/IPC and disk persistence; controlled cursor, not physical DPI or drag acceptance",
+  "passed": false,
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n7 !== 8\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-capacity-workflow.cjs:29:63",
+  "normalQuit": true
+}
