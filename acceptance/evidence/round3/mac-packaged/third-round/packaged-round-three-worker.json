@@ -1,0 +1,30 @@
+{
+  "packaged": true,
+  "executable": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/dist/mac-arm64/Thoughtline.app/Contents/MacOS/Thoughtline",
+  "version": "0.0.22",
+  "platform": "darwin",
+  "checks": [],
+  "pids": [
+    53518,
+    53530,
+    53531,
+    53534,
+    53535
+  ],
+  "scope": "actual package with own synthetic data, real shortcut registration and controlled callback/cursor/menu; no physical DPI/IME/native banner acceptance",
+  "failure": "TypeError: Cannot read properties of undefined (reading 'locator')\n    at open (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/packaged-round3-worker.cjs:8:161)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/packaged-round3-worker.cjs:12:53",
+  "passed": false,
+  "cleanup": {
+    "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-packaged-round-three-0Q5Jfe",
+    "normalQuit": true,
+    "profileRemoved": true,
+    "allExited": true,
+    "ownedPids": [
+      53518,
+      53530,
+      53531,
+      53534,
+      53535
+    ]
+  }
+}
