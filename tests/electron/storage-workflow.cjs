@@ -15,7 +15,12 @@ const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=requ
   const imeRefused=await manage.evaluate(()=>window.thoughtline.changeStorage());assert.equal(imeRefused.ok,false);assert.equal(await editor.inputValue(),'dirty input before storage');
   await editor.evaluate(el=>el.dispatchEvent(new CompositionEvent('compositionend',{bubbles:true,data:''})));
   // Keep a dirty edit pending immediately before switching to settings; existing guard must flush it.
-  await editor.fill('最后未保存输入🙂\n');assert((await manage.evaluate(()=>window.thoughtline.openSettings())).ok);await manage.waitForSelector('[data-mode=settings]');
+  await editor.fill('最后未保存输入🙂\n');const settingsStarted=Date.now(),settingsOpened=await manage.evaluate(()=>window.thoughtline.openSettings());
+  if(!settingsOpened.ok){
+   const diagnostic={result:settingsOpened,elapsed:Date.now()-settingsStarted,editorValue:await editor.inputValue(),alerts:await manage.locator('[role=alert]').allTextContents(),status:await manage.locator('.inline-save-status').allTextContents(),info:await manage.evaluate(()=>window.thoughtline.info()),stored:JSON.parse(await fs.readFile(path.join(profile,'snapshot.json'),'utf8'))};
+   await fs.mkdir(evidence,{recursive:true});await fs.writeFile(path.join(evidence,`settings-transition-${attempt}-failed.json`),JSON.stringify(diagnostic,null,2));console.error(JSON.stringify({settingsTransitionDiagnostic:diagnostic}));
+  }
+  assert(settingsOpened.ok,settingsOpened.message);await manage.waitForSelector('[data-mode=settings]');
   assert.equal(JSON.parse(await fs.readFile(path.join(profile,'snapshot.json'),'utf8')).ideas[0].text,'最后未保存输入🙂\n');
   const info=await manage.evaluate(()=>window.thoughtline.storageInfo());assert(info.ok);assert.equal(info.value.directory,profile);assert.equal(await manage.locator('[data-storage-path]').textContent(),profile);
   assert((await manage.evaluate(()=>window.thoughtline.openStorageDirectory())).ok);assert.equal(await app.evaluate(()=>globalThis.openedStoragePath),profile);
