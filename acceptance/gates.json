@@ -1,5 +1,5 @@
 {
-  "stage": "round3-v0.0.23-released-physical-and-user-acceptance-pending",
+  "stage": "round3-v0.0.23-user-checklist-accepted-physical-coverage-pending",
   "asOf": "2026-10-11",
   "branch": "main",
   "lastCommittedSource": "2b363d18e1329aa195c1f3fadc1cee70a9c9de2d",
@@ -787,7 +787,7 @@
   },
   "round3": {
     "version": "0.0.23",
-    "status": "released-physical-and-user-acceptance-pending",
+    "status": "released-user-checklist-accepted-physical-coverage-pending",
     "source": "2b363d18e1329aa195c1f3fadc1cee70a9c9de2d",
     "finalWindowsRun": 38142369778,
     "formalAcceptance": false,
@@ -1074,7 +1074,7 @@
       "published": true
     },
     "remaining": [
-      "user reference-quality visual acceptance",
+      "cross-platform/physical-environment coverage beyond accepted ten-item v0.0.23 user checklist",
       "physical actual-app maximized and full-screen top-edge invocation",
       "physical IME, 100/125/150% DPI, multiscreen disconnect/switch",
       "Mac native menu outside-click on blank desktop",
@@ -1252,6 +1252,28 @@
       "noThoughtlineTestMounts": true,
       "userDataDependenciesCachesWorktreesHistoricalPackagesFailedEvidenceAndFinalDeliveryPreserved": true,
       "scope": "Named own built App, empty check-only directories, CI downloads and relocated logs only; previous stage cleanup separately recorded without double-counting"
+    },
+    "userAcceptance": {
+      "version": "0.0.23",
+      "asOf": "2026-10-11",
+      "status": "accepted-for-ten-item-user-checklist",
+      "reportedBy": "project owner in this conversation",
+      "verbatimFeedback": "以上修复我觉得没什么问题了",
+      "scope": [
+        "transient notice expiry",
+        "single outer window contour",
+        "settings tabs/headings/spacing",
+        "unsaved controls draft across settings tabs",
+        "classic rope custom colors",
+        "cotton/vine natural fixed colors",
+        "vine actual clip-jaw contact at 4/6/8 and drag",
+        "five soft paper colors",
+        "ruled/dashed alignment and plain-text content",
+        "appearance preview/cancel/scoped defaults/restart"
+      ],
+      "platformCoverage": "not individually specified by user; do not infer both physical platforms passed",
+      "physicalCoverage": "remaining conditions not individually confirmed",
+      "fullFormalAcceptance": false
     }
   },
   "releaseHistory": {
@@ -1593,6 +1615,12 @@
         ],
         "userDataDependenciesCachesWorktreesHistoricalPackagesFailedEvidenceAndFinalDeliveryPreserved": true,
         "scope": "Named owned built App, native test probe and final CI download only; final DMG retained in dist and delivery; all tests quit before deletion"
+      },
+      "userAcceptance": {
+        "asOf": "2026-10-11",
+        "verbatimFeedback": "0.0.22 我测试过了 没有什么问题",
+        "status": "owner-reported-no-issues",
+        "platformCoverage": "not individually specified"
       }
     }
   },
