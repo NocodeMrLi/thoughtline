@@ -104,3 +104,5 @@ Mac verify315通过4跳过，版本0.0.24。补位20次merge／undo、原先最�
 ## 2026-10-12 0.0.24最终收口
 
 Final source62d9302351d6d339f417007e1dce3da4cecafc3b; WindowsCI38157102205 success, Mac323+4skip/Win327, final packaged84each. 306input objects/modes and279exactCRLF proof; Mac native signature replay/Windows9installed hashes bound. Release409807192 formal/private33assets all sizes+digests checked, prior23/22/21 unchanged. Cleanup ownedAllocated1179.05MiB, no net space claim; user/QA no signals. Docs/README/gates updated; main docs/evidence push pending final readback. Click report chat only; physical/user acceptance and deleted-in-progress restart/filter notice targeted confirmation remain pending.
+
+收口核验：文档/完整失败与通过证据8ffc6624c51c8d3889c391e53a339063b35d217a已提交并push，远端main一致、树干净；33发布附件、最终双端包和tag62d保持，点击报告将在最终对话给出。后续本行/回执的收口提交仅文档证据，不重新构建。
