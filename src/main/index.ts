@@ -1,4 +1,5 @@
 import {shelfCapacity} from '../shared/ropeGeometry';
+import {validPaper,validRope} from '../shared/appearance';
 import {PreferenceRepository} from './store/preferences';
 import {translator,localizeMessage,agentLabel,countThoughts,type Translator} from '../shared/i18n';
 import {app,BrowserWindow,dialog,shell,clipboard,globalShortcut,ipcMain,nativeImage,nativeTheme,powerMonitor,screen,Tray,Menu} from 'electron';
@@ -66,7 +67,8 @@ else app.whenReady().then(async()=>{
  let composerSession=0,manageSession=0,manageSelection:string|null=null;
  let manageEditingOwner:{session:number;ideaId:string}|null=null,manageEditingRequested=false;
  let dragCancelSession=0,dragEscape=false;let textDragTimer:ReturnType<typeof setTimeout>|null=null;let textDragOwner:string|null=null;
- let placementNotice:string|null=null;let shelfAgentId='all';let settingsBusy=false;let storageBusy=false;let refreshTray=()=>{};
+ let placementNotice:string|null=null;let placementNoticeId=0;let placementNoticeKind:'info'|'error'='info';
+ const setPlacementNotice=(message:string|null,error=false)=>{placementNotice=message;placementNoticeId++;placementNoticeKind=error?'error':'info';};let shelfAgentId='all';let settingsBusy=false;let storageBusy=false;let refreshTray=()=>{};
  let geometryTimer:ReturnType<typeof setTimeout>|null=null,boundsIgnoreUntil=0;
  let manageMode:'browse'|'detail'|'settings'='browse',manageTitles=false;let undoClips:{snapshot:Snapshot;revision:number;positionsOnly?:boolean;placement?:PlacementUndo;placementKind?:'hang'|'arrange'|'swap'}|null=null;
  let composerContext:ComposerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
@@ -74,7 +76,7 @@ else app.whenReady().then(async()=>{
  const host=createHost(shelf,()=>composer);
  let preferenceCommit:{version:number;sequence:number;sender:number}|null=null;
  let reminderFallback:ReminderFallback|null=null;
- const info=(viewer?:number):PilotInfo=>({lightReminder:reminderFallback?.current??null,preferenceCommit:preferenceCommit?{version:preferenceCommit.version,sequence:preferenceCommit.sequence,own:preferenceCommit.sender===viewer}:null,preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,arrangeSession,manageVisit,calendarReturning,manageSession,manageSelection,manageMode,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,undoPlacementKind:undoClips?.placementKind,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation(),layoutLocked:dragEscape||!!textDragOwner});
+ const info=(viewer?:number):PilotInfo=>({lightReminder:reminderFallback?.current??null,preferenceCommit:preferenceCommit?{version:preferenceCommit.version,sequence:preferenceCommit.sequence,own:preferenceCommit.sender===viewer}:null,preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,placementNoticeId,placementNoticeKind,arrangeSession,manageVisit,calendarReturning,manageSession,manageSelection,manageMode,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,undoPlacementKind:undoClips?.placementKind,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation(),layoutLocked:dragEscape||!!textDragOwner});
  let reminderScheduler:ReminderScheduler|null=null,reminderNotices:ReminderNotifications|null=null;
  const publish=()=>{reminderFallback?.sync();edge.reminder(!!reminderFallback?.current);reminderNotices?.sync();reminderScheduler?.refresh();for(const w of [shelf,composer,manage])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info(w.webContents.id));};
  const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:(BrowserWindow|null)[]=[shelf,composer,manage])=>allowed.some(w=>w?.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
@@ -211,7 +213,7 @@ else app.whenReady().then(async()=>{
   if(intent.kind!=='save'&&shelfAgentId!=='all'&&shelfAgentId!==agentId&&!reveal)return invalid(t('当前Agent筛选会隐藏这张纸，请选择显示全部Agent后挂上。'));
   const before=snapshot,next=placeIdea(snapshot,source,intent,width,new Date().toISOString());
   const r=await save(next,revision);if(!r.ok)return r;
-  placementNotice=null;
+  setPlacementNotice(null);
   if(intent.kind!=='save'){
    if(reveal)shelfAgentId='all';
    undoClips={snapshot:before,revision:snapshot.revision,placement:{before,after:snapshot,incomingId:source.id},placementKind:intent.kind};
@@ -271,17 +273,17 @@ else app.whenReady().then(async()=>{
    const targetIdea=snapshot.ideas.find(i=>i.id===target.currentId);
    const characters=Array.from((targetIdea?.title||targetIdea?.text.trim().split('\n')[0]||t('无标题')).replace(/\s+/g,' '));
    const title=characters.slice(0,24).join('')+(characters.length>24?'…':'');
-   return {label:`${title} · ${countThoughts(preferences.current.locale,target.ideaIds.length)}`,click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'paperDrop',id:clip!.id,ideaId:id,targetId:target.id,position:null},snapshot.revision);if(!r.ok){placementNotice=r.message;publish();}})();}};
+   return {label:`${title} · ${countThoughts(preferences.current.locale,target.ideaIds.length)}`,click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'paperDrop',id:clip!.id,ideaId:id,targetId:target.id,position:null},snapshot.revision);if(!r.ok){setPlacementNotice(r.message,true);publish();}})();}};
   });
   const menu=Menu.buildFromTemplate([
    {label:t("查看全文"),click:()=>{void openBrowseDetail(id);}},
    {label:t("合并"),enabled:!!clip,submenu:mergeItems.length?mergeItems:[{label:t("没有可合并的夹子"),enabled:false}]},
-   ...(clip&&clip.ideaIds.length>1?[{label:t("拆分"),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'split',id:clip.id,ideaId:id},snapshot.revision);if(!r.ok){placementNotice=r.message;publish();}})();}}]:[]),
-   {label:t("收起当前念头"),click:()=>{void (async()=>{if(!await prepareViews())return;const r=await composerWrite(()=>{const current=snapshot.ideas.find(i=>i.id===id&&i.status==='hanging');return current?save(changeStatus({...snapshot,clips:captureClipPositions(snapshot.clips,width,'all',shelfCapacity(snapshot.settings.shelfCapacity))},id,'archived',new Date().toISOString()),snapshot.revision):Promise.resolve(invalid(t("找不到这条念头。")));});if(!r.ok){placementNotice=r.message;publish();}})();}},
+   ...(clip&&clip.ideaIds.length>1?[{label:t("拆分"),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'split',id:clip.id,ideaId:id},snapshot.revision);if(!r.ok){setPlacementNotice(r.message,true);publish();}})();}}]:[]),
+   {label:t("收起当前念头"),click:()=>{void (async()=>{if(!await prepareViews())return;const r=await composerWrite(()=>{const current=snapshot.ideas.find(i=>i.id===id&&i.status==='hanging');return current?save(changeStatus({...snapshot,clips:captureClipPositions(snapshot.clips,width,'all',shelfCapacity(snapshot.settings.shelfCapacity))},id,'archived',new Date().toISOString()),snapshot.revision):Promise.resolve(invalid(t("找不到这条念头。")));});if(!r.ok){setPlacementNotice(r.message,true);publish();}})();}},
    {label:t('onlyAgent',{name:agentLabel(preferences.current.locale,snapshot.agents.find(a=>a.id===idea.agentId))||t('这个 Agent')}),click:()=>selectShelfAgent(idea.agentId)},
    {label:t('显示全部 Agent'),type:'checkbox',checked:shelfAgentId==='all',click:()=>selectShelfAgent('all')},
-   {label:t(undoClips?.positionsOnly&&undoClips.revision===snapshot.revision?'撤销整理':'自动整理'),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:undoClips?.positionsOnly&&undoClips.revision===snapshot.revision?'undo':'arrange'},snapshot.revision);if(!r.ok){placementNotice=r.message;publish();}})();}},
-   ...(undoClips&&!undoClips.positionsOnly?[{label:t(undoClips.placementKind==='swap'?'撤销换上':undoClips.placementKind==='hang'?'撤销挂上':undoClips.placementKind==='arrange'?'撤销整理挂上':'撤销夹子操作'),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'undo'},snapshot.revision);if(!r.ok){placementNotice=r.message;publish();}})();}}]:[]),
+   {label:t(undoClips?.positionsOnly&&undoClips.revision===snapshot.revision?'撤销整理':'自动整理'),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:undoClips?.positionsOnly&&undoClips.revision===snapshot.revision?'undo':'arrange'},snapshot.revision);if(!r.ok){setPlacementNotice(r.message,true);publish();}})();}},
+   ...(undoClips&&!undoClips.positionsOnly?[{label:t(undoClips.placementKind==='swap'?'撤销换上':undoClips.placementKind==='hang'?'撤销挂上':undoClips.placementKind==='arrange'?'撤销整理挂上':'撤销夹子操作'),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'undo'},snapshot.revision);if(!r.ok){setPlacementNotice(r.message,true);publish();}})();}}]:[]),
 
    {label:t("筛选 Agent"),submenu:agentFilterMenu()},
    {type:'separator'},
@@ -374,6 +376,7 @@ else app.whenReady().then(async()=>{
  ipcMain.handle('thoughtline:export-backup',e=>storageOperation(e,'backup'));
  ipcMain.handle('thoughtline:settings',async(e,settings:Snapshot['settings'],revision:number):Promise<Result<Snapshot>>=>{
   if(!trusted(e,[manage])||manageMode!=='settings'||!settings||!validWriteHotkey(settings.writeHotkey)||typeof settings.reducedMotion!=='boolean'||settings.shelfCapacity!==undefined&&![4,6,8].includes(settings.shelfCapacity))return invalid(t("请录制有效的组合快捷键。"));
+  if(settings.rope!==undefined&&!validRope(settings.rope)||settings.paper!==undefined&&!validPaper(settings.paper))return invalid(t('设置无效。'));
   return composerWrite(async()=>{
   if(settingsBusy)return invalid(t("正在保存设置，请稍后重试。"));
   if(revision!==snapshot.revision)return {ok:false,code:'CONFLICT',message:t("设置已变化，请核对后重试。")};
@@ -381,7 +384,7 @@ else app.whenReady().then(async()=>{
   try{
    const changed=await swapShortcut(globalShortcut,snapshot.settings.writeHotkey,settings.writeHotkey,()=>{openComposer();},async()=>{
     const capacity=setShelfCapacity(snapshot,shelfCapacity(settings.shelfCapacity),width,new Date().toISOString(),shelfAgentId);
-    committed=await save(capacity.ok?{ok:true,value:{...capacity.value,settings:{...capacity.value.settings,writeHotkey:settings.writeHotkey,reducedMotion:settings.reducedMotion}}}:capacity,revision);return committed;
+    committed=await save(capacity.ok?{ok:true,value:{...capacity.value,settings:{...capacity.value.settings,writeHotkey:settings.writeHotkey,reducedMotion:settings.reducedMotion,rope:settings.rope,paper:settings.paper}}}:capacity,revision);return committed;
    });
    if(!changed.ok)return changed.error?.ok===false?changed.error:committed;
    refreshTray();publish();return committed;
@@ -408,7 +411,7 @@ else app.whenReady().then(async()=>{
    const saved=await save(editIdeaIfUnchanged(snapshot,id,draft,expectedDraft,new Date().toISOString(),width),snapshot.revision);
    if(saved.ok&&priorUndo?.placement){undoClips={...priorUndo,revision:snapshot.revision};publish();}
    if(saved.ok&&snapshot.clips.some(c=>!priorClips.has(c.id)&&c.ideaIds.includes(id))){
-    placementNotice=layoutClips(snapshot.clips,width,shelfCapacity(snapshot.settings.shelfCapacity)).overflow.some(c=>c.ideaIds.includes(id))?t("已保存，绳上暂时放不下，可在念头日历查看"):null;publish();
+    setPlacementNotice(layoutClips(snapshot.clips,width,shelfCapacity(snapshot.settings.shelfCapacity)).overflow.some(c=>c.ideaIds.includes(id))?t("已保存，绳上暂时放不下，可在念头日历查看"):null);publish();
    }
    return saved;
   });
@@ -418,7 +421,7 @@ else app.whenReady().then(async()=>{
   return composerWrite(async()=>{
    if(revision!==snapshot.revision)return {ok:false as const,code:'CONFLICT' as const,message:t("内容已更新，请重新操作。")};
    const next=kind==='delete'?deleteIdea(snapshot,id,new Date().toISOString()):kind==='restore'?restoreIdea({...snapshot,clips:captureClipPositions(snapshot.clips,width,'all',shelfCapacity(snapshot.settings.shelfCapacity))},id,new Date().toISOString()):permanentlyDeleteIdea(snapshot,id);
-   const r=await save(next,revision);if(r.ok){placementNotice=kind==='restore'&&layoutClips(snapshot.clips,width,shelfCapacity(snapshot.settings.shelfCapacity)).overflow.some(c=>c.ideaIds.includes(id))?t("已恢复，绳上暂时放不下，可在念头日历查看"):null;publish();}return r;
+   const r=await save(next,revision);if(r.ok){setPlacementNotice(kind==='restore'&&layoutClips(snapshot.clips,width,shelfCapacity(snapshot.settings.shelfCapacity)).overflow.some(c=>c.ideaIds.includes(id))?t("已恢复，绳上暂时放不下，可在念头日历查看"):null);publish();}return r;
   });
  });
  ipcMain.handle('thoughtline:status',async(e,id:string,status:'hanging'|'archived',revision:number)=>{
@@ -426,7 +429,7 @@ else app.whenReady().then(async()=>{
   return composerWrite(async()=>{if(revision!==snapshot.revision)return {ok:false as const,code:'CONFLICT' as const,message:t("内容已变化，请重新操作。")};
   if(status==='hanging')return commitPlacement({id},{kind:'hang'},revision);
   const r=await save(changeStatus({...snapshot,clips:captureClipPositions(snapshot.clips,width,'all',shelfCapacity(snapshot.settings.shelfCapacity))},id,status,new Date().toISOString()),revision);
-  if(r.ok){placementNotice=null;edge.event({type:'peek',now:Date.now()});publish();}return r;
+  if(r.ok){setPlacementNotice(null);edge.event({type:'peek',now:Date.now()});publish();}return r;
   });
  });
  ipcMain.handle('thoughtline:agent',(e,c:AgentMutation,revision:number)=>{
@@ -491,7 +494,7 @@ else app.whenReady().then(async()=>{
   }else return invalid(t("夹子操作无效"));
   const repositioned=next.ok&&['split','splitAll','undo'].includes(c.kind)&&next.value.clips.some(clip=>{const old=previous.clips.find(old=>old.id===clip.id);return old&&old.position!==clip.position;});
   const r=await save(next,revision,()=>{if(c.kind==='arrange'||c.kind==='undo'&&oldUndo?.positionsOnly||repositioned)arrangeSession++;},c.kind!=='undo');
-  if(r.ok){placementNotice=['arrange','split','splitAll'].includes(c.kind)&&layoutClips(snapshot.clips,width,shelfCapacity(snapshot.settings.shelfCapacity)).overflow.length?t("已保存，绳上暂时放不下，可在念头日历查看"):null;if(c.kind==='split'){manageSelection=c.ideaId;manageSession++;}undoClips=c.kind==='undo'?null:c.kind==='select'?(oldUndo?{...oldUndo,revision:r.value.revision}:null):{snapshot:previous,revision:r.value.revision,positionsOnly:c.kind==='arrange'};publish();}
+  if(r.ok){setPlacementNotice(['arrange','split','splitAll'].includes(c.kind)&&layoutClips(snapshot.clips,width,shelfCapacity(snapshot.settings.shelfCapacity)).overflow.length?t("已保存，绳上暂时放不下，可在念头日历查看"):null);if(c.kind==='split'){manageSelection=c.ideaId;manageSession++;}undoClips=c.kind==='undo'?null:c.kind==='select'?(oldUndo?{...oldUndo,revision:r.value.revision}:null):{snapshot:previous,revision:r.value.revision,positionsOnly:c.kind==='arrange'};publish();}
   return r;
  });
  ipcMain.handle('thoughtline:clip',async(e,c:ClipMutation,revision:number)=>{

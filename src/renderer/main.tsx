@@ -12,6 +12,8 @@ import './styles/overlay.css';
 import './styles/auxiliary.css';
 import './styles/preferences-theme.css';
 import './styles/auxiliary-material.css';
+import './styles/settings.css';
+import './styles/appearance.css';
 import {flushPageSelections} from './hooks/useClipPage';
 import {prepareLeave} from './hooks/leaveGuards';
 function App(){

@@ -1,0 +1,71 @@
+{
+  "platform": "darwin",
+  "scope": "owned source renderer/IPC, isolated data, own native window captures; not physical user acceptance",
+  "cases": [
+    {
+      "name": "full-split-notice-expires-and-does-not-revive",
+      "passed": false,
+      "failure": "AssertionError [ERR_ASSERTION]: saved/full-rope message must expire without pointer movement\n\n1 !== 0\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:15:43\n    at async run (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:10:162)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:13:2",
+      "pids": [
+        99151,
+        99151,
+        99154,
+        99155,
+        99158,
+        99159,
+        99162
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "notice-hover-focus-and-same-message-restart",
+      "passed": false,
+      "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:21:289\n    at async run (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:10:162)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:19:2",
+      "pids": [
+        99165,
+        99165,
+        99169,
+        99170,
+        99171,
+        99173,
+        99174
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "settings-tabs-data-spacing-and-controls-draft",
+      "passed": false,
+      "failure": "AssertionError [ERR_ASSERTION]: Appearance / Controls / Data must be real keyboard-accessible tabs\n\n0 !== 3\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:26:45\n    at async run (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:10:162)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:24:2",
+      "pids": [
+        99185,
+        99185,
+        99188,
+        99189,
+        99190,
+        99191,
+        99195
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "native-shell-one-contour-and-all-settings-views",
+      "passed": false,
+      "failure": "AssertionError [ERR_ASSERTION]: web shell must not draw a second window outline\n\n'1px' !== '0px'\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:36:10\n    at async run (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:10:162)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:32:2",
+      "pids": [
+        99198,
+        99198,
+        99199,
+        99200,
+        99201,
+        99202,
+        99203
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    }
+  ],
+  "passed": false
+}

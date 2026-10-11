@@ -1,0 +1,32 @@
+{
+  "platform": "darwin",
+  "scope": "isolated renderer/main/calendar return with real repository; no physical DPI or multi-display",
+  "cases": [
+    {
+      "name": "day-range-limit-scroll-restored",
+      "passed": true,
+      "scroll": 240
+    },
+    {
+      "name": "year-hierarchy-restored",
+      "passed": true
+    },
+    {
+      "name": "search-status-restored",
+      "passed": true,
+      "count": 9
+    }
+  ],
+  "pids": [
+    432,
+    433,
+    434,
+    436,
+    437,
+    438
+  ],
+  "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-calendar-return-PkiJsl",
+  "normalClose": true,
+  "dataRemoved": true,
+  "passed": true
+}

@@ -60,5 +60,8 @@
 :is(.composer,.manage)[data-platform=windows] .preference-settings{padding:10px 12px;border:1px solid var(--glass-line);border-radius:8px}
 :root[data-platform=windows] .placement-target[data-chosen=true],:is(.composer,.manage)[data-platform=windows] .date-cell[aria-current=date]{border-color:var(--focus);box-shadow:inset 0 0 0 1px var(--focus)}
 :is(.composer,.manage)[data-platform=windows] .primary{background:linear-gradient(180deg,#FFFFFF0D,transparent),var(--accent);box-shadow:inset 0 1px #FFFFFF35,inset 0 -1px #00000030}
+/* Only the native window clips the Mac exterior; do not draw a second shell. */
+:root[data-platform][data-theme] :is(.composer,.manage)[data-platform]{border-width:0;box-shadow:none}
+:root[data-platform=mac] :is(.composer,.manage)[data-platform=mac]{border-radius:0}
 /* No foreground filters, continuous animation, backdrop capture, or glass paper. */
 @media(forced-colors:active){:root[data-platform][data-theme] :is(.composer,.manage)[data-material],:root[data-platform] :is(.compact-popover,.placement-target),:is(.composer,.manage)[data-platform] :is(.composer-project-picker,.inline-project-picker,.settings-leave-prompt,.storage-settings,.preference-settings,.date-cell,.capsule-track,.capsule-thumb,.primary){background:Canvas;color:CanvasText;border-color:CanvasText;box-shadow:none;backdrop-filter:none}:is(.composer,.manage)[data-platform] .primary{background:Highlight;color:HighlightText}}

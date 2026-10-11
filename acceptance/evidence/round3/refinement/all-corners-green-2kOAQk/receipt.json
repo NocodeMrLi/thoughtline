@@ -1,0 +1,23 @@
+{
+  "platform": "darwin",
+  "scope": "owned source renderer/IPC, isolated data, own native window captures; not physical user acceptance",
+  "cases": [
+    {
+      "name": "all-view-corners-in-both-themes",
+      "passed": false,
+      "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert((await shelf.evaluate(async([theme,sequence])=>window.thoughtline.setPreferences({theme},sequence),[theme,++preferenceSequence])).ok)\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:45:4\n    at async run (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:10:277)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:41:2",
+      "pids": [
+        589,
+        589,
+        590,
+        592,
+        596,
+        597,
+        598
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    }
+  ],
+  "passed": false
+}

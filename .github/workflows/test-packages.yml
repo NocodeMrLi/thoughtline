@@ -27,7 +27,7 @@ jobs:
           THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round3/windows-source
         run: |
           New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
-          foreach ($test in @('round3-layout-workflow','round3-capacity-workflow','round3-material-workflow','round3-window-workflow')) {
+          foreach ($test in @('round3-layout-workflow','round3-capacity-workflow','round3-material-workflow','round3-window-workflow','round3-refinement-workflow','round3-appearance-workflow')) {
             & node "tests/electron/$test.cjs"
             if ($LASTEXITCODE -ne 0) { throw "$test failed" }
           }
@@ -126,6 +126,8 @@ jobs:
           $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round3/windows-packaged'
           & node tests/electron/packaged-round3.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Third round actual package regression failed' }
+          & node tests/electron/round3-appearance-workflow.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Actual package appearance customization failed' }
           $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round2/windows/packaged-capacity'
           & node tests/electron/packaged-round21.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Actual packaged reminder/title/More regression failed' }

@@ -1,0 +1,28 @@
+import {useLayoutEffect,useRef,useState,type CSSProperties} from 'react';
+import type {PilotInfo} from '../../shared/bridge';
+import {defaultPaper,defaultRope,paperAppearance,paperColors,paperPatterns,paperPalettes,ropeAppearance,ropeColors,ropeStyles,type PaperAppearance,type RopeAppearance} from '../../shared/appearance';
+import {fixedRope} from '../../shared/ropeGeometry';
+import {useLocale} from '../LocaleContext';
+import {ClipCard} from './ClipCard';
+import {RopeArtwork,ropeStyle} from './RopeArtwork';
+export type CustomizerKind='rope'|'paper';
+export type AppearancePatch=Pick<PilotInfo['snapshot']['settings'],'rope'|'paper'>;
+const names={classic:'经典细绳',cotton:'编织棉绳',vine:'轻藤蔓',warm:'经典暖纸',ivory:'柔白',apricot:'浅杏',sage:'雾绿',blue:'雾蓝',blank:'空白纸',ruled:'细横线',dashed:'轻虚线'} as const;
+export function AppearanceSettings({info,busy,kind,onCustomize,onApply}:{info:PilotInfo;busy:boolean;kind:CustomizerKind|null;onCustomize:(kind:CustomizerKind|null)=>void;onApply:(patch:AppearancePatch)=>Promise<boolean>}){
+ const {t}=useLocale(),savedRope=ropeAppearance(info.snapshot.settings.rope),savedPaper=paperAppearance(info.snapshot.settings.paper);
+ const [rope,setRope]=useState<RopeAppearance>(savedRope),[paper,setPaper]=useState<PaperAppearance>(savedPaper);
+ const open=(next:CustomizerKind)=>{setRope(savedRope);setPaper(savedPaper);onCustomize(next);};
+ if(!kind)return <div className="appearance-choices"><section className="appearance-choice"><div><strong>{t('挂绳')}</strong><small>{t(names[savedRope.style])}</small></div><button disabled={busy} onClick={()=>open('rope')}>{t('更换挂绳')}</button></section><section className="appearance-choice"><div><strong>{t('纸张')}</strong><small>{t(names[savedPaper.color])} · {t(names[savedPaper.pattern])}</small></div><button disabled={busy} onClick={()=>open('paper')}>{t('更换纸张')}</button></section><p className="setting-hint">{t('夹子颜色随标签设置，保持标签与夹子对应。')}</p></div>;
+ return <section className="appearance-customizer" aria-label={t(kind==='rope'?'定制挂绳':'定制纸张')} onKeyDown={e=>{if(e.key==='Escape'&&!busy&&!e.nativeEvent.isComposing){e.stopPropagation();e.preventDefault();onCustomize(null);}}}>
+  <div className="customizer-heading"><strong>{t(kind==='rope'?'定制挂绳':'定制纸张')}</strong><button disabled={busy} onClick={()=>onCustomize(null)}>{t('取消')}</button></div>
+  <AppearancePreview rope={kind==='rope'?rope:savedRope} paper={kind==='paper'?paper:savedPaper}/>
+  {kind==='rope'?<><div className="appearance-options" role="group" aria-label={t('挂绳样式')}>{ropeStyles.map(style=><button disabled={busy} key={style} aria-pressed={rope.style===style} onClick={()=>setRope({style})}>{t(names[style])}</button>)}</div>{rope.style==='classic'?<><div className="appearance-options rope-colors" role="group" aria-label={t('挂绳颜色')}>{ropeColors.map((color,i)=><button disabled={busy} key={color} aria-pressed={rope.color===color} aria-label={t('绳色预设')+' '+(i+1)} onClick={()=>setRope({style:'classic',color})}><span style={{background:color}}/></button>)}</div><label className="rope-custom-color">{t('自定绳色')}<input aria-label={t('自定绳色')} type="color" disabled={busy} value={rope.color??('#787d70')} onChange={e=>setRope({style:'classic',color:e.target.value})}/></label></>:<p className="setting-hint">{t(rope.style==='vine'?'藤蔓保留自然绿色，不提供调色。':'编织棉绳保留自然棉色，不提供调色。')}</p>}</>:<><div className="appearance-options" role="group" aria-label={t('纸张颜色')}>{paperColors.map(color=><button disabled={busy} key={color} aria-pressed={paper.color===color} onClick={()=>setPaper({...paper,color})}><span className="paper-color-chip" style={{background:paperPalettes[color].light}}/>{t(names[color])}</button>)}</div><div className="appearance-options" role="group" aria-label={t('纸面样式')}>{paperPatterns.map(pattern=><button disabled={busy} key={pattern} aria-pressed={paper.pattern===pattern} onClick={()=>setPaper({...paper,pattern})}>{t(names[pattern])}</button>)}</div><p className="setting-hint">{t('柔和预设纸色；线条只作纸面展示，不改变正文。')}</p></>}
+  <div className="customizer-actions"><button className="text-button" disabled={busy} onClick={()=>kind==='rope'?setRope(defaultRope):setPaper(defaultPaper)}>{t(kind==='rope'?'恢复默认挂绳':'恢复默认纸张')}</button><button className="primary" disabled={busy} onClick={async()=>{if(await onApply(kind==='rope'?{rope}:{paper}))onCustomize(null);}}>{t('应用')}</button></div>
+ </section>;
+}
+function AppearancePreview({rope,paper}:{rope:RopeAppearance;paper:PaperAppearance}){
+ const {t}=useLocale(),host=useRef<HTMLDivElement>(null),[width,setWidth]=useState(260),scale=.85;
+ useLayoutEffect(()=>{const observer=new ResizeObserver(()=>setWidth(host.current?.clientWidth??260));if(host.current)observer.observe(host.current);return()=>observer.disconnect();},[]);
+ const geometry=fixedRope(width,4),id='appearance-sample',idea={id,title:t('今天的念头'),text:t('先写下来，慢慢理清。')+'\ngyp: keep it simple.\n'+t('给自己留一点呼吸。'),project:'',agentId:'preview-tag',status:'hanging' as const,createdAt:'2026-10-11T00:00:00Z',updatedAt:'2026-10-11T00:00:00Z'};
+ return <div ref={host} className="appearance-preview" inert aria-hidden="true" style={ropeStyle(rope)}><svg className="rope" width={width} height="140"><RopeArtwork rope={geometry} anchors={[width/2]} appearance={rope}/></svg><div className="preview-paper-position" style={{left:width/2-80*scale,top:geometry.top+geometry.sag}}><div className="scaled-paper" style={{transform:`scale(${scale})`,'--paper-scale':scale} as CSSProperties}><ClipCard appearance={paper} clip={{id,agentId:idea.agentId,ideaIds:[id],currentId:id,position:null}} ideas={[idea]} agent={{id:idea.agentId,name:t('生活灵感'),color:'#DB44B4'}} onChange={async()=>false} onGrab={()=>{}} onError={()=>{}} reduced textDragActive={false} ropeContact="M0 27H18"/></div></div></div>;
+}

@@ -1,0 +1,22 @@
+.manage.app-settings{overflow:hidden;gap:16px;padding:20px}
+.settings-tabs{display:flex;flex-shrink:0;gap:4px;padding:4px;background:color-mix(in srgb,var(--text),transparent 94%);border-radius:10px}
+.settings-tabs button{flex:1;min-width:0;min-height:34px;padding:6px 8px;border:0;background:transparent;font-size:12px;white-space:normal}
+.settings-tabs button[aria-selected=true]{background:var(--glass-fill,var(--surface));color:var(--text);box-shadow:0 1px 3px #00000018}
+.settings-content{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:1px 2px 16px;scrollbar-gutter:stable}
+.settings-content [role=tabpanel][hidden]{display:none}
+.manage.app-settings :is(.preference-settings,.storage-settings){margin:0;padding:20px;border:1px solid var(--glass-line,var(--border));border-radius:12px}
+.app-settings .preference-settings h2,.storage-settings h2{margin:0 0 12px;font-size:14px;font-weight:600;line-height:20px}
+.app-settings .capacity-preference{margin-top:24px;gap:12px}
+.settings-module{display:flex;flex-direction:column;gap:12px;margin:0 0 24px}
+.settings-module>label{font-weight:500}
+.settings-module .setting-hint{margin:0;line-height:1.6}
+.settings-module .default-hotkey{align-self:flex-start;margin:0;padding:0;min-height:28px}
+.storage-settings [data-storage-path]{margin:0 0 16px;line-height:1.6}
+.storage-settings .storage-actions{margin:0 0 12px;gap:8px}
+.storage-settings .storage-actions button{min-height:34px;white-space:normal;max-width:100%}
+.storage-settings .setting-hint{margin:0;line-height:1.6}
+.storage-settings .setting-hint+.setting-hint{margin-top:8px}
+.app-settings footer{flex-shrink:0;margin-top:0;min-height:0;gap:12px}
+.app-settings footer [role=status]:empty{display:none}
+.app-settings>.error:empty{display:none}
+@media(max-width:380px){.manage.app-settings{padding:16px;gap:12px}.manage.app-settings :is(.preference-settings,.storage-settings){padding:16px}.settings-tabs button{padding:6px 4px;font-size:11px}.app-settings .capacity-preference{grid-template-columns:1fr}.capacity-preference [role=group]{justify-self:start}}

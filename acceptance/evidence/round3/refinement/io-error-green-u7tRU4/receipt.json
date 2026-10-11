@@ -1,0 +1,28 @@
+{
+  "platform": "darwin",
+  "scope": "owned source renderer/IPC, isolated data, own native window captures; not physical user acceptance",
+  "cases": [
+    {
+      "name": "real-owned-IO-errors-do-not-expire-or-change-saved-data",
+      "observation": {
+        "menuErrorPreserved": true,
+        "settingsErrorPreserved": true,
+        "originalSavedDataPreserved": true,
+        "retrySucceeded": true
+      },
+      "passed": true,
+      "pids": [
+        99968,
+        99968,
+        99969,
+        99970,
+        99974,
+        99975,
+        99978
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    }
+  ],
+  "passed": true
+}

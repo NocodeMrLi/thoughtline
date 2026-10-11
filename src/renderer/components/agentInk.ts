@@ -3,7 +3,7 @@ const lightPaper:RGB=[245,239,223],darkPaper:RGB=[56,56,49];
 const luminance=(rgb:RGB)=>rgb.map(v=>{const c=v/255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4;}).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
 const contrast=(a:RGB,b:RGB)=>(Math.max(luminance(a),luminance(b))+.05)/(Math.min(luminance(a),luminance(b))+.05);
 // Preserve the clip's hue/saturation; adjust label lightness for the current paper palette.
-export function agentInkColors(color:string):{light:string;dark:string}{
+export function agentInkColors(color:string,palette?:{light:string;dark:string}):{light:string;dark:string}{
  const hex=/^#[0-9a-f]{6}$/i.test(color)?color:'#A0A3AA';
  const [r,g,b]=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255),hi=Math.max(r,g,b),lo=Math.min(r,g,b),d=hi-lo,l=(hi+lo)/2;
  const saturation=d===0?0:d/(1-Math.abs(2*l-1));let hue=0;
@@ -22,5 +22,6 @@ export function agentInkColors(color:string):{light:string;dark:string}{
   for(let n=0;n<24;n++){const mid=(low+high)/2;if(readable(rgbAt(mid))===lighten)high=mid;else low=mid;}
   return '#'+rgbAt(lighten?high:low).map(v=>v.toString(16).padStart(2,'0')).join('');
  };
- return {light:ink(lightPaper),dark:ink(darkPaper)};
+ const paperRGB=(hex:string)=>[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)) as RGB;
+ return {light:ink(palette?paperRGB(palette.light):lightPaper),dark:ink(palette?paperRGB(palette.dark):darkPaper)};
 }

@@ -1,0 +1,21 @@
+{
+  "platform": "darwin",
+  "packaged": false,
+  "scope": "own isolated data and controlled renderer/native package; no physical DPI, user acceptance or receiving-app drag proof",
+  "checks": [
+    "preview-cancel-apply-and-controls-draft-isolation",
+    "classic-color-controls-and-natural-material-color-locks"
+  ],
+  "pids": [
+    2481,
+    2481,
+    2483,
+    2484,
+    2485,
+    2486
+  ],
+  "passed": false,
+  "failure": "AssertionError [ERR_ASSERTION]: dashed must contain both horizontal gaps and row lines\n\n1 !== 2\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-appearance-workflow.cjs:22:977",
+  "normalQuit": true,
+  "profileRemoved": true
+}

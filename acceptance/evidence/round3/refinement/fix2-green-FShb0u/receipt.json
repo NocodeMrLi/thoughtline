@@ -1,0 +1,168 @@
+{
+  "platform": "darwin",
+  "scope": "owned source renderer/IPC, isolated data, own native window captures; not physical user acceptance",
+  "cases": [
+    {
+      "name": "full-split-notice-expires-and-does-not-revive",
+      "observation": {
+        "expired": true,
+        "revisionDidNotRevive": true,
+        "ideasUnchanged": true
+      },
+      "passed": true,
+      "pids": [
+        99793,
+        99793,
+        99794,
+        99795,
+        99796,
+        99798,
+        99799
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "notice-hover-focus-and-same-message-restart",
+      "observation": {
+        "focus": true,
+        "hover": true,
+        "repeat": true
+      },
+      "passed": true,
+      "pids": [
+        99803,
+        99803,
+        99808,
+        99809,
+        99812,
+        99813,
+        99817
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "settings-tabs-data-spacing-and-controls-draft",
+      "observation": {
+        "tabs": 3,
+        "bounds": {
+          "titleInset": 21,
+          "buttonHintGap": 12
+        },
+        "draftProtected": true
+      },
+      "passed": true,
+      "pids": [
+        99827,
+        99827,
+        99832,
+        99833,
+        99834,
+        99835,
+        99837
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "native-shell-one-contour-and-all-settings-views",
+      "observation": {
+        "shape": {
+          "border": "0px",
+          "radius": "0px",
+          "shadow": "none",
+          "image": "radial-gradient(at 5% 0%, rgba(209, 226, 239, 0.094), rgba(0, 0, 0, 0) 58%), radial-gradient(at 100% 35%, rgba(113, 146, 173, 0.12), rgba(0, 0, 0, 0) 62%), radial-gradient(at 5% 100%, rgba(186, 169, 138, 0.07), rgba(0, 0, 0, 0) 64%)"
+        },
+        "nativeCaptured": true,
+        "sizes": [
+          {
+            "locale": "zh-CN",
+            "width": 350
+          },
+          {
+            "locale": "zh-CN",
+            "width": 480
+          },
+          {
+            "locale": "zh-CN",
+            "width": 740
+          },
+          {
+            "locale": "zh-CN",
+            "width": 350
+          },
+          {
+            "locale": "zh-CN",
+            "width": 480
+          },
+          {
+            "locale": "zh-CN",
+            "width": 740
+          },
+          {
+            "locale": "zh-CN",
+            "width": 350
+          },
+          {
+            "locale": "zh-CN",
+            "width": 480
+          },
+          {
+            "locale": "zh-CN",
+            "width": 740
+          },
+          {
+            "locale": "en",
+            "width": 350
+          },
+          {
+            "locale": "en",
+            "width": 480
+          },
+          {
+            "locale": "en",
+            "width": 740
+          },
+          {
+            "locale": "en",
+            "width": 350
+          },
+          {
+            "locale": "en",
+            "width": 480
+          },
+          {
+            "locale": "en",
+            "width": 740
+          },
+          {
+            "locale": "en",
+            "width": 350
+          },
+          {
+            "locale": "en",
+            "width": 480
+          },
+          {
+            "locale": "en",
+            "width": 740
+          }
+        ]
+      },
+      "passed": true,
+      "pids": [
+        99841,
+        99841,
+        99843,
+        99844,
+        99846,
+        99850,
+        99854
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    }
+  ],
+  "passed": true
+}

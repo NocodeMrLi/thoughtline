@@ -7,11 +7,14 @@ import {useClipPage} from '../hooks/useClipPage';
 import {Clothespin} from './Clothespin';
 import {paperShapeForClip} from './paperShape';
 import {agentInkColors} from './agentInk';
-export function ClipCard({clip,ideas,agent,onChange,onGrab,onError,reduced,textDragActive,ropeContact}:{clip:Clip;ideas:Idea[];agent:AgentTag|undefined;onChange:(c:ClipMutation)=>Promise<boolean>;onGrab:(e:PointerEvent<HTMLButtonElement>,clip:Clip,mode?:'clip'|'paper')=>void;onError:(text:string)=>void;reduced:boolean;textDragActive:boolean;ropeContact:string}){
+import {paperAppearance,paperPalettes,type PaperAppearance} from '../../shared/appearance';
+import {paperStyle} from './PaperAppearance';
+export function ClipCard({clip,ideas,agent,onChange,onGrab,onError,reduced,textDragActive,ropeContact,appearance}:{clip:Clip;ideas:Idea[];agent:AgentTag|undefined;onChange:(c:ClipMutation)=>Promise<boolean>;onGrab:(e:PointerEvent<HTMLButtonElement>,clip:Clip,mode?:'clip'|'paper')=>void;onError:(text:string)=>void;reduced:boolean;textDragActive:boolean;ropeContact:string;appearance?:PaperAppearance}){
  const {t,agentName}=useLocale();
  const page=useClipPage(clip,onError);
  const [copied,setCopied]=useState(false),[direction,setDirection]=useState('');
- const paperId=useId().replace(/:/g,'');const paper=paperShapeForClip(clip.id);const ink=useMemo(()=>agentInkColors(agent?.color??'#A0A3AA'),[agent?.color]);
+ const surface=paperAppearance(appearance);
+ const paperId=useId().replace(/:/g,'');const paper=paperShapeForClip(clip.id);const ink=useMemo(()=>agentInkColors(agent?.color??'#A0A3AA',paperPalettes[surface.color]),[agent?.color,surface.color]);
  const copyTimer=useRef<ReturnType<typeof setTimeout>|null>(null),current=useRef(clip.currentId),ignoreCopyUntil=useRef(0),exportId=useRef<string|null>(null);const [exporting,setExporting]=useState(false);current.current=page.id;
  useEffect(()=>{setCopied(false);if(copyTimer.current)clearTimeout(copyTimer.current);return()=>{if(copyTimer.current)clearTimeout(copyTimer.current);if(exportId.current)window.thoughtline.textDrag(false,exportId.current);exportId.current=null;};},[page.id]);
  useEffect(()=>{if(!textDragActive&&exportId.current){exportId.current=null;ignoreCopyUntil.current=performance.now()+160;setExporting(false);}},[textDragActive]);
@@ -23,7 +26,7 @@ export function ClipCard({clip,ideas,agent,onChange,onGrab,onError,reduced,textD
   <Clothespin color={agent?.color} reduced={reduced} layer="rear"/>
   <svg className="clamp-rope" width="18" height="38" viewBox="0 0 18 38" aria-hidden="true">{['rope-shadow','rope-core','rope-light'].map(c=><path key={c} className={c} d={ropeContact}/>)}</svg>
   <button data-hit className="peg-button" aria-label={t("moveClip",{p0:idea.title})} onPointerDown={e=>onGrab(e,{...clip,currentId:page.id},'clip')}><Clothespin color={agent?.color} reduced={reduced}/></button>
-  <article data-hit data-paper-variant={paper.variant} data-agent-neutral={!agent||agent.id==='general'} style={{'--agent-ink-light':ink.light,'--agent-ink-dark':ink.dark} as CSSProperties} data-copied={copied} className={`idea-card ${grouped?'grouped':''}`} onContextMenu={e=>{e.preventDefault();void window.thoughtline.shelfMenu(idea.id).then(r=>{if(!r.ok)onError(r.message);});}}>
+  <article data-hit data-paper-variant={paper.variant} data-paper-pattern={surface.pattern} data-paper-color={surface.color} data-agent-neutral={!agent||agent.id==='general'} style={{...paperStyle(surface),'--agent-ink-light':ink.light,'--agent-ink-dark':ink.dark} as CSSProperties} data-copied={copied} className={`idea-card ${grouped?'grouped':''}`} onContextMenu={e=>{e.preventDefault();void window.thoughtline.shelfMenu(idea.id).then(r=>{if(!r.ok)onError(r.message);});}}>
    <svg className="paper-sheet" width="160" height="226" viewBox="0 0 160 226" aria-hidden="true">
     <defs>
      <path id={`${paperId}-outline`} d={paper.outline}/>

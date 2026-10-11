@@ -1,3 +1,4 @@
+import type {PaperAppearance,RopeAppearance} from './appearance';
 export type Point = { x: number; y: number };
 export type Rect = Point & { width: number; height: number };
 export type AgentId = string;
@@ -15,7 +16,7 @@ export type Draft = { text: string; title: string; project: string; agentId: Age
 export type Clip = {id:string; agentId:AgentId; ideaIds:string[]; currentId:string; position:number|null};
 export type Snapshot = {
   schemaVersion: 2 | 3; revision: number; clips:Clip[]; capacityOverflow?:Clip[]; ideas: Idea[]; agents: AgentTag[]; draft: Draft | null;
-  settings: { writeHotkey: string; reducedMotion: boolean; shelfCapacity?: 4 | 6 | 8; calendarBounds?: Rect };
+  settings: { writeHotkey: string; reducedMotion: boolean; shelfCapacity?: 4 | 6 | 8; calendarBounds?: Rect; rope?:RopeAppearance; paper?:PaperAppearance };
 };
 export type Result<T> = { ok: true; value: T } | {
   ok: false; code: 'INVALID' | 'CONFLICT' | 'IO' | 'MISSING_BODY'; message: string;

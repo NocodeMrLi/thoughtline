@@ -6,6 +6,7 @@ import {ideaDay} from './ideaHistory';
 import {validReminder,validReminderTime} from './reminderTime';
 import {DEFAULT_TAGS} from './tagPresets';
 import {hasIdeaContent} from './ideaContent';
+import {validPaper,validRope} from './appearance';
 const invalid=<T>(message:string):Result<T>=>({ok:false,code:'INVALID',message});
 const plain=(x:unknown):x is Record<string,unknown>=>!!x&&typeof x==='object'&&!Array.isArray(x);
 const textOK=(s:unknown,max:number)=>typeof s==='string'&&Array.from(s).length<=max;
@@ -35,6 +36,7 @@ export function validateSnapshot(input:unknown):Result<Snapshot>{
   if(input.draft!==null&&(!plain(input.draft)||!draftOK(input.draft)))return invalid('草稿无效。');
   if(!textOK(input.settings.writeHotkey,100)||!(input.settings.writeHotkey as string).trim()||typeof input.settings.reducedMotion!=='boolean')return invalid('设置无效。');
   if(input.settings.shelfCapacity!==undefined&&(typeof input.settings.shelfCapacity!=='number'||![4,6,8].includes(input.settings.shelfCapacity)))return invalid('设置无效。');
+  if(input.settings.rope!==undefined&&!validRope(input.settings.rope)||input.settings.paper!==undefined&&!validPaper(input.settings.paper))return invalid('设置无效。');
   const bounds=input.settings.calendarBounds;
   if(bounds!==undefined&&(!plain(bounds)||!['x','y','width','height'].every(k=>typeof bounds[k]==='number'&&Number.isFinite(bounds[k]))||Number(bounds.width)<=0||Number(bounds.height)<=0||Number(bounds.width)>16384||Number(bounds.height)>16384))return invalid('日历窗口位置无效。');
   const ideas:Idea[]=(input.ideas as Idea[]).map(i=>{

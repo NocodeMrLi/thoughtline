@@ -1,3 +1,4 @@
+import {useTransientNotice} from '../hooks/useTransientNotice';
 import {countThoughts} from '../../shared/i18n';
 import {useLocale} from '../LocaleContext';
 import {useCallback,useEffect,useRef,useState} from 'react';
@@ -14,12 +15,12 @@ import {ReaderMoreMenu} from './ReaderMoreMenu';
 import {ReminderControl} from './ReminderControl';
 export function IdeaReader({idea,info,initialEdit=false}:{idea:Idea;info:PilotInfo;initialEdit?:boolean}){
  const {t,m,locale}=useLocale();
- const [editing,setEditing]=useState(initialEdit),[menu,setMenu]=useState(false),[permanent,setPermanent]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');
+ const {notice,setNotice,noticeProps}=useTransientNotice();
+ const [editing,setEditing]=useState(initialEdit),[menu,setMenu]=useState(false),[permanent,setPermanent]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState('');
  const [picker,setPicker]=useState(false),[reveal,setReveal]=useState(false),[reminderOpen,setReminderOpen]=useState(false),moreAnchor=useRef<HTMLSpanElement>(null),swapAnchor=useRef<HTMLSpanElement>(null);
  const closeMenu=useCallback(()=>{setMenu(false);setPermanent(false);},[]);
  const plan=placementPlan(info.snapshot,info.width,idea.id),filteredOut=info.shelfAgentId!=='all'&&info.shelfAgentId!==idea.agentId;
  const onLine=idea.status==='hanging'&&onLineIdeaIds(info.snapshot,info.width,info.shelfAgentId).has(idea.id);
- useEffect(()=>{if(!notice)return;const timer=setTimeout(()=>setNotice(''),1600);return()=>clearTimeout(timer);},[notice,idea.id]);
  useEffect(()=>{setMenu(false);setPermanent(false);setReminderOpen(false);setPicker(false);setError('');setNotice('');},[idea.id,info.manageSession]);
  useEffect(()=>{if(initialEdit)setEditing(true);},[initialEdit]);
  const live=useRef(true),operation=useRef(0),pending=useRef(false),owner=useRef({session:info.manageSession,id:idea.id});
@@ -60,6 +61,6 @@ export function IdeaReader({idea,info,initialEdit=false}:{idea:Idea;info:PilotIn
   </ReaderMoreMenu>}
   {!deleted&&filteredOut&&plan!=='full'&&<label className="placement-filter"><input type="checkbox" checked={reveal} onChange={e=>setReveal(e.target.checked)}/>{t('显示全部Agent后挂上')}</label>}
   {picker&&<PlacementPicker anchor={swapAnchor} info={info} sourceId={idea.id} agentId={idea.agentId} busy={busy} error={error} onCancel={()=>setPicker(false)} onConfirm={(intent,reveal)=>void run(current=>window.thoughtline.placeIdea(idea.id,intent,current.snapshot.revision,reveal,current.manageSession),t('已换上，旧念头已收起。'))}/>}
-  <p className="reader-notice" role="status">{m(notice)}</p>{error&&!picker&&<p className="error" role="alert">{m(error)}</p>}
+  <p className="reader-notice" role="status" {...noticeProps}>{m(notice)}</p>{error&&!picker&&<p className="error" role="alert">{m(error)}</p>}
  </section>;
 }
