@@ -4,6 +4,9 @@
 .settings-tabs button[aria-selected=true]{background:var(--glass-fill,var(--surface));color:var(--text);box-shadow:0 1px 3px #00000018}
 .settings-content{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:1px 2px 16px;scrollbar-gutter:stable}
 .settings-content [role=tabpanel][hidden]{display:none}
+.settings-content.is-customizing{overflow:hidden;padding-bottom:0;scrollbar-gutter:auto}
+.settings-content.is-customizing>[role=tabpanel]:not([hidden]){display:flex;flex-direction:column;height:100%;min-height:0}
+.app-settings[data-customizer]>.error:empty,.app-settings[data-customizer]>footer:has([role=status]:empty){display:none}
 .manage.app-settings :is(.preference-settings,.storage-settings){margin:0;padding:20px;border:1px solid var(--glass-line,var(--border));border-radius:12px}
 .app-settings .preference-settings h2,.storage-settings h2{margin:0 0 12px;font-size:14px;font-weight:600;line-height:20px}
 .app-settings .capacity-preference{margin-top:24px;gap:12px}

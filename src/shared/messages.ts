@@ -1,5 +1,10 @@
 // Central typed application text; user text is never translated.
 export const zh = {
+ "绳色": "绳色",
+ "自定": "自定",
+ "自然绿色": "自然绿色",
+ "自然棉色": "自然棉色",
+
  "返回外观设置": "返回外观设置",
  "藤蔓保留自然绿色，不提供调色。": "藤蔓保留自然绿色，不提供调色。",
  "编织棉绳保留自然棉色，不提供调色。": "编织棉绳保留自然棉色，不提供调色。",
@@ -503,6 +508,11 @@ export const zh = {
  "savedBackup": "独立备份已保存到 {p0}。当前数据位置未更改。"
 } as const;
 export const en = {
+ "绳色": "Color",
+ "自定": "Custom",
+ "自然绿色": "Natural green",
+ "自然棉色": "Natural cotton",
+
  "返回外观设置": "Back to appearance",
  "藤蔓保留自然绿色，不提供调色。": "Vines keep their natural green color.",
  "编织棉绳保留自然棉色，不提供调色。": "Braided cotton keeps its natural fiber color.",

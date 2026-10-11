@@ -16,6 +16,8 @@ export function Settings({info,restore,onRemember}:{info:PilotInfo;restore?:Sett
  const {notice,setNotice,noticeProps}=useTransientNotice();
  const [tab,setTab]=useState<SettingsTab>(restore?.tab??'appearance');
  const [customizer,setCustomizer]=useState<CustomizerKind|null>(null);
+ const content=useRef<HTMLDivElement>(null);
+ useLayoutEffect(()=>{if(customizer&&content.current)content.current.scrollTop=0;},[customizer]);
  const tabs=[['appearance','appearanceTab'],['controls','controlsTab'],['data','dataTab']] as const;
  const selectedTab=useRef(tab);selectedTab.current=tab;
  const [hotkey,setHotkey]=useState(restore?.hotkey??info.snapshot.settings.writeHotkey);
@@ -42,17 +44,17 @@ export function Settings({info,restore,onRemember}:{info:PilotInfo;restore?:Sett
  const changeCapacity=async(capacity:ShelfCapacity)=>{if(busy||recording)return;setBusy(true);setError('');try{const r=await window.thoughtline.saveSettings({...info.snapshot.settings,shelfCapacity:capacity},info.snapshot.revision);if(!r.ok)setError(r.message);}catch{setError('保存未成功，原快捷键保持可用。');}finally{setBusy(false);}};
  const applyAppearance=async(patch:AppearancePatch)=>{if(busy||recording)return false;setBusy(true);setError('');setNotice('');try{const r=await window.thoughtline.saveSettings({...info.snapshot.settings,...patch},info.snapshot.revision);if(!r.ok)setError(r.message);else setNotice('已保存。');return r.ok;}catch{setError('保存未成功，请重试。');return false;}finally{setBusy(false);}};
  const save=async()=>{if(busy||recording)return false;setBusy(true);setError('');setNotice('');try{const r=await window.thoughtline.saveSettings({...info.snapshot.settings,writeHotkey:hotkey,reducedMotion:reduced},info.snapshot.revision);if(r.ok)setNotice('已保存。');else setError(r.message);return r.ok;}catch{setError('保存未成功，原快捷键保持可用。');return false;}finally{setBusy(false);}};
- return <main data-view="manage" data-mode="settings" data-material={info.manageMaterial} data-platform={info.platform} className="manage app-settings" onKeyDown={e=>{
+ return <main data-view="manage" data-mode="settings" data-customizer={customizer??undefined} data-material={info.manageMaterial} data-platform={info.platform} className="manage app-settings" onKeyDown={e=>{
   if(e.nativeEvent.isComposing||e.nativeEvent.keyCode===229)return;
   if(e.key==='Escape'){e.preventDefault();if(leavePrompt)setLeavePrompt(false);else if(recording)setRecording(false);else if(customizer&&!busy)setCustomizer(null);else if(!busy)void window.thoughtline.closeManage();}
   if(leavePrompt&&e.key==='Tab'){const buttons=[...prompt.current?.querySelectorAll<HTMLButtonElement>('button:not(:disabled)')??[]],at=buttons.indexOf(document.activeElement as HTMLButtonElement);if(buttons.length){e.preventDefault();buttons[(at+(e.shiftKey?-1:1)+buttons.length)%buttons.length].focus();}}
  }}>
-  <header><IconButton icon="back" label={t(customizer?'返回外观设置':'返回Thoughtline日历')} disabled={busy||recording} onClick={()=>void back()}/><strong>{t("存储与设置")}</strong><PreferencesControl info={info}/><button className="close" aria-label={t("关闭设置")} disabled={busy} onClick={()=>void window.thoughtline.closeManage()}>×</button></header>
+  <header><IconButton icon="back" label={t(customizer?'返回外观设置':'返回Thoughtline日历')} disabled={busy||recording} onClick={()=>void back()}/><strong>{t(customizer==='rope'?'定制挂绳':customizer==='paper'?'定制纸张':"存储与设置")}</strong><PreferencesControl info={info}/><button className="close" aria-label={t("关闭设置")} disabled={busy} onClick={()=>void window.thoughtline.closeManage()}>×</button></header>
   <nav className="settings-tabs" role="tablist" aria-label={t('settingsSections')} onKeyDown={e=>{
    const index=tabs.findIndex(([value])=>value===tab);const next=e.key==='ArrowRight'?(index+1)%3:e.key==='ArrowLeft'?(index+2)%3:e.key==='Home'?0:e.key==='End'?2:null;
    if(next!==null&&!busy&&!recording){e.preventDefault();setCustomizer(null);setTab(tabs[next][0]);e.currentTarget.querySelectorAll<HTMLButtonElement>('[role=tab]')[next]?.focus();}
   }}>{tabs.map(([value,label])=><button key={value} id={`settings-tab-${value}`} role="tab" aria-selected={tab===value} aria-controls={`settings-panel-${value}`} tabIndex={tab===value?0:-1} disabled={busy||recording} onClick={()=>{setCustomizer(null);setTab(value);}}>{t(label)}</button>)}</nav>
-  <div className="settings-content">
+  <div ref={content} className={`settings-content ${customizer?'is-customizing':''}`}>
   <section id="settings-panel-appearance" role="tabpanel" aria-labelledby="settings-tab-appearance" hidden={tab!=='appearance'}>
   <section className="preference-settings" hidden={!!customizer}><h2>{t('appearanceTab')}</h2><PreferencesControl info={info} settings/><div className="capacity-preference"><span>{t("绳上夹子数量")}</span><div role="group" aria-label={t("绳上夹子数量")}>{([4,6,8] as const).map(n=><button key={n} disabled={busy||recording} aria-pressed={shelfCapacity(info.snapshot.settings.shelfCapacity)===n} onClick={()=>void changeCapacity(n)}>{n}</button>)}</div><small>{t("默认6个；便签按屏幕空间等比例适配，减少数量仍保留全部内容。")}</small></div></section>
   <AppearanceSettings info={info} busy={busy||recording} kind={customizer} onCustomize={setCustomizer} onApply={applyAppearance}/>

@@ -41,3 +41,20 @@ it('manually re-hanging part of a parked group does not collide on restoring its
  expect(upper.clips.filter(c=>c.ideaIds.includes('stack'))).toHaveLength(1);
  expect(upper.ideas.find(i=>i.id==='n0')?.status).toBe('archived');
 });
+
+
+it('two successive merged slots receive newest then second newest eligible records, not edited legacy',()=>{
+ let s=save(save(seed(),'older','2026-10-11T01:00:00Z'),'newer','2026-10-11T02:00:00Z');
+ s.ideas.push({...s.ideas[0],id:'legacy-newer',createdAt:'2026-10-11T02:59:00Z',updatedAt:'2026-10-11T04:00:00Z',status:'archived'});
+ s.ideas.find(i=>i.id==='older')!.updatedAt='2026-10-11T05:00:00Z';
+ s=fill(v(mergeClips(s,'clip:n1','clip:n0')));
+ expect(s.ideas.find(i=>i.id==='newer')?.status).toBe('hanging');expect(s.ideas.find(i=>i.id==='older')?.status).toBe('archived');
+ s=fill(v(mergeClips(s,'clip:n2','clip:n0')));
+ expect(s.clips).toHaveLength(6);expect(s.ideas.find(i=>i.id==='older')?.status).toBe('hanging');expect(s.ideas.find(i=>i.id==='legacy-newer')?.status).toBe('archived');
+ expect(s.clips.find(c=>c.id==='clip:n0')?.ideaIds).toEqual(['n0','n1','n2']);
+});
+it('equal creation times resolve deterministically despite reverse save order',()=>{
+ const s=save(save(seed(),'z-last','2026-10-11T01:00:00Z'),'a-first','2026-10-11T01:00:00Z');
+ const next=fill(v(mergeClips(s,'clip:n1','clip:n0')));
+ expect(next.ideas.find(i=>i.id==='a-first')?.status).toBe('hanging');expect(next.ideas.find(i=>i.id==='z-last')?.status).toBe('archived');
+});
