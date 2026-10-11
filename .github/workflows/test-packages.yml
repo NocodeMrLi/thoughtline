@@ -40,6 +40,8 @@ jobs:
           New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
           & node tests/electron/round2-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Second round UI failed' }
+          & node tests/electron/round2-native-menu.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Second round native menu failed' }
           & node tests/electron/round2-calendar-navigation.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Second round calendar return failed' }
           & node tests/electron/round2-arrange-workflow.cjs
@@ -58,8 +60,6 @@ jobs:
             & node "tests/electron/$test.cjs"
             if ($LASTEXITCODE -ne 0) { throw "$test failed" }
           }
-          & node tests/electron/round2-native-menu.cjs
-          if ($LASTEXITCODE -ne 0) { throw 'Second round native menu failed' }
       - name: Source Electron UI regression on Windows
         shell: pwsh
         env:
@@ -70,7 +70,7 @@ jobs:
           $runEvidence = Join-Path $evidenceRoot ('run-{0}-{1}-{2}' -f $env:GITHUB_RUN_ID, $env:GITHUB_RUN_ATTEMPT, [guid]::NewGuid().ToString('N'))
           New-Item -ItemType Directory -Path $runEvidence | Out-Null
           $env:THOUGHTLINE_EVIDENCE_DIR = $runEvidence
-          foreach ($test in @('inline-edit-workflow', 'calendar-workflow', 'calendar-motion-workflow', 'calendar-motion-fix1-workflow', 'calendar-geometry-workflow', 'storage-workflow', 'windows-source-runtime', 'calendar-brand-clip-workflow', 'final-reader-placement-workflow', 'final-calendar-shape-workflow')) {
+          foreach ($test in @('storage-workflow', 'inline-edit-workflow', 'calendar-workflow', 'calendar-motion-workflow', 'calendar-motion-fix1-workflow', 'calendar-geometry-workflow', 'windows-source-runtime', 'calendar-brand-clip-workflow', 'final-reader-placement-workflow', 'final-calendar-shape-workflow')) {
             $env:THOUGHTLINE_ATTEMPT = ('{0}-windows-ci' -f $test)
             & node "tests/electron/$test.cjs" 2>&1 | Tee-Object -FilePath (Join-Path $runEvidence "$test.log")
             if ($LASTEXITCODE -ne 0) { throw "$test failed with exit code $LASTEXITCODE" }
