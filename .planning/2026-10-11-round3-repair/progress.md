@@ -77,3 +77,5 @@ Windows38138929154失败于旧拆分菜单测试对IO错误仍查找role=status�
 最终f39226e相对5588d12仅拆分IO测试角色修订。Mac最终34编译产物和asar与通过68项的实际App完全一致，精确签名重放及最终DMG绑定通过，原生材质7点另通过，OS偏好false/false保持。Windows38139291246第一次在title-only detail等待空正文持久确认4秒超时，calendar入口正常；初次失败回执保留，Mac两个入口源流程及实际包均通过，正用同一源码重跑Windows复核，确切原因暂未确定。初次38138929154旧角色定位失败已按alert修订并保留长错误断言。
 
 Windows f39226e第二次已通过标题独存/本轮新外观/第二轮/存储等流程，随后旧appearance-workflow仍定位旧英文Follow system而超时；产品已按R3-11改为Follow system appearance。仅修订该测试定位，Mac全部偏好/回滚/时序/重启/损坏文件保护流程通过。两次失败及同源title绿色回执保留，标题超时确切历史原因未定。
+
+0f4ac14 Windows38140593042已通过完整偏好/普通源码回归，随后旧appearance-fix-workflow直接在设置首页找Change location，因新三页签隐藏数据页超时；修订为先选择英文Data页签再操作，保留实际原始诊断字节/本地位置保护/原生启动错误检查。同步扫其余设置可见定位，无另一个同类旧入口。原失败保留。
