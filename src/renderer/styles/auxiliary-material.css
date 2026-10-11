@@ -1,0 +1,64 @@
+/* Native desktop blending and in-window glass are different layers.
+   Keep an opaque desktop base for accessibility; its controls still have depth.
+   Optical layering informed by kube.io/blog/liquid-glass-css-svg/ and
+   github.com/rdev/liquid-glass-react; original CSS, no third-party runtime. */
+:root[data-platform=mac]{
+ --glass-base:#F3F1EE;--glass-fill:#FFFFFFB8;--glass-line:#A8AAA780;
+ --glass-sheen:radial-gradient(ellipse at 8% 0%,#FFFFFFD9,transparent 58%),radial-gradient(ellipse at 100% 38%,#DCE6F68A,transparent 62%),radial-gradient(ellipse at 8% 100%,#EAE1C77A,transparent 64%);
+ --glass-depth:0 5px 16px #323E4820,0 1px 3px #323E4814,inset 0 1px 1px #FFFFFFEB,inset 0 -1px 1px #78848430;
+ --glass-panel:linear-gradient(150deg,#FFFFFFC9,#FFFFFF82 48%,#ECF0F1A6);
+}
+:is(.composer,.manage)[data-platform=mac]{background-image:var(--glass-sheen);border-color:#FFFFFFD9;border-radius:18px;
+ box-shadow:inset 0 1px 2px #FFFFFFFF,inset 1px 0 1px #FFFFFFB0,inset 0 -1px 2px #78848455;
+}
+:root[data-theme=dark][data-platform=mac]{
+ --glass-base:#253039;--glass-fill:#303E49D9;--glass-line:#CFD9DD70;
+ --glass-sheen:radial-gradient(ellipse at 5% 0%,#D1E2EF18,transparent 58%),radial-gradient(ellipse at 100% 35%,#7192AD1F,transparent 62%),radial-gradient(ellipse at 5% 100%,#BAA98A12,transparent 64%);
+ --glass-panel:linear-gradient(150deg,#495A68CF,#2C3944D9 55%,#28353EEB);
+ --glass-depth:0 5px 16px #00000038,0 1px 3px #00000020,inset 0 1px 1px #FFFFFF38,inset 0 -1px 1px #0000004D;
+}
+:root[data-theme=dark] :is(.composer,.manage)[data-platform=mac]{border-color:#D1DFEA73;box-shadow:inset 0 1px 2px #FFFFFF50,inset 1px 0 1px #FFFFFF20,inset 0 -1px 2px #00000070;
+}
+:is(.composer,.manage)[data-platform=mac][data-material=opaque],:root[data-theme=dark] :is(.composer,.manage)[data-platform=mac][data-material=opaque]{background-color:var(--glass-base);background-image:var(--glass-sheen)}
+:is(.composer,.manage)[data-platform=mac][data-material=vibrancy],:root[data-theme=dark] :is(.composer,.manage)[data-platform=mac][data-material=vibrancy]{background-image:var(--glass-sheen)}
+:root[data-platform=mac] .compact-popover,:is(.composer,.manage)[data-platform=mac] :is(.composer-project-picker,.inline-project-picker,.settings-leave-prompt){
+ background:var(--glass-panel);background-color:var(--glass-fill);backdrop-filter:blur(22px) saturate(135%);border:1px solid var(--glass-line);border-radius:14px;box-shadow:var(--glass-depth);
+}
+:root[data-platform=mac] .placement-target{
+ background:linear-gradient(145deg,#FFFFFF73,#FFFFFF20),var(--glass-fill);border-color:var(--glass-line);border-radius:10px;box-shadow:0 1px 3px #323E4812,inset 0 1px #FFFFFFC0;
+}
+:root[data-theme=dark][data-platform=mac] .placement-target{background:linear-gradient(145deg,#FFFFFF0D,transparent),var(--glass-fill);box-shadow:0 1px 3px #00000022,inset 0 1px #FFFFFF30}
+:root[data-platform=mac] .placement-target[data-chosen=true]{border-color:var(--focus);box-shadow:inset 0 0 0 1px var(--focus),0 2px 5px #323E4820}
+:is(.composer,.manage)[data-platform=mac] :is(.storage-settings,.preference-settings){background:var(--glass-panel);border-color:var(--glass-line);box-shadow:inset 0 1px #FFFFFF90,0 2px 5px #323E4810}
+:is(.composer,.manage)[data-platform=mac] .preference-settings{padding:10px 12px;border:1px solid var(--glass-line);border-radius:12px}
+:is(.composer,.manage)[data-platform=mac] .date-cell{background:var(--glass-panel);border-color:var(--glass-line);box-shadow:inset 0 1px #FFFFFF7A,0 1px 3px #323E480D}
+:is(.composer,.manage)[data-platform=mac] .date-cell[aria-current=date]{border-color:var(--focus);background:color-mix(in srgb,var(--glass-fill),#7098B8 14%)}
+:is(.composer,.manage)[data-platform=mac] .capsule-track{background:linear-gradient(180deg,#52656018,#FFFFFF28),var(--glass-fill);border-color:var(--glass-line);box-shadow:inset 0 1px 3px #263E4520,0 1px #FFFFFF8A}
+:is(.composer,.manage)[data-platform=mac] .capsule-thumb{background:linear-gradient(155deg,#FFFFFFBD,transparent),var(--switch-thumb);box-shadow:0 2px 5px #263E4533,inset 0 1px #FFFFFFE8,inset 0 -1px var(--coral)}
+:root[data-theme=dark] :is(.composer,.manage)[data-platform=mac] .capsule-thumb{background:linear-gradient(155deg,#FFFFFF18,transparent),var(--switch-thumb);box-shadow:0 2px 5px #00000055,inset 0 1px #FFFFFF50,inset 0 -1px var(--coral)}
+:is(.composer,.manage)[data-platform=mac] .primary{background:linear-gradient(180deg,#FFFFFF16,transparent 70%),var(--accent);box-shadow:inset 0 1px #FFFFFF45,inset 0 -1px #00000020,0 2px 4px #243F381A}
+
+/* Windows uses a quieter Acrylic plane, smaller corners, and firm control edges. */
+:root[data-platform=windows]{
+ --glass-base:#F2F3F4;--glass-fill:#FFFFFFD9;--glass-line:#77868D66;
+ --glass-sheen:radial-gradient(ellipse at 0% 0%,#FFFFFFAD,transparent 65%),linear-gradient(125deg,#DCE8F24D,transparent 55%,#EEE9DE3D);
+ --glass-panel:linear-gradient(180deg,#FFFFFFF0,#F8FAFBE6);--glass-depth:0 4px 12px #172D4226,0 1px 2px #172D421A,inset 0 1px #FFFFFFD9;
+}
+:is(.composer,.manage)[data-platform=windows]{background-image:var(--glass-sheen);border-color:#FFFFFF80;border-radius:8px;box-shadow:inset 0 1px #FFFFFFC0,inset 0 -1px #75868E40;
+}
+:root[data-theme=dark][data-platform=windows]{
+ --glass-base:#252D35;--glass-fill:#293540EB;--glass-line:#C1D2DF66;
+ --glass-sheen:radial-gradient(ellipse at 0% 0%,#D3E4F012,transparent 65%),linear-gradient(125deg,#668DB517,transparent 55%,#D7CBB409);
+ --glass-panel:linear-gradient(180deg,#35414DED,#27333FF2);--glass-depth:0 4px 12px #0000004D,0 1px 2px #00000038,inset 0 1px #FFFFFF26;
+}
+:root[data-theme=dark] :is(.composer,.manage)[data-platform=windows]{border-color:#D1DFEA66;box-shadow:inset 0 1px #FFFFFF38,inset 0 -1px #00000055;
+}
+:is(.composer,.manage)[data-platform=windows][data-material=opaque],:root[data-theme=dark] :is(.composer,.manage)[data-platform=windows][data-material=opaque]{background-color:var(--glass-base);background-image:var(--glass-sheen)}
+:is(.composer,.manage)[data-platform=windows][data-material=acrylic],:root[data-theme=dark] :is(.composer,.manage)[data-platform=windows][data-material=acrylic]{background-image:var(--glass-sheen)}
+:root[data-platform=windows] .compact-popover,:is(.composer,.manage)[data-platform=windows] :is(.composer-project-picker,.inline-project-picker,.settings-leave-prompt){background:var(--glass-panel);backdrop-filter:blur(16px);border-color:var(--glass-line);border-radius:8px;box-shadow:var(--glass-depth)}
+:root[data-platform=windows] .placement-target,:is(.composer,.manage)[data-platform=windows] :is(.storage-settings,.preference-settings,.date-cell){background:var(--glass-fill);border-color:var(--glass-line);box-shadow:inset 0 1px #FFFFFF50,0 1px 2px #172D420A}
+:is(.composer,.manage)[data-platform=windows] .preference-settings{padding:10px 12px;border:1px solid var(--glass-line);border-radius:8px}
+:root[data-platform=windows] .placement-target[data-chosen=true],:is(.composer,.manage)[data-platform=windows] .date-cell[aria-current=date]{border-color:var(--focus);box-shadow:inset 0 0 0 1px var(--focus)}
+:is(.composer,.manage)[data-platform=windows] .primary{background:linear-gradient(180deg,#FFFFFF0D,transparent),var(--accent);box-shadow:inset 0 1px #FFFFFF35,inset 0 -1px #00000030}
+/* No foreground filters, continuous animation, backdrop capture, or glass paper. */
+@media(forced-colors:active){:root[data-platform][data-theme] :is(.composer,.manage)[data-material],:root[data-platform] :is(.compact-popover,.placement-target),:is(.composer,.manage)[data-platform] :is(.composer-project-picker,.inline-project-picker,.settings-leave-prompt,.storage-settings,.preference-settings,.date-cell,.capsule-track,.capsule-thumb,.primary){background:Canvas;color:CanvasText;border-color:CanvasText;box-shadow:none;backdrop-filter:none}:is(.composer,.manage)[data-platform] .primary{background:Highlight;color:HighlightText}}

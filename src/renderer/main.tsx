@@ -11,6 +11,7 @@ import {type SettingsDraft,Settings} from './components/Settings';
 import './styles/overlay.css';
 import './styles/auxiliary.css';
 import './styles/preferences-theme.css';
+import './styles/auxiliary-material.css';
 import {flushPageSelections} from './hooks/useClipPage';
 import {prepareLeave} from './hooks/leaveGuards';
 function App(){
@@ -18,7 +19,7 @@ function App(){
  useEffect(()=>window.thoughtline.onPrepareLeave(async()=>{try{if(!await prepareLeave())return false;await flushPageSelections();return true;}catch{return false;}}),[]);
  const [info,setInfo]=useState<PilotInfo|null>(null);
  useEffect(()=>{const accept=(incoming:PilotInfo)=>setInfo(prior=>prior?{...incoming,preferences:newerPreferences(prior.preferences,incoming.preferences),dark:incoming.preferences.version<prior.preferences.version?prior.dark:incoming.dark}:incoming);const off=window.thoughtline.onInfo(accept);window.thoughtline.info().then(accept).catch(console.error);return off;},[]);
- useEffect(()=>{if(info){document.documentElement.lang=info.preferences.locale;document.documentElement.dataset.theme=info.dark?'dark':'light';document.documentElement.dataset.motion=info.snapshot.settings.reducedMotion?'reduce':'normal';}},[info?.preferences.locale,info?.dark,info?.snapshot.settings.reducedMotion]);
+ useEffect(()=>{if(info){document.documentElement.lang=info.preferences.locale;document.documentElement.dataset.theme=info.dark?'dark':'light';document.documentElement.dataset.platform=info.platform;document.documentElement.dataset.motion=info.snapshot.settings.reducedMotion?'reduce':'normal';}},[info?.preferences.locale,info?.dark,info?.platform,info?.snapshot.settings.reducedMotion]);
  if(!info)return null;if(remembered.current.visit!==info.manageVisit)remembered.current={visit:info.manageVisit??-1};const visit=remembered.current;const view=new URLSearchParams(location.search).get('view');
  return <LocaleProvider locale={info.preferences.locale}>{view==='composer'?<Composer key={info.composerSession} info={info}/>:view==='manage'?(info.manageMode==='settings'?<Settings info={info} restore={visit.settings} onRemember={draft=>{visit.settings=draft;}}/>:info.manageMode==='detail'?<Detail info={info}/>:<Calendar info={info} restore={info.calendarReturning?visit.calendar:undefined} onRemember={state=>{visit.calendar=state;}}/>):<Shelf info={info}/>}</LocaleProvider>;
 }

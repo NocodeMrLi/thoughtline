@@ -19,7 +19,11 @@ async function checks(page,{kind,language,evidence}){
  await check('pointer-cross-gap-and-return-cancels-dismissal',async()=>{
   await open();const a=await anchor.boundingBox(),m=await menu.boundingBox();const gapY=isTop?(a.y+a.height+m.y)/2:(m.y+m.height+a.y)/2;
   await page.mouse.move(a.x+a.width/2,gapY);await page.waitForTimeout(230);assert.equal(await menu.count(),1,'crossing the anchor gap must not close');
-  await page.mouse.move(1,page.viewportSize()?.height??await page.evaluate(()=>innerHeight)-1);await page.waitForTimeout(70);await menu.locator('button').first().hover();await page.waitForTimeout(230);assert.equal(await menu.count(),1,'return before delay cancels dismissal');
+  // Resolve the return point before starting the 180ms dismissal clock. Locator
+  // hover adds stability/actionability waits and can arrive after the deadline
+  // on a loaded runner, testing a late return rather than cancellation.
+  const returnPoint=await menu.locator('button').first().boundingBox(),outsideY=await page.evaluate(()=>innerHeight)-1;assert(returnPoint);
+  await page.mouse.move(1,outsideY);await page.waitForTimeout(70);await page.mouse.move(returnPoint.x+returnPoint.width/2,returnPoint.y+returnPoint.height/2);await page.waitForTimeout(230);assert.equal(await menu.count(),1,'return before delay cancels dismissal');
   await page.mouse.move(1,await page.evaluate(()=>innerHeight)-1);await gone();
  });
  await check('outside-click-and-escape-return-focus',async()=>{
