@@ -74,7 +74,8 @@ export function backfillIdeas(s:Snapshot,width:number,now:string,agentId='all'):
   if(next.clips.length>=capacity)break;
   const group=next.capacityOverflow?.find(c=>c.ideaIds.includes(idea.id));
   if(group){
-   const ids=new Set(group.ideaIds),restored={...next,clips:[...captureClipPositions(next.clips,width,'all',capacity),{...group,position:null}],capacityOverflow:next.capacityOverflow!.filter(c=>c.id!==group.id),ideas:next.ideas.map(i=>ids.has(i.id)?{...i,status:'hanging' as const,offRopeReason:undefined,updatedAt:now}:i)};
+   let groupId=group.id;for(let suffix=1;next.clips.some(c=>c.id===groupId);suffix++)groupId=group.id+':capacity:'+suffix;
+   const ids=new Set(group.ideaIds),restored={...next,clips:[...captureClipPositions(next.clips,width,'all',capacity),{...group,id:groupId,position:null}],capacityOverflow:next.capacityOverflow!.filter(c=>c.id!==group.id),ideas:next.ideas.map(i=>ids.has(i.id)?{...i,status:'hanging' as const,offRopeReason:undefined,updatedAt:now}:i)};
    const placed=layoutClips(restored.clips,width,capacity).overflow.length?arrangeClips(restored,width):validateSnapshot(restored);if(!placed.ok)return placed;next=placed.value;continue;
   }
   const plan=placementPlan(next,width,idea.id);if(plan==='full')break;
