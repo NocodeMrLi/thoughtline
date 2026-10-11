@@ -8,7 +8,7 @@ const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 
 function sourceInputVector() {
   const headSha = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
-  const records = execFileSync('git', ['ls-files', '--stage', '-z']).toString('utf8').split('\0').filter(Boolean);
+  const records = execFileSync('git', ['ls-files', '--stage', '-z'], { maxBuffer: 32 * 1024 * 1024 }).toString('utf8').split('\0').filter(Boolean);
   const files = {};
   for (const record of records) {
     const match = /^(\d{6}) ([0-9a-f]{40,64}) 0\t(.+)$/.exec(record);
@@ -21,8 +21,8 @@ function sourceInputVector() {
   }
   if (!files['package.json'] || !files['package-lock.json'] || !files['scripts/package-mac.cjs'] ||
       !files['docs/delivery/Start-Thoughtline-Isolated.ps1']) throw Error('Required delivery inputs missing from Git index.');
-  const changed = execFileSync('git', ['diff', 'HEAD', '--name-only', '-z']).toString('utf8').split('\0').filter(include);
-  const untracked = execFileSync('git', ['ls-files', '--others', '--exclude-standard', '-z']).toString('utf8').split('\0').filter(include);
+  const changed = execFileSync('git', ['diff', 'HEAD', '--name-only', '-z'], { maxBuffer: 32 * 1024 * 1024 }).toString('utf8').split('\0').filter(include);
+  const untracked = execFileSync('git', ['ls-files', '--others', '--exclude-standard', '-z'], { maxBuffer: 32 * 1024 * 1024 }).toString('utf8').split('\0').filter(include);
   if (changed.length || untracked.length) throw Error(`Production or build inputs are not frozen: ${[...changed, ...untracked].join(', ')}`);
   const gitObjects = Object.fromEntries(Object.entries(files).map(([file, value]) => [file, { mode: value.mode, blob: value.blob }]));
   const vectorSha256 = sha256(Buffer.from(JSON.stringify(gitObjects)));
