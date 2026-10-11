@@ -384,7 +384,7 @@ else app.whenReady().then(async()=>{
   try{
    const changed=await swapShortcut(globalShortcut,snapshot.settings.writeHotkey,settings.writeHotkey,()=>{openComposer();},async()=>{
     const capacity=setShelfCapacity(snapshot,shelfCapacity(settings.shelfCapacity),width,new Date().toISOString(),shelfAgentId);
-    committed=await save(capacity.ok?{ok:true,value:{...capacity.value,settings:{...capacity.value.settings,writeHotkey:settings.writeHotkey,reducedMotion:settings.reducedMotion,rope:settings.rope,paper:settings.paper}}}:capacity,revision);return committed;
+    committed=await save(capacity.ok?{ok:true,value:{...capacity.value,settings:{...capacity.value.settings,writeHotkey:settings.writeHotkey,reducedMotion:settings.reducedMotion,...(settings.rope===undefined?{}:{rope:settings.rope}),...(settings.paper===undefined?{}:{paper:settings.paper})}}}:capacity,revision);return committed;
    });
    if(!changed.ok)return changed.error?.ok===false?changed.error:committed;
    refreshTray();publish();return committed;
