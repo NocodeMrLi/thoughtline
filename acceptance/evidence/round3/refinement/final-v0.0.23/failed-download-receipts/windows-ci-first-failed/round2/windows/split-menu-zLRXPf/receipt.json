@@ -1,0 +1,48 @@
+{
+  "platform": "win32",
+  "scope": "isolated source protocol and repository; native popup stub, no physical click",
+  "cases": [
+    {
+      "name": "single-clip-has-no-split",
+      "passed": true
+    },
+    {
+      "name": "cancelled-menu-does-not-mutate",
+      "passed": true
+    },
+    {
+      "name": "captured-current-id-survives-background-page-change-without-opening-reader",
+      "passed": true
+    },
+    {
+      "name": "right-click-split-can-be-undone",
+      "passed": true
+    },
+    {
+      "name": "first-middle-last-pages-and-repeated-undo-preserve-order-content",
+      "passed": true
+    },
+    {
+      "name": "stale-clip-target-is-rejected",
+      "passed": true
+    }
+  ],
+  "pids": [
+    3116,
+    6648,
+    1540,
+    6036,
+    8236,
+    7076,
+    4932,
+    1112,
+    5652,
+    1648,
+    8736,
+    3824
+  ],
+  "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-split-menu-7Lb2DJ",
+  "failure": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('status').filter({ hasText: 'owned-split-write-failure' }) to be visible\u001b[22m\n\n    at D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-split-menu-workflow.cjs:62:81",
+  "dataRemoved": true,
+  "passed": false
+}

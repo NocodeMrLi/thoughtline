@@ -1,0 +1,44 @@
+{
+  "platform": "win32",
+  "scope": "Source UI with owned clipboard double; no host clipboard access.",
+  "cases": [
+    {
+      "mode": "detail",
+      "profile": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-title-only-urb44g",
+      "failure": "Error: Timed out waiting for acknowledged main-process state\n    at waitForInfo (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\window-fixture.cjs:32:258)\n    at async D:\\a\\thoughtline\\thoughtline\\tests\\electron\\title-only-workflow.cjs:7:131",
+      "pids": [
+        4684,
+        5748,
+        9092,
+        7284,
+        7972,
+        8768
+      ],
+      "normalQuit": true,
+      "profileRemoved": true
+    },
+    {
+      "mode": "calendar",
+      "profile": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-title-only-HdRVgE",
+      "emptyAutosaved": true,
+      "emptyCopy": true,
+      "emptyAllowsCalendar": true,
+      "emptyAllowsClose": true,
+      "titleOnlyComposer": true,
+      "bothEmptyBlockedWithoutLoss": true,
+      "passed": true,
+      "pids": [
+        2500,
+        4524,
+        868,
+        2724,
+        4340,
+        9156,
+        7324
+      ],
+      "normalQuit": true,
+      "profileRemoved": true
+    }
+  ],
+  "passed": false
+}

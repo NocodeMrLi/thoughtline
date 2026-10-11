@@ -1,0 +1,33 @@
+{
+  "platform": "win32",
+  "scope": "isolated renderer/main/calendar return with real repository; no physical DPI or multi-display",
+  "cases": [
+    {
+      "name": "day-range-limit-scroll-restored",
+      "passed": true,
+      "scroll": 240
+    },
+    {
+      "name": "year-hierarchy-restored",
+      "passed": true
+    },
+    {
+      "name": "search-status-restored",
+      "passed": true,
+      "count": 9
+    }
+  ],
+  "pids": [
+    4668,
+    4704,
+    5600,
+    8628,
+    7240,
+    5164,
+    8596
+  ],
+  "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-calendar-return-1pfKbR",
+  "normalClose": true,
+  "dataRemoved": true,
+  "passed": true
+}

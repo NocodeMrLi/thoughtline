@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.22"><img src="badges/preview.svg" alt="Version: 0.0.22" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.23"><img src="badges/preview.svg" alt="Version: 0.0.23" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.22"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.23"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   줄 하나와 집게, 종이로 일상의 아이디어를 남깁니다.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.22"><ins>Thoughtline 다운로드</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.23"><ins>Thoughtline 다운로드</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.22</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.23</sub></p>
 
 Thoughtline은 macOS와 Windows용 가벼운 데스크톱 메모 도구입니다. 화면 위쪽 가장자리에서 생각을 꺼내 보고, 기록한 뒤 하던 일로 돌아가세요.
 
@@ -31,6 +31,7 @@ Thoughtline은 macOS와 Windows용 가벼운 데스크톱 메모 도구입니다
 - 단축키로 제목, 본문, 분류를 기록하고 미완성 메모를 초안으로 저장합니다.
 - 데스크톱에는 줄, 집게, 종이만 표시합니다. 새 메모의 기본 분류는 일반입니다.
 - 달력 → 더 보기 → 저장소 및 설정에서 집게 4／6／8개를 선택합니다. 기본값은 6개이며 종이는 화면에 맞춰 비율을 유지합니다. 4개도 지나치게 커지지 않습니다. 줄이 가득 찼을 때 새로 저장한 메모는 자리가 나면 최신순으로 걸립니다. 기존 미표시 메모와 수동으로 보관한 메모는 자동으로 돌아오지 않습니다.
+- 달력 → 더 보기 → 저장소 및 설정 → 모양에서 끈과 종이를 바꿉니다. 기본 끈은 자유롭게 색을 선택하고, 면 끈은 자연스러운 면색, 덩굴은 녹색을 유지합니다. 집게 색은 태그를 따릅니다. 부드러운 종이색 5가지와 무지／가로줄／점선을 선택하고 미리 본 뒤 적용합니다. 취소나 뒤로 가기는 저장하지 않습니다. 설정은 모양·조작·데이터 및 백업으로 나뉩니다.
 - 집게 전체를 옮기거나 종이 한 장을 분리합니다. 오른쪽 클릭의 **Merge(합치기)** 로 호환 집게를 선택하고 **Split(분리)** 로 현재 한 장을 분리합니다. 공간이 흩어져 있으면 간격을 정리하며, 자동 정리는 좌우 순서를 유지합니다. 정리를 실행 취소할 수 있습니다.
 - 상세 보기와 달력에서 직접 편집합니다. 잠시 입력을 멈추면 자동 저장하고 페이지를 즉시 전환합니다.
 - 일·월·년으로 돌아보고 검색과 상태 필터로 보관한 메모도 찾습니다.
@@ -46,7 +47,7 @@ Thoughtline은 macOS와 Windows용 가벼운 데스크톱 메모 도구입니다
 
 ## 다운로드 및 설치
 
-저장소 접근 권한이 있는 구성원에게 다운로드를 제공합니다. Releases에서 패키지, 격리 실행 스크립트, SHA256SUMS와 빌드 정보를 확인하세요. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.22).
+저장소 접근 권한이 있는 구성원에게 다운로드를 제공합니다. Releases에서 패키지, 격리 실행 스크립트, SHA256SUMS와 빌드 정보를 확인하세요. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.23).
 
 | Platform | Package |
 |---|---|
@@ -98,4 +99,4 @@ Star와 다운로드 수는 2026-10-10 API 스냅샷입니다. 다운로드는 �
 
 현재 프로젝트는 UNLICENSED이며 오픈소스 사용 권한을 부여하지 않았습니다. 향후 공개 시 라이선스와 기여 방식을 정합니다. 포함된 코드의 라이선스는 제3자 고지를 참고하세요. [Third-party notices](../../THIRD_PARTY_NOTICES.md).
 
-0.0.22 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.
+0.0.23 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.

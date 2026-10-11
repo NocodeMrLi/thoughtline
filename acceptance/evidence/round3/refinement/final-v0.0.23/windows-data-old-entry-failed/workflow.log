@@ -1,0 +1,20 @@
+PASS light-rendered-custom-Agent-contrast
+PASS dark-rendered-custom-Agent-contrast
+PASS custom-clip-color-and-user-names-unchanged
+PASS English-drag-persists-position-without-redundant-toast
+PASS locale-switch-keeps-position-and-no-obsolete-drag-toast
+PASS out-of-bounds-cancel-preserves-snapshot-without-redundant-toast
+PASS locale-broadcast-does-not-cancel-active-drag
+PASS active-drag-completes-after-locale-switch-with-content-retained
+PASS actual-page-save-IO-current-English-diagnostic-bytes
+PASS existing-save-error-renders-current-Chinese-and-preserves-diagnostic
+locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for getByRole('button', { name: 'Change location', exact: true })
+
+    at D:\a\thoughtline\thoughtline\tests\electron\appearance-fix-workflow.cjs:27:380 {
+  log: [
+    "  - waiting for getByRole('button', { name: 'Change location', exact: true })"
+  ],
+  name: 'TimeoutError'
+}

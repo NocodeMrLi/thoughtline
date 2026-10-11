@@ -1,0 +1,160 @@
+{
+  "platform": "win32",
+  "scope": "Source UI + production IPC/scheduler with fixture-only native-notification and Mac-permission doubles; not proof of physical system notification delivery.",
+  "cases": [
+    "draft-reminder-persists-but-does-not-deliver-until-submit",
+    "invalid-custom-time-keeps-original-reminder",
+    "due-consumed-once-native-confirmation-and-click-route",
+    "detail-cancel-clears-shared-marker",
+    "calendar-list-and-detail-share-the-persisted-time",
+    "form-hover-preserves-input-and-Escape-cancels-without-mutation",
+    "time-and-more-panels-are-mutually-exclusive",
+    "denied-system-permission-is-visible-without-claiming-delivery",
+    "native-denial-fallback-visible-with-hidden-rope-nonfocused-and-click-opens-correct-thought",
+    "cancel-reminder-withdraws-fallback-and-stale-click-cannot-open",
+    "English-dark-compact-panel-and-next-local-morning-preset",
+    "configured-reminder-keeps-footer-controls-visible-at-350-380-420"
+  ],
+  "footerGeometry": [
+    {
+      "width": 350,
+      "height": 282,
+      "scroll": 350,
+      "client": 350,
+      "controls": [
+        {
+          "left": 12,
+          "right": 112,
+          "top": 198,
+          "bottom": 230
+        },
+        {
+          "left": 141.71875,
+          "right": 203,
+          "top": 198,
+          "bottom": 230
+        },
+        {
+          "left": 174.34375,
+          "right": 263,
+          "top": 234,
+          "bottom": 266
+        },
+        {
+          "left": 266,
+          "right": 338,
+          "top": 234,
+          "bottom": 266
+        }
+      ]
+    },
+    {
+      "width": 380,
+      "height": 282,
+      "scroll": 380,
+      "client": 380,
+      "controls": [
+        {
+          "left": 12,
+          "right": 112,
+          "top": 198,
+          "bottom": 230
+        },
+        {
+          "left": 141.71875,
+          "right": 203,
+          "top": 198,
+          "bottom": 230
+        },
+        {
+          "left": 204.34375,
+          "right": 293,
+          "top": 234,
+          "bottom": 266
+        },
+        {
+          "left": 296,
+          "right": 368,
+          "top": 234,
+          "bottom": 266
+        }
+      ]
+    },
+    {
+      "width": 420,
+      "height": 282,
+      "scroll": 420,
+      "client": 420,
+      "controls": [
+        {
+          "left": 12,
+          "right": 131.828125,
+          "top": 198,
+          "bottom": 230
+        },
+        {
+          "left": 160.546875,
+          "right": 254.546875,
+          "top": 198,
+          "bottom": 230
+        },
+        {
+          "left": 184.203125,
+          "right": 272.859375,
+          "top": 234,
+          "bottom": 266
+        },
+        {
+          "left": 336,
+          "right": 408,
+          "top": 234,
+          "bottom": 266
+        }
+      ]
+    },
+    {
+      "width": 480,
+      "height": 282,
+      "scroll": 480,
+      "client": 480,
+      "controls": [
+        {
+          "left": 12,
+          "right": 131.828125,
+          "top": 198,
+          "bottom": 230
+        },
+        {
+          "left": 160.546875,
+          "right": 254.546875,
+          "top": 198,
+          "bottom": 230
+        },
+        {
+          "left": 244.203125,
+          "right": 332.859375,
+          "top": 234,
+          "bottom": 266
+        },
+        {
+          "left": 396,
+          "right": 468,
+          "top": 234,
+          "bottom": 266
+        }
+      ]
+    }
+  ],
+  "passed": true,
+  "pids": [
+    2416,
+    8036,
+    5152,
+    6660,
+    8896,
+    7620,
+    1072
+  ],
+  "normalQuit": true,
+  "profileRemoved": true
+}

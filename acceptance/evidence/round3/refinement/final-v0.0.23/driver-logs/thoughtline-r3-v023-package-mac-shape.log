@@ -1,0 +1,66 @@
+
+> thoughtline@0.0.23 package:mac
+> node scripts/package-mac.cjs
+
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 36 modules transformed.
+rendering chunks...
+out/main/index.js  209.19 kB
+✓ built in 243ms
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 1 modules transformed.
+rendering chunks...
+out/preload/index.js  5.00 kB
+✓ built in 6ms
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 82 modules transformed.
+rendering chunks...
+../../out/renderer/index.html                                    0.52 kB
+../../out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg   98.37 kB
+../../out/renderer/assets/index-DPeowQon.css                    67.89 kB
+../../out/renderer/assets/index-DUXP5cdM.js                    913.50 kB
+✓ built in 1.06s
+Using audited Electron 44.7.0 arm64 cache ZIP: e04e411b58a0a14375dd21b0ab4a378fd38930a702e4e20e322fee4849404c0b
+  • electron-builder  version=26.15.3 os=24.3.0
+  • loaded configuration  file=package.json ("build" field)
+  • executing @electron/rebuild  electronVersion=44.7.0 arch=arm64 buildFromSource=false workspaceRoot=/Users/lihongwei/Desktop/晾念头 : Thoughtline/app projectDir=./ appDir=./
+  • installing native dependencies  arch=arm64
+  • completed installing native dependencies
+  • packaging       platform=darwin arch=arm64 electron=44.7.0 appOutDir=dist/mac-arm64
+  • using custom electronDist zip file  zipFile=/Users/lihongwei/Library/Caches/electron/5a625dfd3df3efc3971556afe64989f9aa6ea0f4cd6e33889c1951789041498f/electron-v44.7.0-darwin-arm64.zip
+  • searching for node modules  pm=npm searchDir=/Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+  • signing         file=dist/mac-arm64/Thoughtline.app platform=darwin type=distribution identityName=- identityHash=none provisioningProfile=none
+  • skipped macOS notarization  reason=`notarize` options were unable to be generated
+  • building        target=DMG arch=arm64 file=dist/Thoughtline-0.0.23-mac-arm64.dmg
+  • building block map  blockMapFile=dist/Thoughtline-0.0.23-mac-arm64.dmg.blockmap
+正在检查“Protective Master Boot Record（MBR：0）”的校验和…
+Protective Master Boot Record（MBR：0）：已验证CRC32 $C4A0C9DC
+正在检查“GPT Header（Primary GPT Header：1）”的校验和…
+    GPT Header（Primary GPT Header：1）：已验证CRC32 $2BFA12DC
+正在检查“GPT Partition Data（Primary GPT Table：2）”的校验和…
+GPT Partition Data（Primary GPT Table：已验证CRC32 $CC4AB55B
+正在检查“（Apple_Free：3）”的校验和…
+                      （Apple_Free：3）：已验证CRC32 $00000000
+正在检查“disk image（Apple_HFS：4）”的校验和…
+             disk image（Apple_HFS：4）：已验证CRC32 $CD11A2BE
+正在检查“（Apple_Free：5）”的校验和…
+                      （Apple_Free：5）：已验证CRC32 $00000000
+正在检查“GPT Partition Data（Backup GPT Table：6）”的校验和…
+GPT Partition Data（Backup GPT Table：：已验证CRC32 $CC4AB55B
+正在检查“GPT Header（Backup GPT Header：7）”的校验和…
+     GPT Header（Backup GPT Header：7）：已验证CRC32 $CA343AE2
+已验证CRC32 $E8B680B1
+/dev/disk4          	GUID_partition_scheme          	
+/dev/disk4s1        	Apple_HFS                      	/private/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-signature-NF9rQJ
+"disk4" ejected.
+{
+  "version": "0.0.23",
+  "file": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/dist/Thoughtline-0.0.23-mac-arm64.dmg",
+  "sha256": "873ee7474e66cd3dea0a6425585971fa3a6d3234ea5dcc7effef5e1cfd59be90",
+  "signature": "ad-hoc, sealed resources; not Developer ID or notarization",
+  "builtAppStrictVerification": true,
+  "dmgAppStrictVerification": true
+}

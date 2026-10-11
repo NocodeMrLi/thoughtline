@@ -1,0 +1,39 @@
+windows-test-package	Appearance and English source workflow on Windows	﻿2026-10-11T12:43:45.5645967Z ##[group]Run New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:45.5646752Z ^[[36;1mNew-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:45.5647401Z ^[[36;1m& node tests/electron/appearance-workflow.cjs 2>&1 | Tee-Object -FilePath (Join-Path $env:THOUGHTLINE_EVIDENCE_DIR 'workflow.log')^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:45.5648031Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw "Appearance workflow failed: $LASTEXITCODE" }^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:45.5728121Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:45.5728561Z env:
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:45.5728915Z   THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/appearance/windows-source
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:45.5729363Z   THOUGHTLINE_FAKE_CLIPBOARD: 1
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:45.5729631Z ##[endgroup]
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:48.6513759Z first-level-control-placement
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:48.7769187Z shelf-cannot-write-preferences
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:49.7710280Z composition-node-focus-selection-scroll-candidate-and-note-bytes-preserved
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:50.1239576Z older-success-newest-IO-visible-current-locale-editor-intact
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:50.5992321Z older-success-newest-catch-visible-current-locale-editor-intact
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:51.7426545Z light-dark-rendered-body-and-button-contrast
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:52.1097418Z composer-widths-350-380-480-740-no-overflow
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:52.7169057Z continuous-drag-frames-and-escape-cancel
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:53.2238474Z drag-release-and-immediate-reversal
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:53.3943164Z keyboard-home-end-arrows
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:53.6572959Z reduced-motion-and-forced-colors-operations-without-animation
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:53.9136032Z atomic-IO-failure-visible-durable-rollback-text-retained-retry
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:54.1472489Z late-failed-response-does-not-override-new-choice-or-current-locale
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:43:54.6550578Z pointercancel-restores-durable-choice
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:44:26.1716227Z ^[[31;1mlocator.click: Timeout 30000ms exceeded.^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:44:26.1740191Z ^[[31;1mCall log:^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:44:26.1770745Z ^[[31;1m^[[2m  - waiting for getByRole('checkbox', { name: 'Follow system', exact: true })^[[22m^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:44:26.1776227Z ^[[31;1m^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:44:26.1781980Z ^[[31;1m    at D:\a\thoughtline\thoughtline\tests\electron\appearance-workflow.cjs:46:1490 {^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:44:26.1787608Z ^[[31;1m  log: [^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:44:26.1792949Z ^[[31;1m    "  - waiting for getByRole('checkbox', { name: 'Follow system', exact: true })"^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:44:26.1798163Z ^[[31;1m  ],^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:44:26.1803151Z ^[[31;1m  name: 'TimeoutError'^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:44:26.1808538Z ^[[31;1m}^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:44:26.4705786Z ^[[31;1mException: ^[[0mD:\a\_temp\0778b0a0-7e03-4d2a-b5a3-d8617a30b81c.ps1:4^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:44:26.4706460Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:44:26.4711811Z ^[[31;1m^[[0m^[[36;1m^[[36;1m   4 | ^[[0m … EXITCODE -ne 0) { ^[[36;1mthrow "Appearance workflow failed: $LASTEXITCODE"^[[0m }^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:44:26.4713142Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:44:26.4714641Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mAppearance workflow failed: 1^[[0m
+windows-test-package	Appearance and English source workflow on Windows	2026-10-11T12:44:26.4930882Z ##[error]Process completed with exit code 1.

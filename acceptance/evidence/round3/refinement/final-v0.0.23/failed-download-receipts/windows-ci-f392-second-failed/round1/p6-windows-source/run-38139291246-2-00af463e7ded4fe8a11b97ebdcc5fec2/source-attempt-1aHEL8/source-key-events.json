@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "evidenceDirectory": "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38139291246-2-00af463e7ded4fe8a11b97ebdcc5fec2\\source-attempt-1aHEL8",
+  "attempt": "windows-source-runtime-windows-ci",
+  "host": {
+    "platform": "win32",
+    "arch": "x64",
+    "release": "10.0.26100"
+  },
+  "scope": "Source Electron on the actual runner OS with emulated shortcut registration and DOM keyboard events; no physical IME, DPI, focus, display, or receiver acceptance",
+  "electron": "44.7.0",
+  "checks": {
+    "enterInsertsNewline": true,
+    "keyCode229GuardsSubmit": true,
+    "platformSubmitShortcut": "Control+Enter",
+    "preservedEmojiAndLineBreak": true,
+    "draftClearedAfterSubmit": true
+  },
+  "revisions": {
+    "before": 0,
+    "after": 2
+  },
+  "cleanup": {
+    "directory": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-source-key-events-b3ePem",
+    "ownedPids": [
+      4028,
+      4852,
+      1440,
+      5928,
+      7980,
+      1064
+    ],
+    "normalClose": true,
+    "fakeDataRemoved": true,
+    "allExited": true
+  }
+}

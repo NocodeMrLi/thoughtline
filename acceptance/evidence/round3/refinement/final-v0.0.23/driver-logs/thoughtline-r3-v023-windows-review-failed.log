@@ -1,0 +1,35 @@
+windows-test-package	Appearance review fixes on Windows	﻿2026-10-11T12:55:21.5241202Z ##[group]Run New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:21.5242118Z ^[[36;1mNew-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:21.5242911Z ^[[36;1m& node tests/electron/appearance-fix-workflow.cjs 2>&1 | Tee-Object -FilePath (Join-Path $env:THOUGHTLINE_EVIDENCE_DIR 'workflow.log')^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:21.5244159Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw "Appearance review fixes failed: $LASTEXITCODE" }^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:21.5342382Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:21.5342743Z env:
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:21.5343137Z   THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/appearance/windows-source/fix-round1
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:21.5343911Z   THOUGHTLINE_FAKE_CLIPBOARD: 1
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:21.5344310Z ##[endgroup]
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:26.2702102Z PASS light-rendered-custom-Agent-contrast
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:26.6716334Z PASS dark-rendered-custom-Agent-contrast
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:26.8735693Z PASS custom-clip-color-and-user-names-unchanged
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:27.6036483Z PASS English-drag-persists-position-without-redundant-toast
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:27.8237504Z PASS locale-switch-keeps-position-and-no-obsolete-drag-toast
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:28.2091968Z PASS out-of-bounds-cancel-preserves-snapshot-without-redundant-toast
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:28.4293526Z PASS locale-broadcast-does-not-cancel-active-drag
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:28.6029786Z PASS active-drag-completes-after-locale-switch-with-content-retained
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:29.0398577Z PASS actual-page-save-IO-current-English-diagnostic-bytes
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:29.1831826Z PASS existing-save-error-renders-current-Chinese-and-preserves-diagnostic
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:40.7411867Z ^[[31;1mException: ^[[0mD:\a\_temp\fedba07d-f079-4285-a616-5458b4d34bec.ps1:4^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:40.7412699Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:40.7413873Z ^[[31;1m^[[0m^[[36;1m^[[36;1m   4 | ^[[0m … CODE -ne 0) { ^[[36;1mthrow "Appearance review fixes failed: $LASTEXITCODE"^[[0m }^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:40.7415353Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:40.7416644Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mAppearance review fixes failed: 1^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:40.7418025Z ^[[31;1mlocator.click: Timeout 10000ms exceeded.^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:40.7418626Z ^[[31;1mCall log:^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:40.7419520Z ^[[31;1m^[[2m  - waiting for getByRole('button', { name: 'Change location', exact: true })^[[22m^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:40.7420291Z ^[[31;1m^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:40.7421200Z ^[[31;1m    at D:\a\thoughtline\thoughtline\tests\electron\appearance-fix-workflow.cjs:27:380 {^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:40.7422014Z ^[[31;1m  log: [^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:40.7422848Z ^[[31;1m    "  - waiting for getByRole('button', { name: 'Change location', exact: true })"^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:40.7423575Z ^[[31;1m  ],^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:40.7424026Z ^[[31;1m  name: 'TimeoutError'^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:40.7424468Z ^[[31;1m}^[[0m
+windows-test-package	Appearance review fixes on Windows	2026-10-11T12:55:40.7440063Z ##[error]Process completed with exit code 1.

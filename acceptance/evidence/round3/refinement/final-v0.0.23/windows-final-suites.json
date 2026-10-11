@@ -1,0 +1,79 @@
+{
+  "passed": true,
+  "source": "2b363d18e1329aa195c1f3fadc1cee70a9c9de2d",
+  "version": "0.0.23",
+  "windowsRun": 38142369778,
+  "checkpoints": 68,
+  "suites": [
+    {
+      "file": "acceptance/evidence/round3/refinement/final-v0.0.23/windows-final/round3/windows-packaged/packaged-round-three.json",
+      "checks": 10,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/refinement/final-v0.0.23/windows-final/round2/windows/packaged-capacity/packaged-round-twenty-one.json",
+      "checks": 24,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/refinement/final-v0.0.23/windows-final/appearance/windows-packaged/packaged-appearance.json",
+      "checks": 3,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/refinement/final-v0.0.23/windows-final/round2/windows/packaged-capacity/packaged-capacity.json",
+      "checks": 4,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/refinement/final-v0.0.23/windows-final/round2/windows/packaged-capacity/packaged-positioning.json",
+      "checks": 9,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/refinement/final-v0.0.23/windows-final/round2/windows/packaged-split/packaged-split.json",
+      "checks": 4,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/refinement/final-v0.0.23/windows-final/round3/windows-packaged/appearance-EG1X3Q/receipt.json",
+      "checks": 14,
+      "normalQuit": true,
+      "profileRemoved": true
+    }
+  ],
+  "installedRound3": {
+    "file": "acceptance/evidence/round3/refinement/final-v0.0.23/windows-final/round3/windows-installed/packaged-round-three.json",
+    "checks": 10,
+    "countedAgain": false,
+    "passed": true
+  },
+  "native": {
+    "scope": "Real native permission query and scheduler delivery events; no automatic permission granting, physical banner/click, or OS settings changes.",
+    "access": "unknown",
+    "events": [
+      {
+        "event": "show",
+        "data": [
+          "[object Object]"
+        ]
+      }
+    ],
+    "state": "notified"
+  },
+  "formalAcceptance": false,
+  "physicalAcceptance": false,
+  "scope": "Actual installed and unpacked Windows package, own data on disposable runner; physical display, IME, actual receiver and native banners are separate acceptance"
+}

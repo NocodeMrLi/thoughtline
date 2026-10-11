@@ -1,0 +1,15 @@
+const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),assert=require('node:assert/strict'),crypto=require('node:crypto');
+const delivery=process.argv[2];assert(delivery);const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const api=endpoint=>JSON.parse(cp.execFileSync('gh',['api',endpoint],{encoding:'utf8',maxBuffer:10*1024*1024}));
+const source='2b363d18e1329aa195c1f3fadc1cee70a9c9de2d';
+const repo=api('repos/NocodeMrLi/thoughtline');assert(repo.private);
+const r=api('repos/NocodeMrLi/thoughtline/releases/tags/v0.0.23');assert.equal(r.draft,false);assert.equal(r.prerelease,false);
+const tag=api('repos/NocodeMrLi/thoughtline/git/ref/tags/v0.0.23');assert.equal(tag.object.sha,source);assert.equal(tag.object.type,'commit');
+const local=fs.readdirSync(delivery).filter(n=>fs.statSync(path.join(delivery,n)).isFile()).sort();assert.deepEqual(r.assets.map(a=>a.name).sort(),local);
+const receipts=r.assets.map(a=>{const p=path.join(delivery,a.name),hash=sha(p);assert.equal(a.size,fs.statSync(p).size,a.name);assert.equal(a.digest,'sha256:'+hash,a.name);return{name:a.name,id:a.id,bytes:a.size,sha256:hash};});
+const old=api('repos/NocodeMrLi/thoughtline/releases/tags/v0.0.22'),baseline=JSON.parse(fs.readFileSync('acceptance/evidence/round3/refinement/final-v0.0.23/historical-v022-before.json'));
+assert.equal(old.id,baseline.id);assert.deepEqual(old.assets.map(({id,name,size,digest})=>({id,name,size,digest})).sort((a,b)=>a.name.localeCompare(b.name)),baseline.assets.map(({id,name,size,digest})=>({id,name,size,digest})).sort((a,b)=>a.name.localeCompare(b.name)));
+const v21=api('repos/NocodeMrLi/thoughtline/releases/tags/v0.0.21'),v21Baseline=JSON.parse(fs.readFileSync('acceptance/evidence/round3/previous-release-baseline.json'));assert.equal(v21.id,v21Baseline.id);assert.deepEqual(v21.assets.map(({id,name,size,digest})=>({id,name,size,digest})).sort((a,b)=>a.name.localeCompare(b.name)),v21Baseline.assets.slice().sort((a,b)=>a.name.localeCompare(b.name)));
+const checks=fs.readFileSync(path.join(delivery,'SHA256SUMS.txt'),'utf8').trim().split(/\r?\n/).map(l=>{const m=l.match(/^([a-f0-9]{64})  (.+)$/);assert(m,l);assert.equal(sha(path.join(delivery,m[2])),m[1]);return m[2];});assert.deepEqual(checks.sort(),local.filter(n=>n!=='SHA256SUMS.txt'));
+const receipt={passed:true,verifiedAt:new Date().toISOString(),releaseId:r.id,url:r.html_url,publishedAt:r.published_at,privateRepository:true,draft:false,prerelease:false,tag:'v0.0.23',source,tagSource:tag.object.sha,assets:receipts.length,checksumTargets:checks.length,allAssetsServerDigestAndSizeMatched:true,previousV0022Unchanged:true,previousV0021Unchanged:true,attachments:receipts,formalAcceptance:false,physicalAcceptance:false};
+fs.writeFileSync('acceptance/evidence/round3/refinement/final-v0.0.23/release-verification.json',JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify({passed:true,id:r.id,assets:receipts.length,oldAssets:old.assets.length}));
