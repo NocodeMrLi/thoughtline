@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21"><img src="badges/preview.svg" alt="Version: 0.0.21" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.22"><img src="badges/preview.svg" alt="Version: 0.0.22" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.22"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   一本のロープとクリップ、紙で日々のアイデアを残します。
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21"><ins>Thoughtline をダウンロード</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.22"><ins>Thoughtline をダウンロード</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.21</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.22</sub></p>
 
 Thoughtline は macOS と Windows 向けの軽量なデスクトップメモアプリです。画面上端からメモを呼び出し、思いつきを書き留めて作業に戻れます。
 
@@ -30,6 +30,7 @@ Thoughtline は macOS と Windows 向けの軽量なデスクトップメモア�
 
 - ショートカットでタイトル、本文、分類を記録し、未完成のメモを下書きに保存。
 - デスクトップにはロープ、クリップ、紙だけを表示。新しいメモは「通用」に分類。
+- カレンダー → その他 → ストレージと設定でクリップを4／6／8個から選択できます。初期値は6個。紙は画面に合わせて縦横比を保って調整し、4個でも過度に拡大しません。ロープが満杯のときに新しく保存したメモは、空きができると新しい順に掛かります。以前の未表示メモや手動でしまったメモは自動で戻りません。
 - クリップ全体を移動し、紙を一枚取り出せます。右クリックの **Merge（結合）** で互換クリップを選び、**Split（分離）** で現在の一枚を分離。必要に応じて間隔を整え、自動整理は左右の順序を保ちます。整理は取り消せます。
 - 詳細画面やカレンダー内で直接編集。短い入力停止後に自動保存し、ページを即座に切り替え。
 - 日・月・年で振り返り、検索や状態フィルターで収納済みのメモも表示。
@@ -45,7 +46,7 @@ Thoughtline は macOS と Windows 向けの軽量なデスクトップメモア�
 
 ## ダウンロードとインストール
 
-リポジトリへのアクセス権を持つメンバーがダウンロードできます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21).
+リポジトリへのアクセス権を持つメンバーがダウンロードできます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.22).
 
 | Platform | Package |
 |---|---|
@@ -97,4 +98,4 @@ Starとダウンロード数は2026-10-10のAPIスナップショットです。
 
 現在は UNLICENSED で、オープンソースの利用許諾は付与されていません。将来の公開時にライセンスと貢献方法を定めます。同梱コードのライセンスは第三者声明を参照してください。 [Third-party notices](../../THIRD_PARTY_NOTICES.md).
 
-0.0.21 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.
+0.0.22 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.

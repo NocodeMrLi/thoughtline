@@ -2,7 +2,7 @@
 
 ## Authority and state
 
-Approved V2 spec: `/Users/lihongwei/安安的成长笔记📒/晾念头 Thoughtline/Thoughtline语言与外观模式补充方案.md`. This document is its implementation argument, not a replacement. Latest user approval adds the smooth, tactile motion of iPhone Settings switches (the voice text says “丝瓜”, interpreted as “丝滑”). No production feature or physical acceptance is claimed at plan creation.
+Approved V2 spec: `/Users/lihongwei/安安的成长笔记📒/晾念头 Thoughtline/归档/历史方案/Thoughtline语言与外观模式补充方案.md`. This document is its implementation argument, not a replacement. Latest user approval adds the smooth, tactile motion of iPhone Settings switches (the voice text says “丝瓜”, interpreted as “丝滑”). No production feature or physical acceptance is claimed at plan creation.
 
 Base main: `713a1fe30482930b24a23b40f2d75ac495057a40`, clean and pushed. Existing delivered version `v0.0.17-preview.2` binds `ca2137b1c7af1458643ac2988c6cc4ed9ce15e35`; keep its tag, packages, evidence and rollback unchanged. README public preparation is completed. Original round-one receiver/physical gates remain open.
 

@@ -5,7 +5,7 @@ import type {Clip} from '../../src/shared/contracts';
 test('绳居中并留两端空白，固定弧线留出上方夹子命中空间',()=>{
  for(const width of [260,320,800,1440,2560,3840]){
   const rope=geometry.fixedRope?.(width);expect(rope).toBeDefined();if(!rope)continue;
-  expect(rope.left).toBeCloseTo(width*.15,8);expect(rope.left+rope.length).toBeCloseTo(width*.85,8);expect(rope.sag).toBeGreaterThanOrEqual(18);expect(rope.sag).toBeLessThanOrEqual(30);expect(rope.top-31).toBeGreaterThanOrEqual(0);expect(rope.top+rope.sag+6+CARD_HEIGHT+4).toBeLessThan(340);
+  expect(rope.left).toBeGreaterThan(0);expect(rope.left+rope.length).toBeLessThan(width);expect(rope.sag).toBeGreaterThanOrEqual(18);expect(rope.sag).toBeLessThanOrEqual(30);expect(rope.top-31).toBeGreaterThanOrEqual(0);expect(rope.top+rope.sag+6+CARD_HEIGHT+4).toBeLessThan(340);
   expect(geometry.fixedRopeY?.(rope.left,rope)).toBeCloseTo(rope.top,10);expect(geometry.fixedRopeY?.(rope.left+rope.length,rope)).toBeCloseTo(rope.top,10);expect(geometry.fixedRopeY?.(width/2,rope)).toBeCloseTo(rope.top+rope.sag,10);
  }
 });

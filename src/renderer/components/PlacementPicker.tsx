@@ -1,3 +1,4 @@
+import {shelfCapacity} from '../../shared/ropeGeometry';
 import {useEffect,useRef,useState,type RefObject} from 'react';
 import type {PilotInfo} from '../../shared/bridge';
 import type {PlacementIntent} from '../../shared/ideaPlacement';
@@ -10,7 +11,7 @@ export function PlacementPicker({info,agentId,sourceId,busy,error='',anchor,onCa
  const {t,m,agentName}=useLocale(),dialog=useRef<HTMLDivElement>(null);
  const [choice,setChoice]=useState<{clipId:string;ideaId:string;expectedIds:string[];wholeClip:boolean}|null>(null),[older,setOlder]=useState(false),[reveal,setReveal]=useState(false);
  const currentFilter=info.shelfAgentId,hidden=currentFilter!=='all'&&currentFilter!==agentId;
- const targets=layoutClips(info.snapshot.clips,info.width).visible.filter(p=>(currentFilter==='all'||p.clip.agentId===currentFilter)&&!p.clip.ideaIds.includes(sourceId??''));
+ const targets=layoutClips(info.snapshot.clips,info.width,shelfCapacity(info.snapshot.settings.shelfCapacity)).visible.filter(p=>(currentFilter==='all'||p.clip.agentId===currentFilter)&&!p.clip.ideaIds.includes(sourceId??''));
  const boundary=new Date();boundary.setDate(boundary.getDate()-2);const day=[boundary.getFullYear(),String(boundary.getMonth()+1).padStart(2,'0'),String(boundary.getDate()).padStart(2,'0')].join('-');
  const rows=targets.map(p=>({clip:p.clip,idea:info.snapshot.ideas.find(i=>i.id===p.clip.currentId)!})).sort((a,b)=>ideaDay(b.idea).localeCompare(ideaDay(a.idea)));
  const recent=rows.filter(r=>ideaDay(r.idea)>=day),displayed=older||!recent.length?rows:recent;

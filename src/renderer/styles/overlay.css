@@ -120,3 +120,15 @@
 @keyframes light-reminder-in{from{opacity:0;transform:translate(-50%,-4px)}to{opacity:1;transform:translate(-50%,0)}}
 @media(prefers-reduced-motion:reduce){.light-reminder{animation:none}}
 [data-reduced-motion=true] .light-reminder{animation:none}
+
+.scaled-paper{position:relative;width:160px;transform-origin:0 0}
+.scaled-paper .peg-button{min-width:26px}
+
+.scaled-paper .peg-button{width:calc(26px / var(--paper-scale));left:calc(80px - 13px / var(--paper-scale))}
+.scaled-paper .agent-name{font-size:max(11px,calc(10px / var(--paper-scale)))}
+.scaled-paper .idea-card strong{font-size:max(14px,calc(12px / var(--paper-scale)));line-height:max(20px,calc(16px / var(--paper-scale)))}
+.scaled-paper .preview{font-size:max(13px,calc(11px / var(--paper-scale)));line-height:max(18px,calc(15px / var(--paper-scale)))}
+.scaled-paper .idea-card footer button{min-width:calc(24px / var(--paper-scale));min-height:calc(24px / var(--paper-scale))}
+
+.scaled-paper .peg-button .clothespin{left:calc(50% - 9px)}
+.hanging>.merge-ring{left:50%;transform:translateX(-50%)}

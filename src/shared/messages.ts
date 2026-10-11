@@ -1,5 +1,10 @@
 // Central typed application text; user text is never translated.
 export const zh = {
+ "绳上夹子数量": "绳上夹子数量",
+ "默认6个；便签按屏幕空间等比例适配，减少数量仍保留全部内容。": "默认6个；便签按屏幕空间等比例适配，减少数量仍保留全部内容。",
+ "输入浮层尺寸调整未成功，请重试。": "输入浮层尺寸调整未成功，请重试。",
+ "撤销夹子操作": "撤销夹子操作",
+ "撤销整理挂上": "撤销整理挂上",
  "轻提醒": "轻提醒",
  "点击查看": "点击查看",
  "关闭提醒": "关闭提醒",
@@ -457,6 +462,11 @@ export const zh = {
  "savedBackup": "独立备份已保存到 {p0}。当前数据位置未更改。"
 } as const;
 export const en = {
+ "绳上夹子数量": "Clips on the line",
+ "默认6个；便签按屏幕空间等比例适配，减少数量仍保留全部内容。": "6 by default. Notes scale proportionally to the screen; lowering the count keeps all content.",
+ "输入浮层尺寸调整未成功，请重试。": "Could not resize the composer. Please retry.",
+ "撤销夹子操作": "Undo clip action",
+ "撤销整理挂上": "Undo arrange and hang",
  "轻提醒": "Reminder",
  "点击查看": "Click to view",
  "关闭提醒": "Dismiss reminder",

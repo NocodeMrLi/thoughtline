@@ -1,0 +1,38 @@
+{
+  "platform": "darwin",
+  "cases": [
+    {
+      "mode": "maximized",
+      "visible": true,
+      "focused": false,
+      "controllerFocused": true,
+      "bounds": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 340
+      },
+      "native": {
+        "fullScreenAuxiliary": false,
+        "onActiveSpace": true,
+        "nonactivating": false,
+        "visible": true,
+        "level": 3
+      }
+    }
+  ],
+  "scope": "isolated native window flags, own maximized/fullscreen controller; synthetic edge cursor; not physical WeChat/Codex acceptance",
+  "failure": "AssertionError [ERR_ASSERTION]: shelf must participate in fullscreen Spaces\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-window-workflow.cjs:8:34",
+  "passed": false,
+  "pids": [
+    39736,
+    39736,
+    39740,
+    39741,
+    39742,
+    39743,
+    39744,
+    39745
+  ],
+  "normalQuit": true
+}

@@ -1,5 +1,6 @@
 import {contextBridge,ipcRenderer} from 'electron';import type {ThoughtlineBridge} from '../shared/bridge';
 const api:ThoughtlineBridge={
+ resizeComposer:(height,session)=>ipcRenderer.invoke('thoughtline:composer-size',height,session),
  reminderAction:(key,open)=>ipcRenderer.invoke('thoughtline:reminder-action',key,open),
  notificationAccess:request=>ipcRenderer.invoke('thoughtline:notification-access',request===true),
  openNotificationSettings:()=>ipcRenderer.invoke('thoughtline:notification-settings'),

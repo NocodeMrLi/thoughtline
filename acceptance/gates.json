@@ -784,5 +784,29 @@
     ],
     "readmeHeroGif": "deferred by user until stable actual acceptance",
     "signing": "Mac local ad-hoc; Windows unsigned; commercial signing/notarization not planned"
+  },
+  "round3": {
+    "version": "0.0.22",
+    "status": "implementation-and-verification-in-progress",
+    "formalAcceptance": false,
+    "physicalAcceptance": false,
+    "capacity": {
+      "choices": [
+        4,
+        6,
+        8
+      ],
+      "default": 6,
+      "legacyArchivedQueueMigration": false
+    },
+    "evidence": "acceptance/evidence/round3/",
+    "release": {
+      "published": false
+    },
+    "remaining": [
+      "dual-platform final CI and actual packages",
+      "native material compositing with accessible test conditions",
+      "physical IME, DPI, multiscreen, native outside-click, text drag receiver, notification banner/click/DND, animation feel, clean LaunchServices"
+    ]
   }
 }

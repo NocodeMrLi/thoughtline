@@ -10,8 +10,8 @@ test.each([800,1040,1440,1920,2560])('右侧手动夹后新增，必须回填左
 });
 test('左/右保留，中间空位可新挂，满后明确溢出而不盖住旧纸',()=>{
  const width=1440,old=[c('left',0),c('right',1)],after=layoutClips([...old,c('middle',null)],width);
- expect(after.visible).toHaveLength(3);expect(after.visible.find(p=>p.clip.id==='middle')!.x).toBeGreaterThan(384+171);expect(after.visible.find(p=>p.clip.id==='right')!.x).toBe(1056);
- const full=[c('a',0),c('b',.26),c('c',.52),c('d',1),c('new',null)];const shown=layoutClips(full,width);expect(shown.visible).toHaveLength(4);expect(shown.overflow.map(c=>c.id)).toEqual(['new']);
+ expect(after.visible).toHaveLength(3);expect(after.visible.find(p=>p.clip.id==='middle')!.x).toBeGreaterThan(clipTravelBounds(width).min+171);expect(after.visible.find(p=>p.clip.id==='right')!.x).toBeCloseTo(clipTravelBounds(width).max,8);
+ const full=[c('a',0),c('b',.2),c('c',.4),c('d',.6),c('e',.8),c('f',1),c('new',null)];const shown=layoutClips(full,width);expect(shown.visible).toHaveLength(6);expect(shown.overflow.map(c=>c.id)).toEqual(['new']);
 });
 test('空位回填捕获后重复投影位置/身份稳定',()=>{
  const old=[c('right',1),c('new',null),c('other',null)],first=layoutClips(old,1440),next=layoutClips(captureClipPositions(old,1440),1440);

@@ -1,0 +1,39 @@
+
+> thoughtline@0.0.21 test
+> node node_modules/vitest/vitest.mjs run tests/unit/round3Backfill.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/round3Backfill.test.ts (5 tests | 1 failed) 48ms
+   × capacity overflow keeps a stacked clip together when capacity returns 7ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/round3Backfill.test.ts > capacity overflow keeps a stacked clip together when capacity returns
+AssertionError: expected { id: 'clip:n5', …(4) } to match object { ideaIds: [ 'n5', 'stack' ], …(1) }
+(3 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "currentId": "stack",
++   "currentId": "n5",
+    "ideaIds": [
+      "n5",
+-     "stack",
+    ],
+  }
+
+ ❯ tests/unit/round3Backfill.test.ts:30:50
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 passed (5)
+   Start at  12:28:52
+   Duration  227ms (transform 56%, tests 32%, import 10%, worker 2%)
+

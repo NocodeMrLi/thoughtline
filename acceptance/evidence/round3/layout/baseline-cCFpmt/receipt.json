@@ -1,0 +1,54 @@
+{
+  "platform": "darwin",
+  "cases": [
+    {
+      "name": "swap-rows-date-and-impact-not-clipped",
+      "passed": false,
+      "failure": "AssertionError [ERR_ASSERTION]: [{\"height\":34,\"children\":[{\"text\":\"布局目标 0\",\"inside\":true},{\"text\":\"通用 · 2026-10-11\",\"inside\":false},{\"text\":\"换下一张\",\"inside\":false}]},{\"height\":34,\"children\":[{\"text\":\"布局目标 1\",\"inside\":true},{\"text\":\"通用 · 2026-10-11\",\"inside\":false},{\"text\":\"换下一张\",\"inside\":false}]},{\"height\":34,\"children\":[{\"text\":\"布局目标 2\",\"inside\":true},{\"text\":\"通用 · 2026-10-11\",\"inside\":false},{\"text\":\"换下一张\",\"inside\":false}]},{\"height\":34,\"children\":[{\"text\":\"布局目标 3\",\"inside\":true},{\"text\":\"通用 · 2026-10-11\",\"inside\":false},{\"text\":\"换下一张\",\"inside\":false}]}]\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-layout-workflow.cjs:24:62\n    at async run (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-layout-workflow.cjs:13:23)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-layout-workflow.cjs:19:2",
+      "pids": [
+        38741,
+        38741,
+        38744,
+        38747,
+        38749,
+        38751,
+        38752
+      ],
+      "normalQuit": true,
+      "profileRemoved": true
+    },
+    {
+      "name": "reminder-footer-retains-bottom-spacing",
+      "passed": false,
+      "failure": "AssertionError [ERR_ASSERTION]: [{\"width\":350,\"height\":260,\"bottom\":7,\"controls\":[{\"left\":13,\"right\":105.2265625,\"bottom\":217},{\"left\":150.2265625,\"right\":198.2265625,\"bottom\":217},{\"left\":118.1484375,\"right\":202,\"bottom\":253},{\"left\":205,\"right\":262,\"bottom\":251},{\"left\":265,\"right\":337,\"bottom\":253}],\"capacity\":{\"x\":13,\"y\":182,\"width\":154,\"height\":13,\"top\":182,\"right\":167,\"bottom\":195,\"left\":13}},{\"width\":380,\"height\":260,\"bottom\":7,\"controls\":[{\"left\":13,\"right\":105.2265625,\"bottom\":217},{\"left\":150.2265625,\"right\":198.2265625,\"bottom\":217},{\"left\":148.1484375,\"right\":232,\"bottom\":253},{\"left\":235,\"right\":292,\"bottom\":251},{\"left\":295,\"right\":367,\"bottom\":253}],\"capacity\":{\"x\":13,\"y\":182,\"width\":154,\"height\":13,\"top\":182,\"right\":167,\"bottom\":195,\"left\":13}},{\"width\":420,\"height\":260,\"bottom\":7,\"controls\":[{\"left\":13,\"right\":105.2265625,\"bottom\":217},{\"left\":149.2265625,\"right\":197.2265625,\"bottom\":217},{\"left\":126.1328125,\"right\":209.984375,\"bottom\":253},{\"left\":269,\"right\":326,\"bottom\":251},{\"left\":335,\"right\":407,\"bottom\":253}],\"capacity\":{\"x\":13,\"y\":182,\"width\":154,\"height\":13,\"top\":182,\"right\":167,\"bottom\":195,\"left\":13}},{\"width\":480,\"height\":260,\"bottom\":7,\"controls\":[{\"left\":13,\"right\":105.2265625,\"bottom\":217},{\"left\":149.2265625,\"right\":197.2265625,\"bottom\":217},{\"left\":186.1328125,\"right\":269.984375,\"bottom\":253},{\"left\":329,\"right\":386,\"bottom\":251},{\"left\":395,\"right\":467,\"bottom\":253}],\"capacity\":{\"x\":13,\"y\":182,\"width\":154,\"height\":13,\"top\":182,\"right\":167,\"bottom\":195,\"left\":13}}]\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-layout-workflow.cjs:34:3\n    at async run (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-layout-workflow.cjs:13:23)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-layout-workflow.cjs:26:2",
+      "pids": [
+        38753,
+        38753,
+        38755,
+        38756,
+        38758,
+        38759,
+        38762
+      ],
+      "normalQuit": true,
+      "profileRemoved": true
+    },
+    {
+      "name": "arrange-menu-is-one-stateful-action",
+      "passed": false,
+      "failure": "AssertionError [ERR_ASSERTION]: [\"查看全文\",\"合并\",\"收起当前念头\",\"只看 通用\",\"显示全部标签\",\"自动整理\",\"撤销整理\",\"筛选标签\",\"\",\"Thoughtline日历\"]\n\n2 !== 1\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-layout-workflow.cjs:39:106\n    at async run (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-layout-workflow.cjs:13:23)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-layout-workflow.cjs:36:2",
+      "pids": [
+        38766,
+        38766,
+        38768,
+        38769,
+        38771,
+        38774,
+        38775
+      ],
+      "normalQuit": true,
+      "profileRemoved": true
+    }
+  ],
+  "passed": false
+}

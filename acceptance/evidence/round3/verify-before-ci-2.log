@@ -1,0 +1,9 @@
+
+> thoughtline@0.0.21 verify
+> node scripts/verify.cjs
+
+
+> thoughtline@0.0.21 typecheck
+> node node_modules/typescript/bin/tsc --noEmit
+
+src/shared/ideaCommands.ts(63,101): error TS2339: Property 'offRopeReason' does not exist on type '{ id: string; text: string; title: string; project: string; agentId: string; status: "archived" | "deleted" | "hanging"; createdAt: string; updatedAt: string; createdDay?: string | undefined; creationTimeZone?: string | undefined; deletedAt?: string | undefined; deletedFrom?: "archived" | ... 1 more ... | undefined;...'.

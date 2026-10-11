@@ -1,6 +1,6 @@
 import type {Snapshot,Draft,Result,AgentTag,Idea} from './contracts';
 import {captureClipPositions} from './clipLayout';
-import {visibleSlots} from './ropeGeometry';
+import {visibleSlots,shelfCapacity} from './ropeGeometry';
 import {independentClip,pruneClips} from './clipModel';
 import {ideaDay} from './ideaHistory';
 import {validReminder,validReminderTime} from './reminderTime';
@@ -29,13 +29,19 @@ export function validateSnapshot(input:unknown):Result<Snapshot>{
     if((idea.createdDay!==undefined||idea.creationTimeZone!==undefined)&&(!dayOK(idea.createdDay)||typeof idea.creationTimeZone!=='string'||!idea.creationTimeZone.trim()))return invalid('念头创建日或时区无效。');
     if(idea.deletedAt!==undefined&&(typeof idea.deletedAt!=='string'||!Number.isFinite(Date.parse(idea.deletedAt)))||idea.deletedFrom!==undefined&&!['hanging','archived'].includes(String(idea.deletedFrom))||idea.status==='deleted'&&(idea.deletedAt===undefined||idea.deletedFrom===undefined))return invalid('最近删除恢复信息无效。');
     if(idea.reminder!==undefined&&!validReminder(idea.reminder))return invalid('提醒数据无效。');
+    if(idea.offRopeReason!==undefined&&!['waiting','capacity','manual','replaced'].includes(String(idea.offRopeReason)))return invalid('数据结构不完整。');
     ids.add(idea.id);
   }
   if(input.draft!==null&&(!plain(input.draft)||!draftOK(input.draft)))return invalid('草稿无效。');
   if(!textOK(input.settings.writeHotkey,100)||!(input.settings.writeHotkey as string).trim()||typeof input.settings.reducedMotion!=='boolean')return invalid('设置无效。');
+  if(input.settings.shelfCapacity!==undefined&&(typeof input.settings.shelfCapacity!=='number'||![4,6,8].includes(input.settings.shelfCapacity)))return invalid('设置无效。');
   const bounds=input.settings.calendarBounds;
   if(bounds!==undefined&&(!plain(bounds)||!['x','y','width','height'].every(k=>typeof bounds[k]==='number'&&Number.isFinite(bounds[k]))||Number(bounds.width)<=0||Number(bounds.height)<=0||Number(bounds.width)>16384||Number(bounds.height)>16384))return invalid('日历窗口位置无效。');
-  const ideas=(input.ideas as Idea[]).map(i=>input.schemaVersion!==3||i.createdDay===undefined?{...i,createdDay:ideaDay({...i,createdDay:undefined}),creationTimeZone:'legacy-offset'}:{...i});
+  const ideas:Idea[]=(input.ideas as Idea[]).map(i=>{
+   const {offRopeReason,...fields}=i;
+   const clean=offRopeReason===undefined?fields:i;
+   return input.schemaVersion!==3||i.createdDay===undefined?{...clean,createdDay:ideaDay({...i,createdDay:undefined}),creationTimeZone:'legacy-offset'}:{...clean};
+  });
   if(ideas.some(i=>!dayOK(i.createdDay)))return invalid('念头创建日无法迁移，原文件已保留。');
   const normalized={...input,schemaVersion:3,ideas,clips:input.schemaVersion===1?ideas.filter(i=>i.status==='hanging').sort((a,b)=>Date.parse(a.createdAt)-Date.parse(b.createdAt)||a.id.localeCompare(b.id)).map(i=>({id:'clip:'+i.id,agentId:i.agentId,ideaIds:[i.id],currentId:i.id,position:null})):input.clips};
   if(!Array.isArray(normalized.clips))return invalid('夹子数据缺失。');
@@ -46,6 +52,18 @@ export function validateSnapshot(input:unknown):Result<Snapshot>{
    for(const id of c.ideaIds){const i=byId.get(id);if(typeof id!=='string'||members.has(id)||!i||i.status!=='hanging'||i.agentId!==c.agentId)return invalid('夹子成员重复、缺失或标签不一致。');members.add(id);}
   }
   if(ideas.some(i=>i.status==='hanging'&&!members.has(i.id)))return invalid('挂着的念头没有夹子。');
+  if(input.capacityOverflow!==undefined){
+   if(!Array.isArray(input.capacityOverflow))return invalid('夹子数据缺失。');
+   const parkedIds=new Set<string>(),parkedMembers=new Set<string>();
+   for(const c of input.capacityOverflow){
+    if(!plain(c)||typeof c.id!=='string'||!c.id||parkedIds.has(c.id)||typeof c.agentId!=='string'||!agents.has(c.agentId)||!Array.isArray(c.ideaIds)||!c.ideaIds.length||!c.ideaIds.includes(c.currentId)||!(c.position===null||typeof c.position==='number'&&Number.isFinite(c.position)&&c.position>=0&&c.position<=1))return invalid('夹子结构或位置无效。');
+    parkedIds.add(c.id);for(const id of c.ideaIds){if(typeof id!=='string'||!byId.has(id)||parkedMembers.has(id))return invalid('夹子成员重复、缺失或标签不一致。');parkedMembers.add(id);}
+   }
+   Object.assign(normalized,{capacityOverflow:input.capacityOverflow.flatMap(c=>{
+    const keep=c.ideaIds.filter((id:string)=>{const i=byId.get(id);return i?.status==='archived'&&i.offRopeReason==='capacity'&&i.agentId===c.agentId;});
+    return keep.length?[{...c,ideaIds:keep,currentId:keep.includes(c.currentId)?c.currentId:keep[0]}]:[];
+   })});
+  }
   return {ok:true,value:structuredClone(normalized) as Snapshot};
 }
 export function newIdea(s:Snapshot,draft:Draft,id:string,now:string):Result<Snapshot>{
@@ -59,7 +77,7 @@ export function newIdea(s:Snapshot,draft:Draft,id:string,now:string):Result<Snap
 }
 export function changeStatus(s:Snapshot,id:string,status:'hanging'|'archived',now:string):Result<Snapshot>{
   if(!s.ideas.some(x=>x.id===id&&x.status!=='deleted'))return invalid('找不到可操作的念头。');
-  const ideas=s.ideas.map(x=>x.id===id?{...x,status,updatedAt:now}:x);
+  const ideas=s.ideas.map(x=>x.id===id?{...x,status,offRopeReason:status==='archived'?'manual' as const:undefined,updatedAt:now}:x);
   let clips=pruneClips(s.clips,ideas);if(status==='hanging'&&!clips.some(c=>c.ideaIds.includes(id)))clips=[...clips,independentClip({...s,clips},id,ideas.find(i=>i.id===id)!.agentId)];
   return validateSnapshot({...s,clips,ideas});
 }
@@ -69,7 +87,7 @@ export function renameAgent(s:Snapshot,id:string,name:string):Result<Snapshot>{
 }
 export function removeAgent(s:Snapshot,id:string,replacement:string):Result<Snapshot>{
   if(id==='general'||id===replacement||!s.agents.some(x=>x.id===id)||!s.agents.some(x=>x.id===replacement))return invalid('请选择存在的替代标签，通用标签不能移除。');
-  return validateSnapshot({...s,clips:s.clips.map(c=>c.agentId===id?{...c,agentId:replacement}:c),agents:s.agents.filter(x=>x.id!==id),ideas:s.ideas.map(x=>x.agentId===id?{...x,agentId:replacement}:x),draft:s.draft?.agentId===id?{...s.draft,agentId:replacement}:s.draft});
+  return validateSnapshot({...s,clips:s.clips.map(c=>c.agentId===id?{...c,agentId:replacement}:c),...(s.capacityOverflow?{capacityOverflow:s.capacityOverflow.map(c=>c.agentId===id?{...c,agentId:replacement}:c)}:{}),agents:s.agents.filter(x=>x.id!==id),ideas:s.ideas.map(x=>x.agentId===id?{...x,agentId:replacement}:x),draft:s.draft?.agentId===id?{...s.draft,agentId:replacement}:s.draft});
 }
 export function editIdea(s:Snapshot,id:string,draft:Draft,now:string):Result<Snapshot>{
   if(!s.ideas.some(x=>x.id===id&&x.status!=='deleted')||!draft||!bodyOK(draft.text,true)||!textOK(draft.title,50)||!textOK(draft.project,40))return invalid('正文、标题或项目无效，请保留文字后重试。');
@@ -85,7 +103,7 @@ export function editIdeaIfUnchanged(s:Snapshot,id:string,draft:Draft,expectedDra
   if(idea.text!==expectedDraft.text||idea.title!==expectedDraft.title||idea.project!==expectedDraft.project||idea.agentId!==expectedDraft.agentId)return {ok:false,code:'CONFLICT',message:'这条念头已更新，请保留当前文字并重新读取。'};
   const owner=s.clips.find(c=>c.ideaIds.includes(id));
   const separates=owner&&owner.ideaIds.length>1&&owner.agentId!==draft.agentId;
-  return editIdea(separates&&width!==undefined?{...s,clips:captureClipPositions(s.clips,width)}:s,id,draft,now);
+  return editIdea(separates&&width!==undefined?{...s,clips:captureClipPositions(s.clips,width,'all',shelfCapacity(s.settings.shelfCapacity))}:s,id,draft,now);
 }
 export function deleteIdea(s:Snapshot,id:string,now:string):Result<Snapshot>{
   const idea=s.ideas.find(i=>i.id===id);
@@ -122,7 +140,7 @@ export function findIdeas(s:Snapshot,q:IdeaQuery):Idea[]{
 export function shelfSelection(s:Snapshot,agentId:string,width:number){
   const totalHanging=s.ideas.filter(i=>i.status==='hanging').length;
   const filtered=findIdeas(s,{status:'hanging',agentId});
-  const visible=filtered.slice(0,visibleSlots(width));
+  const visible=filtered.slice(0,visibleSlots(width,shelfCapacity(s.settings.shelfCapacity)));
   return {totalHanging,visible,filteredCount:filtered.length,overflow:filtered.length-visible.length};
 }
 

@@ -8,13 +8,14 @@ export type Idea = {
   createdDay?: string; creationTimeZone?: string;
   deletedAt?: string; deletedFrom?: 'hanging' | 'archived';
   reminder?: Reminder;
+  offRopeReason?: 'waiting' | 'capacity' | 'manual' | 'replaced';
 };
 export type AgentTag = { id: AgentId; name: string; color: string };
 export type Draft = { text: string; title: string; project: string; agentId: AgentId; reminderAt?:string };
 export type Clip = {id:string; agentId:AgentId; ideaIds:string[]; currentId:string; position:number|null};
 export type Snapshot = {
-  schemaVersion: 2 | 3; revision: number; clips:Clip[]; ideas: Idea[]; agents: AgentTag[]; draft: Draft | null;
-  settings: { writeHotkey: string; reducedMotion: boolean; calendarBounds?: Rect };
+  schemaVersion: 2 | 3; revision: number; clips:Clip[]; capacityOverflow?:Clip[]; ideas: Idea[]; agents: AgentTag[]; draft: Draft | null;
+  settings: { writeHotkey: string; reducedMotion: boolean; shelfCapacity?: 4 | 6 | 8; calendarBounds?: Rect };
 };
 export type Result<T> = { ok: true; value: T } | {
   ok: false; code: 'INVALID' | 'CONFLICT' | 'IO' | 'MISSING_BODY'; message: string;

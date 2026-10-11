@@ -7,7 +7,7 @@ export function createHost(shelf:BrowserWindow,composer:()=>BrowserWindow|null):
   platform:process.platform==='darwin'?'mac':'windows',cursor:()=>screen.getCursorScreenPoint(),
   displays:()=>screen.getAllDisplays().map(d=>({id:String(d.id),bounds:d.bounds,workArea:d.workArea,scaleFactor:d.scaleFactor})),
   showShelf:(bounds:Rect)=>{
-   shelf.setBounds(bounds);shelf.showInactive();
+   shelf.setBounds(bounds);shelf.showInactive();shelf.moveTop();
    // macOS can restore the hidden non-activating panel's old origin during show.
    // Correct its native frame after showing; renderer and hit geometry use these DIP bounds.
    const actual=shelf.getBounds();

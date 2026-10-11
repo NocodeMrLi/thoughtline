@@ -9,8 +9,8 @@ const value=<T>(r:Result<T>)=>{if(!r.ok)throw Error(r.message);return r.value;};
 const fixture=(n=3)=>{let s=initialSnapshot();for(let i=0;i<n;i++)s=value(newIdea(s,{...draft,title:'旧'+i},'a'+i,now));return s;};
 const target=(s:Snapshot,id='a0'):Extract<PlacementIntent,{kind:'swap'}>=>{const clip=s.clips.find(c=>c.ideaIds.includes(id))!;return {kind:'swap',targetClipId:clip.id,targetIdeaId:id,expectedIds:clip.ideaIds,wholeClip:false};};
 test('capacity distinguishes a real free slot, fragmented gaps, and true full without moving notes',()=>{
- const s=fixture();s.clips.forEach((c,i)=>c.position=i/2);const original=structuredClone(s);
- expect(placementPlan(s,1280)).toBe('arrange');expect(placementPlan(s,2000)).toBe('hang');expect(placementPlan(fixture(5),1280)).toBe('full');expect(s).toEqual(original);
+ const s=fixture(5);s.clips.forEach((c,i)=>c.position=i/4);const original=structuredClone(s);
+ expect(placementPlan(s,1280)).toBe('arrange');expect(placementPlan(s,2000)).toBe('hang');expect(placementPlan(fixture(6),1280)).toBe('full');expect(s).toEqual(original);
 });
 test('save-only creates one archived record with exact text and no additional clip',()=>{
  const s=fixture();const next=value(placeIdea(s,{draft,id:'new'}, {kind:'save'},1280,now));
@@ -51,5 +51,5 @@ test('restoring archived history preserves its ID/date and does not create a dup
 });
 
 test('a persisted ID resembling a capacity probe does not hide a full rope',()=>{
- const s=fixture(5);s.ideas[0].id='capacity:'+s.revision;s.clips[0].ideaIds=[s.ideas[0].id];s.clips[0].currentId=s.ideas[0].id;expect(placementPlan(s,1280)).toBe('full');
+ const s=fixture(6);s.ideas[0].id='capacity:'+s.revision;s.clips[0].ideaIds=[s.ideas[0].id];s.clips[0].currentId=s.ideas[0].id;expect(placementPlan(s,1280)).toBe('full');
 });

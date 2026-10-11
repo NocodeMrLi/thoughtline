@@ -1,6 +1,6 @@
 import {PreferencesControl} from './PreferencesControl';
 import {useLocale} from '../LocaleContext';
-import {useEffect,useRef,useState,type CSSProperties,type ChangeEvent,type CompositionEvent,type FocusEvent} from 'react';
+import {useEffect,useLayoutEffect,useRef,useState,type CSSProperties,type ChangeEvent,type CompositionEvent,type FocusEvent} from 'react';
 import type {PilotInfo} from '../../shared/bridge';
 import type {Draft} from '../../shared/contracts';
 import {shouldSubmit} from '../../shared/composerKeys';
@@ -22,6 +22,19 @@ export function Composer({info}:{info:PilotInfo}){
  const [picker,setPicker]=useState(false),[reveal,setReveal]=useState(false),[reminderOpen,setReminderOpen]=useState(false),swapAnchor=useRef<HTMLSpanElement>(null);
  const plan=placementPlan(info.snapshot,info.width),filteredOut=info.shelfAgentId!=='all'&&info.shelfAgentId!==draft.agentId;
  const projectButton=useRef<HTMLButtonElement>(null),projectInput=useRef<HTMLInputElement>(null);
+ const surface=useRef<HTMLElement>(null);
+ useLayoutEffect(()=>{
+  const root=surface.current,header=root?.querySelector('header'),footer=root?.querySelector('footer'),status=root?.querySelector<HTMLElement>('.composer-status');if(!root||!header||!footer||!status)return;
+  let frame=0,active=true;
+  const fit=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{
+   const css=getComputedStyle(root),number=(key:string)=>parseFloat(css.getPropertyValue(key))||0;
+   const statusHeight=[...status.children].reduce((sum,child)=>sum+child.getBoundingClientRect().height,0);
+   const height=Math.max(260,Math.ceil(header.getBoundingClientRect().height+132+statusHeight+footer.getBoundingClientRect().height+number('padding-top')+number('padding-bottom')+number('border-top-width')+number('border-bottom-width')+3*number('row-gap')));
+   void window.thoughtline.resizeComposer(Math.min(600,height),info.composerSession).then(r=>{if(active&&!r.ok)setError(r.message);}).catch(()=>{if(active)setError('输入浮层尺寸调整未成功，请重试。');});
+  });};
+  const observer=new ResizeObserver(fit);observer.observe(header);observer.observe(footer);observer.observe(status);fit();
+  return()=>{active=false;cancelAnimationFrame(frame);observer.disconnect();};
+ },[info.composerSession]);
  const projects=[...new Set(info.snapshot.ideas.map(i=>i.project).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
  useEffect(()=>{if(projectOpen)projectInput.current?.focus();},[projectOpen]);
  const autosaver=useRef<DraftAutosaver<Draft>|null>(null);
@@ -76,7 +89,7 @@ export function Composer({info}:{info:PilotInfo}){
  };
  const agent=info.snapshot.agents.find(a=>a.id===draft.agentId),ink=agentInkColors(agent?.color??'#A0A3AA');
  const outline={ '--composer-agent-light':agent?.id==='general'?'#8A8E98':ink.light,'--composer-agent-dark':agent?.id==='general'?'#7B828E':agent?.color??'#7B828E' } as CSSProperties;
- return <main style={outline} data-view="composer" data-material={info.composerMaterial} data-platform={info.platform} className="composer" aria-labelledby="composer-heading" aria-busy={busy} onKeyDown={e=>{
+ return <main ref={surface} style={outline} data-view="composer" data-material={info.composerMaterial} data-platform={info.platform} className="composer" aria-labelledby="composer-heading" aria-busy={busy} onKeyDown={e=>{
   const isComposing=e.nativeEvent.isComposing||composition.current.composing;
   if(picker||reminderOpen)return;
   if(shouldSubmit({platform:info.platform,key:e.key,metaKey:e.metaKey,ctrlKey:e.ctrlKey,isComposing,keyCode:e.nativeEvent.keyCode})){e.preventDefault();if(!e.repeat)void submit();}

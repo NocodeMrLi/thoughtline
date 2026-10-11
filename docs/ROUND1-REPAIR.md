@@ -24,7 +24,7 @@ Mac15.3.1 arm64／Electron44.7.0：184通过／4Windows-onlyskip，类型／构�
 源码、故障注入、合成Electron、实际包、Windowsrunner、物理两端、真实接收框及用户验收各自记录。物理和真实接收未测；原红例／harness错误／9a未批准包记录保留。仅本轮自有测试数据／PID／重复构建及下载按正常退出后核实清理，最终证据／包、旧回滚、依赖缓存、out、原程序及其他树保留。最终独立QA按优先级／复现／预期实际／证据交回本项目。
 <!-- CURRENT_ROUND1_STATUS_END -->
 
-完整产品方案：`/Users/lihongwei/安安的成长笔记📒/晾念头 Thoughtline/Thoughtline第一轮修复优化.md`。本轮基线main `ff39779cbeb562083f3574db4d2998693091b0be`，仓库private，G7未整合；旧发布v0.0.16-preview.6不改。早期开发候选为0.0.17-preview.1，现已交付0.0.17-preview.2私有预发布；不替换用户安装。
+完整产品方案：`/Users/lihongwei/安安的成长笔记📒/晾念头 Thoughtline/归档/历史方案/Thoughtline第一轮修复优化.md`。本轮基线main `ff39779cbeb562083f3574db4d2998693091b0be`，仓库private，G7未整合；旧发布v0.0.16-preview.6不改。早期开发候选为0.0.17-preview.1，现已交付0.0.17-preview.2私有预发布；不替换用户安装。
 
 ## P1 项目编辑（2026-10-09）
 

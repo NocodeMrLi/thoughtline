@@ -1,0 +1,35 @@
+
+> thoughtline@0.0.21 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/spaceAllocation.test.ts (7 tests | 1 failed) 9ms
+   × 左/右保留，中间空位可新挂，满后明确溢出而不盖住旧纸 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/spaceAllocation.test.ts > 左/右保留，中间空位可新挂，满后明确溢出而不盖住旧纸
+AssertionError: expected 1310.3999999999996 to be 1310.3999999999999 // Object.is equality
+
+- Expected
++ Received
+
+- 1310.3999999999999
++ 1310.3999999999996
+
+ ❯ tests/unit/spaceAllocation.test.ts:13:198
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 51 passed | 1 skipped (53)
+      Tests  1 failed | 304 passed | 4 skipped (309)
+   Start at  12:27:08
+   Duration  2.17s (tests 62%, transform 24%, import 11%, worker 3%)
+
+    Isolate  53 workers spawned · ~116ms startup each (spawn + environment, per file)
+             at least ~761ms faster with isolate: false — reuses workers across files instead of one per file
+

@@ -1,0 +1,301 @@
+
+> thoughtline@0.0.21 test
+> node node_modules/vitest/vitest.mjs run tests/unit/round3Capacity.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/round3Capacity.test.ts (16 tests | 14 failed) 64ms
+   ❯ round3 capacity and waiting origin (16)
+     × 1024 DIP retains selected 4 places 32ms
+     × 1280 DIP retains selected 4 places 2ms
+     × 1920 DIP retains selected 4 places 2ms
+     × 2560 DIP retains selected 4 places 2ms
+     × 1024 DIP retains selected 6 places 2ms
+     × 1280 DIP retains selected 6 places 2ms
+     × 1440 DIP retains selected 6 places 3ms
+     × 1920 DIP retains selected 6 places 2ms
+     × 1024 DIP retains selected 8 places 2ms
+     × 1280 DIP retains selected 8 places 2ms
+     × 1440 DIP retains selected 8 places 2ms
+     × 1920 DIP retains selected 8 places 2ms
+     × 2560 DIP retains selected 8 places 2ms
+     × new capacity save explicitly waits while legacy archived stays unchanged 3ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 14 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/round3Capacity.test.ts > round3 capacity and waiting origin > 1024 DIP retains selected 4 places
+AssertionError: expected [ { clip: { …(5) }, x: 292 }, …(2) ] to have a length of 4 but got 3
+
+- Expected
++ Received
+
+- 4
++ 3
+
+ ❯ tests/unit/round3Capacity.test.ts:11:21
+      9|  for(const count of [4,6,8])for(const width of [1024,1280,1440,1920,25…
+     10|   const s=seed(12),r=(layoutClips as (...args:any[])=>ReturnType<typeo…
+     11|   expect(r.visible).toHaveLength(count);expect(r.overflow).toHaveLengt…
+       |                     ^
+     12|  });
+     13|  it('new capacity save explicitly waits while legacy archived stays un…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/14]⎯
+
+ FAIL  tests/unit/round3Capacity.test.ts > round3 capacity and waiting origin > 1280 DIP retains selected 4 places
+AssertionError: expected [ { clip: { …(5) }, x: 420 }, …(2) ] to have a length of 4 but got 3
+
+- Expected
++ Received
+
+- 4
++ 3
+
+ ❯ tests/unit/round3Capacity.test.ts:11:21
+      9|  for(const count of [4,6,8])for(const width of [1024,1280,1440,1920,25…
+     10|   const s=seed(12),r=(layoutClips as (...args:any[])=>ReturnType<typeo…
+     11|   expect(r.visible).toHaveLength(count);expect(r.overflow).toHaveLengt…
+       |                     ^
+     12|  });
+     13|  it('new capacity save explicitly waits while legacy archived stays un…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/14]⎯
+
+ FAIL  tests/unit/round3Capacity.test.ts > round3 capacity and waiting origin > 1920 DIP retains selected 4 places
+AssertionError: expected [ { clip: { …(5) }, x: 520 }, …(4) ] to have a length of 4 but got 5
+
+- Expected
++ Received
+
+- 4
++ 5
+
+ ❯ tests/unit/round3Capacity.test.ts:11:21
+      9|  for(const count of [4,6,8])for(const width of [1024,1280,1440,1920,25…
+     10|   const s=seed(12),r=(layoutClips as (...args:any[])=>ReturnType<typeo…
+     11|   expect(r.visible).toHaveLength(count);expect(r.overflow).toHaveLengt…
+       |                     ^
+     12|  });
+     13|  it('new capacity save explicitly waits while legacy archived stays un…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/14]⎯
+
+ FAIL  tests/unit/round3Capacity.test.ts > round3 capacity and waiting origin > 2560 DIP retains selected 4 places
+AssertionError: expected [ { clip: { …(5) }, x: 730 }, …(5) ] to have a length of 4 but got 6
+
+- Expected
++ Received
+
+- 4
++ 6
+
+ ❯ tests/unit/round3Capacity.test.ts:11:21
+      9|  for(const count of [4,6,8])for(const width of [1024,1280,1440,1920,25…
+     10|   const s=seed(12),r=(layoutClips as (...args:any[])=>ReturnType<typeo…
+     11|   expect(r.visible).toHaveLength(count);expect(r.overflow).toHaveLengt…
+       |                     ^
+     12|  });
+     13|  it('new capacity save explicitly waits while legacy archived stays un…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/14]⎯
+
+ FAIL  tests/unit/round3Capacity.test.ts > round3 capacity and waiting origin > 1024 DIP retains selected 6 places
+AssertionError: expected [ { clip: { …(5) }, x: 292 }, …(2) ] to have a length of 6 but got 3
+
+- Expected
++ Received
+
+- 6
++ 3
+
+ ❯ tests/unit/round3Capacity.test.ts:11:21
+      9|  for(const count of [4,6,8])for(const width of [1024,1280,1440,1920,25…
+     10|   const s=seed(12),r=(layoutClips as (...args:any[])=>ReturnType<typeo…
+     11|   expect(r.visible).toHaveLength(count);expect(r.overflow).toHaveLengt…
+       |                     ^
+     12|  });
+     13|  it('new capacity save explicitly waits while legacy archived stays un…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/14]⎯
+
+ FAIL  tests/unit/round3Capacity.test.ts > round3 capacity and waiting origin > 1280 DIP retains selected 6 places
+AssertionError: expected [ { clip: { …(5) }, x: 420 }, …(2) ] to have a length of 6 but got 3
+
+- Expected
++ Received
+
+- 6
++ 3
+
+ ❯ tests/unit/round3Capacity.test.ts:11:21
+      9|  for(const count of [4,6,8])for(const width of [1024,1280,1440,1920,25…
+     10|   const s=seed(12),r=(layoutClips as (...args:any[])=>ReturnType<typeo…
+     11|   expect(r.visible).toHaveLength(count);expect(r.overflow).toHaveLengt…
+       |                     ^
+     12|  });
+     13|  it('new capacity save explicitly waits while legacy archived stays un…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/14]⎯
+
+ FAIL  tests/unit/round3Capacity.test.ts > round3 capacity and waiting origin > 1440 DIP retains selected 6 places
+AssertionError: expected [ { clip: { …(5) }, x: 390 }, …(3) ] to have a length of 6 but got 4
+
+- Expected
++ Received
+
+- 6
++ 4
+
+ ❯ tests/unit/round3Capacity.test.ts:11:21
+      9|  for(const count of [4,6,8])for(const width of [1024,1280,1440,1920,25…
+     10|   const s=seed(12),r=(layoutClips as (...args:any[])=>ReturnType<typeo…
+     11|   expect(r.visible).toHaveLength(count);expect(r.overflow).toHaveLengt…
+       |                     ^
+     12|  });
+     13|  it('new capacity save explicitly waits while legacy archived stays un…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/14]⎯
+
+ FAIL  tests/unit/round3Capacity.test.ts > round3 capacity and waiting origin > 1920 DIP retains selected 6 places
+AssertionError: expected [ { clip: { …(5) }, x: 520 }, …(4) ] to have a length of 6 but got 5
+
+- Expected
++ Received
+
+- 6
++ 5
+
+ ❯ tests/unit/round3Capacity.test.ts:11:21
+      9|  for(const count of [4,6,8])for(const width of [1024,1280,1440,1920,25…
+     10|   const s=seed(12),r=(layoutClips as (...args:any[])=>ReturnType<typeo…
+     11|   expect(r.visible).toHaveLength(count);expect(r.overflow).toHaveLengt…
+       |                     ^
+     12|  });
+     13|  it('new capacity save explicitly waits while legacy archived stays un…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/14]⎯
+
+ FAIL  tests/unit/round3Capacity.test.ts > round3 capacity and waiting origin > 1024 DIP retains selected 8 places
+AssertionError: expected [ { clip: { …(5) }, x: 292 }, …(2) ] to have a length of 8 but got 3
+
+- Expected
++ Received
+
+- 8
++ 3
+
+ ❯ tests/unit/round3Capacity.test.ts:11:21
+      9|  for(const count of [4,6,8])for(const width of [1024,1280,1440,1920,25…
+     10|   const s=seed(12),r=(layoutClips as (...args:any[])=>ReturnType<typeo…
+     11|   expect(r.visible).toHaveLength(count);expect(r.overflow).toHaveLengt…
+       |                     ^
+     12|  });
+     13|  it('new capacity save explicitly waits while legacy archived stays un…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/14]⎯
+
+ FAIL  tests/unit/round3Capacity.test.ts > round3 capacity and waiting origin > 1280 DIP retains selected 8 places
+AssertionError: expected [ { clip: { …(5) }, x: 420 }, …(2) ] to have a length of 8 but got 3
+
+- Expected
++ Received
+
+- 8
++ 3
+
+ ❯ tests/unit/round3Capacity.test.ts:11:21
+      9|  for(const count of [4,6,8])for(const width of [1024,1280,1440,1920,25…
+     10|   const s=seed(12),r=(layoutClips as (...args:any[])=>ReturnType<typeo…
+     11|   expect(r.visible).toHaveLength(count);expect(r.overflow).toHaveLengt…
+       |                     ^
+     12|  });
+     13|  it('new capacity save explicitly waits while legacy archived stays un…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/14]⎯
+
+ FAIL  tests/unit/round3Capacity.test.ts > round3 capacity and waiting origin > 1440 DIP retains selected 8 places
+AssertionError: expected [ { clip: { …(5) }, x: 390 }, …(3) ] to have a length of 8 but got 4
+
+- Expected
++ Received
+
+- 8
++ 4
+
+ ❯ tests/unit/round3Capacity.test.ts:11:21
+      9|  for(const count of [4,6,8])for(const width of [1024,1280,1440,1920,25…
+     10|   const s=seed(12),r=(layoutClips as (...args:any[])=>ReturnType<typeo…
+     11|   expect(r.visible).toHaveLength(count);expect(r.overflow).toHaveLengt…
+       |                     ^
+     12|  });
+     13|  it('new capacity save explicitly waits while legacy archived stays un…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/14]⎯
+
+ FAIL  tests/unit/round3Capacity.test.ts > round3 capacity and waiting origin > 1920 DIP retains selected 8 places
+AssertionError: expected [ { clip: { …(5) }, x: 520 }, …(4) ] to have a length of 8 but got 5
+
+- Expected
++ Received
+
+- 8
++ 5
+
+ ❯ tests/unit/round3Capacity.test.ts:11:21
+      9|  for(const count of [4,6,8])for(const width of [1024,1280,1440,1920,25…
+     10|   const s=seed(12),r=(layoutClips as (...args:any[])=>ReturnType<typeo…
+     11|   expect(r.visible).toHaveLength(count);expect(r.overflow).toHaveLengt…
+       |                     ^
+     12|  });
+     13|  it('new capacity save explicitly waits while legacy archived stays un…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/14]⎯
+
+ FAIL  tests/unit/round3Capacity.test.ts > round3 capacity and waiting origin > 2560 DIP retains selected 8 places
+AssertionError: expected [ { clip: { …(5) }, x: 730 }, …(5) ] to have a length of 8 but got 6
+
+- Expected
++ Received
+
+- 8
++ 6
+
+ ❯ tests/unit/round3Capacity.test.ts:11:21
+      9|  for(const count of [4,6,8])for(const width of [1024,1280,1440,1920,25…
+     10|   const s=seed(12),r=(layoutClips as (...args:any[])=>ReturnType<typeo…
+     11|   expect(r.visible).toHaveLength(count);expect(r.overflow).toHaveLengt…
+       |                     ^
+     12|  });
+     13|  it('new capacity save explicitly waits while legacy archived stays un…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/14]⎯
+
+ FAIL  tests/unit/round3Capacity.test.ts > round3 capacity and waiting origin > new capacity save explicitly waits while legacy archived stays unchanged
+AssertionError: expected { title: '等待补位', text: '', …(8) } to match object { status: 'archived', …(1) }
+(9 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "offRopeReason": "waiting",
+    "status": "archived",
+  }
+
+ ❯ tests/unit/round3Capacity.test.ts:15:48
+     13|  it('new capacity save explicitly waits while legacy archived stays un…
+     14|   const s=seed(8),next=v(placeIdea(s,{id:'waiting',draft:{title:'等待补位'…
+     15|   expect(next.ideas.find(i=>i.id==='waiting')).toMatchObject({status:'…
+       |                                                ^
+     16|   expect(s.ideas.every(i=>!('offRopeReason' in i))).toBe(true);
+     17|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/14]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  14 failed | 2 passed (16)
+   Start at  12:21:35
+   Duration  240ms (transform 48%, tests 42%, import 8%, worker 2%)
+

@@ -46,7 +46,7 @@ const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:
   await shelf.evaluate(()=>window.thoughtline.dragLock(false));await shelf.waitForSelector('[data-idea-id="b"]');
   assert(!await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().some(w=>w.getTitle()==='Thoughtline Manage'&&w.isVisible())));
   pass('captured-current-id-survives-background-page-change-without-opening-reader');
-  await shelf.evaluate(()=>window.thoughtline.dragLock(true));await menu('b');assert((await labels()).includes('撤销整理'));await click('撤销整理');
+  await shelf.evaluate(()=>window.thoughtline.dragLock(true));await menu('b');assert((await labels()).includes('撤销夹子操作'));await click('撤销夹子操作');
   i=await waitForInfo(shelf,i=>i.snapshot.clips.some(c=>c.id==='stack'&&c.ideaIds.length===3));assert.deepEqual(i.snapshot.clips,before.clips);assert.deepEqual(i.snapshot.ideas,before.ideas);pass('right-click-split-can-be-undone');
   for(const id of ['a','b','c']){
    await change({kind:'select',id:'stack',ideaId:id});const original=(await info()).snapshot;

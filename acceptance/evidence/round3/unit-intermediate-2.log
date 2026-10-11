@@ -1,0 +1,141 @@
+
+> thoughtline@0.0.21 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/agentSplitPlacement.test.ts (6 tests | 1 failed) 14ms
+   × Agent split preserves old centers and identity: full 6ms
+ ❯ tests/unit/clipCommands.test.ts (8 tests | 1 failed) 52ms
+   × 拆分遇零散间距时自动腾位，总容量足够就全部可见且内容不变 4ms
+ ❯ tests/unit/ideaWorkflow.test.ts (7 tests | 2 failed) 81ms
+   × 筛选与可见容量不减少总重量，也不删除溢出记录 5ms
+   × 大量历史不计重量，持续挂着也只占有限展示槽位 37ms
+ ❯ tests/unit/positioning.test.ts (10 tests | 1 failed) 52ms
+   × width changes recompute capacity status; tag-hidden normal clip remains on-line 6ms
+ ❯ tests/unit/spaceAllocation.test.ts (7 tests | 1 failed) 11ms
+   × 左/右保留，中间空位可新挂，满后明确溢出而不盖住旧纸 6ms
+ ❯ tests/unit/fixedRope.test.ts (2 tests | 1 failed) 9ms
+   × 绳居中并留两端空白，固定弧线留出上方夹子命中空间 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/agentSplitPlacement.test.ts > Agent split preserves old centers and identity: full
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/agentSplitPlacement.test.ts:12:58
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  tests/unit/clipCommands.test.ts > 拆分遇零散间距时自动腾位，总容量足够就全部可见且内容不变
+AssertionError: expected 468 to be null
+
+- Expected:
+null
+
++ Received:
+468
+
+ ❯ tests/unit/clipCommands.test.ts:41:113
+     39|  s=value(newIdea(s,{text:'第四张 中文😀\n',title:'第四张',project:'独立项目',agent…
+     40|  s.clips=s.clips.map((c,i)=>({...c,position:i/2}));const width=1280,be…
+     41|  expect(before.visible).toHaveLength(3);expect(availableClipPosition(b…
+       |                                                                                                                 ^
+     42|  const next=value(splitClip(s,'clip:a','b','separate',width)),shown=la…
+     43|  expect(shown.overflow).toHaveLength(0);expect(shown.visible).toHaveLe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  tests/unit/fixedRope.test.ts > 绳居中并留两端空白，固定弧线留出上方夹子命中空间
+AssertionError: expected 20.8 to be close to 39, received difference is 18.2, but expected 5e-9
+ ❯ tests/unit/fixedRope.test.ts:8:21
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  tests/unit/ideaWorkflow.test.ts > 筛选与可见容量不减少总重量，也不删除溢出记录
+AssertionError: expected [ 'id0', 'id1', 'id2', 'id3', …(2) ] to deeply equal [ 'id0', 'id1', 'id2' ]
+
+- Expected
++ Received
+
+  [
+    "id0",
+    "id1",
+    "id2",
++   "id3",
++   "id4",
++   "id5",
+  ]
+
+ ❯ tests/unit/ideaWorkflow.test.ts:43:68
+     41|  for(let i=0;i<8;i++)s=unwrap(commands.newIdea(s,{...draft,agentId:i<2…
+     42|  const all=commands.shelfSelection(s,'all',1000);
+     43|  expect(all.totalHanging).toBe(8);expect(all.visible.map(x=>x.id)).toE…
+       |                                                                    ^
+     44|  const filtered=commands.shelfSelection(s,'claude',1000);
+     45|  expect(filtered.totalHanging).toBe(8);expect(filtered.visible.map(x=>…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  tests/unit/ideaWorkflow.test.ts > 大量历史不计重量，持续挂着也只占有限展示槽位
+AssertionError: expected [ { text: '原文\n第二行', …(9) }, …(4) ] to have a length of 3 but got 5
+
+- Expected
++ Received
+
+- 3
++ 5
+
+ ❯ tests/unit/ideaWorkflow.test.ts:52:61
+     50|  for(let i=0;i<35;i++)s=unwrap(commands.changeStatus(s,s.ideas[i].id,'…
+     51|  const picked=commands.shelfSelection(s,'all',1000);
+     52|  expect(picked.totalHanging).toBe(5);expect(picked.visible).toHaveLeng…
+       |                                                             ^
+     53|  expect(commands.findIdeas(s,{status:'archived'})).toHaveLength(35);ex…
+     54| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  tests/unit/positioning.test.ts > width changes recompute capacity status; tag-hidden normal clip remains on-line
+AssertionError: expected [ 'id0', 'id1', 'id2', 'id3', …(2) ] to not have a length of 6
+ ❯ tests/unit/positioning.test.ts:43:86
+     41|  const s=fixture(6);s.agents.push({id:'custom',name:'日报',color:'#8899A…
+     42|  expect(ids(calendarIndex(s,{status:'hanging'},{width:2560,shelfAgentI…
+     43|  expect(ids(calendarIndex(s,{status:'hanging'},{width:800,shelfAgentId…
+       |                                                                                      ^
+     44| });
+     45| test('legacy overflow actually shown by active tag filter is on-line',…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  tests/unit/spaceAllocation.test.ts > 左/右保留，中间空位可新挂，满后明确溢出而不盖住旧纸
+AssertionError: expected 500 to be greater than 555
+ ❯ tests/unit/spaceAllocation.test.ts:13:95
+     11| test('左/右保留，中间空位可新挂，满后明确溢出而不盖住旧纸',()=>{
+     12|  const width=1440,old=[c('left',0),c('right',1)],after=layoutClips([..…
+     13|  expect(after.visible).toHaveLength(3);expect(after.visible.find(p=>p.…
+       |                                                                                               ^
+     14|  const full=[c('a',0),c('b',.26),c('c',.52),c('d',1),c('new',null)];co…
+     15| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+
+ Test Files  6 failed | 46 passed | 1 skipped (53)
+      Tests  7 failed | 298 passed | 4 skipped (309)
+   Start at  12:26:33
+   Duration  2.33s (tests 58%, transform 29%, import 10%, worker 3%)
+
+  Transform  transforming modules took 2.65s · 29% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

@@ -10,6 +10,7 @@ export type PilotInfo={lightReminder?:LightReminder|null;preferenceCommit?:{vers
 export type HitLayout={layoutRevision:number;displayId:string;rects:Rect[]};
 export type StorageInfo={directory:string;profileDirectory:string;revision:number};
 export interface ThoughtlineBridge{
+ resizeComposer(height:number,session:number):Promise<Result<void>>;
  reminderAction(key:string,open:boolean):Promise<Result<void>>;
  notificationAccess(request?:boolean):Promise<Result<NotificationAccess>>;
  openNotificationSettings():Promise<Result<void>>;

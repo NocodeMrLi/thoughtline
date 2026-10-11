@@ -37,10 +37,11 @@ import {layoutClips,availableClipPosition,MIN_SPACING} from '../../src/shared/cl
 test('拆分遇零散间距时自动腾位，总容量足够就全部可见且内容不变',()=>{
  let s=value(mergeClips(fixture(),'clip:b','clip:a'));
  s=value(newIdea(s,{text:'第四张 中文😀\n',title:'第四张',project:'独立项目',agentId:'codex'},'d',now));
- s.clips=s.clips.map((c,i)=>({...c,position:i/2}));const width=1280,before=layoutClips(s.clips,width);
- expect(before.visible).toHaveLength(3);expect(availableClipPosition(before.visible.map(p=>p.x),width,width/2)).toBeNull();
+ for(const id of ['e','f'])s=value(newIdea(s,{text:id,title:id,project:'',agentId:'codex'},id,now));
+ s.clips=s.clips.map((c,i)=>({...c,position:i/4}));const width=1280,before=layoutClips(s.clips,width);
+ expect(before.visible).toHaveLength(5);expect(availableClipPosition(before.visible.map(p=>p.x),width,width/2)).toBeNull();
  const next=value(splitClip(s,'clip:a','b','separate',width)),shown=layoutClips(next.clips,width);
- expect(shown.overflow).toHaveLength(0);expect(shown.visible).toHaveLength(4);expect(next.ideas).toEqual(s.ideas);
+ expect(shown.overflow).toHaveLength(0);expect(shown.visible).toHaveLength(6);expect(next.ideas).toEqual(s.ideas);
  expect(next.clips.find(c=>c.id==='clip:a')?.ideaIds).toEqual(['a']);
  for(let i=1;i<shown.visible.length;i++)expect(shown.visible[i].x-shown.visible[i-1].x).toBeGreaterThanOrEqual(MIN_SPACING-1e-8);
 });

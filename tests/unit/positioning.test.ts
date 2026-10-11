@@ -37,10 +37,10 @@ test('legacy hanging capacity overflow is off-line without mutating snapshot or 
  const s=fixture(8),before=JSON.stringify(s),shown=layoutClips(s.clips,800).visible.flatMap(p=>p.clip.ideaIds);expect(shown.length).toBeLessThan(8);
  expect(ids(calendarIndex(s,{status:'hanging'},{width:800,shelfAgentId:'all'}))).toEqual(s.ideas.filter(i=>shown.includes(i.id)).map(i=>i.id));expect(ids(calendarIndex(s,{status:'archived'},{width:800,shelfAgentId:'all'}))).toEqual(s.ideas.filter(i=>!shown.includes(i.id)).map(i=>i.id));expect(JSON.stringify(s)).toBe(before);
 });
-test('width changes recompute capacity status; tag-hidden normal clip remains on-line',()=>{
+test('width changes retain selected capacity status; tag-hidden normal clip remains on-line',()=>{
  const s=fixture(6);s.agents.push({id:'custom',name:'日报',color:'#8899AA'});s.ideas[0].agentId='custom';s.clips[0].agentId='custom';
  expect(ids(calendarIndex(s,{status:'hanging'},{width:2560,shelfAgentId:'custom'}))).toHaveLength(6);
- expect(ids(calendarIndex(s,{status:'hanging'},{width:800,shelfAgentId:'all'}))).not.toHaveLength(6);
+ expect(ids(calendarIndex(s,{status:'hanging'},{width:800,shelfAgentId:'all'}))).toHaveLength(6);
 });
 test('legacy overflow actually shown by active tag filter is on-line',()=>{
  const s=fixture(8);s.agents.push({id:'custom',name:'日报',color:'#8899AA'});s.ideas[7].agentId='custom';s.clips[7].agentId='custom';

@@ -1,0 +1,83 @@
+
+> thoughtline@0.0.21 test
+> node node_modules/vitest/vitest.mjs run tests/unit/round3Backfill.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/round3Backfill.test.ts (4 tests | 4 failed) 24ms
+   × merge frees one slot, newest waiting idea wins; undo keeps old origin 19ms
+   × manual stash, replaced and legacy archived never reappear on reload 1ms
+   × active label filtering does not admit unrelated queued tags 2ms
+   × reduce then increase capacity preserves grouped notes and queued eligibility 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/round3Backfill.test.ts > merge frees one slot, newest waiting idea wins; undo keeps old origin
+AssertionError: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ fill tests/unit/round3Backfill.test.ts:9:93
+      7| const seed=()=>{let s=initialSnapshot();for(let n=0;n<6;n++)s=v(newIde…
+      8| const save=(s:Snapshot,id:string,now:string)=>v(queue.placeIdea(s,{id,…
+      9| const fill=(s:Snapshot,filter='all'):Snapshot=>{expect(typeof (queue a…
+       |                                                                                             ^
+     10| it('merge frees one slot, newest waiting idea wins; undo keeps old ori…
+     11|  const s=save(save(seed(),'older','2026-10-11T01:00:00Z'),'newer','202…
+ ❯ tests/unit/round3Backfill.test.ts:11:142
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/unit/round3Backfill.test.ts > manual stash, replaced and legacy archived never reappear on reload
+AssertionError: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ fill tests/unit/round3Backfill.test.ts:9:93
+      7| const seed=()=>{let s=initialSnapshot();for(let n=0;n<6;n++)s=v(newIde…
+      8| const save=(s:Snapshot,id:string,now:string)=>v(queue.placeIdea(s,{id,…
+      9| const fill=(s:Snapshot,filter='all'):Snapshot=>{expect(typeof (queue a…
+       |                                                                                             ^
+     10| it('merge frees one slot, newest waiting idea wins; undo keeps old ori…
+     11|  const s=save(save(seed(),'older','2026-10-11T01:00:00Z'),'newer','202…
+ ❯ tests/unit/round3Backfill.test.ts:15:223
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/unit/round3Backfill.test.ts > active label filtering does not admit unrelated queued tags
+AssertionError: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ fill tests/unit/round3Backfill.test.ts:9:93
+      7| const seed=()=>{let s=initialSnapshot();for(let n=0;n<6;n++)s=v(newIde…
+      8| const save=(s:Snapshot,id:string,now:string)=>v(queue.placeIdea(s,{id,…
+      9| const fill=(s:Snapshot,filter='all'):Snapshot=>{expect(typeof (queue a…
+       |                                                                                             ^
+     10| it('merge frees one slot, newest waiting idea wins; undo keeps old ori…
+     11|  const s=save(save(seed(),'older','2026-10-11T01:00:00Z'),'newer','202…
+ ❯ tests/unit/round3Backfill.test.ts:20:9
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/unit/round3Backfill.test.ts > reduce then increase capacity preserves grouped notes and queued eligibility
+AssertionError: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ tests/unit/round3Backfill.test.ts:23:64
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed (4)
+   Start at  12:23:10
+   Duration  184ms (transform 66%, tests 21%, import 11%, worker 2%)
+

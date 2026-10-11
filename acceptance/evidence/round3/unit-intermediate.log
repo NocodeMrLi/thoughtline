@@ -1,0 +1,296 @@
+
+> thoughtline@0.0.21 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/ideaWorkflow.test.ts (7 tests | 2 failed) 107ms
+   × 筛选与可见容量不减少总重量，也不删除溢出记录 11ms
+   × 大量历史不计重量，持续挂着也只占有限展示槽位 35ms
+ ❯ tests/unit/ideaPlacement.test.ts (11 tests | 2 failed) 60ms
+   × capacity distinguishes a real free slot, fragmented gaps, and true full without moving notes 37ms
+   × a persisted ID resembling a capacity probe does not hide a full rope 1ms
+ ❯ tests/unit/clipCommands.test.ts (8 tests | 1 failed) 49ms
+   × 拆分遇零散间距时自动腾位，总容量足够就全部可见且内容不变 6ms
+ ❯ tests/unit/positioning.test.ts (10 tests | 1 failed) 44ms
+   × width changes recompute capacity status; tag-hidden normal clip remains on-line 7ms
+ ❯ tests/unit/arrangeClips.test.ts (4 tests | 2 failed) 33ms
+   × 碎片间距压紧后能容纳下一夹子，保留左右顺序与全部念头 26ms
+   × 窗口宽度变化使用同一间距，足够容量时集中完整空位 1ms
+ ❯ tests/unit/agentSplitPlacement.test.ts (6 tests | 1 failed) 21ms
+   × Agent split preserves old centers and identity: full 8ms
+ ❯ tests/unit/centeredRope.test.ts (4 tests | 4 failed) 15ms
+   × 已批准居中70%绳，左右留白与中央2/3夹区适配屏宽 6ms
+   × 旧比例位置映射到新夹区，无数据改写或丢失，捕获后可往返且合夹无关中心不漂移 2ms
+   × 移到新夹区最右侧时为已有夹子留最小间距，不把可容纳的移动夹藏入溢出 3ms
+   × 首夹显式比例0映射精确左界，不能被居中起排的虚拟前夹推走 1ms
+ ❯ tests/unit/fixedRope.test.ts (2 tests | 1 failed) 12ms
+   × 绳居中并留两端空白，固定弧线留出上方夹子命中空间 5ms
+ ❯ tests/unit/ropeGeometry.test.ts (3 tests | 1 failed) 6ms
+   × 窄屏减少数量而不压缩正文，宽屏按真实空间增加 4ms
+ ❯ tests/unit/clipLayout.test.ts (5 tests | 2 failed) 7ms
+   × 宽屏不限制6夹，小屏放不下仍完整溢出 4ms
+   × 拉近到最小距离释放空间，不遮文字，位置随宽度夹紧 0ms
+ ❯ tests/unit/spaceAllocation.test.ts (7 tests | 1 failed) 6ms
+   × 左/右保留，中间空位可新挂，满后明确溢出而不盖住旧纸 2ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 18 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/agentSplitPlacement.test.ts > Agent split preserves old centers and identity: full
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/agentSplitPlacement.test.ts:12:58
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/18]⎯
+
+ FAIL  tests/unit/arrangeClips.test.ts > 碎片间距压紧后能容纳下一夹子，保留左右顺序与全部念头
+AssertionError: expected 528 to be null // Object.is equality
+
+- Expected:
+null
+
++ Received:
+528
+
+ ❯ tests/unit/arrangeClips.test.ts:11:66
+      9| test('碎片间距压紧后能容纳下一夹子，保留左右顺序与全部念头',()=>{
+     10|  const width=1400,s=fixture(3),{min,max}=clipTravelBounds(width);s.cli…
+     11|  expect(availableClipPosition(before.map(p=>p.x),width,width/2)).toBe(…
+       |                                                                  ^
+     12|  const arranged=value(arrangeClips(s,width)),after=layoutClips(arrange…
+     13|  expect(after.map(p=>p.clip.id)).toEqual(before.map(p=>p.clip.id));exp…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/18]⎯
+
+ FAIL  tests/unit/arrangeClips.test.ts > 窗口宽度变化使用同一间距，足够容量时集中完整空位
+AssertionError: expected 94.33694117647059 to be close to 172, received difference is 77.66305882352941, but expected 0.005
+ ❯ tests/unit/arrangeClips.test.ts:29:250
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/18]⎯
+
+ FAIL  tests/unit/centeredRope.test.ts > 已批准居中70%绳，左右留白与中央2/3夹区适配屏宽
+AssertionError: expected 0.84 to be close to 0.7, received difference is 0.14, but expected 5e-11
+ ❯ tests/unit/centeredRope.test.ts:11:57
+      9| test('已批准居中70%绳，左右留白与中央2/3夹区适配屏宽',()=>{
+     10|  for(const width of [260,380,800,1040,1440,1920,2560,3840]){
+     11|   const rope=fixedRope(width);expect(rope.length/width).toBeCloseTo(.7…
+       |                                                         ^
+     12|   expect(fixedRopeY(width/2,rope)).toBeCloseTo(rope.top+rope.sag,10);
+     13|   for(const count of [0,3,24]){const layout=layoutClips(clips(count),w…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/18]⎯
+
+ FAIL  tests/unit/centeredRope.test.ts > 旧比例位置映射到新夹区，无数据改写或丢失，捕获后可往返且合夹无关中心不漂移
+AssertionError: expected 48.44329411764704 to be greater than or equal to 171.99999999
+ ❯ tests/unit/centeredRope.test.ts:24:217
+
+ ❯ tests/unit/centeredRope.test.ts:24:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/18]⎯
+
+ FAIL  tests/unit/centeredRope.test.ts > 移到新夹区最右侧时为已有夹子留最小间距，不把可容纳的移动夹藏入溢出
+AssertionError: expected 1310.3999999999996 to be close to 1056, received difference is 254.39999999999964, but expected 5e-9
+ ❯ tests/unit/centeredRope.test.ts:32:34
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/18]⎯
+
+ FAIL  tests/unit/centeredRope.test.ts > 首夹显式比例0映射精确左界，不能被居中起排的虚拟前夹推走
+AssertionError: expected 129.60000000000002 to be close to 384, received difference is 254.39999999999998, but expected 5e-9
+ ❯ tests/unit/centeredRope.test.ts:35:148
+     33| });
+     34| test('首夹显式比例0映射精确左界，不能被居中起排的虚拟前夹推走',()=>{
+     35|  const one={...clips(1)[0],position:0};expect(layoutClips([one,...clip…
+       |                                                                                                                                                    ^
+     36| });
+     37|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/18]⎯
+
+ FAIL  tests/unit/clipCommands.test.ts > 拆分遇零散间距时自动腾位，总容量足够就全部可见且内容不变
+AssertionError: expected 468 to be null
+
+- Expected:
+null
+
++ Received:
+468
+
+ ❯ tests/unit/clipCommands.test.ts:41:113
+     39|  s=value(newIdea(s,{text:'第四张 中文😀\n',title:'第四张',project:'独立项目',agent…
+     40|  s.clips=s.clips.map((c,i)=>({...c,position:i/2}));const width=1280,be…
+     41|  expect(before.visible).toHaveLength(3);expect(availableClipPosition(b…
+       |                                                                                                                 ^
+     42|  const next=value(splitClip(s,'clip:a','b','separate',width)),shown=la…
+     43|  expect(shown.overflow).toHaveLength(0);expect(shown.visible).toHaveLe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/18]⎯
+
+ FAIL  tests/unit/clipLayout.test.ts > 宽屏不限制6夹，小屏放不下仍完整溢出
+AssertionError: expected 6 to be greater than 6
+ ❯ tests/unit/clipLayout.test.ts:5:49
+      3| const clips=Array.from({length:12},(_,i)=>({id:''+i,agentId:'codex',id…
+      4| test('宽屏不限制6夹，小屏放不下仍完整溢出',()=>{
+      5|  expect(layoutClips(clips,3840).visible.length).toBeGreaterThan(6);
+       |                                                 ^
+      6|  expect(layoutClips(clips,150).visible).toHaveLength(0);expect(layoutC…
+      7| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/18]⎯
+
+ FAIL  tests/unit/clipLayout.test.ts > 拉近到最小距离释放空间，不遮文字，位置随宽度夹紧
+AssertionError: expected 6 to be greater than 6
+ ❯ tests/unit/clipLayout.test.ts:10:31
+      8| test('拉近到最小距离释放空间，不遮文字，位置随宽度夹紧',()=>{
+      9|  const compact=clips.map((c,i)=>({...c,position:Math.min(1,i*.13)}));c…
+     10|  expect(dense.visible.length).toBeGreaterThan(normal.visible.length);
+       |                               ^
+     11|  for(let i=1;i<dense.visible.length;i++)expect(dense.visible[i].x-dens…
+     12|  for(const {x} of layoutClips(compact,600).visible){expect(x-CARD_WIDT…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/18]⎯
+
+ FAIL  tests/unit/fixedRope.test.ts > 绳居中并留两端空白，固定弧线留出上方夹子命中空间
+AssertionError: expected 20.8 to be close to 39, received difference is 18.2, but expected 5e-9
+ ❯ tests/unit/fixedRope.test.ts:8:21
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/18]⎯
+
+ FAIL  tests/unit/ideaPlacement.test.ts > capacity distinguishes a real free slot, fragmented gaps, and true full without moving notes
+AssertionError: expected 'hang' to be 'arrange' // Object.is equality
+
+Expected: "arrange"
+Received: "hang"
+
+ ❯ tests/unit/ideaPlacement.test.ts:13:32
+     11| test('capacity distinguishes a real free slot, fragmented gaps, and tr…
+     12|  const s=fixture();s.clips.forEach((c,i)=>c.position=i/2);const origin…
+     13|  expect(placementPlan(s,1280)).toBe('arrange');expect(placementPlan(s,…
+       |                                ^
+     14| });
+     15| test('save-only creates one archived record with exact text and no add…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/18]⎯
+
+ FAIL  tests/unit/ideaPlacement.test.ts > a persisted ID resembling a capacity probe does not hide a full rope
+AssertionError: expected 'arrange' to be 'full' // Object.is equality
+
+Expected: "full"
+Received: "arrange"
+
+ ❯ tests/unit/ideaPlacement.test.ts:54:158
+     52|
+     53| test('a persisted ID resembling a capacity probe does not hide a full …
+     54|  const s=fixture(5);s.ideas[0].id='capacity:'+s.revision;s.clips[0].id…
+       |                                                                                                                                                              ^
+     55| });
+     56|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/18]⎯
+
+ FAIL  tests/unit/ideaWorkflow.test.ts > 筛选与可见容量不减少总重量，也不删除溢出记录
+AssertionError: expected [ 'id0', 'id1', 'id2', 'id3', …(2) ] to deeply equal [ 'id0', 'id1', 'id2' ]
+
+- Expected
++ Received
+
+  [
+    "id0",
+    "id1",
+    "id2",
++   "id3",
++   "id4",
++   "id5",
+  ]
+
+ ❯ tests/unit/ideaWorkflow.test.ts:43:68
+     41|  for(let i=0;i<8;i++)s=unwrap(commands.newIdea(s,{...draft,agentId:i<2…
+     42|  const all=commands.shelfSelection(s,'all',1000);
+     43|  expect(all.totalHanging).toBe(8);expect(all.visible.map(x=>x.id)).toE…
+       |                                                                    ^
+     44|  const filtered=commands.shelfSelection(s,'claude',1000);
+     45|  expect(filtered.totalHanging).toBe(8);expect(filtered.visible.map(x=>…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/18]⎯
+
+ FAIL  tests/unit/ideaWorkflow.test.ts > 大量历史不计重量，持续挂着也只占有限展示槽位
+AssertionError: expected [ { text: '原文\n第二行', …(9) }, …(4) ] to have a length of 3 but got 5
+
+- Expected
++ Received
+
+- 3
++ 5
+
+ ❯ tests/unit/ideaWorkflow.test.ts:52:61
+     50|  for(let i=0;i<35;i++)s=unwrap(commands.changeStatus(s,s.ideas[i].id,'…
+     51|  const picked=commands.shelfSelection(s,'all',1000);
+     52|  expect(picked.totalHanging).toBe(5);expect(picked.visible).toHaveLeng…
+       |                                                             ^
+     53|  expect(commands.findIdeas(s,{status:'archived'})).toHaveLength(35);ex…
+     54| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/18]⎯
+
+ FAIL  tests/unit/positioning.test.ts > width changes recompute capacity status; tag-hidden normal clip remains on-line
+AssertionError: expected [ 'id0', 'id1', 'id2', 'id3', …(2) ] to not have a length of 6
+ ❯ tests/unit/positioning.test.ts:43:86
+     41|  const s=fixture(6);s.agents.push({id:'custom',name:'日报',color:'#8899A…
+     42|  expect(ids(calendarIndex(s,{status:'hanging'},{width:2560,shelfAgentI…
+     43|  expect(ids(calendarIndex(s,{status:'hanging'},{width:800,shelfAgentId…
+       |                                                                                      ^
+     44| });
+     45| test('legacy overflow actually shown by active tag filter is on-line',…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/18]⎯
+
+ FAIL  tests/unit/ropeGeometry.test.ts > 窄屏减少数量而不压缩正文，宽屏按真实空间增加
+AssertionError: expected 6 to be 1 // Object.is equality
+
+- Expected
++ Received
+
+- 1
++ 6
+
+ ❯ tests/unit/ropeGeometry.test.ts:17:29
+     15| });
+     16| test('窄屏减少数量而不压缩正文，宽屏按真实空间增加', () => {
+     17|   expect(visibleSlots(380)).toBe(1); expect(visibleSlots(800)).toBe(2);
+       |                             ^
+     18|   expect(visibleSlots(1440)).toBe(4); expect(visibleSlots(3200)).toBe(…
+     19| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/18]⎯
+
+ FAIL  tests/unit/spaceAllocation.test.ts > 左/右保留，中间空位可新挂，满后明确溢出而不盖住旧纸
+AssertionError: expected 500 to be greater than 555
+ ❯ tests/unit/spaceAllocation.test.ts:13:95
+     11| test('左/右保留，中间空位可新挂，满后明确溢出而不盖住旧纸',()=>{
+     12|  const width=1440,old=[c('left',0),c('right',1)],after=layoutClips([..…
+     13|  expect(after.visible).toHaveLength(3);expect(after.visible.find(p=>p.…
+       |                                                                                               ^
+     14|  const full=[c('a',0),c('b',.26),c('c',.52),c('d',1),c('new',null)];co…
+     15| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/18]⎯
+
+
+ Test Files  11 failed | 41 passed | 1 skipped (53)
+      Tests  18 failed | 287 passed | 4 skipped (309)
+   Start at  12:25:24
+   Duration  2.41s (tests 67%, transform 20%, import 10%, worker 3%)
+
+    Isolate  53 workers spawned · ~126ms startup each (spawn + environment, per file)
+             at least ~827ms faster with isolate: false — reuses workers across files instead of one per file
+

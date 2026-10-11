@@ -1,0 +1,23 @@
+{
+  "platform": "darwin",
+  "scenes": [
+    {
+      "background": "rgb(246, 243, 235)",
+      "image": "none",
+      "field": "rgb(245, 239, 223)",
+      "text": "rgb(41, 62, 57)",
+      "border": "rgba(255, 255, 255, 0.69)",
+      "theme": "light",
+      "material": "vibrancy"
+    }
+  ],
+  "scope": "actual renderer material contrast and controlled CSS fallback; OS accessibility unchanged; not native NSGlassEffectView",
+  "actual": {
+    "reduceTransparency": true,
+    "highContrast": true,
+    "screenCapture": "granted"
+  },
+  "passed": false,
+  "failure": "AssertionError [ERR_ASSERTION]: native background must be exposed, {\"background\":\"rgb(246, 243, 235)\",\"image\":\"none\",\"field\":\"rgb(245, 239, 223)\",\"text\":\"rgb(41, 62, 57)\",\"border\":\"rgba(255, 255, 255, 0.69)\",\"theme\":\"light\",\"material\":\"vibrancy\"}\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-material-workflow.cjs:6:652",
+  "normalQuit": true
+}

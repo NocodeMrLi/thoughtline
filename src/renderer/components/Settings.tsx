@@ -1,3 +1,4 @@
+import {shelfCapacity,type ShelfCapacity} from '../../shared/ropeGeometry';
 import {registerLeaveGuard} from '../hooks/leaveGuards';
 import {IconButton} from './ActionIcon';
 import {PreferencesControl} from './PreferencesControl';
@@ -30,6 +31,7 @@ export function Settings({info,restore,onRemember}:{info:PilotInfo;restore?:Sett
  useEffect(()=>{const next={hotkey:info.snapshot.settings.writeHotkey,reduced:info.snapshot.settings.reducedMotion},prior=baseline.current;setHotkey(current=>current===prior.hotkey?next.hotkey:current);setReduced(current=>current===prior.reduced?next.reduced:current);baseline.current=next;},[info.snapshot.settings.writeHotkey,info.snapshot.settings.reducedMotion]);
  useEffect(()=>{if(!leavePrompt)return;const previous=document.activeElement;prompt.current?.querySelector<HTMLButtonElement>('button:last-child')?.focus();return()=>{if(previous instanceof HTMLElement&&previous.isConnected)previous.focus();};},[leavePrompt]);
  useEffect(()=>{if(recording)input.current?.focus();},[recording]);
+ const changeCapacity=async(capacity:ShelfCapacity)=>{if(busy||recording)return;setBusy(true);setError('');try{const r=await window.thoughtline.saveSettings({...info.snapshot.settings,shelfCapacity:capacity},info.snapshot.revision);if(!r.ok)setError(r.message);}catch{setError('保存未成功，原快捷键保持可用。');}finally{setBusy(false);}};
  const save=async()=>{if(busy||recording)return false;setBusy(true);setError('');setNotice('');try{const r=await window.thoughtline.saveSettings({...info.snapshot.settings,writeHotkey:hotkey,reducedMotion:reduced},info.snapshot.revision);if(r.ok)setNotice('已保存。');else setError(r.message);return r.ok;}catch{setError('保存未成功，原快捷键保持可用。');return false;}finally{setBusy(false);}};
  return <main data-view="manage" data-mode="settings" data-material={info.manageMaterial} data-platform={info.platform} className="manage app-settings" onKeyDown={e=>{
   if(e.nativeEvent.isComposing||e.nativeEvent.keyCode===229)return;
@@ -37,7 +39,7 @@ export function Settings({info,restore,onRemember}:{info:PilotInfo;restore?:Sett
   if(leavePrompt&&e.key==='Tab'){const buttons=[...prompt.current?.querySelectorAll<HTMLButtonElement>('button:not(:disabled)')??[]],at=buttons.indexOf(document.activeElement as HTMLButtonElement);if(buttons.length){e.preventDefault();buttons[(at+(e.shiftKey?-1:1)+buttons.length)%buttons.length].focus();}}
  }}>
   <header><IconButton icon="back" label={t("返回Thoughtline日历")} disabled={busy||recording} onClick={()=>void back()}/><strong>{t("存储与设置")}</strong><PreferencesControl info={info}/><button className="close" aria-label={t("关闭设置")} disabled={busy} onClick={()=>void window.thoughtline.closeManage()}>×</button></header>
-  <section className="preference-settings"><h2>{t('preferences')}</h2><PreferencesControl info={info} settings/></section>
+  <section className="preference-settings"><h2>{t('preferences')}</h2><PreferencesControl info={info} settings/><div className="capacity-preference"><span>{t("绳上夹子数量")}</span><div role="group" aria-label={t("绳上夹子数量")}>{([4,6,8] as const).map(n=><button key={n} disabled={busy||recording} aria-pressed={shelfCapacity(info.snapshot.settings.shelfCapacity)===n} onClick={()=>void changeCapacity(n)}>{n}</button>)}</div><small>{t("默认6个；便签按屏幕空间等比例适配，减少数量仍保留全部内容。")}</small></div></section>
   <label htmlFor="write-hotkey">{t("写念头快捷键")}</label>
   <div className="hotkey-record"><input id="write-hotkey" ref={input} aria-label={t("写念头快捷键")} readOnly value={recording?t("请按组合键…"):hotkey} onKeyDown={e=>{
    if(!recording||e.key==='Escape')return;e.preventDefault();

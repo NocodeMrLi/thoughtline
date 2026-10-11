@@ -21,6 +21,16 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm run verify
+      - name: Third round capacity, backfill, layout and platform material
+        shell: pwsh
+        env:
+          THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round3/windows-source
+        run: |
+          New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
+          foreach ($test in @('round3-layout-workflow','round3-capacity-workflow','round3-material-workflow','round3-window-workflow')) {
+            & node "tests/electron/$test.cjs"
+            if ($LASTEXITCODE -ne 0) { throw "$test failed" }
+          }
       - name: Second round UI and real native menu characterization
         shell: pwsh
         env:
@@ -113,6 +123,10 @@ jobs:
           THOUGHTLINE_EXECUTABLE: dist/win-unpacked/Thoughtline.exe
           THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round2/windows/packaged-capacity
         run: |
+          $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round3/windows-packaged'
+          & node tests/electron/packaged-round3.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Third round actual package regression failed' }
+          $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round2/windows/packaged-capacity'
           & node tests/electron/packaged-round21.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Actual packaged reminder/title/More regression failed' }
           & node tests/electron/packaged-capacity.cjs
@@ -158,6 +172,9 @@ jobs:
             acceptance/evidence/round1/p6-windows-source/**
             acceptance/evidence/appearance/windows-source/**
             acceptance/evidence/round2/windows/**
+            acceptance/evidence/round3/windows-source/**
+            acceptance/evidence/round3/windows-packaged/**
+            acceptance/evidence/round3/windows-installed/**
             acceptance/evidence/top-edge-20261010/windows-source/**
             acceptance/evidence/top-edge-20261010/windows-packaged/**
             acceptance/evidence/appearance/windows-packaged/**

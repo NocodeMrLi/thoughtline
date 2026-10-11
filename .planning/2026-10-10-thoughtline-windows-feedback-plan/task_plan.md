@@ -63,3 +63,10 @@ Finalsource9628a1427846cfc04fb47366883a5c666aff8a16; private regular32asset rele
 - [x] Audit all three reader More entry points and calendar header as one standard.
 - [x] Source and actual dual-package regressions, native delivery limits separately recorded.
 - [x] Same-source immutable private new release, README/docs and owned cleanup.
+
+
+## Continuation preflight (2026-10-10T20:51:23+08:00)
+- [x] Current source, canonical delivery docs, acceptance boundaries and live GitHub release checked.
+- [ ] Await new user feedback; verify exact version/system/DPI/action before minimal repair and paired-platform checks.
+- [ ] Physical acceptance remains pending, subject to available real conditions. formalAcceptance stays false.
+No new product work, package rebuild or repeated full test run was needed for this preflight.

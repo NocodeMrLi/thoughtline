@@ -112,3 +112,8 @@ Final0.0.20 private regular release408840229 published32 assets allserver size/d
 
 ## Final0.0.21 closure (2026-10-10)
 Frozen production/build/test f1726cc96f6aa57e12ea5eb07af7f3f0d7aa06e3; Mac285 passed/4 Windows-only skips, Windows289 passed CI38047064252; final actual packages24 added checks each. Native Mac denied/real light fallback passed, Windows show event confirmed/no duplicate fallback; physical banners and click remain pending. Private regular release408897458 tagv0.0.21 published with32 hash/size verified assets; old0.0.20 unchanged. Owned1096.9MiB allocated scratch removed; user App/12 worktrees/cache preserved. Full30-row click-by-click report docs/releases/round2-v0.0.21-delivery.md; canonical same round2 plan and00/07/master backed up and updated with verified prefix preservation.
+
+
+## Continuation preflight (2026-10-10T20:51:23+08:00)
+Restored original second-round plan, project rules, latest delivery/QA/gates and canonical30-row acceptance report, then historical product/UI/grouping contracts. Verified live main/tag/version/release/CI, all32 server assets against local files, historical0.0.20 asset preservation and current process identities. Fetched missing release tag only; no product edits, tests, builds, installation or cleanup. Awaiting user feedback.
+Tool recovery: stale initial cwd was absent, so commands now explicitly use real project. An unmatched source glob was replaced with rg --files discovery. Chinese stdin append failed encoding before writes; an apply_patch context mismatch also made no edits; recorded checkpoint using ASCII append. These are tooling failures, not product failures. Only existing planning records changed during this preflight.

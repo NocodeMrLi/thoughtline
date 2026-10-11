@@ -5,7 +5,7 @@ import type {Snapshot,Result,Draft} from '../../src/shared/contracts';
 const value=<T>(r:Result<T>)=>{if(!r.ok)throw Error(r.message);return r.value;};
 const now='2026-10-09T00:00:00Z',base:Draft={text:'完整正文 中文😀\n ',title:'标题',project:'项目',agentId:'general'};
 function seed(positions:(number|null)[]):Snapshot {const ids=['a','b',...positions.slice(1).map((_,n)=>'other'+n)];return value(validateSnapshot({...initialSnapshot(),ideas:ids.map(id=>({...base,id,status:'hanging',createdAt:now,updatedAt:now})),clips:positions.map((position,n)=>({id:'clip'+n,ideaIds:n===0?['a','b']:['other'+(n-1)],currentId:n===0?'b':'other'+(n-1),agentId:'general',position}))}));}
-for(const [label,width,positions,overflow] of [ ['automatic',1440,[null,null],false],['left',1440,[1],false],['middle',1440,[0,1],false],['right',1440,[0],false],['full',900,[null,null],true] ] as const)test('Agent split preserves old centers and identity: '+label,()=>{
+for(const [label,width,positions,overflow] of [ ['automatic',1440,[null,null],false],['left',1440,[1],false],['middle',1440,[0,1],false],['right',1440,[0],false],['full',900,[null,null,null,null,null,null],true] ] as const)test('Agent split preserves old centers and identity: '+label,()=>{
  const s=seed([...positions]),before=layoutClips(s.clips,width),draft={...base,agentId:'codex'};
  const next=value(editIdeaIfUnchanged(s,'b',draft,base,now,width)),after=layoutClips(next.clips,width);
  for(const p of before.visible)expect(after.visible.find(q=>q.clip.id===p.clip.id)?.x).toBeCloseTo(p.x,8);

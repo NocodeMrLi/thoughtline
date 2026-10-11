@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21"><img src="badges/preview.svg" alt="Version: 0.0.21" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.22"><img src="badges/preview.svg" alt="Version: 0.0.22" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.22"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   Une corde, quelques pinces et des feuilles pour les idées du quotidien.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21"><ins>Télécharger Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.22"><ins>Télécharger Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.21</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.22</sub></p>
 
 Thoughtline est un outil léger pour macOS et Windows. Retrouvez vos idées au bord supérieur de l’écran, notez une pensée, puis reprenez votre activité.
 
@@ -30,6 +30,7 @@ Thoughtline est un outil léger pour macOS et Windows. Retrouvez vos idées au b
 
 - Saisissez titre, texte et catégorie avec un raccourci ; conservez les notes inachevées comme brouillons.
 - Une corde de bureau avec pinces et papier ; les nouvelles idées sont classées dans Général.
+- Choisissez 4, 6 ou 8 pinces dans Calendrier → Plus → Stockage et paramètres ; 6 par défaut. Les feuilles s’adaptent proportionnellement à l’écran, avec un agrandissement modéré pour 4. Les nouvelles idées enregistrées sur une corde pleine remplissent les places libérées, les plus récentes d’abord ; les anciennes idées rangées et celles archivées manuellement restent à votre choix.
 - Déplacez une pince ou détachez une feuille. Un clic droit sur **Merge** permet de choisir une pince compatible ; **Split** détache la pensée actuelle. Si nécessaire, la séparation resserre les espaces dispersés ; l’organisation automatique conserve l’ordre de gauche à droite. Vous pouvez annuler l’organisation.
 - Modifiez dans la vue détaillée ou le calendrier, avec sauvegarde après une courte pause et changement de page immédiat.
 - Parcourez jours, mois et années ; recherchez et filtrez aussi les idées archivées.
@@ -45,7 +46,7 @@ Thoughtline est un outil léger pour macOS et Windows. Retrouvez vos idées au b
 
 ## Téléchargement et installation
 
-Les téléchargements sont réservés aux membres ayant accès au dépôt. Releases contient les paquets, lanceurs isolés, SHA256SUMS et informations de provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.21).
+Les téléchargements sont réservés aux membres ayant accès au dépôt. Releases contient les paquets, lanceurs isolés, SHA256SUMS et informations de provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.22).
 
 | Platform | Package |
 |---|---|
@@ -97,4 +98,4 @@ Signalez les problèmes dans Issues avec versions, étapes, résultats attendus 
 
 Le projet est UNLICENSED ; aucune permission d’utilisation open source n’a été accordée. Une future publication précisera la licence et les contributions. Consultez les avis tiers pour le code et les licences inclus. [Third-party notices](../../THIRD_PARTY_NOTICES.md).
 
-0.0.21 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.
+0.0.22 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.

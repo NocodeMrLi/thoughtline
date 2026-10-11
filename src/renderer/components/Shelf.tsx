@@ -1,10 +1,10 @@
 import {useLocale} from '../LocaleContext';
 import {useEffect,useId,useLayoutEffect,useRef,useState} from 'react';
-import type {PointerEvent} from 'react';
+import type {PointerEvent,CSSProperties} from 'react';
 import type {PilotInfo,ClipMutation} from '../../shared/bridge';
 import type {Clip} from '../../shared/contracts';
-import {layoutClips,normalizedPosition,clipTravelBounds,availableClipPosition} from '../../shared/clipLayout';
-import {fixedRope,fixedRopeY} from '../../shared/ropeGeometry';
+import {layoutClips,normalizedPosition,clipTravelBounds,availableClipPosition,clipMetrics} from '../../shared/clipLayout';
+import {fixedRope,fixedRopeY,shelfCapacity} from '../../shared/ropeGeometry';
 import {flushPageSelections} from '../hooks/useClipPage';
 import {ClipCard} from './ClipCard';
 import {useShelfMotion} from '../hooks/useShelfMotion';
@@ -18,7 +18,8 @@ export function Shelf({info}:{info:PilotInfo}){
  useEffect(()=>{setDismissedPlacement(null);},[info.placementNotice,info.snapshot.revision]);
  const placement=info.placementNotice!==dismissedPlacement?info.placementNotice:null;
  const drag=useRef<Drag|null>(null),mergeTimer=useRef<ReturnType<typeof setTimeout>|null>(null);const infoRef=useRef(info);infoRef.current=info;
- const filtered=info.snapshot.clips.filter(c=>agentId==='all'||c.agentId===agentId);const rope=fixedRope(info.width);const layout=layoutClips(filtered,info.width);
+ const capacity=shelfCapacity(info.snapshot.settings.shelfCapacity),metrics=clipMetrics(info.width,capacity);
+ const filtered=info.snapshot.clips.filter(c=>agentId==='all'||c.agentId===agentId);const rope=fixedRope(info.width,capacity);const layout=layoutClips(filtered,info.width,capacity);
  const held=useRef({displayId:info.displayId,width:info.width,layout});
  if(!info.layoutLocked||held.current.displayId!==info.displayId||held.current.width!==info.width)held.current={displayId:info.displayId,width:info.width,layout};
  const visible=held.current.layout.visible;const visibleRef=useRef(visible);visibleRef.current=visible;const {sag,progress,reduced}=useShelfMotion(info);
@@ -44,14 +45,14 @@ export function Shelf({info}:{info:PilotInfo}){
    if(!d.active){if(Math.hypot(e.clientX-d.startX,e.clientY-d.startY)<5)return;d.active=true;
     const r=await window.thoughtline.dragLock(true);if(drag.current!==d){void window.thoughtline.dragLock(false);return;}if(!r.ok){setError(r.message);reset();return;}
    }
-   const bounds=clipTravelBounds(infoRef.current.width);d.x=Math.max(bounds.min,Math.min(bounds.max,d.origin+e.clientX-d.startX));
+   const bounds=clipTravelBounds(infoRef.current.width,shelfCapacity(infoRef.current.snapshot.settings.shelfCapacity));d.x=Math.max(bounds.min,Math.min(bounds.max,d.origin+e.clientX-d.startX));
    const target=visibleRef.current.find(p=>p.clip.id!==d.clip.id&&Math.abs(p.x-d.x)<=30&&Math.abs(e.clientY-d.startY)<90);
    const id=target?.clip.id??null;
    if(d.target!==id){if(mergeTimer.current)clearTimeout(mergeTimer.current);d.target=id;d.ready=false;
     if(target&&target.clip.agentId===d.clip.agentId)mergeTimer.current=setTimeout(()=>{if(drag.current===d&&d.target===id){d.ready=true;setDragView({...d});}},600);
    }
    d.valid=true;
-   if(d.mode==='paper'&&!d.target){const occupied=visibleRef.current.filter(p=>d.clip.ideaIds.length>1||p.clip.id!==d.clip.id).map(p=>p.x),free=availableClipPosition(occupied,infoRef.current.width,d.x);d.valid=free!==null;if(free!==null)d.x=free;}
+   if(d.mode==='paper'&&!d.target){const occupied=visibleRef.current.filter(p=>d.clip.ideaIds.length>1||p.clip.id!==d.clip.id).map(p=>p.x),free=availableClipPosition(occupied,infoRef.current.width,d.x,shelfCapacity(infoRef.current.snapshot.settings.shelfCapacity));d.valid=free!==null;if(free!==null)d.x=free;}
    setDragView({...d});
   };
   const up=async(e:globalThis.PointerEvent)=>{
@@ -64,10 +65,10 @@ export function Shelf({info}:{info:PilotInfo}){
    if(!outside){
     if(d.ready&&target?.clip.agentId===d.clip.agentId){await change(d.mode==='paper'?{kind:'paperDrop',id:d.clip.id,ideaId:d.ideaId,targetId:target.clip.id,position:null}:{kind:'merge',sourceId:d.clip.id,targetId:target.clip.id},d.revision);}
     else if(d.target){message=target?.clip.agentId!==d.clip.agentId?"不同 Agent 无法合夹，位置保持。":"未达到合夹停留时间，位置保持。";}
-    else if(d.mode==='paper'){if(d.valid)await change({kind:'paperDrop',id:d.clip.id,ideaId:d.ideaId,targetId:null,position:normalizedPosition(d.x,infoRef.current.width)},d.revision);else message="无合法空位，纸张保持原位";}
+    else if(d.mode==='paper'){if(d.valid)await change({kind:'paperDrop',id:d.clip.id,ideaId:d.ideaId,targetId:null,position:normalizedPosition(d.x,infoRef.current.width,shelfCapacity(infoRef.current.snapshot.settings.shelfCapacity))},d.revision);else message="无合法空位，纸张保持原位";}
     else{
      const before=visibleRef.current.find(p=>p.clip.id!==d.clip.id&&p.x>d.x)?.clip.id??null;
-     await change({kind:'move',id:d.clip.id,position:normalizedPosition(d.x,infoRef.current.width),beforeId:before},d.revision);
+     await change({kind:'move',id:d.clip.id,position:normalizedPosition(d.x,infoRef.current.width,shelfCapacity(infoRef.current.snapshot.settings.shelfCapacity)),beforeId:before},d.revision);
     }
    }
    setNotice(outside?'':message);reset();
@@ -99,11 +100,11 @@ export function Shelf({info}:{info:PilotInfo}){
   {visible.map(({clip:heldClip,x:origin})=>{
    const clip=info.snapshot.clips.find(c=>c.id===heldClip.id);if(!clip)return null;const active=dragView?.clip.id===clip.id&&dragView.mode==='clip';const x=active?dragView.x:origin,y=fixedRopeY(x,rope);const agent=info.snapshot.agents.find(a=>a.id===clip.agentId);
    const slope=4*rope.sag/rope.length*(1-2*(x-rope.left)/rope.length),bend=-4*rope.sag/(rope.length*rope.length);
-   const ropeContact=`M 0 ${27+81*bend-9*slope} Q 9 ${27-81*bend} 18 ${27+81*bend+9*slope}`;
-   return <div className={`hanging ${active?'dragging':''} ${dragView?.target===clip.id&&dragView.clip.agentId===clip.agentId?'merge-pending':''} ${dragView?.ready&&dragView.target===clip.id?'merge-target':''}`} data-idea-id={clip.currentId} data-clip-id={clip.id} key={clip.id} style={{transform:`translate3d(${x}px,${y}px,0) translateX(-50%)`}}>{dragView?.target===clip.id&&dragView.clip.agentId===clip.agentId&&<svg className="merge-ring" key={`${dragView.clip.id}:${clip.id}`} width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><circle className="ring-track" cx="24" cy="24" r="20"/><circle className="ring-progress" cx="24" cy="24" r="20"/></svg>}<ClipCard clip={clip} ideas={info.snapshot.ideas} agent={agent} onChange={change} onGrab={grab} onError={setError} reduced={reduced} textDragActive={info.textDragActive} ropeContact={ropeContact}/></div>;
+   const ropeContact=`M 0 ${27+(81*bend*metrics.scale*metrics.scale-9*slope*metrics.scale)/metrics.scale} Q 9 ${27-81*bend*metrics.scale} 18 ${27+(81*bend*metrics.scale*metrics.scale+9*slope*metrics.scale)/metrics.scale}`;
+   return <div className={`hanging ${active?'dragging':''} ${dragView?.target===clip.id&&dragView.clip.agentId===clip.agentId?'merge-pending':''} ${dragView?.ready&&dragView.target===clip.id?'merge-target':''}`} data-idea-id={clip.currentId} data-clip-id={clip.id} key={clip.id} style={{width:metrics.cardWidth,transform:`translate3d(${x}px,${y}px,0) translateX(-50%)`}}>{dragView?.target===clip.id&&dragView.clip.agentId===clip.agentId&&<svg className="merge-ring" key={`${dragView.clip.id}:${clip.id}`} width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><circle className="ring-track" cx="24" cy="24" r="20"/><circle className="ring-progress" cx="24" cy="24" r="20"/></svg>}<div className="scaled-paper" style={{transform:`scale(${metrics.scale})`,'--paper-scale':metrics.scale} as CSSProperties}><ClipCard clip={clip} ideas={info.snapshot.ideas} agent={agent} onChange={change} onGrab={grab} onError={setError} reduced={reduced} textDragActive={info.textDragActive} ropeContact={ropeContact}/></div></div>;
   })}
-  {dragView?.mode==='paper'&&dragView.active&&<div className="paper-drag-preview" data-valid={dragView.valid} aria-hidden="true" style={{left:dragView.x,top:fixedRopeY(dragView.x,rope)}}><ClipCard clip={{...dragView.clip,ideaIds:[dragView.ideaId],currentId:dragView.ideaId}} ideas={info.snapshot.ideas} agent={info.snapshot.agents.find(a=>a.id===dragView.clip.agentId)} onChange={change} onGrab={()=>{}} onError={()=>{}} reduced={true} textDragActive={false} ropeContact="M0 27H18"/></div>}
-  {dragView&&<><div className="source-ghost" style={{left:dragView.origin,top:fixedRopeY(dragView.origin,rope)+6}}/><span className="drag-message" role="status">{dragView.ready?t("松开合并"):dragView.target?(info.snapshot.clips.find(c=>c.id===dragView.target)?.agentId===dragView.clip.agentId?t("停留后合夹"):t("不同 Agent 不能合夹")):dragView.mode==='paper'?(dragView.valid?t("松开将当前纸张挂到空位 · Esc取消"):t("绳上暂时放不下 · Esc取消")):t("拖动调整位置 · Esc取消")}</span></>}
+  {dragView?.mode==='paper'&&dragView.active&&<div className="paper-drag-preview" data-valid={dragView.valid} aria-hidden="true" style={{left:dragView.x,top:fixedRopeY(dragView.x,rope),width:metrics.cardWidth}}><div className="scaled-paper" style={{transform:`scale(${metrics.scale})`,'--paper-scale':metrics.scale} as CSSProperties}><ClipCard clip={{...dragView.clip,ideaIds:[dragView.ideaId],currentId:dragView.ideaId}} ideas={info.snapshot.ideas} agent={info.snapshot.agents.find(a=>a.id===dragView.clip.agentId)} onChange={change} onGrab={()=>{}} onError={()=>{}} reduced={true} textDragActive={false} ropeContact="M0 27H18"/></div></div>}
+  {dragView&&<><div className="source-ghost" style={{left:dragView.origin,top:fixedRopeY(dragView.origin,rope)+6*metrics.scale,width:metrics.cardWidth,height:metrics.cardHeight}}/><span className="drag-message" role="status">{dragView.ready?t("松开合并"):dragView.target?(info.snapshot.clips.find(c=>c.id===dragView.target)?.agentId===dragView.clip.agentId?t("停留后合夹"):t("不同 Agent 不能合夹")):dragView.mode==='paper'?(dragView.valid?t("松开将当前纸张挂到空位 · Esc取消"):t("绳上暂时放不下 · Esc取消")):t("拖动调整位置 · Esc取消")}</span></>}
   {(error||notice)&&<button data-hit className="shelf-error" role={error?'alert':'status'} onClick={()=>{setError('');setNotice('');}}>{m(error||notice)}</button>}
   {!error&&!notice&&placement&&<button data-hit className="shelf-error" role="status" onClick={()=>{setDismissedPlacement(placement);if(layout.overflow.length)void browse();}}>{m(placement)}</button>}
  </div>

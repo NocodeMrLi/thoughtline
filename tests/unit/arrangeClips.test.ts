@@ -2,16 +2,16 @@ import {legacySnapshot} from '../helpers/legacySnapshot';
 import {expect,test} from 'vitest';
 import {arrangeClips} from '../../src/shared/clipCommands';
 import {initialSnapshot,newIdea} from '../../src/shared/ideaCommands';
-import {availableClipPosition,clipTravelBounds,layoutClips,MIN_SPACING} from '../../src/shared/clipLayout';
+import {availableClipPosition,clipTravelBounds,layoutClips,MIN_SPACING,clipMetrics} from '../../src/shared/clipLayout';
 import type {Result,Snapshot} from '../../src/shared/contracts';
 const value=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);return r.value;};
 const fixture=(count:number)=>{let s=legacySnapshot();for(let i=0;i<count;i++)s=value(newIdea(s,{text:'正文 中文😀\n'+i,title:'念头'+i,project:'保留',agentId:i%2?'claude':'codex'},'i'+i,'2026-10-10T00:00:00Z'));return s;};
 test('碎片间距压紧后能容纳下一夹子，保留左右顺序与全部念头',()=>{
- const width=1400,s=fixture(3),{min,max}=clipTravelBounds(width);s.clips.forEach((c,i)=>c.position=i/2);const before=layoutClips(s.clips,width).visible;
+ const width=1400,s=fixture(5),{min,max}=clipTravelBounds(width);s.clips.forEach((c,i)=>c.position=i/4);const before=layoutClips(s.clips,width).visible;
  expect(availableClipPosition(before.map(p=>p.x),width,width/2)).toBe(null);
  const arranged=value(arrangeClips(s,width)),after=layoutClips(arranged.clips,width).visible;
- expect(after.map(p=>p.clip.id)).toEqual(before.map(p=>p.clip.id));expect(after[1].x-after[0].x).toBeCloseTo(MIN_SPACING);expect(after[2].x-after[1].x).toBeCloseTo(MIN_SPACING);
- expect(availableClipPosition(after.map(p=>p.x),width,width/2)).not.toBe(null);expect(after.every(p=>p.x>=min&&p.x<=max)).toBe(true);expect(arranged.ideas).toEqual(s.ideas);expect(s.clips.map(c=>c.position)).toEqual([0,.5,1]);
+ expect(after.map(p=>p.clip.id)).toEqual(before.map(p=>p.clip.id));expect(after[1].x-after[0].x).toBeCloseTo(clipMetrics(width).spacing);expect(after[2].x-after[1].x).toBeCloseTo(clipMetrics(width).spacing);
+ expect(availableClipPosition(after.map(p=>p.x),width,width/2)).not.toBe(null);expect(after.every(p=>p.x>=min&&p.x<=max)).toBe(true);expect(arranged.ideas).toEqual(s.ideas);expect(s.clips.map(c=>c.position)).toEqual([0,.25,.5,.75,1]);
 });
 test('混合Agent和满容量：不漏ID、不拆合、不重排组内、不误改当前页',()=>{
  const s=fixture(8);s.clips[0].ideaIds.push(s.clips[1].ideaIds[0]);s.clips[0].currentId=s.clips[1].currentId;s.ideas[1].agentId=s.clips[0].agentId;s.clips.splice(1,1);
@@ -26,5 +26,5 @@ test('空绳与无效宽度不造数据，极窄窗口不重挂历史',()=>{
 });
 
 test('窗口宽度变化使用同一间距，足够容量时集中完整空位',()=>{
- for(const width of [740,1000,1400,1920]){const s=fixture(2),next=value(arrangeClips(s,width)),shown=layoutClips(next.clips,width),{min,max}=clipTravelBounds(width);expect(shown.visible).toHaveLength(2);expect(shown.visible[1].x-shown.visible[0].x).toBeCloseTo(MIN_SPACING);expect(next.ideas).toEqual(s.ideas);if(max-min>=2*MIN_SPACING)expect(availableClipPosition(shown.visible.map(p=>p.x),width,width/2)).not.toBe(null);}
+ for(const width of [740,1000,1400,1920]){const s=fixture(2),next=value(arrangeClips(s,width)),shown=layoutClips(next.clips,width),{min,max}=clipTravelBounds(width);expect(shown.visible).toHaveLength(2);expect(shown.visible[1].x-shown.visible[0].x).toBeCloseTo(clipMetrics(width).spacing);expect(next.ideas).toEqual(s.ideas);if(max-min>=2*MIN_SPACING)expect(availableClipPosition(shown.visible.map(p=>p.x),width,width/2)).not.toBe(null);}
 });
