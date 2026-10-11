@@ -1,0 +1,106 @@
+{
+  "passed": false,
+  "packaged": true,
+  "executable": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/dist/mac-arm64/Thoughtline.app/Contents/MacOS/Thoughtline",
+  "version": "0.0.22",
+  "checks": [],
+  "captures": [],
+  "scope": "Actual frozen package and native compositor, OS transparency/contrast temporarily disabled by authorized outer controller; synthetic owned backdrop, no personal screen or reference-quality acceptance.",
+  "native": {
+    "reduceTransparency": false,
+    "increaseContrast": false,
+    "screen": "granted"
+  },
+  "failure": "AssertionError [ERR_ASSERTION]: capture region must remain completely inside owned backdrop\n    at capture (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round3/native-material-worker.cjs:13:304)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round3/native-material-worker.cjs:18:207",
+  "cleanup": {
+    "normalQuit": true,
+    "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-packaged-native-material-1FkN3A",
+    "profileRemoved": true,
+    "allExited": true,
+    "ownedPids": [
+      15777,
+      15777,
+      15778,
+      15779,
+      15780,
+      15781,
+      15782
+    ]
+  },
+  "worker": {
+    "pid": 15776,
+    "code": 1,
+    "signal": null
+  },
+  "stage": "worker-completed",
+  "launchEvents": [
+    {
+      "time": "2026-10-11T05:42:21.480Z",
+      "type": "spawn",
+      "pid": 15777,
+      "shell": false,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-11T05:42:21.684Z",
+      "type": "stderr",
+      "pid": 15777,
+      "text": "Debugger listening on ws://127.0.0.1:57591/8bc0e68f-3ebe-4dd2-b935-cc226becd47f\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-11T05:42:21.689Z",
+      "type": "stderr",
+      "pid": 15777,
+      "text": "Debugger attached.\n"
+    },
+    {
+      "time": "2026-10-11T05:42:21.756Z",
+      "type": "stderr",
+      "pid": 15777,
+      "text": "\nDevTools listening on ws://127.0.0.1:57593/devtools/browser/e3649df2-8d4c-45f1-b634-e3910e9601d2\n"
+    },
+    {
+      "time": "2026-10-11T05:42:21.855Z",
+      "type": "stderr",
+      "pid": 15777,
+      "text": "2026-10-11 13:42:21.855 Thoughtline[15777:9740946] NSWindow does not support nonactivating panel styleMask 0x80\n"
+    },
+    {
+      "time": "2026-10-11T05:42:21.905Z",
+      "type": "stderr",
+      "pid": 15777,
+      "text": "2026-10-11 13:42:21.905 Thoughtline[15777:9740946] NSWindow does not support nonactivating panel styleMask 0x80\n"
+    },
+    {
+      "time": "2026-10-11T05:42:22.571Z",
+      "type": "stderr",
+      "pid": 15777,
+      "text": "2026-10-11 13:42:22.571 Thoughtline[15777:9740946] +[IMKClient subclass]: chose IMKClient_Modern\n2026-10-11 13:42:22.571 Thoughtline[15777:9740946] +[IMKInputSession subclass]: chose IMKInputSession_Modern\n"
+    },
+    {
+      "time": "2026-10-11T05:42:22.619Z",
+      "type": "stderr",
+      "pid": 15777,
+      "text": "2026-10-11 13:42:22.619 Thoughtline[15777:9740946] _TIPropertyValueIsValid called with 11 on nil context!\n2026-10-11 13:42:22.619 Thoughtline[15777:9740946] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 11, bailing.\n2026-10-11 13:42:22.619 Thoughtline[15777:9740946] _TIPropertyValueIsValid called with 12 on nil context!\n2026-10-11 13:42:22.619 Thoughtline[15777:9740946] imkxpc_setApplicationProperty:value:reply: called with incorrect property value 12, bailing.\n"
+    },
+    {
+      "time": "2026-10-11T05:42:22.830Z",
+      "type": "stderr",
+      "pid": 15777,
+      "text": "Debugger ending on ws://127.0.0.1:57591/8bc0e68f-3ebe-4dd2-b935-cc226becd47f\nFor help, see: https://nodejs.org/learn/getting-started/debugging\n"
+    },
+    {
+      "time": "2026-10-11T05:42:22.977Z",
+      "type": "exit",
+      "pid": 15777,
+      "code": 0,
+      "signal": null
+    }
+  ],
+  "observedPidState": [
+    {
+      "pid": 15777,
+      "alive": false
+    }
+  ]
+}

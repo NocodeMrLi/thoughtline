@@ -1,0 +1,50 @@
+{
+  "platform": "darwin",
+  "scenes": [
+    {
+      "background": "rgba(248, 246, 239, 0.157)",
+      "image": "linear-gradient(145deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.04) 52%, rgba(231, 220, 202, 0.125)), none",
+      "field": "rgb(245, 239, 223)",
+      "text": "rgb(41, 62, 57)",
+      "border": "rgba(255, 255, 255, 0.81)",
+      "theme": "light",
+      "material": "vibrancy"
+    },
+    {
+      "background": "rgb(246, 243, 235)",
+      "image": "none",
+      "field": "rgb(245, 239, 223)",
+      "text": "rgb(41, 62, 57)",
+      "border": "rgba(255, 255, 255, 0.69)",
+      "theme": "light",
+      "material": "opaque"
+    },
+    {
+      "background": "rgba(23, 33, 43, 0.314)",
+      "image": "linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.008) 56%, rgba(106, 123, 144, 0.125)), none",
+      "field": "rgb(56, 56, 49)",
+      "text": "rgb(242, 234, 219)",
+      "border": "rgba(255, 255, 255, 0.408)",
+      "theme": "dark",
+      "material": "vibrancy"
+    },
+    {
+      "background": "rgb(34, 44, 51)",
+      "image": "none",
+      "field": "rgb(56, 56, 49)",
+      "text": "rgb(242, 234, 219)",
+      "border": "rgba(255, 255, 255, 0.24)",
+      "theme": "dark",
+      "material": "opaque"
+    }
+  ],
+  "scope": "actual renderer material contrast and controlled CSS fallback; OS accessibility unchanged; not native NSGlassEffectView",
+  "actual": {
+    "reduceTransparency": true,
+    "highContrast": true,
+    "screenCapture": "granted"
+  },
+  "passed": false,
+  "failure": "AssertionError [ERR_ASSERTION]: Mac accessible material must retain layered surface rather than reverting to a flat fill\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-material-workflow.cjs:8:3",
+  "normalQuit": true
+}

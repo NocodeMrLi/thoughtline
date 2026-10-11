@@ -1,0 +1,422 @@
+windows-test-package	Source Electron UI regression on Windows	﻿2026-10-11T05:23:36.9448287Z ##[group]Run $evidenceRoot = 'acceptance/evidence/round1/p6-windows-source'
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:23:36.9449091Z ^[[36;1m$evidenceRoot = 'acceptance/evidence/round1/p6-windows-source'^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:23:36.9449632Z ^[[36;1mNew-Item -ItemType Directory -Force $evidenceRoot | Out-Null^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:23:36.9450376Z ^[[36;1m$runEvidence = Join-Path $evidenceRoot ('run-{0}-{1}-{2}' -f $env:GITHUB_RUN_ID, $env:GITHUB_RUN_ATTEMPT, [guid]::NewGuid().ToString('N'))^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:23:36.9451154Z ^[[36;1mNew-Item -ItemType Directory -Path $runEvidence | Out-Null^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:23:36.9451604Z ^[[36;1m$env:THOUGHTLINE_EVIDENCE_DIR = $runEvidence^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:23:36.9452920Z ^[[36;1mforeach ($test in @('inline-edit-workflow', 'calendar-workflow', 'calendar-motion-workflow', 'calendar-motion-fix1-workflow', 'calendar-geometry-workflow', 'storage-workflow', 'windows-source-runtime', 'calendar-brand-clip-workflow', 'final-reader-placement-workflow', 'final-calendar-shape-workflow')) {^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:23:36.9454307Z ^[[36;1m  $env:THOUGHTLINE_ATTEMPT = ('{0}-windows-ci' -f $test)^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:23:36.9454990Z ^[[36;1m  & node "tests/electron/$test.cjs" 2>&1 | Tee-Object -FilePath (Join-Path $runEvidence "$test.log")^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:23:36.9455668Z ^[[36;1m  if ($LASTEXITCODE -ne 0) { throw "$test failed with exit code $LASTEXITCODE" }^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:23:36.9456100Z ^[[36;1m}^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:23:36.9527388Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:23:36.9527794Z env:
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:23:36.9528059Z   THOUGHTLINE_FAKE_CLIPBOARD: 1
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:23:36.9528329Z ##[endgroup]
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:23:42.7069005Z {"scope":"isolated source Electron DOM/IPC on actual runner OS, synthetic composition events and disk fault; not physical IME","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"inline":true,"autosave":true,"lastInputClose":true,"compositionCloseBlocked":true,"failureRetained":true,"retryPersisted":true,"identityDatePreserved":true,"groupAgentSplitKeepsEditor":true}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:23:47.1243360Z {"scope":"isolated source Electron DOM/IPC on actual runner OS with synthetic dates; not physical DPI/IME","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"today":true,"archiveCounted":true,"initialNine":true,"threeColumns":true,"loadMore":true,"inlineEdit":true,"backScrollRestored":true,"yearTwelveMonths":true,"search":true,"softDeleteRestore":true}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:23:56.7270419Z {"scope":"source Electron real pixels, synthetic dates; not physical iPhone or Windows acceptance","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"day":"2026-10-11","month":"2026-10","entered":["month-to-year","year-to-month","month-to-day","day-to-month"],"interruption":true,"reduced":true,"scroll":true,"twoColumns":true,"boundedCards":true,"compositionGuard":true,"evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38114386629-1-0c88a4b5682b48d283ae742e1e128048\\calendar-motion-workflow-windows-ci"}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:02.9111062Z {"cases":[{"name":"empty-day-visible-return","passed":true,"emptyDay":"2026-10-01","visual":{"kind":"day-to-month","text":"这里还没有念头。","emptyCount":1}},{"name":"scroll-interrupts-active-motion","passed":true,"scrollTop":180},{"name":"restored-scroll-keeps-return-motion","passed":true,"kind":"day-to-month"},{"name":"resize-interrupts-active-motion","passed":true,"previousSize":[740,540]},{"name":"old-save-cannot-navigate-new-session","passed":true,"oldSession":2,"publishedSession":3,"storedTextSaved":true}],"evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38114386629-1-0c88a4b5682b48d283ae742e1e128048\\calendar-motion-fix1-workflow-windows-ci"}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:09.2285204Z {"scope":"isolated source Electron simulated window bounds and real repository; no physical multi-display/DPI","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"savedBounds":{"x":166,"y":42,"width":700,"height":580},"restoredBounds":{"x":166,"y":42,"width":700,"height":580},"settingsPreserved":true,"detailDidNotPollute":true,"motions":{"monthToDay":230,"dayToMonth":210,"monthToYear":210,"yearToMonth":230,"monthBackToYear":210},"sourceContent":true,"storedTextPreserved":true,"evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38114386629-1-0c88a4b5682b48d283ae742e1e128048\\calendar-geometry-workflow-windows-ci"}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:16.8624911Z {"profile":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-p5-electron-uCfsEr\\profile","target":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-p5-electron-uCfsEr\\target","backup":"C:\\Users\\runneradmin\\AppData\\Local\\Temp\\thoughtline-p5-electron-uCfsEr\\Thoughtline-backup-2026-10-11T05-24-13-008Z-6853db80-bea0-4003-845a-94d2493c52c2","checks":{"actualPath":true,"openFolder":true,"cancelUnchanged":true,"failedCopyOldLocation":true,"migrationRestart":true,"independentBackup":true,"dirtyFlush":true,"compositionRefused":true,"actualRestoreTwoRestarts":true,"offlineStartupFailClosed":true,"recoveryFolderRetry":true},"scope":"source Electron on actual runner OS with synthetic storage fixture; not hardware acceptance","host":{"platform":"win32","arch":"x64","release":"10.0.26100"}}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:19.0463633Z {"passed":true,"evidenceDirectory":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38114386629-1-0c88a4b5682b48d283ae742e1e128048\\source-attempt-Czqgq0","attempt":"windows-source-runtime-windows-ci","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"scope":"Source Electron on the actual runner OS with emulated shortcut registration and DOM keyboard events; no physical IME, DPI, focus, display, or receiver acceptance","electron":"44.7.0","checks":{"enterInsertsNewline":true,"keyCode229GuardsSubmit":true,"platformSubmitShortcut":"Control+Enter","preservedEmojiAndLineBreak":true,"draftClearedAfterSubmit":true},"revisions":{"before":0,"after":2},"cleanup":{"directory":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-source-key-events-igARqw","ownedPids":[4156,2588,9020,3424,4312,5360],"normalClose":true,"fakeDataRemoved":true,"allExited":true}}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.1509432Z {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.1834296Z   "attempt": "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38114386629-1-0c88a4b5682b48d283ae742e1e128048\\calendar-brand-clip-workflow-windows-ci-1791696259553-3036",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.1897408Z   "stage": "complete",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.1906559Z   "checks": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.1911434Z     "isolatedDataDir": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.1937917Z     "monthMarker": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.1969032Z       "href": "file:///D:/a/thoughtline/thoughtline/out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.1978581Z       "viewBox": "120 260 260 200",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.1981752Z       "clip": "polygon(3% 33%, 4% 29%, 12% 9%, 15% 6%, 18% 5%, 50% 28%, 53% 27%, 83% 45%, 87% 49%, 88% 55%, 86% 58%, 96% 64%, 97% 69%, 96% 72%, 90% 90%, 87% 93%, 85% 93%, 38% 60%, 34% 57%, 4% 38%)",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.1985649Z       "aria": "true",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2008661Z       "bounds": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2017936Z         "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2018933Z         "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2020779Z       },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2021561Z       "loaded": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2023193Z         "ok": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2024015Z         "width": 1254,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2025731Z         "height": 1254
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2026537Z       }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2032848Z     },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2033753Z     "yearMarker": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2036181Z       "href": "file:///D:/a/thoughtline/thoughtline/out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2037617Z       "viewBox": "120 260 260 200",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2040130Z       "clip": "polygon(3% 33%, 4% 29%, 12% 9%, 15% 6%, 18% 5%, 50% 28%, 53% 27%, 83% 45%, 87% 49%, 88% 55%, 86% 58%, 96% 64%, 97% 69%, 96% 72%, 90% 90%, 87% 93%, 85% 93%, 38% 60%, 34% 57%, 4% 38%)",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2042286Z       "aria": "true",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2042737Z       "bounds": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2043153Z         "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2043645Z         "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2044034Z       },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2044409Z       "loaded": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2044826Z         "ok": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2045308Z         "width": 1254,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2045747Z         "height": 1254
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2046177Z       }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2046614Z     },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2047069Z     "paperMarker": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2048027Z       "href": "file:///D:/a/thoughtline/thoughtline/out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2048977Z       "viewBox": "120 260 260 200",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2050135Z       "clip": "polygon(3% 33%, 4% 29%, 12% 9%, 15% 6%, 18% 5%, 50% 28%, 53% 27%, 83% 45%, 87% 49%, 88% 55%, 86% 58%, 96% 64%, 97% 69%, 96% 72%, 90% 90%, 87% 93%, 85% 93%, 38% 60%, 34% 57%, 4% 38%)",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2051192Z       "aria": "true",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2052054Z       "bounds": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2052490Z         "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2052932Z         "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2053410Z       },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2053803Z       "loaded": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2054234Z         "ok": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2054671Z         "width": 1254,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2055170Z         "height": 1254
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2055614Z       }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2056029Z     },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2056492Z     "motionClone": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2057435Z       "href": "file:///D:/a/thoughtline/thoughtline/out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2058426Z       "viewBox": "120 260 260 200",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2059613Z       "clip": "polygon(3% 33%, 4% 29%, 12% 9%, 15% 6%, 18% 5%, 50% 28%, 53% 27%, 83% 45%, 87% 49%, 88% 55%, 86% 58%, 96% 64%, 97% 69%, 96% 72%, 90% 90%, 87% 93%, 85% 93%, 38% 60%, 34% 57%, 4% 38%)",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2060707Z       "aria": null,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2062125Z       "bounds": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2062661Z         "width": 7.129314422607422,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2063158Z         "height": 5.509002685546875
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2063622Z       },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2064001Z       "loaded": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2064329Z         "ok": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2064617Z         "width": 1254,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2065017Z         "height": 1254
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2065392Z       }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2065783Z     },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2066240Z     "countWidths": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2066846Z       "350": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2067325Z         "windowWidth": 350,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2068082Z         "one": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2068572Z           "day": "2026-10-11",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2069447Z           "dateText": "11",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2069895Z           "countText": "3",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2070555Z           "cell": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2070998Z             "left": 17,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2071488Z             "right": 55.703125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2072374Z             "top": 343.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2072931Z             "bottom": 423.390625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2073458Z             "width": 38.703125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2074025Z             "height": 79.796875
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2074498Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2075032Z           "row": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2075461Z             "left": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2076005Z             "right": 47.53125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2076453Z             "top": 370.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2076958Z             "bottom": 385.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2077509Z             "width": 25.53125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2077983Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2078416Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2078865Z           "clip": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2079293Z             "left": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2079776Z             "right": 39.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2080338Z             "top": 371.296875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2080836Z             "bottom": 384.890625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2081609Z             "width": 17.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2082533Z             "height": 13.59375
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2083007Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2083313Z           "number": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2083726Z             "left": 41.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2084437Z             "right": 47.53125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2085673Z             "top": 370.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2086189Z             "bottom": 385.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2086724Z             "width": 5.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2087193Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2088006Z           }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2088321Z         },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2088606Z         "three": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2089099Z           "day": "2026-10-15",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2089561Z           "dateText": "15",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2090123Z           "countText": "123",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2090585Z           "cell": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2091024Z             "left": 191.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2091610Z             "right": 230.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2092086Z             "top": 343.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2092583Z             "bottom": 423.390625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2093142Z             "width": 38.71875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2093897Z             "height": 79.796875
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2094423Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2095215Z           "row": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2096712Z             "left": 196.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2098535Z             "right": 225.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2100764Z             "top": 370.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2102479Z             "bottom": 401.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2104170Z             "width": 28.71875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2105844Z             "height": 30.59375
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2107419Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2109676Z           "clip": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2111455Z             "left": 196.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2112959Z             "right": 214.4375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2114721Z             "top": 370.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2116507Z             "bottom": 384.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2118128Z             "width": 17.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2119613Z             "height": 13.59375
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2121079Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2122817Z           "number": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2124460Z             "left": 196.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2126207Z             "right": 214.640625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2127744Z             "top": 386.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2129254Z             "bottom": 401.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2130712Z             "width": 17.796875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2132199Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2133766Z           }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2135473Z         }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2137033Z       },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2138781Z       "421": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2140599Z         "windowWidth": 421,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2142303Z         "one": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2144066Z           "day": "2026-10-11",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2145877Z           "dateText": "11",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2147107Z           "countText": "3",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2148826Z           "cell": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2150549Z             "left": 17,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2152313Z             "right": 65.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2153980Z             "top": 343.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2155517Z             "bottom": 423.390625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2157264Z             "width": 48.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2158877Z             "height": 79.796875
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2160330Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2162641Z           "row": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2164083Z             "left": 24,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2165778Z             "right": 56.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2167745Z             "top": 372.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2169218Z             "bottom": 389.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2170661Z             "width": 32.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2172077Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2173973Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2176172Z           "clip": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2177858Z             "left": 24,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2179809Z             "right": 46,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2181254Z             "top": 372.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2182960Z             "bottom": 389.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2184467Z             "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2186181Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2187405Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2189492Z           "number": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2190846Z             "left": 51,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2192453Z             "right": 56.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2193928Z             "top": 373.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2196107Z             "bottom": 388.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2197765Z             "width": 5.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2199271Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2200677Z           }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2202714Z         },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2204135Z         "three": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2205547Z           "day": "2026-10-15",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2206984Z           "dateText": "15",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2209076Z           "countText": "123",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2210404Z           "cell": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2212701Z             "left": 232.421875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2214484Z             "right": 281.28125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2215993Z             "top": 343.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2217616Z             "bottom": 423.390625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2218865Z             "width": 48.859375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2220517Z             "height": 79.796875
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2221903Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2223353Z           "row": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2225234Z             "left": 239.421875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2226794Z             "right": 274.28125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2228330Z             "top": 372.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2230270Z             "bottom": 404.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2231994Z             "width": 34.859375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2233376Z             "height": 32
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2235789Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2237343Z           "clip": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2238780Z             "left": 239.421875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2240471Z             "right": 261.421875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2242082Z             "top": 372.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2243510Z             "bottom": 389.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2245282Z             "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2246855Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2248155Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2249827Z           "number": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2251205Z             "left": 239.421875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2252566Z             "right": 257.21875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2254134Z             "top": 389.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2255584Z             "bottom": 404.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2256982Z             "width": 17.796875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2258555Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2260059Z           }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2261361Z         }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2262839Z       },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2264174Z       "500": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2265974Z         "windowWidth": 500,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2267252Z         "one": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2269523Z           "day": "2026-10-11",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2270896Z           "dateText": "11",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2272471Z           "countText": "3",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2274160Z           "cell": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2275640Z             "left": 17,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2277627Z             "right": 77.140625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2279460Z             "top": 343.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2280811Z             "bottom": 423.390625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2282151Z             "width": 60.140625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2283187Z             "height": 79.796875
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2284811Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2287047Z           "row": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2288600Z             "left": 24,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2289875Z             "right": 56.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2291187Z             "top": 372.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2292648Z             "bottom": 389.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2294371Z             "width": 32.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2295974Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2297954Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2299829Z           "clip": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2301372Z             "left": 24,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2302724Z             "right": 46,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2304048Z             "top": 372.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2306135Z             "bottom": 389.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2307425Z             "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2308738Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2310147Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2311446Z           "number": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2313013Z             "left": 51,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2314345Z             "right": 56.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2315667Z             "top": 373.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2316983Z             "bottom": 388.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2318308Z             "width": 5.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2320359Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2321928Z           }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2323423Z         },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2325429Z         "three": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2326679Z           "day": "2026-10-15",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2328736Z           "dateText": "15",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2330317Z           "countText": "123",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2331746Z           "cell": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2333288Z             "left": 277.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2334601Z             "right": 337.703125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2335959Z             "top": 343.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2338174Z             "bottom": 423.390625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2339514Z             "width": 60.140625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2340909Z             "height": 79.796875
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2342166Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2343736Z           "row": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2346196Z             "left": 284.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2348436Z             "right": 329.359375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2349775Z             "top": 372.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2351081Z             "bottom": 389.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2352417Z             "width": 44.796875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2353700Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2354961Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2356676Z           "clip": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2358221Z             "left": 284.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2359546Z             "right": 306.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2360851Z             "top": 372.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2362937Z             "bottom": 389.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2364248Z             "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2366335Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2367891Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2369411Z           "number": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2370960Z             "left": 311.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2372273Z             "right": 329.359375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2373761Z             "top": 373.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2375950Z             "bottom": 388.59375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2377274Z             "width": 17.796875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2378563Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2379813Z           }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2381505Z         }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2383191Z       },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2384859Z       "740": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2387049Z         "windowWidth": 740,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2388356Z         "one": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2389924Z           "day": "2026-10-11",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2391875Z           "dateText": "11",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2393470Z           "countText": "3",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2394746Z           "cell": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2396264Z             "left": 23,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2397626Z             "right": 115.703125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2398917Z             "top": 347.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2400217Z             "bottom": 423.796875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2401546Z             "width": 92.703125,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2403407Z             "height": 76.609375
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2405164Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2406889Z           "row": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2408418Z             "left": 33,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2409771Z             "right": 65.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2411969Z             "top": 380.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2413374Z             "bottom": 397.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2414668Z             "width": 32.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2416014Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2417339Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2419066Z           "clip": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2420475Z             "left": 33,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2421568Z             "right": 55,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2423463Z             "top": 380.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2425220Z             "bottom": 397.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2426627Z             "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2428764Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2430399Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2432231Z           "number": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2433985Z             "left": 60,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2435533Z             "right": 65.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2436939Z             "top": 381.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2438390Z             "bottom": 396.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2439867Z             "width": 5.9375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2441435Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2442577Z           }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2444583Z         },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2445931Z         "three": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2447349Z           "day": "2026-10-15",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2448814Z           "dateText": "15",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2450302Z           "countText": "123",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2452004Z           "cell": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2454107Z             "left": 413.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2455412Z             "right": 506.5625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2457389Z             "top": 347.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2459084Z             "bottom": 423.796875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2460559Z             "width": 92.71875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2462234Z             "height": 76.609375
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2463874Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2465343Z           "row": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2467092Z             "left": 423.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2468396Z             "right": 468.640625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2469856Z             "top": 380.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2471336Z             "bottom": 397.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2472864Z             "width": 44.796875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2474502Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2475997Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2477381Z           "clip": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2478770Z             "left": 423.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2480118Z             "right": 445.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2482294Z             "top": 380.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2484174Z             "bottom": 397.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2485786Z             "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2487883Z             "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2489410Z           },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2491539Z           "number": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2492943Z             "left": 450.84375,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2494475Z             "right": 468.640625,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2496059Z             "top": 381.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2497782Z             "bottom": 396.1875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2499315Z             "width": 17.796875,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2500803Z             "height": 15
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2502507Z           }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2504329Z         }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2505788Z       }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2507111Z     },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2508857Z     "originalSourceSha256": "313485e59395e3165f6504964efd72f4a3811150ac337834be3e2759f279f778"
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2510139Z   },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2511805Z   "screenshots": [
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2514718Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38114386629-1-0c88a4b5682b48d283ae742e1e128048\\calendar-brand-clip-workflow-windows-ci-1791696259553-3036\\month.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2517970Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38114386629-1-0c88a4b5682b48d283ae742e1e128048\\calendar-brand-clip-workflow-windows-ci-1791696259553-3036\\marker-closeup.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2521200Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38114386629-1-0c88a4b5682b48d283ae742e1e128048\\calendar-brand-clip-workflow-windows-ci-1791696259553-3036\\year.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2524421Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38114386629-1-0c88a4b5682b48d283ae742e1e128048\\calendar-brand-clip-workflow-windows-ci-1791696259553-3036\\day-paper.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2527521Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38114386629-1-0c88a4b5682b48d283ae742e1e128048\\calendar-brand-clip-workflow-windows-ci-1791696259553-3036\\day-to-month-motion.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2530559Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38114386629-1-0c88a4b5682b48d283ae742e1e128048\\calendar-brand-clip-workflow-windows-ci-1791696259553-3036\\month-350-one-three-digit.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2533741Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38114386629-1-0c88a4b5682b48d283ae742e1e128048\\calendar-brand-clip-workflow-windows-ci-1791696259553-3036\\month-421-one-three-digit.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2536877Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38114386629-1-0c88a4b5682b48d283ae742e1e128048\\calendar-brand-clip-workflow-windows-ci-1791696259553-3036\\month-500-one-three-digit.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2540150Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38114386629-1-0c88a4b5682b48d283ae742e1e128048\\calendar-brand-clip-workflow-windows-ci-1791696259553-3036\\month-740-one-three-digit.png"
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2542125Z   ],
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2542718Z   "normalClose": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2543300Z   "fixtureRemoved": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2544448Z   "originalAppPid30628AliveAfter": "not-applicable"
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:24.2545177Z }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:24:30.8920930Z {"evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38114386629-1-0c88a4b5682b48d283ae742e1e128048\\final-reader-placement-workflow-windows-ci-Lb0EZU","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-final-reader-bsCijU","cases":[{"name":"raw-cross","passed":true,"oldSession":2,"session":3,"reader":"c","editors":1,"draft":"UNSAVED cross C","persisted":"final probe c"},{"name":"real-main-cross-session-late-delete","passed":true,"session":3,"reader":"c","editors":1,"draft":"UNSAVED cross C","persisted":"final probe c"},{"name":"raw-same","passed":true,"oldSession":4,"session":4,"reader":"c","editors":1,"draft":"UNSAVED same C","persisted":"UNSAVED cross C"},{"name":"same-session-back-new-dirty-reader","passed":true,"session":4,"reader":"c","editors":1,"draft":"UNSAVED same C","persisted":"UNSAVED cross C"},{"name":"detail-fast-queued-flips-and-delayed-finish","passed":true,"sequentialFlipsRetained":true,"delayedFinishWaitedForSave":true},{"name":"calendar-normal-delete-neighbor","passed":true,"reader":"e"},{"name":"detail-normal-delete-neighbor-and-empty","passed":true,"neighbor":"f","lastDeleteEmpty":true},{"name":"detail-last-deleted-selection-stays-empty","passed":true,"noFallbackToOldManageSelection":true},{"name":"agent-auto-split-full-rope-recovery-action-and-stable-body","passed":true,"notice":"","swapRecoveryPresent":true,"idsStable":true,"subsequentEditStable":true}],"pids":[3968,5840,4356,6276,2560,8808,7576],"scope":"Real source Electron main routing and persisted mutations; controlled reply hold, synthetic data only","normalClose":true,"pidChecks":[{"pid":3968,"status":"ESRCH"},{"pid":5840,"status":"ESRCH"},{"pid":4356,"status":"ESRCH"},{"pid":6276,"status":"ESRCH"},{"pid":2560,"status":"ESRCH"},{"pid":8808,"status":"ESRCH"},{"pid":7576,"status":"ESRCH"}],"stat":"ENOENT","passed":true}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:25:08.3394622Z {"dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-final-shape-B1OVmP","evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38114386629-1-0c88a4b5682b48d283ae742e1e128048\\final-calendar-shape-workflow-windows-ci-EXya3I","cases":[{"name":"empty-day-expand","passed":true,"frames":[{"time":25,"kind":"month-to-day","from":{"left":413.84375,"top":184,"width":92.71875,"height":60.59375},"to":{"left":23,"top":117,"width":679,"height":19.1875},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"calendar-paper-groups","x":0.507942,"y":0.507942,"tx":222.732,"ty":54.7006}],"clones":0,"clips":[]},{"time":100,"kind":"month-to-day","from":{"left":413.84375,"top":184,"width":92.71875,"height":60.59375},"to":{"left":23,"top":117,"width":679,"height":19.1875},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"calendar-paper-groups","x":0.944699,"y":0.944699,"tx":25.0323,"ty":6.14765}],"clones":0,"clips":[]}]},{"name":"empty-day-return","passed":true,"frames":[{"time":25,"kind":"day-to-month","from":{"left":23,"top":117,"width":679,"height":19.1875},"to":{"left":413.84375,"top":184,"width":92.71875,"height":60.59375},"transforms":[{"class":"calendar-motion-surface","x":0.599924,"y":0.599924,"tx":181.096,"ty":44.4752},{"class":"date-cell","x":1,"y":1,"tx":0,"ty":0}],"clones":0,"clips":[]},{"time":100,"kind":"day-to-month","from":{"left":23,"top":117,"width":679,"height":19.1875},"to":{"left":413.84375,"top":184,"width":92.71875,"height":60.59375},"transforms":[{"class":"calendar-motion-surface","x":0.176821,"y":0.176821,"tx":372.616,"ty":91.5103},{"class":"date-cell","x":1,"y":1,"tx":0,"ty":0}],"clones":0,"clips":[]}]},{"name":"paper-day-expand","passed":true,"frames":[{"time":25,"kind":"month-to-day","from":{"left":413.84375,"top":315.1875,"width":92.71875,"height":60.609375},"to":{"left":23,"top":108,"width":679,"height":407},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"calendar-paper-groups","x":0.507942,"y":0.507942,"tx":222.732,"ty":119.505}],"clones":0,"clips":[{"width":22,"height":17}]},{"time":100,"kind":"month-to-day","from":{"left":413.84375,"top":315.1875,"width":92.71875,"height":60.609375},"to":{"left":23,"top":108,"width":679,"height":407},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"calendar-paper-groups","x":0.944699,"y":0.944699,"tx":25.0323,"ty":13.4309}],"clones":0,"clips":[{"width":22,"height":17}]}]}],"pids":[8904,8816,3264,8360,9112,8624],"failure":"page.waitForSelector: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-calendar-motion]') to be visible\u001b[22m\n\n    at sample (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\final-calendar-shape-workflow.cjs:6:62)\n    at async D:\\a\\thoughtline\\thoughtline\\tests\\electron\\final-calendar-shape-workflow.cjs:7:281","normalClose":true,"pidChecks":[{"pid":8904,"status":"ESRCH"},{"pid":8816,"status":"ESRCH"},{"pid":3264,"status":"ESRCH"},{"pid":8360,"status":"ESRCH"},{"pid":9112,"status":"ESRCH"},{"pid":8624,"status":"ESRCH"}],"stat":"ENOENT","passed":false}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:25:08.7540458Z ^[[31;1mException: ^[[0mD:\a\_temp\9091bd81-6e96-4736-847a-88d667d9465a.ps1:10^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:25:08.7541716Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:25:08.7543641Z ^[[31;1m^[[0m^[[36;1m^[[36;1m  10 | ^[[0m … EXITCODE -ne 0) { ^[[36;1mthrow "$test failed with exit code $LASTEXITCODE"^[[0m }^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:25:08.7546360Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:25:08.7549168Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mfinal-calendar-shape-workflow failed with exit code 1^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:25:08.7784512Z ##[error]Process completed with exit code 1.

@@ -1,0 +1,93 @@
+windows-test-package	Source Electron UI regression on Windows	﻿2026-10-11T06:07:51.7978495Z ##[group]Run $evidenceRoot = 'acceptance/evidence/round1/p6-windows-source'
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:07:51.7979724Z ^[[36;1m$evidenceRoot = 'acceptance/evidence/round1/p6-windows-source'^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:07:51.7980717Z ^[[36;1mNew-Item -ItemType Directory -Force $evidenceRoot | Out-Null^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:07:51.7982084Z ^[[36;1m$runEvidence = Join-Path $evidenceRoot ('run-{0}-{1}-{2}' -f $env:GITHUB_RUN_ID, $env:GITHUB_RUN_ATTEMPT, [guid]::NewGuid().ToString('N'))^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:07:51.7983584Z ^[[36;1mNew-Item -ItemType Directory -Path $runEvidence | Out-Null^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:07:51.7985097Z ^[[36;1m$env:THOUGHTLINE_EVIDENCE_DIR = $runEvidence^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:07:51.7987713Z ^[[36;1mforeach ($test in @('storage-workflow', 'inline-edit-workflow', 'calendar-workflow', 'calendar-motion-workflow', 'calendar-motion-fix1-workflow', 'calendar-geometry-workflow', 'windows-source-runtime', 'calendar-brand-clip-workflow', 'final-reader-placement-workflow', 'final-calendar-shape-workflow')) {^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:07:51.7990383Z ^[[36;1m  $env:THOUGHTLINE_ATTEMPT = ('{0}-windows-ci' -f $test)^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:07:51.7991794Z ^[[36;1m  & node "tests/electron/$test.cjs" 2>&1 | Tee-Object -FilePath (Join-Path $runEvidence "$test.log")^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:07:51.7993005Z ^[[36;1m  if ($LASTEXITCODE -ne 0) { throw "$test failed with exit code $LASTEXITCODE" }^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:07:51.7993825Z ^[[36;1m}^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:07:51.8117825Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:07:51.8118270Z env:
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:07:51.8118560Z   THOUGHTLINE_FAKE_CLIPBOARD: 1
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:07:51.8119493Z ##[endgroup]
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:07:59.1332454Z {"profile":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-p5-electron-P09gTr\\profile","target":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-p5-electron-P09gTr\\target","backup":"C:\\Users\\runneradmin\\AppData\\Local\\Temp\\thoughtline-p5-electron-P09gTr\\Thoughtline-backup-2026-10-11T06-07-55-035Z-58d1e037-f634-4643-98aa-ff39ae80589d","checks":{"actualPath":true,"openFolder":true,"cancelUnchanged":true,"failedCopyOldLocation":true,"migrationRestart":true,"independentBackup":true,"dirtyFlush":true,"compositionRefused":true,"actualRestoreTwoRestarts":true,"offlineStartupFailClosed":true,"recoveryFolderRetry":true},"scope":"source Electron on actual runner OS with synthetic storage fixture; not hardware acceptance","host":{"platform":"win32","arch":"x64","release":"10.0.26100"}}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:08:05.5903830Z {"scope":"isolated source Electron DOM/IPC on actual runner OS, synthetic composition events and disk fault; not physical IME","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"inline":true,"autosave":true,"lastInputClose":true,"compositionCloseBlocked":true,"failureRetained":true,"retryPersisted":true,"identityDatePreserved":true,"groupAgentSplitKeepsEditor":true}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:08:10.5498632Z {"scope":"isolated source Electron DOM/IPC on actual runner OS with synthetic dates; not physical DPI/IME","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"today":true,"archiveCounted":true,"initialNine":true,"threeColumns":true,"loadMore":true,"inlineEdit":true,"backScrollRestored":true,"yearTwelveMonths":true,"search":true,"softDeleteRestore":true}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:08:20.9730723Z {"scope":"source Electron real pixels, synthetic dates; not physical iPhone or Windows acceptance","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"day":"2026-10-11","month":"2026-10","entered":["month-to-year","year-to-month","month-to-day","day-to-month"],"interruption":true,"reduced":true,"scroll":true,"twoColumns":true,"boundedCards":true,"compositionGuard":true,"evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38116755980-1-a49a744513474468a15190ab290b686c\\calendar-motion-workflow-windows-ci"}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:08:27.8869937Z {"cases":[{"name":"empty-day-visible-return","passed":true,"emptyDay":"2026-10-01","visual":{"kind":"day-to-month","text":"这里还没有念头。","emptyCount":1}},{"name":"scroll-interrupts-active-motion","passed":true,"scrollTop":180},{"name":"restored-scroll-keeps-return-motion","passed":true,"kind":"day-to-month"},{"name":"resize-interrupts-active-motion","passed":true,"previousSize":[740,540]},{"name":"old-save-cannot-navigate-new-session","passed":true,"oldSession":2,"publishedSession":3,"storedTextSaved":true}],"evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38116755980-1-a49a744513474468a15190ab290b686c\\calendar-motion-fix1-workflow-windows-ci"}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:08:34.7516490Z {"scope":"isolated source Electron simulated window bounds and real repository; no physical multi-display/DPI","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"savedBounds":{"x":166,"y":42,"width":700,"height":580},"restoredBounds":{"x":166,"y":42,"width":700,"height":580},"settingsPreserved":true,"detailDidNotPollute":true,"motions":{"monthToDay":230,"dayToMonth":210,"monthToYear":210,"yearToMonth":230,"monthBackToYear":210},"sourceContent":true,"storedTextPreserved":true,"evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38116755980-1-a49a744513474468a15190ab290b686c\\calendar-geometry-workflow-windows-ci"}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:08:36.9578980Z {"passed":true,"evidenceDirectory":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38116755980-1-a49a744513474468a15190ab290b686c\\source-attempt-E0JNjP","attempt":"windows-source-runtime-windows-ci","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"scope":"Source Electron on the actual runner OS with emulated shortcut registration and DOM keyboard events; no physical IME, DPI, focus, display, or receiver acceptance","electron":"44.7.0","checks":{"enterInsertsNewline":true,"keyCode229GuardsSubmit":true,"platformSubmitShortcut":"Control+Enter","preservedEmojiAndLineBreak":true,"draftClearedAfterSubmit":true},"revisions":{"before":0,"after":2},"cleanup":{"directory":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-source-key-events-SrexKL","ownedPids":[6744,3100,1728,2536,8156,2344],"normalClose":true,"fakeDataRemoved":true,"allExited":true}}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6689634Z {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6693837Z   "attempt": "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38116755980-1-a49a744513474468a15190ab290b686c\\calendar-brand-clip-workflow-windows-ci-1791698917410-8780",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6696410Z   "stage": "motion",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6698008Z   "checks": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6700999Z     "isolatedDataDir": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6712506Z     "monthMarker": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6713749Z       "href": "file:///D:/a/thoughtline/thoughtline/out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6715162Z       "viewBox": "120 260 260 200",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6718032Z       "clip": "polygon(3% 33%, 4% 29%, 12% 9%, 15% 6%, 18% 5%, 50% 28%, 53% 27%, 83% 45%, 87% 49%, 88% 55%, 86% 58%, 96% 64%, 97% 69%, 96% 72%, 90% 90%, 87% 93%, 85% 93%, 38% 60%, 34% 57%, 4% 38%)",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6750654Z       "aria": "true",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6751163Z       "bounds": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6751987Z         "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6752489Z         "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6753237Z       },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6753753Z       "loaded": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6754212Z         "ok": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6754676Z         "width": 1254,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6755205Z         "height": 1254
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6755688Z       }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6756073Z     },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6756545Z     "yearMarker": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6757572Z       "href": "file:///D:/a/thoughtline/thoughtline/out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6758665Z       "viewBox": "120 260 260 200",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6759958Z       "clip": "polygon(3% 33%, 4% 29%, 12% 9%, 15% 6%, 18% 5%, 50% 28%, 53% 27%, 83% 45%, 87% 49%, 88% 55%, 86% 58%, 96% 64%, 97% 69%, 96% 72%, 90% 90%, 87% 93%, 85% 93%, 38% 60%, 34% 57%, 4% 38%)",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6762814Z       "aria": "true",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6763295Z       "bounds": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6763811Z         "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6764286Z         "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6764721Z       },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6765172Z       "loaded": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6765603Z         "ok": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6766404Z         "width": 1254,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6766874Z         "height": 1254
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6767633Z       }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6768111Z     },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6769032Z     "paperMarker": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6770135Z       "href": "file:///D:/a/thoughtline/thoughtline/out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6771450Z       "viewBox": "120 260 260 200",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6772741Z       "clip": "polygon(3% 33%, 4% 29%, 12% 9%, 15% 6%, 18% 5%, 50% 28%, 53% 27%, 83% 45%, 87% 49%, 88% 55%, 86% 58%, 96% 64%, 97% 69%, 96% 72%, 90% 90%, 87% 93%, 85% 93%, 38% 60%, 34% 57%, 4% 38%)",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6773860Z       "aria": "true",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6774305Z       "bounds": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6774704Z         "width": 22,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6775048Z         "height": 17
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6775492Z       },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6775907Z       "loaded": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6776405Z         "ok": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6776864Z         "width": 1254,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6777337Z         "height": 1254
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6777961Z       }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6778362Z     }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6778742Z   },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6779105Z   "screenshots": [
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6780893Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38116755980-1-a49a744513474468a15190ab290b686c\\calendar-brand-clip-workflow-windows-ci-1791698917410-8780\\month.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6784590Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38116755980-1-a49a744513474468a15190ab290b686c\\calendar-brand-clip-workflow-windows-ci-1791698917410-8780\\marker-closeup.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6788376Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38116755980-1-a49a744513474468a15190ab290b686c\\calendar-brand-clip-workflow-windows-ci-1791698917410-8780\\year.png",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6790442Z     "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38116755980-1-a49a744513474468a15190ab290b686c\\calendar-brand-clip-workflow-windows-ci-1791698917410-8780\\day-paper.png"
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6791657Z   ],
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6791919Z   "normalClose": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6792216Z   "fixtureRemoved": true,
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6792532Z   "failure": {
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6792799Z     "stage": "motion",
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6794323Z     "message": "locator.evaluate: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-calendar-motion] .mini-clip').first()\u001b[22m\n\n    at imageCheck (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\calendar-brand-clip-workflow.cjs:28:70)\n    at D:\\a\\thoughtline\\thoughtline\\tests\\electron\\calendar-brand-clip-workflow.cjs:44:21"
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6795774Z   },
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6796098Z   "originalAppPid30628AliveAfter": "not-applicable"
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:12.6796494Z }
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:13.4144278Z ^[[31;1mException: ^[[0mD:\a\_temp\f3c645c7-988d-416a-851b-c8e6822d9e5b.ps1:10^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:13.4170854Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:13.4172593Z ^[[31;1m^[[0m^[[36;1m^[[36;1m  10 | ^[[0m … EXITCODE -ne 0) { ^[[36;1mthrow "$test failed with exit code $LASTEXITCODE"^[[0m }^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:13.4174689Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:13.4176632Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mcalendar-brand-clip-workflow failed with exit code 1^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T06:09:13.4405367Z ##[error]Process completed with exit code 1.

@@ -1,0 +1,158 @@
+{
+  "passed": false,
+  "packaged": true,
+  "executable": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/dist/mac-arm64/Thoughtline.app/Contents/MacOS/Thoughtline",
+  "version": "0.0.22",
+  "checks": [
+    {
+      "name": "light-native-background-blends",
+      "size": {
+        "width": 1300,
+        "height": 1040
+      },
+      "changedPixels": 943235,
+      "meanRGBDifference": 6.172084812623274
+    },
+    {
+      "name": "light-blur-keeps-native-material"
+    },
+    {
+      "name": "light-moved-actual-window"
+    },
+    {
+      "name": "dark-native-background-blends",
+      "size": {
+        "width": 1300,
+        "height": 1040
+      },
+      "changedPixels": 834361,
+      "meanRGBDifference": 9.054886587771202
+    },
+    {
+      "name": "dark-blur-keeps-native-material"
+    },
+    {
+      "name": "dark-moved-actual-window"
+    }
+  ],
+  "captures": [
+    {
+      "file": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round3/mac-packaged/authorized-native-material-final/light-focused-first-backdrop.png",
+      "windowId": "window:41982:0",
+      "bounds": {
+        "x": 257,
+        "y": 110,
+        "width": 650,
+        "height": 520
+      },
+      "ownedBackdropOnly": true,
+      "method": "screen-composited region; isolated window capture omits behind-window native blending"
+    },
+    {
+      "file": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round3/mac-packaged/authorized-native-material-final/light-focused-second-backdrop.png",
+      "windowId": "window:41982:0",
+      "bounds": {
+        "x": 257,
+        "y": 110,
+        "width": 650,
+        "height": 520
+      },
+      "ownedBackdropOnly": true,
+      "method": "screen-composited region; isolated window capture omits behind-window native blending"
+    },
+    {
+      "file": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round3/mac-packaged/authorized-native-material-final/light-unfocused.png",
+      "windowId": "window:41982:0",
+      "bounds": {
+        "x": 257,
+        "y": 110,
+        "width": 650,
+        "height": 520
+      },
+      "ownedBackdropOnly": true,
+      "method": "screen-composited region; isolated window capture omits behind-window native blending"
+    },
+    {
+      "file": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round3/mac-packaged/authorized-native-material-final/light-moved.png",
+      "windowId": "window:41982:0",
+      "bounds": {
+        "x": 277,
+        "y": 130,
+        "width": 650,
+        "height": 520
+      },
+      "ownedBackdropOnly": true,
+      "method": "screen-composited region; isolated window capture omits behind-window native blending"
+    },
+    {
+      "file": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round3/mac-packaged/authorized-native-material-final/dark-focused-first-backdrop.png",
+      "windowId": "window:41982:0",
+      "bounds": {
+        "x": 257,
+        "y": 110,
+        "width": 650,
+        "height": 520
+      },
+      "ownedBackdropOnly": true,
+      "method": "screen-composited region; isolated window capture omits behind-window native blending"
+    },
+    {
+      "file": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round3/mac-packaged/authorized-native-material-final/dark-focused-second-backdrop.png",
+      "windowId": "window:41982:0",
+      "bounds": {
+        "x": 257,
+        "y": 110,
+        "width": 650,
+        "height": 520
+      },
+      "ownedBackdropOnly": true,
+      "method": "screen-composited region; isolated window capture omits behind-window native blending"
+    },
+    {
+      "file": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round3/mac-packaged/authorized-native-material-final/dark-unfocused.png",
+      "windowId": "window:41982:0",
+      "bounds": {
+        "x": 257,
+        "y": 110,
+        "width": 650,
+        "height": 520
+      },
+      "ownedBackdropOnly": true,
+      "method": "screen-composited region; isolated window capture omits behind-window native blending"
+    },
+    {
+      "file": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round3/mac-packaged/authorized-native-material-final/dark-moved.png",
+      "windowId": "window:41982:0",
+      "bounds": {
+        "x": 277,
+        "y": 130,
+        "width": 650,
+        "height": 520
+      },
+      "ownedBackdropOnly": true,
+      "method": "screen-composited region; isolated window capture omits behind-window native blending"
+    }
+  ],
+  "scope": "Actual frozen package and native compositor, OS transparency/contrast temporarily disabled by authorized outer controller; synthetic owned backdrop, no personal screen or reference-quality acceptance.",
+  "native": {
+    "reduceTransparency": false,
+    "increaseContrast": false,
+    "screen": "granted"
+  },
+  "failure": "AssertionError [ERR_ASSERTION]: capture region must remain completely inside owned backdrop\n    at capture (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round3/native-material-worker.cjs:13:304)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round3/native-material-worker.cjs:24:132",
+  "cleanup": {
+    "normalQuit": true,
+    "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-packaged-native-material-FZTNrn",
+    "profileRemoved": true,
+    "allExited": true,
+    "ownedPids": [
+      16170,
+      16170,
+      16171,
+      16172,
+      16173,
+      16174,
+      16176
+    ]
+  }
+}

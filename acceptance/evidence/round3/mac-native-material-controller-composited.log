@@ -1,0 +1,5 @@
+{"authorizedByUser": true, "scope": "Two accessibility display toggles only; actual package compositor test; restore original values in finally", "before": {"reduceTransparency": true, "increaseContrast": true}, "during": {"reduceTransparency": false, "increaseContrast": false}, "after": {"reduceTransparency": true, "increaseContrast": true}, "restored": true, "testPassed": false, "updatedAt": "2026-10-11T05:42:54.131766+00:00", "testExitCode": 1}
+Traceback (most recent call last):
+  File "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round3/mac-native-material-controller.py", line 38, in <module>
+    assert receipt['testPassed'],'Actual native material test failed; original OS settings restored'
+AssertionError: Actual native material test failed; original OS settings restored

@@ -1,0 +1,32 @@
+windows-test-package	Source Electron UI regression on Windows	﻿2026-10-11T05:37:04.1405774Z ##[group]Run $evidenceRoot = 'acceptance/evidence/round1/p6-windows-source'
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:04.1406564Z ^[[36;1m$evidenceRoot = 'acceptance/evidence/round1/p6-windows-source'^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:04.1407110Z ^[[36;1mNew-Item -ItemType Directory -Force $evidenceRoot | Out-Null^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:04.1407910Z ^[[36;1m$runEvidence = Join-Path $evidenceRoot ('run-{0}-{1}-{2}' -f $env:GITHUB_RUN_ID, $env:GITHUB_RUN_ATTEMPT, [guid]::NewGuid().ToString('N'))^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:04.1408654Z ^[[36;1mNew-Item -ItemType Directory -Path $runEvidence | Out-Null^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:04.1409110Z ^[[36;1m$env:THOUGHTLINE_EVIDENCE_DIR = $runEvidence^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:04.1410378Z ^[[36;1mforeach ($test in @('inline-edit-workflow', 'calendar-workflow', 'calendar-motion-workflow', 'calendar-motion-fix1-workflow', 'calendar-geometry-workflow', 'storage-workflow', 'windows-source-runtime', 'calendar-brand-clip-workflow', 'final-reader-placement-workflow', 'final-calendar-shape-workflow')) {^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:04.1411778Z ^[[36;1m  $env:THOUGHTLINE_ATTEMPT = ('{0}-windows-ci' -f $test)^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:04.1413186Z ^[[36;1m  & node "tests/electron/$test.cjs" 2>&1 | Tee-Object -FilePath (Join-Path $runEvidence "$test.log")^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:04.1413925Z ^[[36;1m  if ($LASTEXITCODE -ne 0) { throw "$test failed with exit code $LASTEXITCODE" }^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:04.1414649Z ^[[36;1m}^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:04.1523405Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:04.1523835Z env:
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:04.1524124Z   THOUGHTLINE_FAKE_CLIPBOARD: 1
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:04.1524444Z ##[endgroup]
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:10.5096661Z {"scope":"isolated source Electron DOM/IPC on actual runner OS, synthetic composition events and disk fault; not physical IME","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"inline":true,"autosave":true,"lastInputClose":true,"compositionCloseBlocked":true,"failureRetained":true,"retryPersisted":true,"identityDatePreserved":true,"groupAgentSplitKeepsEditor":true}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:15.5239582Z {"scope":"isolated source Electron DOM/IPC on actual runner OS with synthetic dates; not physical DPI/IME","host":{"platform":"win32","arch":"x64","release":"10.0.26100"},"today":true,"archiveCounted":true,"initialNine":true,"threeColumns":true,"loadMore":true,"inlineEdit":true,"backScrollRestored":true,"yearTwelveMonths":true,"search":true,"softDeleteRestore":true}
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:23.3583314Z ^[[31;1mAssertionError [ERR_ASSERTION]: day papers themselves expand^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:23.3594397Z ^[[31;1m    at D:\a\thoughtline\thoughtline\tests\electron\calendar-motion-workflow.cjs:64:3 {^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:23.3596513Z ^[[31;1m  generatedMessage: false,^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:23.3619251Z ^[[31;1m  code: 'ERR_ASSERTION',^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:23.3620410Z ^[[31;1m  actual: false,^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:23.3622392Z ^[[31;1m  expected: true,^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:23.3623750Z ^[[31;1m  operator: '==',^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:23.3624818Z ^[[31;1m  diff: 'simple'^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:23.3625828Z ^[[31;1m}^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:23.8092025Z ^[[31;1mException: ^[[0mD:\a\_temp\f6087e85-4d27-45cd-90c8-5aa6a7689dfa.ps1:10^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:23.8260687Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:23.8270587Z ^[[31;1m^[[0m^[[36;1m^[[36;1m  10 | ^[[0m … EXITCODE -ne 0) { ^[[36;1mthrow "$test failed with exit code $LASTEXITCODE"^[[0m }^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:23.8291280Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:24.0400560Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mcalendar-motion-workflow failed with exit code 1^[[0m
+windows-test-package	Source Electron UI regression on Windows	2026-10-11T05:37:24.0466683Z ##[error]Process completed with exit code 1.

@@ -1,0 +1,20 @@
+{
+  "authorizedByUser": true,
+  "scope": "Two accessibility display toggles only; actual package compositor test; restore original values in finally",
+  "before": {
+    "reduceTransparency": true,
+    "increaseContrast": true
+  },
+  "during": {
+    "reduceTransparency": false,
+    "increaseContrast": false
+  },
+  "after": {
+    "reduceTransparency": true,
+    "increaseContrast": true
+  },
+  "restored": true,
+  "testPassed": false,
+  "updatedAt": "2026-10-11T05:40:35.956298+00:00",
+  "testExitCode": 1
+}

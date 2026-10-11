@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "source": "44abe93d05853260e0eb17d4ac38f9bf004e8c7c",
+  "version": "0.0.22",
+  "checkpoints": 54,
+  "suites": [
+    {
+      "file": "acceptance/evidence/round3/mac-packaged/material-round3/packaged-round-three.json",
+      "checks": 10,
+      "normalQuit": true,
+      "profileRemoved": true
+    },
+    {
+      "file": "acceptance/evidence/round3/mac-packaged/material-round21/packaged-round-twenty-one.json",
+      "checks": 24,
+      "normalQuit": true,
+      "profileRemoved": true
+    },
+    {
+      "file": "acceptance/evidence/round3/mac-packaged/material-appearance/packaged-appearance.json",
+      "checks": 3,
+      "normalQuit": true,
+      "profileRemoved": true
+    },
+    {
+      "file": "acceptance/evidence/round3/mac-packaged/material-capacity/packaged-capacity.json",
+      "checks": 4,
+      "normalQuit": true,
+      "profileRemoved": true
+    },
+    {
+      "file": "acceptance/evidence/round3/mac-packaged/material-positioning/packaged-positioning.json",
+      "checks": 9,
+      "normalQuit": true,
+      "profileRemoved": true
+    },
+    {
+      "file": "acceptance/evidence/round3/mac-packaged/material-split-menu/packaged-split.json",
+      "checks": 4,
+      "normalQuit": true,
+      "profileRemoved": true
+    }
+  ],
+  "formalAcceptance": false,
+  "physicalAcceptance": false,
+  "native": {
+    "scope": "Real native permission query and scheduler delivery events; no automatic permission granting, physical banner/click, or OS settings changes.",
+    "access": "granted",
+    "events": [
+      {
+        "event": "show",
+        "data": [
+          "[object Object]"
+        ]
+      }
+    ],
+    "state": "notified"
+  }
+}

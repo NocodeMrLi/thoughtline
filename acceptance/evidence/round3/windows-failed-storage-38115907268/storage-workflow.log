@@ -1,0 +1,12 @@
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert((await manage.evaluate(()=>window.thoughtline.openSettings())).ok)
+
+    at D:\a\thoughtline\thoughtline\tests\electron\storage-workflow.cjs:18:36 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

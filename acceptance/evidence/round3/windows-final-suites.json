@@ -1,0 +1,73 @@
+{
+  "passed": true,
+  "source": "b932ffc60e8f5ebf20e2bc5355eea513126a3872",
+  "version": "0.0.22",
+  "windowsRun": 38117325731,
+  "checkpoints": 54,
+  "suites": [
+    {
+      "file": "acceptance/evidence/round3/windows-final/packaged-round3/packaged-round-three.json",
+      "checks": 10,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/windows-final/packaged-capacity/packaged-round-twenty-one.json",
+      "checks": 24,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/windows-final/packaged-appearance/packaged-appearance.json",
+      "checks": 3,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/windows-final/packaged-capacity/packaged-capacity.json",
+      "checks": 4,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/windows-final/packaged-capacity/packaged-positioning.json",
+      "checks": 9,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    },
+    {
+      "file": "acceptance/evidence/round3/windows-final/packaged-split/packaged-split.json",
+      "checks": 4,
+      "normalQuit": true,
+      "profileRemoved": true,
+      "allExited": true
+    }
+  ],
+  "installedRound3": {
+    "file": "acceptance/evidence/round3/windows-final/installed-round3/packaged-round-three.json",
+    "checks": 10,
+    "countedAgain": false,
+    "passed": true
+  },
+  "native": {
+    "scope": "Real native permission query and scheduler delivery events; no automatic permission granting, physical banner/click, or OS settings changes.",
+    "access": "unknown",
+    "events": [
+      {
+        "event": "show",
+        "data": [
+          "[object Object]"
+        ]
+      }
+    ],
+    "state": "notified"
+  },
+  "formalAcceptance": false,
+  "physicalAcceptance": false,
+  "scope": "Actual installed and unpacked Windows package, own data; cloud runner does not prove physical display, IME, notification banner or receiver acceptance."
+}
