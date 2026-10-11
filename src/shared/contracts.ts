@@ -8,6 +8,7 @@ export type Idea = {
   status: 'hanging' | 'archived' | 'deleted'; createdAt: string; updatedAt: string;
   createdDay?: string; creationTimeZone?: string;
   deletedAt?: string; deletedFrom?: 'hanging' | 'archived';
+  deletedClip?: {id:string;index:number;position:number|null};
   reminder?: Reminder;
   offRopeReason?: 'waiting' | 'capacity' | 'manual' | 'replaced';
 };

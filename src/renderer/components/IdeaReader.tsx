@@ -1,7 +1,10 @@
 import {useTransientNotice} from '../hooks/useTransientNotice';
 import {countThoughts} from '../../shared/i18n';
 import {useLocale} from '../LocaleContext';
-import {useCallback,useEffect,useRef,useState} from 'react';
+import {useCallback,useEffect,useRef,useState,type CSSProperties,type ReactNode} from 'react';
+import {paperStyle} from './PaperAppearance';
+import {agentInkColors} from './agentInk';
+import {paperAppearance,paperPalettes} from '../../shared/appearance';
 import type {PilotInfo,ClipMutation} from '../../shared/bridge';
 import type {Idea,Result} from '../../shared/contracts';
 import {prepareLeave} from '../hooks/leaveGuards';
@@ -13,9 +16,10 @@ import {onLineIdeaIds} from '../../shared/ideaVisibility';
 import {PlacementPicker} from './PlacementPicker';
 import {ReaderMoreMenu} from './ReaderMoreMenu';
 import {ReminderControl} from './ReminderControl';
-export function IdeaReader({idea,info,initialEdit=false}:{idea:Idea;info:PilotInfo;initialEdit?:boolean}){
+export function IdeaReader({idea,info,initialEdit=false,heading}:{idea:Idea;info:PilotInfo;initialEdit?:boolean;heading?:ReactNode}){
  const {t,m,locale}=useLocale();
  const {notice,setNotice,noticeProps}=useTransientNotice();
+ const [draftAgent,setDraftAgent]=useState<string|null>(null);
  const [editing,setEditing]=useState(initialEdit),[menu,setMenu]=useState(false),[permanent,setPermanent]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState('');
  const [picker,setPicker]=useState(false),[reveal,setReveal]=useState(false),[reminderOpen,setReminderOpen]=useState(false),moreAnchor=useRef<HTMLSpanElement>(null),swapAnchor=useRef<HTMLSpanElement>(null);
  const closeMenu=useCallback(()=>{setMenu(false);setPermanent(false);},[]);
@@ -29,25 +33,33 @@ export function IdeaReader({idea,info,initialEdit=false}:{idea:Idea;info:PilotIn
  const checkpoint=()=>{const token=++operation.current,session=info.manageSession,id=idea.id;return ()=>live.current&&operation.current===token&&owner.current.session===session&&owner.current.id===id;};
  const finishEdit=async()=>{const current=checkpoint();if(await prepareLeave()&&current())setEditing(false);};
  const clip=info.snapshot.clips.find(c=>c.ideaIds.includes(idea.id)),deleted=(idea.status as string)==='deleted';
- const run=async(task:(current:PilotInfo)=>Promise<Result<unknown>>,message='')=>{
+ const run=async(task:(current:PilotInfo)=>Promise<Result<unknown>>,message:string|(()=>string)='')=>{
   if(pending.current)return;const currentOwner=checkpoint();pending.current=true;setBusy(true);setError('');setNotice('');
   try{
    if(!await prepareLeave()||!currentOwner())return;
    await flushPageSelections();if(!currentOwner())return;
    const current=await window.thoughtline.info();if(!currentOwner()||current.manageSession!==info.manageSession)return;
    const result=await task(current);if(!currentOwner())return;
-   if(!result.ok){setError(result.message);return;}setNotice(message);setMenu(false);setPermanent(false);setPicker(false);
+   if(!result.ok){setError(result.message);return;}setNotice(typeof message==='function'?message():message);setMenu(false);setPermanent(false);setPicker(false);
   }catch{if(currentOwner())setError('操作未成功，原文已保留，请重试。');}
   finally{if(currentOwner()){pending.current=false;setBusy(false);}}
  };
  const change=(c:ClipMutation,message:string)=>run(current=>window.thoughtline.clipChange(c,current.snapshot.revision),message);
- const history=(kind:'delete'|'restore'|'permanent')=>run(current=>window.thoughtline.ideaHistory(idea.id,kind,current.snapshot.revision),kind==='delete'?t("已移到最近删除，可恢复。"):kind==='restore'?t("念头已恢复。"):t("已永久删除。"));
+ const history=(kind:'delete'|'restore'|'permanent')=>{let message=kind==='delete'?t('已移到最近删除，可恢复。'):kind==='restore'?t('念头已恢复。'):t('已永久删除。');return run(async current=>{
+  const result=await window.thoughtline.ideaHistory(idea.id,kind,current.snapshot.revision);
+  if(result.ok&&kind==='restore'){const restored=result.value.ideas.find(i=>i.id===idea.id);if(idea.deletedFrom==='hanging'&&restored?.status==='archived')message=t('已恢复，绳上已满。');else if(restored?.status==='hanging'&&current.shelfAgentId!=='all'&&restored.agentId!==current.shelfAgentId)message=t('已恢复，当前标签筛选未显示。');}
+  return result;
+ },()=>message);};
  const changeReminder=async(at:string|null)=>{
   if(pending.current)return false;const currentOwner=checkpoint();pending.current=true;setBusy(true);setError('');
   try{if(!await prepareLeave()||!currentOwner())return false;const current=await window.thoughtline.info();if(!currentOwner()||current.manageSession!==info.manageSession)return false;const record=current.snapshot.ideas.find(i=>i.id===idea.id);if(!record)return false;const r=await window.thoughtline.setReminder(idea.id,at,record.reminder??null,current.manageSession);if(!r.ok&&currentOwner())setError(r.message);return r.ok;}catch{if(currentOwner())setError(t('提醒未能保存，请重试。'));return false;}finally{if(currentOwner()){pending.current=false;setBusy(false);}}
  };
+ const paper=paperAppearance(info.snapshot.settings.paper),agent=info.snapshot.agents.find(a=>a.id===(editing&&draftAgent||idea.agentId)),ink=agentInkColors(agent?.color??'#A0A3AA',paperPalettes[paper.color]);
  return <section className="idea-reader" data-reader-id={idea.id}>
-  {editing&&!deleted?<InlineIdeaEditor key={idea.id+':'+info.manageSession} idea={idea} info={info} onDone={()=>setEditing(false)}/>:<textarea data-full-text readOnly aria-label={t("完整正文，可手动选中复制")} value={idea.text}/>}
+  <div className="reader-paper" data-reader-paper-color={paper.color} data-reader-agent-color={agent?.color??'#A0A3AA'} style={{...paperStyle(paper),'--reader-accent-light':ink.light,'--reader-accent-dark':ink.dark} as CSSProperties}>
+  {!editing&&<div className="reader-paper-heading">{heading??<strong>{idea.title}</strong>}</div>}
+  {editing&&!deleted?<InlineIdeaEditor key={idea.id+':'+info.manageSession} idea={idea} info={info} onDraftAgentChange={setDraftAgent} onDone={()=>{setEditing(false);setDraftAgent(null);}}/>:<textarea data-full-text readOnly aria-label={t("完整正文，可手动选中复制")} value={idea.text}/>}
+  </div>
   {!deleted&&<div className="reader-reminder"><ReminderControl at={idea.reminder?.at} state={idea.reminder?.state} disabled={busy} open={reminderOpen} onOpenChange={open=>{setReminderOpen(open);if(open){setPicker(false);closeMenu();}}} onChange={changeReminder}/></div>}
   <div className="reader-toolbar" aria-label={t("念头操作")}>
    <IconButton icon="copy" label={t("复制正文")} disabled={busy} onClick={()=>void run(()=>window.thoughtline.copy(idea.id),idea.text?t("已复制完整正文。"):t("已复制空白。"))}/>

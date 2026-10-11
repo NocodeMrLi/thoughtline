@@ -28,3 +28,15 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 .composer[data-platform=windows][data-material=acrylic],.manage[data-platform=windows][data-material=acrylic]{--aux-field:#FFFFFFDB;background:linear-gradient(180deg,#FFFFFF12,#FFFFFF04),#F6F3EB55;border-color:#FFFFFF70;border-radius:8px;box-shadow:inset 0 1px #FFFFFF60}
 :root[data-theme=dark] .composer[data-platform=windows][data-material=acrylic],:root[data-theme=dark] .manage[data-platform=windows][data-material=acrylic]{--aux-field:#29323DD9;background:linear-gradient(180deg,#FFFFFF08,transparent),#222C3366;border-color:#FFFFFF24}
 @media(forced-colors:active){.composer[data-material],.manage[data-material]{background:Canvas;color:CanvasText;border-color:CanvasText;box-shadow:none}}
+
+/* One continuous matte paper surface in all reader entry points. */
+.reader-paper{--paper:var(--paper-light);--reader-accent:var(--reader-accent-light);display:flex;flex:1;min-height:0;flex-direction:column;gap:12px;padding:14px;border:1px solid var(--reader-accent);border-radius:10px;background:var(--paper);color:var(--paper-text);overflow:hidden}
+:root[data-theme=dark] .reader-paper{--paper:var(--paper-dark);--reader-accent:var(--reader-accent-dark)}
+.reader-paper-heading{flex-shrink:0;background:var(--paper);color:var(--paper-text);line-height:1.5;overflow-wrap:anywhere}.reader-paper-heading strong{font-size:15px}.reader-paper-heading .detail-heading{margin:0}
+.reader-paper>[data-full-text],.reader-paper .inline-editor>textarea,.reader-paper .inline-editor>input{background:var(--paper);color:var(--paper-text);border:0;border-radius:0;box-shadow:none}
+.reader-paper>[data-full-text]{flex:1;min-height:0;width:100%;resize:none;padding:0;font:inherit;line-height:1.65;outline:none}
+.reader-paper .inline-editor{flex:1;min-height:0;--editor-focus:var(--reader-accent)}
+.reader-paper:focus-within{box-shadow:inset 0 0 0 1px var(--reader-accent)}
+.reader-paper>[data-full-text]:focus-visible,.reader-paper .inline-editor>textarea:focus-visible,.reader-paper .inline-editor>input:focus-visible{border:0;outline:0;box-shadow:none}
+.reader-paper .inline-editor>input{padding:0 0 8px;font-weight:600}
+@media(forced-colors:active){.reader-paper{background:Canvas;color:CanvasText;border-color:CanvasText}.reader-paper:focus-within{outline:2px solid Highlight;outline-offset:-2px;box-shadow:none}.reader-paper-heading,.reader-paper>[data-full-text],.reader-paper .inline-editor>textarea,.reader-paper .inline-editor>input{background:Canvas;color:CanvasText}}

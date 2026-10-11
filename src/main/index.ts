@@ -420,8 +420,8 @@ else app.whenReady().then(async()=>{
   if(!trusted(e,[manage])||typeof id!=='string'||!['delete','restore','permanent'].includes(kind))return Promise.resolve(invalid<Snapshot>(t("无效操作")));
   return composerWrite(async()=>{
    if(revision!==snapshot.revision)return {ok:false as const,code:'CONFLICT' as const,message:t("内容已更新，请重新操作。")};
-   const next=kind==='delete'?deleteIdea(snapshot,id,new Date().toISOString()):kind==='restore'?restoreIdea({...snapshot,clips:captureClipPositions(snapshot.clips,width,'all',shelfCapacity(snapshot.settings.shelfCapacity))},id,new Date().toISOString()):permanentlyDeleteIdea(snapshot,id);
-   const r=await save(next,revision);if(r.ok){setPlacementNotice(kind==='restore'&&layoutClips(snapshot.clips,width,shelfCapacity(snapshot.settings.shelfCapacity)).overflow.some(c=>c.ideaIds.includes(id))?t("已恢复，绳上暂时放不下，可在念头日历查看"):null);publish();}return r;
+   const next=kind==='delete'?deleteIdea(snapshot,id,new Date().toISOString(),width):kind==='restore'?restoreIdea({...snapshot,clips:captureClipPositions(snapshot.clips,width,'all',shelfCapacity(snapshot.settings.shelfCapacity))},id,new Date().toISOString(),width):permanentlyDeleteIdea(snapshot,id);
+   const r=await save(next,revision);if(r.ok){setPlacementNotice(null);publish();}return r;
   });
  });
  ipcMain.handle('thoughtline:status',async(e,id:string,status:'hanging'|'archived',revision:number)=>{

@@ -1,5 +1,7 @@
 import type {Snapshot,Draft,Result,AgentTag,Idea} from './contracts';
-import {captureClipPositions} from './clipLayout';
+import {captureClipPositions,layoutClips} from './clipLayout';
+import {arrangeClips} from './clipCommands';
+import {onLineIdeaIds} from './ideaVisibility';
 import {visibleSlots,shelfCapacity} from './ropeGeometry';
 import {independentClip,pruneClips} from './clipModel';
 import {ideaDay} from './ideaHistory';
@@ -29,6 +31,7 @@ export function validateSnapshot(input:unknown):Result<Snapshot>{
     if(!plain(idea)||typeof idea.id!=='string'||!idea.id||ids.has(idea.id)||!draftOK(idea)||!hasIdeaContent(idea as unknown as Draft)||!['hanging','archived',...(input.schemaVersion===3?['deleted']:[])].includes(String(idea.status))||typeof idea.createdAt!=='string'||!Number.isFinite(Date.parse(idea.createdAt))||typeof idea.updatedAt!=='string'||!Number.isFinite(Date.parse(idea.updatedAt)))return invalid('念头正文或归属无效。');
     if((idea.createdDay!==undefined||idea.creationTimeZone!==undefined)&&(!dayOK(idea.createdDay)||typeof idea.creationTimeZone!=='string'||!idea.creationTimeZone.trim()))return invalid('念头创建日或时区无效。');
     if(idea.deletedAt!==undefined&&(typeof idea.deletedAt!=='string'||!Number.isFinite(Date.parse(idea.deletedAt)))||idea.deletedFrom!==undefined&&!['hanging','archived'].includes(String(idea.deletedFrom))||idea.status==='deleted'&&(idea.deletedAt===undefined||idea.deletedFrom===undefined))return invalid('最近删除恢复信息无效。');
+    if(idea.deletedClip!==undefined){const c=idea.deletedClip;if(idea.status!=='deleted'||!plain(c)||typeof c.id!=='string'||!c.id||!Number.isSafeInteger(c.index)||Number(c.index)<0||!(c.position===null||typeof c.position==='number'&&Number.isFinite(c.position)&&c.position>=0&&c.position<=1)||!Object.keys(c).every(k=>['id','index','position'].includes(k)))return invalid('最近删除恢复信息无效。');}
     if(idea.reminder!==undefined&&!validReminder(idea.reminder))return invalid('提醒数据无效。');
     if(idea.offRopeReason!==undefined&&!['waiting','capacity','manual','replaced'].includes(String(idea.offRopeReason)))return invalid('数据结构不完整。');
     ids.add(idea.id);
@@ -107,19 +110,30 @@ export function editIdeaIfUnchanged(s:Snapshot,id:string,draft:Draft,expectedDra
   const separates=owner&&owner.ideaIds.length>1&&owner.agentId!==draft.agentId;
   return editIdea(separates&&width!==undefined?{...s,clips:captureClipPositions(s.clips,width,'all',shelfCapacity(s.settings.shelfCapacity))}:s,id,draft,now);
 }
-export function deleteIdea(s:Snapshot,id:string,now:string):Result<Snapshot>{
+export function deleteIdea(s:Snapshot,id:string,now:string,width?:number):Result<Snapshot>{
   const idea=s.ideas.find(i=>i.id===id);
   if(!idea||idea.status==='deleted'||!Number.isFinite(Date.parse(now)))return invalid('找不到可删除的念头或删除时间无效。');
-  const deletedFrom=idea.status;
-  const ideas=s.ideas.map(i=>i.id===id?{...i,...(i.reminder?{reminder:{...i.reminder,state:'cancelled' as const}}:{}),status:'deleted' as const,deletedFrom,deletedAt:now,updatedAt:now}:i);
-  return validateSnapshot({...s,ideas,clips:pruneClips(s.clips,ideas)});
+  const deletedFrom: 'hanging'|'archived'=idea.status==='hanging'&&(width===undefined||onLineIdeaIds(s,width,'all').has(id))?'hanging':'archived';
+  const captured=width===undefined?s.clips:captureClipPositions(s.clips,width,'all',shelfCapacity(s.settings.shelfCapacity)),owner=captured.find(c=>c.ideaIds.includes(id));
+  const deletedClip=deletedFrom==='hanging'&&owner?{id:owner.id,index:owner.ideaIds.indexOf(id),position:owner.position}:undefined;
+  const ideas=s.ideas.map(i=>i.id===id?{...i,...(i.reminder?{reminder:{...i.reminder,state:'cancelled' as const}}:{}),...(deletedClip?{deletedClip}:{}),status:'deleted' as const,deletedFrom,deletedAt:now,updatedAt:now}:i);
+  return validateSnapshot({...s,ideas,clips:pruneClips(captured,ideas)});
 }
-export function restoreIdea(s:Snapshot,id:string,now:string):Result<Snapshot>{
+export function restoreIdea(s:Snapshot,id:string,now:string,width=1440):Result<Snapshot>{
   const idea=s.ideas.find(i=>i.id===id);
-  if(!idea||idea.status!=='deleted'||!['hanging','archived'].includes(idea.deletedFrom??'')||!Number.isFinite(Date.parse(now)))return invalid('找不到可恢复的念头或恢复时间无效。');
-  const ideas=s.ideas.map(i=>{if(i.id!==id)return i;const {deletedAt:_at,deletedFrom:_from,...rest}=i;return {...rest,status:idea.deletedFrom!,updatedAt:now};});
-  let clips=pruneClips(s.clips,ideas);if(idea.deletedFrom==='hanging')clips=[...clips,independentClip({...s,clips},id,idea.agentId)];
-  return validateSnapshot({...s,ideas,clips});
+  if(!idea||idea.status!=='deleted'||!['hanging','archived'].includes(idea.deletedFrom??'')||!Number.isFinite(Date.parse(now))||!Number.isFinite(width)||width<0)return invalid('找不到可恢复的念头或恢复时间无效。');
+  const capacity=shelfCapacity(s.settings.shelfCapacity),original=idea.deletedClip;
+  const owner=original?s.clips.find(c=>c.id===original.id&&c.agentId===idea.agentId&&layoutClips(s.clips,width,capacity).visible.some(p=>p.clip.id===c.id)):undefined;
+  const hanging=idea.deletedFrom==='hanging'&&(!!owner||s.clips.length<capacity&&width>=320);
+  const ideas=s.ideas.map(i=>{if(i.id!==id)return i;const {deletedAt:_at,deletedFrom:_from,deletedClip:_clip,offRopeReason,...rest}=i;return {...rest,status:hanging?'hanging' as const:'archived' as const,...(!hanging?{offRopeReason:'manual' as const}:{}),updatedAt:now};});
+  let clips=pruneClips(s.clips,ideas);
+  if(hanging){
+   if(owner)clips=clips.map(c=>{if(c.id!==owner.id)return c;const ids=[...c.ideaIds];ids.splice(Math.min(original!.index,ids.length),0,id);return {...c,ideaIds:ids,currentId:id};});
+   else{const fresh=independentClip({...s,clips},id,idea.agentId);clips=[...clips,{...fresh,...(original&&!clips.some(c=>c.id===original.id)?{id:original.id,position:original.position}:{})}];}
+  }
+  const result=validateSnapshot({...s,ideas,clips});
+  if(result.ok&&hanging&&layoutClips(clips,width,capacity).overflow.some(c=>c.ideaIds.includes(id)))return arrangeClips(result.value,width);
+  return result;
 }
 export function permanentlyDeleteIdea(s:Snapshot,id:string):Result<Snapshot>{
   if(!s.ideas.some(i=>i.id===id&&i.status==='deleted'))return invalid('只能永久删除最近删除中的念头。');

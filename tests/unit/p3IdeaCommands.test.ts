@@ -10,7 +10,7 @@ const now='2026-01-01T18:30:00Z',later='2026-10-09T12:00:00Z';
 const original:Draft={text:'  原文 🧵\n结尾 😄\n ',title:'旧标题',project:'旧项目',agentId:'general'};
 const fixture=()=>value(commands.newIdea(legacySnapshot(),original,'one',now));
 
-test('软删除保全全文/ID/创建日/归属并从物理组移出，恢复挂着记录独立成夹保留原组',()=>{
+test('软删除保全全文/ID/创建日/归属并从物理组移出，恢复挂着记录回原组并保留排序',()=>{
  const del=api('deleteIdea'),restore=api('restoreIdea');let s=fixture();
  s=value(commands.newIdea(s,{...original,text:'同夹剩余正文'},'two',now));s=value(mergeClips(s,'clip:one','clip:two'));
  s={...s,clips:s.clips.map(c=>({...c,position:0.31}))};const originalIdea={...s.ideas[0]};
@@ -19,7 +19,7 @@ test('软删除保全全文/ID/创建日/归属并从物理组移出，恢复挂
  expect(s.ideas[0].status).toBe('hanging');
  const restored=value(restore(deleted,'one','2026-10-10T12:00:00Z'));expect(restored.ideas[0]).toMatchObject({...originalIdea,status:'hanging',updatedAt:'2026-10-10T12:00:00Z'});
  expect(restored.ideas[0]).not.toHaveProperty('deletedAt');expect(restored.ideas[0]).not.toHaveProperty('deletedFrom');
- expect(restored.clips[0]).toEqual(deleted.clips[0]);expect(restored.clips[1]).toMatchObject({ideaIds:['one'],currentId:'one',agentId:'general',position:null});
+ expect(restored.clips).toEqual([{...deleted.clips[0],ideaIds:['two','one'],currentId:'one'}]);expect(restored.ideas[0]).not.toHaveProperty('deletedClip');
 });
 
 test('已收起记录软删除后恢复仍收起，永久删除只允许trash而不自动清空其他条目',()=>{

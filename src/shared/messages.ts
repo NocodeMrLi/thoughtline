@@ -1,5 +1,7 @@
 // Central typed application text; user text is never translated.
 export const zh = {
+ "已恢复，绳上已满。": "已恢复，绳上已满。",
+ "已恢复，当前标签筛选未显示。": "已恢复，当前标签筛选未显示。",
  "绳色": "绳色",
  "自定": "自定",
  "自然绿色": "自然绿色",
@@ -795,6 +797,8 @@ export const en = {
  "操作未成功，原文已保留，请重试。": "The operation failed. Original text is preserved; please retry.",
  "已移到最近删除，可恢复。": "Moved to Recently deleted. You can restore it.",
  "念头已恢复。": "Thought restored.",
+ "已恢复，绳上已满。": "Restored. The rope is full.",
+ "已恢复，当前标签筛选未显示。": "Restored. Hidden by the current tag filter.",
  "已永久删除。": "Permanently deleted.",
  "完整正文，可手动选中复制": "Full text; select to copy manually",
  "念头操作": "Thought actions",

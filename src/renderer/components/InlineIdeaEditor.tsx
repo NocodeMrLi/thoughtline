@@ -6,9 +6,10 @@ import {DraftAutosaver} from '../../shared/draftAutosaver';
 import {CompositionSession} from '../../shared/compositionSession';
 import {registerLeaveGuard} from '../hooks/leaveGuards';
 import {agentInkColors} from './agentInk';
+import {paperAppearance,paperPalettes} from '../../shared/appearance';
 import {ProjectOptions} from './ProjectOptions';
 export const ideaDraft=(idea:Idea):Draft=>({text:idea.text,title:idea.title,project:idea.project,agentId:idea.agentId});
-export function InlineIdeaEditor({idea,info,onDone}:{idea:Idea;info:PilotInfo;onDone:()=>void}){
+export function InlineIdeaEditor({idea,info,onDone,onDraftAgentChange}:{idea:Idea;info:PilotInfo;onDone:()=>void;onDraftAgentChange?:(id:string)=>void}){
  const {t,m,agentName}=useLocale();
  const bridge=window.thoughtline;
  const [draft,setDraft]=useState(()=>ideaDraft(idea)),[status,setStatus]=useState(t("已保存")),[error,setError]=useState(''),[projectOpen,setProjectOpen]=useState(false),[confirmAgent,setConfirmAgent]=useState(false);
@@ -42,11 +43,11 @@ export function InlineIdeaEditor({idea,info,onDone}:{idea:Idea;info:PilotInfo;on
  });
  const flush=async()=>{if(composition.current.composing){setError('请先完成输入法选字。');return false;}try{await saver.current?.flush();return true;}catch{return false;}};
  const projects=[...new Set(info.snapshot.ideas.map(i=>i.project).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
- const ink=agentInkColors(info.snapshot.agents.find(a=>a.id===draft.agentId)?.color??'#A0A3AA');
+ const ink=agentInkColors(info.snapshot.agents.find(a=>a.id===draft.agentId)?.color??'#A0A3AA',paperPalettes[paperAppearance(info.snapshot.settings.paper).color]);
  return <section style={{'--editor-focus-light':ink.light,'--editor-focus-dark':ink.dark} as CSSProperties} data-inline-editor className="inline-editor" aria-label={t("原地编辑念头")} onKeyDown={e=>{if(e.key==='Escape'){e.stopPropagation();if(!e.nativeEvent.isComposing&&!composition.current.composing){e.preventDefault();void flush().then(ok=>{if(ok&&live.current)onDone();});}}}}>
   <input aria-label={t("编辑标题")} placeholder={t("名称（可选）")} maxLength={50} value={draft.title} {...events('title')}/>
   <textarea ref={text} aria-label={t("编辑正文")} value={draft.text} spellCheck={false} {...events('text')}/>
-  <div className="inline-properties"><button aria-label={t("projectValue",{p0:draft.project||t("未分组")})} aria-expanded={projectOpen} onClick={()=>setProjectOpen(!projectOpen)}>{t("项目：")}{draft.project||t("未分组")} ⌄</button><label>{t("给谁：")}<select aria-label={t("编辑归属 Agent")} value={draft.agentId} onChange={e=>{setConfirmAgent(false);update({...latest.current,agentId:e.target.value});}}>{info.snapshot.agents.map(a=><option key={a.id} value={a.id}>{agentName(a)}</option>)}</select></label></div>
+  <div className="inline-properties"><button aria-label={t("projectValue",{p0:draft.project||t("未分组")})} aria-expanded={projectOpen} onClick={()=>setProjectOpen(!projectOpen)}>{t("项目：")}{draft.project||t("未分组")} ⌄</button><label>{t("给谁：")}<select aria-label={t("编辑归属 Agent")} value={draft.agentId} onChange={e=>{setConfirmAgent(false);onDraftAgentChange?.(e.target.value);update({...latest.current,agentId:e.target.value});}}>{info.snapshot.agents.map(a=><option key={a.id} value={a.id}>{agentName(a)}</option>)}</select></label></div>
   {projectOpen&&<div className="inline-project-picker"><ProjectOptions disabled={false} projects={projects} reduced={info.snapshot.settings.reducedMotion} composing={()=>composition.current.composing} onChoose={p=>{update({...latest.current,project:p});setProjectOpen(false);}} onDone={()=>setProjectOpen(false)} onDelete={async p=>{
    if(!await flush())throw Error(t("请先保存最后修改再删除分组。"));const current=await window.thoughtline.info();const result=await window.thoughtline.projectDelete(p,current.snapshot.revision);if(!result.ok)throw Error(result.message);
    if(base.current.project===p)base.current={...base.current,project:''};if(latest.current.project===p)update({...latest.current,project:''});
