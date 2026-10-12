@@ -17,3 +17,13 @@ Windows38187186237：源码/安装/本轮源和包71均通过；实际包round21
 第三次Windows38189326018并无断言失败，check-run正式注记“exceeded maximum execution time of20m0s”。全部源验证/构建/安装通过；包第三轮10/外观14/定制6/reader10/本轮71/round21新诊断24/容量4均通过，定位及上传被整体上限截断。保留通过与取消回执。CI新增显式package续验选择（默认full保持所有源回归），仍跑完整verify、本轮源71、指针源16、安装及全部实际包流程；不再重复未变且已通过的其余源流程，后续用产物指纹核复用。整体上限35分钟，安装包提前独立保存，以免晚期取消丢失构建。
 
 R4-03真实Mac指针红例：枝叶按夹点间隔派生导致移动50DIP时根点位移17.5/25DIP；独立单测亦红。夹子层在绳SVG之后，可用前后遮挡保留固定枝叶，不引入数据变更。0.0.25两项用户明确认可。
+
+新增阶段源码核对：标签全局agents已有；项目只保存在ideas/draft字符串中，必须增加可独立保存空分组的目录，兼容旧快照。Composer标签当前原生select，agentChange仅manage可信窗口；分类入口需要共用主进程变更并保护活动草稿。新建调用锁composer导致hidden悬停不能展开；应分开写作生命周期与挂绳展示，保持其他锁/暂停保护。旧标签管理位于Calendar的agents模式，后续替换为统一分类页。
+
+用户最新批准：对称分组/标签搜索菜单；长按直接停用，不加右键小菜单；搜索提示含“ / 长按移除”。停用从新建选择/搜索隐藏，历史与活动草稿归属保留，统一管理页已停用可恢复/彻底删除。已同步第四轮14节和03/05；当前核心23条通过只是早期目录/展示锁验证，界面/两端新包未完成。继续原计划，不重做已认可0.0.25/26。
+
+Windows材质只读核对：shared/composerMaterial将win32build>=22621且focused且无reduceTransparency/highContrast/forcedColors设acrylic，其余opaque；manage复用此策略。Electron44.7本地d.ts及官方BrowserWindow#setBackgroundMaterial确认11 22H2+支持。建议页签几何/高光/阴影双端统一，系统透明自适应并验证不透明降级；不宣称Win实际玻璃已验证。Anysearch提取官方页成功但截断50k未覆盖末段，用官方网页直接补读该段；shasum初次C.UTF-8 locale panic，改LC_ALL=C核四脚本成功。设置页三页签统一仅建议、尚未授权修改。
+
+用户最新定稿：管理恢复入口统一“已移除”，按钮“恢复选用”；无30天期限/自动删除，长按保历史与草稿，管理“删除”仍确认永久删除分类。代码中英、第四轮及03/05同步，接下来验证实际移除→管理显示→恢复→新建可选，双端/实际包未完成。
+
+隐藏原生窗口不能默认依赖Playwright的requestAnimationFrame轮询：Windows38238035947在另一份重启fixture第32行同样失败，正常退出/删profiletrue。两份fixture统一timer polling50ms并断言busy=false/原生不可见/完整重启读回；新Win38239196630第四轮源步骤已success，旧功能与实际包继续。生产代码不受此测试修正影响；Mac最终源/tag候选787a770，317输入，34输出/asar签名绑定，六组实际DMG11/18/71/13/14/10通过，DMG b95bd3ace3480a1d338209954c67a0080477134c826236bb797e6ebbaed7f533。

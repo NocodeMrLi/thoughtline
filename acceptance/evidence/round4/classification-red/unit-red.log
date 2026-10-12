@@ -1,0 +1,36 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/shelfState.test.ts (16 tests | 1 failed) 9ms
+   × writing window can reveal and dismiss a hidden shelf without releasing its session lock 4ms
+ ❯ tests/unit/classification.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/classification.test.ts [ tests/unit/classification.test.ts ]
+Error: Cannot find module '../../src/shared/classification' imported from /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/unit/classification.test.ts
+ ❯ tests/unit/classification.test.ts:3:1
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/shelfState.test.ts > writing window can reveal and dismiss a hidden shelf without releasing its session lock
+AssertionError: expected 'hidden' to be 'revealed' // Object.is equality
+
+Expected: "revealed"
+Received: "hidden"
+
+ ❯ tests/unit/shelfState.test.ts:100:230
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  1 failed | 15 passed (16)
+   Start at  14:30:19
+   Duration  192ms (transform 62%, import 14%, tests 14%, worker 9%)
+

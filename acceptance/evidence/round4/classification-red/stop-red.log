@@ -1,0 +1,65 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/classification.test.ts (12 tests | 5 failed) 44ms
+   × stop hides groups from new choices, retains all history and draft, and can resume after reload 2ms
+   × stop preserves tag colour and ownership; general and ungrouped cannot be stopped 0ms
+   × renaming a stopped group keeps it stopped and permanent removal clears stop metadata 0ms
+   × new tags reject duplicate names, general name is protected while its colour remains editable 2ms
+   × final note creation registers group independently; removing last note does not erase classification 20ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/classification.test.ts > stop hides groups from new choices, retains all history and draft, and can resume after reload
+TypeError: setClassificationActive is not a function
+ ❯ tests/unit/classification.test.ts:18:30
+     16| import * as catalog from '../../src/shared/classification';
+     17| test('stop hides groups from new choices, retains all history and draf…
+     18|  const s=fixture(),r=catalog.setClassificationActive(s,'project','工作记录…
+       |                              ^
+     19|  expect(catalog.activeProjects(r.value)).not.toContain('工作记录');expect(…
+     20|  const loaded=validateSnapshot(JSON.parse(JSON.stringify(r.value)));ex…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/unit/classification.test.ts > stop preserves tag colour and ownership; general and ungrouped cannot be stopped
+TypeError: setClassificationActive is not a function
+ ❯ tests/unit/classification.test.ts:24:90
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/unit/classification.test.ts > renaming a stopped group keeps it stopped and permanent removal clears stop metadata
+TypeError: setClassificationActive is not a function
+ ❯ tests/unit/classification.test.ts:29:24
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/unit/classification.test.ts > new tags reject duplicate names, general name is protected while its colour remains editable
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/classification.test.ts:33:88
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/unit/classification.test.ts > final note creation registers group independently; removing last note does not erase classification
+AssertionError: the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string
+ ❯ tests/unit/classification.test.ts:36:189
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 7 passed (12)
+   Start at  14:59:37
+   Duration  216ms (transform 57%, tests 32%, import 9%, worker 2%)
+

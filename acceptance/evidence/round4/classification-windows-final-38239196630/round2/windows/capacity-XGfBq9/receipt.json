@@ -1,0 +1,380 @@
+{
+  "platform": "win32",
+  "arch": "x64",
+  "evidence": "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round2\\windows\\capacity-XGfBq9",
+  "cases": [
+    {
+      "name": "calendar-open-immediate-hang",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-EjFjyS",
+      "passed": true,
+      "detail": {
+        "calendarKeptOpen": true,
+        "shelfUpdated": true
+      },
+      "windows": [
+        {
+          "title": "Thoughtline Composer",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer",
+          "visible": false
+        },
+        {
+          "title": "Thoughtline Manage",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage",
+          "visible": true
+        },
+        {
+          "title": "Thoughtline Shelf",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf",
+          "visible": true
+        }
+      ],
+      "screenshots": [
+        "calendar-open-immediate-hang-Thoughtline-Manage.png",
+        "calendar-open-immediate-hang-Thoughtline-Shelf.png"
+      ],
+      "pids": [
+        2660,
+        7668,
+        8984,
+        6852,
+        3832,
+        816,
+        2396
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "more-menu-content-width",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-3nMA0v",
+      "passed": true,
+      "detail": {
+        "menu": 219.046875,
+        "content": 189.046875,
+        "button": "color(srgb 0.939647 0.931529 0.900863)",
+        "detailAndCalendarReaderAndHeaderLeaveClose": true,
+        "bridgeSafe": true
+      },
+      "windows": [
+        {
+          "title": "Thoughtline Composer",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer",
+          "visible": false
+        },
+        {
+          "title": "Thoughtline Manage",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage",
+          "visible": true
+        },
+        {
+          "title": "Thoughtline Shelf",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf",
+          "visible": false
+        }
+      ],
+      "screenshots": [
+        "more-menu-content-width-Thoughtline-Manage.png"
+      ],
+      "pids": [
+        3412,
+        4732,
+        5604,
+        8744,
+        3240,
+        8544,
+        4100
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "new-swap-cancel-confirm-undo",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-Mv4SoS",
+      "passed": true,
+      "detail": {
+        "incomingId": "e6b088c3-17e5-4325-9135-7a361fa3ffe5",
+        "slot": "clip:c0",
+        "cancelKeptText": true,
+        "undoKeepsNewRecord": true
+      },
+      "windows": [
+        {
+          "title": "Thoughtline Composer",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer",
+          "visible": false
+        },
+        {
+          "title": "Thoughtline Manage",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage",
+          "visible": false
+        },
+        {
+          "title": "Thoughtline Shelf",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf",
+          "visible": true
+        }
+      ],
+      "screenshots": [
+        "new-swap-cancel-confirm-undo-Thoughtline-Shelf.png"
+      ],
+      "pids": [
+        4924,
+        7912,
+        8932,
+        4184,
+        8232,
+        5688,
+        5560
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "calendar-swap-open-focus-retained",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-AxWV2K",
+      "passed": true,
+      "detail": {
+        "readerKeptOpen": true,
+        "focusRetained": true,
+        "successExpires": true
+      },
+      "windows": [
+        {
+          "title": "Thoughtline Composer",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer",
+          "visible": false
+        },
+        {
+          "title": "Thoughtline Manage",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage",
+          "visible": true
+        },
+        {
+          "title": "Thoughtline Shelf",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf",
+          "visible": true
+        }
+      ],
+      "screenshots": [
+        "calendar-swap-open-focus-retained-Thoughtline-Manage.png",
+        "calendar-swap-open-focus-retained-Thoughtline-Shelf.png"
+      ],
+      "pids": [
+        6368,
+        8660,
+        4992,
+        6704,
+        9212,
+        7852,
+        3884
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "stale-target-retains-draft",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-evFA0E",
+      "passed": true,
+      "detail": {
+        "staleChoiceDisabled": true,
+        "noDuplicate": true
+      },
+      "windows": [
+        {
+          "title": "Thoughtline Composer",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer",
+          "visible": true
+        },
+        {
+          "title": "Thoughtline Manage",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage",
+          "visible": false
+        },
+        {
+          "title": "Thoughtline Shelf",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf",
+          "visible": true
+        }
+      ],
+      "screenshots": [
+        "stale-target-retains-draft-Thoughtline-Composer.png",
+        "stale-target-retains-draft-Thoughtline-Shelf.png"
+      ],
+      "pids": [
+        4496,
+        4740,
+        4180,
+        604,
+        6468,
+        2796,
+        4592
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "write-failure-in-picker-keeps-old-and-new-content",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-8ruwnW",
+      "passed": true,
+      "detail": {
+        "failedWriteAtomic": true,
+        "pickerRetained": true,
+        "retrySucceeded": true
+      },
+      "windows": [
+        {
+          "title": "Thoughtline Composer",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer",
+          "visible": false
+        },
+        {
+          "title": "Thoughtline Manage",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage",
+          "visible": true
+        },
+        {
+          "title": "Thoughtline Shelf",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf",
+          "visible": true
+        }
+      ],
+      "screenshots": [
+        "write-failure-in-picker-keeps-old-and-new-content-Thoughtline-Manage.png",
+        "write-failure-in-picker-keeps-old-and-new-content-Thoughtline-Shelf.png"
+      ],
+      "pids": [
+        1072,
+        8392,
+        3100,
+        7164,
+        6584,
+        8812,
+        7564
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "composer-write-failure-keeps-focus-and-draft",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-LPCgau",
+      "passed": true,
+      "detail": {
+        "failedDraftKept": true,
+        "pickerFocusRetained": true,
+        "retrySucceeded": true
+      },
+      "windows": [
+        {
+          "title": "Thoughtline Composer",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer",
+          "visible": false
+        },
+        {
+          "title": "Thoughtline Manage",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage",
+          "visible": false
+        },
+        {
+          "title": "Thoughtline Shelf",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf",
+          "visible": true
+        }
+      ],
+      "screenshots": [
+        "composer-write-failure-keeps-focus-and-draft-Thoughtline-Shelf.png"
+      ],
+      "pids": [
+        6244,
+        7068,
+        5780,
+        2556,
+        8084,
+        2964,
+        6748
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "native-show-all-Agent-label-and-selection",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-7FRKAF",
+      "passed": true,
+      "detail": {
+        "filterOnly": true,
+        "checkmarkTracksFilter": true
+      },
+      "windows": [
+        {
+          "title": "Thoughtline Composer",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer",
+          "visible": false
+        },
+        {
+          "title": "Thoughtline Manage",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage",
+          "visible": true
+        },
+        {
+          "title": "Thoughtline Shelf",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf",
+          "visible": true
+        }
+      ],
+      "screenshots": [
+        "native-show-all-Agent-label-and-selection-Thoughtline-Manage.png",
+        "native-show-all-Agent-label-and-selection-Thoughtline-Shelf.png"
+      ],
+      "pids": [
+        6280,
+        2432,
+        600,
+        1232,
+        3636,
+        5240,
+        6008
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    },
+    {
+      "name": "full-composer-save-stays-out-of-reader",
+      "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-OlIo7N",
+      "passed": true,
+      "detail": {
+        "archived": true,
+        "noReaderJump": true
+      },
+      "windows": [
+        {
+          "title": "Thoughtline Composer",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer",
+          "visible": false
+        },
+        {
+          "title": "Thoughtline Manage",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage",
+          "visible": false
+        },
+        {
+          "title": "Thoughtline Shelf",
+          "url": "file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf",
+          "visible": false
+        }
+      ],
+      "intentionalAbsence": "Saved-only flow closes Composer and leaves Manage hidden; see the pre-submit screenshot.",
+      "screenshots": [],
+      "pids": [
+        4512,
+        3096,
+        7876,
+        2392,
+        1092,
+        1020,
+        1388
+      ],
+      "normalClose": true,
+      "dataRemoved": true
+    }
+  ],
+  "passed": true
+}

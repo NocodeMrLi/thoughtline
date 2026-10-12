@@ -1,0 +1,36 @@
+windows-test-package	Second round UI and real native menu characterization	﻿2026-10-12T09:31:56.6232799Z ##[group]Run New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6233312Z ^[[36;1mNew-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6233590Z ^[[36;1m& node tests/electron/round2-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6233843Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round UI failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6234100Z ^[[36;1m& node tests/electron/round2-native-menu.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6234375Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round native menu failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6234674Z ^[[36;1m& node tests/electron/round2-calendar-navigation.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6235003Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round calendar return failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6235276Z ^[[36;1m& node tests/electron/round2-arrange-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6235542Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round arrangement failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6235879Z ^[[36;1m& node tests/electron/round2-split-menu-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6236104Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round split menu failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6236328Z ^[[36;1m& node tests/electron/round2-merge-menu-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6236548Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round merge menu failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6236774Z ^[[36;1m& node tests/electron/round2-capacity-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6237003Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Capacity and swap workflow failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6237236Z ^[[36;1m& node tests/electron/positioning-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6237495Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Tag positioning and effective status workflow failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6237751Z ^[[36;1m& node tests/electron/title-edit-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6237988Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Optional title live input regression failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6238302Z ^[[36;1mforeach ($test in @('more-menu-workflow', 'title-only-workflow', 'reminder-workflow')) {^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6238557Z ^[[36;1m  & node "tests/electron/$test.cjs"^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6238737Z ^[[36;1m  if ($LASTEXITCODE -ne 0) { throw "$test failed" }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6238904Z ^[[36;1m}^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6289084Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6289299Z env:
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6289462Z   THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round2/windows
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6289654Z   THOUGHTLINE_FAKE_CLIPBOARD: 1
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:31:56.6289786Z ##[endgroup]
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:32:29.7493326Z {"platform":"win32","arch":"x64","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-round2-eGzCc2","evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round2\\windows\\workflow-8Xka3s","cases":[{"name":"hint-delay-small-dismiss-on-menu","passed":true,"detail":{"x":260,"y":416,"width":60,"height":24}},{"name":"focus-ring-inside-editor-edges","passed":true,"detail":{"outline":"0px","offset":"-3px","shadow":"rgb(102, 105, 114) 0px 0px 0px 1px inset","border":"rgb(102, 105, 114)","x":14,"right":406,"parentX":14,"parentRight":406}}],"pids":[5088,8884,7856,7316,4892,7868],"nativeOutsideClick":"not exercised by protocol fixture","failure":"page.waitForSelector: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.month-grid') to be visible\u001b[22m\n\n    at D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-workflow.cjs:23:74","normalClose":true,"dataRemoved":true,"passed":false}
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:32:30.2971651Z ^[[31;1mException: ^[[0mD:\a\_temp\5b2e1d33-6311-40c4-8334-299df82b5d9e.ps1:4^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:32:30.2972662Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:32:30.2973514Z ^[[31;1m^[[0m^[[36;1m^[[36;1m   4 | ^[[0m if ($LASTEXITCODE -ne 0) { ^[[36;1mthrow 'Second round UI failed'^[[0m }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:32:30.2974584Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:32:30.2982374Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mSecond round UI failed^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-12T09:32:30.3171579Z ##[error]Process completed with exit code 1.

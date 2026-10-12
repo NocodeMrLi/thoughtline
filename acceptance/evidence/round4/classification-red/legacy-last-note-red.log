@@ -1,0 +1,26 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/classification.test.ts (15 tests | 1 failed) 53ms
+   × deleting the last legacy thought does not delete its independent historical group 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/classification.test.ts > deleting the last legacy thought does not delete its independent historical group
+AssertionError: expected [] to include '工作记录'
+ ❯ tests/unit/classification.test.ts:54:144
+     52| test('deleting the last legacy thought does not delete its independent…
+     53|  const s=fixture();s.ideas=[s.ideas[2]];s.clips=[];s.draft=null;delete…
+     54|  const r=permanentlyDeleteIdea(s,'i2');expect(r.ok).toBe(true);if(!r.o…
+       |                                                                                                                                                ^
+     55|  const loaded=validateSnapshot(JSON.parse(JSON.stringify(r.value)));ex…
+     56| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 14 passed (15)
+   Start at  18:11:59
+   Duration  276ms (transform 60%, tests 29%, import 9%, worker 2%)
+

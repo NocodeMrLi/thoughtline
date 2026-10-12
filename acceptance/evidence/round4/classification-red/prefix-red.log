@@ -1,0 +1,36 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/classification.test.ts (13 tests | 1 failed) 49ms
+   × paused inline project typing does not accumulate unfinished prefixes in the directory 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/classification.test.ts > paused inline project typing does not accumulate unfinished prefixes in the directory
+AssertionError: expected [ '工作记录', '新', '新归属' ] to deeply equal [ '工作记录' ]
+
+- Expected
++ Received
+
+  [
+    "工作记录",
++   "新",
++   "新归属",
+  ]
+
+ ❯ tests/unit/classification.test.ts:42:27
+     40|  const s=fixture();s.projects=['工作记录'];let current=s;
+     41|  for(const project of ['新','新归属']){const r=editIdea(current,'i0',{...c…
+     42|  expect(current.projects).toEqual(['工作记录']);expect(projectNames(curren…
+       |                           ^
+     43| });
+     44|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 12 passed (13)
+   Start at  16:49:47
+   Duration  227ms (transform 56%, tests 33%, import 9%, worker 2%)
+

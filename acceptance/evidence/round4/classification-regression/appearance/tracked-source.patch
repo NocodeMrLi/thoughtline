@@ -1,0 +1,837 @@
+diff --git a/src/main/index.ts b/src/main/index.ts
+index b8bbcdf..91e925f 100644
+--- a/src/main/index.ts
++++ b/src/main/index.ts
+@@ -1,3 +1,4 @@
++import {addProject,renameProject,setClassificationActive,rememberIdeaProject} from '../shared/classification';
+ import {shelfCapacity} from '../shared/ropeGeometry';
+ import {validPaper,validRope} from '../shared/appearance';
+ import {PreferenceRepository} from './store/preferences';
+@@ -17,7 +18,7 @@ import {swapShortcut} from './shortcuts';
+ import {validWriteHotkey,displayWriteHotkey} from '../shared/composerKeys';
+ import {changeStatus,addAgent,updateAgent,removeAgent,removeProject,editIdeaIfUnchanged,deleteIdea,restoreIdea,permanentlyDeleteIdea} from '../shared/ideaCommands';
+ import type {Draft,Result,Snapshot} from '../shared/contracts';
+-import type {PilotInfo,HitLayout,ComposerContext,AgentMutation,ClipMutation} from '../shared/bridge';
++import type {PilotInfo,HitLayout,ComposerContext,AgentMutation,ClipMutation,ClassificationTab,ClassificationMutation} from '../shared/bridge';
+ import {mergeClips,splitClip,moveClip,selectClipIdea,dropClipIdea,arrangeClips} from '../shared/clipCommands';
+ import {captureClipPositions,layoutClips} from '../shared/clipLayout';
+ import {placeIdea,placementPlan,undoPlacement,backfillIdeas,setShelfCapacity,type PlacementIntent,type PlacementSource,type PlacementUndo} from '../shared/ideaPlacement';
+@@ -70,13 +71,15 @@ else app.whenReady().then(async()=>{
+  let placementNotice:string|null=null;let placementNoticeId=0;let placementNoticeKind:'info'|'error'='info';
+  const setPlacementNotice=(message:string|null,error=false)=>{placementNotice=message;placementNoticeId++;placementNoticeKind=error?'error':'info';};let shelfAgentId='all';let settingsBusy=false;let storageBusy=false;let refreshTray=()=>{};
+  let geometryTimer:ReturnType<typeof setTimeout>|null=null,boundsIgnoreUntil=0;
+- let manageMode:'browse'|'detail'|'settings'='browse',manageTitles=false;let undoClips:{snapshot:Snapshot;revision:number;positionsOnly?:boolean;placement?:PlacementUndo;placementKind?:'hang'|'arrange'|'swap'}|null=null;
++ let classificationTab:ClassificationTab='tags',classificationOrigin:'composer'|'calendar'='calendar',classificationReturnBounds:Electron.Rectangle|null=null;
++ let classificationChange:PilotInfo['classificationChange'];let classificationSequence=0;
++ let manageMode:'browse'|'detail'|'settings'|'classification'='browse',manageTitles=false;let undoClips:{snapshot:Snapshot;revision:number;positionsOnly?:boolean;placement?:PlacementUndo;placementKind?:'hang'|'arrange'|'swap'}|null=null;
+  let composerContext:ComposerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
+  const preload=join(__dirname,'../preload/index.js');shelf=createShelf(preload);
+  const host=createHost(shelf,()=>composer);
+  let preferenceCommit:{version:number;sequence:number;sender:number}|null=null;
+  let reminderFallback:ReminderFallback|null=null;
+- const info=(viewer?:number):PilotInfo=>({lightReminder:reminderFallback?.current??null,preferenceCommit:preferenceCommit?{version:preferenceCommit.version,sequence:preferenceCommit.sequence,own:preferenceCommit.sender===viewer}:null,preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,placementNoticeId,placementNoticeKind,arrangeSession,manageVisit,calendarReturning,manageSession,manageSelection,manageMode,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,undoPlacementKind:undoClips?.placementKind,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation(),layoutLocked:dragEscape||!!textDragOwner});
++ const info=(viewer?:number):PilotInfo=>({lightReminder:reminderFallback?.current??null,preferenceCommit:preferenceCommit?{version:preferenceCommit.version,sequence:preferenceCommit.sequence,own:preferenceCommit.sender===viewer}:null,preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,placementNoticeId,placementNoticeKind,arrangeSession,manageVisit,calendarReturning,manageSession,manageSelection,manageMode,classificationTab,classificationOrigin,classificationChange,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,undoPlacementKind:undoClips?.placementKind,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation(),layoutLocked:dragEscape||!!textDragOwner});
+  let reminderScheduler:ReminderScheduler|null=null,reminderNotices:ReminderNotifications|null=null;
+  const publish=()=>{reminderFallback?.sync();edge.reminder(!!reminderFallback?.current);reminderNotices?.sync();reminderScheduler?.refresh();for(const w of [shelf,composer,manage])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info(w.webContents.id));};
+  const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:(BrowserWindow|null)[]=[shelf,composer,manage])=>allowed.some(w=>w?.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
+@@ -126,7 +129,7 @@ else app.whenReady().then(async()=>{
+   if(manageRelease)clearTimeout(manageRelease);manageRelease=null;
+   if(manageLoading)return manageLoading;if(manage)return Promise.resolve(manage);
+   const w=createManage(preload);manage=w;
+-  w.on('close',event=>{if(!quitting){event.preventDefault();void prepareWindow(w).then(ok=>{if(ok)hideManage();else{w.show();w.focus();}});}});
++  w.on('close',event=>{if(!quitting){event.preventDefault();void prepareWindow(w).then(ok=>{if(ok){hideManage();if(manageMode==='classification'&&classificationOrigin==='composer'){composer?.show();composer?.focus();}}else{w.show();w.focus();}});}});
+   w.on('focus',publish);w.on('blur',publish);
+   w.on('will-move',()=>{boundsIgnoreUntil=0;});w.on('will-resize',()=>{boundsIgnoreUntil=0;});
+   w.on('move',queueCalendarGeometry);w.on('resize',queueCalendarGeometry);
+@@ -136,7 +139,7 @@ else app.whenReady().then(async()=>{
+   return manageLoading;
+  };
+  app.on('will-quit',()=>{if(composerRelease)clearTimeout(composerRelease);if(manageRelease)clearTimeout(manageRelease);if(geometryTimer)clearTimeout(geometryTimer);});
+- const openComposer=async():Promise<Result<void>>=>{
++ const openComposer=async(sourceId?:string):Promise<Result<void>>=>{
+   if(composerLoading)return done();
+   if(manage?.isVisible()&&manageMode==='settings')return invalid(t("请先关闭设置。"));
+   if(composer?.isVisible()){
+@@ -148,9 +151,11 @@ else app.whenReady().then(async()=>{
+    return done();
+   }
+   if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
+-  composerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
++  const source=snapshot.ideas.find(i=>i.id===sourceId&&i.status!=='deleted');
++  composerContext={mode:'new',ideaId:null,draft:snapshot.draft??{...blank,...(source?{agentId:source.agentId,project:source.project}:{})}};
+   composerSession++;draftWritableSession=composerSession;draftSequence=0;try{await ensureComposer();}catch{return {ok:false,code:'IO',message:t("输入浮层未能打开，请重试。原数据已保留。")};}if(quitting)return invalid(t("正在退出。"));if(manage?.isVisible()&&manageMode==='settings')return invalid(t("请先关闭设置。"));composerSafeToRelease=false;lock('composer',true);hideManage();publish();host.showComposer(boundsFor(COMPOSER_SIZE.width,COMPOSER_SIZE.height));return done();
+  };
++ ipcMain.handle('thoughtline:open-composer',(e,sourceId?:string)=>trusted(e)&&(!sourceId||typeof sourceId==='string')?openComposer(sourceId):invalid(t('无效操作')));
+  ipcMain.handle('thoughtline:composer-size',(e,height:number,session:number)=>{
+   if(!trusted(e,[composer])||session!==composerSession||!composer||!Number.isFinite(height)||height<260||height>600)return invalid(t('无效操作'));
+   const bounds=composer.getBounds(),area=screen.getDisplayMatching(bounds).workArea;
+@@ -276,6 +281,7 @@ else app.whenReady().then(async()=>{
+    return {label:`${title} · ${countThoughts(preferences.current.locale,target.ideaIds.length)}`,click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'paperDrop',id:clip!.id,ideaId:id,targetId:target.id,position:null},snapshot.revision);if(!r.ok){setPlacementNotice(r.message,true);publish();}})();}};
+   });
+   const menu=Menu.buildFromTemplate([
++   {label:t("新建念头"),accelerator:snapshot.settings.writeHotkey,click:()=>{void openComposer(id);}},
+    {label:t("查看全文"),click:()=>{void openBrowseDetail(id);}},
+    {label:t("合并"),enabled:!!clip,submenu:mergeItems.length?mergeItems:[{label:t("没有可合并的夹子"),enabled:false}]},
+    ...(clip&&clip.ideaIds.length>1?[{label:t("拆分"),click:()=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange({kind:'split',id:clip.id,ideaId:id},snapshot.revision);if(!r.ok){setPlacementNotice(r.message,true);publish();}})();}}]:[]),
+@@ -329,7 +335,21 @@ else app.whenReady().then(async()=>{
+  const consumeReminders=(claims:ReminderClaim[],state:'notified'|'missed'|'failed',now:string)=>composerWrite(async()=>{if(quitting)return false;const r=await reminderCommit(markReminders(snapshot,claims,state,now));return r.ok;});
+  reminderScheduler=new ReminderScheduler({snapshot:()=>snapshot,consume:(c,s,n)=>consumeReminders(c,s,n),failed:async(c,n)=>{if(await consumeReminders(c,'failed',n)&&!quitting)reminderFallback!.show(c);},notify:(ids,missed)=>reminderNotices!.show(ids,missed),onError:()=>{/* A persisted scheduled reminder remains retryable after a storage failure. */}});
+  app.on('will-quit',()=>{reminderScheduler?.stop();reminderFallback?.stop();});
+- ipcMain.handle('thoughtline:close-manage',async e=>{if(!trusted(e,[manage]))return invalid(t("无效操作"));if(!await prepareWindow(manage))return invalid(t("最后修改尚未保存，窗口已保留。"));hideManage();return done();});
++ const returnClassification=async():Promise<Result<void>>=>{
++  if(manageMode!=='classification'||!await prepareWindow(manage))return invalid(t('最后修改尚未保存，窗口已保留。'));
++  if(classificationOrigin==='composer'){hideManage();composer?.show();composer?.focus();}
++  else{manageMode='browse';manageSelection=null;calendarReturning=true;manageSession++;setManageBounds(classificationReturnBounds??calendarBounds());publish();manage?.show();manage?.focus();}
++  return done();
++ };
++ ipcMain.handle('thoughtline:open-classification',async(e,tab:ClassificationTab)=>{
++  if(!trusted(e,[composer,manage])||!['tags','projects'].includes(tab)||quitting||settingsBusy||storageBusy)return invalid(t('无效操作'));
++  if(!await prepareWindow(composer)||!await prepareWindow(manage))return invalid(t('最后修改尚未保存，窗口已保留。'));
++  const origin=trusted(e,[composer])?'composer' as const:'calendar' as const;
++  classificationReturnBounds=origin==='calendar'&&manage?.isVisible()?manage.getBounds():null;
++  await ensureManage();classificationOrigin=origin;classificationTab=tab;manageMode='classification';manageSelection=null;manageEditingRequested=false;manageSession++;lock('manage',true);setManageBounds(boundsFor(740,570));publish();manage!.show();manage!.focus();return done();
++ });
++ ipcMain.handle('thoughtline:return-classification',e=>trusted(e,[manage])?returnClassification():invalid(t('无效操作')));
++ ipcMain.handle('thoughtline:close-manage',async e=>{if(!trusted(e,[manage]))return invalid(t("无效操作"));if(manageMode==='classification'&&classificationOrigin==='composer')return returnClassification();if(!await prepareWindow(manage))return invalid(t("最后修改尚未保存，窗口已保留。"));hideManage();return done();});
+  const openSettings=async(fromCalendar=false):Promise<Result<void>>=>{
+   if(composer?.isVisible())return invalid(t("请先保存或取消当前输入。"));
+   if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
+@@ -433,22 +453,46 @@ else app.whenReady().then(async()=>{
+   });
+  });
+  ipcMain.handle('thoughtline:agent',(e,c:AgentMutation,revision:number)=>{
+-  if(!trusted(e,[manage])||!c||typeof c!=='object')return invalid(t("无效操作"));
++  if(!trusted(e,[manage,composer])||!c||typeof c!=='object'||trusted(e,[composer])&&c.kind!=='add')return invalid(t("无效操作"));
+   return composerWrite(async()=>{if(revision!==snapshot.revision)return {ok:false as const,code:'CONFLICT' as const,message:t("内容已变化，请重新操作。")};
+   let next:Result<Snapshot>;
+   if(c.kind==='add'&&typeof c.name==='string'&&typeof c.color==='string')next=addAgent(snapshot,{id:randomUUID(),name:c.name.trim(),color:c.color});
+   else if(c.kind==='update'&&typeof c.id==='string'&&typeof c.name==='string'&&typeof c.color==='string')next=updateAgent(snapshot,c.id,{name:c.name.trim(),color:c.color});
+   else if(c.kind==='remove'&&typeof c.id==='string'&&typeof c.replacement==='string')next=removeAgent(snapshot,c.id,c.replacement);
+   else return invalid(t("Agent内容无效"));
+-  return save(next,revision);
++  return save(next,revision,()=>{if(c.kind==='remove'){
++   if(composerContext.draft.agentId===c.id)composerContext={...composerContext,draft:{...composerContext.draft,agentId:c.replacement}};
++   classificationChange={sequence:++classificationSequence,field:'agentId',from:c.id,to:c.replacement};
++  }});
+   });
+  });
++ ipcMain.handle('thoughtline:classification',(e,c:ClassificationMutation,revision:number)=>composerWrite(async()=>{
++  if(!trusted(e,[composer,manage])||!c||typeof c!=='object'||revision!==snapshot.revision)return invalid(t('内容已变化，请重新操作。'));
++  const priorUndo=undoClips;let next:Result<Snapshot>;
++  if(c.kind==='active'&&['tag','project'].includes(c.field)&&typeof c.id==='string'&&typeof c.active==='boolean')next=setClassificationActive(snapshot,c.field,c.id,c.active);
++  else if(c.kind==='rememberProject'&&trusted(e,[manage])&&c.session===manageSession&&manageEditingOwner?.session===c.session&&manageEditingOwner.ideaId===c.ideaId){
++   const project=snapshot.ideas.find(i=>i.id===c.ideaId&&i.status!=='deleted')?.project;
++   if(!project||snapshot.projects?.includes(project))return {ok:true,value:snapshot};
++   next=rememberIdeaProject(snapshot,c.ideaId);
++  }
++  else if(c.kind==='addProject')next=addProject(snapshot,c.name);
++  else if(c.kind==='renameProject'&&trusted(e,[manage])&&typeof c.from==='string')next=renameProject(snapshot,c.from,c.name,new Date().toISOString());
++  else return invalid(t('无效操作'));
++  return save(next,revision,()=>{
++   // Catalog maintenance does not invalidate a reversible clip arrangement.
++   if(priorUndo){const original=priorUndo.snapshot;undoClips={...priorUndo,revision:snapshot.revision,snapshot:{...original,agents:snapshot.agents,projects:snapshot.projects,inactiveProjects:snapshot.inactiveProjects,inactiveAgents:snapshot.inactiveAgents,draft:snapshot.draft,ideas:c.kind==='renameProject'?original.ideas.map(i=>i.project===c.from?{...i,project:c.name.trim()}:i):original.ideas}};}
++   if(c.kind==='renameProject'&&next.ok){
++   if(composerContext.draft.project===c.from)composerContext={...composerContext,draft:{...composerContext.draft,project:c.name.trim()}};
++   classificationChange={sequence:++classificationSequence,field:'project',from:c.from,to:c.name.trim()};
++  }});
++ }));
+  ipcMain.handle('thoughtline:project-delete',(e,project:string,revision:number)=>composerWrite(async()=>{
+   if(!trusted(e,[composer,manage])||typeof project!=='string'||!project)return invalid(t("未分组不能删除。"));
+   if(revision!==snapshot.revision)return {ok:false,code:'CONFLICT',message:t("内容已更新，请重新删除分组。")};
+   const priorUndo=undoClips,now=new Date().toISOString();
+   const saved=await save(removeProject(snapshot,project,now),revision);
+   if(saved.ok){
++   classificationChange={sequence:++classificationSequence,field:'project',from:project,to:''};
+    if(composerContext.draft.project===project)composerContext={...composerContext,draft:{...composerContext.draft,project:''}};
+    if(priorUndo){const cleaned=removeProject(priorUndo.snapshot,project,now);if(cleaned.ok)undoClips={...priorUndo,snapshot:cleaned.value,revision:snapshot.revision};}
+    publish();
+diff --git a/src/preload/index.ts b/src/preload/index.ts
+index b46b5d3..d4d916a 100644
+--- a/src/preload/index.ts
++++ b/src/preload/index.ts
+@@ -21,6 +21,10 @@ const api:ThoughtlineBridge={
+  placeIdea:(id,intent,revision,reveal,session)=>ipcRenderer.invoke('thoughtline:place-idea',id,intent,revision,reveal,session),
+  close:draft=>ipcRenderer.invoke('thoughtline:close',draft),
+  saveDraft:(draft,session,sequence)=>ipcRenderer.invoke('thoughtline:save-draft',draft,session,sequence),
++ openComposer:sourceId=>ipcRenderer.invoke('thoughtline:open-composer',sourceId),
++ openClassification:tab=>ipcRenderer.invoke('thoughtline:open-classification',tab),
++ returnClassification:()=>ipcRenderer.invoke('thoughtline:return-classification'),
++ classificationChange:(change,revision)=>ipcRenderer.invoke('thoughtline:classification',change,revision),
+  openManage:(id,titles)=>ipcRenderer.invoke('thoughtline:open-manage',id,titles),
+  closeManage:()=>ipcRenderer.invoke('thoughtline:close-manage'),
+  openEdit:id=>ipcRenderer.invoke('thoughtline:open-edit',id),
+diff --git a/src/renderer/components/AgentSettings.tsx b/src/renderer/components/AgentSettings.tsx
+deleted file mode 100644
+index de5df82..0000000
+--- a/src/renderer/components/AgentSettings.tsx
++++ /dev/null
+@@ -1,18 +0,0 @@
+-import {useLocale} from '../LocaleContext';
+-import {useEffect,useState} from 'react';
+-import type {PilotInfo,AgentMutation} from '../../shared/bridge';
+-import type {Result} from '../../shared/contracts';
+-export function AgentSettings({info,busy,run}:{info:PilotInfo;busy:boolean;run:(task:()=>Promise<Result<unknown>>,message?:string)=>Promise<boolean>}){
+- const {t,agentName}=useLocale();
+- const [id,setId]=useState('general');const chosen=info.snapshot.agents.find(a=>a.id===id)??info.snapshot.agents[0];
+- const [name,setName]=useState(chosen.name),[color,setColor]=useState(chosen.color),[replacement,setReplacement]=useState('general');const [newName,setNewName]=useState(''),[newColor,setNewColor]=useState('#8AADD4');
+- useEffect(()=>{setId(chosen.id);setName(chosen.name);setColor(chosen.color);},[chosen.id,chosen.name,chosen.color]);
+- const change=(c:AgentMutation,message:string)=>run(()=>window.thoughtline.agentChange(c,info.snapshot.revision),message);
+- return <section className="agent-settings">
+-  <p>{t("夹子颜色和文字一起区分 Agent。这里只记录归属，不连接 Agent 账户。")}</p>
+-  <label>{t("编辑标签")}<select value={chosen.id} disabled={busy} onChange={e=>setId(e.target.value)}>{info.snapshot.agents.map(a=><option key={a.id} value={a.id}>{agentName(a)}</option>)}</select></label>
+-  <div className="agent-form"><label>{t("名称")}<input maxLength={40} value={name} disabled={busy} onChange={e=>setName(e.target.value)}/></label><label>{t("夹子颜色")}<input type="color" value={color} disabled={busy} onChange={e=>setColor(e.target.value)}/></label><button disabled={busy||!name.trim()} onClick={()=>void change({kind:'update',id:chosen.id,name,color},t("标签已更新，念头归属保持不变。"))}>{t("保存标签")}</button></div>
+-  {chosen.id!=='general'&&<div className="agent-form migration"><label>{t("移除前，将念头和草稿迁到")}<select value={replacement} disabled={busy} onChange={e=>setReplacement(e.target.value)}>{info.snapshot.agents.filter(a=>a.id!==chosen.id).map(a=><option key={a.id} value={a.id}>{agentName(a)}</option>)}</select></label><button disabled={busy||replacement===chosen.id} onClick={()=>void change({kind:'remove',id:chosen.id,replacement},t("标签已移除，全文已迁移。"))}>{t("移除并迁移")}</button></div>}
+-  <hr/><h2>{t("新增 Agent")}</h2><div className="agent-form"><label>{t("名称")}<input placeholder={t("例如：日报、直属领导、客户")} maxLength={40} value={newName} disabled={busy} onChange={e=>setNewName(e.target.value)}/></label><label>{t("夹子颜色")}<input type="color" value={newColor} disabled={busy} onChange={e=>setNewColor(e.target.value)}/></label><button disabled={busy||!newName.trim()} onClick={async()=>{if(await change({kind:'add',name:newName,color:newColor},t("新标签已添加。")))setNewName('');}}>{t("添加标签")}</button></div>
+- </section>;
+-}
+diff --git a/src/renderer/components/Calendar.tsx b/src/renderer/components/Calendar.tsx
+index 6abd768..efe03b6 100644
+--- a/src/renderer/components/Calendar.tsx
++++ b/src/renderer/components/Calendar.tsx
+@@ -11,12 +11,11 @@ import type {PilotInfo} from '../../shared/bridge';
+ import type {Idea,Result} from '../../shared/contracts';
+ import {prepareLeave} from '../hooks/leaveGuards';
+ import {IdeaReader} from './IdeaReader';
+-import {AgentSettings} from './AgentSettings';
+ import {onLineIdeaIds} from '../../shared/ideaVisibility';
+ import {ActionIcon,IconButton} from './ActionIcon';
+ import brandLogoUrl from '../../../assets/source/approved-TL-brand-logo.jpg?url';
+ import {calendarIndex,ideaDay} from '../../shared/ideaHistory';
+-type Level='month'|'year'|'day'|'monthIdeas'|'yearIdeas'|'trash'|'agents';
++type Level='month'|'year'|'day'|'monthIdeas'|'yearIdeas'|'trash';
+ type Nav={level:Level;month:string;day:string;scroll:number;limit:number};
+ export type CalendarNavigation={nav:Nav;history:Nav[];selected:string|null;query:string;status:'all'|'hanging'|'archived';readerScroll:number};
+ type MotionKind='month-to-year'|'year-to-month'|'month-to-day'|'day-to-month'|'card-to-reader'|'reader-to-card';
+@@ -129,18 +128,18 @@ export function Calendar({info,restore,onRemember}:{info:PilotInfo;restore?:Cale
+  const openIdea=async(id:string,from:Element)=>{const intent=++navigationIntent.current,session=info.manageSession,at=scroll.current?.scrollTop??0;if(!await prepareLeave()||!currentIntent(session,intent))return;captureMotion(from,'.idea-reader','card-to-reader');readerScroll.current=at;setSelected(id);setTools(false);};
+  const run=async(task:()=>Promise<Result<unknown>>,message='')=>{if(busy)return false;const session=info.manageSession;setBusy(true);setError('');try{if(!await prepareLeave()||!mounted.current||activeSession.current!==session)return false;const r=await task();if(!mounted.current||activeSession.current!==session)return false;if(!r.ok){setError(r.message);return false;}setNotice(message);return true;}catch{if(mounted.current&&activeSession.current===session)setError('操作未成功，内容已保留。');return false;}finally{if(mounted.current&&activeSession.current===session)setBusy(false);}};
+  const date=(key:string,kind:'day'|'month'|'year'|'monthName'='day')=>formatCalendarDate(locale,key,kind);
+- const label=nav.level==='year'?date(year,'year'):nav.level==='day'?t('dayThoughts',{date:date(nav.day)}):nav.level==='monthIdeas'?t('allThoughts',{date:date(nav.month,'month')}):nav.level==='yearIdeas'?t('allThoughts',{date:date(year,'year')}):nav.level==='trash'?t('最近删除'):nav.level==='agents'?t('Agent 标签'):date(nav.month,'month');
++ const label=nav.level==='year'?date(year,'year'):nav.level==='day'?t('dayThoughts',{date:date(nav.day)}):nav.level==='monthIdeas'?t('allThoughts',{date:date(nav.month,'month')}):nav.level==='yearIdeas'?t('allThoughts',{date:date(year,'year')}):nav.level==='trash'?t('最近删除'):date(nav.month,'month');
+  const grid=nav.level==='month'&&!query.trim(),yearGrid=nav.level==='year'&&!query.trim();
+  const monthDays=new Date(Date.UTC(Number(year),Number(nav.month.slice(5)),0)).getUTCDate(),offset=new Date(nav.month+'-01T12:00:00Z').getUTCDay();
+  const weeks=Math.ceil((offset+monthDays)/7);
+  return <main ref={host} data-view="manage" data-mode="calendar" data-material={info.manageMaterial} data-platform={info.platform} className="manage thought-calendar">
+   <header className="auxiliary-header"><div className="calendar-heading">{(selected||history.length>0||nav.level!=='month')&&<IconButton icon="back" label={t("返回")} onClick={()=>void back()}/>}<button className="calendar-title" onClick={()=>{if(nav.level==='month'&&!selected){void go({...nav,level:'year',scroll:0,limit:9},{from:host.current?.querySelector('.month-grid')??null,to:`[data-month="${nav.month}"]`,kind:'month-to-year'});}}} title={nav.level==='month'?t("查看全年十二个月"):undefined}>{idea?t('念头日历'):label}</button></div><div className="calendar-header-actions">{info.canUndoClips&&<IconButton icon="undo" label={t(info.undoPlacementKind==='swap'?'撤销换上':info.undoPlacementKind==='hang'?'撤销挂上':'撤销整理')} disabled={busy} onClick={()=>void run(async()=>{const current=await window.thoughtline.info();if(current.manageSession!==info.manageSession)return {ok:false,code:'CONFLICT',message:t('内容已变化，请重新操作。')};return window.thoughtline.clipChange({kind:'undo'},current.snapshot.revision);})}/>}<span ref={toolsAnchor}><IconButton icon="more" label={t("日历更多选项")} aria-expanded={tools} onClick={()=>setTools(!tools)}/></span><PreferencesControl info={info}/><button className="close" aria-label={t("关闭日历")} onClick={()=>void window.thoughtline.closeManage()}>×</button></div></header>
+-  {tools&&<ReaderMoreMenu anchor={toolsAnchor} onClose={closeTools} side="below" label={t("日历更多选项")} className="calendar-tools"><button onClick={()=>void go({...nav,level:'trash',scroll:0,limit:9})}>{t("最近删除")}</button><button onClick={()=>void run(()=>window.thoughtline.openSettings())}>{t("存储与设置")}</button><button onClick={()=>void go({...nav,level:'agents',scroll:0,limit:9})}>{t("Agent 标签")}</button></ReaderMoreMenu>}
++  {tools&&<ReaderMoreMenu anchor={toolsAnchor} onClose={closeTools} side="below" label={t("日历更多选项")} className="calendar-tools"><button onClick={()=>void go({...nav,level:'trash',scroll:0,limit:9})}>{t("最近删除")}</button><button onClick={()=>void run(()=>window.thoughtline.openSettings())}>{t("存储与设置")}</button><button onClick={()=>void run(()=>window.thoughtline.openClassification('tags'))}>{t('标签与分组')}</button></ReaderMoreMenu>}
+   {idea?<IdeaReader key={idea.id+':'+info.manageSession} idea={idea} info={info}/>:<>
+-   {nav.level!=='agents'&&<div className="calendar-search"><input aria-label={t("搜索念头")} placeholder={t("搜索正文、名称或项目")} value={query} onChange={e=>{navigationIntent.current++;cancelMotion();setQuery(e.target.value);restoreScroll.current=0;if(scroll.current)scroll.current.scrollTop=0;setNav(n=>({...n,scroll:0,limit:9}));}}/><select aria-label={t("筛选念头状态")} value={status} onChange={e=>{navigationIntent.current++;cancelMotion();setStatus(e.target.value as typeof status);restoreScroll.current=0;if(scroll.current)scroll.current.scrollTop=0;setNav(n=>({...n,scroll:0,limit:9}));}}><option value="all">{t("全部状态")}</option><option value="hanging">{t("挂着")}</option><option value="archived">{t("未挂上")}</option></select></div>}
++   {<div className="calendar-search"><input aria-label={t("搜索念头")} placeholder={t("搜索正文、名称或项目")} value={query} onChange={e=>{navigationIntent.current++;cancelMotion();setQuery(e.target.value);restoreScroll.current=0;if(scroll.current)scroll.current.scrollTop=0;setNav(n=>({...n,scroll:0,limit:9}));}}/><select aria-label={t("筛选念头状态")} value={status} onChange={e=>{navigationIntent.current++;cancelMotion();setStatus(e.target.value as typeof status);restoreScroll.current=0;if(scroll.current)scroll.current.scrollTop=0;setNav(n=>({...n,scroll:0,limit:9}));}}><option value="all">{t("全部状态")}</option><option value="hanging">{t("挂着")}</option><option value="archived">{t("未挂上")}</option></select></div>}
+    {(grid||yearGrid)&&<div className="calendar-navigation"><button aria-label={yearGrid?t("上一年"):t("上个月")} onClick={()=>{navigationIntent.current++;cancelMotion();restoreScroll.current=0;setNav(n=>({...n,month:shiftMonth(n.month,yearGrid?-12:-1)}));}}><ActionIcon name="chevronLeft"/></button><button onClick={()=>{navigationIntent.current++;cancelMotion();restoreScroll.current=0;setNav(initial);}}>{t("今天")}</button><button onClick={()=>void go({...nav,level:yearGrid?'yearIdeas':'monthIdeas',scroll:0,limit:9})}>{yearGrid?t('yearThoughts',{count:yearCount(year)}):t('monthThoughts',{count:monthCount(nav.month)})}</button><button aria-label={yearGrid?t("下一年"):t("下个月")} onClick={()=>{navigationIntent.current++;cancelMotion();restoreScroll.current=0;setNav(n=>({...n,month:shiftMonth(n.month,yearGrid?12:1)}));}}><ActionIcon name="chevronRight"/></button></div>}
+    <div ref={scroll} className="calendar-content" data-calendar-scroll>
+-    {grid?<div className="month-grid" style={{gridTemplateRows:`28px repeat(${weeks},minmax(57px,1fr))`}} aria-label={t('calendarLabel',{date:date(nav.month,'month')})}>{[t("日"),t("一"),t("二"),t("三"),t("四"),t("五"),t("六")].map(d=><span className="weekday" key={d}>{d}</span>)}{Array.from({length:offset},(_,i)=><span key={'blank'+i}/>)}{Array.from({length:monthDays},(_,i)=>{const day=nav.month+'-'+pad(i+1),count=index.normal.get(day)?.length??0;return <button key={day} className="date-cell" data-day={day} aria-current={day===today?'date':undefined} aria-label={t('dayCount',{date:date(day),count:countThoughts(locale,count)})} onClick={e=>void go({...nav,level:'day',day,scroll:0,limit:9},{from:e.currentTarget,to:'.calendar-paper-groups',kind:'month-to-day'})}><span>{i+1}</span>{count>0&&<span className="day-count"><MiniClip/>{count}</span>}</button>;})}{Array.from({length:weeks*7-offset-monthDays},(_,i)=><span key={'tail'+i}/> )}</div>:yearGrid?<div className="year-grid" aria-label={t('yearMonths',{year})}>{Array.from({length:12},(_,i)=>{const month=year+'-'+pad(i+1),count=monthCount(month);return <button key={month} data-month={month} onClick={e=>void go({...nav,level:'month',month,scroll:0,limit:9},{from:e.currentTarget,to:'.month-grid',kind:'year-to-month'})}><strong>{date(month,'monthName')}</strong><span>{count>0&&<MiniClip/>}{countThoughts(locale,count)}</span></button>;})}</div>:nav.level==='agents'?<AgentSettings info={info} busy={busy} run={run}/>:<div className="calendar-paper-groups">
++    {grid?<div className="month-grid" style={{gridTemplateRows:`28px repeat(${weeks},minmax(57px,1fr))`}} aria-label={t('calendarLabel',{date:date(nav.month,'month')})}>{[t("日"),t("一"),t("二"),t("三"),t("四"),t("五"),t("六")].map(d=><span className="weekday" key={d}>{d}</span>)}{Array.from({length:offset},(_,i)=><span key={'blank'+i}/>)}{Array.from({length:monthDays},(_,i)=>{const day=nav.month+'-'+pad(i+1),count=index.normal.get(day)?.length??0;return <button key={day} className="date-cell" data-day={day} aria-current={day===today?'date':undefined} aria-label={t('dayCount',{date:date(day),count:countThoughts(locale,count)})} onClick={e=>void go({...nav,level:'day',day,scroll:0,limit:9},{from:e.currentTarget,to:'.calendar-paper-groups',kind:'month-to-day'})}><span>{i+1}</span>{count>0&&<span className="day-count"><MiniClip/>{count}</span>}</button>;})}{Array.from({length:weeks*7-offset-monthDays},(_,i)=><span key={'tail'+i}/> )}</div>:yearGrid?<div className="year-grid" aria-label={t('yearMonths',{year})}>{Array.from({length:12},(_,i)=>{const month=year+'-'+pad(i+1),count=monthCount(month);return <button key={month} data-month={month} onClick={e=>void go({...nav,level:'month',month,scroll:0,limit:9},{from:e.currentTarget,to:'.month-grid',kind:'year-to-month'})}><strong>{date(month,'monthName')}</strong><span>{count>0&&<MiniClip/>}{countThoughts(locale,count)}</span></button>;})}</div>:<div className="calendar-paper-groups">
+      {shown.length===0&&<p className="empty-list">{nav.level==='trash'?t("最近删除为空，不会自动清空。"):t("这里还没有念头。")}</p>}
+      {[...new Set(shown.map(dayKey))].map(day=><section key={day} className="calendar-day-papers"><h2>{date(day)}</h2><div className="paper-grid">{shown.filter(i=>dayKey(i)===day).map(i=><button className="calendar-paper" style={paperStyle(info.snapshot.settings.paper)} data-paper-pattern={paperAppearance(info.snapshot.settings.paper).pattern} data-paper-color={paperAppearance(info.snapshot.settings.paper).color} data-idea-id={i.id} key={i.id} onClick={e=>void openIdea(i.id,e.currentTarget)}><MiniClip/><strong>{i.title}</strong><span className="calendar-paper-text">{i.text}</span>{i.reminder&&i.reminder.state!=='cancelled'&&<span className="calendar-reminder" data-calendar-reminder={i.id} aria-label={t('提醒：')+reminderLabel(i.reminder.at,locale)} title={reminderLabel(i.reminder.at,locale)}><ActionIcon name="bell"/></span>}<small>{names.get(i.agentId)}{i.project?' · '+i.project:''}{!onLine.has(i.id)?t(" · 未挂上"):''}</small></button>)}</div></section>)}
+      {shown.length<cards.length&&<button className="calendar-load-more" onClick={()=>{navigationIntent.current++;cancelMotion();restoreScroll.current=scroll.current?.scrollTop??0;setNav(n=>({...n,limit:n.limit+18}));}}>{t('showMore',{count:countThoughts(locale,cards.length-shown.length)})}</button>}
+diff --git a/src/renderer/components/CompactPopover.tsx b/src/renderer/components/CompactPopover.tsx
+index 9c14a41..42ed831 100644
+--- a/src/renderer/components/CompactPopover.tsx
++++ b/src/renderer/components/CompactPopover.tsx
+@@ -9,7 +9,7 @@ export function CompactPopover({anchor,label,className='',busy=false,onClose,chi
+  },[anchor]);
+  return createPortal(<div ref={panel} className={`compact-popover ${className}`} style={{position:'fixed',...position}} role="dialog" aria-label={label} aria-busy={busy} onKeyDown={e=>{
+   if(e.nativeEvent.isComposing||e.nativeEvent.keyCode===229)return;
+-  if(e.key==='Escape'){e.preventDefault();e.stopPropagation();if(!busy){onClose();anchor.current?.querySelector<HTMLButtonElement>('button')?.focus();}}
++  if(e.key==='Escape'){e.preventDefault();e.stopPropagation();if(!busy){onClose();(anchor.current?.matches('button')?anchor.current:anchor.current?.querySelector<HTMLButtonElement>('button'))?.focus();}}
+   if(e.key==='Tab'){const controls=[...panel.current?.querySelectorAll<HTMLElement>('button:not(:disabled),input:not(:disabled),select:not(:disabled)')??[]],first=controls[0],last=controls.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}}
+  }}>{children}</div>,document.body);
+ }
+diff --git a/src/renderer/components/Composer.tsx b/src/renderer/components/Composer.tsx
+index 67a9c9c..9c44898 100644
+--- a/src/renderer/components/Composer.tsx
++++ b/src/renderer/components/Composer.tsx
+@@ -6,7 +6,8 @@ import type {Draft} from '../../shared/contracts';
+ import {shouldSubmit} from '../../shared/composerKeys';
+ import {DraftAutosaver} from '../../shared/draftAutosaver';
+ import {CompositionSession} from '../../shared/compositionSession';
+-import {ProjectOptions} from './ProjectOptions';
++import {ClassificationPicker,FolderIcon} from './ClassificationPicker';
++import {registerLeaveGuard} from '../hooks/leaveGuards';
+ import {agentInkColors} from './agentInk';
+ import {placementPlan,type PlacementIntent} from '../../shared/ideaPlacement';
+ import {PlacementPicker} from './PlacementPicker';
+@@ -18,10 +19,10 @@ export function Composer({info}:{info:PilotInfo}){
+  const [draft,setDraft]=useState<Draft>(info.composerContext.draft),[busy,setBusy]=useState(false),[error,setError]=useState(''),[autosaveError,setAutosaveError]=useState('');
+  const text=useRef<HTMLTextAreaElement>(null),title=useRef<HTMLInputElement>(null),inFlight=useRef(false),live=useRef(true);
+  const composition=useRef(new CompositionSession<'text'|'title'|'project'>());
+- const [projectOpen,setProjectOpen]=useState(false);
++ const [classificationOpen,setClassificationOpen]=useState<'tag'|'project'|null>(null);const projectOpen=classificationOpen==='project';
+  const [picker,setPicker]=useState(false),[reveal,setReveal]=useState(false),[reminderOpen,setReminderOpen]=useState(false),swapAnchor=useRef<HTMLSpanElement>(null);
+  const plan=placementPlan(info.snapshot,info.width),filteredOut=info.shelfAgentId!=='all'&&info.shelfAgentId!==draft.agentId;
+- const projectButton=useRef<HTMLButtonElement>(null),projectInput=useRef<HTMLInputElement>(null);
++ const projectButton=useRef<HTMLButtonElement>(null),tagButton=useRef<HTMLButtonElement>(null);
+  const surface=useRef<HTMLElement>(null);
+  useLayoutEffect(()=>{
+   const root=surface.current,header=root?.querySelector('header'),footer=root?.querySelector('footer'),status=root?.querySelector<HTMLElement>('.composer-status');if(!root||!header||!footer||!status)return;
+@@ -30,13 +31,11 @@ export function Composer({info}:{info:PilotInfo}){
+    const css=getComputedStyle(root),number=(key:string)=>parseFloat(css.getPropertyValue(key))||0;
+    const statusHeight=[...status.children].reduce((sum,child)=>sum+child.getBoundingClientRect().height,0);
+    const height=Math.max(260,Math.ceil(header.getBoundingClientRect().height+132+statusHeight+footer.getBoundingClientRect().height+number('padding-top')+number('padding-bottom')+number('border-top-width')+number('border-bottom-width')+3*number('row-gap')));
+-   void window.thoughtline.resizeComposer(Math.min(600,height),info.composerSession).then(r=>{if(active&&!r.ok)setError(r.message);}).catch(()=>{if(active)setError('输入浮层尺寸调整未成功，请重试。');});
++   void window.thoughtline.resizeComposer(Math.min(600,classificationOpen?Math.max(350,height):height),info.composerSession).then(r=>{if(active&&!r.ok)setError(r.message);}).catch(()=>{if(active)setError('输入浮层尺寸调整未成功，请重试。');});
+   });};
+   const observer=new ResizeObserver(fit);observer.observe(header);observer.observe(footer);observer.observe(status);fit();
+   return()=>{active=false;cancelAnimationFrame(frame);observer.disconnect();};
+- },[info.composerSession]);
+- const projects=[...new Set(info.snapshot.ideas.map(i=>i.project).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+- useEffect(()=>{if(projectOpen)projectInput.current?.focus();},[projectOpen]);
++ },[info.composerSession,classificationOpen]);
+  const autosaver=useRef<DraftAutosaver<Draft>|null>(null);
+  const latest=useRef({draft,busy});latest.current={draft,busy};
+  useEffect(()=>{if(error&&!busy&&!picker&&!composition.current.composing)text.current?.focus();},[error,busy,picker]);
+@@ -71,10 +70,18 @@ export function Composer({info}:{info:PilotInfo}){
+    updateDraft({...latest.current.draft,[abandoned.field]:abandoned.before});autosaver.current?.resume();
+   }
+  });
+- const closeProject=()=>{if(projectInput.current){const abandoned=composition.current.blur(projectInput.current);if(abandoned){updateDraft({...latest.current.draft,[abandoned.field]:abandoned.before});autosaver.current?.resume();}}setProjectOpen(false);};
++ const closeProject=()=>setClassificationOpen(null);
++ const prepareClassification=async()=>{
++  if(latest.current.busy||inFlight.current||composition.current.composing)return false;
++  try{await autosaver.current?.flush();return !composition.current.composing&&!inFlight.current;}catch{setAutosaveError('草稿自动保存未成功，文字仍在窗口中；请重试保存或关闭。');return false;}
++ };
++ const prepareRef=useRef(prepareClassification);prepareRef.current=prepareClassification;
++ useEffect(()=>registerLeaveGuard(()=>prepareRef.current()),[]);
++ const classificationSeen=useRef(info.classificationChange?.sequence??0);
++ useEffect(()=>{const c=info.classificationChange;if(!c||c.sequence<=classificationSeen.current)return;classificationSeen.current=c.sequence;if(latest.current.draft[c.field]===c.from)updateDraft({...latest.current.draft,[c.field]:c.to});},[info.classificationChange?.sequence]);
+  const grouped=info.snapshot.clips.find(c=>c.ideaIds.includes(info.composerContext.ideaId??'')),changesAgent=editing&&grouped&&grouped.ideaIds.length>1&&draft.agentId!==grouped.agentId;
+  const [splitConfirmed,setSplitConfirmed]=useState(false);
+- useEffect(()=>{setDraft(info.composerContext.draft);setError('');setSplitConfirmed(false);setProjectOpen(false);setPicker(false);setReminderOpen(false);setReveal(false);text.current?.focus();},[info.composerSession]);
++ useEffect(()=>{setDraft(info.composerContext.draft);setError('');setSplitConfirmed(false);setClassificationOpen(null);setPicker(false);setReminderOpen(false);setReveal(false);text.current?.focus();},[info.composerSession]);
+  const submit=async(intent:PlacementIntent={kind:plan==='full'?'save':plan==='arrange'?'arrange':'hang'},revealChoice=reveal)=>{
+   if(!live.current||busy||inFlight.current||composition.current.composing)return;if(changesAgent&&!splitConfirmed){setError('保存后会移至新Agent的独立夹子，请先确认。');return;}
+   inFlight.current=true;setBusy(true);setError('');try{
+@@ -91,21 +98,16 @@ export function Composer({info}:{info:PilotInfo}){
+  const outline={ '--composer-agent-light':agent?.id==='general'?'#8A8E98':ink.light,'--composer-agent-dark':agent?.id==='general'?'#7B828E':agent?.color??'#7B828E' } as CSSProperties;
+  return <main ref={surface} style={outline} data-view="composer" data-material={info.composerMaterial} data-platform={info.platform} className="composer" aria-labelledby="composer-heading" aria-busy={busy} onKeyDown={e=>{
+   const isComposing=e.nativeEvent.isComposing||composition.current.composing;
+-  if(picker||reminderOpen)return;
++  if(picker||reminderOpen||classificationOpen)return;
+   if(shouldSubmit({platform:info.platform,key:e.key,metaKey:e.metaKey,ctrlKey:e.ctrlKey,isComposing,keyCode:e.nativeEvent.keyCode})){e.preventDefault();if(!e.repeat)void submit();}
+   else if(e.key==='Escape'&&!isComposing&&e.nativeEvent.keyCode!==229&&!(e.target instanceof HTMLSelectElement)){e.preventDefault();void close();}
+  }}>
+   <header><label id="composer-heading" className="sr-only" htmlFor="idea-text">{editing?t("编辑念头"):t("写下念头")}</label><div className="composer-name"><input ref={title} className="composer-title" aria-label={t("名称")} aria-describedby="composer-name-help" maxLength={50} disabled={busy} value={draft.title} placeholder={t("名称（可选）")} title={t("点击修改名称")} {...fieldEvents('title')}/><button type="button" className="composer-name-edit" aria-label={t("修改名称")} title={t("点击修改名称")} disabled={busy} onClick={()=>title.current?.focus()}><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m10.5 2.5 3 3M3 10l7.5-7.5a1.4 1.4 0 0 1 2 0l1 1a1.4 1.4 0 0 1 0 2L6 13l-3.5.5L3 10Z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/></svg></button></div><span id="composer-name-help" className="sr-only">{t("名称可选，可点击直接编辑；留空时使用正文首行。")}</span><PreferencesControl info={info}/><button className="close" aria-label={editing?t("取消编辑并关闭"):t("保存草稿并关闭")} onClick={()=>void close()} disabled={busy}>×</button></header>
+   <textarea id="idea-text" ref={text} value={draft.text} placeholder={t("先写下来，稍后交给 Agent。")} aria-describedby="composer-status composer-shortcut composer-help" aria-invalid={!!(error||autosaveError)} {...fieldEvents('text')} spellCheck={false} disabled={busy}/>
+   <div id="composer-status" className="composer-status"><p className="error" role="alert">{!picker&&m(error||autosaveError)}</p>{!editing&&plan==='full'&&<span className="capacity-help">{t('绳上已满，可保存或换上一张。')}</span>}{!editing&&filteredOut&&plan!=='full'&&<label className="placement-filter"><input type="checkbox" checked={reveal} onChange={e=>setReveal(e.target.checked)}/>{t('显示全部Agent后挂上')}</label>}{changesAgent&&<label className="split-confirm"><input type="checkbox" disabled={busy} checked={splitConfirmed} onChange={e=>setSplitConfirmed(e.target.checked)}/>{t("保存后移至新Agent的独立夹子")}</label>}</div>
+-  <footer><div className="composer-properties"><button ref={projectButton} className="composer-project" aria-label={t("projectValue",{p0:draft.project||t("未分组")})} aria-expanded={projectOpen} aria-controls="composer-project-picker" disabled={busy} title={t("projectValue",{p0:draft.project||t("未分组")})} onClick={()=>{if(projectOpen)closeProject();else setProjectOpen(true);}}><span>{t("项目：")}</span><b>{draft.project||t("未分组")}</b><span aria-hidden="true">⌄</span></button><label className="composer-agent"><span>{t("给谁：")}</span><span className="composer-select"><select aria-label={t("念头归属 Agent")} disabled={busy} value={draft.agentId} title={agentName(agent)} onChange={e=>updateDraft({...draft,agentId:e.target.value})}>{info.snapshot.agents.map(a=><option key={a.id} value={a.id}>{agentName(a)}</option>)}</select><span aria-hidden="true">⌄</span></span></label></div><div className="composer-submit"><ReminderControl at={draft.reminderAt} disabled={busy} open={reminderOpen} onOpenChange={open=>{setReminderOpen(open);if(open){closeProject();setPicker(false);}}} onChange={async at=>{updateDraft({...latest.current.draft,reminderAt:at??undefined});try{await autosaver.current?.flush();return true;}catch{return false;}}}/><span id="composer-shortcut">{info.platform==='mac'?'⌘ Enter':'Ctrl Enter'}</span>{!editing&&plan==='full'&&<span ref={swapAnchor}><button className="composer-swap" disabled={busy||!hasIdeaContent(draft)} onClick={()=>{if(!composition.current.composing){closeProject();setReminderOpen(false);setPicker(true);}}}><ActionIcon name="swap"/>{t('换上')}</button></span>}<button className="primary" disabled={busy||!hasIdeaContent(draft)||!editing&&filteredOut&&plan!=='full'&&!reveal} onClick={()=>void submit()}>{busy?t("保存中…"):editing?t("保存修改"):plan==='full'?t('保存'):plan==='arrange'?t('整理挂上'):t("挂上")}</button></div></footer>
++  <footer><div className="composer-properties"><span>{t('分组：')}</span><button ref={projectButton} className="classification-trigger" aria-label={t('分组：')+(draft.project||t('未分组'))} aria-expanded={projectOpen} disabled={busy} onClick={()=>{setReminderOpen(false);setPicker(false);setClassificationOpen(projectOpen?null:'project');}}><FolderIcon/><span>{draft.project||t('未分组')}</span><span aria-hidden="true">⌄</span></button><span>{t('标签：')}</span><button ref={tagButton} className="classification-trigger" aria-label={t('标签：')+agentName(agent)} aria-expanded={classificationOpen==='tag'} disabled={busy} onClick={()=>{setReminderOpen(false);setPicker(false);setClassificationOpen(classificationOpen==='tag'?null:'tag');}}><span className="classification-dot" style={{background:agent?.color}}/><span>{agentName(agent)}</span><span aria-hidden="true">⌄</span></button></div><div className="composer-submit"><ReminderControl at={draft.reminderAt} disabled={busy} open={reminderOpen} onOpenChange={open=>{setReminderOpen(open);if(open){closeProject();setPicker(false);}}} onChange={async at=>{updateDraft({...latest.current.draft,reminderAt:at??undefined});try{await autosaver.current?.flush();return true;}catch{return false;}}}/><span id="composer-shortcut">{info.platform==='mac'?'⌘ Enter':'Ctrl Enter'}</span>{!editing&&plan==='full'&&<span ref={swapAnchor}><button className="composer-swap" disabled={busy||!hasIdeaContent(draft)} onClick={()=>{if(!composition.current.composing){closeProject();setReminderOpen(false);setPicker(true);}}}><ActionIcon name="swap"/>{t('换上')}</button></span>}<button className="primary" disabled={busy||!hasIdeaContent(draft)||!editing&&filteredOut&&plan!=='full'&&!reveal} onClick={()=>void submit()}>{busy?t("保存中…"):editing?t("保存修改"):plan==='full'?t('保存'):plan==='arrange'?t('整理挂上'):t("挂上")}</button></div></footer>
+   {picker&&<PlacementPicker anchor={swapAnchor} info={info} agentId={draft.agentId} busy={busy} error={error} onCancel={()=>setPicker(false)} onConfirm={(intent,reveal)=>void submit(intent,reveal)}/>}
+-  {projectOpen&&<div id="composer-project-picker" className="composer-project-picker" role="group" aria-label={t("选择或填写项目")} onKeyDown={e=>{if((e.key==='Escape'||(e.key==='Enter'&&e.target instanceof HTMLInputElement&&!e.metaKey&&!e.ctrlKey))&&!composition.current.composing&&!e.nativeEvent.isComposing&&e.nativeEvent.keyCode!==229){e.preventDefault();e.stopPropagation();closeProject();projectButton.current?.focus();}}}><ProjectOptions projects={projects} reduced={info.snapshot.settings.reducedMotion} disabled={busy} composing={()=>composition.current.composing} onChoose={p=>{closeProject();updateDraft({...latest.current.draft,project:p});projectButton.current?.focus();}} onDone={()=>{closeProject();projectButton.current?.focus();}} onDelete={async p=>{
+-   // Finish older draft checkpoints before deleting; the following checkpoint
+-   // then carries the cleared project, so autosave cannot resurrect the group.
+-   await autosaver.current?.flush();const current=await window.thoughtline.info();const r=await window.thoughtline.projectDelete(p,current.snapshot.revision);if(!r.ok)throw Error(r.message);
+-   if(latest.current.draft.project===p)updateDraft({...latest.current.draft,project:''});
+-  }}><label>{t("项目")}<input ref={projectInput} aria-label={t("项目")} maxLength={40} disabled={busy} value={draft.project} placeholder={t("选择已有项目，或填写新项目")} {...fieldEvents('project')}/></label></ProjectOptions></div>}
++  {classificationOpen&&<ClassificationPicker key={classificationOpen} kind={classificationOpen} anchor={classificationOpen==='tag'?tagButton:projectButton} info={info} value={classificationOpen==='tag'?draft.agentId:draft.project} prepare={prepareClassification} onClose={()=>setClassificationOpen(null)} onChoose={value=>{updateDraft({...latest.current.draft,[classificationOpen==='tag'?'agentId':'project']:value});setClassificationOpen(null);(classificationOpen==='tag'?tagButton:projectButton).current?.focus();}}/>}
+   <span id="composer-help" className="sr-only">{t("Enter 换行。")}{editing?t("Esc 取消编辑，保留原记录。"):t("Esc 保存草稿并关闭。")}{t("查找和已收起可从系统Thoughtline图标菜单打开。")}</span>
+  </main>;
+ }
+diff --git a/src/renderer/components/InlineIdeaEditor.tsx b/src/renderer/components/InlineIdeaEditor.tsx
+index b485c6d..06cdac3 100644
+--- a/src/renderer/components/InlineIdeaEditor.tsx
++++ b/src/renderer/components/InlineIdeaEditor.tsx
+@@ -7,6 +7,7 @@ import {CompositionSession} from '../../shared/compositionSession';
+ import {registerLeaveGuard} from '../hooks/leaveGuards';
+ import {agentInkColors} from './agentInk';
+ import {paperAppearance,paperPalettes} from '../../shared/appearance';
++import {activeProjects} from '../../shared/classification';
+ import {ProjectOptions} from './ProjectOptions';
+ export const ideaDraft=(idea:Idea):Draft=>({text:idea.text,title:idea.title,project:idea.project,agentId:idea.agentId});
+ export function InlineIdeaEditor({idea,info,onDone,onDraftAgentChange}:{idea:Idea;info:PilotInfo;onDone:()=>void;onDraftAgentChange?:(id:string)=>void}){
+@@ -15,6 +16,7 @@ export function InlineIdeaEditor({idea,info,onDone,onDraftAgentChange}:{idea:Ide
+  const [draft,setDraft]=useState(()=>ideaDraft(idea)),[status,setStatus]=useState(t("已保存")),[error,setError]=useState(''),[projectOpen,setProjectOpen]=useState(false),[confirmAgent,setConfirmAgent]=useState(false);
+  const latest=useRef(draft),base=useRef(ideaDraft(idea)),live=useRef(true),saver=useRef<DraftAutosaver<Draft>|null>(null),text=useRef<HTMLTextAreaElement>(null),composition=useRef(new CompositionSession<'text'|'title'|'project'>());
+  const grouped=info.snapshot.clips.find(c=>c.ideaIds.includes(idea.id));const needsSplit=!!grouped&&grouped.ideaIds.length>1&&draft.agentId!==grouped.agentId;
++ const rememberProject=async()=>{const current=await bridge.info(),record=current.snapshot.ideas.find(i=>i.id===idea.id);if(!record?.project||current.snapshot.projects?.includes(record.project))return;const result=await bridge.classificationChange({kind:'rememberProject',ideaId:idea.id,session:info.manageSession},current.snapshot.revision);if(!result.ok)throw Error(result.message);};
+  const splitAllowed=useRef(false);splitAllowed.current=confirmAgent||!needsSplit;
+  useEffect(()=>{
+   live.current=true;void bridge.setEditing(true,info.manageSession,idea.id).catch(()=>{});
+@@ -29,7 +31,7 @@ export function InlineIdeaEditor({idea,info,onDone,onDraftAgentChange}:{idea:Ide
+   saver.current=worker;
+   const off=registerLeaveGuard(async()=>{
+    if(composition.current.composing){setError('请先完成中文输入法选字，当前内容已保留。');return false;}
+-   try{await worker.flush();return true;}catch{return false;}
++   try{await worker.flush();await rememberProject();return true;}catch(e){if(live.current)setError(e instanceof Error?e.message:'保存未成功，文字已保留。');return false;}
+   });
+   return()=>{live.current=false;off();worker.dispose();saver.current=null;void bridge.setEditing(false,info.manageSession,idea.id).catch(()=>{});};
+  },[idea.id,info.manageSession]);
+@@ -41,16 +43,15 @@ export function InlineIdeaEditor({idea,info,onDone,onDraftAgentChange}:{idea:Ide
+   onCompositionEnd:(e:CompositionEvent<HTMLInputElement|HTMLTextAreaElement>)=>{const completed=composition.current.end(e.currentTarget,e.timeStamp);if(completed){update({...latest.current,[completed.field]:e.currentTarget.value});saver.current?.resume();}},
+   onBlur:(e:FocusEvent<HTMLInputElement|HTMLTextAreaElement>)=>{const abandoned=composition.current.blur(e.currentTarget);if(abandoned){update({...latest.current,[abandoned.field]:abandoned.before});saver.current?.resume();}}
+  });
+- const flush=async()=>{if(composition.current.composing){setError('请先完成输入法选字。');return false;}try{await saver.current?.flush();return true;}catch{return false;}};
+- const projects=[...new Set(info.snapshot.ideas.map(i=>i.project).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
++ const flush=async()=>{if(composition.current.composing){setError('请先完成输入法选字。');return false;}try{await saver.current?.flush();await rememberProject();return true;}catch(e){if(live.current)setError(e instanceof Error?e.message:'保存未成功，文字已保留。');return false;}};
++ const projects=activeProjects(info.snapshot);
+  const ink=agentInkColors(info.snapshot.agents.find(a=>a.id===draft.agentId)?.color??'#A0A3AA',paperPalettes[paperAppearance(info.snapshot.settings.paper).color]);
+  return <section style={{'--editor-focus-light':ink.light,'--editor-focus-dark':ink.dark} as CSSProperties} data-inline-editor className="inline-editor" aria-label={t("原地编辑念头")} onKeyDown={e=>{if(e.key==='Escape'){e.stopPropagation();if(!e.nativeEvent.isComposing&&!composition.current.composing){e.preventDefault();void flush().then(ok=>{if(ok&&live.current)onDone();});}}}}>
+   <input aria-label={t("编辑标题")} placeholder={t("名称（可选）")} maxLength={50} value={draft.title} {...events('title')}/>
+   <textarea ref={text} aria-label={t("编辑正文")} value={draft.text} spellCheck={false} {...events('text')}/>
+   <div className="inline-properties"><button aria-label={t("projectValue",{p0:draft.project||t("未分组")})} aria-expanded={projectOpen} onClick={()=>setProjectOpen(!projectOpen)}>{t("项目：")}{draft.project||t("未分组")} ⌄</button><label>{t("给谁：")}<select aria-label={t("编辑归属 Agent")} value={draft.agentId} onChange={e=>{setConfirmAgent(false);onDraftAgentChange?.(e.target.value);update({...latest.current,agentId:e.target.value});}}>{info.snapshot.agents.map(a=><option key={a.id} value={a.id}>{agentName(a)}</option>)}</select></label></div>
+   {projectOpen&&<div className="inline-project-picker"><ProjectOptions disabled={false} projects={projects} reduced={info.snapshot.settings.reducedMotion} composing={()=>composition.current.composing} onChoose={p=>{update({...latest.current,project:p});setProjectOpen(false);}} onDone={()=>setProjectOpen(false)} onDelete={async p=>{
+-   if(!await flush())throw Error(t("请先保存最后修改再删除分组。"));const current=await window.thoughtline.info();const result=await window.thoughtline.projectDelete(p,current.snapshot.revision);if(!result.ok)throw Error(result.message);
+-   if(base.current.project===p)base.current={...base.current,project:''};if(latest.current.project===p)update({...latest.current,project:''});
++   if(!await flush())throw Error(t("请先保存最后修改再删除分组。"));const current=await window.thoughtline.info();const result=await window.thoughtline.classificationChange({kind:'active',field:'project',id:p,active:false},current.snapshot.revision);if(!result.ok)throw Error(result.message);
+   }}><label>{t("项目")}<input aria-label={t("编辑项目")} maxLength={40} value={draft.project} {...events('project')}/></label></ProjectOptions></div>}
+   {needsSplit&&<label className="inline-split-confirm"><input type="checkbox" checked={confirmAgent} onChange={e=>{setConfirmAgent(e.target.checked);if(e.target.checked){splitAllowed.current=true;void flush();}}}/>{t("更改归属会将当前纸张移至独立夹子")}</label>}
+   <div className="inline-save-status"><span role="status">{m(status)}</span><button onClick={()=>void flush().then(ok=>{if(ok&&live.current)onDone();})}>{t("完成编辑")}</button>{error&&<button onClick={()=>void flush()}>{t("重试保存")}</button>}</div>
+diff --git a/src/renderer/components/ProjectOptions.tsx b/src/renderer/components/ProjectOptions.tsx
+index 28669bc..a53f34e 100644
+--- a/src/renderer/components/ProjectOptions.tsx
++++ b/src/renderer/components/ProjectOptions.tsx
+@@ -7,13 +7,13 @@ export function ProjectOptions({projects,reduced,disabled,onChoose,onDelete,onDo
+  const cancel=()=>{if(press.current)clearTimeout(press.current.timer);press.current=null;};
+  useEffect(()=>cancel,[]);
+  const start=(e:PointerEvent<HTMLButtonElement>)=>{if(e.button!==0||disabled||editing)return;suppress.current=false;cancel();press.current={x:e.clientX,y:e.clientY,timer:setTimeout(()=>{press.current=null;suppress.current=true;setEditing(true);},500)};};
+- const remove=async(p:string)=>{if(removing)return;setRemoving(true);setError('');try{await onDelete(p);}catch(e){setError(e instanceof Error?e.message:'分组未删除，请重试。');}finally{setRemoving(false);}};
++ const remove=async(p:string)=>{if(removing)return;setRemoving(true);setError('');try{await onDelete(p);}catch(e){setError(e instanceof Error?e.message:'分类未移除，请重试。');}finally{setRemoving(false);}};
+  return <div className="project-editor" data-editing={editing} data-reduced={reduced} onKeyDown={e=>{if(e.key==='Escape'&&!e.nativeEvent.isComposing&&!composing?.()){e.preventDefault();e.stopPropagation();if(!removing){cancel();setEditing(false);onDone();}}}}>
+   <div className="project-editor-controls"><button type="button" aria-label={t("退出项目编辑")} disabled={removing} onClick={()=>{cancel();setEditing(false);onDone();}}>×</button><button type="button" disabled={removing} onClick={()=>{cancel();setEditing(false);onDone();}}>{t("完成")}</button></div>
+-  {children}<p className="project-hint">{editing?t("删除分组不会删除念头"):t("长按分组可整理")}</p>
++  {children}<p className="project-hint">{editing?t("历史归属保留"):t("长按分组可整理")}</p>
+   <div className="composer-project-options"><button type="button" disabled={disabled||removing} onClick={()=>{if(!editing)onChoose('');}}>{t("未分组")}</button>{projects.map(p=><span className="project-tag" key={p} data-deletable={editing}>
+    <button type="button" disabled={disabled||removing} onPointerDown={start} onPointerUp={cancel} onPointerCancel={cancel} onPointerLeave={cancel} onPointerMove={e=>{if(press.current&&Math.hypot(e.clientX-press.current.x,e.clientY-press.current.y)>6)cancel();}} onContextMenu={e=>{e.preventDefault();if(!disabled)setEditing(true);}} onClick={()=>{if(suppress.current){suppress.current=false;return;}if(!editing)onChoose(p);}}>{p}</button>
+-   {editing&&<button type="button" className="project-delete" aria-label={t("deleteProjectValue",{p0:p})} title={t("deleteProjectValueHelp",{p0:p})} disabled={disabled||removing} onClick={()=>void remove(p)}>×</button>}
++   {editing&&<button type="button" className="project-delete" aria-label={t("removeProjectChoice",{p0:p})} title={t("removeProjectChoiceHelp",{p0:p})} disabled={disabled||removing} onClick={()=>void remove(p)}>×</button>}
+   </span>)}</div><p className="error" role="alert">{m(error)}</p>
+  </div>;
+ }
+diff --git a/src/renderer/main.tsx b/src/renderer/main.tsx
+index ec3b6e4..1a75b83 100644
+--- a/src/renderer/main.tsx
++++ b/src/renderer/main.tsx
+@@ -5,6 +5,7 @@ import {createRoot} from 'react-dom/client';
+ import type {PilotInfo} from '../shared/bridge';
+ import {Shelf} from './components/Shelf';
+ import {Composer} from './components/Composer';
++import {ClassificationManager} from './components/ClassificationManager';
+ import {Detail} from './components/Detail';
+ import {type CalendarNavigation,Calendar} from './components/Calendar';
+ import {type SettingsDraft,Settings} from './components/Settings';
+@@ -14,6 +15,7 @@ import './styles/preferences-theme.css';
+ import './styles/auxiliary-material.css';
+ import './styles/settings.css';
+ import './styles/appearance.css';
++import './styles/classification.css';
+ import {flushPageSelections} from './hooks/useClipPage';
+ import {prepareLeave} from './hooks/leaveGuards';
+ function App(){
+@@ -23,6 +25,6 @@ function App(){
+  useEffect(()=>{const accept=(incoming:PilotInfo)=>setInfo(prior=>prior?{...incoming,preferences:newerPreferences(prior.preferences,incoming.preferences),dark:incoming.preferences.version<prior.preferences.version?prior.dark:incoming.dark}:incoming);const off=window.thoughtline.onInfo(accept);window.thoughtline.info().then(accept).catch(console.error);return off;},[]);
+  useEffect(()=>{if(info){document.documentElement.lang=info.preferences.locale;document.documentElement.dataset.theme=info.dark?'dark':'light';document.documentElement.dataset.platform=info.platform;document.documentElement.dataset.motion=info.snapshot.settings.reducedMotion?'reduce':'normal';}},[info?.preferences.locale,info?.dark,info?.platform,info?.snapshot.settings.reducedMotion]);
+  if(!info)return null;if(remembered.current.visit!==info.manageVisit)remembered.current={visit:info.manageVisit??-1};const visit=remembered.current;const view=new URLSearchParams(location.search).get('view');
+- return <LocaleProvider locale={info.preferences.locale}>{view==='composer'?<Composer key={info.composerSession} info={info}/>:view==='manage'?(info.manageMode==='settings'?<Settings info={info} restore={visit.settings} onRemember={draft=>{visit.settings=draft;}}/>:info.manageMode==='detail'?<Detail info={info}/>:<Calendar info={info} restore={info.calendarReturning?visit.calendar:undefined} onRemember={state=>{visit.calendar=state;}}/>):<Shelf info={info}/>}</LocaleProvider>;
++ return <LocaleProvider locale={info.preferences.locale}>{view==='composer'?<Composer key={info.composerSession} info={info}/>:view==='manage'?(info.manageMode==='settings'?<Settings info={info} restore={visit.settings} onRemember={draft=>{visit.settings=draft;}}/>:info.manageMode==='classification'?<ClassificationManager key={info.manageSession} info={info}/>:info.manageMode==='detail'?<Detail info={info}/>:<Calendar info={info} restore={info.calendarReturning?visit.calendar:undefined} onRemember={state=>{visit.calendar=state;}}/>):<Shelf info={info}/>}</LocaleProvider>;
+ }
+ createRoot(document.getElementById('root')!).render(<App/>);
+diff --git a/src/shared/bridge.ts b/src/shared/bridge.ts
+index 2294cb7..8407290 100644
+--- a/src/shared/bridge.ts
++++ b/src/shared/bridge.ts
+@@ -5,8 +5,10 @@ export type NotificationAccess={status:'granted'|'denied'|'not-determined'|'unkn
+ import type {PlacementIntent} from './ideaPlacement';
+ export type ComposerContext={mode:'new'|'edit';ideaId:string|null;draft:Draft};
+ export type AgentMutation={kind:'add';name:string;color:string}|{kind:'update';id:string;name:string;color:string}|{kind:'remove';id:string;replacement:string};
++export type ClassificationTab='tags'|'projects';
++export type ClassificationMutation={kind:'active';field:'tag'|'project';id:string;active:boolean}|{kind:'addProject';name:string}|{kind:'renameProject';from:string;name:string}|{kind:'rememberProject';ideaId:string;session:number};
+ export type ClipMutation={kind:'paperDrop';id:string;ideaId:string;targetId:string|null;position:number|null}|{kind:'merge';sourceId:string;targetId:string}|{kind:'move';id:string;position:number;beforeId:string|null}|{kind:'select';id:string;ideaId:string}|{kind:'split';id:string;ideaId:string}|{kind:'splitAll'|'archiveAll';id:string}|{kind:'undo'|'arrange'};
+-export type PilotInfo={lightReminder?:LightReminder|null;preferenceCommit?:{version:number;sequence:number;own:boolean}|null;preferences:Preferences;preferenceError:string|null;platform:'mac'|'windows';snapshot:Snapshot;displayId:string;width:number;dark:boolean;hotkeyRegistered:boolean;composerSession:number;composerDraftSequence:number;composerMaterial:'vibrancy'|'acrylic'|'opaque';composerContext:ComposerContext;placementNotice:string|null;placementNoticeId?:number;placementNoticeKind?:'info'|'error';arrangeSession?:number;manageVisit?:number;calendarReturning?:boolean;manageSession:number;manageSelection:string|null;manageMode:'browse'|'detail'|'settings';manageTitles:boolean;manageMaterial:'vibrancy'|'acrylic'|'opaque';manageEditingRequested:boolean;canUndoClips:boolean;undoPlacementKind?:'hang'|'arrange'|'swap';dragCancelSession:number;shelfVisible:boolean;interactionLocked:boolean;layoutLocked?:boolean;presentationSession:number;textDragActive:boolean;shelfAgentId:string};
++export type PilotInfo={lightReminder?:LightReminder|null;preferenceCommit?:{version:number;sequence:number;own:boolean}|null;preferences:Preferences;preferenceError:string|null;platform:'mac'|'windows';snapshot:Snapshot;displayId:string;width:number;dark:boolean;hotkeyRegistered:boolean;composerSession:number;composerDraftSequence:number;composerMaterial:'vibrancy'|'acrylic'|'opaque';composerContext:ComposerContext;placementNotice:string|null;placementNoticeId?:number;placementNoticeKind?:'info'|'error';arrangeSession?:number;manageVisit?:number;calendarReturning?:boolean;manageSession:number;manageSelection:string|null;manageMode:'browse'|'detail'|'settings'|'classification';classificationTab?:ClassificationTab;classificationOrigin?:'composer'|'calendar';classificationChange?:{sequence:number;field:'agentId'|'project';from:string;to:string};manageTitles:boolean;manageMaterial:'vibrancy'|'acrylic'|'opaque';manageEditingRequested:boolean;canUndoClips:boolean;undoPlacementKind?:'hang'|'arrange'|'swap';dragCancelSession:number;shelfVisible:boolean;interactionLocked:boolean;layoutLocked?:boolean;presentationSession:number;textDragActive:boolean;shelfAgentId:string};
+ export type HitLayout={layoutRevision:number;displayId:string;rects:Rect[]};
+ export type StorageInfo={directory:string;profileDirectory:string;revision:number};
+ export interface ThoughtlineBridge{
+@@ -28,6 +30,9 @@ export interface ThoughtlineBridge{
+  placeIdea(id:string,intent:PlacementIntent,revision:number,reveal:boolean,session:number):Promise<Result<Snapshot>>;
+  close(draft:Draft):Promise<Result<Snapshot>>;
+  saveDraft(draft:Draft,session:number,sequence:number):Promise<Result<Snapshot>>;
++ openComposer(sourceId?:string):Promise<Result<void>>;
++ openClassification(tab:ClassificationTab):Promise<Result<void>>; returnClassification():Promise<Result<void>>;
++ classificationChange(change:ClassificationMutation,revision:number):Promise<Result<Snapshot>>;
+  openManage(id?:string,titles?:boolean):Promise<Result<void>>; closeManage():Promise<Result<void>>;
+  openEdit(id:string):Promise<Result<void>>;
+  updateIdea(id:string,draft:Draft,expectedDraft:Draft,manageSession:number):Promise<Result<Snapshot>>;
+diff --git a/src/shared/contracts.ts b/src/shared/contracts.ts
+index 105ddfe..c53f760 100644
+--- a/src/shared/contracts.ts
++++ b/src/shared/contracts.ts
+@@ -16,7 +16,7 @@ export type AgentTag = { id: AgentId; name: string; color: string };
+ export type Draft = { text: string; title: string; project: string; agentId: AgentId; reminderAt?:string };
+ export type Clip = {id:string; agentId:AgentId; ideaIds:string[]; currentId:string; position:number|null};
+ export type Snapshot = {
+-  schemaVersion: 2 | 3; revision: number; clips:Clip[]; capacityOverflow?:Clip[]; ideas: Idea[]; agents: AgentTag[]; draft: Draft | null;
++  schemaVersion: 2 | 3; revision: number; clips:Clip[]; capacityOverflow?:Clip[]; ideas: Idea[]; agents: AgentTag[]; projects?:string[]; inactiveProjects?:string[]; inactiveAgents?:string[]; draft: Draft | null;
+   settings: { writeHotkey: string; reducedMotion: boolean; shelfCapacity?: 4 | 6 | 8; calendarBounds?: Rect; rope?:RopeAppearance; paper?:PaperAppearance };
+ };
+ export type Result<T> = { ok: true; value: T } | {
+diff --git a/src/shared/ideaCommands.ts b/src/shared/ideaCommands.ts
+index 0c4f3d2..1cc545e 100644
+--- a/src/shared/ideaCommands.ts
++++ b/src/shared/ideaCommands.ts
+@@ -8,6 +8,7 @@ import {ideaDay} from './ideaHistory';
+ import {validReminder,validReminderTime} from './reminderTime';
+ import {DEFAULT_TAGS} from './tagPresets';
+ import {hasIdeaContent} from './ideaContent';
++import {projectNames} from './projectCatalog';
+ import {validPaper,validRope} from './appearance';
+ const invalid=<T>(message:string):Result<T>=>({ok:false,code:'INVALID',message});
+ const plain=(x:unknown):x is Record<string,unknown>=>!!x&&typeof x==='object'&&!Array.isArray(x);
+@@ -25,6 +26,12 @@ export function validateSnapshot(input:unknown):Result<Snapshot>{
+     agents.add(a.id);
+   }
+   if(!agents.size||!agents.has('general'))return invalid('缺少通用标签。');
++  if(input.projects!==undefined&&(!Array.isArray(input.projects)||input.projects.some(p=>!textOK(p,40)||!(p as string).trim())||new Set(input.projects).size!==input.projects.length))return invalid('分组目录无效。');
++  for(const key of ['inactiveAgents','inactiveProjects'] as const){
++   const values=input[key];if(values===undefined)continue;
++   const names=key==='inactiveAgents'?agents:new Set([...(input.projects as string[]??[]),...(input.ideas as Record<string,unknown>[]).map(i=>i?.project),plain(input.draft)?input.draft.project:'']);
++   if(!Array.isArray(values)||values.some(v=>typeof v!=='string'||!v||key==='inactiveAgents'&&v==='general'||!names.has(v))||new Set(values).size!==values.length)return invalid('停用分类无效。');
++  }
+   const draftOK=(d:Record<string,unknown>)=>bodyOK(d.text,true)&&textOK(d.title,50)&&textOK(d.project,40)&&typeof d.agentId==='string'&&agents.has(d.agentId)&&(d.reminderAt===undefined||validReminderTime(d.reminderAt));
+   const ids=new Set<string>();
+   for(const idea of input.ideas){
+@@ -78,7 +85,7 @@ export function newIdea(s:Snapshot,draft:Draft,id:string,now:string):Result<Snap
+   const checked=validateSnapshot(s);if(!checked.ok)return checked;const base=checked.value;
+   const {reminderAt,...fields}=draft;
+   const title=draft.title.trim()||Array.from((draft.text.split('\n').find(x=>x.trim())??'').trim()).slice(0,50).join('');
+-  return validateSnapshot({...base,clips:[...base.clips,independentClip(base,id,draft.agentId)],draft:null,ideas:[...base.ideas,{...fields,...(reminderAt?{reminder:{at:reminderAt,state:'scheduled'}}:{}),title,id,status:'hanging',createdAt:now,updatedAt:now,createdDay:localDay(now),creationTimeZone:Intl.DateTimeFormat().resolvedOptions().timeZone}]});
++  return validateSnapshot({...base,projects:[...new Set([...projectNames(base),draft.project].filter(Boolean))],clips:[...base.clips,independentClip(base,id,draft.agentId)],draft:null,ideas:[...base.ideas,{...fields,...(reminderAt?{reminder:{at:reminderAt,state:'scheduled'}}:{}),title,id,status:'hanging',createdAt:now,updatedAt:now,createdDay:localDay(now),creationTimeZone:Intl.DateTimeFormat().resolvedOptions().timeZone}]});
+ }
+ export function changeStatus(s:Snapshot,id:string,status:'hanging'|'archived',now:string):Result<Snapshot>{
+   if(!s.ideas.some(x=>x.id===id&&x.status!=='deleted'))return invalid('找不到可操作的念头。');
+@@ -92,7 +99,8 @@ export function renameAgent(s:Snapshot,id:string,name:string):Result<Snapshot>{
+ }
+ export function removeAgent(s:Snapshot,id:string,replacement:string):Result<Snapshot>{
+   if(id==='general'||id===replacement||!s.agents.some(x=>x.id===id)||!s.agents.some(x=>x.id===replacement))return invalid('请选择存在的替代标签，通用标签不能移除。');
+-  return validateSnapshot({...s,clips:s.clips.map(c=>c.agentId===id?{...c,agentId:replacement}:c),...(s.capacityOverflow?{capacityOverflow:s.capacityOverflow.map(c=>c.agentId===id?{...c,agentId:replacement}:c)}:{}),agents:s.agents.filter(x=>x.id!==id),ideas:s.ideas.map(x=>x.agentId===id?{...x,agentId:replacement}:x),draft:s.draft?.agentId===id?{...s.draft,agentId:replacement}:s.draft});
++  if(s.inactiveAgents?.includes(replacement))return invalid('请选择使用中的替代标签。');
++  return validateSnapshot({...s,...(s.inactiveAgents?{inactiveAgents:s.inactiveAgents.filter(a=>a!==id)}:{}),clips:s.clips.map(c=>c.agentId===id?{...c,agentId:replacement}:c),...(s.capacityOverflow?{capacityOverflow:s.capacityOverflow.map(c=>c.agentId===id?{...c,agentId:replacement}:c)}:{}),agents:s.agents.filter(x=>x.id!==id),ideas:s.ideas.map(x=>x.agentId===id?{...x,agentId:replacement}:x),draft:s.draft?.agentId===id?{...s.draft,agentId:replacement}:s.draft});
+ }
+ export function editIdea(s:Snapshot,id:string,draft:Draft,now:string):Result<Snapshot>{
+   if(!s.ideas.some(x=>x.id===id&&x.status!=='deleted')||!draft||!bodyOK(draft.text,true)||!textOK(draft.title,50)||!textOK(draft.project,40))return invalid('正文、标题或项目无效，请保留文字后重试。');
+@@ -140,10 +148,13 @@ export function permanentlyDeleteIdea(s:Snapshot,id:string):Result<Snapshot>{
+   const ideas=s.ideas.filter(i=>i.id!==id);return validateSnapshot({...s,ideas,clips:pruneClips(s.clips,ideas)});
+ }
+ export function addAgent(s:Snapshot,a:AgentTag):Result<Snapshot>{
++  if(typeof a?.name!=='string'||s.agents.some(x=>x.name.trim().toLowerCase()===a.name.trim().toLowerCase()))return invalid('已有同名标签，请选择已有标签。');
+   return validateSnapshot({...s,agents:[...s.agents,{id:a?.id,name:a?.name,color:a?.color}]});
+ }
+ export function updateAgent(s:Snapshot,id:string,patch:Pick<AgentTag,'name'|'color'>):Result<Snapshot>{
+-  if(!s.agents.some(a=>a.id===id))return invalid('找不到这个标签。');
++  const old=s.agents.find(a=>a.id===id);if(!old)return invalid('找不到这个标签。');
++  if(id==='general'&&patch?.name!==old.name)return invalid('通用标签只能修改颜色。');
++  if(typeof patch?.name!=='string'||s.agents.some(a=>a.id!==id&&a.name.trim().toLowerCase()===patch.name.trim().toLowerCase()))return invalid('已有同名标签，请使用其他名称。');
+   return validateSnapshot({...s,agents:s.agents.map(a=>a.id===id?{...a,name:patch?.name,color:patch?.color}:a)});
+ }
+ export type IdeaQuery={status:'all'|'hanging'|'archived';query?:string;agentId?:string};
+@@ -164,5 +175,5 @@ export function shelfSelection(s:Snapshot,agentId:string,width:number){
+ // (including archived ideas and drafts) makes deletion survive reconstruction.
+ export function removeProject(s:Snapshot,project:string,now:string):Result<Snapshot>{
+  if(!project||!textOK(project,40)||!Number.isFinite(Date.parse(now)))return invalid('未分组不能删除。');
+- return validateSnapshot({...s,ideas:s.ideas.map(i=>i.project===project?{...i,project:'',updatedAt:now}:i),draft:s.draft?.project===project?{...s.draft,project:''}:s.draft});
++ return validateSnapshot({...s,projects:projectNames(s).filter(p=>p!==project),...(s.inactiveProjects?{inactiveProjects:s.inactiveProjects.filter(p=>p!==project)}:{}),ideas:s.ideas.map(i=>i.project===project?{...i,project:'',updatedAt:now}:i),draft:s.draft?.project===project?{...s.draft,project:''}:s.draft});
+ }
+diff --git a/src/shared/messages.ts b/src/shared/messages.ts
+index e95cdd1..da330d0 100644
+--- a/src/shared/messages.ts
++++ b/src/shared/messages.ts
+@@ -1,5 +1,65 @@
+ // Central typed application text; user text is never translated.
+ export const zh = {
++ "removeProjectChoiceHelp": "移出新建列表：{p0}；保留历史归属",
++ "removeProjectChoice": "移出列表：{p0}",
++ "历史归属保留": "历史归属保留",
++ "删除": "删除",
++ "关闭": "关闭",
++ "新建念头": "新建念头",
++ "请选择使用中的替代标签。": "请选择使用中的替代标签。",
++ "通用标签只能修改颜色。": "通用标签只能修改颜色。",
++ "已有同名标签，请使用其他名称。": "已有同名标签，请使用其他名称。",
++ "已有同名标签，请选择已有标签。": "已有同名标签，请选择已有标签。",
++ "系统分类或不存在的分类不能移除。": "系统分类或不存在的分类不能移除。",
++ "停用分类无效。": "停用分类无效。",
++ "分组目录无效。": "分组目录无效。",
++ "找不到这个分组。": "找不到这个分组。",
++ "已有同名分组，请使用其他名称。": "已有同名分组，请使用其他名称。",
++ "已有同名分组，请选择已有分组。": "已有同名分组，请选择已有分组。",
++ "分组名称须为1～40个字。": "分组名称须为1～40个字。",
++ "暂无分类": "暂无分类",
++ "暂无已移除项": "暂无已移除项",
++ "迁移到": "迁移到",
++ "正文保留。": "正文保留。",
++ "删除后，相关念头和草稿改为未分组。": "删除后，相关念头和草稿改为未分组。",
++ "删除后，相关念头和草稿改用所选标签。": "删除后，相关念头和草稿改用所选标签。",
++ "改名": "改名",
++ "分组改名": "分组改名",
++ "删除分组": "删除分组",
++ "删除标签": "删除标签",
++ "保留": "保留",
++ "改颜色": "改颜色",
++ "操作": "操作",
++ "关联念头": "关联念头",
++ "已删除": "已删除",
++ "已恢复选用": "已恢复选用",
++ "恢复选用": "恢复选用",
++ "使用中": "使用中",
++ "未找到匹配项": "未找到匹配项",
++ "撤销": "撤销",
++ "已移除": "已移除",
++ "自定颜色": "自定颜色",
++ "创建": "创建",
++ "创建并选用": "创建并选用",
++ "新增分组": "新增分组",
++ "新增标签": "新增标签",
++ "管理分组…": "管理分组…",
++ "管理标签…": "管理标签…",
++ "新建分组…": "新建分组…",
++ "新建标签…": "新建标签…",
++ "新建分组": "新建分组",
++ "新建标签": "新建标签",
++ "选择分组": "选择分组",
++ "选择标签": "选择标签",
++ "搜索分组 / 长按移除": "搜索分组 / 长按移除",
++ "搜索标签 / 长按移除": "搜索标签 / 长按移除",
++ "搜索分组": "搜索分组",
++ "搜索标签": "搜索标签",
++ "标签与分组": "标签与分组",
++ "标签": "标签",
++ "分组": "分组",
++ "标签：": "标签：",
++ "分组：": "分组：",
+  "已恢复，绳上已满。": "已恢复，绳上已满。",
+  "已恢复，当前标签筛选未显示。": "已恢复，当前标签筛选未显示。",
+  "绳色": "绳色",
+@@ -510,6 +570,66 @@ export const zh = {
+  "savedBackup": "独立备份已保存到 {p0}。当前数据位置未更改。"
+ } as const;
+ export const en = {
++ "removeProjectChoiceHelp": "Hide from new choices: {p0}; retain history",
++ "removeProjectChoice": "Remove from choices: {p0}",
++ "历史归属保留": "Historical ownership is preserved",
++ "删除": "Delete",
++ "关闭": "Close",
++ "新建念头": "New thought",
++ "请选择使用中的替代标签。": "Choose an active replacement tag.",
++ "通用标签只能修改颜色。": "Only the colour of the General tag can be changed.",
++ "已有同名标签，请使用其他名称。": "This tag name already exists. Choose another name.",
++ "已有同名标签，请选择已有标签。": "This tag already exists. Select it instead.",
++ "系统分类或不存在的分类不能移除。": "Protected or missing items cannot be removed.",
++ "停用分类无效。": "Invalid inactive classifications.",
++ "分组目录无效。": "Invalid group catalog.",
++ "找不到这个分组。": "Group not found.",
++ "已有同名分组，请使用其他名称。": "This group name already exists. Choose another name.",
++ "已有同名分组，请选择已有分组。": "This group already exists. Select it instead.",
++ "分组名称须为1～40个字。": "Group names must contain 1–40 characters.",
++ "暂无分类": "No items yet",
++ "暂无已移除项": "No removed items",
++ "迁移到": "Move to",
++ "正文保留。": "Text is preserved.",
++ "删除后，相关念头和草稿改为未分组。": "Related thoughts and drafts will become ungrouped.",
++ "删除后，相关念头和草稿改用所选标签。": "Related thoughts and drafts will use the selected tag.",
++ "改名": "Rename",
++ "分组改名": "Rename group",
++ "删除分组": "Delete group",
++ "删除标签": "Delete tag",
++ "保留": "Protected",
++ "改颜色": "Colour",
++ "操作": "Actions",
++ "关联念头": "Thoughts",
++ "已删除": "Deleted",
++ "已恢复选用": "Restored to choices",
++ "恢复选用": "Restore to choices",
++ "使用中": "Active",
++ "未找到匹配项": "No matching items",
++ "撤销": "Undo",
++ "已移除": "Removed",
++ "自定颜色": "Custom colour",
++ "创建": "Create",
++ "创建并选用": "Create & select",
++ "新增分组": "Add group",
++ "新增标签": "Add tag",
++ "管理分组…": "Manage groups…",
++ "管理标签…": "Manage tags…",
++ "新建分组…": "New group…",
++ "新建标签…": "New tag…",
++ "新建分组": "New group",
++ "新建标签": "New tag",
++ "选择分组": "Choose a group",
++ "选择标签": "Choose a tag",
++ "搜索分组 / 长按移除": "Search groups / Hold to remove",
++ "搜索标签 / 长按移除": "Search tags / Hold to remove",
++ "搜索分组": "Search groups",
++ "搜索标签": "Search tags",
++ "标签与分组": "Tags & groups",
++ "标签": "Tags",
++ "分组": "Groups",
++ "标签：": "Tag:",
++ "分组：": "Group:",
+  "绳色": "Color",
+  "自定": "Custom",
+  "自然绿色": "Natural green",
+diff --git a/src/shared/shelfState.ts b/src/shared/shelfState.ts
+index 9a2642e..bbf613d 100644
+--- a/src/shared/shelfState.ts
++++ b/src/shared/shelfState.ts
+@@ -9,7 +9,7 @@ export function shelfTransition(previous:ShelfState,event:ShelfEvent):ShelfState
+   // Window/drag lifecycle continues while hidden; pause suppresses presentation, not lock bookkeeping.
+   if(event.type==='lock'){
+     s.locks=event.active?[...new Set([...s.locks,event.name])]:s.locks.filter(x=>x!==event.name);
+-    if(!s.suspended&&!s.locks.length){
++    if(!s.suspended&&!s.locks.some(name=>name!=='composer')){
+       s.leaveAt=(s.zone==='card'||s.zone==='edge'||s.zone==='corridor')?null:event.now;
+       if(s.peekUntil!==null)s.peekUntil=Math.max(s.peekUntil,event.now+500);
+     }
+@@ -30,7 +30,8 @@ export function shelfTransition(previous:ShelfState,event:ShelfEvent):ShelfState
+       s.corridorUntil=null;
+     }
+   }
+-  if(s.locks.length)return s;
++  // Writing retains its draft/session lock but does not pin shelf presentation.
++  if(s.locks.some(name=>name!=='composer'))return s;
+   if(s.phase==='hidden'&&s.dwellAt!==null&&event.now-s.dwellAt>=250){s.phase='revealed';s.leaveAt=null;}
+   if(s.phase!=='hidden'&&s.zone!=='card'&&s.zone!=='edge'&&s.zone!=='corridor'){
+     const expiry=s.phase==='peek'?s.peekUntil:s.leaveAt===null?null:Math.max(s.leaveAt+500,s.corridorUntil??0);
+diff --git a/tests/electron/appearance-source-binding.cjs b/tests/electron/appearance-source-binding.cjs
+index a675c23..3ff1036 100644
+--- a/tests/electron/appearance-source-binding.cjs
++++ b/tests/electron/appearance-source-binding.cjs
+@@ -1,9 +1,9 @@
+ const fs=require('node:fs/promises'),path=require('node:path'),{execFileSync}=require('node:child_process'),{createHash}=require('node:crypto');
+ async function bindAppearanceSource(output){
+  const include=p=>['.gitattributes','THIRD_PARTY_NOTICES.md','acceptance/evidence/icon-final/resource-verification.json','acceptance/evidence/round1/p6-electron-cache-binding.json'].includes(p)||/^(src|assets|scripts|tests|licenses|\.github|docs\/delivery)\//.test(p)||/^(package.*\.json|electron\.vite\.config\.ts|tsconfig.*\.json|vitest\.config\..*|\.gitignore)$/.test(p);
+- const tracked=execFileSync('git',['ls-files','-z']).toString().split('\0').filter(include),untracked=execFileSync('git',['ls-files','--others','--exclude-standard','-z']).toString().split('\0').filter(include);const hashes={};
+- for(const p of [...new Set([...tracked,...untracked])].sort()){const raw=await fs.readFile(p);hashes[p]=createHash('sha256').update(raw).digest('hex');}
+- await fs.mkdir(output,{recursive:true});await fs.writeFile(path.join(output,'source-inputs.json'),JSON.stringify({base:execFileSync('git',['rev-parse','HEAD']).toString().trim(),node:process.version,files:hashes},null,2));await fs.writeFile(path.join(output,'tracked-source.patch'),execFileSync('git',['diff','--binary','HEAD','--',...tracked],{maxBuffer:20*1024*1024}));
++ const tracked=execFileSync('git',['ls-files','-z','--','src','assets','scripts','tests','licenses','.github','docs/delivery','.gitattributes','THIRD_PARTY_NOTICES.md','package*.json','electron.vite.config.ts','tsconfig*.json','vitest.config.*','.gitignore','acceptance/evidence/icon-final/resource-verification.json','acceptance/evidence/round1/p6-electron-cache-binding.json']).toString().split('\0').filter(include),untracked=execFileSync('git',['ls-files','--others','--exclude-standard','-z']).toString().split('\0').filter(include);const hashes={},deleted=[];
++ for(const p of [...new Set([...tracked,...untracked])].sort()){let raw;try{raw=await fs.readFile(p);}catch(e){if(e.code==='ENOENT'&&tracked.includes(p)){deleted.push(p);continue;}throw e;}hashes[p]=createHash('sha256').update(raw).digest('hex');}
++ await fs.mkdir(output,{recursive:true});await fs.writeFile(path.join(output,'source-inputs.json'),JSON.stringify({base:execFileSync('git',['rev-parse','HEAD']).toString().trim(),node:process.version,files:hashes,deleted},null,2));await fs.writeFile(path.join(output,'tracked-source.patch'),execFileSync('git',['diff','--binary','HEAD','--',...tracked],{maxBuffer:20*1024*1024}));
+  for(const p of untracked){const dest=path.join(output,'new-source',p);await fs.mkdir(path.dirname(dest),{recursive:true});await fs.copyFile(p,dest);}
+ }
+ module.exports={bindAppearanceSource};
+diff --git a/tests/electron/appearance-workflow.cjs b/tests/electron/appearance-workflow.cjs
+index b7d2923..8b9df6b 100644
+--- a/tests/electron/appearance-workflow.cjs
++++ b/tests/electron/appearance-workflow.cjs
+@@ -15,7 +15,7 @@ try{
+  const text='用户文字 通用 未分组\n'+Array.from({length:30},(_,i)=>`第${i}行`).join('\n');await composer.locator('#idea-text').fill(text);await waitForInfo(shelf,i=>i.snapshot.draft?.text===text);
+  await composer.evaluate(()=>{const e=document.querySelector('#idea-text');e.focus();e.setSelectionRange(3,8);e.scrollTop=70;globalThis.appearanceEditor=e;e.dispatchEvent(new CompositionEvent('compositionstart',{bubbles:true,data:'候'}));const setter=Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value').set;setter.call(e,e.value+'候选');e.dispatchEvent(new InputEvent('input',{bubbles:true,inputType:'insertCompositionText',data:'候选',isComposing:true}));e.setSelectionRange(3,8);e.scrollTop=70;});
+  const capture=()=>composer.evaluate(()=>{const e=document.querySelector('#idea-text');return {same:e===globalThis.appearanceEditor,value:e.value,start:e.selectionStart,end:e.selectionEnd,scroll:e.scrollTop,focus:e===document.activeElement};});const before=await capture(),raw=await fs.readFile(path.join(dir,'snapshot.json'),'utf8');
+- await choose(composer,'locale',1);await choose(composer,'theme',1);assert.deepEqual(await capture(),before);assert.equal(await fs.readFile(path.join(dir,'snapshot.json'),'utf8'),raw);assert.equal(await composer.locator('#idea-text').getAttribute('placeholder'),'Capture an idea, a work note or something you want to say.');assert.equal(await composer.locator('select option[value=general]').textContent(),'General');assert.equal(await composer.locator('select option[value=custom]').textContent(),'通用');await shelf.waitForFunction(()=>document.documentElement.lang==='en'&&document.documentElement.dataset.theme==='dark');mark('composition-node-focus-selection-scroll-candidate-and-note-bytes-preserved');
++ await choose(composer,'locale',1);await choose(composer,'theme',1);assert.deepEqual(await capture(),before);assert.equal(await fs.readFile(path.join(dir,'snapshot.json'),'utf8'),raw);assert.equal(await composer.locator('#idea-text').getAttribute('placeholder'),'Capture an idea, a work note or something you want to say.');await shelf.waitForFunction(()=>document.documentElement.lang==='en'&&document.documentElement.dataset.theme==='dark');mark('composition-node-focus-selection-scroll-candidate-and-note-bytes-preserved');
+  // Both intents precede the first write; its broadcast must not hide the newest failure.
+  for(const reject of [false,true]){
+   await choose(composer,'locale',0);await choose(composer,'theme',0);const retained=await capture(),noteBytes=await fs.readFile(path.join(dir,'snapshot.json'),'utf8');
+@@ -27,6 +27,7 @@ try{
+  }
+  await choose(composer,'theme',1);
+  await composer.evaluate(()=>{const e=document.querySelector('#idea-text');e.dispatchEvent(new CompositionEvent('compositionend',{bubbles:true,data:'候选'}));});await waitForInfo(shelf,i=>i.snapshot.draft?.text===text+'候选');
++ const tagPanel=await require('./classification-fixture.cjs').openTagPicker(composer);assert.equal(await tagPanel.getByRole('button',{name:'General',exact:true}).count(),1);assert.equal(await tagPanel.getByRole('button',{name:'通用',exact:true}).count(),1);await tagPanel.locator('input').press('Escape');await composer.locator('#idea-text').focus();
+  for(const theme of [0,1]){await choose(composer,'theme',theme);const contrast=await composer.evaluate(()=>{const rgb=s=>s.match(/[\d.]+/g).slice(0,3).map(Number),lum=c=>{const x=c.map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;});return .2126*x[0]+.7152*x[1]+.0722*x[2];};return ['.composer textarea','.composer .primary'].map(selector=>{const e=document.querySelector(selector),style=getComputedStyle(e),a=lum(rgb(style.color)),b=lum(rgb(style.backgroundColor));return {selector,color:style.color,background:style.backgroundColor,ratio:(Math.max(a,b)+.05)/(Math.min(a,b)+.05)};});});for(const c of contrast)assert(c.ratio>=4.5,JSON.stringify({theme,...c}));}mark('light-dark-rendered-body-and-button-contrast');
+  await geometry(composer,'Thoughtline Composer');mark('composer-widths-350-380-480-740-no-overflow');
+  const capsule=composer.locator('[data-capsule=theme]'),thumb=capsule.locator('.capsule-thumb');await choose(composer,'theme',0);await composer.waitForTimeout(180);const box=await capsule.boundingBox();await composer.mouse.move(box.x+18,box.y+18);await composer.mouse.down();
+diff --git a/tests/electron/composition-safety-workflow.cjs b/tests/electron/composition-safety-workflow.cjs
+index f7828be..0333efb 100644
+--- a/tests/electron/composition-safety-workflow.cjs
++++ b/tests/electron/composition-safety-workflow.cjs
+@@ -5,29 +5,27 @@ const output=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evid
+  const state=async()=>{const i=await shelf.evaluate(()=>window.thoughtline.info());const visible=await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer').isVisible());return {revision:i.snapshot.revision,draft:i.snapshot.draft,ideas:i.snapshot.ideas,session:i.composerSession,visible,locked:i.interactionLocked};};
+  const mark=async name=>{const observed=await state();checks.push({name,observed});console.log(JSON.stringify({name,observed}));};
+  const field=key=>key==='text'?composer.locator('#idea-text'):composer.getByLabel(key==='title'?'名称':'项目',{exact:true});
+- const start=async key=>{if(key==='project'&&!await composer.locator('#composer-project-picker').count())await composer.locator('.composer-project').click();const input=field(key);await input.focus();await input.evaluate(e=>e.dispatchEvent(new CompositionEvent('compositionstart',{bubbles:true})));return input;};
++ const start=async key=>{const input=field(key);await input.focus();await input.evaluate(e=>e.dispatchEvent(new CompositionEvent('compositionstart',{bubbles:true})));return input;};
+  const end=async input=>input.evaluate(e=>e.dispatchEvent(new CompositionEvent('compositionend',{bubbles:true})));
+  const unchanged=async before=>{const after=await state();assert.equal(after.revision,before.revision);assert.deepEqual(after.draft,before.draft);assert.equal(after.visible,true);assert.equal(after.locked,true);assert.equal(after.ideas.length,before.ideas.length);};
+  const wait=()=>composer.waitForTimeout(2400);
+  try{
+   await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:2,revision:0,ideas:[],clips:[],agents:[{id:'general',name:'通用',color:'#A0A3AA'}],draft:{text:'完整正文',title:'完整名称',project:'完整项目',agentId:'general'},settings:{writeHotkey:'Control+Alt+F18',reducedMotion:false}}));app=await _electron.launch(await launchOptions(dir));pids.push(app.process().pid);shelf=await app.firstWindow();await shelf.waitForURL(/view=shelf/);await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});composer=await openComposer(app,shelf);
+   const geometry=await composer.locator('#idea-text').evaluate(e=>({width:innerWidth,height:innerHeight,textHeight:e.getBoundingClientRect().height}));assert.deepEqual(geometry,{width:480,height:260,textHeight:132});
+-  for(const key of ['title','text','project']){
++  for(const key of ['title','text']){
+    const before=await state(),input=await start(key);await input.fill('未确认'+key);await wait();await unchanged(before);
+    // Unflagged events must also be guarded by the tracked owner, not only native flags.
+    for(const options of [{key:'Enter'},{key:'Escape'},{key:'Enter',metaKey:true},{key:'Enter',ctrlKey:true}])await input.evaluate((e,o)=>e.dispatchEvent(new KeyboardEvent('keydown',{...o,bubbles:true,cancelable:true})),options);
+    await composer.locator('.primary').evaluate(e=>{e.click();e.click();});await composer.locator('.close').evaluate(e=>e.click());await unchanged(before);
+-   if(key==='project')assert.equal(await composer.locator('#composer-project-picker').count(),1);
+    await mark(key+'-2.4s-negative-and-unflagged-keys-and-direct-buttons');
+    await input.fill('完成'+key+'😀');await end(input);await waitForInfo(shelf,i=>i.snapshot.draft?.[key]==='完成'+key+'😀');assert.equal(JSON.parse(await fs.readFile(path.join(dir,'snapshot.json'),'utf8')).draft[key],'完成'+key+'😀');await mark(key+'-end-current-dom-checkpoint');
+    // A final input arriving after end must replace the end DOM value before the fresh debounce.
+    await start(key);await input.fill('结束前值');await end(input);await input.fill('结束后的完整'+key);await waitForInfo(shelf,i=>i.snapshot.draft?.[key]==='结束后的完整'+key);await mark(key+'-post-end-input-checkpoint');
+-   if(key==='project')await composer.getByRole('button',{name:'完成',exact:true}).click();
+   }
+   let before=await state(),a=await start('title');await a.fill('A未确认');const aHandle=await a.elementHandle();let b=await start('text');await b.fill('B未确认');await aHandle.evaluate(e=>e.dispatchEvent(new CompositionEvent('compositionend',{bubbles:true})));await wait();await unchanged(before);assert.equal(await field('title').inputValue(),before.draft.title);await b.fill('B确认');await end(b);await waitForInfo(shelf,i=>i.snapshot.draft?.text==='B确认');assert.equal((await state()).draft.title,before.draft.title);await mark('A-blur-rollback-late-end-cannot-resume-B');
+   before=await state();a=await start('title');await a.fill('失焦未确认');await a.evaluate(e=>e.dispatchEvent(new CompositionEvent('compositionstart',{bubbles:true})));await field('text').focus();assert.equal(await field('title').inputValue(),before.draft.title);await field('text').fill('失焦后普通输入');await waitForInfo(shelf,i=>i.snapshot.draft?.text==='失焦后普通输入');await mark('missing-end-duplicate-start-blur-resumes-normal-typing');
+   before=await state();a=await start('title');await a.fill('取消未确认');await a.fill(before.draft.title);await end(a);await wait();await unchanged(before);await mark('cancel-end-original-value-does-not-change-disk');
+-  before=await state();a=await start('project');await a.fill('关闭浮层未确认');const detached=await a.elementHandle();await composer.getByRole('button',{name:'完成',exact:true}).evaluate(e=>e.click());assert.equal(await composer.locator('#composer-project-picker').count(),0);await detached.evaluate(e=>e.dispatchEvent(new CompositionEvent('compositionend',{bubbles:true})));await field('text').fill('浮层关闭后输入');await waitForInfo(shelf,i=>i.snapshot.draft?.text==='浮层关闭后输入');assert.equal((await state()).draft.project,before.draft.project);await mark('programmatic-picker-unmount-rolls-back-and-resumes');
++  before=await state();await composer.getByRole('button',{name:/^分组：/}).click();await composer.getByRole('button',{name:'新建分组…',exact:true}).click();const form=composer.getByRole('dialog',{name:'新建分组',exact:true});a=form.getByRole('textbox',{name:'名称',exact:true});await a.focus();await a.evaluate(e=>e.dispatchEvent(new CompositionEvent('compositionstart',{bubbles:true})));await a.fill('关闭浮层未确认');const detached=await a.elementHandle();assert(await form.getByRole('button',{name:'创建并选用',exact:true}).isDisabled());await form.getByRole('button',{name:'取消',exact:true}).click();await detached.evaluate(e=>e.dispatchEvent(new CompositionEvent('compositionend',{bubbles:true})));await field('text').fill('浮层关闭后输入');await waitForInfo(shelf,i=>i.snapshot.draft?.text==='浮层关闭后输入');assert.equal((await state()).draft.project,before.draft.project);assert(!(await shelf.evaluate(()=>window.thoughtline.info())).snapshot.projects?.includes('关闭浮层未确认'));await mark('cancelled-create-group-form-ignores-detached-IME-and-preserves-draft');
+   before=await state();a=await start('title');await a.fill('退出未确认');for(let n=0;n<2;n++){await app.evaluate(({app})=>{app.quit();});await composer.locator('.error').filter({hasText:/退出未完成/}).waitFor();await wait();await unchanged(before);}await mark('prepareQuit-twice-refuses-preedit-and-error-does-not-resume');await a.fill('退出失败后确认');await end(a);await waitForInfo(shelf,i=>i.snapshot.draft?.title==='退出失败后确认');await mark('after-quit-error-complete-end-resumes');
+   before=await state();a=await start('title');await a.fill('重载未确认');await composer.reload();await composer.waitForSelector('#idea-text');assert.equal(await field('title').inputValue(),before.draft.title);await field('title').fill('重载后名称');await waitForInfo(shelf,i=>i.snapshot.draft?.title==='重载后名称');await mark('reload-abandons-preedit-and-sequence-resumes');
+   before=await state();a=await start('title');await a.fill('关闭未确认');const oldNode=await a.elementHandle();await composer.getByRole('button',{name:'保存草稿并关闭',exact:true}).click();await waitForInfo(shelf,i=>!i.interactionLocked);composer=await openComposer(app,shelf);assert.equal(await field('title').inputValue(),before.draft.title);assert.equal(await oldNode.evaluate(e=>e.isConnected),false);await oldNode.evaluate(e=>{e.value='旧会话迟到';e.dispatchEvent(new CompositionEvent('compositionend',{bubbles:true}));e.dispatchEvent(new Event('input',{bubbles:true}));});await field('title').fill('新会话名称');await waitForInfo(shelf,i=>i.snapshot.draft?.title==='新会话名称');const stale=await composer.evaluate(s=>window.thoughtline.saveDraft({text:'旧',title:'旧',project:'旧',agentId:'general'},s,999),before.session);assert.equal(stale.ok,false);await mark('close-rollback-reopen-remount-detached-events-and-old-session-rejected');
+diff --git a/tests/electron/inline-properties-workflow.cjs b/tests/electron/inline-properties-workflow.cjs
+index e7bc875..d708b58 100644
+--- a/tests/electron/inline-properties-workflow.cjs
++++ b/tests/electron/inline-properties-workflow.cjs
+@@ -4,10 +4,12 @@ const output=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evid
+ (async()=>{const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-inline-properties-'));let app,pids=[];const checks=[];
+  const mark=name=>{checks.push(name);console.log(name);};
+  try{const date='2026-10-09T00:00:00.000Z';await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:2,revision:0,ideas:[1,2].map(i=>({id:'idea'+i,text:'组内原文'+i,title:'组内'+i,project:'已有项目',agentId:'codex',status:'hanging',createdAt:date,updatedAt:date})),clips:[{id:'clip-group',agentId:'codex',ideaIds:['idea1','idea2'],currentId:'idea1',position:null}],agents:[{id:'general',name:'通用',color:'#A0A3AA'},{id:'codex',name:'Codex',color:'#4C90D9'},{id:'long',name:'很长的自定义Agent名称用于边界检查',color:'#2C8A76'}],draft:null,settings:{writeHotkey:'Control+Alt+F18',reducedMotion:false}}));app=await _electron.launch(await launchOptions(dir));const shelf=await app.firstWindow();await shelf.waitForURL(/view=shelf/);await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});let composer=await openComposer(app,shelf);
+- await composer.locator('.composer-project').click();await composer.getByRole('button',{name:'已有项目',exact:true}).focus();await composer.getByRole('button',{name:'已有项目',exact:true}).press('Enter');assert.equal(await composer.locator('.composer-project b').textContent(),'已有项目');assert.equal(await composer.locator('#composer-project-picker').count(),0);mark('existing-project-keyboard-enter-selects-value');
+- await composer.locator('.composer-project').click();await composer.getByLabel('项目',{exact:true}).fill('新项目');await composer.getByLabel('项目',{exact:true}).press('Escape');assert.equal(await composer.locator('.composer-project b').textContent(),'新项目');assert.equal(await composer.locator('#composer-project-picker').count(),0);assert(await composer.locator('.composer-project').evaluate(e=>document.activeElement===e));mark('new-project-escape-closes-picker-not-composer');
+- await composer.locator('.composer-project').click();await composer.getByLabel('项目',{exact:true}).fill('长'.repeat(40));await composer.getByRole('button',{name:'完成',exact:true}).click();await composer.locator('select').selectOption('long');await composer.getByLabel('名称',{exact:true}).fill('标题'.repeat(25));await composer.locator('#idea-text').fill('长字段仍可提交的正文');const geometry=await composer.evaluate(()=>{const box=s=>{const r=document.querySelector(s).getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width,height:r.height};};return {project:box('.composer-project'),agent:box('.composer-agent'),button:box('.primary'),footer:box('footer'),width:innerWidth,height:innerHeight};});for(const r of [geometry.project,geometry.agent,geometry.button])assert(r.x>=0&&r.right<=geometry.width&&r.bottom<=geometry.height&&r.height===32);assert(geometry.agent.right<geometry.button.x);assert.equal(geometry.button.width,72);mark('long-project-agent-title-keep-full-submit-button-inside');
+- await composer.getByRole('button',{name:'保存草稿并关闭',exact:true}).click();await waitForInfo(shelf,i=>!i.interactionLocked);composer=await openComposer(app,shelf);assert.equal(await composer.locator('.composer-project b').textContent(),'长'.repeat(40));assert.equal(await composer.locator('select').inputValue(),'long');assert.equal(await composer.getByLabel('名称',{exact:true}).inputValue(),'标题'.repeat(25));assert(await composer.locator('#idea-text').evaluate(e=>document.activeElement===e));mark('reopen-restores-visible-properties-title-and-body-focus');await composer.getByRole('button',{name:'保存草稿并关闭',exact:true}).click();await waitForInfo(shelf,i=>!i.interactionLocked);
++ const groupTrigger=()=>composer.getByRole('button',{name:/^分组：/}),tagTrigger=()=>composer.getByRole('button',{name:/^标签：/});
++ const createGroup=async(name)=>{await groupTrigger().click();await composer.getByRole('dialog',{name:'选择分组',exact:true}).getByRole('button',{name:'新建分组…',exact:true}).click();const form=composer.getByRole('dialog',{name:'新建分组',exact:true});await form.getByRole('textbox',{name:'名称',exact:true}).fill(name);await form.getByRole('button',{name:'创建并选用',exact:true}).click();await composer.getByRole('button',{name:'分组：'+name,exact:true}).waitFor();};
++ await groupTrigger().click();await composer.getByRole('button',{name:'已有项目',exact:true}).focus();await composer.getByRole('button',{name:'已有项目',exact:true}).press('Enter');await composer.getByRole('button',{name:'分组：已有项目',exact:true}).waitFor();assert.equal(await composer.getByRole('dialog',{name:'选择分组',exact:true}).count(),0);mark('existing-project-keyboard-enter-selects-value');
++ await createGroup('新项目');await groupTrigger().click();await composer.getByRole('textbox',{name:'搜索分组',exact:true}).press('Escape');assert(await groupTrigger().evaluate(e=>document.activeElement===e));mark('new-group-selects-and-Escape-restores-trigger-focus');
++ await createGroup('长'.repeat(40));await tagTrigger().click();await composer.getByRole('button',{name:'很长的自定义Agent名称用于边界检查',exact:true}).click();await composer.getByLabel('名称',{exact:true}).fill('标题'.repeat(25));await composer.locator('#idea-text').fill('长字段仍可提交的正文');const geometry=await composer.evaluate(()=>{const box=s=>{const r=document.querySelector(s).getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width,height:r.height};};return {project:box('.classification-trigger'),agent:box('.classification-trigger-tag'),button:box('.primary'),footer:box('footer'),width:innerWidth,height:innerHeight};});for(const r of [geometry.project,geometry.agent,geometry.button])assert(r.x>=0&&r.right<=geometry.width&&r.bottom<=geometry.height);assert.equal(geometry.project.height,geometry.agent.height);assert(geometry.agent.right<geometry.button.x);assert.equal(geometry.button.width,72);mark('long-project-agent-title-keep-full-submit-button-inside');
++ await composer.getByRole('button',{name:'保存草稿并关闭',exact:true}).click();await waitForInfo(shelf,i=>!i.interactionLocked);composer=await openComposer(app,shelf);await composer.getByRole('button',{name:'分组：'+'长'.repeat(40),exact:true}).waitFor();await composer.getByRole('button',{name:'标签：很长的自定义Agent名称用于边界检查',exact:true}).waitFor();assert.equal(await composer.getByLabel('名称',{exact:true}).inputValue(),'标题'.repeat(25));assert(await composer.locator('#idea-text').evaluate(e=>document.activeElement===e));mark('reopen-restores-visible-properties-title-and-body-focus');await composer.getByRole('button',{name:'保存草稿并关闭',exact:true}).click();await waitForInfo(shelf,i=>!i.interactionLocked);
+  const r=await shelf.evaluate(()=>window.thoughtline.openEdit('idea1'));assert(r.ok);const manage=(await app.windows()).find(p=>p.url().includes('view=manage'));await manage.waitForSelector('[data-inline-editor]');await manage.getByRole('combobox',{name:'编辑标签归属'}).selectOption('general');await manage.waitForSelector('.inline-split-confirm');await manage.waitForTimeout(500);assert.equal((await shelf.evaluate(()=>window.thoughtline.info())).snapshot.ideas.find(i=>i.id==='idea1').agentId,'codex','cross-Agent grouped edit requires explicit confirmation');const confirm=manage.locator('.inline-split-confirm input');await confirm.check();assert(await confirm.isChecked());await manage.screenshot({path:path.join(output,'grouped-edit-confirmation-renderer.png'),omitBackground:true});await waitForInfo(shelf,i=>i.snapshot.ideas.find(n=>n.id==='idea1')?.agentId==='general');assert.equal((await manage.evaluate(()=>window.thoughtline.closeManage())).ok,true);const result=(await shelf.evaluate(()=>window.thoughtline.info())).snapshot;assert.equal(result.ideas.find(i=>i.id==='idea1').text,'组内原文1');assert.equal(result.ideas.find(i=>i.id==='idea2').text,'组内原文2');assert(result.clips.some(c=>c.agentId==='codex'&&c.ideaIds.length===1&&c.ideaIds[0]==='idea2'));mark('grouped-edit-warning-confirmation-scroll-reachable-and-splits-with-text-preserved');
+  await fs.writeFile(path.join(output,'properties-native.json'),JSON.stringify({scope:'actual Mac source DOM/keyboard protocol and trusted IPC; not physical key/IME or Windows acceptance',checks,geometry},null,2)+'\n');
+  }finally{if(app){pids.push(...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)),app.process().pid);await app.close();}await cleanupIdleFixture(dir,pids);await fs.writeFile(path.join(output,'properties-cleanup.json'),JSON.stringify({ownPids:[...new Set(pids)],allExited:true,fakeDataRemoved:true},null,2)+'\n');}
+diff --git a/tests/electron/positioning-checks.cjs b/tests/electron/positioning-checks.cjs
+index 56b427f..8ec9985 100644
+--- a/tests/electron/positioning-checks.cjs
++++ b/tests/electron/positioning-checks.cjs
+@@ -14,12 +14,12 @@ async function freshChecks(app,shelf,evidence,{composer=false}={}){
+  const checks=[],info=await shelf.evaluate(()=>window.thoughtline.info());
+  assert.deepEqual(info.snapshot.agents.map(a=>a.name),['通用','生活灵感','工作记录','直属领导','同事','Codex']);assert.equal(info.snapshot.agents.length,6);checks.push('fresh-six-presets-cover-everyday-work-people-development');
+  let manage=await openCalendar(app,shelf);assert.equal((await manage.evaluate(()=>window.thoughtline.storageInfo())).value.directory,await app.evaluate(({app})=>app.getPath('userData')));await manage.locator('[data-capsule=locale] button').nth(1).click();await waitForInfo(manage,i=>i.preferences.locale==='en');
+- await manage.getByRole('button',{name:'More calendar options',exact:true}).click();await manage.getByRole('button',{name:'Thoughtline Tags',exact:true}).click();await manage.waitForSelector('.agent-settings');
+- const options=await manage.locator('.agent-settings>label select option').allTextContents();assert.deepEqual(options,['General','Everyday ideas','Work notes','Direct manager','Colleague','Codex']);assert.equal(await manage.getByRole('heading',{name:'Add tag',exact:true}).count(),1);assert(!(await manage.locator('.agent-settings').innerText()).includes('Agent'));checks.push('English-tag-settings-and-translated-preset-display');
+- const add=manage.locator('.agent-form').last();await add.locator('input[type=text],input:not([type])').fill('日报');await add.getByRole('button',{name:'Add tag',exact:true}).click();const added=await waitForInfo(manage,i=>i.snapshot.agents.some(a=>a.name==='日报'));assert.equal(added.snapshot.agents.length,7);await manage.waitForFunction(()=>[...document.querySelectorAll('.agent-settings>label select option')].some(o=>o.textContent==='日报'));assert((await manage.locator('.agent-settings>label select option').allTextContents()).includes('日报'));checks.push('custom-tag-remains-literal-in-English');
+- await manage.locator('.agent-settings>label select').selectOption('preset:manager');const edit=manage.locator('.agent-form').first();await edit.locator('input:not([type])').fill('我的领导');await edit.getByRole('button',{name:'Save tag',exact:true}).click();await waitForInfo(manage,i=>i.snapshot.agents.some(a=>a.id==='preset:manager'&&a.name==='我的领导'));await manage.waitForFunction(()=>[...document.querySelectorAll('.agent-settings>label select option')].some(o=>o.textContent==='我的领导'));assert((await manage.locator('.agent-settings>label select option').allTextContents()).includes('我的领导'));checks.push('renamed-built-in-remains-literal');
++ await manage.getByRole('button',{name:'More calendar options',exact:true}).click();await manage.getByRole('button',{name:'Tags & groups',exact:true}).click();await manage.waitForSelector('[data-mode=classification]');
++ const rows=manage.locator('.classification-name>span:last-child');assert.deepEqual(await rows.allTextContents(),['General','Everyday ideas','Work notes','Direct manager','Colleague','Codex']);assert.equal(await manage.getByRole('button',{name:'Add tag',exact:true}).count(),1);checks.push('English-tag-settings-and-translated-preset-display');
++ await manage.getByRole('button',{name:'Add tag',exact:true}).click();await manage.getByRole('dialog').getByRole('textbox',{name:'Name',exact:true}).fill('日报');await manage.getByRole('dialog').getByRole('button',{name:'Create',exact:true}).click();const added=await waitForInfo(manage,i=>i.snapshot.agents.some(a=>a.name==='日报'));assert.equal(added.snapshot.agents.length,7);await manage.getByText('日报',{exact:true}).waitFor();checks.push('custom-tag-remains-literal-in-English');
++ await manage.locator('[data-classification-id="preset:manager"]').getByRole('button',{name:'Edit',exact:true}).click();await manage.getByRole('dialog').getByRole('textbox',{name:'Name',exact:true}).fill('我的领导');await manage.getByRole('dialog').getByRole('button',{name:'Save',exact:true}).click();await waitForInfo(manage,i=>i.snapshot.agents.some(a=>a.id==='preset:manager'&&a.name==='我的领导'));await manage.getByText('我的领导',{exact:true}).waitFor();checks.push('renamed-built-in-remains-literal');
+  await manage.screenshot({path:path.join(evidence,'tags-english.png')});
+- if(composer){await manage.evaluate(()=>window.thoughtline.closeManage());const page=await openComposer(app,shelf);assert.equal(await page.locator('.composer-agent select').inputValue(),'general');assert.equal(await page.locator('#idea-text').getAttribute('placeholder'),'Capture an idea, a work note or something you want to say.');await page.getByRole('combobox',{name:'Thought tag',exact:true}).selectOption('preset:manager');await page.locator('#idea-text').fill('汇报内容 原文😀\n保留');await page.locator('.composer-submit .primary').click();const saved=await waitForInfo(shelf,i=>i.snapshot.ideas.some(a=>a.text.startsWith('汇报内容')));assert.equal(saved.snapshot.ideas.at(-1).agentId,'preset:manager');checks.push('composer-general-default-generic-placeholder-specific-person-and-save');}
++ if(composer){await manage.evaluate(()=>window.thoughtline.closeManage());const page=await openComposer(app,shelf);assert.equal((await page.evaluate(()=>window.thoughtline.info())).composerContext.draft.agentId,'general');assert.equal(await page.getByRole('button',{name:'Tag:General',exact:true}).count(),1);assert.equal(await page.locator('#idea-text').getAttribute('placeholder'),'Capture an idea, a work note or something you want to say.');await require('./classification-fixture.cjs').chooseTag(page,'我的领导');await page.locator('#idea-text').fill('汇报内容 原文😀\n保留');await page.locator('.composer-submit .primary').click();const saved=await waitForInfo(shelf,i=>i.snapshot.ideas.some(a=>a.text.startsWith('汇报内容')));assert.equal(saved.snapshot.ideas.at(-1).agentId,'preset:manager');checks.push('composer-general-default-generic-placeholder-specific-person-and-save');}
+  return checks;
+ }
+ async function legacyChecks(app,shelf,evidence,{nativeMenu=false}={}){
+diff --git a/tests/unit/shelfState.test.ts b/tests/unit/shelfState.test.ts
+index 7694e64..e08a90d 100644
+--- a/tests/unit/shelfState.test.ts
++++ b/tests/unit/shelfState.test.ts
+@@ -85,8 +85,8 @@ test('暂停中新操作仍记录锁，禁止peek和指针展开直到恢复后
+  s=step(s,{type:'peek',now:2});s=step(s,{type:'pointer',zone:'edge',now:3});s=step(s,{type:'tick',now:1000});
+  expect(s.phase).toBe('hidden');expect(s.dwellAt).toBe(null);
+  s=step(s,{type:'resume',now:1001});s=step(s,{type:'pointer',zone:'edge',now:1002});
+- expect(step(s,{type:'tick',now:2000}).phase).toBe('hidden');
+- s=step(s,{type:'lock',name:'composer',active:false,now:2001});expect(step(s,{type:'tick',now:2002}).phase).toBe('revealed');
++ expect(step(s,{type:'tick',now:2000}).phase).toBe('revealed');
++ expect(s.locks).toEqual(['composer']);
+ });
+ test('暂停中只释放已结束锁，仍活跃的其他锁不能被恢复清空',()=>{
+  let s=step(initialShelf(),{type:'lock',name:'manage',active:true,now:0});
+@@ -95,3 +95,11 @@ test('暂停中只释放已结束锁，仍活跃的其他锁不能被恢复清
+  s=step(s,{type:'resume',now:4});s=step(s,{type:'pointer',zone:'edge',now:5});expect(step(s,{type:'tick',now:1000}).phase).toBe('hidden');
+  s=step(s,{type:'lock',name:'manage',active:false,now:1001});expect(step(s,{type:'tick',now:1002}).phase).toBe('revealed');
+ });
++
++test('writing window can reveal and dismiss a hidden shelf without releasing its session lock',()=>{
++ let s=step(initialShelf(),{type:'lock',name:'composer',active:true,now:0});s=step(s,{type:'pointer',zone:'edge',now:10});expect(step(s,{type:'tick',now:259}).phase).toBe('hidden');s=step(s,{type:'tick',now:260});expect(s.phase).toBe('revealed');expect(s.locks).toEqual(['composer']);s=step(s,{type:'pointer',zone:'outside',now:300});expect(step(s,{type:'tick',now:800}).phase).toBe('hidden');
++});
++test('writing does not bypass active menu, drag, manager or sleep guards',()=>{
++ for(const name of ['menu','drag','text-drag','manage']){let s=step(initialShelf(),{type:'lock',name:'composer',active:true,now:0});s=step(s,{type:'lock',name,active:true,now:1});s=step(s,{type:'pointer',zone:'edge',now:10});expect(step(s,{type:'tick',now:1000}).phase).toBe('hidden');}
++ let s=step(initialShelf(),{type:'lock',name:'composer',active:true,now:0});s=step(s,{type:'suspend',now:1});s=step(s,{type:'pointer',zone:'edge',now:10});expect(step(s,{type:'tick',now:1000}).phase).toBe('hidden');
++});

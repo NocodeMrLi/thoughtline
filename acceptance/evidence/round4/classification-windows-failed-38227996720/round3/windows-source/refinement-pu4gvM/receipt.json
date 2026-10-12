@@ -1,0 +1,204 @@
+{
+  "platform": "win32",
+  "scope": "owned source renderer/IPC, isolated data, own native window captures; not physical user acceptance",
+  "cases": [
+    {
+      "name": "full-split-notice-expires-and-does-not-revive",
+      "observation": {
+        "expired": true,
+        "revisionDidNotRevive": true,
+        "ideasUnchanged": true
+      },
+      "passed": true,
+      "pids": [
+        6576,
+        1836,
+        2648,
+        5316,
+        6804,
+        8080,
+        7292
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "notice-hover-focus-and-same-message-restart",
+      "observation": {
+        "focus": true,
+        "hover": true,
+        "repeat": true
+      },
+      "passed": true,
+      "pids": [
+        6996,
+        2564,
+        8516,
+        5064,
+        4792,
+        6256,
+        3536
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "settings-tabs-data-spacing-and-controls-draft",
+      "observation": {
+        "tabs": 3,
+        "bounds": {
+          "titleInset": 21,
+          "buttonHintGap": 12
+        },
+        "draftProtected": true
+      },
+      "passed": true,
+      "pids": [
+        8392,
+        3892,
+        1272,
+        6816,
+        3272,
+        8868,
+        4212
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "native-shell-one-contour-and-all-settings-views",
+      "observation": {
+        "shape": {
+          "border": "0px",
+          "radius": "8px",
+          "shadow": "none",
+          "image": "radial-gradient(at 0% 0%, rgba(255, 255, 255, 0.68), rgba(0, 0, 0, 0) 65%), linear-gradient(125deg, rgba(220, 232, 242, 0.3), rgba(0, 0, 0, 0) 55%, rgba(238, 233, 222, 0.24))"
+        },
+        "nativeCaptured": false,
+        "sizes": [
+          {
+            "locale": "zh-CN",
+            "width": 350
+          },
+          {
+            "locale": "zh-CN",
+            "width": 480
+          },
+          {
+            "locale": "zh-CN",
+            "width": 740
+          },
+          {
+            "locale": "zh-CN",
+            "width": 350
+          },
+          {
+            "locale": "zh-CN",
+            "width": 480
+          },
+          {
+            "locale": "zh-CN",
+            "width": 740
+          },
+          {
+            "locale": "zh-CN",
+            "width": 350
+          },
+          {
+            "locale": "zh-CN",
+            "width": 480
+          },
+          {
+            "locale": "zh-CN",
+            "width": 740
+          },
+          {
+            "locale": "en",
+            "width": 350
+          },
+          {
+            "locale": "en",
+            "width": 480
+          },
+          {
+            "locale": "en",
+            "width": 740
+          },
+          {
+            "locale": "en",
+            "width": 350
+          },
+          {
+            "locale": "en",
+            "width": 480
+          },
+          {
+            "locale": "en",
+            "width": 740
+          },
+          {
+            "locale": "en",
+            "width": 350
+          },
+          {
+            "locale": "en",
+            "width": 480
+          },
+          {
+            "locale": "en",
+            "width": 740
+          }
+        ]
+      },
+      "passed": true,
+      "pids": [
+        6936,
+        8428,
+        1340,
+        2136,
+        9204,
+        7836,
+        7584
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "all-view-corners-in-both-themes",
+      "passed": false,
+      "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Thoughtline标签', exact: true })\u001b[22m\n\n    at D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round3-refinement-workflow.cjs:49:139\n    at async run (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round3-refinement-workflow.cjs:10:277)\n    at async D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round3-refinement-workflow.cjs:41:2",
+      "pids": [
+        4172,
+        5312,
+        8476,
+        9092,
+        5364,
+        2760
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "real-owned-IO-errors-do-not-expire-or-change-saved-data",
+      "observation": {
+        "menuErrorPreserved": true,
+        "settingsErrorPreserved": true,
+        "originalSavedDataPreserved": true,
+        "retrySucceeded": true
+      },
+      "passed": true,
+      "pids": [
+        3088,
+        2732,
+        7028,
+        9000,
+        2364,
+        8528,
+        7120
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    }
+  ],
+  "passed": false
+}

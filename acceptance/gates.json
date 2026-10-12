@@ -1,9 +1,9 @@
 {
-  "stage": "ROUND4_V0_0_26_PUBLISHED_VERIFIED_R4_03_OWNER_ACCEPTANCE_PENDING",
+  "stage": "ROUND4_V0_0_27_DUAL_VERIFIED_CLEANED_PRIVATE_PUBLICATION_VERIFIED_OWNER_PENDING",
   "asOf": "2026-10-12",
   "branch": "main",
-  "lastCommittedSource": "b76b5dc48f182d4928f69daddeb597d279a2b7eb",
-  "currentCandidateVersion": "0.0.26",
+  "lastCommittedSource": "787a770328ceef4b6013f56f5f9eea9dbdf8ecf6",
+  "currentCandidateVersion": "0.0.27",
   "formalAcceptance": false,
   "round1": {
     "plan": "/Users/lihongwei/安安的成长笔记📒/晾念头 Thoughtline/Thoughtline第一轮修复优化.md",
@@ -2356,7 +2356,7 @@
   "documentationCommitMayAdvanceWithoutRebuild": true,
   "round4": {
     "version": "0.0.25",
-    "status": "R4-01/02 accepted on 0.0.25; R4-03 repaired and published on 0.0.26; R4-03 owner and global physical acceptance pending",
+    "status": "R4-01/02 accepted on 0.0.25 and R4-03 accepted on 0.0.26; R4-04..07 dual source/actual package verified, cleaned and private publication verified; new owner/global physical acceptance pending",
     "formalAcceptance": false,
     "physicalAcceptance": false,
     "scope": [
@@ -2475,7 +2475,12 @@
       "status": "repaired-dual-source-actual-package-verified-cleaned-private-publication-verified",
       "reportedPlatform": "windows",
       "evidence": "acceptance/evidence/round4/vine-red",
-      "userAcceptance": "pending-R4-03-only; R4-01/02 accepted on 0.0.25",
+      "userAcceptance": {
+        "status": "accepted",
+        "version": "0.0.26",
+        "verbatim": "0.0.26没问题了",
+        "asOf": "2026-10-12"
+      },
       "version": "0.0.26",
       "source": "b76b5dc48f182d4928f69daddeb597d279a2b7eb",
       "mac": {
@@ -2532,6 +2537,88 @@
         "url": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.26",
         "receipt": "acceptance/evidence/round4/final-v0.0.26/release-verification.json",
         "prior25AndEarlierAssetsUnchanged": true
+      }
+    },
+    "classificationIteration": {
+      "status": "dual-source-actual-package-verified-cleaned-private-publication-verified",
+      "issues": [
+        "R4-04",
+        "R4-05",
+        "R4-06",
+        "R4-07"
+      ],
+      "ownerApprovedBaseLayout": true,
+      "uiIterationRequired": true,
+      "missingTagReportWithdrawn": true,
+      "formalAcceptance": false,
+      "physicalAcceptance": false,
+      "macSourceCore": {
+        "unitPassed": 341,
+        "windowsOnlySkipped": 4,
+        "workflowChecks": 11,
+        "uiChecks": 18,
+        "workflowReceipt": "acceptance/evidence/round4/final-v0.0.27/mac-source-workflow.json",
+        "uiReceipt": "acceptance/evidence/round4/final-v0.0.27/mac-source-ui.json",
+        "reuseProof": "acceptance/evidence/round4/final-v0.0.27/mac-source-reuse-proof.json"
+      },
+      "terminology": {
+        "removed": "已移除",
+        "restore": "恢复选用",
+        "expirationDays": null,
+        "autoDelete": false
+      },
+      "version": "0.0.27",
+      "source": "787a770328ceef4b6013f56f5f9eea9dbdf8ecf6",
+      "windowsRun": "38239196630",
+      "macPackage": {
+        "workflowChecks": 11,
+        "uiChecks": 18,
+        "visualChecks": 71,
+        "vineChecks": 13,
+        "appearanceChecks": 14,
+        "readerChecks": 10,
+        "binding": "acceptance/evidence/round4/final-v0.0.27/mac-package-binding.json",
+        "scope": "actual readonly DMG; physical/owner acceptance separate"
+      },
+      "windows": {
+        "run": "38239196630",
+        "conclusion": "success",
+        "unitPassed": 345,
+        "sourceChecks": {
+          "workflow": 11,
+          "ui": 18,
+          "visual": 71,
+          "vine": 13,
+          "appearance": 14,
+          "reader": 10
+        },
+        "packageChecks": {
+          "workflow": 11,
+          "ui": 18,
+          "visual": 71,
+          "vine": 13,
+          "appearance": 14,
+          "reader": 10
+        },
+        "installationDataRetention": true,
+        "binding": "acceptance/evidence/round4/final-v0.0.27/windows-package-binding.json",
+        "suites": "acceptance/evidence/round4/final-v0.0.27/windows-final-suites.json"
+      },
+      "sourcePair": "acceptance/evidence/round4/final-v0.0.27/source-pair-proof.json",
+      "cleanup": "acceptance/evidence/round4/final-v0.0.27/cleanup-release.json",
+      "userAcceptance": "pending-new-version-feedback",
+      "publication": {
+        "releaseId": 410528129,
+        "tag": "v0.0.27",
+        "source": "787a770328ceef4b6013f56f5f9eea9dbdf8ecf6",
+        "draft": false,
+        "prerelease": false,
+        "url": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.27",
+        "assetCount": 47,
+        "sha256Targets": 46,
+        "historicalAssetsUnchanged": true,
+        "receipt": "acceptance/evidence/round4/final-v0.0.27/release-verification.json",
+        "uploadedGateSnapshotIsPrePublication": true
       }
     }
   }

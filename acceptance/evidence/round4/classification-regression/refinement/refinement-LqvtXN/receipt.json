@@ -1,0 +1,204 @@
+{
+  "platform": "darwin",
+  "scope": "owned source renderer/IPC, isolated data, own native window captures; not physical user acceptance",
+  "cases": [
+    {
+      "name": "full-split-notice-expires-and-does-not-revive",
+      "observation": {
+        "expired": true,
+        "revisionDidNotRevive": true,
+        "ideasUnchanged": true
+      },
+      "passed": true,
+      "pids": [
+        23226,
+        23226,
+        23227,
+        23228,
+        23229,
+        23234,
+        23235
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "notice-hover-focus-and-same-message-restart",
+      "observation": {
+        "focus": true,
+        "hover": true,
+        "repeat": true
+      },
+      "passed": true,
+      "pids": [
+        23240,
+        23240,
+        23241,
+        23242,
+        23243,
+        23244,
+        23245
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "settings-tabs-data-spacing-and-controls-draft",
+      "observation": {
+        "tabs": 3,
+        "bounds": {
+          "titleInset": 21,
+          "buttonHintGap": 12
+        },
+        "draftProtected": true
+      },
+      "passed": true,
+      "pids": [
+        23250,
+        23250,
+        23251,
+        23252,
+        23253,
+        23254,
+        23255
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "native-shell-one-contour-and-all-settings-views",
+      "observation": {
+        "shape": {
+          "border": "0px",
+          "radius": "0px",
+          "shadow": "none",
+          "image": "radial-gradient(at 8% 0%, rgba(255, 255, 255, 0.85), rgba(0, 0, 0, 0) 58%), radial-gradient(at 100% 38%, rgba(220, 230, 246, 0.54), rgba(0, 0, 0, 0) 62%), radial-gradient(at 8% 100%, rgba(234, 225, 199, 0.48), rgba(0, 0, 0, 0) 64%)"
+        },
+        "nativeCaptured": true,
+        "sizes": [
+          {
+            "locale": "zh-CN",
+            "width": 350
+          },
+          {
+            "locale": "zh-CN",
+            "width": 480
+          },
+          {
+            "locale": "zh-CN",
+            "width": 740
+          },
+          {
+            "locale": "zh-CN",
+            "width": 350
+          },
+          {
+            "locale": "zh-CN",
+            "width": 480
+          },
+          {
+            "locale": "zh-CN",
+            "width": 740
+          },
+          {
+            "locale": "zh-CN",
+            "width": 350
+          },
+          {
+            "locale": "zh-CN",
+            "width": 480
+          },
+          {
+            "locale": "zh-CN",
+            "width": 740
+          },
+          {
+            "locale": "en",
+            "width": 350
+          },
+          {
+            "locale": "en",
+            "width": 480
+          },
+          {
+            "locale": "en",
+            "width": 740
+          },
+          {
+            "locale": "en",
+            "width": 350
+          },
+          {
+            "locale": "en",
+            "width": 480
+          },
+          {
+            "locale": "en",
+            "width": 740
+          },
+          {
+            "locale": "en",
+            "width": 350
+          },
+          {
+            "locale": "en",
+            "width": 480
+          },
+          {
+            "locale": "en",
+            "width": 740
+          }
+        ]
+      },
+      "passed": true,
+      "pids": [
+        23256,
+        23256,
+        23257,
+        23258,
+        23259,
+        23260,
+        23261
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "all-view-corners-in-both-themes",
+      "passed": false,
+      "failure": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.classification-manager') to be visible\u001b[22m\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:49:187\n    at async run (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:10:277)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-refinement-workflow.cjs:41:2",
+      "pids": [
+        23269,
+        23269,
+        23270,
+        23271,
+        23272,
+        23274
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    },
+    {
+      "name": "real-owned-IO-errors-do-not-expire-or-change-saved-data",
+      "observation": {
+        "menuErrorPreserved": true,
+        "settingsErrorPreserved": true,
+        "originalSavedDataPreserved": true,
+        "retrySucceeded": true
+      },
+      "passed": true,
+      "pids": [
+        23303,
+        23303,
+        23304,
+        23305,
+        23306,
+        23307,
+        23308
+      ],
+      "profileRemoved": true,
+      "normalQuit": true
+    }
+  ],
+  "passed": false
+}
