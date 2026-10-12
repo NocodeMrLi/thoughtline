@@ -57,7 +57,8 @@ export function IdeaReader({idea,info,initialEdit=false,heading,navigation}:{ide
  const paper=paperAppearance(info.snapshot.settings.paper),agent=info.snapshot.agents.find(a=>a.id===(editing&&draftAgent||idea.agentId)),ink=agentInkColors(agent?.color??'#A0A3AA',paperPalettes[paper.color]);
  return <section className="idea-reader" data-reader-id={idea.id}>
   <div className="reader-paper" data-reader-paper-color={paper.color} data-reader-agent-color={agent?.color??'#A0A3AA'} style={{...paperStyle(paper),'--reader-accent-light':ink.light,'--reader-accent-dark':ink.dark} as CSSProperties}>
-  {(!editing||navigation)&&<div className="reader-paper-heading">{!editing&&(heading??<strong>{idea.title}</strong>)}{navigation}</div>}
+  {!editing&&<div className="reader-paper-heading">{heading??<strong>{idea.title}</strong>}{navigation}</div>}
+  {editing&&navigation&&<div className="reader-group-navigation">{navigation}</div>}
   {editing&&!deleted?<InlineIdeaEditor key={idea.id+':'+info.manageSession} idea={idea} info={info} onDraftAgentChange={setDraftAgent} onDone={()=>{setEditing(false);setDraftAgent(null);}}/>:<textarea data-full-text readOnly aria-label={t("完整正文，可手动选中复制")} value={idea.text}/>}
   </div>
   {!deleted&&<div className="reader-reminder"><ReminderControl at={idea.reminder?.at} state={idea.reminder?.state} disabled={busy} open={reminderOpen} onOpenChange={open=>{setReminderOpen(open);if(open){setPicker(false);closeMenu();}}} onChange={changeReminder}/></div>}

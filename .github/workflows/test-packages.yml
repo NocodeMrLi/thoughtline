@@ -31,6 +31,13 @@ jobs:
             & node "tests/electron/$test.cjs"
             if ($LASTEXITCODE -ne 0) { throw "$test failed" }
           }
+      - name: Fourth round rope samples and reader field safety
+        shell: pwsh
+        env:
+          THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round4/windows-source
+        run: |
+          & node tests/electron/round4-visual-workflow.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Fourth round source visual regression failed' }
       - name: Second round UI and real native menu characterization
         shell: pwsh
         env:
@@ -132,6 +139,9 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Actual package customizer layout and dropdown failed' }
           & node tests/electron/round3-reader-recovery-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Actual package reader colors and deleted recovery failed' }
+          $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round4/windows-packaged'
+          & node tests/electron/round4-visual-workflow.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Fourth round actual package visual regression failed' }
           $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round2/windows/packaged-capacity'
           & node tests/electron/packaged-round21.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Actual packaged reminder/title/More regression failed' }
@@ -181,6 +191,8 @@ jobs:
             acceptance/evidence/round3/windows-source/**
             acceptance/evidence/round3/windows-packaged/**
             acceptance/evidence/round3/windows-installed/**
+            acceptance/evidence/round4/windows-source/**
+            acceptance/evidence/round4/windows-packaged/**
             acceptance/evidence/top-edge-20261010/windows-source/**
             acceptance/evidence/top-edge-20261010/windows-packaged/**
             acceptance/evidence/appearance/windows-packaged/**

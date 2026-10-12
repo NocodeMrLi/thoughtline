@@ -3,7 +3,7 @@
   "asOf": "2026-10-11T17:15:30.199629+00:00",
   "branch": "main",
   "lastCommittedSource": "62d9302351d6d339f417007e1dce3da4cecafc3b",
-  "currentCandidateVersion": "0.0.24",
+  "currentCandidateVersion": "0.0.25",
   "formalAcceptance": false,
   "round1": {
     "plan": "/Users/lihongwei/安安的成长笔记📒/晾念头 Thoughtline/Thoughtline第一轮修复优化.md",
@@ -2353,5 +2353,39 @@
       }
     }
   },
-  "documentationCommitMayAdvanceWithoutRebuild": true
+  "documentationCommitMayAdvanceWithoutRebuild": true,
+  "round4": {
+    "version": "0.0.25",
+    "status": "Mac source verified; Windows and actual packages pending",
+    "formalAcceptance": false,
+    "physicalAcceptance": false,
+    "scope": [
+      "R4-01 rope menu uses real material and visible vine leaves",
+      "R4-02 separate clip-colored title/body fields with 12DIP material gap in reader and editor"
+    ],
+    "sourceValidation": {
+      "mac": {
+        "unitPassed": 323,
+        "windowsOnlySkipped": 4,
+        "typecheck": true,
+        "build": true,
+        "visualAssertions": 71,
+        "evidence": "acceptance/evidence/round4/final-v0.0.25/mac-source-visual.json",
+        "affectedSupport": "acceptance/evidence/round4/final-v0.0.25/mac-source-support.json"
+      },
+      "windows": "pending"
+    },
+    "packageValidation": {
+      "mac": "pending",
+      "windows": "pending"
+    },
+    "remaining": [
+      "physical and owner acceptance retained from round3",
+      "A/B delete-in-progress restart and filtered restore targeted runtime confirmation"
+    ],
+    "release": {
+      "published": false,
+      "version": "0.0.25"
+    }
+  }
 }

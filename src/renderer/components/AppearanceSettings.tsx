@@ -47,7 +47,7 @@ function AppearanceSelect({id,label,value,busy,open,onToggle,onClose,children}:{
  </div>;
 }
 function RopeSample({style}:{style:RopeAppearance['style']}){
- const geometry={left:3,length:65,top:11,sag:5};return <svg className="rope-sample" width="72" height="35" viewBox="0 0 72 35" aria-hidden="true" style={ropeStyle({style})}><RopeArtwork rope={geometry} anchors={[]} appearance={{style}}/></svg>;
+ const geometry={left:4,length:120,top:12,sag:7};return <svg className="rope rope-sample" width="96" height="42" viewBox="0 0 128 56" aria-hidden="true" style={ropeStyle({style})}><RopeArtwork rope={geometry} anchors={[]} appearance={{style}}/></svg>;
 }
 function PaperSample({pattern}:{pattern:PaperAppearance['pattern']}){
  return <svg className="paper-pattern-sample" width="30" height="26" viewBox="0 0 30 26" aria-hidden="true"><rect x=".5" y=".5" width="29" height="25" rx="2"/>{pattern!=='blank'&&[7,13,19].map(y=><path key={y} d={`M4 ${y}H26`} strokeDasharray={pattern==='dashed'?'3 3':undefined}/>)}</svg>;
