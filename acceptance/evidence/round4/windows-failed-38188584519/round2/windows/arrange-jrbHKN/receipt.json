@@ -1,0 +1,48 @@
+{
+  "platform": "win32",
+  "scope": "isolated native-menu protocol, real source renderer/IPC/repository; no physical menu click",
+  "cases": [
+    {
+      "name": "native-menu-arranges-filtered-full-rope-with-data-intact",
+      "passed": true
+    },
+    {
+      "name": "finite-transform-animation",
+      "passed": true,
+      "duration": 180
+    },
+    {
+      "name": "position-only-undo-preserves-new-current-page",
+      "passed": true
+    },
+    {
+      "name": "arrange-undo-cannot-revive-deleted-project",
+      "passed": true
+    },
+    {
+      "name": "system-reduced-motion-no-animation",
+      "passed": true
+    }
+  ],
+  "pids": [
+    3432,
+    4720,
+    7604,
+    1864,
+    7424
+  ],
+  "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-arrange-KVc24H",
+  "normalMotionScope": "Owned renderer emulates no-preference; host OS settings unchanged",
+  "motionProbe": {
+    "durations": [
+      180,
+      180
+    ],
+    "locked": "false",
+    "reduced": "false"
+  },
+  "failure": "page.evaluate: Target page, context or browser has been closed\n    at D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-arrange-workflow.cjs:15:29",
+  "normalClose": true,
+  "dataRemoved": true,
+  "passed": false
+}

@@ -11,3 +11,7 @@
 已冻结并push源码bece988ad18817462a4c6fa9e15dac961f7f6dd1；Windows38187186237进行中。Mac实际0.0.25包visual71/reader10/customizer6/appearance14/round21共24项均通过，全部自有profile正常清理。34输出与asar逐项绑定，原生签名字节精确重放；DMG及check-only启动器哈希一致，未正常LaunchServices启动。自有Mac测试App/重复DMG/块图/空隔离目录及已转存日志已清理，du分配428.85MiB；未动用户88971或历史/最终包和共享out。
 
 实际输入时间诊断Mac source-darwin-CORRECTED（见pointer-timing-source-sequential/）：16组合通过，浏览器真实返回间隔0.7–17.9ms，180ms产品阈值不变；并行输入候选发生coalescing失败，改顺序确认后通过。历史Windows失败确切时间无法追溯，原因仍未确认，不能把新稳定测试当成随机产品故障修复。冻结新测试输入后重跑同源Windows包流程。协作刷新hook旧目录不存在，按交接读取实际-codex两份当前协作参考，不写通用经验/记忆。
+
+最终源ee7ea98076ae3fdbf70dcf62ad9dd884b428a95f已push，Windows38188584519执行中。Mac重新冻结包34输出/asar与bece完全一致，唯一变化输入tests/electron/more-menu-checks.cjs；前三轮/本轮有效同字节视觉证据复用，实际包round21新诊断24组重新通过，16指针返回0.6–17.6ms。最终DMG8a05fcca...及同版check-only启动器通过；自有最终测试App、重复包和空隔离目录另清428.85MiB，用户88971保留。
+
+Mac受控隐藏窗口31s释放及当前入口重开，7项整理流程通过；为最终Windows回归更新旧fixture窗口生命周期，不改产品。保留38188584519失败完整证据，最终冻结另以新head记录。

@@ -2380,7 +2380,9 @@
         "passed": true,
         "visualAssertions": 71,
         "affectedSuites": "acceptance/evidence/round4/final-v0.0.25/mac-packaged-suites.json",
-        "binding": "acceptance/evidence/round4/final-v0.0.25/mac-package-binding.json"
+        "binding": "acceptance/evidence/round4/final-v0.0.25/mac-package-binding.json",
+        "reuseProof": "acceptance/evidence/round4/final-v0.0.25/mac-evidence-reuse-proof.json",
+        "affectedMenuRetest": "acceptance/evidence/round4/final-v0.0.25/mac-packaged-round21-final.json"
       },
       "windows": "pending"
     },
@@ -2392,12 +2394,13 @@
       "published": false,
       "version": "0.0.25"
     },
-    "source": "bece988ad18817462a4c6fa9e15dac961f7f6dd1",
-    "finalWindowsRun": "38187186237",
+    "source": "ee7ea98076ae3fdbf70dcf62ad9dd884b428a95f",
+    "finalWindowsRun": "38188584519",
     "cleanup": {
       "mac": "acceptance/evidence/round4/final-v0.0.25/mac-owned-cleanup.json",
       "profiles": "acceptance/evidence/round4/final-v0.0.25/mac-profile-cleanup-audit.json",
-      "windowsDownloads": "pending"
+      "windowsDownloads": "pending",
+      "macFinal": "acceptance/evidence/round4/final-v0.0.25/mac-final-owned-cleanup.json"
     },
     "failedWindowsRuns": [
       {
@@ -2407,6 +2410,14 @@
         "visualSourceAndPackageAssertions": 71,
         "remainingCause": "original browser event interval not recorded; not conclusively attributed",
         "evidence": "acceptance/evidence/round4/final-v0.0.25/failed-windows-38187186237/packaged-round21-failed.json"
+      },
+      {
+        "runId": "38188584519",
+        "source": "ee7ea98076ae3fdbf70dcf62ad9dd884b428a95f",
+        "stage": "round2-arrange cached hidden manage page",
+        "sourceVisualAssertions": 71,
+        "testFix": "Reopen current settings window via normal entry before saving; Mac 31s idle-release characterization and seven original assertions passed",
+        "evidence": "acceptance/evidence/round4/windows-failed-38188584519"
       }
     ]
   }
