@@ -48,3 +48,9 @@ test('explicit completion retains only the final group even after its last note 
  const r=catalog.rememberIdeaProject(current,'i0');expect(r.ok).toBe(true);if(!r.ok)return;expect(r.value.projects).toContain('新归属');expect(r.value.projects).not.toContain('新');
  const deleted={...r.value,clips:[],ideas:r.value.ideas.map(i=>({...i,status:'deleted' as const,deletedAt:i.createdAt,deletedFrom:'hanging' as const}))},removed=permanentlyDeleteIdea(deleted,'i0');expect(removed.ok).toBe(true);if(removed.ok)expect(projectNames(removed.value)).toContain('新归属');
 });
+
+test('deleting the last legacy thought does not delete its independent historical group',()=>{
+ const s=fixture();s.ideas=[s.ideas[2]];s.clips=[];s.draft=null;delete s.projects;
+ const r=permanentlyDeleteIdea(s,'i2');expect(r.ok).toBe(true);if(!r.ok)return;expect(r.value.ideas).toEqual([]);expect(projectNames(r.value)).toContain('工作记录');
+ const loaded=validateSnapshot(JSON.parse(JSON.stringify(r.value)));expect(loaded.ok).toBe(true);if(loaded.ok)expect(projectNames(loaded.value)).toContain('工作记录');
+});

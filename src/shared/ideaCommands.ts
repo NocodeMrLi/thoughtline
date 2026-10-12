@@ -145,7 +145,7 @@ export function restoreIdea(s:Snapshot,id:string,now:string,width=1440):Result<S
 }
 export function permanentlyDeleteIdea(s:Snapshot,id:string):Result<Snapshot>{
   if(!s.ideas.some(i=>i.id===id&&i.status==='deleted'))return invalid('只能永久删除最近删除中的念头。');
-  const ideas=s.ideas.filter(i=>i.id!==id);return validateSnapshot({...s,ideas,clips:pruneClips(s.clips,ideas)});
+  const ideas=s.ideas.filter(i=>i.id!==id),projects=projectNames(s);return validateSnapshot({...s,...(projects.length?{projects}:{}),ideas,clips:pruneClips(s.clips,ideas)});
 }
 export function addAgent(s:Snapshot,a:AgentTag):Result<Snapshot>{
   if(typeof a?.name!=='string'||s.agents.some(x=>x.name.trim().toLowerCase()===a.name.trim().toLowerCase()))return invalid('已有同名标签，请选择已有标签。');
