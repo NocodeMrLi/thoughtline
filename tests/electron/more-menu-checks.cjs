@@ -23,8 +23,18 @@ async function checks(page,{kind,language,evidence}){
   // hover adds stability/actionability waits and can arrive after the deadline
   // on a loaded runner, testing a late return rather than cancellation.
   const returnPoint=await menu.locator('button').first().boundingBox(),outsideY=await page.evaluate(()=>innerHeight)-1;assert(returnPoint);
-  await page.mouse.move(1,outsideY);await page.waitForTimeout(70);await page.mouse.move(returnPoint.x+returnPoint.width/2,returnPoint.y+returnPoint.height/2);await page.waitForTimeout(230);assert.equal(await menu.count(),1,'return before delay cancels dismissal');
+  // Send acknowledged real inputs without an extra host sleep, which can turn
+  // the intended quick return into a late one. Measure browser event times.
+  await page.evaluate(()=>{globalThis.moreMenuPointerTimes=[];globalThis.moreMenuPointerProbe=e=>globalThis.moreMenuPointerTimes.push({time:performance.now(),x:e.clientX,y:e.clientY});document.addEventListener('pointermove',globalThis.moreMenuPointerProbe,true);});
+  const input=await page.context().newCDPSession(page);let timing;
+  try{
+   await input.send('Input.dispatchMouseEvent',{type:'mouseMoved',x:1,y:outsideY});
+   await input.send('Input.dispatchMouseEvent',{type:'mouseMoved',x:returnPoint.x+returnPoint.width/2,y:returnPoint.y+returnPoint.height/2});
+   timing=await page.evaluate(()=>globalThis.moreMenuPointerTimes);assert(timing.length>=2,'both real pointer events must arrive: '+JSON.stringify(timing));const leave=timing.find(e=>e.x===1&&e.y===Math.round(outsideY)),returned=timing.find(e=>Math.abs(e.x-(returnPoint.x+returnPoint.width/2))<=1&&Math.abs(e.y-(returnPoint.y+returnPoint.height/2))<=1);assert(leave&&returned,'outside and inside points must be delivered');assert(returned.time>=leave.time&&returned.time-leave.time<180,'fixture must actually return inside the 180ms deadline: '+JSON.stringify(timing));
+   await page.waitForTimeout(230);assert.equal(await menu.count(),1,'return before delay cancels dismissal: '+JSON.stringify(timing));
+  }finally{await input.detach();await page.evaluate(()=>{document.removeEventListener('pointermove',globalThis.moreMenuPointerProbe,true);delete globalThis.moreMenuPointerProbe;});}
   await page.mouse.move(1,await page.evaluate(()=>innerHeight)-1);await gone();
+  return {realPointerEvents:timing,returnElapsedMs:timing.at(-1).time-timing[0].time};
  });
  await check('outside-click-and-escape-return-focus',async()=>{
   await open();await page.mouse.click(1,await page.evaluate(()=>innerHeight)-1);await gone();await open();await page.keyboard.press('Escape');await gone();assert(await anchor.evaluate(el=>el===document.activeElement));

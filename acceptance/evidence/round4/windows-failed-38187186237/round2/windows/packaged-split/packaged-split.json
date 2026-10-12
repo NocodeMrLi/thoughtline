@@ -1,0 +1,87 @@
+{
+  "executable": "D:\\a\\_temp\\Thoughtline-installer-preflight\\Thoughtline.exe",
+  "packaged": true,
+  "platform": "win32",
+  "version": "0.0.25",
+  "scope": "actual packaged executable, synthetic isolated data, native menu callback interception; no physical click",
+  "pids": [
+    6324,
+    6264,
+    2820,
+    5232,
+    6040
+  ],
+  "checks": [
+    "packaged-English-menu-splits-current-thought-without-opening-window",
+    "packaged-right-click-undo-preserves-original-stack-and-text",
+    "packaged-Merge-targets-current-paper-and-keeps-content",
+    "packaged-merge-undo-restores-both-groups"
+  ],
+  "cleanup": {
+    "normalQuit": true,
+    "profile": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-packaged-split-WxlbQg",
+    "profileRemoved": true,
+    "ownedPids": [
+      6324,
+      6264,
+      2820,
+      5232,
+      6040
+    ],
+    "allExited": true
+  },
+  "dataRemoved": true,
+  "passed": true,
+  "worker": {
+    "pid": 5564,
+    "code": 0,
+    "signal": null
+  },
+  "stage": "worker-completed",
+  "launchEvents": [
+    {
+      "time": "2026-10-12T00:24:56.173Z",
+      "type": "spawn",
+      "pid": 6324,
+      "shell": true,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-12T00:24:56.221Z",
+      "type": "stderr",
+      "pid": 6324,
+      "text": "Debugger listening on ws://127.0.0.1:54874/f734513a-6e16-45ef-aa7f-100f32eac603\r\nFor help, see: https://nodejs.org/learn/getting-started/debugging\r\n"
+    },
+    {
+      "time": "2026-10-12T00:24:56.241Z",
+      "type": "stderr",
+      "pid": 6324,
+      "text": "Debugger attached.\r\n"
+    },
+    {
+      "time": "2026-10-12T00:24:56.303Z",
+      "type": "stderr",
+      "pid": 6324,
+      "text": "\r\nDevTools listening on ws://127.0.0.1:54876/devtools/browser/f28cc620-a9d8-41ea-9e46-46c1740dd642\r\n"
+    },
+    {
+      "time": "2026-10-12T00:24:58.584Z",
+      "type": "stderr",
+      "pid": 6324,
+      "text": "Debugger ending on ws://127.0.0.1:54874/f734513a-6e16-45ef-aa7f-100f32eac603\r\nFor help, see: https://nodejs.org/learn/getting-started/debugging\r\n"
+    },
+    {
+      "time": "2026-10-12T00:24:58.720Z",
+      "type": "exit",
+      "pid": 6324,
+      "code": 0,
+      "signal": null
+    }
+  ],
+  "observedPidState": [
+    {
+      "pid": 6324,
+      "alive": false
+    }
+  ]
+}

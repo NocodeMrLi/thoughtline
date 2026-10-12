@@ -7,3 +7,7 @@ UI/UX本地检索确认文字在窄窗保持可达的建议；使用现有桌面
 初始工具错误：默认cwd已删除，改真实代码目录；旧不存在组件路径和mac-build-manifest路径搜索失败，按真实文件继续，未改产品。
 
 首次新专项fixture缺少必须保留的general标签，App按数据保护契约显示读取失败对话，不算产品红例。修正测试数据；仅对已核PID90407的自有对话正常退出，保留失败证据。
+
+Windows38187186237：源码/安装/本轮源和包71均通过；实际包round21仅calendar-bottom中文昼夜的一次“return before delay cancels dismissal”失败，其他23组通过且正常退出/清profile。生产ReaderMoreMenu180ms行为未改，旧测试跨Node wait70ms/RPC未记录浏览器实际间隔；是否迟到尚无证据，不能武断归因runner。保留失败原日志/回执；对该测试补真实指针事件时间诊断及保证及时返回的双CDP输入，再重测，不改产品180ms。
+
+首个时间诊断测试用Promise.all并行发送两次真实CDP移动，Mac部分场景事件被合并，仅一个pointermove，属于fixture设计错误；原失败回执/截图保留。改逐次等待输入确认，去除Node70ms额外等待，记录实际两个事件时间，不降低180ms/跨间隙230ms/返回后230ms/外移关闭断言。失败Windows完整原始artifact已转存acceptance/evidence/round4/windows-failed-38187186237，临时下载目录不再保留。

@@ -2356,7 +2356,7 @@
   "documentationCommitMayAdvanceWithoutRebuild": true,
   "round4": {
     "version": "0.0.25",
-    "status": "Mac source verified; Windows and actual packages pending",
+    "status": "Mac source and package visual verified; first Windows package menu return timing failed; diagnostic test updated, final dual-platform verification pending",
     "formalAcceptance": false,
     "physicalAcceptance": false,
     "scope": [
@@ -2376,7 +2376,12 @@
       "windows": "pending"
     },
     "packageValidation": {
-      "mac": "pending",
+      "mac": {
+        "passed": true,
+        "visualAssertions": 71,
+        "affectedSuites": "acceptance/evidence/round4/final-v0.0.25/mac-packaged-suites.json",
+        "binding": "acceptance/evidence/round4/final-v0.0.25/mac-package-binding.json"
+      },
       "windows": "pending"
     },
     "remaining": [
@@ -2386,6 +2391,23 @@
     "release": {
       "published": false,
       "version": "0.0.25"
-    }
+    },
+    "source": "bece988ad18817462a4c6fa9e15dac961f7f6dd1",
+    "finalWindowsRun": "38187186237",
+    "cleanup": {
+      "mac": "acceptance/evidence/round4/final-v0.0.25/mac-owned-cleanup.json",
+      "profiles": "acceptance/evidence/round4/final-v0.0.25/mac-profile-cleanup-audit.json",
+      "windowsDownloads": "pending"
+    },
+    "failedWindowsRuns": [
+      {
+        "runId": "38187186237",
+        "source": "bece988ad18817462a4c6fa9e15dac961f7f6dd1",
+        "stage": "packaged-round21 calendar-bottom pointer return",
+        "visualSourceAndPackageAssertions": 71,
+        "remainingCause": "original browser event interval not recorded; not conclusively attributed",
+        "evidence": "acceptance/evidence/round4/final-v0.0.25/failed-windows-38187186237/packaged-round21-failed.json"
+      }
+    ]
   }
 }

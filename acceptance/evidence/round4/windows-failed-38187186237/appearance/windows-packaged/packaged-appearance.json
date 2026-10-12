@@ -1,0 +1,132 @@
+{
+  "passed": true,
+  "packaged": true,
+  "executable": "D:\\a\\_temp\\Thoughtline-installer-preflight\\Thoughtline.exe",
+  "version": "0.0.25",
+  "host": {
+    "platform": "win32",
+    "arch": "x64",
+    "release": "10.0.26100"
+  },
+  "checks": [
+    "exact-English-dark-UI-and-user-text",
+    "dirty-editor-focus-selection-content-preserved",
+    "package-restart-stored-preferences-date-content-English-calendar"
+  ],
+  "scope": "actual isolated package DOM/IPC; no physical IME/DPI/multi-display/receiver acceptance",
+  "asarSha256": "c238d542bba5cb9ace449d762638e0e313fd49c14279b0c7da6216f563bb082c",
+  "cleanup": {
+    "normalQuit": true,
+    "profile": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-packaged-appearance-1ai7jd",
+    "profileRemoved": true,
+    "ownedPids": [
+      8556,
+      2748,
+      4628,
+      7528,
+      5584,
+      8096,
+      896,
+      5972,
+      8576,
+      7192,
+      5212,
+      6892
+    ],
+    "allExited": true
+  },
+  "worker": {
+    "pid": 1252,
+    "code": 0,
+    "signal": null
+  },
+  "stage": "worker-completed",
+  "launchEvents": [
+    {
+      "time": "2026-10-12T00:24:52.434Z",
+      "type": "spawn",
+      "pid": 8556,
+      "shell": true,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-12T00:24:52.490Z",
+      "type": "stderr",
+      "pid": 8556,
+      "text": "Debugger listening on ws://127.0.0.1:54866/ed6078aa-ecfd-4aab-bb56-464120fde704\r\nFor help, see: https://nodejs.org/learn/getting-started/debugging\r\n"
+    },
+    {
+      "time": "2026-10-12T00:24:52.510Z",
+      "type": "stderr",
+      "pid": 8556,
+      "text": "Debugger attached.\r\n"
+    },
+    {
+      "time": "2026-10-12T00:24:52.570Z",
+      "type": "stderr",
+      "pid": 8556,
+      "text": "\r\nDevTools listening on ws://127.0.0.1:54868/devtools/browser/b1ff201d-9092-44d5-acfd-104dc04cc8b9\r\n"
+    },
+    {
+      "time": "2026-10-12T00:24:54.279Z",
+      "type": "stderr",
+      "pid": 8556,
+      "text": "Debugger ending on ws://127.0.0.1:54866/ed6078aa-ecfd-4aab-bb56-464120fde704\r\nFor help, see: https://nodejs.org/learn/getting-started/debugging\r\n"
+    },
+    {
+      "time": "2026-10-12T00:24:54.484Z",
+      "type": "exit",
+      "pid": 8556,
+      "code": 0,
+      "signal": null
+    },
+    {
+      "time": "2026-10-12T00:24:54.491Z",
+      "type": "spawn",
+      "pid": 896,
+      "shell": true,
+      "runtimeOverrideKeys": []
+    },
+    {
+      "time": "2026-10-12T00:24:54.538Z",
+      "type": "stderr",
+      "pid": 896,
+      "text": "Debugger listening on ws://127.0.0.1:54870/ffad9e9f-2a7e-4f68-b743-8ca607596e53\r\nFor help, see: https://nodejs.org/learn/getting-started/debugging\r\n"
+    },
+    {
+      "time": "2026-10-12T00:24:54.541Z",
+      "type": "stderr",
+      "pid": 896,
+      "text": "Debugger attached.\r\n"
+    },
+    {
+      "time": "2026-10-12T00:24:54.612Z",
+      "type": "stderr",
+      "pid": 896,
+      "text": "\r\nDevTools listening on ws://127.0.0.1:54872/devtools/browser/c1eeef14-7671-4423-b608-8ff5b1506d24\r\n"
+    },
+    {
+      "time": "2026-10-12T00:24:55.402Z",
+      "type": "stderr",
+      "pid": 896,
+      "text": "Debugger ending on ws://127.0.0.1:54870/ffad9e9f-2a7e-4f68-b743-8ca607596e53\r\nFor help, see: https://nodejs.org/learn/getting-started/debugging\r\n"
+    },
+    {
+      "time": "2026-10-12T00:24:55.567Z",
+      "type": "exit",
+      "pid": 896,
+      "code": 0,
+      "signal": null
+    }
+  ],
+  "observedPidState": [
+    {
+      "pid": 8556,
+      "alive": false
+    },
+    {
+      "pid": 896,
+      "alive": false
+    }
+  ]
+}

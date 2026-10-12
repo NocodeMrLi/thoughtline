@@ -1,0 +1,39 @@
+{
+  "version": "0.0.25",
+  "source": "bece988ad18817462a4c6fa9e15dac961f7f6dd1",
+  "platforms": [
+    "macOS arm64",
+    "Windows x64"
+  ],
+  "productFilesChanged": [
+    "src/renderer/components/AppearanceSettings.tsx",
+    "src/renderer/components/IdeaReader.tsx",
+    "src/renderer/styles/appearance.css",
+    "src/renderer/styles/preferences-theme.css"
+  ],
+  "contracts": [
+    "R4-01 actual rope artwork, cotton texture, visible vine leaves in dropdown",
+    "R4-02 separate title/body fields, >=12DIP clear material gap, shared paper and clip colors, same-color focus ring"
+  ],
+  "sourceRed": "acceptance/evidence/round4/visual/baseline-red-fixture-corrected-WJTAmq/receipt.json",
+  "macSource": {
+    "passed": true,
+    "unitPassed": 323,
+    "windowsOnlySkip": 4,
+    "targetedAssertions": 71,
+    "supportSuites": 6
+  },
+  "macPackaged": {
+    "passed": true,
+    "targetedAssertions": 71,
+    "readerRecovery": 10,
+    "customizer": 6,
+    "appearance": 14,
+    "round21": 24
+  },
+  "windowsStatus": "All source regression steps succeeded; NSIS building; packaged validation pending",
+  "noAdditionalProductLogicChanges": true,
+  "physicalAcceptance": false,
+  "formalAcceptance": false,
+  "releasePublished": false
+}
