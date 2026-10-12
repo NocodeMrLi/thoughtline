@@ -1,0 +1,55 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/appearance.test.ts (5 tests | 1 failed) 26ms
+   × vine foliage belongs to the fixed rope, independent of moving, reordered or absent clips 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/appearance.test.ts > vine foliage belongs to the fixed rope, independent of moving, reordered or absent clips
+AssertionError: expected [ { x: 65.03, …(5) }, …(2) ] to deeply equal [ …(2) ]
+
+- Expected
++ Received
+
+@@ -1,13 +1,21 @@
+  [
+    {
++     "angle": 24,
++     "index": 0,
++     "length": 17,
++     "side": 1,
++     "x": 65.03,
++     "y": 43.149762940985966,
++   },
++   {
+      "angle": -17,
+      "index": 1,
+      "length": 22,
+      "side": -1,
+-     "x": 145.60000000000002,
+-     "y": 45.96109064514517,
++     "x": 169.10000000000002,
++     "y": 47.05615940254123,
+    },
+    {
+      "angle": 24,
+      "index": 2,
+      "length": 27,
+
+ ❯ tests/unit/appearance.test.ts:30:166
+     28|   const original=vineArtwork(rope,anchors).branches;
+     29|   expect(original.length).toBeGreaterThan(0);
+     30|   for(const next of [[anchors[0]+47,anchors[1]],anchors.toReversed(),[…
+       |                                                                                                                                                                      ^
+     31|  }
+     32| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 passed (5)
+   Start at  11:42:57
+   Duration  244ms (transform 71%, tests 17%, import 10%, worker 2%)
+

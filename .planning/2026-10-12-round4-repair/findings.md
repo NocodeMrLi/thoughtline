@@ -15,3 +15,5 @@ Windows38187186237：源码/安装/本轮源和包71均通过；实际包round21
 第二次Windows38188584519在旧round2-arrange的manage.evaluate处TargetClosed（测试缓存warmViews的隐藏窗口，生产30s空闲回收）。未到新菜单诊断和实际包，不能冒充通过。只修测试：saveSettings前现有openSettings入口重新取得manage。Mac显式等待31s确认旧manage正常关闭，再完成全部7整理/动画/删除项目/重启断言，normalClose/dataRemoved通过；未修改生产回收机制。Windows失败artifact完整转存并删除临时下载目录。
 
 第三次Windows38189326018并无断言失败，check-run正式注记“exceeded maximum execution time of20m0s”。全部源验证/构建/安装通过；包第三轮10/外观14/定制6/reader10/本轮71/round21新诊断24/容量4均通过，定位及上传被整体上限截断。保留通过与取消回执。CI新增显式package续验选择（默认full保持所有源回归），仍跑完整verify、本轮源71、指针源16、安装及全部实际包流程；不再重复未变且已通过的其余源流程，后续用产物指纹核复用。整体上限35分钟，安装包提前独立保存，以免晚期取消丢失构建。
+
+R4-03真实Mac指针红例：枝叶按夹点间隔派生导致移动50DIP时根点位移17.5/25DIP；独立单测亦红。夹子层在绳SVG之后，可用前后遮挡保留固定枝叶，不引入数据变更。0.0.25两项用户明确认可。

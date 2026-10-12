@@ -19,5 +19,14 @@ test('tag hue stays readable against every paper color in both themes',()=>{
  for(const palette of Object.values(paperPalettes))for(const color of ['#FFFFFF','#000000','#FF0000','#00FF00','#0000FF','#DB44B4','#4D90B4','#B78356','#A0A3AA']){const ink=agentInkColors(color,palette);for(const theme of ['light','dark'] as const){const a=lum(ink[theme]),b=lum(palette[theme]);expect((Math.max(a,b)+.05)/(Math.min(a,b)+.05)).toBeGreaterThanOrEqual(4.6);}}
 });
 test('vine stem and tangent meet every actual jaw in 4/6/8 layouts and during dragging',()=>{
- for(const width of [800,1280,1440,2560])for(const capacity of [4,6,8] as const){const rope=fixedRope(width,capacity),clips=Array.from({length:capacity},(_,i)=>({id:'c'+i,agentId:'general',ideaIds:['i'+i],currentId:'i'+i,position:null})),anchors=layoutClips(clips,width,capacity).visible.map(p=>p.x);anchors[1]+=17;const vine=vineArtwork(rope,anchors);for(const x of anchors){expect(vine.y(x)).toBe(fixedRopeY(x,rope));const h=.001;expect((vine.y(x+h)-vine.y(x-h))/(2*h)).toBeCloseTo((fixedRopeY(x+h,rope)-fixedRopeY(x-h,rope))/(2*h),4);}expect(vine.branches.every(b=>anchors.every(x=>Math.abs(x-b.x)>=30))).toBe(true);}
+ for(const width of [800,1280,1440,2560])for(const capacity of [4,6,8] as const){const rope=fixedRope(width,capacity),clips=Array.from({length:capacity},(_,i)=>({id:'c'+i,agentId:'general',ideaIds:['i'+i],currentId:'i'+i,position:null})),anchors=layoutClips(clips,width,capacity).visible.map(p=>p.x);anchors[1]+=17;const vine=vineArtwork(rope,anchors);for(const x of anchors){expect(vine.y(x)).toBe(fixedRopeY(x,rope));const h=.001;expect((vine.y(x+h)-vine.y(x-h))/(2*h)).toBeCloseTo((fixedRopeY(x+h,rope)-fixedRopeY(x-h,rope))/(2*h),4);}expect(vine.branches.every(b=>b.x>rope.left&&b.x<rope.left+rope.length)).toBe(true);}
+});
+
+test('vine foliage belongs to the fixed rope, independent of moving, reordered or absent clips',()=>{
+ for(const width of [350,800,1280,2560])for(const capacity of [4,6,8] as const){
+  const rope=fixedRope(width,capacity),anchors=[rope.left+rope.length*.2,rope.left+rope.length*.6];
+  const original=vineArtwork(rope,anchors).branches;
+  expect(original.length).toBeGreaterThan(0);
+  for(const next of [[anchors[0]+47,anchors[1]],[...anchors].reverse(),[],[anchors[0]], [...anchors,rope.left+rope.length*.4]])expect(vineArtwork(rope,next).branches).toEqual(original);
+ }
 });

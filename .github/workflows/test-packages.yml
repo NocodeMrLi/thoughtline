@@ -45,6 +45,8 @@ jobs:
         run: |
           & node tests/electron/round4-visual-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Fourth round source visual regression failed' }
+          & node tests/electron/round4-vine-workflow.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Fourth round source vine drag regression failed' }
       - name: Measured pointer source regression for package continuation
         if: github.event_name == 'workflow_dispatch' && inputs.validation_scope == 'package'
         shell: pwsh
@@ -176,6 +178,8 @@ jobs:
           $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round4/windows-packaged'
           & node tests/electron/round4-visual-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Fourth round actual package visual regression failed' }
+          & node tests/electron/round4-vine-workflow.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Fourth round actual package vine drag regression failed' }
           $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round2/windows/packaged-capacity'
           & node tests/electron/packaged-round21.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Actual packaged reminder/title/More regression failed' }

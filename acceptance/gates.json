@@ -2464,8 +2464,18 @@
     ],
     "sourcePairProof": "acceptance/evidence/round4/final-v0.0.25/source-pair-proof.json",
     "userAcceptance": {
-      "status": "pending",
-      "scope": "R4-01 rope dropdown and R4-02 title/body safe gap in expanded/calendar read/edit; prior acceptance remains in round3/releaseHistory"
+      "status": "accepted",
+      "version": "0.0.25",
+      "scope": "R4-01 and R4-02",
+      "evidence": "Human: 0.0.25通过，没问题了; new R4-03 vine drag reported separately",
+      "date": "2026-10-12"
+    },
+    "vineDrag": {
+      "id": "R4-03",
+      "status": "reproduced-mac-source-and-independent-unit",
+      "reportedPlatform": "windows",
+      "evidence": "acceptance/evidence/round4/vine-red",
+      "userAcceptance": "pending"
     }
   }
 }
