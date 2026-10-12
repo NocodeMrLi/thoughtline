@@ -85,8 +85,8 @@ test('暂停中新操作仍记录锁，禁止peek和指针展开直到恢复后�
  s=step(s,{type:'peek',now:2});s=step(s,{type:'pointer',zone:'edge',now:3});s=step(s,{type:'tick',now:1000});
  expect(s.phase).toBe('hidden');expect(s.dwellAt).toBe(null);
  s=step(s,{type:'resume',now:1001});s=step(s,{type:'pointer',zone:'edge',now:1002});
- expect(step(s,{type:'tick',now:2000}).phase).toBe('hidden');
- s=step(s,{type:'lock',name:'composer',active:false,now:2001});expect(step(s,{type:'tick',now:2002}).phase).toBe('revealed');
+ expect(step(s,{type:'tick',now:2000}).phase).toBe('revealed');
+ expect(s.locks).toEqual(['composer']);
 });
 test('暂停中只释放已结束锁，仍活跃的其他锁不能被恢复清空',()=>{
  let s=step(initialShelf(),{type:'lock',name:'manage',active:true,now:0});
@@ -94,4 +94,12 @@ test('暂停中只释放已结束锁，仍活跃的其他锁不能被恢复清�
  s=step(s,{type:'lock',name:'menu',active:false,now:3});expect(s.locks).toEqual(['manage']);
  s=step(s,{type:'resume',now:4});s=step(s,{type:'pointer',zone:'edge',now:5});expect(step(s,{type:'tick',now:1000}).phase).toBe('hidden');
  s=step(s,{type:'lock',name:'manage',active:false,now:1001});expect(step(s,{type:'tick',now:1002}).phase).toBe('revealed');
+});
+
+test('writing window can reveal and dismiss a hidden shelf without releasing its session lock',()=>{
+ let s=step(initialShelf(),{type:'lock',name:'composer',active:true,now:0});s=step(s,{type:'pointer',zone:'edge',now:10});expect(step(s,{type:'tick',now:259}).phase).toBe('hidden');s=step(s,{type:'tick',now:260});expect(s.phase).toBe('revealed');expect(s.locks).toEqual(['composer']);s=step(s,{type:'pointer',zone:'outside',now:300});expect(step(s,{type:'tick',now:800}).phase).toBe('hidden');
+});
+test('writing does not bypass active menu, drag, manager or sleep guards',()=>{
+ for(const name of ['menu','drag','text-drag','manage']){let s=step(initialShelf(),{type:'lock',name:'composer',active:true,now:0});s=step(s,{type:'lock',name,active:true,now:1});s=step(s,{type:'pointer',zone:'edge',now:10});expect(step(s,{type:'tick',now:1000}).phase).toBe('hidden');}
+ let s=step(initialShelf(),{type:'lock',name:'composer',active:true,now:0});s=step(s,{type:'suspend',now:1});s=step(s,{type:'pointer',zone:'edge',now:10});expect(step(s,{type:'tick',now:1000}).phase).toBe('hidden');
 });

@@ -9,7 +9,7 @@ export function shelfTransition(previous:ShelfState,event:ShelfEvent):ShelfState
   // Window/drag lifecycle continues while hidden; pause suppresses presentation, not lock bookkeeping.
   if(event.type==='lock'){
     s.locks=event.active?[...new Set([...s.locks,event.name])]:s.locks.filter(x=>x!==event.name);
-    if(!s.suspended&&!s.locks.length){
+    if(!s.suspended&&!s.locks.some(name=>name!=='composer')){
       s.leaveAt=(s.zone==='card'||s.zone==='edge'||s.zone==='corridor')?null:event.now;
       if(s.peekUntil!==null)s.peekUntil=Math.max(s.peekUntil,event.now+500);
     }
@@ -30,7 +30,8 @@ export function shelfTransition(previous:ShelfState,event:ShelfEvent):ShelfState
       s.corridorUntil=null;
     }
   }
-  if(s.locks.length)return s;
+  // Writing retains its draft/session lock but does not pin shelf presentation.
+  if(s.locks.some(name=>name!=='composer'))return s;
   if(s.phase==='hidden'&&s.dwellAt!==null&&event.now-s.dwellAt>=250){s.phase='revealed';s.leaveAt=null;}
   if(s.phase!=='hidden'&&s.zone!=='card'&&s.zone!=='edge'&&s.zone!=='corridor'){
     const expiry=s.phase==='peek'?s.peekUntil:s.leaveAt===null?null:Math.max(s.leaveAt+500,s.corridorUntil??0);

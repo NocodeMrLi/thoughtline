@@ -10,8 +10,8 @@ const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:
  const call=async(page,name,...args)=>{const r=await page.evaluate(({name,args})=>window.thoughtline[name](...args),{name,args});assert(r.ok,r.message);return r.value;};
  const clickMoving=async(name)=>{const box=await composer.getByRole('button',{name,exact:true}).boundingBox();assert(box);await composer.mouse.click(box.x+box.width/2,box.y+box.height/2);};
  const snap=async()=> (await shelf.evaluate(()=>window.thoughtline.info())).snapshot;
- const openPicker=async()=>{await composer.getByRole('button',{name:/^项目：/}).click();await composer.getByRole('button',{name:'项目甲',exact:true}).waitFor();};
- const longPress=async(p)=>{const button=composer.getByRole('button',{name:p,exact:true});const box=await button.boundingBox();await composer.mouse.move(box.x+box.width/2,box.y+box.height/2);await composer.mouse.down();await composer.getByRole('button',{name:'删除分组：'+p,exact:true}).waitFor();await composer.mouse.up();};
+ const openPicker=async()=>{await composer.getByRole('button',{name:/^分组：/}).click();await composer.getByRole('button',{name:'项目甲',exact:true}).waitFor();};
+ const longPress=async(p)=>{const button=composer.getByRole('button',{name:p,exact:true});await button.hover();await composer.mouse.down();await composer.waitForTimeout(620);await composer.mouse.up();await composer.getByRole('button',{name:p,exact:true}).waitFor({state:'detached'});};
  try{
   await launch();const text=[' a中文\n🧷\n ','b多行\n保留','c收起内容'];
   for(let i=0;i<3;i++){const s=await snap();await call(composer,'submit',{text:text[i],title:'念头'+i,project:i===2?'项目乙':'项目甲',agentId:'general'},s.revision);if(i<2)composer=await openComposer(app,shelf);}
@@ -20,16 +20,13 @@ const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:
   await call(shelf,'clipChange',{kind:'split',id:clipIds[1],ideaId:ids[0]},s.revision);
   composer=await openComposer(app,shelf);await openPicker();await longPress('项目甲');await composer.screenshot({path:path.join(evidence,'project-editing.png')});
   assert.equal(await composer.getByRole('button',{name:'删除分组：未分组',exact:true}).count(),0);
-  await clickMoving('删除分组：项目甲');await composer.getByRole('button',{name:'项目甲',exact:true}).waitFor({state:'detached'});
-  assert((await snap()).ideas.filter(i=>i.id!==ids[2]).every(i=>i.project===''));assert.deepEqual((await snap()).ideas.map(i=>i.text),text);
-  await composer.getByRole('button',{name:'完成',exact:true}).click();assert.equal(await composer.locator('#composer-project-picker').count(),0);
-  await composer.getByRole('button',{name:/^项目：/}).click();assert.equal(await composer.getByRole('button',{name:'项目甲',exact:true}).count(),0);
-  await longPress('项目乙');await clickMoving('删除分组：项目乙');await composer.getByRole('button',{name:'项目乙',exact:true}).waitFor({state:'detached'});
-  await composer.getByRole('button',{name:'退出项目编辑',exact:true}).click();s=await snap();assert(s.ideas.every(i=>i.project===''));
-  await call(shelf,'clipChange',{kind:'undo'},s.revision);s=await snap();assert(s.ideas.every(i=>i.project===''));assert.equal(s.clips.length,1);assert.equal(s.clips[0].ideaIds.length,2);
+  assert((await snap()).ideas.filter(i=>i.id!==ids[2]).every(i=>i.project==='项目甲'));assert.deepEqual((await snap()).ideas.map(i=>i.text),text);
+  await composer.getByRole('textbox',{name:'搜索分组',exact:true}).press('Escape');await composer.getByRole('button',{name:/^分组：/}).click();assert.equal(await composer.getByRole('button',{name:'项目甲',exact:true}).count(),0);
+  await longPress('项目乙');await composer.getByRole('textbox',{name:'搜索分组',exact:true}).press('Escape');s=await snap();assert.equal(s.ideas[2].project,'项目乙');
+  await call(shelf,'clipChange',{kind:'undo'},s.revision);s=await snap();assert(s.ideas.filter(i=>i.id!==ids[2]).every(i=>i.project==='项目甲'));assert.equal(s.clips.length,1);assert.equal(s.clips[0].ideaIds.length,2);assert.deepEqual(new Set(s.inactiveProjects),new Set(['项目甲','项目乙']));
   await composer.screenshot({path:path.join(evidence,'project-after.png')});
-  await call(composer,'close',{text:'',title:'',project:'',agentId:'general'});await close();await launch();s=await snap();assert(s.ideas.every(i=>i.project===''));assert.deepEqual(s.ideas.map(i=>i.text),text);
-  const report={platform:process.platform,scope:'isolated Electron DOM/pointer/IPC; not physical Windows',dataIsolated:true,longPress:true,deleteBeforeDone:true,doneDoesNotRestore:true,exitDoesNotRestore:true,systemProjectProtected:true,layoutUndoDoesNotRestore:true,contentAndIdsPreserved:true,restartNoRevival:true};
+  await call(composer,'close',{text:'',title:'',project:'',agentId:'general'});await close();await launch();s=await snap();assert(s.ideas.filter(i=>i.id!==ids[2]).every(i=>i.project==='项目甲'));assert.deepEqual(s.ideas.map(i=>i.text),text);assert.deepEqual(new Set(s.inactiveProjects),new Set(['项目甲','项目乙']));
+  const report={platform:process.platform,scope:'isolated Electron pointer/IPC and restart; physical acceptance separate',dataIsolated:true,longPress:true,removedChoicesRetainHistory:true,systemProjectProtected:true,layoutUndoKeepsRemoval:true,contentAndIdsPreserved:true,restartKeepsRemovedChoices:true};
   await fs.writeFile(path.join(evidence,'project-native.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report));
  }finally{await close();await cleanupIdleFixture(dir,pids);await fs.writeFile(path.join(evidence,'project-cleanup.json'),JSON.stringify({pids:[...new Set(pids)],dataRemoved:true},null,2));}
 })().catch(e=>{console.error(e);process.exitCode=1;});

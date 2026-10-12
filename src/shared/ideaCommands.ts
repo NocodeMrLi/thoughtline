@@ -8,6 +8,7 @@ import {ideaDay} from './ideaHistory';
 import {validReminder,validReminderTime} from './reminderTime';
 import {DEFAULT_TAGS} from './tagPresets';
 import {hasIdeaContent} from './ideaContent';
+import {projectNames} from './projectCatalog';
 import {validPaper,validRope} from './appearance';
 const invalid=<T>(message:string):Result<T>=>({ok:false,code:'INVALID',message});
 const plain=(x:unknown):x is Record<string,unknown>=>!!x&&typeof x==='object'&&!Array.isArray(x);
@@ -25,6 +26,12 @@ export function validateSnapshot(input:unknown):Result<Snapshot>{
     agents.add(a.id);
   }
   if(!agents.size||!agents.has('general'))return invalid('缺少通用标签。');
+  if(input.projects!==undefined&&(!Array.isArray(input.projects)||input.projects.some(p=>!textOK(p,40)||!(p as string).trim())||new Set(input.projects).size!==input.projects.length))return invalid('分组目录无效。');
+  for(const key of ['inactiveAgents','inactiveProjects'] as const){
+   const values=input[key];if(values===undefined)continue;
+   const names=key==='inactiveAgents'?agents:new Set([...(input.projects as string[]??[]),...(input.ideas as Record<string,unknown>[]).map(i=>i?.project),plain(input.draft)?input.draft.project:'']);
+   if(!Array.isArray(values)||values.some(v=>typeof v!=='string'||!v||key==='inactiveAgents'&&v==='general'||!names.has(v))||new Set(values).size!==values.length)return invalid('移除记录无效。');
+  }
   const draftOK=(d:Record<string,unknown>)=>bodyOK(d.text,true)&&textOK(d.title,50)&&textOK(d.project,40)&&typeof d.agentId==='string'&&agents.has(d.agentId)&&(d.reminderAt===undefined||validReminderTime(d.reminderAt));
   const ids=new Set<string>();
   for(const idea of input.ideas){
@@ -78,7 +85,7 @@ export function newIdea(s:Snapshot,draft:Draft,id:string,now:string):Result<Snap
   const checked=validateSnapshot(s);if(!checked.ok)return checked;const base=checked.value;
   const {reminderAt,...fields}=draft;
   const title=draft.title.trim()||Array.from((draft.text.split('\n').find(x=>x.trim())??'').trim()).slice(0,50).join('');
-  return validateSnapshot({...base,clips:[...base.clips,independentClip(base,id,draft.agentId)],draft:null,ideas:[...base.ideas,{...fields,...(reminderAt?{reminder:{at:reminderAt,state:'scheduled'}}:{}),title,id,status:'hanging',createdAt:now,updatedAt:now,createdDay:localDay(now),creationTimeZone:Intl.DateTimeFormat().resolvedOptions().timeZone}]});
+  return validateSnapshot({...base,projects:[...new Set([...projectNames(base),draft.project].filter(Boolean))],clips:[...base.clips,independentClip(base,id,draft.agentId)],draft:null,ideas:[...base.ideas,{...fields,...(reminderAt?{reminder:{at:reminderAt,state:'scheduled'}}:{}),title,id,status:'hanging',createdAt:now,updatedAt:now,createdDay:localDay(now),creationTimeZone:Intl.DateTimeFormat().resolvedOptions().timeZone}]});
 }
 export function changeStatus(s:Snapshot,id:string,status:'hanging'|'archived',now:string):Result<Snapshot>{
   if(!s.ideas.some(x=>x.id===id&&x.status!=='deleted'))return invalid('找不到可操作的念头。');
@@ -92,7 +99,8 @@ export function renameAgent(s:Snapshot,id:string,name:string):Result<Snapshot>{
 }
 export function removeAgent(s:Snapshot,id:string,replacement:string):Result<Snapshot>{
   if(id==='general'||id===replacement||!s.agents.some(x=>x.id===id)||!s.agents.some(x=>x.id===replacement))return invalid('请选择存在的替代标签，通用标签不能移除。');
-  return validateSnapshot({...s,clips:s.clips.map(c=>c.agentId===id?{...c,agentId:replacement}:c),...(s.capacityOverflow?{capacityOverflow:s.capacityOverflow.map(c=>c.agentId===id?{...c,agentId:replacement}:c)}:{}),agents:s.agents.filter(x=>x.id!==id),ideas:s.ideas.map(x=>x.agentId===id?{...x,agentId:replacement}:x),draft:s.draft?.agentId===id?{...s.draft,agentId:replacement}:s.draft});
+  if(s.inactiveAgents?.includes(replacement))return invalid('请选择使用中的替代标签。');
+  return validateSnapshot({...s,...(s.inactiveAgents?{inactiveAgents:s.inactiveAgents.filter(a=>a!==id)}:{}),clips:s.clips.map(c=>c.agentId===id?{...c,agentId:replacement}:c),...(s.capacityOverflow?{capacityOverflow:s.capacityOverflow.map(c=>c.agentId===id?{...c,agentId:replacement}:c)}:{}),agents:s.agents.filter(x=>x.id!==id),ideas:s.ideas.map(x=>x.agentId===id?{...x,agentId:replacement}:x),draft:s.draft?.agentId===id?{...s.draft,agentId:replacement}:s.draft});
 }
 export function editIdea(s:Snapshot,id:string,draft:Draft,now:string):Result<Snapshot>{
   if(!s.ideas.some(x=>x.id===id&&x.status!=='deleted')||!draft||!bodyOK(draft.text,true)||!textOK(draft.title,50)||!textOK(draft.project,40))return invalid('正文、标题或项目无效，请保留文字后重试。');
@@ -140,10 +148,13 @@ export function permanentlyDeleteIdea(s:Snapshot,id:string):Result<Snapshot>{
   const ideas=s.ideas.filter(i=>i.id!==id);return validateSnapshot({...s,ideas,clips:pruneClips(s.clips,ideas)});
 }
 export function addAgent(s:Snapshot,a:AgentTag):Result<Snapshot>{
+  if(typeof a?.name!=='string'||s.agents.some(x=>x.name.trim().toLowerCase()===a.name.trim().toLowerCase()))return invalid('已有同名标签，请选择已有标签。');
   return validateSnapshot({...s,agents:[...s.agents,{id:a?.id,name:a?.name,color:a?.color}]});
 }
 export function updateAgent(s:Snapshot,id:string,patch:Pick<AgentTag,'name'|'color'>):Result<Snapshot>{
-  if(!s.agents.some(a=>a.id===id))return invalid('找不到这个标签。');
+  const old=s.agents.find(a=>a.id===id);if(!old)return invalid('找不到这个标签。');
+  if(id==='general'&&patch?.name!==old.name)return invalid('通用标签只能修改颜色。');
+  if(typeof patch?.name!=='string'||s.agents.some(a=>a.id!==id&&a.name.trim().toLowerCase()===patch.name.trim().toLowerCase()))return invalid('已有同名标签，请使用其他名称。');
   return validateSnapshot({...s,agents:s.agents.map(a=>a.id===id?{...a,name:patch?.name,color:patch?.color}:a)});
 }
 export type IdeaQuery={status:'all'|'hanging'|'archived';query?:string;agentId?:string};
@@ -164,5 +175,5 @@ export function shelfSelection(s:Snapshot,agentId:string,width:number){
 // (including archived ideas and drafts) makes deletion survive reconstruction.
 export function removeProject(s:Snapshot,project:string,now:string):Result<Snapshot>{
  if(!project||!textOK(project,40)||!Number.isFinite(Date.parse(now)))return invalid('未分组不能删除。');
- return validateSnapshot({...s,ideas:s.ideas.map(i=>i.project===project?{...i,project:'',updatedAt:now}:i),draft:s.draft?.project===project?{...s.draft,project:''}:s.draft});
+ return validateSnapshot({...s,projects:projectNames(s).filter(p=>p!==project),...(s.inactiveProjects?{inactiveProjects:s.inactiveProjects.filter(p=>p!==project)}:{}),ideas:s.ideas.map(i=>i.project===project?{...i,project:'',updatedAt:now}:i),draft:s.draft?.project===project?{...s.draft,project:''}:s.draft});
 }

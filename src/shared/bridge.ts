@@ -5,8 +5,10 @@ export type NotificationAccess={status:'granted'|'denied'|'not-determined'|'unkn
 import type {PlacementIntent} from './ideaPlacement';
 export type ComposerContext={mode:'new'|'edit';ideaId:string|null;draft:Draft};
 export type AgentMutation={kind:'add';name:string;color:string}|{kind:'update';id:string;name:string;color:string}|{kind:'remove';id:string;replacement:string};
+export type ClassificationTab='tags'|'projects';
+export type ClassificationMutation={kind:'active';field:'tag'|'project';id:string;active:boolean}|{kind:'addProject';name:string}|{kind:'renameProject';from:string;name:string}|{kind:'rememberProject';ideaId:string;session:number};
 export type ClipMutation={kind:'paperDrop';id:string;ideaId:string;targetId:string|null;position:number|null}|{kind:'merge';sourceId:string;targetId:string}|{kind:'move';id:string;position:number;beforeId:string|null}|{kind:'select';id:string;ideaId:string}|{kind:'split';id:string;ideaId:string}|{kind:'splitAll'|'archiveAll';id:string}|{kind:'undo'|'arrange'};
-export type PilotInfo={lightReminder?:LightReminder|null;preferenceCommit?:{version:number;sequence:number;own:boolean}|null;preferences:Preferences;preferenceError:string|null;platform:'mac'|'windows';snapshot:Snapshot;displayId:string;width:number;dark:boolean;hotkeyRegistered:boolean;composerSession:number;composerDraftSequence:number;composerMaterial:'vibrancy'|'acrylic'|'opaque';composerContext:ComposerContext;placementNotice:string|null;placementNoticeId?:number;placementNoticeKind?:'info'|'error';arrangeSession?:number;manageVisit?:number;calendarReturning?:boolean;manageSession:number;manageSelection:string|null;manageMode:'browse'|'detail'|'settings';manageTitles:boolean;manageMaterial:'vibrancy'|'acrylic'|'opaque';manageEditingRequested:boolean;canUndoClips:boolean;undoPlacementKind?:'hang'|'arrange'|'swap';dragCancelSession:number;shelfVisible:boolean;interactionLocked:boolean;layoutLocked?:boolean;presentationSession:number;textDragActive:boolean;shelfAgentId:string};
+export type PilotInfo={lightReminder?:LightReminder|null;preferenceCommit?:{version:number;sequence:number;own:boolean}|null;preferences:Preferences;preferenceError:string|null;platform:'mac'|'windows';snapshot:Snapshot;displayId:string;width:number;dark:boolean;hotkeyRegistered:boolean;composerSession:number;composerDraftSequence:number;composerMaterial:'vibrancy'|'acrylic'|'opaque';composerContext:ComposerContext;placementNotice:string|null;placementNoticeId?:number;placementNoticeKind?:'info'|'error';arrangeSession?:number;manageVisit?:number;calendarReturning?:boolean;manageSession:number;manageSelection:string|null;manageMode:'browse'|'detail'|'settings'|'classification';classificationTab?:ClassificationTab;classificationOrigin?:'composer'|'calendar';classificationChange?:{sequence:number;field:'agentId'|'project';from:string;to:string};manageTitles:boolean;manageMaterial:'vibrancy'|'acrylic'|'opaque';manageEditingRequested:boolean;canUndoClips:boolean;undoPlacementKind?:'hang'|'arrange'|'swap';dragCancelSession:number;shelfVisible:boolean;interactionLocked:boolean;layoutLocked?:boolean;presentationSession:number;textDragActive:boolean;shelfAgentId:string};
 export type HitLayout={layoutRevision:number;displayId:string;rects:Rect[]};
 export type StorageInfo={directory:string;profileDirectory:string;revision:number};
 export interface ThoughtlineBridge{
@@ -28,6 +30,9 @@ export interface ThoughtlineBridge{
  placeIdea(id:string,intent:PlacementIntent,revision:number,reveal:boolean,session:number):Promise<Result<Snapshot>>;
  close(draft:Draft):Promise<Result<Snapshot>>;
  saveDraft(draft:Draft,session:number,sequence:number):Promise<Result<Snapshot>>;
+ openComposer(sourceId?:string):Promise<Result<void>>;
+ openClassification(tab:ClassificationTab):Promise<Result<void>>; returnClassification():Promise<Result<void>>;
+ classificationChange(change:ClassificationMutation,revision:number):Promise<Result<Snapshot>>;
  openManage(id?:string,titles?:boolean):Promise<Result<void>>; closeManage():Promise<Result<void>>;
  openEdit(id:string):Promise<Result<void>>;
  updateIdea(id:string,draft:Draft,expectedDraft:Draft,manageSession:number):Promise<Result<Snapshot>>;
