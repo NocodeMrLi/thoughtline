@@ -1,11 +1,11 @@
-const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs'),{_electron}=require('playwright');
+const {launchOptions,warmViews,waitForInfo,bounded}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs'),{_electron}=require('playwright');
 const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
 // Catches obstructing hints, fixed-height calendars, clipped focus, lost settings navigation and wrong-note stash.
 (async()=>{
  const root=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round2');await fs.mkdir(root,{recursive:true});
  const evidence=await fs.mkdtemp(path.join(root,(process.env.THOUGHTLINE_ATTEMPT||'workflow')+'-')),dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-round2-'));
  const receipt={platform:process.platform,arch:process.arch,dir,evidence,cases:[],pids:[],nativeOutsideClick:'not exercised by protocol fixture'};let app,manage,shelf;
- const check=async(name,action)=>{try{const detail=await action();receipt.cases.push({name,passed:true,detail});}catch(e){receipt.cases.push({name,passed:false,error:String(e)});}};
+ const check=async(name,action)=>{console.log('ROUND2 check:',name);try{const detail=await action();receipt.cases.push({name,passed:true,detail});}catch(e){receipt.cases.push({name,passed:false,error:String(e)});}};
  try{
   const now=new Date().toISOString(),ideas=[0,1,2].map(n=>({id:'r2-'+n,text:'正文中文😀\n第二行 '+n,title:'测试 '+n,agentId:'general',project:'保留分组',status:'hanging',createdAt:now,updatedAt:now}));
   await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:2,revision:0,ideas,clips:[{id:'group',ideaIds:ideas.map(i=>i.id),currentId:'r2-1',agentId:'general',position:.4}],agents:[{id:'general',name:'通用',color:'#A0A3AA'}],draft:null,settings:{writeHotkey:'Control+Alt+N',reducedMotion:false}}));
@@ -56,8 +56,8 @@ const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:
    const s=(await shelf.evaluate(()=>window.thoughtline.info())).snapshot;assert.equal(s.ideas.find(i=>i.id==='r2-1').text,ideas[1].text);assert.equal(s.ideas.find(i=>i.id==='r2-1').project,'保留分组');assert.deepEqual(s.clips[0].ideaIds,['r2-0','r2-2']);assert.equal(s.clips[0].currentId,'r2-2');assert.equal(s.clips[0].position,.4);await app.evaluate(()=>globalThis.thoughtlineTestPopup.options.callback());await shelf.evaluate(()=>window.thoughtline.dragLock(false));return {labels,ids:s.clips[0].ideaIds,current:s.clips[0].currentId};
   });
   await check('navigation-performance-baseline',async()=>{
-   await shelf.evaluate(()=>window.thoughtline.openManage());await manage.waitForSelector('.month-grid');const times=[];
-   for(let n=0;n<10;n++){const start=Date.now();await manage.getByRole('button',{name:n%2?'下个月':'上个月',exact:true}).click();await manage.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));times.push(Date.now()-start);}
+   await shelf.evaluate(()=>window.thoughtline.openManage());await manage.waitForSelector('.month-grid');await manage.bringToFront();const times=[];
+   for(let n=0;n<10;n++){const start=Date.now();await manage.getByRole('button',{name:n%2?'下个月':'上个月',exact:true}).click();await bounded(manage.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))),'two visible calendar frames',5000);times.push(Date.now()-start);}
    const sorted=[...times].sort((a,b)=>a-b);return {samples:times,p50:sorted[4],p95:sorted[9],scope:'Playwright input plus two actual renderer frames, controlled environment'};
   });
  }catch(e){receipt.failure=e.stack;}finally{
