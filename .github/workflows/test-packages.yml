@@ -44,6 +44,8 @@ jobs:
           THOUGHTLINE_FIXTURE_TRACE: '1'
         run: |
           New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
+          & node scripts/run-ci-fixture.cjs tests/electron/hidden-manage-reopen.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Confirmed hidden Manage reopen failed' }
           & node scripts/run-ci-fixture.cjs tests/electron/round2-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Second round UI failed' }
           & node scripts/run-ci-fixture.cjs tests/electron/round2-native-menu.cjs

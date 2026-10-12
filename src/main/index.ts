@@ -65,6 +65,7 @@ else app.whenReady().then(async()=>{
  let draftSequence=0,draftWritableSession:number|null=null;let composerWrites:Promise<unknown>=Promise.resolve();
  const composerWrite=<T>(action:()=>Promise<T>):Promise<T>=>{const next=composerWrites.then(action,action);composerWrites=next;return next;};
  let arrangeSession=0,manageVisit=0,calendarReturning=false,calendarReturnBounds:Electron.Rectangle|null=null;
+ let manageSafeToRelease=false;
  let composerSession=0,manageSession=0,manageSelection:string|null=null;
  let manageEditingOwner:{session:number;ideaId:string}|null=null,manageEditingRequested=false;
  let dragCancelSession=0,dragEscape=false;let textDragTimer:ReturnType<typeof setTimeout>|null=null;let textDragOwner:string|null=null;
@@ -87,6 +88,9 @@ else app.whenReady().then(async()=>{
  const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:(BrowserWindow|null)[]=[shelf,composer,manage])=>allowed.some(w=>w?.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
  const prepareWindow=(w:BrowserWindow|null):Promise<boolean>=>{
   if(!w||w.isDestroyed())return Promise.resolve(true);
+  // hideManage is reached only after the renderer acknowledged its save guard.
+  // A hidden renderer can suspend on Windows; reuse that acknowledgement until shown again.
+  if(w===manage&&manageSafeToRelease&&!w.isVisible())return Promise.resolve(true);
   return new Promise(resolve=>{const id=randomUUID();let finished=false;
    const finish=(ok:boolean)=>{if(finished)return;finished=true;clearTimeout(timer);ipcMain.removeListener('thoughtline:leave-ready',receive);resolve(ok);};
    const receive=(event:Electron.IpcMainEvent,requestId:string,ok:boolean)=>{if(requestId===id&&trusted(event,[w]))finish(ok===true);};
@@ -95,7 +99,7 @@ else app.whenReady().then(async()=>{
  };
  const prepareViews=async()=>await prepareWindow(shelf)&&await prepareWindow(manage);
  const lock=(name:string,active:boolean)=>edge.event({type:'lock',name,active,now:Date.now()});
- const hideManage=()=>{manageEditingOwner=null;manageEditingRequested=false;manage?.hide();lock('manage',false);};
+ const hideManage=()=>{manageEditingOwner=null;manageEditingRequested=false;manageSafeToRelease=true;manage?.hide();lock('manage',false);};
  const boundsFor=(w:number,h:number)=>{const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint());const width=Math.min(w,d.workArea.width-40),height=Math.min(h,d.workArea.height-48);return {x:Math.round(d.workArea.x+(d.workArea.width-width)/2),y:d.workArea.y+24,width,height};};
  const workAreas=()=>screen.getAllDisplays().map(d=>d.workArea);
  const setManageBounds=(bounds:Electron.Rectangle)=>{boundsIgnoreUntil=Date.now()+500;manage?.setBounds(fitManageBounds(bounds,workAreas()));};
@@ -130,12 +134,12 @@ else app.whenReady().then(async()=>{
  const ensureManage=():Promise<BrowserWindow>=>{
   if(manageRelease)clearTimeout(manageRelease);manageRelease=null;
   if(manageLoading)return manageLoading;if(manage)return Promise.resolve(manage);
-  const w=createManage(preload);manage=w;
+  const w=createManage(preload);manage=w;manageSafeToRelease=false;
   w.on('close',event=>{if(!quitting){event.preventDefault();void prepareWindow(w).then(ok=>{if(ok){hideManage();if(manageMode==='classification'&&classificationOrigin==='composer'){composer?.show();composer?.focus();}}else{w.show();w.focus();}});}});
   w.on('focus',publish);w.on('blur',publish);
   w.on('will-move',()=>{boundsIgnoreUntil=0;});w.on('will-resize',()=>{boundsIgnoreUntil=0;});
   w.on('move',queueCalendarGeometry);w.on('resize',queueCalendarGeometry);
-  w.on('show',()=>{if(manageRelease)clearTimeout(manageRelease);manageRelease=null;refreshTray();});
+  w.on('show',()=>{manageSafeToRelease=false;if(manageRelease)clearTimeout(manageRelease);manageRelease=null;refreshTray();});
   w.on('hide',()=>{refreshTray();if(manageEditingOwner){w.show();w.focus();return;}manageRelease=setTimeout(()=>{manageRelease=null;if(!w.isDestroyed()&&!w.isVisible()&&!manageEditingOwner){manage=null;w.destroy();}},30000);});
   manageLoading=loadView(w,'manage').then(()=>w).catch(error=>{manage=null;w.destroy();throw error;}).finally(()=>{manageLoading=null;});
   return manageLoading;
