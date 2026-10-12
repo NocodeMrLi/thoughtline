@@ -17,3 +17,6 @@
 Mac受控隐藏窗口31s释放及当前入口重开，7项整理流程通过；为最终Windows回归更新旧fixture窗口生命周期，不改产品。保留38188584519失败完整证据，最终冻结另以新head记录。
 
 最终Mac/source feac122、307输入，第三次打包与前候选34输出/asar相同，同版启动器check-only及最后包绑定通过。第三次自有App/重复DMG/块图/空隔离目录已清428.85MiB；三次合计1286.55MiB分配量，不承诺APFS净空间。源/包菜单诊断与31s隐藏窗口回收测试均正常退出清profile，所有新诊断目录的显式profile不存在已回读。最终Windows38189326018仍在执行。
+
+最终package续验CI38191123624成功，source d898141716176e7a8f02008152f017e4db1184db；verify327/类型/构建、本轮源71/指针源16及全部实际包通过。Windows实际visual71、customizer6、appearance14、reader10、round3 10、round21 24、capacity4、positioning9、split4、appearance3通过；source及pkg指针各16返回1.8–16.5ms/4.2–15.6ms，正常退出/清profile均核。307输入对象/模式一致，280差异精确LF→CRLF；下载exe d32dacd6...与构建SHA一致。安装有效载荷9项回执下载读回中；正式发布尚未执行。
+工具窄Range提取artifact尝试被接口忽略，1MiB缓冲正确阻止整包stdout（ENOBUFS，无本地文件产生）；改标准完整artifact下载。首次回执汇总引用旧packaged-split-menu文件名错误，按真实packaged-split路径重新核，未改测试或产品。

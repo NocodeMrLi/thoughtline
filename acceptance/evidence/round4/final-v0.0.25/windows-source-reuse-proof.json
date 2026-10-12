@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "baselineWindowsRun": "38189326018",
+  "baselineSource": "feac1224b1c162d33493e65c3008d4dc5b1baa17",
+  "finalSource": "d898141716176e7a8f02008152f017e4db1184db",
+  "changedBuildInputsOnly": [
+    ".github/workflows/test-packages.yml"
+  ],
+  "allProductionAndTestGitObjectsUnchanged": true,
+  "unchangedMacCompiledOutputs": 34,
+  "baselineSourceStepsPassed": [
+    "verify",
+    "third-round source",
+    "round4 visual71",
+    "second-round source including corrected arrange and measured menus",
+    "original source UI",
+    "appearance",
+    "appearance fixes"
+  ],
+  "baselineStoppedBecause": "Official check-run annotation: job exceeded maximum execution time20m0s; no new assertion failure",
+  "newValidation": "package continuation: verify,source visual71,pointer16,build/install/all packaged suites",
+  "scope": "Reuse passed source runtime evidence only after unchanged source/test inputs verified; final Windows package still requires fresh complete runtime and binding"
+}

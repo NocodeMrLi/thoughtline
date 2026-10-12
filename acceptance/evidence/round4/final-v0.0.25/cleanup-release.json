@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "scope": "Owned local downloads, Mac temporary test apps and package duplicates; final/historical packages and raw source/failure/pass evidence retained",
+  "removed": [
+    {
+      "path": "/Users/lihongwei/Documents/Codex/2026-10-12/thoughtline-round4-repair/windows-tested-metadata",
+      "allocatedBytesBefore": 113229824,
+      "absentAfter": true
+    },
+    {
+      "path": "/Users/lihongwei/Documents/Codex/2026-10-12/thoughtline-round4-repair/windows-final-build",
+      "allocatedBytesBefore": 113201152,
+      "absentAfter": true
+    },
+    {
+      "path": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/dist/mac-arm64/Thoughtline.app",
+      "allocatedBytesBefore": 315318272,
+      "absentAfter": true
+    },
+    {
+      "path": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/dist/Thoughtline-0.0.25-mac-arm64.dmg",
+      "allocatedBytesBefore": 133476352,
+      "absentAfter": true
+    },
+    {
+      "path": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/dist/Thoughtline-0.0.25-mac-arm64.dmg.blockmap",
+      "allocatedBytesBefore": 143360,
+      "absentAfter": true
+    },
+    {
+      "path": "/Users/lihongwei/Documents/Codex/2026-10-12/thoughtline-round4-repair/delivery/v0.0.25/isolated-experience/user-data",
+      "absentAfter": true,
+      "emptyOwnedCheckOnlyDirectory": true
+    },
+    {
+      "path": "/Users/lihongwei/Documents/Codex/2026-10-12/thoughtline-round4-repair/delivery/v0.0.25/isolated-experience/mount",
+      "absentAfter": true,
+      "emptyOwnedCheckOnlyDirectory": true
+    },
+    {
+      "path": "/Users/lihongwei/Documents/Codex/2026-10-12/thoughtline-round4-repair/delivery/v0.0.25/isolated-experience",
+      "absentAfter": true,
+      "emptyOwnedCheckOnlyDirectory": true
+    }
+  ],
+  "macCleanupReceipts": [
+    "mac-owned-cleanup.json",
+    "mac-final-owned-cleanup.json",
+    "mac-final-feac122-cleanup.json"
+  ],
+  "userAppWasNotSignaled": true,
+  "otherQANotSignaled": true,
+  "userAppRunningAtFinalCleanup": true,
+  "currentRemovalAllocatedBytes": 675368960,
+  "previousMacAllocatedBytes": 1349050368,
+  "totalAllocatedBytesRemoved": 2024419328,
+  "netApfsSpaceClaimed": false,
+  "finalEvidencePreserved": "acceptance/evidence/round4/windows-final-38191123624"
+}

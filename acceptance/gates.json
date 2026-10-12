@@ -1,8 +1,8 @@
 {
-  "stage": "round3-v0.0.24-released-owner-and-physical-acceptance-pending",
-  "asOf": "2026-10-11T17:15:30.199629+00:00",
+  "stage": "ROUND4_DUAL_PACKAGE_VERIFIED_PUBLICATION_PENDING",
+  "asOf": "2026-10-12",
   "branch": "main",
-  "lastCommittedSource": "62d9302351d6d339f417007e1dce3da4cecafc3b",
+  "lastCommittedSource": "d898141716176e7a8f02008152f017e4db1184db",
   "currentCandidateVersion": "0.0.25",
   "formalAcceptance": false,
   "round1": {
@@ -2356,7 +2356,7 @@
   "documentationCommitMayAdvanceWithoutRebuild": true,
   "round4": {
     "version": "0.0.25",
-    "status": "Mac source and package visual verified; first Windows package menu return timing failed; diagnostic test updated, final dual-platform verification pending",
+    "status": "Both feedback items repaired; source/actual-package verification and owned cleanup passed; publication pending",
     "formalAcceptance": false,
     "physicalAcceptance": false,
     "scope": [
@@ -2373,7 +2373,14 @@
         "evidence": "acceptance/evidence/round4/final-v0.0.25/mac-source-visual.json",
         "affectedSupport": "acceptance/evidence/round4/final-v0.0.25/mac-source-support.json"
       },
-      "windows": "pending"
+      "windows": {
+        "unitPassed": 327,
+        "typecheck": true,
+        "build": true,
+        "sourceVisualAssertions": 71,
+        "pointerCases": 16,
+        "sourceReuse": "acceptance/evidence/round4/final-v0.0.25/windows-source-reuse-proof.json"
+      }
     },
     "packageValidation": {
       "mac": {
@@ -2384,23 +2391,31 @@
         "reuseProof": "acceptance/evidence/round4/final-v0.0.25/mac-evidence-reuse-proof.json",
         "affectedMenuRetest": "acceptance/evidence/round4/final-v0.0.25/mac-packaged-round21-final.json"
       },
-      "windows": "pending"
+      "windows": {
+        "passed": true,
+        "visualAssertions": 71,
+        "suites": "acceptance/evidence/round4/final-v0.0.25/windows-final-suites.json",
+        "binding": "acceptance/evidence/round4/final-v0.0.25/windows-package-binding.json"
+      }
     },
     "remaining": [
       "physical and owner acceptance retained from round3",
       "A/B delete-in-progress restart and filtered restore targeted runtime confirmation"
     ],
     "release": {
+      "version": "0.0.25",
       "published": false,
-      "version": "0.0.25"
+      "source": "d898141716176e7a8f02008152f017e4db1184db",
+      "private": true,
+      "url": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.25"
     },
-    "source": "feac1224b1c162d33493e65c3008d4dc5b1baa17",
-    "finalWindowsRun": "38189326018",
+    "source": "d898141716176e7a8f02008152f017e4db1184db",
+    "finalWindowsRun": "38191123624",
     "cleanup": {
-      "mac": "acceptance/evidence/round4/final-v0.0.25/mac-owned-cleanup.json",
-      "profiles": "acceptance/evidence/round4/final-v0.0.25/mac-profile-cleanup-audit.json",
-      "windowsDownloads": "pending",
-      "macFinal": "acceptance/evidence/round4/final-v0.0.25/mac-final-feac122-cleanup.json"
+      "passed": true,
+      "receipt": "acceptance/evidence/round4/final-v0.0.25/cleanup-release.json",
+      "macProfiles": "acceptance/evidence/round4/final-v0.0.25/mac-profile-cleanup-audit.json",
+      "userAppNotStopped": true
     },
     "failedWindowsRuns": [
       {
@@ -2419,6 +2434,11 @@
         "testFix": "Reopen current settings window via normal entry before saving; Mac 31s idle-release characterization and seven original assertions passed",
         "evidence": "acceptance/evidence/round4/windows-failed-38188584519"
       }
-    ]
+    ],
+    "sourcePairProof": "acceptance/evidence/round4/final-v0.0.25/source-pair-proof.json",
+    "userAcceptance": {
+      "status": "pending",
+      "scope": "R4-01 rope dropdown and R4-02 title/body safe gap in expanded/calendar read/edit; prior acceptance remains in round3/releaseHistory"
+    }
   }
 }

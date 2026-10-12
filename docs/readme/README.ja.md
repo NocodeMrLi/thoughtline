@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.24"><img src="badges/preview.svg" alt="Version: 0.0.24" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.25"><img src="badges/preview.svg" alt="Version: 0.0.25" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.24"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.25"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,14 +20,15 @@
   一本のロープとクリップ、紙で日々のアイデアを残します。
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.24"><ins>Thoughtline をダウンロード</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.25"><ins>Thoughtline をダウンロード</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.24</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.25</sub></p>
 
 Thoughtline は macOS と Windows 向けの軽量なデスクトップメモアプリです。画面上端からメモを呼び出し、思いつきを書き留めて作業に戻れます。
 
 ## 機能
 
+- ロープの選択肢に実際の編み目と蔓の葉を表示。展開表示とカレンダーの詳細では、タイトルと本文を間隔のある独立した枠に分け、クリップと紙の色を反映します。
 - ショートカットでタイトル、本文、分類を記録し、未完成のメモを下書きに保存。
 - デスクトップにはロープ、クリップ、紙だけを表示。新しいメモは「通用」に分類。
 - カレンダー → その他 → ストレージと設定でクリップを4／6／8個から選択できます。初期値は6個。紙は画面に合わせて縦横比を保って調整し、4個でも過度に拡大しません。ロープが満杯のときに新しく保存したメモは、空きができると新しい順に掛かります。以前の未表示メモや手動でしまったメモは自動で戻りません。
@@ -47,7 +48,7 @@ Thoughtline は macOS と Windows 向けの軽量なデスクトップメモア�
 
 ## ダウンロードとインストール
 
-リポジトリへのアクセス権を持つメンバーがダウンロードできます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.24).
+リポジトリへのアクセス権を持つメンバーがダウンロードできます。Releases にパッケージ、分離起動スクリプト、SHA256SUMS、ビルド情報があります。 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.25).
 
 | Platform | Package |
 |---|---|
@@ -99,4 +100,4 @@ Starとダウンロード数は2026-10-10のAPIスナップショットです。
 
 現在は UNLICENSED で、オープンソースの利用許諾は付与されていません。将来の公開時にライセンスと貢献方法を定めます。同梱コードのライセンスは第三者声明を参照してください。 [Third-party notices](../../THIRD_PARTY_NOTICES.md).
 
-0.0.24 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.
+0.0.25 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.

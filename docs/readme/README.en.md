@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.24"><img src="badges/preview.svg" alt="Version: 0.0.24" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.25"><img src="badges/preview.svg" alt="Version: 0.0.25" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.24"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.25"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,14 +20,15 @@
   A rope, a few clips, and sheets of paper for everyday ideas.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.24"><ins>Download Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.25"><ins>Download Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.24</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.25</sub></p>
 
 Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ideas at the top edge of the screen, capture a thought, and return to what you were doing.
 
 ## Features
 
+- Rope options show actual braid texture and vine leaves. Expanded and calendar readers keep separate title and body fields with clear spacing, matching clip and paper colors.
 - Capture titles, text, and categories with a shortcut; keep unfinished notes as drafts.
 - A desktop rope with clips and paper, with new thoughts assigned to General.
 - Choose 4, 6 or 8 clips in Calendar → More → Storage & Settings; the default is 6. Sheets scale proportionally to the display, with only a modest increase at 4. Newly saved thoughts waiting on a full line fill freed slots, newest first; legacy off-line and manually archived thoughts remain under your control. Separate dropdowns keep the full preview and Apply visible while adjusting.
@@ -47,7 +48,7 @@ Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ide
 
 ## Download and install
 
-Downloads are available to members with repository access. Releases include packages, isolated launchers, SHA256SUMS, and build provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.24).
+Downloads are available to members with repository access. Releases include packages, isolated launchers, SHA256SUMS, and build provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.25).
 
 | Platform | Package |
 |---|---|
@@ -99,4 +100,4 @@ Stars and downloads are an API snapshot dated 2026-10-10. Downloads count releas
 
 The project is currently UNLICENSED; no open-source permission has been granted. A future public release will specify its license and contribution process. See the third-party notices for included code and licenses. [Third-party notices](../../THIRD_PARTY_NOTICES.md).
 
-0.0.24 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.
+0.0.25 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.

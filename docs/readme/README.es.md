@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.24"><img src="badges/preview.svg" alt="Version: 0.0.24" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.25"><img src="badges/preview.svg" alt="Version: 0.0.25" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.24"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.25"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,14 +20,15 @@
   Una cuerda, unas pinzas y hojas de papel para tus ideas cotidianas.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.24"><ins>Descargar Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.25"><ins>Descargar Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.24</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.25</sub></p>
 
 Thoughtline es una herramienta ligera para macOS y Windows. Muestra tus ideas en el borde superior de la pantalla, anota una y vuelve a lo que estabas haciendo.
 
 ## Funciones
 
+- Las opciones de cuerda muestran la textura trenzada y las hojas reales. El título y el texto en los detalles y el calendario tienen bordes separados, espacio entre ellos y colores del clip y del papel.
 - Anota título, texto y categoría con un atajo; guarda notas incompletas como borradores.
 - Una cuerda de escritorio con pinzas y papel; las ideas nuevas usan la categoría General.
 - Elige 4, 6 u 8 pinzas en Calendario → Más → Almacenamiento y ajustes; por defecto son 6. El papel se escala proporcionalmente a la pantalla, con un aumento moderado al elegir 4. Las ideas nuevas guardadas con la cuerda llena ocupan los huecos libres, empezando por las más recientes; las antiguas y las archivadas manualmente no vuelven automáticamente.
@@ -47,7 +48,7 @@ Thoughtline es una herramienta ligera para macOS y Windows. Muestra tus ideas en
 
 ## Descarga e instalación
 
-Las descargas están disponibles para miembros con acceso al repositorio. Releases incluye paquetes, lanzadores aislados, SHA256SUMS y procedencia de las compilaciones. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.24).
+Las descargas están disponibles para miembros con acceso al repositorio. Releases incluye paquetes, lanzadores aislados, SHA256SUMS y procedencia de las compilaciones. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.25).
 
 | Platform | Package |
 |---|---|
@@ -99,4 +100,4 @@ Estrellas y descargas: instantánea de la API del 2026-10-10. Las descargas cuen
 
 El proyecto es UNLICENSED; no se ha otorgado permiso de uso como código abierto. Una futura publicación pública definirá su licencia y proceso de contribución. Consulta los avisos de terceros para el código y las licencias incluidos. [Third-party notices](../../THIRD_PARTY_NOTICES.md).
 
-0.0.24 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.
+0.0.25 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.

@@ -1,7 +1,7 @@
 {
   "passed": true,
   "previousBuildSource": "bece988ad18817462a4c6fa9e15dac961f7f6dd1",
-  "finalBuildSource": "feac1224b1c162d33493e65c3008d4dc5b1baa17",
+  "finalBuildSource": "d898141716176e7a8f02008152f017e4db1184db",
   "unchangedCompiledOutputs": 34,
   "asarUnchanged": true,
   "changedInputs": [
@@ -19,5 +19,10 @@
     "tests/electron/round2-arrange-workflow.cjs"
   ],
   "intermediateSource": "ee7ea98076ae3fdbf70dcf62ad9dd884b428a95f",
-  "retestedArrangeLifecycle": "mac-arrange-idle-release.log; seven original checks and 31s hidden-release characterization passed"
+  "retestedArrangeLifecycle": "mac-arrange-idle-release.log; seven original checks and 31s hidden-release characterization passed",
+  "preCIResumeSource": "feac1224b1c162d33493e65c3008d4dc5b1baa17",
+  "finalChangedInputsOnly": [
+    ".github/workflows/test-packages.yml"
+  ],
+  "ciContinuationDoesNotChangeAppBytes": true
 }
