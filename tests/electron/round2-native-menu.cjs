@@ -34,4 +34,16 @@ try{
   await app.evaluate(()=>{setTimeout(()=>globalThis.nativeMenuProbe?.menu.closePopup(),300);});await shelf.evaluate(id=>window.thoughtline.shelfMenu(id),id);await new Promise(r=>setTimeout(r,350));receipt.probes.push(await app.evaluate(()=>({closed:globalThis.nativeMenuProbe.closed,ownerFocusable:globalThis.nativeMenuProbe.ownerFocusable,ownerFocused:globalThis.nativeMenuProbe.ownerFocused})));assert(receipt.probes[0].closed);receipt.nativeOutsideClick='not tested: no OS mouse injection on user Mac desktop';
  }
  await app.evaluate(({BrowserWindow})=>{const w=BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Shelf');w.setFocusable(false);globalThis.nativeReceiver?.close();});await shelf.evaluate(()=>window.thoughtline.dragLock(false));
-}catch(e){receipt.failure=e.stack;}finally{try{if(receiverApp){const receiverPids=[...new Set([receiverApp.process().pid,...await receiverApp.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid))])];await receiverApp.close();await cleanupIdleFixture(receiverDir,receiverPids);receipt.receiverPids=receiverPids;receipt.receiverRemoved=true;}if(app){await app.evaluate(()=>globalThis.nativeMenuProbe?.menu.closePopup());receipt.pids=[...new Set([app.process().pid,...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid))])];await app.close();receipt.normalClose=true;await cleanupIdleFixture(dir,receipt.pids);receipt.dataRemoved=true;}}catch(e){receipt.cleanupFailure=e.stack;}receipt.passed=!receipt.failure&&!receipt.cleanupFailure&&receipt.dataRemoved;await fs.writeFile(path.join(evidence,'receipt.json'),JSON.stringify(receipt,null,2));console.log(JSON.stringify(receipt));if(!receipt.passed)process.exitCode=1;}})();
+}catch(e){receipt.failure=e.stack;console.error('NATIVE MENU FAILURE',e.stack);}finally{
+ const closeOwned=async(instance,profile,menu=false)=>{
+  const pids=[instance.process().pid];let failed;
+  try{if(menu)await bounded(instance.evaluate(()=>globalThis.nativeMenuProbe?.menu.closePopup()),'native popup cleanup',3000);}catch(e){failed=e;}
+  try{pids.push(...await bounded(instance.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)),'native fixture metrics',3000));}catch(e){failed??=e;}
+  try{await bounded(instance.close(),'native fixture normal quit',10000);}catch(e){failed??=e;if(instance.process().exitCode===null){receipt.forcedOwnedProcessStop={pid:instance.process().pid,reason:'Normal quit failed; profile retained'};instance.process().kill();}}
+  if(failed)throw failed;
+  if(!receipt.failure)await cleanupIdleFixture(profile,[...new Set(pids)]);
+  return [...new Set(pids)];
+ };
+ try{if(receiverApp){receipt.receiverPids=await closeOwned(receiverApp,receiverDir);receipt.receiverRemoved=!receipt.failure;}}catch(e){receipt.cleanupFailure=e.stack;console.error('NATIVE RECEIVER CLEANUP FAILURE',e.stack);}
+ try{if(app){receipt.pids=await closeOwned(app,dir,true);receipt.normalClose=true;receipt.dataRemoved=!receipt.failure;}}catch(e){receipt.cleanupFailure=e.stack;console.error('NATIVE MENU CLEANUP FAILURE',e.stack);}
+ receipt.passed=!receipt.failure&&!receipt.cleanupFailure&&receipt.dataRemoved;await fs.writeFile(path.join(evidence,'receipt.json'),JSON.stringify(receipt,null,2));console.log(JSON.stringify(receipt));if(!receipt.passed)process.exitCode=1;}})();

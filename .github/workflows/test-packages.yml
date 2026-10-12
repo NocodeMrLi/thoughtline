@@ -41,28 +41,29 @@ jobs:
         env:
           THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round2/windows
           THOUGHTLINE_FAKE_CLIPBOARD: '1'
+          THOUGHTLINE_FIXTURE_TRACE: '1'
         run: |
           New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
-          & node tests/electron/round2-workflow.cjs
+          & node scripts/run-ci-fixture.cjs tests/electron/round2-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Second round UI failed' }
-          & node tests/electron/round2-native-menu.cjs
+          & node scripts/run-ci-fixture.cjs tests/electron/round2-native-menu.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Second round native menu failed' }
-          & node tests/electron/round2-calendar-navigation.cjs
+          & node scripts/run-ci-fixture.cjs tests/electron/round2-calendar-navigation.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Second round calendar return failed' }
-          & node tests/electron/round2-arrange-workflow.cjs
+          & node scripts/run-ci-fixture.cjs tests/electron/round2-arrange-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Second round arrangement failed' }
-          & node tests/electron/round2-split-menu-workflow.cjs
+          & node scripts/run-ci-fixture.cjs tests/electron/round2-split-menu-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Second round split menu failed' }
-          & node tests/electron/round2-merge-menu-workflow.cjs
+          & node scripts/run-ci-fixture.cjs tests/electron/round2-merge-menu-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Second round merge menu failed' }
-          & node tests/electron/round2-capacity-workflow.cjs
+          & node scripts/run-ci-fixture.cjs tests/electron/round2-capacity-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Capacity and swap workflow failed' }
-          & node tests/electron/positioning-workflow.cjs
+          & node scripts/run-ci-fixture.cjs tests/electron/positioning-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Tag positioning and effective status workflow failed' }
-          & node tests/electron/title-edit-workflow.cjs
+          & node scripts/run-ci-fixture.cjs tests/electron/title-edit-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Optional title live input regression failed' }
           foreach ($test in @('more-menu-workflow', 'title-only-workflow', 'reminder-workflow')) {
-            & node "tests/electron/$test.cjs"
+            & node scripts/run-ci-fixture.cjs "tests/electron/$test.cjs"
             if ($LASTEXITCODE -ne 0) { throw "$test failed" }
           }
       - name: Third round capacity, backfill, layout and platform material
