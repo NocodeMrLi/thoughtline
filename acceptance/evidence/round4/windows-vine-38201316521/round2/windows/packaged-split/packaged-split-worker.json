@@ -1,0 +1,35 @@
+{
+  "executable": "D:\\a\\_temp\\Thoughtline-installer-preflight\\Thoughtline.exe",
+  "packaged": true,
+  "platform": "win32",
+  "version": "0.0.26",
+  "scope": "actual packaged executable, synthetic isolated data, native menu callback interception; no physical click",
+  "pids": [
+    5704,
+    7864,
+    1080,
+    2140,
+    6996
+  ],
+  "checks": [
+    "packaged-English-menu-splits-current-thought-without-opening-window",
+    "packaged-right-click-undo-preserves-original-stack-and-text",
+    "packaged-Merge-targets-current-paper-and-keeps-content",
+    "packaged-merge-undo-restores-both-groups"
+  ],
+  "cleanup": {
+    "normalQuit": true,
+    "profile": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-packaged-split-EWTwnN",
+    "profileRemoved": true,
+    "ownedPids": [
+      5704,
+      7864,
+      1080,
+      2140,
+      6996
+    ],
+    "allExited": true
+  },
+  "dataRemoved": true,
+  "passed": true
+}

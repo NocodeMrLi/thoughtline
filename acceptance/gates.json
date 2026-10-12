@@ -1,9 +1,9 @@
 {
-  "stage": "ROUND4_V0_0_25_PUBLISHED_VERIFIED_OWNER_PHYSICAL_ACCEPTANCE_PENDING",
+  "stage": "ROUND4_V0_0_26_PUBLISHED_VERIFIED_R4_03_OWNER_ACCEPTANCE_PENDING",
   "asOf": "2026-10-12",
   "branch": "main",
-  "lastCommittedSource": "d898141716176e7a8f02008152f017e4db1184db",
-  "currentCandidateVersion": "0.0.25",
+  "lastCommittedSource": "b76b5dc48f182d4928f69daddeb597d279a2b7eb",
+  "currentCandidateVersion": "0.0.26",
   "formalAcceptance": false,
   "round1": {
     "plan": "/Users/lihongwei/安安的成长笔记📒/晾念头 Thoughtline/Thoughtline第一轮修复优化.md",
@@ -2356,7 +2356,7 @@
   "documentationCommitMayAdvanceWithoutRebuild": true,
   "round4": {
     "version": "0.0.25",
-    "status": "Both feedback items repaired; source/package/binding/cleanup/private release verified; owner/physical acceptance pending",
+    "status": "R4-01/02 accepted on 0.0.25; R4-03 repaired and published on 0.0.26; R4-03 owner and global physical acceptance pending",
     "formalAcceptance": false,
     "physicalAcceptance": false,
     "scope": [
@@ -2472,10 +2472,67 @@
     },
     "vineDrag": {
       "id": "R4-03",
-      "status": "reproduced-mac-source-and-independent-unit",
+      "status": "repaired-dual-source-actual-package-verified-cleaned-private-publication-verified",
       "reportedPlatform": "windows",
       "evidence": "acceptance/evidence/round4/vine-red",
-      "userAcceptance": "pending"
+      "userAcceptance": "pending-R4-03-only; R4-01/02 accepted on 0.0.25",
+      "version": "0.0.26",
+      "source": "b76b5dc48f182d4928f69daddeb597d279a2b7eb",
+      "mac": {
+        "unitPassed": 324,
+        "windowsOnlySkipped": 4,
+        "sourceVineChecks": 13,
+        "packagedVineChecks": 13,
+        "sourceVisualChecks": 71,
+        "packagedVisualChecks": 71,
+        "sourceAppearanceChecks": 14,
+        "packagedAppearanceChecks": 14,
+        "binding": "acceptance/evidence/round4/final-v0.0.26/mac-package-binding.json",
+        "cleanup": "acceptance/evidence/round4/final-v0.0.26/mac-profile-cleanup-audit.json"
+      },
+      "windows": {
+        "runId": 38201316521,
+        "status": "success-full-validation",
+        "unitPassed": 328,
+        "sourceVineChecks": 13,
+        "packagedVineChecks": 13,
+        "sourceVisualChecks": 71,
+        "packagedVisualChecks": 71,
+        "sourceAppearanceChecks": 14,
+        "packagedAppearanceChecks": 14,
+        "installedOutputs": 9,
+        "installReinstallUninstallPreservesData": true,
+        "binding": "acceptance/evidence/round4/final-v0.0.26/windows-package-binding.json",
+        "suites": "acceptance/evidence/round4/final-v0.0.26/windows-final-suites.json"
+      },
+      "physicalAcceptance": false,
+      "formalAcceptance": false,
+      "sourcePair": {
+        "count": 308,
+        "exactCRLFDifferences": 281,
+        "proof": "acceptance/evidence/round4/final-v0.0.26/source-pair-proof.json"
+      },
+      "cleanup": {
+        "passed": true,
+        "receipt": "acceptance/evidence/round4/final-v0.0.26/cleanup-release.json",
+        "allocatedMiB": 536.8359375,
+        "notApfsNetClaim": true
+      },
+      "publication": {
+        "published": true,
+        "tag": "v0.0.26",
+        "source": "b76b5dc48f182d4928f69daddeb597d279a2b7eb",
+        "releaseId": 410153282,
+        "private": true,
+        "draft": false,
+        "prerelease": false,
+        "assets": 32,
+        "checksumTargets": 31,
+        "publishedAt": "2026-10-12T04:19:11Z",
+        "url": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.26",
+        "receipt": "acceptance/evidence/round4/final-v0.0.26/release-verification.json",
+        "prior25AndEarlierAssetsUnchanged": true
+      }
     }
   }
 }

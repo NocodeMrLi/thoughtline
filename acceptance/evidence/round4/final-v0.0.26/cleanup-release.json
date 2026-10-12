@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "scope": "Only this round owned temporary apps, duplicate Mac artifacts and empty check-only profile; evidence/final/historical packages/user app/data/shared dependencies retained",
+  "removed": [
+    {
+      "path": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/dist/mac-arm64/Thoughtline.app",
+      "allocatedBytesBefore": 315318272,
+      "absentAfter": true
+    },
+    {
+      "path": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/dist/Thoughtline-0.0.26-mac-arm64.dmg",
+      "allocatedBytesBefore": 134221824,
+      "absentAfter": true
+    },
+    {
+      "path": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/dist/Thoughtline-0.0.26-mac-arm64.dmg.blockmap",
+      "allocatedBytesBefore": 143360,
+      "absentAfter": true
+    },
+    {
+      "path": "/Users/lihongwei/Documents/Codex/2026-10-12/thoughtline-round4-repair/delivery/v0.0.26/isolated-experience",
+      "allocatedBytesBefore": 0,
+      "absentAfter": true
+    },
+    {
+      "path": "/tmp/thoughtline-vine-red.log",
+      "absentAfter": true,
+      "evidencePreserved": true
+    },
+    {
+      "path": "/tmp/thoughtline-vine-runtime-red.log",
+      "absentAfter": true,
+      "evidencePreserved": true
+    },
+    {
+      "path": "/tmp/thoughtline-vine-verify.log",
+      "absentAfter": true,
+      "evidencePreserved": true
+    },
+    {
+      "path": "/tmp/thoughtline-vine-verify-final.log",
+      "absentAfter": true,
+      "evidencePreserved": true
+    },
+    {
+      "path": "/tmp/thoughtline-vine-source.log",
+      "absentAfter": true,
+      "evidencePreserved": true
+    },
+    {
+      "path": "/tmp/thoughtline-vine-source-final.log",
+      "absentAfter": true,
+      "evidencePreserved": true
+    },
+    {
+      "path": "/tmp/thoughtline-vine-source-final2.log",
+      "absentAfter": true,
+      "evidencePreserved": true
+    },
+    {
+      "path": "/tmp/thoughtline-vine-package-mac.log",
+      "absentAfter": true,
+      "evidencePreserved": true
+    },
+    {
+      "path": "/Users/lihongwei/Documents/Codex/2026-10-12/thoughtline-round4-repair/windows-vine-tested",
+      "allocatedBytesBefore": 113229824,
+      "absentAfter": true,
+      "finalInstallerAndOriginalWindowsBytesPreserved": true
+    }
+  ],
+  "knownUserApp": {
+    "pid": 88971,
+    "command": "/Applications/Thoughtline.app/Contents/MacOS/Thoughtline",
+    "untouched": true
+  },
+  "allocatedBytesRemoved": 562913280,
+  "notApfsNetClaim": true,
+  "windowsDownloads": "verified payload/SHA/launcher bytes copied to delivery and receipts retained; original download directory removed",
+  "relocatedEvidence": {
+    "from": "/Users/lihongwei/Documents/Codex/2026-10-12/thoughtline-round4-repair/windows-vine-source-ui",
+    "to": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round4/windows-vine-38201316521",
+    "sourceAbsentAfter": true,
+    "rawWindowsSourceAndPackageEvidencePreserved": true
+  }
+}
