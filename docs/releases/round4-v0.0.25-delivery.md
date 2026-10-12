@@ -1,6 +1,6 @@
 # Thoughtline 0.0.25：挂绳样式示意与详情安全区
 
-状态：两项反馈已复现并修复，Mac/Windows源码及实际包专项通过。正式发布前安装有效载荷、最终附件回执及收尾核验进行中；formalAcceptance=false，physicalAcceptance=false。
+状态：两项反馈已复现并修复，Mac/Windows源码及实际包专项通过。正式私有发布32附件服务端大小/SHA256、安装载荷和清理回读通过；formalAcceptance=false，physicalAcceptance=false。
 
 ## 修复结果
 - R4-01：挂绳样式菜单使用实际RopeArtwork及共享材质样式；棉绳双色编织细纹可见、藤蔓展示自然主茎/枝叶，缩略图不再是三根不同色弧线。已有自然材质固定色、应用持久/取消草稿、键盘与窄窗行为保留。
@@ -29,4 +29,4 @@ Mac受影响源流程六组通过；实际visual71、reader10、customizer6、ap
 
 剩余：用户0.0.25两项逐项验收、既有物理IME/缩放/多屏/真实接收应用外拖/最大化呼出/通知横幅点击勿扰/动画手感/LaunchServices，及A/B删除中途重启和标签过滤恢复提示专项。前三轮与0.0.22/23认可保留。README七种文字同步，界面仅中文/英文；展示图/GIF继续后置。
 
-最终包SHA256：Mac `e0a8b2357bd77f4b63084d32d2c7adbbcbb41120f13314d2939b1cbddf91ec5c`；Windows `d32dacd6c111613696ec46b127d35da93af745cad7c84d149cbac323136ea9eb`。正式私有发布准备就绪，服务端回执后追加本节。
+最终包SHA256：Mac `e0a8b2357bd77f4b63084d32d2c7adbbcbb41120f13314d2939b1cbddf91ec5c`；Windows `d32dacd6c111613696ec46b127d35da93af745cad7c84d149cbac323136ea9eb`。[正式私有Release v0.0.25](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.25)，ID410058311，draft=false/prerelease=false，32附件服务端大小/摘要匹配，31SUMS目标；旧24/23/22/21保持。北京时间2026-10-12 09:54:42发布；原发布前DELIVERY/gates附件保持原字节，最终publication回执及当前报告为准。

@@ -1,5 +1,5 @@
 {
-  "stage": "ROUND4_DUAL_PACKAGE_VERIFIED_PUBLICATION_PENDING",
+  "stage": "ROUND4_V0_0_25_PUBLISHED_VERIFIED_OWNER_PHYSICAL_ACCEPTANCE_PENDING",
   "asOf": "2026-10-12",
   "branch": "main",
   "lastCommittedSource": "d898141716176e7a8f02008152f017e4db1184db",
@@ -2356,7 +2356,7 @@
   "documentationCommitMayAdvanceWithoutRebuild": true,
   "round4": {
     "version": "0.0.25",
-    "status": "Both feedback items repaired; source/actual-package verification and owned cleanup passed; publication pending",
+    "status": "Both feedback items repaired; source/package/binding/cleanup/private release verified; owner/physical acceptance pending",
     "formalAcceptance": false,
     "physicalAcceptance": false,
     "scope": [
@@ -2404,10 +2404,37 @@
     ],
     "release": {
       "version": "0.0.25",
-      "published": false,
+      "published": true,
       "source": "d898141716176e7a8f02008152f017e4db1184db",
+      "releaseId": 410058311,
+      "url": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.25",
       "private": true,
-      "url": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.25"
+      "draft": false,
+      "prerelease": false,
+      "assets": 32,
+      "checksumTargets": 31,
+      "publishedAt": "2026-10-12T01:54:42Z",
+      "allAssetsServerDigestAndSizeMatched": true,
+      "priorVersionsUnchanged": [
+        {
+          "tag": "v0.0.21",
+          "assets": 32
+        },
+        {
+          "tag": "v0.0.22",
+          "assets": 37
+        },
+        {
+          "tag": "v0.0.23",
+          "assets": 31
+        },
+        {
+          "tag": "v0.0.24",
+          "assets": 33
+        }
+      ],
+      "verification": "acceptance/evidence/round4/final-v0.0.25/release-verification.json",
+      "attachedDeliverySnapshot": "Pre-publication; unchanged released attachment bytes; current report/publication receipts authoritative"
     },
     "source": "d898141716176e7a8f02008152f017e4db1184db",
     "finalWindowsRun": "38191123624",

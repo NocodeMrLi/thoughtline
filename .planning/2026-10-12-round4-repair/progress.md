@@ -20,3 +20,7 @@ Mac受控隐藏窗口31s释放及当前入口重开，7项整理流程通过；�
 
 最终package续验CI38191123624成功，source d898141716176e7a8f02008152f017e4db1184db；verify327/类型/构建、本轮源71/指针源16及全部实际包通过。Windows实际visual71、customizer6、appearance14、reader10、round3 10、round21 24、capacity4、positioning9、split4、appearance3通过；source及pkg指针各16返回1.8–16.5ms/4.2–15.6ms，正常退出/清profile均核。307输入对象/模式一致，280差异精确LF→CRLF；下载exe d32dacd6...与构建SHA一致。安装有效载荷9项回执下载读回中；正式发布尚未执行。
 工具窄Range提取artifact尝试被接口忽略，1MiB缓冲正确阻止整包stdout（ENOBUFS，无本地文件产生）；改标准完整artifact下载。首次回执汇总引用旧packaged-split-menu文件名错误，按真实packaged-split路径重新核，未改测试或产品。
+
+双端技术/证据/七语README/门禁文档收口提交8232c66cd298a15a767e09461b14b8a5d3c82364已push，产品/构建输入相对d898仍逐项相同，树干净。新tagv0.0.25已push并固定d898；32文件/31SUMS目标的私有draft上传中，尚未宣称正式发布。Windows启动器与Macraw比较首次失败确认为受验证的精确CRLF，改核Windows构建原始摘要并原字节交付；不归一化已发布历史附件。
+
+正式私有发布410058311，v0.0.25源/tag d898141，2026-10-12北京时间09:54:42。32附件服务端大小/SHA256逐项一致，SHA256SUMS31目标；历史24(33)/23(31)/22(37)/21(32)原id/大小/摘要保持。源码/包/清理/文档均技术收口，完整物理/本版用户验收false，旧认可保留。发布前附件不重写，最终回执publication与当前项目报告为准。
