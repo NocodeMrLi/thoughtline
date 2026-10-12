@@ -1,12 +1,14 @@
-const {launchOptions,warmViews,openComposer}=require('./window-fixture.cjs');
+const {launchOptions}=require('./window-fixture.cjs');
+const {writePage}=require('./classification-fixture.cjs');
 const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
 (async()=>{
  const root=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round5/readability');await fs.mkdir(root,{recursive:true});
  const out=await fs.mkdtemp(path.join(root,'readability-')),profile=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-r5-readability-'));let app;
- const receipt={platform:process.platform,scenes:[],scope:'Actual native renderer; opaque text contrast measured, native translucent scenes visually reviewed separately. Not arbitrary desktop-background certification.'};
+ const receipt={platform:process.platform,packaged:!!process.env.THOUGHTLINE_EXECUTABLE,scenes:[],scope:'Actual native renderer; opaque text contrast measured, native translucent scenes visually reviewed separately. Not arbitrary desktop-background certification.'};
  try{
-  app=await _electron.launch(await launchOptions(profile));const {shelf}=await warmViews(app),page=await openComposer(app,shelf);
+  if(process.env.THOUGHTLINE_EXECUTABLE){const {sanitizedPackagedEnv,observeLaunch}=require('./packaged-launch.cjs'),exe=path.resolve(process.env.THOUGHTLINE_EXECUTABLE),restore=observeLaunch(exe,out);try{app=await _electron.launch({executablePath:exe,args:[],env:sanitizedPackagedEnv(process.env,profile)});}finally{restore();}}else app=await _electron.launch(await launchOptions(profile));
+  const shelf=await app.firstWindow();await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});const page=await writePage(app,shelf);
   for(const locale of ['zh-CN','en']){await page.locator('[data-capsule=locale] button').nth(locale==='en'?1:0).click();
    for(const theme of ['light','dark']){await page.locator('[data-capsule=theme] button').nth(theme==='dark'?1:0).click();await page.waitForFunction(v=>document.documentElement.dataset.theme===v,theme);
     for(const state of ['empty','ready']){await page.locator('#idea-text').fill(state==='empty'?'':'清晰可读 Readable text');await page.waitForFunction(v=>document.querySelector('.composer-submit>.primary').disabled===v,state==='empty');
