@@ -16,3 +16,8 @@
 @media(prefers-reduced-motion:reduce){:root{--control-feedback:0ms}}
 :root[data-motion=reduce]{--control-feedback:0ms}
 @media(forced-colors:active){:root{scrollbar-color:auto;--control-stroke:ButtonText}:is(.classification-row-actions,.popover-form-actions,.customizer-actions,.storage-actions)>button:not(.primary),.classification-row-actions>span>button,.appearance-choice button,.appearance-select>button,.inline-save-status>button{background:ButtonFace;color:ButtonText;border-color:ButtonText;box-shadow:none;transition:none}.classification-dot{box-shadow:none;outline:1px solid CanvasText}}
+
+/* Disabled means unavailable, not illegible. Keep glyph opacity and quiet the surface. */
+:is(.composer,.manage,.compact-popover) button:disabled{opacity:1;color:var(--muted);cursor:default;text-shadow:none}
+:is(.composer,.manage,.compact-popover) button.primary:disabled{background:var(--surface);color:var(--muted);box-shadow:inset 0 0 0 1px var(--control-stroke)}
+@media(forced-colors:active){:is(.composer,.manage,.compact-popover) button:disabled{color:GrayText}:is(.composer,.manage,.compact-popover) button.primary:disabled{background:Canvas;color:GrayText;box-shadow:none;outline:1px solid GrayText}}
