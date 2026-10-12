@@ -1,0 +1,33 @@
+FAIL calendar opens beside active writer 请先保存或取消当前输入。
+FAIL focused composer name has no coloured rectangle The expression evaluated to a falsy value:
+
+  assert(await composer.locator('.composer-title').evaluate(e=>getComputedStyle(e).outlineStyle==='none'&&parseFloat(getComputedStyle(e).borderLeftWidth)===0))
+
+FAIL opening a picker preserves native composer bounds Expected values to be strictly deep-equal:
++ actual - expected
+
+  {
++   height: 350,
+-   height: 260,
+    width: 480,
+    x: 480,
+    y: 49
+  }
+
+FAIL default group stays above selected group Expected values to be strictly equal:
+
+'工作\n✓' !== '未分组'
+
+FAIL long hold only enters arrange; explicit cross removes The expression evaluated to a falsy value:
+
+  assert(!(await shelf.evaluate(()=>window.thoughtline.info())).snapshot.inactiveProjects.includes('工作'))
+
+FAIL three equal settings-style tabs; full catalog retains removed rows Expected values to be strictly equal:
+
+2 !== 3
+
+FAIL removed tab has two bounded icon lists with independent scrolling and restore only locator.click: Timeout 1500ms exceeded.
+Call log:
+[2m  - waiting for getByRole('tab', { name: '已移除', exact: true })[22m
+
+{"out":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round5/source/run-2NQTG0","platform":"darwin","packaged":false,"profile":"/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-r5-u8XhU5","checks":[],"failures":[{"name":"calendar opens beside active writer","error":"AssertionError [ERR_ASSERTION]: 请先保存或取消当前输入。\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:12:129\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:6:35)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:12:3"},{"name":"focused composer name has no coloured rectangle","error":"AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(await composer.locator('.composer-title').evaluate(e=>getComputedStyle(e).outlineStyle==='none'&&parseFloat(getComputedStyle(e).borderLeftWidth)===0))\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:13:142\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:6:35)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:13:3"},{"name":"opening a picker preserves native composer bounds","error":"AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   height: 350,\n-   height: 260,\n    width: 480,\n    x: 480,\n    y: 49\n  }\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:15:119\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:6:35)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:15:3"},{"name":"default group stays above selected group","error":"AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n'工作\\n✓' !== '未分组'\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:16:74\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:6:35)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:16:3"},{"name":"long hold only enters arrange; explicit cross removes","error":"AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(!(await shelf.evaluate(()=>window.thoughtline.info())).snapshot.inactiveProjects.includes('工作'))\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:17:285\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:6:35)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:17:3"},{"name":"three equal settings-style tabs; full catalog retains removed rows","error":"AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n2 !== 3\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:20:101\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:6:35)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:20:3"},{"name":"removed tab has two bounded icon lists with independent scrolling and restore only","error":"locator.click: Timeout 1500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('tab', { name: '已移除', exact: true })\u001b[22m\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:21:165\n    at check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:6:41)\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-workflow.cjs:21:9"}],"scope":"controlled native source/actual package; physical and owner acceptance separate","normalQuit":true,"profileRemoved":true,"passed":false}

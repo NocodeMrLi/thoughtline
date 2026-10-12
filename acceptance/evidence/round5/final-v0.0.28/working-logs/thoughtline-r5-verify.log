@@ -1,0 +1,46 @@
+
+> thoughtline@0.0.27 typecheck
+> node node_modules/typescript/bin/tsc --noEmit
+
+
+> thoughtline@0.0.27 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+
+ Test Files  57 passed | 1 skipped (58)
+      Tests  344 passed | 4 skipped (348)
+   Start at  22:24:21
+   Duration  3.03s (tests 58%, transform 27%, import 11%, worker 4%)
+
+  Transform  transforming modules took 2.92s · 27% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+
+
+> thoughtline@0.0.27 build
+> node node_modules/electron-vite/bin/electron-vite.js build && node scripts/build-notification-native.cjs
+
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 38 modules transformed.
+rendering chunks...
+out/main/index.js  228.78 kB
+✓ built in 220ms
+vite v7.3.7 building ssr environment for production...
+transforming...
+✓ 1 modules transformed.
+rendering chunks...
+out/preload/index.js  5.44 kB
+✓ built in 8ms
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 86 modules transformed.
+rendering chunks...
+../../out/renderer/index.html                                    0.52 kB
+../../out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg   98.37 kB
+../../out/renderer/assets/index-DOl3mGns.css                    82.94 kB
+../../out/renderer/assets/index-B8oiqvez.js                    950.86 kB
+✓ built in 987ms

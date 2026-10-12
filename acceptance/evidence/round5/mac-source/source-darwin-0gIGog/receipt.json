@@ -1,0 +1,56 @@
+{
+  "platform": "darwin",
+  "version": "0.0.28",
+  "scope": "Synthetic source UI/IPC. No physical IME acceptance.",
+  "cases": [
+    {
+      "mode": "detail",
+      "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-title-edit-X1HcPf",
+      "checks": {
+        "mode": "detail",
+        "slowBackspace": true,
+        "emptyAcrossAutosave": true,
+        "focusCaretKept": true,
+        "typingWithoutSelectAll": true,
+        "compositionCloseBlockedAndCommitKept": true,
+        "contentIdentityDateKept": true
+      },
+      "passed": true,
+      "pids": [
+        8204,
+        8204,
+        8205,
+        8206,
+        8207,
+        8208
+      ],
+      "normalQuit": true,
+      "profileRemoved": true
+    },
+    {
+      "mode": "calendar",
+      "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-title-edit-DjQ1Lb",
+      "checks": {
+        "mode": "calendar",
+        "slowBackspace": true,
+        "emptyAcrossAutosave": true,
+        "focusCaretKept": true,
+        "typingWithoutSelectAll": true,
+        "compositionCloseBlockedAndCommitKept": true,
+        "contentIdentityDateKept": true
+      },
+      "passed": true,
+      "pids": [
+        8226,
+        8226,
+        8229,
+        8230,
+        8231,
+        8232
+      ],
+      "normalQuit": true,
+      "profileRemoved": true
+    }
+  ],
+  "passed": true
+}

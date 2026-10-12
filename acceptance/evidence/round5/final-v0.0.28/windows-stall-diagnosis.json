@@ -1,0 +1,37 @@
+{
+  "historicalInitialInvestigation": {
+    "run": 38275679938,
+    "source": "3529112507e74f8e4772023ece9ff0a69261fb4b",
+    "conclusion": "cancelled",
+    "evidence": "final-logs/thoughtline-r5-windows-352-cancelled.log",
+    "facts": [
+      "Round3 and Round4 including Round5 source gates passed",
+      "First round2-workflow had no completed receipt and no screenshots before cancellation after 12 minutes",
+      "Static review identified unbounded hidden shelf executeJavaScript query before shortcut; native Esc and performance frames also lacked timeouts"
+    ],
+    "changes": [
+      "Invoke the unique registered write callback directly, excluding Escape",
+      "Warm fixture stage logs and bounded requests",
+      "Bound native popup responses and two-frame sample"
+    ],
+    "rootCauseProven": false,
+    "nextRun": 38278380709,
+    "noProductionChange": true
+  },
+  "confirmed": {
+    "run": 38285028667,
+    "productionFix": "3b6342543019cda8b237583991518d54985663bc",
+    "evidence": "windows-attempt13-failed",
+    "root": "Previously approved hidden Manage was asked again to acknowledge leaving; its renderer was unresponsive while native heartbeat/material calls remained normal. Composer preparation timed out.",
+    "redGreen": "controlled hidden renderer IPC drop fails old source and passes fixed source",
+    "guards": "Only acknowledged hidden Manage reuses approval; show resets approval; visible dirty settings still require guard",
+    "WindowsControlledCases": 4,
+    "WindowsControlledRun": 38286724156
+  },
+  "fixtureFollowup": {
+    "source": "4c9567fef38dd43ccd0e0c3bc18d557c4b945843",
+    "run": 38286724156,
+    "root": "native-menu test queried storageInfo through already hidden Manage after warmViews, then native idle destruction closed page at 30s",
+    "change": "Assert the same owned profile using native app.getPath(userData) with 3s bound; no menu assertions removed"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "stage": "old-save-cannot-navigate-new-session",
+  "host": {
+    "platform": "win32",
+    "arch": "x64",
+    "release": "10.0.26100"
+  },
+  "directory": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-calendar-motion-fix1-VgYkmd",
+  "pids": [
+    1552,
+    2716,
+    1852,
+    964,
+    8792,
+    1180,
+    8136
+  ],
+  "normalClose": true,
+  "dataRemoved": true,
+  "allExited": true,
+  "assertionsComplete": true,
+  "passed": true,
+  "cases": [
+    {
+      "name": "empty-day-visible-return",
+      "passed": true,
+      "emptyDay": "2026-10-01",
+      "visual": {
+        "kind": "day-to-month",
+        "text": "这里还没有念头。",
+        "emptyCount": 1
+      }
+    },
+    {
+      "name": "scroll-interrupts-active-motion",
+      "passed": true,
+      "scrollTop": 180
+    },
+    {
+      "name": "restored-scroll-keeps-return-motion",
+      "passed": true,
+      "kind": "day-to-month"
+    },
+    {
+      "name": "resize-interrupts-active-motion",
+      "passed": true,
+      "previousSize": [
+        740,
+        540
+      ]
+    },
+    {
+      "name": "old-save-cannot-navigate-new-session",
+      "passed": true,
+      "oldSession": 2,
+      "publishedSession": 3,
+      "storedTextSaved": true
+    }
+  ],
+  "recoveryError": null,
+  "cleanupError": null
+}

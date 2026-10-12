@@ -1,0 +1,21 @@
+{
+  "platform": "win32",
+  "scope": "isolated native-menu protocol, real source renderer/IPC/repository; no physical menu click",
+  "cases": [],
+  "pids": [
+    1244,
+    1948,
+    4008,
+    8164,
+    8260,
+    8348
+  ],
+  "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-arrange-nMHhiI",
+  "failure": "Error: Composer did not open: [{\"title\":\"Thoughtline Manage\",\"visible\":false,\"loading\":false},{\"title\":\"Thoughtline Shelf\",\"visible\":true,\"loading\":false}]\n    at openComposer (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\window-fixture.cjs:25:225)\n    at async warmViewsImpl (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\window-fixture.cjs:36:60)\n    at async bounded (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\window-fixture.cjs:19:74)\n    at async start (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-arrange-workflow.cjs:4:830)\n    at async D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-arrange-workflow.cjs:4:872",
+  "cleanupFailure": "Error: Fixture timed out: arrange normal quit\n    at Timeout.<anonymous> (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\window-fixture.cjs:19:155)\n    at listOnTimeout (node:internal/timers:635:17)\n    at process.processTimers (node:internal/timers:571:7)",
+  "forcedOwnedProcessStop": {
+    "pid": 1244,
+    "reason": "Failed fixture quit; preserved profile"
+  },
+  "passed": false
+}

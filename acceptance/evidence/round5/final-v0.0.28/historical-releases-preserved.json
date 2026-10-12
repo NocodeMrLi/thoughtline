@@ -1,0 +1,2782 @@
+{
+  "passed": true,
+  "historicalReleasesUnchanged": 20,
+  "identities": [
+    {
+      "id": 410528129,
+      "tag_name": "v0.0.27",
+      "draft": false,
+      "prerelease": false,
+      "assets": [
+        {
+          "id": 633582707,
+          "name": "SHA256SUMS",
+          "size": 4252,
+          "digest": "sha256:8fcc90217f94a6f4286ac943f6115a23d8c9dd8bcd20d28620bc15ef5e750246"
+        },
+        {
+          "id": 633582709,
+          "name": "Start-Thoughtline-Isolated-Mac.command",
+          "size": 3156,
+          "digest": "sha256:acd73d2d0db2d24e7090e14bc68fc6204defc2d76b8dcda177febd68577abb78"
+        },
+        {
+          "id": 633582710,
+          "name": "Start-Thoughtline-Isolated.ps1",
+          "size": 1646,
+          "digest": "sha256:3165c9837b4a0510e1f08d3a77e59515eeee9da623cb91b0b2e55c946ca731b0"
+        },
+        {
+          "id": 633582711,
+          "name": "DELIVERY.md",
+          "size": 6260,
+          "digest": "sha256:0a9918e10cc558c86293ce5c836d7bc64462a498c923f667ba36641c0a4b5055"
+        },
+        {
+          "id": 633582713,
+          "name": "Thoughtline-0.0.27-mac-arm64.dmg",
+          "size": 133496890,
+          "digest": "sha256:b95bd3ace3480a1d338209954c67a0080477134c826236bb797e6ebbaed7f533"
+        },
+        {
+          "id": 633582773,
+          "name": "Thoughtline-0.0.27-win-x64.exe",
+          "size": 113127865,
+          "digest": "sha256:14e8f6a7ce886a8e5289a43bd3c9b8811c01d7a7fb79e20237cbbf232327f6fb"
+        },
+        {
+          "id": 633582775,
+          "name": "gates.json",
+          "size": 109095,
+          "digest": "sha256:c22978fec39549afea295f564d35c2b7109b3388b245687be7993d18149f4010"
+        },
+        {
+          "id": 633582776,
+          "name": "cleanup-release.json",
+          "size": 1704,
+          "digest": "sha256:b07ecbd497bd8608bfbb30b4ff05994340cc8b3800040459afc540c0cc9623d7"
+        },
+        {
+          "id": 633582870,
+          "name": "mac-build-manifest.json",
+          "size": 76190,
+          "digest": "sha256:339d1e6fb23c2da7c5c5c837c022ab7afc13d231bad98f2fec6165c88d1ece6f"
+        },
+        {
+          "id": 633582883,
+          "name": "mac-package-binding.json",
+          "size": 1962,
+          "digest": "sha256:dc93c5f104bf5bcecb754ca7795b59645a246ab27e947dd3adacd6730be12294"
+        },
+        {
+          "id": 633582885,
+          "name": "mac-launcher-generation.json",
+          "size": 370,
+          "digest": "sha256:ec515921869b3265ecebab1985262be25c62b5acb2f5d36d7a5d8757032d2e32"
+        },
+        {
+          "id": 633582944,
+          "name": "mac-packaged-appearance.json",
+          "size": 28012,
+          "digest": "sha256:a824d38823d666c63f9e29c9c5a3489374d77dd82127699b3c2fdf2cd81e692f"
+        },
+        {
+          "id": 633582953,
+          "name": "mac-packaged-ui.json",
+          "size": 19133,
+          "digest": "sha256:ae56c33940d9114a2eebae7ef4fffd6cf9a6cb70177b5552405167405c58d896"
+        },
+        {
+          "id": 633582961,
+          "name": "mac-packaged-reader.json",
+          "size": 1017,
+          "digest": "sha256:847b9aa66f22a166e450f06274dd35bb8f48b3805b6db35821a5838a09f44674"
+        },
+        {
+          "id": 633583005,
+          "name": "mac-packaged-visual.json",
+          "size": 68622,
+          "digest": "sha256:ec419c623d810b625e2f84e514bce6dedd9a50a34fe5036c7cc4d1116c227f90"
+        },
+        {
+          "id": 633583006,
+          "name": "mac-packaged-vine.json",
+          "size": 337998,
+          "digest": "sha256:c7613d6f75f5a25a5c9ba6f3cdd672d96b01805ec9aef37dcfb72a1c6431a24e"
+        },
+        {
+          "id": 633583007,
+          "name": "mac-packaged-workflow.json",
+          "size": 1177,
+          "digest": "sha256:5a5db43e70ea63e9d55e3b2f1d5b9587030cbeb9cf935044e9b84c14d2d9f7ad"
+        },
+        {
+          "id": 633583062,
+          "name": "mac-profile-cleanup-audit.json",
+          "size": 14407,
+          "digest": "sha256:b546f5d4f6de6e6bcd7c3400b764821a05bc01e893c687dbdc983e91a7ca2295"
+        },
+        {
+          "id": 633583063,
+          "name": "mac-signature-verification.json",
+          "size": 361,
+          "digest": "sha256:6c01bb7cd3b1dfc5d4755ad89743a31f839c3cb275df9d2705968d2bf932955f"
+        },
+        {
+          "id": 633583134,
+          "name": "mac-source-appearance.json",
+          "size": 28013,
+          "digest": "sha256:ad9f8ad38dcc0d77d0c865071a44ff5fafa0e96f067dd6a79db1571226919f2a"
+        },
+        {
+          "id": 633583137,
+          "name": "mac-source-reuse-proof.json",
+          "size": 603,
+          "digest": "sha256:9d70d467a6411d4da48bb969a26c078804d77b8d570ef74dcdce4f9a6763137c"
+        },
+        {
+          "id": 633583139,
+          "name": "mac-source-ui.json",
+          "size": 19134,
+          "digest": "sha256:9d33d9b7d51b70b01809fd55dbd70bba90c13369fcdb36035bd8a87c61206025"
+        },
+        {
+          "id": 633583280,
+          "name": "mac-source-visual.json",
+          "size": 68623,
+          "digest": "sha256:bf701221ebba131d1e84a529057e1c349c15e0abddd2c614d0e00dde357901b3"
+        },
+        {
+          "id": 633583286,
+          "name": "mac-source-workflow.json",
+          "size": 1178,
+          "digest": "sha256:343029cb7f0ad171fac5653e90ba35e2774f1c8ba136cd625ddc4e7c4ad5dc9b"
+        },
+        {
+          "id": 633583287,
+          "name": "mac-source-vine.json",
+          "size": 337999,
+          "digest": "sha256:11d2329a8f42ff84f2163c994114dcabe12dbcca014fe4accfc10395dee26b62"
+        },
+        {
+          "id": 633583380,
+          "name": "mac-verify.log",
+          "size": 1606,
+          "digest": "sha256:37788a28cb4ee98e6d464c2ef3491db4b5926b8900846bcf7ca6d9fe2128fcd2"
+        },
+        {
+          "id": 633583383,
+          "name": "source-pair-proof.json",
+          "size": 12952,
+          "digest": "sha256:f92e3d59f75331afa84862412e0b6b81a1656cd8f546b8c48a5cef565d1d7df4"
+        },
+        {
+          "id": 633583584,
+          "name": "windows-build-manifest.json",
+          "size": 76552,
+          "digest": "sha256:45eb877aede608313fd5ca80fbefa631b5cbf92839fda3d248708b5ab6460846"
+        },
+        {
+          "id": 633583759,
+          "name": "windows-classification-cleanup.json",
+          "size": 1938,
+          "digest": "sha256:f5f0f1e18e4f3344acdf9ad679699f2f4c0999fa8950be78bea33359a3d66470"
+        },
+        {
+          "id": 633583842,
+          "name": "windows-final-run.json",
+          "size": 5753,
+          "digest": "sha256:7478a5af90616d72f1286b587d687556563cbaf74475e10d7b2564c09bbde49d"
+        },
+        {
+          "id": 633584052,
+          "name": "windows-final-suites.json",
+          "size": 2569,
+          "digest": "sha256:8610e3e1cd435fd035ec3765d985e727ab91b635443349287233d1391bb9739a"
+        },
+        {
+          "id": 633584074,
+          "name": "windows-installed-preflight.json",
+          "size": 1766,
+          "digest": "sha256:b75a19ccc9a7489508b2f21e018d8eaa5d565b336608bea7d08199f2d4f7a1f3"
+        },
+        {
+          "id": 633584084,
+          "name": "windows-installer-preflight.json",
+          "size": 1230,
+          "digest": "sha256:c73043bc4f7730228608563643803f5dd60ab4c911cf27651422f956a33692f7"
+        },
+        {
+          "id": 633584142,
+          "name": "windows-package-binding.json",
+          "size": 1439,
+          "digest": "sha256:821776027f21fd63790e80663e5cf07afb84b408ca5f8baaedc85447fb0cfe94"
+        },
+        {
+          "id": 633584179,
+          "name": "windows-packaged-reader.json",
+          "size": 1004,
+          "digest": "sha256:f3817bcfd771d3087cd99ca1095aff3d9d1e3e12c3dedcae882c66e94641e864"
+        },
+        {
+          "id": 633584183,
+          "name": "windows-packaged-appearance.json",
+          "size": 29465,
+          "digest": "sha256:09abd6cc71fc36e2266f88c0449a7a55a8eefe620a1621d5b62769d8018c433e"
+        },
+        {
+          "id": 633584215,
+          "name": "windows-packaged-ui.json",
+          "size": 19094,
+          "digest": "sha256:d0ae4dd3307e24ded27b874f6837ce2bbd2da94d504a50188402208342bf3eda"
+        },
+        {
+          "id": 633584267,
+          "name": "windows-packaged-vine.json",
+          "size": 202406,
+          "digest": "sha256:c80eb476745dc25aed5a6dd21cbaa045633497cc028eea345b65725158d5d118"
+        },
+        {
+          "id": 633584268,
+          "name": "windows-packaged-visual.json",
+          "size": 68503,
+          "digest": "sha256:5513987726017b02db2339e5d8457cdaf59f5cd638749da6fe4ef95f8b90cf75"
+        },
+        {
+          "id": 633584290,
+          "name": "windows-packaged-workflow.json",
+          "size": 1170,
+          "digest": "sha256:8624a4e57e097add7be0aa97c8f137aa069be54e102d3148fea91e9bb8c8176d"
+        },
+        {
+          "id": 633584326,
+          "name": "windows-source-appearance.json",
+          "size": 29466,
+          "digest": "sha256:325fe3847b463d7139af209cd096716318ae3df1dae63829f1e8f46f41a95962"
+        },
+        {
+          "id": 633584327,
+          "name": "windows-pe-icons.json",
+          "size": 12804,
+          "digest": "sha256:fe89f803223989c9fd37ae0af9f184c17c9d45ffc4c75d4949c37b6482a6ba58"
+        },
+        {
+          "id": 633584332,
+          "name": "windows-source-reader.json",
+          "size": 1004,
+          "digest": "sha256:9f03930c346cee59f1ec17a0a6ba5b424c000d91e2fac6b7df54887f1e1620d9"
+        },
+        {
+          "id": 633584372,
+          "name": "windows-source-vine.json",
+          "size": 202407,
+          "digest": "sha256:6525d5ba9c38e80708283dc5d0d0fc7f35b9d141b6024a50a8778b9f8ee87a5b"
+        },
+        {
+          "id": 633584373,
+          "name": "windows-source-ui.json",
+          "size": 19095,
+          "digest": "sha256:2ccdd59ddba70b0351e0a0d9f695e6b42e80b6153beda512e92a86a416c9772b"
+        },
+        {
+          "id": 633584375,
+          "name": "windows-source-visual.json",
+          "size": 68504,
+          "digest": "sha256:8887239b4484a9ca2b39ad313f3103522c45f25da9e44ec6ac309620ca990895"
+        },
+        {
+          "id": 633584420,
+          "name": "windows-source-workflow.json",
+          "size": 1171,
+          "digest": "sha256:4a045225b359f604fac39070a158b1b2dd0e659c6c64ab2f59131ffda95af107"
+        }
+      ]
+    },
+    {
+      "id": 410153282,
+      "tag_name": "v0.0.26",
+      "draft": false,
+      "prerelease": false,
+      "assets": [
+        {
+          "id": 632633340,
+          "name": "DELIVERY.md",
+          "size": 1800,
+          "digest": "sha256:d0d7fe92f7c77b36d904b0e3b23d26dc7ed23bbb5a4fa86f0eadf042e3f98d73"
+        },
+        {
+          "id": 632633341,
+          "name": "SHA256SUMS",
+          "size": 2876,
+          "digest": "sha256:c3d48c55450e6b557ad49698e3ebda980fd15b057293277144cca607b4476390"
+        },
+        {
+          "id": 632633342,
+          "name": "Start-Thoughtline-Isolated.ps1",
+          "size": 1646,
+          "digest": "sha256:39c2ce33f3ea2709303ce81e22f7fc37a56e9322daa44280e350002d80db7856"
+        },
+        {
+          "id": 632633344,
+          "name": "Start-Thoughtline-Isolated-Mac.command",
+          "size": 3156,
+          "digest": "sha256:cb392170ab55304dc56f20f173e8601e554af27e9464bbcacc9ad2551e93b32c"
+        },
+        {
+          "id": 632633345,
+          "name": "Thoughtline-0.0.26-mac-arm64.dmg",
+          "size": 133472831,
+          "digest": "sha256:d435dfb45ae94f2d9bf6834ee5132c348abec26e833a0226ce9c57b1a88a5855"
+        },
+        {
+          "id": 632633436,
+          "name": "Thoughtline-0.0.26-win-x64.exe",
+          "size": 113118300,
+          "digest": "sha256:02ec7cb71642407a854d9b58c03e3c9035749a62e5cb3f4f0591ffcf60be15f8"
+        },
+        {
+          "id": 632633437,
+          "name": "cleanup-release.json",
+          "size": 2920,
+          "digest": "sha256:1591e9c249b5ec5247a59e4f225bb78bb4cd9af6607421ae34976700bcbf424a"
+        },
+        {
+          "id": 632633441,
+          "name": "gates.json",
+          "size": 106100,
+          "digest": "sha256:eded668cf5c4e3965605f82c3195885ca74051d7cf7a79f1ea5c0b327785116d"
+        },
+        {
+          "id": 632633469,
+          "name": "mac-build-manifest.json",
+          "size": 74100,
+          "digest": "sha256:905c51227206f13452d18ee6eca4674a7ebe3e13c50be9deaa60421e9d1941e3"
+        },
+        {
+          "id": 632633528,
+          "name": "mac-launcher-generation.json",
+          "size": 670,
+          "digest": "sha256:6379c223f847093629a587e5866fe3bc29ae0d0499f2e2d4a43f3e3411cbbd31"
+        },
+        {
+          "id": 632633533,
+          "name": "mac-packaged-appearance.json",
+          "size": 28012,
+          "digest": "sha256:7d9b96fe284076f45c15b4daa071c6f420e0c88c2d42ca3c0010d8fdee428e35"
+        },
+        {
+          "id": 632633538,
+          "name": "mac-package-binding.json",
+          "size": 1920,
+          "digest": "sha256:3351e44d7ce254d32ee6fdd5f53d9d621d628d6ca7181a0708f1c7378c91df43"
+        },
+        {
+          "id": 632633568,
+          "name": "mac-packaged-vine.json",
+          "size": 337998,
+          "digest": "sha256:7ddfd48476fa97314f918e5bb5c94017f3bb6a1c119ce65011be89f7207d6dac"
+        },
+        {
+          "id": 632633573,
+          "name": "mac-packaged-visual.json",
+          "size": 68622,
+          "digest": "sha256:578fef29797e576f64e4d4b0b770fab6952b4559583a795d37e1eef09d828bbe"
+        },
+        {
+          "id": 632633574,
+          "name": "mac-profile-cleanup-audit.json",
+          "size": 2974,
+          "digest": "sha256:dcb23556653a6166d250b1245eb30f8a94d67fab3a1ac1e656cc5c1f96ebf86f"
+        },
+        {
+          "id": 632633615,
+          "name": "mac-signature-verification.json",
+          "size": 361,
+          "digest": "sha256:9ae341d90e94b8b20e3bfb1d47facd30859b0a19e45b4168bc42c610a02d4d8f"
+        },
+        {
+          "id": 632633620,
+          "name": "mac-source-appearance.json",
+          "size": 28013,
+          "digest": "sha256:d852e6cbbafa473fff7b98eb9a54db6884d83f921d048e86ff28d15242685e12"
+        },
+        {
+          "id": 632633629,
+          "name": "mac-source-vine.json",
+          "size": 337999,
+          "digest": "sha256:9b0413dd2209703257bb6389e5a258d5b71e39d7a213cd1ced37da1c9915cfc9"
+        },
+        {
+          "id": 632633653,
+          "name": "mac-source-visual.json",
+          "size": 68623,
+          "digest": "sha256:ba7ab985878ad8613f98e8c245acefd581e47d0099d3084267dc236c6f567c14"
+        },
+        {
+          "id": 632633659,
+          "name": "source-pair-proof.json",
+          "size": 12619,
+          "digest": "sha256:5585ac7b780089e1f6afda3494bf79a93a506cd3ec325d101b1d8b17a830a135"
+        },
+        {
+          "id": 632633671,
+          "name": "windows-build-manifest.json",
+          "size": 74462,
+          "digest": "sha256:5948e20939acc5bb938a2d1ca91e09a2696129fd822753a1334de26de58d0a95"
+        },
+        {
+          "id": 632633684,
+          "name": "windows-final-run.json",
+          "size": 5753,
+          "digest": "sha256:8c8b7c336d3173bf3c5130bd5a8ee62b5ddec8638b3d7fbc685a70a47b06da54"
+        },
+        {
+          "id": 632633686,
+          "name": "windows-installed-preflight.json",
+          "size": 1766,
+          "digest": "sha256:f6bda5cb5a393fa872aecc984bc581c04c5cadc0c32582278c0b9b0a873a7b5e"
+        },
+        {
+          "id": 632633701,
+          "name": "windows-installer-preflight.json",
+          "size": 1230,
+          "digest": "sha256:1af6b76d376ff5aefdeae5745aff1fee5e0c4003ad0feb24bdf8ad1154f200db"
+        },
+        {
+          "id": 632633720,
+          "name": "windows-package-binding.json",
+          "size": 1522,
+          "digest": "sha256:067c4b43e980154c382ba35e1dd88ebf4205b52bbac15bcfffa160eb04124e18"
+        },
+        {
+          "id": 632633723,
+          "name": "windows-packaged-appearance.json",
+          "size": 29465,
+          "digest": "sha256:3425e2038b67056e829a8fbb53bf7ce77d134aa08ccbb535928e72e70dc1c7ef"
+        },
+        {
+          "id": 632633736,
+          "name": "windows-packaged-vine.json",
+          "size": 202406,
+          "digest": "sha256:f4e08022f19637ace787548909b9793c09f3ebcc9a88df37675389cc7bfa359a"
+        },
+        {
+          "id": 632633762,
+          "name": "windows-packaged-visual.json",
+          "size": 68503,
+          "digest": "sha256:fe5cf2e51d340bc048c5c4cfd12c2d51a179a3ea1c4a0477079ed2b7a9e13210"
+        },
+        {
+          "id": 632633764,
+          "name": "windows-pe-icons.json",
+          "size": 12804,
+          "digest": "sha256:8a88aeef42e20fb9d42b551202f52c67c35f143e1c095d5ee1edb30ed4c0e50e"
+        },
+        {
+          "id": 632633774,
+          "name": "windows-source-appearance.json",
+          "size": 29465,
+          "digest": "sha256:51f75346fe05f6142b1b325cd9be3df16cb069d96737ea80a2b9ae0cc673b3f5"
+        },
+        {
+          "id": 632633789,
+          "name": "windows-source-vine.json",
+          "size": 202407,
+          "digest": "sha256:887d71628a96fce1879d48542d04b6903c65dad3c76b2d22b99f979098406174"
+        },
+        {
+          "id": 632633792,
+          "name": "windows-source-visual.json",
+          "size": 68503,
+          "digest": "sha256:c72eca6ac477a526670095ffc7f5a0067af33c513e82b2782904d04a8bddcb9b"
+        }
+      ]
+    },
+    {
+      "id": 410058311,
+      "tag_name": "v0.0.25",
+      "draft": false,
+      "prerelease": false,
+      "assets": [
+        {
+          "id": 632349856,
+          "name": "DELIVERY.md",
+          "size": 1783,
+          "digest": "sha256:c8d91bf5ed159ee673c5eb53e8d21fdc77c8bb1eefd9c9dc344075719381ba0b"
+        },
+        {
+          "id": 632349858,
+          "name": "SHA256SUMS.txt",
+          "size": 2894,
+          "digest": "sha256:91e257750f40f60e4f7c81247e0876955a00d8481fee4c923e335382c23f918c"
+        },
+        {
+          "id": 632349859,
+          "name": "Start-Thoughtline-Isolated-Mac.command",
+          "size": 3156,
+          "digest": "sha256:1ccc9f71d880d059043d8dc4c1dafa87c55b04f2bfbe57ac8d9738d8356759a0"
+        },
+        {
+          "id": 632349860,
+          "name": "Start-Thoughtline-Isolated.ps1",
+          "size": 1646,
+          "digest": "sha256:086f34b2933f82057a5c019e00ea1b2b797a891b1a6d3cdf9fd1e989e654a189"
+        },
+        {
+          "id": 632349861,
+          "name": "Thoughtline-0.0.25-mac-arm64.dmg",
+          "size": 133472820,
+          "digest": "sha256:e0a8b2357bd77f4b63084d32d2c7adbbcbb41120f13314d2939b1cbddf91ec5c"
+        },
+        {
+          "id": 632349906,
+          "name": "cleanup-release.json",
+          "size": 2260,
+          "digest": "sha256:6e9d54a12f2a10f4c40bbcf24ab65427b657f01a0a1ecda48ac58ae1e318688b"
+        },
+        {
+          "id": 632349907,
+          "name": "Thoughtline-0.0.25-win-x64.exe",
+          "size": 113117492,
+          "digest": "sha256:d32dacd6c111613696ec46b127d35da93af745cad7c84d149cbac323136ea9eb"
+        },
+        {
+          "id": 632349908,
+          "name": "failed-candidates.json",
+          "size": 918,
+          "digest": "sha256:e1801b4f128fe8d87c1e315e3cbcbcad89e207c7566df9829a9b08928ea9f35a"
+        },
+        {
+          "id": 632349910,
+          "name": "gates.json",
+          "size": 103184,
+          "digest": "sha256:4a1b425cc543078e6e4c6d6833cdf052b41bab09b2c783a2e6a68e5783307c40"
+        },
+        {
+          "id": 632350047,
+          "name": "mac-launcher-generation.json",
+          "size": 670,
+          "digest": "sha256:8252102f0be86372aed7687f5bd5fb017380d58d4b70b9bcfbb84e32df8e198b"
+        },
+        {
+          "id": 632350048,
+          "name": "mac-evidence-reuse-proof.json",
+          "size": 1100,
+          "digest": "sha256:3bb41ddc2e29b73eb586b635ddaed800dc1d375b3c969e0bda798e3052530706"
+        },
+        {
+          "id": 632350050,
+          "name": "mac-build-manifest.json",
+          "size": 73869,
+          "digest": "sha256:ff8036098bcd64e19abce6e209fa6bb8120b3d0f09308996ebc215cb5083a707"
+        },
+        {
+          "id": 632350100,
+          "name": "mac-package-binding.json",
+          "size": 2132,
+          "digest": "sha256:bce0465cf6fa11e1ffe7a1a580597e3248e1a342f775f3b7df2ce41479243f6b"
+        },
+        {
+          "id": 632350105,
+          "name": "mac-packaged-round21-final.json",
+          "size": 41042,
+          "digest": "sha256:af4b0a4a74bc0fd68e8988c3704524089987230dadfe7a37f2e59de7fdb264bf"
+        },
+        {
+          "id": 632350106,
+          "name": "mac-packaged-visual.json",
+          "size": 68617,
+          "digest": "sha256:94a7fd786b320660400e96c862d3d9a551bc58e3f5e019e0c919b4563b63aa9f"
+        },
+        {
+          "id": 632350165,
+          "name": "mac-profile-cleanup-audit.json",
+          "size": 9983,
+          "digest": "sha256:ca98b0550ce4e36f3cb831877b6165108f1303b1d1b0438311dfd9a7f301066d"
+        },
+        {
+          "id": 632350177,
+          "name": "mac-source-support.json",
+          "size": 1689,
+          "digest": "sha256:24ffd01b36c059bda6dae282e7a917dff2bfeb18eda633a800cab7c6ba8143f6"
+        },
+        {
+          "id": 632350181,
+          "name": "mac-signature-verification.json",
+          "size": 361,
+          "digest": "sha256:e15ade03e5f382ae44e33fa4d223922432f2fdd3df8856e98f0b6a7881106a36"
+        },
+        {
+          "id": 632350219,
+          "name": "source-pair-proof.json",
+          "size": 12651,
+          "digest": "sha256:8ca6a4328429ed823a9344ad91de2ea0bb8e9cfc2b1e0bdf7ea413234f640c49"
+        },
+        {
+          "id": 632350226,
+          "name": "mac-source-visual.json",
+          "size": 68624,
+          "digest": "sha256:c7cfde6a28cf3ca9ce63c5e8942a2f3720c3cf6e6e6fd8dfff68f7ec244be1e5"
+        },
+        {
+          "id": 632350234,
+          "name": "windows-build-manifest.json",
+          "size": 74231,
+          "digest": "sha256:cfbffbae967ff951b59b291dd2b0e0e2947e3e02f54399d86516068bdabc1215"
+        },
+        {
+          "id": 632350279,
+          "name": "windows-installed-preflight.json",
+          "size": 1766,
+          "digest": "sha256:2f136fb06ca1ae4da09fd962efb7fe831a657ac581553925506d538ab8932096"
+        },
+        {
+          "id": 632350280,
+          "name": "windows-final-suites.json",
+          "size": 2558,
+          "digest": "sha256:4bae5fdea52e1c150ad3e99ccf4e077e8f6e39f75fcf9341080284a490a867d2"
+        },
+        {
+          "id": 632350282,
+          "name": "windows-final-run.json",
+          "size": 5583,
+          "digest": "sha256:43ef41c2208ed1bb5d61f0a175fe125ea25b18d8255c24db90c48340d7554ece"
+        },
+        {
+          "id": 632350321,
+          "name": "windows-installer-preflight.json",
+          "size": 1230,
+          "digest": "sha256:4a524e3341230fddbdc893d8c84b22b6628c005fb9f823d7e7cca6e8c1dcf6b1"
+        },
+        {
+          "id": 632350325,
+          "name": "windows-package-binding.json",
+          "size": 1454,
+          "digest": "sha256:2e8c111efb03383ca51807096da535012d3c4f9f5d70e55fa508cf2501070a7d"
+        },
+        {
+          "id": 632350327,
+          "name": "windows-packaged-round-twenty-one.json",
+          "size": 36358,
+          "digest": "sha256:2a34f909b844c3aa4f943cf50358d8f9d4a5f24895299a071ae32f7e758a2aa9"
+        },
+        {
+          "id": 632350356,
+          "name": "windows-packaged-visual.json",
+          "size": 68504,
+          "digest": "sha256:3dc175c38dee4b7a05e681df0c28abb88d78c3fdfa183986b61796d58fd71795"
+        },
+        {
+          "id": 632350371,
+          "name": "windows-pe-icons.json",
+          "size": 12804,
+          "digest": "sha256:895564ef38bbb886e6de0fb4bce01a4bef817a6ec7e28dc6d407cd37be69320c"
+        },
+        {
+          "id": 632350383,
+          "name": "windows-source-pointer.json",
+          "size": 26955,
+          "digest": "sha256:d1c4fde537b02fcf854ddb0d0967d5ffbbcf8112babad39dad697336543dcb5b"
+        },
+        {
+          "id": 632350477,
+          "name": "windows-source-visual.json",
+          "size": 68505,
+          "digest": "sha256:4ced4ca358984f199785f1375cceb7fdb6b95a51f04ea81051b3efd62a7eec82"
+        },
+        {
+          "id": 632350478,
+          "name": "windows-source-reuse-proof.json",
+          "size": 1005,
+          "digest": "sha256:13fd15c65f4dd217f01810f02fef7a499044ba20b06c6e433fd1fc2f9ab3c6cc"
+        }
+      ]
+    },
+    {
+      "id": 409807192,
+      "tag_name": "v0.0.24",
+      "draft": false,
+      "prerelease": false,
+      "assets": [
+        {
+          "id": 631321457,
+          "name": "DELIVERY.md",
+          "size": 2264,
+          "digest": "sha256:3115d885b0422c958255c55ed4af6f33072ef85bcdb9d86706bc60c33304f590"
+        },
+        {
+          "id": 631321458,
+          "name": "Start-Thoughtline-Isolated-Mac.command",
+          "size": 3156,
+          "digest": "sha256:c7080aea6faa614bb7a0c539935a1c10bdc94203d65911ecc737c974de53257b"
+        },
+        {
+          "id": 631321459,
+          "name": "Start-Thoughtline-Isolated.ps1",
+          "size": 1646,
+          "digest": "sha256:e2c17b65776f9359499a493423620eda584e929a043d94b2e98aeb89291116cb"
+        },
+        {
+          "id": 631321460,
+          "name": "SHA256SUMS.txt",
+          "size": 3047,
+          "digest": "sha256:996534a71c96d8391b876f1ac6f0af44a995de650b51a9ff35994bed28a9b40a"
+        },
+        {
+          "id": 631321462,
+          "name": "Thoughtline-0.0.24-mac-arm64.dmg",
+          "size": 133473052,
+          "digest": "sha256:98213349d42f15862245c48016779e4bbc400876a1fba1fe344ff5aa8857bd74"
+        },
+        {
+          "id": 631321493,
+          "name": "audit-reader-recovery.json",
+          "size": 1034,
+          "digest": "sha256:d925657b87bef95668ac2017203e982ab47c2a26a4f61ab724c321a457053a8e"
+        },
+        {
+          "id": 631321494,
+          "name": "backfill-verification.json",
+          "size": 659,
+          "digest": "sha256:7729cfba9722f3e2d95238dd3abfddee0170db586bab1e0d589600172d9498a8"
+        },
+        {
+          "id": 631321496,
+          "name": "Thoughtline-0.0.24-win-x64.exe",
+          "size": 113117487,
+          "digest": "sha256:9ba04a5b436a316fe317ff8775b6e5e22f7e1b91b17c5dad44146901e8a52324"
+        },
+        {
+          "id": 631321519,
+          "name": "cleanup-release.json",
+          "size": 24170,
+          "digest": "sha256:d6e9a433f7ae9e9958f862bb06dd4142e04df23fbd4faf47eae9cc1505689d30"
+        },
+        {
+          "id": 631321582,
+          "name": "failed-candidates.json",
+          "size": 812,
+          "digest": "sha256:8334a1c9037dae50cf200b90a8688670d33712ce1f876cfed4394e36414e81b4"
+        },
+        {
+          "id": 631321585,
+          "name": "mac-build-manifest.json",
+          "size": 73636,
+          "digest": "sha256:74e4fa2734a007038866715b15af77c639e3b04afea74d4c4d5bea96c0b45490"
+        },
+        {
+          "id": 631321593,
+          "name": "gates.json",
+          "size": 99030,
+          "digest": "sha256:f681fda43d2ffa8030ebceafae366ca9e0bbcbc7019c26bd9c80f303094d3e3b"
+        },
+        {
+          "id": 631321624,
+          "name": "mac-final-suites.json",
+          "size": 3038,
+          "digest": "sha256:c36a217cec5fafbc3d116df7469e7ff5ede1ac0decc14de913e29af92f363a32"
+        },
+        {
+          "id": 631321630,
+          "name": "mac-launcher-generation.json",
+          "size": 678,
+          "digest": "sha256:b8f3925ae10dfee5fe07eedd9b6b923338c6ed2cb946842ed96cd4afba4b168c"
+        },
+        {
+          "id": 631321643,
+          "name": "mac-package-binding.json",
+          "size": 2210,
+          "digest": "sha256:2aec92c3b286a1be3e97d2e0de355b53a7f1167c679f88b7a578fb9ed0272838"
+        },
+        {
+          "id": 631321679,
+          "name": "mac-packaged-appearance-customization.json",
+          "size": 28012,
+          "digest": "sha256:47ec6f3a4146be806cf7575e49053dc96ea2ffca3ff93c66fa037bee412cab1f"
+        },
+        {
+          "id": 631321681,
+          "name": "mac-packaged-customizer.json",
+          "size": 25093,
+          "digest": "sha256:0faf659851c2a2a7faeb75dc42305e4d98602e505425bc1eb7c59ec468fcb5d6"
+        },
+        {
+          "id": 631321684,
+          "name": "mac-packaged-reader-recovery.json",
+          "size": 1017,
+          "digest": "sha256:8effde20f47190b04d037be81e9919f8378fa631a71e2da2066f2e547110044e"
+        },
+        {
+          "id": 631321715,
+          "name": "mac-packaged-round-three.json",
+          "size": 14478,
+          "digest": "sha256:d462e1e7bb640652c6d94680af88dbb127eb3d79f0326359fd1d34106a8f0a2f"
+        },
+        {
+          "id": 631321719,
+          "name": "mac-signature-verification.json",
+          "size": 361,
+          "digest": "sha256:7f18db38d04801e66004037e43353b9e90a684aefa54d34833fc99c2fcdf8d25"
+        },
+        {
+          "id": 631321722,
+          "name": "mac-packaged-round-twenty-one.json",
+          "size": 35763,
+          "digest": "sha256:ddeda80b0269076834481a151681600cfa166cc34c5482cad459d314f70bdbfc"
+        },
+        {
+          "id": 631321753,
+          "name": "source-pair-proof.json",
+          "size": 12513,
+          "digest": "sha256:eec1d73374d555713a03a26aa375398c24815897c39525cb64c86d8bbcc125a5"
+        },
+        {
+          "id": 631321756,
+          "name": "mac-source-validation.json",
+          "size": 1144,
+          "digest": "sha256:4000022a5c717f3c4abdd2935bec45b10b16874cbc3d332cd26d188631ebad7c"
+        },
+        {
+          "id": 631321759,
+          "name": "windows-build-manifest.json",
+          "size": 73998,
+          "digest": "sha256:42efaeef419e09559cc33bed64c414335ba783f3e54525ce8fcb2c857790a8b3"
+        },
+        {
+          "id": 631321803,
+          "name": "windows-final-run.json",
+          "size": 4872,
+          "digest": "sha256:41ad305d2731fd01620c2324debc669b4d71ef09c7d049c7da6487d3510ba558"
+        },
+        {
+          "id": 631321806,
+          "name": "windows-final-suites.json",
+          "size": 3320,
+          "digest": "sha256:5a8bb0015822e4e43a444511de97a07640022546cdda3d7fa93db06c9cf4f66a"
+        },
+        {
+          "id": 631321807,
+          "name": "windows-installed-preflight.json",
+          "size": 1766,
+          "digest": "sha256:9f3eddb39e5e51fc4993fec8d484a6adca0564d72c457aa1eab2e180cb718289"
+        },
+        {
+          "id": 631321824,
+          "name": "windows-package-binding.json",
+          "size": 512,
+          "digest": "sha256:b6e597c74bf6d820a9b7b00dc8bae73f6de037e8ca868838f7d6d76ad062370d"
+        },
+        {
+          "id": 631321826,
+          "name": "windows-installer-preflight.json",
+          "size": 1230,
+          "digest": "sha256:e6b2f6d29de2a6530710c9a35290224b3c6b5ddd21df95474617245ce41f8dc7"
+        },
+        {
+          "id": 631321828,
+          "name": "windows-packaged-appearance-customization-receipt.json",
+          "size": 29464,
+          "digest": "sha256:05f1a696d8b6513c5fdebe7a0acb19dcb61497fd904e44691483260cefd961e4"
+        },
+        {
+          "id": 631321848,
+          "name": "windows-pe-icons.json",
+          "size": 12804,
+          "digest": "sha256:2610487bd31e43f167784b1384a6801715701bdf7f9362bf9b50a0bd60ad9b20"
+        },
+        {
+          "id": 631321849,
+          "name": "windows-packaged-reader-receipt.json",
+          "size": 1003,
+          "digest": "sha256:0e9e12a02e52dbb50461fc056d497be1f45bd59c5dec6f841d0841798f81a6b3"
+        },
+        {
+          "id": 631321850,
+          "name": "windows-packaged-customizer-receipt.json",
+          "size": 24899,
+          "digest": "sha256:9a0e2f4034bb4c1e0b71a92dbc81c59a515d8539157b889ea7938df5d2313c5d"
+        }
+      ]
+    },
+    {
+      "id": 409692021,
+      "tag_name": "v0.0.23",
+      "draft": false,
+      "prerelease": false,
+      "assets": [
+        {
+          "id": 630847752,
+          "name": "SHA256SUMS.txt",
+          "size": 2845,
+          "digest": "sha256:3502ecc80880698bd690c9c73450e8146a6d2158632d2aa370515bee30fab0af"
+        },
+        {
+          "id": 630847753,
+          "name": "Thoughtline-0.0.23-mac-arm64.dmg",
+          "size": 133482597,
+          "digest": "sha256:d651f12dd9d4740e55c9b0952fadab4bd25e1da909a21b8127ab08072871033a"
+        },
+        {
+          "id": 630847757,
+          "name": "DELIVERY.md",
+          "size": 4566,
+          "digest": "sha256:5c851f4d60c4dfa648889247f542a5dee375d9342f4c7add2a5f1a2243e10336"
+        },
+        {
+          "id": 630847758,
+          "name": "Start-Thoughtline-Isolated.ps1",
+          "size": 1646,
+          "digest": "sha256:63338406f01681f499fa098aa0a2c73219dc1bc471f8ff01432afc04fbc5b4c6"
+        },
+        {
+          "id": 630847759,
+          "name": "Start-Thoughtline-Isolated-Mac.command",
+          "size": 3156,
+          "digest": "sha256:d9cdb9516eb2d8043adbed4acfc1a46a22c2ac3dd1ac983180eb71046e5cc385"
+        },
+        {
+          "id": 630847952,
+          "name": "Thoughtline-0.0.23-win-x64.exe",
+          "size": 113115837,
+          "digest": "sha256:f80e27239390ea1aadad578ed9563babc0d0e62896286d2c7ac2e42ec8d93a95"
+        },
+        {
+          "id": 630847969,
+          "name": "cleanup-release.json",
+          "size": 6200,
+          "digest": "sha256:5fc3ac21b4eabd73ef89a82a70ad701913e1503e6f15fc42d901355f0532e81f"
+        },
+        {
+          "id": 630847972,
+          "name": "gates.json",
+          "size": 58787,
+          "digest": "sha256:11f7462ceedc6940634865e633cc3a87ac3575eb58a4a0ba5c980947ef52c5d1"
+        },
+        {
+          "id": 630847978,
+          "name": "mac-build-manifest.json",
+          "size": 72932,
+          "digest": "sha256:7aa645c630e60bf76bd4f2eb94aa57358f3afb43c469260f4628180d99338da3"
+        },
+        {
+          "id": 630848075,
+          "name": "mac-final-suites.json",
+          "size": 2489,
+          "digest": "sha256:71b2ff504585cd0800a17caf25a28566f8e179870b604b0e894f9b5be3587563"
+        },
+        {
+          "id": 630848076,
+          "name": "mac-launcher-generation.json",
+          "size": 830,
+          "digest": "sha256:0d80290b5bcbf71727c32ea620659e61a0190ba38871c603f824f738222d5872"
+        },
+        {
+          "id": 630848080,
+          "name": "mac-native-material.json",
+          "size": 8555,
+          "digest": "sha256:29b60fbcaee6f3900cf2d030bb501829273f092a8c9353c80484a8f9959085e7"
+        },
+        {
+          "id": 630848172,
+          "name": "mac-package-binding.json",
+          "size": 2210,
+          "digest": "sha256:9c0254270d14f03381355902265c7aba8c7c83cb6bab0e7b0570e615550e1bf5"
+        },
+        {
+          "id": 630848194,
+          "name": "mac-runtime-evidence-reuse.json",
+          "size": 499,
+          "digest": "sha256:dd1c4a8d9bb3fe5bc84aa9c5d12b91f6c5cb89681676502e28ced71ff1b836dd"
+        },
+        {
+          "id": 630848199,
+          "name": "mac-signature-verification.json",
+          "size": 361,
+          "digest": "sha256:c71a0c365b9d3f0762d2e5fdca6cbac27d56c0139114974e8673aaaaac0b1eb1"
+        },
+        {
+          "id": 630848259,
+          "name": "source-pair-proof.json",
+          "size": 12361,
+          "digest": "sha256:b59b5a176953d08d557bdcb4abc48b3891585a0d6b2cb3861ff3ec92d59f75f3"
+        },
+        {
+          "id": 630848264,
+          "name": "windows-build-manifest.json",
+          "size": 73294,
+          "digest": "sha256:5bb5b5dbf50e820956d50ec2416b4d3bb9b4554fc19f47b50379c2480aa75aef"
+        },
+        {
+          "id": 630848277,
+          "name": "windows-final-run.json",
+          "size": 4942,
+          "digest": "sha256:1209292c67d8625c99420c869a6c66586d090125e3d22c16255c0a835af85b8f"
+        },
+        {
+          "id": 630848334,
+          "name": "windows-final-suites.json",
+          "size": 2701,
+          "digest": "sha256:60a06953091d05e5f2aa8bd993a66a7c55440080b3e43bee8069906e26c85e0f"
+        },
+        {
+          "id": 630848344,
+          "name": "windows-installed-preflight.json",
+          "size": 1766,
+          "digest": "sha256:330bae035636cb26208be2876df63cee3b24dda251c26c40fb2fdbc5f1e701ce"
+        },
+        {
+          "id": 630848382,
+          "name": "windows-installed-round-three.json",
+          "size": 10392,
+          "digest": "sha256:0c40fd05ddfebe8f885a43416893895012003a665945447cc1ab1aade5c80aa0"
+        },
+        {
+          "id": 630848460,
+          "name": "windows-installer-preflight.json",
+          "size": 1230,
+          "digest": "sha256:1a9fb654240ed51ba3dbb7cfdd32057c706968446f409c946f6725cfe2146f2e"
+        },
+        {
+          "id": 630848463,
+          "name": "windows-package-binding.json",
+          "size": 521,
+          "digest": "sha256:716ea5cc5c5e410df9a2e4be01437a66eb0432a38f466ed24cee7864e179ef26"
+        },
+        {
+          "id": 630848479,
+          "name": "windows-packaged-appearance-customization.json",
+          "size": 29465,
+          "digest": "sha256:3c280aa50483543abeb45ad5beacc2c9d3005d27cca05819944dc2a9a5b1a03c"
+        },
+        {
+          "id": 630848543,
+          "name": "windows-packaged-appearance.json",
+          "size": 3568,
+          "digest": "sha256:c06dd870c3c254d8b6b309e01a32fac15551658718e428c7697bdfbe065de69a"
+        },
+        {
+          "id": 630848558,
+          "name": "windows-packaged-capacity.json",
+          "size": 3683,
+          "digest": "sha256:b9c171363c0a5028e20986bd35a9bcf4cf7d5fbd269b69dbddc64c1b87707676"
+        },
+        {
+          "id": 630848587,
+          "name": "windows-packaged-positioning.json",
+          "size": 8724,
+          "digest": "sha256:de163f47863399cf92e33ca870f85394856fb23d65089e039432507ed962c30c"
+        },
+        {
+          "id": 630848665,
+          "name": "windows-packaged-round-three.json",
+          "size": 10285,
+          "digest": "sha256:1f0b493007fb4526f94aefe03bbaf64f8f86c289ff90c05f74cfcb96061c648a"
+        },
+        {
+          "id": 630848676,
+          "name": "windows-packaged-round-twenty-one.json",
+          "size": 29861,
+          "digest": "sha256:8b48358d497da5e6f173ed3d38aaef3eeda3d1040e38c630265fc3968f161515"
+        },
+        {
+          "id": 630848688,
+          "name": "windows-packaged-split.json",
+          "size": 2413,
+          "digest": "sha256:bd4ce1f695cf1359146d26f7b422cf4f4e557c2e4a0243da3572cc90bcdcd648"
+        },
+        {
+          "id": 630848714,
+          "name": "windows-pe-icons.json",
+          "size": 12804,
+          "digest": "sha256:721b9eac8d27761a9ac8d7d89c4e0f1a492378df38d98ca2a77897d884535a0c"
+        }
+      ]
+    },
+    {
+      "id": 409473854,
+      "tag_name": "v0.0.22",
+      "draft": false,
+      "prerelease": false,
+      "assets": [
+        {
+          "id": 629997424,
+          "name": "DELIVERY.md",
+          "size": 3506,
+          "digest": "sha256:1fd3dab5911da8f88a69ba3551f69d811e79a4d2c624bd89265974b1c54e5fa2"
+        },
+        {
+          "id": 629997425,
+          "name": "Start-Thoughtline-Isolated.ps1",
+          "size": 1646,
+          "digest": "sha256:d1f88f72b82f145d29825d9c55421856172db7e51eea0f45ce3d2f0c9693db6f"
+        },
+        {
+          "id": 629997427,
+          "name": "SHA256SUMS.txt",
+          "size": 3447,
+          "digest": "sha256:32c28768a44552b8003249b0a520a244e696c7cf904122943678275b8eecfa8c"
+        },
+        {
+          "id": 629997428,
+          "name": "Start-Thoughtline-Isolated-Mac.command",
+          "size": 3156,
+          "digest": "sha256:7e74483bb15a2619811ddfd0deb6d3faae118a48b22aa5b3578969a626d8ce0d"
+        },
+        {
+          "id": 629997430,
+          "name": "Thoughtline-0.0.22-mac-arm64.dmg",
+          "size": 133353490,
+          "digest": "sha256:58f340ab138d66cb480652ab205b6983ae8a82ed3079f416ad3907fb36aa226d"
+        },
+        {
+          "id": 629997482,
+          "name": "Thoughtline-0.0.22-win-x64.exe",
+          "size": 113109536,
+          "digest": "sha256:35cadc69b0dce38132c014a61e0012f9edecf31b0d2300ecc0f56f65c1da523e"
+        },
+        {
+          "id": 629997484,
+          "name": "cleanup-release.json",
+          "size": 1572,
+          "digest": "sha256:afa2f26e40a9617f0bdc2ab5aa2288d142a878ebb0ef308e3f021157c16b0d41"
+        },
+        {
+          "id": 629997496,
+          "name": "mac-accessibility-user-change.json",
+          "size": 466,
+          "digest": "sha256:2d2b05185394e86bfc4dbfe030498367f830ba1cc138d9b88cf0209e27b09ffe"
+        },
+        {
+          "id": 629997501,
+          "name": "mac-build-manifest.json",
+          "size": 70193,
+          "digest": "sha256:a113566a66c3c8fd3d626a825fbec79fa8ee1be3215dc3d450e8d83659b742a9"
+        },
+        {
+          "id": 629997576,
+          "name": "mac-final-launcher-generated.json",
+          "size": 670,
+          "digest": "sha256:2d3f5429c60b1ba49f370c67932e79a37fb44037de4e878afd2552412f4b45b7"
+        },
+        {
+          "id": 629997602,
+          "name": "mac-native-material-authorized.json",
+          "size": 507,
+          "digest": "sha256:bb7c6939729726f872348a692ccffd3e99e108043e4d61f317ef83a1c1e3bff1"
+        },
+        {
+          "id": 629997603,
+          "name": "mac-final-suites.json",
+          "size": 1808,
+          "digest": "sha256:50ed19e284f332d7a27538046b2132eb7c88869d796b6002803dc312caa5d2cd"
+        },
+        {
+          "id": 629997678,
+          "name": "mac-packaged-appearance.json",
+          "size": 5826,
+          "digest": "sha256:38c04fcf4ff197f4a6fea01e848e9fae690eafe2d4869acf18670528fd473b73"
+        },
+        {
+          "id": 629997681,
+          "name": "mac-native-signature-replay.json",
+          "size": 400,
+          "digest": "sha256:f66af741ffc2d9e388f496e852708d9e03ceee26284cdcf2694a577bbb4b504d"
+        },
+        {
+          "id": 629997682,
+          "name": "mac-package-binding.json",
+          "size": 2210,
+          "digest": "sha256:27e838f0d58cab1656a8732abb73fd50f6ada7866f1386ac99624b0777f06e0f"
+        },
+        {
+          "id": 629997709,
+          "name": "mac-packaged-native-material.json",
+          "size": 8534,
+          "digest": "sha256:486f99db0be80db23842ac159146b952cf1f0c62a569e05bdd17fccafd6c3ba8"
+        },
+        {
+          "id": 629997711,
+          "name": "mac-packaged-capacity.json",
+          "size": 5999,
+          "digest": "sha256:7e6eb07ae5c771e9fd023bb84bec4f3bb163a2ef3a9bf4c29bc89d39ffe8f104"
+        },
+        {
+          "id": 629997714,
+          "name": "mac-packaged-positioning.json",
+          "size": 14310,
+          "digest": "sha256:9e056daf13426219ad7075e205ea648e8b609a5d4ca3f390136d7542b1bfe7f9"
+        },
+        {
+          "id": 629997762,
+          "name": "mac-packaged-round-three.json",
+          "size": 13464,
+          "digest": "sha256:cd7abe965722a24e928178db2c237525f7832afe461523c523fa5bb73aa67e76"
+        },
+        {
+          "id": 629997763,
+          "name": "mac-packaged-split.json",
+          "size": 2792,
+          "digest": "sha256:bed11cfe76d037b91a14ded3a3b76986f51ddcee4257caf9ce1ae7792a9dd2b6"
+        },
+        {
+          "id": 629997764,
+          "name": "mac-packaged-round-twenty-one.json",
+          "size": 35590,
+          "digest": "sha256:22e69bd935f6c85ac69f9efda47f443f53e476fa99e6bfa79004d8dc7edec5b1"
+        },
+        {
+          "id": 629997793,
+          "name": "source-pair-proof.json",
+          "size": 11830,
+          "digest": "sha256:7195c7c6328ac2f14b2a995da48faaa01cb87223c46bebf2152329c17a1bfa18"
+        },
+        {
+          "id": 629997794,
+          "name": "mac-signature-verification.json",
+          "size": 361,
+          "digest": "sha256:172474be7e0629817c858800a7ab0ee61d6745a77acea3b861fecf9622530147"
+        },
+        {
+          "id": 629997795,
+          "name": "mac-runtime-evidence-reuse.json",
+          "size": 590,
+          "digest": "sha256:d44c8dbb51f562c16b718eccf99f7dcb69f755225c95616d8836832d1c7d25a6"
+        },
+        {
+          "id": 629997831,
+          "name": "windows-build-manifest.json",
+          "size": 70555,
+          "digest": "sha256:c92e103ec732fbf97d08fede7f1211ce2a2006cdcae12e8be78e231bbfa668cf"
+        },
+        {
+          "id": 629997833,
+          "name": "windows-final-run.json",
+          "size": 4797,
+          "digest": "sha256:2c14dbe163c091bbb9bc9a660317e221ad7276d5e44a056854daf3d0485ffc5d"
+        },
+        {
+          "id": 629997835,
+          "name": "windows-final-suites.json",
+          "size": 2208,
+          "digest": "sha256:5cfe00af00b76adb1afcc7710d18c9f598084b1e2767a52cad81ce9dbf6846cb"
+        },
+        {
+          "id": 629997945,
+          "name": "windows-installed-round-three.json",
+          "size": 10394,
+          "digest": "sha256:9d8232031139cebf0859e4ee0ece71b2d6d92f5b2b60930b4969d4e5157570fa"
+        },
+        {
+          "id": 629997949,
+          "name": "windows-installed-preflight.json",
+          "size": 1766,
+          "digest": "sha256:835b60d7a31e45d81f55fb782d0cd5893774f2564d61dddd87789bb169eb6afd"
+        },
+        {
+          "id": 629997954,
+          "name": "windows-installer-preflight.json",
+          "size": 1230,
+          "digest": "sha256:be65cb82a0901e1e5b0bb2a43830f2279a84aee882890e0cf02195988afdfc5c"
+        },
+        {
+          "id": 629997995,
+          "name": "windows-packaged-capacity.json",
+          "size": 3798,
+          "digest": "sha256:a44a5783db761658a4bda33d0114276aed396b321524b55335f8895c5ef4f4ae"
+        },
+        {
+          "id": 629997997,
+          "name": "windows-packaged-appearance.json",
+          "size": 3570,
+          "digest": "sha256:75c7ba66b545bb516adf0bbff0eedcc196882ae57bc1127acf976e141897762c"
+        },
+        {
+          "id": 629997999,
+          "name": "windows-packaged-positioning.json",
+          "size": 8956,
+          "digest": "sha256:666c3ffd020aaae1e6b71d4bb84f9e3f13a5cbba946943abafd55e096c68d0f7"
+        },
+        {
+          "id": 629998032,
+          "name": "windows-packaged-round-three.json",
+          "size": 10285,
+          "digest": "sha256:6815699e9d4515031dd52bd746fc724760a131009ab3a6694ea8177eba494466"
+        },
+        {
+          "id": 629998037,
+          "name": "windows-packaged-round-twenty-one.json",
+          "size": 29859,
+          "digest": "sha256:10cf9014f04d30dc435d49f80b85ccd0f4ef1f67a154e5b412e6639e187802cd"
+        },
+        {
+          "id": 629998038,
+          "name": "windows-packaged-split.json",
+          "size": 2298,
+          "digest": "sha256:6cf73556c77cc8cbad46ccaacde8c8368045f8a9538f4c4810e80ede8e28f756"
+        },
+        {
+          "id": 629998094,
+          "name": "windows-pe-icons.json",
+          "size": 12804,
+          "digest": "sha256:d658dfd9d6f0fffea802985b49dc9e43828b43a121f2b361d075b545add6e9fc"
+        }
+      ]
+    },
+    {
+      "id": 408897458,
+      "tag_name": "v0.0.21",
+      "draft": false,
+      "prerelease": false,
+      "assets": [
+        {
+          "id": 627779352,
+          "name": "Start-Thoughtline-Isolated.ps1",
+          "size": 1646,
+          "digest": "sha256:44544004265221fe5020993e98fa3103d01ebd37fa2e6a36cee08a2b5815410d"
+        },
+        {
+          "id": 627779354,
+          "name": "Start-Thoughtline-Isolated-Mac.command",
+          "size": 3156,
+          "digest": "sha256:09cca2e4484e5c24e0f7ad9ef2d7433289d56b4459ef431c4a1f75223be2002b"
+        },
+        {
+          "id": 627779355,
+          "name": "RELEASE-NOTES.md",
+          "size": 1770,
+          "digest": "sha256:98cc96641aeb8c4e09261ff20f27b21b0cdc1b232aeb6bf6b124d0ab470928b3"
+        },
+        {
+          "id": 627779357,
+          "name": "DELIVERY.md",
+          "size": 12020,
+          "digest": "sha256:0e30d9228c89c04a92411eaa2e8a337b7399229eacbcd0fe7d2063dc6b2a01d6"
+        },
+        {
+          "id": 627779360,
+          "name": "INDEPENDENT-QA.md",
+          "size": 11677,
+          "digest": "sha256:45ee43e7cfe599381c1af725e278f7301fd9693766debd08be67f40c9bd1c7b3"
+        },
+        {
+          "id": 627779383,
+          "name": "Thoughtline-0.0.21-win-x64.exe",
+          "size": 113105320,
+          "digest": "sha256:9c466e8dce23550c076a64c5b7dbb2a528d3b8d227d2395291754a34b71d9542"
+        },
+        {
+          "id": 627779400,
+          "name": "cleanup-release.json",
+          "size": 702,
+          "digest": "sha256:63b04e90745889fcd703b328d00e0851a5e3fe7b8603710906f486ae19499109"
+        },
+        {
+          "id": 627779403,
+          "name": "Thoughtline-0.0.21-mac-arm64.dmg",
+          "size": 133457771,
+          "digest": "sha256:696f3267a17d4f8a802221ab21c6384ce81176d698700cef394130bafbc205f8"
+        },
+        {
+          "id": 627779404,
+          "name": "mac-build-manifest.json",
+          "size": 67651,
+          "digest": "sha256:a4316cfabb401827c36b36564633fa5e7d49d4ea17b12f2aa1129456f1eb5a24"
+        },
+        {
+          "id": 627779405,
+          "name": "mac-idle-development-runtime.json",
+          "size": 3493,
+          "digest": "sha256:e70550eb82b94a0d8b992edbd2a84e4c388d276896b0aef7c6fe9d92145d92e7"
+        },
+        {
+          "id": 627779557,
+          "name": "mac-launcher-check.json",
+          "size": 430,
+          "digest": "sha256:6d4387ac8307491ef7ca8c2ff34fafa4db55bb8c64393fd0fb1f7c877d232ff1"
+        },
+        {
+          "id": 627779578,
+          "name": "mac-launcher-generated.json",
+          "size": 669,
+          "digest": "sha256:5766984400ad2ee2f0159634d218d8c7366590e467ef7566d8f6d1b4b6d99443"
+        },
+        {
+          "id": 627779579,
+          "name": "mac-native-signature-replay.json",
+          "size": 446,
+          "digest": "sha256:2f68666ce9bb7825f4eea81ef3ca56a6144af7fe713b0acf941a7ea0a06321e5"
+        },
+        {
+          "id": 627779624,
+          "name": "mac-package-binding.json",
+          "size": 2478,
+          "digest": "sha256:fa379ca14aab017a8bfe0b0678e4c0a625e64c44ecb6169ec98674677e241edc"
+        },
+        {
+          "id": 627779641,
+          "name": "mac-packaged-appearance.json",
+          "size": 1049,
+          "digest": "sha256:874b9826d6b7ea68dc94c83a690d87d5a13b48424f078d53d0744d6d7510a134"
+        },
+        {
+          "id": 627779645,
+          "name": "mac-packaged-capacity.json",
+          "size": 1140,
+          "digest": "sha256:a87cd6dc0f17b2e8dd2f5f8d4f9c7fc586804ddf761aaa32c7f96611e8d30eea"
+        },
+        {
+          "id": 627779684,
+          "name": "mac-packaged-positioning.json",
+          "size": 2330,
+          "digest": "sha256:e066f9acb5c3282ee450887d6186efe9779f9588a12444aa3e65f09ef665c263"
+        },
+        {
+          "id": 627779703,
+          "name": "mac-packaged-round21.json",
+          "size": 24843,
+          "digest": "sha256:f542bcbe83747f47f2b67c8d55650c899975de6ecc1e5d66cc87c0cece74152f"
+        },
+        {
+          "id": 627779704,
+          "name": "mac-packaged-split.json",
+          "size": 1005,
+          "digest": "sha256:d21f79fe7f516ce256a2a6121717c53dd396a576964b8e1f2750aa1f95868419"
+        },
+        {
+          "id": 627779740,
+          "name": "mac-packaged-top-edge.json",
+          "size": 27264,
+          "digest": "sha256:2358fb7d9432abb38e46f7e7520c559df6a5536807b5b0ee2375e8d11ebf1c4f"
+        },
+        {
+          "id": 627779751,
+          "name": "mac-source-reminders.json",
+          "size": 3575,
+          "digest": "sha256:4b975ac0b478c0999fcbcb79730a9f749c3eb6470aaf85230869c8ae852d7a5f"
+        },
+        {
+          "id": 627779753,
+          "name": "mac-signature-verification.json",
+          "size": 412,
+          "digest": "sha256:781719c064ae15d1732717e43ea2cec0fae416f30f55c83daab8812087c87882"
+        },
+        {
+          "id": 627779805,
+          "name": "windows-build-manifest.json",
+          "size": 68013,
+          "digest": "sha256:9870cc3d78610f3b79368ec2d7205086537379ad3817ed149e60a1f428afafbd"
+        },
+        {
+          "id": 627779807,
+          "name": "source-pair-proof.json",
+          "size": 12800,
+          "digest": "sha256:63eb961ae57c8b48d1ccdd80fd71cefe211d387c7dc4a17f91ee552f94a9904f"
+        },
+        {
+          "id": 627779808,
+          "name": "windows-ci.json",
+          "size": 4672,
+          "digest": "sha256:6281de8a5433396e8cbdda7aeebfd783d25fb58b77550c995bebf90be12c0fbd"
+        },
+        {
+          "id": 627779848,
+          "name": "windows-installed-preflight.json",
+          "size": 1766,
+          "digest": "sha256:c9e0a22570556c5bd39658ba15388512c5943aa3dc92e4ad05c4d920bb3b28eb"
+        },
+        {
+          "id": 627779854,
+          "name": "windows-installer-preflight.json",
+          "size": 1203,
+          "digest": "sha256:679879386516f9ba412e019a3683d8fe74db8064988ff609139f93b7eaefd900"
+        },
+        {
+          "id": 627779855,
+          "name": "windows-packaged-capacity.json",
+          "size": 1082,
+          "digest": "sha256:4d55ce62b0ddade8e05851e408f4aa8fc2b97dd2ce1693e1015c81e4096f1e60"
+        },
+        {
+          "id": 627779901,
+          "name": "windows-packaged-positioning.json",
+          "size": 2336,
+          "digest": "sha256:e048d61cb2cb4cf0da29f8a4cd7a94f86a30655a476d9591f52eb04cb2c14d3e"
+        },
+        {
+          "id": 627779904,
+          "name": "windows-packaged-round21.json",
+          "size": 24697,
+          "digest": "sha256:2ec48a82246b4ff3a3b182b47996d75781c5fa1854a0c1dbbe8148ca4f47bce9"
+        },
+        {
+          "id": 627779906,
+          "name": "windows-pe-icons.json",
+          "size": 12804,
+          "digest": "sha256:db3363c8c7c20052517dba8ef6e7240c1ee3abad9edcf36617e8559683e91aa9"
+        },
+        {
+          "id": 627779951,
+          "name": "SHA256SUMS.txt",
+          "size": 2887,
+          "digest": "sha256:03da479567da2bf53b75b2413d4ecf7c69b869b67f0d783de49e5e15331d4bb1"
+        }
+      ]
+    },
+    {
+      "id": 408840229,
+      "tag_name": "v0.0.20",
+      "draft": false,
+      "prerelease": false,
+      "assets": [
+        {
+          "id": 627546839,
+          "name": "INDEPENDENT-QA.md",
+          "size": 9496,
+          "digest": "sha256:2e2e3adeed1e7e80d59bb7ec6294bdacbb38d632f6b86b54323ac92cde1dd3ca"
+        },
+        {
+          "id": 627546840,
+          "name": "Start-Thoughtline-Isolated-Mac.command",
+          "size": 3156,
+          "digest": "sha256:0917327d776a1f8a326fb2feccec0b9aa587d4e0f149fbdd459f10273a3dd0cd"
+        },
+        {
+          "id": 627546841,
+          "name": "Start-Thoughtline-Isolated.ps1",
+          "size": 1646,
+          "digest": "sha256:22e534e6dfd0573c764189a9fc349c1b531ccc7eeca3b2d0a15c38d0e4789838"
+        },
+        {
+          "id": 627546842,
+          "name": "DELIVERY.md",
+          "size": 5913,
+          "digest": "sha256:62b14ffee50f6479a29a69fbf9cb6dc2824c78e4df3665058676fa3cf1afdc52"
+        },
+        {
+          "id": 627546846,
+          "name": "SHA256SUMS",
+          "size": 2902,
+          "digest": "sha256:69628401a90a597e6b8e5701e9d524c7a7254067aaef444ca254ab1ba91a72e1"
+        },
+        {
+          "id": 627546863,
+          "name": "Thoughtline-0.0.20-mac-arm64.dmg",
+          "size": 133427722,
+          "digest": "sha256:1eba158d2290202cf63a2dc71c9183f7b786139ba8bdb7718183610f861f730c"
+        },
+        {
+          "id": 627546892,
+          "name": "mac-build-manifest.json",
+          "size": 62331,
+          "digest": "sha256:4c796d1616a4905a1c7075f5d1bfabdd1109860701810174fa4cd58f876c3b44"
+        },
+        {
+          "id": 627546895,
+          "name": "mac-launcher-final-check.json",
+          "size": 195,
+          "digest": "sha256:f0d34deb36a58ce2f9f0e0a20c612f038871b8ce366fedafa0372ec048aac5a7"
+        },
+        {
+          "id": 627546897,
+          "name": "cleanup-release.json",
+          "size": 794,
+          "digest": "sha256:4a0405b98b0d0eb076b936f79553dc0363527d22e9fdfa001dc6c4502f57f58f"
+        },
+        {
+          "id": 627546898,
+          "name": "Thoughtline-0.0.20-win-x64.exe",
+          "size": 113098957,
+          "digest": "sha256:8c627e02ba651df85f51124956c1841a4df361316ed14d2413802f4d280901e3"
+        },
+        {
+          "id": 627547005,
+          "name": "mac-native-probe.json",
+          "size": 27048,
+          "digest": "sha256:fc027465c1fefbb1696af6aa0002bd1205c81f99d829ac2e8a5ecaa18305eb1a"
+        },
+        {
+          "id": 627547014,
+          "name": "mac-package-binding.json",
+          "size": 1943,
+          "digest": "sha256:8312cafbb1baaa61aad79e17cf0e922a4f2d875b9d26ac2dde1a49814803d88a"
+        },
+        {
+          "id": 627547032,
+          "name": "mac-launcher-generated-final.json",
+          "size": 670,
+          "digest": "sha256:ad33469113622c7bfc97c51a29bdd56a164c3635870323d83a99dad26c0a3d01"
+        },
+        {
+          "id": 627547096,
+          "name": "mac-packaged-appearance.json",
+          "size": 4964,
+          "digest": "sha256:d04f85f04a988a2828f0df704f287982fb39816cb26ef5981f160ef5466f02bf"
+        },
+        {
+          "id": 627547100,
+          "name": "mac-packaged-capacity.json",
+          "size": 5757,
+          "digest": "sha256:f1c6cb51b8ef5370da222e9c505f63645009b855cbdfdf1d83b12f0c888bb5f1"
+        },
+        {
+          "id": 627547133,
+          "name": "mac-packaged-positioning.json",
+          "size": 10835,
+          "digest": "sha256:cf0224c271bd7b1d30a37e6f52113255eb3b65a7e02fa6699c39c72c21dc0974"
+        },
+        {
+          "id": 627547152,
+          "name": "mac-packaged-split.json",
+          "size": 2388,
+          "digest": "sha256:ca4da85c1bc97a318fda019ed62384a064edcdc7579cdcf6298ae8ace21007d1"
+        },
+        {
+          "id": 627547174,
+          "name": "mac-signature-verification.json",
+          "size": 415,
+          "digest": "sha256:51f3bdebb387f4b0b88bd47710f1a2c1618af1d0f9ab49570df471a6b088cef8"
+        },
+        {
+          "id": 627547196,
+          "name": "reminder-plan-readback.json",
+          "size": 604,
+          "digest": "sha256:66c2355705fc1005aa42341ecf96df3498afff835ae72704e23e7825fd1e4703"
+        },
+        {
+          "id": 627547235,
+          "name": "source-pair-proof.json",
+          "size": 11661,
+          "digest": "sha256:8378fc34216ccd4f2684382007abcaa034a8b47c3569d5bee563f40042638512"
+        },
+        {
+          "id": 627547236,
+          "name": "windows-SHA256SUMS.txt",
+          "size": 98,
+          "digest": "sha256:9fb63f68095cb407c247dc806cb921ce780365fdb89212a0cb6e1afa52163c44"
+        },
+        {
+          "id": 627547269,
+          "name": "windows-build-manifest.json",
+          "size": 62806,
+          "digest": "sha256:90ae1c749064ce53076af5a8e082cdb21353d6ab373be35a02dddd6ec3be172a"
+        },
+        {
+          "id": 627547328,
+          "name": "windows-final-artifacts.json",
+          "size": 1517,
+          "digest": "sha256:8d5353b575e5130418f5cc9ed51adab7851524df4e4f83821f8f001a2edd54ee"
+        },
+        {
+          "id": 627547330,
+          "name": "windows-final-run.json",
+          "size": 4597,
+          "digest": "sha256:ca416cb5a925fdddb3cecdb0859879ebe72adf507302e88db6eab04f8cf301ff"
+        },
+        {
+          "id": 627547339,
+          "name": "windows-installed-preflight.json",
+          "size": 1766,
+          "digest": "sha256:4b99d2c549d6f2fb36630c16996a097951ed26d498ff67ab4307c826739a8384"
+        },
+        {
+          "id": 627547476,
+          "name": "windows-native-probe.json",
+          "size": 27152,
+          "digest": "sha256:795121fce93432a4f121ae3790bdae950d1f8fecf0979b6c8acaff738b4ee788"
+        },
+        {
+          "id": 627547480,
+          "name": "windows-installer-preflight.json",
+          "size": 1203,
+          "digest": "sha256:cbe520590106fb4f1def8b20ac2e9ca5ac3843909cf3e198b508c4c74937887b"
+        },
+        {
+          "id": 627547497,
+          "name": "windows-packaged-appearance.json",
+          "size": 3675,
+          "digest": "sha256:5ec6d5c7753372e0779e60e3f131a57a0eba04b28c102526f69dfc5ba1143eb7"
+        },
+        {
+          "id": 627547531,
+          "name": "windows-packaged-capacity.json",
+          "size": 3683,
+          "digest": "sha256:54e6b1fc56d35b674c2569136305c030a67c62e0fb08dcf1e7c3d06bd0b9ad31"
+        },
+        {
+          "id": 627547542,
+          "name": "windows-packaged-positioning.json",
+          "size": 8611,
+          "digest": "sha256:7971f2f2db644a8c461c0902ec7ac3b59b7d5b82d332a93d22f3c549da7aadd3"
+        },
+        {
+          "id": 627547545,
+          "name": "windows-packaged-split.json",
+          "size": 2298,
+          "digest": "sha256:50ee9baa7ecabaa1633f48286a0f79bd316580729f4133ad624c16f41a790339"
+        },
+        {
+          "id": 627547602,
+          "name": "windows-pe-icons.json",
+          "size": 12804,
+          "digest": "sha256:55bc6a17ecdf90006542e5928c99411b65dc639816f3b2d96e765cc4fa92db87"
+        }
+      ]
+    },
+    {
+      "id": 408806088,
+      "tag_name": "v0.0.19",
+      "draft": false,
+      "prerelease": false,
+      "assets": [
+        {
+          "id": 627425913,
+          "name": "SHA256SUMS.txt",
+          "size": 2986,
+          "digest": "sha256:0acb04531b6b9b48e9b2195217fec10e60a2d0b7aa697a74ace5236253a64b46"
+        },
+        {
+          "id": 627425914,
+          "name": "Start-Thoughtline-Isolated-Mac.command",
+          "size": 3167,
+          "digest": "sha256:9f9a0102afe8d1cdfc42f2a00b0ea8c4e960bcf56a222d2e06ec7a5c5ef3ba1c"
+        },
+        {
+          "id": 627425915,
+          "name": "INDEPENDENT-QA.md",
+          "size": 7518,
+          "digest": "sha256:938b84505cd18ea6236805af4d20aecd71eb4089c752548375935d47e4e1c5ff"
+        },
+        {
+          "id": 627425916,
+          "name": "DELIVERY.md",
+          "size": 9991,
+          "digest": "sha256:b4408360354052f4fc4f6485a195241ead49ea3e1e8c561df9edc6fcb6c7c2c2"
+        },
+        {
+          "id": 627425925,
+          "name": "Start-Thoughtline-Isolated.ps1",
+          "size": 1646,
+          "digest": "sha256:d38531dda74236063b3ff76d48ff8a7702832585b7ce8be65ca4d17c5809cda1"
+        },
+        {
+          "id": 627425965,
+          "name": "Thoughtline-0.0.19-mac-arm64.dmg",
+          "size": 133426259,
+          "digest": "sha256:e4fab796837d0267c5592d4cea65861ae5424000e780488d66b009c36fcd0015"
+        },
+        {
+          "id": 627425992,
+          "name": "cleanup-release.json",
+          "size": 1133,
+          "digest": "sha256:7c911afd3ee218dc779c1505be1f75c00d9a125c128c718d7f7649b0db147e12"
+        },
+        {
+          "id": 627425994,
+          "name": "Thoughtline-0.0.19-win-x64.exe",
+          "size": 113098442,
+          "digest": "sha256:4a39695e7ddc262b1945df66cc15fed74f9b4d9d8752a2201f2dc1133c4ad55c"
+        },
+        {
+          "id": 627425996,
+          "name": "mac-build-manifest.json",
+          "size": 60063,
+          "digest": "sha256:91c438d261398b3118bdd48c4a50c9982e9aba56af81f781d28ce3820ea1c1fc"
+        },
+        {
+          "id": 627426001,
+          "name": "mac-launcher-quit-interruption.json",
+          "size": 990,
+          "digest": "sha256:8445995375cacacff5e937b2a5d9c3e25af4f57a6fda9d06e27e32accec87edb"
+        },
+        {
+          "id": 627426161,
+          "name": "mac-package-binding.json",
+          "size": 1633,
+          "digest": "sha256:6a763b658963b08cd567bd8a46b4dbe413c10aa95d8455cffa5cd799dcf8ca12"
+        },
+        {
+          "id": 627426164,
+          "name": "mac-packaged-capacity.json",
+          "size": 6123,
+          "digest": "sha256:10cee4ac7d6be970e971f01c7c7c0c13efe9ed97000cce41ead6488f58cea844"
+        },
+        {
+          "id": 627426165,
+          "name": "mac-packaged-appearance.json",
+          "size": 5424,
+          "digest": "sha256:0c86fc9ede2e54aaf4a304c94c94378dde645c6adb5a5a148c093be24bea8977"
+        },
+        {
+          "id": 627426232,
+          "name": "mac-packaged-data.json",
+          "size": 1286,
+          "digest": "sha256:face564407326acfa80b8513e12ac25b119d55be13a48c19a8f79683b91f0ea0"
+        },
+        {
+          "id": 627426235,
+          "name": "mac-packaged-menu.json",
+          "size": 2369,
+          "digest": "sha256:481c43162009c91c307d8b066684e98bb870c0898cb43b7d8fd08cef975df5c0"
+        },
+        {
+          "id": 627426237,
+          "name": "mac-packaged-top-edge.json",
+          "size": 27045,
+          "digest": "sha256:7c53e69f8041b8c079fba734ba2005b2376550ffa975e54c087137a7e3e3b340"
+        },
+        {
+          "id": 627426261,
+          "name": "mac-signature-verification.json",
+          "size": 412,
+          "digest": "sha256:aa47a5067f6c5d3246732fadbfc1c049c4f33ce0018e95bf3747581ef769175d"
+        },
+        {
+          "id": 627426264,
+          "name": "source-pair-proof.json",
+          "size": 11233,
+          "digest": "sha256:031426641b8d4c9bc2828a5c76398699b1614121f0c4f53e698ab17a5625f643"
+        },
+        {
+          "id": 627426265,
+          "name": "windows-artifact-digests.json",
+          "size": 395,
+          "digest": "sha256:e351bd903edbba11527b209e8b448337e6d42767b3c53b29a6ba7dbfeae9da41"
+        },
+        {
+          "id": 627426299,
+          "name": "windows-build-manifest.json",
+          "size": 60538,
+          "digest": "sha256:4fb3d3a3cac41a087ab77f948872c63eda9eddea4ed4396c04191bc5071f089b"
+        },
+        {
+          "id": 627426305,
+          "name": "windows-capacity-source.json",
+          "size": 10927,
+          "digest": "sha256:92a0ade216a65c15230884a70b829f2f139cd59f03ae4a4c18ce154e344e035e"
+        },
+        {
+          "id": 627426306,
+          "name": "windows-ci-result.json",
+          "size": 174,
+          "digest": "sha256:aa7cf6e6968d4baad963698e30c82f492f5e98128411ee8558c6a542fdaeb654"
+        },
+        {
+          "id": 627426357,
+          "name": "windows-installed-preflight.json",
+          "size": 1766,
+          "digest": "sha256:de7672e63cef6288055067d025cd6d8e1890c7e7e915c3fa39e16b5fa73aa2c7"
+        },
+        {
+          "id": 627426359,
+          "name": "windows-merge-source.json",
+          "size": 1290,
+          "digest": "sha256:19f85572412ff24b65d23d3825822b20a30a1e84e69f0aa775d18f292e1ed89f"
+        },
+        {
+          "id": 627426361,
+          "name": "windows-installer-preflight.json",
+          "size": 1203,
+          "digest": "sha256:9db17723b9b5e564b19df01244947a7b86eee6e9a67387cf26f2a4fb5b0dab11"
+        },
+        {
+          "id": 627426396,
+          "name": "windows-packaged-appearance.json",
+          "size": 3570,
+          "digest": "sha256:32ab9fba076a8b55f563ff4afb76cfd2701c9ebfe6f95e87a7d82b723c27c5a9"
+        },
+        {
+          "id": 627426401,
+          "name": "windows-packaged-capacity.json",
+          "size": 3683,
+          "digest": "sha256:f12bbf6dc8a518e1936ba685265975efdf3b58e18f01eb648c52abde79c458cc"
+        },
+        {
+          "id": 627426402,
+          "name": "windows-native-menu.json",
+          "size": 1195,
+          "digest": "sha256:2a10e7943b56313aebacf330ed11e9962437b1eabc66d9bd0a6cb8a568683c95"
+        },
+        {
+          "id": 627426447,
+          "name": "windows-packaged-top-edge.json",
+          "size": 27159,
+          "digest": "sha256:74845e13cfae895ca6844beafcea24d687f3a1d7996e97a8f55d966f4b36a6a1"
+        },
+        {
+          "id": 627426448,
+          "name": "windows-packaged-menu.json",
+          "size": 2411,
+          "digest": "sha256:2652e3549d0cc0042ca09c40d3a8b04554008c26bdb0180d6f8a63fc77b4ab74"
+        },
+        {
+          "id": 627426451,
+          "name": "windows-pe-icons.json",
+          "size": 12804,
+          "digest": "sha256:9a50181717d6f2d0ba09d5e2e33c811c864ea824e222e8a9d3b3375baa97c062"
+        },
+        {
+          "id": 627426488,
+          "name": "windows-split-source.json",
+          "size": 1722,
+          "digest": "sha256:4ce4b0357e73c5c0187c00ad3af6f5f51503456b903feacded49bba68f8cde22"
+        },
+        {
+          "id": 627426492,
+          "name": "windows-ui-source.json",
+          "size": 3182,
+          "digest": "sha256:5693e37c2cca848affe6dd00452ec2ed1a95fa40dd94199c5fe08208166bac2f"
+        }
+      ]
+    },
+    {
+      "id": 408652705,
+      "tag_name": "v0.0.18",
+      "draft": false,
+      "prerelease": false,
+      "assets": [
+        {
+          "id": 627018560,
+          "name": "Start-Thoughtline-Isolated.ps1",
+          "size": 1646,
+          "digest": "sha256:89222457f3a5e1dfc44907203ee10e1381362b352c43406b608eff8c8a8fcd2b"
+        },
+        {
+          "id": 627018561,
+          "name": "INDEPENDENT-QA.md",
+          "size": 5566,
+          "digest": "sha256:2c2bd0fadc67ba3ef11e8fd8bbfd0a6c32764a0b25041deceed3e0f79a4a36d7"
+        },
+        {
+          "id": 627018562,
+          "name": "SHA256SUMS.txt",
+          "size": 196,
+          "digest": "sha256:068a2c58304a2672b70de165ea43389891f8956b478c9f5334ddf6838e699c42"
+        },
+        {
+          "id": 627018564,
+          "name": "Thoughtline-0.0.18-mac-arm64.dmg",
+          "size": 133421643,
+          "digest": "sha256:b378e2b8a85d77e5f43db6cda1d1f552494860718f46eca0ef6bbd7e5a9350f1"
+        },
+        {
+          "id": 627018565,
+          "name": "Start-Thoughtline-Isolated-Mac.command",
+          "size": 2959,
+          "digest": "sha256:3240f7a77087a30a795eaaf696af9beda52b90e8b83db762cd40173e93f689d1"
+        },
+        {
+          "id": 627018625,
+          "name": "Thoughtline-0.0.18-win-x64.exe",
+          "size": 113093892,
+          "digest": "sha256:7a74ff48d8df7e837b3ff9d1a38c53b69a699ea511798fee5162988e2a33376a"
+        },
+        {
+          "id": 627018630,
+          "name": "mac-build-manifest.json",
+          "size": 58453,
+          "digest": "sha256:ec53ca6cdfac24074a31682496676db6c6ce7535b3f4c051fafc4ea37a16e8f6"
+        },
+        {
+          "id": 627018637,
+          "name": "mac-merge-source.json",
+          "size": 1276,
+          "digest": "sha256:b2f5206311bf5bb5ea544ff11c33d0fd37aea848156773fc0bacf1d38f2a582d"
+        },
+        {
+          "id": 627018644,
+          "name": "mac-packaged-appearance.json",
+          "size": 5396,
+          "digest": "sha256:841a2e8636c3f1e1ac6d735553f6a40f763c7f840ce525ccb1526c3df7edc3e4"
+        },
+        {
+          "id": 627018675,
+          "name": "mac-packaged-data.json",
+          "size": 1297,
+          "digest": "sha256:145b74881a13c9fe97d499eca0c66d1c01c5859e2fa3c337e8edbb2b1709f526"
+        },
+        {
+          "id": 627018678,
+          "name": "mac-packaged-top-edge.json",
+          "size": 26809,
+          "digest": "sha256:11c44bfc133ba877885850f9b2141dcbfcce1548ede1c9e178103c10d4ae2589"
+        },
+        {
+          "id": 627018680,
+          "name": "mac-packaged-menu.json",
+          "size": 2380,
+          "digest": "sha256:7c0246e0c500d52dca56043d349e6d7ae8eb471cfc35d08e7a703d8ffd027cd0"
+        },
+        {
+          "id": 627018703,
+          "name": "mac-signature-verification.json",
+          "size": 407,
+          "digest": "sha256:3c9f5e5dc1d495d2b36cb6a79b2bd5c7fceb716aaeaaeba5fde9957e2ed6b072"
+        },
+        {
+          "id": 627018707,
+          "name": "mac-split-source.json",
+          "size": 1713,
+          "digest": "sha256:9a9f4a2af9e7b83a806f1aa6e5052eefe634a32d7d46926b12240b95a7db764a"
+        },
+        {
+          "id": 627018709,
+          "name": "source-pair-proof.json",
+          "size": 10919,
+          "digest": "sha256:c121e3c92add1cf37fbba725cfde17a3c0d6ebef3f07c952a0902d95a9b16da9"
+        },
+        {
+          "id": 627018734,
+          "name": "windows-artifact-digests.json",
+          "size": 1734,
+          "digest": "sha256:97ce0f061508ab561f1725114fd18eb647929ff11d3612c1baad438b71432733"
+        },
+        {
+          "id": 627018735,
+          "name": "windows-ci-result.json",
+          "size": 174,
+          "digest": "sha256:f6e72419c04f7e251ff09f5b1b9cc64a453b5dc138f20a0585008d0618d1f797"
+        },
+        {
+          "id": 627018741,
+          "name": "windows-build-manifest.json",
+          "size": 58928,
+          "digest": "sha256:e83365d1f977226e12d995d27d930228f73860dbea21be1eb29c163987d78b9f"
+        },
+        {
+          "id": 627018770,
+          "name": "windows-installed-preflight.json",
+          "size": 1766,
+          "digest": "sha256:8844c031242b117a0629cb68e08296a213b25c330639e8edecb7d0e637860ef5"
+        },
+        {
+          "id": 627018773,
+          "name": "windows-installer-preflight.json",
+          "size": 1203,
+          "digest": "sha256:0d581d139b8e5579dc9d8862a1b97eafbedc963f3773cfc88b157843521c3ab2"
+        },
+        {
+          "id": 627018774,
+          "name": "windows-merge-source.json",
+          "size": 1290,
+          "digest": "sha256:82a92b163a291dc1b223899578f53e394b0a62e9a658235a5940b4009e259ac5"
+        },
+        {
+          "id": 627018797,
+          "name": "windows-packaged-appearance.json",
+          "size": 3570,
+          "digest": "sha256:6cc7ef212f1c386294f6acc0a6151ef02cc17ac799ac16d92ec68127aa969e7c"
+        },
+        {
+          "id": 627018806,
+          "name": "windows-packaged-menu.json",
+          "size": 2298,
+          "digest": "sha256:789566bd9be62ad8906915bc26acca89bf34009be50453a3c264eb2f3251a16a"
+        },
+        {
+          "id": 627018808,
+          "name": "windows-pe-icons.json",
+          "size": 12804,
+          "digest": "sha256:05f1d53e49b222ae9e255fe605d7696791228a1303e1d26b7e95c69fc165f178"
+        },
+        {
+          "id": 627018821,
+          "name": "windows-split-source.json",
+          "size": 1723,
+          "digest": "sha256:95352b4784017de7c675bff6a354e0035012ec2dbf74f7aee28560b11218cfc6"
+        },
+        {
+          "id": 627022529,
+          "name": "DELIVERY.md",
+          "size": 6546,
+          "digest": "sha256:c82ab5ab8327281f507fe80cee52ce3499c9f80c25b5052cce4f12d5b4050511"
+        }
+      ]
+    },
+    {
+      "id": 408588398,
+      "tag_name": "v0.0.17-preview.5",
+      "draft": false,
+      "prerelease": false,
+      "assets": [
+        {
+          "id": 626880716,
+          "name": "SHA256SUMS",
+          "size": 2096,
+          "digest": "sha256:f473f21bb4386900b0bb88ae4b26e9d74a74907169d924ea7999504d36148fa9"
+        },
+        {
+          "id": 626880717,
+          "name": "Start-Thoughtline-Isolated-Mac.command",
+          "size": 2979,
+          "digest": "sha256:f062e4629d28bf71080a9154bc97741970ac8ebd9d4d21ec49b0bdfcd80ce2c1"
+        },
+        {
+          "id": 626880719,
+          "name": "QA-guide.md",
+          "size": 4765,
+          "digest": "sha256:791e393ff8a2efe3d7bc10cfdccd38a6907682b9c55bf78aaecfb133e6f0e31f"
+        },
+        {
+          "id": 626880720,
+          "name": "README-installation-and-acceptance.md",
+          "size": 1288,
+          "digest": "sha256:2316ad563cfea5775c70c8660d065329046475cb154172fa12f2dfc78a11f87d"
+        },
+        {
+          "id": 626880721,
+          "name": "Start-Thoughtline-Isolated.ps1",
+          "size": 1676,
+          "digest": "sha256:e8a6a818ea6211a2325c62624afb53c535e37d6f78403606ea321926a0d5ec2e"
+        },
+        {
+          "id": 626880739,
+          "name": "Thoughtline-0.0.17-preview.5-mac-arm64.dmg",
+          "size": 133418585,
+          "digest": "sha256:3250b502a9f22c88ed420d04e553cefddf2ed008a2c59cbdb45351e64dbd3d93"
+        },
+        {
+          "id": 626880766,
+          "name": "Thoughtline-0.0.17-preview.5-win-x64.exe",
+          "size": 113104488,
+          "digest": "sha256:69b7774cb2a69ca103e0bb03809f5f2ec44481ea045a08b8781f526bad4698f7"
+        },
+        {
+          "id": 626880769,
+          "name": "mac-launcher-manifest.json",
+          "size": 710,
+          "digest": "sha256:b648f330a9e3cec64651b7301e5dbb9e8184178a82761ffa659477800e3d3910"
+        },
+        {
+          "id": 626880770,
+          "name": "mac-build-manifest.json",
+          "size": 57527,
+          "digest": "sha256:b9efc59dbcdc0c9445fd10489fdf9b7ff818d15b66f902772394f0edd2d47258"
+        },
+        {
+          "id": 626880773,
+          "name": "mac-packaged-acceptance.json",
+          "size": 1277,
+          "digest": "sha256:a72d29270a810e83cf68b6bdd17925569ea4340214a684110ffd59a630deb19c"
+        },
+        {
+          "id": 626880850,
+          "name": "mac-signature-verification.json",
+          "size": 420,
+          "digest": "sha256:4ab6682399337fbe415980ab46216f4f7e5f3dcbce7a0ce76247150005c9eeea"
+        },
+        {
+          "id": 626880852,
+          "name": "mac-packaged-appearance.json",
+          "size": 5474,
+          "digest": "sha256:b089decd9ac837fa55877c327b3079a814ad6fdd971a4b5a51465ef41362f231"
+        },
+        {
+          "id": 626880854,
+          "name": "mac-top-edge-test.json",
+          "size": 26834,
+          "digest": "sha256:630d448d73384cd1b3a9485e93e2cd2a601bcb797873c068e7dfbeba168fbc45"
+        },
+        {
+          "id": 626880902,
+          "name": "release-manifest.json",
+          "size": 3711,
+          "digest": "sha256:1fcb1d5d204ea48b74bad4d1643b04c536bb9c44c1133cc319315d25f91c48dc"
+        },
+        {
+          "id": 626880919,
+          "name": "source-pair-proof.json",
+          "size": 10719,
+          "digest": "sha256:724681a95d859e93c30b1258ed81b8b72d973ccc6fc744545267b5928b6f09fc"
+        },
+        {
+          "id": 626880921,
+          "name": "windows-build-manifest.json",
+          "size": 58002,
+          "digest": "sha256:cb173caa3eef3891f274e65e1e02d551053b8388a088c0a0c86161a221c1c857"
+        },
+        {
+          "id": 626880951,
+          "name": "windows-installed-preflight.json",
+          "size": 1786,
+          "digest": "sha256:260b304388f3d1806734466da146f64fd38ae18f92a0fe8bcc3f446259a69c2b"
+        },
+        {
+          "id": 626880953,
+          "name": "windows-installer-preflight.json",
+          "size": 1183,
+          "digest": "sha256:3acc0da3a6711b324b068cbec940a903e91186b6204d6c131bc92d2bd387076c"
+        },
+        {
+          "id": 626880956,
+          "name": "windows-native-menu.json",
+          "size": 1113,
+          "digest": "sha256:342fe62224e1f05384bcdf3ef6823176db6b1c4dfcc6a79a43bd6bd76e727b57"
+        },
+        {
+          "id": 626880973,
+          "name": "windows-packaged-appearance.json",
+          "size": 3580,
+          "digest": "sha256:42f5afd339510503c24ddddba0badf4b8c2c8e5a60da1d406d5a0590c06d8f72"
+        },
+        {
+          "id": 626880976,
+          "name": "windows-runner-SHA256SUMS.txt",
+          "size": 108,
+          "digest": "sha256:ec45a7934568293f88553eba964507dd29e485880fbbfa748ed3f15248648023"
+        },
+        {
+          "id": 626880978,
+          "name": "windows-pe-icons.json",
+          "size": 12814,
+          "digest": "sha256:6f3b7a8b5c67bf2bc852030d77aab6895be4716449426c505dbd795f94bd0695"
+        },
+        {
+          "id": 626880996,
+          "name": "windows-top-edge-test.json",
+          "size": 26948,
+          "digest": "sha256:2acab8979f342f65e5603fff5157cd4508a48b57016f99013e11640ef5da5719"
+        }
+      ]
+    },
+    {
+      "id": 408459446,
+      "tag_name": "v0.0.17-preview.4",
+      "draft": false,
+      "prerelease": false,
+      "assets": [
+        {
+          "id": 626588037,
+          "name": "Start-Thoughtline-Isolated-Mac.command",
+          "size": 2979,
+          "digest": "sha256:76129b5a2c567b26d5cefef8283db02051cc63db2abc7cfe5b3e2d2a0e9c3b82"
+        },
+        {
+          "id": 626588038,
+          "name": "Thoughtline-0.0.17-preview.4-mac-arm64.dmg",
+          "size": 133417700,
+          "digest": "sha256:a8be2583a4e16a5977b93566a2853c9f1460e7b9bea19f63f7e766f90a5c7424"
+        },
+        {
+          "id": 626588040,
+          "name": "Start-Thoughtline-Isolated.ps1",
+          "size": 1676,
+          "digest": "sha256:2978ee1e658248d861d151b2bb4c7ae2f2d112e6c060e646cab9152741d65b23"
+        },
+        {
+          "id": 626588066,
+          "name": "Thoughtline-0.0.17-preview.4-win-x64.exe",
+          "size": 113101779,
+          "digest": "sha256:e248f747c372ba513189c4ce231fa7ea94f4fb9164c5bf2f4ffb4879925a8159"
+        },
+        {
+          "id": 626588068,
+          "name": "mac-build-manifest.json",
+          "size": 56378,
+          "digest": "sha256:df2b55249817568896336d3a3126ef6d0c92321424e520595ef5cdce606db13b"
+        },
+        {
+          "id": 626588069,
+          "name": "mac-launcher-manifest.json",
+          "size": 756,
+          "digest": "sha256:feb7d477bec4ec7a4e468eb4c08c245532eaf199ea9fe8a11309ea0e0303591e"
+        },
+        {
+          "id": 626588091,
+          "name": "mac-signature-verification.json",
+          "size": 427,
+          "digest": "sha256:d44f69cead9894e3d66cc49fe47131f9025ad3f8877a0ad1d48a16eb1671dc23"
+        },
+        {
+          "id": 626588111,
+          "name": "mac-top-edge-test.json",
+          "size": 26129,
+          "digest": "sha256:da0729d68fb94b0172ec1856942c9795c2cde3a9631e8f5a8f53c3838a581e3c"
+        },
+        {
+          "id": 626588126,
+          "name": "source-pair-proof.json",
+          "size": 9578,
+          "digest": "sha256:bc7570048b1a06d7d52da7c74aa254b226a79b9c334da053a286faa571e3cec5"
+        },
+        {
+          "id": 626588173,
+          "name": "windows-build-manifest.json",
+          "size": 56853,
+          "digest": "sha256:8c4023acca78a4807cfda27873b1b32a8990ea4f3eb0467f8352c20242d4b053"
+        },
+        {
+          "id": 626588181,
+          "name": "windows-installed-preflight.json",
+          "size": 1786,
+          "digest": "sha256:d841bf879d6c2858a8bc62b9cda51890304a955fe465360b5b08d5b7f3104264"
+        },
+        {
+          "id": 626588182,
+          "name": "windows-installer-preflight.json",
+          "size": 1183,
+          "digest": "sha256:1f256ab202f142a5163966a62705173ab63a00797c32dc4a33f683743bbae2c4"
+        },
+        {
+          "id": 626588200,
+          "name": "windows-pe-icons.json",
+          "size": 12814,
+          "digest": "sha256:1b9b844c9d3475697ad76a5e8542fcecf9aadb918bdc919657c31b2653d18669"
+        },
+        {
+          "id": 626588209,
+          "name": "windows-top-edge-test.json",
+          "size": 26269,
+          "digest": "sha256:12d98455a4454f95e3063dfefdbebc742a236e7e47d1d815e5a0a6d86832a2c0"
+        },
+        {
+          "id": 626591601,
+          "name": "README-installation-and-acceptance.md",
+          "size": 1913,
+          "digest": "sha256:cc49ed69e609973e2928f8fa8eaa25729d5062b95e8ce27dcd285d190473aa15"
+        },
+        {
+          "id": 626591610,
+          "name": "SHA256SUMS",
+          "size": 1542,
+          "digest": "sha256:8ebf628d43961dc6e085035ace216f35dcc78ab992f6053e7984c63449c1a1ed"
+        },
+        {
+          "id": 626591611,
+          "name": "release-manifest.json",
+          "size": 2767,
+          "digest": "sha256:1a6794d283618958b49c4ccab28531f392c5dbc19e3fd569acede030ce4dc3c5"
+        }
+      ]
+    },
+    {
+      "id": 408155486,
+      "tag_name": "v0.0.17-preview.3",
+      "draft": false,
+      "prerelease": true,
+      "assets": [
+        {
+          "id": 625635111,
+          "name": "Start-Thoughtline-Isolated.ps1",
+          "size": 1676,
+          "digest": "sha256:4da07f0f81b6f0071de34af571d3c283b50549dcd077dad343e59ba2ae8ac55d"
+        },
+        {
+          "id": 625841400,
+          "name": "Start-Thoughtline-Isolated-Mac.command",
+          "size": 2979,
+          "digest": "sha256:5696d9b2577a70fedb62aecf0e52032ab9b7dc13990fe2332ecd826abf974f50"
+        },
+        {
+          "id": 625841403,
+          "name": "Thoughtline-0.0.17-preview.3-mac-arm64.dmg.blockmap",
+          "size": 139990,
+          "digest": "sha256:6f790a90466fbc0c7e78bf600fa2077352a5ee6718668d05b48e460a4a30b516"
+        },
+        {
+          "id": 625841405,
+          "name": "Thoughtline-0.0.17-preview.3-mac-arm64.dmg",
+          "size": 133417660,
+          "digest": "sha256:4799af1772eff9d013942d207c6235cce6a239ef89f3a2910994ef2ff5758a3d"
+        },
+        {
+          "id": 625841604,
+          "name": "mac-asar-input-audit.json",
+          "size": 879,
+          "digest": "sha256:72af75de44c298556af435195e991066935e27dbfcf5defb4bad40ef99457623"
+        },
+        {
+          "id": 625841605,
+          "name": "Windows-source-UI-evidence.zip",
+          "size": 1821404,
+          "digest": "sha256:c111f2f6d611002879290cd74b07d1a57cb1fd80d10cfe0b2dece015e91d7c2b"
+        },
+        {
+          "id": 625841607,
+          "name": "Thoughtline-0.0.17-preview.3-win-x64.exe",
+          "size": 113101943,
+          "digest": "sha256:68c6f4f1f35a5ded1c8d1a04e3c063c4d372fd003fba73ceaa4e77c7921da235"
+        },
+        {
+          "id": 625841612,
+          "name": "mac-build-manifest.json",
+          "size": 55437,
+          "digest": "sha256:6515bc0c29b17672ffb5be72f245ac7837100dea8292db8b0cb0be16cce37656"
+        },
+        {
+          "id": 625841681,
+          "name": "mac-launcher-generation.json",
+          "size": 709,
+          "digest": "sha256:209e24a2b9fa8c90e35782268598e2171921fe590ab6fac6d7c14360707769c3"
+        },
+        {
+          "id": 625841683,
+          "name": "mac-package-acceptance.json",
+          "size": 1329,
+          "digest": "sha256:380ec55a7fa455644e02d05c6846042a14b54131ac98476a326d68841fbd4285"
+        },
+        {
+          "id": 625841720,
+          "name": "mac-packaged-appearance.json",
+          "size": 5380,
+          "digest": "sha256:84b925c6a34b62257252048d6b709fd48fe6fd3c4a5cfb0a430b15bd2170183f"
+        },
+        {
+          "id": 625841727,
+          "name": "mac-signature-verification.json",
+          "size": 380,
+          "digest": "sha256:527b39c369127011871445ab0cbc8bb050bd9c8789997b94ff245b8a6bba5a27"
+        },
+        {
+          "id": 625841769,
+          "name": "source-freeze-input-vector-01017c9.json",
+          "size": 49228,
+          "digest": "sha256:91df89c3ff08da61719431816aa10e31fd925e7f8343a2815ea5ad748c085ba3"
+        },
+        {
+          "id": 625841791,
+          "name": "windows-build-manifest.json",
+          "size": 55912,
+          "digest": "sha256:0e41c073ae294f4a5114da4f9356d63d7f07d44d6e376c83f7c2ea285113a39e"
+        },
+        {
+          "id": 625841842,
+          "name": "windows-installed-preflight.json",
+          "size": 1786,
+          "digest": "sha256:84c74dc21601cb6eefd56b5aca4a6e05464784354e56268b6351a9147de2e009"
+        },
+        {
+          "id": 625841847,
+          "name": "windows-installer-preflight.json",
+          "size": 1133,
+          "digest": "sha256:8af3b4cff80397616d30e50ef0e00361369e2d55d4fbc3d95987a30dc897f712"
+        },
+        {
+          "id": 625841873,
+          "name": "windows-package-audit.json",
+          "size": 1471,
+          "digest": "sha256:027b20851a81c38a53241231282a53b65a4748d696b41e7d825e15b237ca7251"
+        },
+        {
+          "id": 625842063,
+          "name": "windows-packaged-appearance.json",
+          "size": 3809,
+          "digest": "sha256:7f973af1d9c6e77f1628766463a5f29a2f453f32c2c59221960d53e026313f0c"
+        },
+        {
+          "id": 625842065,
+          "name": "windows-pe-icons.json",
+          "size": 12814,
+          "digest": "sha256:2bba51af4dfca596d5e968ef737ab7e2e75046e6ef5219ad6d2ca8f46b3645f4"
+        },
+        {
+          "id": 625842073,
+          "name": "windows-runner-SHA256SUMS.txt",
+          "size": 108,
+          "digest": "sha256:6ea65e9811223cf71eef81febe47b66593adf11baef821a8effbc497c56ba921"
+        },
+        {
+          "id": 625873801,
+          "name": "QA-guide-v0.0.17-preview.3.md",
+          "size": 5272,
+          "digest": "sha256:9100f69049e07a44e0f0aa8063c63549abbbde546efbcb0a9eaefab255abc235"
+        },
+        {
+          "id": 625873802,
+          "name": "release-manifest.json",
+          "size": 9099,
+          "digest": "sha256:b671fa93f1097d4f677dc8fcd77ca631a0b7c8b1291836986f5c7179b3387ee9"
+        },
+        {
+          "id": 625873805,
+          "name": "SHA256SUMS",
+          "size": 2256,
+          "digest": "sha256:fe5dd1b1593229065a87ff4f450d7dc9c230a85d552bc2fd181954f03fb0a2b7"
+        },
+        {
+          "id": 625873811,
+          "name": "release-notes-v0.0.17-preview.3.md",
+          "size": 1554,
+          "digest": "sha256:e848a212acf0bb050392864378aff9b57f8e2d15ed2bbfafed763de1f62dae34"
+        }
+      ]
+    },
+    {
+      "id": 408004525,
+      "tag_name": "v0.0.17-preview.2",
+      "draft": false,
+      "prerelease": true,
+      "assets": [
+        {
+          "id": 625235690,
+          "name": "Thoughtline-0.0.17-preview.2-win-x64.exe",
+          "size": 113089690,
+          "digest": "sha256:1ccc1e4badd2ea8db7bea3da3b5fa563fa294234f9181bee93ff7e6d50e2d3d5"
+        },
+        {
+          "id": 625235691,
+          "name": "Thoughtline-0.0.17-preview.2-mac-arm64.dmg.blockmap",
+          "size": 139793,
+          "digest": "sha256:bcce1aa3726800ea0db9069d8881029bbfd432f2ef38dfa211b6a45cf796dc85"
+        },
+        {
+          "id": 625235692,
+          "name": "Start-Thoughtline-Isolated.ps1",
+          "size": 1676,
+          "digest": "sha256:877fa720958eae4ee9079f5f514f3e79671db98a7b23415d5b77193d53458698"
+        },
+        {
+          "id": 625235694,
+          "name": "Thoughtline-0.0.17-preview.2-mac-arm64.dmg",
+          "size": 133377669,
+          "digest": "sha256:9ef50f9804edeaf4c3b3a15713037047e403372de98d40fba27110465edbdd45"
+        },
+        {
+          "id": 625235746,
+          "name": "mac-signature-verification.json",
+          "size": 381,
+          "digest": "sha256:f1612ad4fce821963cbf0ac1cbf998a9142abeeaa5eb7bab3936854df01ffa03"
+        },
+        {
+          "id": 625235747,
+          "name": "mac-build-manifest.json",
+          "size": 50642,
+          "digest": "sha256:cc2d007837fdd5933afb76b4d164a9700df3162c2e977f104f5edacd63e60d6c"
+        },
+        {
+          "id": 625235923,
+          "name": "windows-build-manifest.json",
+          "size": 51117,
+          "digest": "sha256:d02be27029ca2dda7c41733767587f2afa7422ebfa8f66e09179467a3dabeb6e"
+        },
+        {
+          "id": 625235927,
+          "name": "source-freeze-input-vector-ca2137b.json",
+          "size": 44643,
+          "digest": "sha256:92e5c0077f5763e3a837645deb9b877a555d93549b3c9372436ee5889b0b1990"
+        },
+        {
+          "id": 625235997,
+          "name": "windows-installed-preflight.json",
+          "size": 1786,
+          "digest": "sha256:e95834af898ecc5380157e08ba782778d5af1361bc14ad27d4b0dec6f274a262"
+        },
+        {
+          "id": 625236003,
+          "name": "windows-pe-icons.json",
+          "size": 12814,
+          "digest": "sha256:f26bfd3de357291d38131e0e111d5ae5e70ec3ba7474fe692f4b3911d6411a05"
+        },
+        {
+          "id": 625236011,
+          "name": "windows-installer-preflight.json",
+          "size": 1095,
+          "digest": "sha256:0312ffe25d0b4892bfea639d6b026cebfb5da3d976023ebc11966d21b87d2d14"
+        },
+        {
+          "id": 625236061,
+          "name": "windows-runner-SHA256SUMS.txt",
+          "size": 108,
+          "digest": "sha256:7815acc96538fd6fd96f6dd4c0edc57e6ead351bd874523246c0d7ad633e2ec6"
+        },
+        {
+          "id": 625236064,
+          "name": "Start-Thoughtline-Isolated-Mac.command",
+          "size": 3123,
+          "digest": "sha256:ca743d321f035f487d92c2ec00cd1f71ce75d65c512199608447f6728cab090c"
+        },
+        {
+          "id": 625242125,
+          "name": "release-manifest.json",
+          "size": 5890,
+          "digest": "sha256:78e7f1a9cb97638c803dbf0af376b83b4e7afb7ec689e92d306eb4c648849783"
+        },
+        {
+          "id": 625242137,
+          "name": "SHA256SUMS",
+          "size": 1394,
+          "digest": "sha256:bf61da6e19ec344e067a8759e75690ded4576af2a990d75f790497ff3f889599"
+        }
+      ]
+    },
+    {
+      "id": 407667273,
+      "tag_name": "v0.0.16-preview.6",
+      "draft": false,
+      "prerelease": true,
+      "assets": [
+        {
+          "id": 624279235,
+          "name": "mac-build-manifest.json",
+          "size": 3843,
+          "digest": "sha256:3f83bdabbe9673b2f76e41416e72d9b98341ef05370b2b704f87cc417ebbc277"
+        },
+        {
+          "id": 624279236,
+          "name": "windows-build-manifest.json",
+          "size": 4208,
+          "digest": "sha256:31aa6260272200c8295dfcb9b00a564db31ba675cd64fa84daf062db5df299a8"
+        },
+        {
+          "id": 624279237,
+          "name": "SHA256SUMS.txt",
+          "size": 216,
+          "digest": "sha256:8baf53922970ff8904ca63913bdfc7c9c09a136163df92870cd3efcde4e417f1"
+        },
+        {
+          "id": 624279238,
+          "name": "Thoughtline-0.0.16-preview.6-mac-arm64.dmg",
+          "size": 133264204,
+          "digest": "sha256:dfe18f6ee4cb64df5cd61ed8268b12e534382636f2955d5f2810a7bcb57296c6"
+        },
+        {
+          "id": 624279239,
+          "name": "Thoughtline-0.0.16-preview.6-win-x64.exe",
+          "size": 112978436,
+          "digest": "sha256:545bac65d545578653ca031861b98080d4e6ea46c94db51cd493565734289266"
+        },
+        {
+          "id": 624279309,
+          "name": "Start-Thoughtline-Isolated.ps1",
+          "size": 1676,
+          "digest": "sha256:12c3cd92c3e63da79825e5d4da4abd610d47d1008c6915efd8d1203582634049"
+        },
+        {
+          "id": 624279317,
+          "name": "release-manifest.json",
+          "size": 24141,
+          "digest": "sha256:081496986eadaa5e5278c67958dfe247a09a0a51b688545d16c6dc70aa6340a9"
+        }
+      ]
+    },
+    {
+      "id": 407015293,
+      "tag_name": "v0.0.6-alpha.1",
+      "draft": false,
+      "prerelease": true,
+      "assets": [
+        {
+          "id": 622293042,
+          "name": "SHA256SUMS.txt",
+          "size": 194,
+          "digest": "sha256:a3142e099d7c8b05e37ade7f9858fd5c4e2a38f8c3f454b021095bd63c6ccbbb"
+        },
+        {
+          "id": 622293044,
+          "name": "Thoughtline-0.0.6-win-x64.exe",
+          "size": 111262232,
+          "digest": "sha256:e6654e8e438b848cf15816cf89ba330aa3d5875afa5b96bf886c1cef4d2d05df"
+        },
+        {
+          "id": 622293050,
+          "name": "Thoughtline-0.0.6-mac-arm64.dmg",
+          "size": 129674998,
+          "digest": "sha256:7e483fc2d750590860c304d0ec3e9eb1ff9d69fd43b2c7ea29dfbd2cc3214fc6"
+        }
+      ]
+    },
+    {
+      "id": 406998024,
+      "tag_name": "v0.0.5-alpha.1",
+      "draft": false,
+      "prerelease": true,
+      "assets": [
+        {
+          "id": 622250101,
+          "name": "Thoughtline-0.0.5-win-x64.exe",
+          "size": 111260917,
+          "digest": "sha256:fbb8f96d1a0baba73ec61c0fc02a585a4d7a6540511e069f5dc42015dba7d2e0"
+        },
+        {
+          "id": 622250102,
+          "name": "Thoughtline-0.0.5-mac-arm64.dmg",
+          "size": 129668170,
+          "digest": "sha256:9d6a395c4d1faee23a0a5feedb6dd018a8cdbc728860e10132bd64792588deaf"
+        },
+        {
+          "id": 622250119,
+          "name": "SHA256SUMS.txt",
+          "size": 194,
+          "digest": "sha256:e82cb7bdab605a9088c65662759746423c16e514a75280e682944f81c1f374e3"
+        }
+      ]
+    },
+    {
+      "id": 406962729,
+      "tag_name": "v0.0.4-alpha.1",
+      "draft": false,
+      "prerelease": true,
+      "assets": [
+        {
+          "id": 622158608,
+          "name": "SHA256SUMS.txt",
+          "size": 194,
+          "digest": "sha256:5a39a36cf6698c5754437f7f31c3933ab933dfb435dd2283a2498257da2125df"
+        },
+        {
+          "id": 622158610,
+          "name": "Thoughtline-0.0.4-win-x64.exe",
+          "size": 111258252,
+          "digest": "sha256:31e015500807c431d7345e6e67c9adbc4b99961ca1a4fd5ec54409a5877a644e"
+        },
+        {
+          "id": 622158625,
+          "name": "Thoughtline-0.0.4-mac-arm64.dmg",
+          "size": 129661866,
+          "digest": "sha256:0a1b53e1e4d37cd0a66a9679c892055bd2ba62e78356f9582d8daa19940f8fbd"
+        }
+      ]
+    },
+    {
+      "id": 406929759,
+      "tag_name": "v0.0.3-alpha.1",
+      "draft": false,
+      "prerelease": true,
+      "assets": [
+        {
+          "id": 622078775,
+          "name": "Thoughtline-0.0.3-mac-arm64.dmg",
+          "size": 129616109,
+          "digest": "sha256:706607f8cfa161f1b4a114eb3c80a4257bd779c43368165e4601a9ffe7c932c2"
+        },
+        {
+          "id": 622082962,
+          "name": "Thoughtline-0.0.3-win-x64.exe",
+          "size": 111258318,
+          "digest": "sha256:b39d63a96900f5d98e13524c8cef3539b6c0982a92a6a81adff2caf01526f631"
+        },
+        {
+          "id": 622082968,
+          "name": "SHA256SUMS.txt",
+          "size": 194,
+          "digest": "sha256:834f1c8603bd0f502402413fae6ca321c6f4265fbc1cda78ae0bde012fc03afe"
+        }
+      ]
+    },
+    {
+      "id": 406854933,
+      "tag_name": "v0.0.1-pilot.1",
+      "draft": false,
+      "prerelease": true,
+      "assets": [
+        {
+          "id": 621903814,
+          "name": "Thoughtline-0.0.1-mac-arm64.dmg",
+          "size": 129617551,
+          "digest": "sha256:7c8b7cda049a7a3d6ec4d00961aa0a5260fbcf005179e80b0f08752404f2923e"
+        },
+        {
+          "id": 621906587,
+          "name": "SHA256SUMS.txt",
+          "size": 194,
+          "digest": "sha256:438fef4eab2ed1444e5ee44241d8e76fe75b254971f9dc2e6e0aa526d51df601"
+        },
+        {
+          "id": 621906589,
+          "name": "Thoughtline-0.0.1-win-x64.exe",
+          "size": 111247319,
+          "digest": "sha256:cec57f51802b0585c1bfbc2b197d348e6b28e7e1b598984373ee58fa495c58bd"
+        }
+      ]
+    }
+  ]
+}

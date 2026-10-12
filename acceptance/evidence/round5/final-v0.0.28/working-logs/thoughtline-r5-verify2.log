@@ -1,0 +1,37 @@
+
+> thoughtline@0.0.27 typecheck
+> node node_modules/typescript/bin/tsc --noEmit
+
+
+> thoughtline@0.0.27 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/i18n.test.ts (11 tests | 1 failed) 87ms
+   × system IDs alone localize and user values are inserted unchanged 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/i18n.test.ts > system IDs alone localize and user values are inserted unchanged
+AssertionError: expected 'Group: 未分组' to be 'Project: 未分组' // Object.is equality
+
+Expected: "Project: 未分组"
+Received: "Group: 未分组"
+
+ ❯ tests/unit/i18n.test.ts:5:259
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 56 passed | 1 skipped (58)
+      Tests  1 failed | 343 passed | 4 skipped (348)
+   Start at  22:26:43
+   Duration  2.46s (tests 59%, transform 25%, import 12%, worker 4%)
+
+  Transform  transforming modules took 2.26s · 25% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

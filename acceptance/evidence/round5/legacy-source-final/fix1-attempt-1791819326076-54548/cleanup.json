@@ -1,0 +1,62 @@
+{
+  "stage": "old-save-cannot-navigate-new-session",
+  "host": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "release": "24.3.0"
+  },
+  "directory": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-calendar-motion-fix1-HCimWY",
+  "pids": [
+    54551,
+    54551,
+    54552,
+    54553,
+    54554,
+    54559,
+    54560
+  ],
+  "normalClose": true,
+  "dataRemoved": true,
+  "allExited": true,
+  "assertionsComplete": true,
+  "passed": true,
+  "cases": [
+    {
+      "name": "empty-day-visible-return",
+      "passed": true,
+      "emptyDay": "2026-10-01",
+      "visual": {
+        "kind": "day-to-month",
+        "text": "这里还没有念头。",
+        "emptyCount": 1
+      }
+    },
+    {
+      "name": "scroll-interrupts-active-motion",
+      "passed": true,
+      "scrollTop": 180
+    },
+    {
+      "name": "restored-scroll-keeps-return-motion",
+      "passed": true,
+      "kind": "day-to-month"
+    },
+    {
+      "name": "resize-interrupts-active-motion",
+      "passed": true,
+      "previousSize": [
+        740,
+        540
+      ]
+    },
+    {
+      "name": "old-save-cannot-navigate-new-session",
+      "passed": true,
+      "oldSession": 2,
+      "publishedSession": 3,
+      "storedTextSaved": true
+    }
+  ],
+  "recoveryError": null,
+  "cleanupError": null
+}

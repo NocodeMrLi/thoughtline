@@ -1,0 +1,35 @@
+{
+  "reviewedSource": "ce4c387941c2af674a7fa5ed70a0ca771d7c2680",
+  "mode": "independent read-only final incremental review",
+  "remainingImportantFindings": 0,
+  "resolved": [
+    "actual package readability launch was source-only; now uses sanitized actual executable and bridge entry",
+    "pending classification creation could exit via finish/close; shared leave guard and delayed-IPC regression added",
+    "inline classification triggers could unmount pending picker; both disabled while pending and Escape protected"
+  ],
+  "reviewIsNotRuntimeEvidence": true,
+  "fixtureFinalReview": {
+    "source": "4ec205aa21c43bfe4d0b7369ac9744348ce98d99",
+    "importantFindings": 0,
+    "scope": "Test-only focus timer polling, bounded preparation/diagnostics/normal shutdown; force stops only owned process on failure and never passes. Full CI gates retained and reordered for earlier failure."
+  },
+  "ciSupervisorReview": {
+    "source": "83c550e2ed2e17c15c6f8f9cd198c9d49c65c87e",
+    "remainingImportantFindings": 0,
+    "fixed": [
+      "Confirm child close and trailing output",
+      "Bound native-menu cleanup and preserve failed profiles"
+    ],
+    "scope": "Read-only review; CI acceptance separate"
+  },
+  "hiddenManageProductionReview": {
+    "source": "3b6342543019cda8b237583991518d54985663bc",
+    "remainingImportantFindings": 0,
+    "scope": "Confirmed hidden-only leave acknowledgement; all hide callers traced, show invalidates, visible dirty guard retained; controlled red-green reviewed"
+  },
+  "finalFixtureReview": {
+    "source": "4c9567fef38dd43ccd0e0c3bc18d557c4b945843",
+    "remainingImportantFindings": 0,
+    "scope": "Same owned profile native path assertion with 3s boundary; storage fallback verified; menu gates unchanged"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "platform": "darwin",
+  "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-hidden-manage-oAGvf4",
+  "cases": [
+    "visible-dirty-settings-still-block-close-and-new",
+    "confirmed-hidden-manage-does-not-need-a-second-renderer-ack"
+  ],
+  "pids": [
+    48772,
+    48772,
+    48773,
+    48774,
+    48775,
+    48777,
+    48778
+  ],
+  "scope": "Real source lifecycle with deliberately unresponsive hidden Manage leave IPC; visible guards remain real",
+  "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert((await shelf.evaluate(()=>window.thoughtline.openSettings())).ok)\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/hidden-manage-reopen.cjs:17:3",
+  "normalClose": true,
+  "passed": false
+}

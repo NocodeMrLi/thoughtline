@@ -1,0 +1,31 @@
+{
+  "platform": "darwin",
+  "packaged": false,
+  "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-r5-OTla7U",
+  "checks": [
+    "native tray calendar entry stays enabled during writing",
+    "calendar opens beside active writer",
+    "focused composer name has no coloured rectangle",
+    "opening a picker preserves native composer bounds",
+    "default group stays above selected group",
+    "long hold only enters arrange; explicit cross removes",
+    "three equal settings-style tabs; full catalog retains removed rows",
+    "table headings align with body despite native scrollbar gutter",
+    "removed tab has two bounded icon lists with independent scrolling and restore only",
+    "restoration preserves both pane heights and original writer classification",
+    "one delete action migrates all related history and live writer body to selected group",
+    "detail shares group and tag choices while writer stays visible; management returns to same edit",
+    "same-paper return preserves raw empty title instead of derived display title",
+    "multi-paper management return preserves actual B and active empty title",
+    "restored draft is consumed once across repeated editing",
+    "concurrent writer and old-note autosaves preserve independent content",
+    "all simultaneous group-tag metadata is group first in shelf and calendar",
+    "calendar reader management return retains editing and raw empty title",
+    "calendar close leaves writer intact and editable"
+  ],
+  "failures": [],
+  "scope": "controlled native source/actual package; physical and owner acceptance separate",
+  "normalQuit": true,
+  "profileRemoved": true,
+  "passed": true
+}

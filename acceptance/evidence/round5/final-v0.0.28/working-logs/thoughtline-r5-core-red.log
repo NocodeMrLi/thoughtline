@@ -1,0 +1,54 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/classification.test.ts (17 tests | 2 failed) 45ms
+   × group deletion migrates hanging archived deleted and active draft atomically without text loss 4ms
+   × group migration rejects self missing inactive or invalid destination and protects defaults 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/classification.test.ts > group deletion migrates hanging archived deleted and active draft atomically without text loss
+AssertionError: expected [ '', '', '' ] to deeply equal [ '接收分组', '接收分组', '接收分组' ]
+
+- Expected
++ Received
+
+  [
+-   "接收分组",
+-   "接收分组",
+-   "接收分组",
++   "",
++   "",
++   "",
+  ]
+
+ ❯ tests/unit/classification.test.ts:62:42
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/classification.test.ts > group migration rejects self missing inactive or invalid destination and protects defaults
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/classification.test.ts:68:113
+     66| test('group migration rejects self missing inactive or invalid destina…
+     67|  const s=fixture();s.projects=['工作记录','停用接收'];s.inactiveProjects=['停用接…
+     68|  for(const to of ['工作记录','不存在','停用接收',7])expect(removeProject(s,'工作记录'…
+       |                                                                                                                 ^
+     69|  expect(removeProject(s,'','2026-10-12T01:00:00Z','工作记录').ok).toBe(fal…
+     70| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 15 passed (17)
+   Start at  22:12:26
+   Duration  233ms (transform 58%, tests 30%, import 10%, worker 2%)
+

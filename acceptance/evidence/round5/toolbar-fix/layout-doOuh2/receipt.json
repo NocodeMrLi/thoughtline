@@ -1,0 +1,182 @@
+{
+  "platform": "darwin",
+  "cases": [
+    {
+      "name": "swap-rows-date-and-impact-not-clipped",
+      "passed": true,
+      "observation": [
+        {
+          "height": 64.5,
+          "children": [
+            {
+              "text": "布局目标 0",
+              "inside": true
+            },
+            {
+              "text": "通用 · 2026-10-11",
+              "inside": true
+            },
+            {
+              "text": "换下一张",
+              "inside": true
+            }
+          ]
+        },
+        {
+          "height": 64.5,
+          "children": [
+            {
+              "text": "布局目标 1",
+              "inside": true
+            },
+            {
+              "text": "通用 · 2026-10-11",
+              "inside": true
+            },
+            {
+              "text": "换下一张",
+              "inside": true
+            }
+          ]
+        },
+        {
+          "height": 64.5,
+          "children": [
+            {
+              "text": "布局目标 2",
+              "inside": true
+            },
+            {
+              "text": "通用 · 2026-10-11",
+              "inside": true
+            },
+            {
+              "text": "换下一张",
+              "inside": true
+            }
+          ]
+        },
+        {
+          "height": 64.5,
+          "children": [
+            {
+              "text": "布局目标 3",
+              "inside": true
+            },
+            {
+              "text": "通用 · 2026-10-11",
+              "inside": true
+            },
+            {
+              "text": "换下一张",
+              "inside": true
+            }
+          ]
+        },
+        {
+          "height": 64.5,
+          "children": [
+            {
+              "text": "布局目标 4",
+              "inside": true
+            },
+            {
+              "text": "通用 · 2026-10-11",
+              "inside": true
+            },
+            {
+              "text": "换下一张",
+              "inside": true
+            }
+          ]
+        },
+        {
+          "height": 64.5,
+          "children": [
+            {
+              "text": "布局目标 5",
+              "inside": true
+            },
+            {
+              "text": "通用 · 2026-10-11",
+              "inside": true
+            },
+            {
+              "text": "换下一张",
+              "inside": true
+            }
+          ]
+        }
+      ],
+      "pids": [
+        33184,
+        33184,
+        33187,
+        33189,
+        33190,
+        33191,
+        33195
+      ],
+      "normalQuit": true,
+      "profileRemoved": true
+    },
+    {
+      "name": "reminder-footer-retains-bottom-spacing",
+      "passed": false,
+      "failure": "AssertionError [ERR_ASSERTION]: [{\"width\":350,\"height\":260,\"bottom\":16,\"controls\":[{\"left\":12,\"right\":81.2265625,\"bottom\":243},{\"left\":85.2265625,\"right\":154.453125,\"bottom\":243},{\"left\":158.453125,\"right\":245.390625,\"bottom\":244},{\"left\":251.390625,\"right\":308.390625,\"bottom\":242},{\"left\":314.390625,\"right\":386.390625,\"bottom\":244}],\"capacity\":{\"x\":12,\"y\":187,\"width\":154,\"height\":13,\"top\":187,\"right\":166,\"bottom\":200,\"left\":12}},{\"width\":380,\"height\":260,\"bottom\":16,\"controls\":[{\"left\":12,\"right\":81.2265625,\"bottom\":243},{\"left\":85.2265625,\"right\":154.453125,\"bottom\":243},{\"left\":158.453125,\"right\":245.390625,\"bottom\":244},{\"left\":251.390625,\"right\":308.390625,\"bottom\":242},{\"left\":314.390625,\"right\":386.390625,\"bottom\":244}],\"capacity\":{\"x\":12,\"y\":187,\"width\":154,\"height\":13,\"top\":187,\"right\":166,\"bottom\":200,\"left\":12}},{\"width\":420,\"height\":260,\"bottom\":16,\"controls\":[{\"left\":12,\"right\":92.03125,\"bottom\":243},{\"left\":96.03125,\"right\":176.0625,\"bottom\":243},{\"left\":180.0625,\"right\":267,\"bottom\":244},{\"left\":273,\"right\":330,\"bottom\":242},{\"left\":336,\"right\":408,\"bottom\":244}],\"capacity\":{\"x\":12,\"y\":187,\"width\":154,\"height\":13,\"top\":187,\"right\":166,\"bottom\":200,\"left\":12}},{\"width\":480,\"height\":260,\"bottom\":16,\"controls\":[{\"left\":12,\"right\":122.03125,\"bottom\":243},{\"left\":126.03125,\"right\":236.0625,\"bottom\":243},{\"left\":240.0625,\"right\":327,\"bottom\":244},{\"left\":333,\"right\":390,\"bottom\":242},{\"left\":396,\"right\":468,\"bottom\":244}],\"capacity\":{\"x\":12,\"y\":187,\"width\":154,\"height\":13,\"top\":187,\"right\":166,\"bottom\":200,\"left\":12}}]\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-layout-workflow.cjs:34:3\n    at async run (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-layout-workflow.cjs:13:23)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-layout-workflow.cjs:26:2",
+      "pids": [
+        33197,
+        33197,
+        33199,
+        33200,
+        33201,
+        33202,
+        33203
+      ],
+      "normalQuit": true,
+      "profileRemoved": true
+    },
+    {
+      "name": "arrange-menu-is-one-stateful-action",
+      "passed": true,
+      "observation": {
+        "labels": [
+          "新建念头",
+          "查看全文",
+          "合并",
+          "收起当前念头",
+          "只看 通用",
+          "显示全部标签",
+          "撤销整理",
+          "筛选标签",
+          "",
+          "Thoughtline日历"
+        ],
+        "after": [
+          "新建念头",
+          "查看全文",
+          "合并",
+          "收起当前念头",
+          "只看 通用",
+          "显示全部标签",
+          "自动整理",
+          "筛选标签",
+          "",
+          "Thoughtline日历"
+        ]
+      },
+      "pids": [
+        33211,
+        33211,
+        33212,
+        33213,
+        33214,
+        33217,
+        33218
+      ],
+      "normalQuit": true,
+      "profileRemoved": true
+    }
+  ],
+  "passed": false
+}

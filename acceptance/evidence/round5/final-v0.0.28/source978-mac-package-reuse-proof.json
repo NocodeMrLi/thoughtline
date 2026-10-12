@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "testedSource": "ce4c387941c2af674a7fa5ed70a0ca771d7c2680",
+  "finalSource": "978b9483d1d0ec7674265eece5a98aa89f1178eb",
+  "changedFiles": [
+    ".github/workflows/test-packages.yml",
+    "tests/electron/round2-arrange-workflow.cjs",
+    "tests/electron/round2-native-menu.cjs",
+    "tests/electron/round2-workflow.cjs",
+    "tests/electron/window-fixture.cjs"
+  ],
+  "sameCompiledHashes": true,
+  "outputs": 34,
+  "exactSameAsarSha256": "10252fc4ea5c8d2c26887832af2bb3f1496cda570d923367fbadf5de8eacf480",
+  "priorActualDmgSuites": "mac-final-suites.json",
+  "additionalFixtureTests": [
+    "hidden-fixture-source",
+    "bounded-fixture-source",
+    "focus-fixture-source",
+    "final-quit-fixture-source",
+    "diagnostic-fixture-source"
+  ],
+  "scope": "Only test fixtures and CI ordering changed; all 34 compiled outputs and complete signed runtime asar are identical. Final Mac package binding independently verifies final DMG."
+}

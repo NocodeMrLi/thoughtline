@@ -1,0 +1,71 @@
+{
+  "platform": "darwin",
+  "scenes": [
+    {
+      "rows": [
+        {
+          "selector": ".composer-title",
+          "pseudo": "::placeholder",
+          "color": "rgb(193, 188, 178)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": 1,
+          "font": "-apple-system, \"system-ui\", \"PingFang SC\", sans-serif",
+          "ratio": 7.115327571714497
+        },
+        {
+          "selector": "#idea-text",
+          "pseudo": null,
+          "color": "rgb(242, 234, 219)",
+          "background": "rgb(56, 56, 49)",
+          "opacity": 1,
+          "font": "-apple-system, \"system-ui\", \"PingFang SC\", sans-serif",
+          "ratio": 9.879521995898319
+        },
+        {
+          "selector": "#idea-text",
+          "pseudo": "::placeholder",
+          "color": "rgb(193, 188, 178)",
+          "background": "rgb(56, 56, 49)",
+          "opacity": 1,
+          "font": "-apple-system, \"system-ui\", \"PingFang SC\", sans-serif",
+          "ratio": 6.244424731822177
+        },
+        {
+          "selector": ".composer-submit>.primary",
+          "pseudo": null,
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(71, 105, 99)",
+          "opacity": 0.5,
+          "font": "-apple-system, \"system-ui\", \"PingFang SC\", sans-serif",
+          "ratio": 6.054107782085981
+        },
+        {
+          "selector": ".classification-trigger",
+          "pseudo": null,
+          "color": "rgb(242, 234, 223)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": 1,
+          "font": "-apple-system, \"system-ui\", \"PingFang SC\", sans-serif",
+          "ratio": 11.284736990290417
+        }
+      ],
+      "locale": "zh-CN",
+      "theme": "light",
+      "state": "empty"
+    }
+  ],
+  "scope": "Actual native renderer; opaque text contrast measured, native translucent scenes visually reviewed separately. Not arbitrary desktop-background certification.",
+  "passed": false,
+  "failure": "AssertionError [ERR_ASSERTION]: Readable controls cannot fade their text: {\"locale\":\"zh-CN\",\"theme\":\"light\",\"state\":\"empty\",\"selector\":\".composer-submit>.primary\",\"pseudo\":null,\"color\":\"rgb(255, 255, 255)\",\"background\":\"rgb(71, 105, 99)\",\"opacity\":0.5,\"font\":\"-apple-system, \\\"system-ui\\\", \\\"PingFang SC\\\", sans-serif\",\"ratio\":6.054107782085981}\n\n0.5 !== 1\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-readability-workflow.cjs:30:42",
+  "pids": [
+    65457,
+    65457,
+    65459,
+    65460,
+    65462,
+    65463,
+    65464
+  ],
+  "normalQuit": true,
+  "profileRemoved": true
+}

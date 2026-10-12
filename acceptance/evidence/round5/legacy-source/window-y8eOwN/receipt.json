@@ -1,0 +1,18 @@
+{
+  "platform": "darwin",
+  "cases": [],
+  "scope": "isolated native window flags, own maximized/fullscreen controller; synthetic edge cursor; not physical WeChat/Codex acceptance",
+  "failure": "electronApplication.evaluate: TypeError: Cannot read properties of undefined (reading 'read')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:329)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round3-window-workflow.cjs:7:24",
+  "passed": false,
+  "pids": [
+    33527,
+    33527,
+    33528,
+    33529,
+    33530,
+    33534,
+    33535,
+    33536
+  ],
+  "normalQuit": true
+}
