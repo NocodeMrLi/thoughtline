@@ -48,3 +48,5 @@
 Mac DMG SHA256：`4777f5cd26a14b023415a2268b34e9a5354da9f3c11108cecb6430a56a6f9c6e`。
 Windows EXE SHA256：`454b464567e3f4fbd05d4870bc2e47be49684683ce23fd92864554735b7e25cb`。
 完整技术证据：[本轮最终回执](</Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round5/final-v0.0.28>)；已归档的旧截图可按归档清单恢复。
+
+文档证据汇总提交f43fc1f与已验证tag源码4c9567f的326份构建输入对象/模式一致。规划记录JSON意外触发的重复运行38290488598已在checkout阶段取消；不作为通过记录，发布依据仍是完整成功任务38287260286，验证门禁未关闭。
