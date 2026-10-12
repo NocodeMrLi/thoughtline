@@ -16,6 +16,7 @@ import './styles/auxiliary-material.css';
 import './styles/settings.css';
 import './styles/appearance.css';
 import './styles/classification.css';
+import './styles/visual-quality.css';
 import {flushPageSelections} from './hooks/useClipPage';
 import {prepareLeave} from './hooks/leaveGuards';
 function App(){
