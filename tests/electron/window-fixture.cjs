@@ -17,16 +17,18 @@ async function launchOptions(dir,{realShortcuts=false,seedLocale='zh-CN',osLocal
 }
 async function bounded(promise,label,timeout=10000){let timer;try{return await Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Fixture timed out: '+label)),timeout);})]);}finally{clearTimeout(timer);}}
 async function openComposer(app,shelf){
+ console.log('FIXTURE composer: invoking shortcut');
  await bounded(app.evaluate(()=>{const keys=[...(globalThis.thoughtlineTestHotkeys?.keys()??[])].filter(key=>key.toLowerCase()!=='escape');if(keys.length!==1)throw Error('Expected exactly one registered write shortcut, found '+keys.join(', '));globalThis.thoughtlineTestHotkeys.get(keys[0])();}),'registered write shortcut');
- let page;const until=Date.now()+10000;
+ console.log('FIXTURE composer: shortcut invoked');let page;const until=Date.now()+10000;
  while(!page&&Date.now()<until){page=(await app.windows()).find(p=>p.url().includes('view=composer'));if(!page)await new Promise(r=>setTimeout(r,25));}
- if(!page)throw Error('Composer did not open');console.log('FIXTURE composer: created');while(!(await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().some(w=>w.getTitle()==='Thoughtline Composer'&&w.isVisible())))&&Date.now()<until)await new Promise(r=>setTimeout(r,25));console.log('FIXTURE composer: native visibility checked');await page.waitForSelector('#idea-text',{timeout:10000});console.log('FIXTURE composer: textbox visible');await page.waitForFunction(()=>document.activeElement?.id==='idea-text',undefined,{polling:50,timeout:10000});console.log('FIXTURE composer: focused');return page;
+ if(!page){const state=await bounded(app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().map(w=>({title:w.getTitle(),visible:w.isVisible(),loading:w.webContents.isLoading()}))),'composer failure state',3000);throw Error('Composer did not open: '+JSON.stringify(state));}console.log('FIXTURE composer: created');while(!(await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().some(w=>w.getTitle()==='Thoughtline Composer'&&w.isVisible())))&&Date.now()<until)await new Promise(r=>setTimeout(r,25));console.log('FIXTURE composer: native visibility checked');await page.waitForSelector('#idea-text',{timeout:10000});console.log('FIXTURE composer: textbox visible');await page.waitForFunction(()=>document.activeElement?.id==='idea-text',undefined,{polling:50,timeout:10000});console.log('FIXTURE composer: focused');return page;
 }
 // A hidden renderer may suspend the promise continuation before Playwright reads
 // it. Observe the acknowledged native hide from the main process instead of
 // holding page.evaluate open until the normal 30-second window recycle.
 async function waitHidden(app,title){const deadline=Date.now()+10000;while(await app.evaluate(({BrowserWindow},title)=>BrowserWindow.getAllWindows().some(w=>w.getTitle()===title&&w.isVisible()),title)){if(Date.now()>deadline)throw Error('Fixture close did not hide '+title);await new Promise(r=>setTimeout(r,25));}}
-async function warmViews(app){
+async function warmViews(app){return bounded(warmViewsImpl(app),'warm views',45000);}
+async function warmViewsImpl(app){
  console.log('FIXTURE warmViews: shelf');const shelf=await app.firstWindow();await shelf.waitForURL(/view=shelf/);await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});
  console.log('FIXTURE warmViews: settings');const opened=await bounded(shelf.evaluate(()=>window.thoughtline.openSettings()),'open settings');if(!opened.ok)throw Error(opened.message);
  const manage=(await app.windows()).find(p=>p.url().includes('view=manage'));await manage.waitForSelector('[data-mode=settings]');await bounded(manage.evaluate(()=>{void window.thoughtline.closeManage().then(result=>{window.thoughtlineFixtureClose=result;});}),'request settings hide');await waitHidden(app,'Thoughtline Manage');
