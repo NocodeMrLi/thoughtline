@@ -20,7 +20,7 @@ async function openComposer(app,shelf){
  await bounded(app.evaluate(()=>{const keys=[...(globalThis.thoughtlineTestHotkeys?.keys()??[])].filter(key=>key.toLowerCase()!=='escape');if(keys.length!==1)throw Error('Expected exactly one registered write shortcut, found '+keys.join(', '));globalThis.thoughtlineTestHotkeys.get(keys[0])();}),'registered write shortcut');
  let page;const until=Date.now()+10000;
  while(!page&&Date.now()<until){page=(await app.windows()).find(p=>p.url().includes('view=composer'));if(!page)await new Promise(r=>setTimeout(r,25));}
- if(!page)throw Error('Composer did not open');while(!(await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().some(w=>w.getTitle()==='Thoughtline Composer'&&w.isVisible())))&&Date.now()<until)await new Promise(r=>setTimeout(r,25));await page.waitForSelector('#idea-text');await page.waitForFunction(()=>document.activeElement?.id==='idea-text');return page;
+ if(!page)throw Error('Composer did not open');console.log('FIXTURE composer: created');while(!(await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().some(w=>w.getTitle()==='Thoughtline Composer'&&w.isVisible())))&&Date.now()<until)await new Promise(r=>setTimeout(r,25));console.log('FIXTURE composer: native visibility checked');await page.waitForSelector('#idea-text',{timeout:10000});console.log('FIXTURE composer: textbox visible');await page.waitForFunction(()=>document.activeElement?.id==='idea-text',undefined,{polling:50,timeout:10000});console.log('FIXTURE composer: focused');return page;
 }
 // A hidden renderer may suspend the promise continuation before Playwright reads
 // it. Observe the acknowledged native hide from the main process instead of

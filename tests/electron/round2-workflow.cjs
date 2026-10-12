@@ -9,7 +9,7 @@ const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:
  try{
   const now=new Date().toISOString(),ideas=[0,1,2].map(n=>({id:'r2-'+n,text:'正文中文😀\n第二行 '+n,title:'测试 '+n,agentId:'general',project:'保留分组',status:'hanging',createdAt:now,updatedAt:now}));
   await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:2,revision:0,ideas,clips:[{id:'group',ideaIds:ideas.map(i=>i.id),currentId:'r2-1',agentId:'general',position:.4}],agents:[{id:'general',name:'通用',color:'#A0A3AA'}],draft:null,settings:{writeHotkey:'Control+Alt+N',reducedMotion:false}}));
-  app=await _electron.launch(await launchOptions(dir,{stationaryTopCursor:true}));({manage,shelf}=await warmViews(app));assert.equal((await manage.evaluate(()=>window.thoughtline.storageInfo())).value.directory,dir);
+  app=await _electron.launch(await launchOptions(dir,{stationaryTopCursor:true}));({manage,shelf}=await bounded(warmViews(app),'warm views',45000));assert.equal((await manage.evaluate(()=>window.thoughtline.storageInfo())).value.directory,dir);
   await shelf.evaluate(()=>window.thoughtline.openManage('r2-1'));await manage.waitForSelector('.idea-reader');
   await check('hint-delay-small-dismiss-on-menu',async()=>{
    const b=manage.getByRole('button',{name:'更多操作',exact:true});await b.hover();await manage.waitForTimeout(120);assert.equal(await manage.locator('.icon-tooltip').count(),0,'hover must not show hint immediately');await manage.waitForTimeout(550);
@@ -60,8 +60,8 @@ const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:
    for(let n=0;n<10;n++){const start=Date.now();await manage.getByRole('button',{name:n%2?'下个月':'上个月',exact:true}).click();await bounded(manage.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))),'two visible calendar frames',5000);times.push(Date.now()-start);}
    const sorted=[...times].sort((a,b)=>a-b);return {samples:times,p50:sorted[4],p95:sorted[9],scope:'Playwright input plus two actual renderer frames, controlled environment'};
   });
- }catch(e){receipt.failure=e.stack;}finally{
-  try{if(app){receipt.pids=[...new Set([app.process().pid,...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid))])];await app.close();receipt.normalClose=true;await cleanupIdleFixture(dir,receipt.pids);receipt.dataRemoved=true;}}catch(e){receipt.cleanupFailure=e.stack;}
+ }catch(e){receipt.failure=e.stack;console.error('ROUND2 FAILURE',e.stack);try{receipt.windowsAtFailure=await bounded(app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().map(w=>({title:w.getTitle(),visible:w.isVisible(),focused:w.isFocused(),loading:w.webContents.isLoading()}))),'failure window state',3000);console.error(JSON.stringify(receipt.windowsAtFailure));}catch(diagnostic){receipt.diagnosticFailure=String(diagnostic);}}finally{
+  try{if(app){receipt.pids=[...new Set([app.process().pid,...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid))])];await bounded(app.close(),'normal fixture quit',10000);receipt.normalClose=true;await cleanupIdleFixture(dir,receipt.pids);receipt.dataRemoved=true;}}catch(e){receipt.cleanupFailure=e.stack;console.error('ROUND2 CLEANUP FAILURE',e.stack);if(app&&app.process().exitCode===null){receipt.forcedOwnedProcessStop={pid:app.process().pid,reason:'Failed fixture normal quit timed out; this is a test failure'};app.process().kill();}}
   receipt.passed=!receipt.failure&&!receipt.cleanupFailure&&receipt.dataRemoved&&receipt.cases.every(c=>c.passed);await fs.writeFile(path.join(evidence,'receipt.json'),JSON.stringify(receipt,null,2));console.log(JSON.stringify(receipt));if(!receipt.passed)process.exitCode=1;
  }
 })();
