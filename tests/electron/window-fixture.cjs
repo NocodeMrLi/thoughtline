@@ -21,12 +21,16 @@ async function openComposer(app,shelf){
  while(!page&&Date.now()<until){page=(await app.windows()).find(p=>p.url().includes('view=composer'));if(!page)await new Promise(r=>setTimeout(r,25));}
  if(!page)throw Error('Composer did not open');while(!(await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().some(w=>w.getTitle()==='Thoughtline Composer'&&w.isVisible())))&&Date.now()<until)await new Promise(r=>setTimeout(r,25));await page.waitForSelector('#idea-text');await page.waitForFunction(()=>document.activeElement?.id==='idea-text');return page;
 }
+// A hidden renderer may suspend the promise continuation before Playwright reads
+// it. Observe the acknowledged native hide from the main process instead of
+// holding page.evaluate open until the normal 30-second window recycle.
+async function waitHidden(app,title){const deadline=Date.now()+10000;while(await app.evaluate(({BrowserWindow},title)=>BrowserWindow.getAllWindows().some(w=>w.getTitle()===title&&w.isVisible()),title)){if(Date.now()>deadline)throw Error('Fixture close did not hide '+title);await new Promise(r=>setTimeout(r,25));}}
 async function warmViews(app){
  const shelf=await app.firstWindow();await shelf.waitForURL(/view=shelf/);await shelf.waitForSelector('[data-view=shelf]',{state:'attached'});
  const opened=await shelf.evaluate(()=>window.thoughtline.openSettings());if(!opened.ok)throw Error(opened.message);
- const manage=(await app.windows()).find(p=>p.url().includes('view=manage'));await manage.waitForSelector('[data-mode=settings]');await manage.evaluate(()=>window.thoughtline.closeManage());
+ const manage=(await app.windows()).find(p=>p.url().includes('view=manage'));await manage.waitForSelector('[data-mode=settings]');await manage.evaluate(()=>{void window.thoughtline.closeManage().then(result=>{window.thoughtlineFixtureClose=result;});});await waitHidden(app,'Thoughtline Manage');
  const composer=await openComposer(app,shelf);
- await composer.evaluate(async()=>{const i=await window.thoughtline.info();const r=await window.thoughtline.close(i.composerContext.draft);if(!r.ok)throw Error(r.message);});
+ await composer.evaluate(()=>{void window.thoughtline.info().then(i=>window.thoughtline.close(i.composerContext.draft)).then(result=>{window.thoughtlineFixtureClose=result;});});await waitHidden(app,'Thoughtline Composer');
  return {shelf,composer,manage};
 }
 async function waitForInfo(page,predicate,timeout=10000){const deadline=Date.now()+timeout;while(Date.now()<deadline){const info=await page.evaluate(()=>window.thoughtline.info());if(predicate(info))return info;await new Promise(r=>setTimeout(r,25));}throw Error('Timed out waiting for acknowledged main-process state');}
