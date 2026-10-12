@@ -1,3 +1,4 @@
+const {chooseInlineTag}=require('./classification-fixture.cjs');
 // Catches missing natural-rope motifs and fused title/body fields in actual Electron pages.
 const {launchOptions,waitForInfo}=require('./window-fixture.cjs');
 const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
@@ -40,10 +41,10 @@ const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=requ
   }
   for(const theme of ['light','dark'])for(const entry of ['detail','calendar']){
    await appearance('blue',theme);await open(entry);await button('编辑').click();await page.locator('[data-inline-editor]').waitFor();const before=await geometry(true);
-   await page.getByRole('combobox',{name:'编辑标签归属',exact:true}).selectOption('codex');
+   await chooseInlineTag(page,'codex');
    await page.waitForFunction(()=>document.querySelector('.reader-paper').getAttribute('data-reader-agent-color')==='#3F79D4');const changed=await geometry(true);
    assert.notEqual(changed.title.borderColor,before.title.borderColor,'draft tag change updates the visible title border');assert.equal(changed.title.borderColor,changed.body.borderColor);assert.equal(changed.title.background,before.title.background);
-   await page.getByRole('combobox',{name:'编辑标签归属',exact:true}).selectOption('claude');await button('完成编辑').first().click();await page.locator('[data-inline-editor]').waitFor({state:'detached'});
+   await chooseInlineTag(page,'claude');await button('完成编辑').first().click();await page.locator('[data-inline-editor]').waitFor({state:'detached'});
    assert.equal((await geometry(false)).title.borderColor,before.title.borderColor);receipt.checks.push(entry+'-'+theme+'-draft-tag-updates-both-borders-with-paper-retained');
   }
   for(const [entry,w,h] of [['detail',380,360],['calendar',350,360],['calendar',420,500],['calendar',740,540]]){

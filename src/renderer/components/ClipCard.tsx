@@ -1,3 +1,4 @@
+import {classificationLabel} from '../../shared/classification';
 import {useLocale} from '../LocaleContext';
 import {useEffect,useId,useMemo,useRef,useState} from 'react';
 import type {PointerEvent,CSSProperties} from 'react';
@@ -46,7 +47,7 @@ export function ClipCard({clip,ideas,agent,onChange,onGrab,onError,reduced,textD
    }} onDragEnd={()=>{ignoreCopyUntil.current=performance.now()+160;setExporting(false);if(exportId.current)window.thoughtline.textDrag(false,exportId.current);exportId.current=null;}} aria-label={t("copyPaper",{p0:agentName(agent)||t('通用'),p1:idea.title})} onClick={async()=>{
     if(performance.now()<ignoreCopyUntil.current)return;const id=idea.id,r=await window.thoughtline.copy(id);if(!r.ok){onError(r.message);return;}if(current.current!==id)return;
     if(copyTimer.current)clearTimeout(copyTimer.current);setCopied(true);copyTimer.current=setTimeout(()=>setCopied(false),1500);
-   }}><span className="agent-name">{agentName(agent)||t('通用')}{idea.project?` · ${idea.project}`:''}</span><strong key={idea.id} data-direction={reduced?undefined:direction}>{idea.title}</strong><span className="preview">{idea.text}</span></button>
+   }}><span className="agent-name">{classificationLabel(idea.project,agentName(agent)||t('通用'))}</span><strong key={idea.id} data-direction={reduced?undefined:direction}>{idea.title}</strong><span className="preview">{idea.text}</span></button>
    <footer className={grouped?'group-footer':'single-footer'}>
     {grouped?<><button className="page-arrow" aria-label={t("上一张便签")} disabled={index===0} onClick={()=>void flip(-1)}>‹</button><button className="page-number" aria-label={t("paperPage",{p0:index+1,p1:clip.ideaIds.length})} onClick={()=>void open(true)}>{copied?'✓':`${index+1}/${clip.ideaIds.length}`}</button><button className="page-arrow" aria-label={t("下一张便签")} disabled={index===clip.ideaIds.length-1} onClick={()=>void flip(1)}>›</button></>:<span className="copy-status" aria-live="polite">{copied?t("已复制"):''}</span>}
     <button aria-label={t("expandPaper",{p0:idea.title})} onClick={()=>void open()}><ExpandIcon/></button>

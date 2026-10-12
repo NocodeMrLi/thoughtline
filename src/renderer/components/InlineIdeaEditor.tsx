@@ -7,13 +7,12 @@ import {CompositionSession} from '../../shared/compositionSession';
 import {registerLeaveGuard} from '../hooks/leaveGuards';
 import {agentInkColors} from './agentInk';
 import {paperAppearance,paperPalettes} from '../../shared/appearance';
-import {activeProjects} from '../../shared/classification';
-import {ProjectOptions} from './ProjectOptions';
+import {ClassificationPicker,FolderIcon} from './ClassificationPicker';
 export const ideaDraft=(idea:Idea):Draft=>({text:idea.text,title:idea.title,project:idea.project,agentId:idea.agentId});
 export function InlineIdeaEditor({idea,info,onDone,onDraftAgentChange}:{idea:Idea;info:PilotInfo;onDone:()=>void;onDraftAgentChange?:(id:string)=>void}){
  const {t,m,agentName}=useLocale();
  const bridge=window.thoughtline;
- const [draft,setDraft]=useState(()=>ideaDraft(idea)),[status,setStatus]=useState(t("已保存")),[error,setError]=useState(''),[projectOpen,setProjectOpen]=useState(false),[confirmAgent,setConfirmAgent]=useState(false);
+ const [draft,setDraft]=useState(()=>info.restoredEditor?.session===info.manageSession&&info.restoredEditor.ideaId===idea.id?info.restoredEditor.draft:ideaDraft(idea)),[status,setStatus]=useState(t("已保存")),[error,setError]=useState(''),[classificationOpen,setClassificationOpen]=useState<'project'|'tag'|null>(null),[confirmAgent,setConfirmAgent]=useState(false);
  const latest=useRef(draft),base=useRef(ideaDraft(idea)),live=useRef(true),saver=useRef<DraftAutosaver<Draft>|null>(null),text=useRef<HTMLTextAreaElement>(null),composition=useRef(new CompositionSession<'text'|'title'|'project'>());
  const grouped=info.snapshot.clips.find(c=>c.ideaIds.includes(idea.id));const needsSplit=!!grouped&&grouped.ideaIds.length>1&&draft.agentId!==grouped.agentId;
  const remembering=useRef<Promise<void>|null>(null);
@@ -45,15 +44,16 @@ export function InlineIdeaEditor({idea,info,onDone,onDraftAgentChange}:{idea:Ide
   onBlur:(e:FocusEvent<HTMLInputElement|HTMLTextAreaElement>)=>{const abandoned=composition.current.blur(e.currentTarget);if(abandoned){update({...latest.current,[abandoned.field]:abandoned.before});saver.current?.resume();}}
  });
  const flush=async()=>{if(composition.current.composing){setError('请先完成输入法选字。');return false;}try{await saver.current?.flush();await rememberProject();return true;}catch(e){if(live.current)setError(e instanceof Error?e.message:'保存未成功，文字已保留。');return false;}};
- const projects=activeProjects(info.snapshot);
+ const projectButton=useRef<HTMLButtonElement>(null),tagButton=useRef<HTMLButtonElement>(null);
+ const changeSeen=useRef(info.classificationChange?.sequence??0);
+ useEffect(()=>{const c=info.classificationChange;if(!c||c.sequence<=changeSeen.current)return;changeSeen.current=c.sequence;if(base.current[c.field]===c.from)base.current={...base.current,[c.field]:c.to};if(latest.current[c.field]===c.from){update({...latest.current,[c.field]:c.to});if(c.field==='agentId')onDraftAgentChange?.(c.to);}},[info.classificationChange?.sequence]);
+ const agent=info.snapshot.agents.find(a=>a.id===draft.agentId);
  const ink=agentInkColors(info.snapshot.agents.find(a=>a.id===draft.agentId)?.color??'#A0A3AA',paperPalettes[paperAppearance(info.snapshot.settings.paper).color]);
  return <section style={{'--editor-focus-light':ink.light,'--editor-focus-dark':ink.dark} as CSSProperties} data-inline-editor className="inline-editor" aria-label={t("原地编辑念头")} onKeyDown={e=>{if(e.key==='Escape'){e.stopPropagation();if(!e.nativeEvent.isComposing&&!composition.current.composing){e.preventDefault();void flush().then(ok=>{if(ok&&live.current)onDone();});}}}}>
   <input aria-label={t("编辑标题")} placeholder={t("名称（可选）")} maxLength={50} value={draft.title} {...events('title')}/>
   <textarea ref={text} aria-label={t("编辑正文")} value={draft.text} spellCheck={false} {...events('text')}/>
-  <div className="inline-properties"><button aria-label={t("projectValue",{p0:draft.project||t("未分组")})} aria-expanded={projectOpen} onClick={()=>setProjectOpen(!projectOpen)}>{t("项目：")}{draft.project||t("未分组")} ⌄</button><label>{t("给谁：")}<select aria-label={t("编辑归属 Agent")} value={draft.agentId} onChange={e=>{setConfirmAgent(false);onDraftAgentChange?.(e.target.value);update({...latest.current,agentId:e.target.value});}}>{info.snapshot.agents.map(a=><option key={a.id} value={a.id}>{agentName(a)}</option>)}</select></label></div>
-  {projectOpen&&<div className="inline-project-picker"><ProjectOptions disabled={false} projects={projects} reduced={info.snapshot.settings.reducedMotion} composing={()=>composition.current.composing} onChoose={p=>{update({...latest.current,project:p});setProjectOpen(false);}} onDone={()=>setProjectOpen(false)} onDelete={async p=>{
-   if(!await flush())throw Error(t("请先保存最后修改再删除分组。"));const current=await window.thoughtline.info();const result=await window.thoughtline.classificationChange({kind:'active',field:'project',id:p,active:false},current.snapshot.revision);if(!result.ok)throw Error(result.message);
-  }}><label>{t("项目")}<input aria-label={t("编辑项目")} maxLength={40} value={draft.project} {...events('project')}/></label></ProjectOptions></div>}
+  <div className="inline-properties"><button ref={projectButton} className="classification-trigger" aria-label={t('分组：')+(draft.project||t('未分组'))} aria-expanded={classificationOpen==='project'} title={draft.project||t('未分组')} onClick={()=>setClassificationOpen(classificationOpen==='project'?null:'project')}><FolderIcon/><span>{draft.project||t('未分组')}</span><span aria-hidden="true">⌄</span></button><button ref={tagButton} className="classification-trigger" aria-label={t('标签：')+agentName(agent)} aria-expanded={classificationOpen==='tag'} title={agentName(agent)} onClick={()=>setClassificationOpen(classificationOpen==='tag'?null:'tag')}><span className="classification-dot" style={{background:agent?.color}}/><span>{agentName(agent)}</span><span aria-hidden="true">⌄</span></button></div>
+  {classificationOpen&&<ClassificationPicker key={classificationOpen} kind={classificationOpen} anchor={classificationOpen==='project'?projectButton:tagButton} info={info} value={classificationOpen==='project'?draft.project:draft.agentId} prepare={flush} returnDraft={()=>({session:info.manageSession,ideaId:idea.id,draft:latest.current})} onClose={()=>setClassificationOpen(null)} onChoose={value=>{if(classificationOpen==='tag'){setConfirmAgent(false);onDraftAgentChange?.(value);}update({...latest.current,[classificationOpen==='project'?'project':'agentId']:value});setClassificationOpen(null);(classificationOpen==='project'?projectButton:tagButton).current?.focus();}}/>}
   {needsSplit&&<label className="inline-split-confirm"><input type="checkbox" checked={confirmAgent} onChange={e=>{setConfirmAgent(e.target.checked);if(e.target.checked){splitAllowed.current=true;void flush();}}}/>{t("更改归属会将当前纸张移至独立夹子")}</label>}
   <div className="inline-save-status"><span role="status">{m(status)}</span><button onClick={()=>void flush().then(ok=>{if(ok&&live.current)onDone();})}>{t("完成编辑")}</button>{error&&<button onClick={()=>void flush()}>{t("重试保存")}</button>}</div>
   {error&&<div className="inline-save-error"><p role="alert">{m(error)}</p></div>}

@@ -22,7 +22,7 @@ const api:ThoughtlineBridge={
  close:draft=>ipcRenderer.invoke('thoughtline:close',draft),
  saveDraft:(draft,session,sequence)=>ipcRenderer.invoke('thoughtline:save-draft',draft,session,sequence),
  openComposer:sourceId=>ipcRenderer.invoke('thoughtline:open-composer',sourceId),
- openClassification:tab=>ipcRenderer.invoke('thoughtline:open-classification',tab),
+ openClassification:(tab,returnDraft)=>ipcRenderer.invoke('thoughtline:open-classification',tab,returnDraft),
  returnClassification:()=>ipcRenderer.invoke('thoughtline:return-classification'),
  classificationChange:(change,revision)=>ipcRenderer.invoke('thoughtline:classification',change,revision),
  openManage:(id,titles)=>ipcRenderer.invoke('thoughtline:open-manage',id,titles),
@@ -41,7 +41,7 @@ const api:ThoughtlineBridge={
  dragLock:active=>ipcRenderer.invoke('thoughtline:drag-lock',active),
  textDrag:(active,id)=>ipcRenderer.send('thoughtline:text-drag',active,id),
  clipChange:(change,revision)=>ipcRenderer.invoke('thoughtline:clip',change,revision),
- projectDelete:(project,revision)=>ipcRenderer.invoke('thoughtline:project-delete',project,revision),
+ projectDelete:(project,revision,replacement)=>ipcRenderer.invoke('thoughtline:project-delete',project,revision,replacement),
  agentChange:(change,revision)=>ipcRenderer.invoke('thoughtline:agent',change,revision)
 };
 contextBridge.exposeInMainWorld('thoughtline',api);

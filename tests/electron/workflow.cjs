@@ -1,3 +1,4 @@
+const {chooseInlineTag}=require('./classification-fixture.cjs');
 const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');
 const assert=require('node:assert/strict');const path=require('node:path');const fs=require('node:fs/promises');const os=require('node:os');const {_electron}=require('playwright');
@@ -20,7 +21,7 @@ const assert=require('node:assert/strict');const path=require('node:path');const
   await result(manage,'openEdit',id);await manage.waitForSelector('[data-inline-editor]');assert.equal(await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer').isVisible()),false);
   const firstEdit='自动保存后关闭\n原文改动';await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill(firstEdit);assert.equal((await manage.evaluate(()=>window.thoughtline.closeManage())).ok,true);await waitForInfo(shelf,i=>i.snapshot.ideas[0].text===firstEdit);assert.equal(JSON.parse(await fs.readFile(path.join(dir,'snapshot.json'),'utf8')).ideas[0].text,firstEdit);
   await result(shelf,'openManage',id);await manage.waitForSelector('[data-mode=detail]');await manage.getByRole('button',{name:'编辑',exact:true}).click();await manage.waitForSelector('[data-inline-editor]');
-  const edited=full+'\n已编辑';await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill(edited);await manage.getByRole('combobox',{name:'编辑标签归属'}).selectOption('claude');await manage.getByRole('button',{name:'完成编辑',exact:true}).first().click();await waitForInfo(manage,i=>i.snapshot.ideas[0].text===edited&&i.snapshot.ideas[0].agentId==='claude');
+  const edited=full+'\n已编辑';await manage.getByRole('textbox',{name:'编辑正文',exact:true}).fill(edited);await chooseInlineTag(manage,'claude');await manage.getByRole('button',{name:'完成编辑',exact:true}).first().click();await waitForInfo(manage,i=>i.snapshot.ideas[0].text===edited&&i.snapshot.ideas[0].agentId==='claude');
   info=await manage.evaluate(()=>window.thoughtline.info());await result(manage,'setStatus',id,'archived',info.snapshot.revision);
   await result(shelf,'openManage');await manage.waitForSelector('[data-mode=calendar]');await manage.getByRole('textbox',{name:'搜索念头'}).fill('已编辑');
   await manage.waitForSelector('[data-idea-id="'+id+'"]');

@@ -173,7 +173,8 @@ export function shelfSelection(s:Snapshot,agentId:string,width:number){
 
 // Project membership is independent of physical clips. Clearing every reference
 // (including archived ideas and drafts) makes deletion survive reconstruction.
-export function removeProject(s:Snapshot,project:string,now:string):Result<Snapshot>{
+export function removeProject(s:Snapshot,project:string,now:string,replacement=''):Result<Snapshot>{
  if(!project||!textOK(project,40)||!Number.isFinite(Date.parse(now)))return invalid('未分组不能删除。');
- return validateSnapshot({...s,projects:projectNames(s).filter(p=>p!==project),...(s.inactiveProjects?{inactiveProjects:s.inactiveProjects.filter(p=>p!==project)}:{}),ideas:s.ideas.map(i=>i.project===project?{...i,project:'',updatedAt:now}:i),draft:s.draft?.project===project?{...s.draft,project:''}:s.draft});
+ if(typeof replacement!=='string'||replacement===project||replacement&&(!projectNames(s).includes(replacement)||s.inactiveProjects?.includes(replacement)))return invalid('请选择有效的接收分组。');
+ return validateSnapshot({...s,projects:projectNames(s).filter(p=>p!==project),...(s.inactiveProjects?{inactiveProjects:s.inactiveProjects.filter(p=>p!==project)}:{}),ideas:s.ideas.map(i=>i.project===project?{...i,project:replacement,updatedAt:now}:i),draft:s.draft?.project===project?{...s.draft,project:replacement}:s.draft});
 }

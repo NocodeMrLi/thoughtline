@@ -54,3 +54,17 @@ test('deleting the last legacy thought does not delete its independent historica
  const r=permanentlyDeleteIdea(s,'i2');expect(r.ok).toBe(true);if(!r.ok)return;expect(r.value.ideas).toEqual([]);expect(projectNames(r.value)).toContain('工作记录');
  const loaded=validateSnapshot(JSON.parse(JSON.stringify(r.value)));expect(loaded.ok).toBe(true);if(loaded.ok)expect(projectNames(loaded.value)).toContain('工作记录');
 });
+
+// Round 5: deleting a group may migrate ownership to another live group.
+test('group deletion migrates hanging archived deleted and active draft atomically without text loss',()=>{
+ const s=fixture();s.projects=['工作记录','接收分组'];s.inactiveProjects=['工作记录'];const before=JSON.stringify(s);
+ const r=removeProject(s,'工作记录','2026-10-12T01:00:00Z','接收分组');expect(r.ok).toBe(true);if(!r.ok)return;
+ expect(r.value.ideas.map(i=>i.project)).toEqual(['接收分组','接收分组','接收分组']);expect(r.value.draft).toEqual({...s.draft,project:'接收分组'});expect(r.value.clips).toEqual(s.clips);expect(r.value.inactiveProjects).not.toContain('工作记录');expect(projectNames(r.value)).not.toContain('工作记录');expect(JSON.stringify(s)).toBe(before);
+ for(let n=0;n<3;n++)expect({...r.value.ideas[n],project:s.ideas[n].project,updatedAt:s.ideas[n].updatedAt}).toEqual(s.ideas[n]);
+ expect(validateSnapshot(JSON.parse(JSON.stringify(r.value))).ok).toBe(true);
+});
+test('group migration rejects self missing inactive or invalid destination and protects defaults',()=>{
+ const s=fixture();s.projects=['工作记录','停用接收'];s.inactiveProjects=['停用接收'];
+ for(const to of ['工作记录','不存在','停用接收',7])expect(removeProject(s,'工作记录','2026-10-12T01:00:00Z',to as string).ok).toBe(false);
+ expect(removeProject(s,'','2026-10-12T01:00:00Z','工作记录').ok).toBe(false);
+});

@@ -33,3 +33,6 @@ export function rememberIdeaProject(s:Snapshot,id:string):Result<Snapshot>{
  if(!s.ideas.some(i=>i.id===id&&i.status!=='deleted'))return invalid('找不到这条念头。');
  return validateSnapshot({...s,projects:projectNames(s)});
 }
+
+// User-visible metadata follows context (group), then category (tag).
+export function classificationLabel(project:string|undefined,tag:string|undefined):string{return [project,tag].filter(Boolean).join(' · ');}
