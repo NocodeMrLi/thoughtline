@@ -343,7 +343,7 @@ else app.whenReady().then(async()=>{
  };
  ipcMain.handle('thoughtline:open-classification',async(e,tab:ClassificationTab)=>{
   if(!trusted(e,[composer,manage])||!['tags','projects'].includes(tab)||quitting||settingsBusy||storageBusy)return invalid(t('无效操作'));
-  if(!await prepareWindow(composer)||!await prepareWindow(manage))return invalid(t('最后修改尚未保存，窗口已保留。'));
+  if((composer?.isVisible()&&!await prepareWindow(composer))||!await prepareWindow(manage))return invalid(t('最后修改尚未保存，窗口已保留。'));
   const origin=trusted(e,[composer])?'composer' as const:'calendar' as const;
   classificationReturnBounds=origin==='calendar'&&manage?.isVisible()?manage.getBounds():null;
   await ensureManage();classificationOrigin=origin;classificationTab=tab;manageMode='classification';manageSelection=null;manageEditingRequested=false;manageSession++;lock('manage',true);setManageBounds(boundsFor(740,570));publish();manage!.show();manage!.focus();return done();
