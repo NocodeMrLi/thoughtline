@@ -20,7 +20,7 @@ const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:
    const geometry=await text.evaluate(el=>{const c=getComputedStyle(el),r=el.getBoundingClientRect(),p=el.parentElement.getBoundingClientRect();return {outline:c.outlineWidth,offset:c.outlineOffset,shadow:c.boxShadow,border:c.borderColor,x:r.x,right:r.right,parentX:p.x,parentRight:p.right};});
    await manage.screenshot({path:path.join(evidence,'editor.png')});const outward=parseFloat(geometry.outline)+parseFloat(geometry.offset);assert(outward<=0||geometry.x-outward>=geometry.parentX&&geometry.right+outward<=geometry.parentRight,'focus stroke must fit clipping ancestor');await manage.getByRole('button',{name:'完成编辑',exact:true}).first().click();return geometry;
   });
-  await shelf.evaluate(()=>window.thoughtline.openManage());await manage.waitForSelector('.month-grid');
+  const openedCalendar=await shelf.evaluate(()=>window.thoughtline.openManage());assert(openedCalendar.ok,JSON.stringify(openedCalendar));await manage.waitForSelector('.month-grid');
   await check('calendar-fills-resized-height-and-arrows',async()=>{
    await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Manage').setSize(950,670));await manage.waitForTimeout(500);
    const sample=await manage.evaluate(()=>{const r=e=>{const b=e.getBoundingClientRect();return {height:b.height,bottom:b.bottom,width:b.width};};return {content:r(document.querySelector('.calendar-content')),grid:r(document.querySelector('.month-grid')),cell:r(document.querySelector('.date-cell')),arrow:r(document.querySelector('.calendar-navigation button')),svg:document.querySelector('.calendar-navigation button svg')?.getBoundingClientRect().width??0};});
