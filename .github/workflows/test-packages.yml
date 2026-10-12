@@ -4,12 +4,18 @@ on:
     branches: [feat/native-pilot, main, codex/thoughtline-acceptance-20261009]
     paths-ignore: ['docs/**', '**.md', 'acceptance/**']
   workflow_dispatch:
+    inputs:
+      validation_scope:
+        description: 'Full validation, or package continuation using recorded unchanged source evidence'
+        type: choice
+        default: full
+        options: [full, package]
 permissions:
   contents: read
 jobs:
   windows-test-package:
     runs-on: windows-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
     steps:
       - name: Enable long paths for archived evidence on disposable Windows runner
         shell: pwsh
@@ -22,6 +28,7 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: npm run verify
       - name: Third round capacity, backfill, layout and platform material
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'package'
         shell: pwsh
         env:
           THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round3/windows-source
@@ -38,7 +45,16 @@ jobs:
         run: |
           & node tests/electron/round4-visual-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Fourth round source visual regression failed' }
+      - name: Measured pointer source regression for package continuation
+        if: github.event_name == 'workflow_dispatch' && inputs.validation_scope == 'package'
+        shell: pwsh
+        env:
+          THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round4/windows-source-pointer
+        run: |
+          & node tests/electron/more-menu-workflow.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Measured pointer source regression failed' }
       - name: Second round UI and real native menu characterization
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'package'
         shell: pwsh
         env:
           THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round2/windows
@@ -68,6 +84,7 @@ jobs:
             if ($LASTEXITCODE -ne 0) { throw "$test failed" }
           }
       - name: Source Electron UI regression on Windows
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'package'
         shell: pwsh
         env:
           THOUGHTLINE_FAKE_CLIPBOARD: '1'
@@ -83,6 +100,7 @@ jobs:
             if ($LASTEXITCODE -ne 0) { throw "$test failed with exit code $LASTEXITCODE" }
           }
       - name: Appearance and English source workflow on Windows
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'package'
         shell: pwsh
         env:
           THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/appearance/windows-source
@@ -92,6 +110,7 @@ jobs:
           & node tests/electron/appearance-workflow.cjs 2>&1 | Tee-Object -FilePath (Join-Path $env:THOUGHTLINE_EVIDENCE_DIR 'workflow.log')
           if ($LASTEXITCODE -ne 0) { throw "Appearance workflow failed: $LASTEXITCODE" }
       - name: Appearance review fixes on Windows
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'package'
         shell: pwsh
         env:
           THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/appearance/windows-source/fix-round1
@@ -113,6 +132,21 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Windows source top edge regression failed' }
       - name: Bind package to source and compiled outputs
         run: node scripts/windows-build-manifest.cjs
+      - name: Preserve built installer before package validation
+        shell: pwsh
+        run: |
+          $files = @(Get-ChildItem dist -Filter '*.exe')
+          if ($files.Count -ne 1) { throw 'Expected exactly one x64 installer' }
+          $files | ForEach-Object { "$((Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower())  $($_.Name)" } | Set-Content dist/SHA256SUMS.txt
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: Thoughtline-Windows-built-${{ github.sha }}
+          path: |
+            dist/*.exe
+            dist/SHA256SUMS.txt
+            dist/build-manifest.json
+          if-no-files-found: error
+          retention-days: 30
       - name: Parse user isolation launcher without launching
         shell: pwsh
         run: |
@@ -192,6 +226,7 @@ jobs:
             acceptance/evidence/round3/windows-packaged/**
             acceptance/evidence/round3/windows-installed/**
             acceptance/evidence/round4/windows-source/**
+            acceptance/evidence/round4/windows-source-pointer/**
             acceptance/evidence/round4/windows-packaged/**
             acceptance/evidence/top-edge-20261010/windows-source/**
             acceptance/evidence/top-edge-20261010/windows-packaged/**

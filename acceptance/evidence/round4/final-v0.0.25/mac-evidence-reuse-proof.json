@@ -1,7 +1,7 @@
 {
   "passed": true,
   "previousBuildSource": "bece988ad18817462a4c6fa9e15dac961f7f6dd1",
-  "finalBuildSource": "ee7ea98076ae3fdbf70dcf62ad9dd884b428a95f",
+  "finalBuildSource": "feac1224b1c162d33493e65c3008d4dc5b1baa17",
   "unchangedCompiledOutputs": 34,
   "asarUnchanged": true,
   "changedInputs": [
@@ -14,5 +14,10 @@
     "appearance14"
   ],
   "retestedAffectedSuite": "packaged-round21 with measured real pointer timing",
-  "scope": "Reuse only unchanged app byte outputs and unchanged corresponding test inputs; old failed Windows run is retained separately"
+  "scope": "Reuse only unchanged app byte outputs and unchanged corresponding test inputs; old failed Windows run is retained separately",
+  "changedInputsFromIntermediate": [
+    "tests/electron/round2-arrange-workflow.cjs"
+  ],
+  "intermediateSource": "ee7ea98076ae3fdbf70dcf62ad9dd884b428a95f",
+  "retestedArrangeLifecycle": "mac-arrange-idle-release.log; seven original checks and 31s hidden-release characterization passed"
 }

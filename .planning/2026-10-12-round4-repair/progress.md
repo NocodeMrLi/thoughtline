@@ -15,3 +15,5 @@
 最终源ee7ea98076ae3fdbf70dcf62ad9dd884b428a95f已push，Windows38188584519执行中。Mac重新冻结包34输出/asar与bece完全一致，唯一变化输入tests/electron/more-menu-checks.cjs；前三轮/本轮有效同字节视觉证据复用，实际包round21新诊断24组重新通过，16指针返回0.6–17.6ms。最终DMG8a05fcca...及同版check-only启动器通过；自有最终测试App、重复包和空隔离目录另清428.85MiB，用户88971保留。
 
 Mac受控隐藏窗口31s释放及当前入口重开，7项整理流程通过；为最终Windows回归更新旧fixture窗口生命周期，不改产品。保留38188584519失败完整证据，最终冻结另以新head记录。
+
+最终Mac/source feac122、307输入，第三次打包与前候选34输出/asar相同，同版启动器check-only及最后包绑定通过。第三次自有App/重复DMG/块图/空隔离目录已清428.85MiB；三次合计1286.55MiB分配量，不承诺APFS净空间。源/包菜单诊断与31s隐藏窗口回收测试均正常退出清profile，所有新诊断目录的显式profile不存在已回读。最终Windows38189326018仍在执行。

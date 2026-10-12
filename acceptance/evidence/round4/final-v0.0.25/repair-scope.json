@@ -1,6 +1,6 @@
 {
   "version": "0.0.25",
-  "source": "bece988ad18817462a4c6fa9e15dac961f7f6dd1",
+  "source": "feac1224b1c162d33493e65c3008d4dc5b1baa17",
   "platforms": [
     "macOS arm64",
     "Windows x64"
@@ -31,9 +31,18 @@
     "appearance": 14,
     "round21": 24
   },
-  "windowsStatus": "All source regression steps succeeded; NSIS building; packaged validation pending",
+  "windowsStatus": "Final CI38189326018 pending; prior failure receipts retained",
   "noAdditionalProductLogicChanges": true,
   "physicalAcceptance": false,
   "formalAcceptance": false,
-  "releasePublished": false
+  "releasePublished": false,
+  "testRepairs": [
+    "Real timely pointer input with browser event times; product 180ms unchanged",
+    "Reopen settings after normal 30s hidden auxiliary window release; seven original assertions retained"
+  ],
+  "failedCandidates": [
+    "38187186237",
+    "38188584519"
+  ],
+  "macRuntimeReuseProof": "mac-evidence-reuse-proof.json"
 }
