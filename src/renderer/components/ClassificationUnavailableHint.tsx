@@ -2,7 +2,7 @@ import {useEffect,useLayoutEffect,useRef,useState} from 'react';
 import {createPortal} from 'react-dom';
 
 /** Explains an unavailable action without opening a dialog or taking focus. */
-export function ClassificationUnavailableHint({anchor,text,eventId,id,onClose}:{anchor:HTMLButtonElement;text:string;eventId:number;id:string;onClose:()=>void}){
+export function ClassificationUnavailableHint({anchor,text,eventId,id,onClose}:{anchor:HTMLElement;text:string;eventId:number;id:string;onClose:()=>void}){
  const panel=useRef<HTMLSpanElement>(null),close=useRef(onClose),[position,setPosition]=useState({left:8,top:8});close.current=onClose;
  useLayoutEffect(()=>{
   const place=()=>{const a=anchor.getBoundingClientRect(),p=panel.current?.getBoundingClientRect();if(!p)return;const above=a.top-p.height-6,below=a.bottom+6;setPosition({left:Math.max(8,Math.min(innerWidth-p.width-8,a.right-p.width)),top:Math.max(8,Math.min(innerHeight-p.height-8,above>=8?above:below))});};

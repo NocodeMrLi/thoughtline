@@ -6,7 +6,7 @@
 .settings-content [role=tabpanel][hidden]{display:none}
 .settings-content.is-customizing{overflow:hidden;padding-bottom:0;scrollbar-gutter:auto}
 .settings-content.is-customizing>[role=tabpanel]:not([hidden]){display:flex;flex-direction:column;height:100%;min-height:0}
-.app-settings[data-customizer]>.error:empty,.app-settings[data-customizer]>footer:has([role=status]:empty){display:none}
+.app-settings[data-customizer]>.error:empty,.app-settings[data-customizer] .settings-footer>footer:has([role=status]:empty){display:none}
 .manage.app-settings :is(.preference-settings,.storage-settings){margin:0;padding:20px;border:1px solid var(--glass-line,var(--border));border-radius:12px}
 .app-settings .preference-settings h2,.storage-settings h2{margin:0 0 12px;font-size:14px;font-weight:600;line-height:20px}
 .app-settings .capacity-preference{margin-top:24px;gap:12px}
@@ -18,6 +18,18 @@
 .storage-settings .storage-actions{margin:0 0 12px;gap:8px}
 .storage-settings .storage-actions button{min-height:34px;white-space:normal;max-width:100%}
 .storage-settings .setting-hint{margin:0;line-height:1.6}
+.settings-footer{display:flex;flex-direction:column;gap:6px;flex-shrink:0;min-width:0}
+.settings-contact-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;column-gap:12px;row-gap:2px;min-width:0;flex-shrink:0;padding-top:6px;border-top:1px solid var(--control-stroke,var(--border));font-size:12px;line-height:18px;color:var(--text)}
+.settings-contact-action{display:inline-flex;align-items:center;gap:5px;min-height:24px;max-width:100%;padding:2px 0;border:0;background:transparent;color:inherit;font:inherit;text-decoration:none}
+.settings-contact-action:hover{ text-decoration:underline;text-underline-offset:3px}
+.settings-contact-action[aria-disabled=true]{cursor:default;color:var(--muted);text-decoration:none}
+.settings-contact-action:focus-visible{outline:2px solid var(--focus);outline-offset:0;border-radius:3px}
+.settings-github-mark{width:14px;height:14px;flex:none;object-fit:contain}
+.settings-contact-mail{display:flex;align-items:center;gap:4px;min-width:0;max-width:100%}
+.settings-contact-mail svg{width:14px;height:14px;flex:none}
+.settings-contact-email{white-space:nowrap;user-select:text}
+.settings-contact-bar .icon-button{width:24px;height:24px;padding:4px;border:0;background:transparent;color:inherit}
+@media(forced-colors:active){.settings-contact-bar{color:CanvasText;border-color:CanvasText}.settings-contact-action{color:LinkText}.settings-contact-action:focus-visible{outline-color:Highlight}}
 .storage-settings .setting-hint+.setting-hint{margin-top:8px}
 .app-settings footer{flex-shrink:0;margin-top:0;min-height:0;gap:12px}
 .app-settings footer [role=status]:empty{display:none}

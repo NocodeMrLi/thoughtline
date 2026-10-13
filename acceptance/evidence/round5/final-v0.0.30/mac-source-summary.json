@@ -1,0 +1,64 @@
+{
+  "candidateVersion": "0.0.30",
+  "base": "57bc00694071b1c7ee96a315a61690db3a2f46c4",
+  "unitPassed": 349,
+  "windowsOnlySkipped": 4,
+  "typecheck": true,
+  "build": true,
+  "settingsChecks": 36,
+  "focusScenes": 16,
+  "finalSourceSuites": {
+    "platform": "darwin",
+    "scope": "source",
+    "executable": null,
+    "suites": [
+      {
+        "test": "round5-contact-workflow",
+        "exitCode": 0,
+        "receipts": [
+          {
+            "path": "acceptance/evidence/round5/final-source-0.0.30/contact-VEN4yn/receipt.json",
+            "passed": true,
+            "packaged": false,
+            "checks": 32,
+            "scenes": 24
+          }
+        ],
+        "log": "acceptance/evidence/round5/final-v0.0.30/final-logs/source-round5-contact-workflow.log"
+      },
+      {
+        "test": "hidden-manage-reopen",
+        "exitCode": 0,
+        "receipts": [
+          {
+            "path": "acceptance/evidence/round5/final-source-0.0.30/reopen-awqAjt/receipt.json",
+            "passed": true,
+            "packaged": null,
+            "checks": 4,
+            "scenes": 0
+          }
+        ],
+        "log": "acceptance/evidence/round5/final-v0.0.30/final-logs/source-hidden-manage-reopen.log"
+      },
+      {
+        "test": "settings-lifecycle",
+        "exitCode": 0,
+        "receipts": [],
+        "log": "acceptance/evidence/round5/final-v0.0.30/final-logs/source-settings-lifecycle.log"
+      },
+      {
+        "test": "storage-workflow",
+        "exitCode": 0,
+        "receipts": [],
+        "log": "acceptance/evidence/round5/final-v0.0.30/final-logs/source-storage-workflow.log"
+      }
+    ],
+    "passed": true,
+    "physicalAcceptance": false
+  },
+  "previousAffectedSuites": "acceptance/evidence/round5/r513-r516-regression/suite.json",
+  "reviewFix": "actual Tray lifecycle RED to GREEN",
+  "packagedVerification": "pending",
+  "physicalAcceptance": false,
+  "formalAcceptance": false
+}

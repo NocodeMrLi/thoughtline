@@ -13,6 +13,7 @@ import {fitManageBounds} from './windows/manageGeometry';
 import {createHost} from './platform/host';
 import {EdgeController} from './edgeController';
 import {FileRepository} from './store/repository';
+import {AUTHOR_GITHUB_URL,FEEDBACK_EMAIL,FEEDBACK_MAILTO} from '../shared/contact';
 import {loadStorageDirectory,loadStorageLocation,commitStorageDirectory,migrateStorage,exportBackup as writeBackup} from './store/storageLocations';
 import {swapShortcut} from './shortcuts';
 import {validWriteHotkey,displayWriteHotkey} from '../shared/composerKeys';
@@ -98,6 +99,9 @@ else app.whenReady().then(async()=>{
   });
  };
  const prepareViews=async()=>await prepareWindow(shelf)&&await prepareWindow(manage);
+ // Opening another window keeps Settings mounted, including its unsaved form.
+ const prepareWritingViews=async()=>await prepareWindow(shelf)&&(manageMode==='settings'&&!!manage?.isVisible()||await prepareWindow(manage));
+ const writerUnavailable=():Result<void>|null=>quitting||quitInFlight?invalid(t("正在退出。")):storageBusy?invalid(t("存储操作正在进行，请稍后重试。")):settingsBusy?invalid(t("正在保存设置，请稍后重试。")):null;
  const lock=(name:string,active:boolean)=>edge.event({type:'lock',name,active,now:Date.now()});
  const hideManage=()=>{manageEditingOwner=null;manageEditingRequested=false;manageSafeToRelease=true;manage?.hide();lock('manage',false);};
  const boundsFor=(w:number,h:number)=>{const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint());const width=Math.min(w,d.workArea.width-40),height=Math.min(h,d.workArea.height-48);return {x:Math.round(d.workArea.x+(d.workArea.width-width)/2),y:d.workArea.y+24,width,height};};
@@ -147,19 +151,20 @@ else app.whenReady().then(async()=>{
  app.on('will-quit',()=>{if(composerRelease)clearTimeout(composerRelease);if(manageRelease)clearTimeout(manageRelease);if(geometryTimer)clearTimeout(geometryTimer);});
  const openComposer=async(sourceId?:string):Promise<Result<void>>=>{
   if(composerLoading)return done();
-  if(manage?.isVisible()&&manageMode==='settings')return invalid(t("请先关闭设置。"));
   if(composer?.isVisible()){
    composer.show();composer.focus();return done();
   }
+  const blocked=writerUnavailable();if(blocked)return blocked;
   if(composer&&!composerSafeToRelease){
-   if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
+   if(!await prepareWritingViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
+   const blocked=writerUnavailable();if(blocked)return blocked;
    lock('composer',true);host.showComposer(boundsFor(COMPOSER_SIZE.width,COMPOSER_SIZE.height));
    return done();
   }
-  if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
+  if(!await prepareWritingViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
   const source=snapshot.ideas.find(i=>i.id===sourceId&&i.status!=='deleted');
   composerContext={mode:'new',ideaId:null,draft:snapshot.draft??{...blank,...(source?{agentId:source.agentId,project:source.project}:{})}};
-  composerSession++;draftWritableSession=composerSession;draftSequence=0;try{await ensureComposer();}catch{return {ok:false,code:'IO',message:t("输入浮层未能打开，请重试。原数据已保留。")};}if(quitting)return invalid(t("正在退出。"));if(manage?.isVisible()&&manageMode==='settings')return invalid(t("请先关闭设置。"));composerSafeToRelease=false;lock('composer',true);publish();host.showComposer(boundsFor(COMPOSER_SIZE.width,COMPOSER_SIZE.height));return done();
+  composerSession++;draftWritableSession=composerSession;draftSequence=0;try{await ensureComposer();}catch{return {ok:false,code:'IO',message:t("输入浮层未能打开，请重试。原数据已保留。")};}const blockedAfterLoad=writerUnavailable();if(blockedAfterLoad)return blockedAfterLoad;composerSafeToRelease=false;lock('composer',true);publish();host.showComposer(boundsFor(COMPOSER_SIZE.width,COMPOSER_SIZE.height));return done();
  };
  ipcMain.handle('thoughtline:open-composer',(e,sourceId?:string)=>trusted(e)&&(!sourceId||typeof sourceId==='string')?openComposer(sourceId):invalid(t('无效操作')));
  ipcMain.handle('thoughtline:composer-size',(e,height:number,session:number)=>{
@@ -357,9 +362,9 @@ else app.whenReady().then(async()=>{
  ipcMain.handle('thoughtline:return-classification',e=>trusted(e,[manage])?returnClassification():invalid(t('无效操作')));
  ipcMain.handle('thoughtline:close-manage',async e=>{if(!trusted(e,[manage]))return invalid(t("无效操作"));if(manageMode==='classification'&&classificationOrigin==='composer')return returnClassification();if(!await prepareWindow(manage))return invalid(t("最后修改尚未保存，窗口已保留。"));hideManage();return done();});
  const openSettings=async(fromCalendar=false):Promise<Result<void>>=>{
-  if(composer?.isVisible())return invalid(t("请先保存或取消当前输入。"));
+  const blocked=writerUnavailable();if(blocked)return blocked;
   if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
-  try{await ensureManage();}catch{return {ok:false,code:'IO',message:t("设置浮层未能打开，请重试。")};}if(quitting)return invalid(t("正在退出。"));if(composer?.isVisible())return invalid(t("请先保存或取消当前输入。"));calendarReturnBounds=fromCalendar&&manage?.isVisible()?manage.getBounds():null;if(!fromCalendar)manageVisit++;calendarReturning=false;cancelDrag();manageMode='settings';manageTitles=false;manageSelection=null;manageEditingRequested=false;manageSession++;lock('manage',true);setManageBounds(boundsFor(500,600));publish();manage!.show();manage!.focus();refreshTray();return done();
+  try{await ensureManage();}catch{return {ok:false,code:'IO',message:t("设置浮层未能打开，请重试。")};}const blockedAfterLoad=writerUnavailable();if(blockedAfterLoad)return blockedAfterLoad;calendarReturnBounds=fromCalendar&&manage?.isVisible()?manage.getBounds():null;if(!fromCalendar)manageVisit++;calendarReturning=false;cancelDrag();manageMode='settings';manageTitles=false;manageSelection=null;manageEditingRequested=false;manageSession++;lock('manage',true);setManageBounds(boundsFor(500,600));publish();manage!.show();manage!.focus();refreshTray();return done();
  };
  ipcMain.handle('thoughtline:open-settings',e=>trusted(e)?openSettings(trusted(e,[manage])&&manageMode==='browse'&&!!manage?.isVisible()):invalid(t("无效操作")));
  ipcMain.handle('thoughtline:return-calendar',async e=>{
@@ -368,6 +373,11 @@ else app.whenReady().then(async()=>{
   calendarReturning=calendarReturnBounds!==null;manageMode='browse';manageSelection=null;manageEditingRequested=false;manageSession++;setManageBounds(calendarReturnBounds??calendarBounds());calendarReturnBounds=null;publish();manage!.show();manage!.focus();return done();
  });
  const storageState=()=>({directory:dataDir,profileDirectory:profileDir,revision:snapshot.revision});
+ ipcMain.handle('thoughtline:contact-action',async(e,action:unknown)=>{
+  if(!trusted(e,[manage])||!manage?.isVisible()||manageMode!=='settings'||quitting||!['github','email','copy-email'].includes(action as string))return invalid(t('无效操作'));
+  try{if(action==='copy-email')clipboard.writeText(FEEDBACK_EMAIL);else await shell.openExternal(action==='github'?AUTHOR_GITHUB_URL:FEEDBACK_MAILTO);return done();}
+  catch{return invalid(t(action==='copy-email'?'邮箱复制未成功，请重试。':'未能打开联系入口，请稍后重试。'));}
+ });
  ipcMain.handle('thoughtline:storage-info',e=>trusted(e,[manage])?{ok:true,value:storageState()}:invalid(t("无效操作")));
  ipcMain.handle('thoughtline:open-storage-directory',async e=>{
   if(!trusted(e,[manage]))return invalid(t("无效操作"));
@@ -376,17 +386,21 @@ else app.whenReady().then(async()=>{
  });
  const storageOperation=async(e:Electron.IpcMainInvokeEvent,kind:'migrate'|'backup')=>{
   if(!trusted(e,[manage])||storageBusy||quitting)return invalid(t("存储操作正在进行，请稍后重试。"));
-  if(composer?.isVisible())return invalid(t("请先保存当前输入。"));
-  storageBusy=true;
+  if(kind==='migrate'&&composer?.isVisible())return invalid(t("请先保存草稿并关闭新建窗口，再更改数据位置。"));
+  storageBusy=true;refreshTray();
   try{
    // Storage operations keep Settings mounted; its busy/dirty close guard is not a navigation request.
    const ready=await prepareWindow(shelf)&&(manageMode==='settings'||await prepareWindow(manage));
    if(!ready)return invalid(t("最后修改尚未保存或输入法尚未确认，仍使用原位置。"));
+   if(kind==='backup'&&composer?.isVisible()&&!await prepareWindow(composer))return invalid(t("草稿尚未保存或输入法尚未确认，备份未生成。请完成输入后重试。"));
    const choice=await dialog.showOpenDialog(manage!,{title:kind==='migrate'?t("选择新的空念头文件夹"):t("选择独立备份的保存文件夹"),properties:['openDirectory','createDirectory']});
    if(choice.canceled||!choice.filePaths[0])return {ok:true,value:{...storageState(),canceled:true}};
+   // The user can keep typing in the other window while choosing a folder.
+   if(kind==='backup'&&composer?.isVisible()&&!await prepareWindow(composer))return invalid(t("草稿尚未保存或输入法尚未确认，备份未生成。请完成输入后重试。"));
    return await composerWrite(async()=>{
     if(!trusted(e,[manage])||quitting)return invalid(t("操作窗口已关闭。"));
     await repository.flush();
+    if(kind==='migrate'&&composer?.isVisible())return invalid(t("请先保存草稿并关闭新建窗口，再更改数据位置。"));
     if(kind==='backup'){
      const result=await writeBackup(dataDir,choice.filePaths[0],snapshot,app.getVersion());
      return result.ok?{ok:true,value:{...storageState(),directory:result.value,canceled:false}}:result;
@@ -396,7 +410,7 @@ else app.whenReady().then(async()=>{
     dataDir=result.value.directory;repository=result.value.repository;snapshot=result.value.snapshot;undoClips=null;publish();
     return {ok:true,value:{...storageState(),canceled:false}};
    });
-  }catch(error){return invalid(`操作未完成，仍使用原位置。${error instanceof Error?error.message:''}`);}finally{storageBusy=false;}
+  }catch(error){return invalid(`操作未完成，仍使用原位置。${error instanceof Error?error.message:''}`);}finally{storageBusy=false;refreshTray();}
  };
  ipcMain.handle('thoughtline:change-storage',e=>storageOperation(e,'migrate'));
  ipcMain.handle('thoughtline:export-backup',e=>storageOperation(e,'backup'));
@@ -406,7 +420,7 @@ else app.whenReady().then(async()=>{
   return composerWrite(async()=>{
   if(settingsBusy)return invalid(t("正在保存设置，请稍后重试。"));
   if(revision!==snapshot.revision)return {ok:false,code:'CONFLICT',message:t("设置已变化，请核对后重试。")};
-  settingsBusy=true;let committed:Result<Snapshot>=invalid(t("快捷键已被占用，请录制其他组合；原键位保持。"));
+  settingsBusy=true;refreshTray();let committed:Result<Snapshot>=invalid(t("快捷键已被占用，请录制其他组合；原键位保持。"));
   try{
    const changed=await swapShortcut(globalShortcut,snapshot.settings.writeHotkey,settings.writeHotkey,()=>{openComposer();},async()=>{
     const capacity=setShelfCapacity(snapshot,shelfCapacity(settings.shelfCapacity),width,new Date().toISOString(),shelfAgentId);
@@ -414,7 +428,7 @@ else app.whenReady().then(async()=>{
    });
    if(!changed.ok)return changed.error?.ok===false?changed.error:committed;
    refreshTray();publish();return committed;
-  }finally{settingsBusy=false;}
+  }finally{settingsBusy=false;refreshTray();}
   });
  });
  ipcMain.handle('thoughtline:open-edit',async(e,id:string)=>{
@@ -560,7 +574,7 @@ else app.whenReady().then(async()=>{
   icon.setTemplateImage(true);tray=new Tray(icon);
  }else tray=new Tray(trayPath);
  tray.setToolTip(t("晾念头 / Thoughtline"));
- refreshTray=()=>{tray.setToolTip(t('晾念头 / Thoughtline'));tray.setContextMenu(Menu.buildFromTemplate([{label:t("晾念头 / Thoughtline"),enabled:false},{label:t('trayWrite',{hotkey:displayWriteHotkey(snapshot.settings.writeHotkey,host.platform).replace('空格',t('空格')),failure:globalShortcut.isRegistered(snapshot.settings.writeHotkey)?'':t('（注册失败）')}),enabled:!composer?.isVisible()&&!(manage?.isVisible()&&manageMode==='settings'),click:()=>{void openComposer();}},{type:'separator'},{label:t("查找 / 已收起"),click:browseFromTray},{label:t("筛选 Agent"),submenu:agentFilterMenu()},{label:t("设置"),enabled:!composer?.isVisible(),click:()=>{openSettings();}},{label:t("暂停悬停"),type:'checkbox',checked:edge.isManuallyPaused(),click:item=>{cancelDrag();edge.pause(item.checked);}},{label:t("退出"),click:()=>app.quit()}]));};
+ refreshTray=()=>{tray.setToolTip(t('晾念头 / Thoughtline'));tray.setContextMenu(Menu.buildFromTemplate([{label:t("晾念头 / Thoughtline"),enabled:false},{label:t('trayWrite',{hotkey:displayWriteHotkey(snapshot.settings.writeHotkey,host.platform).replace('空格',t('空格')),failure:globalShortcut.isRegistered(snapshot.settings.writeHotkey)?'':t('（注册失败）')}),enabled:!composer?.isVisible()&&!settingsBusy&&!storageBusy&&!quitting,click:()=>{void openComposer();}},{type:'separator'},{label:t("查找 / 已收起"),click:browseFromTray},{label:t("筛选 Agent"),submenu:agentFilterMenu()},{label:t("设置"),enabled:!settingsBusy&&!storageBusy&&!quitting,click:()=>{openSettings();}},{label:t("暂停悬停"),type:'checkbox',checked:edge.isManuallyPaused(),click:item=>{cancelDrag();edge.pause(item.checked);}},{label:t("退出"),click:()=>app.quit()}]));};
  refreshTray();
  let reminderSleeping=false,reminderLocked=false;const resumeReminders=()=>{if(!reminderSleeping&&!reminderLocked)reminderScheduler?.start();};
  nativeTheme.on('updated',publish);powerMonitor.on('suspend',()=>{reminderSleeping=true;reminderScheduler?.stop();cancelDrag();edge.pause(true,'sleep');});powerMonitor.on('lock-screen',()=>{reminderLocked=true;reminderScheduler?.stop();cancelDrag();edge.pause(true,'lock');});powerMonitor.on('resume',()=>{reminderSleeping=false;edge.pause(false,'sleep');resumeReminders();});powerMonitor.on('unlock-screen',()=>{reminderLocked=false;edge.pause(false,'lock');resumeReminders();});

@@ -1,5 +1,10 @@
 // Central typed application text; user text is never translated.
 export const zh = {
+ "反馈建议": "反馈建议",
+ "复制反馈邮箱": "复制反馈邮箱",
+ "邮箱已复制": "邮箱已复制",
+ "邮箱复制未成功，请重试。": "邮箱复制未成功，请重试。",
+ "未能打开联系入口，请稍后重试。": "未能打开联系入口，请稍后重试。",
  "搜索标签 / 长按整理": "搜索标签 / 长按整理",
  "搜索分组 / 长按整理": "搜索分组 / 长按整理",
  "默认": "默认",
@@ -214,6 +219,8 @@ export const zh = {
  "无法打开当前念头目录。": "无法打开当前念头目录。",
  "存储操作正在进行，请稍后重试。": "存储操作正在进行，请稍后重试。",
  "请先保存当前输入。": "请先保存当前输入。",
+ "请先保存草稿并关闭新建窗口，再更改数据位置。": "请先保存草稿并关闭新建窗口，再更改数据位置。",
+ "草稿尚未保存或输入法尚未确认，备份未生成。请完成输入后重试。": "草稿尚未保存或输入法尚未确认，备份未生成。请完成输入后重试。",
  "最后修改尚未保存或输入法尚未确认，仍使用原位置。": "最后修改尚未保存或输入法尚未确认，仍使用原位置。",
  "选择新的空念头文件夹": "选择新的空念头文件夹",
  "选择独立备份的保存文件夹": "选择独立备份的保存文件夹",
@@ -583,6 +590,11 @@ export const zh = {
  "savedBackup": "独立备份已保存到 {p0}。当前数据位置未更改。"
 } as const;
 export const en = {
+ "反馈建议": "Feedback",
+ "复制反馈邮箱": "Copy feedback email",
+ "邮箱已复制": "Email copied",
+ "邮箱复制未成功，请重试。": "Could not copy the email. Please retry.",
+ "未能打开联系入口，请稍后重试。": "Could not open the contact link. Please retry.",
  "搜索标签 / 长按整理": "Search tags / Hold to arrange",
  "搜索分组 / 长按整理": "Search groups / Hold to arrange",
  "默认": "Default",
@@ -795,6 +807,8 @@ export const en = {
  "无法打开当前念头目录。": "Cannot open the current thoughts folder.",
  "存储操作正在进行，请稍后重试。": "A storage operation is in progress. Please retry shortly.",
  "请先保存当前输入。": "Save your current input first.",
+ "请先保存草稿并关闭新建窗口，再更改数据位置。": "Save your draft and close the writing window before changing the data location.",
+ "草稿尚未保存或输入法尚未确认，备份未生成。请完成输入后重试。": "The draft is not saved or text composition is unfinished. No backup was created. Finish your input and retry.",
  "最后修改尚未保存或输入法尚未确认，仍使用原位置。": "Changes are unsaved or input is still composing. The original location is retained.",
  "选择新的空念头文件夹": "Choose a new empty thoughts folder",
  "选择独立备份的保存文件夹": "Choose a folder for an independent backup",

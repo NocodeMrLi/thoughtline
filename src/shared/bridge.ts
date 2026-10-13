@@ -1,4 +1,5 @@
 import type {Preferences,PreferencePatch} from './preferences';
+import type {ContactAction} from './contact';
 import type {Draft,Rect,Result,Snapshot,Reminder} from './contracts';
 import type {LightReminder} from './reminderFallback';
 export type NotificationAccess={status:'granted'|'denied'|'not-determined'|'unknown'|'unsupported'};
@@ -41,6 +42,7 @@ export interface ThoughtlineBridge{
  ideaHistory(id:string,kind:'delete'|'restore'|'permanent',revision:number):Promise<Result<Snapshot>>;
  shelfMenu(id:string):Promise<Result<void>>;
  openSettings():Promise<Result<void>>;
+ contactAction(action:ContactAction):Promise<Result<void>>;
  returnCalendar():Promise<Result<void>>;
  saveSettings(settings:Snapshot['settings'],revision:number):Promise<Result<Snapshot>>;
  onPrepareQuit(callback:()=>Draft|null):()=>void;

@@ -47,3 +47,15 @@ Actions 34份/65932941bytes；归档与发布后清理读回通过。
 保护用户运行0.0.28 PID68573和个人数据；只改已移除编辑/改名灰态与说明。
 
 R5-12完成：0.0.29（第五轮R5-12）已完成双端技术验证、清理及私有发布。构建/tag源码 66e88363d34f042b18a7ca4f88c8d7c29a115595；Windows完整运行 38333752315 success；Release 411180836，10份附件大小/SHA256读回一致。main后续文档提交不改变包来源。
+
+## Task 5 R5-13/14 分类描边与设置共存（进行中）
+Baseline: main 57bc006；0.0.29包源66e8836；真实用户App版本/PID现场刷新，不操作真实数据。
+Files: classification.css, main/index.ts, shared/i18n.ts, tests/electron/round5-settings-workflow.cjs, workflow, version/delivery metadata。
+Interfaces: prepareWindow(composer)已有离开协议只刷新草稿，不关闭/冻结输入；composerWrite串行提交保证备份一致快照；设置显示与存储迁移分离。
+Review Focus: 备份checkpoint失败/IME/正在创建分类；文件选择期间写作与迁移竞态；dirty Settings共存及退出保护；无框顶部名称不回归；原日历导航/搜索/滚动还原。
+2026-10-13追加授权R5-15/16：设置三页签底部联系栏（固定GitHub/邮箱/复制，标准14px图标12px文字、窄窗两行）；日历更多菜单最近删除/标签与分组/存储与设置。先红例后实现，外部目标固定并限定可见设置授权，测试不真实打开浏览器/邮箱或改个人剪贴板。
+- [x] 原方案追加第五轮、03/05同步、先红例验证现象。
+- [x] 修复内侧focus、双向普通设置共存、备份flush及迁移门禁；绿与旧回归。
+- [ ] 全verify、独立最终review、双端源/实际包及安装验证。
+- [ ] 新版源/包绑定、私有发行与main推送、结果文档、owned垃圾清理。
+Ruling: 此次在main顺序执行并沿用既有私有包/推送授权；用户要求先写文档后执行，优先于技能默认新worktree/再次许可。

@@ -8,6 +8,7 @@ import {useEffect,useLayoutEffect,useRef,useState} from 'react';
 import type {PilotInfo,StorageInfo} from '../../shared/bridge';
 import {recordWriteHotkey} from '../../shared/composerKeys';
 import {AppearanceSettings,type CustomizerKind,type AppearancePatch} from './AppearanceSettings';
+import {SettingsContact} from './SettingsContact';
 
 type SettingsTab='appearance'|'controls'|'data';
 export type SettingsDraft={hotkey:string;reduced:boolean;tab?:SettingsTab};
@@ -82,7 +83,7 @@ export function Settings({info,restore,onRemember}:{info:PilotInfo;restore?:Sett
    <p className="setting-hint">{t("缓存和应用配置仍在：")}{storage?.profileDirectory??t("正在读取…")}</p>
   </section></section></div>
   <p className="error" role="alert">{m(error)}</p>
-  <footer><span role="status" {...noticeProps}>{m(notice)||(state.current.dirty?t("设置尚未保存"):"")}</span>{tab==='controls'&&<button className="primary" disabled={busy||recording} onClick={()=>void save()}>{busy?t("正在处理…"):t("保存设置")}</button>}</footer>
+  <div className="settings-footer"><footer><span role="status" {...noticeProps}>{m(notice)||(state.current.dirty?t("设置尚未保存"):"")}</span>{tab==='controls'&&<button className="primary" disabled={busy||recording} onClick={()=>void save()}>{busy?t("正在处理…"):t("保存设置")}</button>}</footer><SettingsContact info={info} disabled={busy||recording} section={tab+':'+(customizer??'')}/></div>
   {leavePrompt&&<div ref={prompt} className="settings-leave-prompt" role="dialog" aria-modal="true" aria-label={t("设置尚未保存")}><p>{t("设置尚未保存，要保存后关闭吗？")}</p><button disabled={busy} onClick={async()=>{if(await save()){allowLeave.current=true;try{await window.thoughtline.closeManage();}finally{allowLeave.current=false;}}}}>{t("保存并关闭")}</button><button disabled={busy} onClick={async()=>{setHotkey(info.snapshot.settings.writeHotkey);setReduced(info.snapshot.settings.reducedMotion);setLeavePrompt(false);allowLeave.current=true;try{await window.thoughtline.closeManage();}finally{allowLeave.current=false;}}}>{t("放弃修改")}</button><button disabled={busy} onClick={()=>setLeavePrompt(false)}>{t("继续编辑")}</button></div>}
  </main>;
 }

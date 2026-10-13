@@ -1,0 +1,37 @@
+{
+  "platform": "darwin",
+  "packaged": false,
+  "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-r5-contact-mamyQ9",
+  "checks": [],
+  "scenes": [],
+  "failures": [
+    {
+      "name": "calendar menu order zh-CN",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    '最近删除',\n+   '存储与设置',\n    '标签与分组',\n-   '存储与设置'\n  ]\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:11:360\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:6:35)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:11:38"
+    },
+    {
+      "name": "calendar menu order en",
+      "error": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.calendar-tools') to be visible\u001b[22m\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:11:343\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:6:35)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:11:38"
+    },
+    {
+      "name": "contact bar is visible independently of save footer",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:12:225\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:6:35)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:12:142"
+    }
+  ],
+  "scope": "Isolated native renderer and trusted IPC; OS external/clipboard boundary captured, no real browser, email or personal clipboard",
+  "runtime": {
+    "mainPid": 8567,
+    "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-r5-contact-mamyQ9"
+  },
+  "pids": [
+    8567,
+    8567,
+    8567,
+    8568,
+    8569,
+    8570,
+    8571
+  ],
+  "normalQuit": true,
+  "passed": false
+}

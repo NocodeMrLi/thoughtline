@@ -66,3 +66,25 @@ Windows400全量38332410356：R5 19及灰态8场景/5前置行为通过，恢复
 
 0.0.29（第五轮R5-12）已完成双端技术验证、清理及私有发布。构建/tag源码 66e88363d34f042b18a7ca4f88c8d7c29a115595；Windows完整运行 38333752315 success；Release 411180836，10份附件大小/SHA256读回一致。main后续文档提交不改变包来源。
 最终发布附件/历史Release/存储副本归档删除/本地清理/真实App版本读回通过。
+
+R5-13/14开始：获准方案已先追加第五轮及03/05；当前main57bc006干净，真实App版本现场读回。源码未修改，先写独立原生红例。此次没有重做0.28/29已交付功能。
+
+R5-13/14红例记录：首次夹具app.evaluate没有require，改用Node process.getBuiltinModule；setup早期失败退出超时，仅按receipt记录PID停止自有进程，原目录保留。第二轮16场景均捕捉到classification-create裁切聚焦描边，随后测试误用calendar-card（实际calendar-paper），纠正夹具后继续复现设置入口；未修改生产。
+
+R5-13/14正式红例：16聚焦裁切和设置入口旧拦截均实际失败；名称顶部无框对照通过，正常退出。最小实现采用表单focus内侧偏移、双向设置共存、backup双次检查点与migration实际执行/异步返回门禁。随后构建、原生绿验证。
+
+R5-13/14首轮原生30检查/16视觉场景全绿。扩展冷启动反向入口、文件选择期间新增正文、真实IO阻塞中的分类创建保护也通过；详情编辑夹具发现同名“完成编辑”文字按钮/底部图标，限定既有文字按钮后再跑，失败回执保留，不改生产。
+
+R5-13/14扩展Mac原生34检查/16场景全绿，含冷Settings→新建、backup文件选择期间输入、创建分类真实IO阻塞、旧便签/日历/管理共享输入框；正常退出/owned数据删除已回读。用户追加确认作者邮箱联系栏与日历菜单顺序，方案已先同步第五轮和03/05，加入本轮。
+
+R5-15/16红例：原菜单设置位于中间、联系栏不存在均实际失败；Anysearch提取失败，改官方Brand Toolkit核验，下载官方2025现行黑/白Invertocat，ZIP CRC及逐SVG SHA入档，原样拷贝。初次apply_patch桥接import上下文不一致未修改文件，按真实header重新应用。联系栏/固定动作IPC/菜单顺序最小实现开始验证，不自动发送或读取用户念头。
+
+R5-15首次构建命令未包含tsc，发现locale中文export实际带空格，字符串替换未加ZH键而EN已加；修正ZH字典并先跑类型检查。初次原生运行保留，不把混合/失败状态作为验收。后续使用完整verify后新进程重跑。
+
+联系栏修正中文键后完整verify349+4/类型/构建绿。24联系栏中英浅深宽窄/三页签场景及点击/键盘复制/小字反馈/错误/拒绝非法及非设置发送者均通过；菜单EN断言误写&，当前既有翻译是and，修夹具保持原文案。此前缺ZH导致渲染失败的自有9002经SIGTERM最终退出，再次PS确认PID已不存在（没有执行SIGKILL），现场与回执保留。
+
+Mac相关回归前10套全部通过（含24定制页完整预览/布局）。额外旧settings-lifecycle脚本在已通过真实冲突保护后保留自有busyKey，与真正新写作key同时存在，通用fixture要求唯一键位而失败；只在冲突断言之后释放该测试占用键，保留全部原冲突/IO/退出断言。不改生产或全局注册器，原失败日志保留。
+
+R5-15/16正式原生32检查/24场景全绿，官方SVG、固定外部/邮箱目标、复制和非法sender限制已验证；保留原failures未当通过。旧settings-lifecycle最小夹具修复后真实globalShortcut冲突/IO/退出/重启全绿。候选升0.0.30（保留旧版本），新两套源/实际包门禁加入CI，完整旧门禁未删。
+
+Important/P2 fix pass: actual Tray red failed both after-settings and during-storage assertions; refresh on busy start/finally fixed both. Native green36 checks/16 scenes, full349+4/tsc/build green. No second review, final package verification continues.

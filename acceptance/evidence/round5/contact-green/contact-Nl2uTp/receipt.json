@@ -1,0 +1,63 @@
+{
+  "platform": "darwin",
+  "packaged": false,
+  "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-r5-contact-vhB0Ms",
+  "checks": [
+    "calendar menu order zh-CN",
+    "contact bar is visible independently of save footer"
+  ],
+  "scenes": [],
+  "failures": [
+    {
+      "name": "calendar menu order en",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    'Recently deleted',\n    'Tags & groups',\n+   'Storage and settings'\n-   'Storage & settings'\n  ]\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:11:360\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:6:35)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:11:38"
+    },
+    {
+      "name": "contact layout zh-CN light 350 tab0",
+      "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('tab').first()\u001b[22m\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:16:146\n    at check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:6:41)\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:16:37"
+    },
+    {
+      "name": "contact layout zh-CN light 350 tab1",
+      "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('tab').nth(1)\u001b[22m\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:16:146\n    at check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:6:41)\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:16:37"
+    },
+    {
+      "name": "contact layout zh-CN light 350 tab2",
+      "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('tab').nth(2)\u001b[22m\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:16:146\n    at check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:6:41)\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:16:37"
+    },
+    {
+      "name": "contact layout zh-CN light 500 tab0",
+      "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('tab').first()\u001b[22m\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:16:146\n    at check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:6:41)\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:16:37"
+    },
+    {
+      "name": "contact layout zh-CN light 500 tab1",
+      "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('tab').nth(1)\u001b[22m\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:16:146\n    at check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:6:41)\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:16:37"
+    },
+    {
+      "name": "contact layout zh-CN light 500 tab2",
+      "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('tab').nth(2)\u001b[22m\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:16:146\n    at check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:6:41)\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:16:37"
+    },
+    {
+      "name": "setup/workflow",
+      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-contact-workflow.cjs:15:157"
+    }
+  ],
+  "scope": "Isolated native renderer and trusted IPC; OS external/clipboard boundary captured, no real browser, email or personal clipboard",
+  "runtime": {
+    "mainPid": 9002,
+    "dir": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-r5-contact-vhB0Ms"
+  },
+  "pids": [
+    9002,
+    9002,
+    9002,
+    9003,
+    9004,
+    9005,
+    9006
+  ],
+  "cleanupFailure": "Error: Fixture timed out: normal quit\n    at Timeout.<anonymous> (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/window-fixture.cjs:19:155)\n    at listOnTimeout (node:internal/timers:635:17)\n    at process.processTimers (node:internal/timers:571:7)",
+  "forcedOwnedStop": [
+    9002
+  ],
+  "passed": false
+}

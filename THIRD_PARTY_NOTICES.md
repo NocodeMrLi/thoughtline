@@ -20,3 +20,7 @@ Copyright (c) 2026 Alejandro Buján. MIT source license, full text and name/icon
 - The shelf visual follows the reference design; the name and icon are original Thoughtline assets. No private CGS APIs or screenshot-folder changes are used.
 
 These notices and licenses must be included in local installation packages. Other npm dependencies retain their own package licenses.
+
+## GitHub Invertocat
+
+Official black/white SVG assets from https://brand.github.com/GitHub_Logos.zip, used unchanged only as a secondary profile link. GitHub trademarks and artwork remain owned by GitHub, Inc.; this is not Thoughtline identity or an endorsement. Permitted social-link guidance: https://brand.github.com/foundations/logo. Details in licenses/GitHub-logo-use.md.

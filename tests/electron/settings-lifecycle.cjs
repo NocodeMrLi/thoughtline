@@ -35,6 +35,9 @@ const {_electron}=require('playwright');
    assert.equal(JSON.parse(await fs.readFile(path.join(dir,'snapshot.json'),'utf8')).settings.writeHotkey,newKey);await fs.chmod(dir,0o700);
   }
   await manage.getByRole('button',{name:'关闭设置',exact:true}).click();await manage.getByRole('dialog',{name:'设置尚未保存',exact:true}).waitFor();await manage.getByRole('button',{name:'放弃修改',exact:true}).click();
+  // The conflict was injected into this process's test registry. Release only
+  // that owned blocker before the helper invokes the one app writing callback.
+  await app.evaluate(({globalShortcut},key)=>globalShortcut.unregister(key),busyKey);
   // Invoke the registered app callback so the production session lifecycle is exercised.
   await openComposer(app,shelf);
   const draft='  退出前尚未挂上的草稿\n第二行中文\n第三行完整保留';

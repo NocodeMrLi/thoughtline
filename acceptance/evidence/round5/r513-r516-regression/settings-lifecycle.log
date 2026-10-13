@@ -1,0 +1,19 @@
+FIXTURE warmViews: shelf
+FIXTURE warmViews: settings
+FIXTURE warmViews: composer
+FIXTURE composer: invoking shortcut
+FIXTURE composer: shortcut invoked
+FIXTURE composer: created
+FIXTURE composer: native visibility checked
+FIXTURE composer: textbox visible
+FIXTURE composer: focused
+FIXTURE warmViews: ready
+FIXTURE composer: invoking shortcut
+electronApplication.evaluate: Error: Expected exactly one registered write shortcut, found Control+Alt+Shift+9, Control+Alt+Shift+8
+    at eval (eval at evaluate (:311:30), <anonymous>:1:137)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at openComposer (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/window-fixture.cjs:22:20)
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/settings-lifecycle.cjs:39:9 {
+  log: []
+}
