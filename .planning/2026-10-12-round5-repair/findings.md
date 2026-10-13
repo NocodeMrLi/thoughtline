@@ -13,3 +13,5 @@ Mac349单测通过、4项Windows专用跳过；Windows353全部通过，类型�
 本轮Mac 38个自有临时路径均不存在，8份失败残留先归档校验再清理；早期退出未成功的进程按专有PID、启动路径及父进程核实后停止，没有按名称杀进程。挂载、空隔离目录及当前重复构建包已清理，真实App仍0.0.28，未覆盖个人数据。22个旧Release附件及本地0.0.22/23历史包保持。
 Actions已删除本轮安装器副本和已归档失败UI产物，最新验收UI继续保留；当前37份约189.8MiB，验证门禁、私有状态与预算保持。本月累计提醒不会因删除立即归零。
 [操作报告](</Users/lihongwei/Desktop/晾念头 : Thoughtline/app/docs/releases/round5-v0.0.30-delivery.md>)；[私有安装包](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.30)。formalAcceptance/physicalAcceptance保持false，等待实际使用反馈。
+
+R5-17实测：17导出行为/8菜单场景在Mac源与DMG均通过；macOS textutil可回读标准DOCX。Windows首轮360单测通过，但旧round2-arrange首次窗口URL超时未进入cases，原ZIP11796716448已校验归档，同源完整重跑。读取GitHub出现间歇TLS握手超时，不改仓库权限或预算。

@@ -104,3 +104,7 @@ Actions已删除本轮安装器副本和已归档失败UI产物，最新验收UI
 R5-17: 7项导出内容单测先红后绿，全verify通过（待收录日志）。源UI8场景/键盘菜单通过；保存失败定位到测试Electron evaluate把首参Electron模块误作目标路径，已改二参传入。两次失败fixture正常退出超时已按receipt/PID和隔离路径校验后SIGTERM，真实App PID68573保留。
 
 R5-17: 源导出17项/8场景全部通过；Mac完整356通过、4项Windows专用跳过，类型/构建通过。六套Mac源码原生回归通过，DOCX经macOS textutil独立读取四字段、emoji、空行通过。准备冻结0.0.31，Windows与实际DMG尚待验证。
+
+Mac实际DMG9套通过，源码与36个输出文件/asar/签名绑定通过。Windows run38365102037首轮完整360单测通过；round2-arrange在warmViews首窗URL等待30秒失败，cases为空，未到本次导出。保留原日志及artifact11796716448 ZIP/API SHA256/CRC，原源码原门禁完整重跑一次（attempt2），未放宽断言或超时。
+
+Windows attempt2自动整理及后续多套通过，title-only detail清空正文后4秒等主进程状态超时，calendar模式同一逻辑通过。补充仅测试侧导航/renderer错误及超时前状态诊断，不更改生产、断言或等待时限。Mac自动整理7项和仅标题双入口重新通过。将新诊断提交后继续完整Windows门禁；Mac再打包并核相同asar，不把未查明超时写成已修复。
