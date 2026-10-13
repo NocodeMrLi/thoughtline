@@ -21,12 +21,20 @@ try{
   const browserHandles=await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().map(w=>{const h=w.getNativeWindowHandle();return (h.length===8?h.readBigUInt64LE():BigInt(h.readUInt32LE())).toString();}).join(','));
   const nativeState=async(expected)=>{const result=await promisify(execFile)('powershell.exe',['-NoProfile','-NonInteractive','-File',path.join(__dirname,'windows-native-menu-state.ps1'),'-OwnerPid',String(runtimePid),'-ExpectedCount',String(expected),'-BrowserHandles',browserHandles],{windowsHide:true,timeout:15000});const state=JSON.parse(result.stdout.trim());(receipt.nativeMenuStates??=[]).push(state);return state;};
   await app.evaluate(()=>{globalThis.nativeMenuProbe=null;});
-  const submenuPending=shelf.evaluate(id=>window.thoughtline.shelfMenu(id),id);
+  // A renderer RPC after another process owns the foreground is not an OS
+  // context-menu gesture. Use a real right click, granting the same foreground
+  // eligibility as the user's paper interaction before injecting keyboard input.
+  const paper=await shelf.locator('.hanging[data-idea-id="'+id+'"] .idea-card').boundingBox();assert(paper);
+  const shelfBounds=await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Shelf').getBounds());
+  const rightPoint={x:Math.round(shelfBounds.x+paper.x+paper.width/2),y:Math.round(shelfBounds.y+paper.y+Math.min(60,paper.height/2))};
+  const rightCommand=`Add-Type -TypeDefinition 'using System;using System.Runtime.InteropServices;public class ThoughtlineNativeRightClick{[DllImport("user32.dll")]public static extern bool SetCursorPos(int x,int y);[DllImport("user32.dll")]public static extern void mouse_event(uint flags,uint x,uint y,uint data,UIntPtr extra);}';if(-not [ThoughtlineNativeRightClick]::SetCursorPos(${rightPoint.x},${rightPoint.y})){throw 'Interactive desktop unavailable'};[ThoughtlineNativeRightClick]::mouse_event(8,0,0,0,[UIntPtr]::Zero);[ThoughtlineNativeRightClick]::mouse_event(16,0,0,0,[UIntPtr]::Zero)`;
+  await promisify(execFile)('powershell.exe',['-NoProfile','-NonInteractive','-EncodedCommand',Buffer.from(rightCommand,'utf16le').toString('base64')],{windowsHide:true});receipt.keyboardEntry={kind:'real OS paper context click',point:rightPoint};
+  const submenuPending=Promise.resolve();
   const openedDeadline=Date.now()+3000;while(!await app.evaluate(()=>!!globalThis.nativeMenuProbe&&!globalThis.nativeMenuProbe.closed)&&Date.now()<openedDeadline)await new Promise(r=>setTimeout(r,25));
   assert(await app.evaluate(()=>!!globalThis.nativeMenuProbe&&!globalThis.nativeMenuProbe.closed),'Fresh native popup must be open before OS keyboard input');
   // Arrow navigation skips disabled items and separators, unlike raw Menu.items indices.
   const navigation=await app.evaluate(()=>{const all=globalThis.nativeMenuProbe.menu.items;const selectable=all.filter(i=>i.visible&&i.enabled&&i.type!=='separator');return {rawIndex:all.findIndex(i=>i.label==='整理'),selectableIndex:selectable.findIndex(i=>i.label==='整理'),labels:selectable.map(i=>i.label)};});
-  receipt.submenuNavigation=navigation;assert(navigation.selectableIndex>=0);await nativeState(1);await keys([36,...Array(navigation.selectableIndex).fill(40),39]);await nativeState(2);
+  receipt.submenuNavigation=navigation;assert(navigation.selectableIndex>=0);const foreground=await nativeState(1);assert.equal(foreground.foregroundPid,runtimePid,'OS paper gesture must route keyboard input to its menu owner');await keys([36,...Array(navigation.selectableIndex).fill(40),39]);await nativeState(2);
   assert(await app.evaluate(()=>!globalThis.nativeMenuProbe.closed),'Organize submenu must retain root menu');
   // Separate OS injections let the submenu finish dismissing before the root Escape.
   await keys([27]);await nativeState(1);
