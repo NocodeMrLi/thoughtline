@@ -38,4 +38,4 @@ async function warmViewsImpl(app){
  console.log('FIXTURE warmViews: ready');return {shelf,composer,manage};
 }
 async function waitForInfo(page,predicate,timeout=10000){const deadline=Date.now()+timeout;while(Date.now()<deadline){const info=await page.evaluate(()=>window.thoughtline.info());if(predicate(info))return info;await new Promise(r=>setTimeout(r,25));}throw Error('Timed out waiting for acknowledged main-process state');}
-module.exports={launchOptions,openComposer,warmViews,waitForInfo,bounded};
+module.exports={launchOptions,openComposer,warmViews,waitForInfo,bounded,waitHidden};

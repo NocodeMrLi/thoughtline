@@ -1,5 +1,5 @@
 const {chooseInlineTag}=require('./classification-fixture.cjs');
-const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');
+const {launchOptions,warmViews,waitForInfo,bounded}=require('./window-fixture.cjs');
 const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
 (async()=>{
@@ -10,7 +10,7 @@ const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=requ
   const ids=['a','b','b2','c','d','e','f','g','h','q','r',...Array.from({length:30},(_,i)=>'full'+i)],ideas=ids.map(id=>({id,text:'final probe '+id,title:'final probe '+id,project:'',agentId:'general',status:'hanging',createdAt:'2026-10-09T00:00:00Z',updatedAt:'2026-10-09T00:00:00Z'}));
   const clips=[{id:'separate-test',agentId:'general',ideaIds:['q','r'],currentId:'q',position:null},{id:'group',agentId:'general',ideaIds:['d','e','f'],currentId:'d',position:null},{id:'agents',agentId:'general',ideaIds:['g','h'],currentId:'g',position:null},...ids.filter(id=>!['d','e','f','g','h','q','r'].includes(id)).map(id=>({id:'clip:'+id,agentId:'general',ideaIds:[id],currentId:id,position:null}))];
   await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:2,revision:0,ideas,clips,agents:[{id:'general',name:'通用',color:'#A0A3AA'},{id:'codex',name:'Codex',color:'#4C90D9'}],draft:null,settings:{writeHotkey:'Control+Alt+N',reducedMotion:true}}));
-  app=await _electron.launch(await launchOptions(dir));({shelf,manage}=await warmViews(app));assert.equal((await manage.evaluate(()=>window.thoughtline.storageInfo())).value.directory,dir);
+  app=await _electron.launch(await launchOptions(dir));({shelf,manage}=await warmViews(app));assert.equal(await bounded(app.evaluate(({app})=>app.getPath('userData')),'native isolated profile directory',3000),dir);
   const calendar=async()=>{assert((await shelf.evaluate(()=>window.thoughtline.openManage())).ok);await manage.waitForSelector('[data-mode=calendar]');await manage.getByRole('textbox',{name:'搜索念头'}).fill('final probe');};
   const open=async id=>{await manage.locator(`[data-idea-id="${id}"]`).click();await manage.waitForSelector(`[data-reader-id="${id}"]`);};
   const del=async()=>{await manage.getByRole('button',{name:'更多操作',exact:true}).click();await manage.getByRole('button',{name:/删除当前念头/}).click();};

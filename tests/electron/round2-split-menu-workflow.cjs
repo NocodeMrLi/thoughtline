@@ -1,4 +1,4 @@
-const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');
+const {launchOptions,warmViews,waitForInfo,bounded}=require('./window-fixture.cjs');
 const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 const {_electron}=require('playwright');
 const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
@@ -24,7 +24,7 @@ const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:
   const options=await launchOptions(dir,{stationaryTopCursor:true});
   await fs.appendFile(options.args[0],"\nglobalThis.thoughtlineTestIO=require('node:fs/promises');\n");
   app=await _electron.launch(options);({shelf,manage}=await warmViews(app));
-  assert.equal((await manage.evaluate(()=>window.thoughtline.storageInfo())).value.directory,dir);
+  assert.equal(await bounded(app.evaluate(({app})=>app.getPath('userData')),'native isolated profile directory',3000),dir);
   await shelf.evaluate(async()=>{const i=await window.thoughtline.info();return window.thoughtline.setStatus(i.snapshot.ideas[0].id,'hanging',i.snapshot.revision);});
   await waitForInfo(shelf,i=>i.shelfVisible);await shelf.evaluate(()=>window.thoughtline.dragLock(true));
  };
@@ -63,7 +63,7 @@ const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:
   await shelf.waitForTimeout(4300);assert.equal(await shelf.getByRole('alert').filter({hasText:'owned-split-write-failure'}).count(),1,'IO failure must remain visible beyond the long notice timeout');
   await app.evaluate(()=>{globalThis.thoughtlineTestIO.writeFile=globalThis.splitOriginalWrite;});pass('write-failure-visible-on-shelf-with-original-data-intact');
   await menu('b');await click('拆分');i=await waitForInfo(shelf,i=>i.snapshot.clips.some(c=>c.ideaIds.length===1&&c.currentId==='b'));
-  assert((await manage.evaluate(rev=>window.thoughtline.projectDelete('可删除分组',rev),i.snapshot.revision)).ok);await change({kind:'undo'});
+  assert((await shelf.evaluate(()=>window.thoughtline.openManage())).ok);manage=app.windows().find(p=>p.url().includes('view=manage'));await manage.waitForSelector('[data-mode=calendar]');assert((await manage.evaluate(rev=>window.thoughtline.projectDelete('可删除分组',rev),i.snapshot.revision)).ok);await change({kind:'undo'});
   i=await info();assert(i.snapshot.ideas.every(n=>n.project===''));pass('split-undo-cannot-revive-deleted-project');
   await shelf.evaluate(()=>window.thoughtline.openManage('b'));await manage.waitForSelector('[data-reader-id="b"]');
   await manage.getByRole('button',{name:'拆分',exact:true}).click();i=await waitForInfo(shelf,i=>i.snapshot.clips.some(c=>c.ideaIds.length===1&&c.currentId==='b'));pass('expanded-reader-split-remains-available');
