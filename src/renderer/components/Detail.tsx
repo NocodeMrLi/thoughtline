@@ -5,7 +5,7 @@ import {useLocale} from '../LocaleContext';
 import {useEffect,useLayoutEffect,useRef,useState} from 'react';
 import type {PilotInfo} from '../../shared/bridge';
 import {matchingClipIds} from '../../shared/ideaVisibility';
-import {useClipPage} from '../hooks/useClipPage';
+import {flushPageSelections,useClipPage} from '../hooks/useClipPage';
 import {prepareLeave} from '../hooks/leaveGuards';
 import {IdeaReader} from './IdeaReader';
 import {IconButton} from './ActionIcon';
@@ -43,7 +43,7 @@ export function Detail({info}:{info:PilotInfo}){
  const choose=(id:string)=>{const at=info.manageSession;selectionQueue.current=selectionQueue.current.then(async()=>{if(!owned(at)||!await prepareLeave()||!owned(at))return;const current=latest.current;if(!current.ids.includes(id))return;intent.current++;current.page.choose(id);current.visibleId=id;setSelected(id);setTitles(false);setEditRequest(null);}).catch(()=>{if(owned(at))setError('最后修改尚未保存，请重试。');});};
  const flip=(step:number)=>{const at=info.manageSession;selectionQueue.current=selectionQueue.current.then(async()=>{if(!owned(at)||!await prepareLeave()||!owned(at))return;const current=latest.current,index=current.ids.indexOf(current.visibleId||current.page.current()||'')??-1;const next=current.ids[index+step];if(next){intent.current++;current.page.choose(next);current.visibleId=next;setSelected(next);setTitles(false);setEditRequest(null);}}).catch(()=>{if(owned(at))setError('最后修改尚未保存，请重试。');});};
  const toggleTitles=async()=>{const at=info.manageSession,token=++intent.current;if(await prepareLeave()&&owned(at)&&intent.current===token)setTitles(value=>!value);};
- const undo=async()=>{const at=info.manageSession,token=++intent.current,valid=()=>owned(at)&&intent.current===token;try{if(!await prepareLeave()||!valid())return;const current=await window.thoughtline.info();if(!valid()||current.manageSession!==at)return;const r=await window.thoughtline.clipChange({kind:'undo'},current.snapshot.revision);if(valid()&&!r.ok)setError(r.message);}catch{if(valid())setError('操作未成功，请重试。');}};
+ const undo=async()=>{const at=info.manageSession,token=++intent.current,valid=()=>owned(at)&&intent.current===token;try{if(!await prepareLeave()||!valid())return;await flushPageSelections();if(!valid())return;const current=await window.thoughtline.info();if(!valid()||current.manageSession!==at)return;const r=await window.thoughtline.clipChange({kind:'undo'},current.snapshot.revision);if(valid()&&!r.ok)setError(r.message);}catch{if(valid())setError('操作未成功，请重试。');}};
  const navigation=clip&&clip.ideaIds.length>1&&<nav className="detail-pager" aria-label={t("便签切换")}><button aria-label={t("上一张便签")} disabled={index<=0} onClick={()=>flip(-1)}>‹</button><button aria-label={t("打开本夹标题列表")} onMouseDown={e=>e.preventDefault()} onClick={()=>void toggleTitles()}>{index+1}/{ids.length}</button><button aria-label={t("下一张便签")} disabled={index>=ids.length-1} onClick={()=>flip(1)}>›</button></nav>;
  return <main data-view="manage" data-mode="detail" data-material={info.manageMaterial} data-platform={info.platform} className="manage compact-detail" onKeyDown={e=>{
   if(e.nativeEvent.isComposing||e.nativeEvent.keyCode===229)return;

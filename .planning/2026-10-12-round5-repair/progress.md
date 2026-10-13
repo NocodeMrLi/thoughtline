@@ -162,3 +162,5 @@ R5-26最新合并合同已正式写入第五轮并替换直接目标菜单条款
 2026-10-14 第二轮实际包审查：24套Mac实际DMG回归已逐项通过，旧脚本菜单路径、默认分组页签及日期扩展按最终合同定向校正，业务门禁保留。新增长跨年日期原生红例确认78px列内中文完整日期截断；改跨年为YYYY-MM-DD，字号不变，同年仍本地化简写。完整verify398pass/4Windows skip与8场景含跨年源回归通过，重新冻结双端最终包。a8bb03e的Windows运行38434518095在无已知失败时按明确身份取消，原因是新增生产修复需同源全量重跑。
 
 Windows完整38435526865在pager保存故障用例失败：8布局/3业务先通过，原用例150ms就撤销故障，而Windows atomic rename允许20+100+300ms真实重试。Mac受控400ms请求延迟重现同一末页禁用红例。仅测试改为观察真实update-idea IO失败确认及pending归零后再恢复文件，保留原文/原文件/不离开/重试再翻页全部断言，增加失败诊断及有界退出；不改生产和权限。pager-io-ack-green-3在两次约415ms IO失败后5业务/8布局/正常退出绿，全verify398pass/4Windows skip。两个试验探针先因frame等待/错误Electron evaluate参数失败，已登记精确PID清理，不能计正常退出通过。最新最终源码需重新冻结、双端包证据绑定及完整Windows重跑。
+
+最终Windows38438855454通过慢IO pager，但原merge测试使用裸clipChange撤销，在页码保存并发时失败。实际详情按钮受控600ms页码/800ms撤销延迟复现CONFLICT（merge-ui-undo-red）；确认Detail.undo与Calendar页头undo遗漏既有flushPageSelections。补页码检查点后两个实际按钮绿，不放宽CAS。交接项5也复现：日历仍有待保存页码时打开合并面板，merge-target prepareViews改变合法revision导致CONFLICT（merge-pre-open-red-2）。将现有prepareViews移到小面板打开前，并按同source复用coalesce请求，仍保留提交前保护/版本校验和资格重核。完整verify398pass/4Windows skip；merge-prepare-and-undo-green8业务、两入口撤销、并发合并与重复打开及正常退出绿。早期merge-pre-open-red因用例误改初始页码导致基线比较失败，不当产品红例；所有失败资料保留。新版源/双端实际包需重新绑定。
