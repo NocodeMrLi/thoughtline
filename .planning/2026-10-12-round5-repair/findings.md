@@ -23,3 +23,22 @@ Mac356单测通过、4项Windows专用跳过；Windows360全部通过，类型�
 Mac 23个本轮隔离路径确认不存在；失败残留先校验归档再清理。测试进程按自有PID/路径核实后退出或停止，最终挂载/隔离启动空目录/重复构建包已清理。真实应用及个人数据未动，旧Release和历史安装包保留。
 Actions安装器副本与三份本轮已归档失败UI已清理，最新验收UI仍保留；当前38份/272741961bytes。原验证门禁、仓库私有状态和预算保持，累计账期用量不会因清理立即归零。
 [操作验证报告](</Users/lihongwei/Desktop/晾念头 : Thoughtline/app/docs/releases/round5-v0.0.31-delivery.md>)；[私有安装包](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.31)。原生自动验证与受控系统保存边界已完成，个人设备文件选择体验、Word/WPS排版和物理IME/DPI/多屏仍独立确认，formalAcceptance/physicalAcceptance保持false。
+
+Task7源码事实：boundsFor y=workArea.y+24；fitManageBounds只有屏内约束；分类/设置重用Manage并重设顶部默认；最近删除是Calendar内部nav.level=trash。host.showShelf含moveTop，Mac shelf为panel，两窗alwaysOnTop。默认避让和层级需一起验证；卡顿无当前耗时证据，方案先分阶段计时。UI技能空间查询首轮偏VisionOS，窄化命中Web content-jumping只作位置稳定原则参考，不当作Electron平台事实。
+
+R5-20纠正：用户指出Manage存在期间挂绳保持展开，普通同屏页面往返不会重显。shelfState中非composer锁阻止自动收起；日历/分类/设置保留manage锁，最近删除为内部go(trash)，edge.render仅before=hidden才showShelf。撤回moveTop是用户这条操作链根因的推断。方案收敛三种Manage形态的出现/切换/返回位置与性能，现有层级/显隐不预设改动。
+
+Task7模型11项新增行为已绿。全量首次27失败：3项待实现几何；余24为新schema4输出、旧同标签跨组新合夹及同组改标签自动拆分合同变化。逐项调整有效合夹夹具为同分组，并保留历史跨组快照读取测试；位置分離测试改为真实改组而非改标签。未删除原全文/位置/身份/旧CAS/旧备份断言。单测夹具第三标签初用claude（新默认不存在）导致无效，修成已有preset:colleague，生产不新增默认标签。
+
+2026-10-13 23:25 用户要求暂停并交接：此后不继续生产修改、不打包、不提交/推送。当前npm test 385pass/4Windows skip、typecheck退出0；pause-full-unit.log/pause-typecheck.log。新增R5-26原生6业务CHECK不等于整体PASS，正常离开第7项尚未通过；obsolete-page-owner-red.json保持原FAIL。旧group-spatial-green.log实际FAIL，当前+12几何读数需按width/2校准；不再把未证实pointer假说当根因。双端新版实际包、两轮最终合同审查、交付清理仍未完成。
+检查点和可恢复源归档：/Users/lihongwei/Documents/Codex/2026-10-13/thoughtline-r526-pause-20261013-232510
+77源码/计划文件归档，Git展开469变动（含证据）；本轮精确原生runner/R526 Electron已无活动，失败55文件逐SHA验证归档后清理；只停已登记原型6011/49324，个人App68573与归属未明Electron95997保留。其他历史/全轮临时对象未宣称全清。
+外部主文00/07/第五轮暂停状态和新接续提示词已同步；通用文档3处去重补强，升级05无新增候选。保存责任与IO/IME门禁不放宽。任务7保持未完成，0.0.31既有交付不重置。
+
+接续复现：当前源码重新build后merge-picker完整7项通过，closeManage返回ok且正常app.close/数据清理通过（resume-merge-owner.log和merge-picker-darwin-source.json）。既有owner防护在本次条件有效，无需再猜测或追加生产修复。旧group-workflow几何断言用硬编码+12，真实peg宽26，改为width/2；保留端点、全部三夹可见、早放手、停留合夹断言。标题列表按当前获批pager入口展开后选标题，不能依赖已移除常驻标题。
+
+完整stack原生矩阵先通过9类行为，归档改组确认红例复现：inline只查clips导致确认缺失并自动拆分写入。Inline/Composer改为共享storedClipFor覆盖clips/archivedClips/capacityOverflow，不改保存或IME协议。stack-owner-confirm-red.log为改前失败。group按稳定clip ID修正后完整绿（resume-group-id.log），实际成员/原文/位置/正常重启保全断言保持。
+
+R5-26全目标审查红例：旧hanging溢出夹被当挂绳目标。按实际无筛选物理layout可见ID判断目标位置（隐藏筛选成员仍随真实位置），列表和提交共用width。当前源仍仅挂绳，日历目标完整成员转manual archived，不参与补位。overflow-target-red.log保留。此为最终合同落地缺口，不新增范围。
+
+设置回归33通过/3失败：第一项在waitHidden已确认新建不可见后托盘write仍disabled，后两项被失败善后再开writer污染，不独立归因。closeConfirmedComposer在host.closeComposer返回后刷新真实Tray；原hide回调可能早于native可见性终态，必须按完整close后的状态刷新。保持保存确认前不关闭、迁移门禁不变。保留resume-regression-3原失败与隔离回执，重新完整设置36项验证。

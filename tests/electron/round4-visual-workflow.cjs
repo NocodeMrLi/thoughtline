@@ -12,7 +12,7 @@ const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=requ
  const button=name=>page.getByRole('button',{name,exact:true});
  const settings=async()=>{assert((await shelf.evaluate(()=>window.thoughtline.openSettings())).ok);page=(await app.windows()).find(p=>p.url().includes('view=manage'));await page.waitForSelector('[data-mode=settings]');};
  const appearance=async(color,theme)=>{await settings();const i=await info();assert((await page.evaluate(([settings,revision])=>window.thoughtline.saveSettings(settings,revision),[{...i.snapshot.settings,paper:{color,pattern:'ruled'}},i.snapshot.revision])).ok);assert((await page.evaluate(([theme,request])=>window.thoughtline.setPreferences({locale:'zh-CN',theme},request),[theme,sequence++])).ok);};
- const open=async(entry)=>{assert((await shelf.evaluate(()=>window.thoughtline.openManage('one'))).ok);await page.locator('[data-reader-id=one]').waitFor();if(entry==='calendar'){await button('Thoughtline日历').click();await page.locator('.date-cell[data-day="2026-10-12"]').click();await page.locator('.calendar-paper[data-idea-id=one]').click();await page.locator('[data-reader-id=one]').waitFor();}};
+ const open=async(entry)=>{assert((await shelf.evaluate(()=>window.thoughtline.openManage('one'))).ok);await page.locator('[data-reader-id=one]').waitFor();if(entry==='calendar'){await button('Thoughtline 日历').click();await page.locator('.date-cell[data-day="2026-10-12"]').click();await page.locator('.calendar-paper[data-idea-id=one]').click();await page.locator('[data-reader-id=one]').waitFor();}};
  const geometry=async(editing)=>page.evaluate(editing=>{
   const host=document.querySelector('.reader-paper'),title=host.querySelector(editing?'.inline-editor>input':'.reader-paper-heading'),body=host.querySelector(editing?'.inline-editor>textarea':'[data-full-text]');
   const box=e=>{const r=e.getBoundingClientRect(),s=getComputedStyle(e);return {x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width,height:r.height,border:parseFloat(s.borderTopWidth),borderColor:s.borderTopColor,background:s.backgroundColor,shadow:s.boxShadow,outline:s.outlineWidth};};
@@ -52,7 +52,7 @@ const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=requ
    await button('编辑').click();await page.locator('[data-inline-editor]').waitFor();
    const g=await geometry(true),label=`${entry}-${w}-${h}`;receipt.measurements.push({label,...g});
    assert(g.gap>=11.9);assert(g.title.right<=g.viewport.width&&g.body.right<=g.viewport.width,'fields fit narrow window');
-   assert.equal(await page.getByRole('button',{name:'打开本夹标题列表',exact:true}).count(),entry==='detail'?1:0);
+   assert.equal(await page.getByRole('button',{name:'打开本夹标题列表',exact:true}).count(),1);
    await page.getByRole('textbox',{name:'编辑标题',exact:true}).fill('只有标题的安全区');await page.getByRole('textbox',{name:'编辑正文',exact:true}).fill('');
    await button('完成编辑').first().click();await page.locator('[data-inline-editor]').waitFor({state:'detached'});await waitForInfo(shelf,i=>i.snapshot.ideas.find(x=>x.id==='one').text==='');
    const after=await geometry(false);assert(after.gap>=11.9);assert(after.body.border>=1);assert.equal(await page.locator('[data-full-text]').inputValue(),'');

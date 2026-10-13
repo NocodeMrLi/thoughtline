@@ -1,0 +1,46 @@
+
+> thoughtline@0.0.32 verify
+> node scripts/verify.cjs
+
+
+> thoughtline@0.0.32 typecheck
+> node node_modules/typescript/bin/tsc --noEmit
+
+
+> thoughtline@0.0.32 test
+> node node_modules/vitest/vitest.mjs run
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/deliveryVersion.test.ts (1 test | 1 failed) 8ms
+   ❯ active Windows isolation delivery binding (1)
+     × binds the executable check and both isolated profile paths to the packaged version 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/deliveryVersion.test.ts > active Windows isolation delivery binding > binds the executable check and both isolated profile paths to the packaged version
+AssertionError: expected '0.0.31' to be '0.0.32' // Object.is equality
+
+Expected: "0.0.32"
+Received: "0.0.31"
+
+ ❯ tests/unit/deliveryVersion.test.ts:10:116
+      8|   const preflight=readFileSync('scripts/windows-installer-preflight.ps…
+      9|   expect(launcher.match(/\.FileVersion -ne '([^']+)'/)?.[1]).toBe(vers…
+     10|   for(const source of [launcher,preflight])expect(source.match(/Though…
+       |                                                                                                                    ^
+     11|  });
+     12| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 63 passed | 1 skipped (65)
+      Tests  1 failed | 397 passed | 4 skipped (402)
+   Start at  00:33:32
+   Duration  2.63s (tests 62%, transform 23%, import 12%, worker 3%)
+
+    Isolate  65 workers spawned · ~118ms startup each (spawn + environment, per file)
+             at least ~974ms faster with isolate: false — reuses workers across files instead of one per file
+

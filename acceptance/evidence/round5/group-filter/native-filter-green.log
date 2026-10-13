@@ -1,0 +1,41 @@
+PASS seven-entry slim menu order and English product calendar name
+locator.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-clip-id="clip:b"]').locator('.page-arrow').first()[22m
+[2m    - locator resolved to <button class="page-arrow" aria-label="上一张便签">‹</button>[22m
+[2m  - attempting click action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is not visible[22m
+[2m    - retrying click action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is not visible[22m
+[2m    - retrying click action[22m
+[2m      - waiting 100ms[22m
+[2m    58 × waiting for element to be visible, enabled and stable[22m
+[2m       - element is not visible[22m
+[2m     - retrying click action[22m
+[2m       - waiting 500ms[22m
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:18:481
+    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:6:35)
+    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:18:3 {
+  log: [
+    `  - waiting for locator('[data-clip-id="clip:b"]').locator('.page-arrow').first()`,
+    '    - locator resolved to <button class="page-arrow" aria-label="上一张便签">‹</button>',
+    '  - attempting click action',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is not visible',
+    '    - retrying click action',
+    '    - waiting 20ms',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is not visible',
+    '    - retrying click action',
+    '      - waiting 100ms',
+    '    58 × waiting for element to be visible, enabled and stable',
+    '       - element is not visible',
+    '     - retrying click action',
+    '       - waiting 500ms'
+  ],
+  name: 'TimeoutError'
+}

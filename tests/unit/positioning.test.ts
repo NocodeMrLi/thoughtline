@@ -16,7 +16,7 @@ test('fresh profile has only six compact presets spanning everyday, work, specif
 test('legacy schema2 custom developer tags, colors, note fields, positions and draft survive validation',()=>{
  let s=fixture(2);s={...s,schemaVersion:2,agents:[{id:'general',name:'通用',color:'#A0A3AA'},{id:'claude',name:'Claude 我改过',color:'#123456'}],ideas:s.ideas.map(i=>({...i,agentId:'claude'})),clips:s.clips.map(c=>({...c,agentId:'claude',position:.3})),draft:{...draft,agentId:'claude'}};
  s.ideas=s.ideas.map(({createdDay:_day,creationTimeZone:_zone,...i})=>i);const original=structuredClone(s),next=value(validateSnapshot(JSON.parse(JSON.stringify(s))));
- expect(next.agents).toEqual(original.agents);expect(next.ideas.map(({createdDay:_day,creationTimeZone:_zone,...i})=>i)).toEqual(original.ideas);expect(next.ideas.every(i=>i.createdDay==='2026-10-09'&&i.creationTimeZone==='legacy-offset')).toBe(true);expect(next.clips).toEqual(original.clips);expect(next.draft).toEqual(original.draft);expect(next.schemaVersion).toBe(3);
+ expect(next.agents).toEqual(original.agents);expect(next.ideas.map(({createdDay:_day,creationTimeZone:_zone,...i})=>i)).toEqual(original.ideas);expect(next.ideas.every(i=>i.createdDay==='2026-10-09'&&i.creationTimeZone==='legacy-offset')).toBe(true);expect(next.clips).toEqual(original.clips);expect(next.draft).toEqual(original.draft);expect(next.schemaVersion).toBe(4);
 });
 test('all app-owned messages use generic tag terminology in both languages',()=>{
  const offenders=Object.entries(dictionaries).flatMap(([locale,dict])=>Object.entries(dict).filter(([,v])=>/Agent/.test(v)).map(([k])=>locale+':'+k));expect(offenders).toEqual([]);

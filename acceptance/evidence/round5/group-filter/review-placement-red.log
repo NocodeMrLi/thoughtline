@@ -1,0 +1,93 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/ideaPlacement.test.ts (13 tests | 2 failed) 49ms
+   × 换上撤销保留另一个日历叠放的后续合法改组拆分 7ms
+   × 同一夹位连续整叠换上生成独立归档身份且可撤销最新一次 3ms
+ ❯ tests/unit/round5MergeTargets.test.ts (12 tests | 2 failed) 52ms
+   × 容量日历叠放主动挂上必须整体恢复 8ms
+   × 容量日历叠放改组仅分离当前纸张 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/ideaPlacement.test.ts > 换上撤销保留另一个日历叠放的后续合法改组拆分
+AssertionError: expected [ { id: 'uv', …(4) } ] to deeply equal [ { id: 'uv', …(4) }, …(1) ]
+
+- Expected
++ Received
+
+@@ -3,18 +3,10 @@
+      "agentId": "general",
+      "currentId": "u",
+      "id": "uv",
+      "ideaIds": [
+        "u",
+-     ],
+-     "position": null,
+-   },
+-   {
+-     "agentId": "general",
+-     "currentId": "v",
+-     "id": "calendar:v",
+-     "ideaIds": [
+        "v",
+      ],
+      "position": null,
+    },
+  ]
+
+ ❯ tests/unit/ideaPlacement.test.ts:62:154
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/unit/ideaPlacement.test.ts > 同一夹位连续整叠换上生成独立归档身份且可撤销最新一次
+Error: 日历叠放结构或位置无效。
+ ❯ value tests/unit/ideaPlacement.test.ts:8:47
+
+ ❯ tests/unit/ideaPlacement.test.ts:66:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/unit/round5MergeTargets.test.ts > 容量日历叠放主动挂上必须整体恢复
+AssertionError: expected [ 'a' ] to deeply equal [ 'c', 'a' ]
+
+- Expected
++ Received
+
+  [
+-   "c",
+    "a",
+  ]
+
+ ❯ tests/unit/round5MergeTargets.test.ts:29:125
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/unit/round5MergeTargets.test.ts > 容量日历叠放改组仅分离当前纸张
+AssertionError: expected [ [ 'c', 'a' ] ] to deeply equal [ [ 'c' ], [ 'a' ] ]
+
+- Expected
++ Received
+
+  [
+    [
+      "c",
+-   ],
+-   [
+      "a",
+    ],
+  ]
+
+ ❯ tests/unit/round5MergeTargets.test.ts:33:137
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  4 failed | 21 passed (25)
+   Start at  00:12:41
+   Duration  313ms (transform 62%, tests 24%, import 11%, worker 3%)
+

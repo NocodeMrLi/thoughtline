@@ -1,7 +1,7 @@
 import type {Idea,Snapshot} from './contracts';
 import type {IdeaQuery} from './ideaCommands';
 import {onLineIdeaIds} from './ideaVisibility';
-export type CalendarVisibility={width:number;shelfAgentId?:string;names?:ReadonlyMap<string,string>};
+export type CalendarVisibility={width:number;shelfAgentId?:string;shelfProject?:string|null;names?:ReadonlyMap<string,string>};
 
 // Old snapshots retain the date written with their original offset. A missing
 // offset is interpreted in UTC, never in the timezone used at migration time.
@@ -15,7 +15,7 @@ export function ideaDay(idea:Idea):string{
 
 export function calendarIndex(s:Snapshot,filters:Partial<IdeaQuery>={},visibility?:CalendarVisibility):Map<string,Idea[]>{
  const query=(filters.query??'').trim().toLowerCase(),names=new Map(s.agents.map(a=>[a.id,a.name]));
- const onLine=visibility?onLineIdeaIds(s,visibility.width,visibility.shelfAgentId):null;
+ const onLine=visibility?onLineIdeaIds(s,visibility.width,visibility.shelfAgentId,visibility.shelfProject??null):null;
  const ideas=s.ideas.filter(i=>i.status!=='deleted'&&(!filters.status||filters.status==='all'||(onLine?(i.status==='hanging'&&onLine.has(i.id)?'hanging':'archived'):i.status)===filters.status)&&(!filters.agentId||filters.agentId==='all'||i.agentId===filters.agentId)&&(!query||[i.text,i.title,i.project,names.get(i.agentId)??'',visibility?.names?.get(i.agentId)??''].join('\n').toLowerCase().includes(query)))
   .sort((a,b)=>Date.parse(a.createdAt)-Date.parse(b.createdAt)||(a.id<b.id?-1:a.id>b.id?1:0));
  const days=new Map<string,Idea[]>();

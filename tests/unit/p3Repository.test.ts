@@ -16,13 +16,13 @@ const old=(schemaVersion:1|2)=>({...initialSnapshot(),schemaVersion,revision:7,i
 test.each([1,2] as const)('schema%s原始字节先备份，修订/全文/草稿/日期跨提交重启保全，备份不覆盖',async schemaVersion=>{
  const dir=await fixture();const raw=' \n'+JSON.stringify(old(schemaVersion),null,2)+'\n';await writeFile(join(dir,'snapshot.json'),raw);
  process.env.TZ='America/Los_Angeles';const repo=new FileRepository(dir);const migrated=value(await repo.load());
- expect(migrated.schemaVersion).toBe(3);expect(migrated.revision).toBe(7);
+ expect(migrated.schemaVersion).toBe(4);expect(migrated.revision).toBe(7);
  expect(migrated.ideas[0]).toMatchObject({text:'  原文 🧵\n第二行\n ',createdDay:'2026-01-01',creationTimeZone:'legacy-offset'});
  expect(migrated.draft?.text).toBe(' 尚未写完\n ');expect(await readFile(join(dir,'snapshot.json'),'utf8')).toBe(raw);
  const committed=value(await repo.commit(migrated,7));expect(committed.revision).toBe(8);
  const backupPath=join(dir,`snapshot.schema${schemaVersion}.backup.json`);expect(await readFile(backupPath,'utf8')).toBe(raw);
  process.env.TZ='Pacific/Kiritimati';const restarted=new FileRepository(dir);const current=value(await restarted.load());
- expect(current).toEqual(committed);expect(JSON.parse(await readFile(join(dir,'snapshot.json'),'utf8')).schemaVersion).toBe(3);
+ expect(current).toEqual(committed);expect(JSON.parse(await readFile(join(dir,'snapshot.json'),'utf8')).schemaVersion).toBe(4);
  const edited=value(editIdea(current,'old',{text:'  修改 😄\n ',title:'短名',project:'项目',agentId:'general'},'2026-10-09T12:00:00Z'));
  value(await restarted.commit(edited,8));expect(value(await new FileRepository(dir).load()).ideas[0]).toMatchObject({id:'old',text:'  修改 😄\n ',createdAt:'2026-01-01T00:30:00+08:00',createdDay:'2026-01-01',creationTimeZone:'legacy-offset'});
  expect(await readFile(backupPath,'utf8')).toBe(raw);

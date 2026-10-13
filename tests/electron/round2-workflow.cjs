@@ -50,7 +50,7 @@ const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:
   await check('menu-stash-current-preserves-other-pages',async()=>{
    await shelf.evaluate(async()=>{const i=await window.thoughtline.info();const r=await window.thoughtline.setStatus('r2-1','hanging',i.snapshot.revision);if(!r.ok)throw Error(r.message);});await waitForInfo(shelf,i=>i.shelfVisible);
    await shelf.evaluate(()=>window.thoughtline.dragLock(true));const opened=await shelf.evaluate(()=>window.thoughtline.shelfMenu('r2-1'));assert(opened.ok,opened.message);
-   const labels=await app.evaluate(()=>globalThis.thoughtlineTestPopup.menu.items.map(i=>i.label));assert(labels.includes('Thoughtline日历'),'calendar entry uses unified name');assert(labels.includes('收起当前念头'),'current-note stash available');
+   const labels=await app.evaluate(()=>globalThis.thoughtlineTestPopup.menu.items.map(i=>i.label));assert(labels.includes('Thoughtline 日历'),'calendar entry uses unified name');assert(labels.includes('收起当前念头'),'current-note stash available');
    await app.evaluate(()=>globalThis.thoughtlineTestPopup.menu.items.find(i=>i.label==='收起当前念头').click());
    await waitForInfo(shelf,i=>i.snapshot.ideas.find(i=>i.id==='r2-1').status==='archived');
    const s=(await shelf.evaluate(()=>window.thoughtline.info())).snapshot;assert.equal(s.ideas.find(i=>i.id==='r2-1').text,ideas[1].text);assert.equal(s.ideas.find(i=>i.id==='r2-1').project,'保留分组');assert.deepEqual(s.clips[0].ideaIds,['r2-0','r2-2']);assert.equal(s.clips[0].currentId,'r2-2');assert.equal(s.clips[0].position,.4);await app.evaluate(()=>globalThis.thoughtlineTestPopup.options.callback());await shelf.evaluate(()=>window.thoughtline.dragLock(false));return {labels,ids:s.clips[0].ideaIds,current:s.clips[0].currentId};

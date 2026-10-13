@@ -25,13 +25,13 @@ it('reduce then increase capacity preserves grouped notes and queued eligibility
  const upper=v((queue as any).setShelfCapacity(lower,8,1440,'2026-10-11T04:00:00Z'));expect(upper.clips).toHaveLength(6);expect(upper.ideas.map(i=>[i.id,i.title,i.text])).toEqual(s.ideas.map(i=>[i.id,i.title,i.text]));
 });
 it('capacity overflow keeps a stacked clip together when capacity returns',()=>{
- let s=seed();s=v(newIdea(s,{title:'叠纸',text:'内容',project:'',agentId:'general'},'stack','2026-10-11T00:00:00Z'));s=v(mergeClips(s,'clip:stack','clip:n5'));
+ let s=seed();s=v(newIdea(s,{title:'叠纸',text:'内容',project:'工作',agentId:'general'},'stack','2026-10-11T00:00:00Z'));s=v(mergeClips(s,'clip:stack','clip:n5'));
  const original=s.clips.find(c=>c.id==='clip:n5')!;const lower=v((queue as any).setShelfCapacity(s,4,1440,'2026-10-11T03:00:00Z')),upper=v((queue as any).setShelfCapacity(lower,8,1440,'2026-10-11T04:00:00Z'));
  expect(upper.clips.find(c=>c.id===original.id)).toMatchObject({ideaIds:original.ideaIds,currentId:original.currentId});
 });
 
 it('manually re-hanging part of a parked group does not collide on restoring its remainder',()=>{
- let s=seed();s=v(newIdea(s,{title:'stack',text:'body',project:'',agentId:'general'},'stack','2026-10-11T00:00:00Z'));s=v(mergeClips(s,'clip:stack','clip:n5'));
+ let s=seed();s=v(newIdea(s,{title:'stack',text:'body',project:'工作',agentId:'general'},'stack','2026-10-11T00:00:00Z'));s=v(mergeClips(s,'clip:stack','clip:n5'));
  s=v(queue.setShelfCapacity(s,4,1440,'2026-10-11T03:00:00Z'));
  s=v(changeStatus(s,'n0','archived','2026-10-11T03:01:00Z'));
  s=v(queue.placeIdea(s,{id:'n5'},{kind:'hang'},1440,'2026-10-11T03:02:00Z'));

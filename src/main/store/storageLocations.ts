@@ -9,7 +9,7 @@ import {FileRepository} from './repository';
 import {atomicWrite} from './atomicFile';
 
 /** Narrowly owned files only. Browser profile and arbitrary files never travel. */
-const owned=(name:string)=>/^(snapshot(?:\.bak|\.schema[12]\.backup)?\.json|snapshot\.corrupt-[a-f0-9-]+\.json)$/.test(name);
+const owned=(name:string)=>/^(snapshot(?:\.bak|\.schema[123]\.backup)?\.json|snapshot\.corrupt-[a-f0-9-]+\.json)$/.test(name);
 export const storageIO=fs;
 export type StorageIO=Pick<typeof fs,'lstat'|'realpath'|'readdir'|'readFile'|'copyFile'|'open'|'unlink'|'mkdir'|'rmdir'|'writeFile'>;
 type Entry={name:string;size:number;sha256:string};
@@ -26,7 +26,7 @@ async function snapshotAt(dir:string,io:StorageIO):Promise<Snapshot>{
   let raw:Buffer;try{raw=await bytes(dir,name,io);}catch(e){if((e as NodeJS.ErrnoException).code==='ENOENT')continue;throw e;}
   let parsed;try{parsed=JSON.parse(raw.toString('utf8'));}catch{continue;}
   const result=validateSnapshot(parsed);if(result.ok)return result.value;
-  if(parsed&&![1,2,3].includes(parsed.schemaVersion))throw new Invalid('未知快照版本，拒绝替换。');
+  if(parsed&&![1,2,3,4].includes(parsed.schemaVersion))throw new Invalid('未知快照版本，拒绝替换。');
  }
  throw new Invalid('没有可读取的念头快照或备份，未创建空库。');
 }

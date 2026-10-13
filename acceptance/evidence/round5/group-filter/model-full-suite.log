@@ -1,0 +1,404 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/round5ManageBounds.test.ts (4 tests | 3 failed) 9ms
+   × 默认窗口避开真实便签底边并保留16DIP间距 4ms
+   × 不同页面优先保持父窗口同屏顶部与水平中心 4ms
+   × 避让后的可用高度不足时缩短窗口而不越界 0ms
+ ❯ tests/unit/p3Repository.test.ts (9 tests | 2 failed) 218ms
+   × schema1原始字节先备份，修订/全文/草稿/日期跨提交重启保全，备份不覆盖 16ms
+   × schema2原始字节先备份，修订/全文/草稿/日期跨提交重启保全，备份不覆盖 14ms
+ ❯ tests/unit/repository.test.ts (11 tests | 1 failed) 370ms
+   × 旧schema1首次提交前保留原始备份，迁移保全全文与草稿 26ms
+ ❯ tests/unit/round3Backfill.test.ts (8 tests | 2 failed) 76ms
+   × capacity overflow keeps a stacked clip together when capacity returns 3ms
+   × manually re-hanging part of a parked group does not collide on restoring its remainder 1ms
+ ❯ tests/unit/ideaPlacement.test.ts (11 tests | 1 failed) 56ms
+   × cross-Agent stack requires explicit whole-clip scope and stale member lists are rejected 11ms
+ ❯ tests/unit/paperDrop.test.ts (3 tests | 1 failed) 51ms
+   × 跨Agent、同源、无效位置与缺失正文拒收，快照原样 7ms
+ ❯ tests/unit/p3Schema.test.ts (19 tests | 4 failed) 55ms
+   × 新快照与旧typed fixture规范化后始终是schema3，未知版本类型不被数字转换接受 10ms
+   × schema1创建日冻结在原始偏移日期，迁移不使用当前时区或今天 6ms
+   × schema2创建日冻结在原始偏移日期，迁移不使用当前时区或今天 3ms
+   × 旧typed schema2快照中新建仍按localday，与迁移的旧记录规则分开 3ms
+ ❯ tests/unit/positioning.test.ts (10 tests | 1 failed) 62ms
+   × legacy schema2 custom developer tags, colors, note fields, positions and draft survive validation 38ms
+ ❯ tests/unit/p3IdeaCommands.test.ts (13 tests | 1 failed) 46ms
+   × CAS先成功后旧回调冲突，Agent变化拆到独立夹而不动其余组成员 8ms
+ ❯ tests/unit/clipCommands.test.ts (8 tests | 6 failed) 51ms
+   × schema1迁移将每条挂着记录变为独立夹子，已收起不占位，原文保全 23ms
+   × 同Agent合夹保持独立全文/顺序/目标位置与总重量，源第一张成为当前张 4ms
+   × 拆出当前张回退相邻张、保全全文，收起后恢复独立夹子避免ID冲突 9ms
+   × 拆分遇零散间距时自动腾位，总容量足够就全部可见且内容不变 2ms
+   × 合并单张无需暂存空位，不因中间拆出步骤改变其他手动位置 1ms
+   × 改Agent只拆出当前成员，收起当前成员后展示相邻张 1ms
+ ❯ tests/unit/agentSplitPlacement.test.ts (6 tests | 5 failed) 31ms
+   × Agent split preserves old centers and identity: automatic 18ms
+   × Agent split preserves old centers and identity: left 3ms
+   × Agent split preserves old centers and identity: middle 5ms
+   × Agent split preserves old centers and identity: right 1ms
+   × Agent split preserves old centers and identity: full 2ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 27 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/agentSplitPlacement.test.ts > Agent split preserves old centers and identity: automatic
+ FAIL  tests/unit/agentSplitPlacement.test.ts > Agent split preserves old centers and identity: left
+ FAIL  tests/unit/agentSplitPlacement.test.ts > Agent split preserves old centers and identity: middle
+ FAIL  tests/unit/agentSplitPlacement.test.ts > Agent split preserves old centers and identity: right
+AssertionError: expected { id: 'clip0', …(4) } to match object { id: 'clip0', ideaIds: [ 'a' ], …(1) }
+(2 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "currentId": "a",
++   "currentId": "b",
+    "id": "clip0",
+    "ideaIds": [
+      "a",
++     "b",
+    ],
+  }
+
+ ❯ tests/unit/agentSplitPlacement.test.ts:12:243
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/27]⎯
+
+ FAIL  tests/unit/agentSplitPlacement.test.ts > Agent split preserves old centers and identity: full
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/agentSplitPlacement.test.ts:12:58
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/27]⎯
+
+ FAIL  tests/unit/clipCommands.test.ts > schema1迁移将每条挂着记录变为独立夹子，已收起不占位，原文保全
+AssertionError: expected 4 to be 3 // Object.is equality
+
+- Expected
++ Received
+
+- 3
++ 4
+
+ ❯ tests/unit/clipCommands.test.ts:9:39
+      7|  const legacy={...s,schemaVersion:1,clips:undefined,ideas:[...s.ideas,…
+      8|  const migrated=validateSnapshot(legacy);expect(migrated.ok).toBe(true…
+      9|  expect(migrated.value.schemaVersion).toBe(3);expect((migrated.value a…
+       |                                       ^
+     10|  expect((migrated.value as any).clips[0]).toMatchObject({ideaIds:['one…
+     11| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/27]⎯
+
+ FAIL  tests/unit/clipCommands.test.ts > 同Agent合夹保持独立全文/顺序/目标位置与总重量，源第一张成为当前张
+Error: 不同分组的夹子不能合并，未分组仅支持同标签合并。
+ ❯ value tests/unit/clipCommands.test.ts:14:49
+     12| import {mergeClips,splitClip,selectClipIdea,moveClip,dropClipIdea} fro…
+     13| import type {Result,Snapshot} from '../../src/shared/contracts';
+     14| const value=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);retur…
+       |                                                 ^
+     15| const fixture=()=>{let s=legacySnapshot();for(const id of ['a','b','c'…
+     16| test('同Agent合夹保持独立全文/顺序/目标位置与总重量，源第一张成为当前张',()=>{
+ ❯ tests/unit/clipCommands.test.ts:17:54
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/27]⎯
+
+ FAIL  tests/unit/clipCommands.test.ts > 拆出当前张回退相邻张、保全全文，收起后恢复独立夹子避免ID冲突
+Error: 不同分组的夹子不能合并，未分组仅支持同标签合并。
+ ❯ value tests/unit/clipCommands.test.ts:14:49
+     12| import {mergeClips,splitClip,selectClipIdea,moveClip,dropClipIdea} fro…
+     13| import type {Result,Snapshot} from '../../src/shared/contracts';
+     14| const value=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);retur…
+       |                                                 ^
+     15| const fixture=()=>{let s=legacySnapshot();for(const id of ['a','b','c'…
+     16| test('同Agent合夹保持独立全文/顺序/目标位置与总重量，源第一张成为当前张',()=>{
+ ❯ tests/unit/clipCommands.test.ts:28:8
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/27]⎯
+
+ FAIL  tests/unit/clipCommands.test.ts > 拆分遇零散间距时自动腾位，总容量足够就全部可见且内容不变
+Error: 不同分组的夹子不能合并，未分组仅支持同标签合并。
+ ❯ value tests/unit/clipCommands.test.ts:14:49
+     12| import {mergeClips,splitClip,selectClipIdea,moveClip,dropClipIdea} fro…
+     13| import type {Result,Snapshot} from '../../src/shared/contracts';
+     14| const value=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);retur…
+       |                                                 ^
+     15| const fixture=()=>{let s=legacySnapshot();for(const id of ['a','b','c'…
+     16| test('同Agent合夹保持独立全文/顺序/目标位置与总重量，源第一张成为当前张',()=>{
+ ❯ tests/unit/clipCommands.test.ts:38:8
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/27]⎯
+
+ FAIL  tests/unit/clipCommands.test.ts > 合并单张无需暂存空位，不因中间拆出步骤改变其他手动位置
+Error: 不同分组的夹子不能合并，未分组仅支持同标签合并。
+ ❯ value tests/unit/clipCommands.test.ts:14:49
+     12| import {mergeClips,splitClip,selectClipIdea,moveClip,dropClipIdea} fro…
+     13| import type {Result,Snapshot} from '../../src/shared/contracts';
+     14| const value=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);retur…
+       |                                                 ^
+     15| const fixture=()=>{let s=legacySnapshot();for(const id of ['a','b','c'…
+     16| test('同Agent合夹保持独立全文/顺序/目标位置与总重量，源第一张成为当前张',()=>{
+ ❯ tests/unit/clipCommands.test.ts:49:8
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/27]⎯
+
+ FAIL  tests/unit/clipCommands.test.ts > 改Agent只拆出当前成员，收起当前成员后展示相邻张
+Error: 不同分组的夹子不能合并，未分组仅支持同标签合并。
+ ❯ value tests/unit/clipCommands.test.ts:14:49
+     12| import {mergeClips,splitClip,selectClipIdea,moveClip,dropClipIdea} fro…
+     13| import type {Result,Snapshot} from '../../src/shared/contracts';
+     14| const value=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);retur…
+       |                                                 ^
+     15| const fixture=()=>{let s=legacySnapshot();for(const id of ['a','b','c'…
+     16| test('同Agent合夹保持独立全文/顺序/目标位置与总重量，源第一张成为当前张',()=>{
+ ❯ tests/unit/clipCommands.test.ts:58:8
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/27]⎯
+
+ FAIL  tests/unit/ideaPlacement.test.ts > cross-Agent stack requires explicit whole-clip scope and stale member lists are rejected
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/ideaPlacement.test.ts:37:65
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/27]⎯
+
+ FAIL  tests/unit/p3IdeaCommands.test.ts > CAS先成功后旧回调冲突，Agent变化拆到独立夹而不动其余组成员
+AssertionError: expected [ { id: 'clip:two', …(4) } ] to match object [ { id: 'clip:two', …(3) }, …(1) ]
+
+- Expected
++ Received
+
+  [
+    {
+-     "agentId": "general",
+-     "currentId": "two",
++     "agentId": "claude",
++     "currentId": "one",
+      "id": "clip:two",
+      "ideaIds": [
+        "two",
+-     ],
+-   },
+-   {
+-     "agentId": "claude",
+-     "ideaIds": [
+        "one",
+      ],
++     "position": null,
+    },
+  ]
+
+ ❯ tests/unit/p3IdeaCommands.test.ts:78:21
+     76|  const cas=api('editIdeaIfUnchanged');let s=fixture();s=value(commands…
+     77|  const next=value(cas(s,'one',{...original,text:'  首次修改 🧵\n ',agentId…
+     78|  expect(next.clips).toMatchObject([{id:'clip:two',ideaIds:['two'],curr…
+       |                     ^
+     79|  expect(cas(next,'one',{...original,text:'旧回调后到'},original,later)).toM…
+     80|  expect(next.ideas[0].text).toBe('  首次修改 🧵\n ');expect(next.ideas[0].…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/27]⎯
+
+ FAIL  tests/unit/p3Repository.test.ts > schema1原始字节先备份，修订/全文/草稿/日期跨提交重启保全，备份不覆盖
+ FAIL  tests/unit/p3Repository.test.ts > schema2原始字节先备份，修订/全文/草稿/日期跨提交重启保全，备份不覆盖
+AssertionError: expected 4 to be 3 // Object.is equality
+
+- Expected
++ Received
+
+- 3
++ 4
+
+ ❯ tests/unit/p3Repository.test.ts:19:33
+     17|  const dir=await fixture();const raw=' \n'+JSON.stringify(old(schemaVe…
+     18|  process.env.TZ='America/Los_Angeles';const repo=new FileRepository(di…
+     19|  expect(migrated.schemaVersion).toBe(3);expect(migrated.revision).toBe…
+       |                                 ^
+     20|  expect(migrated.ideas[0]).toMatchObject({text:'  原文 🧵\n第二行\n ',creat…
+     21|  expect(migrated.draft?.text).toBe(' 尚未写完\n ');expect(await readFile(j…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/27]⎯
+
+ FAIL  tests/unit/p3Schema.test.ts > 新快照与旧typed fixture规范化后始终是schema3，未知版本类型不被数字转换接受
+AssertionError: expected 4 to be 3 // Object.is equality
+
+- Expected
++ Received
+
+- 3
++ 4
+
+ ❯ tests/unit/p3Schema.test.ts:13:42
+     11|
+     12| test('新快照与旧typed fixture规范化后始终是schema3，未知版本类型不被数字转换接受',()=>{
+     13|  expect(initialSnapshot().schemaVersion).toBe(3);
+       |                                          ^
+     14|  for(const schemaVersion of [0,4,99,'2','3',null])expect(validateSnaps…
+     15|  const v=value(validateSnapshot({...legacy(2),schemaVersion:3}));
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/27]⎯
+
+ FAIL  tests/unit/p3Schema.test.ts > schema1创建日冻结在原始偏移日期，迁移不使用当前时区或今天
+ FAIL  tests/unit/p3Schema.test.ts > schema2创建日冻结在原始偏移日期，迁移不使用当前时区或今天
+AssertionError: expected { Object (schemaVersion, revision, ...) } to match object { schemaVersion: 3, revision: 11 }
+(7 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "revision": 11,
+-   "schemaVersion": 3,
++   "schemaVersion": 4,
+  }
+
+ ❯ tests/unit/p3Schema.test.ts:22:17
+     20|  process.env.TZ='America/Los_Angeles';
+     21|  const result=value(validateSnapshot(legacy(schemaVersion)));
+     22|  expect(result).toMatchObject({schemaVersion:3,revision:11});
+       |                 ^
+     23|  expect(result.ideas[0]).toMatchObject({...oldIdea,createdDay:'2026-01…
+     24|  expect(result.clips[0]).toMatchObject(schemaVersion===1?{id:'clip:old…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/27]⎯
+
+ FAIL  tests/unit/p3Schema.test.ts > 旧typed schema2快照中新建仍按localday，与迁移的旧记录规则分开
+AssertionError: expected 4 to be 3 // Object.is equality
+
+- Expected
++ Received
+
+- 3
++ 4
+
+ ❯ tests/unit/p3Schema.test.ts:56:29
+     54|  process.env.TZ='Asia/Shanghai';const s={...initialSnapshot(),schemaVe…
+     55|  const next=value(newIdea(s,draft,'new','2026-01-01T18:30:00Z'));
+     56|  expect(next.schemaVersion).toBe(3);expect(next.ideas[0]).toMatchObjec…
+       |                             ^
+     57| });
+     58|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/27]⎯
+
+ FAIL  tests/unit/paperDrop.test.ts > 跨Agent、同源、无效位置与缺失正文拒收，快照原样
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/paperDrop.test.ts:18:191
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/27]⎯
+
+ FAIL  tests/unit/positioning.test.ts > legacy schema2 custom developer tags, colors, note fields, positions and draft survive validation
+AssertionError: expected 4 to be 3 // Object.is equality
+
+- Expected
++ Received
+
+- 3
++ 4
+
+ ❯ tests/unit/positioning.test.ts:19:365
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/27]⎯
+
+ FAIL  tests/unit/repository.test.ts > 旧schema1首次提交前保留原始备份，迁移保全全文与草稿
+AssertionError: expected 4 to be 3 // Object.is equality
+
+- Expected
++ Received
+
+- 3
++ 4
+
+ ❯ tests/unit/repository.test.ts:50:163
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/27]⎯
+
+ FAIL  tests/unit/round3Backfill.test.ts > capacity overflow keeps a stacked clip together when capacity returns
+Error: 不同分组的夹子不能合并，未分组仅支持同标签合并。
+ ❯ v tests/unit/round3Backfill.test.ts:6:47
+      4| import {mergeClips} from '../../src/shared/clipCommands';
+      5| import type {Snapshot,Result} from '../../src/shared/contracts';
+      6| const v=(r:Result<Snapshot>)=>{if(!r.ok)throw Error(r.message);return …
+       |                                               ^
+      7| const seed=()=>{let s=initialSnapshot();for(let n=0;n<6;n++)s=v(newIde…
+      8| const save=(s:Snapshot,id:string,now:string)=>v(queue.placeIdea(s,{id,…
+ ❯ tests/unit/round3Backfill.test.ts:28:116
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/27]⎯
+
+ FAIL  tests/unit/round3Backfill.test.ts > manually re-hanging part of a parked group does not collide on restoring its remainder
+Error: 不同分组的夹子不能合并，未分组仅支持同标签合并。
+ ❯ v tests/unit/round3Backfill.test.ts:6:47
+      4| import {mergeClips} from '../../src/shared/clipCommands';
+      5| import type {Snapshot,Result} from '../../src/shared/contracts';
+      6| const v=(r:Result<Snapshot>)=>{if(!r.ok)throw Error(r.message);return …
+       |                                               ^
+      7| const seed=()=>{let s=initialSnapshot();for(let n=0;n<6;n++)s=v(newIde…
+      8| const save=(s:Snapshot,id:string,now:string)=>v(queue.placeIdea(s,{id,…
+ ❯ tests/unit/round3Backfill.test.ts:34:121
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/27]⎯
+
+ FAIL  tests/unit/round5ManageBounds.test.ts > 默认窗口避开真实便签底边并保留16DIP间距
+AssertionError: expected 48 to be greater than or equal to 312
+ ❯ tests/unit/round5ManageBounds.test.ts:4:122
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/27]⎯
+
+ FAIL  tests/unit/round5ManageBounds.test.ts > 不同页面优先保持父窗口同屏顶部与水平中心
+AssertionError: expected 550 to be -1140 // Object.is equality
+
+- Expected
++ Received
+
+- -1140
++ 550
+
+ ❯ tests/unit/round5ManageBounds.test.ts:5:233
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/27]⎯
+
+ FAIL  tests/unit/round5ManageBounds.test.ts > 避让后的可用高度不足时缩短窗口而不越界
+AssertionError: expected 24 to be greater than or equal to 312
+ ❯ tests/unit/round5ManageBounds.test.ts:6:156
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22/27]⎯
+
+
+ Test Files  11 failed | 51 passed | 1 skipped (63)
+      Tests  27 failed | 344 passed | 4 skipped (375)
+   Start at  19:16:54
+   Duration  2.56s (tests 61%, transform 22%, import 14%, worker 3%)
+
+    Isolate  63 workers spawned · ~124ms startup each (spawn + environment, per file)
+             at least ~992ms faster with isolate: false — reuses workers across files instead of one per file
+

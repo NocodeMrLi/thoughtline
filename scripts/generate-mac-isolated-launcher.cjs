@@ -67,7 +67,7 @@ for isolated_path in "$experience_root" "$experience_data" "$experience_mount"; 
 done
 /bin/mkdir -p "$experience_data" "$experience_mount"
 [[ -z "$(/bin/ls -A "$experience_mount")" ]] || fail '挂载目录仍有内容，请正常退出先前测试 App 并弹出挂载。'
-for snapshot_file in snapshot.json snapshot.bak.json snapshot.schema1.backup.json snapshot.schema2.backup.json; do
+for snapshot_file in snapshot.json snapshot.bak.json snapshot.schema1.backup.json snapshot.schema2.backup.json snapshot.schema3.backup.json; do
  [[ ! -L "$experience_data/$snapshot_file" ]] || fail '测试存储文件存在符号链接，停止。'
 done
 /usr/bin/hdiutil attach -readonly -nobrowse -noautoopen -mountpoint "$experience_mount" "$candidate_dmg" >/dev/null

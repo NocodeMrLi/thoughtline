@@ -1,3 +1,4 @@
+import {canMergeIdea} from './clipModel';
 import {shelfCapacity} from './ropeGeometry';
 import type {Draft,Snapshot,Result,Clip} from './contracts';
 import {newIdea,changeStatus,validateSnapshot} from './ideaCommands';
@@ -39,29 +40,36 @@ export function placeIdea(s:Snapshot,source:PlacementSource,intent:PlacementInte
  if(typeof intent.wholeClip!=='boolean')return invalid('目标夹子已变化，请重新选择。');
  const target=before.clips.find(c=>c.id===intent.targetClipId),incoming=created.value.ideas.find(i=>i.id===source.id)!;
  if(!target||!target.ideaIds.includes(intent.targetIdeaId)||target.ideaIds.includes(source.id)||!Array.isArray(intent.expectedIds)||JSON.stringify(target.ideaIds)!==JSON.stringify(intent.expectedIds)||!layoutClips(before.clips,width,shelfCapacity(s.settings.shelfCapacity)).visible.some(p=>p.clip.id===target.id))return invalid('目标夹子已变化，请重新选择。');
- if(target.ideaIds.length>1&&target.agentId!==incoming.agentId&&!intent.wholeClip)return invalid('不同标签的叠纸需明确收起整夹后换上。');
+ if(target.ideaIds.length>1&&!canMergeIdea(created.value,source.id,target)&&!intent.wholeClip)return invalid('不同分组的叠纸需明确收起整夹后换上，未分组仅支持同标签。');
+ const incomingClip=created.value.clips.find(c=>c.ideaIds.includes(source.id))!,incomingIds=[...s.archivedClips??[],...s.capacityOverflow??[]].some(c=>c.ideaIds.includes(source.id))?incomingClip.ideaIds:[source.id];
+ if(incomingIds.length>1&&!intent.wholeClip)return invalid('叠放念头请整夹换上。');
  const outgoing=intent.wholeClip?target.ideaIds:[intent.targetIdeaId],outIds=new Set(outgoing);
  const ideas=created.value.ideas.map(i=>outIds.has(i.id)?{...i,status:'archived' as const,offRopeReason:'replaced' as const,updatedAt:now}:i);
  const clips=created.value.clips.flatMap(c=>{
-  if(c.id===target.id){const ids=intent.wholeClip?[source.id]:c.ideaIds.map(id=>id===intent.targetIdeaId?source.id:id);return [{...c,agentId:incoming.agentId,ideaIds:ids,currentId:source.id}];}
-  const ids=c.ideaIds.filter(id=>id!==source.id);return ids.length?[{...c,ideaIds:ids,currentId:ids.includes(c.currentId)?c.currentId:ids[Math.min(Math.max(0,c.ideaIds.indexOf(c.currentId)),ids.length-1)]}]:[];
+  if(c.id===target.id){const ids=intent.wholeClip?incomingIds:c.ideaIds.map(id=>id===intent.targetIdeaId?source.id:id);return [{...c,agentId:incoming.agentId,ideaIds:ids,currentId:source.id}];}
+  const ids=c.ideaIds.filter(id=>!incomingIds.includes(id));return ids.length?[{...c,ideaIds:ids,currentId:ids.includes(c.currentId)?c.currentId:ids[Math.min(Math.max(0,c.ideaIds.indexOf(c.currentId)),ids.length-1)]}]:[];
  });
- const result=validateSnapshot({...created.value,ideas,clips});if(!result.ok)return result;
+ let replacedId=target.id+':replaced';while([...created.value.clips,...created.value.archivedClips??[],...created.value.capacityOverflow??[]].some(c=>c.id===replacedId))replacedId+=':';
+ const archivedClips=intent.wholeClip&&outgoing.length>1?[...created.value.archivedClips??[],{...target,id:replacedId,ideaIds:outgoing,currentId:target.currentId,position:null}]:created.value.archivedClips;
+ const result=validateSnapshot({...created.value,ideas,clips,...(archivedClips?{archivedClips}: {})});if(!result.ok)return result;
  if(!layoutClips(result.value.clips,width,shelfCapacity(s.settings.shelfCapacity)).visible.some(p=>p.clip.ideaIds.includes(source.id)))return invalid('挂绳空间已变化，请重新选择。');return result;
 }
-const structure=(c:Clip|undefined)=>c?JSON.stringify([c.id,c.agentId,c.ideaIds,c.position]):'';
+const structure=(c:Clip|undefined)=>c?JSON.stringify([c.id,c.ideaIds,c.position]):'';
 export function undoPlacement(current:Snapshot,undo:PlacementUndo):Result<Snapshot>{
  const beforeIds=new Map(undo.before.ideas.map(i=>[i.id,i]));
  const changes=undo.after.ideas.filter(i=>i.status!==(beforeIds.get(i.id)?.status??'archived'));
  if(changes.some(i=>current.ideas.find(x=>x.id===i.id)?.status!==i.status))return invalid('换上记录已变化，不能撤销。');
- const oldClips=new Map(undo.before.clips.map(c=>[c.id,c])),afterClips=new Map(undo.after.clips.map(c=>[c.id,c]));
- const affected=new Set([...oldClips.keys(),...afterClips.keys()].filter(id=>structure(oldClips.get(id))!==structure(afterClips.get(id))));
- if([...affected].some(id=>structure(current.clips.find(c=>c.id===id))!==structure(afterClips.get(id))))return invalid('夹子已变化，不能撤销换上。');
+ const restored:Pick<Snapshot,'clips'|'archivedClips'|'capacityOverflow'>={clips:[]};
+ for(const key of ['clips','archivedClips','capacityOverflow'] as const){
+  if(key!=='clips'&&undo.before[key]===undefined&&undo.after[key]===undefined&&current[key]===undefined)continue;
+  const before=undo.before[key]??[],after=undo.after[key]??[],present=current[key]??[],oldClips=new Map(before.map(c=>[c.id,c])),afterClips=new Map(after.map(c=>[c.id,c]));
+  const affected=new Set([...oldClips.keys(),...afterClips.keys()].filter(id=>structure(oldClips.get(id))!==structure(afterClips.get(id))));
+  if([...affected].some(id=>structure(present.find(c=>c.id===id))!==structure(afterClips.get(id))))return invalid('夹子已变化，不能撤销换上。');
+  const clips=present.filter(c=>!affected.has(c.id));for(let i=0;i<before.length;i++)if(affected.has(before[i].id))clips.splice(Math.min(i,clips.length),0,before[i]);restored[key]=clips;
+ }
  const statuses=new Map(changes.map(i=>[i.id,beforeIds.get(i.id)?.status??'archived']));
  const ideas=current.ideas.map(i=>statuses.has(i.id)?{...i,status:statuses.get(i.id)!,offRopeReason:beforeIds.get(i.id)?.offRopeReason}:i);
- const clips=current.clips.filter(c=>!affected.has(c.id));
- for(let i=0;i<undo.before.clips.length;i++){const old=undo.before.clips[i];if(affected.has(old.id))clips.splice(Math.min(i,clips.length),0,old);}
- return validateSnapshot({...current,ideas,clips,...(undo.before.capacityOverflow?{capacityOverflow:undo.before.capacityOverflow}:{})});
+ return validateSnapshot({...current,ideas,...restored});
 }
 
 // Only explicit new waiting records are eligible; legacy archived records stay put.

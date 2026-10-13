@@ -1,0 +1,245 @@
+{
+  "platform": "darwin",
+  "checks": [
+    "no undo on opening or browsing",
+    "calendar updates immediately after current-only merge, retained source does not release slot",
+    "archive undo restores source and automatic backfill without pulling manual calendar stack",
+    "calendar split stays archived and undo restores full stack",
+    "arrange undo restores all original clip positions",
+    "hang restores entire archived stack, failed swap preserves undo and hang undo restores archive"
+  ],
+  "pids": [
+    67859,
+    67859,
+    67860,
+    67861,
+    67862,
+    67868
+  ],
+  "scope": "Native Electron renderer/IPC with isolated persistent data, controlled IO/IME and menu callbacks; physical OS conditions separate.",
+  "failure": "Error: Timed out waiting for acknowledged main-process state\n    at waitForInfo (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/window-fixture.cjs:40:849)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-stack-workflow.cjs:24:392",
+  "state": {
+    "lightReminder": null,
+    "preferenceCommit": null,
+    "preferences": {
+      "schemaVersion": 1,
+      "version": 0,
+      "locale": "zh-CN",
+      "theme": "system"
+    },
+    "preferenceError": null,
+    "platform": "mac",
+    "snapshot": {
+      "schemaVersion": 4,
+      "revision": 10,
+      "ideas": [
+        {
+          "id": "a",
+          "title": "名称a",
+          "text": "独立全文😀 a",
+          "project": "工作",
+          "agentId": "general",
+          "status": "archived",
+          "createdAt": "2026-10-13T00:00:00.000Z",
+          "updatedAt": "2026-10-13T16:12:43.213Z",
+          "createdDay": "2026-10-13",
+          "creationTimeZone": "Asia/Shanghai",
+          "offRopeReason": "manual"
+        },
+        {
+          "id": "sibling",
+          "title": "名称sibling",
+          "text": "独立全文😀 sibling",
+          "project": "工作",
+          "agentId": "general",
+          "status": "hanging",
+          "createdAt": "2026-10-13T00:00:00.000Z",
+          "updatedAt": "2026-10-13T00:00:00.000Z",
+          "createdDay": "2026-10-13",
+          "creationTimeZone": "Asia/Shanghai"
+        },
+        {
+          "id": "rope",
+          "title": "名称rope",
+          "text": "独立全文😀 rope",
+          "project": "工作",
+          "agentId": "codex",
+          "status": "hanging",
+          "createdAt": "2026-10-13T00:00:00.000Z",
+          "updatedAt": "2026-10-13T00:00:00.000Z",
+          "createdDay": "2026-10-13",
+          "creationTimeZone": "Asia/Shanghai"
+        },
+        {
+          "id": "wrong",
+          "title": "名称wrong",
+          "text": "独立全文😀 wrong",
+          "project": "生活",
+          "agentId": "codex",
+          "status": "hanging",
+          "createdAt": "2026-10-13T00:00:00.000Z",
+          "updatedAt": "2026-10-13T00:00:00.000Z",
+          "createdDay": "2026-10-13",
+          "creationTimeZone": "Asia/Shanghai"
+        },
+        {
+          "id": "cal0",
+          "title": "名称cal0",
+          "text": "独立全文😀 cal0",
+          "project": "工作",
+          "agentId": "codex",
+          "status": "archived",
+          "createdAt": "2026-10-13T00:00:00.000Z",
+          "updatedAt": "2026-10-13T16:12:43.213Z",
+          "createdDay": "2026-10-13",
+          "creationTimeZone": "Asia/Shanghai",
+          "offRopeReason": "manual"
+        },
+        {
+          "id": "cal1",
+          "title": "名称cal1",
+          "text": "独立全文😀 cal1",
+          "project": "工作",
+          "agentId": "codex",
+          "status": "archived",
+          "createdAt": "2026-10-13T00:00:00.000Z",
+          "updatedAt": "2026-10-13T16:12:43.213Z",
+          "createdDay": "2026-10-13",
+          "creationTimeZone": "Asia/Shanghai",
+          "offRopeReason": "manual"
+        },
+        {
+          "id": "waiting",
+          "title": "名称waiting",
+          "text": "独立全文😀 waiting",
+          "project": "工作",
+          "agentId": "codex",
+          "status": "hanging",
+          "createdAt": "2026-10-13T00:00:00.000Z",
+          "updatedAt": "2026-10-13T16:12:43.257Z",
+          "createdDay": "2026-10-13",
+          "creationTimeZone": "Asia/Shanghai"
+        }
+      ],
+      "clips": [
+        {
+          "id": "source",
+          "ideaIds": [
+            "sibling"
+          ],
+          "currentId": "sibling",
+          "agentId": "general",
+          "position": 0.28780864197530864
+        },
+        {
+          "id": "rope",
+          "ideaIds": [
+            "rope"
+          ],
+          "currentId": "rope",
+          "agentId": "codex",
+          "position": 0.5
+        },
+        {
+          "id": "wrong",
+          "ideaIds": [
+            "wrong"
+          ],
+          "currentId": "wrong",
+          "agentId": "codex",
+          "position": 0.7121913580246914
+        },
+        {
+          "id": "clip:waiting",
+          "agentId": "codex",
+          "ideaIds": [
+            "waiting"
+          ],
+          "currentId": "waiting",
+          "position": null
+        }
+      ],
+      "archivedClips": [
+        {
+          "id": "calendar-stack",
+          "ideaIds": [
+            "cal0",
+            "cal1",
+            "a"
+          ],
+          "currentId": "a",
+          "agentId": "general",
+          "position": null
+        }
+      ],
+      "agents": [
+        {
+          "id": "general",
+          "name": "通用",
+          "color": "#A0A3AA"
+        },
+        {
+          "id": "codex",
+          "name": "工作记录",
+          "color": "#4C90D9"
+        }
+      ],
+      "projects": [
+        "工作",
+        "生活"
+      ],
+      "draft": null,
+      "settings": {
+        "writeHotkey": "Control+Alt+Shift+F19",
+        "reducedMotion": true,
+        "shelfCapacity": 4
+      }
+    },
+    "displayId": "1",
+    "width": 1440,
+    "dark": true,
+    "composerSession": 0,
+    "composerDraftSequence": 0,
+    "composerMaterial": "vibrancy",
+    "composerContext": {
+      "mode": "new",
+      "ideaId": null,
+      "draft": {
+        "text": "",
+        "title": "",
+        "project": "",
+        "agentId": "general"
+      }
+    },
+    "placementNotice": null,
+    "placementNoticeId": 10,
+    "placementNoticeKind": "info",
+    "arrangeSession": 2,
+    "manageVisit": 4,
+    "calendarReturning": false,
+    "manageSession": 5,
+    "manageReadyRequest": 4,
+    "manageSelection": "a",
+    "manageMode": "detail",
+    "classificationTab": "projects",
+    "classificationOrigin": "calendar",
+    "manageTitles": false,
+    "manageMaterial": "vibrancy",
+    "manageEditingRequested": false,
+    "canUndoClips": true,
+    "undoActionLabel": "撤销挂上",
+    "undoPlacementKind": "hang",
+    "dragCancelSession": 1,
+    "textDragActive": false,
+    "shelfAgentId": "all",
+    "shelfProject": null,
+    "shelfFilterPicker": null,
+    "shelfMergePicker": null,
+    "hotkeyRegistered": true,
+    "shelfVisible": true,
+    "interactionLocked": true,
+    "presentationSession": 2,
+    "layoutLocked": false
+  },
+  "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-r526-stack-o1nj4N"
+}

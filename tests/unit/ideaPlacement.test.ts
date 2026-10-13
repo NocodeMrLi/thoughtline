@@ -32,8 +32,8 @@ test('same-Agent stack replaces only one page at its index and makes incoming pa
  const s=value(mergeClips(fixture(),'clip:a1','clip:a0'));const next=value(placeIdea(s,{draft,id:'new'},target(s,'a1'),2000,now));
  expect(next.clips[0]).toMatchObject({ideaIds:['a0','new'],currentId:'new'});expect(next.ideas.find(i=>i.id==='a0')).toEqual(s.ideas[0]);
 });
-test('cross-Agent stack requires explicit whole-clip scope and stale member lists are rejected',()=>{
- const s=value(mergeClips(fixture(),'clip:a1','clip:a0'));const other={...draft,agentId:'codex'},intent=target(s);
+test('cross-group stack requires explicit whole-clip scope and stale member lists are rejected',()=>{
+ const s=value(mergeClips(fixture(),'clip:a1','clip:a0'));const other={...draft,agentId:'codex',project:'另一分组'},intent=target(s);
  expect(placeIdea(s,{draft:other,id:'new'},intent,2000,now).ok).toBe(false);
  const next=value(placeIdea(s,{draft:other,id:'new'},{...intent,wholeClip:true},2000,now));expect(next.ideas.filter(i=>i.status==='archived').map(i=>i.id)).toEqual(['a0','a1']);expect(next.clips[0]).toMatchObject({agentId:'codex',ideaIds:['new']});
  expect(placeIdea(s,{draft,id:'new'},{...intent,expectedIds:['a0']},2000,now).ok).toBe(false);
@@ -52,4 +52,16 @@ test('restoring archived history preserves its ID/date and does not create a dup
 
 test('a persisted ID resembling a capacity probe does not hide a full rope',()=>{
  const s=fixture(6);s.ideas[0].id='capacity:'+s.revision;s.clips[0].ideaIds=[s.ideas[0].id];s.clips[0].currentId=s.ideas[0].id;expect(placementPlan(s,1280)).toBe('full');
+});
+function archivedSwapFixture(){
+ let s=initialSnapshot();for(const id of ['a','b','c','d','u','v'])s=value(newIdea(s,{text:'原文 '+id,title:id,project:'工作',agentId:'general'},id,now));s=value(mergeClips(s,'clip:b','clip:a'));for(const id of ['c','d','u','v'])s=value(changeStatus(s,id,'archived',now));return {...s,archivedClips:[{id:'cd',ideaIds:['c','d'],currentId:'c',agentId:'general',position:null},{id:'uv',ideaIds:['u','v'],currentId:'u',agentId:'general',position:null}]};
+}
+test('换上撤销保留另一个日历叠放的后续合法改组拆分',()=>{
+ const before=archivedSwapFixture(),after=value(placeIdea(before,{id:'c'},{kind:'swap',targetClipId:'clip:a',targetIdeaId:'a',expectedIds:['a','b'],wholeClip:true},2000,now));
+ const edited=value(editIdea(after,'v',{...after.ideas.find(i=>i.id==='v')!,project:'生活'},now)),unrelated=edited.archivedClips!.filter(c=>c.ideaIds.some(id=>id==='u'||id==='v'));
+ const undone=value(undoPlacement(edited,{before,after,incomingId:'c'}));expect(undone.archivedClips!.filter(c=>c.ideaIds.some(id=>id==='u'||id==='v'))).toEqual(unrelated);expect(undone.ideas.find(i=>i.id==='v')?.project).toBe('生活');
+});
+test('同一夹位连续整叠换上生成独立归档身份且可撤销最新一次',()=>{
+ const before=archivedSwapFixture(),first=value(placeIdea(before,{id:'c'},{kind:'swap',targetClipId:'clip:a',targetIdeaId:'a',expectedIds:['a','b'],wholeClip:true},2000,now));
+ const second=value(placeIdea(first,{id:'u'},{kind:'swap',targetClipId:'clip:a',targetIdeaId:'c',expectedIds:['c','d'],wholeClip:true},2000,now));expect(second.archivedClips!.map(c=>c.id)).toHaveLength(new Set(second.archivedClips!.map(c=>c.id)).size);expect(second.archivedClips!.map(c=>c.ideaIds)).toEqual([['a','b'],['c','d']]);expect(value(undoPlacement(second,{before:first,after:second,incomingId:'u'})).clips.find(c=>c.id==='clip:a')?.ideaIds).toEqual(['c','d']);
 });

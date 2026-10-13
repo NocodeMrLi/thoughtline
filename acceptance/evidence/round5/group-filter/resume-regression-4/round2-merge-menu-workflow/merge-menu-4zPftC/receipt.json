@@ -1,0 +1,47 @@
+{
+  "platform": "darwin",
+  "scope": "isolated source native-menu callbacks/renderer/IPC/repository, not physical menu click",
+  "cases": [
+    {
+      "name": "compatible-targets-exclude-self-and-show-title-count",
+      "passed": true
+    },
+    {
+      "name": "captured-one-paper-merge-preserves-projects-content-order-and-position",
+      "passed": true
+    },
+    {
+      "name": "merge-undo-restores-both-stacks",
+      "passed": true
+    },
+    {
+      "name": "stale-revision-rejected-without-moving-paper-or-closing-picker",
+      "passed": true
+    },
+    {
+      "name": "no-compatible-target-has-readable-disabled-reason",
+      "passed": true
+    }
+  ],
+  "pids": [
+    66453,
+    66454,
+    66455,
+    66456,
+    66457,
+    66458,
+    66459,
+    66460,
+    66461,
+    66462,
+    66463,
+    66467,
+    66468,
+    66469,
+    66470,
+    66471
+  ],
+  "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.shelf-merge-picker [data-target-idea-id=\"a\"]')\u001b[22m\n\n    at merge (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-merge-menu-workflow.cjs:14:136)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-merge-menu-workflow.cjs:24:38",
+  "dataRemoved": true,
+  "passed": false
+}

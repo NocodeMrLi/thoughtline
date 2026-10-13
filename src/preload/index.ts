@@ -1,5 +1,10 @@
 import {contextBridge,ipcRenderer} from 'electron';import type {ThoughtlineBridge} from '../shared/bridge';
 const api:ThoughtlineBridge={
+ viewReady:(session,mode,request)=>ipcRenderer.send('thoughtline:view-ready',{session,mode,request}),
+ setShelfFilter:filter=>ipcRenderer.invoke('thoughtline:shelf-filter',filter),
+ closeShelfMergePicker:()=>ipcRenderer.invoke('thoughtline:close-shelf-merge-picker'),
+ mergeTarget:(id,revision,session)=>ipcRenderer.invoke('thoughtline:merge-target',id,revision,session),
+ closeShelfFilterPicker:()=>ipcRenderer.invoke('thoughtline:close-shelf-filter-picker'),
  contactAction:action=>ipcRenderer.invoke('thoughtline:contact-action',action),
  resizeComposer:(height,session)=>ipcRenderer.invoke('thoughtline:composer-size',height,session),
  reminderAction:(key,open)=>ipcRenderer.invoke('thoughtline:reminder-action',key,open),

@@ -1,5 +1,6 @@
 import type {Snapshot,Result} from './contracts';
 import {validateSnapshot} from './ideaCommands';
+import {migrateDeletedMembers} from './clipModel';
 import {projectNames} from './projectCatalog';
 export {projectNames};
 const invalid=(message:string):Result<Snapshot>=>({ok:false,code:'INVALID',message});
@@ -14,7 +15,7 @@ export function renameProject(s:Snapshot,from:string,name:unknown,now:string):Re
  const names=projectNames(s);if(!from||!names.includes(from))return invalid('找不到这个分组。');
  if(!validName(name)||!Number.isFinite(Date.parse(now)))return invalid('分组名称须为1～40个字。');
  const to=name.trim();if(names.some(n=>n!==from&&sameName(n,to)))return invalid('已有同名分组，请使用其他名称。');
- return validateSnapshot({...s,projects:names.map(n=>n===from?to:n),...(s.inactiveProjects?{inactiveProjects:s.inactiveProjects.map(n=>n===from?to:n)}:{}),ideas:s.ideas.map(i=>i.project===from?{...i,project:to,updatedAt:now}:i),draft:s.draft?.project===from?{...s.draft,project:to}:s.draft});
+ return validateSnapshot({...s,projects:names.map(n=>n===from?to:n),...(s.inactiveProjects?{inactiveProjects:s.inactiveProjects.map(n=>n===from?to:n)}:{}),ideas:s.ideas.map(i=>migrateDeletedMembers(i.project===from?{...i,project:to,updatedAt:now}:i,'project',from,to)),draft:s.draft?.project===from?{...s.draft,project:to}:s.draft});
 }
 export function classificationCount(s:Snapshot,kind:'tag'|'project',id:string):number{return s.ideas.filter(i=>(kind==='tag'?i.agentId:i.project)===id).length;}
 

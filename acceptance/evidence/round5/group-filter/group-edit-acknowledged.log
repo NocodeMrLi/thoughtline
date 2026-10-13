@@ -1,0 +1,26 @@
+PASS seven-entry slim menu order and English product calendar name
+PASS same group mixed-tag merge updates clip colour on page flip
+PASS group and tag intersection includes matching hidden member without rewriting membership
+PASS tag-only filter crosses groups and clear all restores full stack
+locator.fill: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('.shelf-filter-picker input')[22m
+[2m    - locator resolved to <input value="" aria-label="搜索所有标签" placeholder="搜索所有标签"/>[22m
+[2m    - fill("Codex")[22m
+[2m  - attempting fill action[22m
+[2m    - waiting for element to be visible, enabled and editable[22m
+[2m  - element was detached from the DOM, retrying[22m
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:21:246
+    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:6:35)
+    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:21:3 {
+  log: [
+    "  - waiting for locator('.shelf-filter-picker input')",
+    '    - locator resolved to <input value="" aria-label="搜索所有标签" placeholder="搜索所有标签"/>',
+    '    - fill("Codex")',
+    '  - attempting fill action',
+    '    - waiting for element to be visible, enabled and editable',
+    '  - element was detached from the DOM, retrying'
+  ],
+  name: 'TimeoutError'
+}

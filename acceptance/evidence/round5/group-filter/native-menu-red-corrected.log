@@ -1,0 +1,33 @@
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  [
+    '新建念头',
++   '查看全文',
++   '合并',
++   '收起当前念头',
++   '只看 通用',
++   '显示全部标签',
++   '自动整理',
++   '撤销挂上',
++   '筛选标签',
+-   '收起',
+    '---',
+-   '只看「工作」',
+-   '筛选标签',
+-   '显示全部',
+    'Thoughtline日历',
+-   '---',
+-   '整理'
+  ]
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:17:96
+    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:6:35)
+    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:17:3 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [Array],
+  expected: [Array],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}

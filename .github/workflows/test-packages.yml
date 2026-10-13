@@ -88,7 +88,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Fourth round source visual regression failed' }
           & node tests/electron/round4-vine-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Fourth round source vine drag regression failed' }
-          foreach ($test in @('round4-classification-workflow','round4-classification-ui','round5-workflow','round5-readability-workflow','round5-unavailable-workflow','round5-settings-workflow','round5-contact-workflow','round5-export-workflow')) {
+          foreach ($test in @('round4-classification-workflow','round4-classification-ui','round5-workflow','round5-readability-workflow','round5-unavailable-workflow','round5-settings-workflow','round5-contact-workflow','round5-export-workflow','round5-group-filter-workflow','round5-filter-ui-workflow','round5-window-workflow','round5-detail-pager-workflow','round5-merge-picker-workflow','round5-stack-workflow','round5-picker-style-workflow')) {
             & node "tests/electron/$test.cjs"
             if ($LASTEXITCODE -ne 0) { throw "$test source failed" }
           }
@@ -186,7 +186,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Fourth round actual package visual regression failed' }
           & node tests/electron/round4-vine-workflow.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Fourth round actual package vine drag regression failed' }
-          foreach ($test in @('round4-classification-workflow','round4-classification-ui','round5-workflow','round5-readability-workflow','round5-unavailable-workflow','round5-settings-workflow','round5-contact-workflow','round5-export-workflow')) {
+          foreach ($test in @('round4-classification-workflow','round4-classification-ui','round5-workflow','round5-readability-workflow','round5-unavailable-workflow','round5-settings-workflow','round5-contact-workflow','round5-export-workflow','round5-group-filter-workflow','round5-filter-ui-workflow','round5-window-workflow','round5-detail-pager-workflow','round5-merge-picker-workflow','round5-stack-workflow','round5-picker-style-workflow')) {
             & node "tests/electron/$test.cjs"
             if ($LASTEXITCODE -ne 0) { throw "$test actual package failed" }
           }

@@ -8,7 +8,7 @@ const data=path.join(process.env.APPDATA||'', 'Thoughtline');
 const marker='thoughtline-disposable-windows-preflight';
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const fixture={schemaVersion:2,revision:7,ideas:[{id:'win-preflight',text:'合成预检正文\n第二行 🙂',title:'合成名称',project:'安装器保留',agentId:'general',status:'hanging',createdAt:'2026-10-09T00:00:00.000Z',updatedAt:'2026-10-09T00:00:00.000Z'}],clips:[{id:'clip:win-preflight',agentId:'general',ideaIds:['win-preflight'],currentId:'win-preflight',position:0.4}],agents:[{id:'general',name:'通用',color:'#A0A3AA'}],draft:{text:'合成未完成草稿',title:'草稿名称',project:'草稿项目',agentId:'general'},settings:{writeHotkey:'Control+Alt+N',reducedMotion:false}};
-const expected={...fixture,schemaVersion:3,ideas:fixture.ideas.map(idea=>({...idea,createdDay:'2026-10-09',creationTimeZone:'legacy-offset'}))};
+const expected={...fixture,schemaVersion:4,ideas:fixture.ideas.map(idea=>({...idea,createdDay:'2026-10-09',creationTimeZone:'legacy-offset'}))};
 const seedBytes=Buffer.from(JSON.stringify(fixture));
 const locationBytes=Buffer.from(JSON.stringify({schemaVersion:1,path:data}));
 async function main(){

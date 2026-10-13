@@ -10,19 +10,20 @@ import {paperShapeForClip} from './paperShape';
 import {agentInkColors} from './agentInk';
 import {paperAppearance,paperPalettes,type PaperAppearance} from '../../shared/appearance';
 import {paperStyle} from './PaperAppearance';
-export function ClipCard({clip,ideas,agent,onChange,onGrab,onError,reduced,textDragActive,ropeContact,appearance}:{clip:Clip;ideas:Idea[];agent:AgentTag|undefined;onChange:(c:ClipMutation)=>Promise<boolean>;onGrab:(e:PointerEvent<HTMLButtonElement>,clip:Clip,mode?:'clip'|'paper')=>void;onError:(text:string)=>void;reduced:boolean;textDragActive:boolean;ropeContact:string;appearance?:PaperAppearance}){
+export function ClipCard({clip,ideas,agent:fallbackAgent,agents,view,onChange,onGrab,onError,reduced,textDragActive,ropeContact,appearance}:{clip:Clip;ideas:Idea[];agent:AgentTag|undefined;agents?:AgentTag[];view?:{ids:string[];key:string};onChange:(c:ClipMutation)=>Promise<boolean>;onGrab:(e:PointerEvent<HTMLButtonElement>,clip:Clip,mode?:'clip'|'paper')=>void;onError:(text:string)=>void;reduced:boolean;textDragActive:boolean;ropeContact:string;appearance?:PaperAppearance}){
  const {t,agentName}=useLocale();
- const page=useClipPage(clip,onError);
+ const page=useClipPage(clip,onError,view),ids=view?.ids??clip.ideaIds;
+ const idea=ideas.find(i=>i.id===page.id),agent=agents?.find(a=>a.id===idea?.agentId)??fallbackAgent;
  const [copied,setCopied]=useState(false),[direction,setDirection]=useState('');
  const surface=paperAppearance(appearance);
  const paperId=useId().replace(/:/g,'');const paper=paperShapeForClip(clip.id);const ink=useMemo(()=>agentInkColors(agent?.color??'#A0A3AA',paperPalettes[surface.color]),[agent?.color,surface.color]);
  const copyTimer=useRef<ReturnType<typeof setTimeout>|null>(null),current=useRef(clip.currentId),ignoreCopyUntil=useRef(0),exportId=useRef<string|null>(null);const [exporting,setExporting]=useState(false);current.current=page.id;
  useEffect(()=>{setCopied(false);if(copyTimer.current)clearTimeout(copyTimer.current);return()=>{if(copyTimer.current)clearTimeout(copyTimer.current);if(exportId.current)window.thoughtline.textDrag(false,exportId.current);exportId.current=null;};},[page.id]);
  useEffect(()=>{if(!textDragActive&&exportId.current){exportId.current=null;ignoreCopyUntil.current=performance.now()+160;setExporting(false);}},[textDragActive]);
- const idea=ideas.find(i=>i.id===page.id);if(!idea)return null;
- const index=clip.ideaIds.indexOf(idea.id),grouped=clip.ideaIds.length>1;
+ if(!idea)return null;
+ const index=ids.indexOf(idea.id),grouped=clip.ideaIds.length>1;
  const open=async(titles=false)=>{const r=await window.thoughtline.openManage(idea.id,titles);if(!r.ok)onError(r.message);};
- const flip=(step:number)=>{const id=clip.ideaIds[clip.ideaIds.indexOf(page.current())+step];if(!id)return;setCopied(false);setDirection(step>0?'next':'previous');page.choose(id);};
+ const flip=(step:number)=>{const id=ids[ids.indexOf(page.current())+step];if(!id)return;setCopied(false);setDirection(step>0?'next':'previous');page.choose(id);};
  return <>
   <Clothespin color={agent?.color} reduced={reduced} layer="rear"/>
   <svg className="clamp-rope" width="18" height="38" viewBox="0 0 18 38" aria-hidden="true">{['rope-shadow','rope-core','rope-light'].map(c=><path key={c} className={c} d={ropeContact}/>)}</svg>
@@ -49,7 +50,7 @@ export function ClipCard({clip,ideas,agent,onChange,onGrab,onError,reduced,textD
     if(copyTimer.current)clearTimeout(copyTimer.current);setCopied(true);copyTimer.current=setTimeout(()=>setCopied(false),1500);
    }}><span className="agent-name">{classificationLabel(idea.project,agentName(agent)||t('通用'))}</span><strong key={idea.id} data-direction={reduced?undefined:direction}>{idea.title}</strong><span className="preview">{idea.text}</span></button>
    <footer className={grouped?'group-footer':'single-footer'}>
-    {grouped?<><button className="page-arrow" aria-label={t("上一张便签")} disabled={index===0} onClick={()=>void flip(-1)}>‹</button><button className="page-number" aria-label={t("paperPage",{p0:index+1,p1:clip.ideaIds.length})} onClick={()=>void open(true)}>{copied?'✓':`${index+1}/${clip.ideaIds.length}`}</button><button className="page-arrow" aria-label={t("下一张便签")} disabled={index===clip.ideaIds.length-1} onClick={()=>void flip(1)}>›</button></>:<span className="copy-status" aria-live="polite">{copied?t("已复制"):''}</span>}
+    {grouped?<><button className="page-arrow" aria-label={t("上一张便签")} disabled={index===0} onClick={()=>void flip(-1)}>‹</button><button className="page-number" aria-label={t("paperPage",{p0:index+1,p1:ids.length})} onClick={()=>void open(true)}>{copied?'✓':`${index+1}/${ids.length}`}</button><button className="page-arrow" aria-label={t("下一张便签")} disabled={index===ids.length-1} onClick={()=>void flip(1)}>›</button></>:<span className="copy-status" aria-live="polite">{copied?t("已复制"):''}</span>}
     <button aria-label={t("expandPaper",{p0:idea.title})} onClick={()=>void open()}><ExpandIcon/></button>
    </footer>
    <span className="sr-only" role="status">{copied?t("copiedPaper",{p0:index+1}):''}</span>

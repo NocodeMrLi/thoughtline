@@ -1,0 +1,18 @@
+{
+  "platform": "darwin",
+  "packaged": false,
+  "checks": [],
+  "scenes": [],
+  "failures": [
+    {
+      "name": "seven-entry slim menu order and English product calendar name",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    '新建念头',\n-   '收起',\n    '---',\n    '只看「工作」',\n+   '筛选标签…',\n-   '筛选标签',\n    '显示全部',\n+   'Thoughtline 日历',\n-   'Thoughtline日历',\n    '---',\n    '整理'\n  ]\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:17:96\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:6:35)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:17:3"
+    }
+  ],
+  "scope": "Real Electron IPC and renderer, isolated native menu callback interception; physical pointer/IME separate.",
+  "runtime": {
+    "pid": 65493,
+    "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-r518-filter-J7e5bi/profile"
+  },
+  "cleaned": true
+}

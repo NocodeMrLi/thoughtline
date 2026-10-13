@@ -1,0 +1,36 @@
+
+> thoughtline@0.0.31 test
+> node node_modules/vitest/vitest.mjs run tests/unit/repository.test.ts -t schema3原始字节
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/repository.test.ts (12 tests | 1 failed | 11 skipped) 64ms
+   × schema3原始字节备份失败禁止首次写入；成功后不覆盖已有原备份 62ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/repository.test.ts > schema3原始字节备份失败禁止首次写入；成功后不覆盖已有原备份
+AssertionError: expected { ok: true, value: { …(7) } } to match object { ok: false, code: 'IO' }
+(8 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "code": "IO",
+-   "ok": false,
++   "ok": true,
+  }
+
+ ❯ tests/unit/repository.test.ts:16:141
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 11 skipped (12)
+   Start at  20:07:36
+   Duration  557ms (transform 69%, tests 16%, import 14%, worker 1%)
+

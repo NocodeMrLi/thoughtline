@@ -1,6 +1,6 @@
 import {LocaleProvider} from './LocaleContext';
 import {newerPreferences} from '../shared/preferences';
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useLayoutEffect,useRef,useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import type {PilotInfo} from '../shared/bridge';
 import {Shelf} from './components/Shelf';
@@ -25,6 +25,7 @@ function App(){
  const [info,setInfo]=useState<PilotInfo|null>(null);
  useEffect(()=>{const accept=(incoming:PilotInfo)=>setInfo(prior=>prior?{...incoming,preferences:newerPreferences(prior.preferences,incoming.preferences),dark:incoming.preferences.version<prior.preferences.version?prior.dark:incoming.dark}:incoming);const off=window.thoughtline.onInfo(accept);window.thoughtline.info().then(accept).catch(console.error);return off;},[]);
  useEffect(()=>{if(info){document.documentElement.lang=info.preferences.locale;document.documentElement.dataset.theme=info.dark?'dark':'light';document.documentElement.dataset.platform=info.platform;document.documentElement.dataset.motion=info.snapshot.settings.reducedMotion?'reduce':'normal';}},[info?.preferences.locale,info?.dark,info?.platform,info?.snapshot.settings.reducedMotion]);
+ useLayoutEffect(()=>{if(!info||new URLSearchParams(location.search).get('view')!=='manage')return;const frame=requestAnimationFrame(()=>window.thoughtline.viewReady(info.manageSession,info.manageMode,info.manageReadyRequest??0));return()=>cancelAnimationFrame(frame);},[info?.manageSession,info?.manageMode,info?.manageReadyRequest]);
  if(!info)return null;if(remembered.current.visit!==info.manageVisit)remembered.current={visit:info.manageVisit??-1};const visit=remembered.current;const view=new URLSearchParams(location.search).get('view');
  return <LocaleProvider locale={info.preferences.locale}>{view==='composer'?<Composer key={info.composerSession} info={info}/>:view==='manage'?(info.manageMode==='settings'?<Settings info={info} restore={visit.settings} onRemember={draft=>{visit.settings=draft;}}/>:info.manageMode==='classification'?<ClassificationManager key={info.manageSession} info={info}/>:info.manageMode==='detail'?<Detail info={info}/>:<Calendar info={info} restore={info.calendarReturning?visit.calendar:undefined} onRemember={state=>{visit.calendar=state;}}/>):<Shelf info={info}/>}</LocaleProvider>;
 }

@@ -72,9 +72,9 @@ test('CAS允许无关revision/窗口位置/其他念头/状态变化，不丢当
  expect(edited.ideas[1].text).toBe('另一条');expect(edited.draft?.text).toBe('新建未保存');expect(edited.revision).toBe(44);expect(edited.settings.calendarBounds).toEqual(s.settings.calendarBounds);
 });
 
-test('CAS先成功后旧回调冲突，Agent变化拆到独立夹而不动其余组成员',()=>{
+test('CAS先成功后旧回调冲突，分组变化拆到独立夹而不动其余组成员',()=>{
  const cas=api('editIdeaIfUnchanged');let s=fixture();s=value(commands.newIdea(s,original,'two',now));s=value(mergeClips(s,'clip:one','clip:two'));
- const next=value(cas(s,'one',{...original,text:'  首次修改 🧵\n ',agentId:'claude'},original,later));
+ const next=value(cas(s,'one',{...original,text:'  首次修改 🧵\n ',agentId:'claude',project:'新分组'},original,later));
  expect(next.clips).toMatchObject([{id:'clip:two',ideaIds:['two'],currentId:'two',agentId:'general'},{ideaIds:['one'],agentId:'claude'}]);
  expect(cas(next,'one',{...original,text:'旧回调后到'},original,later)).toMatchObject({ok:false,code:'CONFLICT'});
  expect(next.ideas[0].text).toBe('  首次修改 🧵\n ');expect(next.ideas[0].createdAt).toBe(now);

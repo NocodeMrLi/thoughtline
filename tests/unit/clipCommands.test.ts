@@ -6,19 +6,19 @@ test('schema1迁移将每条挂着记录变为独立夹子，已收起不占位�
  let s=legacySnapshot();const r=newIdea(s,{text:' 原文\n',title:'',project:'',agentId:'codex'},'one',now);if(!r.ok)throw Error(r.message);s=r.value;
  const legacy={...s,schemaVersion:1,clips:undefined,ideas:[...s.ideas,{...s.ideas[0],id:'history',status:'archived'}]};
  const migrated=validateSnapshot(legacy);expect(migrated.ok).toBe(true);if(!migrated.ok)return;
- expect(migrated.value.schemaVersion).toBe(3);expect((migrated.value as any).clips).toHaveLength(1);
+ expect(migrated.value.schemaVersion).toBe(4);expect((migrated.value as any).clips).toHaveLength(1);
  expect((migrated.value as any).clips[0]).toMatchObject({ideaIds:['one'],currentId:'one'});expect(migrated.value.ideas[0].text).toBe(' 原文\n');
 });
 import {mergeClips,splitClip,selectClipIdea,moveClip,dropClipIdea} from '../../src/shared/clipCommands';
 import type {Result,Snapshot} from '../../src/shared/contracts';
 const value=<T>(r:Result<T>):T=>{if(!r.ok)throw Error(r.message);return r.value;};
-const fixture=()=>{let s=legacySnapshot();for(const id of ['a','b','c'])s=value(newIdea(s,{text:' '+id+'\n正文\n',title:id,project:id,agentId:'codex'},id,now));return s;};
-test('同Agent合夹保持独立全文/顺序/目标位置与总重量，源第一张成为当前张',()=>{
+const fixture=()=>{let s=legacySnapshot();for(const id of ['a','b','c'])s=value(newIdea(s,{text:' '+id+'\n正文\n',title:id,project:'同一分组',agentId:'codex'},id,now));return s;};
+test('同分组合夹保持独立全文/顺序/目标位置与总重量，源第一张成为当前张',()=>{
  const s=fixture();s.clips[1].position=.4;const next=value(mergeClips(s,s.clips[0].id,s.clips[1].id));
  expect(next.clips[0]).toMatchObject({id:'clip:b',ideaIds:['b','a'],currentId:'a',position:.4});expect(next.ideas).toEqual(s.ideas);expect(next.clips).toHaveLength(2);expect(s.clips).toHaveLength(3);
 });
-test('跨Agent、自合夹、未知成员被拒绝，不能重复或漏掉挂载',()=>{
- const s=fixture();s.ideas[1].agentId='claude';s.clips[1].agentId='claude';
+test('跨分组、自合夹、未知成员被拒绝，不能重复或漏掉挂载',()=>{
+ const s=fixture();s.ideas[1].agentId='claude';s.ideas[1].project='另一分组';s.clips[1].agentId='claude';
  expect(mergeClips(s,'clip:a','clip:b').ok).toBe(false);expect(mergeClips(s,'clip:a','clip:a').ok).toBe(false);
  expect(selectClipIdea(s,'clip:a','b').ok).toBe(false);
  expect(validateSnapshot({...s,clips:s.clips.slice(1)}).ok).toBe(false);
@@ -54,7 +54,7 @@ test('合并单张无需暂存空位，不因中间拆出步骤改变其他手�
  expect(next.clips.find(c=>c.id==='clip:a')?.ideaIds).toEqual(['a']);expect(next.clips.find(c=>c.id==='clip:c')?.ideaIds).toEqual(['c','b']);
 });
 import {editIdea} from '../../src/shared/ideaCommands';
-test('改Agent只拆出当前成员，收起当前成员后展示相邻张',()=>{
+test('改分组只拆出当前成员，收起当前成员后展示相邻张',()=>{
  let s=value(mergeClips(fixture(),'clip:b','clip:a'));s=value(selectClipIdea(s,'clip:a','b'));
  const archived=value(changeStatus(s,'b','archived',now));expect(archived.clips[0].currentId).toBe('a');expect(archived.clips[0].ideaIds).toEqual(['a']);
  const edited=value(editIdea(s,'b',{text:s.ideas[1].text,title:'b',project:'b',agentId:'claude'},now));expect(edited.clips[0].ideaIds).toEqual(['a']);expect(edited.clips.find(c=>c.ideaIds.includes('b'))?.agentId).toBe('claude');expect(edited.ideas[1].text).toBe(s.ideas[1].text);

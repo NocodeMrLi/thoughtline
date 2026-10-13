@@ -1,0 +1,28 @@
+FIXTURE warmViews: shelf
+FIXTURE warmViews: settings
+FIXTURE warmViews: composer
+FIXTURE composer: invoking shortcut
+FIXTURE composer: shortcut invoked
+FIXTURE composer: created
+FIXTURE composer: native visibility checked
+FIXTURE composer: textbox visible
+FIXTURE composer: focused
+FIXTURE warmViews: ready
+MOVE INITIAL {"a":"clip:bd6ddf97-178d-4cec-a12d-e593792b306a","b":"clip:93dad609-47f2-407a-bcdd-92ed737349c2","c":"clip:1350f700-2a2f-48a8-9d77-c2bf47922ada","info":{"lightReminder":null,"preferenceCommit":null,"preferences":{"schemaVersion":1,"version":0,"locale":"zh-CN","theme":"system"},"preferenceError":null,"platform":"mac","snapshot":{"schemaVersion":4,"revision":4,"clips":[{"id":"clip:bd6ddf97-178d-4cec-a12d-e593792b306a","agentId":"codex","ideaIds":["bd6ddf97-178d-4cec-a12d-e593792b306a"],"currentId":"bd6ddf97-178d-4cec-a12d-e593792b306a","position":0.5000000000000001},{"id":"clip:93dad609-47f2-407a-bcdd-92ed737349c2","agentId":"codex","ideaIds":["93dad609-47f2-407a-bcdd-92ed737349c2"],"currentId":"93dad609-47f2-407a-bcdd-92ed737349c2","position":0.3543360433604337},{"id":"clip:1350f700-2a2f-48a8-9d77-c2bf47922ada","agentId":"preset:colleague","ideaIds":["1350f700-2a2f-48a8-9d77-c2bf47922ada"],"currentId":"1350f700-2a2f-48a8-9d77-c2bf47922ada","position":null}],"ideas":[{"text":" a\nCodex 第一张原文\n","title":"标签0","project":"项目","agentId":"codex","id":"bd6ddf97-178d-4cec-a12d-e593792b306a","status":"hanging","createdAt":"2026-10-13T15:55:20.487Z","updatedAt":"2026-10-13T15:55:20.487Z","createdDay":"2026-10-13","creationTimeZone":"Asia/Shanghai"},{"text":" b\nCodex 第二张原文\n","title":"标签1","project":"项目","agentId":"codex","id":"93dad609-47f2-407a-bcdd-92ed737349c2","status":"hanging","createdAt":"2026-10-13T15:55:20.537Z","updatedAt":"2026-10-13T15:55:20.537Z","createdDay":"2026-10-13","creationTimeZone":"Asia/Shanghai"},{"text":" c\nClaude 原文\n","title":"标签2","project":"其他项目","agentId":"preset:colleague","id":"1350f700-2a2f-48a8-9d77-c2bf47922ada","status":"hanging","createdAt":"2026-10-13T15:55:20.567Z","updatedAt":"2026-10-13T15:55:20.567Z","createdDay":"2026-10-13","creationTimeZone":"Asia/Shanghai"}],"agents":[{"id":"general","name":"通用","color":"#A0A3AA"},{"id":"preset:life-inspiration","name":"生活灵感","color":"#6CA78C"},{"id":"preset:work-notes","name":"工作记录","color":"#D79551"},{"id":"preset:manager","name":"直属领导","color":"#9574CE"},{"id":"preset:colleague","name":"同事","color":"#8AADD4"},{"id":"codex","name":"Codex","color":"#4C90D9"}],"draft":null,"settings":{"writeHotkey":"Control+Alt+N","reducedMotion":false},"projects":["项目","其他项目"]},"displayId":"1","width":1440,"dark":true,"composerSession":1,"composerDraftSequence":0,"composerMaterial":"vibrancy","composerContext":{"mode":"new","ideaId":null,"draft":{"text":"","title":"","project":"","agentId":"general"}},"placementNotice":null,"placementNoticeId":3,"placementNoticeKind":"info","arrangeSession":0,"manageVisit":1,"calendarReturning":false,"manageSession":1,"manageReadyRequest":1,"manageSelection":null,"manageMode":"settings","classificationTab":"projects","classificationOrigin":"calendar","manageTitles":false,"manageMaterial":"vibrancy","manageEditingRequested":false,"canUndoClips":true,"undoActionLabel":"撤销挂上","undoPlacementKind":"hang","dragCancelSession":2,"textDragActive":false,"shelfAgentId":"all","shelfProject":null,"shelfFilterPicker":null,"shelfMergePicker":null,"hotkeyRegistered":true,"shelfVisible":true,"interactionLocked":false,"presentationSession":2,"layoutLocked":false},"centres":[{"id":"clip:1350f700-2a2f-48a8-9d77-c2bf47922ada","x":376},{"id":"clip:93dad609-47f2-407a-bcdd-92ed737349c2","x":548},{"id":"clip:bd6ddf97-178d-4cec-a12d-e593792b306a","x":720}]}
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  [
++   '1350f700-2a2f-48a8-9d77-c2bf47922ada'
+-   '93dad609-47f2-407a-bcdd-92ed737349c2',
+-   'bd6ddf97-178d-4cec-a12d-e593792b306a'
+  ]
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/group-workflow.cjs:34:108 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [Array],
+  expected: [Array],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}

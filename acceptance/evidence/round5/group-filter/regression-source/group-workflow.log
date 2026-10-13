@@ -1,0 +1,20 @@
+FIXTURE warmViews: shelf
+FIXTURE warmViews: settings
+FIXTURE warmViews: composer
+FIXTURE composer: invoking shortcut
+FIXTURE composer: shortcut invoked
+FIXTURE composer: created
+FIXTURE composer: native visibility checked
+FIXTURE composer: textbox visible
+FIXTURE composer: focused
+FIXTURE warmViews: ready
+AssertionError [ERR_ASSERTION]: 念头正文或归属无效。
+    at result (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/group-workflow.cjs:9:134)
+    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/group-workflow.cjs:12:64 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

@@ -1,0 +1,23 @@
+{
+  "platform": "darwin",
+  "checks": [
+    "six-entry primary menu, four organize actions, no redundant undo",
+    "same-group rope/calendar targets, archived stack once, top search and bounded scrolling",
+    "full hidden-member search, actual total count and long names never overlap count/source",
+    "IME does not prematurely select; calendar merge takes current source only and keeps full target stack",
+    "calendar stack readable with page arrows, dots/tag/title jump",
+    "undo merge restores source and archived target membership/state",
+    "undo retires obsolete page selections and leaves normally"
+  ],
+  "pids": [
+    65712,
+    65712,
+    65713,
+    65714,
+    65715,
+    65719
+  ],
+  "scope": "Renderer/IPC/menu callbacks on source or frozen package, controlled protocol fixture; not physical OS menu/IME acceptance.",
+  "passed": true,
+  "cleaned": true
+}

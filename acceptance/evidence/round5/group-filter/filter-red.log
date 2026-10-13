@@ -1,0 +1,75 @@
+
+> thoughtline@0.0.31 test
+> node node_modules/vitest/vitest.mjs run tests/unit/round5ShelfFilter.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/round5ShelfFilter.test.ts (3 tests | 3 failed) 22ms
+   × 混色叠放按成员求标签交集，当前页不匹配仍保留真实夹子 19ms
+   × 标签单选跨组；清标签保留分组；未分组空字符串不同于全部null 1ms
+   × 标签候选只来自范围内挂绳成员，保留已移除但仍有内容的标签 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/round5ShelfFilter.test.ts > 混色叠放按成员求标签交集，当前页不匹配仍保留真实夹子
+AssertionError: expected undefined to deeply equal [ 'b' ]
+
+- Expected:
+[
+  "b",
+]
+
++ Received:
+undefined
+
+ ❯ tests/unit/round5ShelfFilter.test.ts:7:160
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/round5ShelfFilter.test.ts > 标签单选跨组；清标签保留分组；未分组空字符串不同于全部null
+AssertionError: expected undefined to deeply equal [ [ 'a', 'b' ], [ 'c' ] ]
+
+- Expected:
+[
+  [
+    "a",
+    "b",
+  ],
+  [
+    "c",
+  ],
+]
+
++ Received:
+undefined
+
+ ❯ tests/unit/round5ShelfFilter.test.ts:8:141
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/round5ShelfFilter.test.ts > 标签候选只来自范围内挂绳成员，保留已移除但仍有内容的标签
+AssertionError: expected undefined to deeply equal [ 'general', 'codex' ]
+
+- Expected:
+[
+  "general",
+  "codex",
+]
+
++ Received:
+undefined
+
+ ❯ tests/unit/round5ShelfFilter.test.ts:9:173
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  19:43:22
+   Duration  215ms (transform 70%, tests 17%, import 11%, worker 3%)
+

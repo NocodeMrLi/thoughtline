@@ -1,0 +1,16 @@
+{
+  "file": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs",
+  "args": [],
+  "timeoutMs": 180000,
+  "startedAt": "2026-10-13T15:59:52.147Z",
+  "passed": false,
+  "timedOut": false,
+  "profileCleanup": "Delegated to fixture; supervisor never deletes data",
+  "pid": 65492,
+  "code": 1,
+  "signal": null,
+  "closeConfirmed": true,
+  "stdout": "",
+  "stderr": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    '新建念头',\n-   '收起',\n    '---',\n    '只看「工作」',\n+   '筛选标签…',\n-   '筛选标签',\n    '显示全部',\n+   'Thoughtline 日历',\n-   'Thoughtline日历',\n    '---',\n    '整理'\n  ]\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:17:96\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:6:35)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:17:3 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: [Array],\n  expected: [Array],\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n",
+  "completedAt": "2026-10-13T15:59:52.918Z"
+}

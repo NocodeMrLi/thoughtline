@@ -1,0 +1,100 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/round5MergeTargets.test.ts (8 tests | 8 failed) 28ms
+   × 目标涵盖同分组挂绳/日历，不含自身或其他分组，全文搜索无写入 23ms
+   × 合并到日历留日历，当前源张移出，全文/时间/标签保留且结构重读 1ms
+   × 源已经叠放时只移当前纸张，其余成员/位置保留 1ms
+   × 日历叠放全文搜索隐藏成员仍去重，计数用完整成员 1ms
+   × 日历叠放拆分留日历，主动挂上整叠并保留原全文 1ms
+   × 归档叠放删除恢复回到原叠放原次序，提醒不遗失 1ms
+   × 归档叠放改单标签保留，改分组仅分离当前纸张 1ms
+   × 归档标签目录整体迁移更新镜像且不拆成员，缺失重复数据拒绝 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/round5MergeTargets.test.ts > 目标涵盖同分组挂绳/日历，不含自身或其他分组，全文搜索无写入
+AssertionError: expected [] to deeply equal [ [ 'b', 'hanging' ], …(1) ]
+
+- Expected
++ Received
+
+- [
+-   [
+-     "b",
+-     "hanging",
+-   ],
+-   [
+-     "c",
+-     "archived",
+-   ],
+- ]
++ []
+
+ ❯ tests/unit/round5MergeTargets.test.ts:9:147
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  tests/unit/round5MergeTargets.test.ts > 合并到日历留日历，当前源张移出，全文/时间/标签保留且结构重读
+Error: 请选择可合并的念头。
+ ❯ value tests/unit/round5MergeTargets.test.ts:7:80
+
+ ❯ tests/unit/round5MergeTargets.test.ts:10:68
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  tests/unit/round5MergeTargets.test.ts > 源已经叠放时只移当前纸张，其余成员/位置保留
+Error: 请选择可合并的念头。
+ ❯ value tests/unit/round5MergeTargets.test.ts:7:80
+
+ ❯ tests/unit/round5MergeTargets.test.ts:11:176
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  tests/unit/round5MergeTargets.test.ts > 日历叠放全文搜索隐藏成员仍去重，计数用完整成员
+Error: 请选择可合并的念头。
+ ❯ value tests/unit/round5MergeTargets.test.ts:7:80
+
+ ❯ tests/unit/round5MergeTargets.test.ts:12:43
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  tests/unit/round5MergeTargets.test.ts > 日历叠放拆分留日历，主动挂上整叠并保留原全文
+Error: 请选择可合并的念头。
+ ❯ value tests/unit/round5MergeTargets.test.ts:7:80
+
+ ❯ tests/unit/round5MergeTargets.test.ts:13:44
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  tests/unit/round5MergeTargets.test.ts > 归档叠放删除恢复回到原叠放原次序，提醒不遗失
+Error: 请选择可合并的念头。
+ ❯ value tests/unit/round5MergeTargets.test.ts:7:80
+
+ ❯ tests/unit/round5MergeTargets.test.ts:14:120
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  tests/unit/round5MergeTargets.test.ts > 归档叠放改单标签保留，改分组仅分离当前纸张
+Error: 请选择可合并的念头。
+ ❯ value tests/unit/round5MergeTargets.test.ts:7:80
+
+ ❯ tests/unit/round5MergeTargets.test.ts:15:43
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  tests/unit/round5MergeTargets.test.ts > 归档标签目录整体迁移更新镜像且不拆成员，缺失重复数据拒绝
+Error: 请选择可合并的念头。
+ ❯ value tests/unit/round5MergeTargets.test.ts:7:80
+
+ ❯ tests/unit/round5MergeTargets.test.ts:16:50
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  8 failed (8)
+   Start at  22:05:40
+   Duration  209ms (transform 66%, tests 21%, import 10%, worker 2%)
+

@@ -1,0 +1,168 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/round5ManageBounds.test.ts (4 tests | 3 failed) 7ms
+   × 默认窗口避开真实便签底边并保留16DIP间距 3ms
+   × 不同页面优先保持父窗口同屏顶部与水平中心 2ms
+   × 避让后的可用高度不足时缩短窗口而不越界 0ms
+ ❯ tests/unit/round5Grouping.test.ts (10 tests | 9 failed) 44ms
+   × 同分组跨标签合夹保全原文和目标位置，当前页镜像为来源标签 35ms
+   × 不同明确分组即使同标签也不能新合夹 1ms
+   × 旧跨分组同标签叠放升级schema4保留顺序位置创建日及正文 1ms
+   × schema4允许混合标签叠放且剪除成员只按挂绳状态不按标签 1ms
+   × 同分组修改单标签仍留在原叠放，改单分组分离当前纸张 2ms
+   × 混合叠放拆分和最近删除恢复保留其他标签成员与原插入位置 1ms
+   × 同分组不同标签可只换当前纸张，跨分组必须明确整夹换上 1ms
+   × 成员标签不同的容量溢出与恢复保留完整叠放 0ms
+   × 分组筛选与标签相交，未设置分组时跨分组标签筛选，读取不改快照 1ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 12 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/round5Grouping.test.ts > 同分组跨标签合夹保全原文和目标位置，当前页镜像为来源标签
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/round5Grouping.test.ts:11:146
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/12]⎯
+
+ FAIL  tests/unit/round5Grouping.test.ts > 不同明确分组即使同标签也不能新合夹
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/round5Grouping.test.ts:12:135
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/12]⎯
+
+ FAIL  tests/unit/round5Grouping.test.ts > 旧跨分组同标签叠放升级schema4保留顺序位置创建日及正文
+AssertionError: expected 3 to be 4 // Object.is equality
+
+- Expected
++ Received
+
+- 4
++ 3
+
+ ❯ tests/unit/round5Grouping.test.ts:14:263
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/12]⎯
+
+ FAIL  tests/unit/round5Grouping.test.ts > schema4允许混合标签叠放且剪除成员只按挂绳状态不按标签
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/round5Grouping.test.ts:15:91
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/12]⎯
+
+ FAIL  tests/unit/round5Grouping.test.ts > 同分组修改单标签仍留在原叠放，改单分组分离当前纸张
+AssertionError: expected [ { id: 'clip:1', …(4) }, …(1) ] to have a length of 1 but got 2
+
+- Expected
++ Received
+
+- 1
++ 2
+
+ ❯ tests/unit/round5Grouping.test.ts:16:305
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/12]⎯
+
+ FAIL  tests/unit/round5Grouping.test.ts > 混合叠放拆分和最近删除恢复保留其他标签成员与原插入位置
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/round5Grouping.test.ts:17:115
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/12]⎯
+
+ FAIL  tests/unit/round5Grouping.test.ts > 同分组不同标签可只换当前纸张，跨分组必须明确整夹换上
+Error: 无法读取这个数据版本，原文件已保留。
+ ❯ value tests/unit/round5Grouping.test.ts:8:49
+
+ ❯ tests/unit/round5Grouping.test.ts:18:56
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/12]⎯
+
+ FAIL  tests/unit/round5Grouping.test.ts > 成员标签不同的容量溢出与恢复保留完整叠放
+Error: 无法读取这个数据版本，原文件已保留。
+ ❯ value tests/unit/round5Grouping.test.ts:8:49
+
+ ❯ tests/unit/round5Grouping.test.ts:19:70
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/12]⎯
+
+ FAIL  tests/unit/round5Grouping.test.ts > 分组筛选与标签相交，未设置分组时跨分组标签筛选，读取不改快照
+AssertionError: expected 3 to be 2 // Object.is equality
+
+- Expected
++ Received
+
+- 2
++ 3
+
+ ❯ tests/unit/round5Grouping.test.ts:20:194
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/12]⎯
+
+ FAIL  tests/unit/round5ManageBounds.test.ts > 默认窗口避开真实便签底边并保留16DIP间距
+AssertionError: expected 48 to be greater than or equal to 312
+ ❯ tests/unit/round5ManageBounds.test.ts:4:122
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/12]⎯
+
+ FAIL  tests/unit/round5ManageBounds.test.ts > 不同页面优先保持父窗口同屏顶部与水平中心
+AssertionError: expected 550 to be -1140 // Object.is equality
+
+- Expected
++ Received
+
+- -1140
++ 550
+
+ ❯ tests/unit/round5ManageBounds.test.ts:5:233
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/12]⎯
+
+ FAIL  tests/unit/round5ManageBounds.test.ts > 避让后的可用高度不足时缩短窗口而不越界
+AssertionError: expected 24 to be greater than or equal to 312
+ ❯ tests/unit/round5ManageBounds.test.ts:6:156
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/12]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  12 failed | 2 passed (14)
+   Start at  19:09:07
+   Duration  248ms (transform 64%, tests 22%, import 12%, worker 2%)
+

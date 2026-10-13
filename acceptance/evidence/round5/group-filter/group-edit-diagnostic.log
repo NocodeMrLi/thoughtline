@@ -1,0 +1,20 @@
+PASS seven-entry slim menu order and English product calendar name
+PASS same group mixed-tag merge updates clip colour on page flip
+PASS group and tag intersection includes matching hidden member without rewriting membership
+PASS tag-only filter crosses groups and clear all restores full stack
+PASS shared searchable picker has top search and in-window bounds
+PASS group-first management tabs and renamed calendar menu
+AssertionError [ERR_ASSERTION]: {"clips":[{"id":"clip:b","agentId":"codex","ideaIds":["b","a"],"currentId":"b","position":0.40684281842818437},{"id":"clip:c","agentId":"codex","ideaIds":["c"],"currentId":"c","position":0.5931571815718159},{"id":"clip:d","agentId":"general","ideaIds":["d"],"currentId":"d","position":0.7794715447154473}],"groups":[{"id":"a","project":"工作","agentId":"general"},{"id":"b","project":"工作","agentId":"codex"},{"id":"c","project":"项目","agentId":"codex"},{"id":"d","project":"","agentId":"general"}]}
+
+2 !== 1
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:25:447
+    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:6:35)
+    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-group-filter-workflow.cjs:23:3 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 2,
+  expected: 1,
+  operator: 'strictEqual',
+  diff: 'simple'
+}

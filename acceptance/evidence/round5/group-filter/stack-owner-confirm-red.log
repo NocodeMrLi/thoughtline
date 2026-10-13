@@ -1,0 +1,17 @@
+PASS no undo on opening or browsing
+PASS calendar updates immediately after current-only merge, retained source does not release slot
+PASS archive undo restores source and automatic backfill without pulling manual calendar stack
+PASS calendar split stays archived and undo restores full stack
+PASS arrange undo restores all original clip positions
+PASS hang restores entire archived stack, failed swap preserves undo and hang undo restores archive
+PASS swap undo shared across entries, copying/filtering preserves record, completed undo disappears
+PASS normal restart retains full calendar stack and independent creation days
+PASS delete and restore preserves original calendar stack order
+locator.waitFor: Timeout 2000ms exceeded.
+Call log:
+[2m  - waiting for locator('.inline-split-confirm') to be visible[22m
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-stack-workflow.cjs:27:279 {
+  log: [ "  - waiting for locator('.inline-split-confirm') to be visible" ],
+  name: 'TimeoutError'
+}

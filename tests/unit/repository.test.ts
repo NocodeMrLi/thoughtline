@@ -10,6 +10,13 @@ const io:FileIO={write:async(p,t)=>writeFile(p,t,'utf8'),fsync:async p=>{const f
 async function fixture(){const dir=await mkdtemp(join(tmpdir(),'thoughtline-store-'));dirs.push(dir);return {dir,repo:new FileRepository(dir)};}
 afterEach(async()=>{await Promise.all(dirs.splice(0).map(d=>rm(d,{recursive:true,force:true})));});
 const add=(s:Snapshot,text='正文\n第二行'):Snapshot=>({...s,clips:[...s.clips,{id:'clip:idea-1',agentId:'general',ideaIds:['idea-1'],currentId:'idea-1',position:null}],ideas:[...s.ideas,{id:'idea-1',text,title:'测试',project:'项目',agentId:'general',status:'hanging',createdAt:'2026-10-08T00:00:00.000Z',updatedAt:'2026-10-08T00:00:00.000Z'}]});
+test('schema3原始字节备份失败禁止首次写入；成功后不覆盖已有原备份',async()=>{
+ const {dir,repo}=await fixture(),seed=value(await repo.load()),raw='  '+JSON.stringify({...add(seed),schemaVersion:3},null,2)+'\n';await writeFile(join(dir,'snapshot.json'),raw);
+ const failing=new FileRepository(dir,{...io,write:async(p,t)=>{if(p.includes('snapshot.schema3.backup.json'))throw Object.assign(Error('backup failed'),{code:'EIO'});await io.write(p,t);}});
+ const upgraded=value(await failing.load());expect(upgraded.schemaVersion).toBe(4);expect(await failing.commit(upgraded,upgraded.revision)).toMatchObject({ok:false,code:'IO'});expect(await readFile(join(dir,'snapshot.json'),'utf8')).toBe(raw);
+ const good=new FileRepository(dir),s=value(await good.load());value(await good.commit(s,s.revision));expect(await readFile(join(dir,'snapshot.schema3.backup.json'),'utf8')).toBe(raw);
+ await writeFile(join(dir,'snapshot.json'),raw.replace('正文','另一份正文'));const again=new FileRepository(dir),second=value(await again.load());value(await again.commit(second,second.revision));expect(await readFile(join(dir,'snapshot.schema3.backup.json'),'utf8')).toBe(raw);
+});
 test('首次创建，100KB全文和草稿跨重启逐字节保持',async()=>{
  const {dir,repo}=await fixture();const s=value(await repo.load());
  const next=add(s,'中文\n'.repeat(12000));next.draft={text:'没写完\n',title:'',project:'',agentId:'general'};
@@ -47,7 +54,7 @@ test('未知schema不被备份或空数据覆盖；非法Agent引用不能保存
 });
 test('旧schema1首次提交前保留原始备份，迁移保全全文与草稿',async()=>{
  const {dir,repo}=await fixture();const s=value(await repo.load());const legacy={...add(s),schemaVersion:1,clips:undefined,draft:{text:'旧草稿',title:'',project:'',agentId:'general'}};const raw=JSON.stringify(legacy);
- await writeFile(join(dir,'snapshot.json'),raw);const upgraded=new FileRepository(dir);const migrated=value(await upgraded.load());expect(migrated.schemaVersion).toBe(3);expect(await readFile(join(dir,'snapshot.json'),'utf8')).toBe(raw);
+ await writeFile(join(dir,'snapshot.json'),raw);const upgraded=new FileRepository(dir);const migrated=value(await upgraded.load());expect(migrated.schemaVersion).toBe(4);expect(await readFile(join(dir,'snapshot.json'),'utf8')).toBe(raw);
  value(await upgraded.commit(migrated,migrated.revision));expect(await readFile(join(dir,'snapshot.schema1.backup.json'),'utf8')).toBe(raw);expect(value(await new FileRepository(dir).load()).draft?.text).toBe('旧草稿');
 });
 

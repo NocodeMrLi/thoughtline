@@ -1,0 +1,20 @@
+FIXTURE warmViews: shelf
+FIXTURE warmViews: settings
+FIXTURE warmViews: composer
+FIXTURE composer: invoking shortcut
+FIXTURE composer: shortcut invoked
+FIXTURE composer: created
+FIXTURE composer: native visibility checked
+FIXTURE composer: textbox visible
+FIXTURE composer: focused
+FIXTURE warmViews: ready
+locator.waitFor: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for getByText('松开合并', { exact: true }) to be visible[22m
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/paper-drop-workflow.cjs:14:172 {
+  log: [
+    "  - waiting for getByText('松开合并', { exact: true }) to be visible"
+  ],
+  name: 'TimeoutError'
+}

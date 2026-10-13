@@ -22,9 +22,9 @@ try{
   const openedDeadline=Date.now()+3000;while(!await app.evaluate(()=>!!globalThis.nativeMenuProbe&&!globalThis.nativeMenuProbe.closed)&&Date.now()<openedDeadline)await new Promise(r=>setTimeout(r,25));
   assert(await app.evaluate(()=>!!globalThis.nativeMenuProbe&&!globalThis.nativeMenuProbe.closed),'Fresh native popup must be open before OS keyboard input');
   // Arrow navigation skips disabled items and separators, unlike raw Menu.items indices.
-  const navigation=await app.evaluate(()=>{const all=globalThis.nativeMenuProbe.menu.items;const selectable=all.filter(i=>i.visible&&i.enabled&&i.type!=='separator');return {rawIndex:all.findIndex(i=>i.label==='筛选标签'),selectableIndex:selectable.findIndex(i=>i.label==='筛选标签'),labels:selectable.map(i=>i.label)};});
+  const navigation=await app.evaluate(()=>{const all=globalThis.nativeMenuProbe.menu.items;const selectable=all.filter(i=>i.visible&&i.enabled&&i.type!=='separator');return {rawIndex:all.findIndex(i=>i.label==='整理'),selectableIndex:selectable.findIndex(i=>i.label==='整理'),labels:selectable.map(i=>i.label)};});
   receipt.submenuNavigation=navigation;assert(navigation.selectableIndex>=0);await keys([36,...Array(navigation.selectableIndex).fill(40),39]);await new Promise(r=>setTimeout(r,200));
-  assert(await app.evaluate(()=>!globalThis.nativeMenuProbe.closed),'Agent submenu must retain root menu');
+  assert(await app.evaluate(()=>!globalThis.nativeMenuProbe.closed),'Organize submenu must retain root menu');
   // Separate OS injections let the submenu finish dismissing before the root Escape.
   await keys([27]);await new Promise(r=>setTimeout(r,200));
   receipt.firstEscapeRetainedRoot=await app.evaluate(()=>!globalThis.nativeMenuProbe.closed);assert(receipt.firstEscapeRetainedRoot,'First Escape closes a real submenu, retaining its root');

@@ -1,0 +1,49 @@
+PASS cold settings permits a new writing window without navigating away
+PASS complete focus edges zh-CN light 350 project
+PASS complete focus edges zh-CN light 350 tag
+PASS complete focus edges zh-CN light 480 project
+PASS complete focus edges zh-CN light 480 tag
+PASS complete focus edges zh-CN dark 350 project
+PASS complete focus edges zh-CN dark 350 tag
+PASS complete focus edges zh-CN dark 480 project
+PASS complete focus edges zh-CN dark 480 tag
+PASS complete focus edges en light 350 project
+PASS complete focus edges en light 350 tag
+PASS complete focus edges en light 480 project
+PASS complete focus edges en light 480 tag
+PASS complete focus edges en dark 350 project
+PASS complete focus edges en dark 350 tag
+PASS complete focus edges en dark 480 project
+PASS complete focus edges en dark 480 tag
+PASS composer optional title remains unboxed
+PASS settings opens beside writer and retains full draft and caret
+PASS settings return restores calendar search and same writer
+PASS ordinary settings and open folder preserve writer content
+PASS migration blocked only at actual action while writer remains open
+PASS backup checkpoints latest unsaved draft and keeps writing available
+PASS backup includes text entered while folder selection is pending
+PASS unconfirmed IME prevents backup without closing or changing input
+PASS real draft write failure refuses backup and retry preserves text
+PASS pending classification write refuses backup until acknowledged
+PASS canceled backup creates no files and keeps draft
+PASS completed settings save restores actual tray entries without preference side effects
+PASS dirty settings and new writer coexist in reverse order without discarding changes
+PASS settings dirty close protection stays active during writing
+FAIL actual tray is unavailable during migration and restored after cancel Expected values to be strictly deep-equal:
++ actual - expected
+
+  {
+    settings: true,
++   write: false
+-   write: true
+  }
+
+FAIL migration chooser prevents new writer and rejects a late native show Expected values to be strictly equal:
+
+true !== false
+
+FAIL migration works after saved writer is closed; old copy and draft retained 操作未完成，仍使用原位置，原副本保留。新位置不能与原位置相同。
+PASS shared calendar/detail and manager forms also retain complete focus edges
+PASS tray settings stays enabled while writer is visible
+{"out":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round5/group-filter/resume-regression-3/round5-settings-workflow/settings-JrMCB7","checks":33,"scenes":16,"passed":false,"failures":["actual tray is unavailable during migration and restored after cancel","migration chooser prevents new writer and rejects a late native show","migration works after saved writer is closed; old copy and draft retained"]}
+CI FIXTURE {"file":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-settings-workflow.cjs","pid":65865,"passed":false,"timedOut":false,"code":1}

@@ -9,9 +9,9 @@ const draft={text:' \n原文 🧵\n ',title:'标题',project:'项目',agentId:'g
 const oldIdea={...draft,id:'old',status:'hanging',createdAt:'2026-01-01T00:30:00+08:00',updatedAt:'2026-01-01T00:30:00+08:00'};
 const legacy=(schemaVersion:1|2)=>({...initialSnapshot(),schemaVersion,revision:11,ideas:[oldIdea],clips:schemaVersion===1?undefined:[{id:'custom-clip',agentId:'general',ideaIds:['old'],currentId:'old',position:0.25}]});
 
-test('新快照与旧typed fixture规范化后始终是schema3，未知版本类型不被数字转换接受',()=>{
- expect(initialSnapshot().schemaVersion).toBe(3);
- for(const schemaVersion of [0,4,99,'2','3',null])expect(validateSnapshot({...initialSnapshot(),schemaVersion})).toMatchObject({ok:false,code:'INVALID'});
+test('新快照与旧typed fixture规范化后始终是schema4，未知版本类型不被数字转换接受',()=>{
+ expect(initialSnapshot().schemaVersion).toBe(4);
+ for(const schemaVersion of [0,5,99,'2','3',null])expect(validateSnapshot({...initialSnapshot(),schemaVersion})).toMatchObject({ok:false,code:'INVALID'});
  const v=value(validateSnapshot({...legacy(2),schemaVersion:3}));
  expect(v.ideas[0]).toMatchObject({createdDay:'2026-01-01',creationTimeZone:'legacy-offset'});
 });
@@ -19,7 +19,7 @@ test('新快照与旧typed fixture规范化后始终是schema3，未知版本类
 test.each([1,2] as const)('schema%s创建日冻结在原始偏移日期，迁移不使用当前时区或今天',schemaVersion=>{
  process.env.TZ='America/Los_Angeles';
  const result=value(validateSnapshot(legacy(schemaVersion)));
- expect(result).toMatchObject({schemaVersion:3,revision:11});
+ expect(result).toMatchObject({schemaVersion:4,revision:11});
  expect(result.ideas[0]).toMatchObject({...oldIdea,createdDay:'2026-01-01',creationTimeZone:'legacy-offset'});
  expect(result.clips[0]).toMatchObject(schemaVersion===1?{id:'clip:old',position:null}:{id:'custom-clip',position:0.25});
  process.env.TZ='Pacific/Kiritimati';
@@ -53,7 +53,7 @@ test.each([
 test('旧typed schema2快照中新建仍按localday，与迁移的旧记录规则分开',()=>{
  process.env.TZ='Asia/Shanghai';const s={...initialSnapshot(),schemaVersion:2 as const};
  const next=value(newIdea(s,draft,'new','2026-01-01T18:30:00Z'));
- expect(next.schemaVersion).toBe(3);expect(next.ideas[0]).toMatchObject({createdDay:'2026-01-02',creationTimeZone:'Asia/Shanghai',createdAt:'2026-01-01T18:30:00Z'});
+ expect(next.schemaVersion).toBe(4);expect(next.ideas[0]).toMatchObject({createdDay:'2026-01-02',creationTimeZone:'Asia/Shanghai',createdAt:'2026-01-01T18:30:00Z'});
 });
 
 test.each(['+010000-01-01T00:00:00Z','-000001-01-01T00:00:00Z'])('迁移扩展年份%s不能返回非法创建日或截断为今天',createdAt=>{

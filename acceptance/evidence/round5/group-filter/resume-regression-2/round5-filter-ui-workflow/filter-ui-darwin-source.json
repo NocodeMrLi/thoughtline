@@ -1,0 +1,16 @@
+{
+  "platform": "darwin",
+  "checks": [],
+  "scenes": [],
+  "pids": [
+    65597,
+    65597,
+    65598,
+    65599,
+    65600,
+    65606
+  ],
+  "scope": "Electron long lists/bounds/keyboard/composition-event protocol; physical IME/DPI separate.",
+  "failure": "electronApplication.evaluate: TypeError: Cannot read properties of undefined (reading 'click')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:78)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at open (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-filter-ui-workflow.cjs:7:106)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-filter-ui-workflow.cjs:10:104",
+  "cleaned": true
+}

@@ -36,9 +36,9 @@ const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=requ
  await run('arrange-menu-is-one-stateful-action',async(app,{shelf})=>{
   assert((await shelf.evaluate(async()=>{const i=await window.thoughtline.info();return window.thoughtline.clipChange({kind:'arrange'},i.snapshot.revision);})).ok);
   await waitForInfo(shelf,i=>i.canUndoClips);assert((await shelf.evaluate(()=>window.thoughtline.shelfMenu('c0'))).ok);
-  const labels=await app.evaluate(()=>globalThis.thoughtlineTestPopup.menu.items.map(x=>x.label));assert.equal(labels.filter(l=>['自动整理','撤销整理'].includes(l)).length,1,JSON.stringify(labels));assert(labels.includes('撤销整理'));
-  await app.evaluate(()=>{const {menu,options}=globalThis.thoughtlineTestPopup;menu.items.find(x=>x.label==='撤销整理').click();options.callback();});await waitForInfo(shelf,i=>!i.canUndoClips);assert((await shelf.evaluate(()=>window.thoughtline.shelfMenu('c0'))).ok);
-  const after=await app.evaluate(()=>globalThis.thoughtlineTestPopup.menu.items.map(x=>x.label));assert(after.includes('自动整理')&&!after.includes('撤销整理'));return {labels,after};
+  const labels=await app.evaluate(()=>globalThis.thoughtlineTestPopup.menu.items.find(x=>x.label==='整理'||x.label==='Organize').submenu.items.filter(x=>x.enabled).map(x=>x.label));assert.equal(labels.filter(l=>['自动整理','撤销整理'].includes(l)).length,2,JSON.stringify(labels));assert(labels.includes('撤销整理'));
+  await app.evaluate(()=>{const {menu,options}=globalThis.thoughtlineTestPopup;menu.items.find(x=>x.label==='整理'||x.label==='Organize').submenu.items.find(x=>x.label==='撤销整理').click();options.callback();});await waitForInfo(shelf,i=>!i.canUndoClips);assert((await shelf.evaluate(()=>window.thoughtline.shelfMenu('c0'))).ok);
+  const after=await app.evaluate(()=>globalThis.thoughtlineTestPopup.menu.items.find(x=>x.label==='整理'||x.label==='Organize').submenu.items.filter(x=>x.enabled).map(x=>x.label));assert(after.includes('自动整理')&&!after.includes('撤销整理'));return {labels,after};
  });
  receipt.passed=receipt.cases.every(r=>r.passed&&r.normalQuit&&r.profileRemoved);await fs.writeFile(path.join(evidence,'receipt.json'),JSON.stringify(receipt,null,2));console.log(JSON.stringify({evidence,...receipt}));if(!receipt.passed)process.exitCode=1;
 })().catch(e=>{console.error(e);process.exitCode=1;});

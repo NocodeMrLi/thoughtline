@@ -1,0 +1,117 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/round5ManageBounds.test.ts (5 tests | 1 failed) 11ms
+   × 重新打开保留仍有效的跨屏手动位置，断屏时回到当前可用屏 5ms
+ ❯ tests/unit/round5Grouping.test.ts (12 tests | 1 failed) 35ms
+   × 旧跨组叠放删除恢复是原关系恢复，后续改组不能被覆盖 6ms
+ ❯ tests/unit/round5MergeTargets.test.ts (14 tests | 4 failed) 47ms
+   × 容量日历叠放主动挂上必须整体恢复 6ms
+   × 容量日历叠放改组仅分离当前纸张 1ms
+   × 分组筛选显露的旧溢出夹应列为挂绳目标并合并后仍挂绳 2ms
+   × 三个owner集合不能复用身份，也不能让归档结构引用挂着成员 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/round5Grouping.test.ts > 旧跨组叠放删除恢复是原关系恢复，后续改组不能被覆盖
+AssertionError: expected [ '1' ] to deeply equal [ '0', '1' ]
+
+- Expected
++ Received
+
+  [
+-   "0",
+    "1",
+  ]
+
+ ❯ tests/unit/round5Grouping.test.ts:24:295
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  tests/unit/round5ManageBounds.test.ts > 重新打开保留仍有效的跨屏手动位置，断屏时回到当前可用屏
+AssertionError: expected { x: 688, y: 340, width: 740, …(1) } to deeply equal { x: 1600, y: 340, width: 740, …(1) }
+
+- Expected
++ Received
+
+  {
+    "height": 540,
+    "width": 740,
+-   "x": 1600,
++   "x": 688,
+    "y": 340,
+  }
+
+ ❯ tests/unit/round5ManageBounds.test.ts:9:215
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  tests/unit/round5MergeTargets.test.ts > 容量日历叠放主动挂上必须整体恢复
+AssertionError: expected [ 'a' ] to deeply equal [ 'c', 'a' ]
+
+- Expected
++ Received
+
+  [
+-   "c",
+    "a",
+  ]
+
+ ❯ tests/unit/round5MergeTargets.test.ts:29:125
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  tests/unit/round5MergeTargets.test.ts > 容量日历叠放改组仅分离当前纸张
+AssertionError: expected [ [ 'c', 'a' ] ] to deeply equal [ [ 'c' ], [ 'a' ] ]
+
+- Expected
++ Received
+
+  [
+    [
+      "c",
+-   ],
+-   [
+      "a",
+    ],
+  ]
+
+ ❯ tests/unit/round5MergeTargets.test.ts:33:137
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  tests/unit/round5MergeTargets.test.ts > 分组筛选显露的旧溢出夹应列为挂绳目标并合并后仍挂绳
+AssertionError: expected 'archived' to be 'hanging' // Object.is equality
+
+Expected: "hanging"
+Received: "archived"
+
+ ❯ tests/unit/round5MergeTargets.test.ts:37:134
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  tests/unit/round5MergeTargets.test.ts > 三个owner集合不能复用身份，也不能让归档结构引用挂着成员
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/round5MergeTargets.test.ts:40:287
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  3 failed (3)
+      Tests  6 failed | 25 passed (31)
+   Start at  00:18:54
+   Duration  338ms (transform 70%, tests 18%, import 10%, worker 2%)
+

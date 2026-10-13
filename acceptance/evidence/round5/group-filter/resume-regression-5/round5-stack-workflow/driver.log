@@ -1,0 +1,34 @@
+PASS no undo on opening or browsing
+PASS calendar updates immediately after current-only merge, retained source does not release slot
+PASS archive undo restores source and automatic backfill without pulling manual calendar stack
+PASS calendar split stays archived and undo restores full stack
+PASS arrange undo restores all original clip positions
+PASS hang restores entire archived stack, failed swap preserves undo and hang undo restores archive
+PASS swap undo shared across entries, copying/filtering preserves record, completed undo disappears
+PASS normal restart retains full calendar stack and independent creation days
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  [
+    [
+      'cal0'
+    ],
+    [
++     'a'
+-     'cal1'
+    ],
+    [
++     'cal1'
+-     'a'
+    ]
+  ]
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-stack-workflow.cjs:26:89 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [Array],
+  expected: [Array],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+CI FIXTURE {"file":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-stack-workflow.cjs","pid":66848,"passed":false,"timedOut":false,"code":1}

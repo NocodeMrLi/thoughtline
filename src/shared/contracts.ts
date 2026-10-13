@@ -8,7 +8,7 @@ export type Idea = {
   status: 'hanging' | 'archived' | 'deleted'; createdAt: string; updatedAt: string;
   createdDay?: string; creationTimeZone?: string;
   deletedAt?: string; deletedFrom?: 'hanging' | 'archived';
-  deletedClip?: {id:string;index:number;position:number|null};
+  deletedClip?: {id:string;index:number;position:number|null;location?:'archived'|'capacity';members?:{id:string;project:string;agentId:string}[]};
   reminder?: Reminder;
   offRopeReason?: 'waiting' | 'capacity' | 'manual' | 'replaced';
 };
@@ -16,7 +16,7 @@ export type AgentTag = { id: AgentId; name: string; color: string };
 export type Draft = { text: string; title: string; project: string; agentId: AgentId; reminderAt?:string };
 export type Clip = {id:string; agentId:AgentId; ideaIds:string[]; currentId:string; position:number|null};
 export type Snapshot = {
-  schemaVersion: 2 | 3; revision: number; clips:Clip[]; capacityOverflow?:Clip[]; ideas: Idea[]; agents: AgentTag[]; projects?:string[]; inactiveProjects?:string[]; inactiveAgents?:string[]; draft: Draft | null;
+  schemaVersion: 2 | 3 | 4; revision: number; clips:Clip[]; archivedClips?:Clip[]; capacityOverflow?:Clip[]; ideas: Idea[]; agents: AgentTag[]; projects?:string[]; inactiveProjects?:string[]; inactiveAgents?:string[]; draft: Draft | null;
   settings: { writeHotkey: string; reducedMotion: boolean; shelfCapacity?: 4 | 6 | 8; calendarBounds?: Rect; rope?:RopeAppearance; paper?:PaperAppearance };
 };
 export type Result<T> = { ok: true; value: T } | {

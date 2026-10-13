@@ -1,0 +1,12 @@
+locator.click: Error: strict mode violation: getByRole('button', { name: '完成编辑', exact: true }) resolved to 2 elements:
+    1) <button>完成编辑</button> aka getByText('完成编辑')
+    2) <button aria-label="完成编辑" aria-pressed="true" class="icon-button ">…</button> aka getByLabel('完成编辑')
+
+Call log:
+[2m  - waiting for getByRole('button', { name: '完成编辑', exact: true })[22m
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-detail-pager-workflow.cjs:9:1283 {
+  log: [
+    "  - waiting for getByRole('button', { name: '完成编辑', exact: true })"
+  ]
+}
