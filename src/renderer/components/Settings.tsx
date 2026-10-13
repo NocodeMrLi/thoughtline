@@ -9,6 +9,7 @@ import type {PilotInfo,StorageInfo} from '../../shared/bridge';
 import {recordWriteHotkey} from '../../shared/composerKeys';
 import {AppearanceSettings,type CustomizerKind,type AppearancePatch} from './AppearanceSettings';
 import {SettingsContact} from './SettingsContact';
+import {ExportMenu,type ExportChoice} from './ExportMenu';
 
 type SettingsTab='appearance'|'controls'|'data';
 export type SettingsDraft={hotkey:string;reduced:boolean;tab?:SettingsTab};
@@ -32,9 +33,12 @@ export function Settings({info,restore,onRemember}:{info:PilotInfo;restore?:Sett
  useEffect(()=>registerLeaveGuard(async()=>{if(state.current.busy||state.current.recording)return false;if(allowLeave.current||returning.current||!state.current.dirty)return true;setLeavePrompt(true);return false;}),[]);
  const back=async()=>{if(busy||recording)return;if(customizer){setCustomizer(null);return;}returning.current=true;try{const r=await window.thoughtline.returnCalendar();if(!r.ok)setError(r.message);}catch{setError('返回失败，请重试。');}finally{returning.current=false;}};
  const [storage,setStorage]=useState<StorageInfo|null>(null);
+ const [exportOpen,setExportOpen]=useState(false),exportAnchor=useRef<HTMLButtonElement>(null);
+ useEffect(()=>{setExportOpen(false);},[tab,info.manageSession,busy]);
  useEffect(()=>{void window.thoughtline.storageInfo().then(r=>{if(r.ok)setStorage(r.value);else setError(r.message);}).catch(()=>setError('无法读取念头数据位置。'));},[info]);
- const storageAction=async(kind:'open'|'migrate'|'backup')=>{if(busy)return;setBusy(true);setError('');setNotice('');try{
+ const storageAction=async(kind:'open'|'migrate'|ExportChoice)=>{if(busy)return;setBusy(true);setError('');setNotice('');try{
   if(kind==='open'){const r=await window.thoughtline.openStorageDirectory();if(!r.ok)setError(r.message);}
+  else if(kind==='txt'||kind==='docx'){const r=await window.thoughtline.exportThoughts(kind);if(!r.ok)setError(r.message);else if(!r.value.canceled)setNotice(t('exportSaved',{p0:r.value.path??''}),4000);}
   else{const r=await (kind==='migrate'?window.thoughtline.changeStorage():window.thoughtline.exportBackup());if(!r.ok)setError(r.message);else if(!r.value.canceled){if(kind==='migrate')setStorage(r.value);setNotice(kind==='migrate'?t("changedLocation",{p0:r.value.directory}):t("savedBackup",{p0:r.value.directory}),4000);}}
  }catch{setError('操作未完成，仍使用原位置。');}finally{setBusy(false);}};
  const input=useRef<HTMLInputElement>(null);
@@ -78,7 +82,8 @@ export function Settings({info,restore,onRemember}:{info:PilotInfo;restore?:Sett
   <section id="settings-panel-data" role="tabpanel" aria-labelledby="settings-tab-data" hidden={tab!=='data'}>
   <section className="storage-settings" role="group" aria-labelledby="storage-heading"><h2 id="storage-heading">{t("念头数据位置")}</h2>
    <p data-storage-path>{storage?.directory??t("正在读取…")}</p>
-   <div className="storage-actions"><button disabled={busy} title={t("打开当前念头数据文件夹")} onClick={()=>void storageAction('open')}>{t("打开文件夹")}</button><button disabled={busy} title={t("复制到新空文件夹并切换，保留旧副本")} onClick={()=>void storageAction('migrate')}>{t("更改位置")}</button><button disabled={busy} title={t("保存独立备份，不更改当前数据位置")} onClick={()=>void storageAction('backup')}>{t("导出备份")}</button></div>
+   <div className="storage-actions"><button disabled={busy} title={t("打开当前念头数据文件夹")} onClick={()=>void storageAction('open')}>{t("打开文件夹")}</button><button disabled={busy} title={t("复制到新空文件夹并切换，保留旧副本")} onClick={()=>void storageAction('migrate')}>{t("更改位置")}</button><button ref={exportAnchor} data-export-trigger disabled={busy} aria-haspopup="menu" aria-expanded={exportOpen} aria-controls={exportOpen?'thought-export-menu':undefined} onClick={()=>setExportOpen(!exportOpen)} onKeyDown={e=>{if(e.key==='ArrowDown'){e.preventDefault();setExportOpen(true);}}}>{t('导出')}<svg className="export-chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg></button></div>
+   {exportOpen&&<ExportMenu anchor={exportAnchor} onClose={()=>setExportOpen(false)} onChoose={choice=>void storageAction(choice)}/>}
    <p className="setting-hint">{t("更改位置会保留旧副本；备份会新建独立文件夹，不更改当前位置。")}</p>
    <p className="setting-hint">{t("缓存和应用配置仍在：")}{storage?.profileDirectory??t("正在读取…")}</p>
   </section></section></div>

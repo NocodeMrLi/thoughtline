@@ -24,3 +24,7 @@ These notices and licenses must be included in local installation packages. Othe
 ## GitHub Invertocat
 
 Official black/white SVG assets from https://brand.github.com/GitHub_Logos.zip, used unchanged only as a secondary profile link. GitHub trademarks and artwork remain owned by GitHub, Inc.; this is not Thoughtline identity or an endorsement. Permitted social-link guidance: https://brand.github.com/foundations/logo. Details in licenses/GitHub-logo-use.md.
+
+## docx
+
+DOCX document export uses docx 9.10.0, MIT licensed. Source and documentation: https://github.com/dolanmiu/docx and https://docx.js.org/. Full license in licenses/docx-MIT.txt; its npm dependencies retain their package licenses.

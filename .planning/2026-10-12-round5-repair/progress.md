@@ -1,5 +1,7 @@
 # 执行进度
 
+2026-10-13 R5-17开始：main add6b22/0.0.30干净，已核Settings、bridge、备份、CI与交付流程。hook旧目录不存在，已按实际-codex目录刷新协作约定。首次planning补丁因progress标题不匹配原子失败，无文件改动，修正实际标题后重新写入。
+
 第五轮正式合同已写入，尚未改生产。已有授权优先于技能中的再次计划审批/分支要求；直接main顺序实施。
 
 Ruling: 执行技能的最终审查由只读子代理承担，不委托实现、不开其他用户聊天；原计划不分派实现保持。用户追加R5-10已确认，所有同条念头双分类元信息统一先分组后标签；导航仍按确认三页签顺序。核心17单测及格式单测、verify344+4skip/类型/构建绿；原生R5完整13、第四轮workflow11/UI18/visual71/vine13、reader10、appearance14/customizer6与标题回归绿。inline旧下拉selector失败，已保留正常清理失败回执，只适配共享选择器，不放松IO/IME/拆夹断言。
@@ -98,3 +100,7 @@ Mac349单测通过、4项Windows专用跳过；Windows353全部通过，类型�
 本轮Mac 38个自有临时路径均不存在，8份失败残留先归档校验再清理；早期退出未成功的进程按专有PID、启动路径及父进程核实后停止，没有按名称杀进程。挂载、空隔离目录及当前重复构建包已清理，真实App仍0.0.28，未覆盖个人数据。22个旧Release附件及本地0.0.22/23历史包保持。
 Actions已删除本轮安装器副本和已归档失败UI产物，最新验收UI继续保留；当前37份约189.8MiB，验证门禁、私有状态与预算保持。本月累计提醒不会因删除立即归零。
 [操作报告](</Users/lihongwei/Desktop/晾念头 : Thoughtline/app/docs/releases/round5-v0.0.30-delivery.md>)；[私有安装包](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.30)。formalAcceptance/physicalAcceptance保持false，等待实际使用反馈。
+
+R5-17: 7项导出内容单测先红后绿，全verify通过（待收录日志）。源UI8场景/键盘菜单通过；保存失败定位到测试Electron evaluate把首参Electron模块误作目标路径，已改二参传入。两次失败fixture正常退出超时已按receipt/PID和隔离路径校验后SIGTERM，真实App PID68573保留。
+
+R5-17: 源导出17项/8场景全部通过；Mac完整356通过、4项Windows专用跳过，类型/构建通过。六套Mac源码原生回归通过，DOCX经macOS textutil独立读取四字段、emoji、空行通过。准备冻结0.0.31，Windows与实际DMG尚待验证。

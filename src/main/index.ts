@@ -15,6 +15,7 @@ import {EdgeController} from './edgeController';
 import {FileRepository} from './store/repository';
 import {AUTHOR_GITHUB_URL,FEEDBACK_EMAIL,FEEDBACK_MAILTO} from '../shared/contact';
 import {loadStorageDirectory,loadStorageLocation,commitStorageDirectory,migrateStorage,exportBackup as writeBackup} from './store/storageLocations';
+import {saveThoughtDocument} from './store/ideaExport';
 import {swapShortcut} from './shortcuts';
 import {validWriteHotkey,displayWriteHotkey} from '../shared/composerKeys';
 import {changeStatus,addAgent,updateAgent,removeAgent,removeProject,editIdeaIfUnchanged,deleteIdea,restoreIdea,permanentlyDeleteIdea} from '../shared/ideaCommands';
@@ -414,6 +415,26 @@ else app.whenReady().then(async()=>{
  };
  ipcMain.handle('thoughtline:change-storage',e=>storageOperation(e,'migrate'));
  ipcMain.handle('thoughtline:export-backup',e=>storageOperation(e,'backup'));
+ ipcMain.handle('thoughtline:export-thoughts',async(e,format:unknown)=>{
+  if(!trusted(e,[manage])||!manage?.isVisible()||manageMode!=='settings'||quitting||storageBusy||!['txt','docx'].includes(format as string))return invalid(t('无效操作'));
+  const kind=format as 'txt'|'docx',locale=preferences.current.locale;
+  storageBusy=true;refreshTray();
+  try{
+   if(!await prepareWindow(shelf)||composer?.isVisible()&&!await prepareWindow(composer))return invalid(t('最后修改尚未保存或输入法尚未确认，请完成输入后再导出。'));
+   if(!snapshot.ideas.some(idea=>idea.status==='hanging'||idea.status==='archived'))return invalid(t('暂无可导出的念头。'));
+   const stamp=new Date(),name=(locale==='en'?'Thoughtline':'晾念头')+'-'+[stamp.getFullYear(),String(stamp.getMonth()+1).padStart(2,'0'),String(stamp.getDate()).padStart(2,'0')].join('-')+'.'+kind;
+   const choice=await dialog.showSaveDialog(manage,{title:t(kind==='txt'?'导出 TXT':'导出 DOCX'),defaultPath:join(app.getPath('downloads'),name),filters:[{name:kind==='txt'?'TXT':'DOCX',extensions:[kind]}],properties:['createDirectory','showOverwriteConfirmation']});
+   if(choice.canceled||!choice.filePath)return {ok:true,value:{canceled:true}};
+   if(composer?.isVisible()&&!await prepareWindow(composer))return invalid(t('最后修改尚未保存或输入法尚未确认，请完成输入后再导出。'));
+   return await composerWrite(async()=>{
+    if(!trusted(e,[manage])||!manage?.isVisible()||manageMode!=='settings'||quitting)return invalid(t('操作窗口已关闭。'));
+    await repository.flush();
+    const result=await saveThoughtDocument(structuredClone(snapshot),choice.filePath!,kind,locale,new Date());
+    return result.ok?{ok:true,value:{canceled:false,...result.value}}:result;
+   });
+  }catch{return invalid(t('导出未完成，请检查保存位置、剩余空间或文件是否被占用后重试。'));}
+  finally{storageBusy=false;refreshTray();}
+ });
  ipcMain.handle('thoughtline:settings',async(e,settings:Snapshot['settings'],revision:number):Promise<Result<Snapshot>>=>{
   if(!trusted(e,[manage])||manageMode!=='settings'||!settings||!validWriteHotkey(settings.writeHotkey)||typeof settings.reducedMotion!=='boolean'||settings.shelfCapacity!==undefined&&![4,6,8].includes(settings.shelfCapacity))return invalid(t("请录制有效的组合快捷键。"));
   if(settings.rope!==undefined&&!validRope(settings.rope)||settings.paper!==undefined&&!validPaper(settings.paper))return invalid(t('设置无效。'));

@@ -15,7 +15,7 @@ export const agentLabel=(locale:Locale,agent:{id:string;name:string}|undefined)=
 };
 // Reverse only complete app-owned status/error envelopes, never arbitrary UI/date templates.
 const exactMessages=(Object.keys(zh) as MessageKey[]).filter(key=>!zh[key].includes('{'));
-const envelopes=['localSaveFailureDetail','storageFailure','outerStorageFailure','fileMismatch','changedLocation','savedBackup'] as const;
+const envelopes=['localSaveFailureDetail','storageFailure','outerStorageFailure','fileMismatch','changedLocation','savedBackup','exportSaved'] as const;
 /** App diagnostics and path slots stay byte-for-byte intact. Only nested app-error wrappers recurse. */
 export function localizeMessage(locale:Locale,message:string|null|undefined):string{
  if(!message)return '';

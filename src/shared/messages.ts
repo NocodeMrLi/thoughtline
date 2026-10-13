@@ -1,5 +1,13 @@
 // Central typed application text; user text is never translated.
 export const zh = {
+ "导出": "导出",
+ "导出 TXT": "导出 TXT",
+ "导出 DOCX": "导出 DOCX",
+ "备份数据": "备份数据",
+ "暂无可导出的念头。": "暂无可导出的念头。",
+ "最后修改尚未保存或输入法尚未确认，请完成输入后再导出。": "最后修改尚未保存或输入法尚未确认，请完成输入后再导出。",
+ "导出未完成，请检查保存位置、剩余空间或文件是否被占用后重试。": "导出未完成，请检查保存位置、剩余空间或文件是否被占用后重试。",
+ "exportSaved": "念头已导出到 {p0}。",
  "反馈建议": "反馈建议",
  "复制反馈邮箱": "复制反馈邮箱",
  "邮箱已复制": "邮箱已复制",
@@ -590,6 +598,14 @@ export const zh = {
  "savedBackup": "独立备份已保存到 {p0}。当前数据位置未更改。"
 } as const;
 export const en = {
+ "导出": "Export",
+ "导出 TXT": "Export TXT",
+ "导出 DOCX": "Export DOCX",
+ "备份数据": "Back up data",
+ "暂无可导出的念头。": "There are no thoughts to export.",
+ "最后修改尚未保存或输入法尚未确认，请完成输入后再导出。": "The latest changes are not saved or text composition is unfinished. Finish typing, then export again.",
+ "导出未完成，请检查保存位置、剩余空间或文件是否被占用后重试。": "Export failed. Check the location, free space and whether the file is open, then try again.",
+ "exportSaved": "Thoughts exported to {p0}.",
  "反馈建议": "Feedback",
  "复制反馈邮箱": "Copy feedback email",
  "邮箱已复制": "Email copied",

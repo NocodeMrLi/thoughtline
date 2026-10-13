@@ -24,6 +24,7 @@ export interface ThoughtlineBridge{
  openStorageDirectory():Promise<Result<void>>;
  changeStorage():Promise<Result<StorageInfo&{canceled:boolean}>>;
  exportBackup():Promise<Result<StorageInfo&{canceled:boolean}>>;
+ exportThoughts(format:'txt'|'docx'):Promise<Result<{canceled:boolean;path?:string;count?:number}>>;
  selectClip(id:string,ideaId:string,sequence:number):Promise<Result<Snapshot>>;
  onPrepareLeave(callback:()=>Promise<boolean>):()=>void;
  info():Promise<PilotInfo>; onInfo(callback:(info:PilotInfo)=>void):()=>void;
