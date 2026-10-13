@@ -1,4 +1,4 @@
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useId,useRef,useState} from 'react';
 import type {PilotInfo,ClassificationTab} from '../../shared/bridge';
 import type {Result,Snapshot} from '../../shared/contracts';
 import {projectNames,classificationCount,activeTags,activeProjects} from '../../shared/classification';
@@ -9,6 +9,7 @@ import {ClassificationForm} from './ClassificationForm';
 import {FolderIcon,SearchIcon} from './ClassificationPicker';
 import {registerLeaveGuard} from '../hooks/leaveGuards';
 import {useTransientNotice} from '../hooks/useTransientNotice';
+import {ClassificationUnavailableHint} from './ClassificationUnavailableHint';
 type Field='tag'|'project';
 type Row={id:string;name:string;color:string;system:boolean;inactive:boolean};
 type Operation={kind:'new'|'edit'|'delete';field:Field;id:string;name:string;color:string};
@@ -16,6 +17,9 @@ export function ClassificationManager({info}:{info:PilotInfo}){
  const {t,m,agentName}=useLocale(),[tab,setTab]=useState<ClassificationTab>(info.classificationTab??'tags'),[query,setQuery]=useState(''),[op,setOp]=useState<Operation|null>(null),[busy,setBusy]=useState(false),[error,setError]=useState(''),[replacement,setReplacement]=useState('general');
  const modal=useRef<HTMLDivElement>(null),priorFocus=useRef<HTMLElement|null>(null),current=useRef({busy,op});current.current={busy,op};
  const pending=useRef(false),live=useRef(true),{notice,setNotice,noticeProps}=useTransientNotice();
+ const [hint,setHint]=useState<{anchor:HTMLButtonElement;field:Field;rowId:string;eventId:number}|null>(null),hintSequence=useRef(0),hintId=useId();
+ useEffect(()=>{setHint(null);},[tab,query,op,busy,info.preferences.locale,info.dark]);
+ useEffect(()=>{if(hint&&!(hint.field==='tag'?info.snapshot.inactiveAgents:info.snapshot.inactiveProjects)?.includes(hint.rowId))setHint(null);},[hint,info.snapshot.inactiveAgents,info.snapshot.inactiveProjects]);
  useEffect(()=>{live.current=true;return()=>{live.current=false;};},[]);
  useEffect(()=>registerLeaveGuard(async()=>!current.current.busy&&!current.current.op),[]);
  useEffect(()=>{if(!op)return;priorFocus.current=document.activeElement as HTMLElement;modal.current?.querySelector<HTMLElement>('input:not(:disabled),select,button:not(:disabled)')?.focus();return()=>{priorFocus.current?.focus();};},[op]);
@@ -29,7 +33,7 @@ export function ClassificationManager({info}:{info:PilotInfo}){
   <span className="classification-name">{field==='tag'?<span className="classification-dot" style={{background:row.color}}/>:<FolderIcon/>}<span title={row.name}>{row.name}</span>{!removed&&(row.system||row.inactive)&&<small className="classification-state">{t(row.system?'默认':'已移除')}</small>}</span>
   {!removed&&<span className="classification-count">{classificationCount(info.snapshot,field,row.id)}</span>}
   <span className="classification-row-actions">{removed?<button disabled={busy} onClick={()=>void run(i=>window.thoughtline.classificationChange({kind:'active',field,id:row.id,active:true},i.snapshot.revision),t('已恢复选用'))}>{t('恢复选用')}</button>:<>
-   {(!row.system||field==='tag')&&<span title={row.inactive?t(field==='tag'?'恢复选用后可编辑':'恢复选用后可改名'):undefined} tabIndex={row.inactive?0:undefined}><button disabled={busy||row.inactive} onClick={()=>{setError('');setOp({kind:'edit',field,id:row.id,name:field==='tag'?(info.snapshot.agents.find(a=>a.id===row.id)?.name??row.name):row.name,color:row.color});}}>{t(row.system?'改颜色':field==='tag'?'编辑':'改名')}</button></span>}
+   {(!row.system||field==='tag')&&<button disabled={busy} aria-disabled={row.inactive||undefined} aria-describedby={hint?.field===field&&hint.rowId===row.id?hintId:undefined} className={row.inactive?'classification-unavailable-action':undefined} onClick={e=>{if(busy||pending.current)return;if(row.inactive){setHint({anchor:e.currentTarget,field,rowId:row.id,eventId:++hintSequence.current});return;}setError('');setOp({kind:'edit',field,id:row.id,name:field==='tag'?(info.snapshot.agents.find(a=>a.id===row.id)?.name??row.name):row.name,color:row.color});}}>{t(row.system?'改颜色':field==='tag'?'编辑':'改名')}</button>}
    {!row.system&&<button disabled={busy} onClick={()=>{setError('');setReplacement(field==='tag'?'general':'');setOp({kind:'delete',field,id:row.id,name:row.name,color:row.color});}}>{t('删除')}</button>}
   </>}</span>
  </div>;
@@ -49,5 +53,6 @@ export function ClassificationManager({info}:{info:PilotInfo}){
   {op&&<div className="classification-modal-backdrop"><div ref={modal} className="classification-modal" role="dialog" aria-modal="true" aria-labelledby="classification-dialog-heading" onKeyDown={e=>{if(e.key!=='Tab')return;const controls=[...modal.current?.querySelectorAll<HTMLElement>('button:not(:disabled),input:not(:disabled),select:not(:disabled)')??[]],first=controls[0],last=controls.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}}}><h2 id="classification-dialog-heading">{t(op.kind==='new'?(modalTag?'新建标签':'新建分组'):op.kind==='delete'?(modalTag?'删除标签':'删除分组'):modalTag?'编辑标签':'分组改名')}</h2>
    {op.kind==='delete'?<><p className="classification-impact">{t(modalTag?'删除后，相关念头和草稿改用所选标签。':'删除后，相关念头和草稿改用所选分组。')}<br/>{t('正文保留。')} <strong>{op.name}</strong> · {classificationCount(info.snapshot,op.field,op.id)}</p><label className="classification-migration">{t('迁移到')}<select aria-label={t('迁移到')} disabled={busy} value={replacement} onChange={e=>setReplacement(e.target.value)}>{modalTag?activeTags(info.snapshot).filter(a=>a.id!==op.id).map(a=><option key={a.id} value={a.id}>{agentName(a)}</option>):<><option value="">{t('未分组')}</option>{activeProjects(info.snapshot).filter(p=>p!==op.id).map(p=><option key={p}>{p}</option>)}</>}</select></label>{error&&<p className="error" role="alert">{m(error)}</p>}<div className="popover-form-actions"><button disabled={busy} onClick={()=>{setOp(null);setError('');}}>{t('取消')}</button><button className="classification-danger" disabled={busy} onClick={()=>void run(i=>modalTag?window.thoughtline.agentChange({kind:'remove',id:op.id,replacement},i.snapshot.revision):window.thoughtline.projectDelete(op.id,i.snapshot.revision,replacement),t('已删除'))}>{t('删除')}</button></div></>:<><ClassificationForm key={op.kind+op.id} tag={modalTag} name={op.name} color={op.color||'#789360'} protectedName={modalTag&&op.id==='general'} creating={op.kind==='new'} busy={busy} error={error} onCancel={()=>{setOp(null);setError('');}} onSave={save}/>{op.kind==='edit'&&<p className="classification-impact">{t('关联念头')} · {classificationCount(info.snapshot,op.field,op.id)}</p>}</>}
   </div></div>}
+  {hint&&<ClassificationUnavailableHint anchor={hint.anchor} text={t(hint.field==='tag'?'请先到「已移除」恢复选用，再编辑。':'请先到「已移除」恢复选用，再改名。')} eventId={hint.eventId} id={hintId} onClose={()=>setHint(null)}/>}
  </main>;
 }

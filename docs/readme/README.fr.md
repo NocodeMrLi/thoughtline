@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
   <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.28"><img src="badges/preview.svg" alt="Version: 0.0.28" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><img src="badges/preview.svg" alt="Version: 0.0.29" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.28"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   Une corde, quelques pinces et des feuilles pour les idées du quotidien.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.28"><ins>Télécharger Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><ins>Télécharger Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.28</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.29</sub></p>
 
 Thoughtline est un outil léger pour macOS et Windows. Retrouvez vos idées au bord supérieur de l’écran, notez une pensée, puis reprenez votre activité.
 
@@ -50,7 +50,7 @@ Thoughtline est un outil léger pour macOS et Windows. Retrouvez vos idées au b
 
 ## Téléchargement et installation
 
-Les téléchargements sont réservés aux membres ayant accès au dépôt. Releases contient les paquets, lanceurs isolés, SHA256SUMS et informations de provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.28).
+Les téléchargements sont réservés aux membres ayant accès au dépôt. Releases contient les paquets, lanceurs isolés, SHA256SUMS et informations de provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29).
 
 | Platform | Package |
 |---|---|
