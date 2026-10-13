@@ -16,7 +16,7 @@ for section in ['windows-source','windows-packaged']:
  assert any(len(v.get('scenes',[]))==8 and v.get('passed') for p,v in rows),section+' readability'
  assert any(len(v.get('checks',v.get('cases',[])))==19 and v.get('passed') for p,v in rows),section+' round5 19'
 report={'passed':True,'run':run['id'],'source':run['head_sha'],'unitPassed':353,'typecheck':True,'build':True,'allRequiredWorkflowStepsPassed':True,'verifiedReceipts':records,'scope':'Full source suite and actual Windows package/NSIS on hosted native Windows; physical owner device separate'}
-(e/'windows-final-suites.json').write_text(json.dumps(report,indent=2));print('Windows receipt count',len(records))
+print('Windows receipt count',len(records))
 
 for section in ['windows-source','windows-packaged']:
  rows=[(p,json.loads(p.read_text(encoding='utf-8-sig'))) for p in base.rglob('receipt.json') if '/round4/'+section+'/unavailable-' in str(p)]
@@ -24,3 +24,13 @@ for section in ['windows-source','windows-packaged']:
  p,v=rows[0];assert v['passed'] and len(v['scenes'])==8 and len(v['checks'])==6
  assert all(x['style']['ratio']>=4.5 and x['style']['tipRatio']>=4.5 for x in v['scenes'])
 print('Both fresh source and actual-package unavailable action receipts verified')
+
+for section in ['windows-source','windows-packaged']:
+ rows=[(p,json.loads(p.read_text(encoding='utf-8-sig'))) for p in base.rglob('receipt.json') if '/round4/'+section+'/' in str(p)]
+ settings=[(p,v) for p,v in rows if p.parent.name.startswith('settings-')];contacts=[(p,v) for p,v in rows if p.parent.name.startswith('contact-')]
+ assert len(settings)==1 and len(contacts)==1,section
+ sp,sv=settings[0];cp,cv=contacts[0];assert sv['passed'] and len(sv['checks'])==36 and len(sv['scenes'])==16;assert cv['passed'] and len(cv['checks'])==32 and len(cv['scenes'])==24
+ assert all(ratio>=4.5 for scene in cv['scenes'] for colors in scene['layout']['contrast'] for ratio in colors['ratios']),section+' contact contrast'
+ print(section,'settings36/focus16/contact32/contactScenes24 passed')
+
+(e/'windows-final-suites.json').write_text(json.dumps(report,indent=2))

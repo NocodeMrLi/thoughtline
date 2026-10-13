@@ -90,3 +90,11 @@ R5-15/16正式原生32检查/24场景全绿，官方SVG、固定外部/邮箱目
 Important/P2 fix pass: actual Tray red failed both after-settings and during-storage assertions; refresh on busy start/finally fixed both. Native green36 checks/16 scenes, full349+4/tsc/build green. No second review, final package verification continues.
 
 Windows38346113473: native main heartbeat alive, no BrowserWindow-created; old hiddenManage firstWindow30s timed out before assertions, normalClose true. Original ZIP digest/CRC verified and retained. Startup-dialog/owned launch/native-state observation added only to old fixture; no retries, guard dismissal, deadline extension or relaxed assertions. Product unchanged. Full fresh Windows run required; current Mac8 actual suites and36-output binding retained under mac-2ef38cc before source metadata refresh.
+
+Task5收口：0.0.30（第五轮R5-13至R5-16）已完成双端技术验证、私有发布、文档同步与本轮自有垃圾清理。构建/tag源码 f81cafeab2acad10e31d21c388e0c265656dccff；Windows完整运行 38346921371 success；Release 411296088，10份附件大小/SHA256读回一致。main后续文档提交不改变包来源。
+Mac349单测通过、4项Windows专用跳过；Windows353全部通过，类型与构建通过。Mac实际DMG8套回归、Windows完整源/实际包/NSIS安装、重装、普通卸载保数据通过。两端源和实际包各36项设置/存储行为、16个名称聚焦场景，32项联系行为、24个布局场景；335构建输入一致，306份文本差异仅经过逐字节核验的LF/CRLF。
+联系栏在设置三个页签底部，沿用原配色和形态，按双端字体与可用宽度自然排布；邮箱完整可读，复制成功/失败使用短暂小字。固定GitHub、mailto和复制动作的系统边界已验证，实际浏览器/邮件客户端、物理IME/DPI/多屏和个人手感仍独立确认。普通设置与草稿双向共存；备份自动检查点，迁移仅在实际操作时要求关闭新建，原输入/未保存设置/退出保护保持。日历更多菜单顺序为最近删除、标签与分组、存储与设置。
+独立终审的托盘忙碌状态问题已按真实Tray红→绿补修，操作结束/取消/失败均及时刷新。首轮Windows启动未进入功能断言，原失败ZIP/日志保留；只增加观测，未放宽门禁，最终完整运行已通过。
+本轮Mac 38个自有临时路径均不存在，8份失败残留先归档校验再清理；早期退出未成功的进程按专有PID、启动路径及父进程核实后停止，没有按名称杀进程。挂载、空隔离目录及当前重复构建包已清理，真实App仍0.0.28，未覆盖个人数据。22个旧Release附件及本地0.0.22/23历史包保持。
+Actions已删除本轮安装器副本和已归档失败UI产物，最新验收UI继续保留；当前37份约189.8MiB，验证门禁、私有状态与预算保持。本月累计提醒不会因删除立即归零。
+[操作报告](</Users/lihongwei/Desktop/晾念头 : Thoughtline/app/docs/releases/round5-v0.0.30-delivery.md>)；[私有安装包](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.30)。formalAcceptance/physicalAcceptance保持false，等待实际使用反馈。

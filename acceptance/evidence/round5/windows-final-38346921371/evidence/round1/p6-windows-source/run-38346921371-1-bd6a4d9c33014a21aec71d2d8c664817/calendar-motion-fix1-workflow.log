@@ -1,0 +1,11 @@
+FIXTURE warmViews: shelf
+FIXTURE warmViews: settings
+FIXTURE warmViews: composer
+FIXTURE composer: invoking shortcut
+FIXTURE composer: shortcut invoked
+FIXTURE composer: created
+FIXTURE composer: native visibility checked
+FIXTURE composer: textbox visible
+FIXTURE composer: focused
+FIXTURE warmViews: ready
+{"cases":[{"name":"empty-day-visible-return","passed":true,"emptyDay":"2026-10-01","visual":{"kind":"day-to-month","text":"这里还没有念头。","emptyCount":1}},{"name":"scroll-interrupts-active-motion","passed":true,"scrollTop":180},{"name":"restored-scroll-keeps-return-motion","passed":true,"kind":"day-to-month"},{"name":"resize-interrupts-active-motion","passed":true,"previousSize":[740,540]},{"name":"old-save-cannot-navigate-new-session","passed":true,"oldSession":2,"publishedSession":3,"storedTextSaved":true}],"evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round1\\p6-windows-source\\run-38346921371-1-bd6a4d9c33014a21aec71d2d8c664817\\calendar-motion-fix1-workflow-windows-ci"}
