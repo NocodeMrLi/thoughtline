@@ -13,5 +13,5 @@ export function ClassificationUnavailableHint({anchor,text,eventId,id,onClose}:{
   const timer=setTimeout(dismiss,2500);document.addEventListener('pointerdown',outside,true);document.addEventListener('keydown',escape,true);document.addEventListener('scroll',dismiss,true);window.addEventListener('resize',dismiss);window.addEventListener('blur',dismiss);
   return()=>{clearTimeout(timer);document.removeEventListener('pointerdown',outside,true);document.removeEventListener('keydown',escape,true);document.removeEventListener('scroll',dismiss,true);window.removeEventListener('resize',dismiss);window.removeEventListener('blur',dismiss);};
  },[anchor,eventId]);
- return createPortal(<span ref={panel} id={id} className="classification-unavailable-tip" role="status" style={{position:'fixed',...position}}>{text}</span>,document.body);
+ return createPortal(<span ref={panel} id={id} className="icon-tooltip classification-unavailable-tip" role="status" style={{position:'fixed',...position}}>{text}</span>,document.body);
 }
