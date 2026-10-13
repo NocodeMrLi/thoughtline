@@ -174,3 +174,5 @@ Windows38453315931（58）完整source阶段已通过旧classification held事�
 Windows177完整运行38455732665偶发真实原生菜单第二Esc未关闭；前3次外部点击关闭过，既有固定200ms不能证明子菜单实际切换完成。按微软FindWindowExW官方menu-class atom0x8000，通过自有PID限定查询原生菜单窗口1→2→1→0再逐次注入键，保留原两级、首Esc/次Esc及真正callback断言，不加第三Esc/重试掩盖。popup probe改每个实例保存closed，避免旧callback改新probe；Macnative-menu-state-source正常退出绿。Windows原生状态分支等待新完整CI，必要门禁保持。新PS检查脚本属测试输入，后续对源/包输入数按实际清单核对，不沿用旧356。
 
 Windows14b844完整运行38458043095的原生探针失败：实际菜单0个#32768，外部点击3项仍通过。核Electron v44.7.0官方electron_api_menu_views.cc明确使用Chromium Views MenuRunner，所以上一微软MENUCLASS假设不适用，撤回其状态判断。改为枚举自有主进程可见顶层HWND，排除实际BrowserWindow句柄；记录class/title/handle及每步1→2→1→0状态，不操作其他进程、不改变生产行为、不增加Esc次数。Mac native-views-probe-source正常退出绿；Windows分支仍待完整CI。
+
+Windows87ff4a8运行38458843298探针仍0，诊断显示该PID没有任何可见窗口，真实foreground7592为测试应用metrics成员。核本地Playwright1.62.1 coreBundle.js WindowsElectron.launch明确shell:true，app.process().pid为cmd启动器，非Electron实际主进程。探针改用app.evaluate(()=>process.pid)并同时记录两者；window枚举和句柄排除规则不变。源路径说明已确认，未改生产。87ff最终Mac包36个编译/资源hash与e51完全一致、asar亦相同，可复用此前实际DMG24套；本包又分类18/pager5/merge10正常退出绿。旧native-menu源限定脚本的实际包尝试在启动前明确拒绝，失败与空目录清理记实，不当包通过。
