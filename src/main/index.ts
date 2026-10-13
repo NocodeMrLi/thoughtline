@@ -545,7 +545,8 @@ else app.whenReady().then(async()=>{
   });
  });
  ipcMain.handle('thoughtline:classification',(e,c:ClassificationMutation,revision:number)=>composerWrite(async()=>{
-  if(!trusted(e,[composer,manage])||!c||typeof c!=='object'||revision!==snapshot.revision)return invalid(t('内容已变化，请重新操作。'));
+  if(!trusted(e,[composer,manage])||!c||typeof c!=='object')return invalid(t('内容已变化，请重新操作。'));
+  if(revision!==snapshot.revision)return {ok:false,code:'CONFLICT',message:t('内容已变化，请重新操作。')} as Result<Snapshot>;
   const priorUndo=undoClips;let next:Result<Snapshot>;
   if(c.kind==='active'&&['tag','project'].includes(c.field)&&typeof c.id==='string'&&typeof c.active==='boolean')next=setClassificationActive(snapshot,c.field,c.id,c.active);
   else if(c.kind==='rememberProject'&&trusted(e,[manage])&&c.session===manageSession&&manageEditingOwner?.session===c.session&&manageEditingOwner.ideaId===c.ideaId){

@@ -1,3 +1,4 @@
+import {rememberIdeaProject} from '../hooks/rememberIdeaProject';
 import {clipGroup,storedClipFor} from '../../shared/clipModel';
 import {matchesShelfFilter} from '../../shared/ideaVisibility';
 import {useLocale} from '../LocaleContext';
@@ -19,7 +20,7 @@ export function InlineIdeaEditor({idea,info,onDone,onDraftAgentChange}:{idea:Ide
  const latest=useRef(draft),base=useRef(ideaDraft(idea)),live=useRef(true),saver=useRef<DraftAutosaver<Draft>|null>(null),text=useRef<HTMLTextAreaElement>(null),composition=useRef(new CompositionSession<'text'|'title'|'project'>());
  const grouped=storedClipFor(info.snapshot,idea.id);const needsSplit=!!grouped&&grouped.ideaIds.length>1&&(draft.project!==idea.project||draft.agentId!==idea.agentId&&!clipGroup(info.snapshot,grouped));
  const remembering=useRef<Promise<void>|null>(null);
- const rememberProject=()=>{if(remembering.current)return remembering.current;const task=(async()=>{const current=await bridge.info(),record=current.snapshot.ideas.find(i=>i.id===idea.id);if(!record?.project||current.snapshot.projects?.includes(record.project))return;const result=await bridge.classificationChange({kind:'rememberProject',ideaId:idea.id,session:info.manageSession},current.snapshot.revision);if(!result.ok)throw Error(result.message);})().finally(()=>{if(remembering.current===task)remembering.current=null;});remembering.current=task;return task;};
+ const rememberProject=()=>{if(remembering.current)return remembering.current;const task=rememberIdeaProject(bridge,idea.id,info.manageSession,()=>live.current).finally(()=>{if(remembering.current===task)remembering.current=null;});remembering.current=task;return task;};
  const splitAllowed=useRef(false);splitAllowed.current=confirmAgent||!needsSplit;
  useEffect(()=>{
   live.current=true;void bridge.setEditing(true,info.manageSession,idea.id).catch(()=>{});
