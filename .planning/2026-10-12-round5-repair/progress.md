@@ -156,3 +156,5 @@ R5-26最新合并合同已正式写入第五轮并替换直接目标菜单条款
 接续优先项1/2已验证：merge原生7项正常退出绿；group完整原回归绿，修正真实width/2中心与stable clip ID断言。新增stack矩阵13类绿，归档改组确认红→绿，IO及IME拒绝离开保持；385单测+4Windows专用skip、typecheck/build全绿。新增stack门禁纳入Windows源和实际包两段，不删旧门禁。继续全合同第一轮对照及受影响原生回归。
 
 2026-10-14第一轮源码对照与独立review修复完成：398单测通过+4Windows专用skip，12受影响原生套完整绿（review-fixed-source/results.json）。共用面板8中英浅深宽窄场景及实际Mac一级/整理截图已取得；视觉对照发现旧辅助浮层水晶亮边，按R527仅收敛两个shelf搜索面板为中性轻量菜单材质，menu-material-red已复现、green执行中。原新建/设置/编辑材质不改。首轮对照表docs/releases/round5-r518-r523-audit.md。用户休息前再次明确授权严格文档继续、测试垃圾清理、通过后发布推送及照操作报告。
+
+冻结纠正：0.0.32版本首次全verify因windows-installer-preflight.ps1仍绑定0.0.31隔离路径而失败（v032-freeze-verify.log）。874299e提前候选提交已推送，没有tag/Release，不能视为通过冻结。只补当前preflight脚本版本，保持新旧测试数据分目录；重新set-e完整verify，确认绿后新提交绑定最终包。此前398绿为0.0.31版本号下当前功能，不冒充0.0.32冻结检查。初次CI38431835528预计同一绑定红例，原日志/产物保留；不重写提交历史。
