@@ -108,3 +108,5 @@ R5-17: 源导出17项/8场景全部通过；Mac完整356通过、4项Windows专�
 Mac实际DMG9套通过，源码与36个输出文件/asar/签名绑定通过。Windows run38365102037首轮完整360单测通过；round2-arrange在warmViews首窗URL等待30秒失败，cases为空，未到本次导出。保留原日志及artifact11796716448 ZIP/API SHA256/CRC，原源码原门禁完整重跑一次（attempt2），未放宽断言或超时。
 
 Windows attempt2自动整理及后续多套通过，title-only detail清空正文后4秒等主进程状态超时，calendar模式同一逻辑通过。补充仅测试侧导航/renderer错误及超时前状态诊断，不更改生产、断言或等待时限。Mac自动整理7项和仅标题双入口重新通过。将新诊断提交后继续完整Windows门禁；Mac再打包并核相同asar，不把未查明超时写成已修复。
+
+Windows diagnostic run38368041673在自动整理3项通过后调用隐藏Manage，窗口已按正常30秒规则销毁。以THOUGHTLINE_ARRANGE_VERIFY_IDLE_RELEASE=1前移31秒回收等待，Mac稳定红例Target page closed；在删除分组检查点前走openSettings正常重开并重新取page，7项旧断言完整绿。仅修测试生命周期，不改产品或超时门槛。原artifact11798645026 SHA/CRC归档。
