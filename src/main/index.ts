@@ -285,6 +285,7 @@ else app.whenReady().then(async()=>{
  ipcMain.handle('thoughtline:open-manage',async(e,id?:string,titles?:boolean):Promise<Result<void>>=>{
   if(!trusted(e)||id!==undefined&&typeof id!=='string'||titles!==undefined&&typeof titles!=='boolean')return invalid(t("无效操作"));
   if(id&&!snapshot.ideas.some(x=>x.id===id))return invalid(t("找不到这条念头。"));
+  if(id===undefined&&titles!==true)return openBrowse();
   return coalesceManage('manage:'+String(id??'calendar')+':'+String(titles??false),async()=>{
   if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
   try{await ensureManage();}catch{return {ok:false,code:'IO',message:t("浏览浮层未能打开，请重试。")};}if(quitting)return invalid(t("正在退出。"));if(id===undefined&&titles!==true&&manageSelection===null&&!manageTitles){const reused=await reuseReadyManage('browse');if(reused)return reused;}manageSelection=id??null;manageMode=id?'detail':'browse';manageTitles=!!titles;manageEditingRequested=false;manageVisit++;calendarReturning=false;manageSession++;lock('manage',true);publish();if(id){const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint()),p=screen.getCursorScreenPoint();const b=boundsFor(420,500);b.x=Math.round(Math.max(d.workArea.x+12,Math.min(d.workArea.x+d.workArea.width-b.width-12,p.x-b.width/2)));b.y=Math.round(Math.max(d.workArea.y+12,Math.min(d.workArea.y+d.workArea.height-b.height-12,p.y+24)));setManageBounds(b);}else setManageBounds(calendarBounds(),!!snapshot.settings.calendarBounds);const shown=await presentManage();refreshTray();return shown;
@@ -308,12 +309,13 @@ else app.whenReady().then(async()=>{
  ipcMain.handle('thoughtline:close-shelf-filter-picker',e=>{if(!trusted(e,[shelf]))return invalid(t('无效操作'));closeFilterPicker();return done();});
  shelf.on('blur',()=>{if(shelf.isFocused())return;closeFilterPicker();closeMergePicker();});
  const browseFromTray=()=>{void openBrowse();};
- const openBrowse=async()=>{
+ const openBrowse=()=>coalesceManage('manage:calendar:false',async()=>{
   if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
   try{await ensureManage();}catch{return invalid(t("浏览浮层未能打开，请重试。"));}
   if(quitting)return invalid(t("正在退出。"));
+  if(manageSelection===null&&!manageTitles){const reused=await reuseReadyManage('browse');if(reused)return reused;}
   manageMode='browse';manageSelection=null;manageTitles=false;manageEditingRequested=false;manageVisit++;calendarReturning=false;manageSession++;lock('manage',true);setManageBounds(calendarBounds(),!!snapshot.settings.calendarBounds);publish();const shown=await presentManage();refreshTray();return shown;
- };
+ });
  let activeShelfMenu:{menu:Menu;finish:()=>void}|null=null;
  const closeShelfMenu=()=>{const active=activeShelfMenu;if(!active)return;try{active.menu.closePopup();}finally{active.finish();}};
  shelf.on('hide',closeShelfMenu);app.on('before-quit',closeShelfMenu);
