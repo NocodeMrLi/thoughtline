@@ -1,0 +1,43 @@
+windows-test-package	Second round UI and real native menu characterization	﻿2026-10-13T04:25:19.7345280Z ##[group]Run New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7346470Z ^[[36;1mNew-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7347310Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/hidden-manage-reopen.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7348128Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Confirmed hidden Manage reopen failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7348885Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7349585Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round UI failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7350306Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-native-menu.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7351059Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round native menu failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7352145Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-calendar-navigation.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7352940Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round calendar return failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7353845Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-arrange-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7354594Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round arrangement failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7355340Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-split-menu-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7356103Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round split menu failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7357704Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-merge-menu-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7358499Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round merge menu failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7359242Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-capacity-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7360005Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Capacity and swap workflow failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7360761Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/positioning-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7361570Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Tag positioning and effective status workflow failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7362447Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/title-edit-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7363209Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Optional title live input regression failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7364029Z ^[[36;1mforeach ($test in @('more-menu-workflow', 'title-only-workflow', 'reminder-workflow')) {^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7364833Z ^[[36;1m  & node scripts/run-ci-fixture.cjs "tests/electron/$test.cjs"^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7365464Z ^[[36;1m  if ($LASTEXITCODE -ne 0) { throw "$test failed" }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7365953Z ^[[36;1m}^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7484242Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7484839Z env:
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7485227Z   RETAIN_INSTALLER: true
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7485780Z   THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round2/windows
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7486352Z   THOUGHTLINE_FAKE_CLIPBOARD: 1
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7487181Z   THOUGHTLINE_FIXTURE_TRACE: 1
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:19.7487650Z ##[endgroup]
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:52.3820795Z electronApplication.firstWindow: Timeout 30000ms exceeded while waiting for event "window"
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:52.5069350Z     at D:\a\thoughtline\thoughtline\tests\electron\hidden-manage-reopen.cjs:8:105
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:55.1838546Z {"platform":"win32","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-hidden-manage-XNlDVH","cases":[],"pids":[7824,1856,7384,8384],"scope":"Real source lifecycle with deliberately unresponsive hidden Manage leave IPC; visible guards remain real","failure":"electronApplication.firstWindow: Timeout 30000ms exceeded while waiting for event \"window\"\n    at D:\\a\\thoughtline\\thoughtline\\tests\\electron\\hidden-manage-reopen.cjs:8:105","normalClose":true,"passed":false}
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:55.1988682Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\hidden-manage-reopen.cjs","pid":1576,"passed":false,"timedOut":false,"code":1}
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:58.4212051Z ^[[31;1mException: ^[[0mD:\a\_temp\f8f63d3a-8e83-41e0-a4ba-d8a42f689a3b.ps1:4^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:58.4214241Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:58.4216171Z ^[[31;1m^[[0m^[[36;1m^[[36;1m   4 | ^[[0m … LASTEXITCODE -ne 0) { ^[[36;1mthrow 'Confirmed hidden Manage reopen failed'^[[0m }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:58.4218640Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:58.4310899Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mConfirmed hidden Manage reopen failed^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T04:25:58.4623495Z ##[error]Process completed with exit code 1.

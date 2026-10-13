@@ -88,3 +88,5 @@ Mac相关回归前10套全部通过（含24定制页完整预览/布局）。额
 R5-15/16正式原生32检查/24场景全绿，官方SVG、固定外部/邮箱目标、复制和非法sender限制已验证；保留原failures未当通过。旧settings-lifecycle最小夹具修复后真实globalShortcut冲突/IO/退出/重启全绿。候选升0.0.30（保留旧版本），新两套源/实际包门禁加入CI，完整旧门禁未删。
 
 Important/P2 fix pass: actual Tray red failed both after-settings and during-storage assertions; refresh on busy start/finally fixed both. Native green36 checks/16 scenes, full349+4/tsc/build green. No second review, final package verification continues.
+
+Windows38346113473: native main heartbeat alive, no BrowserWindow-created; old hiddenManage firstWindow30s timed out before assertions, normalClose true. Original ZIP digest/CRC verified and retained. Startup-dialog/owned launch/native-state observation added only to old fixture; no retries, guard dismissal, deadline extension or relaxed assertions. Product unchanged. Full fresh Windows run required; current Mac8 actual suites and36-output binding retained under mac-2ef38cc before source metadata refresh.
