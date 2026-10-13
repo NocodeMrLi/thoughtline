@@ -15,3 +15,11 @@ Actions已删除本轮安装器副本和已归档失败UI产物，最新验收UI
 [操作报告](</Users/lihongwei/Desktop/晾念头 : Thoughtline/app/docs/releases/round5-v0.0.30-delivery.md>)；[私有安装包](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.30)。formalAcceptance/physicalAcceptance保持false，等待实际使用反馈。
 
 R5-17实测：17导出行为/8菜单场景在Mac源与DMG均通过；macOS textutil可回读标准DOCX。Windows首轮360单测通过，但旧round2-arrange首次窗口URL超时未进入cases，原ZIP11796716448已校验归档，同源完整重跑。读取GitHub出现间歇TLS握手超时，不改仓库权限或预算。
+
+Task6收口：0.0.31（第五轮R5-17）已完成极简导出、双端技术验证、私有发布、文档同步及本轮自有垃圾清理。构建/tag源码 9d4ea599e71b4cb85707145ed6ca46e674cfafb0；Windows完整运行 38369828529 success；Release 411486213，10份附件大小/SHA256读回一致。main后续文档提交不改变安装包源码。
+数据与备份页仅一个“导出”入口，三行小菜单为导出TXT、导出DOCX、备份数据。文档依次含分组、标签、名称、完整正文；按分组归集，含已收起及已移除分类下的有效内容，不混入草稿或最近删除。原JSON完整恢复备份保持，未增加范围控件或新页签。
+Mac356单测通过、4项Windows专用跳过；Windows360全部通过，类型与构建通过。Mac源码6套、实际DMG9套回归通过，最后仅增加测试诊断后重新打包，asar/所有编译输出与已验证包完全一致，最终DMG再通过17项导出行为及8个中英浅深宽窄场景。Windows完整源/实际包及NSIS安装、重装、普通卸载保数据通过，源/实际包各17项导出行为及8个菜单场景；340份构建输入同源。DOCX独立ZIP/XML及Mac文本读取器回读通过。
+早期Windows存在初始URL等待、仅标题详情自动保存等待超时，原日志/ZIP保留。后续诊断明确旧自动整理用例误用已按30秒规则回收的隐藏窗口；Mac等待31秒稳定复现相同错误，再通过正常入口重开窗口后7项原断言全部通过。仅修测试生命周期并补诊断，不改产品交互或超时门槛；其余未独立复现的超时不宣称为产品bug已修复。
+Mac 23个本轮隔离路径确认不存在；失败残留先校验归档再清理。测试进程按自有PID/路径核实后退出或停止，最终挂载/隔离启动空目录/重复构建包已清理。真实应用及个人数据未动，旧Release和历史安装包保留。
+Actions安装器副本与三份本轮已归档失败UI已清理，最新验收UI仍保留；当前38份/272741961bytes。原验证门禁、仓库私有状态和预算保持，累计账期用量不会因清理立即归零。
+[操作验证报告](</Users/lihongwei/Desktop/晾念头 : Thoughtline/app/docs/releases/round5-v0.0.31-delivery.md>)；[私有安装包](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.31)。原生自动验证与受控系统保存边界已完成，个人设备文件选择体验、Word/WPS排版和物理IME/DPI/多屏仍独立确认，formalAcceptance/physicalAcceptance保持false。

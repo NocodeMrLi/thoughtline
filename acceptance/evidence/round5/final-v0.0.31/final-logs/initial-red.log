@@ -1,0 +1,128 @@
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/ideaExport.test.ts (7 tests | 7 failed) 14ms
+   × TXT preserves every active record and four fields, excludes draft/deleted, keeps inactive classifications and duplicate names 7ms
+   × DOCX is a readable OOXML ZIP whose paragraphs preserve Unicode, XML symbols, whitespace and all four fields 1ms
+   × English export localizes labels and default names but never translates user text 1ms
+   × long body and title-only records export completely; empty export is explained without creating a file 1ms
+   × failed write keeps previous destination bytes and cleans only the export temporary file 2ms
+   × failed rename keeps previous destination bytes and cleans only the export temporary file 1ms
+   × wrong extension is corrected, valid existing files are replaced and source data remains intact 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/ideaExport.test.ts > TXT preserves every active record and four fields, excludes draft/deleted, keeps inactive classifications and duplicate names
+AssertionError: expected { ok: false, code: 'INVALID', …(1) } to deeply equal { ok: true, value: { …(2) } }
+
+- Expected
++ Received
+
+  {
+-   "ok": true,
+-   "value": {
+-     "count": 3,
+-     "path": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-export-unit-xghkuK/念头.txt",
+-   },
++   "code": "INVALID",
++   "message": "Document export is not implemented.",
++   "ok": false,
+  }
+
+ ❯ tests/unit/ideaExport.test.ts:22:91
+     20| test('TXT preserves every active record and four fields, excludes draf…
+     21|  const snapshot=fixture(),before=structuredClone(snapshot),path=join(a…
+     22|  const result=await saveThoughtDocument(snapshot,path,'txt','zh-CN',st…
+       |                                                                                           ^
+     23|  const bytes=await fs.readFile(path),text=bytes.toString('utf8').repla…
+     24|  expect(text).toContain('分组：工作\n标签：领导A\n名称：会议\n内容：\n第一段😀 < & >\n\n  第…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  tests/unit/ideaExport.test.ts > DOCX is a readable OOXML ZIP whose paragraphs preserve Unicode, XML symbols, whitespace and all four fields
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/ideaExport.test.ts:29:123
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  tests/unit/ideaExport.test.ts > English export localizes labels and default names but never translates user text
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/ideaExport.test.ts:35:218
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  tests/unit/ideaExport.test.ts > long body and title-only records export completely; empty export is explained without creating a file
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/ideaExport.test.ts:36:363
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  tests/unit/ideaExport.test.ts > failed write keeps previous destination bytes and cleans only the export temporary file
+ FAIL  tests/unit/ideaExport.test.ts > failed rename keeps previous destination bytes and cleans only the export temporary file
+AssertionError: expected { ok: false, code: 'INVALID', …(1) } to match object { ok: false, code: 'IO' }
+(1 matching property omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "code": "IO",
++   "code": "INVALID",
+    "ok": false,
+  }
+
+ ❯ tests/unit/ideaExport.test.ts:37:493
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  tests/unit/ideaExport.test.ts > wrong extension is corrected, valid existing files are replaced and source data remains intact
+AssertionError: expected { ok: false, code: 'INVALID', …(1) } to match object { ok: true, …(1) }
+(2 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "ok": true,
+-   "value": {
+-     "path": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-export-unit-sKFYBv/snapshot.json.txt",
+-   },
++   "ok": false,
+  }
+
+ ❯ tests/unit/ideaExport.test.ts:38:314
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  7 failed (7)
+   Start at  15:26:20
+   Duration  201ms (transform 69%, import 17%, tests 12%, worker 3%)
+

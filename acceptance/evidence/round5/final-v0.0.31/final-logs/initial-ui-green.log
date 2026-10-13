@@ -1,0 +1,17 @@
+PASS three-row export menu is reachable from data settings
+PASS menu bounds zh-CN light 350
+PASS menu bounds zh-CN light 500
+PASS menu bounds zh-CN dark 350
+PASS menu bounds zh-CN dark 500
+PASS menu bounds en light 350
+PASS menu bounds en light 500
+PASS menu bounds en dark 350
+PASS menu bounds en dark 500
+PASS keyboard arrows and outside pointer dismiss without closing settings
+Error: ENOENT: no such file or directory, open '/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-r517-export-21nbMD/output/念头.txt'
+    at async open (node:internal/fs/promises:697:25)
+    at async Object.readFile (node:internal/fs/promises:1348:14)
+    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-export-workflow.cjs:24:520
+    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-export-workflow.cjs:8:35)
+    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-export-workflow.cjs:24:38
+{"out":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round5/export/export-hXoZXl","checks":10,"scenes":8,"passed":false,"failures":["txt user click produces full four-field readable output"]}

@@ -1,0 +1,10 @@
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),crypto=require('node:crypto');
+const root=path.resolve('acceptance/evidence/round5/final-v0.0.31'),read=n=>JSON.parse(fs.readFileSync(path.join(root,n),'utf8')),hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const delivery='/Users/lihongwei/Documents/Codex/2026-10-13/thoughtline-r517/delivery/v0.0.31',mac=JSON.parse(fs.readFileSync(path.join(delivery,'mac-build-manifest.json'))),source=mac.actualMacBuildSource;
+assert.deepEqual(require(path.resolve('scripts/source-input-vector.cjs')).sourceInputVector(),mac.inputVector);
+for(const name of ['mac-final-verification.json','mac-package-binding.json','mac-packaged-suites.json','windows-final-suites.json','windows-package-binding.json','source-pair-proof.json','release-verification.json','actions-storage-cleanup.json','mac-owned-cleanup.json'])assert.equal(read(name).passed,true,name);
+assert.equal(read('source-pair-proof.json').source,source);assert.equal(read('windows-final-suites.json').source,source);assert.equal(read('release-verification.json').source,source);
+assert.equal(read('mac-packaged-suites.json').suites.length,9);assert.equal(read('windows-final-suites.json').unitPassed,360);
+for(const row of read('release-verification.json').assets)assert.equal(hash(path.join(delivery,row.name)),row.sha256,row.name);
+assert.equal(require(path.resolve('package.json')).version,'0.0.31');
+console.log('R5-17: current source, both actual packages, private release, original evidence and owned cleanup verified');

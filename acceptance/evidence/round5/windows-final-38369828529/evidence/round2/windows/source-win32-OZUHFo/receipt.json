@@ -1,0 +1,1092 @@
+{
+  "platform": "win32",
+  "version": "0.0.31",
+  "profile": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-more-menus-Y6x4JE",
+  "evidence": "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round2\\windows\\source-win32-OZUHFo",
+  "scope": "Source Electron shared renderer; controlled pointer/document-leave/blur events. Not physical desktop outside-click acceptance.",
+  "cases": [
+    {
+      "kind": "expanded-bottom",
+      "language": "zh",
+      "checks": [
+        {
+          "name": "compact-shared-rows",
+          "passed": true,
+          "detail": {
+            "width": 216.546875,
+            "height": 42,
+            "padding": "4px",
+            "gap": "2px",
+            "borderRadius": "9px",
+            "rows": [
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pointer-cross-gap-and-return-cancels-dismissal",
+          "passed": true,
+          "detail": {
+            "realPointerEvents": [
+              {
+                "time": 1257.5999999999767,
+                "x": 1,
+                "y": 499
+              },
+              {
+                "time": 1266.399999999965,
+                "x": 177.7265625,
+                "y": 419
+              }
+            ],
+            "returnElapsedMs": 8.799999999988358
+          }
+        },
+        {
+          "name": "outside-click-and-escape-return-focus",
+          "passed": true
+        },
+        {
+          "name": "pointer-leaving-document-dismisses",
+          "passed": true
+        },
+        {
+          "name": "window-blur-dismisses",
+          "passed": true
+        },
+        {
+          "name": "keyboard-navigation-and-tab-dismissal",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "kind": "calendar-top",
+      "language": "zh",
+      "checks": [
+        {
+          "name": "compact-shared-rows",
+          "passed": true,
+          "detail": {
+            "width": 160,
+            "height": 110,
+            "padding": "4px",
+            "gap": "2px",
+            "borderRadius": "9px",
+            "rows": [
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              },
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              },
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pointer-cross-gap-and-return-cancels-dismissal",
+          "passed": true,
+          "detail": {
+            "realPointerEvents": [
+              {
+                "time": 3634.7000000000116,
+                "x": 1,
+                "y": 539
+              },
+              {
+                "time": 3641.2999999999884,
+                "x": 438,
+                "y": 75
+              }
+            ],
+            "returnElapsedMs": 6.599999999976717
+          }
+        },
+        {
+          "name": "outside-click-and-escape-return-focus",
+          "passed": true
+        },
+        {
+          "name": "pointer-leaving-document-dismisses",
+          "passed": true
+        },
+        {
+          "name": "window-blur-dismisses",
+          "passed": true
+        },
+        {
+          "name": "keyboard-navigation-and-tab-dismissal",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "kind": "calendar-bottom",
+      "language": "zh",
+      "checks": [
+        {
+          "name": "compact-shared-rows",
+          "passed": true,
+          "detail": {
+            "width": 216.546875,
+            "height": 42,
+            "padding": "4px",
+            "gap": "2px",
+            "borderRadius": "9px",
+            "rows": [
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pointer-cross-gap-and-return-cancels-dismissal",
+          "passed": true,
+          "detail": {
+            "realPointerEvents": [
+              {
+                "time": 6629.599999999977,
+                "x": 1,
+                "y": 539
+              },
+              {
+                "time": 6641.299999999988,
+                "x": 337.7265625,
+                "y": 455
+              }
+            ],
+            "returnElapsedMs": 11.700000000011642
+          }
+        },
+        {
+          "name": "outside-click-and-escape-return-focus",
+          "passed": true
+        },
+        {
+          "name": "pointer-leaving-document-dismisses",
+          "passed": true
+        },
+        {
+          "name": "window-blur-dismisses",
+          "passed": true
+        },
+        {
+          "name": "keyboard-navigation-and-tab-dismissal",
+          "passed": true
+        },
+        {
+          "name": "keyboard-opens-only-one-more-menu",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "kind": "trash-bottom",
+      "language": "zh",
+      "checks": [
+        {
+          "name": "compact-shared-rows",
+          "passed": true,
+          "detail": {
+            "width": 160,
+            "height": 42,
+            "padding": "4px",
+            "gap": "2px",
+            "borderRadius": "9px",
+            "rows": [
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pointer-cross-gap-and-return-cancels-dismissal",
+          "passed": true,
+          "detail": {
+            "realPointerEvents": [
+              {
+                "time": 9756.799999999988,
+                "x": 1,
+                "y": 539
+              },
+              {
+                "time": 9766.599999999977,
+                "x": 346,
+                "y": 455
+              }
+            ],
+            "returnElapsedMs": 9.799999999988358
+          }
+        },
+        {
+          "name": "outside-click-and-escape-return-focus",
+          "passed": true
+        },
+        {
+          "name": "pointer-leaving-document-dismisses",
+          "passed": true
+        },
+        {
+          "name": "window-blur-dismisses",
+          "passed": true
+        },
+        {
+          "name": "keyboard-navigation-and-tab-dismissal",
+          "passed": true
+        },
+        {
+          "name": "keyboard-opens-only-one-more-menu",
+          "passed": true
+        },
+        {
+          "name": "permanent-delete-remains-protected",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "kind": "expanded-bottom",
+      "language": "zh",
+      "checks": [
+        {
+          "name": "compact-shared-rows",
+          "passed": true,
+          "detail": {
+            "width": 216.546875,
+            "height": 42,
+            "padding": "4px",
+            "gap": "2px",
+            "borderRadius": "9px",
+            "rows": [
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pointer-cross-gap-and-return-cancels-dismissal",
+          "passed": true,
+          "detail": {
+            "realPointerEvents": [
+              {
+                "time": 12567.599999999977,
+                "x": 1,
+                "y": 499
+              },
+              {
+                "time": 12578.5,
+                "x": 177.7265625,
+                "y": 419
+              }
+            ],
+            "returnElapsedMs": 10.900000000023283
+          }
+        },
+        {
+          "name": "outside-click-and-escape-return-focus",
+          "passed": true
+        },
+        {
+          "name": "pointer-leaving-document-dismisses",
+          "passed": true
+        },
+        {
+          "name": "window-blur-dismisses",
+          "passed": true
+        },
+        {
+          "name": "keyboard-navigation-and-tab-dismissal",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "kind": "calendar-top",
+      "language": "zh",
+      "checks": [
+        {
+          "name": "compact-shared-rows",
+          "passed": true,
+          "detail": {
+            "width": 160,
+            "height": 110,
+            "padding": "4px",
+            "gap": "2px",
+            "borderRadius": "9px",
+            "rows": [
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              },
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              },
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pointer-cross-gap-and-return-cancels-dismissal",
+          "passed": true,
+          "detail": {
+            "realPointerEvents": [
+              {
+                "time": 14879.299999999988,
+                "x": 1,
+                "y": 539
+              },
+              {
+                "time": 14891.5,
+                "x": 438,
+                "y": 75
+              }
+            ],
+            "returnElapsedMs": 12.200000000011642
+          }
+        },
+        {
+          "name": "outside-click-and-escape-return-focus",
+          "passed": true
+        },
+        {
+          "name": "pointer-leaving-document-dismisses",
+          "passed": true
+        },
+        {
+          "name": "window-blur-dismisses",
+          "passed": true
+        },
+        {
+          "name": "keyboard-navigation-and-tab-dismissal",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "kind": "calendar-bottom",
+      "language": "zh",
+      "checks": [
+        {
+          "name": "compact-shared-rows",
+          "passed": true,
+          "detail": {
+            "width": 216.546875,
+            "height": 42,
+            "padding": "4px",
+            "gap": "2px",
+            "borderRadius": "9px",
+            "rows": [
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pointer-cross-gap-and-return-cancels-dismissal",
+          "passed": true,
+          "detail": {
+            "realPointerEvents": [
+              {
+                "time": 17880.599999999977,
+                "x": 1,
+                "y": 539
+              },
+              {
+                "time": 17891.5,
+                "x": 337.7265625,
+                "y": 455
+              }
+            ],
+            "returnElapsedMs": 10.900000000023283
+          }
+        },
+        {
+          "name": "outside-click-and-escape-return-focus",
+          "passed": true
+        },
+        {
+          "name": "pointer-leaving-document-dismisses",
+          "passed": true
+        },
+        {
+          "name": "window-blur-dismisses",
+          "passed": true
+        },
+        {
+          "name": "keyboard-navigation-and-tab-dismissal",
+          "passed": true
+        },
+        {
+          "name": "keyboard-opens-only-one-more-menu",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "kind": "trash-bottom",
+      "language": "zh",
+      "checks": [
+        {
+          "name": "compact-shared-rows",
+          "passed": true,
+          "detail": {
+            "width": 160,
+            "height": 42,
+            "padding": "4px",
+            "gap": "2px",
+            "borderRadius": "9px",
+            "rows": [
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pointer-cross-gap-and-return-cancels-dismissal",
+          "passed": true,
+          "detail": {
+            "realPointerEvents": [
+              {
+                "time": 21100.399999999965,
+                "x": 1,
+                "y": 539
+              },
+              {
+                "time": 21110.20000000001,
+                "x": 346,
+                "y": 455
+              }
+            ],
+            "returnElapsedMs": 9.800000000046566
+          }
+        },
+        {
+          "name": "outside-click-and-escape-return-focus",
+          "passed": true
+        },
+        {
+          "name": "pointer-leaving-document-dismisses",
+          "passed": true
+        },
+        {
+          "name": "window-blur-dismisses",
+          "passed": true
+        },
+        {
+          "name": "keyboard-navigation-and-tab-dismissal",
+          "passed": true
+        },
+        {
+          "name": "keyboard-opens-only-one-more-menu",
+          "passed": true
+        },
+        {
+          "name": "permanent-delete-remains-protected",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "kind": "expanded-bottom",
+      "language": "en",
+      "checks": [
+        {
+          "name": "compact-shared-rows",
+          "passed": true,
+          "detail": {
+            "width": 266.3125,
+            "height": 42,
+            "padding": "4px",
+            "gap": "2px",
+            "borderRadius": "9px",
+            "rows": [
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pointer-cross-gap-and-return-cancels-dismissal",
+          "passed": true,
+          "detail": {
+            "realPointerEvents": [
+              {
+                "time": 23941.79999999999,
+                "x": 1,
+                "y": 499
+              },
+              {
+                "time": 23954.29999999999,
+                "x": 152.84375,
+                "y": 419
+              }
+            ],
+            "returnElapsedMs": 12.5
+          }
+        },
+        {
+          "name": "outside-click-and-escape-return-focus",
+          "passed": true
+        },
+        {
+          "name": "pointer-leaving-document-dismisses",
+          "passed": true
+        },
+        {
+          "name": "window-blur-dismisses",
+          "passed": true
+        },
+        {
+          "name": "keyboard-navigation-and-tab-dismissal",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "kind": "calendar-top",
+      "language": "en",
+      "checks": [
+        {
+          "name": "compact-shared-rows",
+          "passed": true,
+          "detail": {
+            "width": 160,
+            "height": 110,
+            "padding": "4px",
+            "gap": "2px",
+            "borderRadius": "9px",
+            "rows": [
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              },
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              },
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pointer-cross-gap-and-return-cancels-dismissal",
+          "passed": true,
+          "detail": {
+            "realPointerEvents": [
+              {
+                "time": 26320.399999999965,
+                "x": 1,
+                "y": 539
+              },
+              {
+                "time": 26329.399999999965,
+                "x": 438,
+                "y": 75
+              }
+            ],
+            "returnElapsedMs": 9
+          }
+        },
+        {
+          "name": "outside-click-and-escape-return-focus",
+          "passed": true
+        },
+        {
+          "name": "pointer-leaving-document-dismisses",
+          "passed": true
+        },
+        {
+          "name": "window-blur-dismisses",
+          "passed": true
+        },
+        {
+          "name": "keyboard-navigation-and-tab-dismissal",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "kind": "calendar-bottom",
+      "language": "en",
+      "checks": [
+        {
+          "name": "compact-shared-rows",
+          "passed": true,
+          "detail": {
+            "width": 266.3125,
+            "height": 42,
+            "padding": "4px",
+            "gap": "2px",
+            "borderRadius": "9px",
+            "rows": [
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pointer-cross-gap-and-return-cancels-dismissal",
+          "passed": true,
+          "detail": {
+            "realPointerEvents": [
+              {
+                "time": 29301.29999999999,
+                "x": 1,
+                "y": 539
+              },
+              {
+                "time": 29312.899999999965,
+                "x": 312.84375,
+                "y": 455
+              }
+            ],
+            "returnElapsedMs": 11.599999999976717
+          }
+        },
+        {
+          "name": "outside-click-and-escape-return-focus",
+          "passed": true
+        },
+        {
+          "name": "pointer-leaving-document-dismisses",
+          "passed": true
+        },
+        {
+          "name": "window-blur-dismisses",
+          "passed": true
+        },
+        {
+          "name": "keyboard-navigation-and-tab-dismissal",
+          "passed": true
+        },
+        {
+          "name": "keyboard-opens-only-one-more-menu",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "kind": "trash-bottom",
+      "language": "en",
+      "checks": [
+        {
+          "name": "compact-shared-rows",
+          "passed": true,
+          "detail": {
+            "width": 226,
+            "height": 42,
+            "padding": "4px",
+            "gap": "2px",
+            "borderRadius": "9px",
+            "rows": [
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pointer-cross-gap-and-return-cancels-dismissal",
+          "passed": true,
+          "detail": {
+            "realPointerEvents": [
+              {
+                "time": 32472,
+                "x": 1,
+                "y": 539
+              },
+              {
+                "time": 32485.399999999965,
+                "x": 313,
+                "y": 455
+              }
+            ],
+            "returnElapsedMs": 13.399999999965075
+          }
+        },
+        {
+          "name": "outside-click-and-escape-return-focus",
+          "passed": true
+        },
+        {
+          "name": "pointer-leaving-document-dismisses",
+          "passed": true
+        },
+        {
+          "name": "window-blur-dismisses",
+          "passed": true
+        },
+        {
+          "name": "keyboard-navigation-and-tab-dismissal",
+          "passed": true
+        },
+        {
+          "name": "keyboard-opens-only-one-more-menu",
+          "passed": true
+        },
+        {
+          "name": "permanent-delete-remains-protected",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "kind": "expanded-bottom",
+      "language": "en",
+      "checks": [
+        {
+          "name": "compact-shared-rows",
+          "passed": true,
+          "detail": {
+            "width": 266.3125,
+            "height": 42,
+            "padding": "4px",
+            "gap": "2px",
+            "borderRadius": "9px",
+            "rows": [
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pointer-cross-gap-and-return-cancels-dismissal",
+          "passed": true,
+          "detail": {
+            "realPointerEvents": [
+              {
+                "time": 35133.5,
+                "x": 1,
+                "y": 499
+              },
+              {
+                "time": 35141.5,
+                "x": 152.84375,
+                "y": 419
+              }
+            ],
+            "returnElapsedMs": 8
+          }
+        },
+        {
+          "name": "outside-click-and-escape-return-focus",
+          "passed": true
+        },
+        {
+          "name": "pointer-leaving-document-dismisses",
+          "passed": true
+        },
+        {
+          "name": "window-blur-dismisses",
+          "passed": true
+        },
+        {
+          "name": "keyboard-navigation-and-tab-dismissal",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "kind": "calendar-top",
+      "language": "en",
+      "checks": [
+        {
+          "name": "compact-shared-rows",
+          "passed": true,
+          "detail": {
+            "width": 160,
+            "height": 110,
+            "padding": "4px",
+            "gap": "2px",
+            "borderRadius": "9px",
+            "rows": [
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              },
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              },
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pointer-cross-gap-and-return-cancels-dismissal",
+          "passed": true,
+          "detail": {
+            "realPointerEvents": [
+              {
+                "time": 37396.79999999999,
+                "x": 1,
+                "y": 539
+              },
+              {
+                "time": 37407.899999999965,
+                "x": 438,
+                "y": 75
+              }
+            ],
+            "returnElapsedMs": 11.099999999976717
+          }
+        },
+        {
+          "name": "outside-click-and-escape-return-focus",
+          "passed": true
+        },
+        {
+          "name": "pointer-leaving-document-dismisses",
+          "passed": true
+        },
+        {
+          "name": "window-blur-dismisses",
+          "passed": true
+        },
+        {
+          "name": "keyboard-navigation-and-tab-dismissal",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "kind": "calendar-bottom",
+      "language": "en",
+      "checks": [
+        {
+          "name": "compact-shared-rows",
+          "passed": true,
+          "detail": {
+            "width": 266.3125,
+            "height": 42,
+            "padding": "4px",
+            "gap": "2px",
+            "borderRadius": "9px",
+            "rows": [
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pointer-cross-gap-and-return-cancels-dismissal",
+          "passed": true,
+          "detail": {
+            "realPointerEvents": [
+              {
+                "time": 40258.29999999999,
+                "x": 1,
+                "y": 539
+              },
+              {
+                "time": 40266.79999999999,
+                "x": 312.84375,
+                "y": 455
+              }
+            ],
+            "returnElapsedMs": 8.5
+          }
+        },
+        {
+          "name": "outside-click-and-escape-return-focus",
+          "passed": true
+        },
+        {
+          "name": "pointer-leaving-document-dismisses",
+          "passed": true
+        },
+        {
+          "name": "window-blur-dismisses",
+          "passed": true
+        },
+        {
+          "name": "keyboard-navigation-and-tab-dismissal",
+          "passed": true
+        },
+        {
+          "name": "keyboard-opens-only-one-more-menu",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "kind": "trash-bottom",
+      "language": "en",
+      "checks": [
+        {
+          "name": "compact-shared-rows",
+          "passed": true,
+          "detail": {
+            "width": 226,
+            "height": 42,
+            "padding": "4px",
+            "gap": "2px",
+            "borderRadius": "9px",
+            "rows": [
+              {
+                "height": 32,
+                "font": "12px",
+                "padding": "6px 10px",
+                "borderRadius": "5px"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pointer-cross-gap-and-return-cancels-dismissal",
+          "passed": true,
+          "detail": {
+            "realPointerEvents": [
+              {
+                "time": 43399,
+                "x": 1,
+                "y": 539
+              },
+              {
+                "time": 43406.5,
+                "x": 313,
+                "y": 455
+              }
+            ],
+            "returnElapsedMs": 7.5
+          }
+        },
+        {
+          "name": "outside-click-and-escape-return-focus",
+          "passed": true
+        },
+        {
+          "name": "pointer-leaving-document-dismisses",
+          "passed": true
+        },
+        {
+          "name": "window-blur-dismisses",
+          "passed": true
+        },
+        {
+          "name": "keyboard-navigation-and-tab-dismissal",
+          "passed": true
+        },
+        {
+          "name": "keyboard-opens-only-one-more-menu",
+          "passed": true
+        },
+        {
+          "name": "permanent-delete-remains-protected",
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "pids": [
+    3464,
+    8152,
+    4908,
+    5328,
+    5348,
+    6380
+  ],
+  "normalQuit": true,
+  "profileRemoved": true,
+  "passed": true
+}
