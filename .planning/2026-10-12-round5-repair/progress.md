@@ -170,3 +170,5 @@ Windows426edf2旧合并菜单门禁面板未显示；Mac同例8业务通过。05
 Windows38447728544已通过旧菜单失焦失败点，但第四轮source阶段15分钟未返回、27分钟总作业；为在35分钟整job截止前收集诊断，仅取消该自有作业，不能计正常退出或业务PASS。完整日志/ZIP API SHA与CRC归档。真实卡点为round4-classification-ui的新建分组held-ack未到、normal quit被保护拒绝，15项先过；其请求/保存结果、manager状态补诊断，Mac同例18项正常退出绿。第四轮source保留全部原测试，通过既有run-ci-fixture外层180秒截止运行，失败只停自有子树、保留资料；不放宽业务门禁。e51Mac实际24套全绿，但Windows全轮未绿，仍无v32 tag/Release。
 
 Windows38453315931（58）完整source阶段已通过旧classification held事务18项，仍保留e51单次超时资料，不宣称产品根因修复；对原退出拒绝加监督后不再静默挂住。后续r5merge真实失焦用例仅调用Window.blur，Windows没有已确认焦点转移所以面板留存；测试改为正常打开自有manage并等待实际focus，确认Shelf失焦后才断言面板关闭。Macreal-focus-transfer-green10业务/正常退出绿。仅测试变动，不改生产焦点或权利；held请求trace在成功路径也保留。继续完整Windows、最终同源包/发布绑定。
+
+Windows177完整运行38455732665偶发真实原生菜单第二Esc未关闭；前3次外部点击关闭过，既有固定200ms不能证明子菜单实际切换完成。按微软FindWindowExW官方menu-class atom0x8000，通过自有PID限定查询原生菜单窗口1→2→1→0再逐次注入键，保留原两级、首Esc/次Esc及真正callback断言，不加第三Esc/重试掩盖。popup probe改每个实例保存closed，避免旧callback改新probe；Macnative-menu-state-source正常退出绿。Windows原生状态分支等待新完整CI，必要门禁保持。新PS检查脚本属测试输入，后续对源/包输入数按实际清单核对，不沿用旧356。
