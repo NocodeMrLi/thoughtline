@@ -176,3 +176,5 @@ Windows177完整运行38455732665偶发真实原生菜单第二Esc未关闭；�
 Windows14b844完整运行38458043095的原生探针失败：实际菜单0个#32768，外部点击3项仍通过。核Electron v44.7.0官方electron_api_menu_views.cc明确使用Chromium Views MenuRunner，所以上一微软MENUCLASS假设不适用，撤回其状态判断。改为枚举自有主进程可见顶层HWND，排除实际BrowserWindow句柄；记录class/title/handle及每步1→2→1→0状态，不操作其他进程、不改变生产行为、不增加Esc次数。Mac native-views-probe-source正常退出绿；Windows分支仍待完整CI。
 
 Windows87ff4a8运行38458843298探针仍0，诊断显示该PID没有任何可见窗口，真实foreground7592为测试应用metrics成员。核本地Playwright1.62.1 coreBundle.js WindowsElectron.launch明确shell:true，app.process().pid为cmd启动器，非Electron实际主进程。探针改用app.evaluate(()=>process.pid)并同时记录两者；window枚举和句柄排除规则不变。源路径说明已确认，未改生产。87ff最终Mac包36个编译/资源hash与e51完全一致、asar亦相同，可复用此前实际DMG24套；本包又分类18/pager5/merge10正常退出绿。旧native-menu源限定脚本的实际包尝试在启动前明确拒绝，失败与空目录清理记实，不当包通过。
+
+Windows5e86完整38459402641已通过真实菜单两次Esc、第三轮及第四轮分类/pager/merge旧失败点，新增stack在整叠挂回失败。原生receipt证明真实宽1024、3个保留位置的夹子；原用例硬调用hang但空间碎片应走arrange。Mac受控显示宽1024复现相同红例，证据stack-width1024-red；测试改为点击真实详情“重新挂上/整理挂上”，碎片条件仍断言直接hang拒绝且数据/撤销不变。随后填满容量的waiting也原硬setStatus挂上，按同一已确认空间原因走真实详情入口。stack-width1024-green-2完整14类含IO/IME及正常退出绿；生产零变动，不能宣称产品容量bug修复。原失败ZIP/hash/fixture归档保留。继续完整Windows与最终源码包绑定。
