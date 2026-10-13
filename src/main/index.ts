@@ -122,6 +122,8 @@ else app.whenReady().then(async()=>{
  };
  const calendarBounds=()=>snapshot.settings.calendarBounds??boundsFor(740,540);
  const manageRequests=new Map<string,Promise<Result<void>>>();
+ let confirmedManage:{window:BrowserWindow;session:number;mode:PilotInfo['manageMode']}|null=null;
+ const reuseReadyManage=async(mode:PilotInfo['manageMode']):Promise<Result<void>|null>=>{if(!manage||manage.isDestroyed()||manageMode!==mode||confirmedManage?.window!==manage||confirmedManage.session!==manageSession||confirmedManage.mode!==mode)return null;lock('manage',true);const shown=await presentManage();refreshTray();return shown;};
  const coalesceManage=(key:string,work:()=>Promise<Result<void>>)=>{const current=manageRequests.get(key);if(current)return current;const request=work().finally(()=>{if(manageRequests.get(key)===request)manageRequests.delete(key);});manageRequests.set(key,request);return request;};
  const presentManage=async():Promise<Result<void>>=>{
   const window=manage,session=manageSession,mode=manageMode,request=++manageReadyRequest;if(!window||window.isDestroyed()||quitting)return invalid(t('无效操作'));
@@ -131,7 +133,7 @@ else app.whenReady().then(async()=>{
    const timer=setTimeout(()=>finish(false),5000);ipcMain.on('thoughtline:view-ready',receive);publish();
   });
   if(!ready||window!==manage||window.isDestroyed()||manageSession!==session||manageMode!==mode||quitting)return invalid(t('浏览浮层未能打开，请重试。'));
-  window.show();window.focus();return done();
+  window.show();window.focus();confirmedManage={window,session,mode};return done();
  };
  const queueCalendarGeometry=()=>{
   if(manageMode!=='browse'||!manage?.isVisible()||Date.now()<boundsIgnoreUntil)return;
@@ -169,7 +171,7 @@ else app.whenReady().then(async()=>{
   w.on('will-move',()=>{boundsIgnoreUntil=0;});w.on('will-resize',()=>{boundsIgnoreUntil=0;});
   w.on('move',queueCalendarGeometry);w.on('resize',queueCalendarGeometry);
   w.on('show',()=>{manageSafeToRelease=false;if(manageRelease)clearTimeout(manageRelease);manageRelease=null;refreshTray();});
-  w.on('hide',()=>{w.webContents.setBackgroundThrottling(true);refreshTray();if(manageEditingOwner){w.show();w.focus();return;}manageRelease=setTimeout(()=>{manageRelease=null;if(!w.isDestroyed()&&!w.isVisible()&&!manageEditingOwner){manage=null;w.destroy();}},30000);});
+  w.on('hide',()=>{w.webContents.setBackgroundThrottling(true);refreshTray();if(manageEditingOwner){w.show();w.focus();return;}manageRelease=setTimeout(()=>{manageRelease=null;if(!w.isDestroyed()&&!w.isVisible()&&!manageEditingOwner){manage=null;if(confirmedManage?.window===w)confirmedManage=null;w.destroy();}},30000);});
   manageLoading=loadView(w,'manage').then(()=>w).catch(error=>{manage=null;w.destroy();throw error;}).finally(()=>{manageLoading=null;});
   return manageLoading;
  };
@@ -285,7 +287,7 @@ else app.whenReady().then(async()=>{
   if(id&&!snapshot.ideas.some(x=>x.id===id))return invalid(t("找不到这条念头。"));
   return coalesceManage('manage:'+String(id??'calendar')+':'+String(titles??false),async()=>{
   if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
-  try{await ensureManage();}catch{return {ok:false,code:'IO',message:t("浏览浮层未能打开，请重试。")};}if(quitting)return invalid(t("正在退出。"));manageSelection=id??null;manageMode=id?'detail':'browse';manageTitles=!!titles;manageEditingRequested=false;manageVisit++;calendarReturning=false;manageSession++;lock('manage',true);publish();if(id){const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint()),p=screen.getCursorScreenPoint();const b=boundsFor(420,500);b.x=Math.round(Math.max(d.workArea.x+12,Math.min(d.workArea.x+d.workArea.width-b.width-12,p.x-b.width/2)));b.y=Math.round(Math.max(d.workArea.y+12,Math.min(d.workArea.y+d.workArea.height-b.height-12,p.y+24)));setManageBounds(b);}else setManageBounds(calendarBounds(),!!snapshot.settings.calendarBounds);const shown=await presentManage();refreshTray();return shown;
+  try{await ensureManage();}catch{return {ok:false,code:'IO',message:t("浏览浮层未能打开，请重试。")};}if(quitting)return invalid(t("正在退出。"));if(id===undefined&&titles!==true&&manageSelection===null&&!manageTitles){const reused=await reuseReadyManage('browse');if(reused)return reused;}manageSelection=id??null;manageMode=id?'detail':'browse';manageTitles=!!titles;manageEditingRequested=false;manageVisit++;calendarReturning=false;manageSession++;lock('manage',true);publish();if(id){const d=screen.getDisplayNearestPoint(screen.getCursorScreenPoint()),p=screen.getCursorScreenPoint();const b=boundsFor(420,500);b.x=Math.round(Math.max(d.workArea.x+12,Math.min(d.workArea.x+d.workArea.width-b.width-12,p.x-b.width/2)));b.y=Math.round(Math.max(d.workArea.y+12,Math.min(d.workArea.y+d.workArea.height-b.height-12,p.y+24)));setManageBounds(b);}else setManageBounds(calendarBounds(),!!snapshot.settings.calendarBounds);const shown=await presentManage();refreshTray();return shown;
   });
  });
  const currentFilter=():ShelfFilter=>({project:shelfProject,agentId:shelfAgentId});
@@ -388,20 +390,23 @@ else app.whenReady().then(async()=>{
  };
  ipcMain.handle('thoughtline:open-classification',async(e,tab:ClassificationTab,returnDraft?:EditorReturnDraft)=>{
   if(!trusted(e,[composer,manage])||!['tags','projects','removed'].includes(tab)||quitting||settingsBusy||storageBusy)return invalid(t('无效操作'));
+  const origin=trusted(e,[composer])?'composer' as const:'calendar' as const;
+  return coalesceManage('classification:'+origin+':'+tab+':'+JSON.stringify(returnDraft??null),async()=>{
   if((trusted(e,[composer])&&composer?.isVisible()&&!await prepareWindow(composer))||!await prepareWindow(manage))return invalid(t('最后修改尚未保存，窗口已保留。'));
+  await ensureManage();if(returnDraft===undefined&&classificationOrigin===origin&&classificationTab===tab){const reused=await reuseReadyManage('classification');if(reused)return reused;}
   const editor=manageEditingOwner?.session===manageSession?manageEditingOwner:null;
   if(returnDraft&&(!trusted(e,[manage])||returnDraft.session!==manageSession||returnDraft.ideaId!==editor?.ideaId||!draftShape(returnDraft.draft)))return invalid(t('编辑会话已结束。'));
-  const origin=trusted(e,[composer])?'composer' as const:'calendar' as const;
   classificationReturnContext=origin==='calendar'&&manageMode!=='settings'&&manageMode!=='classification'?{mode:manageMode,selection:editor?.ideaId??manageSelection,editing:!!editor,titles:manageTitles,raw:returnDraft}:null;
   classificationReturnBounds=origin==='calendar'&&manage?.isVisible()?manage.getBounds():null;
   await ensureManage();classificationOrigin=origin;classificationTab=tab;manageMode='classification';manageSelection=null;manageEditingRequested=false;manageEditingOwner=null;manageSession++;lock('manage',true);setManageBounds(boundsFor(740,570));publish();return presentManage();
+  });
  });
  ipcMain.handle('thoughtline:return-classification',e=>trusted(e,[manage])?returnClassification():invalid(t('无效操作')));
  ipcMain.handle('thoughtline:close-manage',async e=>{if(!trusted(e,[manage]))return invalid(t("无效操作"));if(manageMode==='classification'&&classificationOrigin==='composer')return returnClassification();if(!await prepareWindow(manage))return invalid(t("最后修改尚未保存，窗口已保留。"));hideManage();return done();});
  const openSettings=(fromCalendar=false):Promise<Result<void>>=>coalesceManage('settings:'+fromCalendar,async()=>{
   const blocked=writerUnavailable();if(blocked)return blocked;
   if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
-  try{await ensureManage();}catch{return {ok:false,code:'IO',message:t("设置浮层未能打开，请重试。")};}const blockedAfterLoad=writerUnavailable();if(blockedAfterLoad)return blockedAfterLoad;calendarReturnBounds=fromCalendar&&manage?.isVisible()?manage.getBounds():null;if(!fromCalendar)manageVisit++;calendarReturning=false;cancelDrag();manageMode='settings';manageTitles=false;manageSelection=null;manageEditingRequested=false;manageSession++;lock('manage',true);setManageBounds(boundsFor(500,600));publish();const shown=await presentManage();refreshTray();return shown;
+  try{await ensureManage();}catch{return {ok:false,code:'IO',message:t("设置浮层未能打开，请重试。")};}const blockedAfterLoad=writerUnavailable();if(blockedAfterLoad)return blockedAfterLoad;const reused=await reuseReadyManage('settings');if(reused)return reused;calendarReturnBounds=fromCalendar&&manage?.isVisible()?manage.getBounds():null;if(!fromCalendar)manageVisit++;calendarReturning=false;cancelDrag();manageMode='settings';manageTitles=false;manageSelection=null;manageEditingRequested=false;manageSession++;lock('manage',true);setManageBounds(boundsFor(500,600));publish();const shown=await presentManage();refreshTray();return shown;
  });
  ipcMain.handle('thoughtline:open-settings',e=>trusted(e)?openSettings(trusted(e,[manage])&&manageMode==='browse'&&!!manage?.isVisible()):invalid(t("无效操作")));
  ipcMain.handle('thoughtline:return-calendar',async e=>{
