@@ -1,0 +1,143 @@
+START round2-workflow
+FIXTURE warmViews: shelf
+FIXTURE warmViews: settings
+FIXTURE warmViews: composer
+FIXTURE composer: invoking shortcut
+FIXTURE composer: shortcut invoked
+FIXTURE composer: created
+FIXTURE composer: native visibility checked
+FIXTURE composer: textbox visible
+FIXTURE composer: focused
+FIXTURE warmViews: ready
+ROUND2 check: hint-delay-small-dismiss-on-menu
+ROUND2 check: focus-ring-inside-editor-edges
+ROUND2 check: calendar-fills-resized-height-and-arrows
+ROUND2 check: settings-back-restores-month-and-window
+ROUND2 check: settings-dirty-return-retains-draft-and-close-cancels
+ROUND2 check: settings-external-update-does-not-invent-dirty-draft
+ROUND2 check: settings-discard-clears-hidden-close-guard
+ROUND2 check: menu-stash-current-preserves-other-pages
+ROUND2 check: navigation-performance-baseline
+{"platform":"darwin","arch":"arm64","dir":"/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-round2-Ui0Mx3","evidence":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round5/unavailable-legacy-fixture-fix/workflow-BSPHPA","cases":[{"name":"hint-delay-small-dismiss-on-menu","passed":true,"detail":{"x":260,"y":416,"width":60,"height":24}},{"name":"focus-ring-inside-editor-edges","passed":true,"detail":{"outline":"0px","offset":"-3px","shadow":"rgb(102, 105, 114) 0px 0px 0px 1px inset","border":"rgb(102, 105, 114)","x":14,"right":406,"parentX":14,"parentRight":406}},{"name":"calendar-fills-resized-height-and-arrows","passed":true,"detail":{"content":{"height":500,"bottom":646,"width":914},"grid":{"height":490,"bottom":638,"width":906},"cell":{"height":87.3984375,"bottom":268.3984375,"width":125.140625},"arrow":{"height":36,"bottom":136,"width":36},"svg":18}},{"name":"settings-back-restores-month-and-window","passed":true,"detail":{"title":"2026年9月","width":950}},{"name":"settings-dirty-return-retains-draft-and-close-cancels","passed":true,"detail":{"draftRetained":true,"closeCanceled":true}},{"name":"settings-external-update-does-not-invent-dirty-draft","passed":true,"detail":{"externalChangeRebased":true,"navigationAllowed":true}},{"name":"settings-discard-clears-hidden-close-guard","passed":true,"detail":{"discardAllowsNextVisit":true}},{"name":"menu-stash-current-preserves-other-pages","passed":true,"detail":{"labels":["新建念头","查看全文","合并","拆分","收起当前念头","只看 通用","显示全部标签","自动整理","撤销挂上","筛选标签","","Thoughtline日历"],"ids":["r2-0","r2-2"],"current":"r2-2"}},{"name":"navigation-performance-baseline","passed":true,"detail":{"samples":[57,67,66,67,67,66,67,65,68,67],"p50":67,"p95":68,"scope":"Playwright input plus two actual renderer frames, controlled environment"}}],"pids":[74538,74539,74540,74541,74543,74544],"nativeOutsideClick":"not exercised by protocol fixture","normalClose":true,"dataRemoved":true,"passed":true}
+CI FIXTURE {"file":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-workflow.cjs","pid":74537,"passed":true,"timedOut":false,"code":0}
+END round2-workflow 0
+START round2-calendar-navigation
+FIXTURE warmViews: shelf
+FIXTURE warmViews: settings
+FIXTURE warmViews: composer
+FIXTURE composer: invoking shortcut
+FIXTURE composer: shortcut invoked
+FIXTURE composer: created
+FIXTURE composer: native visibility checked
+FIXTURE composer: textbox visible
+FIXTURE composer: focused
+FIXTURE warmViews: ready
+{"platform":"darwin","scope":"isolated renderer/main/calendar return with real repository; no physical DPI or multi-display","cases":[{"name":"day-range-limit-scroll-restored","passed":true,"scroll":240},{"name":"year-hierarchy-restored","passed":true},{"name":"search-status-restored","passed":true,"count":9}],"pids":[74555,74556,74557,74558,74559,74560],"dir":"/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-calendar-return-9fqO48","normalClose":true,"dataRemoved":true,"passed":true}
+CI FIXTURE {"file":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-calendar-navigation.cjs","pid":74554,"passed":true,"timedOut":false,"code":0}
+END round2-calendar-navigation 0
+START round2-split-menu-workflow
+FIXTURE warmViews: shelf
+FIXTURE warmViews: settings
+FIXTURE warmViews: composer
+FIXTURE composer: invoking shortcut
+FIXTURE composer: shortcut invoked
+FIXTURE composer: created
+FIXTURE composer: native visibility checked
+FIXTURE composer: textbox visible
+FIXTURE composer: focused
+FIXTURE warmViews: ready
+FIXTURE warmViews: shelf
+FIXTURE warmViews: settings
+FIXTURE warmViews: composer
+FIXTURE composer: invoking shortcut
+FIXTURE composer: shortcut invoked
+FIXTURE composer: created
+FIXTURE composer: native visibility checked
+FIXTURE composer: textbox visible
+FIXTURE composer: focused
+FIXTURE warmViews: ready
+FIXTURE warmViews: shelf
+FIXTURE warmViews: settings
+FIXTURE warmViews: composer
+FIXTURE composer: invoking shortcut
+FIXTURE composer: shortcut invoked
+FIXTURE composer: created
+FIXTURE composer: native visibility checked
+FIXTURE composer: textbox visible
+FIXTURE composer: focused
+FIXTURE warmViews: ready
+{"platform":"darwin","scope":"isolated source protocol and repository; native popup stub, no physical click","cases":[{"name":"single-clip-has-no-split","passed":true},{"name":"cancelled-menu-does-not-mutate","passed":true},{"name":"captured-current-id-survives-background-page-change-without-opening-reader","passed":true},{"name":"right-click-split-can-be-undone","passed":true},{"name":"first-middle-last-pages-and-repeated-undo-preserve-order-content","passed":true},{"name":"stale-clip-target-is-rejected","passed":true},{"name":"write-failure-visible-on-shelf-with-original-data-intact","passed":true},{"name":"split-undo-cannot-revive-deleted-project","passed":true},{"name":"expanded-reader-split-remains-available","passed":true},{"name":"restart-retains-split-ids-content-order-and-page","passed":true},{"name":"true-full-rope-has-explicit-calendar-entry-and-preserved-content","passed":true},{"name":"English-menu-and-dark-theme-use-translated-current-thought-action","passed":true}],"pids":[74569,74570,74571,74572,74573,74574,74576,74577,74578,74579,74581,74582,74592,74593,74594,74595,74596,74597,74598,74599,74600,74601],"dir":"/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-split-menu-9m6BDV","dataRemoved":true,"passed":true}
+CI FIXTURE {"file":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-split-menu-workflow.cjs","pid":74566,"passed":true,"timedOut":false,"code":0}
+END round2-split-menu-workflow 0
+START round2-merge-menu-workflow
+FIXTURE warmViews: shelf
+FIXTURE warmViews: settings
+FIXTURE warmViews: composer
+FIXTURE composer: invoking shortcut
+FIXTURE composer: shortcut invoked
+FIXTURE composer: created
+FIXTURE composer: native visibility checked
+FIXTURE composer: textbox visible
+FIXTURE composer: focused
+FIXTURE warmViews: ready
+FIXTURE warmViews: shelf
+FIXTURE warmViews: settings
+FIXTURE warmViews: composer
+FIXTURE composer: invoking shortcut
+FIXTURE composer: shortcut invoked
+FIXTURE composer: created
+FIXTURE composer: native visibility checked
+FIXTURE composer: textbox visible
+FIXTURE composer: focused
+FIXTURE warmViews: ready
+FIXTURE warmViews: shelf
+FIXTURE warmViews: settings
+FIXTURE warmViews: composer
+FIXTURE composer: invoking shortcut
+FIXTURE composer: shortcut invoked
+FIXTURE composer: created
+FIXTURE composer: native visibility checked
+FIXTURE composer: textbox visible
+FIXTURE composer: focused
+FIXTURE warmViews: ready
+FIXTURE warmViews: shelf
+FIXTURE warmViews: settings
+FIXTURE warmViews: composer
+FIXTURE composer: invoking shortcut
+FIXTURE composer: shortcut invoked
+FIXTURE composer: created
+FIXTURE composer: native visibility checked
+FIXTURE composer: textbox visible
+FIXTURE composer: focused
+FIXTURE warmViews: ready
+{"platform":"darwin","scope":"isolated source native-menu callbacks/renderer/IPC/repository, not physical menu click","cases":[{"name":"compatible-targets-exclude-self-and-show-title-count","passed":true},{"name":"captured-one-paper-merge-preserves-projects-content-order-and-position","passed":true},{"name":"merge-undo-restores-both-stacks","passed":true},{"name":"stale-target-rejected-without-moving-paper","passed":true},{"name":"no-compatible-target-has-readable-disabled-reason","passed":true},{"name":"single-source-merge-removes-only-empty-source-clip","passed":true},{"name":"English-short-Merge-label-and-localized-count","passed":true},{"name":"overflow-target-not-offered-to-keep-merged-paper-visible","passed":true}],"pids":[74604,74605,74606,74607,74608,74612,74613,74614,74615,74616,74617,74618,74619,74620,74621,74622,74623,74624,74637,74638,74639,74640,74641,74642],"dataRemoved":true,"passed":true}
+CI FIXTURE {"file":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round2-merge-menu-workflow.cjs","pid":74603,"passed":true,"timedOut":false,"code":0}
+END round2-merge-menu-workflow 0
+START final-reader-placement-workflow
+FIXTURE warmViews: shelf
+FIXTURE warmViews: settings
+FIXTURE warmViews: composer
+FIXTURE composer: invoking shortcut
+FIXTURE composer: shortcut invoked
+FIXTURE composer: created
+FIXTURE composer: native visibility checked
+FIXTURE composer: textbox visible
+FIXTURE composer: focused
+FIXTURE warmViews: ready
+{"evidence":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round5/unavailable-legacy-fixture-fix/reader-placement-2DnCLl","dir":"/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-final-reader-0jg46T","cases":[{"name":"raw-cross","passed":true,"oldSession":2,"session":3,"reader":"c","editors":1,"draft":"UNSAVED cross C","persisted":"final probe c"},{"name":"real-main-cross-session-late-delete","passed":true,"session":3,"reader":"c","editors":1,"draft":"UNSAVED cross C","persisted":"final probe c"},{"name":"raw-same","passed":true,"oldSession":4,"session":4,"reader":"c","editors":1,"draft":"UNSAVED same C","persisted":"UNSAVED cross C"},{"name":"same-session-back-new-dirty-reader","passed":true,"session":4,"reader":"c","editors":1,"draft":"UNSAVED same C","persisted":"UNSAVED cross C"},{"name":"detail-fast-queued-flips-and-delayed-finish","passed":true,"sequentialFlipsRetained":true,"delayedFinishWaitedForSave":true},{"name":"calendar-normal-delete-neighbor","passed":true,"reader":"e"},{"name":"detail-normal-delete-neighbor-and-empty","passed":true,"neighbor":"f","lastDeleteEmpty":true},{"name":"detail-last-deleted-selection-stays-empty","passed":true,"noFallbackToOldManageSelection":true},{"name":"agent-auto-split-full-rope-recovery-action-and-stable-body","passed":true,"notice":"","swapRecoveryPresent":true,"idsStable":true,"subsequentEditStable":true}],"pids":[74648,74649,74650,74651,74652,74653],"scope":"Real source Electron main routing and persisted mutations; controlled reply hold, synthetic data only","normalClose":true,"pidChecks":[{"pid":74648,"status":"ESRCH"},{"pid":74649,"status":"ESRCH"},{"pid":74650,"status":"ESRCH"},{"pid":74651,"status":"ESRCH"},{"pid":74652,"status":"ESRCH"},{"pid":74653,"status":"ESRCH"}],"stat":"ENOENT","passed":true}
+CI FIXTURE {"file":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/final-reader-placement-workflow.cjs","pid":74647,"passed":true,"timedOut":false,"code":0}
+END final-reader-placement-workflow 0
+START final-calendar-shape-workflow
+FIXTURE warmViews: shelf
+FIXTURE warmViews: settings
+FIXTURE warmViews: composer
+FIXTURE composer: invoking shortcut
+FIXTURE composer: shortcut invoked
+FIXTURE composer: created
+FIXTURE composer: native visibility checked
+FIXTURE composer: textbox visible
+FIXTURE composer: focused
+FIXTURE warmViews: ready
+{"dir":"/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-final-shape-X1xF3g","evidence":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round5/unavailable-legacy-fixture-fix/calendar-shape-YlOg5p","cases":[{"name":"empty-day-expand","passed":true,"frames":[{"time":25,"kind":"month-to-day","from":{"left":422.5703125,"top":181,"width":95.140625,"height":61.3984375},"to":{"left":22,"top":114,"width":696,"height":19.1953125},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"calendar-paper-groups","x":0.508024,"y":0.508024,"tx":228.275,"ty":54.9288}],"clones":0,"clips":[]},{"time":100,"kind":"month-to-day","from":{"left":422.5703125,"top":181,"width":95.140625,"height":61.3984375},"to":{"left":22,"top":114,"width":696,"height":19.1953125},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"calendar-paper-groups","x":0.944708,"y":0.944708,"tx":25.6553,"ty":6.1733}],"clones":0,"clips":[]}]},{"name":"empty-day-return","passed":true,"frames":[{"time":25,"kind":"day-to-month","from":{"left":22,"top":114,"width":696,"height":19.1953125},"to":{"left":422.5703125,"top":181,"width":95.140625,"height":61.3984375},"transforms":[{"class":"calendar-motion-surface","x":0.599991,"y":0.599991,"tx":185.603,"ty":44.6607},{"class":"date-cell","x":1,"y":1,"tx":0,"ty":0}],"clones":0,"clips":[]},{"time":100,"kind":"day-to-month","from":{"left":22,"top":114,"width":696,"height":19.1953125},"to":{"left":422.5703125,"top":181,"width":95.140625,"height":61.3984375},"transforms":[{"class":"calendar-motion-surface","x":0.176959,"y":0.176959,"tx":381.889,"ty":91.892},{"class":"date-cell","x":1,"y":1,"tx":0,"ty":0}],"clones":0,"clips":[]}]},{"name":"paper-day-expand","passed":true,"frames":[{"time":25,"kind":"month-to-day","from":{"left":422.5703125,"top":313.796875,"width":95.140625,"height":61.3984375},"to":{"left":22,"top":105,"width":696,"height":411},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"calendar-paper-groups","x":0.508024,"y":0.508024,"tx":228.275,"ty":120.475}],"clones":0,"clips":[{"width":22,"height":17}]},{"time":100,"kind":"month-to-day","from":{"left":422.5703125,"top":313.796875,"width":95.140625,"height":61.3984375},"to":{"left":22,"top":105,"width":696,"height":411},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"calendar-paper-groups","x":0.944708,"y":0.944708,"tx":25.6553,"ty":13.5398}],"clones":0,"clips":[{"width":22,"height":17}]}]},{"name":"paper-day-return","passed":true,"frames":[{"time":25,"kind":"day-to-month","from":{"left":22,"top":105,"width":696,"height":411},"to":{"left":422.5703125,"top":313.796875,"width":95.140625,"height":61.3984375},"transforms":[{"class":"calendar-motion-surface","x":0.599991,"y":0.599991,"tx":185.603,"ty":97.9538},{"class":"date-cell","x":1,"y":1,"tx":0,"ty":0}],"clones":6,"clips":[{"width":13.1998291015625,"height":10.199844360351562},{"width":13.199798583984375,"height":10.199844360351562},{"width":13.1998291015625,"height":10.199844360351562},{"width":13.1998291015625,"height":10.199859619140625},{"width":13.199798583984375,"height":10.199859619140625},{"width":13.1998291015625,"height":10.199859619140625}]},{"time":100,"kind":"day-to-month","from":{"left":22,"top":105,"width":696,"height":411},"to":{"left":422.5703125,"top":313.796875,"width":95.140625,"height":61.3984375},"transforms":[{"class":"calendar-motion-surface","x":0.176959,"y":0.176959,"tx":381.889,"ty":201.546},{"class":"date-cell","x":1,"y":1,"tx":0,"ty":0}],"clones":6,"clips":[{"width":3.893096923828125,"height":3.00830078125},{"width":3.893096923828125,"height":3.00830078125},{"width":3.893096923828125,"height":3.00830078125},{"width":3.893096923828125,"height":3.00830078125},{"width":3.893096923828125,"height":3.00830078125},{"width":3.893096923828125,"height":3.00830078125}]}]},{"name":"month-to-year","passed":true,"frames":[{"time":25,"kind":"month-to-year","from":{"left":22,"top":148,"width":696,"height":360},"to":{"left":22,"top":427,"width":224,"height":81},"transforms":[{"class":"calendar-motion-surface","x":0.640906,"y":0.640906,"tx":15.6148,"ty":129.274},{"class":"","x":1,"y":1,"tx":0,"ty":0}],"clones":0,"clips":[{"width":14.09991455078125,"height":10.895416259765625}]},{"time":100,"kind":"month-to-year","from":{"left":22,"top":148,"width":696,"height":360},"to":{"left":22,"top":427,"width":224,"height":81},"transforms":[{"class":"calendar-motion-surface","x":0.261144,"y":0.261144,"tx":32.1283,"ty":265.988},{"class":"","x":1,"y":1,"tx":0,"ty":0}],"clones":0,"clips":[{"width":5.74517822265625,"height":4.439422607421875}]}]},{"name":"year-to-month","passed":true,"frames":[{"time":25,"kind":"year-to-month","from":{"left":22,"top":427,"width":224,"height":81},"to":{"left":22,"top":148,"width":696,"height":360},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"month-grid","x":0.558346,"y":0.558346,"tx":19.2048,"ty":158.995}],"clones":0,"clips":[{"width":22,"height":17}]},{"time":100,"kind":"year-to-month","from":{"left":22,"top":427,"width":224,"height":81},"to":{"left":22,"top":148,"width":696,"height":360},"transforms":[{"class":"calendar-motion-surface","x":1,"y":1,"tx":0,"ty":0},{"class":"month-grid","x":0.950364,"y":0.950364,"tx":2.15838,"ty":17.8691}],"clones":0,"clips":[{"width":22,"height":17}]}]}],"pids":[74661,74662,74663,74664,74665,74666],"normalClose":true,"pidChecks":[{"pid":74661,"status":"ESRCH"},{"pid":74662,"status":"ESRCH"},{"pid":74663,"status":"ESRCH"},{"pid":74664,"status":"ESRCH"},{"pid":74665,"status":"ESRCH"},{"pid":74666,"status":"ESRCH"}],"stat":"ENOENT","passed":true}
+CI FIXTURE {"file":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/final-calendar-shape-workflow.cjs","pid":74660,"passed":true,"timedOut":false,"code":0}
+END final-calendar-shape-workflow 0

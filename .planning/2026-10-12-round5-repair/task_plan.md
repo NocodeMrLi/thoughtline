@@ -39,3 +39,11 @@ Files: CI workflow/tests/scripts, package/lock/readmes/launchers, acceptance/gat
 
 最终结果：0.0.28第五轮双端技术验证、清理和私有发布完成。构建/tag源码 `4c9567fef38dd43ccd0e0c3bc18d557c4b945843`；Windows完整CI [38287260286](https://github.com/NocodeMrLi/thoughtline/actions/runs/38287260286) success；[私有发行页](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.28)（Release 410883610），10份附件大小与SHA256读回一致。main后续文档证据提交不改变安装包源码。
 Actions 34份/65932941bytes；归档与发布后清理读回通过。
+
+## Task 4 R5-12 已移除按钮追加修复（0.0.29，已完成）
+- [x] 获批方案同步；原生灰态与点击说明红例。
+- [x] 最小按钮/浮层修复；中英浅深宽窄、2.5秒/重复点击/Esc/外部点击/键盘/恢复/删除回归。
+- [x] 双端源/实际包验证及摘要绑定，独立0.0.29发布、清理、main推送和报告。
+保护用户运行0.0.28 PID68573和个人数据；只改已移除编辑/改名灰态与说明。
+
+R5-12完成：0.0.29（第五轮R5-12）已完成双端技术验证、清理及私有发布。构建/tag源码 66e88363d34f042b18a7ca4f88c8d7c29a115595；Windows完整运行 38333752315 success；Release 411180836，10份附件大小/SHA256读回一致。main后续文档提交不改变包来源。

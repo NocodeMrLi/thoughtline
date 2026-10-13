@@ -1,0 +1,368 @@
+{
+  "platform": "darwin",
+  "packaged": false,
+  "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-r5-6foiNB",
+  "checks": [
+    "native tray calendar entry stays enabled during writing",
+    "calendar opens beside active writer",
+    "focused composer name has no coloured rectangle",
+    "opening a picker preserves native composer bounds",
+    "default group stays above selected group",
+    "long hold only enters arrange; explicit cross removes",
+    "three equal settings-style tabs; full catalog retains removed rows",
+    "table headings align with body despite native scrollbar gutter",
+    "removed tab has two bounded icon lists with independent scrolling and restore only",
+    "restoration preserves both pane heights and original writer classification",
+    "one delete action migrates all related history and live writer body to selected group",
+    "detail shares group and tag choices while writer stays visible; management returns to same edit",
+    "same-paper return preserves raw empty title instead of derived display title",
+    "multi-paper management return preserves actual B and active empty title",
+    "restored draft is consumed once across repeated editing",
+    "concurrent writer and old-note autosaves preserve independent content",
+    "all simultaneous group-tag metadata is group first in shelf and calendar",
+    "calendar close leaves writer intact and editable"
+  ],
+  "failures": [
+    {
+      "name": "calendar reader management return retains editing and raw empty title",
+      "error": "AssertionError [ERR_ASSERTION]: Return must belong to the completed classification handoff\n+ actual - expected\n\n+ 'calendar'\n- 'classification'\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-window-handoff-diagnostic.cjs:34:793\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-window-handoff-diagnostic.cjs:6:35)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-window-handoff-diagnostic.cjs:34:3"
+    }
+  ],
+  "scope": "controlled native source/actual package; physical and owner acceptance separate",
+  "preReturnMode": "calendar",
+  "failureState": {
+    "lightReminder": null,
+    "preferenceCommit": {
+      "version": 1,
+      "sequence": 1,
+      "own": false
+    },
+    "preferences": {
+      "schemaVersion": 1,
+      "version": 1,
+      "locale": "zh-CN",
+      "theme": "light"
+    },
+    "preferenceError": null,
+    "platform": "mac",
+    "snapshot": {
+      "schemaVersion": 3,
+      "revision": 9,
+      "ideas": [
+        {
+          "id": "old",
+          "title": "历史正文😀",
+          "text": "同时改旧念头😀",
+          "project": "接收分组",
+          "agentId": "daily",
+          "status": "hanging",
+          "createdAt": "2026-10-12T00:00:00Z",
+          "updatedAt": "2026-10-13T01:12:09.003Z",
+          "createdDay": "2026-10-12",
+          "creationTimeZone": "legacy-offset"
+        },
+        {
+          "id": "oldB",
+          "title": "B新保存正文",
+          "text": "B新保存正文",
+          "project": "接收分组",
+          "agentId": "daily",
+          "status": "hanging",
+          "createdAt": "2026-10-12T00:00:00Z",
+          "updatedAt": "2026-10-13T01:12:08.576Z",
+          "createdDay": "2026-10-12",
+          "creationTimeZone": "legacy-offset"
+        }
+      ],
+      "clips": [
+        {
+          "id": "c",
+          "agentId": "daily",
+          "ideaIds": [
+            "old",
+            "oldB"
+          ],
+          "currentId": "oldB",
+          "position": null
+        }
+      ],
+      "agents": [
+        {
+          "id": "daily",
+          "name": "日报",
+          "color": "#3c87dd"
+        },
+        {
+          "id": "general",
+          "name": "通用",
+          "color": "#A0A3AA"
+        },
+        {
+          "id": "tag0",
+          "name": "标签0",
+          "color": "#789360"
+        },
+        {
+          "id": "tag1",
+          "name": "标签1",
+          "color": "#789360"
+        },
+        {
+          "id": "tag2",
+          "name": "标签2",
+          "color": "#789360"
+        },
+        {
+          "id": "tag3",
+          "name": "标签3",
+          "color": "#789360"
+        },
+        {
+          "id": "tag4",
+          "name": "标签4",
+          "color": "#789360"
+        },
+        {
+          "id": "tag5",
+          "name": "标签5",
+          "color": "#789360"
+        },
+        {
+          "id": "tag6",
+          "name": "标签6",
+          "color": "#789360"
+        },
+        {
+          "id": "tag7",
+          "name": "标签7",
+          "color": "#789360"
+        },
+        {
+          "id": "tag8",
+          "name": "标签8",
+          "color": "#789360"
+        },
+        {
+          "id": "tag9",
+          "name": "标签9",
+          "color": "#789360"
+        },
+        {
+          "id": "tag10",
+          "name": "标签10",
+          "color": "#789360"
+        },
+        {
+          "id": "tag11",
+          "name": "标签11",
+          "color": "#789360"
+        },
+        {
+          "id": "tag12",
+          "name": "标签12",
+          "color": "#789360"
+        },
+        {
+          "id": "tag13",
+          "name": "标签13",
+          "color": "#789360"
+        },
+        {
+          "id": "tag14",
+          "name": "标签14",
+          "color": "#789360"
+        },
+        {
+          "id": "tag15",
+          "name": "标签15",
+          "color": "#789360"
+        },
+        {
+          "id": "tag16",
+          "name": "标签16",
+          "color": "#789360"
+        },
+        {
+          "id": "tag17",
+          "name": "标签17",
+          "color": "#789360"
+        },
+        {
+          "id": "tag18",
+          "name": "标签18",
+          "color": "#789360"
+        },
+        {
+          "id": "tag19",
+          "name": "标签19",
+          "color": "#789360"
+        },
+        {
+          "id": "tag20",
+          "name": "标签20",
+          "color": "#789360"
+        },
+        {
+          "id": "tag21",
+          "name": "标签21",
+          "color": "#789360"
+        },
+        {
+          "id": "tag22",
+          "name": "标签22",
+          "color": "#789360"
+        },
+        {
+          "id": "tag23",
+          "name": "标签23",
+          "color": "#789360"
+        }
+      ],
+      "projects": [
+        "分组0",
+        "分组1",
+        "分组10",
+        "分组11",
+        "分组12",
+        "分组13",
+        "分组14",
+        "分组15",
+        "分组16",
+        "分组17",
+        "分组18",
+        "分组19",
+        "分组2",
+        "分组20",
+        "分组21",
+        "分组22",
+        "分组23",
+        "分组24",
+        "分组25",
+        "分组26",
+        "分组27",
+        "分组3",
+        "分组4",
+        "分组5",
+        "分组6",
+        "分组7",
+        "分组8",
+        "分组9",
+        "接收分组"
+      ],
+      "inactiveAgents": [
+        "tag0",
+        "tag1",
+        "tag2",
+        "tag3",
+        "tag4",
+        "tag5",
+        "tag6",
+        "tag7",
+        "tag8",
+        "tag9",
+        "tag10",
+        "tag11",
+        "tag12",
+        "tag13",
+        "tag14",
+        "tag15",
+        "tag16",
+        "tag17",
+        "tag18",
+        "tag19",
+        "tag20",
+        "tag21",
+        "tag22",
+        "tag23"
+      ],
+      "inactiveProjects": [
+        "分组0",
+        "分组1",
+        "分组2",
+        "分组3",
+        "分组4",
+        "分组5",
+        "分组6",
+        "分组7",
+        "分组8",
+        "分组9",
+        "分组10",
+        "分组11",
+        "分组12",
+        "分组13",
+        "分组14",
+        "分组15",
+        "分组16",
+        "分组17",
+        "分组18",
+        "分组19",
+        "分组20",
+        "分组21",
+        "分组22",
+        "分组23",
+        "分组24",
+        "分组25",
+        "分组26",
+        "分组27"
+      ],
+      "draft": {
+        "text": "同时写新草稿😀",
+        "title": "草稿名称",
+        "project": "接收分组",
+        "agentId": "daily"
+      },
+      "settings": {
+        "writeHotkey": "Control+Alt+Shift+F19",
+        "reducedMotion": true
+      }
+    },
+    "displayId": "1",
+    "width": 1440,
+    "dark": false,
+    "composerSession": 1,
+    "composerDraftSequence": 2,
+    "composerMaterial": "vibrancy",
+    "composerContext": {
+      "mode": "new",
+      "ideaId": null,
+      "draft": {
+        "text": "同时写新草稿😀",
+        "title": "草稿名称",
+        "project": "接收分组",
+        "agentId": "daily"
+      }
+    },
+    "placementNotice": null,
+    "placementNoticeId": 0,
+    "placementNoticeKind": "info",
+    "arrangeSession": 0,
+    "manageVisit": 4,
+    "calendarReturning": false,
+    "manageSession": 11,
+    "manageSelection": null,
+    "manageMode": "browse",
+    "classificationTab": "projects",
+    "classificationOrigin": "calendar",
+    "classificationChange": {
+      "sequence": 1,
+      "field": "project",
+      "from": "工作",
+      "to": "接收分组"
+    },
+    "manageTitles": false,
+    "manageMaterial": "vibrancy",
+    "manageEditingRequested": false,
+    "canUndoClips": false,
+    "dragCancelSession": 1,
+    "textDragActive": false,
+    "shelfAgentId": "all",
+    "hotkeyRegistered": true,
+    "shelfVisible": false,
+    "interactionLocked": true,
+    "presentationSession": 1,
+    "layoutLocked": false
+  },
+  "normalQuit": true,
+  "profileRemoved": true,
+  "passed": false
+}
