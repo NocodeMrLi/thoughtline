@@ -184,3 +184,5 @@ Windows38完整38461802440在settings第一窗口等待30秒超时，0业务检�
 Windowsfb完整38464386534实际已通过第四轮全部新增含settings/stack，元数据步骤显示滞后；gh --log-failed为空，读取job115527437749完整日志证明是真实旧calendar-workflow编辑后返回12张断言失败，而非runner中断。原36MBZIP SHA/CRC归档。Mac普通源同例过；对旧组记忆请求施加2800ms延迟独立重现同一点，首次正文已保存、窗口尺寸合法提交把rev2→3，旧rememberProject请求rev2被拒绝，编辑仍在；退出保护拒绝并最终监督超时，精确70649已停止，61文件逐SHA归档清理，不能计正常退出。只读自有Inspector后续trace确认旧INVALID“内容已变化”。
 修复：分类RPC保持trusted/形状/会话/owner/严格revision校验，仅准确将版本不匹配返回CONFLICT；Inline记忆分组只对CONFLICT读取新快照，确认live、原session、版本确实增加、同一未删除纸张分组未变，再用fresh revision最多重试一次。IO/INVALID/组或session变化/退役/第二冲突继续拒绝。新增10单测（原行为2红6绿→全部绿）及全verify408pass/4Win skip。源受控2800ms真实RPC轨迹CONFLICT(rev2)→成功(rev3)，UI编辑完成后返回12张及原滚动、搜索、删除恢复全绿；原测试补等编辑组件真实退场，不把正文写入等同完整完成。源6受影响套含20冷启动settings/stack/pager/classification/inline/calendar全部正常退出绿。
 Calendar门禁增加真实包启动路径，沿普通openManage入口；窗口快捷键用隔离F19。Windows实际包保留原矩阵并追加该旧Calendar完整用例。新生产代码改变了Main/Renderer指纹，之前e51实际24套与旧性能不覆盖本修复；最终Mac全包/新性能与完整Windows必须重跑、重新绑定，仍无v32tag/Release。
+
+实际包Calendar用例不能借source launchOptions默认写入中文locale；显式在同一合成profile写preferences zh-CN/system，确保Windows英文OS上的中文业务断言使用确定的测试输入。仅测试fixture修正，无生产变动；9fMac包已经严格输入冻结/签名完成，保留其作为同运行程序候选，最终源/包输入必须按新提交重建，旧未完成CI将由新完整运行替代，不计PASS。
