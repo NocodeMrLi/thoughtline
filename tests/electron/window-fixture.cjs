@@ -38,4 +38,15 @@ async function warmViewsImpl(app){
  console.log('FIXTURE warmViews: ready');return {shelf,composer,manage};
 }
 async function waitForInfo(page,predicate,timeout=10000){const deadline=Date.now()+timeout;let latest;while(Date.now()<deadline){const info=await page.evaluate(()=>window.thoughtline.info());latest=info;if(predicate(info))return info;await new Promise(r=>setTimeout(r,25));}const renderer=await bounded(page.evaluate(()=>({url:location.href,visibility:document.visibilityState,focused:document.hasFocus(),active:document.activeElement?.getAttribute('aria-label'),inputs:[...document.querySelectorAll('[data-inline-editor] input,[data-inline-editor] textarea')].map(e=>({label:e.getAttribute('aria-label'),value:e.value})),status:[...document.querySelectorAll('[role=status],[role=alert]')].map(e=>e.textContent)})),'state failure diagnostics',3000).catch(e=>String(e));console.error('FIXTURE STATE TIMEOUT',JSON.stringify({latest,renderer}));throw Error('Timed out waiting for acknowledged main-process state');}
-module.exports={launchOptions,openComposer,warmViews,waitForInfo,bounded,waitHidden};
+// Reopening a ready calendar preserves its navigation. Return through real UI,
+// including its save/IME guards, rather than expecting openManage to reset it.
+async function returnToCalendarMonth(page,language='zh'){
+ const signature=()=>JSON.stringify({heading:document.querySelector('.calendar-heading')?.textContent,reader:document.querySelector('[data-reader-id]')?.getAttribute('data-reader-id'),papers:document.querySelectorAll('.calendar-paper').length,month:!!document.querySelector('.month-grid')});
+ for(let depth=0;depth<4&&!await page.locator('.month-grid').count();depth++){
+  const before=await page.evaluate(signature);
+  await page.getByRole('button',{name:language==='zh'?'返回':'Back',exact:true}).click();
+  await page.waitForFunction(before=>JSON.stringify({heading:document.querySelector('.calendar-heading')?.textContent,reader:document.querySelector('[data-reader-id]')?.getAttribute('data-reader-id'),papers:document.querySelectorAll('.calendar-paper').length,month:!!document.querySelector('.month-grid')})!==before,before,{timeout:10000});
+ }
+ await page.locator('.month-grid').waitFor();
+}
+module.exports={launchOptions,openComposer,warmViews,waitForInfo,bounded,waitHidden,returnToCalendarMonth};

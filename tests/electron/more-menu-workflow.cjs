@@ -7,7 +7,7 @@ const {launchOptions,warmViews}=require('./window-fixture.cjs'),{cleanupIdleFixt
   await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify(fixture()));app=await _electron.launch(await launchOptions(dir));assert.equal(await app.evaluate(({app})=>app.getPath('userData')),dir);const {shelf,manage}=await warmViews(app);
   let sequence=0;for(const language of ['zh','en'])for(const theme of ['light','dark']){const themeEvidence=path.join(evidence,language+'-'+theme);await fs.mkdir(themeEvidence);
    const locale=language==='zh'?'zh-CN':'en';const r=await manage.evaluate(({locale,theme,sequence})=>window.thoughtline.setPreferences({locale,theme},sequence),{locale,theme,sequence:++sequence});assert(r.ok,r.message);
-   const openCalendar=async()=>{assert((await shelf.evaluate(()=>window.thoughtline.openManage())).ok);await manage.waitForSelector('.month-grid');};
+   const openCalendar=async()=>{assert((await shelf.evaluate(()=>window.thoughtline.openManage())).ok);await require('./window-fixture.cjs').returnToCalendarMonth(manage,language);};
    assert((await shelf.evaluate(()=>window.thoughtline.openManage('menu-live'))).ok);await manage.waitForSelector('[data-reader-id="menu-live"]');receipt.cases.push(await checks(manage,{kind:'expanded-bottom',language,evidence:themeEvidence}));
    await openCalendar();receipt.cases.push(await checks(manage,{kind:'calendar-top',language,evidence:themeEvidence}));
    await manage.locator('[data-day="'+fixture().ideas[0].createdDay+'"]').click();await manage.locator('[data-idea-id="menu-live"]').click();await manage.waitForSelector('[data-reader-id="menu-live"]');receipt.cases.push(await checks(manage,{kind:'calendar-bottom',language,evidence:themeEvidence}));
