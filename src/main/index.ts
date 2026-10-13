@@ -304,7 +304,7 @@ else app.whenReady().then(async()=>{
   return selectShelfFilter(f);
  });
  ipcMain.handle('thoughtline:close-shelf-filter-picker',e=>{if(!trusted(e,[shelf]))return invalid(t('无效操作'));closeFilterPicker();return done();});
- shelf.on('blur',()=>{closeFilterPicker();closeMergePicker();});
+ shelf.on('blur',()=>{if(shelf.isFocused())return;closeFilterPicker();closeMergePicker();});
  const browseFromTray=()=>{void openBrowse();};
  const openBrowse=async()=>{
   if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
