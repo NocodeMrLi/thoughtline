@@ -6,6 +6,10 @@ on:
         description: 'Frozen full source SHA; unaffected evidence is reused by recorded fingerprints'
         type: string
         required: true
+      source_evidence_run:
+        description: 'Reuse completed source gates when only fixture geometry or workflow routing changed'
+        type: string
+        default: ''
       continuation_run:
         description: 'Reuse the identical verified installer from a failed fixture-routing run'
         type: string
@@ -36,14 +40,58 @@ jobs:
       - run: node scripts/ci-artifact-evidence.cjs snapshot
       - run: npm ci --no-audit --no-fund
       - run: npm run typecheck
-        if: inputs.continuation_run == ''
+        if: inputs.continuation_run == '' && inputs.source_evidence_run == ''
       - name: New and affected unit checks
-        if: inputs.continuation_run == ''
+        if: inputs.continuation_run == '' && inputs.source_evidence_run == ''
         run: npm test -- tests/unit/round6SearchCalendar.test.ts tests/unit/round6PickerGeometry.test.ts tests/unit/round5ShelfFilter.test.ts tests/unit/round5MergeTargets.test.ts tests/unit/round5ManageBounds.test.ts tests/unit/clipCommands.test.ts tests/unit/ideaPlacement.test.ts tests/unit/ideaHistory.test.ts tests/unit/draftAutosaver.test.ts tests/unit/rememberIdeaProject.test.ts tests/unit/windowsAtomicWrite.test.ts tests/unit/deliveryVersion.test.ts tests/unit/macLauncherGenerator.test.ts
       - run: npm run build
         if: inputs.continuation_run == ''
+      - name: Verify previous completed source gates and run remaining cases
+        if: inputs.source_evidence_run != '' && inputs.continuation_run == ''
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $run = '${{ inputs.source_evidence_run }}'
+          if ($run -notmatch '^\d+$') { throw 'Invalid prior source run' }
+          New-Item -ItemType Directory -Force acceptance/evidence/round6/source-reuse | Out-Null
+          gh run view $run --repo '${{ github.repository }}' --json headSha,jobs,conclusion > acceptance/evidence/round6/source-reuse/run.json
+          if ($LASTEXITCODE -ne 0) { throw 'Prior run unavailable' }
+          $prior = Get-Content acceptance/evidence/round6/source-reuse/run.json -Raw | ConvertFrom-Json
+          if ($prior.conclusion -ne 'failure') { throw 'Expected preserved partial failure' }
+          git fetch origin $prior.headSha --depth=1
+          if ($LASTEXITCODE -ne 0) { throw 'Prior source unavailable' }
+          $changed = @(git diff --name-only $prior.headSha HEAD)
+          $bad = @($changed | Where-Object { $_ -notin @('tests/electron/round6-reader-workflow.cjs','.github/workflows/round6-focused.yml') -and $_ -notmatch '^(docs/releases/|acceptance/|\.planning/)' })
+          if ($bad.Count) { throw "Prior gates invalidated by changed inputs: $bad" }
+          foreach ($name in @('Run npm run typecheck','New and affected unit checks','Run npm run build')) {
+            if (!@($prior.jobs[0].steps | Where-Object { $_.name -eq $name -and $_.conclusion -eq 'success' }).Count) { throw "Missing prior gate: $name" }
+          }
+          gh run download $run --repo '${{ github.repository }}' --name "Thoughtline-Windows-source-ui-$($prior.headSha)-1" --dir prior-source
+          if ($LASTEXITCODE -ne 0) { throw 'Prior source evidence unavailable' }
+          $supervisors = @(Get-ChildItem prior-source -Recurse -Filter supervisor.json | ForEach-Object { Get-Content $_.FullName -Raw | ConvertFrom-Json })
+          foreach ($test in @('round6-picker-workflow','round6-picker-recovery','round5-merge-picker-workflow','round5-detail-pager-workflow','round5-stack-workflow','round5-window-workflow')) {
+            if (!@($supervisors | Where-Object { $_.file.EndsWith("$test.cjs") -and $_.passed -and !$_.timedOut -and $_.code -eq 0 }).Count) { throw "Missing completed fixture: $test" }
+          }
+          foreach ($case in @('copy','restore','calendar','date')) {
+            $proof = @(Get-ChildItem prior-source -Recurse -Filter "$case-win32-source.json" | ForEach-Object { Get-Content $_.FullName -Raw | ConvertFrom-Json })
+            if (!@($proof | Where-Object { !$_.failure -and $_.normalQuit -and $_.cleaned }).Count) { throw "Missing completed reader case: $case" }
+          }
+          @{ passed=$true; priorRun=$run; priorSource=$prior.headSha; currentSource='${{ inputs.build_source }}'; changed=$changed; priorFailureRetained=$true; sourceOnlyReuse=$true; installerReuse=$false } | ConvertTo-Json -Depth 10 | Set-Content acceptance/evidence/round6/source-reuse/proof.json
+          foreach ($case in @('dateedge','splitedge','splitalledge')) {
+            $env:THOUGHTLINE_R6_CASE = $case
+            $env:THOUGHTLINE_EVIDENCE_DIR = "acceptance/evidence/round6/windows-source-remaining-$case"
+            & node scripts/run-ci-fixture.cjs tests/electron/round6-reader-workflow.cjs
+            if ($LASTEXITCODE -ne 0) { throw "$case remaining source failed" }
+          }
+          $env:THOUGHTLINE_R6_CASE = $null
+          $env:THOUGHTLINE_FAST_TITLE_UNDO = '1'
+          $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round6/windows-source-remaining-fast'
+          & node scripts/run-ci-fixture.cjs tests/electron/round5-merge-picker-workflow.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Remaining source FAST failed' }
+          $env:THOUGHTLINE_FAST_TITLE_UNDO = $null
       - name: Affected source reader queue and save protection
-        if: inputs.continuation_run == ''
+        if: inputs.continuation_run == '' && inputs.source_evidence_run == ''
         shell: pwsh
         env:
           THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round6/windows-focused-source

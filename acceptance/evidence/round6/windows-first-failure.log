@@ -1,0 +1,85 @@
+windows-test-package	Affected source reader queue and save protection	﻿2026-10-14T04:12:33.4121001Z ##[group]Run foreach ($test in @('round6-picker-workflow','round6-picker-recovery','round5-merge-picker-workflow','round5-detail-pager-workflow','round5-stack-workflow','round5-window-workflow')) {
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4123187Z ^[[36;1mforeach ($test in @('round6-picker-workflow','round6-picker-recovery','round5-merge-picker-workflow','round5-detail-pager-workflow','round5-stack-workflow','round5-window-workflow')) {^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4124581Z ^[[36;1m  & node scripts/run-ci-fixture.cjs "tests/electron/$test.cjs"^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4125220Z ^[[36;1m  if ($LASTEXITCODE -ne 0) { throw "$test source failed" }^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4125674Z ^[[36;1m}^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4126228Z ^[[36;1mforeach ($case in @('copy','restore','calendar','date','dateedge','splitedge','splitalledge')) {^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4127006Z ^[[36;1m  $env:THOUGHTLINE_R6_CASE = $case^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4127765Z ^[[36;1m  $env:THOUGHTLINE_EVIDENCE_DIR = "acceptance/evidence/round6/windows-focused-source-$case"^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4128831Z ^[[36;1m  & node scripts/run-ci-fixture.cjs tests/electron/round6-reader-workflow.cjs^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4132847Z ^[[36;1m  if ($LASTEXITCODE -ne 0) { throw "Round6 reader $case source failed" }^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4133386Z ^[[36;1m}^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4133653Z ^[[36;1m$env:THOUGHTLINE_R6_CASE = $null^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4134655Z ^[[36;1m$env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round6/windows-focused-source-fast'^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4136751Z ^[[36;1m$env:THOUGHTLINE_FAST_TITLE_UNDO = '1'^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4137435Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/round5-merge-picker-workflow.cjs^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4139433Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Fast title choice/undo source failed' }^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4257366Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4257920Z env:
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4258438Z   THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round6/windows-focused-source
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:33.4259099Z ##[endgroup]
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:34.4136757Z Downloading Electron binary...
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:44.3474883Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round6-picker-workflow.cjs","pid":4440,"passed":true,"timedOut":false,"code":0}
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:52.1144089Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round6-picker-recovery.cjs","pid":5632,"passed":true,"timedOut":false,"code":0}
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:54.5926457Z CHECK
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:55.0085519Z MERGE GEOMETRY {"height":192,"scroll":448,"top":71}
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:55.0263872Z CHECK
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:55.1969714Z CHECK
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:55.4228819Z CHECK
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:55.6960668Z CHECK
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:12:57.2339137Z CHECK
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:01.0649576Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round5-merge-picker-workflow.cjs","pid":8252,"passed":true,"timedOut":false,"code":0}
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:03.4415447Z PASS pager zh-CN light 350
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:03.7405171Z PASS pager zh-CN light 420
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:04.0205090Z PASS pager zh-CN dark 350
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:04.2735280Z PASS pager zh-CN dark 420
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:04.6148351Z PASS pager en light 350
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:04.9135313Z PASS pager en light 420
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:05.1916244Z PASS pager en dark 350
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:05.4283924Z PASS pager en dark 420
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:07.3648853Z IO initial failure observed
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:07.3864535Z IO flip requested 1
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:07.8406482Z IO flip failure acknowledged
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:08.2209625Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round5-detail-pager-workflow.cjs","pid":6840,"passed":true,"timedOut":false,"code":0}
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:10.1013309Z PASS no undo on opening or browsing
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:10.4092577Z PASS calendar updates immediately after current-only merge, retained source does not release slot
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:10.6156147Z PASS archive undo restores source and automatic backfill without pulling manual calendar stack
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:10.9877898Z PASS calendar split stays archived and undo restores full stack
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:11.2598971Z PASS arrange undo restores all original clip positions
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:11.5539689Z PASS hang restores entire archived stack, failed swap preserves undo and hang undo restores archive
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:12.3844260Z PASS swap undo shared across entries, copying/filtering preserves record, completed undo disappears
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:13.6548837Z PASS normal restart retains full calendar stack and independent creation days
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:13.8140446Z PASS calendar split-all keeps all papers archived and undo restores order
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:13.9421653Z PASS delete and restore preserves original calendar stack order
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:14.1968823Z PASS archived group change requires split confirmation before commit
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:14.2812554Z PASS confirmed group change splits only edited archived paper and keeps it archived
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:14.3720177Z PASS composition refuses close without losing archived edit
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:14.9950402Z PASS archived disk failure refuses leave, retry persists exact draft
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:15.2094945Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round5-stack-workflow.cjs","pid":1748,"passed":true,"timedOut":false,"code":0}
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:16.8915660Z PASS calendar defaults below actual visible paper within work area
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:17.4971946Z PASS classification/settings roundtrips preserve top and horizontal centre
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:17.5552983Z PASS repeat ready calendar preserves its session and search
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:17.7277502Z PASS shelf calendar entry preserves ready session and search
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:17.7443289Z PASS tray calendar entry preserves ready session and search
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:17.8446256Z PASS cached hidden calendar keeps its ready session and search
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:17.9414190Z PASS repeat classification retains search and return context
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:18.0753477Z PASS repeat settings retains ready session and current tab
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:18.1570447Z PASS concurrent target changes share one transition
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:49.6270716Z PASS normal thirty-second retirement and first-page re-open remain
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:49.8814855Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round5-window-workflow.cjs","pid":5672,"passed":true,"timedOut":false,"code":0}
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:53.7795164Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round6-reader-workflow.cjs","pid":7460,"passed":true,"timedOut":false,"code":0}
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:56.0773036Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round6-reader-workflow.cjs","pid":5972,"passed":true,"timedOut":false,"code":0}
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:13:58.6132080Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round6-reader-workflow.cjs","pid":808,"passed":true,"timedOut":false,"code":0}
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:14:00.7360723Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round6-reader-workflow.cjs","pid":752,"passed":true,"timedOut":false,"code":0}
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:14:05.3012530Z page.waitForFunction: Timeout 2500ms exceeded.
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:14:05.3013652Z     at D:\a\thoughtline\thoughtline\tests\electron\round6-reader-workflow.cjs:6:621 {
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:14:05.3014435Z   log: [],
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:14:05.3014819Z   name: 'TimeoutError'
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:14:05.3015243Z }
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:14:05.3205722Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round6-reader-workflow.cjs","pid":7016,"passed":false,"timedOut":false,"code":1}
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:14:05.5658496Z ^[[31;1mException: ^[[0mD:\a\_temp\3159f5e2-cb50-4817-a4fc-804520538dad.ps1:10^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:14:05.5659603Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:14:05.5661313Z ^[[31;1m^[[0m^[[36;1m^[[36;1m  10 | ^[[0m … f ($LASTEXITCODE -ne 0) { ^[[36;1mthrow "Round6 reader $case source failed"^[[0m }^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:14:05.5663597Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:14:05.5670604Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mRound6 reader dateedge source failed^[[0m
+windows-test-package	Affected source reader queue and save protection	2026-10-14T04:14:05.5914002Z ##[error]Process completed with exit code 1.
