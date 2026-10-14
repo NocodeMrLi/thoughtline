@@ -25,8 +25,9 @@ Expected: actual remote/source/package matches, six-item direct operation report
 
 ## R6-07 focused follow-up (base a719841, candidate0.0.34)
 - [x] Approved single common backing edge + real count added canonical spec.
-- [ ] Source rendered comparison/screenshot RED→GREEN: singles/2/5/9, light/dark,350/740, count/date/detail preserved.
-- [ ] Type/build and related unit scope, frozen source commit/push[skip ci].
+- [x] Source rendered comparison/screenshot RED→GREEN: singles/2/5/9, light/dark,350/740, count/date/detail preserved.
+- [x] Type/build,14relatedunit and frozen localsource9cb8c19.
+- [ ] Push source[skip ci] after local GitHub connection recovery.
 - [ ] Mac/Windows targeted actual package and installation retention, immutable private release0.0.34.
 - [ ] Own cleanup, docs/gates readback and direct operation report.
 User targeted scope overrides skill default full suite. No design overhaul or new product logic. No delegated implementation/review claim needed for a CSS-only adjustment; executor diff+visual/native checks explicitly bounded.
