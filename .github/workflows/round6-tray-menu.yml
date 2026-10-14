@@ -1,0 +1,96 @@
+name: Validate tray menu only
+on:
+  workflow_dispatch:
+    inputs:
+      build_source:
+        description: Frozen full source SHA for R6-09
+        type: string
+        required: true
+permissions:
+  contents: read
+jobs:
+  windows-tray-package:
+    runs-on: windows-latest
+    timeout-minutes: 14
+    steps:
+      - name: Enable long paths on disposable runner
+        shell: pwsh
+        run: git config --global core.longpaths true
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ inputs.build_source }}
+      - name: Confirm frozen source
+        shell: pwsh
+        run: |
+          if ((git rev-parse HEAD) -ne '${{ inputs.build_source }}') { throw 'Frozen source mismatch' }
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '24.19.0'
+          cache: npm
+      - run: node scripts/ci-artifact-evidence.cjs snapshot
+      - run: npm ci --no-audit --no-fund
+      - run: npm run typecheck
+      - name: Related hover, draft and delivery checks
+        run: npm test -- tests/unit/shelfState.test.ts tests/unit/draftAutosaver.test.ts tests/unit/windowsAtomicWrite.test.ts tests/unit/deliveryVersion.test.ts tests/unit/macLauncherGenerator.test.ts
+      - run: npm run build
+      - name: Native source tray actions and quit protection
+        env:
+          THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round6/r609/windows-source
+        run: node scripts/run-ci-fixture.cjs tests/electron/round6-tray-menu.cjs
+      - name: Empty shelf retains shortcut entry
+        env:
+          THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round6/r609/windows-empty
+        run: node scripts/run-ci-fixture.cjs tests/electron/empty-shelf-workflow.cjs
+      - run: npm run package:win
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - name: Bind actual package to frozen source
+        shell: pwsh
+        run: |
+          $env:GITHUB_SHA = '${{ inputs.build_source }}'
+          & node scripts/windows-build-manifest.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Manifest failed' }
+          $files = @(Get-ChildItem dist -Filter '*.exe')
+          if ($files.Count -ne 1) { throw 'Expected one x64 installer' }
+          "$((Get-FileHash $files[0].FullName -Algorithm SHA256).Hash.ToLower())  $($files[0].Name)" | Set-Content dist/SHA256SUMS.txt
+          Copy-Item docs/delivery/Start-Thoughtline-Isolated.ps1 dist/Start-Thoughtline-Isolated.ps1
+      - name: Actual installed tray and install data retention
+        shell: pwsh
+        run: |
+          $env:GITHUB_SHA = '${{ inputs.build_source }}'
+          ./scripts/windows-installer-preflight.ps1 -TrayMenuOnly
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: success()
+        with:
+          name: Thoughtline-Windows-x64-${{ inputs.build_source }}
+          path: |
+            dist/*.exe
+            dist/SHA256SUMS.txt
+            dist/build-manifest.json
+            dist/windows-installed-preflight.json
+            dist/windows-installer-preflight.json
+            dist/windows-pe-icons.json
+            dist/Start-Thoughtline-Isolated.ps1
+          if-no-files-found: error
+          retention-days: 7
+      - name: Preserve built installer if this narrow gate fails
+        if: failure() || cancelled()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: Thoughtline-Windows-built-${{ inputs.build_source }}-${{ github.run_attempt }}
+          path: |
+            dist/*.exe
+            dist/SHA256SUMS.txt
+            dist/*.json
+          if-no-files-found: ignore
+          retention-days: 3
+      - name: Collect only new evidence
+        if: always()
+        run: node scripts/ci-artifact-evidence.cjs collect
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: Thoughtline-Windows-tray-ui-${{ inputs.build_source }}-${{ github.run_attempt }}
+          path: dist/ci-evidence/**
+          if-no-files-found: warn
+          retention-days: 7

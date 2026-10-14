@@ -23,7 +23,7 @@ import {AUTHOR_GITHUB_URL,FEEDBACK_EMAIL,FEEDBACK_MAILTO} from '../shared/contac
 import {loadStorageDirectory,loadStorageLocation,commitStorageDirectory,migrateStorage,exportBackup as writeBackup} from './store/storageLocations';
 import {saveThoughtDocument} from './store/ideaExport';
 import {swapShortcut} from './shortcuts';
-import {validWriteHotkey,displayWriteHotkey} from '../shared/composerKeys';
+import {validWriteHotkey} from '../shared/composerKeys';
 import {changeStatus,addAgent,updateAgent,removeAgent,removeProject,editIdeaIfUnchanged,deleteIdea,restoreIdea,permanentlyDeleteIdea} from '../shared/ideaCommands';
 import type {Draft,Result,Snapshot} from '../shared/contracts';
 import type {PilotInfo,HitLayout,ComposerContext,AgentMutation,ClipMutation,ClassificationTab,ClassificationMutation,EditorReturnDraft} from '../shared/bridge';
@@ -734,7 +734,7 @@ else app.whenReady().then(async()=>{
   icon.setTemplateImage(true);tray=new Tray(icon);
  }else tray=new Tray(trayPath);
  tray.setToolTip(t("晾念头 / Thoughtline"));
- refreshTray=()=>{tray.setToolTip(t('晾念头 / Thoughtline'));tray.setContextMenu(Menu.buildFromTemplate([{label:t("晾念头 / Thoughtline"),enabled:false},{label:t('trayWrite',{hotkey:displayWriteHotkey(snapshot.settings.writeHotkey,host.platform).replace('空格',t('空格')),failure:globalShortcut.isRegistered(snapshot.settings.writeHotkey)?'':t('（注册失败）')}),enabled:!composer?.isVisible()&&!settingsBusy&&!storageBusy&&!quitting,click:()=>{void openComposer();}},{type:'separator'},{label:t("查找 / 已收起"),click:browseFromTray},{label:t("筛选 Agent"),click:openFilterPicker},{label:t('显示全部'),enabled:shelfProject!==null||shelfAgentId!=='all',click:()=>{void selectShelfFilter({project:null,agentId:'all'});}},{label:t("设置"),enabled:!settingsBusy&&!storageBusy&&!quitting,click:()=>{openSettings();}},{label:t("暂停悬停"),type:'checkbox',checked:edge.isManuallyPaused(),click:item=>{cancelDrag();edge.pause(item.checked);}},{label:t("退出"),click:()=>app.quit()}]));};
+ refreshTray=()=>{tray.setToolTip(t('晾念头 / Thoughtline'));tray.setContextMenu(Menu.buildFromTemplate([{label:t(edge.isManuallyPaused()?'恢复悬停':'暂停悬停'),click:()=>{cancelDrag();edge.pause(!edge.isManuallyPaused());refreshTray();}},{type:'separator'},{label:t('退出'),click:()=>app.quit()}]));};
  refreshTray();
  let reminderSleeping=false,reminderLocked=false;const resumeReminders=()=>{if(!reminderSleeping&&!reminderLocked)reminderScheduler?.start();};
  nativeTheme.on('updated',publish);powerMonitor.on('suspend',()=>{reminderSleeping=true;reminderScheduler?.stop();cancelDrag();edge.pause(true,'sleep');});powerMonitor.on('lock-screen',()=>{reminderLocked=true;reminderScheduler?.stop();cancelDrag();edge.pause(true,'lock');});powerMonitor.on('resume',()=>{reminderSleeping=false;edge.pause(false,'sleep');resumeReminders();});powerMonitor.on('unlock-screen',()=>{reminderLocked=false;edge.pause(false,'lock');resumeReminders();});
