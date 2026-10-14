@@ -1,105 +1,137 @@
 <h1 align="center">
-  <img src="../../assets/app-icon.png" alt="Thoughtline app icon" width="96" height="96" valign="middle" /> 晾念头 · Thoughtline
+  <img src="../../assets/app-icon.png" alt="Thoughtline" width="96" height="96" /><br />
+  晾念头 · Thoughtline
 </h1>
 
 <p align="center">
-  <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
-  <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><img src="badges/preview.svg" alt="Version: 0.0.29" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
-</p>
-
-<p align="center">
-  <sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub>
-</p>
-
-<p align="center">
   <strong>Hang up a thought. Keep inspiration within reach.</strong><br />
-  A rope, a few clips, and sheets of paper for everyday ideas.
+  A rope at the top of your desktop for ideas, work notes, and reusable prompts.
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><ins>Download Thoughtline</ins></a></h2>
+<p align="center">
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/preview.svg" alt="Version: 0.0.35" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="GitHub Issues" /></a>
+</p>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.29</sub></p>
+<p align="center"><sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub></p>
 
-Thoughtline is a lightweight desktop tool for macOS and Windows. Reveal your ideas at the top edge of the screen, capture a thought, and return to what you were doing.
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35">Download Thoughtline</a></h2>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.35</sub></p>
 
-## Features
+Thoughtline is a desktop note app for macOS and Windows. Move the pointer to the top edge to reveal a rope and its notes; move away to tuck them back. Keep what you need on colored clips, and use groups, tags, and a calendar to find the rest.
 
-- **Tags and groups**: shared search and creation in every editor. Hold to arrange, then click the cross to remove a choice. Three management tabs cover tags, groups and removed choices; the two restore lists scroll independently.
-- **New thought entry**: right-click a clip or note to create a thought. The top edge still reveals the rope while you write.
-- Rope options show actual braid texture and vine leaves. Expanded and calendar readers keep separate title and body fields with clear spacing, matching clip and paper colors. Vine leaves and tendrils stay in place when clips move.
-- Capture titles, text, and categories with a shortcut; keep unfinished notes as drafts.
-- A desktop rope with clips and paper, with new thoughts assigned to General.
-- Choose 4, 6 or 8 clips in Calendar → More → Storage & Settings; the default is 6. Sheets scale proportionally to the display, with only a modest increase at 4. Newly saved thoughts waiting on a full line fill freed slots, newest first; legacy off-line and manually archived thoughts remain under your control. Separate dropdowns keep the full preview and Apply visible while adjusting.
-- Customize rope and paper in Calendar → More → Storage and settings → Appearance. The classic cord supports custom colors; braided cotton keeps its natural fiber tone, and the vine stays green. Clip colors continue to follow tags. Choose five soft paper presets and blank, ruled or dashed paper. Preview before Apply; Cancel or Back discards the preview. Settings separates Appearance, Controls, and Data.
-- Move a whole clip or pull out one paper. Right-click **Merge** to choose a compatible clip, or **Split** to separate the current thought. Splitting compacts fragmented spacing when needed; **Auto arrange** keeps left-to-right order. Arrangement can be undone.
-- Edit directly in the detail view or calendar; autosave after a short pause and turn pages instantly. Reading and editing share the tag-colored border and selected paper tone.
-- Browse by day, month, or year; search and filter, including archived thoughts.
-- Recover deleted thoughts from Recently Deleted. Removing a project keeps its thoughts. Previously hanging thoughts return to their original clip or a free slot; when full, restore to the calendar and choose Swap in.
-- Copy text or drag the body as plain text. The source note stays in place; nothing is sent automatically.
-- Keep data locally; inspect the actual folder, move it, or export an independent backup.
-- Switch Chinese/English and light/dark directly in the first-level windows, or follow the system; paper stays soft and readable.
-- When the line is full, save the thought or choose **Swap onto line** in the same window; the old thought is put away and retained. Hanging from the calendar appears immediately. More menus close when the pointer leaves.
+## A place for everyday thoughts
 
-- Title-only thoughts and reminders: enter a title or text; the body may be empty. The bell sets a one-time reminder, shared with the calendar. System notifications require permission and open the thought when clicked. Fully quitting pauses delivery; missed reminders are grouped on restart. If system delivery is unavailable, a light reminder at the top provides a clickable fallback without taking focus or adding a window.
+- Meeting notes, task leads, and quick work records.
+- Writing ideas and passing thoughts to return to later.
+- Prompts, reply snippets, and reference text you use repeatedly.
 
-<p align="center"><img src="images/thought-calendar.png" alt="Thoughtline Calendar with synthetic demonstration data." width="740" /><br /><sub>Thoughtline Calendar with synthetic demonstration data.</sub></p>
+## Write, hang, use, revisit
+
+1. **Write**: open a note with a shortcut or a right-click, then choose its group and tag.
+2. **Hang**: keep current notes on the rope and stack related papers on one clip.
+3. **Use**: open the full text to read, edit, copy, or drag it into another app.
+4. **Revisit**: put a note away in the calendar and find it again by date or search.
+
+## What you can do
+
+### Capture a thought and keep a draft
+
+A title or body is enough to save a note. Unsubmitted text can stay as a draft. Edit in the expanded reader or calendar; changes autosave after a short pause.
+
+### Organize with groups and tags
+
+Use groups for work, life, or projects, and tags for topics, roles, or purposes. Filters work independently; combining them shows notes matching both. They change the view while preserving stack relationships and positions. Find tags by tag name, note title, or words in the body.
+
+### Stack papers and read each one
+
+A named group can contain a stack with different tags; ungrouped notes merge by the same tag. Each paper keeps its own title, full text, tag, color, reminder, and creation date. Turn pages, open the title list from the page number, or split out one paper.
+
+### Move between rope and calendar
+
+Search compatible rope or calendar targets in the merge panel. A stack merged into the calendar stays there, including after a split. Drag a clip to move its stack, or a paper’s top edge to pull out one note. Auto arrange brings clips together. The most recent valid arrangement action can be undone. Filter and merge panels can be moved; Esc or a click outside closes them.
+
+### Find notes by their original dates
+
+Browse by day, month, or year; search titles, text, groups, and tags, or filter by status. Click a rope note’s date to locate it in the calendar. Stack cards show the actual paper count. Each member remains discoverable on its own creation date.
+
+### Take the full text with you
+
+Copy text or drag the body as plain text while keeping the original note. A small confirmation appears by the copy button. You choose the destination; Thoughtline does not send text to other apps or AI services automatically.
+
+### Set a one-time reminder
+
+Use the bell to schedule a system notification and open the note from it. Notifications need system permission and a running app. Reminders missed while the app was closed are shown when it opens again.
+
+### Keep writing when the rope is full
+
+Choose 4, 6, or 8 clips; the default is 6. Save another note to the calendar, or swap it onto the rope while putting an old note away. Manually put-away notes remain in the calendar until you hang them again.
+
+### Choose whether to keep or clear content
+
+Manage, rename, remove from selection, and restore groups or tags. Deletion defaults to keeping content and moving it elsewhere. Permanent deletion offers a content list in the same dialog and requires confirmation. Tag deletion covers matching notes across groups and related drafts. General and Ungrouped remain protected.
 
 ## Download and install
 
-Downloads are available to members with repository access. Releases include packages, isolated launchers, SHA256SUMS, and build provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29).
+The current version is **0.0.35**, distributed through repository Releases. Downloads require repository access.
 
-| Platform | Package |
-|---|---|
-| macOS · Apple Silicon | arm64 · DMG |
-| Windows | x64 · EXE (NSIS) |
+| Platform | Installer |
+| --- | --- |
+| macOS · Apple Silicon | [Thoughtline-0.0.35-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
+| Windows · x64 | [Thoughtline-0.0.35-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
 
-Before upgrading, quit normally and back up your data. Commercial signing certificates and platform notarization are not planned. Mac retains local ad-hoc signing; Windows is unsigned. Users install through the normal system trust prompts. Signing status does not determine release maturity. There is no automatic update.
+On Mac, open the DMG and drag Thoughtline into Applications. On Windows, run the EXE installer. Quit the old app normally and keep an independent backup before upgrading. Updates are downloaded manually.
 
-## Getting started
+The Mac package uses an ad-hoc signature and is not notarized. The Windows package is unsigned. Your system may show a trust prompt during installation.
 
-1. Press Control + Alt + N to capture a thought (⌃ + ⌥ + N on Mac); change the shortcut in Settings.
-2. Enter inserts a line break. Submit with ⌘ + Enter on Mac or Ctrl + Enter on Windows. Esc saves a draft and closes the composer.
-3. Move the pointer to the top screen edge to reveal the rope; open a sheet to read, copy, edit, or archive it.
-4. Use the calendar to find archived thoughts or restore items from Recently Deleted.
+## Your first note
 
-Tags describe purposes, people or tools: everyday ideas, work notes, a direct manager, a colleague or Codex. Add your own tags for daily reports, design plans or clients. Fresh installations provide six concise presets; existing tags and colors stay intact. Thoughtline Calendar filters All statuses / On the line / Off the line. Off the line includes saved-only and put-away thoughts, and legacy records that exceed line capacity. Copy or drag text yourself; receiving behavior in other applications still needs separate verification.
+1. Press `Control + Alt + N` to create a note; on Mac, `⌃ + ⌥ + N`. Change this shortcut in settings.
+2. `Enter` adds a line. Submit with `⌘ + Enter` on Mac or `Ctrl + Enter` on Windows. In the new-note window, `Esc` saves the draft and closes the window.
+3. Move to the top edge to reveal the rope. Open a paper to read its full text; right-click for new notes, filters, calendar, or organization.
+4. The calendar’s More menu contains Recently Deleted, Groups and Tags, and Storage and Settings.
 
-## Data and backups
+## Make the rope your own
 
-Calendar settings show the actual data folder. Moving data copies and verifies it before switching; the original remains. Exporting a backup does not change the current folder. [Data / 备份说明](../ROUND1-DATA-SAFETY.md).
+In Storage and Settings → Appearance, choose a classic cord, braided cotton, or a light vine. The classic cord supports custom colors; cotton and vine keep their natural tones. Clip colors follow tags.
 
-The current format is schema3. Version 0.0.16-preview.6 cannot read it directly. Preserve new data and validate a pre-upgrade backup in a separate folder before downgrading; that backup excludes later changes.
+Pick from five soft paper colors and blank, ruled, or dashed paper. Preview first, then Apply. Switch the interface between Chinese and English, light and dark, or follow the system.
 
-## Development
+## Data, exports, and deletion
 
-Use Node.js 24.19.0 or a newer 24.x version. verify runs type checks, unit tests, and a build. Build each platform package on its corresponding OS. The stack is Electron, React, TypeScript, and Vite.
+Notes are stored locally. View the actual folder, move storage, or export a JSON backup in settings. Migration copies and verifies data before switching, leaving the old copy intact. TXT and DOCX export titles and text; JSON backs up complete note data.
 
-```bash
-npm ci
-npm run dev
-```
+Ordinary note deletion goes to Recently Deleted and can be restored. Permanent deletion clears current records, skips Recently Deleted, and cannot be undone through the normal undo action. Existing automatic backups and exports remain. Permanently deleting a classification also clears its matching rope, calendar, recently deleted content, and drafts.
 
-```bash
-npm run verify
-npm run package:mac
-npm run package:win
-```
+Keep an independent backup before upgrading or moving devices. Preserve current data and check format compatibility before restoring an older backup, transferring files, or downgrading.
 
-Applicable automated and package checks have passed. Physical Mac/Windows IME, DPI, multiple displays, focus, and real receiving fields in WeChat, Doubao, and WorkBuddy still need independent testing. The app interface supports Chinese and English. Switch language and light/dark appearance directly at the top right of Composer, Detail, or Calendar; Settings can restore Follow system. The seven language links translate the README, not seven app interface languages.
+## Common questions
 
-## Feedback
+### How should I use groups and tags?
 
-Use Issues for bugs and ideas. Include versions, reproduction steps, expected and actual behavior, and redacted evidence. Do not upload personal thoughts or data. [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
+Work can be a group and Daily Report a tag. A tag-only filter finds reports across groups; combining both shows notes that match both.
 
-Stars and downloads are an API snapshot dated 2026-10-10. Downloads count release asset downloads.
+### How do putting away and deleting differ?
+
+Putting away moves a note to the calendar. Ordinary deletion moves it to Recently Deleted. Permanent deletion clears current records. Classification cleanup keeps and migrates content by default; clearing it requires an explicit choice and confirmation.
+
+### Do I need an account or cloud service?
+
+Using the app requires no Thoughtline account. Notes live in local files; this version provides local storage and backups. Transfer backup files yourself when changing devices. Repository download access is separate from app usage.
+
+### Do tags such as Codex connect to AI?
+
+They are labels for organizing and retrieving text. Thoughtline does not connect to Agent APIs through tags. Copy or drag a prompt when you want to use it.
+
+## Feedback and contact
+
+Contact the author through Storage and Settings, or use [GitHub Issues](https://github.com/NocodeMrLi/thoughtline/issues) if you have repository access. Include your OS, app version, steps, and expected versus actual behavior. Remove personal information from screenshots and examples.
 
 <a id="license"></a>
+
 ## License and acknowledgments
 
-The project is currently UNLICENSED; no open-source permission has been granted. A future public release will specify its license and contribution process. See the third-party notices for included code and licenses. [Third-party notices](../../THIRD_PARTY_NOTICES.md).
+The source is currently marked `UNLICENSED`; no open-source license has been granted. Third-party licenses are retained separately in [Third-party notices](../../THIRD_PARTY_NOTICES.md).
 
-0.0.25 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.
+<sub>Product documentation is available in seven languages. The app interface currently supports Chinese and English.</sub>

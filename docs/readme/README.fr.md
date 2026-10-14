@@ -1,105 +1,137 @@
 <h1 align="center">
-  <img src="../../assets/app-icon.png" alt="Thoughtline app icon" width="96" height="96" valign="middle" /> 晾念头 · Thoughtline
+  <img src="../../assets/app-icon.png" alt="Thoughtline" width="96" height="96" /><br />
+  晾念头 · Thoughtline
 </h1>
 
 <p align="center">
-  <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
-  <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><img src="badges/preview.svg" alt="Version: 0.0.29" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <strong>Accrochez une idée. Retrouvez-la à portée de main.</strong><br />
+  Un fil en haut du bureau pour vos idées, notes et prompts réutilisables.
 </p>
 
 <p align="center">
-  <sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/preview.svg" alt="Version: 0.0.35" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="GitHub Issues" /></a>
 </p>
 
-<p align="center">
-  <strong>Accrochez une idée. Gardez l’inspiration à portée de main.</strong><br />
-  Une corde, quelques pinces et des feuilles pour les idées du quotidien.
-</p>
+<p align="center"><sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub></p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><ins>Télécharger Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35">Télécharger Thoughtline</a></h2>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.35</sub></p>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.29</sub></p>
+Thoughtline est une application de notes pour macOS et Windows. Placez le pointeur au bord supérieur pour dérouler le fil et ses notes ; éloignez-le pour les ranger. Gardez les textes utiles sur des pinces colorées et retrouvez les autres grâce aux groupes, étiquettes et au calendrier.
 
-Thoughtline est un outil léger pour macOS et Windows. Retrouvez vos idées au bord supérieur de l’écran, notez une pensée, puis reprenez votre activité.
+## Pour vos idées du quotidien
+
+- Notes de réunion, pistes de tâches et petits mémos de travail.
+- Idées d’écriture et pensées à reprendre plus tard.
+- Prompts, réponses et textes de référence utilisés régulièrement.
+
+## Écrire, accrocher, utiliser, retrouver
+
+1. **Écrire** : ouvrez une note par raccourci ou clic droit et choisissez groupe et étiquette.
+2. **Accrocher** : gardez les notes du moment sur le fil et empilez les feuilles liées sur une pince.
+3. **Utiliser** : ouvrez le texte complet pour lire, modifier, copier ou faire glisser vers une autre application.
+4. **Retrouver** : rangez dans le calendrier, puis cherchez par date ou par texte.
 
 ## Fonctionnalités
 
-- **Étiquettes et groupes** : recherche et création communes à tous les éditeurs. Maintenez pour organiser, puis cliquez sur la croix pour retirer une option. Trois onglets regroupent étiquettes, groupes et options retirées ; les deux listes de restauration défilent séparément.
-- **Créer une pensée** : un clic droit sur une pince ou une note ouvre la création. Le bord supérieur révèle toujours la corde pendant la rédaction.
-- Les options de corde affichent la texture tressée et les feuilles réelles. Le titre et le texte des détails et du calendrier gardent des cadres séparés, un espace clair et les couleurs de la pince et du papier. Les feuilles et les vrilles restent en place lorsque les pinces se déplacent.
-- Saisissez titre, texte et catégorie avec un raccourci ; conservez les notes inachevées comme brouillons.
-- Une corde de bureau avec pinces et papier ; les nouvelles idées sont classées dans Général.
-- Choisissez 4, 6 ou 8 pinces dans Calendrier → Plus → Stockage et paramètres ; 6 par défaut. Les feuilles s’adaptent proportionnellement à l’écran, avec un agrandissement modéré pour 4. Les nouvelles idées enregistrées sur une corde pleine remplissent les places libérées, les plus récentes d’abord ; les anciennes idées rangées et celles archivées manuellement restent à votre choix.
-- Personnalisez corde et papier dans Calendrier → Plus → Stockage et paramètres → Apparence. La corde classique accepte une couleur libre ; le coton garde sa teinte naturelle et la liane reste verte. Les pinces conservent les couleurs des étiquettes. Choisissez cinq tons doux de papier et une feuille vierge, lignée ou à pointillés. Seul Appliquer enregistre ; Annuler ou Retour abandonne l’aperçu. Les paramètres séparent Apparence, Commandes et Données et sauvegarde. Les menus séparent couleur et surface ; l’aperçu complet et Appliquer restent visibles.
-- Déplacez une pince ou détachez une feuille. Un clic droit sur **Merge** permet de choisir une pince compatible ; **Split** détache la pensée actuelle. Si nécessaire, la séparation resserre les espaces dispersés ; l’organisation automatique conserve l’ordre de gauche à droite. Vous pouvez annuler l’organisation.
-- Modifiez dans la vue détaillée ou le calendrier, avec sauvegarde après une courte pause et changement de page immédiat. Lecture et édition utilisent la bordure de l’étiquette et la teinte de papier choisie.
-- Parcourez jours, mois et années ; recherchez et filtrez aussi les idées archivées.
-- Restaurez les notes récemment supprimées. Supprimer un projet conserve ses idées. Les notes suspendues retrouvent leur pince ou une place libre ; si la corde est pleine, elles sont restaurées dans le calendrier et peuvent être échangées.
-- Copiez ou glissez le texte brut. La note reste en place et rien n’est envoyé automatiquement.
-- Conservez les données localement ; consultez le dossier réel, déplacez-le ou exportez une sauvegarde indépendante.
-- Passez du chinois à l’anglais et du mode clair au mode sombre dès les premières fenêtres, ou suivez le système ; le papier reste doux et lisible.
-- Si la corde est pleine, enregistrez la pensée ou choisissez **Swap onto line** dans la même fenêtre ; la pensée précédente est rangée et conservée. Le calendrier affiche immédiatement la pensée raccrochée. Les menus se ferment lorsque le pointeur les quitte.
+### Notes et brouillons
 
-- Un titre ou un texte suffit ; le corps peut rester vide. La cloche définit un rappel unique, également visible dans le calendrier. Les notifications nécessitent une autorisation et ouvrent la note. Après une fermeture complète, les rappels manqués sont regroupés au redémarrage. Si la notification système est indisponible, un petit rappel cliquable apparaît en haut, sans prendre le focus ni ouvrir une nouvelle fenêtre.
+Un titre ou un texte suffit. Conservez une note non envoyée comme brouillon ; les modifications dans la lecture agrandie ou le calendrier s’enregistrent après une courte pause.
 
-<p align="center"><img src="images/thought-calendar.png" alt="Calendrier d’idées avec des données de démonstration synthétiques." width="740" /><br /><sub>Calendrier d’idées avec des données de démonstration synthétiques.</sub></p>
+### Groupes et étiquettes
+
+Classez travail, vie personnelle ou projets par groupe, puis ajoutez une étiquette de thème ou d’usage. Les filtres sont indépendants et se croisent lorsqu’ils sont combinés. Ils préservent les piles et positions. Cherchez une étiquette par son nom, un titre ou les mots du texte.
+
+### Feuilles empilées, lecture individuelle
+
+Un groupe accepte des étiquettes différentes dans une pile ; hors groupe, l’étiquette doit être la même. Chaque feuille garde titre, texte, étiquette, couleur, rappel et date. Feuilletez, ouvrez la liste des titres depuis le numéro de page ou séparez une feuille.
+
+### Du fil au calendrier
+
+Cherchez une destination compatible sur le fil ou dans le calendrier. Une pile fusionnée dans le calendrier y reste, même après séparation. Déplacez la pince entière ou tirez une feuille par son bord supérieur. Le rangement automatique resserre les positions ; la dernière action valide peut être annulée. Les petits panneaux se déplacent et se ferment par Échap ou clic extérieur.
+
+### Retrouver les dates d’origine
+
+Explorez jours, mois et années ; cherchez titres, texte, groupes et étiquettes ou filtrez par état. Cliquez sur la date d’une feuille suspendue pour la retrouver. Les piles indiquent le vrai nombre de feuilles ; chaque membre reste accessible à sa date de création.
+
+### Emporter le texte complet
+
+Copiez ou faites glisser du texte brut en gardant la note originale. Une confirmation apparaît près du bouton. Vous choisissez la destination ; aucun texte n’est envoyé automatiquement à une application ou un service d’IA.
+
+### Rappel ponctuel
+
+La cloche programme une notification système. Elle nécessite l’autorisation du système et une application ouverte. Les rappels manqués pendant sa fermeture sont signalés à la réouverture.
+
+### Écrire quand le fil est plein
+
+Choisissez 4, 6 ou 8 pinces, avec 6 par défaut. Enregistrez dans le calendrier ou remplacez une note suspendue en rangeant l’ancienne. Les notes rangées volontairement restent dans le calendrier jusqu’à ce que vous les raccrochiez.
+
+### Conserver ou effacer le contenu
+
+Créez, renommez, retirez de la sélection et rétablissez les classifications. La suppression conserve et déplace le contenu par défaut. L’effacement définitif présente une liste dans le même dialogue et exige confirmation. Une étiquette couvre tous les groupes et brouillons liés. Général et Sans groupe sont protégés.
 
 ## Téléchargement et installation
 
-Les téléchargements sont réservés aux membres ayant accès au dépôt. Releases contient les paquets, lanceurs isolés, SHA256SUMS et informations de provenance. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29).
+Version actuelle : **0.0.35**, distribuée via Releases. Le téléchargement nécessite l’accès au dépôt.
 
-| Platform | Package |
-|---|---|
-| macOS · Apple Silicon | arm64 · DMG |
-| Windows | x64 · EXE (NSIS) |
+| Plateforme | Installation |
+| --- | --- |
+| macOS · Apple Silicon | [Thoughtline-0.0.35-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
+| Windows · x64 | [Thoughtline-0.0.35-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
 
-Avant une mise à jour, quittez normalement et sauvegardez vos données. Aucun certificat de signature commerciale ni notarisation n’est prévu. Mac conserve la signature locale ad-hoc ; Windows n’est pas signé. L’utilisateur suit les demandes de confiance normales du système. La signature ne détermine pas la maturité d’une version. Aucune mise à jour automatique.
+Sur Mac, ouvrez le DMG et glissez Thoughtline dans Applications. Sous Windows, lancez l’EXE. Quittez normalement l’ancienne version et gardez une sauvegarde indépendante avant mise à jour. Les mises à jour se téléchargent manuellement.
 
-## Premiers pas
+Le paquet Mac utilise une signature ad-hoc et n’est pas notarié. Le paquet Windows n’est pas signé. Le système peut afficher une demande de confiance.
 
-1. Control + Alt + N (⌃ + ⌥ + N sur Mac) ouvre une nouvelle note ; modifiez ce raccourci dans les réglages.
-2. Enter ajoute une ligne. Validez avec ⌘ + Enter sur Mac ou Ctrl + Enter sur Windows. Esc sauvegarde le brouillon et ferme la saisie.
-3. Placez le pointeur au bord supérieur pour afficher la corde ; ouvrez une feuille pour lire, copier, modifier ou archiver.
-4. Retrouvez les idées archivées dans le calendrier ou restaurez les éléments récemment supprimés.
+## Votre première note
 
-Les étiquettes représentent des usages, des personnes ou des outils : idées du quotidien, notes de travail, responsable direct, collègue ou Codex. Ajoutez des rapports, des projets de design ou des clients. Une nouvelle installation propose six étiquettes ; les anciennes et leurs couleurs sont conservées. Le calendrier filtre Tout / Sur la corde / Hors de la corde. Hors de la corde inclut les idées simplement enregistrées, rangées et les anciens éléments dépassant la capacité. Copiez ou glissez vous-même le texte ; chaque application destinataire demande une vérification séparée.
+1. Appuyez sur `Control + Alt + N`, ou `⌃ + ⌥ + N` sur Mac. Le raccourci se modifie dans les réglages.
+2. `Enter` ajoute une ligne. Validez avec `⌘ + Enter` sur Mac ou `Ctrl + Enter` sous Windows. Dans une nouvelle note, `Esc` enregistre le brouillon et ferme la fenêtre.
+3. Placez le pointeur en haut pour afficher le fil. Ouvrez une feuille pour la lire ; le clic droit donne accès à la création, aux filtres, au calendrier et au rangement.
+4. Le menu Plus du calendrier contient les notes récemment supprimées, les groupes et étiquettes, ainsi que le stockage et les réglages.
 
-## Données et sauvegardes
+## Un fil à votre goût
 
-Les réglages du calendrier affichent le dossier réel. Un déplacement copie et vérifie avant de changer de dossier ; l’original est conservé. Exporter une sauvegarde ne change pas l’emplacement actuel. [Data / 备份说明](../ROUND1-DATA-SAFETY.md).
+Choisissez fil classique, coton tressé ou vigne légère dans les réglages d’apparence. Le fil classique est colorable ; coton et vigne gardent leur couleur naturelle. Les pinces suivent la couleur des étiquettes.
 
-Le format actuel est schema3. La version 0.0.16-preview.6 ne peut pas le lire directement. Conservez les nouvelles données et vérifiez une sauvegarde antérieure dans un dossier séparé avant de revenir en arrière. Elle n’inclut pas les modifications suivantes.
+Cinq teintes douces de papier, des feuilles vierges, lignées ou à pointillés : prévisualisez puis appliquez. L’interface propose chinois et anglais, thèmes clair, sombre ou système.
 
-## Développement
+## Données, export et suppression
 
-Utilisez Node.js 24.19.0 ou une version 24.x plus récente. verify exécute les contrôles de types, tests unitaires et compilation. Construisez chaque paquet sur son OS. Technologies : Electron, React, TypeScript et Vite.
+Les notes sont locales. Consultez le dossier, migrez le stockage ou exportez une sauvegarde JSON. La migration copie et vérifie avant de changer, en conservant l’original. TXT et DOCX exportent titres et texte ; JSON sauvegarde les données complètes des notes.
 
-```bash
-npm ci
-npm run dev
-```
+Une suppression ordinaire permet la restauration depuis les notes récemment supprimées. L’effacement définitif supprime les enregistrements actuels sans y passer et sans annulation ordinaire ; les sauvegardes et exports existants restent. Effacer une classification inclut son contenu sur le fil, dans le calendrier, les notes supprimées et les brouillons.
 
-```bash
-npm run verify
-npm run package:mac
-npm run package:win
-```
+Gardez une copie indépendante avant mise à jour ou changement d’ordinateur. Préservez les données actuelles et vérifiez la compatibilité avant restauration d’une ancienne sauvegarde ou retour à une version antérieure.
 
-Les contrôles automatiques et de paquets applicables ont réussi. IME, DPI, multi-écran, focus et champs réels de WeChat, Doubao et WorkBuddy nécessitent encore des tests indépendants. L’interface propose le chinois et l’anglais. La langue et le mode clair/sombre se changent directement en haut à droite des fenêtres de rédaction, de détail et du calendrier ; les réglages permettent de suivre à nouveau le système. Les sept liens traduisent le README et ne représentent pas sept langues d’interface.
+## Questions fréquentes
 
-## Retours
+### Comment combiner groupes et étiquettes ?
 
-Signalez les problèmes dans Issues avec versions, étapes, résultats attendus et réels, et preuves anonymisées. Ne publiez pas de pensées personnelles ou de données réelles. [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
+Travail peut être un groupe et Rapport quotidien une étiquette. L’étiquette seule cherche dans tous les groupes ; les deux filtres ensemble donnent leur intersection.
 
-Étoiles et téléchargements : instantané API du 2026-10-10. Les téléchargements comptent les fichiers des publications.
+### Ranger et supprimer : quelle différence ?
+
+Ranger déplace dans le calendrier ; supprimer normalement permet de restaurer ; effacer définitivement retire les enregistrements actuels. Le nettoyage des classifications conserve le contenu par défaut.
+
+### Faut-il un compte ou un service cloud ?
+
+L’utilisation ne nécessite pas de compte Thoughtline. Cette version conserve des fichiers locaux et sauvegardes ; transférez vos sauvegardes vous-même pour changer d’appareil. L’accès au téléchargement est distinct.
+
+### Une étiquette Codex se connecte-t-elle à l’IA ?
+
+Les étiquettes servent à organiser vos textes et ne connectent aucune API d’agent. Copiez ou glissez le prompt pour l’utiliser.
+
+## Retours et contact
+
+Contactez l’auteur dans Stockage et réglages, ou via [GitHub Issues](https://github.com/NocodeMrLi/thoughtline/issues) si vous avez accès. Indiquez système, version, étapes et résultat attendu ou obtenu. Masquez les informations personnelles dans les exemples.
 
 <a id="license"></a>
+
 ## Licence et remerciements
 
-Le projet est UNLICENSED ; aucune permission d’utilisation open source n’a été accordée. Une future publication précisera la licence et les contributions. Consultez les avis tiers pour le code et les licences inclus. [Third-party notices](../../THIRD_PARTY_NOTICES.md).
+Le code est marqué `UNLICENSED` ; aucune licence open source n’a été accordée. Les licences tierces figurent dans les [mentions des tiers](../../THIRD_PARTY_NOTICES.md).
 
-0.0.25 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.
+<sub>La documentation existe en sept langues. L’interface de l’application prend en charge le chinois et l’anglais.</sub>

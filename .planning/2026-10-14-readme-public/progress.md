@@ -1,0 +1,6 @@
+# Progress
+2026-10-14: Skills copywriting + planning-with-files applied, no product marketing context file present. Existing7 README files + version badge backed up outside repo. Plan pinned2026-10-14-readme-public. Product and implementation claims read against latestR6 and actualcode. Draft underway; no tests/GUI/CI/build.
+
+Rewrote7README pages, shared035badge. Chinese author pass checks ninefunctional areas/fourFAQ sections. Copies aligned on localstorage, presets/filters/stacks/calendar/panels, defaults/permanentallstates/drafts/acrossgroups/backups, twoUIlanguages, privateaccess/unsigned packages/manualupdates/UNLICENSED. Removed developmental history/testcounts/fulltestcommand/stale metrics and datedscreenshot from publicdisplay; tracked historical assets preserved.84relativepaths + balancedHTML + badgeSVG + version/publichygiene checks passed. No GUI/build/CI/producttest or publishingrights change.
+
+Author finalcopy pass removed spec-language explicitgroup/intersection where plain wording clearer. Sevenpages/84relativepaths/SVGversion/HTML/privacy passed. LiveGitHub035Release412634633 normal/private, correct2installernames andIssues enabled. All378 frozen035 buildinputs remain identical; README edits excluded from packageinputs. No producttest/build/CI/newpackage needed. Commit/push[skipci] next; readback stored outsiderepo to avoiddirtytree.

@@ -1,0 +1,4 @@
+# README outward product update
+Scope: Chinese README + existing six translations + shared version badge. Product overview, use cases, shipped035 features, onboarding, real download/platform/access, local data/export/deletion, appearance, reminders, FAQ, feedback/license. No source/UI change, product tests, packaging, newRelease/public-repo switch, pricing/OSS/AI/network guarantees.
+Phases: [x] Refresh clean d3068d5/035 and read rules/source/currentdocs. [x] Rewrite outward Chinese and translations. [x] Verify local links/anchors/version/privacy/claims and snapshot existing released assets. [ ] Commit/push main[skipci], readback, direct report.
+Validation: documentation only. Keep existing immutable035 source/tag/assets and current source input vector. README documents sevenlanguages, App UI Chinese/English only. Old screenshot and fake stale statistics removed from display, originals retained. User says035 no current problems; not global physical/formal approval.

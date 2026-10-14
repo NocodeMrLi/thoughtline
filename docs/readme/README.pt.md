@@ -1,105 +1,137 @@
 <h1 align="center">
-  <img src="../../assets/app-icon.png" alt="Thoughtline app icon" width="96" height="96" valign="middle" /> 晾念头 · Thoughtline
+  <img src="../../assets/app-icon.png" alt="Thoughtline" width="96" height="96" /><br />
+  晾念头 · Thoughtline
 </h1>
 
 <p align="center">
-  <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
-  <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><img src="badges/preview.svg" alt="Version: 0.0.29" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <strong>Pendure uma ideia. Retome-a quando precisar.</strong><br />
+  Uma corda no topo da área de trabalho para ideias, notas e prompts reutilizáveis.
 </p>
 
 <p align="center">
-  <sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/preview.svg" alt="Version: 0.0.35" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="GitHub Issues" /></a>
 </p>
 
-<p align="center">
-  <strong>Pendure uma ideia. Deixe a inspiração por perto.</strong><br />
-  Uma corda, alguns prendedores e folhas para as ideias do dia a dia.
-</p>
+<p align="center"><sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub></p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><ins>Baixar Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35">Baixar Thoughtline</a></h2>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.35</sub></p>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.29</sub></p>
+Thoughtline é um aplicativo de notas para macOS e Windows. Leve o cursor à borda superior para revelar a corda e as notas; afaste-o para recolher. Mantenha o que precisa em prendedores coloridos e organize o restante com grupos, etiquetas e calendário.
 
-Thoughtline é uma ferramenta leve para macOS e Windows. Abra suas ideias na borda superior da tela, registre um pensamento e volte ao que estava fazendo.
+## Um lugar para suas ideias
 
-## Recursos
+- Notas de reuniões, tarefas a explorar e registros de trabalho.
+- Ideias de escrita e pensamentos para retomar depois.
+- Prompts, respostas e textos de referência usados com frequência.
 
-- **Etiquetas e grupos**: pesquisa e criação comuns em todos os editores. Mantenha pressionado para organizar e clique na cruz para remover uma opção. Três abas mostram etiquetas, grupos e opções removidas; as duas listas de restauração rolam de forma independente.
-- **Criar um pensamento**: clique com o botão direito em um prendedor ou nota para criar um novo. A borda superior continua mostrando o varal enquanto você escreve.
-- As opções de corda mostram a textura trançada e as folhas reais. O título e o texto nos detalhes e no calendário mantêm bordas separadas, espaço entre si e as cores do prendedor e do papel. As folhas e gavinhas ficam no mesmo lugar quando os prendedores se movem.
-- Registre título, texto e categoria com um atalho; mantenha notas incompletas como rascunhos.
-- Uma corda na área de trabalho com prendedores e papel; novas ideias usam a categoria Geral.
-- Escolha 4, 6 ou 8 prendedores em Calendário → Mais → Armazenamento e configurações; o padrão é 6. As folhas se ajustam proporcionalmente à tela, com aumento moderado na opção 4. Novas ideias salvas com a corda cheia ocupam vagas liberadas, da mais recente à mais antiga; registros antigos e ideias arquivadas manualmente não voltam automaticamente.
-- Personalize corda e papel em Calendário → Mais → Armazenamento e configurações → Aparência. A corda clássica permite cores livres; o algodão mantém seu tom natural e a trepadeira permanece verde. Os prendedores seguem as cores das etiquetas. Escolha cinco tons suaves de papel e folhas lisas, pautadas ou com linhas tracejadas. A prévia só é salva ao Aplicar; Cancelar ou Voltar a descarta. As configurações separam Aparência, Controles e Dados e backup. Os menus separam cor e superfície; a prévia completa e Aplicar permanecem visíveis.
-- Mova um prendedor ou separe uma folha. No menu de contexto, **Merge** permite escolher um prendedor compatível e **Split** separa a ideia atual. Quando necessário, a separação reúne os espaços dispersos; a organização automática mantém a ordem da esquerda para a direita. Você pode desfazer a organização.
-- Edite na visualização detalhada ou no calendário, com salvamento após uma breve pausa e troca imediata de página. Leitura e edição usam a borda da etiqueta e o tom de papel escolhido.
-- Navegue por dia, mês ou ano; pesquise e filtre também ideias arquivadas.
-- Restaure notas em Excluídos recentemente. Excluir um projeto mantém suas ideias. Ideias penduradas voltam ao prendedor original ou a uma vaga; se a corda estiver cheia, voltam ao calendário e podem ser trocadas.
-- Copie ou arraste texto simples. A nota original permanece e nada é enviado automaticamente.
-- Guarde dados localmente; veja a pasta real, mova-a ou exporte um backup independente.
-- Alterne chinês/inglês e modo claro/escuro nas primeiras janelas, ou acompanhe o sistema; o papel continua suave e legível.
-- Se a corda estiver cheia, salve a ideia ou escolha **Swap onto line** na mesma janela; a ideia anterior fica arquivada. Pendurar novamente pelo calendário aparece imediatamente. Os menus fecham quando o ponteiro sai.
+## Escreva, pendure, use e retome
 
-- Um título ou texto é suficiente; o corpo pode ficar vazio. O sino define um lembrete único, também visível no calendário. As notificações exigem permissão e abrem a nota. Com o aplicativo totalmente fechado, os lembretes perdidos são agrupados ao reiniciar. Se a notificação do sistema não estiver disponível, um aviso pequeno e clicável aparece no topo, sem tirar o foco nem criar outra janela.
+1. **Escreva**: abra com atalho ou botão direito e escolha grupo e etiqueta.
+2. **Pendure**: mantenha as notas atuais na corda e empilhe folhas relacionadas num prendedor.
+3. **Use**: abra o texto completo para ler, editar, copiar ou arrastar para outro aplicativo.
+4. **Retome**: recolha para o calendário e encontre por data ou pesquisa.
 
-<p align="center"><img src="images/thought-calendar.png" alt="Calendário de ideias com dados sintéticos de demonstração." width="740" /><br /><sub>Calendário de ideias com dados sintéticos de demonstração.</sub></p>
+## O que você pode fazer
+
+### Notas e rascunhos
+
+Um título ou corpo de texto basta para salvar. Guarde conteúdo ainda não enviado como rascunho; edições na leitura ampliada ou calendário são salvas após uma breve pausa.
+
+### Grupos e etiquetas
+
+Organize trabalho, vida pessoal ou projetos por grupo e use etiquetas para temas e finalidades. Os filtros são independentes e combinam por interseção, preservando pilhas e posições. Pesquise etiquetas por nome, título da nota ou palavras do texto.
+
+### Empilhar e ler folha por folha
+
+Um grupo admite etiquetas diferentes na mesma pilha; notas sem grupo combinam pela mesma etiqueta. Cada folha conserva título, texto, etiqueta, cor, lembrete e data. Vire páginas, abra a lista de títulos pelo número da página ou separe uma folha.
+
+### Corda e calendário conectados
+
+Pesquise destinos compatíveis na corda ou calendário. Pilhas combinadas no calendário ficam lá, inclusive após separadas. Arraste o prendedor para mover a pilha ou a borda superior para tirar uma folha. Organize posições automaticamente e desfaça a última ação válida. Os painéis podem ser movidos e fecham com Esc ou clique fora.
+
+### Encontrar a data original
+
+Navegue por dia, mês e ano; pesquise títulos, texto, grupos e etiquetas ou filtre por estado. Clique na data de uma folha pendurada para localizá-la. As pilhas exibem a quantidade real; cada membro mantém a própria data de criação.
+
+### Levar o texto completo
+
+Copie ou arraste texto simples mantendo a nota original. A confirmação aparece perto do botão. Você escolhe o destino; o aplicativo não envia texto automaticamente a outros aplicativos ou serviços de IA.
+
+### Agendar um lembrete
+
+O sino agenda uma notificação única. É preciso permitir notificações e manter o aplicativo aberto. Lembretes perdidos enquanto estava fechado aparecem ao reabrir.
+
+### Continuar com a corda cheia
+
+Escolha 4, 6 ou 8 prendedores; o padrão é 6. Salve no calendário ou substitua uma nota pendurada, recolhendo a anterior. Notas recolhidas manualmente ficam no calendário até você pendurá-las outra vez.
+
+### Conservar ou limpar conteúdo
+
+Crie, renomeie, retire da seleção e restaure classificações. Excluir conserva e transfere o conteúdo por padrão. A exclusão definitiva apresenta a lista no mesmo diálogo e exige confirmação. Uma etiqueta abrange notas de todos os grupos e rascunhos relacionados. Geral e Sem grupo são protegidos.
 
 ## Download e instalação
 
-Os downloads estão disponíveis para membros com acesso ao repositório. Releases inclui pacotes, inicializadores isolados, SHA256SUMS e origem das compilações. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29).
+Versão atual: **0.0.35**, distribuída pelo Releases. O download exige acesso ao repositório.
 
-| Platform | Package |
-|---|---|
-| macOS · Apple Silicon | arm64 · DMG |
-| Windows | x64 · EXE (NSIS) |
+| Plataforma | Instalador |
+| --- | --- |
+| macOS · Apple Silicon | [Thoughtline-0.0.35-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
+| Windows · x64 | [Thoughtline-0.0.35-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
 
-Antes de atualizar, encerre normalmente e faça backup dos dados. Não estão previstos certificados de assinatura comercial nem notarização. Mac mantém a assinatura local ad-hoc; Windows não é assinado. O usuário instala pelos avisos normais de confiança do sistema. A assinatura não determina a maturidade da versão. Não há atualização automática.
+No Mac, abra o DMG e arraste Thoughtline para Aplicativos. No Windows, execute o EXE. Feche normalmente a versão antiga e mantenha uma cópia independente antes de atualizar. Atualizações são baixadas manualmente.
 
-## Primeiros passos
+O pacote Mac usa assinatura ad-hoc e não é notarizado. O pacote Windows não é assinado. O sistema pode exibir um aviso de confiança.
 
-1. Control + Alt + N (⌃ + ⌥ + N no Mac) abre uma nota; altere o atalho nas configurações.
-2. Enter insere uma nova linha. Confirme com ⌘ + Enter no Mac ou Ctrl + Enter no Windows. Esc salva o rascunho e fecha a entrada.
-3. Leve o ponteiro à borda superior para mostrar a corda; abra uma folha para ler, copiar, editar ou arquivar.
-4. Encontre ideias arquivadas no calendário ou restaure as excluídas recentemente.
+## Sua primeira nota
 
-As etiquetas representam usos, pessoas ou ferramentas: ideias do dia a dia, notas de trabalho, gestor direto, colega ou Codex. Adicione relatórios, planos de design ou clientes. Novas instalações oferecem seis etiquetas; as existentes e suas cores são preservadas. O calendário filtra Tudo / Na corda / Fora da corda. Fora inclui ideias apenas salvas, recolhidas e registros antigos que excedem a capacidade. Copie ou arraste o texto manualmente; cada aplicativo receptor exige verificação separada.
+1. Pressione `Control + Alt + N`; no Mac, `⌃ + ⌥ + N`. Altere o atalho nos ajustes.
+2. `Enter` quebra a linha. Envie com `⌘ + Enter` no Mac ou `Ctrl + Enter` no Windows. Na nota nova, `Esc` salva o rascunho e fecha a janela.
+3. Leve o cursor ao topo. Abra uma folha para ler tudo; o botão direito oferece criar, filtrar, abrir calendário e organizar.
+4. O menu Mais do calendário reúne excluídas recentemente, grupos e etiquetas, e armazenamento e ajustes.
 
-## Dados e backups
+## Personalize sua corda
 
-As configurações do calendário mostram a pasta real. A mudança copia e verifica antes de trocar a pasta; mantém o original. Exportar um backup não altera a localização atual. [Data / 备份说明](../ROUND1-DATA-SAFETY.md).
+Nos ajustes de aparência, escolha corda clássica, algodão trançado ou trepadeira leve. A clássica admite cores; algodão e trepadeira conservam tons naturais. Prendedores seguem a cor da etiqueta.
 
-O formato atual é schema3. A versão 0.0.16-preview.6 não pode lê-lo diretamente. Preserve os novos dados e valide um backup anterior em uma pasta separada antes de voltar à versão antiga. Esse backup não contém alterações posteriores.
+Escolha cinco cores suaves e papel em branco, pautado ou tracejado. Veja a prévia e aplique. A interface oferece chinês e inglês e temas claro, escuro ou do sistema.
 
-## Desenvolvimento
+## Dados, exportação e exclusão
 
-Use Node.js 24.19.0 ou uma versão 24.x mais recente. verify executa verificação de tipos, testes unitários e compilação. Gere cada pacote no sistema correspondente. Tecnologias: Electron, React, TypeScript e Vite.
+Notas ficam em arquivos locais. Consulte a pasta, migre o armazenamento ou exporte JSON nos ajustes. A migração copia e verifica antes de mudar e mantém o original. TXT e DOCX exportam títulos e texto; JSON guarda os dados completos das notas.
 
-```bash
-npm ci
-npm run dev
-```
+Excluir normalmente permite restaurar das excluídas recentemente. A exclusão definitiva limpa registros atuais, sem passar por essa lista nem permitir desfazer; cópias automáticas e exportações existentes ficam. Excluir uma classificação definitivamente inclui seu conteúdo na corda, calendário, excluídas recentemente e rascunhos.
 
-```bash
-npm run verify
-npm run package:mac
-npm run package:win
-```
+Mantenha cópia independente antes de atualizar ou trocar de computador. Preserve dados atuais e confira compatibilidade antes de restaurar uma cópia antiga ou voltar de versão.
 
-As verificações automáticas e de pacotes aplicáveis passaram. IME, DPI, múltiplas telas, foco e campos reais do WeChat, Doubao e WorkBuddy ainda precisam de testes independentes. A interface oferece chinês e inglês. Alterne o idioma e o modo claro/escuro diretamente no canto superior direito das janelas de escrita, detalhes ou calendário; nas configurações, você pode voltar a seguir o sistema. Os sete links traduzem o README, não representam sete idiomas da interface.
+## Perguntas frequentes
 
-## Feedback
+### Como combinar grupos e etiquetas?
 
-Use Issues para problemas e ideias. Inclua versões, passos, resultados esperados e reais e evidências sem informações pessoais. Não envie pensamentos ou dados reais. [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
+Trabalho pode ser um grupo e Relatório diário uma etiqueta. Só a etiqueta encontra notas em todos os grupos; ambos os filtros mostram a interseção.
 
-Estrelas e downloads: retrato da API em 2026-10-10. Downloads contam arquivos das publicações.
+### Qual é a diferença entre recolher e excluir?
+
+Recolher leva ao calendário; excluir normalmente permite restaurar; excluir definitivamente remove registros atuais. Ao limpar classificações, conservar e transferir é o padrão.
+
+### Preciso de conta ou serviço de nuvem?
+
+O uso dispensa conta Thoughtline. Esta versão usa arquivos e cópias locais; transfira seus backups ao mudar de aparelho. A permissão de download é separada do uso.
+
+### A etiqueta Codex conecta à IA?
+
+Etiquetas organizam textos e não conectam APIs de agentes. Copie ou arraste um prompt quando quiser usá-lo.
+
+## Feedback e contato
+
+Contate o autor em Armazenamento e ajustes, ou pelo [GitHub Issues](https://github.com/NocodeMrLi/thoughtline/issues) com acesso ao repositório. Informe sistema, versão, passos e resultados esperado e real. Remova dados pessoais dos exemplos e imagens.
 
 <a id="license"></a>
+
 ## Licença e agradecimentos
 
-O projeto está UNLICENSED; nenhuma permissão de uso como código aberto foi concedida. Uma futura publicação definirá a licença e as contribuições. Consulte os avisos de terceiros para o código e as licenças incluídos. [Third-party notices](../../THIRD_PARTY_NOTICES.md).
+O código está marcado `UNLICENSED`; nenhuma licença de código aberto foi concedida. As licenças de terceiros ficam nos [avisos de terceiros](../../THIRD_PARTY_NOTICES.md).
 
-0.0.25 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.
+<sub>A documentação está disponível em sete idiomas. A interface do aplicativo oferece chinês e inglês.</sub>

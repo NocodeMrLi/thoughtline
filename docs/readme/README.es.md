@@ -1,105 +1,137 @@
 <h1 align="center">
-  <img src="../../assets/app-icon.png" alt="Thoughtline app icon" width="96" height="96" valign="middle" /> 晾念头 · Thoughtline
+  <img src="../../assets/app-icon.png" alt="Thoughtline" width="96" height="96" /><br />
+  晾念头 · Thoughtline
 </h1>
 
 <p align="center">
-  <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
-  <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><img src="badges/preview.svg" alt="Version: 0.0.29" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <strong>Cuelga una idea. Tenla a mano cuando la necesites.</strong><br />
+  Una cuerda en el borde del escritorio para ideas, notas y prompts reutilizables.
 </p>
 
 <p align="center">
-  <sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/preview.svg" alt="Version: 0.0.35" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="GitHub Issues" /></a>
 </p>
 
-<p align="center">
-  <strong>Cuelga una idea. Mantén la inspiración a mano.</strong><br />
-  Una cuerda, unas pinzas y hojas de papel para tus ideas cotidianas.
-</p>
+<p align="center"><sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub></p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><ins>Descargar Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35">Descargar Thoughtline</a></h2>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.35</sub></p>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.29</sub></p>
+Thoughtline es una aplicación de notas para macOS y Windows. Lleva el cursor al borde superior para desplegar la cuerda y sus notas; al alejarlo, se recogen. Mantén lo que necesitas en pinzas de colores y organiza el resto con grupos, etiquetas y un calendario.
 
-Thoughtline es una herramienta ligera para macOS y Windows. Muestra tus ideas en el borde superior de la pantalla, anota una y vuelve a lo que estabas haciendo.
+## Un lugar para tus ideas
 
-## Funciones
+- Apuntes de reuniones, tareas pendientes y notas de trabajo.
+- Ideas para escribir y pensamientos que quieres retomar.
+- Prompts, respuestas y textos de referencia que utilizas a menudo.
 
-- **Etiquetas y grupos**: búsqueda y creación comunes en todos los editores. Mantén pulsado para organizar y pulsa la cruz para retirar una opción. Tres pestañas gestionan etiquetas, grupos y opciones retiradas; las dos listas de restauración se desplazan por separado.
-- **Crear un pensamiento**: haz clic derecho en una pinza o nota para crear uno nuevo. El borde superior sigue mostrando la cuerda mientras escribes.
-- Las opciones de cuerda muestran la textura trenzada y las hojas reales. El título y el texto en los detalles y el calendario tienen bordes separados, espacio entre ellos y colores del clip y del papel. Las hojas y los zarcillos permanecen en su sitio al mover las pinzas.
-- Anota título, texto y categoría con un atajo; guarda notas incompletas como borradores.
-- Una cuerda de escritorio con pinzas y papel; las ideas nuevas usan la categoría General.
-- Elige 4, 6 u 8 pinzas en Calendario → Más → Almacenamiento y ajustes; por defecto son 6. El papel se escala proporcionalmente a la pantalla, con un aumento moderado al elegir 4. Las ideas nuevas guardadas con la cuerda llena ocupan los huecos libres, empezando por las más recientes; las antiguas y las archivadas manualmente no vuelven automáticamente.
-- Personalice cuerda y papel en Calendario → Más → Almacenamiento y ajustes → Apariencia. La cuerda clásica permite elegir cualquier color; el algodón conserva su tono natural y la enredadera permanece verde. Las pinzas siguen los colores de las etiquetas. Elija cinco tonos suaves de papel y hojas en blanco, con líneas o líneas discontinuas. La vista previa solo se guarda al Aplicar; Cancelar o Volver la descarta. Ajustes separa Apariencia, Controles y Datos y copias de seguridad. Los menús separan color y superficie; la vista previa completa y Aplicar permanecen visibles.
-- Mueve una pinza o separa una hoja. Con el botón derecho, **Merge** permite elegir una pinza compatible y **Split** separa la idea actual. Si hace falta, la separación reúne los espacios dispersos; la organización automática conserva el orden de izquierda a derecha. Puedes deshacer la organización.
-- Edita en la vista de detalle o el calendario, con guardado automático tras una pausa y cambio inmediato de página. La lectura y la edición comparten el borde de la etiqueta y el tono de papel elegido.
-- Explora por día, mes o año; busca y filtra también las ideas archivadas.
-- Restaura notas desde Eliminados recientemente. Borrar un proyecto conserva sus ideas. Las ideas colgadas vuelven a su pinza o a un espacio libre; si está lleno, se restauran en el calendario y puedes intercambiarlas.
-- Copia o arrastra el texto sin formato. La nota original se mantiene y no se envía nada automáticamente.
-- Guarda los datos localmente; consulta la carpeta real, muévelos o exporta una copia independiente.
-- Cambia entre chino/inglés y modo claro/oscuro desde las primeras ventanas, o sigue el sistema; el papel sigue siendo suave y legible.
-- Si la cuerda está llena, guarda la idea o elige **Swap onto line** en la misma ventana; la idea anterior queda archivada. Volver a colgar desde el calendario se refleja al instante. Los menús se cierran al retirar el puntero.
+## Escribe, cuelga, utiliza y vuelve
 
-- Basta un título o texto; el cuerpo puede quedar vacío. La campana configura un recordatorio único, también visible en el calendario. Las notificaciones requieren permiso y abren la nota. Al cerrar completamente la aplicación no se avisa a tiempo; los recordatorios perdidos se agrupan al reiniciar. Si la notificación del sistema no está disponible, aparece un aviso pequeño y pulsable arriba, sin quitar el foco ni añadir otra ventana.
+1. **Escribe**: abre una nota con el atajo o el botón derecho y elige grupo y etiqueta.
+2. **Cuelga**: deja a la vista lo que necesitas y apila hojas relacionadas en una pinza.
+3. **Utiliza**: abre el texto completo para leerlo, editarlo, copiarlo o arrastrarlo a otra aplicación.
+4. **Vuelve**: guarda la nota en el calendario y encuéntrala por fecha o búsqueda.
 
-<p align="center"><img src="images/thought-calendar.png" alt="Calendario de ideas con datos de demostración sintéticos." width="740" /><br /><sub>Calendario de ideas con datos de demostración sintéticos.</sub></p>
+## Qué puedes hacer
+
+### Guardar notas y borradores
+
+Basta con un título o un cuerpo de texto. Conserva lo que todavía no has enviado como borrador; los cambios en la vista ampliada o el calendario se guardan tras una breve pausa.
+
+### Organizar con grupos y etiquetas
+
+Separa proyectos, trabajo o vida personal mediante grupos; usa etiquetas para temas y usos. Los filtros son independientes y juntos muestran notas que coinciden con ambos, conservando pilas y posiciones. Busca etiquetas por su nombre, título de la nota o palabras del texto.
+
+### Apilar y leer hoja por hoja
+
+Dentro de un grupo puedes combinar etiquetas distintas; las notas sin grupo se combinan con la misma etiqueta. Cada hoja conserva título, texto, etiqueta, color, recordatorio y fecha. Cambia de página, abre la lista de títulos desde el número de página o separa una hoja.
+
+### Conectar cuerda y calendario
+
+Busca destinos compatibles en ambos lugares. Una pila combinada en el calendario permanece allí, también al separarla. Arrastra la pinza para mover la pila o el borde superior para extraer una hoja. Organiza las posiciones y deshaz la última acción válida. Los paneles de filtro y combinación se pueden mover; Esc o un clic fuera los cierra.
+
+### Encontrar la fecha original
+
+Explora días, meses y años; busca títulos, texto, grupos y etiquetas o filtra por estado. Pulsa la fecha de una nota de la cuerda para localizarla. Las pilas muestran el número real de hojas y cada miembro conserva su fecha de creación.
+
+### Llevarte el texto completo
+
+Copia o arrastra texto sin formato conservando la nota original. La confirmación aparece junto al botón. Tú eliges dónde usarlo; no se envía automáticamente a otras aplicaciones o servicios de IA.
+
+### Programar un recordatorio
+
+La campana permite una notificación puntual. Necesita permiso del sistema y la aplicación en ejecución; los recordatorios perdidos mientras estaba cerrada aparecen al volver a abrirla.
+
+### Seguir escribiendo con la cuerda llena
+
+Elige 4, 6 u 8 pinzas; el valor inicial es 6. Guarda en el calendario o intercambia una nota, recogiendo la anterior. Las notas recogidas manualmente permanecen en el calendario hasta que las vuelvas a colgar.
+
+### Decidir si conservar o vaciar
+
+Crea, renombra, retira de la selección y restaura grupos o etiquetas. El borrado conserva y traslada el contenido por defecto. Para eliminarlo definitivamente, revisa la lista en el mismo diálogo y confirma. Una etiqueta abarca notas de todos los grupos y borradores relacionados. General y Sin grupo están protegidos.
 
 ## Descarga e instalación
 
-Las descargas están disponibles para miembros con acceso al repositorio. Releases incluye paquetes, lanzadores aislados, SHA256SUMS y procedencia de las compilaciones. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29).
+La versión actual es **0.0.35**. Se distribuye mediante Releases y requiere acceso al repositorio.
 
-| Platform | Package |
-|---|---|
-| macOS · Apple Silicon | arm64 · DMG |
-| Windows | x64 · EXE (NSIS) |
+| Plataforma | Instalador |
+| --- | --- |
+| macOS · Apple Silicon | [Thoughtline-0.0.35-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
+| Windows · x64 | [Thoughtline-0.0.35-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
 
-Antes de actualizar, cierra la aplicación normalmente y respalda tus datos. No se prevén certificados de firma comercial ni notarización. Mac conserva la firma local ad-hoc; Windows no tiene firma. El usuario instala mediante los avisos normales de confianza del sistema. La firma no determina la madurez de una versión. No hay actualizaciones automáticas.
+En Mac, abre el DMG y arrastra Thoughtline a Aplicaciones. En Windows, ejecuta el EXE. Cierra normalmente la versión anterior y conserva una copia independiente antes de actualizar. Las actualizaciones se descargan manualmente.
 
-## Primeros pasos
+El paquete Mac tiene firma ad-hoc y no está notarizado. El paquete Windows no está firmado. El sistema puede mostrar un aviso de confianza.
 
-1. Pulsa Control + Alt + N (⌃ + ⌥ + N en Mac) para escribir; cambia el atajo en Ajustes.
-2. Enter añade un salto de línea. Envía la nota con ⌘ + Enter en Mac o Ctrl + Enter en Windows. Esc guarda el borrador y cierra el editor.
-3. Acerca el puntero al borde superior para mostrar la cuerda; abre una hoja para leer, copiar, editar o archivar.
-4. Busca ideas archivadas en el calendario o restaura las eliminadas recientemente.
+## Tu primera nota
 
-Las etiquetas describen usos, personas o herramientas: ideas cotidianas, notas de trabajo, un responsable directo, un compañero o Codex. Añade informes diarios, planes de diseño o clientes. Las instalaciones nuevas incluyen seis etiquetas; las existentes y sus colores se conservan. El calendario filtra Todo / En la cuerda / Fuera de la cuerda. Fuera incluye ideas guardadas sin colgar, retiradas y registros antiguos que superan la capacidad. Copia o arrastra el texto tú mismo; la recepción en otras aplicaciones requiere verificación por separado.
+1. Pulsa `Control + Alt + N`; en Mac, `⌃ + ⌥ + N`. Puedes cambiarlo en ajustes.
+2. `Enter` añade una línea. Envía con `⌘ + Enter` en Mac o `Ctrl + Enter` en Windows. En una nota nueva, `Esc` guarda el borrador y cierra la ventana.
+3. Acerca el cursor al borde superior. Abre una hoja para leerla; usa el botón derecho para crear, filtrar, abrir el calendario u organizar.
+4. El menú Más del calendario contiene notas eliminadas recientemente, grupos y etiquetas, y almacenamiento y ajustes.
 
-## Datos y copias de seguridad
+## Personaliza tu escritorio
 
-Los ajustes del calendario muestran la carpeta real. La migración copia y verifica antes de cambiar; conserva el original. Exportar una copia no cambia la ubicación actual. [Data / 备份说明](../ROUND1-DATA-SAFETY.md).
+En los ajustes de apariencia elige cuerda clásica, algodón trenzado o enredadera ligera. La clásica admite colores; las otras conservan su tono natural. Las pinzas siguen el color de la etiqueta.
 
-El formato actual es schema3. La versión 0.0.16-preview.6 no puede leerlo directamente. Conserva los datos nuevos y valida una copia previa en una carpeta independiente antes de volver a una versión anterior. Esa copia no incluye cambios posteriores.
+Elige cinco colores suaves de papel y hojas en blanco, con líneas o líneas discontinuas. Previsualiza y aplica. La interfaz ofrece chino e inglés y temas claro, oscuro o del sistema.
 
-## Desarrollo
+## Datos, exportación y borrado
 
-Usa Node.js 24.19.0 o una versión 24.x posterior. verify ejecuta comprobación de tipos, pruebas unitarias y compilación. Compila cada paquete en su sistema correspondiente. La aplicación usa Electron, React, TypeScript y Vite.
+Las notas se guardan localmente. Consulta el directorio, traslada el almacenamiento o exporta JSON en ajustes. La migración copia y verifica antes de cambiar y conserva el original. TXT y DOCX exportan títulos y texto; JSON respalda los datos completos de las notas.
 
-```bash
-npm ci
-npm run dev
-```
+El borrado normal permite recuperar desde eliminadas recientemente. El definitivo elimina registros actuales sin pasar por esa lista ni permitir deshacer; conserva copias automáticas y exportaciones existentes. Borrar definitivamente un grupo o etiqueta incluye su contenido en cuerda, calendario, eliminadas recientemente y borradores.
 
-```bash
-npm run verify
-npm run package:mac
-npm run package:win
-```
+Conserva una copia independiente antes de actualizar o cambiar de equipo. Guarda los datos actuales y comprueba la compatibilidad antes de restaurar una copia antigua o volver a otra versión.
 
-Las comprobaciones automáticas y de paquetes aplicables han pasado. IME, DPI, varias pantallas, foco y campos reales de WeChat, Doubao y WorkBuddy requieren pruebas independientes. La interfaz admite chino e inglés. Cambia el idioma y el modo claro/oscuro directamente en la esquina superior derecha de Composición, Detalle o Calendario; en Ajustes puedes volver a seguir el sistema. Los siete enlaces traducen el README, no indican siete idiomas para la interfaz.
+## Preguntas frecuentes
 
-## Comentarios
+### ¿Cómo combino grupos y etiquetas?
 
-Usa Issues para errores y sugerencias. Incluye versiones, pasos, resultado esperado y real, y pruebas sin información privada. No subas notas personales ni datos reales. [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
+Trabajo puede ser un grupo e Informe diario una etiqueta. Filtrar solo la etiqueta abarca todos los grupos; combinar ambos muestra su intersección.
 
-Estrellas y descargas: instantánea de la API del 2026-10-10. Las descargas cuentan archivos de las publicaciones.
+### ¿Recoger y borrar son lo mismo?
+
+Recoger lleva al calendario; borrar normalmente permite recuperar; borrar definitivamente elimina registros actuales. Conservar y trasladar sigue siendo la opción predeterminada al limpiar categorías.
+
+### ¿Necesito cuenta o nube?
+
+El uso no requiere cuenta de Thoughtline. Esta versión guarda archivos locales y copias; para cambiar de equipo traslada tú los respaldos. El acceso a la descarga es independiente del uso.
+
+### ¿La etiqueta Codex conecta con IA?
+
+Las etiquetas sirven para organizar texto. No conectan con APIs de agentes. Copia o arrastra un prompt cuando quieras utilizarlo.
+
+## Comentarios y contacto
+
+Contacta con el autor desde almacenamiento y ajustes, o mediante [GitHub Issues](https://github.com/NocodeMrLi/thoughtline/issues) si tienes acceso. Incluye sistema, versión, pasos y resultados esperado y real. Oculta datos personales en capturas y ejemplos.
 
 <a id="license"></a>
+
 ## Licencia y agradecimientos
 
-El proyecto es UNLICENSED; no se ha otorgado permiso de uso como código abierto. Una futura publicación pública definirá su licencia y proceso de contribución. Consulta los avisos de terceros para el código y las licencias incluidos. [Third-party notices](../../THIRD_PARTY_NOTICES.md).
+El código figura como `UNLICENSED`; no se ha concedido licencia de código abierto. Las licencias de terceros se conservan en [Avisos de terceros](../../THIRD_PARTY_NOTICES.md).
 
-0.0.25 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.
+<sub>La documentación está disponible en siete idiomas. La interfaz de la aplicación admite chino e inglés.</sub>

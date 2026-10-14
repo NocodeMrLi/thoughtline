@@ -1,105 +1,137 @@
 <h1 align="center">
-  <img src="../../assets/app-icon.png" alt="Thoughtline app icon" width="96" height="96" valign="middle" /> 晾念头 · Thoughtline
+  <img src="../../assets/app-icon.png" alt="Thoughtline" width="96" height="96" /><br />
+  晾念头 · Thoughtline
 </h1>
 
 <p align="center">
-  <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="badges/stars.svg" alt="GitHub stars: 0" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="badges/downloads.svg" alt="Release asset downloads: 30" /></a>
-  <a href="#license"><img src="badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><img src="badges/preview.svg" alt="Version: 0.0.29" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><img src="badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <strong>생각을 걸어 두고, 필요할 때 다시 꺼내세요.</strong><br />
+  바탕화면 위쪽의 줄 하나에 아이디어, 업무 메모, 자주 쓰는 프롬프트를 담으세요.
 </p>
 
 <p align="center">
-  <sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/preview.svg" alt="Version: 0.0.35" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="GitHub Issues" /></a>
 </p>
 
-<p align="center">
-  <strong>생각을 걸어 두고, 영감을 가까이.</strong><br />
-  줄 하나와 집게, 종이로 일상의 아이디어를 남깁니다.
-</p>
+<p align="center"><sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub></p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29"><ins>Thoughtline 다운로드</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35">Thoughtline 다운로드</a></h2>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.35</sub></p>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.29</sub></p>
+Thoughtline은 macOS와 Windows용 데스크톱 메모 앱입니다. 화면 위쪽으로 마우스를 가져가면 줄과 메모가 나타나고, 벗어나면 접힙니다. 지금 필요한 글은 색깔 집게에 걸고 나머지는 그룹, 태그, 달력으로 정리합니다.
 
-Thoughtline은 macOS와 Windows용 가벼운 데스크톱 메모 도구입니다. 화면 위쪽 가장자리에서 생각을 꺼내 보고, 기록한 뒤 하던 일로 돌아가세요.
+## 이런 생각을 남겨 보세요
 
-## 기능
+- 회의 요점, 할 일의 단서, 짧은 업무 기록.
+- 나중에 이어서 생각할 글감이나 일상 아이디어.
+- 반복해서 쓰는 프롬프트, 답변 문구, 참고 글.
 
-- **태그와 그룹**: 모든 편집 화면에서 검색과 생성을 공유합니다. 길게 눌러 정리 모드로 들어간 뒤 ×를 눌러 선택 목록에서 제거합니다. 관리 화면은 태그, 그룹, 제거됨의 세 탭으로 나뉘며 복원 목록 두 개는 각각 스크롤됩니다.
-- **새 생각 만들기**: 집게나 메모를 오른쪽 클릭해 새 생각을 만듭니다. 작성 중에도 화면 위쪽 가장자리에서 줄을 불러올 수 있습니다.
-- 줄 선택 메뉴에 실제 꼬임 질감과 덩굴 잎을 표시합니다. 펼친 메모와 달력 상세 화면의 제목과 본문은 간격을 둔 독립 테두리로 표시하며 집게와 종이 색을 따릅니다. 집게를 움직여도 덩굴의 잎과 덩굴손은 제자리에 유지됩니다.
-- 단축키로 제목, 본문, 분류를 기록하고 미완성 메모를 초안으로 저장합니다.
-- 데스크톱에는 줄, 집게, 종이만 표시합니다. 새 메모의 기본 분류는 일반입니다.
-- 달력 → 더 보기 → 저장소 및 설정에서 집게 4／6／8개를 선택합니다. 기본값은 6개이며 종이는 화면에 맞춰 비율을 유지합니다. 4개도 지나치게 커지지 않습니다. 줄이 가득 찼을 때 새로 저장한 메모는 자리가 나면 최신순으로 걸립니다. 기존 미표시 메모와 수동으로 보관한 메모는 자동으로 돌아오지 않습니다. 색상과 종이 무늬는 별도 메뉴에서 선택하며, 전체 미리보기와 적용 버튼을 함께 볼 수 있습니다.
-- 달력 → 더 보기 → 저장소 및 설정 → 모양에서 끈과 종이를 바꿉니다. 기본 끈은 자유롭게 색을 선택하고, 면 끈은 자연스러운 면색, 덩굴은 녹색을 유지합니다. 집게 색은 태그를 따릅니다. 부드러운 종이색 5가지와 무지／가로줄／점선을 선택하고 미리 본 뒤 적용합니다. 취소나 뒤로 가기는 저장하지 않습니다. 설정은 모양·조작·데이터 및 백업으로 나뉩니다.
-- 집게 전체를 옮기거나 종이 한 장을 분리합니다. 오른쪽 클릭의 **Merge(합치기)** 로 호환 집게를 선택하고 **Split(분리)** 로 현재 한 장을 분리합니다. 공간이 흩어져 있으면 간격을 정리하며, 자동 정리는 좌우 순서를 유지합니다. 정리를 실행 취소할 수 있습니다.
-- 상세 보기와 달력에서 직접 편집합니다. 잠시 입력을 멈추면 자동 저장하고 페이지를 즉시 전환합니다. 읽기와 편집 모두 태그색 테두리와 선택한 종이색을 사용합니다.
-- 일·월·년으로 돌아보고 검색과 상태 필터로 보관한 메모도 찾습니다.
-- 삭제한 메모를 최근 삭제에서 복원합니다. 프로젝트 삭제는 메모 내용을 유지합니다. 걸려 있던 메모는 원래 집게나 빈자리에 복원하며, 가득 찼다면 달력에서 복원한 뒤 교체할 수 있습니다.
-- 본문을 복사하거나 일반 텍스트로 드래그합니다. 원본을 유지하고 자동 전송하지 않습니다.
-- 데이터를 로컬에 저장하고 실제 폴더 확인, 이동, 독립 백업 내보내기를 지원합니다.
-- 첫 화면에서 중국어/English와 밝게/어둡게 모드를 바꾸거나 시스템 설정을 따릅니다. 종이는 부드럽고 읽기 편한 질감을 유지합니다.
-- 줄이 가득 차면 저장하거나 같은 창에서 **Swap onto line**으로 교체할 수 있습니다. 이전 생각은 보관됩니다. 캘린더에서 다시 걸면 즉시 표시되며, 더 보기 메뉴는 포인터가 벗어나면 닫힙니다.
+## 쓰기, 걸기, 쓰임새 찾기, 돌아보기
 
-- 제목이나 본문 중 하나가 있으면 저장할 수 있습니다. 벨에서 일회성 알림을 설정하고 달력에도 표시합니다. 시스템 알림 권한이 필요합니다. 앱이 완전히 종료된 동안에는 알리지 못하며 놓친 알림은 재시작 시 모아서 알립니다. 시스템 알림을 사용할 수 없으면 화면 위의 작은 알림으로 대신합니다. 포커스를 빼앗거나 새 창을 띄우지 않으며 클릭하면 메모가 열립니다.
+1. **쓰기**: 단축키나 오른쪽 클릭으로 새 메모를 열고 그룹과 태그를 고릅니다.
+2. **걸기**: 당장 필요한 메모를 걸고 관련 종이를 집게 하나에 겹칩니다.
+3. **활용하기**: 전체 글을 열어 읽고 편집하거나 복사하고 다른 앱으로 끌어갑니다.
+4. **돌아보기**: 달력에 넣어 두고 날짜나 검색으로 다시 찾습니다.
 
-<p align="center"><img src="images/thought-calendar.png" alt="합성 시연 데이터를 사용한 생각 달력." width="740" /><br /><sub>합성 시연 데이터를 사용한 생각 달력.</sub></p>
+## 주요 기능
 
-## 다운로드 및 설치
+### 메모와 초안 보관
 
-저장소 접근 권한이 있는 구성원에게 다운로드를 제공합니다. Releases에서 패키지, 격리 실행 스크립트, SHA256SUMS와 빌드 정보를 확인하세요. [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.29).
+제목이나 본문 중 하나만 있어도 저장할 수 있습니다. 아직 등록하지 않은 글은 초안으로 남기고, 펼친 상세 화면이나 달력에서 편집하면 잠시 입력을 멈춘 뒤 자동 저장됩니다.
 
-| Platform | Package |
-|---|---|
-| macOS · Apple Silicon | arm64 · DMG |
-| Windows | x64 · EXE (NSIS) |
+### 그룹과 태그로 정리
 
-업데이트 전에 정상 종료하고 데이터를 백업하세요. 상용 서명 인증서나 공증은 계획하지 않습니다. Mac은 로컬 ad-hoc 서명을 유지하며 Windows는 서명되지 않았습니다. 사용자는 시스템의 정상적인 신뢰 확인 절차에 따라 설치합니다. 서명 여부가 버전의 완성도를 결정하지 않습니다. 자동 업데이트는 없습니다.
+업무, 생활, 프로젝트는 그룹으로 나누고 주제나 용도는 태그로 표시합니다. 필터는 각각 쓰거나 함께 일치하는 내용만 볼 수 있으며, 겹침 관계와 위치는 유지됩니다. 태그 이름, 메모 제목, 본문 단어로 해당 태그를 찾습니다.
 
-## 시작하기
+### 겹친 종이를 한 장씩 읽기
 
-1. Control + Alt + N(Mac: ⌃ + ⌥ + N)으로 새 메모를 엽니다. 설정에서 변경할 수 있습니다.
-2. Enter는 줄바꿈입니다. Mac은 ⌘ + Enter, Windows는 Ctrl + Enter로 제출합니다. Esc는 초안을 저장하고 닫습니다.
-3. 포인터를 화면 위쪽 가장자리로 옮겨 줄을 표시하고 종이를 열어 읽기, 복사, 편집, 보관합니다.
-4. 달력에서 보관한 메모를 찾거나 최근 삭제에서 복원합니다.
+같은 그룹에서는 서로 다른 태그도 합칠 수 있고, 그룹 없는 메모는 같은 태그끼리 합칩니다. 각 종이의 제목, 전문, 태그, 색, 알림, 작성일은 따로 유지됩니다. 페이지를 넘기거나 페이지 번호에서 제목 목록을 열고, 한 장만 분리할 수도 있습니다.
 
-라벨은 용도, 사람 또는 도구를 나타냅니다. 일상 아이디어, 업무 기록, 직속 상사, 동료, Codex뿐 아니라 일일 보고나 디자인 계획, 고객 라벨을 직접 추가할 수 있습니다. 새 설치에는 여섯 가지 간결한 라벨을 제공하고 기존 라벨과 색상은 유지합니다. 날짜 화면에서는 전체 / 줄에 걸림 / 줄 밖으로 필터링합니다. 저장만 한 메모, 보관한 메모와 기존 용량 초과 기록도 찾을 수 있습니다. 다른 앱에는 직접 복사하거나 본문을 드래그하며 실제 입력칸의 수신 동작은 별도로 검증합니다.
+### 줄과 달력 연결
 
-## 데이터와 백업
+줄이나 달력에서 호환되는 합칠 대상을 검색합니다. 달력에 합친 묶음은 분리해도 달력에 남습니다. 집게로 묶음 전체를, 종이 위쪽으로 한 장을 끌어 움직입니다. 자동 정렬과 최근 유효 작업 한 번의 되돌리기를 지원합니다. 작은 필터·합치기 패널은 이동할 수 있고 Esc나 바깥 클릭으로 닫습니다.
 
-달력 설정은 실제 데이터 폴더를 표시합니다. 이동은 복사와 검증 후 경로를 전환하며 원본을 남깁니다. 백업 내보내기는 현재 위치를 변경하지 않습니다. [Data / 备份说明](../ROUND1-DATA-SAFETY.md).
+### 원래 작성일로 찾기
 
-현재 형식은 schema3이며 0.0.16-preview.6은 직접 읽을 수 없습니다. 새 데이터를 보존하고 업그레이드 전 백업을 별도 폴더에서 검증한 뒤 다운그레이드하세요. 그 백업에는 이후 변경이 없습니다.
+일·월·년을 살펴보고 제목, 본문, 그룹, 태그나 상태로 검색합니다. 걸린 메모의 날짜를 누르면 달력에서 해당 메모를 찾습니다. 묶음은 실제 장수를 표시하며 각 종이는 원래 작성일에서 찾을 수 있습니다.
 
-## 개발
+### 전체 글 꺼내 쓰기
 
-Node.js 24.19.0 이상의 24.x를 사용합니다. verify는 타입 검사, 단위 테스트와 빌드를 수행합니다. 플랫폼 패키지는 해당 OS에서 빌드하세요. Electron, React, TypeScript, Vite를 사용합니다.
+복사하거나 일반 텍스트로 끌어가도 원본 메모는 남습니다. 복사 완료는 버튼 가까이에 표시됩니다. 쓸 곳은 직접 선택하며 다른 앱이나 AI 서비스로 자동 전송하지 않습니다.
 
-```bash
-npm ci
-npm run dev
-```
+### 한 번의 알림 예약
 
-```bash
-npm run verify
-npm run package:mac
-npm run package:win
-```
+종 아이콘으로 시스템 알림을 예약합니다. 알림 권한과 실행 중인 앱이 필요하며 종료 중 놓친 알림은 다시 열 때 안내합니다.
 
-적용 가능한 자동 검사와 패키지 검증은 통과했습니다. 실제 Mac/Windows 입력기, DPI, 다중 화면, 포커스와 WeChat·Doubao·WorkBuddy 입력칸은 독립 테스트가 필요합니다. 앱 UI는 중국어와 English를 지원합니다. 작성·상세·달력 창의 오른쪽 위에서 언어와 밝게/어둡게 모드를 바로 바꾸고, 설정에서 시스템 설정 따르기로 돌아갈 수 있습니다. 위의 7개 언어 링크는 README 번역이며 앱 UI가 7개 언어를 지원한다는 뜻은 아닙니다.
+### 줄이 가득 차도 계속 기록
 
-## 피드백
+집게는 4·6·8개 중 선택하며 기본은 6개입니다. 달력에 저장하거나 기존 메모를 넣어 두고 새 메모로 교체합니다. 직접 넣어 둔 메모는 다시 걸 때까지 달력에 남습니다.
 
-버그와 제안은 Issues에 등록하세요. 버전, 재현 단계, 예상 결과와 실제 결과, 개인정보를 가린 증거를 첨부하세요. 실제 메모나 개인 데이터를 올리지 마세요. [Issues](https://github.com/NocodeMrLi/thoughtline/issues).
+### 내용을 남길지 지울지 선택
 
-Star와 다운로드 수는 2026-10-10 API 스냅샷입니다. 다운로드는 릴리스 파일의 다운로드 횟수입니다.
+그룹과 태그를 만들고 이름을 바꾸며 선택 목록에서 제외하거나 복원합니다. 삭제 기본값은 내용을 보존하고 옮기는 방식입니다. 완전 삭제는 같은 대화창에서 목록을 보고 명시적으로 확인해야 합니다. 태그는 모든 그룹의 해당 메모와 관련 초안을 포함합니다. 기본 일반·미분류는 보호됩니다.
+
+## 다운로드와 설치
+
+현재 버전은 **0.0.35**이며 저장소 Releases에서 배포합니다. 다운로드에는 저장소 접근 권한이 필요합니다.
+
+| 플랫폼 | 설치 파일 |
+| --- | --- |
+| macOS · Apple Silicon | [Thoughtline-0.0.35-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
+| Windows · x64 | [Thoughtline-0.0.35-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
+
+Mac에서는 DMG를 열어 Thoughtline을 응용 프로그램으로 옮깁니다. Windows에서는 EXE를 실행합니다. 업데이트 전에는 이전 앱을 정상 종료하고 별도 백업을 남기세요. 업데이트는 수동 다운로드 방식입니다.
+
+Mac 패키지는 ad-hoc 서명이 있으며 공증되지 않았습니다. Windows 패키지는 서명되지 않았습니다. 설치 중 시스템 확인 안내가 표시될 수 있습니다.
+
+## 첫 메모 만들기
+
+1. `Control + Alt + N`, Mac에서는 `⌃ + ⌥ + N`을 누릅니다. 설정에서 바꿀 수 있습니다.
+2. `Enter`는 줄바꿈입니다. Mac은 `⌘ + Enter`, Windows는 `Ctrl + Enter`로 등록합니다. 새 메모에서 `Esc`를 누르면 초안을 저장하고 닫습니다.
+3. 마우스를 위쪽으로 가져가 줄을 열고 종이를 펼쳐 읽습니다. 오른쪽 클릭으로 새 메모, 필터, 달력, 정리 기능을 엽니다.
+4. 달력의 더 보기 메뉴에서 최근 삭제, 그룹과 태그, 저장소와 설정을 엽니다.
+
+## 바탕화면에 맞는 모습
+
+외관 설정에서 기본 줄, 땋은 면줄, 가벼운 덩굴을 선택합니다. 기본 줄은 색을 바꿀 수 있고 면줄과 덩굴은 자연색을 유지합니다. 집게는 태그 색을 따릅니다.
+
+다섯 가지 부드러운 종이색과 무지·줄·점선을 선택하고 미리 본 뒤 적용합니다. 화면 언어는 중국어·영어, 테마는 밝게·어둡게·시스템 설정을 지원합니다.
+
+## 데이터, 내보내기, 삭제
+
+메모는 로컬 파일로 저장합니다. 설정에서 실제 폴더를 확인하고 위치를 옮기거나 JSON 백업을 내보냅니다. 위치 변경은 복사·검증 후 전환하며 원본 사본은 남깁니다. TXT·DOCX는 제목과 글을, JSON은 메모 전체 데이터를 보관합니다.
+
+일반 삭제는 최근 삭제에서 복원할 수 있습니다. 완전 삭제는 현재 기록을 지우며 최근 삭제나 일반 되돌리기를 거치지 않습니다. 기존 자동 백업과 내보낸 파일은 남습니다. 분류의 완전 삭제는 줄, 달력, 최근 삭제, 초안의 해당 내용을 함께 지웁니다.
+
+업데이트나 기기 변경 전에 별도 백업을 남기세요. 이전 백업을 복원하거나 구버전으로 돌아갈 때는 현재 데이터를 보관하고 형식 호환성을 확인합니다.
+
+## 자주 묻는 질문
+
+### 그룹과 태그는 어떻게 함께 쓰나요?
+
+업무는 그룹, 일일 보고는 태그로 정할 수 있습니다. 태그만 고르면 모든 그룹에서 찾고 둘 다 고르면 공통으로 맞는 메모만 표시합니다.
+
+### 넣어 두기와 삭제는 어떻게 다른가요?
+
+넣어 두기는 달력으로, 일반 삭제는 복원 가능한 최근 삭제로 옮깁니다. 완전 삭제는 현재 기록을 지웁니다. 분류 정리는 내용 보존과 이동이 기본입니다.
+
+### 계정이나 클라우드가 필요한가요?
+
+앱 사용에는 Thoughtline 계정이 필요하지 않습니다. 현재는 로컬 저장과 백업을 제공하며 기기 간 이동은 백업 파일을 직접 옮깁니다. 다운로드 권한과 앱 사용은 별개입니다.
+
+### Codex 태그는 AI와 연결되나요?
+
+태그는 글을 분류하는 표시이며 Agent API에 연결하지 않습니다. 프롬프트가 필요하면 복사하거나 끌어가세요.
+
+## 피드백과 연락
+
+저장소와 설정의 연락 메뉴나, 접근 권한이 있다면 [GitHub Issues](https://github.com/NocodeMrLi/thoughtline/issues)를 이용하세요. 운영체제, 앱 버전, 재현 단계, 예상과 실제 결과를 적고 예시와 이미지에서 개인정보를 지워 주세요.
 
 <a id="license"></a>
+
 ## 라이선스와 감사
 
-현재 프로젝트는 UNLICENSED이며 오픈소스 사용 권한을 부여하지 않았습니다. 향후 공개 시 라이선스와 기여 방식을 정합니다. 포함된 코드의 라이선스는 제3자 고지를 참고하세요. [Third-party notices](../../THIRD_PARTY_NOTICES.md).
+소스는 현재 `UNLICENSED`로 표시되며 오픈 소스 사용 허가는 부여되지 않았습니다. 외부 코드의 라이선스는 [외부 코드 안내](../../THIRD_PARTY_NOTICES.md)에 별도로 보존합니다.
 
-0.0.25 title-only thoughts and reminder fields require the updated reader. Before downgrading, retain current data and use a pre-upgrade backup in a separate directory.
+<sub>제품 문서는 일곱 언어로 제공됩니다. 앱 화면은 현재 중국어와 영어를 지원합니다.</sub>
