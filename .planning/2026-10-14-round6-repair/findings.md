@@ -1,2 +1,4 @@
 # 第六轮发现
-Current pickers live inside340DIP Shelf; standalone reusable host needed. Calendar currently renders individual Idea cards. copy/restore notices are flow content; success anchor must outlive restored button. No schema/stack mutation redesign needed.
+Baseline6cc830d pickers live inside340DIP Shelf; standalone reusable host needed. Baseline Calendar rendered individual Idea cards. copy/restore notices are flow content; success anchor must outlive restored button. No schema/stack mutation redesign needed.
+
+Final: dedicated Picker is naturally measured without shrinking feedback loop, strict ready failure ownership cleanup, once-only calendar locate after scroll restore and committed split identity expands existing pagination. Small viewport can be shorter than paper: title + visible portion is real locate criterion, whole paper only when fits; no production relaxation. Product source between02f9963/731a0bb unchanged; finalpackage output/readback proof fixes build/tag/testinput binding, source-only completedgates reused explicitly, not all-UI/global/physical claims.

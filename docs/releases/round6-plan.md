@@ -7,18 +7,20 @@ Review Focus: picker stale source and blurred session; cross-day/filtered/pagina
 ## Task 1: search and day/stack projections
 Files: shared/ideaVisibility.ts, ideaHistory.ts, unit/round6*.test.ts.
 Interfaces: filterTagSearch(snapshot,project,query,names) returns ordered unique tag rows; calendarStackCards(snapshot, day members) retains matching/member representative plus total owner count.
-- [ ] Independent behavioral RED→GREEN for name/body tier recency, deleted/archived exclusion, cross-day dedupe and stable pagination.
-Expected: targeted unit tests exit0, old round5ShelfFilter/Grouping/ideaHistory retain contracts.
+- [x] Independent behavioral RED→GREEN for name/body tier recency, deleted/archived exclusion, cross-day dedupe and stable pagination.
+Outcome: 81Mac/85Windows related unit tests passed (Windows prior source gates strictly reused), round5ShelfFilter/ideaHistory/clipCommands covered.
 ## Task 2: reader feedback and calendar navigation
 Files: ActionIcon.tsx, IdeaReader.tsx, Calendar.tsx, CalendarStackReader.tsx, new feedback helper/style, focused Electron fixture.
-- [ ] Source RED→GREEN copy/restore tooltip and unchanged bounds, split preserves origin list, IO/IME and stale owner refusal.
+- [x] Source RED→GREEN copy/restore tooltip and unchanged bounds, split preserves origin list, IO/IME and stale owner refusal.
 Expected: focused native assertions and normal quit, targeted types/build exit0.
 ## Task 3: picker window and shelf date/location
 Files: main windows/index, shared bridge/messages, preload, renderer picker/Shelf/ClipCard, scoped geometry unit/native fixtures.
-- [ ] Source RED→GREEN standalone picker bounds/drag/Esc/outside/session/selection/cancel, date/day locate and success link.
+- [x] Source RED→GREEN standalone picker bounds/drag/Esc/outside/session/selection/cancel, date/day locate and success link.
 Expected: focused source fixtures normal quit; picker must not expand Shelf or disturb saved writer.
 ## Task 4: delivery
 Files: round6 scoped workflow/release audit/report, acceptance/gates.
-- [ ] Fresh whole-change review; fixes targeted RED→GREEN; Mac actual candidate and Windows focused source/install/package gates.
-- [ ] Version0.0.33 frozen inputs/SHA/retention; push without redundant full task, private release readback, scoped cleanup.
+- [x] Fresh whole-change review; fixes targeted RED→GREEN; Mac actual candidate and Windows focused source/install/package gates.
+- [x] Version0.0.33 frozen inputs/SHA/retention; push without redundant full task, private release readback, scoped cleanup.
 Expected: actual remote/source/package matches, six-item direct operation report; physical/formal remainfalse unless explicit owner feedback.
+
+Final: source/tag731a0bb7c719dabc786482a07606b47196a95af9,369inputs; Windows38511064035 success; original38510030275failure retained; privateRelease412343095 tenassets verified; ownedcleanup complete. User formal/physical acceptance remainsfalse. Final operation report round6-v0.0.33-delivery.md; exact document push readback in final delivery directory.
