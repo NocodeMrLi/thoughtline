@@ -5,7 +5,7 @@
 
 <p align="center">
   <strong>Hang up a thought. Keep inspiration within reach.</strong><br />
-  A rope at the top of your desktop for ideas, work notes, and reusable prompts.
+  A vine at the top of your desktop for ideas, work notes, and reusable prompts.
 </p>
 
 <p align="center">
@@ -20,6 +20,13 @@
 <p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.35</sub></p>
 
 Thoughtline is a desktop note app for macOS and Windows. Move the pointer to the top edge to reveal a rope and its notes; move away to tuck them back. Keep what you need on colored clips, and use groups, tags, and a calendar to find the rest.
+
+<p align="center">
+  <a href="demos/vine-overview.gif"><img src="demos/vine-overview.gif" alt="Reveal → Read the full note → Copy → Tuck away" width="960" /></a><br />
+  <sub>Reveal → Read the full note → Copy → Tuck away · <a href="demos/vine-overview.png">Still preview</a></sub>
+</p>
+
+<p align="center"><sub>Demos use the vine style, fictional sample notes, and the Chinese interface.</sub></p>
 
 ## A place for everyday thoughts
 
@@ -36,6 +43,13 @@ Thoughtline is a desktop note app for macOS and Windows. Move the pointer to the
 
 ## What you can do
 
+<p align="center"><strong>Quick capture　·　Drag to stack</strong></p>
+<p align="center">
+  <a href="demos/quick-capture.gif"><img src="demos/quick-capture.gif" alt="Quick capture" width="48%" /></a>
+  <a href="demos/drag-stack.gif"><img src="demos/drag-stack.gif" alt="Drag to stack" width="48%" /></a>
+</p>
+<p align="center"><sub>Quick capture · <a href="demos/quick-capture.png">Still preview</a>　｜　Drag to stack · <a href="demos/drag-stack.png">Still preview</a></sub></p>
+
 ### Capture a thought and keep a draft
 
 A title or body is enough to save a note. Unsubmitted text can stay as a draft. Edit in the expanded reader or calendar; changes autosave after a short pause.
@@ -43,6 +57,11 @@ A title or body is enough to save a note. Unsubmitted text can stay as a draft. 
 ### Organize with groups and tags
 
 Use groups for work, life, or projects, and tags for topics, roles, or purposes. Filters work independently; combining them shows notes matching both. They change the view while preserving stack relationships and positions. Find tags by tag name, note title, or words in the body.
+
+<p align="center">
+  <a href="demos/groups-and-tags.gif"><img src="demos/groups-and-tags.gif" alt="Choose a group → Filter by tag → Show all" width="900" /></a><br />
+  <sub>Choose a group → Filter by tag → Show all · <a href="demos/groups-and-tags.png">Still preview</a></sub>
+</p>
 
 ### Stack papers and read each one
 
@@ -55,6 +74,11 @@ Search compatible rope or calendar targets in the merge panel. A stack merged in
 ### Find notes by their original dates
 
 Browse by day, month, or year; search titles, text, groups, and tags, or filter by status. Click a rope note’s date to locate it in the calendar. Stack cards show the actual paper count. Each member remains discoverable on its own creation date.
+
+<p align="center">
+  <a href="demos/calendar-revisit.gif"><img src="demos/calendar-revisit.gif" alt="Click the paper’s date → Locate the note → Open the full text" width="900" /></a><br />
+  <sub>Click the paper’s date → Locate the note → Open the full text · <a href="demos/calendar-revisit.png">Still preview</a></sub>
+</p>
 
 ### Take the full text with you
 

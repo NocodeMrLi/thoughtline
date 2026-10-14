@@ -5,7 +5,7 @@
 
 <p align="center">
   <strong>Cuelga una idea. Tenla a mano cuando la necesites.</strong><br />
-  Una cuerda en el borde del escritorio para ideas, notas y prompts reutilizables.
+  Una enredadera en el borde del escritorio para ideas, notas y prompts reutilizables.
 </p>
 
 <p align="center">
@@ -20,6 +20,13 @@
 <p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.35</sub></p>
 
 Thoughtline es una aplicación de notas para macOS y Windows. Lleva el cursor al borde superior para desplegar la cuerda y sus notas; al alejarlo, se recogen. Mantén lo que necesitas en pinzas de colores y organiza el resto con grupos, etiquetas y un calendario.
+
+<p align="center">
+  <a href="demos/vine-overview.gif"><img src="demos/vine-overview.gif" alt="Desplegar → Leer la nota completa → Copiar → Recoger" width="960" /></a><br />
+  <sub>Desplegar → Leer la nota completa → Copiar → Recoger · <a href="demos/vine-overview.png">Vista estática</a></sub>
+</p>
+
+<p align="center"><sub>Las demos usan una enredadera, notas ficticias y la interfaz en chino.</sub></p>
 
 ## Un lugar para tus ideas
 
@@ -36,6 +43,13 @@ Thoughtline es una aplicación de notas para macOS y Windows. Lleva el cursor al
 
 ## Qué puedes hacer
 
+<p align="center"><strong>Captura rápida　·　Apilar arrastrando</strong></p>
+<p align="center">
+  <a href="demos/quick-capture.gif"><img src="demos/quick-capture.gif" alt="Captura rápida" width="48%" /></a>
+  <a href="demos/drag-stack.gif"><img src="demos/drag-stack.gif" alt="Apilar arrastrando" width="48%" /></a>
+</p>
+<p align="center"><sub>Captura rápida · <a href="demos/quick-capture.png">Vista estática</a>　｜　Apilar arrastrando · <a href="demos/drag-stack.png">Vista estática</a></sub></p>
+
 ### Guardar notas y borradores
 
 Basta con un título o un cuerpo de texto. Conserva lo que todavía no has enviado como borrador; los cambios en la vista ampliada o el calendario se guardan tras una breve pausa.
@@ -43,6 +57,11 @@ Basta con un título o un cuerpo de texto. Conserva lo que todavía no has envia
 ### Organizar con grupos y etiquetas
 
 Separa proyectos, trabajo o vida personal mediante grupos; usa etiquetas para temas y usos. Los filtros son independientes y juntos muestran notas que coinciden con ambos, conservando pilas y posiciones. Busca etiquetas por su nombre, título de la nota o palabras del texto.
+
+<p align="center">
+  <a href="demos/groups-and-tags.gif"><img src="demos/groups-and-tags.gif" alt="Elegir un grupo → Filtrar por etiqueta → Mostrar todo" width="900" /></a><br />
+  <sub>Elegir un grupo → Filtrar por etiqueta → Mostrar todo · <a href="demos/groups-and-tags.png">Vista estática</a></sub>
+</p>
 
 ### Apilar y leer hoja por hoja
 
@@ -55,6 +74,11 @@ Busca destinos compatibles en ambos lugares. Una pila combinada en el calendario
 ### Encontrar la fecha original
 
 Explora días, meses y años; busca títulos, texto, grupos y etiquetas o filtra por estado. Pulsa la fecha de una nota de la cuerda para localizarla. Las pilas muestran el número real de hojas y cada miembro conserva su fecha de creación.
+
+<p align="center">
+  <a href="demos/calendar-revisit.gif"><img src="demos/calendar-revisit.gif" alt="Pulsar la fecha → Localizar la nota → Abrir el texto completo" width="900" /></a><br />
+  <sub>Pulsar la fecha → Localizar la nota → Abrir el texto completo · <a href="demos/calendar-revisit.png">Vista estática</a></sub>
+</p>
 
 ### Llevarte el texto completo
 

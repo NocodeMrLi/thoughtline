@@ -5,7 +5,7 @@
 
 <p align="center">
   <strong>Accrochez une idée. Retrouvez-la à portée de main.</strong><br />
-  Un fil en haut du bureau pour vos idées, notes et prompts réutilisables.
+  Une liane en haut du bureau pour vos idées, notes et prompts réutilisables.
 </p>
 
 <p align="center">
@@ -20,6 +20,13 @@
 <p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.35</sub></p>
 
 Thoughtline est une application de notes pour macOS et Windows. Placez le pointeur au bord supérieur pour dérouler le fil et ses notes ; éloignez-le pour les ranger. Gardez les textes utiles sur des pinces colorées et retrouvez les autres grâce aux groupes, étiquettes et au calendrier.
+
+<p align="center">
+  <a href="demos/vine-overview.gif"><img src="demos/vine-overview.gif" alt="Déployer → Lire la note complète → Copier → Replier" width="960" /></a><br />
+  <sub>Déployer → Lire la note complète → Copier → Replier · <a href="demos/vine-overview.png">Aperçu fixe</a></sub>
+</p>
+
+<p align="center"><sub>Les démonstrations utilisent une liane, des notes fictives et l’interface en chinois.</sub></p>
 
 ## Pour vos idées du quotidien
 
@@ -36,6 +43,13 @@ Thoughtline est une application de notes pour macOS et Windows. Placez le pointe
 
 ## Fonctionnalités
 
+<p align="center"><strong>Saisie rapide　·　Empiler par glisser</strong></p>
+<p align="center">
+  <a href="demos/quick-capture.gif"><img src="demos/quick-capture.gif" alt="Saisie rapide" width="48%" /></a>
+  <a href="demos/drag-stack.gif"><img src="demos/drag-stack.gif" alt="Empiler par glisser" width="48%" /></a>
+</p>
+<p align="center"><sub>Saisie rapide · <a href="demos/quick-capture.png">Aperçu fixe</a>　｜　Empiler par glisser · <a href="demos/drag-stack.png">Aperçu fixe</a></sub></p>
+
 ### Notes et brouillons
 
 Un titre ou un texte suffit. Conservez une note non envoyée comme brouillon ; les modifications dans la lecture agrandie ou le calendrier s’enregistrent après une courte pause.
@@ -43,6 +57,11 @@ Un titre ou un texte suffit. Conservez une note non envoyée comme brouillon ; l
 ### Groupes et étiquettes
 
 Classez travail, vie personnelle ou projets par groupe, puis ajoutez une étiquette de thème ou d’usage. Les filtres sont indépendants et se croisent lorsqu’ils sont combinés. Ils préservent les piles et positions. Cherchez une étiquette par son nom, un titre ou les mots du texte.
+
+<p align="center">
+  <a href="demos/groups-and-tags.gif"><img src="demos/groups-and-tags.gif" alt="Choisir un groupe → Filtrer par étiquette → Tout afficher" width="900" /></a><br />
+  <sub>Choisir un groupe → Filtrer par étiquette → Tout afficher · <a href="demos/groups-and-tags.png">Aperçu fixe</a></sub>
+</p>
 
 ### Feuilles empilées, lecture individuelle
 
@@ -55,6 +74,11 @@ Cherchez une destination compatible sur le fil ou dans le calendrier. Une pile f
 ### Retrouver les dates d’origine
 
 Explorez jours, mois et années ; cherchez titres, texte, groupes et étiquettes ou filtrez par état. Cliquez sur la date d’une feuille suspendue pour la retrouver. Les piles indiquent le vrai nombre de feuilles ; chaque membre reste accessible à sa date de création.
+
+<p align="center">
+  <a href="demos/calendar-revisit.gif"><img src="demos/calendar-revisit.gif" alt="Cliquer sur la date → Retrouver la note → Ouvrir le texte complet" width="900" /></a><br />
+  <sub>Cliquer sur la date → Retrouver la note → Ouvrir le texte complet · <a href="demos/calendar-revisit.png">Aperçu fixe</a></sub>
+</p>
 
 ### Emporter le texte complet
 

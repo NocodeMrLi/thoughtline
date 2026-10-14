@@ -5,7 +5,7 @@
 
 <p align="center">
   <strong>생각을 걸어 두고, 필요할 때 다시 꺼내세요.</strong><br />
-  바탕화면 위쪽의 줄 하나에 아이디어, 업무 메모, 자주 쓰는 프롬프트를 담으세요.
+  바탕화면 위쪽의 덩굴에 아이디어, 업무 메모, 자주 쓰는 프롬프트를 담으세요.
 </p>
 
 <p align="center">
@@ -20,6 +20,13 @@
 <p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.35</sub></p>
 
 Thoughtline은 macOS와 Windows용 데스크톱 메모 앱입니다. 화면 위쪽으로 마우스를 가져가면 줄과 메모가 나타나고, 벗어나면 접힙니다. 지금 필요한 글은 색깔 집게에 걸고 나머지는 그룹, 태그, 달력으로 정리합니다.
+
+<p align="center">
+  <a href="demos/vine-overview.gif"><img src="demos/vine-overview.gif" alt="위쪽에서 펼치기 → 전문 읽기 → 복사 → 접기" width="960" /></a><br />
+  <sub>위쪽에서 펼치기 → 전문 읽기 → 복사 → 접기 · <a href="demos/vine-overview.png">정지 이미지</a></sub>
+</p>
+
+<p align="center"><sub>덩굴 모양과 가상의 메모를 사용한 중국어 화면 데모입니다.</sub></p>
 
 ## 이런 생각을 남겨 보세요
 
@@ -36,6 +43,13 @@ Thoughtline은 macOS와 Windows용 데스크톱 메모 앱입니다. 화면 위�
 
 ## 주요 기능
 
+<p align="center"><strong>빠르게 기록　·　끌어서 쌓기</strong></p>
+<p align="center">
+  <a href="demos/quick-capture.gif"><img src="demos/quick-capture.gif" alt="빠르게 기록" width="48%" /></a>
+  <a href="demos/drag-stack.gif"><img src="demos/drag-stack.gif" alt="끌어서 쌓기" width="48%" /></a>
+</p>
+<p align="center"><sub>빠르게 기록 · <a href="demos/quick-capture.png">정지 이미지</a>　｜　끌어서 쌓기 · <a href="demos/drag-stack.png">정지 이미지</a></sub></p>
+
 ### 메모와 초안 보관
 
 제목이나 본문 중 하나만 있어도 저장할 수 있습니다. 아직 등록하지 않은 글은 초안으로 남기고, 펼친 상세 화면이나 달력에서 편집하면 잠시 입력을 멈춘 뒤 자동 저장됩니다.
@@ -43,6 +57,11 @@ Thoughtline은 macOS와 Windows용 데스크톱 메모 앱입니다. 화면 위�
 ### 그룹과 태그로 정리
 
 업무, 생활, 프로젝트는 그룹으로 나누고 주제나 용도는 태그로 표시합니다. 필터는 각각 쓰거나 함께 일치하는 내용만 볼 수 있으며, 겹침 관계와 위치는 유지됩니다. 태그 이름, 메모 제목, 본문 단어로 해당 태그를 찾습니다.
+
+<p align="center">
+  <a href="demos/groups-and-tags.gif"><img src="demos/groups-and-tags.gif" alt="그룹 선택 → 태그 필터 → 모두 표시" width="900" /></a><br />
+  <sub>그룹 선택 → 태그 필터 → 모두 표시 · <a href="demos/groups-and-tags.png">정지 이미지</a></sub>
+</p>
 
 ### 겹친 종이를 한 장씩 읽기
 
@@ -55,6 +74,11 @@ Thoughtline은 macOS와 Windows용 데스크톱 메모 앱입니다. 화면 위�
 ### 원래 작성일로 찾기
 
 일·월·년을 살펴보고 제목, 본문, 그룹, 태그나 상태로 검색합니다. 걸린 메모의 날짜를 누르면 달력에서 해당 메모를 찾습니다. 묶음은 실제 장수를 표시하며 각 종이는 원래 작성일에서 찾을 수 있습니다.
+
+<p align="center">
+  <a href="demos/calendar-revisit.gif"><img src="demos/calendar-revisit.gif" alt="종이 날짜 클릭 → 메모 위치 찾기 → 전문 열기" width="900" /></a><br />
+  <sub>종이 날짜 클릭 → 메모 위치 찾기 → 전문 열기 · <a href="demos/calendar-revisit.png">정지 이미지</a></sub>
+</p>
 
 ### 전체 글 꺼내 쓰기
 

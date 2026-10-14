@@ -1,0 +1,102 @@
+[
+  {
+    "scenario": "capture",
+    "path": "docs/readme/demos/quick-capture.gif",
+    "sizeBytes": 639176,
+    "width": 1120,
+    "height": 880,
+    "frames": 130,
+    "durationMs": 10830,
+    "distinctFrames": 44,
+    "loop": 0,
+    "sha256": "d75254f7f3ce988afd7b73176bcb982e26e586eb0044934487e6ed171af9905d",
+    "checks": [
+      "actual registered new-note entry, DOM character input, submit button, persisted title/body/status and visible new clip"
+    ],
+    "fullApplicationInputsUnchanged": true,
+    "nativeDpr": 2,
+    "upscaled": false,
+    "paletteMaxColors": 256,
+    "cameraCrop": true
+  },
+  {
+    "scenario": "hero",
+    "path": "docs/readme/demos/vine-overview.gif",
+    "sizeBytes": 1497751,
+    "width": 2200,
+    "height": 1900,
+    "frames": 136,
+    "durationMs": 11330,
+    "distinctFrames": 32,
+    "loop": 0,
+    "sha256": "27950f53ab62bc2d2b8bd803427f69e331ff00828cc5c1f61bda4a9307127100",
+    "checks": [
+      "top reveal, expanded full text, actual copy callback and anchored success feedback"
+    ],
+    "fullApplicationInputsUnchanged": true,
+    "nativeDpr": 2,
+    "upscaled": false,
+    "paletteMaxColors": 256,
+    "cameraCrop": false
+  },
+  {
+    "scenario": "stack",
+    "path": "docs/readme/demos/drag-stack.gif",
+    "sizeBytes": 1923461,
+    "width": 1120,
+    "height": 880,
+    "frames": 180,
+    "durationMs": 15000,
+    "distinctFrames": 79,
+    "loop": 0,
+    "sha256": "be108d4fe46065ddea89898e0ff6c3594d0ea9712d272ecaabc2c1d4fab0003c",
+    "checks": [
+      "production paper-grip pointerdown/move/up;600ms ready ring; real merge; page persisted; second paper-grip drag to empty rope splits; original texts retained"
+    ],
+    "fullApplicationInputsUnchanged": true,
+    "nativeDpr": 2,
+    "upscaled": false,
+    "paletteMaxColors": 256,
+    "cameraCrop": true
+  },
+  {
+    "scenario": "filter",
+    "path": "docs/readme/demos/groups-and-tags.gif",
+    "sizeBytes": 1013358,
+    "width": 2200,
+    "height": 1300,
+    "frames": 172,
+    "durationMs": 14330,
+    "distinctFrames": 50,
+    "loop": 0,
+    "sha256": "39400b1c1046fbc2fb8673da1887c4464821caaaa1c63fb882da22845e33e6c4",
+    "checks": [
+      "real native group filter callback; real tag picker DOM search/choose; intersection matches; native Show all restores original3"
+    ],
+    "fullApplicationInputsUnchanged": true,
+    "nativeDpr": 2,
+    "upscaled": false,
+    "paletteMaxColors": 256,
+    "cameraCrop": false
+  },
+  {
+    "scenario": "calendar",
+    "path": "docs/readme/demos/calendar-revisit.gif",
+    "sizeBytes": 1504476,
+    "width": 2200,
+    "height": 1900,
+    "frames": 149,
+    "durationMs": 12410,
+    "distinctFrames": 31,
+    "loop": 0,
+    "sha256": "b6d08ddb8dee76cc5b02a43490f22f1945a7b94677dbc9831847bf9c47900a8b",
+    "checks": [
+      "real paper-date button locates day14 and highlights matching card; actual card opens complete reader; Back retains day and close restores shelf"
+    ],
+    "fullApplicationInputsUnchanged": true,
+    "nativeDpr": 2,
+    "upscaled": false,
+    "paletteMaxColors": 256,
+    "cameraCrop": false
+  }
+]

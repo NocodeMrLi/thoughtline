@@ -1,0 +1,6 @@
+# Findings
+Production compiled out exists from 0.0.35. Must compare payload with mac-compiled-readback before recording. Existing source protocol fixture provides isolated profile, actual renderer/IPC, registered shortcut callback and native menu callbacks. capturePage/screenshots isolate app pixels from desktop. Drag upper paper edge uses production pointer handlers and a 600ms target dwell. Pillow and ffmpeg available. Browser-devtools skill requires unavailable configured server: use existing Playwright/Electron capture instead; no server installation.
+
+Paper grip center is covered by the clip hit area; recorder must grab off-center upper edge (x+30), verified with elementFromPoint. Center drag moved whole stack correctly, so previous attempt was a recording hit-target mistake, not a product defect.
+
+Final mixed layout uses percentage widths for the two focused demos, preserving two columns at1100px and375px without overflow. High-resolution GIFs come from nativeDPR2 frames (2200-wide full scenes;1120-wide paired camera crops),256-color palette; no raster upscaling. Native recorder windows ignore OS mouse and new capture is nonfocusable, preserving user input while CDP drives actual controls.

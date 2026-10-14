@@ -5,7 +5,7 @@
 
 <p align="center">
   <strong>把念头晾起来，让灵感随手可见。</strong><br />
-  桌面顶边的一根绳，留住灵感、工作记录和常用提示词。
+  桌面顶边的一条藤蔓，留住灵感、工作记录和常用提示词。
 </p>
 
 <p align="center">
@@ -19,7 +19,14 @@
 <h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35">下载 Thoughtline</a></h2>
 <p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.35</sub></p>
 
-Thoughtline（晾念头）是一款 macOS 与 Windows 桌面便签工具。鼠标移到屏幕顶边，绳子和便签就会展开；离开后收起，桌面继续留给手头的工作。用几只彩色夹子挂住眼前需要的内容，再用分组、标签和日历保存更多念头。
+Thoughtline（晾念头）是一款 macOS 与 Windows 桌面便签工具。鼠标移到屏幕顶边，藤蔓和便签就会展开；离开后收起，桌面继续留给手头的工作。用几只彩色夹子挂住眼前需要的内容，再用分组、标签和日历保存更多念头。
+
+<p align="center">
+  <a href="docs/readme/demos/vine-overview.gif"><img src="docs/readme/demos/vine-overview.gif" alt="顶边展开 → 浏览全文 → 复制 → 收起" width="960" /></a><br />
+  <sub>顶边展开 → 浏览全文 → 复制 → 收起 · <a href="docs/readme/demos/vine-overview.png">静态预览</a></sub>
+</p>
+
+<p align="center"><sub>演示使用藤蔓外观与虚构示例念头。</sub></p>
 
 ## 适合留住这些念头
 
@@ -36,6 +43,13 @@ Thoughtline（晾念头）是一款 macOS 与 Windows 桌面便签工具。鼠�
 
 ## 可以做什么
 
+<p align="center"><strong>快速新建　·　拖动叠放</strong></p>
+<p align="center">
+  <a href="docs/readme/demos/quick-capture.gif"><img src="docs/readme/demos/quick-capture.gif" alt="快速新建" width="48%" /></a>
+  <a href="docs/readme/demos/drag-stack.gif"><img src="docs/readme/demos/drag-stack.gif" alt="拖动叠放" width="48%" /></a>
+</p>
+<p align="center"><sub>快速新建 · <a href="docs/readme/demos/quick-capture.png">静态预览</a>　｜　拖动叠放 · <a href="docs/readme/demos/drag-stack.png">静态预览</a></sub></p>
+
 ### 随手记录，保留草稿
 
 名称与正文至少填写一项，只有标题也能保存。未提交内容可作为草稿保留；在展开详情或日历中编辑，短暂停顿后自动保存。
@@ -43,6 +57,11 @@ Thoughtline（晾念头）是一款 macOS 与 Windows 桌面便签工具。鼠�
 ### 分组负责归类，标签负责辨认
 
 用分组区分工作、生活或不同项目，用标签标记主题、角色或用途。两种筛选独立，同时启用时只显示两者都匹配的念头；筛选只改变展示，保留真实叠放关系和位置。标签面板支持从标签名、念头名称和正文关键词查找对应标签。
+
+<p align="center">
+  <a href="docs/readme/demos/groups-and-tags.gif"><img src="docs/readme/demos/groups-and-tags.gif" alt="只看分组 → 筛选标签 → 显示全部" width="900" /></a><br />
+  <sub>只看分组 → 筛选标签 → 显示全部 · <a href="docs/readme/demos/groups-and-tags.png">静态预览</a></sub>
+</p>
 
 ### 多张纸叠放，逐张阅读
 
@@ -55,6 +74,11 @@ Thoughtline（晾念头）是一款 macOS 与 Windows 桌面便签工具。鼠�
 ### 按原日期找回内容
 
 日历提供日、月、年浏览，以及名称、正文、分组和标签搜索、状态筛选。点击挂绳便签的日期，可定位对应念头。叠放卡片显示真实张数；成员保留各自创建日期，跨日期的纸张仍能从原日期找到。
+
+<p align="center">
+  <a href="docs/readme/demos/calendar-revisit.gif"><img src="docs/readme/demos/calendar-revisit.gif" alt="点击纸张日期 → 定位念头 → 展开全文" width="900" /></a><br />
+  <sub>点击纸张日期 → 定位念头 → 展开全文 · <a href="docs/readme/demos/calendar-revisit.png">静态预览</a></sub>
+</p>
 
 ### 复制全文，随手取用
 

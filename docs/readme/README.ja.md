@@ -5,7 +5,7 @@
 
 <p align="center">
   <strong>思いつきを吊るして、必要なときに手元へ。</strong><br />
-  デスクトップ上端の一本のロープに、アイデア、仕事のメモ、よく使うプロンプトを。
+  デスクトップ上端の一本の蔓に、アイデア、仕事のメモ、よく使うプロンプトを。
 </p>
 
 <p align="center">
@@ -20,6 +20,13 @@
 <p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.35</sub></p>
 
 Thoughtline（晾念头）は macOS と Windows 向けのデスクトップメモアプリです。画面上端にポインターを移すとロープとメモが現れ、離すと収納されます。今使う文章は色付きクリップに、ほかのメモはグループ、タグ、カレンダーで整理できます。
+
+<p align="center">
+  <a href="demos/vine-overview.gif"><img src="demos/vine-overview.gif" alt="上端で表示 → 全文を読む → コピー → しまう" width="960" /></a><br />
+  <sub>上端で表示 → 全文を読む → コピー → しまう · <a href="demos/vine-overview.png">静止画を見る</a></sub>
+</p>
+
+<p align="center"><sub>デモは蔓の外観、架空のメモ、中国語の画面を使用しています。</sub></p>
 
 ## こんなメモに
 
@@ -36,6 +43,13 @@ Thoughtline（晾念头）は macOS と Windows 向けのデスクトップメ�
 
 ## できること
 
+<p align="center"><strong>すぐにメモ　·　ドラッグで重ねる</strong></p>
+<p align="center">
+  <a href="demos/quick-capture.gif"><img src="demos/quick-capture.gif" alt="すぐにメモ" width="48%" /></a>
+  <a href="demos/drag-stack.gif"><img src="demos/drag-stack.gif" alt="ドラッグで重ねる" width="48%" /></a>
+</p>
+<p align="center"><sub>すぐにメモ · <a href="demos/quick-capture.png">静止画を見る</a>　｜　ドラッグで重ねる · <a href="demos/drag-stack.png">静止画を見る</a></sub></p>
+
 ### メモと下書きを残す
 
 タイトルか本文のどちらかがあれば保存できます。未確定の内容は下書きとして残し、詳細表示やカレンダーでの編集は短い入力休止後に自動保存されます。
@@ -43,6 +57,11 @@ Thoughtline（晾念头）は macOS と Windows 向けのデスクトップメ�
 ### グループとタグで整理する
 
 仕事、生活、プロジェクトをグループで分け、テーマや用途をタグで示します。フィルターは独立し、併用時は両方に一致するメモを表示します。重なりや位置を保ったまま表示を絞り、タグ名、メモのタイトル、本文の単語からタグを探せます。
+
+<p align="center">
+  <a href="demos/groups-and-tags.gif"><img src="demos/groups-and-tags.gif" alt="グループを選ぶ → タグで絞り込む → すべて表示" width="900" /></a><br />
+  <sub>グループを選ぶ → タグで絞り込む → すべて表示 · <a href="demos/groups-and-tags.png">静止画を見る</a></sub>
+</p>
 
 ### 紙を重ねて一枚ずつ読む
 
@@ -55,6 +74,11 @@ Thoughtline（晾念头）は macOS と Windows 向けのデスクトップメ�
 ### 元の作成日から探す
 
 日・月・年を閲覧し、タイトル、本文、グループ、タグや状態で検索します。吊るした紙の日付から対応するメモへ移動できます。束は実際の枚数を表示し、各紙はそれぞれの作成日から見つかります。
+
+<p align="center">
+  <a href="demos/calendar-revisit.gif"><img src="demos/calendar-revisit.gif" alt="紙の日付をクリック → メモの場所へ → 全文を開く" width="900" /></a><br />
+  <sub>紙の日付をクリック → メモの場所へ → 全文を開く · <a href="demos/calendar-revisit.png">静止画を見る</a></sub>
+</p>
 
 ### 全文を取り出す
 

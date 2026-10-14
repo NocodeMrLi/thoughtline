@@ -1,0 +1,60 @@
+{
+  "checks": [
+    {
+      "scenario": "capture",
+      "pixelDimensions": [
+        1120,
+        880
+      ],
+      "firstFrameMeanRgbError": 1.599,
+      "darkPixelMeanRgbError": 1.593,
+      "nativeDpr": 2,
+      "noRasterUpscale": true
+    },
+    {
+      "scenario": "hero",
+      "pixelDimensions": [
+        2200,
+        1900
+      ],
+      "firstFrameMeanRgbError": 1.737,
+      "darkPixelMeanRgbError": 1.63,
+      "nativeDpr": 2,
+      "noRasterUpscale": true
+    },
+    {
+      "scenario": "stack",
+      "pixelDimensions": [
+        1120,
+        880
+      ],
+      "firstFrameMeanRgbError": 1.526,
+      "darkPixelMeanRgbError": 1.842,
+      "nativeDpr": 2,
+      "noRasterUpscale": true
+    },
+    {
+      "scenario": "filter",
+      "pixelDimensions": [
+        2200,
+        1300
+      ],
+      "firstFrameMeanRgbError": 1.915,
+      "darkPixelMeanRgbError": 1.909,
+      "nativeDpr": 2,
+      "noRasterUpscale": true
+    },
+    {
+      "scenario": "calendar",
+      "pixelDimensions": [
+        2200,
+        1900
+      ],
+      "firstFrameMeanRgbError": 1.873,
+      "darkPixelMeanRgbError": 2.057,
+      "nativeDpr": 2,
+      "noRasterUpscale": true
+    }
+  ],
+  "scope": "Actual native2x capture and encoded GIF first-frame palette fidelity; visual contact-sheet review; not a promise that miniature/mobile inline text remains full-size."
+}
