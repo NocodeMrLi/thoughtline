@@ -92,6 +92,12 @@ jobs:
             & node scripts/run-ci-fixture.cjs "tests/electron/$test.cjs"
             if ($LASTEXITCODE -ne 0) { throw "$test source failed" }
           }
+          $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round4/windows-source-fast-title'
+          $env:THOUGHTLINE_FAST_TITLE_UNDO = '1'
+          try {
+            & node scripts/run-ci-fixture.cjs tests/electron/round5-merge-picker-workflow.cjs
+            if ($LASTEXITCODE -ne 0) { throw 'Queued title choice and undo source regression failed' }
+          } finally { $env:THOUGHTLINE_FAST_TITLE_UNDO = $null }
       - name: Measured pointer source regression for package continuation
         if: github.event_name == 'workflow_dispatch' && inputs.validation_scope == 'package'
         shell: pwsh
@@ -190,6 +196,12 @@ jobs:
             & node "tests/electron/$test.cjs"
             if ($LASTEXITCODE -ne 0) { throw "$test actual package failed" }
           }
+          $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round4/windows-packaged-fast-title'
+          $env:THOUGHTLINE_FAST_TITLE_UNDO = '1'
+          try {
+            & node scripts/run-ci-fixture.cjs tests/electron/round5-merge-picker-workflow.cjs
+            if ($LASTEXITCODE -ne 0) { throw 'Queued title choice and undo actual package regression failed' }
+          } finally { $env:THOUGHTLINE_FAST_TITLE_UNDO = $null }
           $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round2/windows/packaged-capacity'
           & node tests/electron/packaged-round21.cjs
           if ($LASTEXITCODE -ne 0) { throw 'Actual packaged reminder/title/More regression failed' }
