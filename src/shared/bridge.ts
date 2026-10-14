@@ -42,6 +42,7 @@ export interface ThoughtlineBridge{
  openComposer(sourceId?:string):Promise<Result<void>>;
  openClassification(tab:ClassificationTab,returnDraft?:EditorReturnDraft):Promise<Result<void>>; returnClassification():Promise<Result<void>>;
  classificationChange(change:ClassificationMutation,revision:number):Promise<Result<Snapshot>>;
+ classificationDelete(field:'tag'|'project',id:string,fingerprint:string,revision:number,session:number):Promise<Result<Snapshot>>;
  locateIdea(id:string):Promise<Result<void>>;
  openManage(id?:string,titles?:boolean):Promise<Result<void>>; closeManage():Promise<Result<void>>;
  openEdit(id:string):Promise<Result<void>>;

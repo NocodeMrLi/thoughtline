@@ -1,3 +1,4 @@
+import {classificationDeletionPreview,deleteClassificationContents,sanitizeClassificationDeletionSnapshot} from '../shared/classificationDeletion';
 import {ideaDay,formatShelfDay} from '../shared/ideaHistory';
 import {mergeInto,mergeTargets,splitArchived} from '../shared/stackCommands';
 import {addProject,renameProject,setClassificationActive,rememberIdeaProject} from '../shared/classification';
@@ -630,6 +631,32 @@ else app.whenReady().then(async()=>{
    if(composerContext.draft.project===c.from)composerContext={...composerContext,draft:{...composerContext.draft,project:c.name.trim()}};
    classificationChange={sequence:++classificationSequence,field:'project',from:c.from,to:c.name.trim()};
   }});
+ }));
+ ipcMain.handle('thoughtline:classification-delete',(e,field:unknown,id:unknown,fingerprint:unknown,revision:unknown,session:unknown)=>composerWrite(async():Promise<Result<Snapshot>>=>{
+  if(!trusted(e,[manage])||!manage?.isVisible()||manageMode!=='classification'||session!==manageSession||typeof field!=='string'||!['tag','project'].includes(field)||typeof id!=='string'||typeof fingerprint!=='string'||!Number.isSafeInteger(revision))return invalid(t('无效操作'));
+  const unavailable=writerUnavailable();if(unavailable)return {ok:false,code:unavailable.ok?'INVALID':unavailable.code,message:unavailable.ok?t('无效操作'):unavailable.message};
+  if(revision!==snapshot.revision)return {ok:false,code:'CONFLICT',message:t('删除范围已更新，请重新确认。')};
+  const kind=field as 'tag'|'project',key=kind==='tag'?'agentId':'project',preview=classificationDeletionPreview(snapshot,kind,id),ids=preview.ideas.map(i=>i.id),removed=new Set(ids);
+  const raw=classificationReturnContext?.raw;
+  if(composer?.isVisible()&&(composerContext.draft[key]===id||!!composerContext.ideaId&&removed.has(composerContext.ideaId))||manageEditingOwner&&removed.has(manageEditingOwner.ideaId)||raw&&removed.has(raw.ideaId))return invalid(t('请先完成相关编辑，再重新删除。'));
+  const before=snapshot,prior=undoClips,next=deleteClassificationContents(snapshot,kind,id,fingerprint);
+  return save(next,revision as number,()=>{
+   if(shelfProject===id&&kind==='project')shelfProject=null;
+   if(composerContext.draft[key]===id||composerContext.ideaId&&removed.has(composerContext.ideaId)){
+    draftWritableSession=null;composerSession++;composerContext={mode:'new',ideaId:null,draft:snapshot.draft??{...blank}};
+   }
+   if(manageSelection&&removed.has(manageSelection)){manageSelection=null;manageEditingOwner=null;manageEditingRequested=false;restoredEditor=undefined;}
+   if(classificationReturnContext?.selection&&removed.has(classificationReturnContext.selection))classificationReturnContext={mode:'browse',selection:null,editing:false,titles:false};
+   if(restoredEditor&&removed.has(restoredEditor.ideaId))restoredEditor=undefined;
+   if(prior&&prior.revision===before.revision){
+    const touched=ids.some(id=>JSON.stringify(prior.snapshot.ideas.find(i=>i.id===id))!==JSON.stringify(before.ideas.find(i=>i.id===id)))||(['clips','archivedClips','capacityOverflow'] as const).some(k=>JSON.stringify(prior.snapshot[k]?.filter(c=>c.ideaIds.some(id=>removed.has(id))))!==JSON.stringify(before[k]?.filter(c=>c.ideaIds.some(id=>removed.has(id)))))||!!prior.placement&&removed.has(prior.placement.incomingId);
+    if(!touched){const clean=sanitizeClassificationDeletionSnapshot(prior.snapshot,kind,id,ids,snapshot);
+     if(clean.ok){if(prior.placement){const b=sanitizeClassificationDeletionSnapshot(prior.placement.before,kind,id,ids,snapshot),a=sanitizeClassificationDeletionSnapshot(prior.placement.after,kind,id,ids,snapshot);if(b.ok&&a.ok){const placement={...prior.placement,before:b.value,after:a.value};if(undoPlacement(snapshot,placement).ok)undoClips={...prior,snapshot:clean.value,placement,revision:snapshot.revision};}}
+      else undoClips={...prior,snapshot:clean.value,revision:snapshot.revision};}
+    }
+   }
+   setPlacementNotice(null);
+  },false);
  }));
  ipcMain.handle('thoughtline:project-delete',(e,project:string,revision:number,replacement='')=>composerWrite(async()=>{
   if(!trusted(e,[composer,manage])||typeof project!=='string'||!project||typeof replacement!=='string')return invalid(t("未分组不能删除。"));

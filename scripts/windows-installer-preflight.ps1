@@ -1,4 +1,4 @@
-param([switch]$StackVisualOnly)
+param([switch]$StackVisualOnly, [switch]$ClassificationDeleteOnly)
 $ErrorActionPreference = 'Stop'
 if ($env:GITHUB_ACTIONS -ne 'true' -or $env:RUNNER_OS -ne 'Windows' -or !$env:RUNNER_TEMP) { throw 'Disposable GitHub Windows runner required' }
 $install = Join-Path $env:RUNNER_TEMP 'Thoughtline-installer-preflight'
@@ -28,7 +28,7 @@ try {
   if (!(Test-Path $exe)) { throw 'Installed executable missing' }
   if ((Snapshot-Hashes) -ne $seed) { throw 'Fresh install changed pre-existing fixture data' }
   $report.installPreservesExistingData = $true
-  $isolated = Join-Path $env:LOCALAPPDATA 'Thoughtline-Preflight\0.0.34\user-data'
+  $isolated = Join-Path $env:LOCALAPPDATA 'Thoughtline-Preflight\0.0.35\user-data'
   if (Test-Path $isolated) { throw 'Unexpected existing isolation fixture' }
   & ./docs/delivery/Start-Thoughtline-Isolated.ps1 -Executable $exe -CheckOnly
   if (Test-Path $isolated) { throw 'Check-only launcher created a profile' }
@@ -48,7 +48,13 @@ try {
   $priorAppearanceEvidence = $env:THOUGHTLINE_EVIDENCE_DIR
   try {
     $env:THOUGHTLINE_EXECUTABLE = $exe
-    if ($StackVisualOnly) {
+    if ($ClassificationDeleteOnly) {
+      $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round6/r608/windows-installed'
+      & node scripts/run-ci-fixture.cjs tests/electron/round6-classification-delete.cjs
+      if ($LASTEXITCODE -ne 0) { throw 'Actual installed classification deletion failed' }
+      $report.packagedClassificationDeletion = $true
+      $report.unrelatedUiChecksNotRerun = @('EnglishAppearance','SplitMenu','Round3','TopEdge','R607StackVisual')
+    } elseif ($StackVisualOnly) {
       $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round6/r607/windows-installed-stack'
       & node scripts/run-ci-fixture.cjs tests/electron/round6-stack-visual.cjs
       if ($LASTEXITCODE -ne 0) { throw 'Actual installed stack appearance failed' }

@@ -32,6 +32,7 @@ const api:ThoughtlineBridge={
  openComposer:sourceId=>ipcRenderer.invoke('thoughtline:open-composer',sourceId),
  openClassification:(tab,returnDraft)=>ipcRenderer.invoke('thoughtline:open-classification',tab,returnDraft),
  returnClassification:()=>ipcRenderer.invoke('thoughtline:return-classification'),
+ classificationDelete:(field,id,fingerprint,revision,session)=>ipcRenderer.invoke('thoughtline:classification-delete',field,id,fingerprint,revision,session),
  classificationChange:(change,revision)=>ipcRenderer.invoke('thoughtline:classification',change,revision),
  locateIdea:id=>ipcRenderer.invoke('thoughtline:locate-idea',id),
  openManage:(id,titles)=>ipcRenderer.invoke('thoughtline:open-manage',id,titles),

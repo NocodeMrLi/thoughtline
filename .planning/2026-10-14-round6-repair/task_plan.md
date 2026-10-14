@@ -33,3 +33,11 @@ Expected: actual remote/source/package matches, six-item direct operation report
 - [x] Own cleanup and operation report written; finaldocs/gates synchronized.
 - [x] Delivery documentation 792bdd550ab3063e7c09fd3404a49a47e324b9f7 pushed and read back; source/tag9cb8c19 unchanged. Direct operation report prepared for closing response.
 User targeted scope overrides skill default full suite. No design overhaul or new product logic. No delegated implementation/review claim needed for a CSS-only adjustment; executor diff+visual/native checks explicitly bounded.
+
+## R6-08 approved follow-up (candidate0.0.35)
+- [x] Canonical approved spec and in-chat previews recorded before code.
+- [ ] Pure transaction/preview RED→GREEN.
+- [ ] Guarded IPC/inline modal source checks.
+- [ ] Fresh final review + scoped fixes, narrow doubleplatform package/install/private release.
+- [ ] Owned cleanup + docs/gates/report, commit/push/readback.
+Plan/audit: docs/releases/round6-r608-plan-audit.md; existingR6 plan reused.
