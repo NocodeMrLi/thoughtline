@@ -19,6 +19,6 @@ Files: main windows/index, shared bridge/messages, preload, renderer picker/Shel
 Expected: focused source fixtures normal quit; picker must not expand Shelf or disturb saved writer.
 ## Task 4: delivery
 Files: round6 scoped workflow/release audit/report, acceptance/gates.
-- [ ] Fresh whole-change review; fixes targeted RED→GREEN; Mac actual candidate and Windows focused source/install/package gates.
-- [ ] Version0.0.33 frozen inputs/SHA/retention; push without redundant full task, private release readback, scoped cleanup.
+- [x] Fresh whole-change review; fixes targeted RED→GREEN; Mac actual candidate and Windows focused source/install/package gates.
+- [x] Version0.0.33 frozen inputs/SHA/retention; push without redundant full task, private release readback, scoped cleanup.
 Expected: actual remote/source/package matches, six-item direct operation report; physical/formal remainfalse unless explicit owner feedback.

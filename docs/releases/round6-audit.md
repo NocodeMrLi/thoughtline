@@ -21,3 +21,7 @@
 Windows38510030275总体failure，85定向单测/type/build及6源码套、copy/restore/calendar/date均已通过；dateedge要求整纸进入视口而失败，后三个检查及打包未执行，不能写PASS。
 小窗口受控读回：纸高314.906DIP，视口244DIP；整纸完全可见客观不可能，标题和定位轮廓实际在视口内。改测试为：标题完整可见、至少96DIP纸张可见；纸能放下时仍要求全纸可见。13卡、目标身份、日期、分组、滚动及内容断言保留；dateedge以368DIP原生窗口补验GREEN。没有为通过测试修改产品定位/缩字号/放松保存。
 新增source_evidence_run只复用同平台匹配版本已过源码证据，严格拒绝src/依赖/构建变化，仅容许此fixture及工作流路由变化；先核实际prior步骤成功、6套退出0及4reader正常退出记录，再跑改正的dateedge、未执行split边界和FAST。新Windows安装包仍必须构建并完整运行本轮必要实包和安装保数据。旧Mac实际包载荷不变，最终Mac新冻结369输入后重打包并核全部out/asar一致，只新包定向复验改变的几何条件，其余定向包证据按明确载荷复用，不假称全部重跑。
+
+## 最终交付
+731a0bb最终源码/tag，369双端输入对象/模式一致，Windows38511064035总体success且源复用证明有效；新NSIS安装/重装/普通卸载保数据、6实包套+7reader+FAST通过。直接NSIS读取全部out匹配manifest，有限跨端差异单列source-pair-proof。Mac最终DMG绑定新输入；先前13套/FAST/日历复制仅按相同完整载荷复用，新的368DIP检查直接最终DMG通过。Release412343095正常私有10附件大小/服务端SHA匹配，0.32原10不变。
+个人App/未知Electron/真实数据/回滚及历史tracked保留；清理scope读回见final/cleanup-receipt.json；预算接口不可读，未改账户，清理不恢复分钟。只读新审查四项红绿、修后执行者补验，不宣称又一次独立review。

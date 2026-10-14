@@ -1,0 +1,68 @@
+{
+  "source": "731a0bb7c719dabc786482a07606b47196a95af9",
+  "baselineReleaseSource": "6135608fb949e58288efe652684560a1626e3be3",
+  "policy": "only new and affected checks, no full verify",
+  "mustTest": [
+    "round6 picker/reader/source and package",
+    "calendar per-day projection/query/pagination/split",
+    "save IME IO owner CAS and single undo",
+    "window reuse/bounds",
+    "Windows installation reinstall ordinary uninstall retains data",
+    "frozen inputs/package hashes/private release"
+  ],
+  "unaffectedObjects": {
+    "src/main/store/repository.ts": {
+      "baseline": "2d1396f9a277975e7d81331ccf86279d9d05d4e4",
+      "final": "2d1396f9a277975e7d81331ccf86279d9d05d4e4"
+    },
+    "src/main/store/atomicFile.ts": {
+      "baseline": "8e54e911f8591523cd1918ee8113616f05c404f0",
+      "final": "8e54e911f8591523cd1918ee8113616f05c404f0"
+    },
+    "src/main/store/storageLocations.ts": {
+      "baseline": "85f4f66f667e36852a20c641fd2663a3fff0116a",
+      "final": "85f4f66f667e36852a20c641fd2663a3fff0116a"
+    },
+    "src/shared/clipModel.ts": {
+      "baseline": "e853c16e6cfc52351d48114bf9d7508838af79bf",
+      "final": "e853c16e6cfc52351d48114bf9d7508838af79bf"
+    },
+    "src/shared/clipCommands.ts": {
+      "baseline": "7f9700565537af435a4fa23cb366ed69f098aa9b",
+      "final": "7f9700565537af435a4fa23cb366ed69f098aa9b"
+    },
+    "src/shared/ideaPlacement.ts": {
+      "baseline": "af3db86ebd92bb53d09e9c8e64b338fcc449a916",
+      "final": "af3db86ebd92bb53d09e9c8e64b338fcc449a916"
+    },
+    "src/shared/stackCommands.ts": {
+      "baseline": "0015389db1f337c22282c13e0fbcc6b0f01e038b",
+      "final": "0015389db1f337c22282c13e0fbcc6b0f01e038b"
+    },
+    "src/renderer/components/ReminderControl.tsx": {
+      "baseline": "4af0c0d7bd597b34825a4dbc94cc5288435958d9",
+      "final": "4af0c0d7bd597b34825a4dbc94cc5288435958d9"
+    },
+    "src/renderer/components/Settings.tsx": {
+      "baseline": "8c52380c96981b6696e967bbfbacb47334f21e9b",
+      "final": "8c52380c96981b6696e967bbfbacb47334f21e9b"
+    }
+  },
+  "reuseLimit": "Exact unchanged store/domain/settings components and same original inputs preserve prior scoped evidence; changed main/Renderer/picker/calendar verified by current targeted suites. No claim all0.32physical/currentUI passed.",
+  "macPreviousCandidateSource": "02f99630a952c2222379f28c38cb47a0fa52f761",
+  "macCandidateReuseCondition": "final out hashes + actual DMG asar/payload match; changed small viewport fixture run on finalDMG. First source tests/ workflow change only; no product change.",
+  "windowsCompletedSourceRun": 38510030275,
+  "windowsRemainingSourceAndNewPackageRun": "pending readback",
+  "firstFailureNeverRewritten": true,
+  "physicalAcceptance": false,
+  "formalAcceptance": false,
+  "neverTestedPhysical": [
+    "real IME",
+    "actual user pointer drag/outside app focus",
+    "multi-screen DPI/disconnect",
+    "external drag receiving app",
+    "system banner notifications",
+    "Word/WPS layout",
+    "owner everyday feel"
+  ]
+}

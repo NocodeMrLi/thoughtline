@@ -1,9 +1,9 @@
 {
-  "stage": "ROUND5_V0_0_32_R518_R527_SCOPED_DUAL_VERIFIED_CLEANED_PRIVATE_PUBLICATION_VERIFIED_OWNER_PENDING",
+  "stage": "ROUND6_V0_0_33_SCOPED_DUAL_VERIFIED_CLEANED_PRIVATE_PUBLICATION_VERIFIED_OWNER_PENDING",
   "asOf": "2026-10-14",
   "branch": "main",
-  "lastCommittedSource": "6135608fb949e58288efe652684560a1626e3be3",
-  "currentCandidateVersion": "0.0.32",
+  "lastCommittedSource": "731a0bb7c719dabc786482a07606b47196a95af9",
+  "currentCandidateVersion": "0.0.33",
   "formalAcceptance": false,
   "round1": {
     "plan": "/Users/lihongwei/安安的成长笔记📒/晾念头 Thoughtline/Thoughtline第一轮修复优化.md",
@@ -2755,7 +2755,7 @@
     "plan": "/Users/lihongwei/安安的成长笔记📒/晾念头 Thoughtline/Thoughtline第六轮修复优化.md",
     "base": "6cc830df771df176dce8a79a5f9bdc38f39a8c65",
     "candidateVersion": "0.0.33",
-    "status": "implemented; focused source gates/review fixes passed; package and release pending",
+    "status": "six items implemented, targeted source/package and installation verified, cleaned, private release verified; owner acceptance pending",
     "formalAcceptance": false,
     "physicalAcceptance": false,
     "scope": [
@@ -2782,7 +2782,11 @@
       "evidence": "evidence/round6/billing-readback.json",
       "budgetReadback": "unavailable 404; no account changes"
     },
-    "packages": "pending",
+    "packages": {
+      "macDmgSha256": "545fb983952736f039499a6b5861c3df2cc43ba6acca5500d35ca87a16e2a9a6",
+      "windowsNsisSha256": "ac321dc017a281e4a268b8f6515b5c6a4dcf9b6f2bf4448e6f7de3c8a77ea691",
+      "sourcePairProof": "evidence/round6/final/source-pair-proof.json"
+    },
     "windowsFirstRun": {
       "id": 38510030275,
       "conclusion": "failure",
@@ -2804,6 +2808,31 @@
         "install"
       ],
       "originalFailureRetained": true
-    }
+    },
+    "source": "731a0bb7c719dabc786482a07606b47196a95af9",
+    "tag": "v0.0.33",
+    "inputCount": 369,
+    "release": {
+      "id": 412343095,
+      "draft": false,
+      "prerelease": false,
+      "assets": 10,
+      "readback": "evidence/round6/final/release-verification.json"
+    },
+    "windowsFinal": {
+      "id": 38511064035,
+      "result": "success",
+      "priorCompletedSourceReusedFrom": 38510030275,
+      "newPackageAndInstallChecks": true
+    },
+    "macFinal": {
+      "previousCandidateSource": "02f99630a952c2222379f28c38cb47a0fa52f761",
+      "regular13FastCalendarCopyReusedAfterExactPayloadComparison": true,
+      "smallViewportFreshFinalDmg": true,
+      "proof": "evidence/round6/mac-input-rebind-proof.json"
+    },
+    "cleanup": "evidence/round6/final/cleanup-receipt.json",
+    "report": "docs/releases/round6-v0.0.33-delivery.md",
+    "documentationPushProof": "/Users/lihongwei/Documents/Codex/2026-10-14/thoughtline-round6/delivery/v0.0.33/documentation-push-verification.json"
   }
 }
