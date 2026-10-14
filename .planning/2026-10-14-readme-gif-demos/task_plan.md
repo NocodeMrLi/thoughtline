@@ -7,7 +7,7 @@ Five real Thoughtline demos using vine, fictional data and a clean background. H
 - [x] 1. Capture setup and verified source binding
 - [x] 2. Five actual interactions, capture and GIF encoding
 - [x] 3. Visual review and README integration
-- [ ] 4. Targeted media/link checks, owned cleanup, commit/push/readback (in progress)
+- [x] 4. Targeted media/link checks, owned cleanup, commit/push/readback
 
 ## Boundaries
 No app code/theme defaults, package/release changes, whole-desktop recording, real user data, global clipboard changes or full test rerun. Existing protected app/processes remain untouched.
