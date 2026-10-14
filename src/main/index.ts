@@ -84,7 +84,7 @@ else app.whenReady().then(async()=>{
  let classificationReturnContext:{mode:'browse'|'detail';selection:string|null;editing:boolean;titles:boolean;raw?:EditorReturnDraft}|null=null;
  let restoredEditor:EditorReturnDraft|undefined;
  let classificationChange:PilotInfo['classificationChange'];let classificationSequence=0;
- let manageMode:'browse'|'detail'|'settings'|'classification'='browse',manageTitles=false;let undoClips:{snapshot:Snapshot;revision:number;positionsOnly?:boolean;command?:ClipMutation['kind'];placement?:PlacementUndo;placementKind?:'hang'|'arrange'|'swap'}|null=null;
+ let manageMode:'browse'|'detail'|'settings'|'classification'='browse',manageTitles=false;let undoClips:{snapshot:Snapshot;revision:number;positionsOnly?:boolean;command?:ClipMutation['kind'];positionTargets?:string[];placement?:PlacementUndo;placementKind?:'hang'|'arrange'|'swap'}|null=null;
  let composerContext:ComposerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
  const preload=join(__dirname,'../preload/index.js');shelf=createShelf(preload);
  const host=createHost(shelf,()=>composer);
@@ -639,7 +639,9 @@ else app.whenReady().then(async()=>{
   const kind=field as 'tag'|'project',key=kind==='tag'?'agentId':'project',preview=classificationDeletionPreview(snapshot,kind,id),ids=preview.ideas.map(i=>i.id),removed=new Set(ids);
   const raw=classificationReturnContext?.raw;
   if(composer?.isVisible()&&(composerContext.draft[key]===id||!!composerContext.ideaId&&removed.has(composerContext.ideaId))||manageEditingOwner&&removed.has(manageEditingOwner.ideaId)||raw&&removed.has(raw.ideaId))return invalid(t('请先完成相关编辑，再重新删除。'));
-  const before=snapshot,prior=undoClips,next=deleteClassificationContents(snapshot,kind,id,fingerprint);
+  const before=snapshot,prior=undoClips,viewFilter=currentFilter();
+  const positionedForDeletion=(s:Snapshot)=>{const visible=new Map(captureClipPositions(filteredClips(s,viewFilter),width,'all',shelfCapacity(s.settings.shelfCapacity)).map(c=>[c.id,c.position]));return {...s,clips:captureClipPositions(s.clips,width,'all',shelfCapacity(s.settings.shelfCapacity)).map(c=>visible.has(c.id)?{...c,position:visible.get(c.id)!}:c)};};
+  const next=deleteClassificationContents(positionedForDeletion(snapshot),kind,id,fingerprint);
   return save(next,revision as number,()=>{
    if(shelfProject===id&&kind==='project')shelfProject=null;
    if(composerContext.draft[key]===id||composerContext.ideaId&&removed.has(composerContext.ideaId)){
@@ -649,9 +651,10 @@ else app.whenReady().then(async()=>{
    if(classificationReturnContext?.selection&&removed.has(classificationReturnContext.selection))classificationReturnContext={mode:'browse',selection:null,editing:false,titles:false};
    if(restoredEditor&&removed.has(restoredEditor.ideaId))restoredEditor=undefined;
    if(prior&&prior.revision===before.revision){
-    const touched=ids.some(id=>JSON.stringify(prior.snapshot.ideas.find(i=>i.id===id))!==JSON.stringify(before.ideas.find(i=>i.id===id)))||(['clips','archivedClips','capacityOverflow'] as const).some(k=>JSON.stringify(prior.snapshot[k]?.filter(c=>c.ideaIds.some(id=>removed.has(id))))!==JSON.stringify(before[k]?.filter(c=>c.ideaIds.some(id=>removed.has(id)))))||!!prior.placement&&removed.has(prior.placement.incomingId);
-    if(!touched){const clean=sanitizeClassificationDeletionSnapshot(prior.snapshot,kind,id,ids,snapshot);
-     if(clean.ok){if(prior.placement){const b=sanitizeClassificationDeletionSnapshot(prior.placement.before,kind,id,ids,snapshot),a=sanitizeClassificationDeletionSnapshot(prior.placement.after,kind,id,ids,snapshot);if(b.ok&&a.ok){const placement={...prior.placement,before:b.value,after:a.value};if(undoPlacement(snapshot,placement).ok)undoClips={...prior,snapshot:clean.value,placement,revision:snapshot.revision};}}
+    const relation=(s:Snapshot,k:'clips'|'archivedClips'|'capacityOverflow')=>s[k]?.filter(c=>c.ideaIds.some(id=>removed.has(id))).map(({id,ideaIds})=>({id,ideaIds})).sort((a,b)=>a.id<b.id?-1:a.id>b.id?1:0);
+    const touched=!!prior.positionTargets?.some(id=>removed.has(id))||ids.some(id=>JSON.stringify(prior.snapshot.ideas.find(i=>i.id===id))!==JSON.stringify(before.ideas.find(i=>i.id===id)))||(['clips','archivedClips','capacityOverflow'] as const).some(k=>JSON.stringify(relation(prior.snapshot,k))!==JSON.stringify(relation(before,k)))||!!prior.placement&&removed.has(prior.placement.incomingId);
+    if(!touched){const clean=sanitizeClassificationDeletionSnapshot(positionedForDeletion(prior.snapshot),kind,id,ids,snapshot);
+     if(clean.ok){if(prior.placement){const b=sanitizeClassificationDeletionSnapshot(positionedForDeletion(prior.placement.before),kind,id,ids,snapshot),a=sanitizeClassificationDeletionSnapshot(positionedForDeletion(prior.placement.after),kind,id,ids,snapshot);if(b.ok&&a.ok){const placement={...prior.placement,before:b.value,after:a.value};if(undoPlacement(snapshot,placement).ok)undoClips={...prior,snapshot:clean.value,placement,revision:snapshot.revision};}}
       else undoClips={...prior,snapshot:clean.value,revision:snapshot.revision};}
     }
    }
@@ -713,7 +716,7 @@ else app.whenReady().then(async()=>{
   }else return invalid(t("夹子操作无效"));
   const repositioned=next.ok&&['split','splitAll','undo'].includes(c.kind)&&next.value.clips.some(clip=>{const old=previous.clips.find(old=>old.id===clip.id);return old&&old.position!==clip.position;});
   const r=await save(next,revision,()=>{if(c.kind==='arrange'||c.kind==='undo'&&oldUndo?.positionsOnly||repositioned)arrangeSession++;},c.kind!=='undo');
-  if(r.ok){setPlacementNotice(['arrange','split','splitAll'].includes(c.kind)&&layoutClips(snapshot.clips,width,shelfCapacity(snapshot.settings.shelfCapacity)).overflow.length?t("已保存，绳上暂时放不下，可在念头日历查看"):null);if(c.kind==='archiveIdea')setPlacementNotice(t('已收起日期',{date:formatShelfDay(ideaDay(previous.ideas.find(i=>i.id===c.ideaId)!),preferences.current.locale)}),false,c.ideaId,noticePoint);if(c.kind==='mergeTarget'&&snapshot.ideas.find(i=>i.id===c.targetIdeaId)?.status==='archived')setPlacementNotice(t('已合并到日历'),false,c.targetIdeaId,noticePoint);if(c.kind==='split'&&manageMode==='detail'){manageSelection=c.ideaId;manageSession++;}undoClips=c.kind==='undo'?null:c.kind==='select'?(oldUndo?{...oldUndo,revision:r.value.revision}:null):{snapshot:previous,revision:r.value.revision,positionsOnly:c.kind==='arrange',command:c.kind};publish();}
+  if(r.ok){setPlacementNotice(['arrange','split','splitAll'].includes(c.kind)&&layoutClips(snapshot.clips,width,shelfCapacity(snapshot.settings.shelfCapacity)).overflow.length?t("已保存，绳上暂时放不下，可在念头日历查看"):null);if(c.kind==='archiveIdea')setPlacementNotice(t('已收起日期',{date:formatShelfDay(ideaDay(previous.ideas.find(i=>i.id===c.ideaId)!),preferences.current.locale)}),false,c.ideaId,noticePoint);if(c.kind==='mergeTarget'&&snapshot.ideas.find(i=>i.id===c.targetIdeaId)?.status==='archived')setPlacementNotice(t('已合并到日历'),false,c.targetIdeaId,noticePoint);if(c.kind==='split'&&manageMode==='detail'){manageSelection=c.ideaId;manageSession++;}undoClips=c.kind==='undo'?null:c.kind==='select'?(oldUndo?{...oldUndo,revision:r.value.revision}:null):{snapshot:previous,revision:r.value.revision,positionsOnly:c.kind==='arrange',command:c.kind,positionTargets:c.kind==='move'?previous.clips.find(x=>x.id===c.id)?.ideaIds:c.kind==='arrange'?previous.clips.flatMap(x=>x.ideaIds):undefined};publish();}
   return r;
  });
  ipcMain.handle('thoughtline:clip',async(e,c:ClipMutation,revision:number)=>{

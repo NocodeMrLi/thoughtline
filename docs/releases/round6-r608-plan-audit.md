@@ -16,3 +16,5 @@ Final fresh reviewer per executing-plans review rule; executor fixes important/c
 
 ## Task 4: cleanup/documentation/operation report
 CanonicalR6 +00/07/plan/audit/gates/report; ownprofile/duplicate cleanup withreceipts, preserveoldfailures/rollback/currentpersonalapps; docs-only skipci commits/push/readback; direct user steps + boundaries. Expected: cleanlocal/remoteHEADmatch, source/tag/packages separate, actualowner newfeature awaitsfeedback.
+
+R608 final independent reviewer gpt-6-astra:0Critical/2Important/0Minor, declined empty. One executor fix pass: actual null/collision positions and unrelated null-position move undo native3 RED→GREEN; page-flip derived activeTag also RED→GREEN. Capture visible and hidden positions before deletion/prior undo sanitation; positionTargets declares genuine move/arrange effects, semantic clip comparison excludes incidental position and derived current tag. Final71 relatedunit9files/types/build pass; mutation/restart and full relevant IPC guard rerun after changed main code GREEN. Source-only positions fixture kept separate from actual-package UI. No second reviewer/no full verify.

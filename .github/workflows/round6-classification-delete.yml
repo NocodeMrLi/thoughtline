@@ -41,6 +41,10 @@ jobs:
         env:
           THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round6/r608/windows-guards
         run: node scripts/run-ci-fixture.cjs tests/electron/round6-classification-delete-guards.cjs
+      - name: Deletion preserves actual paper positions and unrelated undo
+        env:
+          THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round6/r608/windows-positions
+        run: node scripts/run-ci-fixture.cjs tests/electron/round6-classification-delete-positions.cjs
       - run: npm run package:win
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
