@@ -12,6 +12,7 @@ on:
         default: ''
 permissions:
   contents: read
+  actions: read
 jobs:
   windows-test-package:
     runs-on: windows-latest
