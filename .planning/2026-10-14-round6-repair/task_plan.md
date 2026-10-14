@@ -27,7 +27,9 @@ Expected: actual remote/source/package matches, six-item direct operation report
 - [x] Approved single common backing edge + real count added canonical spec.
 - [x] Source rendered comparison/screenshot RED→GREEN: singles/2/5/9, light/dark,350/740, count/date/detail preserved.
 - [x] Type/build,14relatedunit and frozen localsource9cb8c19.
-- [ ] Push source[skip ci] after local GitHub connection recovery.
-- [ ] Mac/Windows targeted actual package and installation retention, immutable private release0.0.34.
-- [ ] Own cleanup, docs/gates readback and direct operation report.
+- [x] Source and documentation pushed; remote main8a35474 verified, source9cb8c19 ancestry retained.
+- [x] Mac actual DMG narrow visual gate and local own cleanup.
+- [x] Windows38535760114 source/actual installed visual and install/reinstall/uninstall retention;371pair proof and immutable privateRelease412509686 published/readback.
+- [x] Own cleanup and operation report written; finaldocs/gates synchronized.
+- [ ] Final documentation commit/push/readback; direct operation report delivered at close.
 User targeted scope overrides skill default full suite. No design overhaul or new product logic. No delegated implementation/review claim needed for a CSS-only adjustment; executor diff+visual/native checks explicitly bounded.

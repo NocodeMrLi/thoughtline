@@ -1,5 +1,5 @@
 {
-  "stage": "ROUND6_R607_LOCAL_SOURCE_MAC_READY_WINDOWS_PUBLICATION_PENDING_CONNECTION",
+  "stage": "ROUND6_R607_TECH_DELIVERED_OWNER_FEEDBACK_PENDING",
   "asOf": "2026-10-14",
   "branch": "main",
   "lastCommittedSource": "9cb8c190d289b38498c4c6c938152064c8ee9b4c",
@@ -2835,7 +2835,7 @@
     "report": "docs/releases/round6-v0.0.33-delivery.md",
     "documentationPushProof": "/Users/lihongwei/Documents/Codex/2026-10-14/thoughtline-round6/delivery/v0.0.33/documentation-push-verification.json",
     "R6_07": {
-      "status": "local source and actual Mac candidate verified;push/Windows/private release blocked by local GitHub transport",
+      "status": "TECH_DELIVERED_OWNER_FEEDBACK_PENDING",
       "base": "a7198419da419ebb94cd4380eb28d62805e2bd28",
       "candidateVersion": "0.0.34",
       "productScope": "one calendar-stack CSS declaration",
@@ -2853,9 +2853,29 @@
       "cleanup": "evidence/round6/r607/cleanup-local.json",
       "latestConnectionRefresh": "acceptance/evidence/round6/r607/connection-refresh.json",
       "pendingOperationGuide": "/Users/lihongwei/Documents/Codex/2026-10-14/thoughtline-round6/archive/r607/Validation-Guide.zh-CN.pending.md",
-      "currentWindowsRun": null,
-      "newActionsDispatched": 0
+      "currentWindowsRun": 38535760114,
+      "newActionsDispatched": 1,
+      "sourcePush": "verified remote main8a354742f2943e9634584b757b075890301f5b7c",
+      "nodeUnchanged": true,
+      "release": {
+        "id": 412509686,
+        "url": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.34",
+        "published_at": "2026-10-14T09:16:54Z",
+        "draft": false,
+        "prerelease": false,
+        "assets": 10,
+        "allServerDigestsAndSizesMatch": true
+      },
+      "windowsFinal": "evidence/round6/r607/final/windows-final-summary.json",
+      "pairProof": "evidence/round6/r607/final/source-pair-proof.json",
+      "scopeProof": "evidence/round6/r607/final/targeted-validation-scope.json",
+      "releaseProof": "evidence/round6/r607/final/release-verification.json",
+      "cleanupFinal": "evidence/round6/r607/final/cleanup-final.json",
+      "billingAndRollbackProof": "evidence/round6/r607/final/billing-and-rollback-readback.json",
+      "report": "docs/releases/round6-v0.0.34-delivery.md",
+      "ownerPriorFeedback": "0.0.33基本上没问题 retained only original reported scope; R607 new actual acceptance awaits feedback",
+      "documentationPushProof": "/Users/lihongwei/Documents/Codex/2026-10-14/thoughtline-round6/archive/r607/documentation-push-verification.json"
     }
   },
-  "latestReleasedVersion": "0.0.33"
+  "latestReleasedVersion": "0.0.34"
 }
