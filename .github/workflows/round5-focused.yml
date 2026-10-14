@@ -1,0 +1,144 @@
+name: Validate fifth-round additions only
+on:
+  workflow_dispatch:
+    inputs:
+      build_source:
+        description: 'Frozen full source SHA; unaffected evidence is reused by recorded fingerprints'
+        type: string
+        required: true
+permissions:
+  contents: read
+jobs:
+  windows-test-package:
+    runs-on: windows-latest
+    timeout-minutes: 25
+    steps:
+      - name: Enable long paths on disposable runner
+        shell: pwsh
+        run: git config --global core.longpaths true
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ inputs.build_source }}
+      - name: Verify frozen source and record workflow identity
+        shell: pwsh
+        run: |
+          if ((git rev-parse HEAD) -ne '${{ inputs.build_source }}') { throw 'Frozen source mismatch' }
+          Write-Output 'Workflow SHA: ${{ github.sha }}; build source: ${{ inputs.build_source }}'
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '24.19.0'
+          cache: npm
+      - run: node scripts/ci-artifact-evidence.cjs snapshot
+      - run: npm ci --no-audit --no-fund
+      - run: npm run typecheck
+      - name: New and affected unit checks
+        run: npm test -- tests/unit/round5Grouping.test.ts tests/unit/round5ShelfFilter.test.ts tests/unit/round5MergeTargets.test.ts tests/unit/round5ManageBounds.test.ts tests/unit/clipCommands.test.ts tests/unit/ideaPlacement.test.ts tests/unit/draftAutosaver.test.ts tests/unit/rememberIdeaProject.test.ts tests/unit/windowsAtomicWrite.test.ts
+      - run: npm run build
+      - name: Affected source reader queue and save protection
+        shell: pwsh
+        env:
+          THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round5/windows-focused-source
+        run: |
+          foreach ($test in @('round5-merge-picker-workflow','round5-detail-pager-workflow','round5-stack-workflow','round5-window-workflow')) {
+            & node scripts/run-ci-fixture.cjs "tests/electron/$test.cjs"
+            if ($LASTEXITCODE -ne 0) { throw "$test source failed" }
+          }
+          $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round5/windows-focused-source-fast'
+          $env:THOUGHTLINE_FAST_TITLE_UNDO = '1'
+          & node scripts/run-ci-fixture.cjs tests/electron/round5-merge-picker-workflow.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Fast title choice/undo source failed' }
+      - run: npm run package:win
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - name: Bind package to frozen source
+        shell: pwsh
+        run: |
+          $env:GITHUB_SHA = '${{ inputs.build_source }}'
+          & node scripts/windows-build-manifest.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Manifest failed' }
+      - name: Preserve built installer before package validation
+        shell: pwsh
+        run: |
+          $files = @(Get-ChildItem dist -Filter '*.exe')
+          if ($files.Count -ne 1) { throw 'Expected exactly one x64 installer' }
+          $files | ForEach-Object { "$((Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower())  $($_.Name)" } | Set-Content dist/SHA256SUMS.txt
+      - name: Parse user isolation launcher without launching
+        shell: pwsh
+        run: |
+          $parseErrors = $null
+          $tokens = $null
+          [System.Management.Automation.Language.Parser]::ParseFile((Join-Path $PWD 'docs/delivery/Start-Thoughtline-Isolated.ps1'), [ref]$tokens, [ref]$parseErrors) | Out-Null
+          if ($parseErrors.Count -ne 0) { throw ($parseErrors | Out-String) }
+          Copy-Item docs/delivery/Start-Thoughtline-Isolated.ps1 dist/Start-Thoughtline-Isolated.ps1
+      - name: Disposable runner installation and data retention preflight
+        shell: pwsh
+        run: |
+          $env:GITHUB_SHA = '${{ inputs.build_source }}'
+          ./scripts/windows-installer-preflight.ps1
+      - name: New and affected actual package checks
+        shell: pwsh
+        env:
+          THOUGHTLINE_EXECUTABLE: dist/win-unpacked/Thoughtline.exe
+          THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round5/windows-focused-package
+        run: |
+          foreach ($test in @('calendar-workflow','final-reader-placement-workflow','round4-classification-workflow','round4-classification-ui','round5-group-filter-workflow','round5-filter-ui-workflow','round5-window-workflow','round5-detail-pager-workflow','round5-merge-picker-workflow','round5-stack-workflow','round5-picker-style-workflow')) {
+            & node scripts/run-ci-fixture.cjs "tests/electron/$test.cjs"
+            if ($LASTEXITCODE -ne 0) { throw "$test actual package failed" }
+          }
+          $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round5/windows-focused-package-fast'
+          $env:THOUGHTLINE_FAST_TITLE_UNDO = '1'
+          & node scripts/run-ci-fixture.cjs tests/electron/round5-merge-picker-workflow.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Fast title choice/undo actual package failed' }
+      - name: Hash test installers
+        shell: pwsh
+        run: |
+          $files = Get-ChildItem dist -Filter '*.exe'
+          if ($files.Count -ne 1) { throw 'Expected exactly one x64 installer' }
+          $files | ForEach-Object {
+            $hash = Get-FileHash $_.FullName -Algorithm SHA256
+            "$($hash.Hash.ToLower())  $($_.Name)"
+          } | Set-Content dist/SHA256SUMS.txt
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: success()
+        with:
+          name: Thoughtline-Windows-x64-${{ inputs.build_source }}
+          path: |
+            dist/*.exe
+            dist/SHA256SUMS.txt
+            dist/build-manifest.json
+            dist/windows-installed-preflight.json
+            dist/windows-installer-preflight.json
+            dist/windows-pe-icons.json
+            dist/Start-Thoughtline-Isolated.ps1
+          if-no-files-found: error
+          retention-days: 7
+      - name: Preserve one built installer if delivery validation fails
+        if: (failure() || cancelled())
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: Thoughtline-Windows-built-${{ inputs.build_source }}-${{ github.run_attempt }}
+          path: |
+            dist/*.exe
+            dist/SHA256SUMS.txt
+            dist/build-manifest.json
+          if-no-files-found: ignore
+          retention-days: 3
+      - name: Retain failed preflight diagnostics
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: Thoughtline-Windows-preflight-failed-${{ inputs.build_source }}-${{ github.run_attempt }}
+          path: dist/*.json
+          if-no-files-found: ignore
+          retention-days: 14
+      - name: Collect only this run's new or changed evidence
+        if: always()
+        run: node scripts/ci-artifact-evidence.cjs collect
+      - name: Retain Windows source and package UI evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: Thoughtline-Windows-source-ui-${{ inputs.build_source }}-${{ github.run_attempt }}
+          path: dist/ci-evidence/**
+          if-no-files-found: warn
+          retention-days: 7
