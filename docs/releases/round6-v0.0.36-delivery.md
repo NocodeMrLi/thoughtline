@@ -48,3 +48,5 @@
 本轮按确切归属清理原始帧、正常退出后的profile、重复候选App、NSIS/asar解包副本及成功CI的本地重复提取。逐项回执在 `acceptance/evidence/round6/r609/final/cleanup-final.json`，实际本地profile读回见 `full-owned-profile-readback.json`；原失败目录先留必要快照/哈希再删，不算正常退出通过。WindowsRunner清理另有实际源码/包与安装回执。
 
 保留12GIF+12静态图、关键菜单/布局/联系图与时间线、录制脚本、失败原件、正式0.0.36双端包、最新成功CI ZIP/UI证据、冻结Mac asar/native、历史tracked媒体及0.0.35/34/33/32/31回滚。个人/Applications/Thoughtline.app仍0.0.35/PID78797/Oct14 19:59:17，真实笔记、依赖、原始截图及未知旧挂载均未触碰。最终回执清理2701文件／1888028332字节（约1.76GiB），33个确切本地profile均不存在；之前154样片帧和失败驱动目录另记，不重复合计。不对未知对象声称全部清理。
+
+最终媒体／文档提交 `5f8cbe46b3977d32900e379f71c962b40eabd20c` 已推送main，36个README／媒体／报告／门禁远端Git对象与本地一致；随后仅交付状态检查点更新，不变更包源码f6或媒体。当前036十附件及035不可变、仓库私有、没有额外Actions的二次读回均通过。最终检查点main读回另写delivery/v0.0.36/documentation-push-verification.json；tracked副本保存前一媒体交付点，二者不混称包源码。

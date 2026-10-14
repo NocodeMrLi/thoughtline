@@ -11,7 +11,7 @@ Six vine demos in a consistent fictional macOS desktop; full real menu paths. Us
 - [x] Minimal tray, focused RED/GREEN and related protection checks
 - [x] Six themes in Chinese/English, visible full menu paths, README/screenshots
 - [x] Frozen0.0.36 source and both actual packages/install preservation/Release verification
-- [ ] Owned cleanup, commit/push/readback with skip-ci
+- [x] Owned cleanup, commit/push/readback with skip-ci
 
 ## Boundaries
 Remaining five now authorized. Two user-supplied real screenshots: placement proposal requested first, integration approved. Product change authorized: minimal tray R6-09 and immutable0.0.36 focused packages. Fictional desktop wallpaper, menu bar, Dock and files; real production vine and note UI. No capture of personal desktop, chat, clipboard, user data. Recording fixture clipboard stub means UI/body-copy evidence only. Preserve existing five assets/READMEs and user App PID78797.
