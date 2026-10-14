@@ -1,3 +1,4 @@
+param([switch]$StackVisualOnly)
 $ErrorActionPreference = 'Stop'
 if ($env:GITHUB_ACTIONS -ne 'true' -or $env:RUNNER_OS -ne 'Windows' -or !$env:RUNNER_TEMP) { throw 'Disposable GitHub Windows runner required' }
 $install = Join-Path $env:RUNNER_TEMP 'Thoughtline-installer-preflight'
@@ -27,7 +28,7 @@ try {
   if (!(Test-Path $exe)) { throw 'Installed executable missing' }
   if ((Snapshot-Hashes) -ne $seed) { throw 'Fresh install changed pre-existing fixture data' }
   $report.installPreservesExistingData = $true
-  $isolated = Join-Path $env:LOCALAPPDATA 'Thoughtline-Preflight\0.0.33\user-data'
+  $isolated = Join-Path $env:LOCALAPPDATA 'Thoughtline-Preflight\0.0.34\user-data'
   if (Test-Path $isolated) { throw 'Unexpected existing isolation fixture' }
   & ./docs/delivery/Start-Thoughtline-Isolated.ps1 -Executable $exe -CheckOnly
   if (Test-Path $isolated) { throw 'Check-only launcher created a profile' }
@@ -47,6 +48,13 @@ try {
   $priorAppearanceEvidence = $env:THOUGHTLINE_EVIDENCE_DIR
   try {
     $env:THOUGHTLINE_EXECUTABLE = $exe
+    if ($StackVisualOnly) {
+      $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round6/r607/windows-installed-stack'
+      & node scripts/run-ci-fixture.cjs tests/electron/round6-stack-visual.cjs
+      if ($LASTEXITCODE -ne 0) { throw 'Actual installed stack appearance failed' }
+      $report.packagedStackVisual = $true
+      $report.unrelatedUiChecksNotRerun = @('EnglishAppearance','SplitMenu','Round3','TopEdge')
+    } else {
     $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/appearance/windows-packaged'
     New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
     & node tests/electron/packaged-appearance.cjs 2>&1 | Tee-Object -FilePath (Join-Path $env:THOUGHTLINE_EVIDENCE_DIR 'workflow.log')
@@ -68,6 +76,7 @@ try {
       if ($LASTEXITCODE -ne 0) { throw 'Actual installed Windows top edge regression failed' }
       $report.packagedTopEdgeGeometryAndPointerPath = $true
     } finally { $env:THOUGHTLINE_VERIFY = $priorTopEdgeVerify }
+    }
   } finally {
     $env:THOUGHTLINE_EXECUTABLE = $priorAppearanceExecutable
     $env:THOUGHTLINE_EVIDENCE_DIR = $priorAppearanceEvidence

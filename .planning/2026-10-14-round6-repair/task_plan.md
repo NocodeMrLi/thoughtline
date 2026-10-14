@@ -22,3 +22,11 @@ Files: round6 scoped workflow/release audit/report, acceptance/gates.
 - [x] Fresh whole-change review; fixes targeted RED→GREEN; Mac actual candidate and Windows focused source/install/package gates.
 - [x] Version0.0.33 frozen inputs/SHA/retention; push without redundant full task, private release readback, scoped cleanup.
 Expected: actual remote/source/package matches, six-item direct operation report; physical/formal remainfalse unless explicit owner feedback.
+
+## R6-07 focused follow-up (base a719841, candidate0.0.34)
+- [x] Approved single common backing edge + real count added canonical spec.
+- [ ] Source rendered comparison/screenshot RED→GREEN: singles/2/5/9, light/dark,350/740, count/date/detail preserved.
+- [ ] Type/build and related unit scope, frozen source commit/push[skip ci].
+- [ ] Mac/Windows targeted actual package and installation retention, immutable private release0.0.34.
+- [ ] Own cleanup, docs/gates readback and direct operation report.
+User targeted scope overrides skill default full suite. No design overhaul or new product logic. No delegated implementation/review claim needed for a CSS-only adjustment; executor diff+visual/native checks explicitly bounded.

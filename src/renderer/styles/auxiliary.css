@@ -62,7 +62,7 @@
 
 .capacity-preference{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;margin-top:16px}.capacity-preference [role=group]{display:flex;gap:4px;padding:3px;border-radius:12px;background:color-mix(in srgb,var(--text),transparent 94%)}.capacity-preference button{min-width:36px;min-height:30px;border:0;background:transparent}.capacity-preference button[aria-pressed=true]{background:var(--accent);color:#fff}.capacity-preference small{grid-column:1/-1;color:var(--muted);line-height:1.5}
 
-.calendar-paper.calendar-stack{isolation:isolate;box-shadow:3px 3px 0 -1px var(--paper),3px 3px 0 0 var(--border),6px 6px 0 -1px var(--paper),6px 6px 0 0 var(--border)}
+.calendar-paper.calendar-stack{isolation:isolate;box-shadow:3px 3px 0 -1px var(--paper),3px 3px 0 0 color-mix(in srgb,var(--paper-text),transparent 88%)}
 .calendar-paper .calendar-stack-count{position:absolute;right:12px;bottom:12px;font-size:11px;line-height:16px;color:var(--paper-muted);white-space:nowrap}
 .calendar-paper.calendar-stack>small{padding-right:42px}
 
