@@ -1,0 +1,16 @@
+{
+  "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-r6-picker-67PtFk",
+  "platform": "darwin",
+  "pids": [
+    88153,
+    88153,
+    88154,
+    88155,
+    88156,
+    88157
+  ],
+  "checks": [],
+  "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert((await shelf.evaluate(({locale,theme,seq})=>window.thoughtline.setPreferences({locale,theme},seq),{locale,theme,seq:seq++})).ok)\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round6-picker-workflow.cjs:3:611",
+  "normalQuit": true,
+  "cleaned": true
+}

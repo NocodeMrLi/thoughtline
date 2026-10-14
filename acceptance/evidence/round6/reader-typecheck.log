@@ -1,0 +1,9 @@
+
+> thoughtline@0.0.32 typecheck
+> node node_modules/typescript/bin/tsc --noEmit
+
+src/renderer/components/Calendar.tsx(149,1098): error TS2345: Argument of type '"当日张数"' is not assignable to parameter of type '" · 已收起" | " · 未挂上" | "15分钟后" | "1小时后" | "Agent 标签" | "Agent内容无效" | "Agent标签无效。" | "Enter 换行。" | "Esc 保存草稿并关闭。" | ... 606 more ... | "（注册失败）"'.
+src/renderer/components/IdeaReader.tsx(53,168): error TS2554: Expected 2 arguments, but got 1.
+src/renderer/components/IdeaReader.tsx(55,164): error TS2554: Expected 2 arguments, but got 1.
+src/renderer/components/IdeaReader.tsx(55,322): error TS2554: Expected 2 arguments, but got 1.
+src/renderer/components/IdeaReader.tsx(57,30): error TS2554: Expected 2 arguments, but got 1.

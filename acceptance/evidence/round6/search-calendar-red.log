@@ -1,0 +1,149 @@
+
+> thoughtline@0.0.32 test
+> node node_modules/vitest/vitest.mjs run tests/unit/round6SearchCalendar.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/round6SearchCalendar.test.ts (8 tests | 8 failed) 9ms
+   × 标签/名称/正文分档，正文最新匹配优先，搜索不修改内容 4ms
+   × 隐藏成员正文命中，标签去重，不能拿未命中的最新成员排序 0ms
+   × 分组范围、归档和删除隔离；空查询保留通用优先 0ms
+   × 当前语言标签名称可检索，空结果稳定 0ms
+   × 同日真实叠放去重，优先当前匹配页，原日期格仍按纸张计数 1ms
+   × 跨日每日期有同一叠放入口，打开各日匹配成员并保全全成员 0ms
+   × 搜索仅命中隐藏成员，代表页取命中，不丢完整叠放 1ms
+   × 归档和容量叠放均能投影，单张无虚假叠放，删成员不进入列表 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/round6SearchCalendar.test.ts > 标签/名称/正文分档，正文最新匹配优先，搜索不修改内容
+AssertionError: expected undefined to deeply equal [ 't', 'n', 'new', 'b' ]
+
+- Expected:
+[
+  "t",
+  "n",
+  "new",
+  "b",
+]
+
++ Received:
+undefined
+
+ ❯ tests/unit/round6SearchCalendar.test.ts:9:143
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  tests/unit/round6SearchCalendar.test.ts > 隐藏成员正文命中，标签去重，不能拿未命中的最新成员排序
+AssertionError: expected undefined to deeply equal [ 't', 'n', 'b', 'new' ]
+
+- Expected:
+[
+  "t",
+  "n",
+  "b",
+  "new",
+]
+
++ Received:
+undefined
+
+ ❯ tests/unit/round6SearchCalendar.test.ts:10:347
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  tests/unit/round6SearchCalendar.test.ts > 分组范围、归档和删除隔离；空查询保留通用优先
+AssertionError: expected undefined to deeply equal [ 'new' ]
+
+- Expected:
+[
+  "new",
+]
+
++ Received:
+undefined
+
+ ❯ tests/unit/round6SearchCalendar.test.ts:11:193
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  tests/unit/round6SearchCalendar.test.ts > 当前语言标签名称可检索，空结果稳定
+AssertionError: expected undefined to deeply equal [ 't' ]
+
+- Expected:
+[
+  "t",
+]
+
++ Received:
+undefined
+
+ ❯ tests/unit/round6SearchCalendar.test.ts:12:135
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  tests/unit/round6SearchCalendar.test.ts > 同日真实叠放去重，优先当前匹配页，原日期格仍按纸张计数
+AssertionError: Target cannot be null or undefined.
+ ❯ tests/unit/round6SearchCalendar.test.ts:14:207
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  tests/unit/round6SearchCalendar.test.ts > 跨日每日期有同一叠放入口，打开各日匹配成员并保全全成员
+AssertionError: Target cannot be null or undefined.
+ ❯ tests/unit/round6SearchCalendar.test.ts:15:150
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  tests/unit/round6SearchCalendar.test.ts > 搜索仅命中隐藏成员，代表页取命中，不丢完整叠放
+AssertionError: expected undefined to match object { idea: { id: 'n' }, count: 2, …(2) }
+
+- Expected:
+{
+  "count": 2,
+  "dayCount": 2,
+  "idea": {
+    "id": "n",
+  },
+  "matchingIds": [
+    "n",
+  ],
+}
+
++ Received:
+undefined
+
+ ❯ tests/unit/round6SearchCalendar.test.ts:16:146
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  tests/unit/round6SearchCalendar.test.ts > 归档和容量叠放均能投影，单张无虚假叠放，删成员不进入列表
+AssertionError: expected undefined to deeply equal [ 2, 1 ]
+
+- Expected:
+[
+  2,
+  1,
+]
+
++ Received:
+undefined
+
+ ❯ tests/unit/round6SearchCalendar.test.ts:17:248
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  8 failed (8)
+   Start at  11:25:54
+   Duration  193ms (transform 78%, import 11%, tests 8%, worker 3%)
+

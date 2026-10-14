@@ -1,0 +1,25 @@
+
+> thoughtline@0.0.32 test
+> node node_modules/vitest/vitest.mjs run tests/unit/round6SearchCalendar.test.ts tests/unit/round6PickerGeometry.test.ts tests/unit/round5ShelfFilter.test.ts tests/unit/ideaHistory.test.ts tests/unit/round5ManageBounds.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/round6PickerGeometry.test.ts (3 tests | 1 failed) 5ms
+   × 下方不足时侧方放置，负坐标工作区仍在屏内 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/round6PickerGeometry.test.ts > 下方不足时侧方放置，负坐标工作区仍在屏内
+AssertionError: expected -424 to be less than or equal to -960
+ ❯ tests/unit/round6PickerGeometry.test.ts:5:226
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 4 passed (5)
+      Tests  1 failed | 22 passed (23)
+   Start at  11:37:06
+   Duration  236ms (transform 72%, import 13%, tests 10%, worker 5%)
+

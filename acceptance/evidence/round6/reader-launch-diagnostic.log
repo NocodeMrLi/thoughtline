@@ -1,0 +1,31 @@
+electron.launch: Timeout 15000ms exceeded.
+Call log:
+[2m  - <launching> /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron --inspect=0 --remote-debugging-port=0 /var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-r6-reader-8xaFm9/protocol-entry.cjs[22m
+[2m  - <launched> pid=85489[22m
+[2m  - [pid=85489][err] Debugger listening on ws://127.0.0.1:62707/9f77bb5d-d46d-4537-96a0-2fbe5c238c3b[22m
+[2m  - [pid=85489][err] For help, see: https://nodejs.org/learn/getting-started/debugging[22m
+[2m  - <ws connecting> ws://127.0.0.1:62707/9f77bb5d-d46d-4537-96a0-2fbe5c238c3b[22m
+[2m  - [pid=85489][err] Debugger attached.[22m
+[2m  - <ws connected> ws://127.0.0.1:62707/9f77bb5d-d46d-4537-96a0-2fbe5c238c3b[22m
+[2m  - [pid=85489][err][22m
+[2m  - [pid=85489][err] DevTools listening on ws://127.0.0.1:62709/devtools/browser/2ecaae93-d601-4b70-a0b1-faad37b53774[22m
+[2m  - <ws connecting> ws://127.0.0.1:62709/devtools/browser/2ecaae93-d601-4b70-a0b1-faad37b53774[22m
+[2m  - <ws connected> ws://127.0.0.1:62709/devtools/browser/2ecaae93-d601-4b70-a0b1-faad37b53774[22m
+
+    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round6-reader-workflow.cjs:5:213 {
+  log: [
+    '  - <launching> /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron --inspect=0 --remote-debugging-port=0 /var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-r6-reader-8xaFm9/protocol-entry.cjs',
+    '  - <launched> pid=85489',
+    '  - [pid=85489][err] Debugger listening on ws://127.0.0.1:62707/9f77bb5d-d46d-4537-96a0-2fbe5c238c3b',
+    '  - [pid=85489][err] For help, see: https://nodejs.org/learn/getting-started/debugging',
+    '  - <ws connecting> ws://127.0.0.1:62707/9f77bb5d-d46d-4537-96a0-2fbe5c238c3b',
+    '  - [pid=85489][err] Debugger attached.',
+    '  - <ws connected> ws://127.0.0.1:62707/9f77bb5d-d46d-4537-96a0-2fbe5c238c3b',
+    '  - [pid=85489][err]',
+    '  - [pid=85489][err] DevTools listening on ws://127.0.0.1:62709/devtools/browser/2ecaae93-d601-4b70-a0b1-faad37b53774',
+    '  - <ws connecting> ws://127.0.0.1:62709/devtools/browser/2ecaae93-d601-4b70-a0b1-faad37b53774',
+    '  - <ws connected> ws://127.0.0.1:62709/devtools/browser/2ecaae93-d601-4b70-a0b1-faad37b53774'
+  ],
+  name: 'TimeoutError'
+}
+CI FIXTURE {"file":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round6-reader-workflow.cjs","pid":85488,"passed":false,"timedOut":false,"code":1}

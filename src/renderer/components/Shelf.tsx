@@ -1,4 +1,3 @@
-import {ShelfMergePicker} from './ShelfMergePicker';
 import {useLocale} from '../LocaleContext';
 import {useEffect,useId,useLayoutEffect,useRef,useState} from 'react';
 import type {PointerEvent,CSSProperties} from 'react';
@@ -8,7 +7,6 @@ import {layoutClips,normalizedPosition,clipTravelBounds,availableClipPosition,cl
 import {fixedRope,fixedRopeY,shelfCapacity} from '../../shared/ropeGeometry';
 import {flushPageSelections} from '../hooks/useClipPage';
 import {ClipCard} from './ClipCard';
-import {ShelfFilterPicker} from './ShelfFilterPicker';
 import {filteredClips,matchingClipIds} from '../../shared/ideaVisibility';
 import {canMergeClips,canMergeIdea} from '../../shared/clipModel';
 import {useTransientNotice} from '../hooks/useTransientNotice';
@@ -112,11 +110,9 @@ export function Shelf({info}:{info:PilotInfo}){
   {dragView?.mode==='paper'&&dragView.active&&<div className="paper-drag-preview" data-valid={dragView.valid} aria-hidden="true" style={{left:dragView.x,top:fixedRopeY(dragView.x,rope),width:metrics.cardWidth}}><div className="scaled-paper" style={{transform:`scale(${metrics.scale})`,'--paper-scale':metrics.scale} as CSSProperties}><ClipCard appearance={info.snapshot.settings.paper} clip={{...dragView.clip,ideaIds:[dragView.ideaId],currentId:dragView.ideaId}} ideas={info.snapshot.ideas} agent={info.snapshot.agents.find(a=>a.id===info.snapshot.ideas.find(i=>i.id===dragView.ideaId)?.agentId)} onChange={change} onGrab={()=>{}} onError={()=>{}} reduced={true} textDragActive={false} ropeContact="M0 27H18"/></div></div>}
   {dragView&&<><div className="source-ghost" style={{left:dragView.origin,top:fixedRopeY(dragView.origin,rope)+6*metrics.scale,width:metrics.cardWidth,height:metrics.cardHeight}}/><span className="drag-message" role="status">{dragView.ready?t("松开合并"):dragView.target?((()=>{const target=info.snapshot.clips.find(c=>c.id===dragView.target);return target&&(dragView.mode==='paper'?canMergeIdea(info.snapshot,dragView.ideaId,target):canMergeClips(info.snapshot,dragView.clip,target));})()?t("停留后合夹"):t("不同分组的夹子不能合并，未分组仅支持同标签合并。")):dragView.mode==='paper'?(dragView.valid?t("松开将当前纸张挂到空位 · Esc取消"):t("绳上暂时放不下 · Esc取消")):t("拖动调整位置 · Esc取消")}</span></>}
   {(error||notice)&&<button data-hit className="shelf-error" {...noticeProps} role={error?'alert':'status'} onClick={()=>{setError('');setNotice('');}}>{m(error||notice)}</button>}
-  {!error&&!notice&&placement&&<button data-hit className="shelf-error" {...placementProps} role={info.placementNoticeKind==='error'?'alert':'status'} onClick={()=>{setPlacement('');if(layout.overflow.length)void browse();}}>{m(placement)}</button>}
+  {!error&&!notice&&placement&&<button data-hit className="shelf-error" style={info.placementPoint?{left:info.placementPoint.x,top:info.placementPoint.y,bottom:'auto',transform:'translateX(-50%)'}:undefined} {...placementProps} role={info.placementNoticeKind==='error'?'alert':'status'} onClick={()=>{setPlacement('');if(info.placementTargetId)void window.thoughtline.locateIdea(info.placementTargetId).then(r=>{if(!r.ok)setError(r.message);});else if(layout.overflow.length)void browse();}}>{m(placement)}{info.placementTargetId&&<> · {t('查看')}</>}</button>}
  {!visible.length&&filterKey&&<button data-hit className="shelf-filter-clear" onClick={()=>void window.thoughtline.setShelfFilter({project:null,agentId:'all'})}>{t('没有匹配念头')} · {t('显示全部')}</button>}
  </div>
- {info.shelfMergePicker&&<ShelfMergePicker key={info.shelfMergePicker.session} info={info} onError={setError}/>}
- {info.shelfFilterPicker&&<ShelfFilterPicker key={info.shelfFilterPicker.session} info={info} onError={setError}/>}
  {info.lightReminder&&<aside className="light-reminder" data-hit data-reminder-key={info.lightReminder.key} role="status" aria-live="polite">
   <button className="light-reminder-open" onClick={()=>{void window.thoughtline.reminderAction(info.lightReminder!.key,true).then(r=>{if(!r.ok)setError(r.message);});}}><span className="light-reminder-brand">Thoughtline · {t('轻提醒')}{info.lightReminder.count>1?' ('+info.lightReminder.count+')':''}</span><strong>{info.lightReminder.title}</strong><span className="light-reminder-hint">{error?m(error):t('点击查看')}</span></button>
   <button className="light-reminder-close" aria-label={t('关闭提醒')} onClick={()=>{void window.thoughtline.reminderAction(info.lightReminder!.key,false);}}>×</button>

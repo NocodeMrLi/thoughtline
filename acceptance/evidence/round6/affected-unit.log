@@ -1,0 +1,29 @@
+
+> thoughtline@0.0.32 test
+> node node_modules/vitest/vitest.mjs run tests/unit/round6SearchCalendar.test.ts tests/unit/round6PickerGeometry.test.ts tests/unit/round5ShelfFilter.test.ts tests/unit/ideaHistory.test.ts tests/unit/round5ManageBounds.test.ts tests/unit/clipCommands.test.ts tests/unit/ideaPlacement.test.ts tests/unit/round5MergeTargets.test.ts tests/unit/draftAutosaver.test.ts tests/unit/rememberIdeaProject.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/round6SearchCalendar.test.ts (9 tests | 1 failed) 29ms
+   × 创建日期格式同年简写跨年含年，不受后续编辑时间影响 20ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/round6SearchCalendar.test.ts > 创建日期格式同年简写跨年含年，不受后续编辑时间影响
+AssertionError: expected '10/13' to be '10月13日' // Object.is equality
+
+Expected: "10月13日"
+Received: "10/13"
+
+ ❯ tests/unit/round6SearchCalendar.test.ts:19:97
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 9 passed (10)
+      Tests  1 failed | 78 passed (79)
+   Start at  11:41:49
+   Duration  445ms (transform 60%, tests 21%, import 16%, worker 3%)
+

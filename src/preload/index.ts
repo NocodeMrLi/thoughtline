@@ -1,7 +1,8 @@
 import {contextBridge,ipcRenderer} from 'electron';import type {ThoughtlineBridge} from '../shared/bridge';
 const api:ThoughtlineBridge={
+ pickerSize:(session,width,height)=>ipcRenderer.invoke('thoughtline:picker-size',session,width,height),
  viewReady:(session,mode,request)=>ipcRenderer.send('thoughtline:view-ready',{session,mode,request}),
- setShelfFilter:filter=>ipcRenderer.invoke('thoughtline:shelf-filter',filter),
+ setShelfFilter:(filter,session)=>ipcRenderer.invoke('thoughtline:shelf-filter',filter,session),
  closeShelfMergePicker:()=>ipcRenderer.invoke('thoughtline:close-shelf-merge-picker'),
  mergeTarget:(id,revision,session)=>ipcRenderer.invoke('thoughtline:merge-target',id,revision,session),
  closeShelfFilterPicker:()=>ipcRenderer.invoke('thoughtline:close-shelf-filter-picker'),
@@ -32,6 +33,7 @@ const api:ThoughtlineBridge={
  openClassification:(tab,returnDraft)=>ipcRenderer.invoke('thoughtline:open-classification',tab,returnDraft),
  returnClassification:()=>ipcRenderer.invoke('thoughtline:return-classification'),
  classificationChange:(change,revision)=>ipcRenderer.invoke('thoughtline:classification',change,revision),
+ locateIdea:id=>ipcRenderer.invoke('thoughtline:locate-idea',id),
  openManage:(id,titles)=>ipcRenderer.invoke('thoughtline:open-manage',id,titles),
  closeManage:()=>ipcRenderer.invoke('thoughtline:close-manage'),
  openEdit:id=>ipcRenderer.invoke('thoughtline:open-edit',id),

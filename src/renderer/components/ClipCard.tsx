@@ -1,3 +1,5 @@
+import {ideaDay,formatShelfDay} from '../../shared/ideaHistory';
+import {formatCalendarDate} from '../../shared/i18n';
 import {classificationLabel} from '../../shared/classification';
 import {useLocale} from '../LocaleContext';
 import {useEffect,useId,useMemo,useRef,useState} from 'react';
@@ -11,7 +13,7 @@ import {agentInkColors} from './agentInk';
 import {paperAppearance,paperPalettes,type PaperAppearance} from '../../shared/appearance';
 import {paperStyle} from './PaperAppearance';
 export function ClipCard({clip,ideas,agent:fallbackAgent,agents,view,onChange,onGrab,onError,reduced,textDragActive,ropeContact,appearance}:{clip:Clip;ideas:Idea[];agent:AgentTag|undefined;agents?:AgentTag[];view?:{ids:string[];key:string};onChange:(c:ClipMutation)=>Promise<boolean>;onGrab:(e:PointerEvent<HTMLButtonElement>,clip:Clip,mode?:'clip'|'paper')=>void;onError:(text:string)=>void;reduced:boolean;textDragActive:boolean;ropeContact:string;appearance?:PaperAppearance}){
- const {t,agentName}=useLocale();
+ const {t,agentName,locale}=useLocale();
  const page=useClipPage(clip,onError,view),ids=view?.ids??clip.ideaIds;
  const idea=ideas.find(i=>i.id===page.id),agent=agents?.find(a=>a.id===idea?.agentId)??fallbackAgent;
  const [copied,setCopied]=useState(false),[direction,setDirection]=useState('');
@@ -54,8 +56,9 @@ export function ClipCard({clip,ideas,agent:fallbackAgent,agents,view,onChange,on
     <button aria-label={t("expandPaper",{p0:idea.title})} onClick={()=>void open()}><ExpandIcon/></button>
    </footer>
    <span className="sr-only" role="status">{copied?t("copiedPaper",{p0:index+1}):''}</span>
+   <button className="paper-date" data-calendar-date={idea.id} title={t('创建日期说明',{date:formatCalendarDate(locale,ideaDay(idea))})} onClick={()=>void window.thoughtline.locateIdea(idea.id).then(r=>{if(!r.ok)onError(r.message);})}>{formatShelfDay(ideaDay(idea),locale)}</button>
   </article>
  </>;
 }
 export function ExpandIcon(){
- const {t,agentName}=useLocale();return <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M9 2h5v5M14 2L8 8M7 14H2V9M2 14l6-6"/></svg>;}
+ const {t,agentName,locale}=useLocale();return <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M9 2h5v5M14 2L8 8M7 14H2V9M2 14l6-6"/></svg>;}

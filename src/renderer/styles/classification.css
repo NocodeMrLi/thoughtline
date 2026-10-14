@@ -40,3 +40,10 @@
 :root[data-platform] .shelf-picker .shelf-filter-all:hover,:root[data-platform] .shelf-picker .shelf-filter-all[aria-pressed=true]{background:color-mix(in srgb,var(--text),transparent 93%)}
 :root[data-platform] .shelf-picker .merge-count,:root[data-platform] .shelf-picker .merge-location,:root[data-platform] .shelf-picker .shelf-filter-row>small{font-size:12px}
 @media(forced-colors:active){:root[data-platform][data-theme] .shelf-picker.compact-popover{background:Canvas;border-color:CanvasText;box-shadow:none;backdrop-filter:none}}
+
+.picker-host{padding:8px;width:100%;min-height:0;background:transparent;overflow:hidden}
+.picker-host .shelf-picker.classification-picker{width:100%;max-height:calc(100vh - 16px);box-sizing:border-box}
+.shelf-picker-drag{height:14px;min-height:14px;display:flex;align-items:center;justify-content:center;-webkit-app-region:drag;cursor:grab}
+.shelf-picker-drag span{width:26px;height:3px;border-radius:2px;background:var(--muted);opacity:.55;pointer-events:none}
+.picker-host input,.picker-host button{-webkit-app-region:no-drag}
+.shelf-filter-hint{justify-content:flex-end}

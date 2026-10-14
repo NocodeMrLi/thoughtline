@@ -1,3 +1,4 @@
+import {ideaDay,formatShelfDay} from '../shared/ideaHistory';
 import {mergeInto,mergeTargets,splitArchived} from '../shared/stackCommands';
 import {addProject,renameProject,setClassificationActive,rememberIdeaProject} from '../shared/classification';
 import {shelfCapacity,fixedRope,fixedRopeY} from '../shared/ropeGeometry';
@@ -9,6 +10,7 @@ import {translator,localizeMessage,agentLabel,countThoughts,type Translator} fro
 import {app,BrowserWindow,dialog,shell,clipboard,globalShortcut,ipcMain,nativeImage,nativeTheme,powerMonitor,screen,Tray,Menu} from 'electron';
 import {join} from 'node:path';
 import {randomUUID} from 'node:crypto';
+import {createPicker} from './windows/picker';
 import {createShelf} from './windows/shelf';
 import {createComposer,COMPOSER_SIZE,currentComposerMaterial} from './windows/composer';
 import {createManage} from './windows/manage';
@@ -74,8 +76,8 @@ else app.whenReady().then(async()=>{
  let manageReadyRequest=0;let composerSession=0,manageSession=0,manageSelection:string|null=null;
  let manageEditingOwner:{session:number;ideaId:string}|null=null,manageEditingRequested=false;
  let dragCancelSession=0,dragEscape=false;let textDragTimer:ReturnType<typeof setTimeout>|null=null;let textDragOwner:string|null=null;
- let placementNotice:string|null=null;let placementNoticeId=0;let placementNoticeKind:'info'|'error'='info';
- const setPlacementNotice=(message:string|null,error=false)=>{placementNotice=message;placementNoticeId++;placementNoticeKind=error?'error':'info';};let shelfAgentId='all';let shelfProject:string|null=null;let shelfFilterPicker:PilotInfo['shelfFilterPicker']=null;let shelfMergePicker:PilotInfo['shelfMergePicker']=null;let mergePickerBusy=false;let filterSession=0;let settingsBusy=false;let storageBusy=false;let refreshTray=()=>{};
+ let placementNoticeTimer:ReturnType<typeof setTimeout>|null=null;let placementNotice:string|null=null;let placementTargetId:string|null=null,placementPoint:{x:number;y:number}|null=null;let calendarLocate:PilotInfo['calendarLocate']=null,calendarLocateSequence=0;let placementNoticeId=0;let placementNoticeKind:'info'|'error'='info';
+ const setPlacementNotice=(message:string|null,error=false,targetId:string|null=null,point:{x:number;y:number}|null=null)=>{placementTargetId=targetId;placementPoint=point;placementNotice=message;placementNoticeId++;placementNoticeKind=error?'error':'info';if(placementNoticeTimer)clearTimeout(placementNoticeTimer);placementNoticeTimer=null;lock('placement-notice',!!targetId);if(targetId)placementNoticeTimer=setTimeout(()=>{placementNoticeTimer=null;lock('placement-notice',false);},4000);};let shelfAgentId='all';let shelfProject:string|null=null;let shelfFilterPicker:PilotInfo['shelfFilterPicker']=null;let shelfMergePicker:PilotInfo['shelfMergePicker']=null;let mergePickerBusy=false;let filterSession=0;let picker:BrowserWindow|null=null,pickerLoading:Promise<void>|null=null;let pickerConfirmed:{window:BrowserWindow;session:number}|null=null;const pickerWaiters=new Set<(session:number)=>void>();let pickerManual:Electron.Rectangle|undefined,pickerProgrammatic:{x:number;y:number}|null=null;let settingsBusy=false;let storageBusy=false;let refreshTray=()=>{};
  let geometryTimer:ReturnType<typeof setTimeout>|null=null,boundsIgnoreUntil=0;
  let classificationTab:ClassificationTab='projects',classificationOrigin:'composer'|'calendar'='calendar',classificationReturnBounds:Electron.Rectangle|null=null;
  let classificationReturnContext:{mode:'browse'|'detail';selection:string|null;editing:boolean;titles:boolean;raw?:EditorReturnDraft}|null=null;
@@ -88,9 +90,9 @@ else app.whenReady().then(async()=>{
  let preferenceCommit:{version:number;sequence:number;sender:number}|null=null;
  let reminderFallback:ReminderFallback|null=null;
  const currentUndoLabel=():PilotInfo['undoActionLabel']=>{if(!undoClips||undoClips.revision!==snapshot.revision)return null;if(undoClips.placementKind==='swap')return '撤销换上';if(undoClips.placementKind==='hang'||undoClips.placementKind==='arrange')return '撤销挂上';if(['archiveIdea','archiveAll'].includes(undoClips.command??''))return '撤销收起';if(['merge','mergeTarget','paperDrop'].includes(undoClips.command??''))return '撤销合并';if(['split','splitAll'].includes(undoClips.command??''))return '撤销拆分';return '撤销整理';};
- const info=(viewer?:number):PilotInfo=>({restoredEditor,lightReminder:reminderFallback?.current??null,preferenceCommit:preferenceCommit?{version:preferenceCommit.version,sequence:preferenceCommit.sequence,own:preferenceCommit.sender===viewer}:null,preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,placementNoticeId,placementNoticeKind,arrangeSession,manageVisit,calendarReturning,manageSession,manageReadyRequest,manageSelection,manageMode,classificationTab,classificationOrigin,classificationChange,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,undoActionLabel:currentUndoLabel(),undoPlacementKind:undoClips?.placementKind,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,shelfProject,shelfFilterPicker,shelfMergePicker,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation(),layoutLocked:dragEscape||!!textDragOwner});
+ const info=(viewer?:number):PilotInfo=>({restoredEditor,lightReminder:reminderFallback?.current??null,preferenceCommit:preferenceCommit?{version:preferenceCommit.version,sequence:preferenceCommit.sequence,own:preferenceCommit.sender===viewer}:null,preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,placementNoticeId,placementNoticeKind,placementTargetId,placementPoint,calendarLocate,arrangeSession,manageVisit,calendarReturning,manageSession,manageReadyRequest,manageSelection,manageMode,classificationTab,classificationOrigin,classificationChange,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,undoActionLabel:currentUndoLabel(),undoPlacementKind:undoClips?.placementKind,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,shelfProject,shelfFilterPicker,shelfMergePicker,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation(),layoutLocked:dragEscape||!!textDragOwner});
  let reminderScheduler:ReminderScheduler|null=null,reminderNotices:ReminderNotifications|null=null;
- const publish=()=>{reminderFallback?.sync();edge.reminder(!!reminderFallback?.current);reminderNotices?.sync();reminderScheduler?.refresh();for(const w of [shelf,composer,manage])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info(w.webContents.id));};
+ const publish=()=>{reminderFallback?.sync();edge.reminder(!!reminderFallback?.current);reminderNotices?.sync();reminderScheduler?.refresh();for(const w of [shelf,composer,manage,picker])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info(w.webContents.id));};
  const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:(BrowserWindow|null)[]=[shelf,composer,manage])=>allowed.some(w=>w?.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
  const prepareWindow=(w:BrowserWindow|null):Promise<boolean>=>{
   if(!w||w.isDestroyed())return Promise.resolve(true);
@@ -230,7 +232,7 @@ else app.whenReady().then(async()=>{
   if(result.ok){preferenceCommit={version:result.value.version,sequence,sender:e.sender.id};startupLocale=preferences.current.locale;nativeTheme.themeSource=preferences.current.theme;refreshTray();publish();}
   return result;
  });
- ipcMain.handle('thoughtline:info',e=>{if(!trusted(e))throw Error(t("不允许读取"));return info(e.sender.id);});
+ ipcMain.handle('thoughtline:info',e=>{if(!trusted(e,[shelf,composer,manage,picker]))throw Error(t("不允许读取"));return info(e.sender.id);});
  ipcMain.on('thoughtline:presentation-finished',(e,session:number)=>{if(trusted(e,[shelf])&&Number.isSafeInteger(session)&&session>=0)edge.presentationFinished(session);});
  ipcMain.on('thoughtline:hit-layout',(e,p:HitLayout)=>{
   if(!trusted(e,[shelf])||!p||!Number.isSafeInteger(p.layoutRevision)||!Array.isArray(p.rects)||p.rects.length>512||typeof p.displayId!=='string')return;
@@ -293,21 +295,62 @@ else app.whenReady().then(async()=>{
  });
  const currentFilter=():ShelfFilter=>({project:shelfProject,agentId:shelfAgentId});
  const captureShelfPositions=()=>{const captured=new Map(captureClipPositions(filteredClips(snapshot,currentFilter()),width,'all',shelfCapacity(snapshot.settings.shelfCapacity)).map(c=>[c.id,c]));return snapshot.clips.map(c=>captured.get(c.id)??c);};
- const closeFilterPicker=()=>{if(!shelfFilterPicker)return;shelfFilterPicker=null;lock('filter',false);if(!shelf.isDestroyed()){if(shelf.isFocused())shelf.blur();shelf.setFocusable(false);}publish();};
- const closeMergePicker=()=>{if(!shelfMergePicker||mergePickerBusy)return;shelfMergePicker=null;lock('filter',false);if(!shelf.isDestroyed()){if(shelf.isFocused())shelf.blur();shelf.setFocusable(false);}publish();};
- const openMergePicker=(sourceId:string)=>coalesceManage('merge-picker:'+sourceId,async()=>{if(quitting||composer?.isVisible()||!mergeTargets(snapshot,sourceId,'',undefined,width,currentFilter()).length)return invalid(t("无效操作"));if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));if(quitting||composer?.isVisible()||!mergeTargets(snapshot,sourceId,'',undefined,width,currentFilter()).length)return invalid(t("无效操作"));closeFilterPicker();const p=screen.getCursorScreenPoint(),b=shelf.getBounds();shelfMergePicker={x:Math.max(8,Math.min(width-8,p.x-b.x)),y:Math.max(8,Math.min(320,p.y-b.y)),session:++filterSession,sourceId};edge.event({type:'peek',now:Date.now()});lock('filter',true);shelf.setFocusable(true);shelf.focus();publish();return done();});
- const selectShelfFilter=async(filter:ShelfFilter):Promise<Result<void>>=>{
-  if(!await prepareWindow(shelf))return invalid(t("页码尚未保存，筛选已保留。"));
+ const hidePicker=()=>{if(picker&&!picker.isDestroyed()){picker.hide();picker.webContents.setBackgroundThrottling(true);}};
+ const closeFilterPicker=()=>{if(!shelfFilterPicker)return;shelfFilterPicker=null;hidePicker();lock('filter',false);publish();};
+ const closeMergePicker=()=>{if(!shelfMergePicker||mergePickerBusy)return;shelfMergePicker=null;hidePicker();lock('filter',false);publish();};
+ const ensurePicker=async()=>{
+  if(pickerLoading)return pickerLoading;
+  if(picker&&!picker.isDestroyed()){picker.webContents.setBackgroundThrottling(false);return;}
+  const w=createPicker(preload);picker=w;
+  w.on('page-title-updated',e=>e.preventDefault());
+  w.on('move',()=>{const b=w.getBounds();if(pickerProgrammatic&&(b.x!==pickerProgrammatic.x||b.y!==pickerProgrammatic.y))pickerManual=b;});
+  w.on('blur',()=>{if(w.isFocused())return;closeFilterPicker();closeMergePicker();});
+  w.on('close',e=>{if(!quitting){e.preventDefault();closeFilterPicker();closeMergePicker();}});
+  w.on('closed',()=>{if(picker===w)picker=null;});
+  pickerLoading=loadView(w,'picker').catch(error=>{if(picker===w){picker=null;pickerConfirmed=null;}if(!w.isDestroyed())w.destroy();throw error;}).finally(()=>{pickerLoading=null;});await pickerLoading;
+ };
+ ipcMain.handle('thoughtline:picker-size',(e,session:number,w:number,h:number)=>{
+  const context=shelfMergePicker??shelfFilterPicker;if(!trusted(e,[picker])||!context||session!==context.session||!picker||quitting||!Number.isFinite(w)||!Number.isFinite(h)||w<100||w>500||h<40||h>500)return invalid(t('无效操作'));
+  const display=screen.getDisplayMatching(pickerManual??shelf.getBounds()),area=display.workArea,p=screen.getCursorScreenPoint();
+  const old=picker.isVisible()?picker.getBounds():pickerManual;
+  const bounds=fitManageBounds({x:old?.x??p.x-188,y:old?.y??p.y+16,width:w,height:h},[area],old?[]:paperObstacles(),{preferredArea:area,preserve:!!old});
+  pickerProgrammatic={x:bounds.x,y:bounds.y};picker.setBounds(bounds);
+  if(!picker.isVisible()){picker.show();picker.focus();}pickerConfirmed={window:picker,session};for(const ready of pickerWaiters)ready(session);return done();
+ });
+ const refitPicker=()=>{if(!picker?.isVisible())return;const b=picker.getBounds(),area=screen.getDisplayMatching(b).workArea,fitted=fitManageBounds(b,[area],[],{preserve:true,preferredArea:area});pickerProgrammatic={x:fitted.x,y:fitted.y};picker.setBounds(fitted);if(pickerManual)pickerManual=fitted;};
+ screen.on('display-removed',refitPicker);screen.on('display-metrics-changed',refitPicker);
+ const retirePickerSession=(session:number)=>{if(shelfFilterPicker?.session===session)closeFilterPicker();if(shelfMergePicker?.session===session)closeMergePicker();};
+ const presentPicker=async(session:number):Promise<Result<void>>=>{
+  if(pickerConfirmed?.window===picker&&pickerConfirmed.session===session&&picker?.isVisible()){picker.focus();return done();}
+  const ok=await new Promise<boolean>(resolve=>{let finished=false;const finish=(ok:boolean)=>{if(finished)return;finished=true;clearTimeout(timer);pickerWaiters.delete(ready);resolve(ok);};const ready=(s:number)=>{if(s===session)finish(true);};const timer=setTimeout(()=>finish(false),5000);pickerWaiters.add(ready);publish();});
+  if(ok&&(shelfMergePicker??shelfFilterPicker)?.session===session)return done();retirePickerSession(session);return invalid(t('浏览浮层未能打开，请重试。'));
+ };
+ const openMergePicker=(sourceId:string)=>coalesceManage('merge-picker:'+sourceId,async()=>{
+  if(quitting||composer?.isVisible()||!mergeTargets(snapshot,sourceId,'',undefined,width,currentFilter()).length)return invalid(t('无效操作'));
+  if(!await prepareViews())return invalid(t('最后修改尚未保存，窗口已保留。'));
+  if(quitting||composer?.isVisible()||!mergeTargets(snapshot,sourceId,'',undefined,width,currentFilter()).length)return invalid(t('无效操作'));
+  closeFilterPicker();if(shelfMergePicker?.sourceId===sourceId&&picker?.isVisible()){picker.focus();return done();}
+  shelfMergePicker={x:0,y:0,session:++filterSession,sourceId};edge.event({type:'peek',now:Date.now()});lock('filter',true);
+  const session=shelfMergePicker.session;try{await ensurePicker();return await presentPicker(session);}catch{retirePickerSession(session);return invalid(t('浏览浮层未能打开，请重试。'));}
+ });
+ const selectShelfFilter=async(filter:ShelfFilter,session?:number):Promise<Result<void>>=>{
+  if(!await prepareWindow(shelf))return invalid(t('页码尚未保存，筛选已保留。'));
+  if(session!==undefined&&shelfFilterPicker?.session!==session)return invalid(t('无效操作'));
   shelfProject=filter.project;shelfAgentId=filter.agentId;closeFilterPicker();refreshTray();publish();return done();
  };
- const openFilterPicker=()=>{if(quitting||composer?.isVisible())return;closeMergePicker();const p=screen.getCursorScreenPoint(),b=shelf.getBounds();shelfFilterPicker={x:Math.max(8,Math.min(width-8,p.x-b.x)),y:Math.max(8,Math.min(320,p.y-b.y)),session:++filterSession};edge.event({type:'peek',now:Date.now()});lock('filter',true);shelf.setFocusable(true);shelf.focus();publish();};
- ipcMain.handle('thoughtline:shelf-filter',async(e,filter:unknown)=>{
-  if(!trusted(e,[shelf])||!filter||typeof filter!=='object'||quitting)return invalid(t('无效操作'));
-  const f=filter as ShelfFilter;if(!(f.project===null||typeof f.project==='string')||typeof f.agentId!=='string'||f.agentId!=='all'&&!snapshot.agents.some(a=>a.id===f.agentId)||f.project!==null&&f.project!==''&&!(snapshot.projects??[]).includes(f.project))return invalid(t('无效操作'));
-  return selectShelfFilter(f);
+ const openFilterPicker=()=>coalesceManage('filter-picker',async()=>{
+  if(quitting||composer?.isVisible()||mergePickerBusy)return invalid(t('无效操作'));
+  if(!await prepareViews())return invalid(t('最后修改尚未保存，窗口已保留。'));
+  closeMergePicker();if(shelfFilterPicker&&picker?.isVisible()){picker.focus();return done();}
+  shelfFilterPicker={x:0,y:0,session:++filterSession};edge.event({type:'peek',now:Date.now()});lock('filter',true);
+  const session=shelfFilterPicker.session;try{await ensurePicker();return await presentPicker(session);}catch{retirePickerSession(session);return invalid(t('浏览浮层未能打开，请重试。'));}
  });
- ipcMain.handle('thoughtline:close-shelf-filter-picker',e=>{if(!trusted(e,[shelf]))return invalid(t('无效操作'));closeFilterPicker();return done();});
- shelf.on('blur',()=>{if(shelf.isFocused())return;closeFilterPicker();closeMergePicker();});
+ ipcMain.handle('thoughtline:shelf-filter',async(e,filter:unknown,session?:number)=>{
+  if(!trusted(e,[shelf,picker])||!filter||typeof filter!=='object'||quitting||trusted(e,[picker])&&(!shelfFilterPicker||!Number.isSafeInteger(session)||session!==shelfFilterPicker.session))return invalid(t('无效操作'));
+  const f=filter as ShelfFilter;if(!(f.project===null||typeof f.project==='string')||typeof f.agentId!=='string'||f.agentId!=='all'&&!snapshot.agents.some(a=>a.id===f.agentId)||f.project!==null&&f.project!==''&&!(snapshot.projects??[]).includes(f.project))return invalid(t('无效操作'));
+  return selectShelfFilter(f,session);
+ });
+ ipcMain.handle('thoughtline:close-shelf-filter-picker',e=>{if(!trusted(e,[shelf,picker]))return invalid(t('无效操作'));closeFilterPicker();return done();});
  const browseFromTray=()=>{void openBrowse();};
  const openBrowse=()=>coalesceManage('manage:calendar:false',async()=>{
   if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
@@ -316,6 +359,21 @@ else app.whenReady().then(async()=>{
   if(manageSelection===null&&!manageTitles){const reused=await reuseReadyManage('browse');if(reused)return reused;}
   manageMode='browse';manageSelection=null;manageTitles=false;manageEditingRequested=false;manageVisit++;calendarReturning=false;manageSession++;lock('manage',true);setManageBounds(calendarBounds(),!!snapshot.settings.calendarBounds);publish();const shown=await presentManage();refreshTray();return shown;
  });
+ ipcMain.handle('thoughtline:locate-idea',async(e,id:string)=>{
+  if(!trusted(e,[shelf,manage])||typeof id!=='string'||quitting||!snapshot.ideas.some(i=>i.id===id&&i.status!=='deleted'))return invalid(t('找不到这条念头。'));
+  return coalesceManage('locate:'+id,async()=>{
+   if(!await prepareViews())return invalid(t('最后修改尚未保存，窗口已保留。'));
+   try{await ensureManage();}catch{return invalid(t('浏览浮层未能打开，请重试。'));}
+   if(quitting||!snapshot.ideas.some(i=>i.id===id&&i.status!=='deleted'))return invalid(t('找不到这条念头。'));
+   manageMode='browse';manageSelection=null;manageTitles=false;manageEditingRequested=false;manageVisit++;calendarReturning=false;manageSession++;
+   calendarLocate={ideaId:id,sequence:++calendarLocateSequence,session:manageSession};lock('manage',true);setManageBounds(calendarBounds(),!!snapshot.settings.calendarBounds);publish();return presentManage();
+  });
+ });
+ const paperNoticePoint=(id:string):{x:number;y:number}|null=>{
+  const clip=snapshot.clips.find(c=>c.ideaIds.includes(id)),capacity=shelfCapacity(snapshot.settings.shelfCapacity),metrics=clipMetrics(width,capacity),rope=fixedRope(width,capacity);
+  const p=layoutClips(filteredClips(snapshot,currentFilter()),width,capacity).visible.find(p=>p.clip.id===clip?.id);
+  return p?{x:Math.max(140,Math.min(width-140,p.x)),y:Math.min(312,fixedRopeY(p.x,rope)+250*metrics.scale)}:null;
+ };
  let activeShelfMenu:{menu:Menu;finish:()=>void}|null=null;
  const closeShelfMenu=()=>{const active=activeShelfMenu;if(!active)return;try{active.menu.closePopup();}finally{active.finish();}};
  shelf.on('hide',closeShelfMenu);app.on('before-quit',closeShelfMenu);
@@ -532,9 +590,9 @@ else app.whenReady().then(async()=>{
   if(!trusted(e,[shelf,manage])||typeof id!=='string'||!['hanging','archived'].includes(status))return invalid(t("无效操作"));
   return composerWrite(async()=>{if(revision!==snapshot.revision)return {ok:false as const,code:'CONFLICT' as const,message:t("内容已变化，请重新操作。")};
   if(status==='hanging')return commitPlacement({id},{kind:'hang'},revision);
-  const before=snapshot;const r=await save(changeStatus({...snapshot,clips:captureClipPositions(snapshot.clips,width,'all',shelfCapacity(snapshot.settings.shelfCapacity))},id,status,new Date().toISOString()),revision);
+  const before=snapshot,point=paperNoticePoint(id);const r=await save(changeStatus({...snapshot,clips:captureClipPositions(snapshot.clips,width,'all',shelfCapacity(snapshot.settings.shelfCapacity))},id,status,new Date().toISOString()),revision);
   if(r.ok&&before.ideas.find(i=>i.id===id)?.status!==status)undoClips={snapshot:before,revision:snapshot.revision,command:'archiveIdea'};
-  if(r.ok){setPlacementNotice(null);edge.event({type:'peek',now:Date.now()});publish();}return r;
+  if(r.ok){if(before.ideas.find(i=>i.id===id)?.status==='hanging')setPlacementNotice(t('已收起日期',{date:formatShelfDay(ideaDay(before.ideas.find(i=>i.id===id)!),preferences.current.locale)}),false,id,point);else setPlacementNotice(null);edge.event({type:'peek',now:Date.now()});publish();}return r;
   });
  });
  ipcMain.handle('thoughtline:agent',(e,c:AgentMutation,revision:number)=>{
@@ -608,7 +666,7 @@ else app.whenReady().then(async()=>{
  });
  const applyClipChange=(c:ClipMutation,revision:number)=>composerWrite(async()=>{
   if(revision!==snapshot.revision)return {ok:false,code:'CONFLICT',message:t("布局已变化，请重新操作。")};
-  const previous=snapshot,oldUndo=undoClips;let next:Result<Snapshot>;
+  const previous=snapshot,oldUndo=undoClips,noticePoint=('ideaId' in c?paperNoticePoint(c.ideaId):null);let next:Result<Snapshot>;
   const positioned=()=>({...snapshot,clips:captureShelfPositions()});
   if(c.kind==='arrange')next=arrangeClips(snapshot,width);
   else if(c.kind==='archiveIdea'&&typeof c.ideaId==='string')next=changeStatus(positioned(),c.ideaId,'archived',new Date().toISOString());
@@ -628,15 +686,15 @@ else app.whenReady().then(async()=>{
   }else return invalid(t("夹子操作无效"));
   const repositioned=next.ok&&['split','splitAll','undo'].includes(c.kind)&&next.value.clips.some(clip=>{const old=previous.clips.find(old=>old.id===clip.id);return old&&old.position!==clip.position;});
   const r=await save(next,revision,()=>{if(c.kind==='arrange'||c.kind==='undo'&&oldUndo?.positionsOnly||repositioned)arrangeSession++;},c.kind!=='undo');
-  if(r.ok){setPlacementNotice(['arrange','split','splitAll'].includes(c.kind)&&layoutClips(snapshot.clips,width,shelfCapacity(snapshot.settings.shelfCapacity)).overflow.length?t("已保存，绳上暂时放不下，可在念头日历查看"):null);if(c.kind==='split'){manageSelection=c.ideaId;manageSession++;}undoClips=c.kind==='undo'?null:c.kind==='select'?(oldUndo?{...oldUndo,revision:r.value.revision}:null):{snapshot:previous,revision:r.value.revision,positionsOnly:c.kind==='arrange',command:c.kind};publish();}
+  if(r.ok){setPlacementNotice(['arrange','split','splitAll'].includes(c.kind)&&layoutClips(snapshot.clips,width,shelfCapacity(snapshot.settings.shelfCapacity)).overflow.length?t("已保存，绳上暂时放不下，可在念头日历查看"):null);if(c.kind==='archiveIdea')setPlacementNotice(t('已收起日期',{date:formatShelfDay(ideaDay(previous.ideas.find(i=>i.id===c.ideaId)!),preferences.current.locale)}),false,c.ideaId,noticePoint);if(c.kind==='mergeTarget'&&snapshot.ideas.find(i=>i.id===c.targetIdeaId)?.status==='archived')setPlacementNotice(t('已合并到日历'),false,c.targetIdeaId,noticePoint);if(c.kind==='split'&&manageMode==='detail'){manageSelection=c.ideaId;manageSession++;}undoClips=c.kind==='undo'?null:c.kind==='select'?(oldUndo?{...oldUndo,revision:r.value.revision}:null):{snapshot:previous,revision:r.value.revision,positionsOnly:c.kind==='arrange',command:c.kind};publish();}
   return r;
  });
  ipcMain.handle('thoughtline:clip',async(e,c:ClipMutation,revision:number)=>{
   if(!trusted(e,[shelf,manage])||!c||typeof c!=='object')return invalid(t('无效操作'));
   return applyClipChange(c,revision);
  });
- ipcMain.handle('thoughtline:close-shelf-merge-picker',e=>{if(!trusted(e,[shelf]))return invalid(t('无效操作'));closeMergePicker();return done();});
- ipcMain.handle('thoughtline:merge-target',async(e,targetId:string,revision:number,session:number)=>{if(!trusted(e,[shelf])||!shelfMergePicker||session!==shelfMergePicker.session||typeof targetId!=='string'||mergePickerBusy)return invalid(t('无效操作'));const context=shelfMergePicker;if(!await prepareViews()||shelfMergePicker?.session!==session)return invalid(t('最后修改尚未保存，窗口已保留。'));mergePickerBusy=true;try{const r=await applyClipChange({kind:'mergeTarget',ideaId:context.sourceId,targetIdeaId:targetId},revision);if(r.ok){mergePickerBusy=false;closeMergePicker();}return r;}finally{mergePickerBusy=false;}});
+ ipcMain.handle('thoughtline:close-shelf-merge-picker',e=>{if(!trusted(e,[shelf,picker]))return invalid(t('无效操作'));closeMergePicker();return done();});
+ ipcMain.handle('thoughtline:merge-target',async(e,targetId:string,revision:number,session:number)=>{if(!trusted(e,[shelf,picker])||!shelfMergePicker||session!==shelfMergePicker.session||typeof targetId!=='string'||mergePickerBusy)return invalid(t('无效操作'));const context=shelfMergePicker;if(!await prepareViews()||shelfMergePicker?.session!==session)return invalid(t('最后修改尚未保存，窗口已保留。'));mergePickerBusy=true;try{const r=await applyClipChange({kind:'mergeTarget',ideaId:context.sourceId,targetIdeaId:targetId},revision);if(r.ok){mergePickerBusy=false;closeMergePicker();}return r;}finally{mergePickerBusy=false;}});
  await loadView(shelf,'shelf');
  globalShortcut.register(snapshot.settings.writeHotkey,()=>{openComposer();});
  const trayPath=join(__dirname,'../../assets/'+(process.platform==='darwin'?'trayTemplate.png':'tray-win.ico'));

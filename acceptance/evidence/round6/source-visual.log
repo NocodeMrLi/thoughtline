@@ -1,0 +1,13 @@
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert((await shelf.evaluate(({locale,theme,seq})=>window.thoughtline.setPreferences({locale,theme},seq),{locale,theme,seq:seq++})).ok)
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round6-picker-workflow.cjs:3:611 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+CI FIXTURE {"file":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round6-picker-workflow.cjs","pid":88152,"passed":false,"timedOut":false,"code":1}

@@ -3,6 +3,7 @@ import {newerPreferences} from '../shared/preferences';
 import {useEffect,useLayoutEffect,useRef,useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import type {PilotInfo} from '../shared/bridge';
+import {PickerHost} from './components/PickerHost';
 import {Shelf} from './components/Shelf';
 import {Composer} from './components/Composer';
 import {ClassificationManager} from './components/ClassificationManager';
@@ -27,6 +28,6 @@ function App(){
  useEffect(()=>{if(info){document.documentElement.lang=info.preferences.locale;document.documentElement.dataset.theme=info.dark?'dark':'light';document.documentElement.dataset.platform=info.platform;document.documentElement.dataset.motion=info.snapshot.settings.reducedMotion?'reduce':'normal';}},[info?.preferences.locale,info?.dark,info?.platform,info?.snapshot.settings.reducedMotion]);
  useLayoutEffect(()=>{if(!info||new URLSearchParams(location.search).get('view')!=='manage')return;const frame=requestAnimationFrame(()=>window.thoughtline.viewReady(info.manageSession,info.manageMode,info.manageReadyRequest??0));return()=>cancelAnimationFrame(frame);},[info?.manageSession,info?.manageMode,info?.manageReadyRequest]);
  if(!info)return null;if(remembered.current.visit!==info.manageVisit)remembered.current={visit:info.manageVisit??-1};const visit=remembered.current;const view=new URLSearchParams(location.search).get('view');
- return <LocaleProvider locale={info.preferences.locale}>{view==='composer'?<Composer key={info.composerSession} info={info}/>:view==='manage'?(info.manageMode==='settings'?<Settings info={info} restore={visit.settings} onRemember={draft=>{visit.settings=draft;}}/>:info.manageMode==='classification'?<ClassificationManager key={info.manageSession} info={info}/>:info.manageMode==='detail'?<Detail info={info}/>:<Calendar info={info} restore={info.calendarReturning?visit.calendar:undefined} onRemember={state=>{visit.calendar=state;}}/>):<Shelf info={info}/>}</LocaleProvider>;
+ return <LocaleProvider locale={info.preferences.locale}>{view==='picker'?<PickerHost info={info}/>:view==='composer'?<Composer key={info.composerSession} info={info}/>:view==='manage'?(info.manageMode==='settings'?<Settings info={info} restore={visit.settings} onRemember={draft=>{visit.settings=draft;}}/>:info.manageMode==='classification'?<ClassificationManager key={info.manageSession} info={info}/>:info.manageMode==='detail'?<Detail info={info}/>:<Calendar info={info} restore={info.calendarReturning?visit.calendar:undefined} onRemember={state=>{visit.calendar=state;}}/>):<Shelf info={info}/>}</LocaleProvider>;
 }
 createRoot(document.getElementById('root')!).render(<App/>);

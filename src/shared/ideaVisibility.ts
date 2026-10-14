@@ -24,3 +24,18 @@ export function onLineIdeaIds(s:Snapshot,width:number,shelfAgentId='all',project
  const filtered=shelfAgentId==='all'&&project===null?[]:layoutClips(filteredClips(s,{agentId:shelfAgentId,project}),width,shelfCapacity(s.settings.shelfCapacity)).visible;
  return new Set([...shown,...filtered].flatMap(p=>p.clip.ideaIds));
 }
+
+/** Query locates labels, never becomes a persistent paper filter. */
+export function filterTagSearch(s:Snapshot,project:string|null,query:string,names?:ReadonlyMap<string,string>):{tag:AgentTag;match?:Snapshot['ideas'][number]}[]{
+ const needle=query.trim().toLocaleLowerCase(),tags=filterTagOptions(s,project);
+ if(!needle)return tags.map(tag=>({tag}));
+ const eligible=new Set(s.clips.flatMap(c=>matchingClipIds(s,c,{project,agentId:'all'})));
+ return tags.flatMap(tag=>{
+  const members=s.ideas.filter(i=>eligible.has(i.id)&&i.agentId===tag.id),tagHit=[tag.name,names?.get(tag.id)??''].some(n=>n.toLocaleLowerCase().includes(needle));
+  const titleHits=members.filter(i=>i.title.toLocaleLowerCase().includes(needle)),bodyHits=members.filter(i=>i.text.toLocaleLowerCase().includes(needle));
+  const tier=tagHit?0:titleHits.length?1:2,candidates=tagHit?members:titleHits.length?titleHits:bodyHits;
+  if(!candidates.length)return [];
+  const match=[...candidates].sort((a,b)=>Date.parse(b.createdAt)-Date.parse(a.createdAt)||a.id.localeCompare(b.id))[0];
+  return [{tag,match,tier,time:Date.parse(match.createdAt)}];
+ }).sort((a,b)=>a.tier-b.tier||b.time-a.time||a.tag.id.localeCompare(b.tag.id)).map(({tag,match})=>({tag,match}));
+}
