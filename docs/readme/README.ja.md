@@ -9,24 +9,27 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/preview.svg" alt="Version: 0.0.35" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="badges/preview.svg" alt="Version: 0.0.36" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="GitHub Issues" /></a>
 </p>
 
 <p align="center"><sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub></p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35">Thoughtline をダウンロード</a></h2>
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.35</sub></p>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36">Thoughtline をダウンロード</a></h2>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.36</sub></p>
 
 Thoughtline（晾念头）は macOS と Windows 向けのデスクトップメモアプリです。画面上端にポインターを移すとロープとメモが現れ、離すと収納されます。今使う文章は色付きクリップに、ほかのメモはグループ、タグ、カレンダーで整理できます。
 
+<p align="center"><strong>クリックしてコピー　·　チャットへテキストをドラッグ</strong></p>
 <p align="center">
-  <a href="demos/vine-overview.gif"><img src="demos/vine-overview.gif" alt="上端で表示 → 全文を読む → コピー → しまう" width="960" /></a><br />
-  <sub>上端で表示 → 全文を読む → コピー → しまう · <a href="demos/vine-overview.png">静止画を見る</a></sub>
+  <a href="demos/en/vine-overview.gif"><img src="demos/en/vine-overview.gif" alt="クリックしてコピー" width="48%" /></a>
+  <a href="demos/en/text-drag.gif"><img src="demos/en/text-drag.gif" alt="チャットへテキストをドラッグ" width="48%" /></a>
 </p>
+<p align="center"><sub>クリックしてコピー · <a href="demos/en/vine-overview.png">静止画</a>　｜　チャットへテキストをドラッグ · <a href="demos/en/text-drag.png">静止画</a></sub></p>
+<p align="center"><a href="#real-interface">実際の画面を見る</a></p>
 
-<p align="center"><sub>デモは蔓の外観、架空のメモ、中国語の画面を使用しています。</sub></p>
+<p align="center"><sub>デモは模擬macOSデスクトップ、蔓、架空のメモ、英語の画面を使用しています。メニューは製品の構成に対応し、チャット入力欄は説明用です。</sub></p>
 
 ## こんなメモに
 
@@ -41,14 +44,16 @@ Thoughtline（晾念头）は macOS と Windows 向けのデスクトップメ�
 3. **使う**：全文を開いて読み、編集、コピー、別アプリへのドラッグを行います。
 4. **振り返る**：使わないメモはカレンダーに収納し、日付や検索から探します。
 
+メニューバー／トレイにはホバーの一時停止・再開と終了を用意しています。新規作成はショートカットや紙のメニュー、設定はカレンダーのその他メニューから開けます。
+
 ## できること
 
 <p align="center"><strong>すぐにメモ　·　ドラッグで重ねる</strong></p>
 <p align="center">
-  <a href="demos/quick-capture.gif"><img src="demos/quick-capture.gif" alt="すぐにメモ" width="48%" /></a>
-  <a href="demos/drag-stack.gif"><img src="demos/drag-stack.gif" alt="ドラッグで重ねる" width="48%" /></a>
+  <a href="demos/en/quick-capture.gif"><img src="demos/en/quick-capture.gif" alt="すぐにメモ" width="48%" /></a>
+  <a href="demos/en/drag-stack.gif"><img src="demos/en/drag-stack.gif" alt="ドラッグで重ねる" width="48%" /></a>
 </p>
-<p align="center"><sub>すぐにメモ · <a href="demos/quick-capture.png">静止画を見る</a>　｜　ドラッグで重ねる · <a href="demos/drag-stack.png">静止画を見る</a></sub></p>
+<p align="center"><sub>すぐにメモ · <a href="demos/en/quick-capture.png">静止画を見る</a>　｜　ドラッグで重ねる · <a href="demos/en/drag-stack.png">静止画を見る</a></sub></p>
 
 ### メモと下書きを残す
 
@@ -59,8 +64,8 @@ Thoughtline（晾念头）は macOS と Windows 向けのデスクトップメ�
 仕事、生活、プロジェクトをグループで分け、テーマや用途をタグで示します。フィルターは独立し、併用時は両方に一致するメモを表示します。重なりや位置を保ったまま表示を絞り、タグ名、メモのタイトル、本文の単語からタグを探せます。
 
 <p align="center">
-  <a href="demos/groups-and-tags.gif"><img src="demos/groups-and-tags.gif" alt="グループを選ぶ → タグで絞り込む → すべて表示" width="900" /></a><br />
-  <sub>グループを選ぶ → タグで絞り込む → すべて表示 · <a href="demos/groups-and-tags.png">静止画を見る</a></sub>
+  <a href="demos/en/groups-and-tags.gif"><img src="demos/en/groups-and-tags.gif" alt="グループを選ぶ → タグで絞り込む → すべて表示" width="800" /></a><br />
+  <sub>グループを選ぶ → タグで絞り込む → すべて表示 · <a href="demos/en/groups-and-tags.png">静止画を見る</a></sub>
 </p>
 
 ### 紙を重ねて一枚ずつ読む
@@ -76,8 +81,8 @@ Thoughtline（晾念头）は macOS と Windows 向けのデスクトップメ�
 日・月・年を閲覧し、タイトル、本文、グループ、タグや状態で検索します。吊るした紙の日付から対応するメモへ移動できます。束は実際の枚数を表示し、各紙はそれぞれの作成日から見つかります。
 
 <p align="center">
-  <a href="demos/calendar-revisit.gif"><img src="demos/calendar-revisit.gif" alt="紙の日付をクリック → メモの場所へ → 全文を開く" width="900" /></a><br />
-  <sub>紙の日付をクリック → メモの場所へ → 全文を開く · <a href="demos/calendar-revisit.png">静止画を見る</a></sub>
+  <a href="demos/en/calendar-revisit.gif"><img src="demos/en/calendar-revisit.gif" alt="紙の日付をクリック → メモの場所へ → 全文を開く" width="800" /></a><br />
+  <sub>紙の日付をクリック → メモの場所へ → 全文を開く · <a href="demos/en/calendar-revisit.png">静止画を見る</a></sub>
 </p>
 
 ### 全文を取り出す
@@ -98,12 +103,12 @@ Thoughtline（晾念头）は macOS と Windows 向けのデスクトップメ�
 
 ## ダウンロードとインストール
 
-現在のバージョンは **0.0.35**。リポジトリの Releases から配布しており、ダウンロードにはアクセス権が必要です。
+現在のバージョンは **0.0.36**。リポジトリの Releases から配布しており、ダウンロードにはアクセス権が必要です。
 
 | プラットフォーム | インストーラー |
 | --- | --- |
-| macOS · Apple Silicon | [Thoughtline-0.0.35-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
-| Windows · x64 | [Thoughtline-0.0.35-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
+| macOS · Apple Silicon | [Thoughtline-0.0.36-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
+| Windows · x64 | [Thoughtline-0.0.36-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
 
 Mac は DMG を開いて Thoughtline をアプリケーションへ移動します。Windows は EXE を実行します。更新前に旧版を通常終了し、独立したバックアップを残してください。更新は手動ダウンロードです。
 
@@ -116,11 +121,20 @@ Mac 版は ad-hoc 署名付きですが公証されていません。Windows 版
 3. 画面上端からロープを呼び出し、紙を開いて全文を読みます。右クリックで新規作成、絞り込み、カレンダー、整理へ進めます。
 4. カレンダーのその他メニューに「最近删除」「分组与标签」「存储与设置」があります。
 
+<a id="real-interface"></a>
+
 ## デスクトップに合わせた見た目
 
 外観設定でクラシックな細い紐、編み込みコットン、軽い蔓を選べます。細い紐は色を変更でき、コットンと蔓は自然な色を保ちます。クリップはタグの色に合わせます。
 
 紙は五つの柔らかな色と、無地・横罫線・破線を選べます。プレビュー後に適用してください。画面は中国語／英語、ライト／ダーク／システム設定に対応します。
+
+
+<p align="center">
+  <a href="screenshots/desktop-dark-zh.png"><img src="screenshots/desktop-dark-zh.png" alt="ダークテーマ · 中国語の画面" width="48%" /></a>
+  <a href="screenshots/desktop-light-en.png"><img src="screenshots/desktop-light-en.png" alt="ライトテーマ · 英語の画面" width="48%" /></a>
+</p>
+<p align="center"><sub>ダークテーマ · 中国語の画面　｜　ライトテーマ · 英語の画面<br />macOSでの実際の表示。Windowsはシステムにより多少異なりますが、機能は同じです。</sub></p>
 
 ## データ、書き出し、削除
 

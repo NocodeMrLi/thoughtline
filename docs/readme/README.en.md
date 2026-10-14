@@ -9,24 +9,27 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/preview.svg" alt="Version: 0.0.35" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="badges/preview.svg" alt="Version: 0.0.36" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="GitHub Issues" /></a>
 </p>
 
 <p align="center"><sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub></p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35">Download Thoughtline</a></h2>
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.35</sub></p>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36">Download Thoughtline</a></h2>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.36</sub></p>
 
 Thoughtline is a desktop note app for macOS and Windows. Move the pointer to the top edge to reveal a rope and its notes; move away to tuck them back. Keep what you need on colored clips, and use groups, tags, and a calendar to find the rest.
 
+<p align="center"><strong>Click to copy　·　Drag text into chat</strong></p>
 <p align="center">
-  <a href="demos/vine-overview.gif"><img src="demos/vine-overview.gif" alt="Reveal → Read the full note → Copy → Tuck away" width="960" /></a><br />
-  <sub>Reveal → Read the full note → Copy → Tuck away · <a href="demos/vine-overview.png">Still preview</a></sub>
+  <a href="demos/en/vine-overview.gif"><img src="demos/en/vine-overview.gif" alt="Click to copy" width="48%" /></a>
+  <a href="demos/en/text-drag.gif"><img src="demos/en/text-drag.gif" alt="Drag text into chat" width="48%" /></a>
 </p>
+<p align="center"><sub>Click to copy · <a href="demos/en/vine-overview.png">Still preview</a>　｜　Drag text into chat · <a href="demos/en/text-drag.png">Still preview</a></sub></p>
+<p align="center"><a href="#real-interface">View the real interface</a></p>
 
-<p align="center"><sub>Demos use the vine style, fictional sample notes, and the Chinese interface.</sub></p>
+<p align="center"><sub>Demos use a simulated macOS desktop, a vine, fictional notes, and the English interface. Menus follow the product structure; the chat input is illustrative.</sub></p>
 
 ## A place for everyday thoughts
 
@@ -41,14 +44,16 @@ Thoughtline is a desktop note app for macOS and Windows. Move the pointer to the
 3. **Use**: open the full text to read, edit, copy, or drag it into another app.
 4. **Revisit**: put a note away in the calendar and find it again by date or search.
 
+The menu-bar or tray icon offers Pause hover, Resume hover, and Quit. Create notes with the shortcut or paper menu; filters and calendar remain in the paper menu, and settings in the calendar More menu.
+
 ## What you can do
 
 <p align="center"><strong>Quick capture　·　Drag to stack</strong></p>
 <p align="center">
-  <a href="demos/quick-capture.gif"><img src="demos/quick-capture.gif" alt="Quick capture" width="48%" /></a>
-  <a href="demos/drag-stack.gif"><img src="demos/drag-stack.gif" alt="Drag to stack" width="48%" /></a>
+  <a href="demos/en/quick-capture.gif"><img src="demos/en/quick-capture.gif" alt="Quick capture" width="48%" /></a>
+  <a href="demos/en/drag-stack.gif"><img src="demos/en/drag-stack.gif" alt="Drag to stack" width="48%" /></a>
 </p>
-<p align="center"><sub>Quick capture · <a href="demos/quick-capture.png">Still preview</a>　｜　Drag to stack · <a href="demos/drag-stack.png">Still preview</a></sub></p>
+<p align="center"><sub>Quick capture · <a href="demos/en/quick-capture.png">Still preview</a>　｜　Drag to stack · <a href="demos/en/drag-stack.png">Still preview</a></sub></p>
 
 ### Capture a thought and keep a draft
 
@@ -59,8 +64,8 @@ A title or body is enough to save a note. Unsubmitted text can stay as a draft. 
 Use groups for work, life, or projects, and tags for topics, roles, or purposes. Filters work independently; combining them shows notes matching both. They change the view while preserving stack relationships and positions. Find tags by tag name, note title, or words in the body.
 
 <p align="center">
-  <a href="demos/groups-and-tags.gif"><img src="demos/groups-and-tags.gif" alt="Choose a group → Filter by tag → Show all" width="900" /></a><br />
-  <sub>Choose a group → Filter by tag → Show all · <a href="demos/groups-and-tags.png">Still preview</a></sub>
+  <a href="demos/en/groups-and-tags.gif"><img src="demos/en/groups-and-tags.gif" alt="Choose a group → Filter by tag → Show all" width="800" /></a><br />
+  <sub>Choose a group → Filter by tag → Show all · <a href="demos/en/groups-and-tags.png">Still preview</a></sub>
 </p>
 
 ### Stack papers and read each one
@@ -76,8 +81,8 @@ Search compatible rope or calendar targets in the merge panel. A stack merged in
 Browse by day, month, or year; search titles, text, groups, and tags, or filter by status. Click a rope note’s date to locate it in the calendar. Stack cards show the actual paper count. Each member remains discoverable on its own creation date.
 
 <p align="center">
-  <a href="demos/calendar-revisit.gif"><img src="demos/calendar-revisit.gif" alt="Click the paper’s date → Locate the note → Open the full text" width="900" /></a><br />
-  <sub>Click the paper’s date → Locate the note → Open the full text · <a href="demos/calendar-revisit.png">Still preview</a></sub>
+  <a href="demos/en/calendar-revisit.gif"><img src="demos/en/calendar-revisit.gif" alt="Click the paper’s date → Locate the note → Open the full text" width="800" /></a><br />
+  <sub>Click the paper’s date → Locate the note → Open the full text · <a href="demos/en/calendar-revisit.png">Still preview</a></sub>
 </p>
 
 ### Take the full text with you
@@ -98,12 +103,12 @@ Manage, rename, remove from selection, and restore groups or tags. Deletion defa
 
 ## Download and install
 
-The current version is **0.0.35**, distributed through repository Releases. Downloads require repository access.
+The current version is **0.0.36**, distributed through repository Releases. Downloads require repository access.
 
 | Platform | Installer |
 | --- | --- |
-| macOS · Apple Silicon | [Thoughtline-0.0.35-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
-| Windows · x64 | [Thoughtline-0.0.35-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
+| macOS · Apple Silicon | [Thoughtline-0.0.36-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
+| Windows · x64 | [Thoughtline-0.0.36-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
 
 On Mac, open the DMG and drag Thoughtline into Applications. On Windows, run the EXE installer. Quit the old app normally and keep an independent backup before upgrading. Updates are downloaded manually.
 
@@ -113,14 +118,23 @@ The Mac package uses an ad-hoc signature and is not notarized. The Windows packa
 
 1. Press `Control + Alt + N` to create a note; on Mac, `⌃ + ⌥ + N`. Change this shortcut in settings.
 2. `Enter` adds a line. Submit with `⌘ + Enter` on Mac or `Ctrl + Enter` on Windows. In the new-note window, `Esc` saves the draft and closes the window.
-3. Move to the top edge to reveal the rope. Open a paper to read its full text; right-click for new notes, filters, calendar, or organization.
+3. Move to the top edge to reveal the rope. Click its text to copy; use the expand icon to read the full note. Right-click for new notes, filters, calendar, or organization.
 4. The calendar’s More menu contains Recently Deleted, Groups and Tags, and Storage and Settings.
+
+<a id="real-interface"></a>
 
 ## Make the rope your own
 
 In Storage and Settings → Appearance, choose a classic cord, braided cotton, or a light vine. The classic cord supports custom colors; cotton and vine keep their natural tones. Clip colors follow tags.
 
 Pick from five soft paper colors and blank, ruled, or dashed paper. Preview first, then Apply. Switch the interface between Chinese and English, light and dark, or follow the system.
+
+
+<p align="center">
+  <a href="screenshots/desktop-dark-zh.png"><img src="screenshots/desktop-dark-zh.png" alt="Dark theme · Chinese interface" width="48%" /></a>
+  <a href="screenshots/desktop-light-en.png"><img src="screenshots/desktop-light-en.png" alt="Light theme · English interface" width="48%" /></a>
+</p>
+<p align="center"><sub>Dark theme · Chinese interface　｜　Light theme · English interface<br />Actual macOS appearance. Windows differs slightly with the system; functionality is the same.</sub></p>
 
 ## Data, exports, and deletion
 

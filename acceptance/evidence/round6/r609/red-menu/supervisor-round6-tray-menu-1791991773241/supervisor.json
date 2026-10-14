@@ -1,0 +1,16 @@
+{
+  "file": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round6-tray-menu.cjs",
+  "args": [],
+  "timeoutMs": 180000,
+  "startedAt": "2026-10-14T15:29:33.242Z",
+  "passed": false,
+  "timedOut": false,
+  "profileCleanup": "Delegated to fixture; supervisor never deletes data",
+  "pid": 91238,
+  "code": 1,
+  "signal": null,
+  "closeConfirmed": true,
+  "stdout": "{\"passed\":false,\"checks\":0,\"normalQuit\":true,\"cleaned\":true}\n",
+  "stderr": "AssertionError [ERR_ASSERTION]: only pause, separator and quit are offered\n+ actual - expected\n\n  [\n+   '晾念头 / Thoughtline',\n+   '写念头：⌃⌥⇧F19',\n+   '',\n+   'Thoughtline 日历',\n+   '筛选标签…',\n+   '显示全部',\n+   '设置',\n    '暂停悬停',\n-   '',\n    '退出'\n  ]\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round6-tray-menu.cjs:21:33 {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: [Array],\n  expected: [Array],\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n",
+  "completedAt": "2026-10-14T15:29:35.131Z"
+}

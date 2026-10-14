@@ -9,24 +9,27 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="docs/readme/badges/preview.svg" alt="Version: 0.0.35" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="docs/readme/badges/platforms.svg" alt="macOS · Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="docs/readme/badges/preview.svg" alt="Version: 0.0.36" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="docs/readme/badges/platforms.svg" alt="macOS · Windows" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="docs/readme/badges/feedback.svg" alt="GitHub Issues" /></a>
 </p>
 
 <p align="center"><sub><a href="README.md">中文</a> · <a href="docs/readme/README.en.md">English</a> · <a href="docs/readme/README.ja.md">日本語</a> · <a href="docs/readme/README.ko.md">한국어</a> · <a href="docs/readme/README.es.md">Español</a> · <a href="docs/readme/README.fr.md">Français</a> · <a href="docs/readme/README.pt.md">Português</a></sub></p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35">下载 Thoughtline</a></h2>
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.35</sub></p>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36">下载 Thoughtline</a></h2>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.36</sub></p>
 
 Thoughtline（晾念头）是一款 macOS 与 Windows 桌面便签工具。鼠标移到屏幕顶边，藤蔓和便签就会展开；离开后收起，桌面继续留给手头的工作。用几只彩色夹子挂住眼前需要的内容，再用分组、标签和日历保存更多念头。
 
+<p align="center"><strong>点击一键复制　·　拖入聊天输入框</strong></p>
 <p align="center">
-  <a href="docs/readme/demos/vine-overview.gif"><img src="docs/readme/demos/vine-overview.gif" alt="顶边展开 → 浏览全文 → 复制 → 收起" width="960" /></a><br />
-  <sub>顶边展开 → 浏览全文 → 复制 → 收起 · <a href="docs/readme/demos/vine-overview.png">静态预览</a></sub>
+  <a href="docs/readme/demos/zh/vine-overview.gif"><img src="docs/readme/demos/zh/vine-overview.gif" alt="点击一键复制" width="48%" /></a>
+  <a href="docs/readme/demos/zh/text-drag.gif"><img src="docs/readme/demos/zh/text-drag.gif" alt="拖入聊天输入框" width="48%" /></a>
 </p>
+<p align="center"><sub>点击一键复制 · <a href="docs/readme/demos/zh/vine-overview.png">静态预览</a>　｜　拖入聊天输入框 · <a href="docs/readme/demos/zh/text-drag.png">静态预览</a></sub></p>
+<p align="center"><a href="#real-interface">查看真实界面</a></p>
 
-<p align="center"><sub>演示使用藤蔓外观与虚构示例念头。</sub></p>
+<p align="center"><sub>演示采用模拟 macOS 桌面、藤蔓和虚构念头；菜单对应实际产品结构，聊天输入框为示意。</sub></p>
 
 ## 适合留住这些念头
 
@@ -38,17 +41,19 @@ Thoughtline（晾念头）是一款 macOS 与 Windows 桌面便签工具。鼠�
 
 1. **写下**：用快捷键或便签右键打开新建窗，填写名称或正文，选择分组、标签。
 2. **晾起**：把眼前需要的念头挂在顶边；相关纸张可以叠在同一夹子里。
-3. **取用**：展开纸张查看全文、编辑、复制，或把正文拖到其他软件。
+3. **取用**：点击便签正文一键复制；用展开图标阅读全文、编辑，或把正文拖到其他软件。
 4. **回看**：暂时不用就收起到日历，之后按日期或搜索找回。
+
+菜单栏／托盘图标提供暂停悬停、恢复悬停和退出；新建、筛选与日历使用快捷键或便签右击菜单，设置在日历更多菜单中。
 
 ## 可以做什么
 
 <p align="center"><strong>快速新建　·　拖动叠放</strong></p>
 <p align="center">
-  <a href="docs/readme/demos/quick-capture.gif"><img src="docs/readme/demos/quick-capture.gif" alt="快速新建" width="48%" /></a>
-  <a href="docs/readme/demos/drag-stack.gif"><img src="docs/readme/demos/drag-stack.gif" alt="拖动叠放" width="48%" /></a>
+  <a href="docs/readme/demos/zh/quick-capture.gif"><img src="docs/readme/demos/zh/quick-capture.gif" alt="快速新建" width="48%" /></a>
+  <a href="docs/readme/demos/zh/drag-stack.gif"><img src="docs/readme/demos/zh/drag-stack.gif" alt="拖动叠放" width="48%" /></a>
 </p>
-<p align="center"><sub>快速新建 · <a href="docs/readme/demos/quick-capture.png">静态预览</a>　｜　拖动叠放 · <a href="docs/readme/demos/drag-stack.png">静态预览</a></sub></p>
+<p align="center"><sub>快速新建 · <a href="docs/readme/demos/zh/quick-capture.png">静态预览</a>　｜　拖动叠放 · <a href="docs/readme/demos/zh/drag-stack.png">静态预览</a></sub></p>
 
 ### 随手记录，保留草稿
 
@@ -59,8 +64,8 @@ Thoughtline（晾念头）是一款 macOS 与 Windows 桌面便签工具。鼠�
 用分组区分工作、生活或不同项目，用标签标记主题、角色或用途。两种筛选独立，同时启用时只显示两者都匹配的念头；筛选只改变展示，保留真实叠放关系和位置。标签面板支持从标签名、念头名称和正文关键词查找对应标签。
 
 <p align="center">
-  <a href="docs/readme/demos/groups-and-tags.gif"><img src="docs/readme/demos/groups-and-tags.gif" alt="只看分组 → 筛选标签 → 显示全部" width="900" /></a><br />
-  <sub>只看分组 → 筛选标签 → 显示全部 · <a href="docs/readme/demos/groups-and-tags.png">静态预览</a></sub>
+  <a href="docs/readme/demos/zh/groups-and-tags.gif"><img src="docs/readme/demos/zh/groups-and-tags.gif" alt="只看分组 → 筛选标签 → 显示全部" width="800" /></a><br />
+  <sub>只看分组 → 筛选标签 → 显示全部 · <a href="docs/readme/demos/zh/groups-and-tags.png">静态预览</a></sub>
 </p>
 
 ### 多张纸叠放，逐张阅读
@@ -76,8 +81,8 @@ Thoughtline（晾念头）是一款 macOS 与 Windows 桌面便签工具。鼠�
 日历提供日、月、年浏览，以及名称、正文、分组和标签搜索、状态筛选。点击挂绳便签的日期，可定位对应念头。叠放卡片显示真实张数；成员保留各自创建日期，跨日期的纸张仍能从原日期找到。
 
 <p align="center">
-  <a href="docs/readme/demos/calendar-revisit.gif"><img src="docs/readme/demos/calendar-revisit.gif" alt="点击纸张日期 → 定位念头 → 展开全文" width="900" /></a><br />
-  <sub>点击纸张日期 → 定位念头 → 展开全文 · <a href="docs/readme/demos/calendar-revisit.png">静态预览</a></sub>
+  <a href="docs/readme/demos/zh/calendar-revisit.gif"><img src="docs/readme/demos/zh/calendar-revisit.gif" alt="点击纸张日期 → 定位念头 → 展开全文" width="800" /></a><br />
+  <sub>点击纸张日期 → 定位念头 → 展开全文 · <a href="docs/readme/demos/zh/calendar-revisit.png">静态预览</a></sub>
 </p>
 
 ### 复制全文，随手取用
@@ -98,12 +103,12 @@ Thoughtline（晾念头）是一款 macOS 与 Windows 桌面便签工具。鼠�
 
 ## 下载与安装
 
-当前版本为 **0.0.35**，通过仓库 Releases 分发；下载需要相应仓库访问权限。
+当前版本为 **0.0.36**，通过仓库 Releases 分发；下载需要相应仓库访问权限。
 
 | 平台 | 安装包 |
 | --- | --- |
-| macOS · Apple Silicon | [Thoughtline-0.0.35-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
-| Windows · x64 | [Thoughtline-0.0.35-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
+| macOS · Apple Silicon | [Thoughtline-0.0.36-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
+| Windows · x64 | [Thoughtline-0.0.36-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
 
 Mac 打开 DMG，将 Thoughtline 拖入“应用程序”；Windows 运行 EXE，按安装向导完成。升级前正常退出旧版，并保留独立备份。当前手动下载更新。
 
@@ -113,14 +118,23 @@ Mac 安装包使用本地 ad-hoc 签名，尚未公证；Windows 安装包未进
 
 1. 按 `Control + Alt + N` 新建念头；Mac 为 `⌃ + ⌥ + N`。快捷键可在设置中修改。
 2. `Enter` 换行；Mac 用 `⌘ + Enter` 提交，Windows 用 `Ctrl + Enter` 提交。新建窗按 `Esc` 保存草稿并关闭。
-3. 鼠标移到屏幕顶边呼出挂绳，点击展开图标阅读全文；右键进入新建、筛选、日历或整理。
+3. 鼠标移到屏幕顶边呼出挂绳，点击正文一键复制，点击展开图标阅读全文；右键进入新建、筛选、日历或整理。
 4. 日历右上角更多菜单提供“最近删除”“分组与标签”“存储与设置”。
+
+<a id="real-interface"></a>
 
 ## 给桌面一点自己的风格
 
 在“存储与设置 → 外观”选择经典细绳、编织棉绳或轻藤蔓。经典细绳可调色，棉绳和藤蔓保留各自的自然色；夹子颜色跟随标签。
 
 纸张提供五种柔和预设颜色，以及空白、细横线、轻虚线。先预览，点击“应用”再保存。界面可切换中文／English、浅色／深色，或跟随系统。
+
+
+<p align="center">
+  <a href="docs/readme/screenshots/desktop-dark-zh.png"><img src="docs/readme/screenshots/desktop-dark-zh.png" alt="深色主题 · 中文界面" width="48%" /></a>
+  <a href="docs/readme/screenshots/desktop-light-en.png"><img src="docs/readme/screenshots/desktop-light-en.png" alt="浅色主题 · English 界面" width="48%" /></a>
+</p>
+<p align="center"><sub>深色主题 · 中文界面　｜　浅色主题 · English 界面<br />macOS 实际效果；Windows 因系统略有差异，功能一致。</sub></p>
 
 ## 数据、导出与删除
 

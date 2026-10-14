@@ -1,0 +1,15 @@
+{
+  "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-r609-tray-58TR7o",
+  "platform": "darwin",
+  "packaged": false,
+  "checks": [],
+  "pids": [
+    91146,
+    91151,
+    91152,
+    91156
+  ],
+  "normalQuit": true,
+  "cleaned": true,
+  "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert((await shelf.evaluate(({locale,seq})=>window.thoughtline.setPreferences({locale,theme:'light'},seq),{locale,seq:sequence++})).ok)\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round6-tray-menu.cjs:17:4"
+}

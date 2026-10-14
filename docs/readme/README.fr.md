@@ -9,24 +9,27 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/preview.svg" alt="Version: 0.0.35" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="badges/preview.svg" alt="Version: 0.0.36" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="GitHub Issues" /></a>
 </p>
 
 <p align="center"><sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub></p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35">Télécharger Thoughtline</a></h2>
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.35</sub></p>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36">Télécharger Thoughtline</a></h2>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.36</sub></p>
 
 Thoughtline est une application de notes pour macOS et Windows. Placez le pointeur au bord supérieur pour dérouler le fil et ses notes ; éloignez-le pour les ranger. Gardez les textes utiles sur des pinces colorées et retrouvez les autres grâce aux groupes, étiquettes et au calendrier.
 
+<p align="center"><strong>Cliquer pour copier　·　Glisser le texte dans le chat</strong></p>
 <p align="center">
-  <a href="demos/vine-overview.gif"><img src="demos/vine-overview.gif" alt="Déployer → Lire la note complète → Copier → Replier" width="960" /></a><br />
-  <sub>Déployer → Lire la note complète → Copier → Replier · <a href="demos/vine-overview.png">Aperçu fixe</a></sub>
+  <a href="demos/en/vine-overview.gif"><img src="demos/en/vine-overview.gif" alt="Cliquer pour copier" width="48%" /></a>
+  <a href="demos/en/text-drag.gif"><img src="demos/en/text-drag.gif" alt="Glisser le texte dans le chat" width="48%" /></a>
 </p>
+<p align="center"><sub>Cliquer pour copier · <a href="demos/en/vine-overview.png">Aperçu fixe</a>　｜　Glisser le texte dans le chat · <a href="demos/en/text-drag.png">Aperçu fixe</a></sub></p>
+<p align="center"><a href="#real-interface">Voir l’interface réelle</a></p>
 
-<p align="center"><sub>Les démonstrations utilisent une liane, des notes fictives et l’interface en chinois.</sub></p>
+<p align="center"><sub>Les démonstrations utilisent un bureau macOS simulé, une liane, des notes fictives et l’interface en anglais. Les menus suivent la structure du produit ; le chat est illustratif.</sub></p>
 
 ## Pour vos idées du quotidien
 
@@ -41,14 +44,16 @@ Thoughtline est une application de notes pour macOS et Windows. Placez le pointe
 3. **Utiliser** : ouvrez le texte complet pour lire, modifier, copier ou faire glisser vers une autre application.
 4. **Retrouver** : rangez dans le calendrier, puis cherchez par date ou par texte.
 
+L’icône de menu ou de notification propose la pause du survol, sa reprise et Quitter. Créez une note par raccourci ou menu de la note ; les réglages sont dans Plus du calendrier.
+
 ## Fonctionnalités
 
 <p align="center"><strong>Saisie rapide　·　Empiler par glisser</strong></p>
 <p align="center">
-  <a href="demos/quick-capture.gif"><img src="demos/quick-capture.gif" alt="Saisie rapide" width="48%" /></a>
-  <a href="demos/drag-stack.gif"><img src="demos/drag-stack.gif" alt="Empiler par glisser" width="48%" /></a>
+  <a href="demos/en/quick-capture.gif"><img src="demos/en/quick-capture.gif" alt="Saisie rapide" width="48%" /></a>
+  <a href="demos/en/drag-stack.gif"><img src="demos/en/drag-stack.gif" alt="Empiler par glisser" width="48%" /></a>
 </p>
-<p align="center"><sub>Saisie rapide · <a href="demos/quick-capture.png">Aperçu fixe</a>　｜　Empiler par glisser · <a href="demos/drag-stack.png">Aperçu fixe</a></sub></p>
+<p align="center"><sub>Saisie rapide · <a href="demos/en/quick-capture.png">Aperçu fixe</a>　｜　Empiler par glisser · <a href="demos/en/drag-stack.png">Aperçu fixe</a></sub></p>
 
 ### Notes et brouillons
 
@@ -59,8 +64,8 @@ Un titre ou un texte suffit. Conservez une note non envoyée comme brouillon ; l
 Classez travail, vie personnelle ou projets par groupe, puis ajoutez une étiquette de thème ou d’usage. Les filtres sont indépendants et se croisent lorsqu’ils sont combinés. Ils préservent les piles et positions. Cherchez une étiquette par son nom, un titre ou les mots du texte.
 
 <p align="center">
-  <a href="demos/groups-and-tags.gif"><img src="demos/groups-and-tags.gif" alt="Choisir un groupe → Filtrer par étiquette → Tout afficher" width="900" /></a><br />
-  <sub>Choisir un groupe → Filtrer par étiquette → Tout afficher · <a href="demos/groups-and-tags.png">Aperçu fixe</a></sub>
+  <a href="demos/en/groups-and-tags.gif"><img src="demos/en/groups-and-tags.gif" alt="Choisir un groupe → Filtrer par étiquette → Tout afficher" width="800" /></a><br />
+  <sub>Choisir un groupe → Filtrer par étiquette → Tout afficher · <a href="demos/en/groups-and-tags.png">Aperçu fixe</a></sub>
 </p>
 
 ### Feuilles empilées, lecture individuelle
@@ -76,8 +81,8 @@ Cherchez une destination compatible sur le fil ou dans le calendrier. Une pile f
 Explorez jours, mois et années ; cherchez titres, texte, groupes et étiquettes ou filtrez par état. Cliquez sur la date d’une feuille suspendue pour la retrouver. Les piles indiquent le vrai nombre de feuilles ; chaque membre reste accessible à sa date de création.
 
 <p align="center">
-  <a href="demos/calendar-revisit.gif"><img src="demos/calendar-revisit.gif" alt="Cliquer sur la date → Retrouver la note → Ouvrir le texte complet" width="900" /></a><br />
-  <sub>Cliquer sur la date → Retrouver la note → Ouvrir le texte complet · <a href="demos/calendar-revisit.png">Aperçu fixe</a></sub>
+  <a href="demos/en/calendar-revisit.gif"><img src="demos/en/calendar-revisit.gif" alt="Cliquer sur la date → Retrouver la note → Ouvrir le texte complet" width="800" /></a><br />
+  <sub>Cliquer sur la date → Retrouver la note → Ouvrir le texte complet · <a href="demos/en/calendar-revisit.png">Aperçu fixe</a></sub>
 </p>
 
 ### Emporter le texte complet
@@ -98,12 +103,12 @@ Créez, renommez, retirez de la sélection et rétablissez les classifications. 
 
 ## Téléchargement et installation
 
-Version actuelle : **0.0.35**, distribuée via Releases. Le téléchargement nécessite l’accès au dépôt.
+Version actuelle : **0.0.36**, distribuée via Releases. Le téléchargement nécessite l’accès au dépôt.
 
 | Plateforme | Installation |
 | --- | --- |
-| macOS · Apple Silicon | [Thoughtline-0.0.35-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
-| Windows · x64 | [Thoughtline-0.0.35-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
+| macOS · Apple Silicon | [Thoughtline-0.0.36-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
+| Windows · x64 | [Thoughtline-0.0.36-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
 
 Sur Mac, ouvrez le DMG et glissez Thoughtline dans Applications. Sous Windows, lancez l’EXE. Quittez normalement l’ancienne version et gardez une sauvegarde indépendante avant mise à jour. Les mises à jour se téléchargent manuellement.
 
@@ -116,11 +121,20 @@ Le paquet Mac utilise une signature ad-hoc et n’est pas notarié. Le paquet Wi
 3. Placez le pointeur en haut pour afficher le fil. Ouvrez une feuille pour la lire ; le clic droit donne accès à la création, aux filtres, au calendrier et au rangement.
 4. Le menu Plus du calendrier contient les notes récemment supprimées, les groupes et étiquettes, ainsi que le stockage et les réglages.
 
+<a id="real-interface"></a>
+
 ## Un fil à votre goût
 
 Choisissez fil classique, coton tressé ou vigne légère dans les réglages d’apparence. Le fil classique est colorable ; coton et vigne gardent leur couleur naturelle. Les pinces suivent la couleur des étiquettes.
 
 Cinq teintes douces de papier, des feuilles vierges, lignées ou à pointillés : prévisualisez puis appliquez. L’interface propose chinois et anglais, thèmes clair, sombre ou système.
+
+
+<p align="center">
+  <a href="screenshots/desktop-dark-zh.png"><img src="screenshots/desktop-dark-zh.png" alt="Thème sombre · Interface chinoise" width="48%" /></a>
+  <a href="screenshots/desktop-light-en.png"><img src="screenshots/desktop-light-en.png" alt="Thème clair · Interface anglaise" width="48%" /></a>
+</p>
+<p align="center"><sub>Thème sombre · Interface chinoise　｜　Thème clair · Interface anglaise<br />Affichage réel sur macOS. Windows présente de légères différences liées au système ; les fonctions restent identiques.</sub></p>
 
 ## Données, export et suppression
 

@@ -1,0 +1,92 @@
+{
+  "scenario": "stack",
+  "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-readme-demo-Eps1gA",
+  "source": "f6abd4883687faa5869f5a63c2b94a42c66a136a",
+  "locale": "zh-CN",
+  "capture": "app-owned webContents only over fictional macOS desktop with original abstract wallpaper, menu bar, Dock and demo folders; no personal desktop capture",
+  "fixture": "isolated compiled0.0.36, logical1024x576 display/cursor, real registered shortcut/menu callback, production DOM pointer handlers; opaque accessibility material for capture privacy",
+  "checks": [
+    "production paper-grip pointerdown/move/up;600ms ready ring; real merge; page persisted; second paper-grip drag to empty rope splits; original texts retained"
+  ],
+  "entries": [
+    {
+      "step": "拖动纸张上缘，把相关念头叠在一起",
+      "time": 1791996016049
+    },
+    {
+      "step": "停留片刻，松开合并",
+      "time": 1791996020869
+    },
+    {
+      "step": "右击整理，也能找到合并与拆分",
+      "time": 1791996023009
+    },
+    {
+      "entry": "actual production Organize submenu rendered from native MenuItem model",
+      "items": [
+        {
+          "label": "收起",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "合并…",
+          "type": "normal",
+          "enabled": false,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "拆分叠放",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "自动整理",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "",
+          "type": "separator",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "撤销合并",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        }
+      ],
+      "simulatedSubmenuBottomAtMost": 390,
+      "captionTop": 402
+    },
+    {
+      "step": "逐张翻页，每张内容独立保留",
+      "time": 1791996027676
+    },
+    {
+      "step": "拖到藤蔓空位，拆出当前一张",
+      "time": 1791996030530
+    }
+  ],
+  "frames": 162,
+  "recordingComplete": true,
+  "normalQuit": true,
+  "pids": [
+    11853,
+    11854,
+    11855,
+    11856
+  ],
+  "profileRemoved": true
+}

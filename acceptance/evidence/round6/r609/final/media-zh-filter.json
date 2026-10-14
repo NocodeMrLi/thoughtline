@@ -1,0 +1,313 @@
+{
+  "scenario": "filter",
+  "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-readme-demo-L5VHTK",
+  "source": "f6abd4883687faa5869f5a63c2b94a42c66a136a",
+  "locale": "zh-CN",
+  "capture": "app-owned webContents only over fictional macOS desktop with original abstract wallpaper, menu bar, Dock and demo folders; no personal desktop capture",
+  "fixture": "isolated compiled0.0.36, logical1024x576 display/cursor, real registered shortcut/menu callback, production DOM pointer handlers; opaque accessibility material for capture privacy",
+  "checks": [
+    "real native group filter callback; real tag picker DOM search/choose; intersection matches; native Show all restores original3"
+  ],
+  "entries": [
+    {
+      "step": "分组与标签，各管一件事",
+      "time": 1791993423807
+    },
+    {
+      "step": "只看工作分组",
+      "time": 1791993425110
+    },
+    {
+      "entry": "actual production native MenuItem callback with visible model-derived menu",
+      "label": "只看「工作」",
+      "allItems": [
+        {
+          "label": "新建念头",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "",
+          "type": "separator",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "只看「工作」",
+          "type": "checkbox",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "筛选标签…",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "显示全部",
+          "type": "normal",
+          "enabled": false,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Thoughtline 日历",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "",
+          "type": "separator",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "整理",
+          "type": "submenu",
+          "enabled": true,
+          "checked": false,
+          "submenu": [
+            {
+              "label": "收起",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "合并…",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "拆分叠放",
+              "type": "normal",
+              "enabled": false,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "自动整理",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "step": "再按标签筛选，找到眼前需要的念头",
+      "time": 1791993429876
+    },
+    {
+      "entry": "actual production native MenuItem callback with visible model-derived menu",
+      "label": "筛选标签…",
+      "allItems": [
+        {
+          "label": "新建念头",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "",
+          "type": "separator",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "只看「工作」",
+          "type": "checkbox",
+          "enabled": true,
+          "checked": true,
+          "submenu": null
+        },
+        {
+          "label": "筛选标签…",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "显示全部",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Thoughtline 日历",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "",
+          "type": "separator",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "整理",
+          "type": "submenu",
+          "enabled": true,
+          "checked": false,
+          "submenu": [
+            {
+              "label": "收起",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "合并…",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "拆分叠放",
+              "type": "normal",
+              "enabled": false,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "自动整理",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "step": "显示全部，恢复完整藤蔓",
+      "time": 1791993438262
+    },
+    {
+      "entry": "actual production native MenuItem callback with visible model-derived menu",
+      "label": "显示全部",
+      "allItems": [
+        {
+          "label": "新建念头",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "",
+          "type": "separator",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "只看「工作」",
+          "type": "checkbox",
+          "enabled": true,
+          "checked": true,
+          "submenu": null
+        },
+        {
+          "label": "筛选标签…",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "显示全部",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Thoughtline 日历",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "",
+          "type": "separator",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "整理",
+          "type": "submenu",
+          "enabled": true,
+          "checked": false,
+          "submenu": [
+            {
+              "label": "收起",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "合并…",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "拆分叠放",
+              "type": "normal",
+              "enabled": false,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "自动整理",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "frames": 155,
+  "recordingComplete": true,
+  "normalQuit": true,
+  "pids": [
+    9393,
+    9394,
+    9395,
+    9396,
+    9434
+  ],
+  "profileRemoved": true
+}

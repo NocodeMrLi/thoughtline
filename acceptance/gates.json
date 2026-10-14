@@ -2983,6 +2983,126 @@
       "nodeChanged": false,
       "budgetChanged": false,
       "documentationPushProof": "/Users/lihongwei/Documents/Codex/2026-10-14/thoughtline-round6/archive/r608/documentation-push-verification.json"
+    },
+    "R6_09": {
+      "status": "TECH_DELIVERED_OWNER_FEEDBACK_PENDING",
+      "version": "0.0.36",
+      "source": "f6abd4883687faa5869f5a63c2b94a42c66a136a",
+      "inputCount": 380,
+      "sourceScope": [
+        "shared native tray menu",
+        "Resume hover localization"
+      ],
+      "macRelatedUnit": {
+        "passed": 25,
+        "windowsOnlySkipped": 4
+      },
+      "noFullSuite": true,
+      "sourceAndActualPackagesTrayChecks": true,
+      "windowsRun": 38592240443,
+      "windowsInstallReinstallUninstallPreserveData": true,
+      "release": {
+        "readAt": "2026-10-14T16:38:36.949462+00:00",
+        "version": "0.0.36",
+        "releaseId": 412946284,
+        "url": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36",
+        "published_at": "2026-10-14T16:38:33Z",
+        "draft": false,
+        "prerelease": false,
+        "repositoryPrivate": true,
+        "sourceTag": "f6abd4883687faa5869f5a63c2b94a42c66a136a",
+        "workflowRun": 38592240443,
+        "assetsMatch": true,
+        "assets": [
+          {
+            "name": "Thoughtline-0.0.36-mac-arm64.dmg",
+            "id": 640974826,
+            "bytes": 138261115,
+            "sha256": "83b62cdd50b8e4fb5df89cf1484dd8c79abac8456925e5fc705e900cc83f2aa6"
+          },
+          {
+            "name": "Thoughtline-0.0.36-win-x64.exe",
+            "id": 640976671,
+            "bytes": 116059524,
+            "sha256": "29119a46444785ca8fa0961813b28f0359be5af5313548208757908c25d4c0ed"
+          },
+          {
+            "name": "Start-Thoughtline-Isolated-Mac.command",
+            "id": 640978140,
+            "bytes": 3185,
+            "sha256": "1ded1a236cda3cb2423cd0ecc7c40ab543cbf01bc86d53b5183ad2d4b0c85abd"
+          },
+          {
+            "name": "Start-Thoughtline-Isolated.ps1",
+            "id": 640978247,
+            "bytes": 1646,
+            "sha256": "e516b7393bdc072ee6345534c84490090e3ac077b6d9a122a2821124b7f3fc53"
+          },
+          {
+            "name": "Validation-Guide.zh-CN.md",
+            "id": 640978334,
+            "bytes": 2549,
+            "sha256": "a574ad9a80bc4e982d78d93fd54262a384771b751cf888a949a60a561e18fcfc"
+          },
+          {
+            "name": "mac-build-manifest.json",
+            "id": 640978454,
+            "bytes": 90988,
+            "sha256": "b964d7c4d91e0468aecc7c7be5011b5fd11f04764708a78b2eb3afe0d8c9806b"
+          },
+          {
+            "name": "build-manifest.json",
+            "id": 640978540,
+            "bytes": 91350,
+            "sha256": "36a5656239785aa1948ab1ab2979168c2863f82c51f5edcbeaa245da320b219d"
+          },
+          {
+            "name": "mac-signature-verification.json",
+            "id": 640978696,
+            "bytes": 361,
+            "sha256": "dae4eb766ad418848df04e06d61202eb5b021c7d64586e6339445ee454ca33c0"
+          },
+          {
+            "name": "source-pair-proof.json",
+            "id": 640978840,
+            "bytes": 16971,
+            "sha256": "a80d4d37bb3ca609448c81b624780e1b4433039a75451848f99ee14f88931135"
+          },
+          {
+            "name": "SHA256SUMS.txt",
+            "id": 640979037,
+            "bytes": 853,
+            "sha256": "fccfddfb293c8c745114759f3e0c9de88555f18748e0fd391e715c879a6f9970"
+          }
+        ],
+        "priorV035TenAssetsIdentical": true,
+        "formalAcceptance": false,
+        "physicalAcceptance": false
+      },
+      "report": "docs/releases/round6-v0.0.36-delivery.md",
+      "evidence": "evidence/round6/r609/final",
+      "review": "executor scoped diff and native checks; no new independent review",
+      "formalAcceptance": false,
+      "physicalAcceptance": false
+    },
+    "R6_10": {
+      "status": "MEDIA_READY_REMOTE_PUSH_PENDING",
+      "themes": 6,
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "gifCount": 12,
+      "READMECount": 7,
+      "resolution": "2048x1152 native2x 16:9",
+      "menuRendering": "production MenuItem structure/actions drawn in simulated desktop; not OS native menu pixels",
+      "chatRendering": "local unsent simulated input; no physical WeChat claim",
+      "source": "f6abd4883687faa5869f5a63c2b94a42c66a136a",
+      "realScreenshots": "user supplied originals byte identical",
+      "report": "docs/releases/round6-v0.0.36-delivery.md",
+      "mediaEvidence": "evidence/round6/r609/final/media-validation.json",
+      "formalAcceptance": false,
+      "physicalAcceptance": false
     }
   },
   "latestReleasedVersion": "0.0.35"

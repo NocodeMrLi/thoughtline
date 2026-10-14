@@ -24,3 +24,8 @@ Files: round6 scoped workflow/release audit/report, acceptance/gates.
 Expected: actual remote/source/package matches, six-item direct operation report; physical/formal remainfalse unless explicit owner feedback.
 
 Final: source/tag731a0bb7c719dabc786482a07606b47196a95af9,369inputs; Windows38511064035 success; original38510030275failure retained; privateRelease412343095 tenassets verified; ownedcleanup complete. User formal/physical acceptance remainsfalse. Final operation report round6-v0.0.33-delivery.md; exact document push readback in final delivery directory.
+
+
+## R6-09／R6-10 当前交付：0.0.36
+
+共享托盘仅暂停／恢复悬停、分隔线、退出，中英同步。25Mac相关单测及4Windows专用对应检查、类型/构建、双端源码与实际包三组菜单/暂停/拖动/草稿退出及Windows安装/重装/卸载保数据通过；不重跑产品全套。本次执行者审计，没有新增独立review。六主题中英各一版共12GIF、7语言README、两张原始实际截图按批准位置整合；最后媒体布局修正只作用录制层。源码/tagf6abd48、380输入、Windows38592240443成功、正式私有Release412946284十附件SHA/大小一致，旧035未变；完整报告 [0.0.36](round6-v0.0.36-delivery.md)。负责人实际/正式验收仍false。后续文档提交与包来源分列。

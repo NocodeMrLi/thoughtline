@@ -9,24 +9,27 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/preview.svg" alt="Version: 0.0.35" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="badges/preview.svg" alt="Version: 0.0.36" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="GitHub Issues" /></a>
 </p>
 
 <p align="center"><sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub></p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35">Baixar Thoughtline</a></h2>
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.35</sub></p>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36">Baixar Thoughtline</a></h2>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.36</sub></p>
 
 Thoughtline é um aplicativo de notas para macOS e Windows. Leve o cursor à borda superior para revelar a corda e as notas; afaste-o para recolher. Mantenha o que precisa em prendedores coloridos e organize o restante com grupos, etiquetas e calendário.
 
+<p align="center"><strong>Clique para copiar　·　Arrastar texto para o chat</strong></p>
 <p align="center">
-  <a href="demos/vine-overview.gif"><img src="demos/vine-overview.gif" alt="Revelar → Ler a nota completa → Copiar → Recolher" width="960" /></a><br />
-  <sub>Revelar → Ler a nota completa → Copiar → Recolher · <a href="demos/vine-overview.png">Prévia estática</a></sub>
+  <a href="demos/en/vine-overview.gif"><img src="demos/en/vine-overview.gif" alt="Clique para copiar" width="48%" /></a>
+  <a href="demos/en/text-drag.gif"><img src="demos/en/text-drag.gif" alt="Arrastar texto para o chat" width="48%" /></a>
 </p>
+<p align="center"><sub>Clique para copiar · <a href="demos/en/vine-overview.png">Prévia estática</a>　｜　Arrastar texto para o chat · <a href="demos/en/text-drag.png">Prévia estática</a></sub></p>
+<p align="center"><a href="#real-interface">Ver a interface real</a></p>
 
-<p align="center"><sub>As demonstrações usam uma trepadeira, notas fictícias e a interface em chinês.</sub></p>
+<p align="center"><sub>As demonstrações usam uma mesa macOS simulada, uma trepadeira, notas fictícias e a interface em inglês. Os menus seguem a estrutura do produto; o chat é ilustrativo.</sub></p>
 
 ## Um lugar para suas ideias
 
@@ -41,14 +44,16 @@ Thoughtline é um aplicativo de notas para macOS e Windows. Leve o cursor à bor
 3. **Use**: abra o texto completo para ler, editar, copiar ou arrastar para outro aplicativo.
 4. **Retome**: recolha para o calendário e encontre por data ou pesquisa.
 
+O ícone de menu ou bandeja oferece pausar e retomar o hover e sair. Crie notas pelo atalho ou menu da nota; as configurações ficam em Mais no calendário.
+
 ## O que você pode fazer
 
 <p align="center"><strong>Registro rápido　·　Empilhar arrastando</strong></p>
 <p align="center">
-  <a href="demos/quick-capture.gif"><img src="demos/quick-capture.gif" alt="Registro rápido" width="48%" /></a>
-  <a href="demos/drag-stack.gif"><img src="demos/drag-stack.gif" alt="Empilhar arrastando" width="48%" /></a>
+  <a href="demos/en/quick-capture.gif"><img src="demos/en/quick-capture.gif" alt="Registro rápido" width="48%" /></a>
+  <a href="demos/en/drag-stack.gif"><img src="demos/en/drag-stack.gif" alt="Empilhar arrastando" width="48%" /></a>
 </p>
-<p align="center"><sub>Registro rápido · <a href="demos/quick-capture.png">Prévia estática</a>　｜　Empilhar arrastando · <a href="demos/drag-stack.png">Prévia estática</a></sub></p>
+<p align="center"><sub>Registro rápido · <a href="demos/en/quick-capture.png">Prévia estática</a>　｜　Empilhar arrastando · <a href="demos/en/drag-stack.png">Prévia estática</a></sub></p>
 
 ### Notas e rascunhos
 
@@ -59,8 +64,8 @@ Um título ou corpo de texto basta para salvar. Guarde conteúdo ainda não envi
 Organize trabalho, vida pessoal ou projetos por grupo e use etiquetas para temas e finalidades. Os filtros são independentes e combinam por interseção, preservando pilhas e posições. Pesquise etiquetas por nome, título da nota ou palavras do texto.
 
 <p align="center">
-  <a href="demos/groups-and-tags.gif"><img src="demos/groups-and-tags.gif" alt="Escolher um grupo → Filtrar por etiqueta → Mostrar tudo" width="900" /></a><br />
-  <sub>Escolher um grupo → Filtrar por etiqueta → Mostrar tudo · <a href="demos/groups-and-tags.png">Prévia estática</a></sub>
+  <a href="demos/en/groups-and-tags.gif"><img src="demos/en/groups-and-tags.gif" alt="Escolher um grupo → Filtrar por etiqueta → Mostrar tudo" width="800" /></a><br />
+  <sub>Escolher um grupo → Filtrar por etiqueta → Mostrar tudo · <a href="demos/en/groups-and-tags.png">Prévia estática</a></sub>
 </p>
 
 ### Empilhar e ler folha por folha
@@ -76,8 +81,8 @@ Pesquise destinos compatíveis na corda ou calendário. Pilhas combinadas no cal
 Navegue por dia, mês e ano; pesquise títulos, texto, grupos e etiquetas ou filtre por estado. Clique na data de uma folha pendurada para localizá-la. As pilhas exibem a quantidade real; cada membro mantém a própria data de criação.
 
 <p align="center">
-  <a href="demos/calendar-revisit.gif"><img src="demos/calendar-revisit.gif" alt="Clicar na data → Localizar a nota → Abrir o texto completo" width="900" /></a><br />
-  <sub>Clicar na data → Localizar a nota → Abrir o texto completo · <a href="demos/calendar-revisit.png">Prévia estática</a></sub>
+  <a href="demos/en/calendar-revisit.gif"><img src="demos/en/calendar-revisit.gif" alt="Clicar na data → Localizar a nota → Abrir o texto completo" width="800" /></a><br />
+  <sub>Clicar na data → Localizar a nota → Abrir o texto completo · <a href="demos/en/calendar-revisit.png">Prévia estática</a></sub>
 </p>
 
 ### Levar o texto completo
@@ -98,12 +103,12 @@ Crie, renomeie, retire da seleção e restaure classificações. Excluir conserv
 
 ## Download e instalação
 
-Versão atual: **0.0.35**, distribuída pelo Releases. O download exige acesso ao repositório.
+Versão atual: **0.0.36**, distribuída pelo Releases. O download exige acesso ao repositório.
 
 | Plataforma | Instalador |
 | --- | --- |
-| macOS · Apple Silicon | [Thoughtline-0.0.35-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
-| Windows · x64 | [Thoughtline-0.0.35-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
+| macOS · Apple Silicon | [Thoughtline-0.0.36-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
+| Windows · x64 | [Thoughtline-0.0.36-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
 
 No Mac, abra o DMG e arraste Thoughtline para Aplicativos. No Windows, execute o EXE. Feche normalmente a versão antiga e mantenha uma cópia independente antes de atualizar. Atualizações são baixadas manualmente.
 
@@ -116,11 +121,20 @@ O pacote Mac usa assinatura ad-hoc e não é notarizado. O pacote Windows não �
 3. Leve o cursor ao topo. Abra uma folha para ler tudo; o botão direito oferece criar, filtrar, abrir calendário e organizar.
 4. O menu Mais do calendário reúne excluídas recentemente, grupos e etiquetas, e armazenamento e ajustes.
 
+<a id="real-interface"></a>
+
 ## Personalize sua corda
 
 Nos ajustes de aparência, escolha corda clássica, algodão trançado ou trepadeira leve. A clássica admite cores; algodão e trepadeira conservam tons naturais. Prendedores seguem a cor da etiqueta.
 
 Escolha cinco cores suaves e papel em branco, pautado ou tracejado. Veja a prévia e aplique. A interface oferece chinês e inglês e temas claro, escuro ou do sistema.
+
+
+<p align="center">
+  <a href="screenshots/desktop-dark-zh.png"><img src="screenshots/desktop-dark-zh.png" alt="Tema escuro · Interface chinesa" width="48%" /></a>
+  <a href="screenshots/desktop-light-en.png"><img src="screenshots/desktop-light-en.png" alt="Tema claro · Interface inglesa" width="48%" /></a>
+</p>
+<p align="center"><sub>Tema escuro · Interface chinesa　｜　Tema claro · Interface inglesa<br />Aparência real no macOS. O Windows tem pequenas diferenças do sistema; as funções são as mesmas.</sub></p>
 
 ## Dados, exportação e exclusão
 

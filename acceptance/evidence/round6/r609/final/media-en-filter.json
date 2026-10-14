@@ -1,0 +1,313 @@
+{
+  "scenario": "filter",
+  "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-readme-demo-Ox4Wxa",
+  "source": "f6abd4883687faa5869f5a63c2b94a42c66a136a",
+  "locale": "en",
+  "capture": "app-owned webContents only over fictional macOS desktop with original abstract wallpaper, menu bar, Dock and demo folders; no personal desktop capture",
+  "fixture": "isolated compiled0.0.36, logical1024x576 display/cursor, real registered shortcut/menu callback, production DOM pointer handlers; opaque accessibility material for capture privacy",
+  "checks": [
+    "real native group filter callback; real tag picker DOM search/choose; intersection matches; native Show all restores original3"
+  ],
+  "entries": [
+    {
+      "step": "Use groups and tags to find your focus",
+      "time": 1791993703411
+    },
+    {
+      "step": "Right-click to show only Work",
+      "time": 1791993704713
+    },
+    {
+      "entry": "actual production native MenuItem callback with visible model-derived menu",
+      "label": "Only “Work”",
+      "allItems": [
+        {
+          "label": "New thought",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "",
+          "type": "separator",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Only “Work”",
+          "type": "checkbox",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Filter tags…",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Show all",
+          "type": "normal",
+          "enabled": false,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Thoughtline Calendar",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "",
+          "type": "separator",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Organize",
+          "type": "submenu",
+          "enabled": true,
+          "checked": false,
+          "submenu": [
+            {
+              "label": "Archive",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "Merge…",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "Split stack",
+              "type": "normal",
+              "enabled": false,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "Arrange clips",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "step": "Right-click Filter tags to narrow the view",
+      "time": 1791993709569
+    },
+    {
+      "entry": "actual production native MenuItem callback with visible model-derived menu",
+      "label": "Filter tags…",
+      "allItems": [
+        {
+          "label": "New thought",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "",
+          "type": "separator",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Only “Work”",
+          "type": "checkbox",
+          "enabled": true,
+          "checked": true,
+          "submenu": null
+        },
+        {
+          "label": "Filter tags…",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Show all",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Thoughtline Calendar",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "",
+          "type": "separator",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Organize",
+          "type": "submenu",
+          "enabled": true,
+          "checked": false,
+          "submenu": [
+            {
+              "label": "Archive",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "Merge…",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "Split stack",
+              "type": "normal",
+              "enabled": false,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "Arrange clips",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "step": "Right-click Show all to restore the vine",
+      "time": 1791993719037
+    },
+    {
+      "entry": "actual production native MenuItem callback with visible model-derived menu",
+      "label": "Show all",
+      "allItems": [
+        {
+          "label": "New thought",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "",
+          "type": "separator",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Only “Work”",
+          "type": "checkbox",
+          "enabled": true,
+          "checked": true,
+          "submenu": null
+        },
+        {
+          "label": "Filter tags…",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Show all",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Thoughtline Calendar",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "",
+          "type": "separator",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Organize",
+          "type": "submenu",
+          "enabled": true,
+          "checked": false,
+          "submenu": [
+            {
+              "label": "Archive",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "Merge…",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "Split stack",
+              "type": "normal",
+              "enabled": false,
+              "checked": false,
+              "submenu": null
+            },
+            {
+              "label": "Arrange clips",
+              "type": "normal",
+              "enabled": true,
+              "checked": false,
+              "submenu": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "frames": 169,
+  "recordingComplete": true,
+  "normalQuit": true,
+  "pids": [
+    9674,
+    9675,
+    9676,
+    9677,
+    9707
+  ],
+  "profileRemoved": true
+}

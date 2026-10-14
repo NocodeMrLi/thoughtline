@@ -1,0 +1,92 @@
+{
+  "scenario": "stack",
+  "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-readme-demo-dM8RBb",
+  "source": "f6abd4883687faa5869f5a63c2b94a42c66a136a",
+  "locale": "en",
+  "capture": "app-owned webContents only over fictional macOS desktop with original abstract wallpaper, menu bar, Dock and demo folders; no personal desktop capture",
+  "fixture": "isolated compiled0.0.36, logical1024x576 display/cursor, real registered shortcut/menu callback, production DOM pointer handlers; opaque accessibility material for capture privacy",
+  "checks": [
+    "production paper-grip pointerdown/move/up;600ms ready ring; real merge; page persisted; second paper-grip drag to empty rope splits; original texts retained"
+  ],
+  "entries": [
+    {
+      "step": "Drag the paper edge to stack thoughts",
+      "time": 1791996036382
+    },
+    {
+      "step": "Pause on the target, release to merge",
+      "time": 1791996041048
+    },
+    {
+      "step": "Right-click Organize for stack actions",
+      "time": 1791996043186
+    },
+    {
+      "entry": "actual production Organize submenu rendered from native MenuItem model",
+      "items": [
+        {
+          "label": "Archive",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Merge…",
+          "type": "normal",
+          "enabled": false,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Split stack",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Arrange clips",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "",
+          "type": "separator",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        },
+        {
+          "label": "Undo merge",
+          "type": "normal",
+          "enabled": true,
+          "checked": false,
+          "submenu": null
+        }
+      ],
+      "simulatedSubmenuBottomAtMost": 390,
+      "captionTop": 402
+    },
+    {
+      "step": "Turn pages. Every thought stays intact",
+      "time": 1791996047792
+    },
+    {
+      "step": "Drag to an empty spot to split a paper",
+      "time": 1791996050655
+    }
+  ],
+  "frames": 162,
+  "recordingComplete": true,
+  "normalQuit": true,
+  "pids": [
+    11885,
+    11886,
+    11887,
+    11888
+  ],
+  "profileRemoved": true
+}

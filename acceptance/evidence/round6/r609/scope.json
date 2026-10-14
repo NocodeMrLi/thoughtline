@@ -1,0 +1,27 @@
+{
+  "feature": "R6-09",
+  "newVersion": "0.0.36",
+  "productChanges": [
+    "shared native tray template",
+    "Resume hover locale text"
+  ],
+  "localUnits": {
+    "passed": 25,
+    "windowsOnlySkipped": 4
+  },
+  "requiredNative": [
+    "tray zh/en state actions and pause reasons",
+    "drag cancellation",
+    "tray quit draft preservation",
+    "empty and filtered rope existing entry recovery",
+    "actual installed package"
+  ],
+  "notRerun": [
+    "full npm verify",
+    "R6-01..08 complete UI",
+    "unrelated features"
+  ],
+  "historyFailuresRetained": true,
+  "physicalAcceptance": false,
+  "formalAcceptance": false
+}

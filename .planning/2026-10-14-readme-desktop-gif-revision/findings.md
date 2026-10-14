@@ -1,0 +1,8 @@
+# Findings
+Live main21bcb62 clean. Prior hero2200x1900 excessively tall; copied via reader rather than paper body. ClipCard.card-copy executes production copy, local 已复制 lasts1500ms. Drag carries text/plain only. Filters are first-level; 整理 contains submenu. Previous source fixture intercepts native Menu.popup so capture omitted native menu pixels; resolve in later phase, not claim already done.
+
+UI skill search animation clarity context matched context-aware timing: give top reveal and success feedback enough viewing time. New composition logical960x540/native1920x1080, complete fictional macOS desktop. Prior helpers available; create successor outside repo rather than overwrite old evidence.
+
+First native2x screenshot confirms simulated menu bar and Dock are visible while production vine/paper screenshots alpha-composite without a solid backdrop. Compositor uses fictional clock and files, no personal screen pixels; sample source is compiled035 with prior six-file package readback fingerprints refreshed before recording.
+
+User proposed simplifying macOS menu-bar / Windows tray context menu, keep pause and quit; asks product proposal first. Live main refreshTray uses one shared Menu template for both platforms, currently title/write/calendar/tag picker/show all/settings/manual-pause checkbox/quit. Calendar tools retains settings; shelf native menu retains new/filter/calendar/show-all. app.quit routes through prepareQuit guard. Recommend only Pause hover/Resume hover depending manual state, separator, Quit, native OS style and localized labels. Feature change pending approval; source not modified. UX query/retry yielded no matching tray-menu guidance; proposal grounded in live implementation and clear labels.

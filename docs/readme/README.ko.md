@@ -9,24 +9,27 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/preview.svg" alt="Version: 0.0.35" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="badges/preview.svg" alt="Version: 0.0.36" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="GitHub Issues" /></a>
 </p>
 
 <p align="center"><sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub></p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35">Thoughtline 다운로드</a></h2>
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.35</sub></p>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36">Thoughtline 다운로드</a></h2>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.36</sub></p>
 
 Thoughtline은 macOS와 Windows용 데스크톱 메모 앱입니다. 화면 위쪽으로 마우스를 가져가면 줄과 메모가 나타나고, 벗어나면 접힙니다. 지금 필요한 글은 색깔 집게에 걸고 나머지는 그룹, 태그, 달력으로 정리합니다.
 
+<p align="center"><strong>클릭하여 복사　·　채팅 입력창으로 드래그</strong></p>
 <p align="center">
-  <a href="demos/vine-overview.gif"><img src="demos/vine-overview.gif" alt="위쪽에서 펼치기 → 전문 읽기 → 복사 → 접기" width="960" /></a><br />
-  <sub>위쪽에서 펼치기 → 전문 읽기 → 복사 → 접기 · <a href="demos/vine-overview.png">정지 이미지</a></sub>
+  <a href="demos/en/vine-overview.gif"><img src="demos/en/vine-overview.gif" alt="클릭하여 복사" width="48%" /></a>
+  <a href="demos/en/text-drag.gif"><img src="demos/en/text-drag.gif" alt="채팅 입력창으로 드래그" width="48%" /></a>
 </p>
+<p align="center"><sub>클릭하여 복사 · <a href="demos/en/vine-overview.png">정지 화면</a>　｜　채팅 입력창으로 드래그 · <a href="demos/en/text-drag.png">정지 화면</a></sub></p>
+<p align="center"><a href="#real-interface">실제 화면 보기</a></p>
 
-<p align="center"><sub>덩굴 모양과 가상의 메모를 사용한 중국어 화면 데모입니다.</sub></p>
+<p align="center"><sub>모의 macOS 데스크톱, 덩굴, 가상의 메모와 영어 화면을 사용한 데모입니다. 메뉴는 실제 제품 구성을 따르며 채팅 입력창은 설명용입니다.</sub></p>
 
 ## 이런 생각을 남겨 보세요
 
@@ -41,14 +44,16 @@ Thoughtline은 macOS와 Windows용 데스크톱 메모 앱입니다. 화면 위�
 3. **활용하기**: 전체 글을 열어 읽고 편집하거나 복사하고 다른 앱으로 끌어갑니다.
 4. **돌아보기**: 달력에 넣어 두고 날짜나 검색으로 다시 찾습니다.
 
+메뉴 막대／트레이에서는 호버 일시 중지·재개와 종료를 제공합니다. 새 메모는 단축키나 메모 메뉴로, 설정은 캘린더 더 보기 메뉴로 열 수 있습니다.
+
 ## 주요 기능
 
 <p align="center"><strong>빠르게 기록　·　끌어서 쌓기</strong></p>
 <p align="center">
-  <a href="demos/quick-capture.gif"><img src="demos/quick-capture.gif" alt="빠르게 기록" width="48%" /></a>
-  <a href="demos/drag-stack.gif"><img src="demos/drag-stack.gif" alt="끌어서 쌓기" width="48%" /></a>
+  <a href="demos/en/quick-capture.gif"><img src="demos/en/quick-capture.gif" alt="빠르게 기록" width="48%" /></a>
+  <a href="demos/en/drag-stack.gif"><img src="demos/en/drag-stack.gif" alt="끌어서 쌓기" width="48%" /></a>
 </p>
-<p align="center"><sub>빠르게 기록 · <a href="demos/quick-capture.png">정지 이미지</a>　｜　끌어서 쌓기 · <a href="demos/drag-stack.png">정지 이미지</a></sub></p>
+<p align="center"><sub>빠르게 기록 · <a href="demos/en/quick-capture.png">정지 이미지</a>　｜　끌어서 쌓기 · <a href="demos/en/drag-stack.png">정지 이미지</a></sub></p>
 
 ### 메모와 초안 보관
 
@@ -59,8 +64,8 @@ Thoughtline은 macOS와 Windows용 데스크톱 메모 앱입니다. 화면 위�
 업무, 생활, 프로젝트는 그룹으로 나누고 주제나 용도는 태그로 표시합니다. 필터는 각각 쓰거나 함께 일치하는 내용만 볼 수 있으며, 겹침 관계와 위치는 유지됩니다. 태그 이름, 메모 제목, 본문 단어로 해당 태그를 찾습니다.
 
 <p align="center">
-  <a href="demos/groups-and-tags.gif"><img src="demos/groups-and-tags.gif" alt="그룹 선택 → 태그 필터 → 모두 표시" width="900" /></a><br />
-  <sub>그룹 선택 → 태그 필터 → 모두 표시 · <a href="demos/groups-and-tags.png">정지 이미지</a></sub>
+  <a href="demos/en/groups-and-tags.gif"><img src="demos/en/groups-and-tags.gif" alt="그룹 선택 → 태그 필터 → 모두 표시" width="800" /></a><br />
+  <sub>그룹 선택 → 태그 필터 → 모두 표시 · <a href="demos/en/groups-and-tags.png">정지 이미지</a></sub>
 </p>
 
 ### 겹친 종이를 한 장씩 읽기
@@ -76,8 +81,8 @@ Thoughtline은 macOS와 Windows용 데스크톱 메모 앱입니다. 화면 위�
 일·월·년을 살펴보고 제목, 본문, 그룹, 태그나 상태로 검색합니다. 걸린 메모의 날짜를 누르면 달력에서 해당 메모를 찾습니다. 묶음은 실제 장수를 표시하며 각 종이는 원래 작성일에서 찾을 수 있습니다.
 
 <p align="center">
-  <a href="demos/calendar-revisit.gif"><img src="demos/calendar-revisit.gif" alt="종이 날짜 클릭 → 메모 위치 찾기 → 전문 열기" width="900" /></a><br />
-  <sub>종이 날짜 클릭 → 메모 위치 찾기 → 전문 열기 · <a href="demos/calendar-revisit.png">정지 이미지</a></sub>
+  <a href="demos/en/calendar-revisit.gif"><img src="demos/en/calendar-revisit.gif" alt="종이 날짜 클릭 → 메모 위치 찾기 → 전문 열기" width="800" /></a><br />
+  <sub>종이 날짜 클릭 → 메모 위치 찾기 → 전문 열기 · <a href="demos/en/calendar-revisit.png">정지 이미지</a></sub>
 </p>
 
 ### 전체 글 꺼내 쓰기
@@ -98,12 +103,12 @@ Thoughtline은 macOS와 Windows용 데스크톱 메모 앱입니다. 화면 위�
 
 ## 다운로드와 설치
 
-현재 버전은 **0.0.35**이며 저장소 Releases에서 배포합니다. 다운로드에는 저장소 접근 권한이 필요합니다.
+현재 버전은 **0.0.36**이며 저장소 Releases에서 배포합니다. 다운로드에는 저장소 접근 권한이 필요합니다.
 
 | 플랫폼 | 설치 파일 |
 | --- | --- |
-| macOS · Apple Silicon | [Thoughtline-0.0.35-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
-| Windows · x64 | [Thoughtline-0.0.35-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35) |
+| macOS · Apple Silicon | [Thoughtline-0.0.36-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
+| Windows · x64 | [Thoughtline-0.0.36-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
 
 Mac에서는 DMG를 열어 Thoughtline을 응용 프로그램으로 옮깁니다. Windows에서는 EXE를 실행합니다. 업데이트 전에는 이전 앱을 정상 종료하고 별도 백업을 남기세요. 업데이트는 수동 다운로드 방식입니다.
 
@@ -116,11 +121,20 @@ Mac 패키지는 ad-hoc 서명이 있으며 공증되지 않았습니다. Window
 3. 마우스를 위쪽으로 가져가 줄을 열고 종이를 펼쳐 읽습니다. 오른쪽 클릭으로 새 메모, 필터, 달력, 정리 기능을 엽니다.
 4. 달력의 더 보기 메뉴에서 최근 삭제, 그룹과 태그, 저장소와 설정을 엽니다.
 
+<a id="real-interface"></a>
+
 ## 바탕화면에 맞는 모습
 
 외관 설정에서 기본 줄, 땋은 면줄, 가벼운 덩굴을 선택합니다. 기본 줄은 색을 바꿀 수 있고 면줄과 덩굴은 자연색을 유지합니다. 집게는 태그 색을 따릅니다.
 
 다섯 가지 부드러운 종이색과 무지·줄·점선을 선택하고 미리 본 뒤 적용합니다. 화면 언어는 중국어·영어, 테마는 밝게·어둡게·시스템 설정을 지원합니다.
+
+
+<p align="center">
+  <a href="screenshots/desktop-dark-zh.png"><img src="screenshots/desktop-dark-zh.png" alt="어두운 테마 · 중국어 화면" width="48%" /></a>
+  <a href="screenshots/desktop-light-en.png"><img src="screenshots/desktop-light-en.png" alt="밝은 테마 · 영어 화면" width="48%" /></a>
+</p>
+<p align="center"><sub>어두운 테마 · 중국어 화면　｜　밝은 테마 · 영어 화면<br />실제 macOS 화면입니다. Windows는 시스템에 따라 모양이 조금 다르지만 기능은 같습니다.</sub></p>
 
 ## 데이터, 내보내기, 삭제
 

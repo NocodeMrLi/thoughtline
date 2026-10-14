@@ -1,0 +1,16 @@
+{
+  "file": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round6-tray-menu.cjs",
+  "args": [],
+  "timeoutMs": 180000,
+  "startedAt": "2026-10-14T15:28:06.993Z",
+  "passed": false,
+  "timedOut": false,
+  "profileCleanup": "Delegated to fixture; supervisor never deletes data",
+  "pid": 91145,
+  "code": 1,
+  "signal": null,
+  "closeConfirmed": true,
+  "stdout": "{\"passed\":false,\"checks\":0,\"normalQuit\":true,\"cleaned\":true}\n",
+  "stderr": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert((await shelf.evaluate(({locale,seq})=>window.thoughtline.setPreferences({locale,theme:'light'},seq),{locale,seq:sequence++})).ok)\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round6-tray-menu.cjs:17:4 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: false,\n  expected: true,\n  operator: '==',\n  diff: 'simple'\n}\n",
+  "completedAt": "2026-10-14T15:28:08.510Z"
+}
