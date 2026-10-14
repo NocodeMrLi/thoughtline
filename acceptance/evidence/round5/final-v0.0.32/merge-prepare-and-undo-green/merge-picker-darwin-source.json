@@ -1,0 +1,925 @@
+{
+  "platform": "darwin",
+  "checks": [
+    "six-entry primary menu, four organize actions, no redundant undo",
+    "same-group rope/calendar targets, archived stack once, top search and bounded scrolling",
+    "full hidden-member search, actual total count and long names never overlap count/source",
+    "IME does not prematurely select; calendar merge takes current source only and keeps full target stack",
+    "calendar stack readable with page arrows, dots/tag/title jump",
+    "undo merge restores source and archived target membership/state",
+    "undo retires obsolete page selections and leaves normally",
+    "detail and in-calendar undo flush pending page checkpoints before taking current revision, without relaxing CAS"
+  ],
+  "pids": [
+    9660,
+    9660,
+    9661,
+    9662,
+    9663,
+    9665
+  ],
+  "scope": "Renderer/IPC/menu callbacks on source or frozen package, controlled protocol fixture; not physical OS menu/IME acceptance.",
+  "initialPickerSession": 1,
+  "undoReplies": [
+    {
+      "ok": true,
+      "value": {
+        "schemaVersion": 4,
+        "revision": 3,
+        "ideas": [
+          {
+            "id": "a",
+            "title": "名称a",
+            "text": "独立全文😀 a 完整原文",
+            "project": "工作",
+            "agentId": "general",
+            "status": "hanging",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "sibling",
+            "title": "名称sibling",
+            "text": "独立全文😀 sibling 完整原文",
+            "project": "工作",
+            "agentId": "general",
+            "status": "hanging",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "rope",
+            "title": "名称rope",
+            "text": "独立全文😀 rope 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "hanging",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "wrong",
+            "title": "名称wrong",
+            "text": "独立全文😀 wrong 完整原文",
+            "project": "生活",
+            "agentId": "codex",
+            "status": "hanging",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal0",
+            "title": "同事与项目进度协调人员的日报及后续工作的完整计划安排",
+            "text": "独立全文😀 cal0 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal1",
+            "title": "名称cal1",
+            "text": "独立全文😀 cal1 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal2",
+            "title": "名称cal2",
+            "text": "独立全文😀 cal2 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal3",
+            "title": "名称cal3",
+            "text": "独立全文😀 cal3 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal4",
+            "title": "名称cal4",
+            "text": "独立全文😀 cal4 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal5",
+            "title": "名称cal5",
+            "text": "独立全文😀 cal5 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal6",
+            "title": "名称cal6",
+            "text": "独立全文😀 cal6 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal7",
+            "title": "名称cal7",
+            "text": "独立全文😀 cal7 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal8",
+            "title": "名称cal8",
+            "text": "独立全文😀 cal8 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal9",
+            "title": "名称cal9",
+            "text": "独立全文😀 cal9 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal10",
+            "title": "名称cal10",
+            "text": "独立全文😀 cal10 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal11",
+            "title": "名称cal11",
+            "text": "独立全文😀 cal11 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal12",
+            "title": "名称cal12",
+            "text": "独立全文😀 cal12 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal13",
+            "title": "名称cal13",
+            "text": "独立全文😀 cal13 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          }
+        ],
+        "clips": [
+          {
+            "id": "source",
+            "ideaIds": [
+              "a",
+              "sibling"
+            ],
+            "currentId": "a",
+            "agentId": "general",
+            "position": null
+          },
+          {
+            "id": "rope",
+            "ideaIds": [
+              "rope"
+            ],
+            "currentId": "rope",
+            "agentId": "codex",
+            "position": null
+          },
+          {
+            "id": "wrong",
+            "ideaIds": [
+              "wrong"
+            ],
+            "currentId": "wrong",
+            "agentId": "codex",
+            "position": null
+          }
+        ],
+        "archivedClips": [
+          {
+            "id": "calendar-stack",
+            "ideaIds": [
+              "cal0",
+              "cal1"
+            ],
+            "currentId": "cal0",
+            "agentId": "codex",
+            "position": null
+          }
+        ],
+        "agents": [
+          {
+            "id": "general",
+            "name": "通用",
+            "color": "#A0A3AA"
+          },
+          {
+            "id": "codex",
+            "name": "项目协作人员与跨部门任务规划协调小组",
+            "color": "#4C90D9"
+          }
+        ],
+        "draft": null,
+        "settings": {
+          "writeHotkey": "Control+Alt+Shift+F19",
+          "reducedMotion": true
+        }
+      }
+    },
+    {
+      "ok": true,
+      "value": {
+        "schemaVersion": 4,
+        "revision": 7,
+        "ideas": [
+          {
+            "id": "a",
+            "title": "名称a",
+            "text": "独立全文😀 a 完整原文",
+            "project": "工作",
+            "agentId": "general",
+            "status": "hanging",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "sibling",
+            "title": "名称sibling",
+            "text": "独立全文😀 sibling 完整原文",
+            "project": "工作",
+            "agentId": "general",
+            "status": "hanging",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "rope",
+            "title": "名称rope",
+            "text": "独立全文😀 rope 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "hanging",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "wrong",
+            "title": "名称wrong",
+            "text": "独立全文😀 wrong 完整原文",
+            "project": "生活",
+            "agentId": "codex",
+            "status": "hanging",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal0",
+            "title": "同事与项目进度协调人员的日报及后续工作的完整计划安排",
+            "text": "独立全文😀 cal0 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal1",
+            "title": "名称cal1",
+            "text": "独立全文😀 cal1 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal2",
+            "title": "名称cal2",
+            "text": "独立全文😀 cal2 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal3",
+            "title": "名称cal3",
+            "text": "独立全文😀 cal3 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal4",
+            "title": "名称cal4",
+            "text": "独立全文😀 cal4 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal5",
+            "title": "名称cal5",
+            "text": "独立全文😀 cal5 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal6",
+            "title": "名称cal6",
+            "text": "独立全文😀 cal6 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal7",
+            "title": "名称cal7",
+            "text": "独立全文😀 cal7 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal8",
+            "title": "名称cal8",
+            "text": "独立全文😀 cal8 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal9",
+            "title": "名称cal9",
+            "text": "独立全文😀 cal9 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal10",
+            "title": "名称cal10",
+            "text": "独立全文😀 cal10 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal11",
+            "title": "名称cal11",
+            "text": "独立全文😀 cal11 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal12",
+            "title": "名称cal12",
+            "text": "独立全文😀 cal12 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal13",
+            "title": "名称cal13",
+            "text": "独立全文😀 cal13 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          }
+        ],
+        "clips": [
+          {
+            "id": "source",
+            "ideaIds": [
+              "a",
+              "sibling"
+            ],
+            "currentId": "a",
+            "agentId": "general",
+            "position": null
+          },
+          {
+            "id": "rope",
+            "ideaIds": [
+              "rope"
+            ],
+            "currentId": "rope",
+            "agentId": "codex",
+            "position": null
+          },
+          {
+            "id": "wrong",
+            "ideaIds": [
+              "wrong"
+            ],
+            "currentId": "wrong",
+            "agentId": "codex",
+            "position": null
+          }
+        ],
+        "archivedClips": [
+          {
+            "id": "calendar-stack",
+            "ideaIds": [
+              "cal0",
+              "cal1"
+            ],
+            "currentId": "cal1",
+            "agentId": "codex",
+            "position": null
+          }
+        ],
+        "agents": [
+          {
+            "id": "general",
+            "name": "通用",
+            "color": "#A0A3AA"
+          },
+          {
+            "id": "codex",
+            "name": "项目协作人员与跨部门任务规划协调小组",
+            "color": "#4C90D9"
+          }
+        ],
+        "draft": null,
+        "settings": {
+          "writeHotkey": "Control+Alt+Shift+F19",
+          "reducedMotion": true
+        }
+      }
+    }
+  ],
+  "mergeReplies": [
+    {
+      "ok": true,
+      "value": {
+        "schemaVersion": 4,
+        "revision": 5,
+        "ideas": [
+          {
+            "id": "a",
+            "title": "名称a",
+            "text": "独立全文😀 a 完整原文",
+            "project": "工作",
+            "agentId": "general",
+            "status": "archived",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T17:55:41.211Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai",
+            "offRopeReason": "manual"
+          },
+          {
+            "id": "sibling",
+            "title": "名称sibling",
+            "text": "独立全文😀 sibling 完整原文",
+            "project": "工作",
+            "agentId": "general",
+            "status": "hanging",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "rope",
+            "title": "名称rope",
+            "text": "独立全文😀 rope 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "hanging",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "wrong",
+            "title": "名称wrong",
+            "text": "独立全文😀 wrong 完整原文",
+            "project": "生活",
+            "agentId": "codex",
+            "status": "hanging",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal0",
+            "title": "同事与项目进度协调人员的日报及后续工作的完整计划安排",
+            "text": "独立全文😀 cal0 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T17:55:41.211Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal1",
+            "title": "名称cal1",
+            "text": "独立全文😀 cal1 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T17:55:41.211Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal2",
+            "title": "名称cal2",
+            "text": "独立全文😀 cal2 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal3",
+            "title": "名称cal3",
+            "text": "独立全文😀 cal3 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal4",
+            "title": "名称cal4",
+            "text": "独立全文😀 cal4 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal5",
+            "title": "名称cal5",
+            "text": "独立全文😀 cal5 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal6",
+            "title": "名称cal6",
+            "text": "独立全文😀 cal6 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal7",
+            "title": "名称cal7",
+            "text": "独立全文😀 cal7 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal8",
+            "title": "名称cal8",
+            "text": "独立全文😀 cal8 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal9",
+            "title": "名称cal9",
+            "text": "独立全文😀 cal9 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal10",
+            "title": "名称cal10",
+            "text": "独立全文😀 cal10 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal11",
+            "title": "名称cal11",
+            "text": "独立全文😀 cal11 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal12",
+            "title": "名称cal12",
+            "text": "独立全文😀 cal12 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          },
+          {
+            "id": "cal13",
+            "title": "名称cal13",
+            "text": "独立全文😀 cal13 完整原文",
+            "project": "工作",
+            "agentId": "codex",
+            "status": "archived",
+            "offRopeReason": "manual",
+            "createdAt": "2026-10-13T00:00:00.000Z",
+            "updatedAt": "2026-10-13T00:00:00.000Z",
+            "createdDay": "2026-10-13",
+            "creationTimeZone": "Asia/Shanghai"
+          }
+        ],
+        "clips": [
+          {
+            "id": "source",
+            "ideaIds": [
+              "sibling"
+            ],
+            "currentId": "sibling",
+            "agentId": "general",
+            "position": 0.31368563685636863
+          },
+          {
+            "id": "rope",
+            "ideaIds": [
+              "rope"
+            ],
+            "currentId": "rope",
+            "agentId": "codex",
+            "position": 0.5000000000000001
+          },
+          {
+            "id": "wrong",
+            "ideaIds": [
+              "wrong"
+            ],
+            "currentId": "wrong",
+            "agentId": "codex",
+            "position": 0.6863143631436316
+          }
+        ],
+        "archivedClips": [
+          {
+            "id": "calendar-stack",
+            "ideaIds": [
+              "cal0",
+              "cal1",
+              "a"
+            ],
+            "currentId": "a",
+            "agentId": "general",
+            "position": null
+          }
+        ],
+        "agents": [
+          {
+            "id": "general",
+            "name": "通用",
+            "color": "#A0A3AA"
+          },
+          {
+            "id": "codex",
+            "name": "项目协作人员与跨部门任务规划协调小组",
+            "color": "#4C90D9"
+          }
+        ],
+        "draft": null,
+        "settings": {
+          "writeHotkey": "Control+Alt+Shift+F19",
+          "reducedMotion": true
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "normalQuit": true,
+  "cleaned": true
+}

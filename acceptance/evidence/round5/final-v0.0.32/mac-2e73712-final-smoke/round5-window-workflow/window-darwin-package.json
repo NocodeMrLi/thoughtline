@@ -1,0 +1,285 @@
+{
+  "platform": "darwin",
+  "checks": [
+    "calendar defaults below actual visible paper within work area",
+    "classification/settings roundtrips preserve top and horizontal centre",
+    "repeat ready calendar preserves its session and search",
+    "shelf calendar entry preserves ready session and search",
+    "tray calendar entry preserves ready session and search",
+    "cached hidden calendar keeps its ready session and search",
+    "repeat classification retains search and return context",
+    "repeat settings retains ready session and current tab",
+    "concurrent target changes share one transition",
+    "normal thirty-second retirement and first-page re-open remain"
+  ],
+  "cases": [
+    {
+      "name": "cold-calendar",
+      "ms": 263.653542,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 1
+    },
+    {
+      "name": "classification-0",
+      "ms": 46.79291699999976,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 1
+    },
+    {
+      "name": "classification-return-0",
+      "ms": 30.678917000000183,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 1
+    },
+    {
+      "name": "settings-0",
+      "ms": 44.00179200000002,
+      "bounds": {
+        "x": 470,
+        "y": 355,
+        "width": 500,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 2
+    },
+    {
+      "name": "settings-return-0",
+      "ms": 262.32774999999947,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 3
+    },
+    {
+      "name": "classification-1",
+      "ms": 63.3441670000002,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 3
+    },
+    {
+      "name": "classification-return-1",
+      "ms": 50.68391700000029,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 3
+    },
+    {
+      "name": "settings-1",
+      "ms": 43.22154200000023,
+      "bounds": {
+        "x": 470,
+        "y": 355,
+        "width": 500,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 4
+    },
+    {
+      "name": "settings-return-1",
+      "ms": 46.630333000000064,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 5
+    },
+    {
+      "name": "classification-2",
+      "ms": 23.11308299999928,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 5
+    },
+    {
+      "name": "classification-return-2",
+      "ms": 17.684249999999338,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 5
+    },
+    {
+      "name": "settings-2",
+      "ms": 32.32887500000015,
+      "bounds": {
+        "x": 470,
+        "y": 355,
+        "width": 500,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 6
+    },
+    {
+      "name": "settings-return-2",
+      "ms": 27.380584000000454,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 7
+    },
+    {
+      "name": "retired-calendar",
+      "ms": 177.65499999999884,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 12
+    }
+  ],
+  "failures": [],
+  "pids": [
+    55159,
+    55159,
+    55166,
+    55167,
+    55168,
+    55200
+  ],
+  "scope": "Native window bounds/show and renderer readiness; screen work area read, OS settings untouched.",
+  "repeatReady": {
+    "before": 13,
+    "after": 13,
+    "query": "保留参考内容"
+  },
+  "cleaned": true
+}

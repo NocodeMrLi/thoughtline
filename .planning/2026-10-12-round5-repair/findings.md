@@ -44,3 +44,7 @@ R5-26全目标审查红例：旧hanging溢出夹被当挂绳目标。按实际�
 设置回归33通过/3失败：第一项在waitHidden已确认新建不可见后托盘write仍disabled，后两项被失败善后再开writer污染，不独立归因。closeConfirmedComposer在host.closeComposer返回后刷新真实Tray；原hide回调可能早于native可见性终态，必须按完整close后的状态刷新。保持保存确认前不关闭、迁移门禁不变。保留resume-regression-3原失败与隔离回执，重新完整设置36项验证。
 
 Windows9a94 402单测/类型/构建通过，旧round2-workflow只从一级找“收起当前念头”失败；按R527整理→收起改脚本，Mac完整9项绿，原业务保全断言保持。Mac实际DMG前20套绿；旧packaged-round3固定10月11夹具在Mac跨日后只显示近3天的新候选，>=4行断言失败并非布局；从实际“更早”入口展开后保留>=4及逐行日期/影响文字不裁剪断言，不修改产品日期规则。positioning旧原生菜单同类tag直接枚举已替换为顶部筛选面板，保留读取无写入和自定义标签溢出可見断言。
+
+2026-10-14 最终候选47ec9d2：第二轮发现挂绳/托盘日历未共享复用，真实MenuItem action红例session13→16，已同一guard/coalesce/ready链修复。源窗口10项与7受影响套退出0；最终源verify408pass/4Windows skip/type/build0，Mac同源实际DMG25套全部退出0、36编译/资源hash核一致及隔离launcher check-only0。15样本warm30.9→25.8/cold289.2→247.8/retired171.5→205.2ms，最后一项变慢不宣称整体提升。Windows完整38478829786仍在执行，尚无v32tag/Release。旧ad9因源码变更取消，之前实际OS纸张右击、1→2→1→0与全R5主要源套通过不外推新候选完整成功；468文件ZIP/SHA归档后移除其Actions副本。最新Mac图329张归档、保留8关键图；本地重复解包269文件/333755401bytes与重复DMG清理，交付DMG保留。正式0.31回滚/暂停备份/依赖/历史tracked图片/个人App68573/未知95997保护。任务7继续等Windows、绑定、发布读回和最终清理。
+
+最终0.0.32技术交付：Release412225874已私有正常发布，10附件size/digest读回；source/tag6135608，source359向量一致；Windows38490095906定向同包续测success，构建/安装保数据38489171294复用严格摘要。无新增整套重复，物理/负责人false；详细边界见round5-v0.0.32-delivery.md。

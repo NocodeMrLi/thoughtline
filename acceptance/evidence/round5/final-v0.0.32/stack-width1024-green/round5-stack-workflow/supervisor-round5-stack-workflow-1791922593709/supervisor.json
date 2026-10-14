@@ -1,0 +1,16 @@
+{
+  "file": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-stack-workflow.cjs",
+  "args": [],
+  "timeoutMs": 180000,
+  "startedAt": "2026-10-13T20:16:33.710Z",
+  "passed": false,
+  "timedOut": false,
+  "profileCleanup": "Delegated to fixture; supervisor never deletes data",
+  "pid": 59121,
+  "code": 1,
+  "signal": null,
+  "closeConfirmed": true,
+  "stdout": "PASS no undo on opening or browsing\nPASS calendar updates immediately after current-only merge, retained source does not release slot\nPASS archive undo restores source and automatic backfill without pulling manual calendar stack\nPASS calendar split stays archived and undo restores full stack\nPASS arrange undo restores all original clip positions\nPASS hang restores entire archived stack, failed swap preserves undo and hang undo restores archive\n",
+  "stderr": "AssertionError [ERR_ASSERTION]: 挂绳空间已变化，请选择保存、整理挂上或换上。\n    at checked (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-stack-workflow.cjs:7:20)\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-stack-workflow.cjs:24:32 {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: false,\n  expected: true,\n  operator: '==',\n  diff: 'simple'\n}\n",
+  "completedAt": "2026-10-13T20:16:35.512Z"
+}

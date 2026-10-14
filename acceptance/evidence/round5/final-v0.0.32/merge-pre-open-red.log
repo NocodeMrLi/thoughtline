@@ -1,0 +1,28 @@
+CHECK
+MERGE GEOMETRY {"height":192,"scroll":448,"top":59}
+CHECK
+CHECK
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  {
+    archivedClips: [
+      {
+        agentId: 'codex',
++       currentId: 'cal1',
+-       currentId: 'cal0',
+        id: 'calendar-stack',
+        ideaIds: [
+          'cal0',
+          'cal1'
+        ],
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-merge-picker-workflow.cjs:11:159 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [Object],
+  expected: [Object],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+CI FIXTURE {"file":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-merge-picker-workflow.cjs","pid":9093,"passed":false,"timedOut":false,"code":1}

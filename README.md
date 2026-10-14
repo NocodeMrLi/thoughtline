@@ -6,9 +6,9 @@
   <a href="https://github.com/NocodeMrLi/thoughtline/stargazers"><img src="docs/readme/badges/stars.svg" alt="GitHub stars: 0" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/releases"><img src="docs/readme/badges/downloads.svg" alt="Release asset downloads: 30" /></a>
   <a href="#license"><img src="docs/readme/badges/license.svg" alt="License: UNLICENSED" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.31"><img src="docs/readme/badges/preview.svg" alt="Version: 0.0.31" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.32"><img src="docs/readme/badges/preview.svg" alt="Version: 0.0.32" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="docs/readme/badges/feedback.svg" alt="Feedback on GitHub" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.31"><img src="docs/readme/badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.32"><img src="docs/readme/badges/platforms.svg" alt="Platforms: macOS and Windows" /></a>
 </p>
 
 <p align="center">
@@ -20,9 +20,9 @@
   用一根绳、几只夹子和几张纸，轻轻留住工作与生活里的念头。
 </p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.31"><ins>下载 Thoughtline</ins></a></h2>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.32"><ins>下载 Thoughtline</ins></a></h2>
 
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.31</sub></p>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.32</sub></p>
 
 Thoughtline 是一款面向 macOS 和 Windows 的轻量桌面念头工具。需要时，在屏幕顶边呼出晾衣绳；写下、整理、取用，再回到手头的事情。
 
@@ -35,7 +35,7 @@ Thoughtline 是一款面向 macOS 和 Windows 的轻量桌面念头工具。需�
 - **晾在桌面**：常驻界面只有绳、夹子和纸张。夹子正面夹住薄纸，新念头默认归属“通用”。
 - **选择舒适数量**：日历顶部三个点 →「存储与设置」选择 4／6／8 个夹子，默认 6 个；便签随屏幕等比例适配，4 个档位只适度放大。满绳保存的新念头在腾出位置后按创建时间由新到旧自动补位；旧未挂记录和主动收起的念头仍由你决定何时挂上。
 - **搭配自己的挂绳与纸张**：日历顶部三个点 →「存储与设置」→「外观」。经典细绳可自由调色；编织棉绳保留天然棉色，轻藤蔓保留自然绿色，夹子继续跟随标签颜色。纸张提供五种柔和预设纸色，以及空白／细横线／轻虚线；先预览，点「应用」才保存。设置分为外观、操作、数据与备份，取消或返回不会保存预览。 分类下拉选择，完整预览和应用按钮同时可见，调整时无需上下滚动。
-- **顺手整理**：拖木夹移动整组，拖纸张上缘抽出一张；右键“合并”选择兼容夹子，“拆分”抽出当前一张。间距零散时拆分会自动腾位；“自动整理”按左右顺序收拢间距，整理可撤销。
+- **顺手整理**：拖木夹移动整组，拖纸张上缘抽出一张；右键“整理 → 合并…”搜索同分组的挂绳或日历目标；“拆分叠放”抽出当前一张，日历叠放拆分仍留日历。间距零散时拆分会自动腾位；“自动整理”按左右顺序收拢间距，整理可撤销。
 - **原地修改**：在展开窗或日历里直接编辑，短暂停顿后自动保存；组内翻页即时显示。 阅读和编辑都使用标签色边框，标题与正文跟随所选纸色。
 - **按日期回看**：Thoughtline日历支持日、月、年浏览、搜索与状态筛选；未挂上的念头仍可找到。
 - **留下退路**：删除念头进入最近删除，可以恢复；删除项目只解除归属，保留念头内容。 原来挂着的念头优先回原夹或空位；绳满时先恢复日历，可自行换上。
@@ -52,7 +52,7 @@ Thoughtline 是一款面向 macOS 和 Windows 的轻量桌面念头工具。需�
 
 ## 下载与安装
 
-当前版本向有仓库访问权限的成员开放。到 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.31) 下载安装包、隔离启动入口和 `SHA256SUMS`；每版提供对应构建来源与校验清单。
+当前版本向有仓库访问权限的成员开放。到 [Releases](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.32) 下载安装包、隔离启动入口和 `SHA256SUMS`；每版提供对应构建来源与校验清单。
 
 | 平台 | 当前安装包 |
 |---|---|
@@ -60,6 +60,8 @@ Thoughtline 是一款面向 macOS 和 Windows 的轻量桌面念头工具。需�
 | Windows | x64 · EXE（NSIS） |
 
 安装或升级前，正常退出应用并备份现有数据。项目不安排商业签名证书、平台认证或公证；用户按系统正常信任提示安装使用。Mac 保留本地 ad-hoc 签名，Windows 包未签名。签名状态与软件的成熟度、验收结果分开说明。当前不提供自动更新。
+
+本版新增与受影响功能的技术检查和逐项手动验收见 [0.0.32操作报告](docs/releases/round5-v0.0.32-delivery.md)。
 
 ## 开始使用
 
@@ -74,7 +76,7 @@ Thoughtline 是一款面向 macOS 和 Windows 的轻量桌面念头工具。需�
 
 日历设置显示实际保存位置。迁移先复制并校验，再切换目录；旧副本保留。导出备份是独立副本，不改变当前位置。恢复流程见 [数据安全说明](docs/ROUND1-DATA-SAFETY.md)。
 
-当前数据格式为 schema3。旧版 `0.0.16-preview.6` 不能直接读取新格式；降级前保留新数据，并使用升级前备份在独立目录验证。升级前备份不包含之后的修改。
+当前数据格式为 schema4（含持久日历叠放）。旧版 `0.0.16-preview.6` 不能直接读取新格式；降级前保留新数据，并使用升级前备份在独立目录验证。升级前备份不包含之后的修改。
 
 ## 开发
 

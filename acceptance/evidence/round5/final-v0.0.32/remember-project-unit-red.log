@@ -1,0 +1,39 @@
+
+> thoughtline@0.0.32 test
+> node node_modules/vitest/vitest.mjs run tests/unit/rememberIdeaProject.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/rememberIdeaProject.test.ts (8 tests | 2 failed) 7ms
+   × unrelated revision change retries remembered metadata once using a fresh revision 3ms
+   × a second conflict is surfaced without an unbounded retry 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/rememberIdeaProject.test.ts > unrelated revision change retries remembered metadata once using a fresh revision
+Error: revision changed
+ ❯ rememberIdeaProject src/renderer/hooks/rememberIdeaProject.ts:9:22
+      7|  if(!record?.project||current.snapshot.projects?.includes(record.proje…
+      8|  const result=await bridge.classificationChange({kind:'rememberProject…
+      9|  if(!result.ok)throw Error(result.message);
+       |                      ^
+     10| }
+     11|
+ ❯ tests/unit/rememberIdeaProject.test.ts:9:243
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/rememberIdeaProject.test.ts > a second conflict is surfaced without an unbounded retry
+AssertionError: expected "vi.fn()" to be called 2 times, but got 1 times
+ ❯ tests/unit/rememberIdeaProject.test.ts:13:265
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 6 passed (8)
+   Start at  05:03:47
+   Duration  193ms (transform 79%, import 12%, tests 6%, worker 3%)
+

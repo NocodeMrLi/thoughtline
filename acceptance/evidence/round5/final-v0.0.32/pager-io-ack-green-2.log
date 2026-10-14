@@ -1,0 +1,17 @@
+PASS pager zh-CN light 350
+PASS pager zh-CN light 420
+PASS pager zh-CN dark 350
+PASS pager zh-CN dark 420
+PASS pager en light 350
+PASS pager en light 420
+PASS pager en dark 350
+PASS pager en dark 420
+IO initial failure observed
+IO flip requested 1
+electronApplication.evaluate: Error: Pager leave checkpoint did not acknowledge its IO failure
+    at eval (eval at evaluate (:311:30), <anonymous>:1:266)
+    at async <anonymous>:337:30
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-detail-pager-workflow.cjs:14:1414 {
+  log: []
+}
+CI FIXTURE {"file":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-detail-pager-workflow.cjs","pid":97773,"passed":false,"timedOut":false,"code":1}

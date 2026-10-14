@@ -1,0 +1,265 @@
+{
+  "platform": "darwin",
+  "checks": [
+    "calendar defaults below actual visible paper within work area",
+    "classification/settings roundtrips preserve top and horizontal centre",
+    "repeat ready calendar preserves its session and search"
+  ],
+  "cases": [
+    {
+      "name": "cold-calendar",
+      "ms": 247.31495799999993,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 1
+    },
+    {
+      "name": "classification-0",
+      "ms": 34.37679200000002,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 1
+    },
+    {
+      "name": "classification-return-0",
+      "ms": 26.029915999999957,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 1
+    },
+    {
+      "name": "settings-0",
+      "ms": 43.22358299999996,
+      "bounds": {
+        "x": 470,
+        "y": 355,
+        "width": 500,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 2
+    },
+    {
+      "name": "settings-return-0",
+      "ms": 26.421749999999975,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 3
+    },
+    {
+      "name": "classification-1",
+      "ms": 18.302124999999933,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 3
+    },
+    {
+      "name": "classification-return-1",
+      "ms": 97.0266250000002,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 3
+    },
+    {
+      "name": "settings-1",
+      "ms": 33.781582999999955,
+      "bounds": {
+        "x": 470,
+        "y": 355,
+        "width": 500,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 4
+    },
+    {
+      "name": "settings-return-1",
+      "ms": 28.37824999999998,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 5
+    },
+    {
+      "name": "classification-2",
+      "ms": 19.695124999999962,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 5
+    },
+    {
+      "name": "classification-return-2",
+      "ms": 12.933250000000044,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 5
+    },
+    {
+      "name": "settings-2",
+      "ms": 23.32729100000006,
+      "bounds": {
+        "x": 470,
+        "y": 355,
+        "width": 500,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 6
+    },
+    {
+      "name": "settings-return-2",
+      "ms": 31.9224999999999,
+      "bounds": {
+        "x": 350,
+        "y": 355,
+        "width": 740,
+        "height": 533
+      },
+      "visible": true,
+      "area": {
+        "x": 0,
+        "y": 25,
+        "width": 1440,
+        "height": 875
+      },
+      "calls": 7
+    }
+  ],
+  "failures": [
+    {
+      "name": "shelf calendar entry preserves ready session and search",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n16 !== 13\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-window-workflow.cjs:17:73\n    at async check (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-window-workflow.cjs:4:34)\n    at async /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-window-workflow.cjs:14:37"
+    }
+  ],
+  "pids": [
+    24066,
+    24066,
+    24067,
+    24068,
+    24069,
+    24070
+  ],
+  "scope": "Native window bounds/show and renderer readiness; screen work area read, OS settings untouched.",
+  "repeatReady": {
+    "before": 13,
+    "after": 13,
+    "query": "保留参考内容"
+  },
+  "cleaned": true
+}

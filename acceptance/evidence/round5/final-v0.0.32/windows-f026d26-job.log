@@ -1,0 +1,597 @@
+﻿2026-10-13T22:16:28.4623113Z Current runner version: '2.337.0'
+2026-10-13T22:16:28.4659851Z ##[group]Runner Image Provisioner
+2026-10-13T22:16:28.4660861Z Hosted Compute Agent
+2026-10-13T22:16:28.4661537Z Version: 20260901.588
+2026-10-13T22:16:28.4662291Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+2026-10-13T22:16:28.4663254Z Build Date: 2026-09-01T19:56:44Z
+2026-10-13T22:16:28.4664121Z Worker ID: {8e97adbc-d7d4-4cbb-8406-84131fe14e47}
+2026-10-13T22:16:28.4665041Z Azure Region: westus3
+2026-10-13T22:16:28.4665711Z ##[endgroup]
+2026-10-13T22:16:28.4666974Z ##[group]Operating System
+2026-10-13T22:16:28.4667794Z Microsoft Windows Server 2025
+2026-10-13T22:16:28.4668608Z 10.0.26100
+2026-10-13T22:16:28.4669227Z Datacenter
+2026-10-13T22:16:28.4669984Z ##[endgroup]
+2026-10-13T22:16:28.4670622Z ##[group]Runner Image
+2026-10-13T22:16:28.4671337Z Image: windows-2025-vs2026
+2026-10-13T22:16:28.4672049Z Version: 20260925.250.1
+2026-10-13T22:16:28.4673804Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260925.250/images/windows/Windows2025-VS2026-Readme.md
+2026-10-13T22:16:28.4676057Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260925.250
+2026-10-13T22:16:28.4677345Z ##[endgroup]
+2026-10-13T22:16:28.4678836Z ##[group]GITHUB_TOKEN Permissions
+2026-10-13T22:16:28.4680872Z Contents: read
+2026-10-13T22:16:28.4681498Z Metadata: read
+2026-10-13T22:16:28.4682166Z ##[endgroup]
+2026-10-13T22:16:28.4684243Z Secret source: Actions
+2026-10-13T22:16:28.4685241Z Cache mode: write
+2026-10-13T22:16:28.4686056Z Prepare workflow directory
+2026-10-13T22:16:28.5084199Z Prepare all required actions
+2026-10-13T22:16:28.5123313Z Getting action download info
+2026-10-13T22:16:28.8298728Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-10-13T22:16:28.9524416Z Download action repository 'actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1' (SHA:949feb2413d6458794dcd2491c4babbbce0c15c1)
+2026-10-13T22:16:29.7117916Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-10-13T22:16:30.4818044Z Complete job name: windows-test-package
+2026-10-13T22:16:30.7486032Z ##[group]Run git config --global core.longpaths true
+2026-10-13T22:16:30.7486816Z [36;1mgit config --global core.longpaths true[0m
+2026-10-13T22:16:31.1786059Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-13T22:16:31.1786751Z env:
+2026-10-13T22:16:31.1786981Z   RETAIN_INSTALLER: true
+2026-10-13T22:16:31.1787210Z ##[endgroup]
+2026-10-13T22:16:34.9006299Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-10-13T22:16:34.9006739Z with:
+2026-10-13T22:16:34.9006932Z   repository: NocodeMrLi/thoughtline
+2026-10-13T22:16:34.9008839Z   token: ***
+2026-10-13T22:16:34.9009030Z   ssh-strict: true
+2026-10-13T22:16:34.9009208Z   ssh-user: git
+2026-10-13T22:16:34.9009400Z   persist-credentials: true
+2026-10-13T22:16:34.9009644Z   clean: true
+2026-10-13T22:16:34.9009856Z   sparse-checkout-cone-mode: true
+2026-10-13T22:16:34.9010049Z   fetch-depth: 1
+2026-10-13T22:16:34.9010166Z   fetch-tags: false
+2026-10-13T22:16:34.9010293Z   show-progress: true
+2026-10-13T22:16:34.9010414Z   lfs: false
+2026-10-13T22:16:34.9010535Z   submodules: false
+2026-10-13T22:16:34.9010659Z   set-safe-directory: true
+2026-10-13T22:16:34.9010807Z   allow-unsafe-pr-checkout: false
+2026-10-13T22:16:34.9010958Z env:
+2026-10-13T22:16:34.9011071Z   RETAIN_INSTALLER: true
+2026-10-13T22:16:34.9011198Z ##[endgroup]
+2026-10-13T22:16:35.0413791Z Syncing repository: NocodeMrLi/thoughtline
+2026-10-13T22:16:35.0414792Z ##[group]Getting Git version info
+2026-10-13T22:16:35.0415002Z Working directory is 'D:\a\thoughtline\thoughtline'
+2026-10-13T22:16:35.1271358Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-10-13T22:16:35.1582686Z git version 2.55.0.windows.5
+2026-10-13T22:16:35.1779537Z ##[endgroup]
+2026-10-13T22:16:35.1790773Z Copying 'C:\Users\runneradmin\.gitconfig' to 'D:\a\_temp\dd953a2f-cd4f-46bb-b5da-d4b7d930b371\.gitconfig'
+2026-10-13T22:16:35.1791283Z Temporarily overriding HOME='D:\a\_temp\dd953a2f-cd4f-46bb-b5da-d4b7d930b371' before making global git config changes
+2026-10-13T22:16:35.1791667Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-13T22:16:35.1792041Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\thoughtline\thoughtline
+2026-10-13T22:16:35.2030862Z Deleting the contents of 'D:\a\thoughtline\thoughtline'
+2026-10-13T22:16:35.2035225Z ##[group]Determining repository object format
+2026-10-13T22:16:35.2036797Z ##[endgroup]
+2026-10-13T22:16:35.2037306Z ##[group]Initializing the repository
+2026-10-13T22:16:35.2043786Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\thoughtline\thoughtline
+2026-10-13T22:16:35.4555789Z Initialized empty Git repository in D:/a/thoughtline/thoughtline/.git/
+2026-10-13T22:16:35.4624365Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/NocodeMrLi/thoughtline
+2026-10-13T22:16:35.5693179Z ##[endgroup]
+2026-10-13T22:16:35.5693865Z ##[group]Disabling automatic garbage collection
+2026-10-13T22:16:35.5732061Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2026-10-13T22:16:35.6015248Z ##[endgroup]
+2026-10-13T22:16:35.6020086Z ##[group]Setting up auth
+2026-10-13T22:16:35.6020632Z Removing SSH command configuration
+2026-10-13T22:16:35.6027650Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-10-13T22:16:35.6303485Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-10-13T22:16:38.5597773Z Removing HTTP extra header
+2026-10-13T22:16:38.5608219Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-13T22:16:38.5881881Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-10-13T22:16:39.1105593Z Removing includeIf entries pointing to credentials config files
+2026-10-13T22:16:39.1111111Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-13T22:16:39.1428490Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-10-13T22:16:39.6670700Z [command]"C:\Program Files\Git\bin\git.exe" config --file D:\a\_temp\git-credentials-d36f54a3-b604-4f4f-9ecc-ced659ad30cf.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2026-10-13T22:16:39.7080098Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/thoughtline/thoughtline/.git.path D:\a\_temp\git-credentials-d36f54a3-b604-4f4f-9ecc-ced659ad30cf.config
+2026-10-13T22:16:39.7339261Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path D:\a\_temp\git-credentials-d36f54a3-b604-4f4f-9ecc-ced659ad30cf.config
+2026-10-13T22:16:39.7695373Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-d36f54a3-b604-4f4f-9ecc-ced659ad30cf.config
+2026-10-13T22:16:39.7984327Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-d36f54a3-b604-4f4f-9ecc-ced659ad30cf.config
+2026-10-13T22:16:39.8262640Z ##[endgroup]
+2026-10-13T22:16:39.8263298Z ##[group]Fetching the repository
+2026-10-13T22:16:39.8265336Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +f026d26b121795c7eebd7d354c7819c26c6168b9:refs/remotes/origin/main
+2026-10-13T22:16:56.1512214Z From https://github.com/NocodeMrLi/thoughtline
+2026-10-13T22:16:56.1512706Z  * [new ref]         f026d26b121795c7eebd7d354c7819c26c6168b9 -> origin/main
+2026-10-13T22:16:56.1513697Z [command]"C:\Program Files\Git\bin\git.exe" branch --list --remote origin/main
+2026-10-13T22:16:56.1514066Z   origin/main
+2026-10-13T22:16:56.1514700Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse refs/remotes/origin/main
+2026-10-13T22:16:56.1515158Z f026d26b121795c7eebd7d354c7819c26c6168b9
+2026-10-13T22:16:56.1515863Z ##[endgroup]
+2026-10-13T22:16:56.1516193Z ##[group]Determining the checkout info
+2026-10-13T22:16:56.1516561Z ##[endgroup]
+2026-10-13T22:16:56.1516831Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2026-10-13T22:16:56.1710233Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2026-10-13T22:16:56.1918618Z ##[group]Checking out the ref
+2026-10-13T22:16:56.1930010Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+2026-10-13T22:16:57.3202621Z Updating files:  18% (3286/18200)
+2026-10-13T22:16:57.3620663Z Updating files:  19% (3458/18200)
+2026-10-13T22:16:57.4142024Z Updating files:  20% (3640/18200)
+2026-10-13T22:16:57.4626309Z Updating files:  21% (3822/18200)
+2026-10-13T22:16:57.5651256Z Updating files:  22% (4004/18200)
+2026-10-13T22:16:57.6206981Z Updating files:  23% (4186/18200)
+2026-10-13T22:16:57.6591528Z Updating files:  24% (4368/18200)
+2026-10-13T22:16:57.8528925Z Updating files:  25% (4550/18200)
+2026-10-13T22:16:57.8906282Z Updating files:  26% (4732/18200)
+2026-10-13T22:16:57.9196473Z Updating files:  27% (4914/18200)
+2026-10-13T22:16:57.9646596Z Updating files:  28% (5096/18200)
+2026-10-13T22:16:58.1591324Z Updating files:  29% (5278/18200)
+2026-10-13T22:16:58.2755625Z Updating files:  30% (5460/18200)
+2026-10-13T22:16:58.5333518Z Updating files:  30% (5507/18200)
+2026-10-13T22:16:58.8087700Z Updating files:  31% (5642/18200)
+2026-10-13T22:16:58.9510513Z Updating files:  32% (5824/18200)
+2026-10-13T22:16:59.0428245Z Updating files:  33% (6006/18200)
+2026-10-13T22:16:59.2846281Z Updating files:  34% (6188/18200)
+2026-10-13T22:16:59.2964731Z Updating files:  34% (6348/18200)
+2026-10-13T22:16:59.4216272Z Updating files:  35% (6370/18200)
+2026-10-13T22:16:59.6312377Z Updating files:  36% (6552/18200)
+2026-10-13T22:16:59.7978812Z Updating files:  37% (6734/18200)
+2026-10-13T22:16:59.8815189Z Updating files:  38% (6916/18200)
+2026-10-13T22:17:00.0497141Z Updating files:  39% (7098/18200)
+2026-10-13T22:17:00.2460753Z Updating files:  40% (7280/18200)
+2026-10-13T22:17:00.2969796Z Updating files:  41% (7462/18200)
+2026-10-13T22:17:00.4259968Z Updating files:  41% (7557/18200)
+2026-10-13T22:17:00.7676038Z Updating files:  42% (7644/18200)
+2026-10-13T22:17:00.9238665Z Updating files:  43% (7826/18200)
+2026-10-13T22:17:01.0030464Z Updating files:  44% (8008/18200)
+2026-10-13T22:17:01.1946648Z Updating files:  45% (8190/18200)
+2026-10-13T22:17:01.3072050Z Updating files:  46% (8372/18200)
+2026-10-13T22:17:01.4561343Z Updating files:  46% (8452/18200)
+2026-10-13T22:17:01.7472701Z Updating files:  47% (8554/18200)
+2026-10-13T22:17:02.2794396Z Updating files:  48% (8736/18200)
+2026-10-13T22:17:02.3161291Z Updating files:  49% (8918/18200)
+2026-10-13T22:17:02.5727389Z Updating files:  49% (8934/18200)
+2026-10-13T22:17:02.9130783Z Updating files:  50% (9100/18200)
+2026-10-13T22:17:03.1929918Z Updating files:  51% (9282/18200)
+2026-10-13T22:17:03.5502982Z Updating files:  52% (9464/18200)
+2026-10-13T22:17:04.0510012Z Updating files:  52% (9498/18200)
+2026-10-13T22:17:04.2837023Z Updating files:  53% (9646/18200)
+2026-10-13T22:17:04.3350478Z Updating files:  54% (9828/18200)
+2026-10-13T22:17:04.3989485Z Updating files:  54% (9888/18200)
+2026-10-13T22:17:04.5150554Z Updating files:  55% (10010/18200)
+2026-10-13T22:17:05.1860468Z Updating files:  56% (10192/18200)
+2026-10-13T22:17:05.2892424Z Updating files:  57% (10374/18200)
+2026-10-13T22:17:05.3417500Z Updating files:  58% (10556/18200)
+2026-10-13T22:17:05.4022148Z Updating files:  58% (10642/18200)
+2026-10-13T22:17:05.5110609Z Updating files:  59% (10738/18200)
+2026-10-13T22:17:05.5488639Z Updating files:  60% (10920/18200)
+2026-10-13T22:17:05.7947783Z Updating files:  61% (11102/18200)
+2026-10-13T22:17:06.4883497Z Updating files:  62% (11284/18200)
+2026-10-13T22:17:07.5588201Z Updating files:  62% (11397/18200)
+2026-10-13T22:17:08.1120940Z Updating files:  62% (11423/18200)
+2026-10-13T22:17:08.2681632Z Updating files:  63% (11466/18200)
+2026-10-13T22:17:08.3544461Z Updating files:  64% (11648/18200)
+2026-10-13T22:17:08.3765209Z Updating files:  64% (11801/18200)
+2026-10-13T22:17:08.4807867Z Updating files:  65% (11830/18200)
+2026-10-13T22:17:08.5784326Z Updating files:  66% (12012/18200)
+2026-10-13T22:17:09.2243184Z Updating files:  67% (12194/18200)
+2026-10-13T22:17:09.4092648Z Updating files:  68% (12376/18200)
+2026-10-13T22:17:09.8831758Z Updating files:  68% (12382/18200)
+2026-10-13T22:17:09.9843783Z Updating files:  69% (12558/18200)
+2026-10-13T22:17:10.0846606Z Updating files:  70% (12740/18200)
+2026-10-13T22:17:10.2687072Z Updating files:  71% (12922/18200)
+2026-10-13T22:17:10.3697062Z Updating files:  72% (13104/18200)
+2026-10-13T22:17:10.5696128Z Updating files:  72% (13169/18200)
+2026-10-13T22:17:11.5870342Z Updating files:  73% (13286/18200)
+2026-10-13T22:17:11.7946100Z Updating files:  73% (13326/18200)
+2026-10-13T22:17:11.9411768Z Updating files:  74% (13468/18200)
+2026-10-13T22:17:11.9720812Z Updating files:  75% (13650/18200)
+2026-10-13T22:17:12.0463988Z Updating files:  76% (13832/18200)
+2026-10-13T22:17:12.0777070Z Updating files:  77% (14014/18200)
+2026-10-13T22:17:12.1126143Z Updating files:  78% (14196/18200)
+2026-10-13T22:17:12.1690630Z Updating files:  79% (14378/18200)
+2026-10-13T22:17:12.3627016Z Updating files:  80% (14560/18200)
+2026-10-13T22:17:12.3882528Z Updating files:  81% (14742/18200)
+2026-10-13T22:17:14.5759264Z Updating files:  81% (14757/18200)
+2026-10-13T22:17:15.6199609Z Updating files:  81% (14849/18200)
+2026-10-13T22:17:16.6582622Z Updating files:  81% (14872/18200)
+2026-10-13T22:17:17.1883770Z Updating files:  81% (14897/18200)
+2026-10-13T22:17:17.7384695Z Updating files:  82% (14924/18200)
+2026-10-13T22:17:18.8400473Z Updating files:  82% (14953/18200)
+2026-10-13T22:17:19.7482395Z Updating files:  82% (14992/18200)
+2026-10-13T22:17:19.7958186Z Updating files:  82% (15028/18200)
+2026-10-13T22:17:20.0242877Z Updating files:  83% (15106/18200)
+2026-10-13T22:17:20.3093146Z Updating files:  84% (15288/18200)
+2026-10-13T22:17:20.4028008Z Updating files:  85% (15470/18200)
+2026-10-13T22:17:20.4295496Z Updating files:  86% (15652/18200)
+2026-10-13T22:17:20.5039068Z Updating files:  86% (15697/18200)
+2026-10-13T22:17:20.6142342Z Updating files:  87% (15834/18200)
+2026-10-13T22:17:20.6942639Z Updating files:  88% (16016/18200)
+2026-10-13T22:17:20.7918298Z Updating files:  89% (16198/18200)
+2026-10-13T22:17:20.8810933Z Updating files:  90% (16380/18200)
+2026-10-13T22:17:20.9730434Z Updating files:  91% (16562/18200)
+2026-10-13T22:17:21.1144728Z Updating files:  92% (16744/18200)
+2026-10-13T22:17:21.2293700Z Updating files:  93% (16926/18200)
+2026-10-13T22:17:21.3567846Z Updating files:  94% (17108/18200)
+2026-10-13T22:17:21.6317377Z Updating files:  95% (17290/18200)
+2026-10-13T22:17:21.6900835Z Updating files:  95% (17380/18200)
+2026-10-13T22:17:21.7719787Z Updating files:  96% (17472/18200)
+2026-10-13T22:17:21.8205317Z Updating files:  97% (17654/18200)
+2026-10-13T22:17:21.8466292Z Updating files:  98% (17836/18200)
+2026-10-13T22:17:21.8720755Z Updating files:  99% (18018/18200)
+2026-10-13T22:17:21.8721216Z Updating files: 100% (18200/18200)
+2026-10-13T22:17:21.8721561Z Updating files: 100% (18200/18200), done.
+2026-10-13T22:17:21.9007462Z Switched to a new branch 'main'
+2026-10-13T22:17:21.9020553Z branch 'main' set up to track 'origin/main'.
+2026-10-13T22:17:22.0072552Z ##[endgroup]
+2026-10-13T22:17:22.0333909Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+2026-10-13T22:17:22.0531608Z f026d26b121795c7eebd7d354c7819c26c6168b9
+2026-10-13T22:17:22.2810817Z ##[group]Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+2026-10-13T22:17:22.2811546Z with:
+2026-10-13T22:17:22.2811816Z   node-version: 24.19.0
+2026-10-13T22:17:22.2812071Z   cache: npm
+2026-10-13T22:17:22.2812287Z   check-latest: false
+2026-10-13T22:17:22.2815119Z   token: ***
+2026-10-13T22:17:22.2815376Z   package-manager-cache: true
+2026-10-13T22:17:22.2815654Z env:
+2026-10-13T22:17:22.2815828Z   RETAIN_INSTALLER: true
+2026-10-13T22:17:22.2816065Z ##[endgroup]
+2026-10-13T22:17:22.7064729Z Attempting to download 24.19.0...
+2026-10-13T22:17:23.7238586Z Acquiring 24.19.0 - x64 from https://github.com/actions/node-versions/releases/download/24.19.0-30872449280/node-24.19.0-win32-x64.7z
+2026-10-13T22:17:24.1426447Z Extracting ...
+2026-10-13T22:17:29.8860998Z Adding to the cache ...
+2026-10-13T22:17:36.8622854Z ##[group]Environment details
+2026-10-13T22:17:37.8753328Z node: v24.19.0
+2026-10-13T22:17:37.8753909Z npm: 11.17.0
+2026-10-13T22:17:37.8754452Z yarn: 1.22.22
+2026-10-13T22:17:37.8755106Z ##[endgroup]
+2026-10-13T22:17:37.9120713Z [command]C:\Windows\system32\cmd.exe /D /S /C "C:\hostedtoolcache\windows\node\24.19.0\x64\npm.cmd config get cache"
+2026-10-13T22:17:38.1203541Z C:\npm\cache
+2026-10-13T22:17:38.6261181Z npm cache is not found
+2026-10-13T22:17:38.6499778Z ##[group]Run node scripts/ci-artifact-evidence.cjs snapshot
+2026-10-13T22:17:38.6500126Z [36;1mnode scripts/ci-artifact-evidence.cjs snapshot[0m
+2026-10-13T22:17:38.6552451Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-13T22:17:38.6552703Z env:
+2026-10-13T22:17:38.6552892Z   RETAIN_INSTALLER: true
+2026-10-13T22:17:38.6553066Z ##[endgroup]
+2026-10-13T22:17:42.1641388Z ##[group]Run npm ci --no-audit --no-fund
+2026-10-13T22:17:42.1641707Z [36;1mnpm ci --no-audit --no-fund[0m
+2026-10-13T22:17:42.1695954Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-13T22:17:42.1696371Z env:
+2026-10-13T22:17:42.1696630Z   RETAIN_INSTALLER: true
+2026-10-13T22:17:42.1696907Z ##[endgroup]
+2026-10-13T22:17:48.7795907Z npm warn deprecated rimraf@2.6.3: Rimraf versions prior to v4 are no longer supported
+2026-10-13T22:17:49.1141711Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2026-10-13T22:17:49.3492225Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2026-10-13T22:17:51.4284908Z npm warn deprecated boolean@3.2.0: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+2026-10-13T22:17:57.0669959Z 
+2026-10-13T22:17:57.0670867Z added 377 packages in 14s
+2026-10-13T22:17:57.0681713Z npm warn allow-scripts 3 packages have install scripts not yet covered by allowScripts:
+2026-10-13T22:17:57.0682597Z npm warn allow-scripts   electron-winstaller@5.4.0 (install: node ./script/select-7z-arch.js)
+2026-10-13T22:17:57.0684052Z npm warn allow-scripts   esbuild@0.25.12 (postinstall: node install.js)
+2026-10-13T22:17:57.0684925Z npm warn allow-scripts   esbuild@0.28.2 (postinstall: node install.js)
+2026-10-13T22:17:57.0687529Z npm warn allow-scripts
+2026-10-13T22:17:57.0691618Z npm warn allow-scripts Run `npm approve-scripts --allow-scripts-pending` to review, or `npm approve-scripts <pkg>` to allow.
+2026-10-13T22:17:58.6085594Z ##[group]Run npm run verify
+2026-10-13T22:17:58.6085808Z [36;1mnpm run verify[0m
+2026-10-13T22:17:58.6133641Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-13T22:17:58.6133851Z env:
+2026-10-13T22:17:58.6134496Z   RETAIN_INSTALLER: true
+2026-10-13T22:17:58.6134635Z ##[endgroup]
+2026-10-13T22:17:59.4422084Z 
+2026-10-13T22:17:59.4423214Z > thoughtline@0.0.32 verify
+2026-10-13T22:17:59.4423670Z > node scripts/verify.cjs
+2026-10-13T22:17:59.4423869Z 
+2026-10-13T22:17:59.6899413Z 
+2026-10-13T22:17:59.6900347Z > thoughtline@0.0.32 typecheck
+2026-10-13T22:17:59.6901002Z > node node_modules/typescript/bin/tsc --noEmit
+2026-10-13T22:17:59.6901270Z 
+2026-10-13T22:18:01.4305713Z 
+2026-10-13T22:18:01.4306048Z > thoughtline@0.0.32 test
+2026-10-13T22:18:01.4306363Z > node node_modules/vitest/vitest.mjs run
+2026-10-13T22:18:01.4306537Z 
+2026-10-13T22:18:01.4306551Z 
+2026-10-13T22:18:01.4307365Z [1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90mD:/a/thoughtline/thoughtline[39m
+2026-10-13T22:18:01.4307645Z 
+2026-10-13T22:18:01.7458611Z  [32m✓[39m tests/unit/classification.test.ts [2m([22m[2m17 tests[22m[2m)[22m[32m 34[2mms[22m[39m
+2026-10-13T22:18:02.5466797Z  [32m✓[39m tests/unit/storageLocations.test.ts [2m([22m[2m15 tests[22m[2m)[22m[33m 649[2mms[22m[39m
+2026-10-13T22:18:02.7614560Z  [32m✓[39m tests/unit/round5MergeTargets.test.ts [2m([22m[2m17 tests[22m[2m)[22m[32m 47[2mms[22m[39m
+2026-10-13T22:18:02.9088003Z  [32m✓[39m tests/unit/p3IdeaCommands.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 25[2mms[22m[39m
+2026-10-13T22:18:03.3203046Z  [32m✓[39m tests/unit/repository.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 277[2mms[22m[39m
+2026-10-13T22:18:03.5021186Z  [32m✓[39m tests/unit/ideaPlacement.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 54[2mms[22m[39m
+2026-10-13T22:18:04.3409335Z  [32m✓[39m tests/unit/ideaExport.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 575[2mms[22m[39m
+2026-10-13T22:18:04.3410731Z    [33m[2m✓[22m[39m failed rename keeps previous destination bytes and cleans only the export temporary file[33m 456[2mms[22m[39m
+2026-10-13T22:18:04.4549596Z  [32m✓[39m tests/unit/shelfState.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+2026-10-13T22:18:04.5918153Z  [32m✓[39m tests/unit/round5Grouping.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 26[2mms[22m[39m
+2026-10-13T22:18:04.8477754Z  [32m✓[39m tests/unit/p3Repository.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 135[2mms[22m[39m
+2026-10-13T22:18:04.9769387Z  [32m✓[39m tests/unit/p3Schema.test.ts [2m([22m[2m19 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+2026-10-13T22:18:05.1241801Z  [32m✓[39m tests/unit/positioning.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 26[2mms[22m[39m
+2026-10-13T22:18:05.2779382Z  [32m✓[39m tests/unit/clipCommands.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 25[2mms[22m[39m
+2026-10-13T22:18:05.8297068Z  [32m✓[39m tests/unit/clipProjection.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 426[2mms[22m[39m
+2026-10-13T22:18:05.9823215Z  [32m✓[39m tests/unit/round3Backfill.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 38[2mms[22m[39m
+2026-10-13T22:18:06.5729284Z  [32m✓[39m tests/unit/packagedLaunch.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 486[2mms[22m[39m
+2026-10-13T22:18:06.5730563Z    [33m[2m✓[22m[39m actual Playwright early process death retains a failed supervisor receipt[33m 371[2mms[22m[39m
+2026-10-13T22:18:06.8260757Z  [32m✓[39m tests/unit/preferences.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 132[2mms[22m[39m
+2026-10-13T22:18:06.9871480Z  [32m✓[39m tests/unit/ideaWorkflow.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 45[2mms[22m[39m
+2026-10-13T22:18:07.1251794Z  [32m✓[39m tests/unit/round3Recovery.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 27[2mms[22m[39m
+2026-10-13T22:18:07.2758617Z  [32m✓[39m tests/unit/i18n.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 37[2mms[22m[39m
+2026-10-13T22:18:07.4142319Z  [32m✓[39m tests/unit/reminderScheduler.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 26[2mms[22m[39m
+2026-10-13T22:18:07.5338682Z  [32m✓[39m tests/unit/centeredRope.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+2026-10-13T22:18:07.7071300Z  [32m✓[39m tests/unit/appearance.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 52[2mms[22m[39m
+2026-10-13T22:18:07.8452161Z  [32m✓[39m tests/unit/arrangeClips.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+2026-10-13T22:18:07.9613072Z  [32m✓[39m tests/unit/draftAutosaver.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+2026-10-13T22:18:08.0830766Z  [32m✓[39m tests/unit/rememberIdeaProject.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+2026-10-13T22:18:08.2119127Z  [32m✓[39m tests/unit/round5ShelfFilter.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+2026-10-13T22:18:08.3270546Z  [32m✓[39m tests/unit/reminderFallback.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+2026-10-13T22:18:11.1254442Z [90mstdout[2m | tests/unit/shelfPresentation.test.ts
+2026-10-13T22:18:11.1256027Z [22m[39mDownloading Electron binary...
+2026-10-13T22:18:11.1256677Z 
+2026-10-13T22:18:11.1486594Z  [32m✓[39m tests/unit/shelfPresentation.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+2026-10-13T22:18:11.3108093Z  [32m✓[39m tests/unit/ideaHistory.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+2026-10-13T22:18:11.6327924Z  [32m✓[39m tests/unit/preferenceOrdering.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+2026-10-13T22:18:11.7497366Z  [32m✓[39m tests/unit/agentSplitPlacement.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+2026-10-13T22:18:11.8851621Z  [32m✓[39m tests/unit/ideaCommands.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+2026-10-13T22:18:11.9922257Z  [32m✓[39m tests/unit/clipLayout.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+2026-10-13T22:18:12.1722665Z  [32m✓[39m tests/unit/projectDeletion.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 48[2mms[22m[39m
+2026-10-13T22:18:12.2826957Z  [32m✓[39m tests/unit/macLauncherGenerator.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 9[2mms[22m[39m
+2026-10-13T22:18:12.4165351Z  [32m✓[39m tests/unit/titleOnly.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+2026-10-13T22:18:12.5257651Z  [32m✓[39m tests/unit/round5ManageBounds.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+2026-10-13T22:18:12.6589367Z  [32m✓[39m tests/unit/paperDrop.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 28[2mms[22m[39m
+2026-10-13T22:18:12.7816166Z  [32m✓[39m tests/unit/reminders.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+2026-10-13T22:18:12.9022854Z  [32m✓[39m tests/unit/reminderContinuity.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+2026-10-13T22:18:13.4130635Z [90mstderr[2m | tests/unit/ciFixtureDeadline.test.ts[2m > [22m[2mCI fixture timeout is reported without deleting its data
+2026-10-13T22:18:13.4134802Z [22m[39mFixture exceeded its deadline; verification failed and data is retained: C:\Users\RUNNER~1\AppData\Local\Temp\thoughtline-ci-deadline-a3GKmu\worker.cjs
+2026-10-13T22:18:13.4135875Z 
+2026-10-13T22:18:13.5107246Z  [32m✓[39m tests/unit/ciFixtureDeadline.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 498[2mms[22m[39m
+2026-10-13T22:18:13.5108874Z    [33m[2m✓[22m[39m CI fixture timeout is reported without deleting its data[33m 370[2mms[22m[39m
+2026-10-13T22:18:13.6173807Z  [32m✓[39m tests/unit/shortcuts.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-13T22:18:13.7240178Z  [32m✓[39m tests/unit/spaceAllocation.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+2026-10-13T22:18:13.8249901Z  [32m✓[39m tests/unit/fixedRope.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-13T22:18:13.9320057Z  [32m✓[39m tests/unit/motion.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-13T22:18:15.8868555Z  [32m✓[39m tests/unit/windowsAtomicWrite.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 1838[2mms[22m[39m
+2026-10-13T22:18:15.8869808Z    [33m[2m✓[22m[39m Windows transient EPERM retries without losing the old snapshot[33m 486[2mms[22m[39m
+2026-10-13T22:18:15.8870535Z    [33m[2m✓[22m[39m Windows transient EBUSY retries without losing the old snapshot[33m 447[2mms[22m[39m
+2026-10-13T22:18:15.8871266Z    [33m[2m✓[22m[39m Windows transient EACCES retries without losing the old snapshot[33m 470[2mms[22m[39m
+2026-10-13T22:18:15.8872185Z    [33m[2m✓[22m[39m Windows exhausted rename retries preserve the prior snapshot and remove only the temporary file[33m 433[2mms[22m[39m
+2026-10-13T22:18:15.9947354Z  [32m✓[39m tests/unit/agentInk.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+2026-10-13T22:18:16.1685607Z  [32m✓[39m tests/unit/round3Capacity.test.ts [2m([22m[2m17 tests[22m[2m)[22m[32m 55[2mms[22m[39m
+2026-10-13T22:18:16.2840599Z  [32m✓[39m tests/unit/idleFixtureCleanup.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+2026-10-13T22:18:16.3984993Z  [32m✓[39m tests/unit/topEdge.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+2026-10-13T22:18:16.5035210Z  [32m✓[39m tests/unit/compositionSession.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+2026-10-13T22:18:16.6091523Z  [32m✓[39m tests/unit/shortcutKeys.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+2026-10-13T22:18:16.7315559Z  [32m✓[39m tests/unit/ciEvidence.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 16[2mms[22m[39m
+2026-10-13T22:18:16.8686799Z  [32m✓[39m tests/unit/reminderTime.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+2026-10-13T22:18:16.9716704Z  [32m✓[39m tests/unit/manageGeometry.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+2026-10-13T22:18:17.0736083Z  [32m✓[39m tests/unit/visibilityMotion.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 2[2mms[22m[39m
+2026-10-13T22:18:17.1800100Z  [32m✓[39m tests/unit/ropeGeometry.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+2026-10-13T22:18:17.2921969Z  [32m✓[39m tests/unit/compositionFlush.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+2026-10-13T22:18:17.4128296Z  [32m✓[39m tests/unit/agentPalette.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+2026-10-13T22:18:17.5260717Z  [32m✓[39m tests/unit/platformHost.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+2026-10-13T22:18:17.6335489Z  [32m✓[39m tests/unit/composerMaterial.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 2[2mms[22m[39m
+2026-10-13T22:18:17.7500588Z  [32m✓[39m tests/unit/notificationDelivery.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+2026-10-13T22:18:17.8606782Z  [32m✓[39m tests/unit/composer.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 2[2mms[22m[39m
+2026-10-13T22:18:17.9657790Z  [32m✓[39m tests/unit/deliveryVersion.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+2026-10-13T22:18:18.0952357Z  [32m✓[39m tests/unit/classificationDisplay.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+2026-10-13T22:18:18.1063780Z 
+2026-10-13T22:18:18.1119737Z [2m Test Files [22m [1m[32m66 passed[39m[22m[90m (66)[39m
+2026-10-13T22:18:18.1122483Z [2m      Tests [22m [1m[32m412 passed[39m[22m[90m (412)[39m
+2026-10-13T22:18:18.1124611Z [2m   Start at [22m 22:18:01
+2026-10-13T22:18:18.1125616Z [2m   Duration [22m 16.67s[2m (tests 56%, import 33%, transform 9%, worker 2%)[22m
+2026-10-13T22:18:18.1135344Z 
+2026-10-13T22:18:18.1154113Z [2m    Isolate [22m [33m66 workers spawned[39m[2m · ~86ms startup each (spawn + environment, per file)[22m
+2026-10-13T22:18:18.1155751Z [2m            [22m [2mat least ~5.58s faster with [22m[33misolate: false[39m[2m — reuses workers across files instead of one per file[22m
+2026-10-13T22:18:18.1156561Z 
+2026-10-13T22:18:18.3630716Z 
+2026-10-13T22:18:18.3631556Z > thoughtline@0.0.32 build
+2026-10-13T22:18:18.3632495Z > node node_modules/electron-vite/bin/electron-vite.js build && node scripts/build-notification-native.cjs
+2026-10-13T22:18:18.3633051Z 
+2026-10-13T22:18:18.7441980Z [36mvite v7.3.7 [32mbuilding ssr environment for production...[36m[39m
+2026-10-13T22:18:18.8040836Z transforming...
+2026-10-13T22:18:19.1922819Z [32m✓[39m 41 modules transformed.
+2026-10-13T22:18:19.2823826Z rendering chunks...
+2026-10-13T22:18:19.2854883Z [2mout/main/[22m[36mindex.js  [39m[1m[2m269.54 kB[22m[1m[22m
+2026-10-13T22:18:19.2855586Z [32m✓ built in 526ms[39m
+2026-10-13T22:18:19.2890912Z [36mvite v7.3.7 [32mbuilding ssr environment for production...[36m[39m
+2026-10-13T22:18:19.2924582Z transforming...
+2026-10-13T22:18:19.2974510Z [32m✓[39m 1 modules transformed.
+2026-10-13T22:18:19.3006746Z rendering chunks...
+2026-10-13T22:18:19.3016274Z [2mout/preload/[22m[36mindex.js  [39m[1m[2m6.20 kB[22m[1m[22m
+2026-10-13T22:18:19.3016890Z [32m✓ built in 12ms[39m
+2026-10-13T22:18:19.3046428Z [36mvite v7.3.7 [32mbuilding client environment for production...[36m[39m
+2026-10-13T22:18:19.3213791Z transforming...
+2026-10-13T22:18:20.6858785Z [32m✓[39m 98 modules transformed.
+2026-10-13T22:18:20.8719164Z rendering chunks...
+2026-10-13T22:18:20.8801721Z [2m../../out/renderer/[22m[32mindex.html                                  [39m[1m[2m  0.52 kB[22m[1m[22m
+2026-10-13T22:18:20.8804474Z [2m../../out/renderer/[22m[32massets/approved-TL-brand-logo-vrNXAf6L.jpg  [39m[1m[2m 98.37 kB[22m[1m[22m
+2026-10-13T22:18:20.8810120Z [2m../../out/renderer/[22m[35massets/index-BCFhQIUp.css                   [39m[1m[2m 96.22 kB[22m[1m[22m
+2026-10-13T22:18:20.8814640Z [2m../../out/renderer/[22m[36massets/index-BCRoVgKO.js                    [39m[1m[33m998.28 kB[39m[22m
+2026-10-13T22:18:20.8817222Z [32m✓ built in 1.57s[39m
+2026-10-13T22:18:20.9782651Z (node:5060) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+2026-10-13T22:18:20.9786126Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-13T22:18:21.0330317Z ##[group]Run New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
+2026-10-13T22:18:21.0330743Z [36;1mNew-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null[0m
+2026-10-13T22:18:21.0331066Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/hidden-manage-reopen.cjs[0m
+2026-10-13T22:18:21.0331363Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Confirmed hidden Manage reopen failed' }[0m
+2026-10-13T22:18:21.0331647Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-workflow.cjs[0m
+2026-10-13T22:18:21.0331904Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round UI failed' }[0m
+2026-10-13T22:18:21.0332167Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-native-menu.cjs[0m
+2026-10-13T22:18:21.0332447Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round native menu failed' }[0m
+2026-10-13T22:18:21.0332733Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-calendar-navigation.cjs[0m
+2026-10-13T22:18:21.0333086Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round calendar return failed' }[0m
+2026-10-13T22:18:21.0333368Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-arrange-workflow.cjs[0m
+2026-10-13T22:18:21.0333646Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round arrangement failed' }[0m
+2026-10-13T22:18:21.0333928Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-split-menu-workflow.cjs[0m
+2026-10-13T22:18:21.0334206Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round split menu failed' }[0m
+2026-10-13T22:18:21.0334483Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-merge-menu-workflow.cjs[0m
+2026-10-13T22:18:21.0334793Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round merge menu failed' }[0m
+2026-10-13T22:18:21.0335771Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-capacity-workflow.cjs[0m
+2026-10-13T22:18:21.0336057Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Capacity and swap workflow failed' }[0m
+2026-10-13T22:18:21.0336332Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/positioning-workflow.cjs[0m
+2026-10-13T22:18:21.0336641Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Tag positioning and effective status workflow failed' }[0m
+2026-10-13T22:18:21.0336946Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/title-edit-workflow.cjs[0m
+2026-10-13T22:18:21.0337232Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Optional title live input regression failed' }[0m
+2026-10-13T22:18:21.0337550Z [36;1mforeach ($test in @('more-menu-workflow', 'title-only-workflow', 'reminder-workflow')) {[0m
+2026-10-13T22:18:21.0337844Z [36;1m  & node scripts/run-ci-fixture.cjs "tests/electron/$test.cjs"[0m
+2026-10-13T22:18:21.0338207Z [36;1m  if ($LASTEXITCODE -ne 0) { throw "$test failed" }[0m
+2026-10-13T22:18:21.0338397Z [36;1m}[0m
+2026-10-13T22:18:21.0386927Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-13T22:18:21.0387133Z env:
+2026-10-13T22:18:21.0387254Z   RETAIN_INSTALLER: true
+2026-10-13T22:18:21.0387432Z   THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round2/windows
+2026-10-13T22:18:21.0387626Z   THOUGHTLINE_FAKE_CLIPBOARD: 1
+2026-10-13T22:18:21.0387763Z   THOUGHTLINE_FIXTURE_TRACE: 1
+2026-10-13T22:18:21.0387895Z ##[endgroup]
+2026-10-13T22:18:26.2026934Z {"platform":"win32","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-hidden-manage-l4HJgY","cases":["visible-dirty-settings-still-block-close-and-preserve-prompt-beside-new","confirmed-hidden-manage-does-not-need-a-second-renderer-ack","reopened-visible-settings-require-fresh-save-guard","normal-quit-preserves-draft-with-hidden-manage"],"pids":[7740,6840,7844,1448,1908,4084,7924],"scope":"Real source lifecycle with deliberately unresponsive hidden Manage leave IPC; visible guards remain real","initialSettingsResult":{"ok":true},"normalClose":true,"dataRemoved":true,"passed":true}
+2026-10-13T22:18:26.2164033Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\hidden-manage-reopen.cjs","pid":3224,"passed":true,"timedOut":false,"code":0}
+2026-10-13T22:18:26.8999948Z FIXTURE warmViews: shelf
+2026-10-13T22:18:27.0707440Z FIXTURE warmViews: settings
+2026-10-13T22:18:27.5608531Z FIXTURE warmViews: composer
+2026-10-13T22:18:27.5608943Z FIXTURE composer: invoking shortcut
+2026-10-13T22:18:27.5609233Z FIXTURE composer: shortcut invoked
+2026-10-13T22:18:27.7367952Z FIXTURE composer: created
+2026-10-13T22:18:27.7584122Z FIXTURE composer: native visibility checked
+2026-10-13T22:18:27.7992783Z FIXTURE composer: textbox visible
+2026-10-13T22:18:27.8318945Z FIXTURE composer: focused
+2026-10-13T22:18:27.9409928Z FIXTURE warmViews: ready
+2026-10-13T22:18:28.0478566Z ROUND2 check: hint-delay-small-dismiss-on-menu
+2026-10-13T22:18:28.9355444Z ROUND2 check: focus-ring-inside-editor-edges
+2026-10-13T22:18:29.3595676Z ROUND2 check: calendar-fills-resized-height-and-arrows
+2026-10-13T22:18:30.0519065Z ROUND2 check: settings-back-restores-month-and-window
+2026-10-13T22:18:30.5656031Z ROUND2 check: settings-dirty-return-retains-draft-and-close-cancels
+2026-10-13T22:18:31.5705491Z ROUND2 check: settings-external-update-does-not-invent-dirty-draft
+2026-10-13T22:18:32.0259278Z ROUND2 check: settings-discard-clears-hidden-close-guard
+2026-10-13T22:18:32.5090695Z ROUND2 check: menu-stash-current-preserves-other-pages
+2026-10-13T22:18:32.7252797Z ROUND2 check: navigation-performance-baseline
+2026-10-13T22:18:33.7908170Z {"platform":"win32","arch":"x64","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-round2-Yxb8UE","evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round2\\windows\\workflow-fkSfz4","cases":[{"name":"hint-delay-small-dismiss-on-menu","passed":true,"detail":{"x":280,"y":354,"width":60,"height":24}},{"name":"focus-ring-inside-editor-edges","passed":true,"detail":{"outline":"0px","offset":"-3px","shadow":"rgb(102, 105, 114) 0px 0px 0px 1px inset","border":"rgb(102, 105, 114)","x":14,"right":406,"parentX":14,"parentRight":406}},{"name":"calendar-fills-resized-height-and-arrows","passed":true,"detail":{"content":{"height":498,"bottom":646,"width":914},"grid":{"height":488,"bottom":638,"width":891},"cell":{"height":87,"bottom":270,"width":123},"arrow":{"height":36,"bottom":138,"width":36},"svg":18}},{"name":"settings-back-restores-month-and-window","passed":true,"detail":{"title":"2026年9月","width":950}},{"name":"settings-dirty-return-retains-draft-and-close-cancels","passed":true,"detail":{"draftRetained":true,"closeCanceled":true}},{"name":"settings-external-update-does-not-invent-dirty-draft","passed":true,"detail":{"externalChangeRebased":true,"navigationAllowed":true}},{"name":"settings-discard-clears-hidden-close-guard","passed":true,"detail":{"discardAllowsNextVisit":true}},{"name":"menu-stash-current-preserves-other-pages","passed":true,"detail":{"labels":["新建念头","","只看「保留分组」","筛选标签…","显示全部","Thoughtline 日历","","整理"],"ids":["r2-0","r2-2"],"current":"r2-2"}},{"name":"navigation-performance-baseline","passed":true,"detail":{"samples":[85,80,77,98,72,81,76,78,62,63],"p50":77,"p95":98,"scope":"Playwright input plus two actual renderer frames, controlled environment"}}],"pids":[8800,5900,6508,5436,1720,7580,5172],"nativeOutsideClick":"not exercised by protocol fixture","normalClose":true,"dataRemoved":true,"passed":true}
+2026-10-13T22:18:33.8053379Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-workflow.cjs","pid":7076,"passed":true,"timedOut":false,"code":0}
+2026-10-13T22:18:34.3514480Z FIXTURE warmViews: shelf
+2026-10-13T22:18:34.6133132Z FIXTURE warmViews: settings
+2026-10-13T22:18:34.9608454Z FIXTURE warmViews: composer
+2026-10-13T22:18:34.9610620Z FIXTURE composer: invoking shortcut
+2026-10-13T22:18:34.9611348Z FIXTURE composer: shortcut invoked
+2026-10-13T22:18:35.1560349Z FIXTURE composer: created
+2026-10-13T22:18:35.1565345Z FIXTURE composer: native visibility checked
+2026-10-13T22:18:35.1899455Z FIXTURE composer: textbox visible
+2026-10-13T22:18:35.2142655Z FIXTURE composer: focused
+2026-10-13T22:18:35.2836739Z FIXTURE warmViews: ready
+2026-10-13T22:18:49.8867060Z NATIVE MENU FAILURE Error: Command failed: powershell.exe -NoProfile -NonInteractive -File D:\a\thoughtline\thoughtline\tests\electron\windows-native-menu-state.ps1 -OwnerPid 1376 -ExpectedCount 2 -BrowserHandles 393412,197146,459138
+2026-10-13T22:18:49.8868325Z Owned Views menu state did not reach expected count: {"menus":1,"expected":2,"ownerPid":1376,"foregroundPid":5996,"wind
+2026-10-13T22:18:49.8869065Z ows":[{"handle":"262768","className":"Chrome_WidgetWin_1","title":""},{"handle":"459138","className":"Chrome_WidgetWin_
+2026-10-13T22:18:49.8870746Z 1","title":"Thoughtline Shelf"}],"browserHandles":["393412","197146","459138"]}
+2026-10-13T22:18:49.8871285Z At D:\a\thoughtline\thoughtline\tests\electron\windows-native-menu-state.ps1:34 char:1
+2026-10-13T22:18:49.8871854Z + throw "Owned Views menu state did not reach expected count: $diagnost ...
+2026-10-13T22:18:49.8872265Z + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2026-10-13T22:18:49.8872762Z     + CategoryInfo          : OperationStopped: (Owned Views men...146","459138"]}:String) [], RuntimeException
+2026-10-13T22:18:49.8873427Z     + FullyQualifiedErrorId : Owned Views menu state did not reach expected count: {"menus":1,"expected":2,"ownerPid": 
+2026-10-13T22:18:49.8874060Z    1376,"foregroundPid":5996,"windows":[{"handle":"262768","className":"Chrome_WidgetWin_1","title":""},{"handle":"45  
+2026-10-13T22:18:49.8874676Z   9138","className":"Chrome_WidgetWin_1","title":"Thoughtline Shelf"}],"browserHandles":["393412","197146","459138"]   
+2026-10-13T22:18:49.8875070Z  }
+2026-10-13T22:18:49.8875216Z  
+2026-10-13T22:18:49.8875305Z 
+2026-10-13T22:18:49.8875449Z     at genericNodeError (node:internal/errors:985:15)
+2026-10-13T22:18:49.8876041Z     at wrappedFn (node:internal/errors:539:14)
+2026-10-13T22:18:49.8876348Z     at ChildProcess.exithandler (node:child_process:417:12)
+2026-10-13T22:18:49.8876653Z     at ChildProcess.emit (node:events:509:28)
+2026-10-13T22:18:49.8876949Z     at maybeClose (node:internal/child_process:1141:16)
+2026-10-13T22:18:49.8877300Z     at ChildProcess._handle.onexit (node:internal/child_process:306:5)
+2026-10-13T22:18:50.1759032Z {"platform":"win32","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-native-menu-XCFpOa","evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round2\\windows\\native-menu-3v0lc5","probes":[{"kind":"production-first","closed":true,"ownerFocusable":true,"ownerFocused":true,"receiverClicks":1},{"kind":"production-repeat","closed":true,"ownerFocusable":true,"ownerFocused":true,"receiverClicks":1},{"kind":"production-third","closed":true,"ownerFocusable":true,"ownerFocused":true,"receiverClicks":1}],"pids":[1288,1376,8844,8400,4776,8188,8560],"scope":"native Menu owner/cancel characterization; hosted Windows is not physical user-device acceptance","externalReceiver":true,"runtimePid":1376,"launcherPid":1288,"submenuNavigation":{"rawIndex":8,"selectableIndex":5,"labels":["新建念头","撤销挂上","只看「未分组」","筛选标签…","Thoughtline 日历","整理"]},"nativeMenuStates":[{"menus":1,"expected":1,"ownerPid":1376,"foregroundPid":5996,"windows":[{"handle":"262768","className":"Chrome_WidgetWin_1","title":""},{"handle":"459138","className":"Chrome_WidgetWin_1","title":"Thoughtline Shelf"}],"menuWindows":[{"handle":"262768","className":"Chrome_WidgetWin_1","title":""}],"browserHandles":["393412","197146","459138"],"matched":true}],"failure":"Error: Command failed: powershell.exe -NoProfile -NonInteractive -File D:\\a\\thoughtline\\thoughtline\\tests\\electron\\windows-native-menu-state.ps1 -OwnerPid 1376 -ExpectedCount 2 -BrowserHandles 393412,197146,459138\nOwned Views menu state did not reach expected count: {\"menus\":1,\"expected\":2,\"ownerPid\":1376,\"foregroundPid\":5996,\"wind\r\nows\":[{\"handle\":\"262768\",\"className\":\"Chrome_WidgetWin_1\",\"title\":\"\"},{\"handle\":\"459138\",\"className\":\"Chrome_WidgetWin_\r\n1\",\"title\":\"Thoughtline Shelf\"}],\"browserHandles\":[\"393412\",\"197146\",\"459138\"]}\r\nAt D:\\a\\thoughtline\\thoughtline\\tests\\electron\\windows-native-menu-state.ps1:34 char:1\r\n+ throw \"Owned Views menu state did not reach expected count: $diagnost ...\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : OperationStopped: (Owned Views men...146\",\"459138\"]}:String) [], RuntimeException\r\n    + FullyQualifiedErrorId : Owned Views menu state did not reach expected count: {\"menus\":1,\"expected\":2,\"ownerPid\": \r\n   1376,\"foregroundPid\":5996,\"windows\":[{\"handle\":\"262768\",\"className\":\"Chrome_WidgetWin_1\",\"title\":\"\"},{\"handle\":\"45  \r\n  9138\",\"className\":\"Chrome_WidgetWin_1\",\"title\":\"Thoughtline Shelf\"}],\"browserHandles\":[\"393412\",\"197146\",\"459138\"]   \r\n }\r\n \r\n\n    at genericNodeError (node:internal/errors:985:15)\n    at wrappedFn (node:internal/errors:539:14)\n    at ChildProcess.exithandler (node:child_process:417:12)\n    at ChildProcess.emit (node:events:509:28)\n    at maybeClose (node:internal/child_process:1141:16)\n    at ChildProcess._handle.onexit (node:internal/child_process:306:5)","receiverPids":[536,1804,7832,5416,7428],"receiverRemoved":false,"normalClose":true,"dataRemoved":false,"passed":false}
+2026-10-13T22:18:50.1871736Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-native-menu.cjs","pid":1900,"passed":false,"timedOut":false,"code":1}
+2026-10-13T22:18:50.4076570Z [31;1mException: [0mD:\a\_temp\e345aebd-5b7b-4d6d-8575-880a937b1e9f.ps1:8[0m
+2026-10-13T22:18:50.4077584Z [31;1m[0m[36;1mLine |[0m
+2026-10-13T22:18:50.4078307Z [31;1m[0m[36;1m[36;1m   8 | [0m if ($LASTEXITCODE -ne 0) { [36;1mthrow 'Second round native menu failed'[0m }[0m
+2026-10-13T22:18:50.4079407Z [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+2026-10-13T22:18:50.4079968Z [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mSecond round native menu failed[0m
+2026-10-13T22:18:50.4274709Z ##[error]Process completed with exit code 1.
+2026-10-13T22:18:50.4481315Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-10-13T22:18:50.4481609Z with:
+2026-10-13T22:18:50.4481820Z   name: Thoughtline-Windows-built-f026d26b121795c7eebd7d354c7819c26c6168b9-1
+2026-10-13T22:18:50.4482135Z   path: dist/*.exe
+dist/SHA256SUMS.txt
+dist/build-manifest.json
+
+2026-10-13T22:18:50.4482354Z   if-no-files-found: ignore
+2026-10-13T22:18:50.4482498Z   retention-days: 3
+2026-10-13T22:18:50.4482623Z   compression-level: 6
+2026-10-13T22:18:50.4482750Z   overwrite: false
+2026-10-13T22:18:50.4482878Z   include-hidden-files: false
+2026-10-13T22:18:50.4483018Z   archive: true
+2026-10-13T22:18:50.4483152Z env:
+2026-10-13T22:18:50.4483263Z   RETAIN_INSTALLER: true
+2026-10-13T22:18:50.4483393Z ##[endgroup]
+2026-10-13T22:18:50.5871210Z No files were found with the provided path: dist/*.exe
+2026-10-13T22:18:50.5871653Z dist/SHA256SUMS.txt
+2026-10-13T22:18:50.5872031Z dist/build-manifest.json. No artifacts will be uploaded.
+2026-10-13T22:18:50.6141676Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-10-13T22:18:50.6142086Z with:
+2026-10-13T22:18:50.6142432Z   name: Thoughtline-Windows-preflight-failed-f026d26b121795c7eebd7d354c7819c26c6168b9-1
+2026-10-13T22:18:50.6142845Z   path: dist/*.json
+2026-10-13T22:18:50.6143035Z   if-no-files-found: ignore
+2026-10-13T22:18:50.6143224Z   retention-days: 14
+2026-10-13T22:18:50.6143408Z   compression-level: 6
+2026-10-13T22:18:50.6143933Z   overwrite: false
+2026-10-13T22:18:50.6144131Z   include-hidden-files: false
+2026-10-13T22:18:50.6144345Z   archive: true
+2026-10-13T22:18:50.6144537Z env:
+2026-10-13T22:18:50.6144697Z   RETAIN_INSTALLER: true
+2026-10-13T22:18:50.6144880Z ##[endgroup]
+2026-10-13T22:18:50.7597591Z No files were found with the provided path: dist/*.json. No artifacts will be uploaded.
+2026-10-13T22:18:50.7813833Z ##[group]Run node scripts/ci-artifact-evidence.cjs collect
+2026-10-13T22:18:50.7814116Z [36;1mnode scripts/ci-artifact-evidence.cjs collect[0m
+2026-10-13T22:18:50.7860102Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-13T22:18:50.7860300Z env:
+2026-10-13T22:18:50.7860417Z   RETAIN_INSTALLER: true
+2026-10-13T22:18:50.7860543Z ##[endgroup]
+2026-10-13T22:18:54.1601452Z {"schema":1,"sha":"f026d26b121795c7eebd7d354c7819c26c6168b9","runId":"38476641307","attempt":"1","files":[{"path":"round2/windows/native-menu-3v0lc5/receipt.json","sha256":"a7e9186358ebeaeb254ccc184a1fd8728d675e66f80ea2875c92d5ac87b801b6","bytes":3786},{"path":"round2/windows/native-trace-thoughtline-hidden-manage-l4HJgY.log","sha256":"ea57dbb24e7891aa1f28a7cc0e462d47084429c087e6b135d3c65741b683cfd2","bytes":2629},{"path":"round2/windows/native-trace-thoughtline-native-menu-XCFpOa.log","sha256":"3c1e76b4ea79613cf80e99042143c68e73b01f3436cc218c953734810d7eeff8","bytes":2477},{"path":"round2/windows/native-trace-thoughtline-round2-Yxb8UE.log","sha256":"934cc99dcb9a0741280f60c829b54e09711be17b7292b47aa5820d64b6c4759c","bytes":3184},{"path":"round2/windows/reopen-6Z6Aij/launch-events.jsonl","sha256":"e4f3824e4e63e36e0ed7285fbfeef624bac648898e7dfc8271c135f0cf5de873","bytes":903},{"path":"round2/windows/reopen-6Z6Aij/receipt.json","sha256":"d7dbc6abfff0f3e7d21c8ac045dde76cb7f5f7d4fab854196f39f7390a567281","bytes":706},{"path":"round2/windows/supervisor-hidden-manage-reopen-1791929901335/supervisor.json","sha256":"dab684294b15ecda3aa84e6423bba7cb3ed2d2e644f3ae511a10efe0ea6b0651","bytes":1080},{"path":"round2/windows/supervisor-round2-native-menu-1791929913849/supervisor.json","sha256":"cdb022e17459d7a63887c4613b34d2acbd7a12e974b4ca50a65605f4e49d3f8c","bytes":6054},{"path":"round2/windows/supervisor-round2-workflow-1791929906258/supervisor.json","sha256":"12930fd544182d5247875d1599708d710a0e11896bcbac71b0f81de9fb856f77","bytes":3431},{"path":"round2/windows/workflow-fkSfz4/calendar.png","sha256":"2e08d6b25121ae07bce5a35a95048dc4fd07710cf9bad50363acff6b138f3d68","bytes":368840},{"path":"round2/windows/workflow-fkSfz4/editor.png","sha256":"33f89bdc64ad08f299fe970c0e8010f58e917c40df438d11204f82af5eb1fae1","bytes":119173},{"path":"round2/windows/workflow-fkSfz4/receipt.json","sha256":"b56ada5f0c6ec26ccbecffee8a37eaff9c237208f1e17a4be5e53b4163a620b0","bytes":3119}],"bytes":515382,"unchangedHistoricalFiles":17705}
+2026-10-13T22:18:54.2540087Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-10-13T22:18:54.2540505Z with:
+2026-10-13T22:18:54.2540825Z   name: Thoughtline-Windows-source-ui-f026d26b121795c7eebd7d354c7819c26c6168b9-1
+2026-10-13T22:18:54.2541209Z   path: dist/ci-evidence/**
+2026-10-13T22:18:54.2541423Z   if-no-files-found: warn
+2026-10-13T22:18:54.2541652Z   retention-days: 7
+2026-10-13T22:18:54.2541838Z   compression-level: 6
+2026-10-13T22:18:54.2542023Z   overwrite: false
+2026-10-13T22:18:54.2542205Z   include-hidden-files: false
+2026-10-13T22:18:54.2542412Z   archive: true
+2026-10-13T22:18:54.2542584Z env:
+2026-10-13T22:18:54.2542742Z   RETAIN_INSTALLER: true
+2026-10-13T22:18:54.2542934Z ##[endgroup]
+2026-10-13T22:18:54.3855336Z With the provided path, there will be 13 files uploaded
+2026-10-13T22:18:54.3858816Z Artifact name is valid!
+2026-10-13T22:18:54.3859305Z Root directory input is valid!
+2026-10-13T22:18:54.8115131Z Uploading artifact: Thoughtline-Windows-source-ui-f026d26b121795c7eebd7d354c7819c26c6168b9-1.zip
+2026-10-13T22:18:54.8146998Z Beginning upload of artifact content to blob storage
+2026-10-13T22:18:55.3762841Z Uploaded bytes 499355
+2026-10-13T22:18:55.4302438Z Finished uploading artifact content to blob storage!
+2026-10-13T22:18:55.4304637Z SHA256 digest of uploaded artifact is bc0aae92773960d168cfe5b921cef60d84904c371407126b3ce114d07c163fb6
+2026-10-13T22:18:55.4305273Z Finalizing artifact upload
+2026-10-13T22:18:55.8154876Z Artifact Thoughtline-Windows-source-ui-f026d26b121795c7eebd7d354c7819c26c6168b9-1 successfully finalized. Artifact ID 11854132160
+2026-10-13T22:18:55.8156093Z Artifact Thoughtline-Windows-source-ui-f026d26b121795c7eebd7d354c7819c26c6168b9-1 has been successfully uploaded! Final size is 499355 bytes. Artifact ID is 11854132160
+2026-10-13T22:18:55.8161712Z Artifact download URL: https://github.com/NocodeMrLi/thoughtline/actions/runs/38476641307/artifacts/11854132160
+2026-10-13T22:18:55.8441333Z Post job cleanup.
+2026-10-13T22:18:55.9597522Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-10-13T22:18:55.9796458Z git version 2.55.0.windows.5
+2026-10-13T22:18:55.9837985Z Copying 'C:\Users\runneradmin\.gitconfig' to 'D:\a\_temp\ad8021ec-d848-4d79-ba0c-0050376175c6\.gitconfig'
+2026-10-13T22:18:55.9853914Z Temporarily overriding HOME='D:\a\_temp\ad8021ec-d848-4d79-ba0c-0050376175c6' before making global git config changes
+2026-10-13T22:18:55.9854768Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-13T22:18:55.9860179Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\thoughtline\thoughtline
+2026-10-13T22:18:56.0057880Z Removing SSH command configuration
+2026-10-13T22:18:56.0064382Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-10-13T22:18:56.0268311Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-10-13T22:18:56.5029460Z Removing HTTP extra header
+2026-10-13T22:18:56.5037177Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-13T22:18:56.5249165Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-10-13T22:18:56.9586034Z Removing includeIf entries pointing to credentials config files
+2026-10-13T22:18:56.9595475Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-13T22:18:56.9785548Z includeif.gitdir:D:/a/thoughtline/thoughtline/.git.path
+2026-10-13T22:18:56.9786267Z includeif.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path
+2026-10-13T22:18:56.9786812Z includeif.gitdir:/github/workspace/.git.path
+2026-10-13T22:18:56.9787298Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-13T22:18:56.9818958Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/thoughtline/thoughtline/.git.path
+2026-10-13T22:18:56.9994767Z D:\a\_temp\git-credentials-d36f54a3-b604-4f4f-9ecc-ced659ad30cf.config
+2026-10-13T22:18:57.0022151Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/thoughtline/thoughtline/.git.path D\:\\a\\_temp\\git\-credentials\-d36f54a3\-b604\-4f4f\-9ecc\-ced659ad30cf\.config
+2026-10-13T22:18:57.0292710Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path
+2026-10-13T22:18:57.0459032Z D:\a\_temp\git-credentials-d36f54a3-b604-4f4f-9ecc-ced659ad30cf.config
+2026-10-13T22:18:57.0484004Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path D\:\\a\\_temp\\git\-credentials\-d36f54a3\-b604\-4f4f\-9ecc\-ced659ad30cf\.config
+2026-10-13T22:18:57.0670709Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-13T22:18:57.0833242Z /github/runner_temp/git-credentials-d36f54a3-b604-4f4f-9ecc-ced659ad30cf.config
+2026-10-13T22:18:57.0855463Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-d36f54a3\-b604\-4f4f\-9ecc\-ced659ad30cf\.config
+2026-10-13T22:18:57.1039454Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-13T22:18:57.1199087Z /github/runner_temp/git-credentials-d36f54a3-b604-4f4f-9ecc-ced659ad30cf.config
+2026-10-13T22:18:57.1229628Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-d36f54a3\-b604\-4f4f\-9ecc\-ced659ad30cf\.config
+2026-10-13T22:18:57.1416468Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-10-13T22:18:57.5438578Z Removing credentials config 'D:\a\_temp\git-credentials-d36f54a3-b604-4f4f-9ecc-ced659ad30cf.config'
+2026-10-13T22:18:57.5630353Z Cleaning up orphan processes

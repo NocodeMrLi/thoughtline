@@ -1,9 +1,9 @@
 {
-  "stage": "ROUND5_V0_0_31_R517_DUAL_VERIFIED_CLEANED_PRIVATE_PUBLICATION_VERIFIED_OWNER_PENDING",
-  "asOf": "2026-10-13",
+  "stage": "ROUND5_V0_0_32_R518_R527_SCOPED_DUAL_VERIFIED_CLEANED_PRIVATE_PUBLICATION_VERIFIED_OWNER_PENDING",
+  "asOf": "2026-10-14",
   "branch": "main",
-  "lastCommittedSource": "9d4ea599e71b4cb85707145ed6ca46e674cfafb0",
-  "currentCandidateVersion": "0.0.31",
+  "lastCommittedSource": "6135608fb949e58288efe652684560a1626e3be3",
+  "currentCandidateVersion": "0.0.32",
   "formalAcceptance": false,
   "round1": {
     "plan": "/Users/lihongwei/安安的成长笔记📒/晾念头 Thoughtline/Thoughtline第一轮修复优化.md",
@@ -2710,6 +2710,44 @@
       "privateReleaseAssetCount": 10,
       "storageAfterBytes": 272741961,
       "storageAfterArtifactCount": 38,
+      "userApplicationAndDataUntouched": true
+    },
+    "R5_18_27": {
+      "source": "6135608fb949e58288efe652684560a1626e3be3",
+      "tag": "v0.0.32",
+      "version": "0.0.32",
+      "workflowCommit": "b8e87e6b02d736763270ca3a5e38c93330e8a49c",
+      "windowsBuildRun": 38489171294,
+      "windowsValidationRun": 38490095906,
+      "windowsValidationResult": "success",
+      "windowsUnitPassed": 80,
+      "windowsUnitScope": "new and affected tests only",
+      "macUnitPassed": 408,
+      "macWindowsOnlySkipped": 4,
+      "macCurrentRegularPackageSuitesPassed": 22,
+      "macFastTitleUndoPassed": true,
+      "macMenuGapTargetedCasesPassed": 2,
+      "windowsActualContinuationSuitesPassed": 10,
+      "windowsSourceOnlyPlacementPassed": true,
+      "sameInstallerContinuation": true,
+      "sameSourceInputCount": 359,
+      "sourcePairProof": "evidence/round5/final-v0.0.32/source-pair-proof.json",
+      "reuseScopeProof": "evidence/round5/final-v0.0.32/targeted-validation-scope.json",
+      "releaseId": 412225874,
+      "releaseUrl": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.32",
+      "releaseProof": "evidence/round5/final-v0.0.32/release-verification.json",
+      "report": "../docs/releases/round5-v0.0.32-delivery.md",
+      "twoContractAudits": "completed, executor audit after original independent review",
+      "independentReview": {
+        "Critical": 0,
+        "Important": 8,
+        "Minor": 0,
+        "allEightFixed": true,
+        "laterChangesNotIndependentlyRereviewed": true
+      },
+      "technicalVerificationPassed": true,
+      "formalAcceptance": false,
+      "physicalAcceptance": false,
       "userApplicationAndDataUntouched": true
     }
   }

@@ -1,0 +1,192 @@
+{
+  "platform": "win32",
+  "dir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-native-menu-7hjcnr",
+  "evidence": "D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round2\\windows\\native-menu-cpuAn7",
+  "probes": [
+    {
+      "kind": "production-first",
+      "closed": true,
+      "ownerFocusable": true,
+      "ownerFocused": true,
+      "receiverClicks": 1
+    },
+    {
+      "kind": "production-repeat",
+      "closed": true,
+      "ownerFocusable": true,
+      "ownerFocused": true,
+      "receiverClicks": 1
+    },
+    {
+      "kind": "production-third",
+      "closed": true,
+      "ownerFocusable": true,
+      "ownerFocused": true,
+      "receiverClicks": 1
+    }
+  ],
+  "pids": [
+    9124,
+    7196,
+    4936,
+    5908,
+    5004,
+    8736,
+    7988
+  ],
+  "scope": "native Menu owner/cancel characterization; hosted Windows is not physical user-device acceptance",
+  "externalReceiver": true,
+  "runtimePid": 7196,
+  "launcherPid": 9124,
+  "submenuNavigation": {
+    "rawIndex": 8,
+    "selectableIndex": 5,
+    "labels": [
+      "新建念头",
+      "撤销挂上",
+      "只看「未分组」",
+      "筛选标签…",
+      "Thoughtline 日历",
+      "整理"
+    ]
+  },
+  "nativeMenuStates": [
+    {
+      "menus": 1,
+      "expected": 1,
+      "ownerPid": 7196,
+      "foregroundPid": 7196,
+      "windows": [
+        {
+          "handle": "393780",
+          "className": "Chrome_WidgetWin_1",
+          "title": ""
+        },
+        {
+          "handle": "589932",
+          "className": "Chrome_WidgetWin_1",
+          "title": "Thoughtline Shelf"
+        }
+      ],
+      "menuWindows": [
+        {
+          "handle": "393780",
+          "className": "Chrome_WidgetWin_1",
+          "title": ""
+        }
+      ],
+      "browserHandles": [
+        "328120",
+        "393326",
+        "589932"
+      ],
+      "matched": true
+    },
+    {
+      "menus": 2,
+      "expected": 2,
+      "ownerPid": 7196,
+      "foregroundPid": 7196,
+      "windows": [
+        {
+          "handle": "524882",
+          "className": "Chrome_WidgetWin_1",
+          "title": ""
+        },
+        {
+          "handle": "393780",
+          "className": "Chrome_WidgetWin_1",
+          "title": ""
+        },
+        {
+          "handle": "589932",
+          "className": "Chrome_WidgetWin_1",
+          "title": "Thoughtline Shelf"
+        }
+      ],
+      "menuWindows": [
+        {
+          "handle": "524882",
+          "className": "Chrome_WidgetWin_1",
+          "title": ""
+        },
+        {
+          "handle": "393780",
+          "className": "Chrome_WidgetWin_1",
+          "title": ""
+        }
+      ],
+      "browserHandles": [
+        "328120",
+        "393326",
+        "589932"
+      ],
+      "matched": true
+    },
+    {
+      "menus": 1,
+      "expected": 1,
+      "ownerPid": 7196,
+      "foregroundPid": 7196,
+      "windows": [
+        {
+          "handle": "393780",
+          "className": "Chrome_WidgetWin_1",
+          "title": ""
+        },
+        {
+          "handle": "589932",
+          "className": "Chrome_WidgetWin_1",
+          "title": "Thoughtline Shelf"
+        }
+      ],
+      "menuWindows": [
+        {
+          "handle": "393780",
+          "className": "Chrome_WidgetWin_1",
+          "title": ""
+        }
+      ],
+      "browserHandles": [
+        "328120",
+        "393326",
+        "589932"
+      ],
+      "matched": true
+    },
+    {
+      "menus": 0,
+      "expected": 0,
+      "ownerPid": 7196,
+      "foregroundPid": 5776,
+      "windows": [
+        {
+          "handle": "589932",
+          "className": "Chrome_WidgetWin_1",
+          "title": "Thoughtline Shelf"
+        }
+      ],
+      "menuWindows": [],
+      "browserHandles": [
+        "328120",
+        "393326",
+        "589932"
+      ],
+      "matched": true
+    }
+  ],
+  "firstEscapeRetainedRoot": true,
+  "submenuAndEscape": true,
+  "escapeClosureWait": "owned Win32 menu windows confirmed before each OS key injection; exact popup callback confirms root closure",
+  "receiverPids": [
+    1856,
+    5776,
+    2500,
+    6412,
+    1644
+  ],
+  "receiverRemoved": true,
+  "normalClose": true,
+  "dataRemoved": true,
+  "passed": true
+}

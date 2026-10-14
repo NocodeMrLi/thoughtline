@@ -1,0 +1,17 @@
+PASS no undo on opening or browsing
+PASS calendar updates immediately after current-only merge, retained source does not release slot
+PASS archive undo restores source and automatic backfill without pulling manual calendar stack
+PASS calendar split stays archived and undo restores full stack
+PASS arrange undo restores all original clip positions
+PASS hang restores entire archived stack, failed swap preserves undo and hang undo restores archive
+AssertionError [ERR_ASSERTION]: 挂绳空间已变化，请选择保存、整理挂上或换上。
+    at checked (/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-stack-workflow.cjs:7:20)
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-stack-workflow.cjs:24:32 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+CI FIXTURE {"file":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-stack-workflow.cjs","pid":59121,"passed":false,"timedOut":false,"code":1}

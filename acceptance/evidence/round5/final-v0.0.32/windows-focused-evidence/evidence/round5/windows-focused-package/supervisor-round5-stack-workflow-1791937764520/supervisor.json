@@ -1,0 +1,16 @@
+{
+  "file": "D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round5-stack-workflow.cjs",
+  "args": [],
+  "timeoutMs": 180000,
+  "startedAt": "2026-10-14T00:29:24.521Z",
+  "passed": true,
+  "timedOut": false,
+  "profileCleanup": "Delegated to fixture; supervisor never deletes data",
+  "pid": 6152,
+  "code": 0,
+  "signal": null,
+  "closeConfirmed": true,
+  "stdout": "PASS no undo on opening or browsing\nPASS calendar updates immediately after current-only merge, retained source does not release slot\nPASS archive undo restores source and automatic backfill without pulling manual calendar stack\nPASS calendar split stays archived and undo restores full stack\nPASS arrange undo restores all original clip positions\nPASS hang restores entire archived stack, failed swap preserves undo and hang undo restores archive\nPASS swap undo shared across entries, copying/filtering preserves record, completed undo disappears\nPASS normal restart retains full calendar stack and independent creation days\nPASS calendar split-all keeps all papers archived and undo restores order\nPASS delete and restore preserves original calendar stack order\nPASS archived group change requires split confirmation before commit\nPASS confirmed group change splits only edited archived paper and keeps it archived\nPASS composition refuses close without losing archived edit\nPASS archived disk failure refuses leave, retry persists exact draft\n",
+  "stderr": "",
+  "completedAt": "2026-10-14T00:29:31.221Z"
+}

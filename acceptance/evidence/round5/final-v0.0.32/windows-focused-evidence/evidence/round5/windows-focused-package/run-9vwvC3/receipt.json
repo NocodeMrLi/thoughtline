@@ -1,0 +1,26 @@
+{
+  "platform": "win32",
+  "packaged": true,
+  "profile": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-r4-classification-cp4HXQ",
+  "checks": [
+    "long press only enters arrange, without removing or changing draft",
+    "explicit cross removes from choices without footer undo or history loss",
+    "removed group can be restored from management with history and draft intact",
+    "manager creates persistent zero-note group",
+    "rename updates hanging, archived, deleted and active draft without text loss",
+    "tag quick creation selects immediately and retains draft",
+    "removed tag can be restored from management without changing draft selection",
+    "tag deletion migrates all history while preserving every body",
+    "group deletion clears all memberships and patches active draft without erasing text",
+    "restart retains empty catalog, tag and full draft",
+    "removed empty group remains recoverable after restart and returns to new choices"
+  ],
+  "scope": "isolated source/actual native package; physical acceptance separate",
+  "writerAfterClose": {
+    "busy": "false",
+    "visibility": "visible"
+  },
+  "passed": true,
+  "normalQuit": true,
+  "profileRemoved": true
+}

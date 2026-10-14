@@ -1,0 +1,80 @@
+{
+  "source": "6135608fb949e58288efe652684560a1626e3be3",
+  "userInstruction": "Only new and affected features; reuse unchanged prior evidence.",
+  "macCurrentRegularSuitesPassed": [
+    "calendar-workflow",
+    "round5-picker-style-workflow",
+    "round5-stack-workflow",
+    "round5-merge-picker-workflow",
+    "round5-group-filter-workflow",
+    "round5-filter-ui-workflow",
+    "round5-window-workflow",
+    "round5-detail-pager-workflow",
+    "round5-settings-workflow",
+    "round5-contact-workflow",
+    "round5-export-workflow",
+    "round5-workflow",
+    "round5-readability-workflow",
+    "round5-unavailable-workflow",
+    "round4-classification-workflow",
+    "round4-classification-ui",
+    "round4-visual-workflow",
+    "round4-vine-workflow",
+    "round3-appearance-workflow",
+    "round3-customizer-workflow",
+    "round3-reader-recovery-workflow",
+    "packaged-round3"
+  ],
+  "macCurrentFastTitleUndoPassed": true,
+  "macCurrentFocusedMenuGapCasesPassed": 2,
+  "reusedUnchangedSuites": [
+    "packaged-capacity",
+    "packaged-positioning"
+  ],
+  "reuseSource": "47ec9d24da5b634f623c2139c27f8d97f0bb25c0",
+  "exactImplementationGitBlobs": {
+    "src/main/index.ts": "35393da3dad1ef9f08e6bf7318c2a373cfc636dd",
+    "src/shared/clipModel.ts": "e853c16e6cfc52351d48114bf9d7508838af79bf",
+    "src/shared/clipCommands.ts": "7f9700565537af435a4fa23cb366ed69f098aa9b",
+    "src/shared/stackCommands.ts": "0015389db1f337c22282c13e0fbcc6b0f01e038b",
+    "src/shared/ideaPlacement.ts": "af3db86ebd92bb53d09e9c8e64b338fcc449a916",
+    "src/shared/ideaVisibility.ts": "ad2db22c79f3f74b2c075e9e60ddacb543c0fa6d"
+  },
+  "oldMac25Passed": true,
+  "currentUnrelatedSampleFailure": {
+    "suite": "packaged-round21",
+    "case": "calendar-top/en pointer gap",
+    "normalQuit": true,
+    "focusedRetestPassed": true,
+    "rootCauseConfirmed": false,
+    "evidence": "mac-6135608-final/packaged-round21/packaged-round-twenty-one.json"
+  },
+  "wrongFixtureAttempt": {
+    "suite": "more-menu-workflow",
+    "rejectedBeforeLaunch": true,
+    "reason": "Source-only fixture cannot run frozen package; replaced by isolated package probe"
+  },
+  "fullMatrixRerunClaim": false,
+  "windowsFocusedRun": 38490095906,
+  "buildSource": "6135608fb949e58288efe652684560a1626e3be3",
+  "workflowCommit": "b8e87e6b02d736763270ca3a5e38c93330e8a49c",
+  "formalAcceptance": false,
+  "physicalAcceptance": false,
+  "windowsBuildAndPreflightRun": 38489171294,
+  "windowsBuildUnitPassed": 80,
+  "windowsFirstActualCalendarPassed": true,
+  "fixtureRoutingFailure": {
+    "run": 38489171294,
+    "sourceOnlyFixture": "final-reader-placement-workflow",
+    "appNeverLaunched": true,
+    "productionChanged": false,
+    "retainedInstallerReusedForContinuation": true
+  },
+  "cancelledRedundantRuns": [
+    38487777416,
+    38489170021,
+    38490041122,
+    38490039902,
+    38490097050
+  ]
+}

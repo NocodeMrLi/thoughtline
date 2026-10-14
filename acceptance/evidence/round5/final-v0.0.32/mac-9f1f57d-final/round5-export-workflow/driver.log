@@ -1,0 +1,19 @@
+PASS three-row export menu is reachable from data settings
+PASS menu bounds zh-CN light 350
+PASS menu bounds zh-CN light 500
+PASS menu bounds zh-CN dark 350
+PASS menu bounds zh-CN dark 500
+PASS menu bounds en light 350
+PASS menu bounds en light 500
+PASS menu bounds en dark 350
+PASS menu bounds en dark 500
+PASS keyboard arrows and outside pointer dismiss without closing settings
+PASS txt user click produces full four-field readable output
+PASS docx user click produces full four-field readable output
+PASS cancel makes no file and UI remains usable
+PASS real write failure preserves prior file and successful retry works
+PASS invalid formats and wrong sender cannot open chooser
+PASS backup menu retains original complete JSON snapshot and current draft
+PASS composer coexists; concurrent exports are refused and cancel keeps the draft
+{"out":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/acceptance/evidence/round5/final-v0.0.32/mac-9f1f57d-final/round5-export-workflow/export-dWNciz","checks":17,"scenes":8,"passed":true,"failures":[]}
+CI FIXTURE {"file":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-export-workflow.cjs","pid":81396,"passed":true,"timedOut":false,"code":0}

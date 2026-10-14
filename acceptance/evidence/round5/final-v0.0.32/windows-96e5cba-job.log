@@ -1,0 +1,826 @@
+﻿2026-10-13T22:05:07.3096530Z Current runner version: '2.337.0'
+2026-10-13T22:05:07.3126997Z ##[group]Runner Image Provisioner
+2026-10-13T22:05:07.3127997Z Hosted Compute Agent
+2026-10-13T22:05:07.3128656Z Version: 20260901.588
+2026-10-13T22:05:07.3129370Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+2026-10-13T22:05:07.3130179Z Build Date: 2026-09-01T19:56:44Z
+2026-10-13T22:05:07.3130953Z Worker ID: {4e80f362-02e3-4a9b-a7a5-1daca187d21a}
+2026-10-13T22:05:07.3131757Z Azure Region: westus
+2026-10-13T22:05:07.3132350Z ##[endgroup]
+2026-10-13T22:05:07.3134040Z ##[group]Operating System
+2026-10-13T22:05:07.3134817Z Microsoft Windows Server 2025
+2026-10-13T22:05:07.3135901Z 10.0.26100
+2026-10-13T22:05:07.3136459Z Datacenter
+2026-10-13T22:05:07.3136998Z ##[endgroup]
+2026-10-13T22:05:07.3137653Z ##[group]Runner Image
+2026-10-13T22:05:07.3138341Z Image: windows-2025-vs2026
+2026-10-13T22:05:07.3139099Z Version: 20260925.250.1
+2026-10-13T22:05:07.3141353Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260925.250/images/windows/Windows2025-VS2026-Readme.md
+2026-10-13T22:05:07.3143538Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260925.250
+2026-10-13T22:05:07.3144797Z ##[endgroup]
+2026-10-13T22:05:07.3146292Z ##[group]GITHUB_TOKEN Permissions
+2026-10-13T22:05:07.3148416Z Contents: read
+2026-10-13T22:05:07.3149059Z Metadata: read
+2026-10-13T22:05:07.3149664Z ##[endgroup]
+2026-10-13T22:05:07.3152165Z Secret source: Actions
+2026-10-13T22:05:07.3153290Z Cache mode: write
+2026-10-13T22:05:07.3154125Z Prepare workflow directory
+2026-10-13T22:05:07.3770931Z Prepare all required actions
+2026-10-13T22:05:07.3826200Z Getting action download info
+2026-10-13T22:05:07.7152382Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-10-13T22:05:07.8453920Z Download action repository 'actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1' (SHA:949feb2413d6458794dcd2491c4babbbce0c15c1)
+2026-10-13T22:05:08.3009508Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-10-13T22:05:08.8199161Z Complete job name: windows-test-package
+2026-10-13T22:05:09.0145695Z ##[group]Run git config --global core.longpaths true
+2026-10-13T22:05:09.0146989Z [36;1mgit config --global core.longpaths true[0m
+2026-10-13T22:05:09.2956542Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-13T22:05:09.2958070Z env:
+2026-10-13T22:05:09.2958717Z   RETAIN_INSTALLER: true
+2026-10-13T22:05:09.2959404Z ##[endgroup]
+2026-10-13T22:05:10.6126929Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-10-13T22:05:10.6127336Z with:
+2026-10-13T22:05:10.6127609Z   repository: NocodeMrLi/thoughtline
+2026-10-13T22:05:10.6130035Z   token: ***
+2026-10-13T22:05:10.6130205Z   ssh-strict: true
+2026-10-13T22:05:10.6130372Z   ssh-user: git
+2026-10-13T22:05:10.6130531Z   persist-credentials: true
+2026-10-13T22:05:10.6130739Z   clean: true
+2026-10-13T22:05:10.6130898Z   sparse-checkout-cone-mode: true
+2026-10-13T22:05:10.6131091Z   fetch-depth: 1
+2026-10-13T22:05:10.6131244Z   fetch-tags: false
+2026-10-13T22:05:10.6131403Z   show-progress: true
+2026-10-13T22:05:10.6131569Z   lfs: false
+2026-10-13T22:05:10.6131721Z   submodules: false
+2026-10-13T22:05:10.6131876Z   set-safe-directory: true
+2026-10-13T22:05:10.6132057Z   allow-unsafe-pr-checkout: false
+2026-10-13T22:05:10.6132248Z env:
+2026-10-13T22:05:10.6132397Z   RETAIN_INSTALLER: true
+2026-10-13T22:05:10.6132561Z ##[endgroup]
+2026-10-13T22:05:12.6285558Z Syncing repository: NocodeMrLi/thoughtline
+2026-10-13T22:05:12.6286667Z ##[group]Getting Git version info
+2026-10-13T22:05:12.6286934Z Working directory is 'D:\a\thoughtline\thoughtline'
+2026-10-13T22:05:12.6287330Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-10-13T22:05:12.6287575Z git version 2.55.0.windows.5
+2026-10-13T22:05:12.6288526Z ##[endgroup]
+2026-10-13T22:05:12.6293915Z Copying 'C:\Users\runneradmin\.gitconfig' to 'D:\a\_temp\ec5c9ae9-f87f-4fda-b2b7-a8bac73829dc\.gitconfig'
+2026-10-13T22:05:12.6294500Z Temporarily overriding HOME='D:\a\_temp\ec5c9ae9-f87f-4fda-b2b7-a8bac73829dc' before making global git config changes
+2026-10-13T22:05:12.6295005Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-13T22:05:12.6295493Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\thoughtline\thoughtline
+2026-10-13T22:05:12.6296182Z Deleting the contents of 'D:\a\thoughtline\thoughtline'
+2026-10-13T22:05:12.6296636Z ##[group]Determining repository object format
+2026-10-13T22:05:12.6296989Z ##[endgroup]
+2026-10-13T22:05:12.6297249Z ##[group]Initializing the repository
+2026-10-13T22:05:12.6297548Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\thoughtline\thoughtline
+2026-10-13T22:05:12.6297929Z Initialized empty Git repository in D:/a/thoughtline/thoughtline/.git/
+2026-10-13T22:05:12.6298825Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/NocodeMrLi/thoughtline
+2026-10-13T22:05:12.6299640Z ##[endgroup]
+2026-10-13T22:05:12.6299996Z ##[group]Disabling automatic garbage collection
+2026-10-13T22:05:12.6300311Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2026-10-13T22:05:12.6300844Z ##[endgroup]
+2026-10-13T22:05:12.6301083Z ##[group]Setting up auth
+2026-10-13T22:05:12.6301266Z Removing SSH command configuration
+2026-10-13T22:05:12.6301598Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-10-13T22:05:12.6302500Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-10-13T22:05:13.6985044Z Removing HTTP extra header
+2026-10-13T22:05:13.6997550Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-13T22:05:13.7272377Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-10-13T22:05:14.2584432Z Removing includeIf entries pointing to credentials config files
+2026-10-13T22:05:14.2634900Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-13T22:05:14.3000381Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-10-13T22:05:14.8240286Z [command]"C:\Program Files\Git\bin\git.exe" config --file D:\a\_temp\git-credentials-5468df55-04d7-4fff-8afb-5b9ff5b045a1.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2026-10-13T22:05:14.8519738Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/thoughtline/thoughtline/.git.path D:\a\_temp\git-credentials-5468df55-04d7-4fff-8afb-5b9ff5b045a1.config
+2026-10-13T22:05:14.8789214Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path D:\a\_temp\git-credentials-5468df55-04d7-4fff-8afb-5b9ff5b045a1.config
+2026-10-13T22:05:14.9183680Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-5468df55-04d7-4fff-8afb-5b9ff5b045a1.config
+2026-10-13T22:05:14.9538211Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-5468df55-04d7-4fff-8afb-5b9ff5b045a1.config
+2026-10-13T22:05:14.9794918Z ##[endgroup]
+2026-10-13T22:05:14.9795933Z ##[group]Fetching the repository
+2026-10-13T22:05:14.9803812Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +96e5cbae7950cea40e416ed0a462e7c14d020a1d:refs/remotes/origin/main
+2026-10-13T22:05:43.7288693Z From https://github.com/NocodeMrLi/thoughtline
+2026-10-13T22:05:43.7290045Z  * [new ref]         96e5cbae7950cea40e416ed0a462e7c14d020a1d -> origin/main
+2026-10-13T22:05:43.7334274Z [command]"C:\Program Files\Git\bin\git.exe" branch --list --remote origin/main
+2026-10-13T22:05:43.7653987Z   origin/main
+2026-10-13T22:05:43.7691966Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse refs/remotes/origin/main
+2026-10-13T22:05:43.7918659Z 96e5cbae7950cea40e416ed0a462e7c14d020a1d
+2026-10-13T22:05:43.7942155Z ##[endgroup]
+2026-10-13T22:05:43.7942750Z ##[group]Determining the checkout info
+2026-10-13T22:05:43.7943384Z ##[endgroup]
+2026-10-13T22:05:43.7951981Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2026-10-13T22:05:43.8532539Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2026-10-13T22:05:43.8667370Z ##[group]Checking out the ref
+2026-10-13T22:05:43.8674070Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+2026-10-13T22:05:44.9683794Z Updating files:  10% (1958/18200)
+2026-10-13T22:05:45.0468087Z Updating files:  11% (2002/18200)
+2026-10-13T22:05:45.1036950Z Updating files:  12% (2184/18200)
+2026-10-13T22:05:45.2586147Z Updating files:  13% (2366/18200)
+2026-10-13T22:05:45.3504497Z Updating files:  14% (2548/18200)
+2026-10-13T22:05:45.3922970Z Updating files:  15% (2730/18200)
+2026-10-13T22:05:45.4591322Z Updating files:  16% (2912/18200)
+2026-10-13T22:05:45.5342896Z Updating files:  17% (3094/18200)
+2026-10-13T22:05:45.6092246Z Updating files:  18% (3276/18200)
+2026-10-13T22:05:45.6669103Z Updating files:  19% (3458/18200)
+2026-10-13T22:05:45.7385808Z Updating files:  20% (3640/18200)
+2026-10-13T22:05:45.8081848Z Updating files:  21% (3822/18200)
+2026-10-13T22:05:45.9899001Z Updating files:  22% (4004/18200)
+2026-10-13T22:05:46.5917894Z Updating files:  22% (4051/18200)
+2026-10-13T22:05:46.6637403Z Updating files:  23% (4186/18200)
+2026-10-13T22:05:46.7167735Z Updating files:  24% (4368/18200)
+2026-10-13T22:05:46.7922839Z Updating files:  25% (4550/18200)
+2026-10-13T22:05:46.8450296Z Updating files:  26% (4732/18200)
+2026-10-13T22:05:46.8885270Z Updating files:  27% (4914/18200)
+2026-10-13T22:05:46.9389930Z Updating files:  28% (5096/18200)
+2026-10-13T22:05:46.9505537Z Updating files:  28% (5239/18200)
+2026-10-13T22:05:47.1940815Z Updating files:  29% (5278/18200)
+2026-10-13T22:05:47.9399205Z Updating files:  30% (5460/18200)
+2026-10-13T22:05:48.2761267Z Updating files:  30% (5509/18200)
+2026-10-13T22:05:49.1658396Z Updating files:  31% (5642/18200)
+2026-10-13T22:05:49.5815805Z Updating files:  31% (5784/18200)
+2026-10-13T22:05:49.7474722Z Updating files:  32% (5824/18200)
+2026-10-13T22:05:49.8639080Z Updating files:  33% (6006/18200)
+2026-10-13T22:05:50.4576590Z Updating files:  34% (6188/18200)
+2026-10-13T22:05:50.5363298Z Updating files:  34% (6271/18200)
+2026-10-13T22:05:50.6878469Z Updating files:  35% (6370/18200)
+2026-10-13T22:05:50.9281628Z Updating files:  36% (6552/18200)
+2026-10-13T22:05:50.9952752Z Updating files:  37% (6734/18200)
+2026-10-13T22:05:51.1361299Z Updating files:  37% (6786/18200)
+2026-10-13T22:05:51.2460517Z Updating files:  38% (6916/18200)
+2026-10-13T22:05:52.3999221Z Updating files:  39% (7098/18200)
+2026-10-13T22:05:52.4958663Z Updating files:  39% (7198/18200)
+2026-10-13T22:05:52.6376626Z Updating files:  40% (7280/18200)
+2026-10-13T22:05:53.0045566Z Updating files:  41% (7462/18200)
+2026-10-13T22:05:53.1491381Z Updating files:  41% (7565/18200)
+2026-10-13T22:05:53.3017134Z Updating files:  42% (7644/18200)
+2026-10-13T22:05:53.4899745Z Updating files:  43% (7826/18200)
+2026-10-13T22:05:53.5886074Z Updating files:  44% (8008/18200)
+2026-10-13T22:05:53.8261239Z Updating files:  45% (8190/18200)
+2026-10-13T22:05:54.0063835Z Updating files:  46% (8372/18200)
+2026-10-13T22:05:54.1968938Z Updating files:  46% (8475/18200)
+2026-10-13T22:05:54.5317207Z Updating files:  47% (8554/18200)
+2026-10-13T22:05:54.8214131Z Updating files:  48% (8736/18200)
+2026-10-13T22:05:55.0062415Z Updating files:  49% (8918/18200)
+2026-10-13T22:05:55.1648647Z Updating files:  49% (9022/18200)
+2026-10-13T22:05:55.7160412Z Updating files:  50% (9100/18200)
+2026-10-13T22:05:56.0239898Z Updating files:  51% (9282/18200)
+2026-10-13T22:05:56.0543612Z Updating files:  51% (9445/18200)
+2026-10-13T22:05:56.4349272Z Updating files:  52% (9464/18200)
+2026-10-13T22:05:56.7396979Z Updating files:  53% (9646/18200)
+2026-10-13T22:05:57.1309603Z Updating files:  54% (9828/18200)
+2026-10-13T22:05:57.2190328Z Updating files:  54% (9887/18200)
+2026-10-13T22:05:57.3627370Z Updating files:  55% (10010/18200)
+2026-10-13T22:05:57.5022548Z Updating files:  56% (10192/18200)
+2026-10-13T22:05:57.6386242Z Updating files:  57% (10374/18200)
+2026-10-13T22:05:57.8067237Z Updating files:  58% (10556/18200)
+2026-10-13T22:05:58.0305175Z Updating files:  59% (10738/18200)
+2026-10-13T22:05:58.0502120Z Updating files:  60% (10920/18200)
+2026-10-13T22:05:58.0763306Z Updating files:  60% (10991/18200)
+2026-10-13T22:05:58.8672710Z Updating files:  61% (11102/18200)
+2026-10-13T22:05:59.0655024Z Updating files:  62% (11284/18200)
+2026-10-13T22:05:59.1848232Z Updating files:  62% (11397/18200)
+2026-10-13T22:05:59.3726586Z Updating files:  63% (11466/18200)
+2026-10-13T22:05:59.5017391Z Updating files:  64% (11648/18200)
+2026-10-13T22:06:00.0359582Z Updating files:  65% (11830/18200)
+2026-10-13T22:06:00.0782677Z Updating files:  66% (12012/18200)
+2026-10-13T22:06:00.1565452Z Updating files:  66% (12086/18200)
+2026-10-13T22:06:00.2923662Z Updating files:  67% (12194/18200)
+2026-10-13T22:06:00.4118465Z Updating files:  68% (12376/18200)
+2026-10-13T22:06:00.5347335Z Updating files:  69% (12558/18200)
+2026-10-13T22:06:00.6615345Z Updating files:  70% (12740/18200)
+2026-10-13T22:06:00.8901382Z Updating files:  71% (12922/18200)
+2026-10-13T22:06:02.8260737Z Updating files:  72% (13104/18200)
+2026-10-13T22:06:03.4368810Z Updating files:  72% (13117/18200)
+2026-10-13T22:06:04.3597390Z Updating files:  72% (13145/18200)
+2026-10-13T22:06:04.6686353Z Updating files:  72% (13170/18200)
+2026-10-13T22:06:05.0223826Z Updating files:  73% (13286/18200)
+2026-10-13T22:06:05.1835255Z Updating files:  74% (13468/18200)
+2026-10-13T22:06:06.2381900Z Updating files:  74% (13482/18200)
+2026-10-13T22:06:06.5539193Z Updating files:  74% (13485/18200)
+2026-10-13T22:06:06.6003658Z Updating files:  75% (13650/18200)
+2026-10-13T22:06:06.6949402Z Updating files:  76% (13832/18200)
+2026-10-13T22:06:06.7422331Z Updating files:  77% (14014/18200)
+2026-10-13T22:06:06.7842337Z Updating files:  78% (14196/18200)
+2026-10-13T22:06:06.8667675Z Updating files:  79% (14378/18200)
+2026-10-13T22:06:07.1214253Z Updating files:  80% (14560/18200)
+2026-10-13T22:06:07.1326635Z Updating files:  81% (14742/18200)
+2026-10-13T22:06:07.3814968Z Updating files:  81% (14746/18200)
+2026-10-13T22:06:08.0632481Z Updating files:  82% (14924/18200)
+2026-10-13T22:06:08.1601552Z Updating files:  83% (15106/18200)
+2026-10-13T22:06:08.2785742Z Updating files:  83% (15143/18200)
+2026-10-13T22:06:08.4130491Z Updating files:  84% (15288/18200)
+2026-10-13T22:06:08.5301149Z Updating files:  85% (15470/18200)
+2026-10-13T22:06:08.6589965Z Updating files:  86% (15652/18200)
+2026-10-13T22:06:09.2136696Z Updating files:  87% (15834/18200)
+2026-10-13T22:06:10.1520372Z Updating files:  87% (15888/18200)
+2026-10-13T22:06:10.8653697Z Updating files:  87% (15902/18200)
+2026-10-13T22:06:10.9683305Z Updating files:  88% (16016/18200)
+2026-10-13T22:06:11.0925819Z Updating files:  89% (16198/18200)
+2026-10-13T22:06:11.1654104Z Updating files:  90% (16380/18200)
+2026-10-13T22:06:11.2112380Z Updating files:  90% (16490/18200)
+2026-10-13T22:06:11.3072495Z Updating files:  91% (16562/18200)
+2026-10-13T22:06:11.4226129Z Updating files:  92% (16744/18200)
+2026-10-13T22:06:11.6785689Z Updating files:  93% (16926/18200)
+2026-10-13T22:06:11.8197476Z Updating files:  94% (17108/18200)
+2026-10-13T22:06:11.9509403Z Updating files:  95% (17290/18200)
+2026-10-13T22:06:12.0567360Z Updating files:  96% (17472/18200)
+2026-10-13T22:06:12.1194073Z Updating files:  97% (17654/18200)
+2026-10-13T22:06:12.1570651Z Updating files:  98% (17836/18200)
+2026-10-13T22:06:12.1654922Z Updating files:  99% (18018/18200)
+2026-10-13T22:06:12.1936029Z Updating files:  99% (18062/18200)
+2026-10-13T22:06:12.1937078Z Updating files: 100% (18200/18200)
+2026-10-13T22:06:12.1937792Z Updating files: 100% (18200/18200), done.
+2026-10-13T22:06:12.2288603Z Switched to a new branch 'main'
+2026-10-13T22:06:12.2301998Z branch 'main' set up to track 'origin/main'.
+2026-10-13T22:06:12.3247795Z ##[endgroup]
+2026-10-13T22:06:12.3538007Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+2026-10-13T22:06:12.3770654Z 96e5cbae7950cea40e416ed0a462e7c14d020a1d
+2026-10-13T22:06:12.4281260Z ##[group]Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+2026-10-13T22:06:12.4281795Z with:
+2026-10-13T22:06:12.4282025Z   node-version: 24.19.0
+2026-10-13T22:06:12.4282286Z   cache: npm
+2026-10-13T22:06:12.4282515Z   check-latest: false
+2026-10-13T22:06:12.4285949Z   token: ***
+2026-10-13T22:06:12.4286202Z   package-manager-cache: true
+2026-10-13T22:06:12.4286498Z env:
+2026-10-13T22:06:12.4286718Z   RETAIN_INSTALLER: true
+2026-10-13T22:06:12.4286985Z ##[endgroup]
+2026-10-13T22:06:12.8602078Z Attempting to download 24.19.0...
+2026-10-13T22:06:15.8594495Z Acquiring 24.19.0 - x64 from https://github.com/actions/node-versions/releases/download/24.19.0-30872449280/node-24.19.0-win32-x64.7z
+2026-10-13T22:06:22.8437478Z Extracting ...
+2026-10-13T22:06:41.4279190Z Adding to the cache ...
+2026-10-13T22:06:55.8765350Z ##[group]Environment details
+2026-10-13T22:06:59.6626797Z node: v24.19.0
+2026-10-13T22:06:59.6648057Z npm: 11.17.0
+2026-10-13T22:06:59.6832192Z yarn: 1.22.22
+2026-10-13T22:06:59.6850069Z ##[endgroup]
+2026-10-13T22:06:59.6937995Z [command]C:\Windows\system32\cmd.exe /D /S /C "C:\hostedtoolcache\windows\node\24.19.0\x64\npm.cmd config get cache"
+2026-10-13T22:07:00.2314781Z C:\npm\cache
+2026-10-13T22:07:00.8361166Z npm cache is not found
+2026-10-13T22:07:00.8605403Z ##[group]Run node scripts/ci-artifact-evidence.cjs snapshot
+2026-10-13T22:07:00.8606006Z [36;1mnode scripts/ci-artifact-evidence.cjs snapshot[0m
+2026-10-13T22:07:00.8703548Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-13T22:07:00.8703988Z env:
+2026-10-13T22:07:00.8704218Z   RETAIN_INSTALLER: true
+2026-10-13T22:07:00.8704486Z ##[endgroup]
+2026-10-13T22:07:13.0026946Z ##[group]Run npm ci --no-audit --no-fund
+2026-10-13T22:07:13.0027299Z [36;1mnpm ci --no-audit --no-fund[0m
+2026-10-13T22:07:13.0085289Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-13T22:07:13.0085565Z env:
+2026-10-13T22:07:13.0085716Z   RETAIN_INSTALLER: true
+2026-10-13T22:07:13.0085917Z ##[endgroup]
+2026-10-13T22:07:23.2716209Z npm warn deprecated rimraf@2.6.3: Rimraf versions prior to v4 are no longer supported
+2026-10-13T22:07:23.7627344Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2026-10-13T22:07:24.3705200Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2026-10-13T22:07:26.2357656Z npm warn deprecated boolean@3.2.0: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+2026-10-13T22:07:35.0397802Z 
+2026-10-13T22:07:35.0398836Z added 377 packages in 20s
+2026-10-13T22:07:35.0413340Z npm warn allow-scripts 3 packages have install scripts not yet covered by allowScripts:
+2026-10-13T22:07:35.0414354Z npm warn allow-scripts   electron-winstaller@5.4.0 (install: node ./script/select-7z-arch.js)
+2026-10-13T22:07:35.0418423Z npm warn allow-scripts   esbuild@0.25.12 (postinstall: node install.js)
+2026-10-13T22:07:35.0424575Z npm warn allow-scripts   esbuild@0.28.2 (postinstall: node install.js)
+2026-10-13T22:07:35.0425260Z npm warn allow-scripts
+2026-10-13T22:07:35.0426300Z npm warn allow-scripts Run `npm approve-scripts --allow-scripts-pending` to review, or `npm approve-scripts <pkg>` to allow.
+2026-10-13T22:07:36.2138865Z ##[group]Run npm run verify
+2026-10-13T22:07:36.2139539Z [36;1mnpm run verify[0m
+2026-10-13T22:07:36.2233461Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-13T22:07:36.2233892Z env:
+2026-10-13T22:07:36.2234115Z   RETAIN_INSTALLER: true
+2026-10-13T22:07:36.2234380Z ##[endgroup]
+2026-10-13T22:07:36.9054717Z 
+2026-10-13T22:07:36.9055810Z > thoughtline@0.0.32 verify
+2026-10-13T22:07:36.9056484Z > node scripts/verify.cjs
+2026-10-13T22:07:36.9062313Z 
+2026-10-13T22:07:37.6165328Z 
+2026-10-13T22:07:37.6177956Z > thoughtline@0.0.32 typecheck
+2026-10-13T22:07:37.6214689Z > node node_modules/typescript/bin/tsc --noEmit
+2026-10-13T22:07:37.6215826Z 
+2026-10-13T22:07:39.1763897Z 
+2026-10-13T22:07:39.1764862Z > thoughtline@0.0.32 test
+2026-10-13T22:07:39.1765633Z > node node_modules/vitest/vitest.mjs run
+2026-10-13T22:07:39.1766048Z 
+2026-10-13T22:07:39.6456790Z 
+2026-10-13T22:07:39.6480578Z [1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90mD:/a/thoughtline/thoughtline[39m
+2026-10-13T22:07:39.6481409Z 
+2026-10-13T22:07:40.0651299Z  [32m✓[39m tests/unit/classification.test.ts [2m([22m[2m17 tests[22m[2m)[22m[32m 34[2mms[22m[39m
+2026-10-13T22:07:40.9426676Z  [32m✓[39m tests/unit/storageLocations.test.ts [2m([22m[2m15 tests[22m[2m)[22m[33m 696[2mms[22m[39m
+2026-10-13T22:07:41.2111814Z  [32m✓[39m tests/unit/round5MergeTargets.test.ts [2m([22m[2m17 tests[22m[2m)[22m[32m 65[2mms[22m[39m
+2026-10-13T22:07:41.3945676Z  [32m✓[39m tests/unit/p3IdeaCommands.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 33[2mms[22m[39m
+2026-10-13T22:07:41.8292659Z  [32m✓[39m tests/unit/repository.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 288[2mms[22m[39m
+2026-10-13T22:07:42.0272759Z  [32m✓[39m tests/unit/ideaPlacement.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 51[2mms[22m[39m
+2026-10-13T22:07:42.8505529Z  [32m✓[39m tests/unit/ideaExport.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 589[2mms[22m[39m
+2026-10-13T22:07:42.8506964Z    [33m[2m✓[22m[39m failed rename keeps previous destination bytes and cleans only the export temporary file[33m 433[2mms[22m[39m
+2026-10-13T22:07:43.0008032Z  [32m✓[39m tests/unit/shelfState.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+2026-10-13T22:07:43.1867843Z  [32m✓[39m tests/unit/round5Grouping.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 37[2mms[22m[39m
+2026-10-13T22:07:43.5173085Z  [32m✓[39m tests/unit/p3Repository.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 174[2mms[22m[39m
+2026-10-13T22:07:43.6907434Z  [32m✓[39m tests/unit/p3Schema.test.ts [2m([22m[2m19 tests[22m[2m)[22m[32m 27[2mms[22m[39m
+2026-10-13T22:07:43.8815187Z  [32m✓[39m tests/unit/positioning.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 34[2mms[22m[39m
+2026-10-13T22:07:44.0568108Z  [32m✓[39m tests/unit/clipCommands.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 33[2mms[22m[39m
+2026-10-13T22:07:44.8096092Z  [32m✓[39m tests/unit/clipProjection.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 603[2mms[22m[39m
+2026-10-13T22:07:44.8097764Z    [33m[2m✓[22m[39m 混合比例与筛选移动压力：旧可见身份保留，其他Agent位置不动[33m 343[2mms[22m[39m
+2026-10-13T22:07:45.0391196Z  [32m✓[39m tests/unit/round3Backfill.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 49[2mms[22m[39m
+2026-10-13T22:07:45.8715205Z  [32m✓[39m tests/unit/packagedLaunch.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 701[2mms[22m[39m
+2026-10-13T22:07:45.8716742Z    [33m[2m✓[22m[39m actual Playwright early process death retains a failed supervisor receipt[33m 560[2mms[22m[39m
+2026-10-13T22:07:46.1850391Z  [32m✓[39m tests/unit/preferences.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 149[2mms[22m[39m
+2026-10-13T22:07:46.3906317Z  [32m✓[39m tests/unit/ideaWorkflow.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 63[2mms[22m[39m
+2026-10-13T22:07:46.5954826Z  [32m✓[39m tests/unit/round3Recovery.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 43[2mms[22m[39m
+2026-10-13T22:07:46.7816484Z  [32m✓[39m tests/unit/i18n.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 49[2mms[22m[39m
+2026-10-13T22:07:46.9616411Z  [32m✓[39m tests/unit/reminderScheduler.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 24[2mms[22m[39m
+2026-10-13T22:07:47.1313281Z  [32m✓[39m tests/unit/centeredRope.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+2026-10-13T22:07:47.3643308Z  [32m✓[39m tests/unit/appearance.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 71[2mms[22m[39m
+2026-10-13T22:07:47.5374509Z  [32m✓[39m tests/unit/arrangeClips.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 30[2mms[22m[39m
+2026-10-13T22:07:47.6939949Z  [32m✓[39m tests/unit/draftAutosaver.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+2026-10-13T22:07:47.8463071Z  [32m✓[39m tests/unit/rememberIdeaProject.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+2026-10-13T22:07:48.0159184Z  [32m✓[39m tests/unit/round5ShelfFilter.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 26[2mms[22m[39m
+2026-10-13T22:07:48.1707521Z  [32m✓[39m tests/unit/reminderFallback.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+2026-10-13T22:07:52.1816707Z [90mstdout[2m | tests/unit/shelfPresentation.test.ts
+2026-10-13T22:07:52.1819182Z [22m[39mDownloading Electron binary...
+2026-10-13T22:07:52.1823239Z 
+2026-10-13T22:07:52.2065809Z  [32m✓[39m tests/unit/shelfPresentation.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+2026-10-13T22:07:52.3697860Z  [32m✓[39m tests/unit/ideaHistory.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+2026-10-13T22:07:52.5187230Z  [32m✓[39m tests/unit/preferenceOrdering.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+2026-10-13T22:07:52.6822964Z  [32m✓[39m tests/unit/agentSplitPlacement.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+2026-10-13T22:07:52.8463873Z  [32m✓[39m tests/unit/ideaCommands.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 23[2mms[22m[39m
+2026-10-13T22:07:52.9879909Z  [32m✓[39m tests/unit/clipLayout.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+2026-10-13T22:07:53.2021342Z  [32m✓[39m tests/unit/projectDeletion.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 65[2mms[22m[39m
+2026-10-13T22:07:53.3923702Z  [32m✓[39m tests/unit/macLauncherGenerator.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 55[2mms[22m[39m
+2026-10-13T22:07:53.5655585Z  [32m✓[39m tests/unit/titleOnly.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 26[2mms[22m[39m
+2026-10-13T22:07:53.7235876Z  [32m✓[39m tests/unit/round5ManageBounds.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-13T22:07:53.8979015Z  [32m✓[39m tests/unit/paperDrop.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 40[2mms[22m[39m
+2026-10-13T22:07:54.0579056Z  [32m✓[39m tests/unit/reminders.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 24[2mms[22m[39m
+2026-10-13T22:07:54.2234978Z  [32m✓[39m tests/unit/reminderContinuity.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 24[2mms[22m[39m
+2026-10-13T22:07:54.7875211Z [90mstderr[2m | tests/unit/ciFixtureDeadline.test.ts[2m > [22m[2mCI fixture timeout is reported without deleting its data
+2026-10-13T22:07:54.7877027Z [22m[39mFixture exceeded its deadline; verification failed and data is retained: C:\Users\RUNNER~1\AppData\Local\Temp\thoughtline-ci-deadline-ivTcYV\worker.cjs
+2026-10-13T22:07:54.7878080Z 
+2026-10-13T22:07:54.8913804Z  [32m✓[39m tests/unit/ciFixtureDeadline.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 527[2mms[22m[39m
+2026-10-13T22:07:54.8916009Z    [33m[2m✓[22m[39m CI fixture timeout is reported without deleting its data[33m 371[2mms[22m[39m
+2026-10-13T22:07:55.0255380Z  [32m✓[39m tests/unit/shortcuts.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-13T22:07:55.1614894Z  [32m✓[39m tests/unit/spaceAllocation.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+2026-10-13T22:07:55.2966399Z  [32m✓[39m tests/unit/fixedRope.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+2026-10-13T22:07:55.4412968Z  [32m✓[39m tests/unit/motion.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+2026-10-13T22:07:57.7390404Z  [32m✓[39m tests/unit/windowsAtomicWrite.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 1807[2mms[22m[39m
+2026-10-13T22:07:57.7391652Z    [33m[2m✓[22m[39m Windows transient EPERM retries without losing the old snapshot[33m 452[2mms[22m[39m
+2026-10-13T22:07:57.7392819Z    [33m[2m✓[22m[39m Windows transient EBUSY retries without losing the old snapshot[33m 446[2mms[22m[39m
+2026-10-13T22:07:57.7393943Z    [33m[2m✓[22m[39m Windows transient EACCES retries without losing the old snapshot[33m 464[2mms[22m[39m
+2026-10-13T22:07:57.7395260Z    [33m[2m✓[22m[39m Windows exhausted rename retries preserve the prior snapshot and remove only the temporary file[33m 444[2mms[22m[39m
+2026-10-13T22:07:57.7396381Z  [32m✓[39m tests/unit/agentInk.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+2026-10-13T22:07:57.7703119Z  [32m✓[39m tests/unit/round3Capacity.test.ts [2m([22m[2m17 tests[22m[2m)[22m[32m 79[2mms[22m[39m
+2026-10-13T22:07:57.9140844Z  [32m✓[39m tests/unit/idleFixtureCleanup.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+2026-10-13T22:07:58.0761523Z  [32m✓[39m tests/unit/topEdge.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+2026-10-13T22:07:58.2141942Z  [32m✓[39m tests/unit/compositionSession.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-13T22:07:58.3513838Z  [32m✓[39m tests/unit/shortcutKeys.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-13T22:07:58.4966084Z  [32m✓[39m tests/unit/ciEvidence.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 12[2mms[22m[39m
+2026-10-13T22:07:58.6530036Z  [32m✓[39m tests/unit/reminderTime.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+2026-10-13T22:07:58.7892649Z  [32m✓[39m tests/unit/manageGeometry.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-13T22:07:58.9215299Z  [32m✓[39m tests/unit/visibilityMotion.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+2026-10-13T22:07:59.7483522Z  [32m✓[39m tests/unit/ropeGeometry.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-13T22:07:59.7484853Z  [32m✓[39m tests/unit/compositionFlush.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+2026-10-13T22:07:59.7485993Z  [32m✓[39m tests/unit/agentPalette.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-13T22:07:59.7487029Z  [32m✓[39m tests/unit/platformHost.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+2026-10-13T22:07:59.7488028Z  [32m✓[39m tests/unit/composerMaterial.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+2026-10-13T22:08:00.2803543Z  [32m✓[39m tests/unit/notificationDelivery.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+2026-10-13T22:08:00.2816199Z  [32m✓[39m tests/unit/composer.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+2026-10-13T22:08:00.2817245Z  [32m✓[39m tests/unit/deliveryVersion.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+2026-10-13T22:08:00.2818270Z  [32m✓[39m tests/unit/classificationDisplay.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+2026-10-13T22:08:00.2818867Z 
+2026-10-13T22:08:00.2819161Z [2m Test Files [22m [1m[32m66 passed[39m[22m[90m (66)[39m
+2026-10-13T22:08:00.2819625Z [2m      Tests [22m [1m[32m412 passed[39m[22m[90m (412)[39m
+2026-10-13T22:08:00.2820017Z [2m   Start at [22m 22:07:39
+2026-10-13T22:08:00.2820617Z [2m   Duration [22m 20.58s[2m (tests 53%, import 38%, transform 7%, worker 2%)[22m
+2026-10-13T22:08:00.2820901Z 
+2026-10-13T22:08:00.2821427Z [2m    Isolate [22m [33m66 workers spawned[39m[2m · ~109ms startup each (spawn + environment, per file)[22m
+2026-10-13T22:08:00.2822233Z [2m            [22m [2mat least ~7.08s faster with [22m[33misolate: false[39m[2m — reuses workers across files instead of one per file[22m
+2026-10-13T22:08:00.2822613Z 
+2026-10-13T22:08:00.5487403Z 
+2026-10-13T22:08:00.5488219Z > thoughtline@0.0.32 build
+2026-10-13T22:08:00.5489330Z > node node_modules/electron-vite/bin/electron-vite.js build && node scripts/build-notification-native.cjs
+2026-10-13T22:08:00.5490064Z 
+2026-10-13T22:08:01.4856523Z [36mvite v7.3.7 [32mbuilding ssr environment for production...[36m[39m
+2026-10-13T22:08:01.6868302Z transforming...
+2026-10-13T22:08:02.5895627Z [32m✓[39m 41 modules transformed.
+2026-10-13T22:08:02.7833200Z rendering chunks...
+2026-10-13T22:08:02.8006269Z [2mout/main/[22m[36mindex.js  [39m[1m[2m269.54 kB[22m[1m[22m
+2026-10-13T22:08:02.8008136Z [32m✓ built in 1.28s[39m
+2026-10-13T22:08:02.8207242Z [36mvite v7.3.7 [32mbuilding ssr environment for production...[36m[39m
+2026-10-13T22:08:02.8209671Z transforming...
+2026-10-13T22:08:02.8569665Z [32m✓[39m 1 modules transformed.
+2026-10-13T22:08:02.8571145Z rendering chunks...
+2026-10-13T22:08:02.8848362Z [2mout/preload/[22m[36mindex.js  [39m[1m[2m6.20 kB[22m[1m[22m
+2026-10-13T22:08:02.8852449Z [32m✓ built in 32ms[39m
+2026-10-13T22:08:03.0946298Z [36mvite v7.3.7 [32mbuilding client environment for production...[36m[39m
+2026-10-13T22:08:03.0953131Z transforming...
+2026-10-13T22:08:06.0192752Z [32m✓[39m 98 modules transformed.
+2026-10-13T22:08:06.6304602Z rendering chunks...
+2026-10-13T22:08:06.6596202Z [2m../../out/renderer/[22m[32mindex.html                                  [39m[1m[2m  0.52 kB[22m[1m[22m
+2026-10-13T22:08:06.6603432Z [2m../../out/renderer/[22m[32massets/approved-TL-brand-logo-vrNXAf6L.jpg  [39m[1m[2m 98.37 kB[22m[1m[22m
+2026-10-13T22:08:06.6609066Z [2m../../out/renderer/[22m[35massets/index-BCFhQIUp.css                   [39m[1m[2m 96.22 kB[22m[1m[22m
+2026-10-13T22:08:06.6675300Z [2m../../out/renderer/[22m[36massets/index-BCRoVgKO.js                    [39m[1m[33m998.28 kB[39m[22m
+2026-10-13T22:08:06.6682636Z [32m✓ built in 3.69s[39m
+2026-10-13T22:08:06.7606950Z (node:4376) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+2026-10-13T22:08:06.7631717Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-13T22:08:06.8385419Z ##[group]Run New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
+2026-10-13T22:08:06.8386234Z [36;1mNew-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null[0m
+2026-10-13T22:08:06.8386863Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/hidden-manage-reopen.cjs[0m
+2026-10-13T22:08:06.8387442Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Confirmed hidden Manage reopen failed' }[0m
+2026-10-13T22:08:06.8388058Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-workflow.cjs[0m
+2026-10-13T22:08:06.8388861Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round UI failed' }[0m
+2026-10-13T22:08:06.8389380Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-native-menu.cjs[0m
+2026-10-13T22:08:06.8389907Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round native menu failed' }[0m
+2026-10-13T22:08:06.8390497Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-calendar-navigation.cjs[0m
+2026-10-13T22:08:06.8392030Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round calendar return failed' }[0m
+2026-10-13T22:08:06.8392596Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-arrange-workflow.cjs[0m
+2026-10-13T22:08:06.8393150Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round arrangement failed' }[0m
+2026-10-13T22:08:06.8393709Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-split-menu-workflow.cjs[0m
+2026-10-13T22:08:06.8394265Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round split menu failed' }[0m
+2026-10-13T22:08:06.8394824Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-merge-menu-workflow.cjs[0m
+2026-10-13T22:08:06.8395393Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round merge menu failed' }[0m
+2026-10-13T22:08:06.8395948Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-capacity-workflow.cjs[0m
+2026-10-13T22:08:06.8396519Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Capacity and swap workflow failed' }[0m
+2026-10-13T22:08:06.8397071Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/positioning-workflow.cjs[0m
+2026-10-13T22:08:06.8397701Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Tag positioning and effective status workflow failed' }[0m
+2026-10-13T22:08:06.8398314Z [36;1m& node scripts/run-ci-fixture.cjs tests/electron/title-edit-workflow.cjs[0m
+2026-10-13T22:08:06.8398894Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'Optional title live input regression failed' }[0m
+2026-10-13T22:08:06.8399532Z [36;1mforeach ($test in @('more-menu-workflow', 'title-only-workflow', 'reminder-workflow')) {[0m
+2026-10-13T22:08:06.8400102Z [36;1m  & node scripts/run-ci-fixture.cjs "tests/electron/$test.cjs"[0m
+2026-10-13T22:08:06.8400536Z [36;1m  if ($LASTEXITCODE -ne 0) { throw "$test failed" }[0m
+2026-10-13T22:08:06.8400848Z [36;1m}[0m
+2026-10-13T22:08:06.8479824Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-13T22:08:06.8480231Z env:
+2026-10-13T22:08:06.8480446Z   RETAIN_INSTALLER: true
+2026-10-13T22:08:06.8480773Z   THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round2/windows
+2026-10-13T22:08:06.8481137Z   THOUGHTLINE_FAKE_CLIPBOARD: 1
+2026-10-13T22:08:06.8481398Z   THOUGHTLINE_FIXTURE_TRACE: 1
+2026-10-13T22:08:06.8481643Z ##[endgroup]
+2026-10-13T22:08:23.2630403Z {"platform":"win32","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-hidden-manage-hjjT9N","cases":["visible-dirty-settings-still-block-close-and-preserve-prompt-beside-new","confirmed-hidden-manage-does-not-need-a-second-renderer-ack","reopened-visible-settings-require-fresh-save-guard","normal-quit-preserves-draft-with-hidden-manage"],"pids":[8660,3124,7096,7416,3508,2500,6424],"scope":"Real source lifecycle with deliberately unresponsive hidden Manage leave IPC; visible guards remain real","initialSettingsResult":{"ok":true},"normalClose":true,"dataRemoved":true,"passed":true}
+2026-10-13T22:08:23.2778042Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\hidden-manage-reopen.cjs","pid":7544,"passed":true,"timedOut":false,"code":0}
+2026-10-13T22:08:24.2419934Z FIXTURE warmViews: shelf
+2026-10-13T22:08:24.3848465Z FIXTURE warmViews: settings
+2026-10-13T22:08:24.8838074Z FIXTURE warmViews: composer
+2026-10-13T22:08:24.8838932Z FIXTURE composer: invoking shortcut
+2026-10-13T22:08:24.8865285Z FIXTURE composer: shortcut invoked
+2026-10-13T22:08:25.1256056Z FIXTURE composer: created
+2026-10-13T22:08:25.1256974Z FIXTURE composer: native visibility checked
+2026-10-13T22:08:25.1555822Z FIXTURE composer: textbox visible
+2026-10-13T22:08:25.1804674Z FIXTURE composer: focused
+2026-10-13T22:08:25.2628789Z FIXTURE warmViews: ready
+2026-10-13T22:08:25.3725335Z ROUND2 check: hint-delay-small-dismiss-on-menu
+2026-10-13T22:08:26.1871123Z ROUND2 check: focus-ring-inside-editor-edges
+2026-10-13T22:08:26.5241366Z ROUND2 check: calendar-fills-resized-height-and-arrows
+2026-10-13T22:08:27.1712888Z ROUND2 check: settings-back-restores-month-and-window
+2026-10-13T22:08:27.6521832Z ROUND2 check: settings-dirty-return-retains-draft-and-close-cancels
+2026-10-13T22:08:28.5474665Z ROUND2 check: settings-external-update-does-not-invent-dirty-draft
+2026-10-13T22:08:29.0493808Z ROUND2 check: settings-discard-clears-hidden-close-guard
+2026-10-13T22:08:29.4075004Z ROUND2 check: menu-stash-current-preserves-other-pages
+2026-10-13T22:08:29.7349487Z ROUND2 check: navigation-performance-baseline
+2026-10-13T22:08:30.5449105Z {"platform":"win32","arch":"x64","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-round2-Qwk8cg","evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round2\\windows\\workflow-laGWjX","cases":[{"name":"hint-delay-small-dismiss-on-menu","passed":true,"detail":{"x":280,"y":354,"width":60,"height":24}},{"name":"focus-ring-inside-editor-edges","passed":true,"detail":{"outline":"0px","offset":"-3px","shadow":"rgb(102, 105, 114) 0px 0px 0px 1px inset","border":"rgb(102, 105, 114)","x":14,"right":406,"parentX":14,"parentRight":406}},{"name":"calendar-fills-resized-height-and-arrows","passed":true,"detail":{"content":{"height":498,"bottom":646,"width":914},"grid":{"height":488,"bottom":638,"width":891},"cell":{"height":87,"bottom":270,"width":123},"arrow":{"height":36,"bottom":138,"width":36},"svg":18}},{"name":"settings-back-restores-month-and-window","passed":true,"detail":{"title":"2026年9月","width":950}},{"name":"settings-dirty-return-retains-draft-and-close-cancels","passed":true,"detail":{"draftRetained":true,"closeCanceled":true}},{"name":"settings-external-update-does-not-invent-dirty-draft","passed":true,"detail":{"externalChangeRebased":true,"navigationAllowed":true}},{"name":"settings-discard-clears-hidden-close-guard","passed":true,"detail":{"discardAllowsNextVisit":true}},{"name":"menu-stash-current-preserves-other-pages","passed":true,"detail":{"labels":["新建念头","","只看「保留分组」","筛选标签…","显示全部","Thoughtline 日历","","整理"],"ids":["r2-0","r2-2"],"current":"r2-2"}},{"name":"navigation-performance-baseline","passed":true,"detail":{"samples":[63,63,62,63,63,62,63,63,62,63],"p50":63,"p95":63,"scope":"Playwright input plus two actual renderer frames, controlled environment"}}],"pids":[8240,3384,5664,5680,3076,1800,4724],"nativeOutsideClick":"not exercised by protocol fixture","normalClose":true,"dataRemoved":true,"passed":true}
+2026-10-13T22:08:30.5623114Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-workflow.cjs","pid":6168,"passed":true,"timedOut":false,"code":0}
+2026-10-13T22:08:31.2359040Z FIXTURE warmViews: shelf
+2026-10-13T22:08:31.6678771Z FIXTURE warmViews: settings
+2026-10-13T22:08:32.1598337Z FIXTURE warmViews: composer
+2026-10-13T22:08:32.4571452Z FIXTURE composer: invoking shortcut
+2026-10-13T22:08:32.4986731Z FIXTURE composer: shortcut invoked
+2026-10-13T22:08:32.5337360Z FIXTURE composer: created
+2026-10-13T22:08:32.5338495Z FIXTURE composer: native visibility checked
+2026-10-13T22:08:32.5687125Z FIXTURE composer: textbox visible
+2026-10-13T22:08:32.5933111Z FIXTURE composer: focused
+2026-10-13T22:08:32.7117177Z FIXTURE warmViews: ready
+2026-10-13T22:08:51.0884609Z {"platform":"win32","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-native-menu-YOtpkx","evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round2\\windows\\native-menu-wdp4q8","probes":[{"kind":"production-first","closed":true,"ownerFocusable":true,"ownerFocused":true,"receiverClicks":1},{"kind":"production-repeat","closed":true,"ownerFocusable":true,"ownerFocused":true,"receiverClicks":1},{"kind":"production-third","closed":true,"ownerFocusable":true,"ownerFocused":true,"receiverClicks":1}],"pids":[4712,7372,3112,6296,8580,6240,5408],"scope":"native Menu owner/cancel characterization; hosted Windows is not physical user-device acceptance","externalReceiver":true,"runtimePid":7372,"launcherPid":4712,"submenuNavigation":{"rawIndex":8,"selectableIndex":5,"labels":["新建念头","撤销挂上","只看「未分组」","筛选标签…","Thoughtline 日历","整理"]},"nativeMenuStates":[{"menus":1,"expected":1,"ownerPid":7372,"foregroundPid":7372,"windows":[{"handle":"262762","className":"Chrome_WidgetWin_1","title":""},{"handle":"524470","className":"Chrome_WidgetWin_1","title":"Thoughtline Shelf"}],"menuWindows":[{"handle":"262762","className":"Chrome_WidgetWin_1","title":""}],"browserHandles":["197142","262658","524470"],"matched":true},{"menus":2,"expected":2,"ownerPid":7372,"foregroundPid":7372,"windows":[{"handle":"393838","className":"Chrome_WidgetWin_1","title":""},{"handle":"262762","className":"Chrome_WidgetWin_1","title":""},{"handle":"524470","className":"Chrome_WidgetWin_1","title":"Thoughtline Shelf"}],"menuWindows":[{"handle":"393838","className":"Chrome_WidgetWin_1","title":""},{"handle":"262762","className":"Chrome_WidgetWin_1","title":""}],"browserHandles":["197142","262658","524470"],"matched":true},{"menus":1,"expected":1,"ownerPid":7372,"foregroundPid":7372,"windows":[{"handle":"262762","className":"Chrome_WidgetWin_1","title":""},{"handle":"524470","className":"Chrome_WidgetWin_1","title":"Thoughtline Shelf"}],"menuWindows":[{"handle":"262762","className":"Chrome_WidgetWin_1","title":""}],"browserHandles":["197142","262658","524470"],"matched":true},{"menus":0,"expected":0,"ownerPid":7372,"foregroundPid":4584,"windows":[{"handle":"524470","className":"Chrome_WidgetWin_1","title":"Thoughtline Shelf"}],"menuWindows":[],"browserHandles":["197142","262658","524470"],"matched":true}],"firstEscapeRetainedRoot":true,"submenuAndEscape":true,"escapeClosureWait":"owned Win32 menu windows confirmed before each OS key injection; exact popup callback confirms root closure","receiverPids":[7292,4584,6612,1116,2652],"receiverRemoved":true,"normalClose":true,"dataRemoved":true,"passed":true}
+2026-10-13T22:08:51.1039750Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-native-menu.cjs","pid":7948,"passed":true,"timedOut":false,"code":0}
+2026-10-13T22:08:52.0321999Z FIXTURE warmViews: shelf
+2026-10-13T22:08:52.0864334Z FIXTURE warmViews: settings
+2026-10-13T22:08:52.6122986Z FIXTURE warmViews: composer
+2026-10-13T22:08:52.6146832Z FIXTURE composer: invoking shortcut
+2026-10-13T22:08:52.6675391Z FIXTURE composer: shortcut invoked
+2026-10-13T22:08:52.7138386Z FIXTURE composer: created
+2026-10-13T22:08:52.7549174Z FIXTURE composer: native visibility checked
+2026-10-13T22:08:52.7953245Z FIXTURE composer: textbox visible
+2026-10-13T22:08:52.8182500Z FIXTURE composer: focused
+2026-10-13T22:08:52.8886801Z FIXTURE warmViews: ready
+2026-10-13T22:08:54.2441275Z {"platform":"win32","scope":"isolated renderer/main/calendar return with real repository; no physical DPI or multi-display","cases":[{"name":"day-range-limit-scroll-restored","passed":true,"scroll":240},{"name":"year-hierarchy-restored","passed":true},{"name":"search-status-restored","passed":true,"count":9}],"pids":[5356,9180,7408,8136,2776,5924,4916],"dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-calendar-return-rL9SWA","normalClose":true,"dataRemoved":true,"passed":true}
+2026-10-13T22:08:54.2635974Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-calendar-navigation.cjs","pid":8492,"passed":true,"timedOut":false,"code":0}
+2026-10-13T22:08:54.9717991Z FIXTURE warmViews: shelf
+2026-10-13T22:08:55.3252581Z FIXTURE warmViews: settings
+2026-10-13T22:08:55.7986633Z FIXTURE warmViews: composer
+2026-10-13T22:08:55.7987398Z FIXTURE composer: invoking shortcut
+2026-10-13T22:08:55.8047225Z FIXTURE composer: shortcut invoked
+2026-10-13T22:08:56.0251140Z FIXTURE composer: created
+2026-10-13T22:08:56.0252162Z FIXTURE composer: native visibility checked
+2026-10-13T22:08:56.0549474Z FIXTURE composer: textbox visible
+2026-10-13T22:08:56.0804629Z FIXTURE composer: focused
+2026-10-13T22:08:56.2370240Z FIXTURE warmViews: ready
+2026-10-13T22:08:58.2938047Z {"platform":"win32","scope":"isolated native-menu protocol, real source renderer/IPC/repository; no physical menu click","cases":[{"name":"native-menu-arranges-filtered-full-rope-with-data-intact","passed":true},{"name":"finite-transform-animation","passed":true,"duration":180},{"name":"position-only-undo-preserves-new-current-page","passed":true},{"name":"arrange-undo-cannot-revive-deleted-project","passed":true},{"name":"system-reduced-motion-no-animation","passed":true},{"name":"reduced-motion-arrangement-no-animation","passed":true},{"name":"arranged-positions-survive-restart","passed":true}],"pids":[8812,4136,6248,728,2480,1640,8776,7592,8284,5796,1360,6320],"dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-arrange-zmVekX","normalMotionScope":"Owned renderer emulates no-preference; host OS settings unchanged","motionProbe":{"durations":[180,180],"locked":"false","reduced":"false"},"normalClose":true,"dataRemoved":true,"passed":true}
+2026-10-13T22:08:58.3108426Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-arrange-workflow.cjs","pid":9000,"passed":true,"timedOut":false,"code":0}
+2026-10-13T22:08:59.1855543Z FIXTURE warmViews: shelf
+2026-10-13T22:08:59.3301511Z FIXTURE warmViews: settings
+2026-10-13T22:08:59.7818642Z FIXTURE warmViews: composer
+2026-10-13T22:08:59.7820834Z FIXTURE composer: invoking shortcut
+2026-10-13T22:08:59.7843372Z FIXTURE composer: shortcut invoked
+2026-10-13T22:08:59.9516496Z FIXTURE composer: created
+2026-10-13T22:09:00.0180648Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:00.0441535Z FIXTURE composer: textbox visible
+2026-10-13T22:09:00.1362280Z FIXTURE composer: focused
+2026-10-13T22:09:00.2438909Z FIXTURE warmViews: ready
+2026-10-13T22:09:02.0843368Z FIXTURE warmViews: shelf
+2026-10-13T22:09:02.2062929Z FIXTURE warmViews: settings
+2026-10-13T22:09:02.6325818Z FIXTURE warmViews: composer
+2026-10-13T22:09:02.6327656Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:02.6343128Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:02.9034622Z FIXTURE composer: created
+2026-10-13T22:09:02.9035538Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:02.9499113Z FIXTURE composer: textbox visible
+2026-10-13T22:09:02.9787136Z FIXTURE composer: focused
+2026-10-13T22:09:03.0248713Z FIXTURE warmViews: ready
+2026-10-13T22:09:09.2368982Z FIXTURE warmViews: shelf
+2026-10-13T22:09:09.3455384Z FIXTURE warmViews: settings
+2026-10-13T22:09:10.0456542Z FIXTURE warmViews: composer
+2026-10-13T22:09:10.0478929Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:10.0502243Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:10.0727987Z FIXTURE composer: created
+2026-10-13T22:09:10.0742105Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:10.1078664Z FIXTURE composer: textbox visible
+2026-10-13T22:09:10.1295086Z FIXTURE composer: focused
+2026-10-13T22:09:10.2068585Z FIXTURE warmViews: ready
+2026-10-13T22:09:11.2302715Z {"platform":"win32","scope":"isolated source protocol and repository; native popup stub, no physical click","cases":[{"name":"single-clip-has-no-split","passed":true},{"name":"cancelled-menu-does-not-mutate","passed":true},{"name":"captured-current-id-survives-background-page-change-without-opening-reader","passed":true},{"name":"right-click-split-can-be-undone","passed":true},{"name":"first-middle-last-pages-and-repeated-undo-preserve-order-content","passed":true},{"name":"stale-clip-target-is-rejected","passed":true},{"name":"write-failure-visible-on-shelf-with-original-data-intact","passed":true},{"name":"split-undo-cannot-revive-deleted-project","passed":true},{"name":"expanded-reader-split-remains-available","passed":true},{"name":"restart-retains-split-ids-content-order-and-page","passed":true},{"name":"true-full-rope-has-explicit-calendar-entry-and-preserved-content","passed":true},{"name":"English-menu-and-dark-theme-use-translated-current-thought-action","passed":true}],"pids":[7944,584,6224,2652,7616,1936,8876,2336,6588,7308,5712,7300,5204,3260,1272,3428,1376,2776,1368,5716,8248,9092,6808,8904,6356,4748],"dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-split-menu-RVYIAM","dataRemoved":true,"passed":true}
+2026-10-13T22:09:11.2508055Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-split-menu-workflow.cjs","pid":7796,"passed":true,"timedOut":false,"code":0}
+2026-10-13T22:09:12.1813693Z FIXTURE warmViews: shelf
+2026-10-13T22:09:12.2200663Z FIXTURE warmViews: settings
+2026-10-13T22:09:12.6775514Z FIXTURE warmViews: composer
+2026-10-13T22:09:12.6776988Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:12.6778413Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:12.9344190Z FIXTURE composer: created
+2026-10-13T22:09:12.9360945Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:13.0031731Z FIXTURE composer: textbox visible
+2026-10-13T22:09:13.0346315Z FIXTURE composer: focused
+2026-10-13T22:09:13.1204376Z FIXTURE warmViews: ready
+2026-10-13T22:09:14.4402721Z FIXTURE warmViews: shelf
+2026-10-13T22:09:14.5561257Z FIXTURE warmViews: settings
+2026-10-13T22:09:15.0245131Z FIXTURE warmViews: composer
+2026-10-13T22:09:15.0245962Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:15.0258064Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:15.2001902Z FIXTURE composer: created
+2026-10-13T22:09:15.2002512Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:15.2703197Z FIXTURE composer: textbox visible
+2026-10-13T22:09:15.2923622Z FIXTURE composer: focused
+2026-10-13T22:09:15.3492653Z FIXTURE warmViews: ready
+2026-10-13T22:09:15.8330235Z FIXTURE warmViews: shelf
+2026-10-13T22:09:16.1177665Z FIXTURE warmViews: settings
+2026-10-13T22:09:16.5172045Z FIXTURE warmViews: composer
+2026-10-13T22:09:16.5178187Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:16.5178648Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:16.6797978Z FIXTURE composer: created
+2026-10-13T22:09:16.7412079Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:16.7782461Z FIXTURE composer: textbox visible
+2026-10-13T22:09:16.8171017Z FIXTURE composer: focused
+2026-10-13T22:09:16.8725418Z FIXTURE warmViews: ready
+2026-10-13T22:09:18.2820705Z FIXTURE warmViews: shelf
+2026-10-13T22:09:18.3137726Z FIXTURE warmViews: settings
+2026-10-13T22:09:18.7291185Z FIXTURE warmViews: composer
+2026-10-13T22:09:18.7292970Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:18.7294469Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:18.9654102Z FIXTURE composer: created
+2026-10-13T22:09:18.9657986Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:19.0024540Z FIXTURE composer: textbox visible
+2026-10-13T22:09:19.0265625Z FIXTURE composer: focused
+2026-10-13T22:09:19.0852390Z FIXTURE warmViews: ready
+2026-10-13T22:09:19.7544024Z {"platform":"win32","scope":"isolated source native-menu callbacks/renderer/IPC/repository, not physical menu click","cases":[{"name":"compatible-targets-exclude-self-and-show-title-count","passed":true},{"name":"captured-one-paper-merge-preserves-projects-content-order-and-position","passed":true},{"name":"merge-undo-restores-both-stacks","passed":true},{"name":"stale-revision-rejected-without-moving-paper-or-closing-picker","passed":true},{"name":"no-compatible-target-has-readable-disabled-reason","passed":true},{"name":"single-source-merge-removes-only-empty-source-clip","passed":true},{"name":"English-short-Merge-label-and-localized-count","passed":true},{"name":"overflow-target-offered-as-calendar-and-merged-stack-stays-calendar","passed":true}],"pids":[5096,3976,1772,7228,9012,8224,1120,1124,7592,1740,4004,1704,8000,7332,4256,9088,8412,4628,1820,1160,612,7948,6196,7308,7404,6588,2776,9108],"dataRemoved":true,"passed":true}
+2026-10-13T22:09:19.7731994Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-merge-menu-workflow.cjs","pid":4404,"passed":true,"timedOut":false,"code":0}
+2026-10-13T22:09:20.6100345Z FIXTURE warmViews: shelf
+2026-10-13T22:09:20.7402551Z FIXTURE warmViews: settings
+2026-10-13T22:09:21.1783622Z FIXTURE warmViews: composer
+2026-10-13T22:09:21.1785073Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:21.1785628Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:21.2644680Z FIXTURE composer: created
+2026-10-13T22:09:21.3567785Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:21.3868383Z FIXTURE composer: textbox visible
+2026-10-13T22:09:21.4083488Z FIXTURE composer: focused
+2026-10-13T22:09:21.4703875Z FIXTURE warmViews: ready
+2026-10-13T22:09:22.8700624Z FIXTURE warmViews: shelf
+2026-10-13T22:09:22.8985865Z FIXTURE warmViews: settings
+2026-10-13T22:09:23.2802136Z FIXTURE warmViews: composer
+2026-10-13T22:09:23.2807512Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:23.2808211Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:23.4407297Z FIXTURE composer: created
+2026-10-13T22:09:23.4906111Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:23.5165657Z FIXTURE composer: textbox visible
+2026-10-13T22:09:23.5373521Z FIXTURE composer: focused
+2026-10-13T22:09:23.6480288Z FIXTURE warmViews: ready
+2026-10-13T22:09:25.2500873Z MORE HEADER DIAG {"focused":true,"menus":1,"pointer":""}
+2026-10-13T22:09:27.1026214Z FIXTURE warmViews: shelf
+2026-10-13T22:09:27.1375760Z FIXTURE warmViews: settings
+2026-10-13T22:09:27.5760608Z FIXTURE warmViews: composer
+2026-10-13T22:09:27.5761339Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:27.5768671Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:27.9410651Z FIXTURE composer: created
+2026-10-13T22:09:27.9420129Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:27.9659154Z FIXTURE composer: textbox visible
+2026-10-13T22:09:27.9859992Z FIXTURE composer: focused
+2026-10-13T22:09:28.0882233Z FIXTURE warmViews: ready
+2026-10-13T22:09:28.0899995Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:28.1070900Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:28.1071554Z FIXTURE composer: created
+2026-10-13T22:09:28.1344232Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:28.1392811Z FIXTURE composer: textbox visible
+2026-10-13T22:09:28.1413613Z FIXTURE composer: focused
+2026-10-13T22:09:29.9647886Z FIXTURE warmViews: shelf
+2026-10-13T22:09:29.9898257Z FIXTURE warmViews: settings
+2026-10-13T22:09:30.5047500Z FIXTURE warmViews: composer
+2026-10-13T22:09:30.5052183Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:30.5822214Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:30.7458206Z FIXTURE composer: created
+2026-10-13T22:09:30.7511676Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:30.7787218Z FIXTURE composer: textbox visible
+2026-10-13T22:09:30.8002328Z FIXTURE composer: focused
+2026-10-13T22:09:30.8734413Z FIXTURE warmViews: ready
+2026-10-13T22:09:33.8365261Z FIXTURE warmViews: shelf
+2026-10-13T22:09:33.8665975Z FIXTURE warmViews: settings
+2026-10-13T22:09:34.5569202Z FIXTURE warmViews: composer
+2026-10-13T22:09:34.6068539Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:34.6070884Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:34.6342453Z FIXTURE composer: created
+2026-10-13T22:09:34.6369303Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:34.6656302Z FIXTURE composer: textbox visible
+2026-10-13T22:09:34.6870700Z FIXTURE composer: focused
+2026-10-13T22:09:34.7753533Z FIXTURE warmViews: ready
+2026-10-13T22:09:34.7762712Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:34.7928509Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:34.7930225Z FIXTURE composer: created
+2026-10-13T22:09:34.8174864Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:34.8247727Z FIXTURE composer: textbox visible
+2026-10-13T22:09:34.8273192Z FIXTURE composer: focused
+2026-10-13T22:09:35.7428205Z FIXTURE warmViews: shelf
+2026-10-13T22:09:36.1192382Z FIXTURE warmViews: settings
+2026-10-13T22:09:36.7635238Z FIXTURE warmViews: composer
+2026-10-13T22:09:36.8115380Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:36.8128232Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:36.8377040Z FIXTURE composer: created
+2026-10-13T22:09:36.8408478Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:36.8676545Z FIXTURE composer: textbox visible
+2026-10-13T22:09:36.8877385Z FIXTURE composer: focused
+2026-10-13T22:09:36.9611471Z FIXTURE warmViews: ready
+2026-10-13T22:09:39.0055584Z FIXTURE warmViews: shelf
+2026-10-13T22:09:39.0389372Z FIXTURE warmViews: settings
+2026-10-13T22:09:39.5246695Z FIXTURE warmViews: composer
+2026-10-13T22:09:39.6117789Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:39.6127781Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:39.7825428Z FIXTURE composer: created
+2026-10-13T22:09:39.7864955Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:39.8151982Z FIXTURE composer: textbox visible
+2026-10-13T22:09:39.8364167Z FIXTURE composer: focused
+2026-10-13T22:09:39.8942438Z FIXTURE warmViews: ready
+2026-10-13T22:09:39.8957675Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:39.9361605Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:39.9390565Z FIXTURE composer: created
+2026-10-13T22:09:39.9394681Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:39.9517604Z FIXTURE composer: textbox visible
+2026-10-13T22:09:39.9536448Z FIXTURE composer: focused
+2026-10-13T22:09:41.7022464Z FIXTURE warmViews: shelf
+2026-10-13T22:09:42.0073955Z FIXTURE warmViews: settings
+2026-10-13T22:09:42.7359697Z FIXTURE warmViews: composer
+2026-10-13T22:09:42.7455614Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:42.7456065Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:42.8984116Z FIXTURE composer: created
+2026-10-13T22:09:42.9000708Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:42.9239368Z FIXTURE composer: textbox visible
+2026-10-13T22:09:42.9442134Z FIXTURE composer: focused
+2026-10-13T22:09:43.0164736Z FIXTURE warmViews: ready
+2026-10-13T22:09:44.2472860Z FIXTURE warmViews: shelf
+2026-10-13T22:09:44.2792893Z FIXTURE warmViews: settings
+2026-10-13T22:09:44.7632047Z FIXTURE warmViews: composer
+2026-10-13T22:09:44.8094035Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:44.8116445Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:45.0237510Z FIXTURE composer: created
+2026-10-13T22:09:45.0259923Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:45.0788892Z FIXTURE composer: textbox visible
+2026-10-13T22:09:45.1087953Z FIXTURE composer: focused
+2026-10-13T22:09:45.2106292Z FIXTURE warmViews: ready
+2026-10-13T22:09:45.2133511Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:45.2781165Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:45.2782454Z FIXTURE composer: created
+2026-10-13T22:09:45.2789740Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:45.2862151Z FIXTURE composer: textbox visible
+2026-10-13T22:09:45.2889422Z FIXTURE composer: focused
+2026-10-13T22:09:45.7591501Z {"platform":"win32","arch":"x64","evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round2\\windows\\capacity-m228kw","cases":[{"name":"calendar-open-immediate-hang","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-5yvENB","passed":true,"detail":{"calendarKeptOpen":true,"shelfUpdated":true},"windows":[{"title":"Thoughtline Composer","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer","visible":false},{"title":"Thoughtline Manage","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage","visible":true},{"title":"Thoughtline Shelf","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf","visible":true}],"screenshots":["calendar-open-immediate-hang-Thoughtline-Manage.png","calendar-open-immediate-hang-Thoughtline-Shelf.png"],"pids":[8156,7076,1504,6808,1812,6728,772],"normalClose":true,"dataRemoved":true},{"name":"more-menu-content-width","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-q2U5S8","passed":true,"detail":{"menu":216.546875,"content":186.546875,"button":"color(srgb 0.939647 0.931529 0.900863)","detailAndCalendarReaderAndHeaderLeaveClose":true,"bridgeSafe":true},"windows":[{"title":"Thoughtline Composer","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer","visible":false},{"title":"Thoughtline Manage","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage","visible":true},{"title":"Thoughtline Shelf","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf","visible":false}],"screenshots":["more-menu-content-width-Thoughtline-Manage.png"],"pids":[1796,5644,7056,1056,4268,3320,8644],"normalClose":true,"dataRemoved":true},{"name":"new-swap-cancel-confirm-undo","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-KeXHJW","passed":true,"detail":{"incomingId":"a8ecfe4b-ef9e-4157-992a-3bbfa4ed63e9","slot":"clip:c0","cancelKeptText":true,"undoKeepsNewRecord":true},"windows":[{"title":"Thoughtline Composer","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer","visible":false},{"title":"Thoughtline Manage","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage","visible":false},{"title":"Thoughtline Shelf","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf","visible":true}],"screenshots":["new-swap-cancel-confirm-undo-Thoughtline-Shelf.png"],"pids":[3012,4364,4784,7464,2536,8756,7988],"normalClose":true,"dataRemoved":true},{"name":"calendar-swap-open-focus-retained","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-CGNyJe","passed":true,"detail":{"readerKeptOpen":true,"focusRetained":true,"successExpires":true},"windows":[{"title":"Thoughtline Composer","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer","visible":false},{"title":"Thoughtline Manage","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage","visible":true},{"title":"Thoughtline Shelf","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf","visible":true}],"screenshots":["calendar-swap-open-focus-retained-Thoughtline-Manage.png","calendar-swap-open-focus-retained-Thoughtline-Shelf.png"],"pids":[5944,4120,7824,2624,7516,3956,3108],"normalClose":true,"dataRemoved":true},{"name":"stale-target-retains-draft","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-aylChk","passed":true,"detail":{"staleChoiceDisabled":true,"noDuplicate":true},"windows":[{"title":"Thoughtline Composer","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer","visible":true},{"title":"Thoughtline Manage","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage","visible":false},{"title":"Thoughtline Shelf","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf","visible":true}],"screenshots":["stale-target-retains-draft-Thoughtline-Composer.png","stale-target-retains-draft-Thoughtline-Shelf.png"],"pids":[6812,3160,7144,1664,1832,8824,7308],"normalClose":true,"dataRemoved":true},{"name":"write-failure-in-picker-keeps-old-and-new-content","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-KJIFMK","passed":true,"detail":{"failedWriteAtomic":true,"pickerRetained":true,"retrySucceeded":true},"windows":[{"title":"Thoughtline Composer","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer","visible":false},{"title":"Thoughtline Manage","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage","visible":true},{"title":"Thoughtline Shelf","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf","visible":true}],"screenshots":["write-failure-in-picker-keeps-old-and-new-content-Thoughtline-Manage.png","write-failure-in-picker-keeps-old-and-new-content-Thoughtline-Shelf.png"],"pids":[6288,2736,9052,2632,5248,5348,8460],"normalClose":true,"dataRemoved":true},{"name":"composer-write-failure-keeps-focus-and-draft","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-PDQtiG","passed":true,"detail":{"failedDraftKept":true,"pickerFocusRetained":true,"retrySucceeded":true},"windows":[{"title":"Thoughtline Composer","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer","visible":false},{"title":"Thoughtline Manage","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage","visible":false},{"title":"Thoughtline Shelf","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf","visible":true}],"screenshots":["composer-write-failure-keeps-focus-and-draft-Thoughtline-Shelf.png"],"pids":[2848,2176,7076,5280,4880,8660,800],"normalClose":true,"dataRemoved":true},{"name":"native-show-all-Agent-label-and-selection","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-CWEltv","passed":true,"detail":{"filterOnly":true,"checkmarkTracksFilter":true},"windows":[{"title":"Thoughtline Composer","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer","visible":false},{"title":"Thoughtline Manage","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage","visible":true},{"title":"Thoughtline Shelf","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf","visible":true}],"screenshots":["native-show-all-Agent-label-and-selection-Thoughtline-Manage.png","native-show-all-Agent-label-and-selection-Thoughtline-Shelf.png"],"pids":[9204,1128,5544,1316,8964,2184,7496],"normalClose":true,"dataRemoved":true},{"name":"full-composer-save-stays-out-of-reader","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-capacity-KQSAbF","passed":true,"detail":{"archived":true,"noReaderJump":true},"windows":[{"title":"Thoughtline Composer","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=composer","visible":false},{"title":"Thoughtline Manage","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=manage","visible":false},{"title":"Thoughtline Shelf","url":"file:///D:/a/thoughtline/thoughtline/out/renderer/index.html?view=shelf","visible":false}],"intentionalAbsence":"Saved-only flow closes Composer and leaves Manage hidden; see the pre-submit screenshot.","screenshots":[],"pids":[7368,8876,7016,2652,8412,7300,5564],"normalClose":true,"dataRemoved":true}],"passed":true}
+2026-10-13T22:09:45.7784414Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-capacity-workflow.cjs","pid":6508,"passed":true,"timedOut":false,"code":0}
+2026-10-13T22:09:48.2719192Z FIXTURE composer: invoking shortcut
+2026-10-13T22:09:48.2744451Z FIXTURE composer: shortcut invoked
+2026-10-13T22:09:48.5042238Z FIXTURE composer: created
+2026-10-13T22:09:48.5043137Z FIXTURE composer: native visibility checked
+2026-10-13T22:09:48.5376045Z FIXTURE composer: textbox visible
+2026-10-13T22:09:48.5614063Z FIXTURE composer: focused
+2026-10-13T22:09:52.9985585Z {"platform":"win32","version":"0.0.32","evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round2\\windows\\source-win32-rPYbYn","cases":[{"kind":"fresh","profile":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-positioning-0d8hsv","checks":["fresh-six-presets-cover-everyday-work-people-development","English-tag-settings-and-translated-preset-display","custom-tag-remains-literal-in-English","renamed-built-in-remains-literal","composer-general-default-generic-placeholder-specific-person-and-save","restart-preserves-identities-content-dates-tag-customizations-and-draft"],"pids":[4872,3284,8212,7688,1260,6168,1664,3084,1576,7260,7436,916],"passed":true,"normalQuit":true,"profileRemoved":true},{"kind":"legacy","profile":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-positioning-cIXUFz","checks":["legacy-tag-ids-colors-names-and-draft-not-reset-or-expanded","capacity-derived-status-counts-include-all-stack-pages-and-two-offline-kinds-without-writes","native-only-variable-show-all-tags-filter-tags-and-calendar-wording-filter-without-data-writes","restart-preserves-identities-content-dates-tag-customizations-and-draft"],"pids":[7244,1232,5356,1572,6700,2784,4880,2636,5280,6268,1840],"passed":true,"normalQuit":true,"profileRemoved":true}],"passed":true}
+2026-10-13T22:09:53.0183429Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\positioning-workflow.cjs","pid":5432,"passed":true,"timedOut":false,"code":0}
+2026-10-13T22:10:07.8341266Z {"platform":"win32","version":"0.0.32","scope":"Synthetic source UI/IPC. No physical IME acceptance.","cases":[{"mode":"detail","profile":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-title-edit-rSkTPS","checks":{"mode":"detail","slowBackspace":true,"emptyAcrossAutosave":true,"focusCaretKept":true,"typingWithoutSelectAll":true,"compositionCloseBlockedAndCommitKept":true,"contentIdentityDateKept":true},"passed":true,"pids":[6696,1104,6980,6564,3188,7616],"normalQuit":true,"profileRemoved":true},{"mode":"calendar","profile":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-title-edit-3RiQ0V","checks":{"mode":"calendar","slowBackspace":true,"emptyAcrossAutosave":true,"focusCaretKept":true,"typingWithoutSelectAll":true,"compositionCloseBlockedAndCommitKept":true,"contentIdentityDateKept":true},"passed":true,"pids":[584,2068,1428,4892,6848,5924],"normalQuit":true,"profileRemoved":true}],"passed":true}
+2026-10-13T22:10:07.8504773Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\title-edit-workflow.cjs","pid":8652,"passed":true,"timedOut":false,"code":0}
+2026-10-13T22:10:08.7709219Z FIXTURE warmViews: shelf
+2026-10-13T22:10:08.8095934Z FIXTURE warmViews: settings
+2026-10-13T22:10:09.3910826Z FIXTURE warmViews: composer
+2026-10-13T22:10:09.3911456Z FIXTURE composer: invoking shortcut
+2026-10-13T22:10:09.4093832Z FIXTURE composer: shortcut invoked
+2026-10-13T22:10:09.5595471Z FIXTURE composer: created
+2026-10-13T22:10:09.6248804Z FIXTURE composer: native visibility checked
+2026-10-13T22:10:09.6666777Z FIXTURE composer: textbox visible
+2026-10-13T22:10:09.6889160Z FIXTURE composer: focused
+2026-10-13T22:10:09.8181597Z FIXTURE warmViews: ready
+2026-10-13T22:10:48.4002703Z {"evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round2\\windows\\source-win32-V0GTI3","passed":false,"failure":"page.waitForSelector: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.month-grid') to be visible\u001b[22m\n\n    at openCalendar (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\more-menu-workflow.cjs:10:117)\n    at async D:\\a\\thoughtline\\thoughtline\\tests\\electron\\more-menu-workflow.cjs:14:4","cases":[{"kind":"expanded-bottom","language":"zh","failed":[]},{"kind":"calendar-top","language":"zh","failed":[]},{"kind":"calendar-bottom","language":"zh","failed":[]}]}
+2026-10-13T22:10:48.4150614Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\more-menu-workflow.cjs","pid":2436,"passed":false,"timedOut":false,"code":1}
+2026-10-13T22:10:49.2900337Z [31;1mException: [0mD:\a\_temp\8284b42c-aae3-4469-a690-78f3e66ef7e2.ps1:25[0m
+2026-10-13T22:10:49.2901931Z [31;1m[0m[36;1mLine |[0m
+2026-10-13T22:10:49.2902937Z [31;1m[0m[36;1m[36;1m  25 | [0m   if ($LASTEXITCODE -ne 0) { [36;1mthrow "$test failed"[0m }[0m
+2026-10-13T22:10:49.2903830Z [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                              ~~~~~~~~~~~~~~~~~~~~[0m
+2026-10-13T22:10:49.2904740Z [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mmore-menu-workflow failed[0m
+2026-10-13T22:10:49.3186715Z ##[error]Process completed with exit code 1.
+2026-10-13T22:10:49.3741645Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-10-13T22:10:49.3742146Z with:
+2026-10-13T22:10:49.3742473Z   name: Thoughtline-Windows-built-96e5cbae7950cea40e416ed0a462e7c14d020a1d-1
+2026-10-13T22:10:49.3742930Z   path: dist/*.exe
+dist/SHA256SUMS.txt
+dist/build-manifest.json
+
+2026-10-13T22:10:49.3743274Z   if-no-files-found: ignore
+2026-10-13T22:10:49.3743558Z   retention-days: 3
+2026-10-13T22:10:49.3743798Z   compression-level: 6
+2026-10-13T22:10:49.3743961Z   overwrite: false
+2026-10-13T22:10:49.3744157Z   include-hidden-files: false
+2026-10-13T22:10:49.3744407Z   archive: true
+2026-10-13T22:10:49.3744611Z env:
+2026-10-13T22:10:49.3744799Z   RETAIN_INSTALLER: true
+2026-10-13T22:10:49.3745012Z ##[endgroup]
+2026-10-13T22:10:53.1982814Z No files were found with the provided path: dist/*.exe
+2026-10-13T22:10:53.1983454Z dist/SHA256SUMS.txt
+2026-10-13T22:10:53.1983858Z dist/build-manifest.json. No artifacts will be uploaded.
+2026-10-13T22:10:53.2745733Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-10-13T22:10:53.2746121Z with:
+2026-10-13T22:10:53.2746433Z   name: Thoughtline-Windows-preflight-failed-96e5cbae7950cea40e416ed0a462e7c14d020a1d-1
+2026-10-13T22:10:53.2746791Z   path: dist/*.json
+2026-10-13T22:10:53.2746959Z   if-no-files-found: ignore
+2026-10-13T22:10:53.2747140Z   retention-days: 14
+2026-10-13T22:10:53.2747304Z   compression-level: 6
+2026-10-13T22:10:53.2747476Z   overwrite: false
+2026-10-13T22:10:53.2747635Z   include-hidden-files: false
+2026-10-13T22:10:53.2747811Z   archive: true
+2026-10-13T22:10:53.2747955Z env:
+2026-10-13T22:10:53.2748096Z   RETAIN_INSTALLER: true
+2026-10-13T22:10:53.2748260Z ##[endgroup]
+2026-10-13T22:10:53.4478933Z No files were found with the provided path: dist/*.json. No artifacts will be uploaded.
+2026-10-13T22:10:53.4727843Z ##[group]Run node scripts/ci-artifact-evidence.cjs collect
+2026-10-13T22:10:53.4728268Z [36;1mnode scripts/ci-artifact-evidence.cjs collect[0m
+2026-10-13T22:10:53.4792380Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-13T22:10:53.4792647Z env:
+2026-10-13T22:10:53.4792797Z   RETAIN_INSTALLER: true
+2026-10-13T22:10:53.4792963Z ##[endgroup]
+2026-10-13T22:11:07.1079753Z {"schema":1,"sha":"96e5cbae7950cea40e416ed0a462e7c14d020a1d","runId":"38475297883","attempt":"1","files":[{"path":"round2/windows/arrange-o9mxhw/receipt.json","sha256":"380153b9a7af06b1d5c31839a62351a76fbef40300c4c88824de46a92138715c","bytes":1300},{"path":"round2/windows/calendar-return-uYptBH/receipt.json","sha256":"fe4e1107b541fca64cef8f8751f38207281a5f62561153647957b511ec390789","bytes":661},{"path":"round2/windows/calendar-return-uYptBH/returned-search.png","sha256":"35bd18b3a9f816ea297ff6c6c934505800ed5dfb32a797236f017982c846184b","bytes":205583},{"path":"round2/windows/capacity-m228kw/calendar-open-immediate-hang-Thoughtline-Manage.png","sha256":"cd83fd08b44b519819489215ae53e7e7d695764c9bd5545fe307184cdba6dfbd","bytes":83064},{"path":"round2/windows/capacity-m228kw/calendar-open-immediate-hang-Thoughtline-Shelf.png","sha256":"0290a9227c6358f5f5f4069f2331964f44d453a7ab1c10ce37c47b4273a47718","bytes":47091},{"path":"round2/windows/capacity-m228kw/calendar-swap-open-focus-retained-Thoughtline-Manage.png","sha256":"6692ed37677ff46f9055de28a6f0c7b782ca954dc39c457c0ae9f6809621f97a","bytes":84296},{"path":"round2/windows/capacity-m228kw/calendar-swap-open-focus-retained-Thoughtline-Shelf.png","sha256":"7ab3046e1ae3045680632f8460840c71b3ff60d57579af5663983f75be13d62b","bytes":113962},{"path":"round2/windows/capacity-m228kw/compact-menu-open.png","sha256":"19513629b5290f368fca50b0211898898712c555ff18191424ffa12e493f6b0c","bytes":77964},{"path":"round2/windows/capacity-m228kw/composer-swap-picker.png","sha256":"66a8a986d2691e22dcf2012ce10d0565df2eec12a3a710b3698b63523ce1966e","bytes":69089},{"path":"round2/windows/capacity-m228kw/composer-write-failure-keeps-focus-and-draft-Thoughtline-Shelf.png","sha256":"2aba1a3b7567f6739a708bcdf632f64843cf200e279f5cd95f84c9513779e561","bytes":114740},{"path":"round2/windows/capacity-m228kw/full-composer-before-save.png","sha256":"1c16c0cc29584addc342d13518b423b12f9cbbeb445077d4468a25de1b63af2f","bytes":76559},{"path":"round2/windows/capacity-m228kw/more-menu-content-width-Thoughtline-Manage.png","sha256":"ef2b04b81c7a6de324d6ca932e861a39f1e6d01245fed3ba91dbbb9d7fb7a738","bytes":115265},{"path":"round2/windows/capacity-m228kw/native-show-all-Agent-label-and-selection-Thoughtline-Manage.png","sha256":"a99169a81350408e4dc2d5e390c3162e18549fd49faf32934453d70d4f1cec5d","bytes":34253},{"path":"round2/windows/capacity-m228kw/native-show-all-Agent-label-and-selection-Thoughtline-Shelf.png","sha256":"4e1d71503065e2223a6f97b3a3f42f7c1b9329a09f685ba1fd9cd8e35f285d71","bytes":33085},{"path":"round2/windows/capacity-m228kw/new-swap-cancel-confirm-undo-Thoughtline-Shelf.png","sha256":"fac844c4a04368c5100ba1847453baa10b89bb3c76fc6a51d4735d6c05a32d39","bytes":114341},{"path":"round2/windows/capacity-m228kw/receipt.json","sha256":"913438e41eab9391c3cac7b378e9984c8657416b3951c7fdd6ef44061f4ab973","bytes":10926},{"path":"round2/windows/capacity-m228kw/stale-target-retains-draft-Thoughtline-Composer.png","sha256":"87da9cc85fcaeacc79048d527d7770db35fb38cc92ba3b448c535f4b7ed2ed9f","bytes":74994},{"path":"round2/windows/capacity-m228kw/stale-target-retains-draft-Thoughtline-Shelf.png","sha256":"b53d71e9991a5fb6563265e625fefc8b46f0db60261ac408c126e5b2446a20f6","bytes":114378},{"path":"round2/windows/capacity-m228kw/write-failure-in-picker-keeps-old-and-new-content-Thoughtline-Manage.png","sha256":"b30e625cf0138897325098b54d0e94211691357bd7ecd1aeada6359e7376da9f","bytes":93743},{"path":"round2/windows/capacity-m228kw/write-failure-in-picker-keeps-old-and-new-content-Thoughtline-Shelf.png","sha256":"7ab3046e1ae3045680632f8460840c71b3ff60d57579af5663983f75be13d62b","bytes":113962},{"path":"round2/windows/merge-menu-HmohZu/receipt.json","sha256":"b81a1e9ecb7dc600366b0824cf5b1169b761536e2fa3c597840d37fbdd72aea7","bytes":1321},{"path":"round2/windows/native-menu-wdp4q8/receipt.json","sha256":"b405976ff490e328fe44adf71cfef09db7a9b32de880463dfce04321bb761259","bytes":4167},{"path":"round2/windows/native-trace-thoughtline-arrange-zmVekX.log","sha256":"4477a58d82ee8bb1e0165aa73accb653b12ef896065ebed550544d011de33662","bytes":3076},{"path":"round2/windows/native-trace-thoughtline-calendar-return-rL9SWA.log","sha256":"a8687153be51bc3bdf3b0c56e937278d193b3139c9991ba415c9845b787e1a86","bytes":2491},{"path":"round2/windows/native-trace-thoughtline-capacity-5yvENB.log","sha256":"6286a7d0f8da61cf133003f6c4428ebdcd384578f042b3bb342ab23858301903","bytes":2344},{"path":"round2/windows/native-trace-thoughtline-capacity-aylChk.log","sha256":"456ee9f0e8416c98c7032e2af57ea5703a0f15086cde0ebc9413253b10bedba8","bytes":2248},{"path":"round2/windows/native-trace-thoughtline-capacity-CGNyJe.log","sha256":"76a679216aba602f72616fbd24929a06d4bb614b61c793b71aa1f4e7460d899e","bytes":2344},{"path":"round2/windows/native-trace-thoughtline-capacity-CWEltv.log","sha256":"70564f59901de97c6256c07b0ae6d90dd55e5627065380c92295e68baf7728cd","bytes":2747},{"path":"round2/windows/native-trace-thoughtline-capacity-KeXHJW.log","sha256":"518295f2f518573172fff5fb5cde50cee39d1389077d11b79b96d5f73c28b8a3","bytes":2372},{"path":"round2/windows/native-trace-thoughtline-capacity-KJIFMK.log","sha256":"3a76354415f6d2d139e4299d9a937a5add59030988263b8abab723d66cda2473","bytes":2344},{"path":"round2/windows/native-trace-thoughtline-capacity-KQSAbF.log","sha256":"992a9120701e69acff7cf52eb56483197d5539dae766d2c60223a25e32c0c3a3","bytes":2344},{"path":"round2/windows/native-trace-thoughtline-capacity-PDQtiG.log","sha256":"0d34e43ca646ebec98f766bcfe2bc55df21c576a58333da9086389df88523339","bytes":2372},{"path":"round2/windows/native-trace-thoughtline-capacity-q2U5S8.log","sha256":"03f2014b24b41f3547992814f8e20488b1e81e409e480b98dbe232234906e168","bytes":2344},{"path":"round2/windows/native-trace-thoughtline-hidden-manage-hjjT9N.log","sha256":"8150a776c9cc23901b392be34e897eb2aad9de115941407bacac65675e4cca3f","bytes":2658},{"path":"round2/windows/native-trace-thoughtline-merge-menu-hrMNFL.log","sha256":"fa388c713bb2a6fb719e8f38bb94c4a61763f2669c90398efe54f6749258eef5","bytes":9787},{"path":"round2/windows/native-trace-thoughtline-more-menus-YvghIP.log","sha256":"4fabf9ea50b122e01f551e8b0b2474dbfe4f2d339dbb89ed81b85f5f1f5e9f10","bytes":2577},{"path":"round2/windows/native-trace-thoughtline-native-menu-YOtpkx.log","sha256":"b2098113ef18d85d8bb7ba489595f24ca42b450ad11293b6384cddf8b5edbbbb","bytes":2477},{"path":"round2/windows/native-trace-thoughtline-positioning-0d8hsv.log","sha256":"57ffb9a339f4f1eef1b7c7a1d3d407d71ac6e4c059ae4fbd5be3c161ab388cfc","bytes":2746},{"path":"round2/windows/native-trace-thoughtline-positioning-cIXUFz.log","sha256":"1c568fafb982d76681e64202887b3ce53d91f9e5c2887f777a67ed2f12f6a0f7","bytes":2070},{"path":"round2/windows/native-trace-thoughtline-round2-Qwk8cg.log","sha256":"6d651c5e655f40c310ea6f7ca2455cc20ea14ea1fcc7116b7aafbdf7578eb541","bytes":3184},{"path":"round2/windows/native-trace-thoughtline-split-menu-RVYIAM.log","sha256":"bb8988a31b153ac6f387040f3dc1627f05faffcff99cb59cfe72a560c3a355b0","bytes":8385},{"path":"round2/windows/native-trace-thoughtline-title-edit-3RiQ0V.log","sha256":"f02fa029cba29ab019f95f3e83e7ca16cb7745553b6126539a988c5869081181","bytes":1322},{"path":"round2/windows/native-trace-thoughtline-title-edit-rSkTPS.log","sha256":"e3f65189f9bed5e787829fcbd38196c787698ef7eda50b3be645fab4891de5c5","bytes":1322},{"path":"round2/windows/reopen-8QT2Ww/launch-events.jsonl","sha256":"f74f821cecedcb01d55ea4a9ddae5d367d2d25365e89fa92916a0a9d8f788bc7","bytes":903},{"path":"round2/windows/reopen-8QT2Ww/receipt.json","sha256":"8d2a6a00dfd9a4717088670facadc4bd776fef331b62dc39e4306017e74fba1d","bytes":706},{"path":"round2/windows/source-win32-e3ZvDr/receipt.json","sha256":"b7fde7a3c878d266a7dfdf1fc40c9362df8232b0be10c2fca8bed6687582d795","bytes":1357},{"path":"round2/windows/source-win32-e3ZvDr/title-empty-calendar.png","sha256":"b15bde3fd5a28c1e0449b420fe0ac5ff86f478182f203832e80ca8ee91ed822c","bytes":169227},{"path":"round2/windows/source-win32-e3ZvDr/title-empty-detail.png","sha256":"c10e4c773286dc571f299ee136fc7f53b7e7c99aa144d8a1b740de308ad3a17f","bytes":105933},{"path":"round2/windows/source-win32-rPYbYn/legacy-offline.png","sha256":"cab171aa6eaf6f9be6f0c381ea8fc235741d39861834ba9f22c800d433575713","bytes":174473},{"path":"round2/windows/source-win32-rPYbYn/receipt.json","sha256":"26284ea1ad90ef53824ce0347641f6aa3bbdadb71c4aec7b280f384762d2f1a7","bytes":1778},{"path":"round2/windows/source-win32-rPYbYn/tags-english.png","sha256":"ee913b0a9726ec8039af25ec200b35c459d3be4914788a214a5d427d612e649f","bytes":228666},{"path":"round2/windows/source-win32-V0GTI3/receipt.json","sha256":"003b7bdc86a57683cfc959e90113977790f996da52c3a4ac8d9f7d6626b04945","bytes":5786},{"path":"round2/windows/source-win32-V0GTI3/zh-light/calendar-bottom-zh.png","sha256":"348d1d2b4e12a475838315f3f9afec9365904daeeb0f712b4c245ea4c5548644","bytes":119334},{"path":"round2/windows/source-win32-V0GTI3/zh-light/calendar-top-zh.png","sha256":"2f5aa1214007d3eb32a454a40fa1d3244fc56f42d0be864acd3bef1604c354ff","bytes":272211},{"path":"round2/windows/source-win32-V0GTI3/zh-light/expanded-bottom-zh.png","sha256":"6debfb782c210b21f2befc584ec8f482e3c84a81411fb8ae5e2be7f518bc56ac","bytes":76072},{"path":"round2/windows/split-menu-FdLCXw/receipt.json","sha256":"ea1bacf5d129ef90afb86f16ce7af6bb26d4c1ac124426306fcd9a2a6b49d3e1","bytes":1723},{"path":"round2/windows/supervisor-hidden-manage-reopen-1791929288453/supervisor.json","sha256":"c1a0d82e2ec2dc5722a32028762bf38d2e8d7d4534442e9372c1acfc89a618fd","bytes":1080},{"path":"round2/windows/supervisor-more-menu-workflow-1791929407899/supervisor.json","sha256":"abb6deccc4b8f5c6033621cd9d9e36cdce7600fd385809764c1304ad0f761adc","bytes":1474},{"path":"round2/windows/supervisor-positioning-workflow-1791929385837/supervisor.json","sha256":"9693736ba3d9584d3b650c04a90e6e35e120b28001c31882a2a989c75d06db75","bytes":2051},{"path":"round2/windows/supervisor-round2-arrange-workflow-1791929334323/supervisor.json","sha256":"4ce50261294994314b8438dd212ecd37ca98ed39ee7f58e2f490238f5440bcf3","bytes":1812},{"path":"round2/windows/supervisor-round2-calendar-navigation-1791929331162/supervisor.json","sha256":"88d7de8852ff560ce69145ea02ff448fa9d1b4e9b02dcb3df145232b4146f54f","bytes":1307},{"path":"round2/windows/supervisor-round2-capacity-workflow-1791929359824/supervisor.json","sha256":"276c808714ff2e1ba7b390d64a92afa3342cf3ce889ff95e7b214aadea5b96e4","bytes":12391},{"path":"round2/windows/supervisor-round2-merge-menu-workflow-1791929351300/supervisor.json","sha256":"532d59a1bbf21705798521fd6a357f9883f5cc907bcfe7353add8f8cee39e214","bytes":2715},{"path":"round2/windows/supervisor-round2-native-menu-1791929310616/supervisor.json","sha256":"bb6761deab26b6b9308aba80855c44f42d0c0939daed6f71d6f2e08f44eba268","bytes":3783},{"path":"round2/windows/supervisor-round2-split-menu-workflow-1791929338359/supervisor.json","sha256":"13fbe034e1d935220c8ed503850c6bddf87a6145353c2fdd67117ebf26ed4302","bytes":2742},{"path":"round2/windows/supervisor-round2-workflow-1791929303335/supervisor.json","sha256":"73afd9113de5a7680e56770c66bfc4101ae1f38814394aadd3343dafbbf17a74","bytes":3431},{"path":"round2/windows/supervisor-title-edit-workflow-1791929393073/supervisor.json","sha256":"11bee1163e0bd41aed90b5d6597632e7ec745192289c38924e43af5ac9d22e0c","bytes":1467},{"path":"round2/windows/workflow-laGWjX/calendar.png","sha256":"2e08d6b25121ae07bce5a35a95048dc4fd07710cf9bad50363acff6b138f3d68","bytes":368840},{"path":"round2/windows/workflow-laGWjX/editor.png","sha256":"33f89bdc64ad08f299fe970c0e8010f58e917c40df438d11204f82af5eb1fae1","bytes":119173},{"path":"round2/windows/workflow-laGWjX/receipt.json","sha256":"571cbec2b103cd135a17991dc3a1288a7ecef8125a6c74d29fc649fe1a015fe9","bytes":3119}],"bytes":3331852,"unchangedHistoricalFiles":17705}
+2026-10-13T22:11:09.2965298Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-10-13T22:11:09.2965686Z with:
+2026-10-13T22:11:09.2966003Z   name: Thoughtline-Windows-source-ui-96e5cbae7950cea40e416ed0a462e7c14d020a1d-1
+2026-10-13T22:11:09.2966347Z   path: dist/ci-evidence/**
+2026-10-13T22:11:09.2966535Z   if-no-files-found: warn
+2026-10-13T22:11:09.2966712Z   retention-days: 7
+2026-10-13T22:11:09.2966874Z   compression-level: 6
+2026-10-13T22:11:09.2967052Z   overwrite: false
+2026-10-13T22:11:09.2967218Z   include-hidden-files: false
+2026-10-13T22:11:09.2967400Z   archive: true
+2026-10-13T22:11:09.2967542Z env:
+2026-10-13T22:11:09.2967683Z   RETAIN_INSTALLER: true
+2026-10-13T22:11:09.2967850Z ##[endgroup]
+2026-10-13T22:11:12.4238321Z With the provided path, there will be 71 files uploaded
+2026-10-13T22:11:12.4244077Z Artifact name is valid!
+2026-10-13T22:11:12.4244987Z Root directory input is valid!
+2026-10-13T22:11:13.1835146Z Uploading artifact: Thoughtline-Windows-source-ui-96e5cbae7950cea40e416ed0a462e7c14d020a1d-1.zip
+2026-10-13T22:11:13.1835775Z Beginning upload of artifact content to blob storage
+2026-10-13T22:11:14.6551048Z Uploaded bytes 3221283
+2026-10-13T22:11:14.7329091Z Finished uploading artifact content to blob storage!
+2026-10-13T22:11:14.7331937Z SHA256 digest of uploaded artifact is ba981a6c629560b13bbb422c292664d764256004f33c294dea5cda031908a6fb
+2026-10-13T22:11:14.7332674Z Finalizing artifact upload
+2026-10-13T22:11:15.1816730Z Artifact Thoughtline-Windows-source-ui-96e5cbae7950cea40e416ed0a462e7c14d020a1d-1 successfully finalized. Artifact ID 11853831497
+2026-10-13T22:11:15.1818521Z Artifact Thoughtline-Windows-source-ui-96e5cbae7950cea40e416ed0a462e7c14d020a1d-1 has been successfully uploaded! Final size is 3221283 bytes. Artifact ID is 11853831497
+2026-10-13T22:11:15.1825004Z Artifact download URL: https://github.com/NocodeMrLi/thoughtline/actions/runs/38475297883/artifacts/11853831497
+2026-10-13T22:11:15.8457358Z Post job cleanup.
+2026-10-13T22:11:16.2604360Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-10-13T22:11:16.9971393Z git version 2.55.0.windows.5
+2026-10-13T22:11:17.0136236Z Copying 'C:\Users\runneradmin\.gitconfig' to 'D:\a\_temp\89edf50f-2911-46f3-9fb7-ab5da9127195\.gitconfig'
+2026-10-13T22:11:17.0209599Z Temporarily overriding HOME='D:\a\_temp\89edf50f-2911-46f3-9fb7-ab5da9127195' before making global git config changes
+2026-10-13T22:11:17.0210820Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-13T22:11:17.0218766Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\thoughtline\thoughtline
+2026-10-13T22:11:17.0967054Z Removing SSH command configuration
+2026-10-13T22:11:17.0977541Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-10-13T22:11:17.1329888Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-10-13T22:11:18.6319438Z Removing HTTP extra header
+2026-10-13T22:11:18.6328458Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-13T22:11:18.6651954Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-10-13T22:11:19.1918450Z Removing includeIf entries pointing to credentials config files
+2026-10-13T22:11:19.1929003Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-13T22:11:19.2163920Z includeif.gitdir:D:/a/thoughtline/thoughtline/.git.path
+2026-10-13T22:11:19.2164587Z includeif.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path
+2026-10-13T22:11:19.2165608Z includeif.gitdir:/github/workspace/.git.path
+2026-10-13T22:11:19.2166794Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-13T22:11:19.2200566Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/thoughtline/thoughtline/.git.path
+2026-10-13T22:11:19.2469448Z D:\a\_temp\git-credentials-5468df55-04d7-4fff-8afb-5b9ff5b045a1.config
+2026-10-13T22:11:19.2666478Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/thoughtline/thoughtline/.git.path D\:\\a\\_temp\\git\-credentials\-5468df55\-04d7\-4fff\-8afb\-5b9ff5b045a1\.config
+2026-10-13T22:11:19.2874916Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path
+2026-10-13T22:11:19.3103462Z D:\a\_temp\git-credentials-5468df55-04d7-4fff-8afb-5b9ff5b045a1.config
+2026-10-13T22:11:19.3152808Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/thoughtline/thoughtline/.git/worktrees/*.path D\:\\a\\_temp\\git\-credentials\-5468df55\-04d7\-4fff\-8afb\-5b9ff5b045a1\.config
+2026-10-13T22:11:19.3416725Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-13T22:11:19.3652268Z /github/runner_temp/git-credentials-5468df55-04d7-4fff-8afb-5b9ff5b045a1.config
+2026-10-13T22:11:19.3694987Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-5468df55\-04d7\-4fff\-8afb\-5b9ff5b045a1\.config
+2026-10-13T22:11:19.3970223Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-13T22:11:19.4195301Z /github/runner_temp/git-credentials-5468df55-04d7-4fff-8afb-5b9ff5b045a1.config
+2026-10-13T22:11:19.4236601Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-5468df55\-04d7\-4fff\-8afb\-5b9ff5b045a1\.config
+2026-10-13T22:11:19.4514669Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-10-13T22:11:19.9821420Z Removing credentials config 'D:\a\_temp\git-credentials-5468df55-04d7-4fff-8afb-5b9ff5b045a1.config'
+2026-10-13T22:11:20.3108189Z Cleaning up orphan processes

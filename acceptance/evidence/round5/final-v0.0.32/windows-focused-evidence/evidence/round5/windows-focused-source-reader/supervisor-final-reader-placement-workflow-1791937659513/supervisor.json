@@ -1,0 +1,16 @@
+{
+  "file": "D:\\a\\thoughtline\\thoughtline\\tests\\electron\\final-reader-placement-workflow.cjs",
+  "args": [],
+  "timeoutMs": 180000,
+  "startedAt": "2026-10-14T00:27:39.514Z",
+  "passed": true,
+  "timedOut": false,
+  "profileCleanup": "Delegated to fixture; supervisor never deletes data",
+  "pid": 1176,
+  "code": 0,
+  "signal": null,
+  "closeConfirmed": true,
+  "stdout": "Downloading Electron binary...\nFIXTURE warmViews: shelf\nFIXTURE warmViews: settings\nFIXTURE warmViews: composer\nFIXTURE composer: invoking shortcut\nFIXTURE composer: shortcut invoked\nFIXTURE composer: created\nFIXTURE composer: native visibility checked\nFIXTURE composer: textbox visible\nFIXTURE composer: focused\nFIXTURE warmViews: ready\n{\"evidence\":\"D:\\\\a\\\\thoughtline\\\\thoughtline\\\\acceptance\\\\evidence\\\\round5\\\\windows-focused-source-reader\\\\reader-placement-ozhSTY\",\"dir\":\"C:\\\\Users\\\\RUNNER~1\\\\AppData\\\\Local\\\\Temp\\\\thoughtline-final-reader-7G0kSV\",\"cases\":[{\"name\":\"raw-cross\",\"passed\":true,\"oldSession\":2,\"session\":4,\"reader\":\"c\",\"editors\":1,\"draft\":\"UNSAVED cross C\",\"persisted\":\"final probe c\"},{\"name\":\"real-main-cross-session-late-delete\",\"passed\":true,\"session\":4,\"reader\":\"c\",\"editors\":1,\"draft\":\"UNSAVED cross C\",\"persisted\":\"final probe c\"},{\"name\":\"raw-same\",\"passed\":true,\"oldSession\":4,\"session\":4,\"reader\":\"c\",\"editors\":1,\"draft\":\"UNSAVED same C\",\"persisted\":\"UNSAVED cross C\"},{\"name\":\"same-session-back-new-dirty-reader\",\"passed\":true,\"session\":4,\"reader\":\"c\",\"editors\":1,\"draft\":\"UNSAVED same C\",\"persisted\":\"UNSAVED cross C\"},{\"name\":\"detail-fast-queued-flips-and-delayed-finish\",\"passed\":true,\"sequentialFlipsRetained\":true,\"delayedFinishWaitedForSave\":true},{\"name\":\"calendar-normal-delete-neighbor\",\"passed\":true,\"reader\":\"e\"},{\"name\":\"detail-normal-delete-neighbor-and-empty\",\"passed\":true,\"neighbor\":\"f\",\"lastDeleteEmpty\":true},{\"name\":\"detail-last-deleted-selection-stays-empty\",\"passed\":true,\"noFallbackToOldManageSelection\":true},{\"name\":\"agent-auto-split-full-rope-recovery-action-and-stable-body\",\"passed\":true,\"notice\":\"\",\"swapRecoveryPresent\":true,\"idsStable\":true,\"subsequentEditStable\":true}],\"pids\":[7480,6492,7796,2188,5616,6352,1552],\"scope\":\"Real source Electron main routing and persisted mutations; controlled reply hold, synthetic data only\",\"normalClose\":true,\"pidChecks\":[{\"pid\":7480,\"status\":\"ESRCH\"},{\"pid\":6492,\"status\":\"ESRCH\"},{\"pid\":7796,\"status\":\"ESRCH\"},{\"pid\":2188,\"status\":\"ESRCH\"},{\"pid\":5616,\"status\":\"ESRCH\"},{\"pid\":6352,\"status\":\"ESRCH\"},{\"pid\":1552,\"status\":\"ESRCH\"}],\"stat\":\"ENOENT\",\"passed\":true}\n",
+  "stderr": "",
+  "completedAt": "2026-10-14T00:27:51.322Z"
+}

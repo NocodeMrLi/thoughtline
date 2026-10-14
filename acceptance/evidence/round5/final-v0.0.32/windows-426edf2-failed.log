@@ -1,0 +1,162 @@
+windows-test-package	Second round UI and real native menu characterization	﻿2026-10-13T18:00:51.2574279Z ##[group]Run New-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2575797Z ^[[36;1mNew-Item -ItemType Directory -Force $env:THOUGHTLINE_EVIDENCE_DIR | Out-Null^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2576910Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/hidden-manage-reopen.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2577940Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Confirmed hidden Manage reopen failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2578946Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2579863Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round UI failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2602605Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-native-menu.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2603830Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round native menu failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2604760Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-calendar-navigation.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2605697Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round calendar return failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2606642Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-arrange-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2607529Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round arrangement failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2608424Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-split-menu-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2609364Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round split menu failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2611302Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-merge-menu-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2612224Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Second round merge menu failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2613106Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/round2-capacity-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2614010Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Capacity and swap workflow failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2614888Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/positioning-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2615866Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Tag positioning and effective status workflow failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2616834Z ^[[36;1m& node scripts/run-ci-fixture.cjs tests/electron/title-edit-workflow.cjs^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2617746Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'Optional title live input regression failed' }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2618742Z ^[[36;1mforeach ($test in @('more-menu-workflow', 'title-only-workflow', 'reminder-workflow')) {^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2619658Z ^[[36;1m  & node scripts/run-ci-fixture.cjs "tests/electron/$test.cjs"^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2620332Z ^[[36;1m  if ($LASTEXITCODE -ne 0) { throw "$test failed" }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2620822Z ^[[36;1m}^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2736669Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2737252Z env:
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2737537Z   RETAIN_INSTALLER: true
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2738050Z   THOUGHTLINE_EVIDENCE_DIR: acceptance/evidence/round2/windows
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2738622Z   THOUGHTLINE_FAKE_CLIPBOARD: 1
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2739008Z   THOUGHTLINE_FIXTURE_TRACE: 1
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:51.2739362Z ##[endgroup]
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:56.8439402Z {"platform":"win32","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-hidden-manage-xfw0jV","cases":["visible-dirty-settings-still-block-close-and-preserve-prompt-beside-new","confirmed-hidden-manage-does-not-need-a-second-renderer-ack","reopened-visible-settings-require-fresh-save-guard","normal-quit-preserves-draft-with-hidden-manage"],"pids":[524,7012,3820,5412,5356,7100,3296],"scope":"Real source lifecycle with deliberately unresponsive hidden Manage leave IPC; visible guards remain real","normalClose":true,"dataRemoved":true,"passed":true}
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:56.8645408Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\hidden-manage-reopen.cjs","pid":9056,"passed":true,"timedOut":false,"code":0}
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:00:59.6529541Z FIXTURE warmViews: shelf
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:00.6545006Z FIXTURE warmViews: settings
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:00.6545484Z FIXTURE warmViews: composer
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:00.6546056Z FIXTURE composer: invoking shortcut
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:00.6546582Z FIXTURE composer: shortcut invoked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:00.6547083Z FIXTURE composer: created
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:00.6547606Z FIXTURE composer: native visibility checked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:00.6548217Z FIXTURE composer: textbox visible
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:00.6548770Z FIXTURE composer: focused
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:00.6549315Z FIXTURE warmViews: ready
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:00.6550919Z ROUND2 check: hint-delay-small-dismiss-on-menu
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:00.6553518Z ROUND2 check: focus-ring-inside-editor-edges
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:00.6554414Z ROUND2 check: calendar-fills-resized-height-and-arrows
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:01.3033246Z ROUND2 check: settings-back-restores-month-and-window
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:01.7132716Z ROUND2 check: settings-dirty-return-retains-draft-and-close-cancels
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:02.6970805Z ROUND2 check: settings-external-update-does-not-invent-dirty-draft
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:03.1778707Z ROUND2 check: settings-discard-clears-hidden-close-guard
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:03.6149001Z ROUND2 check: menu-stash-current-preserves-other-pages
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:03.8989332Z ROUND2 check: navigation-performance-baseline
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:04.9769701Z {"platform":"win32","arch":"x64","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-round2-QNjesV","evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round2\\windows\\workflow-E9hBCe","cases":[{"name":"hint-delay-small-dismiss-on-menu","passed":true,"detail":{"x":280,"y":354,"width":60,"height":24}},{"name":"focus-ring-inside-editor-edges","passed":true,"detail":{"outline":"0px","offset":"-3px","shadow":"rgb(102, 105, 114) 0px 0px 0px 1px inset","border":"rgb(102, 105, 114)","x":14,"right":406,"parentX":14,"parentRight":406}},{"name":"calendar-fills-resized-height-and-arrows","passed":true,"detail":{"content":{"height":498,"bottom":646,"width":914},"grid":{"height":488,"bottom":638,"width":891},"cell":{"height":87,"bottom":270,"width":123},"arrow":{"height":36,"bottom":138,"width":36},"svg":18}},{"name":"settings-back-restores-month-and-window","passed":true,"detail":{"title":"2026年9月","width":950}},{"name":"settings-dirty-return-retains-draft-and-close-cancels","passed":true,"detail":{"draftRetained":true,"closeCanceled":true}},{"name":"settings-external-update-does-not-invent-dirty-draft","passed":true,"detail":{"externalChangeRebased":true,"navigationAllowed":true}},{"name":"settings-discard-clears-hidden-close-guard","passed":true,"detail":{"discardAllowsNextVisit":true}},{"name":"menu-stash-current-preserves-other-pages","passed":true,"detail":{"labels":["新建念头","","只看「保留分组」","筛选标签…","显示全部","Thoughtline 日历","","整理"],"ids":["r2-0","r2-2"],"current":"r2-2"}},{"name":"navigation-performance-baseline","passed":true,"detail":{"samples":[79,77,78,62,79,78,62,63,63,78],"p50":77,"p95":79,"scope":"Playwright input plus two actual renderer frames, controlled environment"}}],"pids":[1324,8220,9168,5092,5952,1212,648],"nativeOutsideClick":"not exercised by protocol fixture","normalClose":true,"dataRemoved":true,"passed":true}
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:04.9973880Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-workflow.cjs","pid":9156,"passed":true,"timedOut":false,"code":0}
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:06.1091713Z FIXTURE warmViews: shelf
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:06.1699794Z FIXTURE warmViews: settings
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:06.7569088Z FIXTURE warmViews: composer
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:06.7573412Z FIXTURE composer: invoking shortcut
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:06.7575546Z FIXTURE composer: shortcut invoked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:06.9788630Z FIXTURE composer: created
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:06.9791435Z FIXTURE composer: native visibility checked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:07.0726733Z FIXTURE composer: textbox visible
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:07.1159964Z FIXTURE composer: focused
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:07.1661094Z FIXTURE warmViews: ready
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:17.3753772Z {"platform":"win32","dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-native-menu-SC7AFF","evidence":"D:\\a\\thoughtline\\thoughtline\\acceptance\\evidence\\round2\\windows\\native-menu-YZoSrB","probes":[{"kind":"production-first","closed":true,"ownerFocusable":true,"ownerFocused":true,"receiverClicks":1},{"kind":"production-repeat","closed":true,"ownerFocusable":true,"ownerFocused":true,"receiverClicks":1},{"kind":"production-third","closed":true,"ownerFocusable":true,"ownerFocused":true,"receiverClicks":1}],"pids":[7808,8448,1840,6564,4620,5960,6684],"scope":"native Menu owner/cancel characterization; hosted Windows is not physical user-device acceptance","externalReceiver":true,"submenuNavigation":{"rawIndex":8,"selectableIndex":5,"labels":["新建念头","撤销挂上","只看「未分组」","筛选标签…","Thoughtline 日历","整理"]},"firstEscapeRetainedRoot":true,"submenuAndEscape":true,"escapeClosureWait":"separate OS key injections, submenu/root state and actual native popup callback","receiverPids":[7232,9196,2308,8704,2336],"receiverRemoved":true,"normalClose":true,"dataRemoved":true,"passed":true}
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:17.3926400Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-native-menu.cjs","pid":7740,"passed":true,"timedOut":false,"code":0}
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:18.5870337Z FIXTURE warmViews: shelf
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:18.6373872Z FIXTURE warmViews: settings
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:19.1166155Z FIXTURE warmViews: composer
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:19.1171162Z FIXTURE composer: invoking shortcut
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:19.1172625Z FIXTURE composer: shortcut invoked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:19.4657598Z FIXTURE composer: created
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:19.4720011Z FIXTURE composer: native visibility checked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:19.5060214Z FIXTURE composer: textbox visible
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:19.5318172Z FIXTURE composer: focused
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:19.6306567Z FIXTURE warmViews: ready
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:21.1412330Z {"platform":"win32","scope":"isolated renderer/main/calendar return with real repository; no physical DPI or multi-display","cases":[{"name":"day-range-limit-scroll-restored","passed":true,"scroll":240},{"name":"year-hierarchy-restored","passed":true},{"name":"search-status-restored","passed":true,"count":9}],"pids":[8072,4936,3172,6476,7756,7384,3220],"dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-calendar-return-CfhGZy","normalClose":true,"dataRemoved":true,"passed":true}
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:21.1614070Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-calendar-navigation.cjs","pid":7660,"passed":true,"timedOut":false,"code":0}
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:22.4576062Z FIXTURE warmViews: shelf
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:22.5361009Z FIXTURE warmViews: settings
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:23.1768792Z FIXTURE warmViews: composer
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:23.1772600Z FIXTURE composer: invoking shortcut
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:23.1784352Z FIXTURE composer: shortcut invoked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:23.4996304Z FIXTURE composer: created
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:23.5018788Z FIXTURE composer: native visibility checked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:23.5426020Z FIXTURE composer: textbox visible
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:23.5803143Z FIXTURE composer: focused
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:23.6393055Z FIXTURE warmViews: ready
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:26.5457221Z {"platform":"win32","scope":"isolated native-menu protocol, real source renderer/IPC/repository; no physical menu click","cases":[{"name":"native-menu-arranges-filtered-full-rope-with-data-intact","passed":true},{"name":"finite-transform-animation","passed":true,"duration":180},{"name":"position-only-undo-preserves-new-current-page","passed":true},{"name":"arrange-undo-cannot-revive-deleted-project","passed":true},{"name":"system-reduced-motion-no-animation","passed":true},{"name":"reduced-motion-arrangement-no-animation","passed":true},{"name":"arranged-positions-survive-restart","passed":true}],"pids":[2368,7856,7688,6472,2140,5232,1568,3048,4748,7628,6600,8704],"dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-arrange-HbCcQy","normalMotionScope":"Owned renderer emulates no-preference; host OS settings unchanged","motionProbe":{"durations":[180,180],"locked":"false","reduced":"false"},"normalClose":true,"dataRemoved":true,"passed":true}
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:26.5464931Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-arrange-workflow.cjs","pid":6900,"passed":true,"timedOut":false,"code":0}
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:27.0562439Z FIXTURE warmViews: shelf
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:27.4572789Z FIXTURE warmViews: settings
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:28.0306558Z FIXTURE warmViews: composer
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:28.0307679Z FIXTURE composer: invoking shortcut
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:28.0308567Z FIXTURE composer: shortcut invoked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:28.3319874Z FIXTURE composer: created
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:28.3326156Z FIXTURE composer: native visibility checked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:28.3682113Z FIXTURE composer: textbox visible
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:28.3949607Z FIXTURE composer: focused
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:28.4982546Z FIXTURE warmViews: ready
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:30.1797543Z FIXTURE warmViews: shelf
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:30.5579158Z FIXTURE warmViews: settings
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:31.0594150Z FIXTURE warmViews: composer
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:31.0600050Z FIXTURE composer: invoking shortcut
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:31.0626806Z FIXTURE composer: shortcut invoked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:31.3912612Z FIXTURE composer: created
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:31.3914268Z FIXTURE composer: native visibility checked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:31.4304217Z FIXTURE composer: textbox visible
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:31.4565465Z FIXTURE composer: focused
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:31.5155813Z FIXTURE warmViews: ready
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:40.5547265Z FIXTURE warmViews: shelf
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:40.5548688Z FIXTURE warmViews: settings
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:40.5550251Z FIXTURE warmViews: composer
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:40.5551407Z FIXTURE composer: invoking shortcut
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:40.5552053Z FIXTURE composer: shortcut invoked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:40.5605387Z FIXTURE composer: created
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:40.5606256Z FIXTURE composer: native visibility checked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:40.5606753Z FIXTURE composer: textbox visible
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:40.5607536Z FIXTURE composer: focused
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:40.5608524Z FIXTURE warmViews: ready
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:40.8061279Z {"platform":"win32","scope":"isolated source protocol and repository; native popup stub, no physical click","cases":[{"name":"single-clip-has-no-split","passed":true},{"name":"cancelled-menu-does-not-mutate","passed":true},{"name":"captured-current-id-survives-background-page-change-without-opening-reader","passed":true},{"name":"right-click-split-can-be-undone","passed":true},{"name":"first-middle-last-pages-and-repeated-undo-preserve-order-content","passed":true},{"name":"stale-clip-target-is-rejected","passed":true},{"name":"write-failure-visible-on-shelf-with-original-data-intact","passed":true},{"name":"split-undo-cannot-revive-deleted-project","passed":true},{"name":"expanded-reader-split-remains-available","passed":true},{"name":"restart-retains-split-ids-content-order-and-page","passed":true},{"name":"true-full-rope-has-explicit-calendar-entry-and-preserved-content","passed":true},{"name":"English-menu-and-dark-theme-use-translated-current-thought-action","passed":true}],"pids":[8124,4312,5216,5736,6760,6040,4652,8964,5296,1864,7072,4664,7664,1076,9016,8336,5804,9144,2624,4936,5224,5232,2756,2740,524,8744],"dir":"C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\thoughtline-split-menu-qGQ98S","dataRemoved":true,"passed":true}
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:40.8292313Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-split-menu-workflow.cjs","pid":6328,"passed":true,"timedOut":false,"code":0}
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:41.9841934Z FIXTURE warmViews: shelf
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:42.0338399Z FIXTURE warmViews: settings
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:42.6123680Z FIXTURE warmViews: composer
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:42.6127199Z FIXTURE composer: invoking shortcut
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:42.6128602Z FIXTURE composer: shortcut invoked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:44.4695109Z FIXTURE composer: created
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:44.4698253Z FIXTURE composer: native visibility checked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:44.4700694Z FIXTURE composer: textbox visible
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:44.4701247Z FIXTURE composer: focused
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:44.4702026Z FIXTURE warmViews: ready
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5182569Z FIXTURE warmViews: shelf
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5183025Z FIXTURE warmViews: settings
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5183428Z FIXTURE warmViews: composer
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5183882Z FIXTURE composer: invoking shortcut
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5184371Z FIXTURE composer: shortcut invoked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5184810Z FIXTURE composer: created
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5185293Z FIXTURE composer: native visibility checked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5193439Z FIXTURE composer: textbox visible
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5193981Z FIXTURE composer: focused
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5194385Z FIXTURE warmViews: ready
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5194766Z FIXTURE warmViews: shelf
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5195151Z FIXTURE warmViews: settings
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5195557Z FIXTURE warmViews: composer
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5196033Z FIXTURE composer: invoking shortcut
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5196548Z FIXTURE composer: shortcut invoked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5196987Z FIXTURE composer: created
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5197483Z FIXTURE composer: native visibility checked
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5198187Z FIXTURE composer: textbox visible
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5198617Z FIXTURE composer: focused
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:01:48.5199003Z FIXTURE warmViews: ready
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:02:18.4574578Z {"platform":"win32","scope":"isolated source native-menu callbacks/renderer/IPC/repository, not physical menu click","cases":[{"name":"compatible-targets-exclude-self-and-show-title-count","passed":true},{"name":"captured-one-paper-merge-preserves-projects-content-order-and-position","passed":true},{"name":"merge-undo-restores-both-stacks","passed":true},{"name":"stale-revision-rejected-without-moving-paper-or-closing-picker","passed":true},{"name":"no-compatible-target-has-readable-disabled-reason","passed":true}],"pids":[3308,3544,6968,8460,3028,6260,7796,3912,7508,7408,6672,8836,7432,8920,8960,4204,6076,9160,5292],"failure":"locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.shelf-merge-picker') to be visible\u001b[22m\n\n    at openPicker (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-merge-menu-workflow.cjs:13:295)\n    at async merge (D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-merge-menu-workflow.cjs:14:39)\n    at async D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-merge-menu-workflow.cjs:24:38","dataRemoved":true,"passed":false}
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:02:18.6791928Z CI FIXTURE {"file":"D:\\a\\thoughtline\\thoughtline\\tests\\electron\\round2-merge-menu-workflow.cjs","pid":1240,"passed":false,"timedOut":false,"code":1}
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:02:18.9174374Z ^[[31;1mException: ^[[0mD:\a\_temp\ba26e78a-f557-4a94-8bd9-500708997d32.ps1:16^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:02:18.9175972Z ^[[31;1m^[[0m^[[36;1mLine |^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:02:18.9177519Z ^[[31;1m^[[0m^[[36;1m^[[36;1m  16 | ^[[0m if ($LASTEXITCODE -ne 0) { ^[[36;1mthrow 'Second round merge menu failed'^[[0m }^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:02:18.9179114Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m     | ^[[31;1m                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:02:18.9180898Z ^[[31;1m^[[0m^[[36;1m^[[36;1m^[[0m^[[36;1m^[[0m^[[36;1m^[[31;1m^[[31;1m^[[36;1m     | ^[[31;1mSecond round merge menu failed^[[0m
+windows-test-package	Second round UI and real native menu characterization	2026-10-13T18:02:18.9419689Z ##[error]Process completed with exit code 1.

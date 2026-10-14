@@ -1,0 +1,41 @@
+{
+  "platform": "darwin",
+  "checks": [
+    "no undo on opening or browsing",
+    "calendar updates immediately after current-only merge, retained source does not release slot",
+    "archive undo restores source and automatic backfill without pulling manual calendar stack",
+    "calendar split stays archived and undo restores full stack",
+    "arrange undo restores all original clip positions",
+    "hang restores entire archived stack, failed swap preserves undo and hang undo restores archive",
+    "swap undo shared across entries, copying/filtering preserves record, completed undo disappears",
+    "normal restart retains full calendar stack and independent creation days",
+    "calendar split-all keeps all papers archived and undo restores order",
+    "delete and restore preserves original calendar stack order",
+    "archived group change requires split confirmation before commit",
+    "confirmed group change splits only edited archived paper and keeps it archived",
+    "composition refuses close without losing archived edit",
+    "archived disk failure refuses leave, retry persists exact draft"
+  ],
+  "pids": [
+    33734,
+    33734,
+    33735,
+    33736,
+    33737,
+    33738,
+    33743,
+    33743,
+    33744,
+    33745,
+    33746,
+    33747
+  ],
+  "scope": "Native Electron renderer/IPC with isolated persistent data, controlled IO/IME and menu callbacks; physical OS conditions separate.",
+  "rehangPlan": {
+    "width": 1440,
+    "action": "重新挂上"
+  },
+  "passed": true,
+  "cleaned": true,
+  "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-r526-stack-nSK802"
+}

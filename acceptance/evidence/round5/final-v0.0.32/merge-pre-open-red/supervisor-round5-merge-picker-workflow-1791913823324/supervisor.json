@@ -1,0 +1,16 @@
+{
+  "file": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-merge-picker-workflow.cjs",
+  "args": [],
+  "timeoutMs": 180000,
+  "startedAt": "2026-10-13T17:50:23.325Z",
+  "passed": false,
+  "timedOut": false,
+  "profileCleanup": "Delegated to fixture; supervisor never deletes data",
+  "pid": 9093,
+  "code": 1,
+  "signal": null,
+  "closeConfirmed": true,
+  "stdout": "CHECK\nMERGE GEOMETRY {\"height\":192,\"scroll\":448,\"top\":59}\nCHECK\nCHECK\n",
+  "stderr": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n    archivedClips: [\n      {\n        agentId: 'codex',\n+       currentId: 'cal1',\n-       currentId: 'cal0',\n        id: 'calendar-stack',\n        ideaIds: [\n          'cal0',\n          'cal1'\n        ],\n\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round5-merge-picker-workflow.cjs:11:159 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: [Object],\n  expected: [Object],\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n",
+  "completedAt": "2026-10-13T17:50:24.736Z"
+}
