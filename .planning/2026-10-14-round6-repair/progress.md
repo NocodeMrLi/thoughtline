@@ -20,3 +20,5 @@ R607 source RED confirms two backing planes (2 !=1) on real rendered CSS, then o
 Localfrozen9cb8c19 sourcecommit0.34; MacDMG built/seals verified, actualmountedDMG8visualmatrices normalquit; allcontent/stackmembership/counts preserved. Macisolationlaunchercheckonly passed. CurrentGitHubCLIstillEOF, networkquestion pending. Maccandidate ready but not mislabeled dual/publication complete; nextpush/manualWindows17min/installgates when connection recovered.
 
 Localcheckpoint:3ownprofilesabsent; duplicateMacApp/DMG removed after asar/fullcandidateSHA checks, candidateDMG/asar+nativeUnpacked archived forpending Win comparison. Source9cb8c19 and371inputs fixed; no tag034, no WinCI, no release/push claim. Networkquestion pending, authorized remaining work resumes on connectivity. Documentationonlycommit will not change package source.
+
+本次继续刷新：本地HEAD2600d798（文档），371项冻结输入/Git对象及Mac最终DMG/归档asar与9cb8c19构建manifest逐项一致。GitHub命令行、替代单命令HTTPS/SOCKS/SSH443及插件连接仍失败；Apple HTTPS控制200，仅支持连接存在局部故障，不猜根因或额度。负责人当前不在电脑，不能操作网络。没有改系统配置、创建tag/发行、触发Actions或重跑已过检查。新增connection-refresh.json与归档R6-07操作报告草稿，双端NSIS来源核对工具已适配034/371并待实际Windows成功run及包，不以准备代替执行。剩余push/Windows/来源核对/发行继续保持未完成。
