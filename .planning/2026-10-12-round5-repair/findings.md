@@ -48,3 +48,9 @@ Windows9a94 402单测/类型/构建通过，旧round2-workflow只从一级找“
 2026-10-14 最终候选47ec9d2：第二轮发现挂绳/托盘日历未共享复用，真实MenuItem action红例session13→16，已同一guard/coalesce/ready链修复。源窗口10项与7受影响套退出0；最终源verify408pass/4Windows skip/type/build0，Mac同源实际DMG25套全部退出0、36编译/资源hash核一致及隔离launcher check-only0。15样本warm30.9→25.8/cold289.2→247.8/retired171.5→205.2ms，最后一项变慢不宣称整体提升。Windows完整38478829786仍在执行，尚无v32tag/Release。旧ad9因源码变更取消，之前实际OS纸张右击、1→2→1→0与全R5主要源套通过不外推新候选完整成功；468文件ZIP/SHA归档后移除其Actions副本。最新Mac图329张归档、保留8关键图；本地重复解包269文件/333755401bytes与重复DMG清理，交付DMG保留。正式0.31回滚/暂停备份/依赖/历史tracked图片/个人App68573/未知95997保护。任务7继续等Windows、绑定、发布读回和最终清理。
 
 最终0.0.32技术交付：Release412225874已私有正常发布，10附件size/digest读回；source/tag6135608，source359向量一致；Windows38490095906定向同包续测success，构建/安装保数据38489171294复用严格摘要。无新增整套重复，物理/负责人false；详细边界见round5-v0.0.32-delivery.md。
+
+Task8现场：HEAD/远端main55d27cd，tag/build6135608；Release412225874 draft=false/prerelease=false，10附件，2026-10-14T00:37:30Z发布。真实App0.0.28 PID68573(Oct13 07:37:53)与未知源码Electron95997(Oct12 19:18:12)仍存在，未触碰。当前小程序套件主文3.5.0及升级04顶部已合并/安装；旧记忆候选状态不再作为当前事实。升级05 U05-1/2仍未实施。continuity Skill实际是网文连贯性，不适用本任务；使用living-docs-governance/planning-with-files，套件合同只用于适配查重，不执行Skill升级。PWF_PLAN_ROOT第一次错误指向.planning，resolver空回；已改为真实repo根，精确回显既有计划目录。
+
+Task8查重落地：通用经验3.3/7.2/8.3各一段、协作9.1一段；升级05新增第7节已有覆盖表和5条未执行独立样例，新增编号0、U05-1/2状态不变。首次大段heredoc Python源码编码解析失败，未执行任何写入；保留记录，改短UTF8备份脚本及apply_patch完成，不猜故障根因。备份archive/handoff-learning-20261014-095115逐SHA已验证。
+
+Task8最终核验：正式提示词包源6135608、交付文档55d27cd、当前HEAD需刷新分别标记；引用文件实际存在，10本地发行资产size/SHA仍与412225874服务端已核摘要一致。记忆旧U04候选状态被本机套件3.5.0/升级04最终收口推翻；升级05候选自身仍未实施。只改文档和证据记录，不以本次桌面案例宣称小程序能力增强。
