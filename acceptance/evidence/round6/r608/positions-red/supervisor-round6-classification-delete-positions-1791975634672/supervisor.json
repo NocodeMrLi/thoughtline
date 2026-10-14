@@ -1,0 +1,16 @@
+{
+  "file": "/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round6-classification-delete-positions.cjs",
+  "args": [],
+  "timeoutMs": 180000,
+  "startedAt": "2026-10-14T11:00:34.673Z",
+  "passed": false,
+  "timedOut": false,
+  "profileCleanup": "Delegated to fixture; supervisor never deletes data",
+  "pid": 58485,
+  "code": 1,
+  "signal": null,
+  "closeConfirmed": true,
+  "stdout": "[\n  {\n    mode: 'null-delete',\n    passed: undefined,\n    error: 'AssertionError [ERR_ASSERTION]: Surviving paper stays at actual center'\n  },\n  {\n    mode: 'collision-delete',\n    passed: undefined,\n    error: 'AssertionError [ERR_ASSERTION]: Surviving paper stays at actual center'\n  },\n  {\n    mode: 'null-undo',\n    passed: undefined,\n    error: 'AssertionError [ERR_ASSERTION]: Unrelated move undo survives implicit position capture'\n  }\n]\n",
+  "stderr": "Error: Deletion position regressions failed\n    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round6-classification-delete-positions.cjs:13:130\n",
+  "completedAt": "2026-10-14T11:00:38.053Z"
+}

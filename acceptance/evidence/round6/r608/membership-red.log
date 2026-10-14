@@ -1,0 +1,25 @@
+
+> thoughtline@0.0.34 test
+> node node_modules/vitest/vitest.mjs run tests/unit/classificationDeletion.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/classificationDeletion.test.ts (9 tests | 1 failed) 22ms
+   × confirmation rejects changed related stack membership, ignores unrelated stack selection 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/classificationDeletion.test.ts > confirmation rejects changed related stack membership, ignores unrelated stack selection
+AssertionError: expected '{"field":"tag","id":"drop","classific…' not to be '{"field":"tag","id":"drop","classific…' // Object.is equality
+ ❯ tests/unit/classificationDeletion.test.ts:19:316
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 8 passed (9)
+   Start at  18:51:53
+   Duration  198ms (transform 69%, tests 17%, import 12%, worker 2%)
+

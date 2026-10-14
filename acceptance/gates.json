@@ -1,9 +1,9 @@
 {
-  "stage": "ROUND6_R607_TECH_DELIVERED_OWNER_FEEDBACK_PENDING",
+  "stage": "R6-08 v0.0.35 technically delivered; owner actual feedback pending",
   "asOf": "2026-10-14",
   "branch": "main",
-  "lastCommittedSource": "9cb8c190d289b38498c4c6c938152064c8ee9b4c",
-  "currentCandidateVersion": "0.0.34",
+  "lastCommittedSource": "3ac0091652b8141ce0c137bc5c2d282273c05771",
+  "currentCandidateVersion": "0.0.35",
   "formalAcceptance": false,
   "round1": {
     "plan": "/Users/lihongwei/安安的成长笔记📒/晾念头 Thoughtline/Thoughtline第一轮修复优化.md",
@@ -2835,7 +2835,7 @@
     "report": "docs/releases/round6-v0.0.33-delivery.md",
     "documentationPushProof": "/Users/lihongwei/Documents/Codex/2026-10-14/thoughtline-round6/delivery/v0.0.33/documentation-push-verification.json",
     "R6_07": {
-      "status": "TECH_DELIVERED_OWNER_FEEDBACK_PENDING",
+      "status": "TECH_DELIVERED_OWNER_REPORTED_NO_PROBLEM",
       "base": "a7198419da419ebb94cd4380eb28d62805e2bd28",
       "candidateVersion": "0.0.34",
       "productScope": "one calendar-stack CSS declaration",
@@ -2846,7 +2846,7 @@
       "network": "GitHub CLI TLS/EOF; plugin confirms remote base unchanged",
       "formalAcceptance": false,
       "physicalAcceptance": false,
-      "ownerFeedback": "previous delivered version basically no problem; only experienced scope, not full physical approval",
+      "ownerFeedback": "Owner reported0.0.34 no problem; actual experienced scope only, not allphysical/formal acceptance",
       "source": "9cb8c190d289b38498c4c6c938152064c8ee9b4c",
       "inputCount": 371,
       "mac": "evidence/round6/r607/mac-summary.json",
@@ -2875,7 +2875,115 @@
       "report": "docs/releases/round6-v0.0.34-delivery.md",
       "ownerPriorFeedback": "0.0.33基本上没问题 retained only original reported scope; R607 new actual acceptance awaits feedback",
       "documentationPushProof": "/Users/lihongwei/Documents/Codex/2026-10-14/thoughtline-round6/archive/r607/documentation-push-verification.json"
+    },
+    "R6_08": {
+      "status": "TECH_DELIVERED_OWNER_FEEDBACK_PENDING",
+      "source": "3ac0091652b8141ce0c137bc5c2d282273c05771",
+      "tag": "v0.0.35",
+      "inputCount": 378,
+      "relatedUnitPassed": 71,
+      "noFullSuite": true,
+      "sourceAndPackagedMatricesEach": 8,
+      "sourcePositionCases": 3,
+      "review": {
+        "freshCritical": 0,
+        "freshImportant": 2,
+        "freshMinor": 0,
+        "executorFixRedGreen": true,
+        "secondReview": false
+      },
+      "windowsRun": 38554027989,
+      "installedPreservesData": true,
+      "release": {
+        "readAt": "2026-10-14T11:28:12.011704+00:00",
+        "releaseId": 412634633,
+        "version": "0.0.35",
+        "url": "https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.35",
+        "draft": false,
+        "prerelease": false,
+        "published_at": "2026-10-14T11:28:07Z",
+        "repositoryPrivate": true,
+        "sourceTag": "3ac0091652b8141ce0c137bc5c2d282273c05771",
+        "workflowRun": 38554027989,
+        "assetsMatch": true,
+        "assets": [
+          {
+            "id": 640163979,
+            "name": "build-manifest.json",
+            "bytes": 90893,
+            "sha256": "sha256:f736ea3a1fa23950a4d5b2054ce38e17613a3b2c8af65ac3ef348b296ed6758d"
+          },
+          {
+            "id": 640164061,
+            "name": "mac-build-manifest.json",
+            "bytes": 90531,
+            "sha256": "sha256:bd925a8b1ad49a84d565335e5c7f63a9f6f7fe44114e89ea8d5a3d4fbc299930"
+          },
+          {
+            "id": 640164110,
+            "name": "mac-signature-verification.json",
+            "bytes": 361,
+            "sha256": "sha256:0a24154dda26c0c9ad8b1f6c84df0e0de69502754e673c4c5f68122eb6f078c9"
+          },
+          {
+            "id": 640163700,
+            "name": "SHA256SUMS.txt",
+            "bytes": 853,
+            "sha256": "sha256:ca784608db1dde321d918d54656041be4cad6d35e6ecfe325f7b6530dd1b1b0b"
+          },
+          {
+            "id": 640164157,
+            "name": "source-pair-proof.json",
+            "bytes": 16882,
+            "sha256": "sha256:9b691e0798d4672be3e30f29ac9cc3b4b8695348c22c62f919ae5f5de63be2ec"
+          },
+          {
+            "id": 640163759,
+            "name": "Start-Thoughtline-Isolated-Mac.command",
+            "bytes": 3185,
+            "sha256": "sha256:5e45212f5b5515cd9e7fd249a5b88392f7aac6559b52c0949d77bbd47cf70da5"
+          },
+          {
+            "id": 640163842,
+            "name": "Start-Thoughtline-Isolated.ps1",
+            "bytes": 1646,
+            "sha256": "sha256:81bcfd6be88887cfd3beeaaf5794285ce4d06d597850a2d9716f9036cbd0da73"
+          },
+          {
+            "id": 640160377,
+            "name": "Thoughtline-0.0.35-mac-arm64.dmg",
+            "bytes": 138261491,
+            "sha256": "sha256:6bd39b15d7190182fdb904d595b126f78ddf2ab57300f8a6a70daa52626f04a8"
+          },
+          {
+            "id": 640162152,
+            "name": "Thoughtline-0.0.35-win-x64.exe",
+            "bytes": 116060104,
+            "sha256": "sha256:5a6d4131cade0c1ec2fef1db867d4a8901256a94efe959a439347ce7ea8225ca"
+          },
+          {
+            "id": 640163910,
+            "name": "Validation-Guide.zh-CN.md",
+            "bytes": 5584,
+            "sha256": "sha256:57a0fa3bce51027a99ed3d37a530f3134c9139f12eb8f90d4dbf8a1611174860"
+          }
+        ],
+        "priorV034TenAssetsIdentical": true,
+        "nodeUnchanged": true,
+        "physicalAcceptance": false,
+        "formalAcceptance": false
+      },
+      "pairProof": "evidence/round6/r608/final/source-pair-proof.json",
+      "scopeProof": "evidence/round6/r608/targeted-validation-scope.json",
+      "cleanup": "evidence/round6/r608/cleanup-receipt.json",
+      "profileReadback": "evidence/round6/r608/profile-readback.json",
+      "report": "docs/releases/round6-v0.0.35-delivery.md",
+      "physicalAcceptance": false,
+      "formalAcceptance": false,
+      "nodeChanged": false,
+      "budgetChanged": false,
+      "documentationPushProof": "/Users/lihongwei/Documents/Codex/2026-10-14/thoughtline-round6/archive/r608/documentation-push-verification.json"
     }
   },
-  "latestReleasedVersion": "0.0.34"
+  "latestReleasedVersion": "0.0.35"
 }

@@ -41,3 +41,5 @@ User targeted scope overrides skill default full suite. No design overhaul or ne
 - [ ] Fresh final review + scoped fixes, narrow doubleplatform package/install/private release.
 - [ ] Owned cleanup + docs/gates/report, commit/push/readback.
 Plan/audit: docs/releases/round6-r608-plan-audit.md; existingR6 plan reused.
+
+R608035最终：source/tag3ac0091/378，Windows38554027989 success，正式私有Release412634633正常10assets readback，034 unchanged，22localprofiles absent/1188215529bytesownedcleanup/7keyPNG retained。71relatedunit/type/build/source/native/actualDMG+NSIS/installretention verified; fresh review2Important executorREDGREEN fixed, no secondreview/no fulltest/physicalfalse. Accurate downloadresume/rootreleaseID/signingmetadata evidence preserved. Final docs push/readback pending this commit only.

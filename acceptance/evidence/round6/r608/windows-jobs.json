@@ -1,0 +1,217 @@
+{
+  "total_count": 1,
+  "jobs": [
+    {
+      "id": 115818599413,
+      "run_id": 38554027989,
+      "workflow_name": "Validate classification deletion only",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/NocodeMrLi/thoughtline/actions/runs/38554027989",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOVA_b4c8AAAAa91OT9Q",
+      "head_sha": "3ac0091652b8141ce0c137bc5c2d282273c05771",
+      "url": "https://api.github.com/repos/NocodeMrLi/thoughtline/actions/jobs/115818599413",
+      "html_url": "https://github.com/NocodeMrLi/thoughtline/actions/runs/38554027989/job/115818599413",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-14T11:04:37Z",
+      "started_at": "2026-10-14T11:04:39Z",
+      "completed_at": "2026-10-14T11:09:39Z",
+      "name": "windows-classification-package",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-14T11:04:42Z",
+          "completed_at": "2026-10-14T11:04:44Z"
+        },
+        {
+          "name": "Enable long paths on disposable runner",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-14T11:04:44Z",
+          "completed_at": "2026-10-14T11:04:45Z"
+        },
+        {
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-14T11:04:45Z",
+          "completed_at": "2026-10-14T11:05:29Z"
+        },
+        {
+          "name": "Confirm frozen source",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-14T11:05:29Z",
+          "completed_at": "2026-10-14T11:05:30Z"
+        },
+        {
+          "name": "Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-14T11:05:30Z",
+          "completed_at": "2026-10-14T11:05:41Z"
+        },
+        {
+          "name": "Run node scripts/ci-artifact-evidence.cjs snapshot",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-14T11:05:41Z",
+          "completed_at": "2026-10-14T11:05:48Z"
+        },
+        {
+          "name": "Run npm ci --no-audit --no-fund",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-14T11:05:48Z",
+          "completed_at": "2026-10-14T11:06:07Z"
+        },
+        {
+          "name": "Run npm run typecheck",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-14T11:06:07Z",
+          "completed_at": "2026-10-14T11:06:10Z"
+        },
+        {
+          "name": "Related classification, save, undo and delivery checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-14T11:06:10Z",
+          "completed_at": "2026-10-14T11:06:15Z"
+        },
+        {
+          "name": "Run npm run build",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-14T11:06:15Z",
+          "completed_at": "2026-10-14T11:06:20Z"
+        },
+        {
+          "name": "Source deletion interface and persistence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-14T11:06:20Z",
+          "completed_at": "2026-10-14T11:06:32Z"
+        },
+        {
+          "name": "Source permissions, concurrent writer, IO and stale editor guards",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-14T11:06:32Z",
+          "completed_at": "2026-10-14T11:06:35Z"
+        },
+        {
+          "name": "Deletion preserves actual paper positions and unrelated undo",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-14T11:06:35Z",
+          "completed_at": "2026-10-14T11:06:42Z"
+        },
+        {
+          "name": "Run npm run package:win",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-14T11:06:42Z",
+          "completed_at": "2026-10-14T11:08:26Z"
+        },
+        {
+          "name": "Bind actual package to frozen source",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-14T11:08:26Z",
+          "completed_at": "2026-10-14T11:08:28Z"
+        },
+        {
+          "name": "Actual installed deletion and install data retention",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16,
+          "started_at": "2026-10-14T11:08:28Z",
+          "completed_at": "2026-10-14T11:09:12Z"
+        },
+        {
+          "name": "Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17,
+          "started_at": "2026-10-14T11:09:12Z",
+          "completed_at": "2026-10-14T11:09:19Z"
+        },
+        {
+          "name": "Preserve built installer if this narrow gate fails",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 18,
+          "started_at": "2026-10-14T11:09:19Z",
+          "completed_at": "2026-10-14T11:09:19Z"
+        },
+        {
+          "name": "Collect only new evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19,
+          "started_at": "2026-10-14T11:09:19Z",
+          "completed_at": "2026-10-14T11:09:30Z"
+        },
+        {
+          "name": "Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20,
+          "started_at": "2026-10-14T11:09:30Z",
+          "completed_at": "2026-10-14T11:09:32Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 39,
+          "started_at": "2026-10-14T11:09:32Z",
+          "completed_at": "2026-10-14T11:09:35Z"
+        },
+        {
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 40,
+          "started_at": "2026-10-14T11:09:35Z",
+          "completed_at": "2026-10-14T11:09:37Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 41,
+          "started_at": "2026-10-14T11:09:37Z",
+          "completed_at": "2026-10-14T11:09:37Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/NocodeMrLi/thoughtline/check-runs/115818599413",
+      "labels": [
+        "windows-latest"
+      ],
+      "runner_id": 1000001182,
+      "runner_name": "GitHub Actions 1000001182",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+[
+  {
+    mode: 'null-delete',
+    passed: undefined,
+    error: 'AssertionError [ERR_ASSERTION]: Surviving paper stays at actual center'
+  },
+  {
+    mode: 'collision-delete',
+    passed: undefined,
+    error: 'AssertionError [ERR_ASSERTION]: Surviving paper stays at actual center'
+  },
+  {
+    mode: 'null-undo',
+    passed: undefined,
+    error: 'AssertionError [ERR_ASSERTION]: Unrelated move undo survives implicit position capture'
+  }
+]
+Error: Deletion position regressions failed
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round6-classification-delete-positions.cjs:13:130
+CI FIXTURE {"file":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round6-classification-delete-positions.cjs","pid":58485,"passed":false,"timedOut":false,"code":1}

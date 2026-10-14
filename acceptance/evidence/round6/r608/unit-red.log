@@ -1,0 +1,159 @@
+
+> thoughtline@0.0.34 test
+> node node_modules/vitest/vitest.mjs run tests/unit/classificationDeletion.test.ts
+
+
+ RUN  v5.0.3 /Users/lihongwei/Desktop/晾念头 : Thoughtline/app
+
+ ❯ tests/unit/classificationDeletion.test.ts (8 tests | 8 failed) 13ms
+   × preview covers all states and draft without mutating or using shelf filter 6ms
+   × group permanent deletion removes only that group from every location and preserves other tags/catalog 1ms
+   × tag permanent deletion crosses groups but preserves other members position, contents and groups 1ms
+   × surviving recently deleted recovery cannot reference deleted members or recreate them after restart 1ms
+   × protected or unknown classifications refuse unchanged 0ms
+   × confirmation rejects content, membership, classification or draft change; ignores unrelated window metadata 1ms
+   × empty classification deletes cleanly; unrelated draft retained 1ms
+   × undo sanitation removes exact current deletion ids even when old ownership differed 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/classificationDeletion.test.ts > preview covers all states and draft without mutating or using shelf filter
+AssertionError: expected [] to deeply equal [ 'a', 'c', 'e', 'g' ]
+
+- Expected
++ Received
+
+- [
+-   "a",
+-   "c",
+-   "e",
+-   "g",
+- ]
++ []
+
+ ❯ tests/unit/classificationDeletion.test.ts:10:206
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  tests/unit/classificationDeletion.test.ts > group permanent deletion removes only that group from every location and preserves other tags/catalog
+AssertionError: expected [ 'a', 'b', 'c', 'd', 'e', 'f', …(2) ] to deeply equal [ 'c', 'd', 'f', 'h' ]
+
+- Expected
++ Received
+
+  [
++   "a",
++   "b",
+    "c",
+    "d",
++   "e",
+    "f",
++   "g",
+    "h",
+  ]
+
+ ❯ tests/unit/classificationDeletion.test.ts:11:232
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  tests/unit/classificationDeletion.test.ts > tag permanent deletion crosses groups but preserves other members position, contents and groups
+AssertionError: expected [ 'a', 'b', 'c', 'd', 'e', 'f', …(2) ] to deeply equal [ 'b', 'd', 'f', 'h' ]
+
+- Expected
++ Received
+
+  [
++   "a",
+    "b",
++   "c",
+    "d",
++   "e",
+    "f",
++   "g",
+    "h",
+  ]
+
+ ❯ tests/unit/classificationDeletion.test.ts:12:249
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  tests/unit/classificationDeletion.test.ts > surviving recently deleted recovery cannot reference deleted members or recreate them after restart
+AssertionError: expected [ 'a', 'b', 'e', 'f' ] to deeply equal [ 'b', 'f' ]
+
+- Expected
++ Received
+
+  [
++   "a",
+    "b",
++   "e",
+    "f",
+  ]
+
+ ❯ tests/unit/classificationDeletion.test.ts:13:361
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  tests/unit/classificationDeletion.test.ts > protected or unknown classifications refuse unchanged
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/classificationDeletion.test.ts:14:246
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  tests/unit/classificationDeletion.test.ts > confirmation rejects content, membership, classification or draft change; ignores unrelated window metadata
+AssertionError: expected { ok: true, value: { …(12) } } to match object { ok: false, code: 'CONFLICT' }
+(13 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "code": "CONFLICT",
+-   "ok": false,
++   "ok": true,
+  }
+
+ ❯ tests/unit/classificationDeletion.test.ts:15:487
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  tests/unit/classificationDeletion.test.ts > empty classification deletes cleanly; unrelated draft retained
+AssertionError: expected [ '工作', '私事', '空分组' ] to not include '空分组'
+ ❯ tests/unit/classificationDeletion.test.ts:16:181
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  tests/unit/classificationDeletion.test.ts > undo sanitation removes exact current deletion ids even when old ownership differed
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/classificationDeletion.test.ts:17:481
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  8 failed (8)
+   Start at  18:25:56
+   Duration  202ms (transform 76%, import 12%, tests 10%, worker 2%)
+

@@ -1,0 +1,13 @@
+R608 launch
+R608 launch ready
+locator.waitFor: Timeout 2000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('dialog').getByRole('radio', { name: '彻底删除标签及内容', exact: true }) to be visible[22m
+
+    at /Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round6-classification-delete.cjs:10:205 {
+  log: [
+    "  - waiting for getByRole('dialog').getByRole('radio', { name: '彻底删除标签及内容', exact: true }) to be visible"
+  ],
+  name: 'TimeoutError'
+}
+CI FIXTURE {"file":"/Users/lihongwei/Desktop/晾念头 : Thoughtline/app/tests/electron/round6-classification-delete.cjs","pid":57159,"passed":false,"timedOut":false,"code":1}

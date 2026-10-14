@@ -1,0 +1,61 @@
+{
+  "source": "3ac0091652b8141ce0c137bc5c2d282273c05771",
+  "macDmgSha256": "6bd39b15d7190182fdb904d595b126f78ddf2ab57300f8a6a70daa52626f04a8",
+  "actualMountedDmgAsarAndUnpacked": true,
+  "allNonNativeOutMatchesBuild": true,
+  "files": [
+    {
+      "file": "out/main/index.js",
+      "sha256": "61e54fdd4754481f7ec34c0cf1125a0618e32f5cd37a75dfd3666b33b1cd42ea"
+    },
+    {
+      "file": "out/preload/index.js",
+      "sha256": "b658e6a12657378474cbac58091528b407a1ace64e5faaa03263a15889501990"
+    },
+    {
+      "file": "out/renderer/assets/approved-TL-brand-logo-vrNXAf6L.jpg",
+      "sha256": "313485e59395e3165f6504964efd72f4a3811150ac337834be3e2759f279f778"
+    },
+    {
+      "file": "out/renderer/assets/index-As7Ekoal.js",
+      "sha256": "44d38c40fa42231ff07de2b7d07956580134d998a32b741b067f2dc7d2a94a5b"
+    },
+    {
+      "file": "out/renderer/assets/index-BtfKl8mA.css",
+      "sha256": "d2b839b8e890073aa580a5045444f8f82db1fabaa6f87bb5f66b42830bb15f1a"
+    },
+    {
+      "file": "out/renderer/index.html",
+      "sha256": "f45685a19643911b4456a1790f650ddb8a40fedac1bae16e51e04bb6abb83990"
+    }
+  ],
+  "nativeVerifiedSignatureOnlyDifferences": [
+    {
+      "file": "out/main/notification-permission.node",
+      "compiledSha256": "1ce938453703e412322d65a9b807a5dfd2c16f88367b4c2b5eb3eaeaedde5b39",
+      "packagedSha256": "70ad0167305425d9b5c69614ff8bc8031d22522918471d1cceb5f2a77c14d0e4",
+      "bothSignaturesValid": true,
+      "verifiedOnlyDifference": "code signature and its 16KiB-aligned LINKEDIT allocation; byte-for-byte code equal after both removed on owned copies",
+      "normalizedCodeSha256": "6a4d90a041968ee77fcc4eac32415f12bf3c484e9b88e7bf39dd98141fa68630",
+      "facts": [
+        {
+          "kind": "compiled.node",
+          "rawBytes": 53712,
+          "linkEditVmSize": 16384,
+          "linkEditFileSize": 4560,
+          "strippedBytes": 53152,
+          "remainingLinkEditFileSize": 4000
+        },
+        {
+          "kind": "packaged.node",
+          "rawBytes": 71856,
+          "linkEditVmSize": 32768,
+          "linkEditFileSize": 22704,
+          "strippedBytes": 53152,
+          "remainingLinkEditFileSize": 4000
+        }
+      ]
+    }
+  ],
+  "claimAllOutByteIdentical": false
+}

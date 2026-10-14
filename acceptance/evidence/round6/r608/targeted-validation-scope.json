@@ -1,0 +1,43 @@
+{
+  "scope": "R6-08 classification+content permanent deletion and related protection only",
+  "notRerun": [
+    "npm verify/full unit suite",
+    "R6-01..07 product matrices",
+    "old window/drag/IME physical suites",
+    "performance"
+  ],
+  "relatedUnits": [
+    "classificationDeletion",
+    "classification",
+    "ideaHistory",
+    "clipCommands",
+    "ideaPlacement",
+    "draftAutosaver",
+    "repository"
+  ],
+  "unitPassed": 71,
+  "deliveryUnitsPassed": 2,
+  "sourceEvidence": {
+    "ui": "native-green/classification-delete-darwin-source.json (passed prefix, subsequent wrong fixture API failure retained)",
+    "mutation": "page-undo-green/classification-delete-darwin-source.json",
+    "compact": "compact-green/classification-delete-darwin-source.json",
+    "guards": "final-guards/guards-darwin.json",
+    "positions": "positions-green/positions-darwin.json"
+  },
+  "reuseBoundary": "UI source prefix contents and production layout unchanged except compact spacing (separately RED→GREEN); fingerprint membership change covered new domain RED→GREEN and actual source IPC guard; final packages run their own R608 only matrix. No blanket reuse of other features.",
+  "physicalAcceptance": false,
+  "formalAcceptance": false,
+  "finalSource": "3ac0091652b8141ce0c137bc5c2d282273c05771",
+  "inputCount": 378,
+  "independentReview": {
+    "critical": 0,
+    "important": 2,
+    "minor": 0,
+    "executorFixRedGreen": true,
+    "secondReview": false
+  },
+  "macActualDmg": "mac-actual-dmg/classification-delete-darwin-package.json",
+  "windowsRun": 38554027989,
+  "windowsActualInstalled": "windows-readback/windows-installed/classification-delete-win32-package.json",
+  "newActionsRunCount": 1
+}
