@@ -5,3 +5,5 @@ First capture run38758309441 passed, 8 actual Windows screenshots and owned clea
 Final capture38759850387 passed. Eight1536x960 PNGs visually inspected and hash-verified after Desktop delivery; same original MSIX hash. Cleanup receipt passed, zero cleanup errors. Both language sets, captions,300icon,capability/certification/privacy/support text and field checklist delivered. Standalone Store record updated only. Public Gist approved and anonymous readback passed. Source/doc final commit and cleanup pending.
 
 Owned rejected first-run PNGs and temporary reference/watch files removed; small first-run reports and final accepted original PNGs/receipts retained. No personal data or existing package removed.
+
+Materials commit e2cfcce6d3cf18d0e924c01e98d07bad57be27fc pushed; main and fork live readback identical, worktree clean. Material preparation complete, owner portal steps continue separately. User confirms individual developer and has reached Launch tax form page; guided launch, no personal identifiers collected.
