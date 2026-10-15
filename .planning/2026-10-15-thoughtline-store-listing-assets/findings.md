@@ -3,3 +3,9 @@ Existing MSIX cloud artifact11981244171/run38752702392 validated and installed; 
 App is frameless desktop top-edge with main views shelf/composer/manage. Real sample data only; per-language isolated profile; use native Windows capture with real taskbar/wallpaper when available. App window screenshots are fallback only if honest and still clear, never fake Win UI.
 Primary Microsoft capability doc confirms runFullTrust needed for full-trust packaged desktop/COM; explain in submission options. New Store policy page7.20 is future-effective2026-10-22; do not present as already effective on Oct15.
 UI skill search returned contrast/readability guidance, applied to capture inspection only; no product redesign or CSS changes.
+
+First native images include unrelated runner desktop icons and Test Mode OS watermark; raw full desktop is technically genuine but unsuitable promotional framing. Final capture uses native GDI actual desktop region1536x960 at192,0, no image editing/retouch, and puts product manage panels below complete vine. No OS metadata claim of physical consumer Windows acceptance.
+Privacy/support Gist explicit approval received; created public page d5b7095be0b95977be39bafe91faaee4, anonymous HTTP response has Chinese, English, support email. No repo visibility change.
+Latest user portal screenshots: Package Validated, Submission options Complete; pricing Save requests tax and payout completion. Payout/tax assignment page shows Microsoft Store China selected, tax Not started and payment Action required. Guided Edit then new tax profile; no private financial identifiers stored.
+
+Final all8 native screenshots passed visual review: complete shelf/window framing, localized sample/UI, no runner icons/watermark/private data in region. Chinese dark/English light. Desktop copies byte-identical. Package unchanged; screenshot task is not physical or Store certification acceptance.

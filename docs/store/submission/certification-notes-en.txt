@@ -1,0 +1,14 @@
+Thoughtline — first Microsoft Store submission
+
+No app account, test login or backend service is required. This is an Electron Win32 desktop app packaged as MSIX, not a conventional app with a persistent main window.
+
+1. Launch Thoughtline from Start. It runs in the notification area. Move the pointer to the top edge of the primary screen and pause briefly to reveal the note shelf. An empty shelf is normal on first launch.
+2. Press Ctrl+Alt+N to create a note. Enter a title or body, then press Ctrl+Enter or use the save/submit button. Enter alone inserts a line break. Esc preserves an unfinished draft and closes the composer.
+3. Reveal the shelf and click a note's body to copy its full text. Text can also be dragged into another app that accepts plain-text drops; the destination app does not send it automatically.
+4. Right-click a paper to access note actions and the calendar. In the calendar, use the More menu to open Groups & tags or Storage & settings. The tray menu offers Pause hover / Resume hover and Quit.
+5. Choose the Vine appearance in Storage & settings → Appearance. English/Chinese and Light/Dark controls are available in the app's auxiliary windows.
+6. Compatible notes can be stacked by dragging a paper's top edge onto a target paper. Navigate the stack or open its title list to read individual notes. Group/tag rules still apply to eligible targets.
+7. Reminders require the app to remain running and Windows notifications to be allowed. Missed reminders are handled when the app is opened again. The app uses a packaged COM toast activator, declared with runFullTrust.
+8. Quit from the notification-area menu for a normal exit. The app saves notes locally and supports user-initiated backups. Changing distribution channels or uninstalling should be preceded by an exported backup.
+
+The purchase price is configured in Partner Center. There are no in-app subscriptions, ads, or required online accounts in this candidate.
