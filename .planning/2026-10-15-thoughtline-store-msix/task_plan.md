@@ -6,9 +6,9 @@ Install the official Store CLI, verify main → private fork sync, and build a t
 ## Phases
 1. [complete] Refresh project contracts/source/fork; install and verify CLI.
 2. [complete] Add Store-only identity/version config, manual Windows workflow and targeted checks.
-3. [in_progress] Validate, commit main with [skip ci], sync exact commit to private fork, read back equality.
-4. [pending] Build in fork after Actions availability; verify actual candidate identity/hash/install/data behavior.
-5. [pending] Deliver candidate/instructions and explicit remaining verification; clean owned temporary outputs.
+3. [complete] Validate, commit main with [skip ci], sync exact commit to private fork, read back equality.
+4. [complete] Build in fork after Actions availability; verify actual candidate identity/hash/install/data behavior.
+5. [complete] Deliver candidate/instructions and explicit remaining verification; clean owned temporary outputs.
 
 ## Boundaries
 Main NocodeMrLi/thoughtline authoritative; NocodeLi/thoughtline build location only. Both start e9dc0dec59643c8701a41e1c2a833e453bddccd2. Release v0.0.37 and source ea4b7223162d3b1738e1cde22126f220a1dad840 remain immutable.

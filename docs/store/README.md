@@ -1,5 +1,7 @@
 # Microsoft Store candidate delivery
 
+Delivery: [0.0.38 candidate report](candidate-0.0.38-report.md).
+
 Main NocodeMrLi/thoughtline remains the source. NocodeLi/thoughtline only builds the identical frozen commit. No tag or old Release is required in the fork. Never put feature changes only in the fork.
 
 ## Build and identity
