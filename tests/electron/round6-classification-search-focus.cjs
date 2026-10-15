@@ -1,0 +1,36 @@
+const {_electron}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
+const {launchOptions,waitForInfo}=require('./window-fixture.cjs'),{managerPage}=require('./classification-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
+(async()=>{
+ const root=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round6/r611/focus'),dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-r611-focus-'));await fs.mkdir(root,{recursive:true});
+ await fs.writeFile(path.join(dir,'preferences.json'),JSON.stringify({schemaVersion:1,version:0,locale:'zh-CN',theme:'light'}));
+ await fs.writeFile(path.join(dir,'snapshot.json'),JSON.stringify({schemaVersion:4,revision:0,ideas:[],clips:[],archivedClips:[],agents:[{id:'general',name:'通用',color:'#A0A3AA'},{id:'sample',name:'Focus Sample',color:'#789360'},{id:'removed',name:'Removed Sample',color:'#789360'}],projects:['Focus Sample','Other Group','Removed Sample'],inactiveProjects:['Removed Sample'],inactiveAgents:['removed'],draft:null,settings:{writeHotkey:'Control+Alt+Shift+F19',reducedMotion:true}}));
+ let app;const receipt={profile:dir,platform:process.platform,packaged:!!process.env.THOUGHTLINE_EXECUTABLE,pids:[],matrices:[],failures:[],checks:[],scope:'Actual renderer focus painting inside all clipping ancestors; input/keyboard/search/no-resize. Physical Windows desktop/DPI separate.'};
+ try{
+  app=process.env.THOUGHTLINE_EXECUTABLE?await _electron.launch({executablePath:path.resolve(process.env.THOUGHTLINE_EXECUTABLE),args:[],env:require('./packaged-launch.cjs').sanitizedPackagedEnv(process.env,dir)}):await _electron.launch(await launchOptions(dir,{stationaryTopCursor:true}));
+  receipt.pids.push(app.process().pid);const shelf=await app.firstWindow();await shelf.locator('[data-view=shelf]').waitFor({state:'attached'});assert((await shelf.evaluate(()=>window.thoughtline.openManage())).ok);const page=await managerPage(app);assert((await page.evaluate(()=>window.thoughtline.openClassification('projects'))).ok);await page.locator('[data-mode=classification]').waitFor();const original=(await page.evaluate(()=>window.thoughtline.info())).snapshot;
+  let sequence=100;
+  for(const locale of ['zh-CN','en'])for(const theme of ['light','dark'])for(const width of [740,350]){
+   assert((await page.evaluate(({locale,theme,sequence})=>window.thoughtline.setPreferences({locale,theme},sequence),{locale,theme,sequence:sequence++})).ok);await waitForInfo(page,i=>i.preferences.locale===locale&&i.dark===(theme==='dark'));
+   await app.evaluate(({BrowserWindow},width)=>BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Manage').setSize(width,540),width);await page.waitForFunction(width=>innerWidth===width,width);
+   for(const tab of ['projects','tags','removed']){
+    await page.locator('#classification-tab-'+tab).click();await page.keyboard.press('Tab');const search=page.locator('.classification-toolbar input');assert(await search.evaluate(e=>e===document.activeElement),'Tab must reach search');
+    const facts=await page.locator('.classification-toolbar .classification-search').evaluate(e=>{
+     const s=getComputedStyle(e),b=e.getBoundingClientRect(),outside=s.outlineStyle==='none'?0:Math.max(0,parseFloat(s.outlineOffset)+parseFloat(s.outlineWidth)),clip={left:0,right:innerWidth,top:0,bottom:innerHeight},ancestors=[];
+     for(let a=e.parentElement;a;a=a.parentElement){const s=getComputedStyle(a),r=a.getBoundingClientRect();if(['hidden','clip','auto','scroll'].includes(s.overflowX)){clip.left=Math.max(clip.left,r.left+a.clientLeft);clip.right=Math.min(clip.right,r.left+a.clientLeft+a.clientWidth);ancestors.push({tag:a.className,axis:'x',left:r.left,right:r.right});}if(['hidden','clip','auto','scroll'].includes(s.overflowY)){clip.top=Math.max(clip.top,r.top+a.clientTop);clip.bottom=Math.min(clip.bottom,r.top+a.clientTop+a.clientHeight);}}
+     return {outline:{style:s.outlineStyle,width:parseFloat(s.outlineWidth),offset:parseFloat(s.outlineOffset),color:s.outlineColor},bounds:{left:b.left,right:b.right,top:b.top,bottom:b.bottom},paint:{left:b.left-outside,right:b.right+outside,top:b.top-outside,bottom:b.bottom+outside},clip,ancestors,scrollWidth:document.documentElement.scrollWidth,viewport:innerWidth};
+    });
+    assert(facts.outline.style!=='none'&&facts.outline.width>=2,'Preserve visible 2px focus indicator');
+    const clipped=['left','right','top','bottom'].filter(side=>['left','top'].includes(side)?facts.paint[side]<facts.clip[side]-.25:facts.paint[side]>facts.clip[side]+.25);if(clipped.length)receipt.failures.push({locale,theme,width,tab,clipped});
+    assert(facts.scrollWidth<=facts.viewport,'No horizontal page overflow');const before=await page.locator('.classification-search').boundingBox();await search.fill(tab==='removed'?'Removed':'Focus');assert(await page.locator('.classification-row[data-classification-id]').count()>0,'Search retains matching rows');assert(!(await page.locator('.classification-row[data-classification-id]').evaluateAll(rows=>rows.some(e=>!e.textContent.includes('Sample')))),'Query must filter content');await search.fill('no-such-classification');assert.equal(await page.locator('.classification-row[data-classification-id]').count(),0);await search.fill('');assert.deepEqual(await page.locator('.classification-search').boundingBox(),before,'Focus/query must not resize field');
+    await page.keyboard.press('Tab');assert(!(await search.evaluate(e=>e===document.activeElement)));await search.click();assert(await search.evaluate(e=>e===document.activeElement),'Pointer focus remains available');
+    if(locale==='zh-CN'&&((theme==='light'&&width===740)||(theme==='dark'&&width===350&&tab==='removed')))await page.screenshot({path:path.join(root,`focus-${process.platform}-${theme}-${width}-${tab}.png`)});
+    receipt.matrices.push({locale,theme,width,tab,clipped,...facts});
+   }
+  }
+  assert.deepEqual((await page.evaluate(()=>window.thoughtline.info())).snapshot,original,'Search and focus never change stored content/classifications/draft');receipt.checks.push('24 focus cases: three tabs x two locales x two themes x two widths; keyboard/pointer; positive/empty/reset search; unchanged geometry and snapshot');assert.deepEqual(receipt.failures,[],'Focus outline must stay fully visible inside every clipping ancestor');
+ }catch(e){receipt.failure=e.stack;throw e;}finally{
+  if(app){const child=app.process();receipt.pids.push(...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)).catch(()=>[]));try{await app.evaluate(({app})=>app.quit()).catch(e=>{if(child.exitCode===null)throw e;});const until=Date.now()+10000;while(child.exitCode===null&&Date.now()<until)await new Promise(r=>setTimeout(r,50));assert.notEqual(child.exitCode,null,'App must quit normally');receipt.normalQuit=true;await app.close();}catch(e){receipt.quitFailure=String(e);}}
+  if(receipt.normalQuit){await cleanupIdleFixture(dir,receipt.pids);receipt.cleaned=true;}
+  await fs.writeFile(path.join(root,`focus-${process.platform}-${receipt.packaged?'package':'source'}.json`),JSON.stringify(receipt,null,2)+'\n');if(receipt.quitFailure)throw Error(receipt.quitFailure);
+ }
+})().catch(e=>{console.error(e);process.exitCode=1;});
