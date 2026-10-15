@@ -1,0 +1,5 @@
+Official screenshot rules: PNG <=50MB, Desktop >=1366x768, up to10; at least4 suggested; no additional logos/icons/marketing overlays. App tile icon300x300 recommended. https://learn.microsoft.com/en-us/windows/apps/publish/publish-your-app/msix/screenshots-and-images
+Existing MSIX cloud artifact11981244171/run38752702392 validated and installed; use read-only artifact download, no build.
+App is frameless desktop top-edge with main views shelf/composer/manage. Real sample data only; per-language isolated profile; use native Windows capture with real taskbar/wallpaper when available. App window screenshots are fallback only if honest and still clear, never fake Win UI.
+Primary Microsoft capability doc confirms runFullTrust needed for full-trust packaged desktop/COM; explain in submission options. New Store policy page7.20 is future-effective2026-10-22; do not present as already effective on Oct15.
+UI skill search returned contrast/readability guidance, applied to capture inspection only; no product redesign or CSS changes.

@@ -1,0 +1,61 @@
+name: Capture existing Store package screenshots only
+on:
+  workflow_dispatch:
+    inputs:
+      capture_source:
+        description: Frozen screenshot script commit SHA
+        type: string
+        required: true
+permissions:
+  contents: read
+  actions: read
+jobs:
+  windows-store-screenshots:
+    if: github.repository == 'NocodeLi/thoughtline'
+    runs-on: windows-2025
+    timeout-minutes: 12
+    steps:
+      - name: Enable long paths on disposable runner
+        shell: pwsh
+        run: git config --global core.longpaths true
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ inputs.capture_source }}
+          persist-credentials: false
+      - name: Verify capture revision and script syntax
+        env:
+          CAPTURE_SOURCE: ${{ inputs.capture_source }}
+        shell: pwsh
+        run: |
+          if ($env:CAPTURE_SOURCE -cnotmatch '^[a-f0-9]{40}$' -or (git rev-parse HEAD) -cne $env:CAPTURE_SOURCE) { throw 'Capture source mismatch' }
+          Get-ChildItem scripts/store -Filter '*.ps1' | ForEach-Object {
+            $tokens=$null; $errors=$null
+            [System.Management.Automation.Language.Parser]::ParseFile($_.FullName,[ref]$tokens,[ref]$errors) | Out-Null
+            if ($errors.Count) { throw ($errors | Out-String) }
+          }
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '24.19.0'
+          cache: npm
+      - name: Install only capture tooling dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Download exact previously built candidate, no product rebuild
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download 38752702392 --repo NocodeLi/thoughtline --name Thoughtline-Store-x64-6e798d53c049da88e49ed31872992a1408873b21-1 --dir dist/store
+          if ($LASTEXITCODE -ne 0) { throw 'Candidate download failed' }
+          if ((Get-FileHash 'dist/store/Thoughtline-0.0.38-store-x64.msix' -Algorithm SHA256).Hash.ToLower() -cne '957ad8564f1c6abf40ef77831d25fa7b39a42b2c541d9824f89feb10a1e9121c') { throw 'Candidate hash mismatch' }
+      - name: Capture actual installed Windows UI with synthetic isolated content
+        shell: pwsh
+        run: ./scripts/store/capture-installed.ps1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: Thoughtline-Store-screenshots-${{ inputs.capture_source }}-${{ github.run_attempt }}
+          path: |
+            dist/store/screenshots/**
+            dist/store/screenshot-install-report.json
+          if-no-files-found: warn
+          retention-days: 7

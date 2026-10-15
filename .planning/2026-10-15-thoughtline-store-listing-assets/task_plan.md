@@ -1,0 +1,6 @@
+# Thoughtline Store listing assets — 2026-10-15
+Goal: deliver real isolated Windows screenshots (4 Chinese + 4 English), upload instructions/captions, correctly sized Store icon and other preparable submission materials in existing Desktop folder; sync standalone Store record only.
+Phases: 1 discovery complete; 2 capture workflow in progress; 3 Windows artifact capture pending; 4 visual/pixel/privacy verification pending; 5 Desktop material/record delivery pending.
+Next: add manual fork-only capture workflow reusing exact existing MSIX sha957ad8564f1c6abf40ef77831d25fa7b39a42b2c541d9824f89feb10a1e9121c, no product rebuild/version bump and no historical suite.
+Boundaries: main authoritative, fork identical commit for screenshot scripts; signed test copy only disposable Windows runner; personal profile untouched. No first Store certification submission, bank/tax input, private source publication or paid service. Public privacy URL requires an actual reachable host, not local file.
+User steering: uploaded package screenshot shows restricted runFullTrust warning; explained desktop-only selection and Submission options justification. Add copyable justification and certification instructions to Desktop.
