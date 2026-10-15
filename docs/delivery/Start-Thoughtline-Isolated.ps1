@@ -5,10 +5,10 @@ param(
 $ErrorActionPreference = 'Stop'
 $exe = (Resolve-Path -LiteralPath $Executable).Path
 if ((Split-Path $exe -Leaf) -ne 'Thoughtline.exe') { throw 'Select the installed Thoughtline.exe' }
-if ((Get-Item -LiteralPath $exe).VersionInfo.FileVersion -ne '0.0.37') { throw 'This launcher requires the 0.0.37 functional preflight executable' }
+if ((Get-Item -LiteralPath $exe).VersionInfo.FileVersion -ne '0.0.38') { throw 'This launcher requires the 0.0.38 functional preflight executable' }
 if (!$env:LOCALAPPDATA) { throw 'Windows LOCALAPPDATA is unavailable' }
 if (Get-Process -Name Thoughtline -ErrorAction SilentlyContinue) { throw 'Exit other Thoughtline versions from their tray menus first. No processes were stopped.' }
-$data = Join-Path $env:LOCALAPPDATA 'Thoughtline-Preflight\0.0.37\user-data'
+$data = Join-Path $env:LOCALAPPDATA 'Thoughtline-Preflight\0.0.38\user-data'
 $normal = Join-Path $env:APPDATA 'Thoughtline'
 if ($data -eq $normal) { throw 'Isolated profile must differ from the normal profile' }
 Write-Output "Executable: $exe"

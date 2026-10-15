@@ -1,0 +1,73 @@
+name: Build Store MSIX candidate only
+on:
+  workflow_dispatch:
+    inputs:
+      build_source:
+        description: Full main/fork-equal source SHA
+        type: string
+        required: true
+      source_tree:
+        description: Frozen source tree SHA
+        type: string
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: store-msix-candidate
+  cancel-in-progress: false
+jobs:
+  store-windows-x64:
+    if: github.repository == 'NocodeLi/thoughtline'
+    runs-on: windows-2025
+    timeout-minutes: 25
+    env:
+      STORE_SOURCE_SHA: ${{ inputs.build_source }}
+      STORE_SOURCE_TREE: ${{ inputs.source_tree }}
+      CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ inputs.build_source }}
+          persist-credentials: false
+      - name: Enable long paths on disposable runner
+        shell: pwsh
+        run: git config --global core.longpaths true
+      - name: Confirm frozen source before dependencies
+        shell: pwsh
+        run: |
+          if ($env:STORE_SOURCE_SHA -cnotmatch '^[a-f0-9]{40}$' -or $env:STORE_SOURCE_TREE -cnotmatch '^[a-f0-9]{40}$') { throw 'Full source/tree SHA required' }
+          if ((git rev-parse HEAD) -cne $env:STORE_SOURCE_SHA -or (git rev-parse 'HEAD^{tree}') -cne $env:STORE_SOURCE_TREE) { throw 'Frozen source mismatch' }
+      - name: Parse Windows packaging scripts before dependency/build minutes
+        shell: pwsh
+        run: |
+          Get-ChildItem scripts/store -Filter '*.ps1' | ForEach-Object {
+            $tokens = $null; $errors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$tokens, [ref]$errors) | Out-Null
+            if ($errors.Count) { throw ($errors | Out-String) }
+          }
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '24.19.0'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run typecheck
+      - name: Store and affected reminder/storage checks only
+        run: npm test -- tests/unit/storePackaging.test.ts tests/unit/storeNotifications.test.ts tests/unit/notificationDelivery.test.ts tests/unit/reminders.test.ts tests/unit/reminderContinuity.test.ts tests/unit/reminderScheduler.test.ts tests/unit/reminderFallback.test.ts tests/unit/reminderTime.test.ts tests/unit/storageLocations.test.ts tests/unit/deliveryVersion.test.ts
+      - run: npm run build
+      - name: Build and verify unsigned upload candidate
+        shell: pwsh
+        run: ./scripts/store/build-msix.ps1
+      - name: Disposable installed package identity and data retention
+        shell: pwsh
+        run: ./scripts/store/install-check.ps1
+      - name: Preserve candidate and actual reports, including failure evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: Thoughtline-Store-x64-${{ inputs.build_source }}-${{ github.run_attempt }}
+          path: |
+            dist/store/*.msix
+            dist/store/*.json
+            dist/store/SHA256SUMS.txt
+          if-no-files-found: warn
+          retention-days: 7

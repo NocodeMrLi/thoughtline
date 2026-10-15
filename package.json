@@ -1,6 +1,6 @@
 {
   "name": "thoughtline",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "private": true,
   "description": "Thoughtline desktop thoughts on a clothesline",
   "main": "out/main/index.js",
@@ -22,7 +22,8 @@
     "idle:direct": "node tests/electron/idle-without-debugger.cjs",
     "rope": "node tests/electron/fixed-rope-workflow.cjs",
     "clothespins": "node tests/electron/clothespin-workflow.cjs",
-    "hidden-draft": "node tests/electron/hidden-draft-workflow.cjs"
+    "hidden-draft": "node tests/electron/hidden-draft-workflow.cjs",
+    "package:store": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/store/build-msix.ps1"
   },
   "engines": {
     "node": ">=24.19.0 <25"

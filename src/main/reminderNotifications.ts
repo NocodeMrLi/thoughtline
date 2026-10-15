@@ -1,4 +1,5 @@
 import {app,Notification} from 'electron';
+import storeIdentity from '../shared/storeIdentity.json';
 import {execFile} from 'node:child_process';
 import {createRequire} from 'node:module';
 import {join} from 'node:path';
@@ -6,7 +7,7 @@ import {createHash} from 'node:crypto';
 import type {NotificationAccess} from '../shared/bridge';
 import type {Snapshot} from '../shared/contracts';
 import {showNotification} from '../shared/notificationDelivery';
-const appId='com.nocodemrli.thoughtline';
+const notificationAppId=()=>process.windowsStore?`${storeIdentity.packageFamilyName}!${storeIdentity.applicationId}`:'com.nocodemrli.thoughtline';
 export async function notificationAccess(request=false):Promise<NotificationAccess>{
  if(!Notification.isSupported())return {status:'unsupported'};
  if(process.platform==='darwin')return new Promise(resolve=>{
@@ -14,7 +15,7 @@ export async function notificationAccess(request=false):Promise<NotificationAcce
   try{const native=createRequire(__filename)(join(__dirname,'notification-permission.node')) as {getStatus:(request:boolean,callback:(status:string)=>void)=>void};native.getStatus(request,finish);}catch{finish('unknown');}
  });
  if(process.platform==='win32')return new Promise(resolve=>{
-  execFile('powershell.exe',['-NoProfile','-NonInteractive','-Command',`[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType=WindowsRuntime] > $null; [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier('${appId}').Setting.ToString()`],{timeout:4000,windowsHide:true},(error,out)=>resolve({status:error?'unknown':out.trim()==='Enabled'?'granted':out.trim().startsWith('Disabled')?'denied':'unknown'}));
+  execFile('powershell.exe',['-NoProfile','-NonInteractive','-Command',`[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType=WindowsRuntime] > $null; [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier('${notificationAppId()}').Setting.ToString()`],{timeout:4000,windowsHide:true},(error,out)=>resolve({status:error?'unknown':out.trim()==='Enabled'?'granted':out.trim().startsWith('Disabled')?'denied':'unknown'}));
  });
  return {status:'unknown'};
 }
@@ -23,7 +24,7 @@ const short=(s:string,max=180)=>{let result='';for(const c of s.replace(/\s+/g,'
 export class ReminderNotifications{
  private active=new Map<string,{notice:Notification;id:string;at:string}>();
  constructor(private snapshot:()=>Snapshot,private locale:()=>string,private open:(id:string)=>Promise<void>){
-  if(process.platform==='win32'){app.setAppUserModelId(appId);Notification.handleActivation(activation=>{const params=new URLSearchParams(activation.arguments),id=params.get('idea'),at=params.get('at');if(id&&at)this.click(id,at);});}
+  if(process.platform==='win32'){app.setAppUserModelId(notificationAppId());if(process.windowsStore)app.setToastActivatorCLSID(storeIdentity.toastClsid);Notification.handleActivation(activation=>{const params=new URLSearchParams(activation.arguments),id=params.get('idea'),at=params.get('at');if(id&&at)this.click(id,at);});}
  }
  private click(id:string,at:string){const idea=this.snapshot().ideas.find(i=>i.id===id&&i.status!=='deleted'&&i.reminder?.at===at&&['notified','missed'].includes(i.reminder.state));if(idea)void this.open(id).catch(()=>{});}
  sync(){for(const [key,item] of this.active){const idea=this.snapshot().ideas.find(i=>i.id===item.id);if(!idea||idea.status==='deleted'||idea.reminder?.at!==item.at||!['notified','missed'].includes(idea.reminder.state)){item.notice.close();this.active.delete(key);}}}
