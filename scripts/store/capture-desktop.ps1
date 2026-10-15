@@ -1,4 +1,4 @@
-param([ValidateSet('prepare','cursor','capture')][string]$Mode, [string]$Output, [int]$X=0, [int]$Y=0)
+param([ValidateSet('prepare','cursor','capture')][string]$Mode, [string]$Output, [int]$X=0, [int]$Y=0, [int]$Width=0, [int]$Height=0)
 $ErrorActionPreference='Stop'
 if ($env:GITHUB_ACTIONS -ne 'true' -or $env:RUNNER_OS -ne 'Windows') { throw 'Disposable Windows runner required' }
 Add-Type -AssemblyName System.Windows.Forms
@@ -21,6 +21,10 @@ if ($Mode -eq 'prepare') {
 } else {
   if (!$Output) { throw 'Output path required' }
   $r=[System.Windows.Forms.Screen]::PrimaryScreen.Bounds
+  if ($Width -gt 0 -and $Height -gt 0) {
+    if ($X -lt $r.X -or $Y -lt $r.Y -or ($X+$Width) -gt $r.Right -or ($Y+$Height) -gt $r.Bottom) { throw 'Capture region outside actual desktop' }
+    $r=[System.Drawing.Rectangle]::new($X,$Y,$Width,$Height)
+  }
   $bitmap=[System.Drawing.Bitmap]::new($r.Width,$r.Height)
   $graphics=[System.Drawing.Graphics]::FromImage($bitmap)
   try { $graphics.CopyFromScreen($r.X,$r.Y,0,0,$r.Size); $bitmap.Save($Output,[System.Drawing.Imaging.ImageFormat]::Png) }

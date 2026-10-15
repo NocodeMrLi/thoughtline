@@ -34,10 +34,10 @@ async function main(){
  const exe=path.resolve(process.argv[2]);assert(exe.toLowerCase().includes('windowsapps'+path.sep));await fs.mkdir(output,{recursive:true});native('prepare');
  const report={sourceSha,packageSha256:'957ad8564f1c6abf40ef77831d25fa7b39a42b2c541d9824f89feb10a1e9121c',captureScriptSha:process.env.GITHUB_SHA,actualInstalledPackage:true,physicalAcceptance:false,screenshots:[],profiles:[],cleaned:false};
  let app,profile;
- async function capture(locale,name){await delay(500);const dir=path.join(output,locale);await fs.mkdir(dir,{recursive:true});const file=path.join(dir,name+'.png');native('capture','-Output',file);
+ async function capture(locale,name){await delay(500);const dir=path.join(output,locale);await fs.mkdir(dir,{recursive:true});const file=path.join(dir,name+'.png');native('capture','-Output',file,'-X',String(report.captureRegion.x),'-Y',String(report.captureRegion.y),'-Width',String(report.captureRegion.width),'-Height',String(report.captureRegion.height));
   const facts=await app.evaluate(({nativeImage},file)=>{const image=nativeImage.createFromPath(file),size=image.getSize(),b=image.toBitmap();let min=255,max=0;for(let i=0;i<b.length;i+=Math.max(4,Math.floor(b.length/30000/4)*4)){for(let k=0;k<3;k++){min=Math.min(min,b[i+k]);max=Math.max(max,b[i+k]);}}return {...size,range:max-min};},file);
   assert(facts.width>=1366&&facts.height>=768,'Desktop resolution below Store minimum: '+JSON.stringify(facts));assert(facts.range>50,'Native desktop appears blank');
-  const bytes=await fs.readFile(file);assert(bytes.length<50*1024*1024);report.screenshots.push({locale,file:path.relative(output,file).replaceAll('\\','/'),...facts,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex'),capture:'Native Windows desktop GDI; no overlays/compositing'});console.log(JSON.stringify(report.screenshots.at(-1)));
+  const bytes=await fs.readFile(file);assert(bytes.length<50*1024*1024);report.screenshots.push({locale,file:path.relative(output,file).replaceAll('\\','/'),...facts,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex'),capture:'Native Windows desktop GDI region; original pixels, no overlays/compositing'});console.log(JSON.stringify(report.screenshots.at(-1)));
  }
  try{
   for(const locale of ['zh-CN','en']){
@@ -47,14 +47,14 @@ async function main(){
    app=await _electron.launch({executablePath:exe,args:[],env,timeout:30000});const shelf=await pageFor(app,'shelf');await shelf.locator('[data-view=shelf]').waitFor({state:'attached'});
    const runtime=await app.evaluate(({app,screen})=>({version:app.getVersion(),store:process.windowsStore===true,platform:process.platform,arch:process.arch,data:app.getPath('userData'),display:screen.getPrimaryDisplay()}));
    assert.equal(runtime.version,'0.0.38');assert.equal(runtime.store,true);assert.equal(runtime.data,profile);assert.equal(runtime.platform,'win32');report.runtime=runtime;
-   const bounds=runtime.display.bounds;native('cursor','-X',String(bounds.x+Math.floor(bounds.width/2)),'-Y',String(bounds.y+1));
+   const bounds=runtime.display.bounds;assert(bounds.width>=1920&&bounds.height>=1080,'Capture layout requires 1920x1080 actual desktop');report.captureRegion={x:bounds.x+192,y:bounds.y,width:1536,height:960};native('cursor','-X',String(bounds.x+Math.floor(bounds.width/2)),'-Y',String(bounds.y+1));
    await shelf.waitForFunction(async()=> (await window.thoughtline.info()).shelfVisible,{timeout:15000});
    const info=await shelf.evaluate(()=>window.thoughtline.info());assert.equal(info.snapshot.ideas.length,7);assert.equal(info.preferences.locale,locale);assert.equal(info.snapshot.settings.rope.style,'vine');
    assert((await shelf.evaluate(()=>window.thoughtline.openComposer())).ok);const composer=await pageFor(app,'composer');await composer.locator('#idea-text').fill(en?'Capture a thought before it slips away.':'趁还记得，先把这个念头写下来。');
-   await app.evaluate(({BrowserWindow,screen})=>{const a=screen.getPrimaryDisplay().workArea,w=BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer');w.setPosition(a.x+90,a.y+Math.max(420,Math.floor(a.height*.55)));w.show();w.focus();});await capture(locale,'01-vine-and-capture');
+   await app.evaluate(({BrowserWindow,screen})=>{const a=screen.getPrimaryDisplay().workArea,w=BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer');w.setBounds({x:a.x+580,y:a.y+440,width:620,height:330});w.show();w.focus();});await capture(locale,'01-vine-and-capture');
    await composer.evaluate(async()=>{const i=await window.thoughtline.info();return window.thoughtline.close(i.composerContext.draft);});
    assert((await shelf.evaluate(()=>window.thoughtline.openManage())).ok);const manage=await pageFor(app,'manage');await manage.locator('.month-grid').waitFor();
-   async function position(){await app.evaluate(({BrowserWindow,screen})=>{const d=screen.getPrimaryDisplay(),w=BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Manage');const width=Math.min(1100,d.workArea.width-60),height=Math.min(820,d.workArea.height-210);w.setBounds({x:d.workArea.x+Math.floor((d.workArea.width-width)/2),y:d.workArea.y+190,width,height});w.show();w.focus();});}
+   async function position(){await app.evaluate(({BrowserWindow,screen})=>{const d=screen.getPrimaryDisplay(),w=BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Manage');const width=1100,height=640;w.setBounds({x:d.workArea.x+Math.floor((d.workArea.width-width)/2),y:d.workArea.y+310,width,height});w.show();w.focus();});}
    await position();await capture(locale,'02-calendar');
    assert((await manage.evaluate(()=>window.thoughtline.openManage('focus'))).ok);await manage.locator('[data-reader-id=focus]').waitFor();await position();await capture(locale,'03-stack-reader');
    assert((await manage.evaluate(()=>window.thoughtline.openClassification('tags'))).ok);await manage.locator('[data-mode=classification]').waitFor();await position();await capture(locale,'04-groups-and-tags');

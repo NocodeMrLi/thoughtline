@@ -1,1 +1,3 @@
 Started user-authorized asset preparation. Skills: planning-with-files, ui-ux-pro-max visual inspection, anysearch official reference checks; browser-qa read for isolation principles but not web full-suite scope. No public upload or Store submission. Current product source remains unchanged0.0.38.
+
+First capture run38758309441 passed, 8 actual Windows screenshots and owned cleanup. Visual review identified irrelevant runner icons/watermark and manage window covering shelf. Adjust native GDI capture region to1536x960 at192,0 (unaltered source pixels) and position actual windows below shelf; no product rebuild. Public privacy/support Gist explicitly approved by user and created d5b7095be0b95977be39bafe91faaee4; anonymous readback pending.
