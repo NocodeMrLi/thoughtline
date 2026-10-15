@@ -9,15 +9,15 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="docs/readme/badges/preview.svg" alt="Version: 0.0.36" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="docs/readme/badges/platforms.svg" alt="macOS · Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.37"><img src="docs/readme/badges/preview.svg" alt="Version: 0.0.37" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.37"><img src="docs/readme/badges/platforms.svg" alt="macOS · Windows" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="docs/readme/badges/feedback.svg" alt="GitHub Issues" /></a>
 </p>
 
 <p align="center"><sub><a href="README.md">中文</a> · <a href="docs/readme/README.en.md">English</a> · <a href="docs/readme/README.ja.md">日本語</a> · <a href="docs/readme/README.ko.md">한국어</a> · <a href="docs/readme/README.es.md">Español</a> · <a href="docs/readme/README.fr.md">Français</a> · <a href="docs/readme/README.pt.md">Português</a></sub></p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36">下载 Thoughtline</a></h2>
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.36</sub></p>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.37">下载 Thoughtline</a></h2>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.37</sub></p>
 
 Thoughtline（晾念头）是一款 macOS 与 Windows 桌面便签工具。鼠标移到屏幕顶边，藤蔓和便签就会展开；离开后收起，桌面继续留给手头的工作。用几只彩色夹子挂住眼前需要的内容，再用分组、标签和日历保存更多念头。
 
@@ -103,12 +103,12 @@ Thoughtline（晾念头）是一款 macOS 与 Windows 桌面便签工具。鼠�
 
 ## 下载与安装
 
-当前版本为 **0.0.36**，通过仓库 Releases 分发；下载需要相应仓库访问权限。
+当前版本为 **0.0.37**，通过仓库 Releases 分发；下载需要相应仓库访问权限。
 
 | 平台 | 安装包 |
 | --- | --- |
-| macOS · Apple Silicon | [Thoughtline-0.0.36-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
-| Windows · x64 | [Thoughtline-0.0.36-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
+| macOS · Apple Silicon | [Thoughtline-0.0.37-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.37) |
+| Windows · x64 | [Thoughtline-0.0.37-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.37) |
 
 Mac 打开 DMG，将 Thoughtline 拖入“应用程序”；Windows 运行 EXE，按安装向导完成。升级前正常退出旧版，并保留独立备份。当前手动下载更新。
 

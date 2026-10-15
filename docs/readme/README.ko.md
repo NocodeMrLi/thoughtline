@@ -9,15 +9,15 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="badges/preview.svg" alt="Version: 0.0.36" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.37"><img src="badges/preview.svg" alt="Version: 0.0.37" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.37"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="GitHub Issues" /></a>
 </p>
 
 <p align="center"><sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub></p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36">Thoughtline 다운로드</a></h2>
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.36</sub></p>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.37">Thoughtline 다운로드</a></h2>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.37</sub></p>
 
 Thoughtline은 macOS와 Windows용 데스크톱 메모 앱입니다. 화면 위쪽으로 마우스를 가져가면 줄과 메모가 나타나고, 벗어나면 접힙니다. 지금 필요한 글은 색깔 집게에 걸고 나머지는 그룹, 태그, 달력으로 정리합니다.
 
@@ -103,12 +103,12 @@ Thoughtline은 macOS와 Windows용 데스크톱 메모 앱입니다. 화면 위�
 
 ## 다운로드와 설치
 
-현재 버전은 **0.0.36**이며 저장소 Releases에서 배포합니다. 다운로드에는 저장소 접근 권한이 필요합니다.
+현재 버전은 **0.0.37**이며 저장소 Releases에서 배포합니다. 다운로드에는 저장소 접근 권한이 필요합니다.
 
 | 플랫폼 | 설치 파일 |
 | --- | --- |
-| macOS · Apple Silicon | [Thoughtline-0.0.36-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
-| Windows · x64 | [Thoughtline-0.0.36-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
+| macOS · Apple Silicon | [Thoughtline-0.0.37-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.37) |
+| Windows · x64 | [Thoughtline-0.0.37-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.37) |
 
 Mac에서는 DMG를 열어 Thoughtline을 응용 프로그램으로 옮깁니다. Windows에서는 EXE를 실행합니다. 업데이트 전에는 이전 앱을 정상 종료하고 별도 백업을 남기세요. 업데이트는 수동 다운로드 방식입니다.
 

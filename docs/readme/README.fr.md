@@ -9,15 +9,15 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="badges/preview.svg" alt="Version: 0.0.36" /></a>
-  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.37"><img src="badges/preview.svg" alt="Version: 0.0.37" /></a>
+  <a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.37"><img src="badges/platforms.svg" alt="macOS · Windows" /></a>
   <a href="https://github.com/NocodeMrLi/thoughtline/issues"><img src="badges/feedback.svg" alt="GitHub Issues" /></a>
 </p>
 
 <p align="center"><sub><a href="../../README.md">中文</a> · <a href="../../docs/readme/README.en.md">English</a> · <a href="../../docs/readme/README.ja.md">日本語</a> · <a href="../../docs/readme/README.ko.md">한국어</a> · <a href="../../docs/readme/README.es.md">Español</a> · <a href="../../docs/readme/README.fr.md">Français</a> · <a href="../../docs/readme/README.pt.md">Português</a></sub></p>
 
-<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36">Télécharger Thoughtline</a></h2>
-<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.36</sub></p>
+<h2 align="center"><a href="https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.37">Télécharger Thoughtline</a></h2>
+<p align="center"><sub>macOS Apple Silicon · Windows x64 · 0.0.37</sub></p>
 
 Thoughtline est une application de notes pour macOS et Windows. Placez le pointeur au bord supérieur pour dérouler le fil et ses notes ; éloignez-le pour les ranger. Gardez les textes utiles sur des pinces colorées et retrouvez les autres grâce aux groupes, étiquettes et au calendrier.
 
@@ -103,12 +103,12 @@ Créez, renommez, retirez de la sélection et rétablissez les classifications. 
 
 ## Téléchargement et installation
 
-Version actuelle : **0.0.36**, distribuée via Releases. Le téléchargement nécessite l’accès au dépôt.
+Version actuelle : **0.0.37**, distribuée via Releases. Le téléchargement nécessite l’accès au dépôt.
 
 | Plateforme | Installation |
 | --- | --- |
-| macOS · Apple Silicon | [Thoughtline-0.0.36-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
-| Windows · x64 | [Thoughtline-0.0.36-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.36) |
+| macOS · Apple Silicon | [Thoughtline-0.0.37-mac-arm64.dmg](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.37) |
+| Windows · x64 | [Thoughtline-0.0.37-win-x64.exe](https://github.com/NocodeMrLi/thoughtline/releases/tag/v0.0.37) |
 
 Sur Mac, ouvrez le DMG et glissez Thoughtline dans Applications. Sous Windows, lancez l’EXE. Quittez normalement l’ancienne version et gardez une sauvegarde indépendante avant mise à jour. Les mises à jour se téléchargent manuellement.
 
