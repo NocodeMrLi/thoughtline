@@ -25,13 +25,13 @@ jobs:
       STORE_SOURCE_TREE: ${{ inputs.source_tree }}
       CSC_IDENTITY_AUTO_DISCOVERY: 'false'
     steps:
+      - name: Enable long paths on disposable runner
+        shell: pwsh
+        run: git config --global core.longpaths true
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: ${{ inputs.build_source }}
           persist-credentials: false
-      - name: Enable long paths on disposable runner
-        shell: pwsh
-        run: git config --global core.longpaths true
       - name: Confirm frozen source before dependencies
         shell: pwsh
         run: |
