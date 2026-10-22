@@ -170,6 +170,6 @@ Mac 安装包使用本地 ad-hoc 签名，尚未公证；Windows 安装包未进
 
 ## 许可与致谢
 
-当前源码许可标记为 `UNLICENSED`，尚未授予开源使用许可。第三方代码与许可证单独保留，见[第三方声明](THIRD_PARTY_NOTICES.md)。
+本仓库源代码以 [GNU GPL-3.0](LICENSE) 授权，全文见仓库根目录的 [LICENSE](LICENSE) 文件。第三方代码与许可证单独保留，见[第三方声明](THIRD_PARTY_NOTICES.md)。
 
 <sub>本页提供七种语言的产品文档；应用界面目前支持中文与 English。</sub>

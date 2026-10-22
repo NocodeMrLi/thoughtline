@@ -170,6 +170,6 @@ Contate o autor em Armazenamento e ajustes, ou pelo [GitHub Issues](https://gith
 
 ## Licença e agradecimentos
 
-O código está marcado `UNLICENSED`; nenhuma licença de código aberto foi concedida. As licenças de terceiros ficam nos [avisos de terceiros](../../THIRD_PARTY_NOTICES.md).
+O código fonte é distribuído sob a [GNU GPL-3.0](../../LICENSE); o texto completo está no arquivo [LICENSE](../../LICENSE) na raiz do repositório. As licenças de terceiros ficam nos [avisos de terceiros](../../THIRD_PARTY_NOTICES.md).
 
 <sub>A documentação está disponível em sete idiomas. A interface do aplicativo oferece chinês e inglês.</sub>

@@ -170,6 +170,6 @@ Contacta con el autor desde almacenamiento y ajustes, o mediante [GitHub Issues]
 
 ## Licencia y agradecimientos
 
-El código figura como `UNLICENSED`; no se ha concedido licencia de código abierto. Las licencias de terceros se conservan en [Avisos de terceros](../../THIRD_PARTY_NOTICES.md).
+El código fuente se distribuye bajo la [GNU GPL-3.0](../../LICENSE); el texto completo está en el archivo [LICENSE](../../LICENSE) de la raíz del repositorio. Las licencias de terceros se conservan en [Avisos de terceros](../../THIRD_PARTY_NOTICES.md).
 
 <sub>La documentación está disponible en siete idiomas. La interfaz de la aplicación admite chino e inglés.</sub>

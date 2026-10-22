@@ -170,6 +170,6 @@ Contact the author through Storage and Settings, or use [GitHub Issues](https://
 
 ## License and acknowledgments
 
-The source is currently marked `UNLICENSED`; no open-source license has been granted. Third-party licenses are retained separately in [Third-party notices](../../THIRD_PARTY_NOTICES.md).
+The source code is licensed under the [GNU GPL-3.0](../../LICENSE); the full license text is in the [LICENSE](../../LICENSE) file at the repository root. Third-party licenses are retained separately in [Third-party notices](../../THIRD_PARTY_NOTICES.md).
 
 <sub>Product documentation is available in seven languages. The app interface currently supports Chinese and English.</sub>

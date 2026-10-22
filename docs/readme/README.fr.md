@@ -170,6 +170,6 @@ Contactez l’auteur dans Stockage et réglages, ou via [GitHub Issues](https://
 
 ## Licence et remerciements
 
-Le code est marqué `UNLICENSED` ; aucune licence open source n’a été accordée. Les licences tierces figurent dans les [mentions des tiers](../../THIRD_PARTY_NOTICES.md).
+Le code source est distribué sous licence [GNU GPL-3.0](../../LICENSE) ; le texte complet se trouve dans le fichier [LICENSE](../../LICENSE) à la racine du dépôt. Les licences tierces figurent dans les [mentions des tiers](../../THIRD_PARTY_NOTICES.md).
 
 <sub>La documentation existe en sept langues. L’interface de l’application prend en charge le chinois et l’anglais.</sub>
