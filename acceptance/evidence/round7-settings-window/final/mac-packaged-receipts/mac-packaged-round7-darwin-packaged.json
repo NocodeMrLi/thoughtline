@@ -1,0 +1,32 @@
+{
+  "platform": "darwin",
+  "packaged": true,
+  "profile": "/var/folders/y5/395p0szd7xlcrw4j6slhwxcw0000gn/T/thoughtline-r7-4aZk4j/profile",
+  "checks": [
+    "settings can read state and change its existing language and theme controls",
+    "standalone settings keeps the original auxiliary window material",
+    "real UI backup reaches chooser and reports success",
+    "real UI migration cancellation reaches chooser",
+    "dirty settings stay mounted while writer opens",
+    "calendar composition blocks backup before chooser",
+    "calendar composition blocks document export before chooser",
+    "backup flushes calendar edits made during chooser and disables tray actions",
+    "calendar more menu has no settings entry",
+    "settings header and resized content retain geometry",
+    "reset button keeps text styling and fits the compact window",
+    "hidden settings reopen without freezing and retain a single window"
+  ],
+  "failures": [],
+  "pids": [
+    76738,
+    76738,
+    76808,
+    76809,
+    76810,
+    76818,
+    76829,
+    76836
+  ],
+  "cleaned": true,
+  "passed": true
+}

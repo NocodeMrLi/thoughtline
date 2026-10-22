@@ -7,3 +7,7 @@ Mac 新11项、storage11、设置36、托盘5、窗口9、联系32、导出17、
 本地首次默认命令实际产出arm64 Windows，已添加--x64与交付绑定断言；错误架构仅临时，不交付。
 
 打包错误已发现且未上传：仅指定 win.files 负规则触发工具全目录收集，NSIS因2.3GB归档 mmap失败。明确复制共同运行文件白名单再加排除，并增加包成员严格白名单核验及交付契约断言。失败目录与错架构包均为本轮自有临时产物，待最终正确包完成后清理。Mac实际包12+36+5+9通过；重新打包后按新包核验。
+
+本机微软官方 MSIX SDK 25a65f5c 本地编译成功（pack + Xerces schema validation）；首次 pack/unpack 成功，断言错误地期待 SDK 导出 [Content_Types].xml。按 SDK 源码核对后改为 ZIP 目录 + CRC 检查，不跳过 schema/block map 校验。重新冻结源码 2f6f1f3d 后重建全部最终包。Windows x64 原始包核验 35 payload + PE/icon/version 已通过；Mac 包 ASAR 与已运行测试版本逐字节相同。
+
+最终三包同源 2f6f1f3d；Mac DMG、Windows NSIS、Store MSIX 校验通过并交付桌面指定目录。NSIS 内嵌 app-64.7z 解出 74 文件全部匹配；MSIX SDK schema/块映射解包、ZIP CRC、身份/版本/图标尺寸及全部 payload 匹配。Windows 实机未测，用户明天验收。清理 188 项/1,213,756,188 字节本轮测试图片/导出、重复 staging/首轮 MSIX；先前失败构建清理 6,069,382,864 字节，测试 profile 自有根清理已记证据。下一步推送 main 和本地包测试预发布，读回摘要/运行记录。
