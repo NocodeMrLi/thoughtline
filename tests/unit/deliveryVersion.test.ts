@@ -5,7 +5,10 @@ import {describe,expect,it} from 'vitest';
 describe('active Windows isolation delivery binding',()=>{
  it('builds Windows x64 explicitly even on an arm64 Mac host',()=>{
   const pkg=JSON.parse(readFileSync('package.json','utf8'));
-  expect(pkg.scripts['package:win']).toMatch(/--x64(?: |$)/);
+  expect(pkg.scripts['package:win']).toBe('node scripts/package-win.cjs');
+  const wrapper=readFileSync('scripts/package-win.cjs','utf8');
+  expect(wrapper).toContain("'--win','nsis','--x64','--publish','never'");
+  expect(wrapper).toContain('fs.renameSync(saved,native)');
   expect(pkg.build.win.target[0].arch).toEqual(['x64']);
  });
  it('keeps an explicit runtime allowlist when adding Windows exclusions',()=>{
