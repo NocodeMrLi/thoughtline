@@ -37,7 +37,11 @@ try {
  assert.deepEqual(inventory(path.join(unpack,'app')),payload,'MSIX payload differs from verified Windows payload');
  assert.deepEqual(inventory(path.join(unpack,'Assets')),Object.fromEntries(Object.entries(logoHashes).sort()));
  assert(!fs.existsSync(path.join(unpack,'AppxSignature.p7x')),'Store candidate must remain unsigned');
- for(const name of ['AppxBlockMap.xml','[Content_Types].xml'])assert(fs.existsSync(path.join(unpack,name)),name+' missing');
+ // SDK extraction intentionally omits [Content_Types].xml; inspect the ZIP directory too.
+ const zipEntries=execFileSync('/usr/bin/unzip',['-Z1',output],{encoding:'utf8'}).trim().split('\n');
+ for(const name of ['AppxBlockMap.xml','[Content_Types].xml'])assert(zipEntries.includes(name),name+' missing from package');
+ assert(fs.existsSync(path.join(unpack,'AppxBlockMap.xml')),'Block map missing from SDK extraction');
+ run('/usr/bin/unzip',['-tqq',output]);
  assert.deepEqual(sourceInputVector(),vector,'Build inputs changed during MSIX packaging');
  const sdkRoot=path.resolve(path.dirname(sdk),'../..');
  const receipt={schema:1,version:pkg.version,storeVersion:storeVersion(pkg.version),buildSource:vector.headSha,inputVectorSha256:vector.worktreeSha256,identity,architecture:'x64',file:path.basename(output),bytes:fs.statSync(output).size,sha256:hash(fs.readFileSync(output)),tool:{name:'Microsoft MSIX SDK makemsix',source:'https://github.com/microsoft/msix-packaging',commit:execFileSync('git',['-C',sdkRoot,'rev-parse','HEAD'],{encoding:'utf8'}).trim(),sha256:hash(fs.readFileSync(sdk)),localBuild:true},checks:{sdkSchemaValidatedPack:true,sdkBlockMapValidatedUnpack:true,payloadHashComparison:true,payloadFiles:Object.keys(payload).length,manifestIdentity:true,logoDimensions:true,unsigned:true},windowsRuntimeTested:false,windowsSdkMakeAppxTested:false,storeUploadTested:false,storeSubmissionPerformed:false,actionsUsed:false,passed:true};
