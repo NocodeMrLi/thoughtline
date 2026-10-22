@@ -52,3 +52,6 @@
 .app-settings footer [role=status]:empty{display:none}
 .app-settings>.error:empty{display:none}
 @media(max-width:380px){.manage.app-settings{padding:16px;gap:12px}.manage.app-settings :is(.preference-settings,.storage-settings){padding:16px}.settings-tabs button{padding:6px 4px;font-size:11px}.app-settings .capacity-preference{grid-template-columns:1fr}.capacity-preference [role=group]{justify-self:start}}
+
+/* Keep the original controls inside the content clip at the smallest window height. */
+@media(max-height:440px){.standalone-settings[data-customizer]{gap:8px}.standalone-settings[data-customizer] .appearance-customizer{gap:8px}}

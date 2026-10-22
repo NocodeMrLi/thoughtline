@@ -94,5 +94,17 @@
     }
   ],
   "windowsRuntime": "not executed: user confirmed no Windows host and no Actions budget",
-  "actionsDispatched": false
+  "actionsDispatched": false,
+  "resetButtonRegression": {
+    "passed": true,
+    "newWindowChecks": 12,
+    "customizerScenarios": 24,
+    "scope": "Restore existing text action styling; compact height content fits"
+  },
+  "windowsPackaging": {
+    "host": "darwin-arm64",
+    "target": "win32-x64",
+    "excludeHostNativeModule": true,
+    "runtimeTested": false
+  }
 }

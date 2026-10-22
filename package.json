@@ -91,7 +91,10 @@
       ],
       "artifactName": "Thoughtline-${version}-win-${arch}.exe",
       "signExecutable": false,
-      "icon": "assets/app-icon.ico"
+      "icon": "assets/app-icon.ico",
+      "files": [
+        "!out/main/*.node"
+      ]
     },
     "nsis": {
       "oneClick": false,
