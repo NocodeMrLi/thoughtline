@@ -11,19 +11,21 @@ const {launchOptions,waitForInfo,bounded}=require('./window-fixture.cjs'),{clean
   else app=await _electron.launch(await launchOptions(dir));
   proc=app.process();receipt.pids.push(proc.pid);await fs.writeFile(path.join(out,'ownership.json'),JSON.stringify({profile:dir,pid:proc.pid,fixture:'round6-tray-menu'}));const shelf=await app.firstWindow();await shelf.locator('[data-view=shelf]').waitFor({state:'attached'});
   await app.evaluate(({Tray,Menu,screen,app,BrowserWindow})=>{const protect=w=>{w.setFocusable(false);w.setIgnoreMouseEvents(true,{forward:true});};for(const w of BrowserWindow.getAllWindows())protect(w);app.on('browser-window-created',(_e,w)=>protect(w));const original=Tray.prototype.setContextMenu;Tray.prototype.setContextMenu=function(menu){globalThis.r609Tray=menu;return original.call(this,menu);};Menu.prototype.popup=function(options){globalThis.r609Popup={menu:this,options};};globalThis.r609Cursor={x:screen.getPrimaryDisplay().bounds.x+300,y:screen.getPrimaryDisplay().bounds.y+1};screen.getCursorScreenPoint=()=>globalThis.r609Cursor;});
-  const menu=()=>app.evaluate(()=>globalThis.r609Tray.items.map(i=>({label:i.label,type:i.type,enabled:i.enabled,submenu:!!i.submenu})));
-  const choose=()=>app.evaluate(()=>globalThis.r609Tray.items[0].click());
+  const menu=()=>app.evaluate(()=>globalThis.r609Tray.items.map(i=>({label:i.label,type:i.type,enabled:i.enabled,accelerator:i.accelerator||null,submenu:!!i.submenu})));
+  const choose=()=>app.evaluate(()=>globalThis.r609Tray.items[4].click());
+  const pauseLabel=locale=>locale==='zh-CN'?'暂停悬停':'Pause hover';
+  const resumeLabel=locale=>locale==='zh-CN'?'恢复悬停':'Resume hover';
   const {managerPage}=require('./classification-fixture.cjs');
-  const labels={ 'zh-CN':['暂停悬停','恢复悬停','退出'],en:['Pause hover','Resume hover','Quit']};
+  const labels={ 'zh-CN':['新建念头','Thoughtline 日历','存储与设置','暂停悬停','恢复悬停','退出'],en:['New thought','Thoughtline Calendar','Storage and settings','Pause hover','Resume hover','Quit']};
   for(const locale of ['zh-CN','en']){
    assert((await shelf.evaluate(()=>window.thoughtline.openManage())).ok);const manage=await managerPage(app);
    const changed=await manage.evaluate(({locale,seq})=>window.thoughtline.setPreferences({locale,theme:'light'},seq),{locale,seq:sequence++});assert(changed.ok,changed.message);
    assert((await manage.evaluate(()=>window.thoughtline.closeManage())).ok);await waitForInfo(shelf,i=>!i.interactionLocked);
-   let rows=await menu();assert.deepEqual(rows.map(i=>i.label),[labels[locale][0],'',labels[locale][2]],'only pause, separator and quit are offered');assert.equal(rows[1].type,'separator');assert(rows.every(i=>!i.submenu));
+   let rows=await menu();const versionRow=rows[6];assert.deepEqual(rows.map(i=>i.label),[labels[locale][0],labels[locale][1],labels[locale][2],'',labels[locale][3],'',versionRow.label,labels[locale][5]],'new thought, calendar, settings, pause, version and quit are offered');assert.match(versionRow.label,/^Thoughtline v\d/,'version row shows the running app version');assert.equal(receipt.packaged?versionRow.label:'Thoughtline v'+(await app.evaluate(({app})=>app.getVersion())),versionRow.label,'version matches app.getVersion() in this runtime');assert.equal(rows[3].type,'separator');assert.equal(rows[5].type,'separator');assert(rows.every(i=>!i.submenu));assert.equal(rows[0].enabled,true);assert.equal(rows[0].accelerator,process.env.THOUGHTLINE_TEST_HOTKEY||'Control+Alt+Shift+F19','tray new-thought shows the write hotkey');assert.equal(rows[6].enabled,false,'version row is informational only');
    await waitForInfo(shelf,i=>i.shelfVisible);const before=(await shelf.evaluate(()=>window.thoughtline.info())).snapshot;
-   await choose();await waitForInfo(shelf,i=>!i.shelfVisible);assert.equal((await menu())[0].label,labels[locale][1]);
+   await choose();await waitForInfo(shelf,i=>!i.shelfVisible);assert.equal((await menu())[4].label,resumeLabel(locale));
    await app.evaluate(({powerMonitor})=>{powerMonitor.emit('suspend');powerMonitor.emit('lock-screen');});
-   await choose();assert.equal((await menu())[0].label,labels[locale][0]);assert.equal((await shelf.evaluate(()=>window.thoughtline.info())).shelfVisible,false,'manual resume must not release sleep/lock');
+   await choose();assert.equal((await menu())[4].label,pauseLabel(locale));assert.equal((await shelf.evaluate(()=>window.thoughtline.info())).shelfVisible,false,'manual resume must not release sleep/lock');
    await app.evaluate(({powerMonitor})=>powerMonitor.emit('resume'));assert.equal((await shelf.evaluate(()=>window.thoughtline.info())).shelfVisible,false,'lock stays paused after sleep resumes');
    await app.evaluate(({powerMonitor})=>powerMonitor.emit('unlock-screen'));await waitForInfo(shelf,i=>i.shelfVisible);
    assert((await shelf.evaluate(()=>window.thoughtline.dragLock(true))).ok);await choose();await waitForInfo(shelf,i=>!i.shelfVisible&&!i.interactionLocked);await choose();await waitForInfo(shelf,i=>i.shelfVisible);
@@ -32,8 +34,16 @@ const {launchOptions,waitForInfo,bounded}=require('./window-fixture.cjs'),{clean
    assert.deepEqual((await shelf.evaluate(()=>window.thoughtline.info())).snapshot,before,'pause and drag cancellation preserve original data');receipt.checks.push(locale+': two native actions, immediate labels, suspend/lock isolation, peg/text drag cancellation and unchanged data');
   }
   // Shelf native New action still opens Composer after tray shortcuts are removed.
-  assert((await shelf.evaluate(()=>window.thoughtline.shelfMenu('demo'))).ok);await app.evaluate(()=>{const item=globalThis.r609Popup.menu.items.find(i=>i.label==='New thought');if(!item)throw Error('Shelf New action missing');item.click();});
+  assert((await shelf.evaluate(()=>window.thoughtline.shelfMenu('demo'))).ok);await app.evaluate(()=>{const item=globalThis.r609Popup.menu.items.find(i=>i.label==='New thought');if(!item)throw Error('Shelf New action missing');const settingsItem=globalThis.r609Popup.menu.items.find(i=>i.label==='Storage and settings'||i.label==='存储与设置');if(!settingsItem)throw Error('Shelf settings action missing');item.click();globalThis.r609ShelfSettingsItem=settingsItem;});
   let composer;await bounded((async()=>{while(!composer){composer=(await app.windows()).find(p=>p.url().includes('view=composer'));if(!composer)await new Promise(r=>setTimeout(r,25));}})(),'actual Composer ready',10000);await composer.locator('#idea-text').fill('Unsubmitted tray quit draft 😀\nSecond line preserved');
+  // The tray Settings action opens the standalone settings window while the writer stays visible.
+  await app.evaluate(()=>globalThis.r609Tray.items[2].click());
+  await bounded((async()=>{const until=Date.now()+10000;while(Date.now()<until){const w=await app.evaluate(({BrowserWindow})=>{const w=BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Settings');return w?{exists:true,visible:w.isVisible()}:null;});if(w?.visible)break;await new Promise(r=>setTimeout(r,25));}})(),'tray settings window visible',10000);
+  await app.evaluate(({BrowserWindow})=>{const w=BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Settings');if(!w)throw Error('Standalone settings window missing');if(!w.isVisible())throw Error('Standalone settings window not visible');const composerWindow=BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Composer');if(!composerWindow?.isVisible())throw Error('Composer must stay visible beside settings');});
+  receipt.checks.push('tray Settings opens standalone Thoughtline Settings window beside the visible writer');
+  // The shelf peg menu Settings action reaches the same standalone window.
+  await app.evaluate(()=>globalThis.r609ShelfSettingsItem.click());await app.evaluate(({BrowserWindow})=>{const w=BrowserWindow.getAllWindows().find(w=>w.getTitle()==='Thoughtline Settings');if(!w?.isVisible())throw Error('Shelf menu settings did not focus the standalone window');});
+  receipt.checks.push('shelf peg menu Storage and settings opens the same standalone window');
   receipt.pids.push(...await app.evaluate(({app})=>app.getAppMetrics().map(m=>m.pid)));
   const exited=new Promise(r=>proc.exitCode!==null?r():proc.once('exit',r));await app.evaluate(()=>globalThis.r609Tray.items.at(-1).click());await bounded(exited,'actual tray quit preserves draft',15000);receipt.normalQuit=true;
   const stored=JSON.parse(await fs.readFile(path.join(dir,'snapshot.json'),'utf8'));assert.equal(stored.draft.text,'Unsubmitted tray quit draft 😀\nSecond line preserved');assert.equal(stored.ideas[0].text,seed.ideas[0].text);receipt.checks.push('actual shelf New callback available; actual tray Quit persisted live unsaved draft and original note');

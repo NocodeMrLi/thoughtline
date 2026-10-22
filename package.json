@@ -1,6 +1,6 @@
 {
   "name": "thoughtline",
-  "version": "0.0.38",
+  "version": "0.0.39",
   "private": true,
   "description": "Thoughtline desktop thoughts on a clothesline",
   "main": "out/main/index.js",
@@ -12,7 +12,7 @@
     "verify": "node scripts/verify.cjs",
     "smoke": "node tests/electron/smoke.cjs",
     "package:mac": "node scripts/package-mac.cjs",
-    "package:win": "node node_modules/electron-builder/cli.js --win nsis --publish never",
+    "package:win": "node node_modules/electron-builder/cli.js --win nsis --x64 --publish never",
     "workflow": "node tests/electron/workflow.cjs",
     "groups": "node tests/electron/group-workflow.cjs",
     "lifecycle": "node tests/electron/settings-lifecycle.cjs",

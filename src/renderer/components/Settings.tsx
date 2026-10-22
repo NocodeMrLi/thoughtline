@@ -14,7 +14,7 @@ import {ExportMenu,type ExportChoice} from './ExportMenu';
 
 type SettingsTab='appearance'|'controls'|'data';
 export type SettingsDraft={hotkey:string;reduced:boolean;tab?:SettingsTab};
-export function Settings({info,restore,onRemember}:{info:PilotInfo;restore?:SettingsDraft;onRemember?:(draft:SettingsDraft)=>void}){
+export function Settings({info,restore,onRemember,standalone=false}:{info:PilotInfo;restore?:SettingsDraft;onRemember?:(draft:SettingsDraft)=>void;standalone?:boolean}){
  const {t,m}=useLocale();
  const {notice,setNotice,noticeProps}=useTransientNotice();
  const [tab,setTab]=useState<SettingsTab>(restore?.tab??'appearance');
@@ -26,16 +26,17 @@ export function Settings({info,restore,onRemember}:{info:PilotInfo;restore?:Sett
  const [hotkey,setHotkey]=useState(restore?.hotkey??info.snapshot.settings.writeHotkey);
  const [reduced,setReduced]=useState(restore?.reduced??info.snapshot.settings.reducedMotion);
  const [recording,setRecording]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState('');
- const [leavePrompt,setLeavePrompt]=useState(false);const allowLeave=useRef(false),returning=useRef(false);
+ const [leavePrompt,setLeavePrompt]=useState(false);const allowLeave=useRef(false);
  const baseline=useRef({hotkey:info.snapshot.settings.writeHotkey,reduced:info.snapshot.settings.reducedMotion});
  const prompt=useRef<HTMLDivElement>(null);
  const state=useRef({hotkey,reduced,busy,recording,dirty:false});state.current={hotkey,reduced,busy,recording,dirty:hotkey!==info.snapshot.settings.writeHotkey||reduced!==info.snapshot.settings.reducedMotion};
  useLayoutEffect(()=>()=>{onRemember?.({hotkey:state.current.hotkey,reduced:state.current.reduced,tab:selectedTab.current});},[]);
- useEffect(()=>registerLeaveGuard(async()=>{if(state.current.busy||state.current.recording)return false;if(allowLeave.current||returning.current||!state.current.dirty)return true;setLeavePrompt(true);return false;}),[]);
- const back=async()=>{if(busy||recording)return;if(customizer){setCustomizer(null);return;}returning.current=true;try{const r=await window.thoughtline.returnCalendar();if(!r.ok)setError(r.message);}catch{setError('返回失败，请重试。');}finally{returning.current=false;}};
+ useEffect(()=>registerLeaveGuard(async()=>{if(state.current.busy||state.current.recording)return false;if(allowLeave.current||!state.current.dirty)return true;setLeavePrompt(true);return false;}),[]);
+ const back=async()=>{if(busy||recording)return;if(customizer){setCustomizer(null);return;}};
  const [storage,setStorage]=useState<StorageInfo|null>(null);
  const [exportOpen,setExportOpen]=useState(false),exportAnchor=useRef<HTMLButtonElement>(null);
- useEffect(()=>{setExportOpen(false);},[tab,info.manageSession,busy]);
+ const session=standalone?info.settingsSession:info.manageSession;
+ useEffect(()=>{setExportOpen(false);},[tab,session,busy]);
  useEffect(()=>{void window.thoughtline.storageInfo().then(r=>{if(r.ok)setStorage(r.value);else setError(r.message);}).catch(()=>setError('无法读取念头数据位置。'));},[info]);
  const storageAction=async(kind:'open'|'migrate'|ExportChoice)=>{if(busy)return;setBusy(true);setError('');setNotice('');try{
   if(kind==='open'){const r=await window.thoughtline.openStorageDirectory();if(!r.ok)setError(r.message);}
@@ -43,19 +44,19 @@ export function Settings({info,restore,onRemember}:{info:PilotInfo;restore?:Sett
   else{const r=await (kind==='migrate'?window.thoughtline.changeStorage():window.thoughtline.exportBackup());if(!r.ok)setError(r.message);else if(!r.value.canceled){if(kind==='migrate')setStorage(r.value);setNotice(kind==='migrate'?t("changedLocation",{p0:r.value.directory}):t("savedBackup",{p0:r.value.directory}),4000);}}
  }catch{setError('操作未完成，仍使用原位置。');}finally{setBusy(false);}};
  const input=useRef<HTMLInputElement>(null);
- useEffect(()=>{setHotkey(restore?.hotkey??info.snapshot.settings.writeHotkey);setReduced(restore?.reduced??info.snapshot.settings.reducedMotion);setRecording(false);setError('');setNotice('');},[info.manageSession]);
+ useEffect(()=>{setHotkey(restore?.hotkey??info.snapshot.settings.writeHotkey);setReduced(restore?.reduced??info.snapshot.settings.reducedMotion);setRecording(false);setError('');setNotice('');},[session]);
  useEffect(()=>{const next={hotkey:info.snapshot.settings.writeHotkey,reduced:info.snapshot.settings.reducedMotion},prior=baseline.current;setHotkey(current=>current===prior.hotkey?next.hotkey:current);setReduced(current=>current===prior.reduced?next.reduced:current);baseline.current=next;},[info.snapshot.settings.writeHotkey,info.snapshot.settings.reducedMotion]);
  useEffect(()=>{if(!leavePrompt)return;const previous=document.activeElement;prompt.current?.querySelector<HTMLButtonElement>('button:last-child')?.focus();return()=>{if(previous instanceof HTMLElement&&previous.isConnected)previous.focus();};},[leavePrompt]);
  useEffect(()=>{if(recording)input.current?.focus();},[recording]);
  const changeCapacity=async(capacity:ShelfCapacity)=>{if(busy||recording)return;setBusy(true);setError('');try{const r=await window.thoughtline.saveSettings({...info.snapshot.settings,shelfCapacity:capacity},info.snapshot.revision);if(!r.ok)setError(r.message);}catch{setError('保存未成功，原快捷键保持可用。');}finally{setBusy(false);}};
  const applyAppearance=async(patch:AppearancePatch)=>{if(busy||recording)return false;setBusy(true);setError('');setNotice('');try{const r=await window.thoughtline.saveSettings({...info.snapshot.settings,...patch},info.snapshot.revision);if(!r.ok)setError(r.message);else setNotice('已保存。');return r.ok;}catch{setError('保存未成功，请重试。');return false;}finally{setBusy(false);}};
  const save=async()=>{if(busy||recording)return false;setBusy(true);setError('');setNotice('');try{const r=await window.thoughtline.saveSettings({...info.snapshot.settings,writeHotkey:hotkey,reducedMotion:reduced},info.snapshot.revision);if(r.ok)setNotice('已保存。');else setError(r.message);return r.ok;}catch{setError('保存未成功，原快捷键保持可用。');return false;}finally{setBusy(false);}};
- return <main data-view="manage" data-mode="settings" data-customizer={customizer??undefined} data-material={info.manageMaterial} data-platform={info.platform} className="manage app-settings" onKeyDown={e=>{
+ return <main data-view={standalone?'settings':'manage'} data-mode="settings" data-customizer={customizer??undefined} data-material={standalone?info.settingsMaterial:info.manageMaterial} data-platform={info.platform} className={standalone?'manage app-settings standalone-settings':'manage app-settings'} onKeyDown={e=>{
   if(e.nativeEvent.isComposing||e.nativeEvent.keyCode===229)return;
   if(e.key==='Escape'){e.preventDefault();if(leavePrompt)setLeavePrompt(false);else if(recording)setRecording(false);else if(customizer&&!busy)setCustomizer(null);else if(!busy)void window.thoughtline.closeManage();}
   if(leavePrompt&&e.key==='Tab'){const buttons=[...prompt.current?.querySelectorAll<HTMLButtonElement>('button:not(:disabled)')??[]],at=buttons.indexOf(document.activeElement as HTMLButtonElement);if(buttons.length){e.preventDefault();buttons[(at+(e.shiftKey?-1:1)+buttons.length)%buttons.length].focus();}}
  }}>
-  <header><IconButton icon="back" label={t(customizer?'返回外观设置':'返回Thoughtline日历')} disabled={busy||recording} onClick={()=>void back()}/><strong>{t(customizer==='rope'?'定制挂绳':customizer==='paper'?'定制纸张':"存储与设置")}</strong><PreferencesControl info={info}/><button className="close" aria-label={t("关闭设置")} disabled={busy} onClick={()=>void window.thoughtline.closeManage()}>×</button></header>
+  <header>{customizer?<IconButton icon="back" label={t('返回外观设置')} disabled={busy||recording} onClick={()=>void back()}/>:<span className="settings-header-spacer" aria-hidden="true"/>}<strong>{t(customizer==='rope'?'定制挂绳':customizer==='paper'?'定制纸张':"存储与设置")}</strong><PreferencesControl info={info}/><button className="close" aria-label={t("关闭设置")} disabled={busy} onClick={()=>void window.thoughtline.closeManage()}>×</button></header>
   <nav className="settings-tabs" role="tablist" aria-label={t('settingsSections')} onKeyDown={e=>{
    const index=tabs.findIndex(([value])=>value===tab);const next=e.key==='ArrowRight'?(index+1)%3:e.key==='ArrowLeft'?(index+2)%3:e.key==='Home'?0:e.key==='End'?2:null;
    if(next!==null&&!busy&&!recording){e.preventDefault();setCustomizer(null);setTab(tabs[next][0]);e.currentTarget.querySelectorAll<HTMLButtonElement>('[role=tab]')[next]?.focus();}

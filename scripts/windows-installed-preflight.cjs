@@ -41,11 +41,11 @@ async function main(){
    second.once('error',error=>{clearTimeout(timeout);reject(error);});second.once('exit',code=>{clearTimeout(timeout);resolve(code);});
   });assert.equal(exitCode,0);assert.deepEqual((await shelf.evaluate(()=>window.thoughtline.info())).snapshot,expected);assert.deepEqual(await fs.readFile(path.join(data,'snapshot.json')),seedBytes);result.checks.singleInstance=true;
   const opened=await shelf.evaluate(()=>window.thoughtline.openSettings());assert(opened.ok);
-  let manage;for(let i=0;i<100&&!manage;i++){manage=(await app.windows()).find(p=>p.url().includes('view=manage'));if(!manage)await new Promise(r=>setTimeout(r,50));}
+  let manage;for(let i=0;i<100&&!manage;i++){manage=(await app.windows()).find(p=>p.url().includes('view=settings'));if(!manage)await new Promise(r=>setTimeout(r,50));}
   assert(manage);await manage.waitForSelector('[data-mode=settings]');
   const saved=await manage.evaluate(async()=>{const i=await window.thoughtline.info();return window.thoughtline.saveSettings({...i.snapshot.settings,reducedMotion:true},i.snapshot.revision);});assert(saved.ok);
   assert.equal(saved.value.revision,fixture.revision+1);assert.deepEqual(saved.value.ideas,expected.ideas);assert.deepEqual(saved.value.clips,fixture.clips);assert.deepEqual(saved.value.draft,fixture.draft);
-  await manage.evaluate(()=>window.thoughtline.closeManage());await app.close();app=null;
+  await manage.evaluate(()=>{void window.thoughtline.closeManage();});await require('../tests/electron/window-fixture.cjs').waitHidden(app,'Thoughtline Settings');await app.close();app=null;
   const persisted=JSON.parse(await fs.readFile(path.join(data,'snapshot.json'),'utf8'));assert.deepEqual(persisted,saved.value);result.checks.packagedCommitAndNormalQuit=true;
   assert.deepEqual(await fs.readFile(path.join(data,'snapshot.schema2.backup.json')),seedBytes);
   app=await _electron.launch({executablePath:executable,args:[],env,timeout:30000});

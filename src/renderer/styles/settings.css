@@ -1,10 +1,26 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
 .manage.app-settings{overflow:hidden;gap:16px;padding:20px}
+.standalone-settings{height:100%;display:flex;flex-direction:column;overflow:hidden;gap:16px;padding:20px}
+.standalone-settings header{display:flex;align-items:center;gap:6px;min-width:0;min-height:36px;height:36px;flex-shrink:0;-webkit-app-region:drag}
+.standalone-settings header strong,.standalone-settings header .close,.standalone-settings header button,.standalone-settings header input,.standalone-settings header select{-webkit-app-region:no-drag}
+.standalone-settings header strong{font-size:14px;font-weight:600;line-height:20px}
+.standalone-settings header .close{width:28px;height:28px;border-radius:50%;font-size:20px}
+.standalone-settings header .close:hover{background:color-mix(in srgb,var(--text),transparent 93%)}
+.settings-header-spacer{width:32px;height:32px;flex-shrink:0;pointer-events:none}
 .settings-tabs{display:flex;flex-shrink:0;gap:4px;padding:4px;background:color-mix(in srgb,var(--text),transparent 94%);border-radius:10px}
 .settings-tabs button{flex:1;min-width:0;min-height:34px;padding:6px 8px;border:0;background:transparent;font-size:12px;white-space:normal}
 .settings-tabs button[aria-selected=true]{background:var(--glass-fill,var(--surface));color:var(--text);box-shadow:0 1px 3px #00000018}
 .settings-content{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:1px 2px 16px;scrollbar-gutter:stable}
 .settings-content [role=tabpanel][hidden]{display:none}
+/* The visible panel fills the stretched window: appearance cards grow with the
+   window (preview absorbs the extra height); shorter tabs keep natural height. */
+.settings-content:not(.is-customizing){display:flex;flex-direction:column}
+.settings-content:not(.is-customizing)>[role=tabpanel]:not([hidden]){display:flex;flex-direction:column;flex:1;min-height:0}
+#settings-panel-appearance .preference-settings{flex-shrink:0}
+#settings-panel-appearance .appearance-choices{flex:1;min-height:0;justify-content:flex-start}
+#settings-panel-appearance .appearance-choices .appearance-choice{flex:1;min-height:96px}
+#settings-panel-appearance .appearance-choices .setting-hint{flex-shrink:0;margin-top:auto;padding-top:12px}
+#settings-panel-appearance .appearance-customizer{flex:1;min-height:0}
 .settings-content.is-customizing{overflow:hidden;padding-bottom:0;scrollbar-gutter:auto}
 .settings-content.is-customizing>[role=tabpanel]:not([hidden]){display:flex;flex-direction:column;height:100%;min-height:0}
 .app-settings[data-customizer]>.error:empty,.app-settings[data-customizer] .settings-footer>footer:has([role=status]:empty){display:none}

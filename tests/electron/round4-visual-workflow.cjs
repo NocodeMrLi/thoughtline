@@ -11,7 +11,7 @@ const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=requ
  const check=(label,action)=>{try{action();receipt.checks.push(label);}catch(e){receipt.failures.push({label,error:e.message});}};
  const info=()=>shelf.evaluate(()=>window.thoughtline.info());
  const button=name=>page.getByRole('button',{name,exact:true});
- const settings=async()=>{assert((await shelf.evaluate(()=>window.thoughtline.openSettings())).ok);page=(await app.windows()).find(p=>p.url().includes('view=manage'));await page.waitForSelector('[data-mode=settings]');};
+ const settings=async()=>{assert((await shelf.evaluate(()=>window.thoughtline.openSettings())).ok);page=(await app.windows()).find(p=>p.url().includes('view=settings'));await page.waitForSelector('[data-mode=settings]');};
  const appearance=async(color,theme)=>{await settings();const i=await info();assert((await page.evaluate(([settings,revision])=>window.thoughtline.saveSettings(settings,revision),[{...i.snapshot.settings,paper:{color,pattern:'ruled'}},i.snapshot.revision])).ok);assert((await page.evaluate(([theme,request])=>window.thoughtline.setPreferences({locale:'zh-CN',theme},request),[theme,sequence++])).ok);};
  const open=async(entry)=>{assert((await shelf.evaluate(()=>window.thoughtline.openManage('one'))).ok);await page.locator('[data-reader-id=one]').waitFor();if(entry==='calendar'){await button('Thoughtline 日历').click();await page.locator('.date-cell[data-day="2026-10-12"]').click();await page.locator('.calendar-paper[data-idea-id=one]').click();await page.locator('[data-reader-id=one]').waitFor();}};
  const geometry=async(editing)=>page.evaluate(editing=>{

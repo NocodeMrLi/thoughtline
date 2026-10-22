@@ -27,7 +27,7 @@ const closeEnough=(a,b)=>Math.abs(a-b)<3;
   await manage.getByRole('button',{name:'返回',exact:true}).click();
   assert.equal(await manage.locator('[data-calendar-motion]').count(),0,'saved reduced-motion setting skips reverse zoom');
   assert((await manage.evaluate(()=>window.thoughtline.closeManage())).ok);
-  assert((await shelf.evaluate(()=>window.thoughtline.openSettings())).ok);await manage.waitForSelector('[data-mode=settings]');
+  assert((await shelf.evaluate(()=>window.thoughtline.openSettings())).ok);const settings=(await app.windows()).find(p=>p.url().includes('view=settings'));await settings.waitForSelector('[data-mode=settings]');
   const settingsSaved=await manage.evaluate(async()=>{const current=await window.thoughtline.info();return window.thoughtline.saveSettings({...current.snapshot.settings,reducedMotion:false},current.snapshot.revision);});
   assert(settingsSaved.ok,settingsSaved.message);await waitForInfo(manage,i=>i.snapshot.settings.reducedMotion===false);
   assert((await manage.evaluate(()=>window.thoughtline.closeManage())).ok);

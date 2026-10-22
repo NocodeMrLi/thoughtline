@@ -16,6 +16,7 @@ import {createPicker} from './windows/picker';
 import {createShelf} from './windows/shelf';
 import {createComposer,COMPOSER_SIZE,currentComposerMaterial} from './windows/composer';
 import {createManage} from './windows/manage';
+import {createSettingsWindow} from './windows/settings';
 import {fitManageBounds} from './windows/manageGeometry';
 import {createHost} from './platform/host';
 import {EdgeController} from './edgeController';
@@ -40,7 +41,7 @@ app.setPath('userData',process.env.THOUGHTLINE_DATA_DIR||join(app.getPath('appDa
 let startupLocale:'zh-CN'|'en'='zh-CN';
 const t:Translator=(key,...args)=>translator(startupLocale)(key,...args);
 let prepareQuit:(()=>Promise<boolean>)|null=null;let quitInFlight=false;
-let tray:Tray;let edge:EdgeController;let shelf:BrowserWindow;let composer:BrowserWindow|null=null;let manage:BrowserWindow|null=null;let quitting=false;
+let tray:Tray;let edge:EdgeController;let shelf:BrowserWindow;let composer:BrowserWindow|null=null;let manage:BrowserWindow|null=null;let settingsWin:BrowserWindow|null=null;let quitting=false;
 const blank:Draft={text:'',title:'',project:'',agentId:'general'};
 const invalid=<T>(message:string):Result<T>=>({ok:false,code:'INVALID',message});
 const done=():Result<void>=>({ok:true,value:undefined});
@@ -86,21 +87,25 @@ else app.whenReady().then(async()=>{
  let restoredEditor:EditorReturnDraft|undefined;
  let classificationChange:PilotInfo['classificationChange'];let classificationSequence=0;
  let manageMode:'browse'|'detail'|'settings'|'classification'='browse',manageTitles=false;let undoClips:{snapshot:Snapshot;revision:number;positionsOnly?:boolean;command?:ClipMutation['kind'];positionTargets?:string[];placement?:PlacementUndo;placementKind?:'hang'|'arrange'|'swap'}|null=null;
+ // The standalone Settings window keeps its own readiness handshake, mirroring
+ // the manage overlay, so both windows can be confirmed independently.
+ let settingsSession=0,settingsReadyRequest=0;let settingsSafeToRelease=false;let confirmedSettings:{window:BrowserWindow;session:number}|null=null;let settingsLoading:Promise<BrowserWindow>|null=null,settingsRelease:ReturnType<typeof setTimeout>|null=null;let settingsFocusedMaterial=false;
  let composerContext:ComposerContext={mode:'new',ideaId:null,draft:snapshot.draft??blank};
  const preload=join(__dirname,'../preload/index.js');shelf=createShelf(preload);
  const host=createHost(shelf,()=>composer);
  let preferenceCommit:{version:number;sequence:number;sender:number}|null=null;
  let reminderFallback:ReminderFallback|null=null;
  const currentUndoLabel=():PilotInfo['undoActionLabel']=>{if(!undoClips||undoClips.revision!==snapshot.revision)return null;if(undoClips.placementKind==='swap')return '撤销换上';if(undoClips.placementKind==='hang'||undoClips.placementKind==='arrange')return '撤销挂上';if(['archiveIdea','archiveAll'].includes(undoClips.command??''))return '撤销收起';if(['merge','mergeTarget','paperDrop'].includes(undoClips.command??''))return '撤销合并';if(['split','splitAll'].includes(undoClips.command??''))return '撤销拆分';return '撤销整理';};
- const info=(viewer?:number):PilotInfo=>({restoredEditor,lightReminder:reminderFallback?.current??null,preferenceCommit:preferenceCommit?{version:preferenceCommit.version,sequence:preferenceCommit.sequence,own:preferenceCommit.sender===viewer}:null,preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,placementNoticeId,placementNoticeKind,placementTargetId,placementPoint,calendarLocate,arrangeSession,manageVisit,calendarReturning,manageSession,manageReadyRequest,manageSelection,manageMode,classificationTab,classificationOrigin,classificationChange,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,undoActionLabel:currentUndoLabel(),undoPlacementKind:undoClips?.placementKind,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,shelfProject,shelfFilterPicker,shelfMergePicker,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),...edge.presentation(),layoutLocked:dragEscape||!!textDragOwner});
+ const info=(viewer?:number):PilotInfo=>({restoredEditor,lightReminder:reminderFallback?.current??null,preferenceCommit:preferenceCommit?{version:preferenceCommit.version,sequence:preferenceCommit.sequence,own:preferenceCommit.sender===viewer}:null,preferences:preferences.current,preferenceError:preferences.error,platform:host.platform,snapshot,displayId,width,dark:nativeTheme.shouldUseDarkColors,composerSession,composerDraftSequence:draftSequence,composerMaterial:currentComposerMaterial(composer?.isFocused()??false),composerContext,placementNotice,placementNoticeId,placementNoticeKind,placementTargetId,placementPoint,calendarLocate,arrangeSession,manageVisit,calendarReturning,manageSession,manageReadyRequest,manageSelection,manageMode,classificationTab,classificationOrigin,classificationChange,manageTitles,manageMaterial:currentComposerMaterial(manage?.isFocused()??false),manageEditingRequested,canUndoClips:!!undoClips,undoActionLabel:currentUndoLabel(),undoPlacementKind:undoClips?.placementKind,dragCancelSession,textDragActive:!!textDragOwner,shelfAgentId,shelfProject,shelfFilterPicker,shelfMergePicker,hotkeyRegistered:globalShortcut.isRegistered(snapshot.settings.writeHotkey),settingsVisible:!!settingsWin?.isVisible(),settingsSession,settingsReadyRequest,settingsMaterial:currentComposerMaterial(settingsFocusedMaterial),...edge.presentation(),layoutLocked:dragEscape||!!textDragOwner});
  let reminderScheduler:ReminderScheduler|null=null,reminderNotices:ReminderNotifications|null=null;
- const publish=()=>{reminderFallback?.sync();edge.reminder(!!reminderFallback?.current);reminderNotices?.sync();reminderScheduler?.refresh();for(const w of [shelf,composer,manage,picker])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info(w.webContents.id));};
- const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:(BrowserWindow|null)[]=[shelf,composer,manage])=>allowed.some(w=>w?.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
+ const publish=()=>{reminderFallback?.sync();edge.reminder(!!reminderFallback?.current);reminderNotices?.sync();reminderScheduler?.refresh();for(const w of [shelf,composer,manage,settingsWin,picker])if(w&&!w.isDestroyed())w.webContents.send('thoughtline:info-update',info(w.webContents.id));};
+ const trusted=(e:Electron.IpcMainInvokeEvent|Electron.IpcMainEvent,allowed:(BrowserWindow|null)[]=[shelf,composer,manage,settingsWin])=>allowed.some(w=>w?.webContents===e.sender)&&e.senderFrame===e.sender.mainFrame;
  const prepareWindow=(w:BrowserWindow|null):Promise<boolean>=>{
   if(!w||w.isDestroyed())return Promise.resolve(true);
-  // hideManage is reached only after the renderer acknowledged its save guard.
-  // A hidden renderer can suspend on Windows; reuse that acknowledgement until shown again.
+  // hideManage/hideSettings are reached only after the renderer acknowledged its save guard.
+  // A hidden renderer can suspend; reuse that acknowledgement until shown again.
   if(w===manage&&manageSafeToRelease&&!w.isVisible())return Promise.resolve(true);
+  if(w===settingsWin&&settingsSafeToRelease&&!w.isVisible())return Promise.resolve(true);
   return new Promise(resolve=>{const id=randomUUID();let finished=false;
    const finish=(ok:boolean)=>{if(finished)return;finished=true;clearTimeout(timer);ipcMain.removeListener('thoughtline:leave-ready',receive);resolve(ok);};
    const receive=(event:Electron.IpcMainEvent,requestId:string,ok:boolean)=>{if(requestId===id&&trusted(event,[w]))finish(ok===true);};
@@ -109,7 +114,7 @@ else app.whenReady().then(async()=>{
  };
  const prepareViews=async()=>await prepareWindow(shelf)&&await prepareWindow(manage);
  // Opening another window keeps Settings mounted, including its unsaved form.
- const prepareWritingViews=async()=>await prepareWindow(shelf)&&(manageMode==='settings'&&!!manage?.isVisible()||await prepareWindow(manage));
+ const prepareWritingViews=async()=>await prepareWindow(shelf)&&await prepareWindow(manage);
  const writerUnavailable=():Result<void>|null=>quitting||quitInFlight?invalid(t("正在退出。")):storageBusy?invalid(t("存储操作正在进行，请稍后重试。")):settingsBusy?invalid(t("正在保存设置，请稍后重试。")):null;
  const lock=(name:string,active:boolean)=>edge.event({type:'lock',name,active,now:Date.now()});
  const hideManage=()=>{manageEditingOwner=null;manageEditingRequested=false;manageSafeToRelease=true;manage?.hide();lock('manage',false);};
@@ -179,7 +184,34 @@ else app.whenReady().then(async()=>{
   manageLoading=loadView(w,'manage').then(()=>w).catch(error=>{manage=null;w.destroy();throw error;}).finally(()=>{manageLoading=null;});
   return manageLoading;
  };
- app.on('will-quit',()=>{if(composerRelease)clearTimeout(composerRelease);if(manageRelease)clearTimeout(manageRelease);if(geometryTimer)clearTimeout(geometryTimer);});
+ const hideSettings=()=>{settingsSafeToRelease=true;settingsWin?.hide();lock('settings',false);};
+ const closeSettingsWindow=()=>coalesceManage('settings-close',async()=>{
+  if(!settingsWin||settingsWin.isDestroyed())return done();
+  if(!await prepareWindow(settingsWin))return invalid(t("最后修改尚未保存，窗口已保留。"));
+  hideSettings();return done();
+ });
+ const ensureSettings=():Promise<BrowserWindow>=>{
+  if(settingsRelease)clearTimeout(settingsRelease);settingsRelease=null;
+  if(settingsLoading)return settingsLoading;if(settingsWin)return Promise.resolve(settingsWin);
+  const w=createSettingsWindow(preload);settingsWin=w;settingsSafeToRelease=false;
+  w.on('close',event=>{if(!quitting){event.preventDefault();void closeSettingsWindow().then(ok=>{if(!ok.ok){w.show();w.focus();}});}});
+  w.on('focus',()=>{settingsFocusedMaterial=true;publish();});w.on('blur',()=>{settingsFocusedMaterial=false;publish();});
+  w.on('show',()=>{settingsSafeToRelease=false;if(settingsRelease)clearTimeout(settingsRelease);settingsRelease=null;refreshTray();});
+  w.on('hide',()=>{settingsFocusedMaterial=false;w.webContents.setBackgroundThrottling(true);refreshTray();settingsRelease=setTimeout(()=>{settingsRelease=null;if(settingsSafeToRelease&&!w.isDestroyed()&&!w.isVisible()){settingsWin=null;if(confirmedSettings?.window===w)confirmedSettings=null;w.destroy();}},30000);});
+  settingsLoading=loadView(w,'settings').then(()=>w).catch(error=>{settingsWin=null;w.destroy();throw error;}).finally(()=>{settingsLoading=null;});
+  return settingsLoading;
+ };
+ const presentSettings=async():Promise<Result<void>>=>{
+  const window=settingsWin,session=settingsSession,request=++settingsReadyRequest;if(!window||window.isDestroyed()||quitting)return invalid(t('设置窗口未能打开，请重试。'));
+  window.webContents.setBackgroundThrottling(false);
+  const ready=await new Promise<boolean>(resolve=>{let finished=false;const finish=(ok:boolean)=>{if(finished)return;finished=true;clearTimeout(timer);ipcMain.removeListener('thoughtline:view-ready',receive);resolve(ok);};
+   const receive=(e:Electron.IpcMainEvent,value:unknown)=>{const state=value as {session:number;mode:string;request:number}|null;if(trusted(e,[window])&&state?.session===session&&state.mode==='settings'&&state.request===request)finish(true);};
+   const timer=setTimeout(()=>finish(false),5000);ipcMain.on('thoughtline:view-ready',receive);publish();
+  });
+  if(!ready||window!==settingsWin||window.isDestroyed()||settingsSession!==session||quitting)return invalid(t('设置窗口未能打开，请重试。'));
+  window.show();window.focus();confirmedSettings={window,session};return done();
+ };
+ app.on('will-quit',()=>{if(composerRelease)clearTimeout(composerRelease);if(manageRelease)clearTimeout(manageRelease);if(settingsRelease)clearTimeout(settingsRelease);if(geometryTimer)clearTimeout(geometryTimer);});
  const openComposer=async(sourceId?:string):Promise<Result<void>>=>{
   if(composerLoading)return done();
   if(composer?.isVisible()){
@@ -221,7 +253,7 @@ else app.whenReady().then(async()=>{
  });
  prepareQuit=async()=>{
   if(settingsBusy||storageBusy)return false;
-  if(!await prepareWindow(shelf)||!await prepareWindow(manage))return false;
+  if(!await prepareWindow(shelf)||!await prepareWindow(manage)||!await prepareWindow(settingsWin))return false;
   await composerWrites;await repository.flush();await preferences.flush();
   if(!composer||(composerSafeToRelease&&!composer.isVisible()))return true;
   const draft=await captureDraft();const saved=draft.ok?await save({ok:true,value:{...snapshot,draft:draft.value}},snapshot.revision):draft;
@@ -229,12 +261,12 @@ else app.whenReady().then(async()=>{
   composer!.webContents.send('thoughtline:quit-error',saved.message);composer!.show();composer!.focus();return false;
  };
  ipcMain.handle('thoughtline:preferences',async(e,patch:unknown,sequence:number)=>{
-  if(!trusted(e,[composer,manage])||quitting||quitInFlight)return invalid(t("无效操作"));
+  if(!trusted(e,[composer,manage,settingsWin])||quitting||quitInFlight)return invalid(t("无效操作"));
   const result=await preferences.update(patch,String(e.sender.id),sequence);
   if(result.ok){preferenceCommit={version:result.value.version,sequence,sender:e.sender.id};startupLocale=preferences.current.locale;nativeTheme.themeSource=preferences.current.theme;refreshTray();publish();}
   return result;
  });
- ipcMain.handle('thoughtline:info',e=>{if(!trusted(e,[shelf,composer,manage,picker]))throw Error(t("不允许读取"));return info(e.sender.id);});
+ ipcMain.handle('thoughtline:info',e=>{if(!trusted(e,[shelf,composer,manage,settingsWin,picker]))throw Error(t("不允许读取"));return info(e.sender.id);});
  ipcMain.on('thoughtline:presentation-finished',(e,session:number)=>{if(trusted(e,[shelf])&&Number.isSafeInteger(session)&&session>=0)edge.presentationFinished(session);});
  ipcMain.on('thoughtline:hit-layout',(e,p:HitLayout)=>{
   if(!trusted(e,[shelf])||!p||!Number.isSafeInteger(p.layoutRevision)||!Array.isArray(p.rects)||p.rects.length>512||typeof p.displayId!=='string')return;
@@ -389,13 +421,14 @@ else app.whenReady().then(async()=>{
   const runClip=(change:ClipMutation)=>{void (async()=>{if(!await prepareViews())return;cancelDrag();const r=await applyClipChange(change,snapshot.revision);if(!r.ok){setPlacementNotice(r.message,true);publish();}})();};
   const undoLabel=currentUndoLabel(),primaryUndo=undoLabel==='撤销换上'||undoLabel==='撤销挂上';
   const menu=Menu.buildFromTemplate([
-   {label:t("新建念头"),accelerator:snapshot.settings.writeHotkey,click:()=>{void openComposer(id);}},
+   {label:t("新建念头"),enabled:!writerUnavailable(),accelerator:snapshot.settings.writeHotkey,click:()=>{void openComposer(id);}},
    ...(primaryUndo?[{label:t(undoLabel!),click:()=>runClip({kind:'undo'})}]:[]),
    {type:'separator'},
    {label:t('只看分组',{name:idea.project||t('未分组')}),type:'checkbox',checked:shelfProject===idea.project,click:()=>{void selectShelfFilter({project:shelfProject===idea.project?null:idea.project,agentId:shelfAgentId});}},
    {label:t("筛选 Agent"),click:openFilterPicker},
    {label:t('显示全部'),enabled:shelfProject!==null||shelfAgentId!=='all',click:()=>{void selectShelfFilter({project:null,agentId:'all'});}},
    {label:t("查找 / 已收起"),click:browseFromTray},
+   {label:t("存储与设置"),enabled:!writerUnavailable(),click:()=>{void openSettings();}},
    {type:'separator'},
    {label:t('整理'),submenu:[
     {label:t('收起'),click:()=>runClip({kind:'archiveIdea',ideaId:id})},
@@ -464,45 +497,54 @@ else app.whenReady().then(async()=>{
   });
  });
  ipcMain.handle('thoughtline:return-classification',e=>trusted(e,[manage])?returnClassification():invalid(t('无效操作')));
- ipcMain.handle('thoughtline:close-manage',async e=>{if(!trusted(e,[manage]))return invalid(t("无效操作"));if(manageMode==='classification'&&classificationOrigin==='composer')return returnClassification();if(!await prepareWindow(manage))return invalid(t("最后修改尚未保存，窗口已保留。"));hideManage();return done();});
- const openSettings=(fromCalendar=false):Promise<Result<void>>=>coalesceManage('settings:'+fromCalendar,async()=>{
+ ipcMain.handle('thoughtline:close-manage',async e=>{
+  if(!trusted(e))return invalid(t("无效操作"));
+  // The standalone Settings window accepts its own close request; any other
+  // view may close it while it is the visible overlay (manage stays warm).
+  const fromManage=!!manage&&!manage.isDestroyed()&&manage.webContents===e.sender;
+  if(settingsWin&&!settingsWin.isDestroyed()&&(settingsWin.webContents===e.sender||settingsWin.isVisible()&&!fromManage))return await closeSettingsWindow();
+  if(!trusted(e,[manage]))return invalid(t("无效操作"));
+  if(manageMode==='classification'&&classificationOrigin==='composer')return returnClassification();
+  if(!await prepareWindow(manage))return invalid(t("最后修改尚未保存，窗口已保留。"));hideManage();return done();
+ });
+ const openSettings=():Promise<Result<void>>=>coalesceManage('settings',async()=>{
   const blocked=writerUnavailable();if(blocked)return blocked;
-  if(!await prepareViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
-  try{await ensureManage();}catch{return {ok:false,code:'IO',message:t("设置浮层未能打开，请重试。")};}const blockedAfterLoad=writerUnavailable();if(blockedAfterLoad)return blockedAfterLoad;const reused=await reuseReadyManage('settings');if(reused)return reused;calendarReturnBounds=fromCalendar&&manage?.isVisible()?manage.getBounds():null;if(!fromCalendar)manageVisit++;calendarReturning=false;cancelDrag();manageMode='settings';manageTitles=false;manageSelection=null;manageEditingRequested=false;manageSession++;lock('manage',true);setManageBounds(boundsFor(500,600));publish();const shown=await presentManage();refreshTray();return shown;
+  if(!await prepareWritingViews())return invalid(t("最后修改尚未保存，窗口已保留。"));
+  try{await ensureSettings();}catch{return {ok:false,code:'IO',message:t("设置窗口未能打开，请重试。")};}
+  const blockedAfterLoad=writerUnavailable();if(blockedAfterLoad)return blockedAfterLoad;
+  if(confirmedSettings?.window===settingsWin&&confirmedSettings.session===settingsSession&&settingsWin?.isVisible()){settingsWin.show();settingsWin.focus();return done();}
+  cancelDrag();settingsSession++;lock('settings',true);publish();const shown=await presentSettings();refreshTray();return shown;
  });
- ipcMain.handle('thoughtline:open-settings',e=>trusted(e)?openSettings(trusted(e,[manage])&&manageMode==='browse'&&!!manage?.isVisible()):invalid(t("无效操作")));
- ipcMain.handle('thoughtline:return-calendar',async e=>{
-  if(!trusted(e,[manage])||manageMode!=='settings'||settingsBusy||storageBusy)return invalid(t('无效操作'));
-  if(!await prepareWindow(manage))return invalid(t('最后修改尚未保存，窗口已保留。'));
-  calendarReturning=calendarReturnBounds!==null;manageMode='browse';manageSelection=null;manageEditingRequested=false;manageSession++;setManageBounds(calendarReturnBounds??calendarBounds(),true);calendarReturnBounds=null;publish();return presentManage();
- });
+ ipcMain.handle('thoughtline:open-settings',e=>trusted(e)?openSettings():invalid(t("无效操作")));
  const storageState=()=>({directory:dataDir,profileDirectory:profileDir,revision:snapshot.revision});
  ipcMain.handle('thoughtline:contact-action',async(e,action:unknown)=>{
-  if(!trusted(e,[manage])||!manage?.isVisible()||manageMode!=='settings'||quitting||!['github','email','copy-email'].includes(action as string))return invalid(t('无效操作'));
+  if(!trusted(e,[settingsWin])||!settingsWin?.isVisible()||quitting||!['github','email','copy-email'].includes(action as string))return invalid(t('无效操作'));
   try{if(action==='copy-email')clipboard.writeText(FEEDBACK_EMAIL);else await shell.openExternal(action==='github'?AUTHOR_GITHUB_URL:FEEDBACK_MAILTO);return done();}
   catch{return invalid(t(action==='copy-email'?'邮箱复制未成功，请重试。':'未能打开联系入口，请稍后重试。'));}
  });
- ipcMain.handle('thoughtline:storage-info',e=>trusted(e,[manage])?{ok:true,value:storageState()}:invalid(t("无效操作")));
+ ipcMain.handle('thoughtline:storage-info',e=>trusted(e,[manage,settingsWin])?{ok:true,value:storageState()}:invalid(t("无效操作")));
  ipcMain.handle('thoughtline:open-storage-directory',async e=>{
-  if(!trusted(e,[manage]))return invalid(t("无效操作"));
+  if(!trusted(e,[manage,settingsWin]))return invalid(t("无效操作"));
   const valid=await loadStorageDirectory(profileDir);if(!valid.ok)return valid;
   try{const error=await shell.openPath(dataDir);return error?invalid(error):done();}catch{return invalid(t("无法打开当前念头目录。"));}
  });
  const storageOperation=async(e:Electron.IpcMainInvokeEvent,kind:'migrate'|'backup')=>{
-  if(!trusted(e,[manage])||storageBusy||quitting)return invalid(t("存储操作正在进行，请稍后重试。"));
+  if(!trusted(e,[manage,settingsWin])||storageBusy||quitting)return invalid(t("存储操作正在进行，请稍后重试。"));
+  const owner=trusted(e,[settingsWin])?settingsWin:manage;
   if(kind==='migrate'&&composer?.isVisible())return invalid(t("请先保存草稿并关闭新建窗口，再更改数据位置。"));
   storageBusy=true;refreshTray();
   try{
    // Storage operations keep Settings mounted; its busy/dirty close guard is not a navigation request.
-   const ready=await prepareWindow(shelf)&&(manageMode==='settings'||await prepareWindow(manage));
+   const ready=await prepareWindow(shelf)&&await prepareWindow(manage);
    if(!ready)return invalid(t("最后修改尚未保存或输入法尚未确认，仍使用原位置。"));
    if(kind==='backup'&&composer?.isVisible()&&!await prepareWindow(composer))return invalid(t("草稿尚未保存或输入法尚未确认，备份未生成。请完成输入后重试。"));
-   const choice=await dialog.showOpenDialog(manage!,{title:kind==='migrate'?t("选择新的空念头文件夹"):t("选择独立备份的保存文件夹"),properties:['openDirectory','createDirectory']});
+   const choice=await dialog.showOpenDialog(owner!,{title:kind==='migrate'?t("选择新的空念头文件夹"):t("选择独立备份的保存文件夹"),properties:['openDirectory','createDirectory']});
    if(choice.canceled||!choice.filePaths[0])return {ok:true,value:{...storageState(),canceled:true}};
-   // The user can keep typing in the other window while choosing a folder.
+   // Other windows remain mounted; checkpoint their latest edits again after the chooser.
+   if(!await prepareWindow(manage))return invalid(t("最后修改尚未保存或输入法尚未确认，仍使用原位置。"));
    if(kind==='backup'&&composer?.isVisible()&&!await prepareWindow(composer))return invalid(t("草稿尚未保存或输入法尚未确认，备份未生成。请完成输入后重试。"));
    return await composerWrite(async()=>{
-    if(!trusted(e,[manage])||quitting)return invalid(t("操作窗口已关闭。"));
+    if(!trusted(e,[manage,settingsWin])||quitting)return invalid(t("操作窗口已关闭。"));
     await repository.flush();
     if(kind==='migrate'&&composer?.isVisible())return invalid(t("请先保存草稿并关闭新建窗口，再更改数据位置。"));
     if(kind==='backup'){
@@ -519,18 +561,18 @@ else app.whenReady().then(async()=>{
  ipcMain.handle('thoughtline:change-storage',e=>storageOperation(e,'migrate'));
  ipcMain.handle('thoughtline:export-backup',e=>storageOperation(e,'backup'));
  ipcMain.handle('thoughtline:export-thoughts',async(e,format:unknown)=>{
-  if(!trusted(e,[manage])||!manage?.isVisible()||manageMode!=='settings'||quitting||storageBusy||!['txt','docx'].includes(format as string))return invalid(t('无效操作'));
+  if(!trusted(e,[manage,settingsWin])||!settingsWin?.isVisible()||quitting||storageBusy||!['txt','docx'].includes(format as string))return invalid(t('无效操作'));
   const kind=format as 'txt'|'docx',locale=preferences.current.locale;
   storageBusy=true;refreshTray();
   try{
-   if(!await prepareWindow(shelf)||composer?.isVisible()&&!await prepareWindow(composer))return invalid(t('最后修改尚未保存或输入法尚未确认，请完成输入后再导出。'));
+   if(!await prepareWindow(shelf)||!await prepareWindow(manage)||composer?.isVisible()&&!await prepareWindow(composer))return invalid(t('最后修改尚未保存或输入法尚未确认，请完成输入后再导出。'));
    if(!snapshot.ideas.some(idea=>idea.status==='hanging'||idea.status==='archived'))return invalid(t('暂无可导出的念头。'));
    const stamp=new Date(),name=(locale==='en'?'Thoughtline':'晾念头')+'-'+[stamp.getFullYear(),String(stamp.getMonth()+1).padStart(2,'0'),String(stamp.getDate()).padStart(2,'0')].join('-')+'.'+kind;
-   const choice=await dialog.showSaveDialog(manage,{title:t(kind==='txt'?'导出 TXT':'导出 DOCX'),defaultPath:join(app.getPath('downloads'),name),filters:[{name:kind==='txt'?'TXT':'DOCX',extensions:[kind]}],properties:['createDirectory','showOverwriteConfirmation']});
+   const choice=await dialog.showSaveDialog(settingsWin,{title:t(kind==='txt'?'导出 TXT':'导出 DOCX'),defaultPath:join(app.getPath('downloads'),name),filters:[{name:kind==='txt'?'TXT':'DOCX',extensions:[kind]}],properties:['createDirectory','showOverwriteConfirmation']});
    if(choice.canceled||!choice.filePath)return {ok:true,value:{canceled:true}};
-   if(composer?.isVisible()&&!await prepareWindow(composer))return invalid(t('最后修改尚未保存或输入法尚未确认，请完成输入后再导出。'));
+   if(!await prepareWindow(manage)||composer?.isVisible()&&!await prepareWindow(composer))return invalid(t('最后修改尚未保存或输入法尚未确认，请完成输入后再导出。'));
    return await composerWrite(async()=>{
-    if(!trusted(e,[manage])||!manage?.isVisible()||manageMode!=='settings'||quitting)return invalid(t('操作窗口已关闭。'));
+    if(!trusted(e,[manage,settingsWin])||!settingsWin?.isVisible()||quitting)return invalid(t('操作窗口已关闭。'));
     await repository.flush();
     const result=await saveThoughtDocument(structuredClone(snapshot),choice.filePath!,kind,locale,new Date());
     return result.ok?{ok:true,value:{canceled:false,...result.value}}:result;
@@ -539,7 +581,7 @@ else app.whenReady().then(async()=>{
   finally{storageBusy=false;refreshTray();}
  });
  ipcMain.handle('thoughtline:settings',async(e,settings:Snapshot['settings'],revision:number):Promise<Result<Snapshot>>=>{
-  if(!trusted(e,[manage])||manageMode!=='settings'||!settings||!validWriteHotkey(settings.writeHotkey)||typeof settings.reducedMotion!=='boolean'||settings.shelfCapacity!==undefined&&![4,6,8].includes(settings.shelfCapacity))return invalid(t("请录制有效的组合快捷键。"));
+  if(!trusted(e,[settingsWin])||!settingsWin?.isVisible()||!settings||!validWriteHotkey(settings.writeHotkey)||typeof settings.reducedMotion!=='boolean'||settings.shelfCapacity!==undefined&&![4,6,8].includes(settings.shelfCapacity))return invalid(t("请录制有效的组合快捷键。"));
   if(settings.rope!==undefined&&!validRope(settings.rope)||settings.paper!==undefined&&!validPaper(settings.paper))return invalid(t('设置无效。'));
   return composerWrite(async()=>{
   if(settingsBusy)return invalid(t("正在保存设置，请稍后重试。"));
@@ -735,7 +777,16 @@ else app.whenReady().then(async()=>{
   icon.setTemplateImage(true);tray=new Tray(icon);
  }else tray=new Tray(trayPath);
  tray.setToolTip(t("晾念头 / Thoughtline"));
- refreshTray=()=>{tray.setToolTip(t('晾念头 / Thoughtline'));tray.setContextMenu(Menu.buildFromTemplate([{label:t(edge.isManuallyPaused()?'恢复悬停':'暂停悬停'),click:()=>{cancelDrag();edge.pause(!edge.isManuallyPaused());refreshTray();}},{type:'separator'},{label:t('退出'),click:()=>app.quit()}]));};
+ refreshTray=()=>{tray.setToolTip(t('晾念头 / Thoughtline'));tray.setContextMenu(Menu.buildFromTemplate([
+  {label:t("新建念头"),enabled:!writerUnavailable(),accelerator:snapshot.settings.writeHotkey,click:()=>{void openComposer();}},
+  {label:t('念头日历'),enabled:!writerUnavailable(),click:browseFromTray},
+  {label:t("存储与设置"),enabled:!writerUnavailable(),click:()=>{void openSettings();}},
+  {type:'separator'},
+  {label:t(edge.isManuallyPaused()?'恢复悬停':'暂停悬停'),click:()=>{cancelDrag();edge.pause(!edge.isManuallyPaused());refreshTray();}},
+  {type:'separator'},
+  {label:'Thoughtline v'+app.getVersion(),enabled:false},
+  {label:t('退出'),click:()=>app.quit()}
+ ]));};
  refreshTray();
  let reminderSleeping=false,reminderLocked=false;const resumeReminders=()=>{if(!reminderSleeping&&!reminderLocked)reminderScheduler?.start();};
  nativeTheme.on('updated',publish);powerMonitor.on('suspend',()=>{reminderSleeping=true;reminderScheduler?.stop();cancelDrag();edge.pause(true,'sleep');});powerMonitor.on('lock-screen',()=>{reminderLocked=true;reminderScheduler?.stop();cancelDrag();edge.pause(true,'lock');});powerMonitor.on('resume',()=>{reminderSleeping=false;edge.pause(false,'sleep');resumeReminders();});powerMonitor.on('unlock-screen',()=>{reminderLocked=false;edge.pause(false,'lock');resumeReminders();});

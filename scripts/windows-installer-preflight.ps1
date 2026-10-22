@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-only
-param([switch]$StackVisualOnly, [switch]$ClassificationDeleteOnly, [switch]$TrayMenuOnly, [switch]$ClassificationFocusOnly)
+param([switch]$StackVisualOnly, [switch]$ClassificationDeleteOnly, [switch]$TrayMenuOnly, [switch]$ClassificationFocusOnly, [switch]$SettingsWindowOnly)
 $ErrorActionPreference = 'Stop'
 if ($env:GITHUB_ACTIONS -ne 'true' -or $env:RUNNER_OS -ne 'Windows' -or !$env:RUNNER_TEMP) { throw 'Disposable GitHub Windows runner required' }
 $install = Join-Path $env:RUNNER_TEMP 'Thoughtline-installer-preflight'
@@ -29,7 +29,7 @@ try {
   if (!(Test-Path $exe)) { throw 'Installed executable missing' }
   if ((Snapshot-Hashes) -ne $seed) { throw 'Fresh install changed pre-existing fixture data' }
   $report.installPreservesExistingData = $true
-  $isolated = Join-Path $env:LOCALAPPDATA 'Thoughtline-Preflight\0.0.38\user-data'
+  $isolated = Join-Path $env:LOCALAPPDATA 'Thoughtline-Preflight\0.0.39\user-data'
   if (Test-Path $isolated) { throw 'Unexpected existing isolation fixture' }
   & ./docs/delivery/Start-Thoughtline-Isolated.ps1 -Executable $exe -CheckOnly
   if (Test-Path $isolated) { throw 'Check-only launcher created a profile' }
@@ -49,7 +49,14 @@ try {
   $priorAppearanceEvidence = $env:THOUGHTLINE_EVIDENCE_DIR
   try {
     $env:THOUGHTLINE_EXECUTABLE = $exe
-    if ($ClassificationFocusOnly) {
+    if ($SettingsWindowOnly) {
+      $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round7-settings-window/windows-installed'
+      foreach ($fixture in @('round7-settings-window','round5-settings-workflow','round5-window-workflow','round6-tray-menu','round5-contact-workflow','round5-export-workflow','round3-customizer-workflow')) {
+        & node scripts/run-ci-fixture.cjs "tests/electron/$fixture.cjs"
+        if ($LASTEXITCODE -ne 0) { throw "$fixture installed package failed" }
+      }
+      $report.packagedSettingsWindow = $true
+    } elseif ($ClassificationFocusOnly) {
       $env:THOUGHTLINE_EVIDENCE_DIR = 'acceptance/evidence/round6/r611/windows-installed'
       & node scripts/run-ci-fixture.cjs tests/electron/round6-classification-search-focus.cjs
       if ($LASTEXITCODE -ne 0) { throw 'Actual installed classification focus failed' }

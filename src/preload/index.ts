@@ -43,7 +43,6 @@ const api:ThoughtlineBridge={
  setEditing:(active,manageSession,ideaId)=>ipcRenderer.invoke('thoughtline:set-editing',active,manageSession,ideaId),
  ideaHistory:(id,kind,revision)=>ipcRenderer.invoke('thoughtline:idea-history',id,kind,revision),
  shelfMenu:id=>ipcRenderer.invoke('thoughtline:shelf-menu',id),
- returnCalendar:()=>ipcRenderer.invoke('thoughtline:return-calendar'),
  openSettings:()=>ipcRenderer.invoke('thoughtline:open-settings'),
  saveSettings:(settings,revision)=>ipcRenderer.invoke('thoughtline:settings',settings,revision),
  onPrepareQuit:callback=>{const listener=(_e:Electron.IpcRendererEvent,id:string)=>{let draft=null;try{draft=callback();}catch{}ipcRenderer.send('thoughtline:quit-draft',id,draft);};ipcRenderer.on('thoughtline:prepare-quit',listener);return()=>ipcRenderer.removeListener('thoughtline:prepare-quit',listener);},
