@@ -8,6 +8,11 @@ describe('active Windows isolation delivery binding',()=>{
   expect(pkg.scripts['package:win']).toMatch(/--x64(?: |$)/);
   expect(pkg.build.win.target[0].arch).toEqual(['x64']);
  });
+ it('keeps an explicit runtime allowlist when adding Windows exclusions',()=>{
+  const pkg=JSON.parse(readFileSync('package.json','utf8'));
+  for(const file of pkg.build.files)expect(pkg.build.win.files).toContain(file);
+  expect(pkg.build.win.files).toContain('!out/main/*.node');
+ });
  it('binds the executable check and both isolated profile paths to the packaged version',()=>{
   const version=JSON.parse(readFileSync('package.json','utf8')).version;
   const launcher=readFileSync('docs/delivery/Start-Thoughtline-Isolated.ps1','utf8');
