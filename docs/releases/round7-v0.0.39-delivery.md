@@ -40,3 +40,7 @@
 Store MSIX 直接位于桌面“Thoughtline微软商店上架材料”根目录，原 0.0.38 归档保留。双端安装包在桌面“Thoughtline-0.0.39-安装包”，包括假数据隔离启动脚本及操作说明。安装与数据隔离边界详见该说明。
 
 本轮测试使用合成数据；归属确认后清理临时 profile、测试导出/冗余截图、错误架构与失败归档、最终打包暂存重复目录。关键截图和结果/失败证据保留于 `acceptance/evidence/round7-settings-window/final`；未动个人安装、真实便签和 WIP 恢复副本。用户验收仍为待完成。
+
+## 发布读回
+
+Release `421045357`，`published_at=2026-10-22T18:14:19Z`，`draft=false`、`prerelease=true`。8 附件服务端 SHA-256 与大小逐项匹配本地；tag 指向构建源码 2f6f1f3d。附件中文说明采用 `README-acceptance.md` 文件名，内容为中文；本地 `SHA256SUMS.txt` 同步。Actions 最近记录仍为 39750530164，没有调度新的工作流。最终 main 文档收口提交与包源码分开记录。
