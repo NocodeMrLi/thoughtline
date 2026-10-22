@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import type {Clip,Idea,Snapshot} from './contracts';
 export function independentClip(s:Pick<Snapshot,'clips'>,ideaId:string,agentId:string):Clip{
  let id='clip:'+ideaId;let index=1;while(s.clips.some(c=>c.id===id))id='clip:'+ideaId+':'+index++;

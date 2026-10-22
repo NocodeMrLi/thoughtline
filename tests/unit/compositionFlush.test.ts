@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {it,expect,vi,afterEach} from 'vitest';
 import {DraftAutosaver} from '../../src/shared/draftAutosaver';
 afterEach(()=>vi.useRealTimers());

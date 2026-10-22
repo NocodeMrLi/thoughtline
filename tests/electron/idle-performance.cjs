@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const assert=require('node:assert/strict'),path=require('node:path'),fs=require('node:fs/promises'),os=require('node:os'),{execFileSync}=require('node:child_process');const {_electron}=require('playwright');
 const time=s=>{const parts=s.split(':').map(Number);return parts.reduce((total,n)=>total*60+n,0);};
 (async()=>{

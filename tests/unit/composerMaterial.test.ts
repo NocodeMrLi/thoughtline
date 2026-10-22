@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {it,expect} from 'vitest';
 import {composerMaterial} from '../../src/shared/composerMaterial';
 it('uses supported native materials with accessibility, inactive and old-Windows fallback',()=>{

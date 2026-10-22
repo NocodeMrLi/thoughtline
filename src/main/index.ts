@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {classificationDeletionPreview,deleteClassificationContents,sanitizeClassificationDeletionSnapshot} from '../shared/classificationDeletion';
 import {ideaDay,formatShelfDay} from '../shared/ideaHistory';
 import {mergeInto,mergeTargets,splitArchived} from '../shared/stackCommands';

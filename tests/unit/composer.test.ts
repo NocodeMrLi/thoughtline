@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import { expect, test } from 'vitest';
 import { shouldSubmit } from '../../src/shared/composerKeys';
 const enter={key:'Enter',metaKey:false,ctrlKey:false,isComposing:false,keyCode:13};

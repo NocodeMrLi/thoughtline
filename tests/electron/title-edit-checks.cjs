@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const assert=require('node:assert/strict'),path=require('node:path');
 const {waitForInfo}=require('./window-fixture.cjs');
 function titleFixture(){const now=new Date().toISOString(),d=new Date(),day=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;return {schemaVersion:3,revision:0,ideas:[{id:'title-test',title:'原来的名称',text:'正文第一行 保留😀\n第二行 原样 ',project:'保留项目',agentId:'general',status:'hanging',createdAt:now,updatedAt:now,createdDay:day,creationTimeZone:'legacy-offset'}],clips:[{id:'title-clip',agentId:'general',ideaIds:['title-test'],currentId:'title-test',position:.5}],agents:[{id:'general',name:'通用',color:'#A0A3AA'}],draft:null,settings:{writeHotkey:'Control+Alt+F18',reducedMotion:true}};}

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test} from 'vitest';
 import {classificationLabel} from '../../src/shared/classification';
 test('classification metadata consistently presents group before tag without changing names',()=>{

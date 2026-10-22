@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {launchOptions,warmViews,waitForInfo,bounded}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs'),{_electron}=require('playwright');
 const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
 // Catches obstructing hints, fixed-height calendars, clipped focus, lost settings navigation and wrong-note stash.

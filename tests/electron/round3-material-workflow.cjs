@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {launchOptions,warmViews,openComposer}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
 (async()=>{const root=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round3/material');await fs.mkdir(root,{recursive:true});const out=await fs.mkdtemp(path.join(root,(process.env.THOUGHTLINE_ATTEMPT||'material')+'-')),profile=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-r3-material-'));let app;const receipt={platform:process.platform,scenes:[],scope:'actual renderer material contrast and controlled CSS fallback; OS accessibility unchanged; not native NSGlassEffectView'};

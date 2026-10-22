@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-only
 param([switch]$StackVisualOnly, [switch]$ClassificationDeleteOnly, [switch]$TrayMenuOnly, [switch]$ClassificationFocusOnly)
 $ErrorActionPreference = 'Stop'
 if ($env:GITHUB_ACTIONS -ne 'true' -or $env:RUNNER_OS -ne 'Windows' -or !$env:RUNNER_TEMP) { throw 'Disposable GitHub Windows runner required' }

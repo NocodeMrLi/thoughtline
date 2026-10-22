@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {clipGroup,storedClipFor} from '../../shared/clipModel';
 import {filteredClips,matchingClipIds,matchesShelfFilter} from '../../shared/ideaVisibility';
 import {shelfCapacity} from '../../shared/ropeGeometry';

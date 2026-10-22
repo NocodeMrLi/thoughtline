@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 'use strict';
 // Run only on a disposable Windows runner. Probe the actual installed binary with its package identity.
 const assert=require('node:assert/strict');const fs=require('node:fs/promises');const path=require('node:path');const {_electron}=require('playwright');

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=require('node:path'),assert=require('node:assert/strict');
 const {sanitizedPackagedEnv,observeLaunch}=require('./packaged-launch.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs'),{waitForInfo}=require('./window-fixture.cjs');
 (async()=>{const dir=process.env.THOUGHTLINE_OWNED_PROFILE,executable=path.resolve(process.env.THOUGHTLINE_EXECUTABLE),evidence=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR);assert(dir);let app,shelf,manage,composer;const receipt={packaged:true,executable,version:require('../../package.json').version,platform:process.platform,checks:[],pids:[],scope:'actual package with own synthetic data, real shortcut registration and controlled callback/cursor/menu; no physical DPI/IME/native banner acceptance'};

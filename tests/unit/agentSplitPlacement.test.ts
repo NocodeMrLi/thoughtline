@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test} from 'vitest';
 import {initialSnapshot,editIdeaIfUnchanged,validateSnapshot} from '../../src/shared/ideaCommands';
 import {layoutClips} from '../../src/shared/clipLayout';

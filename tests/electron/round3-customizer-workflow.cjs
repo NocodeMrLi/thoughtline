@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 // Exercises actual settings windows: catches a clipped preview, lost draft or inaccessible choices.
 const {launchOptions,waitForInfo}=require('./window-fixture.cjs');
 const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');

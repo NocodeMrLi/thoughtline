@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-only
 #!/usr/bin/env python3
 """Export approved TL artwork without changing source RGB. Requires Pillow and numpy."""
 from pathlib import Path

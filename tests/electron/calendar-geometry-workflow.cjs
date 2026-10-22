@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');
 const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 const {sampleCalendarMotion,resumeCalendarMotion}=require('./calendar-motion-sampler.cjs');

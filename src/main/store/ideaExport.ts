@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import * as fs from 'node:fs/promises';
 import {extname,isAbsolute} from 'node:path';
 import {randomUUID} from 'node:crypto';

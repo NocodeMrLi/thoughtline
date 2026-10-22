@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const fs=require('node:fs');const path=require('node:path');const assert=require('node:assert/strict');
 const {createHash}=require('node:crypto');const pkg=require('../package.json');
 const {sourceInputVector}=require('./source-input-vector.cjs');

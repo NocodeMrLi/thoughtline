@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {spawnSync}=require('node:child_process'),{mkdirSync}=require('node:fs'),{resolve}=require('node:path');
 if(process.platform==='darwin'){
  const directory=resolve(process.env.THOUGHTLINE_BUILD_DIR||'out','main');mkdirSync(directory,{recursive:true});

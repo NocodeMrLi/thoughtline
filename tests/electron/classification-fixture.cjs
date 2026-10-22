@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const assert=require('node:assert/strict');
 async function openTagPicker(page){await page.locator('.classification-trigger').nth(1).click();const panel=page.locator('.classification-picker');await panel.locator('.classification-choices').waitFor();return panel;}
 async function chooseTag(page,name){const panel=await openTagPicker(page);await panel.getByRole('button',{name,exact:true}).click();await panel.waitFor({state:'detached'});}

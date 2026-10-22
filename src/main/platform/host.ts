@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {BrowserWindow,screen} from 'electron';import type {PlatformHost,Rect} from '../../shared/contracts';
 export function createHost(shelf:BrowserWindow,composer:()=>BrowserWindow|null):PlatformHost{
  if(!['darwin','win32'].includes(process.platform))throw Error('Thoughtline目标平台为macOS和Windows。');

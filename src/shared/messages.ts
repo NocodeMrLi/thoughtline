@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 // Central typed application text; user text is never translated.
 export const zh = {
  "日历": "日历",

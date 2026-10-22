@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 // Isolated installed-package diagnostic. Does not move the OS cursor or touch real notes.
 const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
 const {_electron}=require('playwright');

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {launchOptions,warmViews,openComposer,waitForInfo}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
 (async()=>{const root=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round3/capacity');await fs.mkdir(root,{recursive:true});const out=await fs.mkdtemp(path.join(root,(process.env.THOUGHTLINE_ATTEMPT||'capacity')+'-')),profile=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-r3-capacity-'));let app;const receipt={platform:process.platform,cases:[],scope:'actual source settings/renderer/IPC and disk persistence; controlled cursor, not physical DPI or drag acceptance'};

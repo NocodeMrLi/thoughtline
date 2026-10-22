@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import { expect, test } from 'vitest';
 import { sagForCount, ropeY, toLocal, contains, visibleSlots } from '../../src/shared/ropeGeometry';
 test('挂多下沉、取下回升，固定端点且封顶', () => {

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test} from 'vitest';
 import {initialSnapshot,validateSnapshot,removeProject,removeAgent} from '../../src/shared/ideaCommands';
 import {projectNames,addProject,renameProject,classificationCount} from '../../src/shared/classification';

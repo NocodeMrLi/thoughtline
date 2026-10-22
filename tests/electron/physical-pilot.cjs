@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 // Manual native test fixture; no helper windows ship in the product.
 const path=require('node:path'),fs=require('node:fs/promises'),os=require('node:os');
 const {_electron}=require(process.env.THOUGHTLINE_PLAYWRIGHT_PACKAGE||'playwright');

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 type RGB=[number,number,number];
 const lightPaper:RGB=[245,239,223],darkPaper:RGB=[56,56,49];
 const luminance=(rgb:RGB)=>rgb.map(v=>{const c=v/255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4;}).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);

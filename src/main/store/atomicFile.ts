@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {writeFile,readFile,rename,open,rm} from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
 export interface FileIO{write(path:string,text:string):Promise<void>;fsync(path:string):Promise<void>;rename(from:string,to:string):Promise<void>;read(path:string):Promise<string>;}

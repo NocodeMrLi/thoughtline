@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test} from 'vitest';
 import {translate,dictionaries,formatCalendarDate,countThoughts,agentLabel,localizeMessage} from '../../src/shared/i18n';
 test('dictionary parity and placeholder contracts',()=>{expect(Object.keys(dictionaries.en).sort()).toEqual(Object.keys(dictionaries['zh-CN']).sort());for(const k of Object.keys(dictionaries.en) as (keyof typeof dictionaries.en)[]){const params=(s:string)=>[...s.matchAll(/\{(\w+)\}/g)].map(m=>m[1]).sort();expect(params(dictionaries.en[k])).toEqual(params(dictionaries['zh-CN'][k]));}});

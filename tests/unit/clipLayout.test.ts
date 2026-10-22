@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test} from 'vitest';
 import {layoutClips,MIN_SPACING,CARD_WIDTH,clipMetrics,captureClipPositions} from '../../src/shared/clipLayout';
 const clips=Array.from({length:12},(_,i)=>({id:''+i,agentId:'codex',ideaIds:[''+i],currentId:''+i,position:null as number|null}));

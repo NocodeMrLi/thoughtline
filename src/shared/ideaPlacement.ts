@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {canMergeIdea} from './clipModel';
 import {shelfCapacity} from './ropeGeometry';
 import type {Draft,Snapshot,Result,Clip} from './contracts';

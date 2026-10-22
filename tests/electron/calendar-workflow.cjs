@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {launchOptions,warmViews,waitForInfo,bounded}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
 (async()=>{const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-round2-calendar-')),evidence=process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round1',attempt=process.env.THOUGHTLINE_ATTEMPT||'current';let app,diagnosticPage,pids=[],normalClose=false,failed=false;try{
  const now=new Date(),pad=n=>String(n).padStart(2,'0'),today=`${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`,other=new Date(now.getFullYear(),now.getMonth()-1,15),past=`${other.getFullYear()}-${pad(other.getMonth()+1)}-15`;

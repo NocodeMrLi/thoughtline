@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {test,expect,vi} from 'vitest';
 import {rememberIdeaProject} from '../../src/renderer/hooks/rememberIdeaProject';
 import {initialSnapshot} from '../../src/shared/ideaCommands';

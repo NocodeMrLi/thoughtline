@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {useLocale} from '../LocaleContext';
 import {useEffect,useId,useLayoutEffect,useRef,useState} from 'react';
 import type {PointerEvent,CSSProperties} from 'react';

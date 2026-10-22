@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {useEffect,useRef,useState} from 'react';
 import type {PilotInfo,AgentMutation} from '../../shared/bridge';
 import type {Result} from '../../shared/contracts';

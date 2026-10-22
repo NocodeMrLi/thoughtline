@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path');
 const {_electron}=require('playwright'),{launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');
 (async()=>{

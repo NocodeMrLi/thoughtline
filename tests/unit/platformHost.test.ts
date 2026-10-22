@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test,vi} from 'vitest';
 vi.mock('electron',()=>({screen:{getCursorScreenPoint:()=>({x:0,y:0}),getAllDisplays:()=>[]}}));
 import {createHost} from '../../src/main/platform/host';

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path');
 const {_electron}=require('playwright'),{launchOptions,openComposer,waitForInfo}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 const output=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/draft-recovery'),baseline=process.argv.includes('--baseline');

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const { createHash } = require('node:crypto');
 const { execFileSync } = require('node:child_process');
 const fs = require('node:fs');

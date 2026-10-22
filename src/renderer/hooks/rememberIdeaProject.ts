@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import type {PilotInfo,ThoughtlineBridge} from '../../shared/bridge';
 type Scope=Pick<PilotInfo,'snapshot'|'manageSession'>;
 type Bridge={info:()=>Promise<Scope>;classificationChange:ThoughtlineBridge['classificationChange']};

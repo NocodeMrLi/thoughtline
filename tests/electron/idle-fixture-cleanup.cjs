@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const fs=require('node:fs/promises');
 const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 function processAlive(pid){try{process.kill(pid,0);return true;}catch(error){if(error.code==='ESRCH')return false;throw error;}}

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import type {Snapshot,Draft,Result,AgentTag,Idea,Clip} from './contracts';
 import {captureClipPositions,layoutClips} from './clipLayout';
 import {arrangeClips} from './clipCommands';

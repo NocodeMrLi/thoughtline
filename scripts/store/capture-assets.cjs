@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
 const {execFileSync}=require('node:child_process'),{createHash}=require('node:crypto'),{_electron}=require('playwright');

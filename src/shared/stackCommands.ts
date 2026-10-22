@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import type {Clip,Idea,Result,Snapshot} from './contracts';
 import {canMergeIdea,pruneClips,storedClipFor} from './clipModel';
 import {validateSnapshot} from './ideaCommands';

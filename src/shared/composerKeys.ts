@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 export type SubmitKey={platform:'mac'|'windows';key:string;metaKey:boolean;ctrlKey:boolean;isComposing:boolean;keyCode:number};
 export function displayWriteHotkey(value:string,platform:'mac'|'windows'):string{
  const labels:Record<string,string>=platform==='mac'?{Command:'⌘',Super:'⌘',Control:'⌃',Alt:'⌥',Shift:'⇧',Space:'空格'}:{Control:'Ctrl',Super:'Win'};

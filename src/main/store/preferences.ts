@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {mkdir,readdir,lstat} from 'node:fs/promises';
 import {join} from 'node:path';
 import {atomicWrite,fileIO,type FileIO} from './atomicFile';

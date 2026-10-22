@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {spawn,execFile}=require('node:child_process');
 const fs=require('node:fs/promises'),path=require('node:path');
 async function runFixture({file,args=[],evidence,timeoutMs=180000,echo=true}){

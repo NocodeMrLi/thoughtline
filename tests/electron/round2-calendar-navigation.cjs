@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {launchOptions,warmViews,bounded}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs'),{_electron}=require('playwright');
 const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
 (async()=>{const root=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round2');await fs.mkdir(root,{recursive:true});const evidence=await fs.mkdtemp(path.join(root,'calendar-return-')),dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-calendar-return-'));const receipt={platform:process.platform,scope:'isolated renderer/main/calendar return with real repository; no physical DPI or multi-display',cases:[],pids:[],dir};let app;

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {fixedRopeY,type FixedRope} from './ropeGeometry';
 /** Waves flatten smoothly at each jaw, preserving both contact point and tangent. */
 export function vineArtwork(rope:FixedRope,anchors:number[]){

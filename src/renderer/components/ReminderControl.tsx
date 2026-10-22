@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {useEffect,useRef,useState} from 'react';
 import {useLocale} from '../LocaleContext';
 import type {Reminder} from '../../shared/contracts';

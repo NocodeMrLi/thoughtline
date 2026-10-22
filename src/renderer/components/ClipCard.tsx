@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {ideaDay,formatShelfDay} from '../../shared/ideaHistory';
 import {formatCalendarDate} from '../../shared/i18n';
 import {classificationLabel} from '../../shared/classification';

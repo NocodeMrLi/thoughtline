@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 // Attach only to a package launched explicitly by the tester with its own temp data and localhost debugging port.
 const {chromium}=require('playwright');const assert=require('node:assert/strict');const fs=require('node:fs/promises');
 (async()=>{

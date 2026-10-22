@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 // Read-only PE resource verification. Works on downloaded binaries as well as in Windows CI.
 const fs=require('node:fs');const assert=require('node:assert/strict');
 const {createHash}=require('node:crypto');const ResEdit=require('resedit');

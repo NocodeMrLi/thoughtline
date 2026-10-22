@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto');const {_electron}=require('playwright');
 const {launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 const output=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/upright-paper-review/viewport-matrix');

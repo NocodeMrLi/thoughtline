@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 // Actual executable fixture. Never substitutes source output for a packaged result.
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto');
 const {sanitizedPackagedEnv,observeLaunch}=require('./packaged-launch.cjs');

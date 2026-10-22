@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {contextBridge,ipcRenderer} from 'electron';import type {ThoughtlineBridge} from '../shared/bridge';
 const api:ThoughtlineBridge={
  pickerSize:(session,width,height)=>ipcRenderer.invoke('thoughtline:picker-size',session,width,height),

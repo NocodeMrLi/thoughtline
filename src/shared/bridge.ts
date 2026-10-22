@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import type {Preferences,PreferencePatch} from './preferences';
 import type {ContactAction} from './contact';
 import type {Draft,Rect,Result,Snapshot,Reminder} from './contracts';

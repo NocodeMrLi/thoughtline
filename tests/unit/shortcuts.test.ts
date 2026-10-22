@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test} from 'vitest';
 import {swapShortcut,type ShortcutRegistry} from '../../src/main/shortcuts';
 class Registry implements ShortcutRegistry{

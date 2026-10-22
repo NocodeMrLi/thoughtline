@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {useEffect,useRef,useState,type PointerEvent,type RefObject} from 'react';
 import type {PilotInfo,EditorReturnDraft} from '../../shared/bridge';
 import {activeProjects,activeTags} from '../../shared/classification';

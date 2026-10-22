@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {useState,useRef} from 'react';
 import {CompositionSession} from '../../shared/compositionSession';
 import {useLocale} from '../LocaleContext';

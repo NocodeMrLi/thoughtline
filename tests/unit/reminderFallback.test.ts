@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {afterEach,describe,expect,it,vi} from 'vitest';
 import {ReminderFallback} from '../../src/shared/reminderFallback';
 import {initialSnapshot} from '../../src/shared/ideaCommands';

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto');
 const {_electron}=require('playwright'),{launchOptions,warmViews,waitForInfo}=require('./window-fixture.cjs');const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 const stage=['baseline','paper','curved'].includes(process.argv[2])?process.argv[2]:'candidate';const output=path.resolve(stage==='baseline'?'acceptance/evidence/clamp-review/baseline':stage==='curved'?'acceptance/evidence/curved-paper-review/preview':'acceptance/evidence/upright-paper-review/'+(stage==='paper'?'preview':'candidate'));

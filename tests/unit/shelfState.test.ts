@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test} from 'vitest';
 import {initialShelf,shelfTransition as step} from '../../src/shared/shelfState';
 test('短暂过边不打开，停留250ms打开',()=>{

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 // A clip owns its paper pose: paging, filtering and reordering never reroll it.
 const shapes=[
  {outline:'M2 .8Q42 .2 77 .5Q118 .7 158 2C159 32 158 89 158 129C158 161 149 183 150 203Q150 214 156 217C115 223.8 61 228.8 10 222C3 212 2 198 2 184C2 162 3 143 2 128C1.6 90 1.5 39 2 .8Z',back:'M9 219C58 226 116 224 156 217Q151 219 146 220C104 225 51 226 10 222Z'},

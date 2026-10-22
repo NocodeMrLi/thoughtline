@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 // Fresh profiles only. Loading an existing snapshot never inserts or renames tags.
 export const DEFAULT_TAGS = [
  {id:'general',name:'通用',color:'#A0A3AA'},

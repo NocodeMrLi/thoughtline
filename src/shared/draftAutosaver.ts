@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 // One write at a time; coalesce typing without postponing a checkpoint indefinitely.
 export class DraftAutosaver<T>{
  private latest:T;private version=0;private savedVersion=0;private since=0;private timer:ReturnType<typeof setTimeout>|null=null;private pending:Promise<void>|null=null;private paused=false;private disposed=false;

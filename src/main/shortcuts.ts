@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import type {Result} from '../shared/contracts';
 export interface ShortcutRegistry{register(key:string,callback:()=>void):boolean;unregister(key:string):void;isRegistered(key:string):boolean;}
 export async function swapShortcut(registry:ShortcutRegistry,previous:string,next:string,callback:()=>void,persist:()=>Promise<Result<unknown>>=async()=>({ok:true,value:undefined})):Promise<{ok:boolean;active:string;error?:Result<never>}>{

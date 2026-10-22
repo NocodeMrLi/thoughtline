@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import type {Snapshot} from './contracts';
 /** Includes legacy references so opening a newer version never hides old groups. */
 export function projectNames(s:Snapshot):string[]{

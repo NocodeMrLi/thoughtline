@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {ClassificationDeletionDialog} from './ClassificationDeletionDialog';
 import {classificationDeletionPreview} from '../../shared/classificationDeletion';
 import {useEffect,useId,useRef,useState} from 'react';

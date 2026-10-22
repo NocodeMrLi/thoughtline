@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {afterEach,expect,test} from 'vitest';
 import {mkdtemp,mkdir,readFile,writeFile,rm} from 'node:fs/promises';
 import {join} from 'node:path';import {tmpdir} from 'node:os';

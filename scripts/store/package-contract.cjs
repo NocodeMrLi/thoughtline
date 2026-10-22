@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 'use strict';
 const {createHash}=require('node:crypto');
 const {resolve,join,relative,isAbsolute}=require('node:path');

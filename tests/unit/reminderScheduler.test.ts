@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {describe,it,expect} from 'vitest';
 import {initialSnapshot,newIdea,changeStatus,deleteIdea} from '../../src/shared/ideaCommands';
 import {setIdeaReminder,markReminders,dueReminders,ReminderScheduler} from '../../src/shared/reminders';

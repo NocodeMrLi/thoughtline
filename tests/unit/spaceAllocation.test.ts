@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test} from 'vitest';
 import {layoutClips,clipTravelBounds,captureClipPositions,MIN_SPACING} from '../../src/shared/clipLayout';
 import type {Clip} from '../../src/shared/contracts';

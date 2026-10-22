@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 // Use a supervised, sanitized actual-package launch; retain fatal-launch evidence.
 const path=require('node:path');
 const {runPackagedFixture}=require('./packaged-launch.cjs');

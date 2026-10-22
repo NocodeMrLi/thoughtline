@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {useEffect,useLayoutEffect,useRef,useState,type ReactNode,type RefObject} from 'react';
 import {createPortal} from 'react-dom';
 export function ReaderMoreMenu({anchor,onClose,label,children,side='above',className=''}:{anchor:RefObject<HTMLSpanElement|null>;onClose:()=>void;label:string;children:ReactNode;side?:'above'|'below';className?:string}){

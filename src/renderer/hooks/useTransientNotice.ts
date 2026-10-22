@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {useCallback,useEffect,useRef,useState,type FocusEvent} from 'react';
 
 /** Every call is a new event, even when the displayed text is identical. */

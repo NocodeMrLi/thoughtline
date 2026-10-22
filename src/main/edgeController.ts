@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {screen} from 'electron';import {probeSeamAware,isNearProximity,type SeamTickState} from './vendor/edge-drop/stickProbe';import type {PlatformHost,Rect} from '../shared/contracts';import type {HitLayout} from '../shared/bridge';
 import {motion} from '../shared/motionTokens';
 import {contains,toLocal} from '../shared/ropeGeometry';import {initialShelf,shelfTransition,pauseTransition,type PauseReason,type ShelfEvent} from '../shared/shelfState';

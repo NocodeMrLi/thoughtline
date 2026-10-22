@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {zh,en} from './messages';import type {Locale} from './preferences';
 import {DEFAULT_TAGS} from './tagPresets';
 export const dictionaries={'zh-CN':zh,en};export type MessageKey=keyof typeof zh;

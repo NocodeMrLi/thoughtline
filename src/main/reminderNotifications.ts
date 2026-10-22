@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {app,Notification} from 'electron';
 import storeIdentity from '../shared/storeIdentity.json';
 import {execFile} from 'node:child_process';

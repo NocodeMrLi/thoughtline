@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 // Disposable GitHub Windows runner only. Never run this against a person's profile.
 const assert=require('node:assert/strict');
 const fs=require('node:fs/promises');const path=require('node:path');

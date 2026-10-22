@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {it,expect} from 'vitest';
 import {CompositionSession} from '../../src/shared/compositionSession';
 it('a duplicate start retains the original rollback value',()=>{

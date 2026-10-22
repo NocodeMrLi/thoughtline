@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const fs=require('node:fs/promises'),path=require('node:path');
 // Protocol fixtures emulate the shortcut registry by default; only smoke/lifecycle opt into real OS registration.
 // Production has no new IPC entry or test-only startup behavior.

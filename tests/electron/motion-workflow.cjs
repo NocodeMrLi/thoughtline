@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 const {launchOptions,warmViews}=require('./window-fixture.cjs');
 const assert=require('node:assert/strict'),path=require('node:path'),fs=require('node:fs/promises'),os=require('node:os');const {_electron}=require('playwright');

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 export type Zone='edge'|'card'|'corridor'|'outside';
 export type ShelfState={phase:'hidden'|'revealed'|'peek';zone:Zone;locks:string[];dwellAt:number|null;leaveAt:number|null;corridorUntil:number|null;peekUntil:number|null;suspended:boolean};
 export type ShelfEvent={type:'pointer';zone:Zone;now:number}|{type:'tick';now:number}|{type:'lock';name:string;active:boolean;now:number}|{type:'peek'|'suspend'|'resume';now:number};

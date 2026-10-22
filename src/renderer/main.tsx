@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {LocaleProvider} from './LocaleContext';
 import {newerPreferences} from '../shared/preferences';
 import {useEffect,useLayoutEffect,useRef,useState} from 'react';

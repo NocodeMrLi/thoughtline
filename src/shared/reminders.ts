@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import type {Snapshot,Reminder,Result} from './contracts';
 import {validateSnapshot} from './ideaCommands';
 import {validReminderTime} from './reminderTime';

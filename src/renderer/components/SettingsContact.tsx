@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {useEffect,useId,useRef,useState,type MouseEvent} from 'react';
 import type {PilotInfo} from '../../shared/bridge';
 import {AUTHOR_GITHUB_NAME,AUTHOR_GITHUB_URL,FEEDBACK_EMAIL,FEEDBACK_MAILTO,type ContactAction} from '../../shared/contact';

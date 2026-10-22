@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import type {PaperAppearance,RopeAppearance} from './appearance';
 export type Point = { x: number; y: number };
 export type Rect = Point & { width: number; height: number };

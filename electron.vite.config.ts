@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import { defineConfig } from 'electron-vite';
 import {resolve} from 'node:path';
 const output=(part:string)=>process.env.THOUGHTLINE_BUILD_DIR?resolve(process.env.THOUGHTLINE_BUILD_DIR,part):undefined;

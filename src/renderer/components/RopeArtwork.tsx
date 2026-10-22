@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {memo,type CSSProperties} from 'react';
 import {ropeAppearance,type RopeAppearance} from '../../shared/appearance';
 import type {FixedRope} from '../../shared/ropeGeometry';

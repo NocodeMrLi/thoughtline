@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {chooseInlineTag}=require('./classification-fixture.cjs');
 // Catches missing natural-rope motifs and fused title/body fields in actual Electron pages.
 const {launchOptions,waitForInfo}=require('./window-fixture.cjs');

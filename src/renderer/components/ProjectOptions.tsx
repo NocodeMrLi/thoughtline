@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {useLocale} from '../LocaleContext';
 import {useEffect,useRef,useState,type PointerEvent,type ReactNode} from 'react';
 export function ProjectOptions({projects,reduced,disabled,onChoose,onDelete,onDone,composing,children}:{projects:string[];reduced:boolean;disabled:boolean;onChoose:(project:string)=>void;onDelete:(project:string)=>Promise<void>;onDone:()=>void;composing?:()=>boolean;children?:ReactNode}){

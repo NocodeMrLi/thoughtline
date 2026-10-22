@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test,vi} from 'vitest';
 const display=vi.hoisted(()=>({id:1,bounds:{x:-1440,y:0,width:1440,height:900},workArea:{x:-1440,y:25,width:1440,height:875}}));
 vi.mock('electron',()=>({screen:{getDisplayNearestPoint:()=>display}}));

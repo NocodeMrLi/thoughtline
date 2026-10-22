@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const { spawnSync } = require('node:child_process');
 const { resolve } = require('node:path');
 

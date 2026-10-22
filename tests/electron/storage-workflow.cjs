@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {launchOptions}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
 (async()=>{const root=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-p5-electron-')),profile=path.join(root,'profile'),target=path.join(root,'target');const evidence=process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round1/p5-storage',attempt=process.env.THOUGHTLINE_ATTEMPT||'current';let app,pids=[],normalClose=false;

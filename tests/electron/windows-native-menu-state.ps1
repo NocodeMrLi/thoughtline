@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-only
 param([Parameter(Mandatory=$true)][int]$OwnerPid,[Parameter(Mandatory=$true)][int]$ExpectedCount,[string]$BrowserHandles='', [int]$TimeoutMs=5000)
 $ErrorActionPreference='Stop'
 # Electron 44 uses Chromium Views MenuRunner, not the Win32 #32768 menu class.

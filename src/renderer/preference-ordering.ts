@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import type {PilotInfo} from '../shared/bridge';
 // A preceding write from this renderer may advance durability without replacing
 // its latest intent. A different renderer's commit or a later local commit does.

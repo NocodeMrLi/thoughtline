@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-only
 """Read-only screenshot analysis; never edits images or reads user data."""
 from pathlib import Path
 import json, hashlib, io

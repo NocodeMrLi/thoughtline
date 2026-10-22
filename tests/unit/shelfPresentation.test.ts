@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test,vi} from 'vitest';
 import {EdgeController} from '../../src/main/edgeController';
 import type {PlatformHost} from '../../src/shared/contracts';

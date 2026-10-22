@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {useTransientNotice} from '../hooks/useTransientNotice';
 import {shelfCapacity,type ShelfCapacity} from '../../shared/ropeGeometry';
 import {registerLeaveGuard} from '../hooks/leaveGuards';

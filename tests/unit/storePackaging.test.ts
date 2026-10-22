@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {createRequire} from 'node:module';
 import {mkdtempSync, mkdirSync, symlinkSync, rmSync, realpathSync} from 'node:fs';
 import {tmpdir} from 'node:os';

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test} from 'vitest';
 import {initialSnapshot,validateSnapshot} from '../../src/shared/ideaCommands';
 test('新默认六标签保持通用灰和Codex蓝，其他用途使用克制颜色',()=>{

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {useEffect,useId,useLayoutEffect,useRef,useState,type ButtonHTMLAttributes} from 'react';
 import {createPortal} from 'react-dom';
 export type ActionName='copy'|'edit'|'archive'|'split'|'more'|'calendar'|'undo'|'delete'|'back'|'settings'|'restore'|'swap'|'chevronLeft'|'chevronRight'|'bell'|'mail';

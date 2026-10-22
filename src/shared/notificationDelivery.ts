@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 type NativeNotice={once(event:'show',callback:()=>void):unknown;once(event:'failed',callback:()=>void):unknown;once(event:'click',callback:()=>void):unknown;removeListener(event:'show',callback:()=>void):unknown;removeListener(event:'failed',callback:()=>void):unknown;removeListener(event:'click',callback:()=>void):unknown;show:()=>void};
 export function showNotification(notice:NativeNotice,onClick:()=>void,timeout=5000):Promise<boolean>{
  return new Promise(resolve=>{

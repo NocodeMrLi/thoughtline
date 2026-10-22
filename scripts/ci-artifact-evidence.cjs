@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const hash=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 function inventory(root){

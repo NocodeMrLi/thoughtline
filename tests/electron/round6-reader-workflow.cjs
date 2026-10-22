@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {_electron}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
 const {launchOptions,bounded}=require('./window-fixture.cjs'),{managerPage}=require('./classification-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 (async()=>{const root=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round6/reader'),which=process.env.THOUGHTLINE_R6_CASE||'copy',dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-r6-reader-'));await fs.mkdir(root,{recursive:true});await fs.writeFile(path.join(dir,'preferences.json'),JSON.stringify({schemaVersion:1,version:0,locale:'zh-CN',theme:'light'}));let app;const receipt={platform:process.platform,case:which,profile:dir,pids:[],checks:[]};

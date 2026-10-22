@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-only
 param([ValidateSet('prepare','cursor','capture')][string]$Mode, [string]$Output, [int]$X=0, [int]$Y=0, [int]$Width=0, [int]$Height=0)
 $ErrorActionPreference='Stop'
 if ($env:GITHUB_ACTIONS -ne 'true' -or $env:RUNNER_OS -ne 'Windows') { throw 'Disposable Windows runner required' }

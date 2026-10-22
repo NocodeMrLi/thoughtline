@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {_electron}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
 const {launchOptions,bounded,waitHidden}=require('./window-fixture.cjs'),{managerPage}=require('./classification-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 (async()=>{const root=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round5/group-filter');await fs.mkdir(root,{recursive:true});const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-r520-windows-'));let app;const receipt={platform:process.platform,checks:[],cases:[],failures:[],pids:[],scope:'Native window bounds/show and renderer readiness; screen work area read, OS settings untouched.'};

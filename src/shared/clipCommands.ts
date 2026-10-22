@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {shelfCapacity} from './ropeGeometry';
 import type {Result,Snapshot} from './contracts';
 import {filteredClips} from './ideaVisibility';

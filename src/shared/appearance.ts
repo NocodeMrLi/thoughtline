@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 export const paperColors=['warm','ivory','apricot','sage','blue'] as const;
 export const paperPatterns=['blank','ruled','dashed'] as const;
 export const ropeStyles=['classic','cotton','vine'] as const;

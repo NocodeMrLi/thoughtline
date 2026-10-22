@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-only
 #!/usr/bin/env python3
 """Offline resource verification and actual decoded inspection sheets. No Electron launch."""
 from pathlib import Path

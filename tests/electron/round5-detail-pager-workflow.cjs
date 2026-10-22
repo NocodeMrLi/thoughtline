@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {_electron}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
 const {launchOptions,waitForInfo,bounded}=require('./window-fixture.cjs'),{managerPage}=require('./classification-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');
 (async()=>{const root=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round5/group-filter');await fs.mkdir(root,{recursive:true});const dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-r524-pager-'));let app;const receipt={platform:process.platform,checks:[],scenes:[],pids:[],scope:'Actual renderer/IPC/layout and synthetic composition/file failure, physical IME separate.'};

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {describe,it,expect} from 'vitest';
 import {fitManageBounds} from '../../src/main/windows/manageGeometry';
 

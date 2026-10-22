@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 // Run after freezing the source and validating the final DMG. The generated command
 // binds one exact version, DMG, and packaged asar without editing this source file.
 const assert = require('node:assert/strict');

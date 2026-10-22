@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test} from 'vitest';
 import * as geometry from '../../src/shared/ropeGeometry';
 import {layoutClips,CARD_WIDTH,CARD_HEIGHT} from '../../src/shared/clipLayout';

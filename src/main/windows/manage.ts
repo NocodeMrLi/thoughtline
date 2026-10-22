@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {BrowserWindow,nativeTheme} from 'electron';
 import {currentComposerMaterial} from './composer';
 export function createManage(preload:string):BrowserWindow{

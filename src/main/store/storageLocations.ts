@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import * as fs from 'node:fs/promises';
 import {constants} from 'node:fs';
 import {isAbsolute,join} from 'node:path';

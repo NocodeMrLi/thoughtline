@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {createContext,useContext,useMemo,type ReactNode} from 'react';
 import type {Locale} from '../shared/preferences';
 import {translator,localizeMessage,agentLabel} from '../shared/i18n';

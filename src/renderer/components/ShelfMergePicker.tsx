@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {useLayoutEffect,useRef,useState} from 'react';
 import type {PilotInfo} from '../../shared/bridge';
 import {mergeTargets} from '../../shared/stackCommands';

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {test,expect} from 'vitest';
 import {fitManageBounds} from '../../src/main/windows/manageGeometry';
 const area={x:0,y:24,width:1280,height:960},paper={x:250,y:70,width:650,height:226};

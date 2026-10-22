@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const fs=require('node:fs/promises'),path=require('node:path'),{execFileSync}=require('node:child_process'),{createHash}=require('node:crypto');
 async function bindAppearanceSource(output){
  const include=p=>['.gitattributes','THIRD_PARTY_NOTICES.md','acceptance/evidence/icon-final/resource-verification.json','acceptance/evidence/round1/p6-electron-cache-binding.json'].includes(p)||/^(src|assets|scripts|tests|licenses|\.github|docs\/delivery)\//.test(p)||/^(package.*\.json|electron\.vite\.config\.ts|tsconfig.*\.json|vitest\.config\..*|\.gitignore)$/.test(p);

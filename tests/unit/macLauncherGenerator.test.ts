@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {test,expect} from 'vitest';
 import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import vm from 'node:vm';import {createHash} from 'node:crypto';import {createRequire} from 'node:module';
 test('Mac generator emits ASCII launcher and matching manifest without rewriting legacy assets',()=>{

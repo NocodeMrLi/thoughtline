@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import type {Snapshot} from './contracts';
 import type {ReminderClaim} from './reminders';
 export type LightReminder={key:string;id:string;at:string;title:string;count:number};

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {legacySnapshot} from '../helpers/legacySnapshot';
 import {expect,test} from 'vitest';
 import * as commands from '../../src/shared/ideaCommands';

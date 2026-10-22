@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {mkdir} from 'node:fs/promises';import {join} from 'node:path';import {randomUUID} from 'node:crypto';
 import type {Repository,Result,Snapshot} from '../../shared/contracts';
 import {initialSnapshot,validateSnapshot} from '../../shared/ideaCommands';

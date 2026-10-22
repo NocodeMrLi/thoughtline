@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {launchOptions,warmViews,bounded}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs'),{_electron}=require('playwright');
 const fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
 (async()=>{const root=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round1/final-fix');await fs.mkdir(root,{recursive:true});const evidence=await fs.mkdtemp(path.join(root,(process.env.THOUGHTLINE_ATTEMPT||'calendar-shape')+'-')),dir=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-final-shape-'));let app,manage;const receipt={dir,evidence,cases:[],pids:[]};

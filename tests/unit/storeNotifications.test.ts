@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {afterEach, beforeEach, expect, test, vi} from 'vitest';
 import type {Snapshot} from '../../src/shared/contracts';
 const mocks=vi.hoisted(()=>({setAppUserModelId:vi.fn(),setToastActivatorCLSID:vi.fn(),handleActivation:vi.fn(),execFile:vi.fn()}));

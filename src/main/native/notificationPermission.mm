@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 #import <Foundation/Foundation.h>
 #import <UserNotifications/UserNotifications.h>
 #include <node_api.h>

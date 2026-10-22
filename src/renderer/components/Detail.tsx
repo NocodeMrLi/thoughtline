@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {storedClipFor} from '../../shared/clipModel';
 import {classificationLabel} from '../../shared/classification';
 import {PreferencesControl} from './PreferencesControl';

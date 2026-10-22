@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {readFileSync} from 'node:fs';
 import {describe,expect,it} from 'vitest';
 

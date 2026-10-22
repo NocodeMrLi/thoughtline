@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {initialSnapshot} from '../../src/shared/ideaCommands';
 // Explicit persisted pre-positioning fixture. Old-user coverage must not depend
 // on the presets chosen for a newly created profile.

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {test,expect} from 'vitest';import fs from 'node:fs/promises';import path from 'node:path';import os from 'node:os';import vm from 'node:vm';import {createRequire} from 'node:module';
 async function rejectedFixture(fixture='appearance'){
  const root=await fs.mkdtemp(path.join(os.tmpdir(),'thoughtline-launch-contract-')),out=path.join(root,'evidence'),profile=path.join(root,'profile');await fs.mkdir(profile);let launchOptions:any;

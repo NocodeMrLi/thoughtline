@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {useId} from 'react';
 // Separate depth layers place rope and paper between front-facing wooden jaws.
 export function Clothespin({color='#A0A3AA',reduced=false,layer='front'}:{color?:string;reduced?:boolean;layer?:'front'|'rear'}){

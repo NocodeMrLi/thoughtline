@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test} from 'vitest';
 import {currentWeight,retargetWeight,type WeightMotion} from '../../src/shared/motionTokens';
 const start:WeightMotion={from:26,to:44,startedAt:0,duration:360};

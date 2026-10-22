@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const assert=require('node:assert/strict'),path=require('node:path');
 const labels={zh:{more:'更多操作',top:'日历更多选项',trash:'最近删除',permanent:'永久删除当前念头'},en:{more:'More actions',top:'More calendar options',trash:'Recently deleted',permanent:'Permanently delete this thought'}};
 function fixture(){

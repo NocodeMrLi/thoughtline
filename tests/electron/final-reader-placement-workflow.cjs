@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {chooseInlineTag}=require('./classification-fixture.cjs');
 const {launchOptions,warmViews,waitForInfo,bounded}=require('./window-fixture.cjs');
 const {cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs');

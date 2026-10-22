@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 // A missing compositionend must not leave autosave paused or turn preedit into a checkpoint.
 // Ownership is the actual input node; a delayed end from A cannot release B.
 export class CompositionSession<K extends string>{

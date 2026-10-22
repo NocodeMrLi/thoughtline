@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test} from 'vitest';
 import {paperColors,paperPatterns,paperPalettes,validPaper,validRope,paperAppearance,ropeAppearance} from '../../src/shared/appearance';
 import {initialSnapshot,validateSnapshot} from '../../src/shared/ideaCommands';

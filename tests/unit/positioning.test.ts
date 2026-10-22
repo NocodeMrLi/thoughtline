@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test} from 'vitest';
 import {initialSnapshot,newIdea,changeStatus,validateSnapshot,deleteIdea} from '../../src/shared/ideaCommands';
 import {calendarIndex} from '../../src/shared/ideaHistory';

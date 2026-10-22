@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {useEffect,useLayoutEffect,useRef,useState,type RefObject} from 'react';
 import {createPortal} from 'react-dom';
 import {useLocale} from '../LocaleContext';

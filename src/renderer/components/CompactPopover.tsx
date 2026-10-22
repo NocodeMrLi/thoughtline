@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {useEffect,useLayoutEffect,useRef,useState,type RefObject,type ReactNode} from 'react';
 import {createPortal} from 'react-dom';
 export function CompactPopover({anchor,label,className='',busy=false,onClose,children,initialFocusSelector,onEscape,hit=false,standalone=false}:{anchor:RefObject<HTMLElement|null>;label:string;className?:string;busy?:boolean;onClose:()=>void;children:ReactNode;initialFocusSelector?:string;onEscape?:()=>boolean;hit?:boolean;standalone?:boolean}){

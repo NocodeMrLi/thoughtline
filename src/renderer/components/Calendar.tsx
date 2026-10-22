@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {calendarStackCards} from '../../shared/ideaHistory';
 import {CalendarStackReader} from './CalendarStackReader';
 import {classificationLabel} from '../../shared/classification';

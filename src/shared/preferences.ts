@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 export type Locale='zh-CN'|'en';
 export type Theme='system'|'light'|'dark';
 export type Preferences={schemaVersion:1;version:number;locale:Locale;theme:Theme};

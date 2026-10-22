@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 const {_electron}=require('playwright'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
 const {launchOptions}=require('./window-fixture.cjs'),{cleanupIdleFixture}=require('./idle-fixture-cleanup.cjs'),{titleFixture,titleChecks}=require('./title-edit-checks.cjs');
 (async()=>{const root=path.resolve(process.env.THOUGHTLINE_EVIDENCE_DIR||'acceptance/evidence/round2/title-edit');await fs.mkdir(root,{recursive:true});const evidence=await fs.mkdtemp(path.join(root,'source-'+process.platform+'-')),receipt={platform:process.platform,version:require('../../package.json').version,scope:'Synthetic source UI/IPC. No physical IME acceptance.',cases:[]};

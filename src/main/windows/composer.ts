@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {BrowserWindow,nativeTheme} from 'electron';
 import {release} from 'node:os';
 import {composerMaterial} from '../../shared/composerMaterial';

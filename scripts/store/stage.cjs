@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 'use strict';
 const fs=require('node:fs');const path=require('node:path');const {execFileSync}=require('node:child_process');const {createHash}=require('node:crypto');
 const {identity,storeVersion,manifest,ownedStage,assertSourceBinding}=require('./package-contract.cjs');

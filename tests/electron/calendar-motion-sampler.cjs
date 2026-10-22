@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 // Test-only observer: arm before input so runner RPC latency cannot consume the
 // real short animation before geometry/pixel assertions. Product timing is unchanged.
 async function sampleCalendarMotion(page, action) {

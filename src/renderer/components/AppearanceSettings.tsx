@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {useLayoutEffect,useRef,useState,type CSSProperties,type ReactNode} from 'react';
 import {CompactPopover} from './CompactPopover';
 import type {PilotInfo} from '../../shared/bridge';

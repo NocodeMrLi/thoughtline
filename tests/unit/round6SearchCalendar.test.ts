@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test} from 'vitest';
 import {initialSnapshot} from '../../src/shared/ideaCommands';
 import * as visibility from '../../src/shared/ideaVisibility';

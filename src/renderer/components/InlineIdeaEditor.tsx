@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {rememberIdeaProject} from '../hooks/rememberIdeaProject';
 import {clipGroup,storedClipFor} from '../../shared/clipModel';
 import {matchesShelfFilter} from '../../shared/ideaVisibility';

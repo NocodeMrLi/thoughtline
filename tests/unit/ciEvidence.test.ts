@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {test,expect} from 'vitest';
 import {createRequire} from 'node:module';
 import fs from 'node:fs';

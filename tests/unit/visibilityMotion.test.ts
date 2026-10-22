@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {expect,test} from 'vitest';
 import {currentWeight,retargetVisibility,type WeightMotion} from '../../src/shared/motionTokens';
 test('快速进出从当前帧接续；无关状态更新不重启滑入',()=>{

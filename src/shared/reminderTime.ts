@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import type {Reminder} from './contracts';
 export const validReminderTime=(at:unknown):at is string=>typeof at==='string'&&Number.isFinite(Date.parse(at))&&new Date(at).toISOString()===at;
 export const validReminder=(r:unknown):r is Reminder=>!!r&&typeof r==='object'&&!Array.isArray(r)&&validReminderTime((r as Reminder).at)&&['scheduled','notified','missed','failed','cancelled'].includes((r as Reminder).state)&&((r as Reminder).attemptedAt===undefined||validReminderTime((r as Reminder).attemptedAt));

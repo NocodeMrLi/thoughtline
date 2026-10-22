@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import {afterEach,expect,test,vi} from 'vitest';
 import {localReminderInput,parseReminderInput,reminderLabel,reminderPreset} from '../../src/shared/reminderTime';
 afterEach(()=>vi.unstubAllEnvs());
