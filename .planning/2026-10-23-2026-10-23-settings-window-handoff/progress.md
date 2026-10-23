@@ -13,3 +13,5 @@ Mac 新11项、storage11、设置36、托盘5、窗口9、联系32、导出17、
 最终三包同源 2f6f1f3d；Mac DMG、Windows NSIS、Store MSIX 校验通过并交付桌面指定目录。NSIS 内嵌 app-64.7z 解出 74 文件全部匹配；MSIX SDK schema/块映射解包、ZIP CRC、身份/版本/图标尺寸及全部 payload 匹配。Windows 实机未测，用户明天验收。清理 188 项/1,213,756,188 字节本轮测试图片/导出、重复 staging/首轮 MSIX；先前失败构建清理 6,069,382,864 字节，测试 profile 自有根清理已记证据。下一步推送 main 和本地包测试预发布，读回摘要/运行记录。
 
 已发布 v0.0.39 测试预发布，Release 421045357，2026-10-22T18:14:19Z；8 附件 API digest/size 全部匹配本地，tag 指向冻结源码 2f6f1f3d。main 已推送 848b178c 文档检查点；发布后记录收口仍带 skip ci。未新增 Actions，Windows 实机与 Store 上传/送审保留待负责人。修复文档、3 张内嵌图、双端目录和指定根目录 MSIX 均已校验。
+
+本地安装包归并已完成：4 配套文件移入 dist、4 同摘要重复文件随桌面目录移废纸篓；9 旧安装包/blockmap（405956284 字节）移废纸篓，8 文件校验通过。原始移动回执在 round7-settings-window/local-package-layout-cleanup.json（本地）；商店材料目录与远端资产不动。初次日志相对路径选错，写入前即失败，无文件变动；改绝对路径后完成。

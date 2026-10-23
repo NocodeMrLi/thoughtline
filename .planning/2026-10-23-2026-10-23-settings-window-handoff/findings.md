@@ -9,3 +9,5 @@
 - 原 red storage 的 IME 失败进入 finally 后被退出保护保留而超时；CDP核验合成profile后仅TERM归属PID53470，5个PID均退出并清理合成目录。
 
 外观截图核查发现独立类未继承manage公共材质/字体；新red-material失败，恢复原manage样式类后新11项green。未重画UI。Node24.19通过；远端GPL更新完整保留。
+
+2026-10-23 用户要求不再新建桌面安装包目录，沿用仓库 app/dist。桌面 8 文件中两安装包、两构建记录已在 dist；4 配套文件待移入。dist 旧 0.0.22/23/36 三 DMG 与旧版本 blockmap 待按明确授权移废纸篓。仅本地范围，微软商店材料及已发布远端版本不动。
